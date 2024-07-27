@@ -84,9 +84,17 @@ a.button {
   -webkit-text-fill-color: transparent;
 }
 
+.container {
+  width: 100%;
+
+  @media (min-width: $breakpoint-xl) {
+    max-width: 1280px;
+  }
+}
+
 /* Blog Styles */
 
-.blog-post {
+.blog-post, .page {
   font-family: "Inter";
 
   /* Headings */
