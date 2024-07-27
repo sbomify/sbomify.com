@@ -19,12 +19,9 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://sbomify.com" # the base hostname & protocol for your site, e.g. http://example.com
 
-twitter_username: vpetersson
-github_username: vpetersson
-
 social:
-  image: "/assets/images/site/talk.jpg"
-  twitter: vpetersson
+  image: "/assets/images/site/sbomify.png"
+  twitter: sbomify
 
 pagination:
   enabled: true
@@ -35,12 +32,8 @@ sass:
   style: compressed
   sourcemap: never
 
-# [To do - Verify this]
 google_analytics: GT-PL9TCBKD
 
-# [To do]
-disqus.shortname: vpeterss
-page.comments: true
 
 # Build settings
 markdown: kramdown

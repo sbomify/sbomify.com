@@ -2,7 +2,7 @@
 layout: default
 ---
 <div class="bg-white blog-post">
-  <div class="md:max-w-[846px] mx-6 md:mx-auto py-10 md:py-20">
+  <div class="md:max-w-[846px] px-6 md:mx-auto py-10 md:py-20">
     <h1 class="mb-6">{{page.title}}</h1>
     <div class="flex mb-12 gap-4 text-[#686868] text-sm">
       {% if page.author and page.author.display_name %}
@@ -20,10 +20,12 @@ layout: default
     </article>
   </div>
 </div>
-<div class="bg-primaryBG text-white px-[105px] py-24">
-  <div class="uppercase text-sm mb-4">
-    &gt; Blog
+<div class=" bg-primaryBG">
+  <div class="max-container text-white px-5 lg:px-[105px] py-12 lg:py-24">
+    <div class="uppercase text-sm mb-4">
+      &gt; Blog
+    </div>
+    {% include posts.html limit=3 dark=true hideViewAll=true title="Recent Posts" %}
   </div>
-  {% include posts.html limit=3 dark=true hideViewAll=true title="Recent Posts" %}
 </div>
 

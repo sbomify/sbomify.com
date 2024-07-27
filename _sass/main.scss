@@ -67,6 +67,11 @@ button {
   font-size: rem(14px);
 }
 
+.btn-icon {
+  border: none;
+  background: none;
+}
+
 a.button {
   @extend button
 }
@@ -84,11 +89,12 @@ a.button {
   -webkit-text-fill-color: transparent;
 }
 
-.container {
+.max-container {
   width: 100%;
+  margin: auto;
 
-  @media (min-width: $breakpoint-xl) {
-    max-width: 1280px;
+  @media (min-width: $breakpoint-xxl) {
+    max-width: 1920px;
   }
 }
 
@@ -222,7 +228,7 @@ a.button {
     margin: 16px 0;
     padding: 16px;
     background: $bg-primary;
-    border-left: 4px solid $purple;
+    border-left: 4px solid #0242E5;
     color: $white;
     font-style: italic;
 
