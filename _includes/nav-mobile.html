@@ -1,0 +1,23 @@
+<div class="relative overflow-hidden lg:hidden">
+  <button class="normal open-menu">
+    <img src="/assets/images/site/hamburger-menu.svg" alt="open menu" />
+  </button>
+  <div class="mobile-menu hidden fixed inset-0 w-full h-full bg-primaryBG z-10 px-6">
+    <div class="text-right py-[18px] mb-10">
+      <button class="normal close-menu">
+        <img src="/assets/images/site/close.svg" alt="close menu" />
+      </button>
+    </div>
+    <nav>
+      {% for item in site.data.main.nav %}
+        <div class="mb-6">
+          <a href="{{item.link}}" class="text-white uppercase leading-[27px] text-lg tracking-[1.8px]">
+            {{item.name}}
+          </a>
+        </div>
+      {% endfor %}
+    </nav>
+    <hr class="mt-4 mb-10 bg-white h-[1px] bg-opacity-20 border-0" />
+    {% include social-links.html %}
+  </div>
+</div>

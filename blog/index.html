@@ -1,0 +1,20 @@
+---
+layout: default
+title: Viktor's ramblings | Viktor on entrepreneurship, Dev(Sec)Ops, remote work, and other geeky stuff.
+pagination:
+  enabled: true
+  permalink: /page/:num/
+  per_page: 12
+  sort_reverse: true
+---
+<div>
+  <div class="blog-header bg-primaryBG p-24">
+    <h1 class="text-white mb-6">
+      <span class="text-gradient">The sbomify</span> <span class="text-fuschia60">Blog</span>
+    </h1>
+    <p class="text-[#CBCCCE] ">Content for software, product, and digital security experts</p>
+  </div>
+  <div class="px-[105px] py-[120px]">
+    {% include posts.html paginate=true %}
+  </div>
+</div>

@@ -1,0 +1,8 @@
+{% for item in include.items %}
+  {% assign nav_item = site.data.main.nav | where: 'name', item | first %}
+  {% if nav_item %}
+    <li>
+      <a href="{{ nav_item.link }}">{{ nav_item.name }}</a>
+    </li>
+  {% endif %}
+{% endfor %}

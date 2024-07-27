@@ -1,0 +1,33 @@
+// _sass/_mixins.scss
+
+@import 'variables';
+
+/* px to rem */
+@function stripUnit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@function rem($pxValue) {
+  @return #{stripUnit($pxValue) / stripUnit($base-font-size)}rem;
+}
+
+/* page header */
+
+@mixin page-header($bg-image) {
+  background-image: url(#{$bg-image});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  object-fit: cover;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 2, 18, 0.1);
+  }
+}

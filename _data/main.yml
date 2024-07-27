@@ -1,0 +1,12 @@
+nav:
+  - name: Pricing
+    link: /pricing
+  - name: About
+    link: /about
+  - name: Blog
+    link: /blog
+
+social:
+  x: https://twitter.com/vpetersson
+  linkedIn: https://www.linkedin.com/in/vpetersson/
+  github: https://github.com/vpetersson

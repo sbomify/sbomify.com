@@ -1,0 +1,10 @@
+---
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+     - "8080:4000"
+    volumes:
+      - .:/usr/src/app
+    command: sh -c "npm run watch:css & bundle exec jekyll serve --host 0.0.0.0 --incremental --future --drafts"
