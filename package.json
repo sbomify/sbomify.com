@@ -1,8 +1,8 @@
 {
-  "name": "blog",
+  "name": "sbomify",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/vpetersson/blog.viktorpetersson.com.git",
+  "repository": "https://github.com/sbomify/sbomify.com",
   "author": "Devan Thakur <devanthakur89@gmail.com>",
   "license": "MIT",
   "scripts": {
