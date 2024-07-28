@@ -1,0 +1,10 @@
+{% assign paginator = include.paginator %}
+
+<div class="flex justify-center lg:justify-end">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path }}" class="button text-white rounded-full text-center uppercase mr-2">Previous</a>
+  {% endif %}
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path }}" class="button text-white rounded-full text-center uppercase">Next</a>
+  {% endif %}
+</div>

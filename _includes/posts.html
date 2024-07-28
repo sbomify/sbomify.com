@@ -1,0 +1,28 @@
+{% assign limit = include.limit | default: site.posts.size %}
+{% assign paginate = include.paginate %}
+{% assign dark = include.dark %}
+{% assign hideViewAll = include.hideViewAll | default: false %}
+<h3 class="text-[32px] lg:text-[40px] {% if dark %}text-white{% endif %}">{{ include.title | default: "Blog" }}</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-8">
+  {% if paginate %}
+    {% for post in paginator.posts %}
+      {% include post-card.html post=post %}
+    {% endfor %}
+  {% else %}
+    {% for post in site.posts limit:limit %}
+      {% include post-card.html post=post dark=dark %}
+    {% endfor %}
+  {% endif %}
+</div>
+{% if hideViewAll!=true and include.limit and include.limit < site.posts.size %}
+<div class="mt-12 flex justify-end">
+  <a href="/blog" class="btn-secondary btn-md text-white rounded-full text-center uppercase">
+    View All Posts
+  </a>
+</div>
+{% endif %}
+{% if paginate %}
+<div class="mt-12">
+  {% include pagination.html paginator=paginator %}
+</div>
+{% endif %}

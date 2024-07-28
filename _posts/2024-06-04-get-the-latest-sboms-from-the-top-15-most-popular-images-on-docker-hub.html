@@ -1,0 +1,101 @@
+---
+layout: post
+status: publish
+published: true
+title: Get the latest SBOMs from the top 15 most popular images on Docker Hub
+author:
+  display_name: viktor
+  login: viktor
+  email: v@viktopia.io
+  url: https://sbomify.com
+author_login: viktor
+author_email: v@viktopia.io
+author_url: https://sbomify.com
+wordpress_id: 259
+wordpress_url: https://sbomify.com/?p=259
+date: '2024-06-04 14:52:07 +0200'
+date_gmt: '2024-06-04 14:52:07 +0200'
+categories:
+- Uncategorized
+tags: []
+comments: []
+---
+<p><!-- wp:paragraph --></p>
+<p>Most companies that use Docker, also uses Docker Hub in some capacity. Have you ever wondered how secure these images are? In our article <a href="https://sbomify.com/2024/05/27/comprehensive-guide-to-generating-and-understanding-sboms-with-docker-and-django-cms/" title="Comprehensive Guide to Generating and Understanding SBOMs with Docker and Django-CMS">Comprehensive Guide to Generating and Understanding SBOMs with Docker and Django-CMS</a> we talked about how to generate SBOMs from a Docker image. </p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>In this article, we are taking this one step further, and automate the process in our CI/CD pipeline (in this case <a href="https://docs.github.com/en/actions" title="GitHub Actions">GitHub Actions</a>). We've created a GitHub repository called <a href="https://github.com/sbomify/docker-hub-sbom" title="">docker-hub-sbom</a> that automatically builds SBOMs for the top 15 Docker Hub images every night. </p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>The top 15 most popular (official) Docker images are as follows:</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:list --></p>
+<ul><!-- wp:list-item --></p>
+<li>alpine</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>busybox</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>docker</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>hello-world</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>httpd</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>memcached</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>mongo</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>mysql</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>nginx</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>node</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>postgres</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>python</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>rabbitmq</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>redis</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>ubuntu</li>
+<p><!-- /wp:list-item --></ul>
+<p><!-- /wp:list --></p>
+<p><!-- wp:paragraph --></p>
+<p>To keep things simple, we will only generate the SBOM for the 'latest' tag of each disk image.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Unlike in our previous guide, we will not use the <code>docker sbom</code> feature available in Docker Desktop. But instead, we will use the tool that Docker Desktop uses behind the scenes, namely <a href="https://github.com/anchore/syft" title="syft">syft</a>.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>The full CI/CD pipeline is defined in <a href="https://github.com/sbomify/docker-hub-sbom/blob/master/.github/workflows/build-sboms.yml" title="build-sboms.yml">build-sboms.yml</a>, but in simple terms all it does is to iterate over the list of the list of images and then use <code>syft</code> to build an SBOM both in CycloneDX and SPDX format.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>After each run has been successful, it publishes the SBOMs as artifacts. You can see an example of this in <a href="https://github.com/sbomify/docker-hub-sbom/actions/runs/9359480735" title="this run">this run</a>. For instance, you can download the SBOM for nginx (<a href="https://github.com/sbomify/docker-hub-sbom/actions/runs/9359480735/artifacts/1564889381" title="CycloneDX">CycloneDX</a> and <a href="https://github.com/sbomify/docker-hub-sbom/actions/runs/9359480735/artifacts/1564889383" title="SPDX">SPDX</a>).</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>There are a few important things to point out here:</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:list --></p>
+<ul><!-- wp:list-item --></p>
+<li>First, this way of generating SBOMs is completely CI/CD agnostic. You could easily take this workflow and implement it on other tools like <a href="https://www.travis-ci.com/" title="Travis">Travis</a>, <a href="https://www.jenkins.io/" title="Jenkins">Jenkins</a>, <a href="https://www.jetbrains.com/teamcity/" title=" TeamCity"> TeamCity</a> or almost any other CI/CD platform.</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>Second, while we are using upstream Docker Hub images in this example, you could just swap this out for your own internal Docker images for your application and get the same result.</li>
+<p><!-- /wp:list-item --></ul>
+<p><!-- /wp:list --></p>
