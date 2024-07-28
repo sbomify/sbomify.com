@@ -16,8 +16,12 @@
 title: Sbomify
 description: >- # this means to ignore newlines until "baseurl:"
   Sbomify.com streamlines SBOM exchange for businesses. Our platform supports customers, vendors, and ISVs in sharing SBOMs efficiently—ideal for transactions, compliance, and mergers. Enhance trust and clarity in your software supply chain with transparent and effective SBOM management. Join us to revolutionize SBOM sharing and management.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://sbomify.com" # the base hostname & protocol for your site, e.g. http://example.com
+#baseurl: "" # the subpath of your site, e.g. /blog
+#url: "https://sbomify.com" # the base hostname & protocol for your site, e.g. http://example.com
+
+# Temporary for GitHub Pages test
+baseurl: sbomify.com
+url: sbomify.github.io
 
 social:
   image: "/assets/images/site/sbomify.png"
@@ -32,7 +36,7 @@ sass:
   style: compressed
   sourcemap: never
 
-google_analytics: GT-PL9TCBKD
+google_analytics: G-4DYDPF55FX
 
 
 # Build settings
