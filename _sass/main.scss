@@ -341,11 +341,15 @@ a.button {
     bottom: 0;
     margin: 0 auto;
     height: 10rem;
-    width: 40rem;
+    width: 80%;
     border-radius: 15rem 15rem 0 0;
     background: linear-gradient(94deg, #4059D0 8.79%, #CC58BB 56.82%, #F4B57F 100%);
     filter: blur(60px);
     opacity: 0.4;
+
+    @media (min-width: $breakpoint-lg) {
+      width: 40rem;
+    }
   }
 }
 
