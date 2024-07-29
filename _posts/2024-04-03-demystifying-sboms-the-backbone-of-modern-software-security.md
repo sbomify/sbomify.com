@@ -6,10 +6,8 @@ title: 'Demystifying SBOMs: The Backbone of Modern Software Security'
 author:
   display_name: viktor
   login: viktor
-  email: v@viktopia.io
   url: https://sbomify.com
 author_login: viktor
-author_email: v@viktopia.io
 author_url: https://sbomify.com
 wordpress_id: 153
 wordpress_url: https://sbomify.com/?p=153

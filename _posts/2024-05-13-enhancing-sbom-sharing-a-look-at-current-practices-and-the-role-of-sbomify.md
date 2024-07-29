@@ -6,10 +6,8 @@ title: 'Enhancing SBOM Sharing: A Look at Current Practices and the Role of sbom
 author:
   display_name: viktor
   login: viktor
-  email: v@viktopia.io
   url: https://sbomify.com
 author_login: viktor
-author_email: v@viktopia.io
 author_url: https://sbomify.com
 wordpress_id: 234
 wordpress_url: https://sbomify.com/?p=234

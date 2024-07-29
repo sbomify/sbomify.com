@@ -6,10 +6,8 @@ title: 'OpenSSF and OpenSSF Scorecards: Bolstering Open Source Security'
 author:
   display_name: viktor
   login: viktor
-  email: v@viktopia.io
   url: https://sbomify.com
 author_login: viktor
-author_email: v@viktopia.io
 author_url: https://sbomify.com
 wordpress_id: 213
 wordpress_url: https://sbomify.com/?p=213

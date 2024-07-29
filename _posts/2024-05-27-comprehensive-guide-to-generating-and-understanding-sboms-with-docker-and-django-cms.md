@@ -7,7 +7,6 @@ author:
   display_name: viktor
   login: viktor
 author_login: viktor
-author_email: v@viktopia.io
 author_url: https://sbomify.com
 wordpress_id: 246
 wordpress_url: https://sbomify.com/?p=246

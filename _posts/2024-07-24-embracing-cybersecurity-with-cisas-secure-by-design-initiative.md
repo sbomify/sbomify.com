@@ -6,7 +6,6 @@ title: Embracing Cybersecurity with CISA's 'Secure by Design' Initiative
 author:
   display_name: viktor
 author_login: viktor
-author_email: v@viktopia.io
 author_url: https://sbomify.com
 wordpress_id: 317
 wordpress_url: https://sbomify.com/?p=317

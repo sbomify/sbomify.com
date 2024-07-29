@@ -6,10 +6,8 @@ title: Get the latest SBOMs from the top 15 most popular images on Docker Hub
 author:
   display_name: viktor
   login: viktor
-  email: v@viktopia.io
   url: https://sbomify.com
 author_login: viktor
-author_email: v@viktopia.io
 author_url: https://sbomify.com
 wordpress_id: 259
 wordpress_url: https://sbomify.com/?p=259

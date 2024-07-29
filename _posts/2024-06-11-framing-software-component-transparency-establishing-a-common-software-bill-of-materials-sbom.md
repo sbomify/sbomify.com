@@ -7,10 +7,8 @@ title: 'Framing Software Component Transparency: Establishing a Common Software 
 author:
   display_name: viktor
   login: viktor
-  email: v@viktopia.io
   url: https://sbomify.com
 author_login: viktor
-author_email: v@viktopia.io
 author_url: https://sbomify.com
 wordpress_id: 263
 wordpress_url: https://sbomify.com/?p=263

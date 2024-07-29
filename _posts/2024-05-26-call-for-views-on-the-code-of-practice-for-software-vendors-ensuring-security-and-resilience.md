@@ -7,10 +7,8 @@ title: 'Call for Views on the Code of Practice for Software Vendors: Ensuring Se
 author:
   display_name: viktor
   login: viktor
-  email: v@viktopia.io
   url: https://sbomify.com
 author_login: viktor
-author_email: v@viktopia.io
 author_url: https://sbomify.com
 wordpress_id: 244
 wordpress_url: https://sbomify.com/?p=244

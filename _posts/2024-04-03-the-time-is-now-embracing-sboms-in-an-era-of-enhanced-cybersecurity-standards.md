@@ -6,10 +6,8 @@ title: 'The Time is Now: Embracing SBOMs in an Era of Enhanced Cybersecurity Sta
 author:
   display_name: viktor
   login: viktor
-  email: v@viktopia.io
   url: https://sbomify.com
 author_login: viktor
-author_email: v@viktopia.io
 author_url: https://sbomify.com
 wordpress_id: 146
 wordpress_url: https://sbomify.com/?p=146

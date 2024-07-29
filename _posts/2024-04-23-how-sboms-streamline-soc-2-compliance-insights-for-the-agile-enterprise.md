@@ -6,10 +6,8 @@ title: 'How SBOMs Streamline SOC 2 Compliance: Insights for the Agile Enterprise
 author:
   display_name: viktor
   login: viktor
-  email: v@viktopia.io
   url: https://sbomify.com
 author_login: viktor
-author_email: v@viktopia.io
 author_url: https://sbomify.com
 wordpress_id: 211
 wordpress_url: https://sbomify.com/?p=211

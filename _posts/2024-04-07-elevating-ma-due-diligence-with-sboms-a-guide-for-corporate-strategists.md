@@ -6,10 +6,8 @@ title: 'Elevating M&A Due Diligence with SBOMs: A Guide for Corporate Strategist
 author:
   display_name: viktor
   login: viktor
-  email: v@viktopia.io
   url: https://sbomify.com
 author_login: viktor
-author_email: v@viktopia.io
 author_url: https://sbomify.com
 wordpress_id: 171
 wordpress_url: https://sbomify.com/?p=171
