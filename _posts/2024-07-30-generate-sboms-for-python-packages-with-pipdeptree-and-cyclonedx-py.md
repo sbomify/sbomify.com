@@ -25,6 +25,8 @@ SBOMs provide a detailed inventory of all components in a software project, help
 - **Compliance**: Meeting legal and regulatory standards.
 - **Maintenance**: Ensuring software stability.
 
+See our article [What is an SBOM]({{ site.url }}/what-is-sbom/) for more details.
+
 ## Step-by-Step Guide to Generating SBOMs
 
 ### Using `pipdeptree` for Dependency Analysis

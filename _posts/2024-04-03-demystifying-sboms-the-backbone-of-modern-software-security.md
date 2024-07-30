@@ -27,6 +27,8 @@ In the ever-evolving landscape of software development and cybersecurity, Softwa
 
 An SBOM is essentially a nested inventory, a document that lists all components in a piece of software. Software components might include libraries, packages, modules, and snippets, among others, each potentially having its own set of dependencies. SBOMs can vary in format and detail, but at their core, they serve the same purpose: to provide visibility into the software supply chain.
 
+See [What is an SBOM]({{ site.url }}/what-is-sbom/) to better understand what SBOMs are.
+
 ### Types of SBOMs
 
 SBOMs can be classified based on the depth of detail they offer and the format in which they are provided. Common formats include:
