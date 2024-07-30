@@ -36,7 +36,7 @@ SBOMs provide a detailed inventory of all components in a software project, help
 Install `pipdeptree` with pip:
 
 ```bash
-pip install pipdeptree
+$ pip install pipdeptree
 ```
 
 #### Generate the Dependency Tree
@@ -44,7 +44,7 @@ pip install pipdeptree
 Run this command to see the dependency tree and save it to a `requirements.txt` file:
 
 ```bash
-pipdeptree --freeze > requirements.txt
+$ pipdeptree --freeze > requirements.txt
 ```
 
 This output includes all installed packages and their dependencies, providing the necessary data for a comprehensive SBOM.
@@ -62,7 +62,7 @@ Once you have the dependency tree from `pipdeptree`, you can convert it to a Cyc
 Install CycloneDX-Python with pip:
 
 ```bash
-pip install cyclonedx-bom
+$ pip install cyclonedx-bom
 ```
 
 #### Conversion Process
@@ -70,7 +70,9 @@ pip install cyclonedx-bom
 First, generate the dependency tree and save it to a file using the previous `pipdeptree` command. Then, convert this `requirements.txt` file to a CycloneDX SBOM:
 
 ```bash
-cyclonedx-py --requirements requirements.txt --output sbom.json
+$ cyclonedx-py \
+    --requirements requirements.txt \
+    --output sbom.json
 ```
 
 This process ensures all dependencies, including transient ones, are captured in the SBOM.
