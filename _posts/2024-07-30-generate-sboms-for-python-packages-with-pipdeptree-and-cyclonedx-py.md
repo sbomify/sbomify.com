@@ -7,7 +7,6 @@ author:
   display_name: viktor
 author_login: viktor
 date: '2024-07-30 09:00:35 +0200'
-date_gmt: '2024-07-30 09:00:35 +0200'
 categories:
 - Uncategorized
 tags: []
