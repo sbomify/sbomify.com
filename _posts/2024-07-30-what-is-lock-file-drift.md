@@ -2,7 +2,7 @@
 layout: post
 status: publish
 published: true
-title: Understanding Lock File Drift: A Hidden Risk in Dependency Management
+title: "Understanding Lock File Drift: A Hidden Risk in Dependency Management"
 author:
   display_name: viktor
 author_login: viktor
