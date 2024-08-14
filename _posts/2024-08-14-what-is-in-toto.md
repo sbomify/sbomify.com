@@ -6,8 +6,6 @@ author:
 
 ---
 
-## Introduction
-
 In today's software landscape, securing the software supply chain is more crucial than ever. With increasing concerns about vulnerabilities and supply chain attacks, developers and organizations are looking for robust solutions to ensure the integrity of their software from development to deployment. One such solution is **[in-toto](https://github.com/in-toto/in-toto)**. In this post, we'll explore what in-toto is, how it works, and why it might be the key to securing your software supply chain.
 
 ### What is in-toto?
