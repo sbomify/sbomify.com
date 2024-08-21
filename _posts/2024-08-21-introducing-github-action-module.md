@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Announcing sbomify’s GitHub Actions Module: Seamlessly Generate SBOMs in Your CI/CD Pipeline"
+title: "Announcing sbomify’s GitHub Actions Module: Seamlessly Share SBOMs in Your CI/CD Pipeline"
 author:
   display_name: viktor
 
