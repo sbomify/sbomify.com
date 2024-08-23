@@ -47,7 +47,7 @@ jobs:
     - name: Upload SBOM
       uses: sbomify/github-action@master
       with:
-        token: ${{ secrets.SBOMIFY_TOKEN }}
+        token: ${% raw %}{{ secrets.SBOMIFY_TOKEN }}{% endraw %}
         sbom-file: 'sbom-file.json'
 ```
 

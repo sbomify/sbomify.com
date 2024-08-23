@@ -23,6 +23,8 @@ jobs:
           docker build . -t web
 
       - name: Build content
+        env:
+          JEKYLL_ENV: production
         run: |
           docker run --rm -v $(pwd):/usr/src/app web bundle exec jekyll build
 
