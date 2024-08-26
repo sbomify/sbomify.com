@@ -39,12 +39,12 @@ title: The SBOM sharing and collaboration platform
     <div class="max-container lg:px-[105px] py-12 lg:py-24">
       <section class="flex flex-col md:flex-row items-center gap-8 lg:gap-[230px]">
         <div class="md:w-1/2 p-4">
-          <div class="uppercase mb-4">&gt; For Compliance Teams</div>
-          <h2 class="mb-4">A Revolution in SBOM Management</h2>
+          <div class="uppercase mb-4">&gt; Why now?</div>
+          <h2 class="mb-4">The SBOM Mandate</h2>
           <p class="mb-4">
-            In the dynamic world of software development, keeping track of every component and its vulnerabilities can be overwhelming. sbomify transforms this challenge into an opportunity for operational excellence. With our secure online portal, managing SBOMs becomes not just manageable but efficient...
+          With the introduction of <a href="https://www.federalregister.gov/documents/2021/05/17/2021-10460/improving-the-nations-cybersecurity">Executive Order 14028</a>, the US government began mandating SBOMs (Software Bill of Materials) for all vendors selling software to the federal government. This requirement has had a cascading effect throughout the software industry, particularly in compliance. From the EU's Cyber Resilience Act to the NIST Cybersecurity Framework, SBOMs are set to become the standard for transparency in the software supply chain. If your organization hasn't adopted SBOMs yet, the clock is ticking.
           </p>
-          <a class="button" href="/features/sbom-management">Learn More</a>
+          <a class="button" href="/features/why-now">Learn More</a>
         </div>
         <div class="md:w-1/2 p-4">
           <img src="/assets/images/site/product.webp" alt="sbom management" class="w-full h-auto rounded-lg">
@@ -56,26 +56,39 @@ title: The SBOM sharing and collaboration platform
           <img src="/assets/images/site/components.webp" alt="sbomify innovation" class="w-full h-auto rounded-lg">
         </div>
         <div class="md:w-1/2 p-4">
-          <div class="uppercase mb-4">&gt; FOR ISV's</div>
-          <h2 class="mb-4">Empowering Innovation with Ease</h2>
+          <div class="uppercase mb-4">&gt; Generate, Collaborate and Analyze</div>
+          <h2 class="mb-4">The SBOM life cycle</h2>
           <p class="mb-4">
-            For software vendors, sbomify isn't just another tool; it's a revolution in how you deliver software. Designed with simplicity and efficiency in mind, our platform seamlessly integrates into your CI/CD pipeline, making SBOM management effortless. Whether you’re dealing with a single SBOM or navigating through a complex application stack, sbomify makes it manageable...
+            The SBOM life cycle consists of three parts: generation, collaboration, and analysis. sbomify focuses on the collaboration aspect. SBOMs are typically used by both internal and external stakeholders, such as customers. After speaking with CTOs and CSAs, it became evident that most SBOM collaboration today is still done via email, reminiscent of how we used to email software patches in the 90s, which were then stored haphazardly on internal file shares. This approach introduces numerous issues, including unnecessary labor and the risk of working with outdated data. Collaboration should be automated and seamlessly integrated into the CI/CD workflow, and this is precisely what sbomify offers.
           </p>
-          <a class="button" href="/features/innovation">Learn More</a>
+          <a class="button" href="/features/generate-collaborate-analyze">Learn More</a>
         </div>
       </section>
 
       <section class="flex flex-col md:flex-row items-center my-8 gap-8 lg:gap-[230px]">
         <div class="md:w-1/2 p-4">
-          <div class="uppercase mb-4">&gt; FOR M&A</div>
-          <h2 class="mb-4">M&A Due Diligence, Redefined</h2>
+          <div class="uppercase mb-4">&gt; Hub and spoke</div>
+          <h2 class="mb-4">The SBOM hub</h2>
           <p class="mb-4">
-            In the critical phase of mergers and acquisitions, understanding the software assets' composition you're acquiring is paramount. sbomify redefines due diligence by providing a comprehensive audit tool for evaluating a company’s software dependencies. Our platform ensures that you’re not inheriting software burdened by vulnerabilities or entangled in incompatible licenses...
+            SBOMs are as fresh as milk—they can change with every CI/CD run, depending on how dependencies (and sub-dependencies!) are managed. This makes it crucial to use a collaborative platform for SBOM management. Whether you're a software buyer or producer, using sbomify will simplify your SBOM process. You can seamlessly invite internal stakeholders to sbomify, allowing them to automatically access the most up-to-date SBOMs for your product, or even specific components for more granular control. These SBOMs can then be easily exported to third-party tools for further analysis, such as security or license audits.
           </p>
-          <a class="button" href="/features/due-diligence">Learn More</a>
+          <a class="button" href="/features/sbom-hub">Learn More</a>
         </div>
         <div class="md:w-1/2 p-4">
           <img src="/assets/images/site/marketplace.svg" alt="sbom due diligence" class="w-full h-auto rounded-lg shadow-lg">
+        </div>
+      </section>
+      <section class="flex flex-col md:flex-row items-center my-8 gap-8 lg:gap-[230px]">
+        <div class="md:w-1/2 p-4 order-last md:order-first">
+          <img src="/assets/images/site/sbom-hierarchy.svg" alt="sbomify innovation" class="w-full h-auto rounded-lg">
+        </div>
+        <div class="md:w-1/2 p-4">
+          <div class="uppercase mb-4">&gt; Product, Project and Components</div>
+          <h2 class="mb-4">SBOMs Done Right</h2>
+          <p class="mb-4">
+            Building an SBOM for a simple microservice or dependency file is straightforward. However, this approach is far from representative of your entire product or service. Your backend likely consists of at least a handful of different services, potentially written in various languages and running in separate Docker containers. On top of that, there are probably front-end components that also need to be captured. Creating SBOMs that accurately reflect your entire product or service could result in generating at least a dozen SBOMs. Even with automated tools, sharing all of these with stakeholders can lead to confusion. At sbomify, we’ve addressed this by introducing hierarchical grouping through products, projects, and components.
+          </p>
+          <a class="button" href="/features/sbom-hierarchy">Learn More</a>
         </div>
       </section>
     </div>
