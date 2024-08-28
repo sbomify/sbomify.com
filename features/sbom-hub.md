@@ -2,9 +2,9 @@
 layout: page
 title: The Importance of Real-Time SBOM Collaboration
 redirect_from:
- - /features/due-diligence
- - /features/innovation
- - /features/sbom-management
+ - /features/due-diligence/
+ - /features/innovation/
+ - /features/sbom-management/
 
 ---
 
