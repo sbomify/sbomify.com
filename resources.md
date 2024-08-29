@@ -15,8 +15,9 @@ The generation phase is where you create an SBOM from a source. There are variou
 
 A collection of tools that spans multiple formats and languages:
 
-* [Trivy](https://github.com/aquasecurity/trivy) from Aqua
+* [Snyk](https://github.com/snyk/cli) from Snyk
 * [Syft](https://github.com/anchore/syft) from Anchore
+* [Trivy](https://github.com/aquasecurity/trivy) from Aqua
 
 ### Specific
 
