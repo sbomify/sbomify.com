@@ -64,6 +64,7 @@ Language or format-specific tools:
 
 * [protobom](https://github.com/protobom/protobom)
 * [Hoppr](https://hoppr.dev/) by Lockheed Martin Corporation
+* [OSS Review Toolkit](https://github.com/oss-review-toolkit/ort) (ORT)
 
 ### Assembly and Enrichment
 
