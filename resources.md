@@ -13,7 +13,7 @@ The generation phase is where you create an SBOM from a source. There are variou
 
 ### Generic
 
-A collection of tools that spans multiple formats and languages:
+Tools that spans multiple formats and languages.
 
 * [Snyk](https://github.com/snyk/cli) from Snyk
 * [Syft](https://github.com/anchore/syft) from Anchore
@@ -21,12 +21,12 @@ A collection of tools that spans multiple formats and languages:
 
 ### Specific
 
-Language or format-specific tools:
+Language or format-specific tools.
 
 #### Docker / Containers
 
 * [Tern](https://github.com/tern-tools/tern)
-* [bom](https://github.com/kubernetes-sigs/bom) from the Linux Foundation
+* [bom](https://github.com/kubernetes-sigs/bom) from The Linux Foundation
 
 #### Python
 
@@ -64,7 +64,7 @@ Language or format-specific tools:
 #### Others
 
 * [protobom](https://github.com/protobom/protobom)
-* [Hoppr](https://hoppr.dev/) by Lockheed Martin Corporation
+* [Hoppr](https://hoppr.dev/) from Lockheed Martin Corporation
 * [OSS Review Toolkit](https://github.com/oss-review-toolkit/ort) (ORT)
 
 ### Assembly and Enrichment
@@ -86,7 +86,7 @@ The collaboration phase focuses on how you share the SBOM with internal and exte
 The analysis phase involves how you use the SBOM, typically for compliance or security purposes. Mature organizations may use multiple tools or services for different purposes.
 
 * [Cybellum](https://cybellum.com/) from Cybellum
-* [Dependency Track](https://dependencytrack.org/) by OWASP
+* [Dependency Track](https://dependencytrack.org/) from OWASP
 * [GUAC](https://github.com/guacsec/guac) from Kusari
 * [Helm](https://www.medcrypt.com/solutions/helm) from Medcrypt
 * [sbomaudit](https://github.com/anthonyharrison/sbomaudit) from Anthony Harrison
