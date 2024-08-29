@@ -5,9 +5,10 @@ title: Automating SBOM Collaboration with sbomify
 ---
 
 The Software Bill of Materials (SBOM) life cycle comprises three key stages:
-* Generation
-* Collaboration
-* Analysis
+
+* [Generation]({{ site.url }}/resources/#generation)
+* [Collaboration]({{ site.url }}/resources/#collaboration)
+* [Analysis]({{ site.url }}/resources/#analysis)
 
 While each of these stages is critical for maintaining transparency and security in the software supply chain, collaboration is often the most challenging. SBOMs need to be shared effectively with both internal teams and external stakeholders, including customers and partners. Unfortunately, current practices for SBOM collaboration are often outdated and inefficient. After discussions with CTOs and Chief Security Architects (CSAs), it became evident that many organizations still rely on email to share SBOMs, a method reminiscent of how software patches were distributed in the 1990s. These SBOMs are then often stored ad-hoc on internal file shares, leading to a host of issues such as unnecessary manual labor, disorganized storage, and the risk of working with outdated data.
 

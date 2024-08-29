@@ -85,8 +85,10 @@ The collaboration phase focuses on how you share the SBOM with internal and exte
 
 The analysis phase involves how you use the SBOM, typically for compliance or security purposes. Mature organizations may use multiple tools or services for different purposes.
 
+* [Cybellum](https://cybellum.com/) from Cybellum
 * [Dependency Track](https://dependencytrack.org/) by OWASP
 * [GUAC](https://github.com/guacsec/guac) from Kusari
+* [Helm](https://www.medcrypt.com/solutions/helm) from Medcrypt
 * [sbomaudit](https://github.com/anthonyharrison/sbomaudit) from Anthony Harrison
 * [sbommerge](https://github.com/anthonyharrison/sbommerge) from Anthony Harrison
 * [sbomqs](https://github.com/interlynk-io/sbomqs) from Interlynk
