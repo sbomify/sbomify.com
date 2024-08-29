@@ -31,6 +31,7 @@ Language or format-specific tools:
 
 * [CycloneDX Python](https://github.com/CycloneDX/cyclonedx-python) from CycloneDX
 * [sbom4python](https://github.com/anthonyharrison/sbom4python) from Anthony Harrison
+* [SPDX Python](https://github.com/spdx/tools-python) from SPDX
 
 #### Rust
 
@@ -41,6 +42,7 @@ Language or format-specific tools:
 #### Go
 
 * [CycloneDX Go](https://github.com/CycloneDX/cyclonedx-gomod) from CycloneDX
+* [SPDX Golang](https://github.com/spdx/tools-golang) from SPDX
 
 #### .NET
 
@@ -50,12 +52,18 @@ Language or format-specific tools:
 #### Java
 
 * [CycloneDX Java](https://github.com/CycloneDX/cyclonedx-core-java) from CycloneDX
+* [SPDX Java](https://github.com/spdx/Spdx-Java-Library) from SPDX
 
 #### JavaScript
 
 * [CycloneDX JavaScript](https://github.com/CycloneDX/cyclonedx-javascript-library)
 * [Retire.js](https://github.com/RetireJS/retire.js) from RetireJS
 * [sbom4js](https://github.com/anthonyharrison/sbom4js) from Anthony Harrison
+
+#### Others
+
+* [protobom](https://github.com/protobom/protobom)
+* [Hoppr](https://hoppr.dev/) by Lockheed Martin Corporation
 
 ### Assembly and Enrichment
 
