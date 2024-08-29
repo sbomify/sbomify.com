@@ -1,6 +1,8 @@
 nav:
   - name: Blog
     link: /blog
+  - name: SBOM Resources
+    link: /resources
 
 social:
   x: https://x.com/sbomify
