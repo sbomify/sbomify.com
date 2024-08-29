@@ -90,6 +90,8 @@ The analysis phase involves how you use the SBOM, typically for compliance or se
 * [GUAC](https://github.com/guacsec/guac) from Kusari
 * [Helm](https://www.medcrypt.com/solutions/helm) from Medcrypt
 * [Open Source Vulnerabilities](https://osv.dev/) (OSV) from Google
+* [bomber](https://github.com/devops-kung-fu/bomber) from DKFM
+* [grype](https://github.com/anchore/grype) from Anchore
 * [sbomaudit](https://github.com/anthonyharrison/sbomaudit) from Anthony Harrison
 * [sbommerge](https://github.com/anthonyharrison/sbommerge) from Anthony Harrison
 * [sbomqs](https://github.com/interlynk-io/sbomqs) from Interlynk
