@@ -89,6 +89,7 @@ The analysis phase involves how you use the SBOM, typically for compliance or se
 * [Dependency Track](https://dependencytrack.org/) from OWASP
 * [GUAC](https://github.com/guacsec/guac) from Kusari
 * [Helm](https://www.medcrypt.com/solutions/helm) from Medcrypt
+* [Open Source Vulnerabilities](https://osv.dev/) (OSV) from Google
 * [sbomaudit](https://github.com/anthonyharrison/sbomaudit) from Anthony Harrison
 * [sbommerge](https://github.com/anthonyharrison/sbommerge) from Anthony Harrison
 * [sbomqs](https://github.com/interlynk-io/sbomqs) from Interlynk
