@@ -94,4 +94,9 @@ The analysis phase involves how you use the SBOM, typically for compliance or se
 * [sbommerge](https://github.com/anthonyharrison/sbommerge) from Anthony Harrison
 * [sbomqs](https://github.com/interlynk-io/sbomqs) from Interlynk
 
+## Other SBOM resources
+
+* NTIA's [The Minimum Elements For a Software Bill of Materials (SBOM)](https://www.ntia.gov/sites/default/files/publications/sbom_minimum_elements_report_0.pdf)
+* NTIA's [Framing Software Component Transparency: Establishing a Common Software Bill of Materials (SBOM)](https://www.ntia.gov/sites/default/files/publications/ntia_sbom_framing_2nd_edition_20211021_0.pdf) (2nd Edition)
+
 [Edit me on GitHub](https://github.com/sbomify/sbomify.com/blob/master/resources.md)
