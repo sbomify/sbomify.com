@@ -2,7 +2,7 @@
 layout: post
 title: "Exploring the Future of Software Security: Join Us at BSides Bristol"
 author:
-  display_name: viktor
+  display_name: Viktor
 
 ---
 

@@ -5,9 +5,9 @@ published: true
 title: 'The Role of SBOMs in an OBOM: Ensuring Compliance and Security in Smart Thermometer
   Development'
 author:
-  display_name: viktor
-  login: viktor
-author_login: viktor
+  display_name: Cowboy Neil
+  login: Cowboy Neil
+author_login: Cowboy Neil
 author_url: https://sbomify.com
 wordpress_id: 272
 wordpress_url: https://sbomify.com/?p=272

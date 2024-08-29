@@ -4,8 +4,8 @@ status: publish
 published: true
 title: "Understanding Lock File Drift: A Hidden Risk in Dependency Management"
 author:
-  display_name: viktor
-author_login: viktor
+  display_name: Cowboy Neil
+author_login: Cowboy Neil
 date: '2024-07-31 09:00:35 +0200'
 categories:
 - Uncategorized

@@ -5,10 +5,10 @@ published: true
 title: 'Call for Views on the Code of Practice for Software Vendors: Ensuring Security
   and Resilience'
 author:
-  display_name: viktor
-  login: viktor
+  display_name: Cowboy Neil
+  login: Cowboy Neil
   url: https://sbomify.com
-author_login: viktor
+author_login: Cowboy Neil
 author_url: https://sbomify.com
 wordpress_id: 244
 wordpress_url: https://sbomify.com/?p=244

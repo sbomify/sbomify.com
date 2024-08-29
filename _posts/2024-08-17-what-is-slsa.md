@@ -2,7 +2,7 @@
 layout: post
 title: "Securing the Software Supply Chain with SLSA: What You Need to Know"
 author:
-  display_name: viktor
+  display_name: Cowboy Neil
 
 ---
 

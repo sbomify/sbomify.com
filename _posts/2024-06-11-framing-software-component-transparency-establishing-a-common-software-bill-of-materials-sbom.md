@@ -5,10 +5,10 @@ published: true
 title: 'Framing Software Component Transparency: Establishing a Common Software Bill
   of Materials (SBOM)'
 author:
-  display_name: viktor
-  login: viktor
+  display_name: Cowboy Neil
+  login: Cowboy Neil
   url: https://sbomify.com
-author_login: viktor
+author_login: Cowboy Neil
 author_url: https://sbomify.com
 wordpress_id: 263
 wordpress_url: https://sbomify.com/?p=263

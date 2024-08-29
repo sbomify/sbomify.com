@@ -5,9 +5,9 @@ published: true
 title: 'Understanding the EU Cyber Resilience Act: The Role of SBOMs in Enhancing
   Cybersecurity'
 author:
-  display_name: viktor
-  login: viktor
-author_login: viktor
+  display_name: Cowboy Neil
+  login: Cowboy Neil
+author_login: Cowboy Neil
 author_url: https://sbomify.com
 wordpress_id: 277
 wordpress_url: https://sbomify.com/?p=277

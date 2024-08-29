@@ -4,9 +4,9 @@ status: publish
 published: true
 title: Comprehensive Guide to Generating and Understanding SBOMs with Docker and Django-CMS
 author:
-  display_name: viktor
-  login: viktor
-author_login: viktor
+  display_name: Cowboy Neil
+  login: Cowboy Neil
+author_login: Cowboy Neil
 author_url: https://sbomify.com
 wordpress_id: 246
 wordpress_url: https://sbomify.com/?p=246

@@ -4,10 +4,10 @@ status: publish
 published: true
 title: 'Demystifying SBOMs: The Backbone of Modern Software Security'
 author:
-  display_name: viktor
-  login: viktor
+  display_name: Cowboy Neil
+  login: Cowboy Neil
   url: https://sbomify.com
-author_login: viktor
+author_login: Cowboy Neil
 author_url: https://sbomify.com
 wordpress_id: 153
 wordpress_url: https://sbomify.com/?p=153

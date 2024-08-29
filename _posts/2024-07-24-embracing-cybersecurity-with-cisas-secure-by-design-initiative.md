@@ -4,8 +4,8 @@ status: publish
 published: true
 title: Embracing Cybersecurity with CISA's 'Secure by Design' Initiative
 author:
-  display_name: viktor
-author_login: viktor
+  display_name: Cowboy Neil
+author_login: Cowboy Neil
 author_url: https://sbomify.com
 wordpress_id: 317
 wordpress_url: https://sbomify.com/?p=317
