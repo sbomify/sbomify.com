@@ -87,7 +87,7 @@ The analysis phase involves how you use the SBOM, typically for compliance or se
 
 * [Cybellum](https://cybellum.com/) from Cybellum
 * [Dependency Track](https://dependencytrack.org/) from OWASP
-* [GUAC](https://github.com/guacsec/guac) from Kusari
+* [GUAC](https://guac.sh) from OpenSSF
 * [Helm](https://www.medcrypt.com/solutions/helm) from Medcrypt
 * [Open Source Vulnerabilities](https://osv.dev/) (OSV) from Google
 * [bomber](https://github.com/devops-kung-fu/bomber) from DKFM
