@@ -88,6 +88,7 @@ The analysis phase involves how you use the SBOM, typically for compliance or se
 
 * [Cybellum](https://cybellum.com/) from Cybellum
 * [Dependency Track](https://dependencytrack.org/) from OWASP
+* [Eclipse SW360](https://github.com/eclipse-sw360/sw360)
 * [GUAC](https://guac.sh) from OpenSSF
 * [Helm](https://www.medcrypt.com/solutions/helm) from Medcrypt
 * [Open Source Vulnerabilities](https://osv.dev/) (OSV) from Google
