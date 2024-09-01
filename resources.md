@@ -69,6 +69,7 @@ Language or format-specific tools.
 
 ### Assembly and Enrichment
 
+* [CycloneDX Editor/Validator](https://github.com/Festo-se/cyclonedx-editor-validator/) from Festo
 * [Parlay](https://github.com/snyk/parlay) from Snyk
 * [jq](https://github.com/jqlang/jq) is commonly used for assembly
 * [sbomasm](https://github.com/interlynk-io/sbomasm) from Interlynk
