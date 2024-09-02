@@ -1,7 +1,7 @@
 FROM ruby:3.3-bookworm
 ENV LANG C.UTF-8
 RUN apt-get update -qq && \
-    apt-get install -y python3 build-essential curl
+    apt-get install -y python3 build-essential curl webp
 
 # Install nvm (Node Version Manager)
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash \
