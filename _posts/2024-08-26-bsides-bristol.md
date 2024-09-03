@@ -23,3 +23,8 @@ This talk is more than just an introduction to SBOMs. It’s a comprehensive gui
 If you’re committed to advancing your organization’s software security practices, this session is one you won’t want to miss.
 
 We look forward to seeing you at BSides Bristol and engaging in this important conversation about the future of software security.
+
+
+## Update
+
+The slides from the talk can be found [here](https://speakerdeck.com/vpetersson/navigating-the-sbom-landscape-formats-relevance-and-tooling-in-2024-at-bsides-bristol-24).
