@@ -97,6 +97,7 @@ The analysis phase involves how you use the SBOM, typically for compliance or se
 * [Eclipse SW360](https://github.com/eclipse-sw360/sw360)
 * [GUAC](https://guac.sh) from OpenSSF
 * [Helm](https://www.medcrypt.com/solutions/helm) from Medcrypt
+* [NTIA Conformance Checker](https://github.com/spdx/ntia-conformance-checker) from SPDX
 * [Open Source Vulnerabilities](https://osv.dev/) (OSV) from Google
 * [bomber](https://github.com/devops-kung-fu/bomber) from DKFM
 * [bomshell](https://github.com/puerco/bomshell) from Adolfo García Veytia (a.k.a. Puerco)
