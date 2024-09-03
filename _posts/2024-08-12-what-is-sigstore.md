@@ -2,7 +2,7 @@
 layout: post
 title: "Understanding Sigstore: Securing the Software Supply Chain"
 author:
-  display_name: viktor
+  display_name: Cowboy Neil
 
 ---
 

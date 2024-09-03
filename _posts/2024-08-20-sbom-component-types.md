@@ -2,7 +2,7 @@
 layout: post
 title: "Comparing SBOM Formats: Focus on Component Types in CycloneDX vs. SPDX"
 author:
-  display_name: viktor
+  display_name: Cowboy Neil
 
 ---
 

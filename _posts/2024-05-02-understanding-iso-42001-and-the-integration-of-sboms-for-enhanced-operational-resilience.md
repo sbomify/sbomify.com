@@ -5,10 +5,10 @@ published: true
 title: Understanding ISO 42001 and the Integration of SBOMs for Enhanced Operational
   Resilience
 author:
-  display_name: viktor
-  login: viktor
+  display_name: Cowboy Neil
+  login: Cowboy Neil
   url: https://sbomify.com
-author_login: viktor
+author_login: Cowboy Neil
 author_url: https://sbomify.com
 wordpress_id: 218
 wordpress_url: https://sbomify.com/?p=218

@@ -4,9 +4,9 @@ status: publish
 published: true
 title: "Enhancing Dependency Management with GitHub's Dependency Graph: An Analysis"
 author:
-  display_name: viktor
-  login: viktor
-author_login: viktor
+  display_name: Cowboy Neil
+  login: Cowboy Neil
+author_login: Cowboy Neil
 author_url: https://sbomify.com
 wordpress_id: 268
 wordpress_url: https://sbomify.com/?p=268

@@ -4,10 +4,10 @@ status: publish
 published: true
 title: 'Elevating M&A Due Diligence with SBOMs: A Guide for Corporate Strategists'
 author:
-  display_name: viktor
-  login: viktor
+  display_name: Cowboy Neil
+  login: Cowboy Neil
   url: https://sbomify.com
-author_login: viktor
+author_login: Cowboy Neil
 author_url: https://sbomify.com
 wordpress_id: 171
 wordpress_url: https://sbomify.com/?p=171

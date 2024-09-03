@@ -4,9 +4,9 @@ status: publish
 published: true
 title: "What's New in SPDX 3: Enhanced Referencing Capabilities"
 author:
-  display_name: viktor
-  login: viktor
-author_login: viktor
+  display_name: Cowboy Neil
+  login: Cowboy Neil
+author_login: Cowboy Neil
 author_url: https://sbomify.com
 wordpress_id: 314
 wordpress_url: https://sbomify.com/?p=314

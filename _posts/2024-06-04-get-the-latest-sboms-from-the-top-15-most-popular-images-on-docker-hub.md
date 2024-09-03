@@ -4,10 +4,10 @@ status: publish
 published: true
 title: Get the latest SBOMs from the top 15 most popular images on Docker Hub
 author:
-  display_name: viktor
-  login: viktor
+  display_name: Cowboy Neil
+  login: Cowboy Neil
   url: https://sbomify.com
-author_login: viktor
+author_login: Cowboy Neil
 author_url: https://sbomify.com
 wordpress_id: 259
 wordpress_url: https://sbomify.com/?p=259

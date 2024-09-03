@@ -4,10 +4,10 @@ status: publish
 published: true
 title: Enhancing SBOM Management for Buyers with sbomify
 author:
-  display_name: viktor
-  login: viktor
+  display_name: Cowboy Neil
+  login: Cowboy Neil
   url: https://sbomify.com
-author_login: viktor
+author_login: Cowboy Neil
 author_url: https://sbomify.com
 wordpress_id: 140
 wordpress_url: https://sbomify.com/?p=140

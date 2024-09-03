@@ -4,10 +4,10 @@ status: publish
 published: true
 title: 'The Time is Now: Embracing SBOMs in an Era of Enhanced Cybersecurity Standards'
 author:
-  display_name: viktor
-  login: viktor
+  display_name: Cowboy Neil
+  login: Cowboy Neil
   url: https://sbomify.com
-author_login: viktor
+author_login: Cowboy Neil
 author_url: https://sbomify.com
 wordpress_id: 146
 wordpress_url: https://sbomify.com/?p=146
