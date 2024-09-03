@@ -7,6 +7,8 @@ title: SBOM Resources
 
 The SBOM life cycle can be broken down into three phases: [generation, collaboration, and analysis]({{ site.url }}/features/generate-collaborate-analyze/). The structure below aligns with the life cycle.
 
+There's also a GitHub repository called [sbom-benchmarks](https://github.com/sbomify/sbom-benchmarks) that sets to benchmark the various tools (from the Generation phase) against each other, along with providing examples how they are used.
+
 ## Generation
 
 The generation phase is where you create an SBOM from a source. There are various strategies for generating SBOMs, but this phase generally involves taking a set of inputs (such as a dependency file) and generating an SBOM in either the [CycloneDX](https://cyclonedx.org/) or [SPDX](https://spdx.dev/) format.
@@ -25,10 +27,14 @@ Language or format-specific tools.
 
 #### Docker / Containers
 
+You can see how they compare side-by-side in the [sbom-benchmark](https://github.com/sbomify/sbom-benchmarks/tree/master/docker) repository.
+
 * [Tern](https://github.com/tern-tools/tern)
 * [bom](https://github.com/kubernetes-sigs/bom) from The Linux Foundation
 
 #### Python
+
+You can see how they compare side-by-side in the [sbom-benchmark](https://github.com/sbomify/sbom-benchmarks/tree/master/python) repository.
 
 * [CycloneDX Python](https://github.com/CycloneDX/cyclonedx-python) from CycloneDX
 * [sbom4python](https://github.com/anthonyharrison/sbom4python) from Anthony Harrison
@@ -93,6 +99,7 @@ The analysis phase involves how you use the SBOM, typically for compliance or se
 * [Helm](https://www.medcrypt.com/solutions/helm) from Medcrypt
 * [Open Source Vulnerabilities](https://osv.dev/) (OSV) from Google
 * [bomber](https://github.com/devops-kung-fu/bomber) from DKFM
+* [bomshell](https://github.com/puerco/bomshell) from Adolfo García Veytia (a.k.a. Puerco)
 * [grype](https://github.com/anchore/grype) from Anchore
 * [sbomaudit](https://github.com/anthonyharrison/sbomaudit) from Anthony Harrison
 * [sbommerge](https://github.com/anthonyharrison/sbommerge) from Anthony Harrison
