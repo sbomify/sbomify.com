@@ -7,10 +7,37 @@ title: The SBOM sharing and collaboration platform
   <div class="hero bg-primaryBG pt-16 lg:pt-24 pb-10">
     <div class="max-container flex flex-col text-white px-4 lg:px-[105px]">
       <div class="flex flex-col lg:flex-row gap-8 lg:gap-24 mb-16 lg:mb-24">
-        <h1 class="text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] flex-1 font-medium">
-          <span class="text-gradient">The SBOM sharing</span> <span class="text-fuschia60">and collaboration platform</span>
-        </h1>
-        <div class="flex-1 mt-3">
+        <h1 class="text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] flex-3 font-medium">
+            <span class="text-gradient">The SBOM hub</span><br />
+            <span id="rotating-text" class="text-fuschia60"></span>
+
+            <script>
+                // List of words to rotate through
+                const words = [
+                    'for secure sharing.',
+                    'for easy NTIA compliance.',
+                    'that integrates with your tools.',
+                    'that works in your CI/CD pipeline.',
+                ];
+
+                // Get the element where the words will rotate
+                const rotatingTextElement = document.getElementById('rotating-text');
+
+                let currentWordIndex = 0;
+
+                // Function to update the text
+                function updateRotatingText() {
+                    rotatingTextElement.textContent = words[currentWordIndex];
+                    currentWordIndex = (currentWordIndex + 1) % words.length;
+                }
+
+                // Initial text set
+                updateRotatingText();
+
+                // Change the text every 5 seconds
+                setInterval(updateRotatingText, 5000);
+        </script>        </h1>
+        <div class="flex-1 mt-3 flex justify-end">
           <div>
             <a class="btn-secondary mx-auto" href="https://calendly.com/vpetersson/sbomify-consultation">Schedule Consultation</a>
           </div>
@@ -69,7 +96,7 @@ title: The SBOM sharing and collaboration platform
           <div class="uppercase mb-4">&gt; Hub and spoke</div>
           <h2 class="mb-4">The SBOM Hub</h2>
           <p class="mb-4">
-            SBOMs are as fresh as milk—they can change with every CI/CD run, depending on how dependencies (and sub-dependencies!) are managed. This makes it crucial to use a collaborative platform for SBOM management. Whether you're a software buyer or producer, using sbomify will simplify your SBOM process. You can seamlessly invite internal stakeholders to sbomify, allowing them to automatically access the most up-to-date SBOMs for your product, or even specific components for more granular control. These SBOMs can then be easily exported to third-party tools for further analysis, such as security or license audits.
+            SBOMs are as fresh as milk — they can change with every CI/CD run, depending on how dependencies (and sub-dependencies!) are managed. This makes it crucial to use a collaborative platform for SBOM management. Whether you're a software buyer or producer, using sbomify will simplify your SBOM process. You can seamlessly invite internal stakeholders to sbomify, allowing them to automatically access the most up-to-date SBOMs for your product, or even specific components for more granular control. These SBOMs can then be easily exported to third-party tools for further analysis, such as security or license audits.
           </p>
           <a class="button" href="/features/sbom-hub">Learn More</a>
         </div>
