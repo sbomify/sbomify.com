@@ -17,11 +17,11 @@ To produce an SBOM that complies with standards like the NTIA Minimum Elements, 
 
 ![Generation Phases](/assets/images/site/generation.svg)
 
-### Generation
+### 1. Generate
 
 The generation phase is when you produce the actual SBOM. Generally speaking, there are two ways to generate an SBOM: you can do it from **source** (e.g., from a lock file, such as `requirements.txt`) or during **build** (e.g., after you’ve installed everything from the lock file). To meet the NTIA Minimum Elements, you really need to generate the SBOM during the build process. If you generate it from the source, you won’t capture all **transitive dependencies** from the source code. This is why tools like GitHub's Dependency Graph can't produce NTIA-compliant SBOMs.
 
-### Augmentation
+### 2. Augment
 
 Once you’ve generated your SBOM, you’ll need to *augment* it with information that the SBOM generation tool likely didn’t capture. This may include details like:
 
@@ -36,11 +36,11 @@ Many people do this manually by merging a metadata SBOM file into the original S
 
 *If you want to avoid this step, get in touch with us and we can automate the entire process for you.*
 
-### Enrichment
+### 3. Enrich
 
 Next comes the *enrichment* phase. Depending on the tool you used to generate the SBOM, this step may or may not be necessary. Some tools will automatically enrich the SBOM, typically by calling out to a third-party service (like PyPI)  during the generation phase to gather more information about all components, such as licensing data, and include it in the SBOM.
 
-### Consolidation
+### 4. Consolidate
 
 This final step is often overlooked: [SBOM hierarchy]({{ site.url }}//features/sbom-hierarchy/).
 
