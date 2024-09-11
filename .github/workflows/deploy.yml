@@ -16,7 +16,7 @@ jobs:
     name: Deploy to GitHub Pages
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build container
         run: |
@@ -29,10 +29,10 @@ jobs:
           docker run --rm -v $(pwd):/usr/src/app web bundle exec jekyll build
 
       - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
