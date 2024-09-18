@@ -1,15 +1,17 @@
 ---
 layout: page
 title: A primer on the SBOM lifecycle
-description: A primer on the Software Bill of Material Lifecycle, which includes generation, collaboration and analysis.
+description: A primer on the Software Bill of Material Lifecycle, which includes generation, distribution and analysis.
 
 ---
 
-The Software Bill of Materials (SBOM) life cycle comprises three key stages: Generation, Collaboration, and Analysis.
+The Software Bill of Materials (SBOM) life cycle comprises three key stages: Authoring, Distribution, and Analysis.
 
-## Generation
+![Lifecycle](/assets/images/site/lifecycle.svg)
 
-Newcomers to SBOMs unfortunately often underestimate the complexities involved in generating a complete SBOM. There are many [SBOM generation tools]({{ site.url }}/resources/#generation) available, so it might seem like it's just a matter of running one of these tools and you're done.
+## Generation (a.k.a Authoring)
+
+Newcomers to SBOMs unfortunately often underestimate the complexities involved in creating a complete SBOM (also known as 'authoring'). There are many [SBOM generation tools]({{ site.url }}/resources/#generation) available, so it might seem like it's just a matter of running one of these tools and you're done.
 
 While this *might* suffice for your internal SBOM needs when starting out, the reality is far more complicated if you need to meet industry requirements, such as the NTIA Minimum Elements. But don’t worry — we’re here to help.
 
@@ -42,7 +44,7 @@ Next comes the *enrichment* phase. Depending on the tool you used to generate th
 
 ### 4. Consolidate
 
-This final step is often overlooked: [SBOM hierarchy]({{ site.url }}//features/sbom-hierarchy/).
+This final step is often overlooked: [SBOM hierarchy]({{ site.url }}//features/sbom-hierarchy/). This step can be skipped and done in the Distribution instead if you're using a platform like sbomify.
 
 In the case of a basic SaaS product, your architecture might include an API service running inside a Docker container and a frontend built with a JavaScript framework. Now, you already have three SBOMs: one for the backend, one for the Docker container, and one for the JavaScript libraries.
 
@@ -52,11 +54,11 @@ To resolve this, you need to create a parent SBOM that links all three SBOMs tog
 
 *If you're looking to simplify this step, get in touch, and we can automatically generate the SBOM hierarchy for you.*
 
-## Collaboration
+## Distribution (a.k.a Transportation)
 
-While each of these stages is critical for maintaining transparency and security in the software supply chain, collaboration is often the most challenging. SBOMs need to be shared effectively with both internal teams and external stakeholders, including customers and partners. Unfortunately, current SBOM collaboration practices are often outdated and inefficient. After speaking with CTOs and Chief Security Architects (CSAs), we found that many organizations still rely on email to share SBOMs — a method reminiscent of how software patches were distributed in the 1990s. These SBOMs are then often stored ad-hoc on internal file shares, leading to issues such as unnecessary manual labor, disorganized storage, and the risk of using outdated data.
+While each of these stages is critical for maintaining transparency and security in the software supply chain, collaboration is often challenging. SBOMs need to be shared effectively with both internal teams and external stakeholders, including customers and partners. This is sometimes referred to as 'Transportation' as well. Unfortunately, current SBOM distribution practices are often outdated and inefficient. After speaking with CTOs and Chief Security Architects (CSAs), we found that many organizations still rely on email to share SBOMs — a method reminiscent of how software patches were distributed in the 1990s. These SBOMs are then often stored ad-hoc on internal file shares, leading to issues such as unnecessary manual labor, disorganized storage, and the risk of using outdated data.
 
-The inefficiencies of traditional SBOM collaboration methods are more than just inconvenient — they pose significant risks to the integrity and security of the software supply chain. As highlighted in the [CISA SBOM Sharing Primer](https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf), effective SBOM sharing is crucial for enhancing visibility and managing risk. The document outlines best practices for SBOM sharing and emphasizes the need for standardized, automated processes. It also warns against relying on manual methods, which can lead to inconsistencies and errors that compromise the entire software ecosystem. The current state of SBOM collaboration in many organizations is far from the ideal outlined by CISA, highlighting a pressing need for better tools and workflows.
+The inefficiencies of traditional SBOM collaboration methods are more than just inconvenient — they pose significant risks to the integrity and security of the software supply chain. As highlighted in the [CISA SBOM Sharing Primer](https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf), effective SBOM sharing (called 'Transport' in the document) is crucial for enhancing visibility and managing risk. The document outlines best practices for SBOM sharing and emphasizes the need for standardized, automated processes. It also warns against relying on manual methods, which can lead to inconsistencies and errors that compromise the entire software ecosystem. The current state of SBOM collaboration in many organizations is far from the ideal outlined by CISA, highlighting a pressing need for better tools and workflows.
 
 This is where sbomify comes in. sbomify automates the collaboration aspect of the SBOM life cycle, ensuring SBOMs are shared seamlessly and securely. By integrating directly into the Continuous Integration/Continuous Deployment (CI/CD) workflow, sbomify eliminates the need for manual SBOM distribution and ad-hoc storage solutions. Instead of relying on email chains and scattered file shares, organizations can use sbomify to automate the sharing process, ensuring all stakeholders have access to the most up-to-date and accurate SBOM data. This not only reduces labor but also enhances security by minimizing the risk of outdated or incorrect information being circulated.
 

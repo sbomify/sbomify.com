@@ -5,13 +5,13 @@ title: SBOM Resources
 
 ---
 
-The SBOM life cycle can be broken down into three phases: [generation, collaboration, and analysis]({{ site.url }}/features/generate-collaborate-analyze/). The structure below aligns with the life cycle.
+The SBOM life cycle can be broken down into three phases: [generation, distribution, and analysis]({{ site.url }}/features/generate-collaborate-analyze/). The structure below aligns with the life cycle.
 
 There's also a GitHub repository called [sbom-benchmarks](https://github.com/sbomify/sbom-benchmarks) that sets to benchmark the various tools (from the Generation phase) against each other, along with providing examples how they are used.
 
-## Generation
+## Generation / Authoring
 
-The generation phase is where you create an SBOM from a source. There are various strategies for generating SBOMs, but this phase generally involves taking a set of inputs (such as a dependency file) and generating an SBOM in either the [CycloneDX](https://cyclonedx.org/) or [SPDX](https://spdx.dev/) format.
+The SBOM generation phase, also known as authoring, is where you create an SBOM from a source. There are various strategies for generating SBOMs, but this phase generally involves taking a set of inputs (such as a dependency file) and generating an SBOM in either the [CycloneDX](https://cyclonedx.org/) or [SPDX](https://spdx.dev/) format.
 
 ### Generic
 
@@ -81,9 +81,9 @@ You can see how they compare side-by-side in the [sbom-benchmark](https://github
 * [sbomasm](https://github.com/interlynk-io/sbomasm) from Interlynk
 * [sbomaudit](https://github.com/anthonyharrison/sbomaudit) from Anthony Harrison
 
-## Collaboration
+## Distribution / Transportation
 
-The collaboration phase focuses on how you share the SBOM with internal and external stakeholders.
+The distribution phase, also known as Transportation, focuses on how you share the SBOM with internal and external stakeholders.
 
 * [sbomify]({{ site.url }})
 * [Project Koala](https://github.com/CycloneDX/transparency-exchange-api) (a.k.a. Transparency Exchange API) from CycloneDX
