@@ -1,6 +1,6 @@
 ---
 layout: page
-title: A primer on the SBOM lifecycle
+title: A primer on the SBOM lifecycle for SBOM producers
 description: A primer on the Software Bill of Material Lifecycle, which includes generation, distribution and analysis.
 
 ---
