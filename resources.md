@@ -105,6 +105,7 @@ The analysis phase involves how you use the SBOM, typically for compliance or se
 * [sbomaudit](https://github.com/anthonyharrison/sbomaudit) from Anthony Harrison
 * [sbommerge](https://github.com/anthonyharrison/sbommerge) from Anthony Harrison
 * [sbomqs](https://github.com/interlynk-io/sbomqs) from Interlynk
+* [SecObserve](https://github.com/MaibornWolff/SecObserve) from MaibornWolff
 
 ## Other SBOM resources
 
