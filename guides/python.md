@@ -40,7 +40,7 @@ Now, let's move on to some more complicated issues.
 
 ### Advanced Gotchas
 
-If you're a seasoned Python developer, you've most likely run across `requirements.txt`, `setup.cfg`, or `pyproject.toml` files that include expressions like `foobar>=1.2.3` (defined in [PEP 440](https://peps.python.org/pep-0440/#version-specifiers)). While there are good reasons for using ranges or less/more-than expressions for versions, this can really create issues when we are using these for SBOM generation. This is where source/pre-build and built SBOMs will diverge. Technically speaking, it's impossible to generate a source/pre-build SBOM for a lockfile that has non-precise pinning, as the version is ambiguous.
+If you're a seasoned Python developer, you've most likely run across `requirements.txt`, `setup.cfg`, or `pyproject.toml` files that include expressions like `foobar>=1.2.3` (defined in [PEP 440](https://peps.python.org/pep-0440/#version-specifiers)). While there are good reasons for using ranges or less/more-than expressions for versions, this can really create issues when we are using these for SBOM generation. This is where source/pre-build and build SBOMs will diverge. Technically speaking, it's impossible to generate a source/pre-build SBOM for a lockfile that has non-precise pinning, as the version is ambiguous.
 
 ### The Importance of Including Hashes
 
@@ -100,7 +100,9 @@ $ cyclonedx-py \
 
 ## Let's Make Your Life Easier
 
-Hopefully, the steps above didn't scare you away from building SBOMs. Now that you understand the basics, you are probably thinking about how to automate this in your CI/CD pipeline. Enter the [sbomify GitHub Action](https://github.com/sbomify/github-action/). Our tool is Open Source and can be run both with and without the sbomify platform.
+Hopefully, the steps above didn't scare you away from building SBOMs. Now that you understand the basics, you are probably thinking about how to automate this in your CI/CD pipeline. Enter the [sbomify GitHub Action](https://github.com/sbomify/github-action/), a swiss army knife for SBOMs. It's an abstraction layer that ties together various other open source SBOM tools to make your life easier.
+
+The GitHub Actions module is open source and can be run both with and without the sbomify platform.
 
 Instead of running the commands above, you can just add a job that looks like this:
 
@@ -126,9 +128,12 @@ jobs:
           LOCK_FILE: 'requirements.txt'
           OUTPUT_FILE: 'my_sbom.cdx.json'
           AUGMENT: false
-          ENRICH: true
+          ENRICH: false
+          UPLOAD: false
 ```
 
-At the end of this run, you will have an enriched SBOM. If you have an sbomify account, you can also automatically augment this SBOM with your information (vendor, supplier, and license information), and then upload the SBOM to our platform. Once uploaded, you can invite all your stakeholders.
+At the end of this run, you will have an SBOM.
+
+If you have an sbomify account, you can also automatically augment this SBOM with your information (vendor, supplier, and license information) with the `AUGMENT: true` setting. We can also set `UPLOAD: true` to automatically upload the SBOM to our platform. Once uploaded, you can invite all your stakeholders.
 
 The GitHub Action can take most Python lockfiles (`Pipfile.lock`, `poetry.lock`, and `requirements.txt`) as input and build an SBOM for you with minimal fuss.
