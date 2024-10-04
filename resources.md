@@ -34,6 +34,8 @@ You can see how they compare side-by-side in the [sbom-benchmark](https://github
 
 #### Python
 
+See guide [The ultimate SBOM guide for Python]({{ site.url }}/guides/python) for more language specific details.
+
 You can see how they compare side-by-side in the [sbom-benchmark](https://github.com/sbomify/sbom-benchmarks/tree/master/python) repository.
 
 * [CycloneDX Python](https://github.com/CycloneDX/cyclonedx-python) from CycloneDX
