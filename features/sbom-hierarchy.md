@@ -1,5 +1,6 @@
 ---
 layout: page
+description: "Understanding Software Bill of Materials (SBOM) Hierarchy: Learn how to manage complex software architectures with hierarchical grouping through products, projects, and components, simplifying SBOM management and sharing."
 title: Comprehensive SBOM Management for Complex Software Architectures
 
 ---

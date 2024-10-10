@@ -1,8 +1,7 @@
 ---
 layout: page
 title: A primer on the SBOM lifecycle for SBOM producers
-description: A primer on the Software Bill of Material Lifecycle, which includes generation, distribution and analysis.
-
+description: "Streamline your Software Bill of Materials (SBOM) workflow with our comprehensive guide. Learn about SBOM generation, collaboration, and analysis best practices, and discover how to automate distribution with sbomify."
 ---
 
 The Software Bill of Materials (SBOM) life cycle comprises three key stages: Authoring, Distribution, and Analysis.

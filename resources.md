@@ -2,7 +2,7 @@
 layout: page
 permalink: /resources/
 title: SBOM Resources
-
+description: "Discover the full SBOM life cycle: Generation, Distribution, and Analysis. Explore tools, benchmarks, and resources for creating, sharing, and utilizing Software Bills of Materials."
 ---
 
 The SBOM life cycle can be broken down into three phases: [generation, distribution, and analysis]({{ site.url }}/features/generate-collaborate-analyze/). The structure below aligns with the life cycle.
