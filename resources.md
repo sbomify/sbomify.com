@@ -29,8 +29,8 @@ Language or format-specific tools.
 
 You can see how they compare side-by-side in the [sbom-benchmark](https://github.com/sbomify/sbom-benchmarks/tree/master/docker) repository.
 
-* [Tern](https://github.com/tern-tools/tern)
 * [bom](https://github.com/kubernetes-sigs/bom) from The Linux Foundation
+* [Tern](https://github.com/tern-tools/tern)
 
 #### Python
 
@@ -71,15 +71,15 @@ You can see how they compare side-by-side in the [sbom-benchmark](https://github
 
 #### Others
 
-* [protobom](https://github.com/protobom/protobom)
 * [Hoppr](https://hoppr.dev/) from Lockheed Martin Corporation
 * [OSS Review Toolkit](https://github.com/oss-review-toolkit/ort) (ORT)
+* [protobom](https://github.com/protobom/protobom)
 
 ### Assembly and Enrichment
 
 * [CycloneDX Editor/Validator](https://github.com/Festo-se/cyclonedx-editor-validator/) from Festo
-* [Parlay](https://github.com/snyk/parlay) from Snyk
 * [jq](https://github.com/jqlang/jq) is commonly used for assembly
+* [Parlay](https://github.com/snyk/parlay) from Snyk
 * [sbomasm](https://github.com/interlynk-io/sbomasm) from Interlynk
 * [sbomaudit](https://github.com/anthonyharrison/sbomaudit) from Anthony Harrison
 
@@ -94,28 +94,27 @@ The distribution phase, also known as Transportation, focuses on how you share t
 
 The analysis phase involves how you use the SBOM, typically for compliance or security purposes. Mature organizations may use multiple tools or services for different purposes.
 
+* [bomber](https://github.com/devops-kung-fu/bomber) from DKFM
+* [bomshell](https://github.com/puerco/bomshell) from Adolfo García Veytia (a.k.a. Puerco)
 * [Cybellum](https://cybellum.com/) from Cybellum
 * [Dependency Track](https://dependencytrack.org/) from OWASP
 * [Eclipse SW360](https://github.com/eclipse-sw360/sw360)
-* [GUAC](https://guac.sh) from OpenSSF
 * [Grype](https://github.com/anchore/grype) from Anchore
+* [GUAC](https://guac.sh) from OpenSSF
 * [Helm](https://www.medcrypt.com/solutions/helm) from Medcrypt
 * [NTIA Conformance Checker](https://github.com/spdx/ntia-conformance-checker) from SPDX
 * [Open Source Vulnerabilities](https://osv.dev/) (OSV) from Google
 * [SBOM Observer](https://sbom.observer/) from Bitfront
-* [SecObserve](https://github.com/MaibornWolff/SecObserve) from MaibornWolff
-* [bomber](https://github.com/devops-kung-fu/bomber) from DKFM
-* [bomshell](https://github.com/puerco/bomshell) from Adolfo García Veytia (a.k.a. Puerco)
-* [grype](https://github.com/anchore/grype) from Anchore
 * [sbomaudit](https://github.com/anthonyharrison/sbomaudit) from Anthony Harrison
 * [sbommerge](https://github.com/anthonyharrison/sbommerge) from Anthony Harrison
 * [sbomqs](https://github.com/interlynk-io/sbomqs) from Interlynk
+* [SecObserve](https://github.com/MaibornWolff/SecObserve) from MaibornWolff
 
 ## Other SBOM resources
 
 * CISA's [SBOM Sharing Primer](https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf)
 * CISA's [Software Bill of Materials (SBOM) Sharing Lifecycle Report](https://www.cisa.gov/sites/default/files/2023-04/sbom-sharing-lifecycle-report_508.pdf)
-* NTIA's [Framing Software Component Transparency: Establishing a Common Software Bill of Materials (SBOM)](https://www.ntia.gov/sites/default/files/publications/ntia_sbom_framing_2nd_edition_20211021_0.pdf) (2nd Edition)
+* CISA's [Framing Software Component Transparency: Establishing a Common Software Bill of Materials (SBOM)](https://www.cisa.gov/sites/default/files/2024-10/SBOM%20Framing%20Software%20Component%20Transparency%202024.pdf) (3rd Edition)
 * NTIA's [The Minimum Elements For a Software Bill of Materials (SBOM)](https://www.ntia.gov/sites/default/files/publications/sbom_minimum_elements_report_0.pdf)
 
 [Edit me on GitHub](https://github.com/sbomify/sbomify.com/blob/master/resources.md)
