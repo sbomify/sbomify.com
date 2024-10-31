@@ -98,16 +98,18 @@ The analysis phase involves how you use the SBOM, typically for compliance or se
 * [Dependency Track](https://dependencytrack.org/) from OWASP
 * [Eclipse SW360](https://github.com/eclipse-sw360/sw360)
 * [GUAC](https://guac.sh) from OpenSSF
+* [Grype](https://github.com/anchore/grype) from Anchore
 * [Helm](https://www.medcrypt.com/solutions/helm) from Medcrypt
 * [NTIA Conformance Checker](https://github.com/spdx/ntia-conformance-checker) from SPDX
 * [Open Source Vulnerabilities](https://osv.dev/) (OSV) from Google
+* [SBOM Observer](https://sbom.observer/) from Bitfront
+* [SecObserve](https://github.com/MaibornWolff/SecObserve) from MaibornWolff
 * [bomber](https://github.com/devops-kung-fu/bomber) from DKFM
 * [bomshell](https://github.com/puerco/bomshell) from Adolfo García Veytia (a.k.a. Puerco)
 * [grype](https://github.com/anchore/grype) from Anchore
 * [sbomaudit](https://github.com/anthonyharrison/sbomaudit) from Anthony Harrison
 * [sbommerge](https://github.com/anthonyharrison/sbommerge) from Anthony Harrison
 * [sbomqs](https://github.com/interlynk-io/sbomqs) from Interlynk
-* [SecObserve](https://github.com/MaibornWolff/SecObserve) from MaibornWolff
 
 ## Other SBOM resources
 
