@@ -4,6 +4,10 @@ permalink: /guides/
 title: SBOM Guides
 ---
 
-## Language Specific guides
+## Generic Guides
+
+* [How to version SBOMs]({{ site.url }}/guides/how-to-version-sboms)
+
+## Language Specific Guides
 
 * [Python]({{ site.url }}/guides/python)

@@ -1,6 +1,8 @@
 nav:
   - name: Blog
     link: /blog
+  - name: Guides
+    link: /guides
   - name: SBOM Resources
     link: /resources
 
