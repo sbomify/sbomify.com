@@ -9,10 +9,11 @@ title: The SBOM sharing and distribution platform
             <div class="flex flex-col lg:flex-row gap-8 lg:gap-24 mb-16 lg:mb-24">
                 <h1 class="text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] flex-3 font-medium">
                     <span class="text-gradient">The SBOM hub</span><br />
-                    <span id="rotating-text" class="text-fuschia60"></span>
+                    <span id="rotating-text" class="text-fuschia60" aria-live="polite"></span>
 
                     <script>
-                        // List of words to rotate through
+                        'use strict';
+
                         const words = [
                             'for secure sharing.',
                             'for easy NTIA compliance.',
@@ -22,12 +23,15 @@ title: The SBOM sharing and distribution platform
                             'that works in your CI/CD pipeline.',
                         ];
 
-                        // Get the element where the words will rotate
                         const rotatingTextElement = document.getElementById('rotating-text');
+
+                        if (!rotatingTextElement) {
+                            console.error('Rotating text element not found');
+                            return;
+                        }
 
                         let currentWordIndex = 0;
 
-                        // Function to update the text
                         function updateRotatingText() {
                             rotatingTextElement.textContent = words[currentWordIndex];
                             currentWordIndex = (currentWordIndex + 1) % words.length;
@@ -36,17 +40,31 @@ title: The SBOM sharing and distribution platform
                         // Initial text set
                         updateRotatingText();
 
-                        // Change the text every 5 seconds
-                        setInterval(updateRotatingText, 5000);
-                </script>        </h1>
+                        // Store interval ID for potential cleanup
+                        const rotationInterval = setInterval(updateRotatingText, 5000);
+
+                        // Cleanup on page unload (optional)
+                        window.addEventListener('unload', () => {
+                            clearInterval(rotationInterval);
+                        });
+                    </script>
+                </h1>
                 <div class="flex-1 mt-3 flex justify-end">
                     <div>
-                        <a class="btn-secondary mx-auto" href="https://calendly.com/vpetersson/sbomify-consultation">Schedule Consultation</a>
+                        <a
+                            class="btn-secondary mx-auto"
+                            href="https://calendly.com/vpetersson/sbomify-consultation"
+                            aria-label="Schedule a consultation meeting">
+                            Schedule Consultation
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="mb-5">
-                <video class="rounded-lg w-full" autoplay="" controls="" preload="auto" src="https://pub-363b35f52e4e406b8363a0be7fde4131.r2.dev/sbomify-pitch.mp4"></video>
+                <video class="rounded-lg w-full" autoplay="" controls="" preload="auto" src="https://pub-363b35f52e4e406b8363a0be7fde4131.r2.dev/sbomify-pitch.mp4" poster="/assets/images/video-poster.jpg">
+                    <track kind="captions" src="/path/to/captions.vtt" srclang="en" label="English">
+                    Your browser does not support the video tag.
+                </video>
             </div>
 
             <div class="flex flex-col lg:flex-row gap-10 justify-center">
@@ -60,9 +78,9 @@ title: The SBOM sharing and distribution platform
                 <div class="flex flex-col lg:flex-row h-auto justify-center items-center gap-2 lg:gap-7 border px-6 lg:px-10 py-6 rounded-lg border-solid border-[#37306B] bg-[#201B4C]">
                     <span class="text-[#8A7DFF]">&gt; Works With</span>
                     <div class="flex gap-10">
-                        <span><img src="/assets/images/site/python.svg" alt="python logo" /></span>
-                        <span><img src="/assets/images/site/docker.svg" alt="docker logo" /></span>
-                        <span><img src="/assets/images/site/github-logo.svg" alt="github logo" /></span>
+                        <span><img class="w-[135px] h-auto" src="/assets/images/site/github-logo.svg" alt="GitHub logo" /></span>
+                        <span><img class="w-[135px] h-auto" src="/assets/images/site/gitlab.svg" alt="GitLab logo" /></span>
+                        <span><img class="w-[135px] h-auto" src="/assets/images/site/docker.svg" alt="Docker logo" /></span>
                     </div>
                 </div>
             </div>
