@@ -96,8 +96,58 @@ title: The SBOM sharing and distribution platform
                     <div class="uppercase mb-4">&gt; Why now?</div>
                     <h2 class="mb-4">The SBOM Mandate</h2>
                     <p class="mb-4">
-                    With the introduction of <a href="https://www.federalregister.gov/documents/2021/05/17/2021-10460/improving-the-nations-cybersecurity">Executive Order 14028</a>, the US government began mandating SBOMs (Software Bill of Materials) for all vendors selling software to the federal government. This requirement has had a cascading effect throughout the software industry, particularly in compliance. From the EU's Cyber Resilience Act (CRA) to the NIST Cybersecurity Framework, SBOMs are set to become the standard for transparency in the software supply chain. If your organization hasn't adopted SBOMs yet, the clock is ticking.
+                    With the introduction of <a href="https://www.federalregister.gov/documents/2021/05/17/2021-10460/improving-the-nations-cybersecurity">Executive Order 14028</a>, the US government began mandating SBOMs (Software Bill of Materials) for all vendors selling software to the federal government. This requirement has had a cascading effect throughout the software industry, particularly in compliance. The EU's Cyber Resilience Act (CRA) goes into force in <strong><span id="force-countdown"></span></strong>, with mandatory reporting starting in <strong><span id="reporting-countdown"></span></strong>. If your organization hasn't adopted SBOMs yet, the clock is ticking.
                     </p>
+
+                    <script>
+                        function formatCountdown(targetDate) {
+                            const now = new Date();
+                            const target = new Date(targetDate);
+
+                            let months = (target.getFullYear() - now.getFullYear()) * 12;
+                            months += target.getMonth() - now.getMonth();
+
+                            const daysLeft = Math.ceil((target - now) / (1000 * 60 * 60 * 24));
+
+                            if (target.getDate() < now.getDate()) {
+                                months--;
+                            }
+
+                            const years = Math.floor(months / 12);
+                            const remainingMonths = months % 12;
+
+                            if (months < 0) {
+                                return 'now';
+                            } else if (years === 0 && remainingMonths === 0) {
+                                return `${daysLeft} days`;
+                            } else if (years === 0) {
+                                return `${remainingMonths} months`;
+                            } else if (remainingMonths === 0) {
+                                return `${years} years`;
+                            } else {
+                                return `${years} years, ${remainingMonths} months`;
+                            }
+                        }
+
+                        function updateCountdowns() {
+                            const dates = {
+                                'force': 'December 10, 2024',
+                                'reporting': 'September 11, 2026'
+                            };
+
+                            for (const [key, date] of Object.entries(dates)) {
+                                const element = document.getElementById(`${key}-countdown`);
+                                if (element) {
+                                    element.innerHTML = formatCountdown(date);
+                                }
+                            }
+                        }
+
+                        // Update immediately and then every day
+                        updateCountdowns();
+                        setInterval(updateCountdowns, 1000 * 60 * 60 * 24);
+                    </script>
+
                     <a class="button" href="/features/why-now">Learn More</a>
                 </div>
                 <div class="md:w-1/2 p-4">
