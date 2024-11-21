@@ -1,6 +1,8 @@
 nav:
   - name: Blog
     link: /blog
+  - name: Case Studies
+    link: /case-studies
   - name: Guides
     link: /guides
   - name: SBOM Resources
