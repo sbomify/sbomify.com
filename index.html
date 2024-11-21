@@ -9,11 +9,10 @@ title: The SBOM sharing and distribution platform
             <div class="flex flex-col lg:flex-row gap-8 lg:gap-24 mb-16 lg:mb-24">
                 <h1 class="text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] flex-3 font-medium">
                     <span class="text-gradient">The SBOM hub</span><br />
-                    <span id="rotating-text" class="text-fuschia60" aria-live="polite"></span>
+                    <span id="rotating-text" class="text-fuschia60"></span>
 
                     <script>
-                        'use strict';
-
+                        // List of words to rotate through
                         const words = [
                             'for secure sharing.',
                             'for easy NTIA compliance.',
@@ -23,15 +22,12 @@ title: The SBOM sharing and distribution platform
                             'that works in your CI/CD pipeline.',
                         ];
 
+                        // Get the element where the words will rotate
                         const rotatingTextElement = document.getElementById('rotating-text');
-
-                        if (!rotatingTextElement) {
-                            console.error('Rotating text element not found');
-                            return;
-                        }
 
                         let currentWordIndex = 0;
 
+                        // Function to update the text
                         function updateRotatingText() {
                             rotatingTextElement.textContent = words[currentWordIndex];
                             currentWordIndex = (currentWordIndex + 1) % words.length;
@@ -40,31 +36,17 @@ title: The SBOM sharing and distribution platform
                         // Initial text set
                         updateRotatingText();
 
-                        // Store interval ID for potential cleanup
-                        const rotationInterval = setInterval(updateRotatingText, 5000);
-
-                        // Cleanup on page unload (optional)
-                        window.addEventListener('unload', () => {
-                            clearInterval(rotationInterval);
-                        });
-                    </script>
-                </h1>
+                        // Change the text every 5 seconds
+                        setInterval(updateRotatingText, 5000);
+                </script>        </h1>
                 <div class="flex-1 mt-3 flex justify-end">
                     <div>
-                        <a
-                            class="btn-secondary mx-auto"
-                            href="https://calendly.com/vpetersson/sbomify-consultation"
-                            aria-label="Schedule a consultation meeting">
-                            Schedule Consultation
-                        </a>
+                        <a class="btn-secondary mx-auto" href="https://calendly.com/vpetersson/sbomify-consultation">Schedule Consultation</a>
                     </div>
                 </div>
             </div>
             <div class="mb-5">
-                <video class="rounded-lg w-full" autoplay="" controls="" preload="auto" src="https://pub-363b35f52e4e406b8363a0be7fde4131.r2.dev/sbomify-pitch.mp4" poster="/assets/images/video-poster.jpg">
-                    <track kind="captions" src="/path/to/captions.vtt" srclang="en" label="English">
-                    Your browser does not support the video tag.
-                </video>
+                <video class="rounded-lg w-full" autoplay="" controls="" preload="auto" src="https://pub-363b35f52e4e406b8363a0be7fde4131.r2.dev/sbomify-pitch.mp4"></video>
             </div>
 
             <div class="flex flex-col lg:flex-row gap-10 justify-center">
@@ -76,11 +58,28 @@ title: The SBOM sharing and distribution platform
                     </div>
                 </div>
                 <div class="flex flex-col lg:flex-row h-auto justify-center items-center gap-2 lg:gap-7 border px-6 lg:px-10 py-6 rounded-lg border-solid border-[#37306B] bg-[#201B4C]">
-                    <span class="text-[#8A7DFF]">&gt; Works With</span>
-                    <div class="flex gap-10">
-                        <span><img class="w-[135px] h-auto" src="/assets/images/site/github-logo.svg" alt="GitHub logo" /></span>
-                        <span><img class="w-[135px] h-auto" src="/assets/images/site/gitlab.svg" alt="GitLab logo" /></span>
-                        <span><img class="w-[135px] h-auto" src="/assets/images/site/docker.svg" alt="Docker logo" /></span>
+                    <span class="text-[#8A7DFF]">&gt; Integrates With</span>
+                    <div class="flex items-center gap-10 h-[50px]">
+                        <span class="flex items-center justify-center h-full">
+                            <a href="/features/integrations/#github">
+                                <img class="w-[135px] max-h-[30px] object-contain" src="/assets/images/site/github.svg" alt="GitHub logo" />
+                            </a>
+                        </span>
+                        <span class="flex items-center justify-center h-full">
+                            <a href="/features/integrations/#gitlab">
+                                <img class="w-[135px] max-h-[30px] object-contain" src="/assets/images/site/gitlab.svg" alt="GitLab logo" />
+                            </a>
+                        </span>
+                        <span class="flex items-center justify-center h-full">
+                            <a href="/features/integrations/#bitbucket">
+                                <img class="w-[135px] max-h-[30px] object-contain" src="/assets/images/site/bitbucket.svg" alt="Bitbucket logo" />
+                            </a>
+                        </span>
+                        <span class="flex items-center justify-center h-full">
+                            <a href="/features/integrations/#docker">
+                                <img class="w-[135px] max-h-[30px] object-contain" src="/assets/images/site/docker.svg" alt="Docker logo" />
+                            </a>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -107,7 +106,7 @@ title: The SBOM sharing and distribution platform
                     <img src="/assets/images/site/components.webp" alt="sbomify innovation" class="w-full h-auto rounded-lg">
                 </div>
                 <div class="md:w-1/2 p-4">
-                    <div class="uppercase mb-4">&gt; Generate, Collaborate and Analyze</div>
+                    <div class="uppercase mb-4">&gt; Generate, Collaborate, and Analyze</div>
                     <h2 class="mb-4">The SBOM Life Cycle</h2>
                     <p class="mb-4">
                     The SBOM life cycle consists of three parts: generation, distribution, and analysis. sbomify focuses on the distribution aspect. SBOMs are typically used by both internal and external stakeholders, such as customers. After speaking with CTOs and CSAs, it became evident that most SBOM distribution today is still done via email, reminiscent of how we used to email software patches in the 90s, which were then stored haphazardly on internal file shares. This approach introduces numerous issues, including unnecessary labor and the risk of working with outdated data. Distribution, also sometimes known as Transport, should be automated and seamlessly integrated into the CI/CD workflow, and this is precisely what sbomify offers.
@@ -121,7 +120,7 @@ title: The SBOM sharing and distribution platform
                     <div class="uppercase mb-4">&gt; Hub and spoke</div>
                     <h2 class="mb-4">The SBOM Hub</h2>
                     <p class="mb-4">
-                    SBOMs are as fresh as milk — they can change with every CI/CD run, depending on how dependencies (and sub-dependencies!) are managed. This makes it crucial to use a collaborative platform for SBOM management. Enter sbomify. Whether you're a software buyer or producer who are looking to set up an <strong>SBOM vendor portal</strong>, using sbomify will simplify your SBOM process.
+                    SBOMs are as fresh as milk — they can change with every CI/CD run, depending on how dependencies (and sub-dependencies!) are managed. This makes it crucial to use a collaborative platform for SBOM management. Enter sbomify. Whether you're a software buyer or producer who is looking to set up an <strong>SBOM vendor portal</strong>, using sbomify will simplify your SBOM process.
                     </p>
                     <p class="mb-4">
                     You can seamlessly invite internal stakeholders to sbomify, allowing them to automatically access the most up-to-date SBOMs for your product, or even specific components for more granular control. These SBOMs can then be easily exported to third-party tools for further analysis, such as security or license audits.

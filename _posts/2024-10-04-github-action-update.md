@@ -26,7 +26,7 @@ This is what it looks like in your Actions YAML file:
       - name: Upload SBOM
         uses: sbomify/github-action@master
         env:
-          TOKEN: 'my-token'
+          TOKEN: ${%raw%}{{ secrets.SBOMIFY_TOKEN }}{%endraw%}
           COMPONENT_ID: 'my-component-id'
           SBOM_FILE: 'sbom-file.json'
           AUGMENT: true
@@ -39,7 +39,7 @@ We didn't stop there. You can also now use the action in stand-alone mode withou
       - name: Upload SBOM
         uses: sbomify/github-action@master
         env:
-          TOKEN: 'placeholder'
+          TOKEN: ${%raw%}{{ secrets.SBOMIFY_TOKEN }}{%endraw%}
           COMPONENT_ID: 'placeholder'
           LOCK_FILE: 'requirements.txt'
           AUGMENT: false

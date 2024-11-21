@@ -30,7 +30,7 @@ The job looks something like this:
       - name: Upload SBOM
         uses: sbomify/github-action@master
         env:
-          TOKEN: [...]
+          TOKEN: ${%raw%}{{ secrets.SBOMIFY_TOKEN }}{%endraw%}
           COMPONENT_ID: 'Gu9wem8mkX'
           LOCK_FILE: 'poetry.lock'
           SBOM_VERSION: [...]

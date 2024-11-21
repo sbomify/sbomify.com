@@ -81,3 +81,18 @@ $ docker sbom \
 ```
 
 It's worth noting that Docker is largely using Syft behind the scene. Docker is doing some extra things, but it also is more restrictive in output formats. We covered more about this in [this blog post]({{ site.url }}/2024/04/07/how-to-create-an-sbom/).
+
+### sbomify action
+
+You can also use the [sbomify SBOM Generation tool](https://github.com/marketplace/actions/sbomify) directly in GitHub as follows:
+
+```yaml
+- name: Upload SBOM
+  uses: sbomify/github-action@master
+  env:
+    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    COMPONENT_ID: 'my-component-id'
+    DOCKER_IMAGE: 'nginx:stable'
+    AUGMENT: true
+    ENRICH: true
+```
