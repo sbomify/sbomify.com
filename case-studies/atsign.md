@@ -23,7 +23,7 @@ security' using SBOMs, Supply-chain Levels for Software Artifacts (SLSA) and
 OpenSSF Scorecards.
 
 Those SBOMs were created by running dependency lock files through Anchore
-Syft. Unfortunately this did not help to describe Atsign's own software or
+Syft. Unfortunately, this did not help to describe Atsign's own software or
 carry any of the metadata needed for NTIA compliance (which describes 'The
 Minimum Elements For a Software Bill of Materials (SBOM)').
 
@@ -39,8 +39,8 @@ Partnering with **sbomify** helped Atsign overcome these challenges:
 sbomify so that it could be added to lock file generated components by the
 sbomify GitHub Action. The Action is run as part of their CD pipelines so
 that SBOMs are created for each release.
-* **sbomify badge**: an sbomify badge in the README.md for each open source
-repo sits alongside the SLSA and Scorecard badges making the SBOM a visible
+* **sbomify badge**: An sbomify badge in the README.md for each open source
+repo sits alongside the SLSA and Scorecard badges, making the SBOM a visible
 part of the trifecta. It also provides an easy link through to the most
 recent SBOMs for that component.
 
@@ -56,7 +56,7 @@ have joined SLSA and Scorecard in showing that Atsign care about security.
 By teaming up with sbomify, Atsign have improved the quality and visibility
 of SBOMs.
 
-Privacy and the security needed to guarantee it are at the heart of Atsigns
+Privacy and the security needed to guarantee it are at the heart of Atsign's
 platform, so being able to show customers how they care about security is
 vital in establishing trust. Especially when Atsign solutions like NoPorts
-become security critical infrastructure for their customers.
+become security-critical infrastructure for their customers.
