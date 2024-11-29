@@ -42,7 +42,21 @@ that SBOMs are created for each release.
 * **sbomify badge**: An sbomify badge in the README.md for each open source
 repo sits alongside the SLSA and Scorecard badges, making the SBOM a visible
 part of the trifecta. It also provides an easy link through to the most
-recent SBOMs for that component.
+recent SBOMs for that component. For example the
+[at_server](https://github.com/atsign-foundation/at_server/) repo, which
+contains the core software implementation of the atProtocol.
+
+## Our Broader Partnership
+
+Whilst working together on SBOM quality and visibility, opportunities have
+arisen to take on broader issues in the SBOM arena, such as the difficulty
+in generating SBOMs for C based projects.
+
+> Working with Viktor and the team at sbomify has been a pleasure.
+Using sbomify has hugely accelerated our work on NTIA compliance. Viktor
+has also been leading a group that's creating standards for making SBOMs.
+This gives us confidence that sbomify will become a platform that follows
+industry practices as they emerge.
 
 ## The Results
 
