@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "sbomify Case Studies"
+title: "Case Studies"
 description: "Learn how organizations use sbomify to manage their SBOMs effectively."
 ---
 

@@ -9,6 +9,12 @@ The SBOM life cycle can be broken down into three phases: [generation, distribut
 
 There's also a GitHub repository called [sbom-benchmarks](https://github.com/sbomify/sbom-benchmarks) that sets to benchmark the various tools (from the Generation phase) against each other, along with providing examples how they are used.
 
+## Video Resources
+
+* Introduction to SBOMs:[sbomify at Ubuntu Engineering Sprint](https://www.youtube.com/watch?v=5mlR1lPz1no)
+* Interview with the creator of CycloneDX: [SBOMs, CycloneDX, and Software Security with Steve Springett](https://www.youtube.com/watch?v=oSBDSJf0FeA)
+* Interview with "the father of SBOMs": [SBOMs and Cybersecurity: A Deep Dive with Allan Friedman](https://youtu.be/E77ohYZA2vo)
+
 ## Generation / Authoring
 
 The SBOM generation phase, also known as authoring, is where you create an SBOM from a source. There are various strategies for generating SBOMs, but this phase generally involves taking a set of inputs (such as a dependency file) and generating an SBOM in either the [CycloneDX](https://cyclonedx.org/) or [SPDX](https://spdx.dev/) format.
