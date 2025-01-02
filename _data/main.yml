@@ -7,6 +7,8 @@ nav:
     link: /guides
   - name: SBOM Resources
     link: /resources
+  - name: Pricing
+    link: /pricing
 
 social:
   x: https://x.com/sbomify
