@@ -19,11 +19,9 @@ description: >- # this means to ignore newlines until "baseurl:"
 
 # the subpath of your site, e.g. /blog
 baseurl: ""
-#baseurl: sbomify.com
 
-# the base hostname & protocol for your site, e.g. http://example.com
+# the base hostname & protocol for your site
 url: "https://sbomify.com"
-#url: sbomify.github.io
 
 social:
   image: "/assets/images/site/sbomify.png"

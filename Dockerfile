@@ -1,31 +1,34 @@
-FROM ruby:3.3-bookworm
-ENV LANG C.UTF-8
-RUN apt-get update -qq && \
-    apt-get install -y python3 build-essential curl webp
+FROM node:22 AS node-builder
 
-# Install nvm (Node Version Manager)
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash \
-    && apt-get update -qq \
-    && apt-get install nodejs -y
-
-RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 
-ENV NOKOGIRI_USE_SYSTEM_LIBRARIES true
+COPY package.json package-lock.json ./
+RUN npm install --ignore-scripts
 
-# Install Ruby dependencies
-ADD Gemfile /usr/src/app
-ADD Gemfile.lock /usr/src/app
-RUN gem install bundle && \
-    bundle && \
+FROM ruby:3.2-bookworm
+
+WORKDIR /usr/src/app
+
+# Node.js runtime is required by execjs (used by autoprefixer and uglifier)
+# hadolint ignore=DL3008
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    nodejs \
+    npm \
+    pkg-config \
+    libxml2-dev \
+    libxslt-dev \
+    webp && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY --from=node-builder /usr/src/app/node_modules ./node_modules
+
+COPY Gemfile Gemfile.lock ./
+# hadolint ignore=DL3028
+RUN gem install bundler --no-document && \
+    bundle config build.nokogiri --use-system-libraries && \
+    bundle config set --local force_ruby_platform true && \
     bundle install
 
-# Install Node.js dependencies including specific npm version and Tailwind CSS
-ADD package.json /usr/src/app
-ADD package-lock.json /usr/src/app
-RUN npm install
-
-#CMD jekyll serve --host 0.0.0.0 --incremental
-CMD ["sh", "-c", "npm run watch:css & bundle exec jekyll serve --host 0.0.0.0 --incremental"]
-
-EXPOSE 4000
+COPY . .
