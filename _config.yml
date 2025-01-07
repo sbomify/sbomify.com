@@ -25,7 +25,12 @@ url: "https://sbomify.com"
 
 social:
   image: "/assets/images/site/sbomify.png"
-  twitter: sbomify
+  profiles:
+    - platform: "X"
+      url: "https://x.com/sbomify"
+      handle: "sbomify"
+    - platform: "LinkedIn"
+      url: "https://www.linkedin.com/company/sbomify/"
 
 pagination:
   enabled: true
@@ -67,3 +72,12 @@ exclude:
   - vendor/ruby/
   - bin/
   - Dockerfile
+
+feed:
+  path: feed.xml
+  posts_limit: 20
+  excerpt_only: false
+  categories:
+    - compliance
+    - security
+    - sbom
