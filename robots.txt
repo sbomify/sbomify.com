@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Sitemap: https://sbomify.com/sitemap.xml
+
+# Prevent crawling of unnecessary paths
+Disallow: /assets/
+Disallow: /404.html
