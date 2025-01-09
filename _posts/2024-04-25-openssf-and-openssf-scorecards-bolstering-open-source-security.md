@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: 'OpenSSF and OpenSSF Scorecards: Bolstering Open Source Security'
+categories: security, tools, openssf
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -13,8 +14,6 @@ wordpress_id: 213
 wordpress_url: https://sbomify.com/?p=213
 date: '2024-04-25 20:02:29 +0200'
 date_gmt: '2024-04-25 20:02:29 +0200'
-categories:
-- Uncategorized
 tags: []
 comments: []
 redirect_from: /2024/04/25/openssf-and-openssf-scorecards-bolstering-open-source-security/

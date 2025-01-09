@@ -13,8 +13,7 @@ wordpress_id: 197
 wordpress_url: https://sbomify.com/?p=197
 date: '2024-04-10 19:13:20 +0200'
 date_gmt: '2024-04-10 19:13:20 +0200'
-categories:
-- Uncategorized
+categories: security cryptography sbom best-practices
 tags: []
 comments: []
 redirect_from: /2024/04/10/future-proofing-cybersecurity-with-the-cryptography-bill-of-materials-cbom/

@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: Comprehensive Guide to Generating and Understanding SBOMs with Docker and Django-CMS
+categories: tutorial sbom docker
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -12,8 +13,6 @@ wordpress_id: 246
 wordpress_url: https://sbomify.com/?p=246
 date: '2024-05-27 16:18:25 +0200'
 date_gmt: '2024-05-27 16:18:25 +0200'
-categories:
-- Uncategorized
 tags: []
 comments:
 redirect_from: /2024/05/27/comprehensive-guide-to-generating-and-understanding-sboms-with-docker-and-django-cms/

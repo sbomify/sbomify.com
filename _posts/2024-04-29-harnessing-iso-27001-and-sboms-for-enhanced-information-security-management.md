@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: Harnessing ISO 27001 and SBOMs for Enhanced Information Security Management
+categories: security, compliance, sbom, iso27001
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -13,8 +14,6 @@ wordpress_id: 216
 wordpress_url: https://sbomify.com/?p=216
 date: '2024-04-29 20:06:01 +0200'
 date_gmt: '2024-04-29 20:06:01 +0200'
-categories:
-- Uncategorized
 tags: []
 comments: []
 redirect_from: /2024/04/29/harnessing-iso-27001-and-sboms-for-enhanced-information-security-management/

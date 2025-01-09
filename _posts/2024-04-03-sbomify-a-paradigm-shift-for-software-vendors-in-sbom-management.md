@@ -13,8 +13,7 @@ wordpress_id: 142
 wordpress_url: https://sbomify.com/?p=142
 date: '2024-04-03 13:54:17 +0200'
 date_gmt: '2024-04-03 13:54:17 +0200'
-categories:
-- Uncategorized
+categories: SBOM Security Software-Development Supply-Chain
 tags: []
 comments: []
 redirect_from: /2024/04/03/sbomify-a-paradigm-shift-for-software-vendors-in-sbom-management/

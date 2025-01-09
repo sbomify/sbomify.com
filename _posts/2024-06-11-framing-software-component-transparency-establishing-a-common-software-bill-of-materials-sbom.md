@@ -14,8 +14,7 @@ wordpress_id: 263
 wordpress_url: https://sbomify.com/?p=263
 date: '2024-06-11 08:03:32 +0200'
 date_gmt: '2024-06-11 08:03:32 +0200'
-categories:
-- Uncategorized
+categories: sbom-basics software-supply-chain security
 tags: []
 comments: []
 redirect_from: /2024/06/11/framing-software-component-transparency-establishing-a-common-software-bill-of-materials-sbom/

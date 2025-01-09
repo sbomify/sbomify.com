@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: "What's New in SPDX 3: Enhanced Referencing Capabilities"
+categories: spdx, specifications, standards
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -12,8 +13,6 @@ wordpress_id: 314
 wordpress_url: https://sbomify.com/?p=314
 date: '2024-07-22 13:15:15 +0200'
 date_gmt: '2024-07-22 13:15:15 +0200'
-categories:
-- Uncategorized
 tags: []
 comments: []
 redirect_from: /2024/07/22/whats-new-in-spdx-3-enhanced-referencing-capabilities/

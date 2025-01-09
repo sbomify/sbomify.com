@@ -3,6 +3,7 @@ layout: post
 title: "GitHub Action module with Attestation"
 author:
   display_name: Viktor
+categories: sbom, tools, announcement, docker
 
 ---
 

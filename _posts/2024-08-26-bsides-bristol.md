@@ -3,6 +3,7 @@ layout: post
 title: "Exploring the Future of Software Security: Join Us at BSides Bristol"
 author:
   display_name: Viktor
+categories: sbom security education news
 
 ---
 

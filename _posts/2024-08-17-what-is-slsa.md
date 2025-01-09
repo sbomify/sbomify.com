@@ -3,6 +3,7 @@ layout: post
 title: "Securing the Software Supply Chain with SLSA: What You Need to Know"
 author:
   display_name: Cowboy Neil
+categories: Security DevOps Software Development Best Practices
 
 ---
 

@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: 'Exploring the New SPDX 3.0: A Game Changer for SBOMs'
+categories: sbom, spdx, security, standards
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -13,8 +14,6 @@ wordpress_id: 221
 wordpress_url: https://sbomify.com/?p=221
 date: '2024-04-28 14:07:39 +0200'
 date_gmt: '2024-04-28 14:07:39 +0200'
-categories:
-- Uncategorized
 tags: []
 comments: []
 redirect_from: /2024/04/28/exploring-the-new-spdx-3-0-a-game-changer-for-sboms/

@@ -12,8 +12,7 @@ wordpress_id: 268
 wordpress_url: https://sbomify.com/?p=268
 date: '2024-06-24 15:44:51 +0200'
 date_gmt: '2024-06-24 15:44:51 +0200'
-categories:
-- Uncategorized
+categories: dependency-management github security tools
 tags: []
 comments: []
 redirect_from: /2024/06/24/enhancing-dependency-management-with-githubs-dependency-graph-an-analysis/

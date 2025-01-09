@@ -13,8 +13,7 @@ wordpress_id: 234
 wordpress_url: https://sbomify.com/?p=234
 date: '2024-05-13 10:20:11 +0200'
 date_gmt: '2024-05-13 10:20:11 +0200'
-categories:
-- Uncategorized
+categories: SBOM Security Best Practices Tools
 tags: []
 comments: []
 redirect_from: /2024/05/13/enhancing-sbom-sharing-a-look-at-current-practices-and-the-role-of-sbomify/

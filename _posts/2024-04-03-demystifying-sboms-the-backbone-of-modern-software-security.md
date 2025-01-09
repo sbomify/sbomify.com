@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: 'Demystifying SBOMs: The Backbone of Modern Software Security'
+categories: security, sbom, education
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -13,8 +14,6 @@ wordpress_id: 153
 wordpress_url: https://sbomify.com/?p=153
 date: '2024-04-03 17:18:12 +0200'
 date_gmt: '2024-04-03 17:18:12 +0200'
-categories:
-- Uncategorized
 tags: []
 comments: []
 redirect_from: /2024/04/03/demystifying-sboms-the-backbone-of-modern-software-security/

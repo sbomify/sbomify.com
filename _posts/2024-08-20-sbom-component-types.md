@@ -3,6 +3,7 @@ layout: post
 title: "Comparing SBOM Formats: Focus on Component Types in CycloneDX vs. SPDX"
 author:
   display_name: Cowboy Neil
+categories: security, software-development, standards, devops
 
 ---
 

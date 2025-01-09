@@ -7,8 +7,7 @@ author:
   display_name: Cowboy Neil
 author_login: Cowboy Neil
 date: '2024-07-31 09:00:35 +0200'
-categories:
-- Uncategorized
+categories: Development, DevOps, "Best Practices", "Package Management"
 tags: []
 comments: []
 

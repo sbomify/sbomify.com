@@ -133,7 +133,7 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": ["BlogPosting"{% if page.categories contains "compliance" or page.categories contains "security" or page.categories contains "sbom" %}, "TechArticle"{% endif %}],
+    "@type": ["BlogPosting"{% if page.categories contains "compliance" or page.categories contains "security" or page.categories contains "sbom" or page.title contains "Docker" or page.title contains "Django" or page.title contains "SBOM" %}, "TechArticle"{% endif %}],
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "{{ page.url | absolute_url }}"
@@ -143,7 +143,7 @@
     "image": "{{ page.image | default: site.social.image | absolute_url }}",
     "author": {
       "@type": "Person",
-      "name": "{{ page.author | default: site.author }}",
+      "name": "{{ page.author.display_name | default: page.author }}",
       "url": "{{ site.url }}"
     },
     "publisher": {
@@ -156,12 +156,14 @@
     },
     "datePublished": "{{ page.date | default: page.git_created_date | date_to_xmlschema }}",
     "dateModified": "{{ page.last_modified_at | default: page.git_modified_date | default: page.date | date_to_xmlschema }}",
-    "keywords": "{{ page.categories | join: ', ' }}",
+    "keywords": [{% for cat in page.categories %}"{{ cat }}"{% unless forloop.last %},{% endunless %}{% endfor %}],
     "articleSection": "{{ page.categories | first }}",
     "wordCount": "{{ content | number_of_words }}",
-    "inLanguage": "en-US"{% if page.categories contains "compliance" or page.categories contains "security" or page.categories contains "sbom" %},
-    "proficiencyLevel": "{{ page.proficiency_level | default: 'Expert' }}",
-    "dependencies": "{{ page.tech_dependencies | default: 'SBOM Tools' }}"{% endif %}
+    "inLanguage": "en-US"
+    {%- if page.categories contains "compliance" or page.categories contains "security" or page.categories contains "sbom" or page.title contains "Docker" or page.title contains "Django" or page.title contains "SBOM" -%}
+    ,"proficiencyLevel": "{{ page.proficiency_level | default: 'Expert' }}",
+    "dependencies": "{{ page.tech_dependencies | default: 'SBOM Tools' }}"
+    {%- endif -%}
   }
   </script>
 

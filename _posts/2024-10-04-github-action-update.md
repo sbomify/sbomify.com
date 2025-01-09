@@ -3,6 +3,7 @@ layout: post
 title: "Big update to our GitHub Action"
 author:
   display_name: Viktor
+categories: tools announcement sbom
 
 ---
 

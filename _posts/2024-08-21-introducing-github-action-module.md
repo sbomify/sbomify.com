@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Announcing sbomify’s GitHub Actions Module: Seamlessly Share SBOMs in Your CI/CD Pipeline"
+title: "Announcing sbomify's GitHub Actions Module: Seamlessly Share SBOMs in Your CI/CD Pipeline"
 author:
   display_name: Viktor
-
+categories: announcement tools sbom security
 ---
 
 We are thrilled to announce the launch of **sbomify's GitHub Actions Module** — now available in the [GitHub Marketplace](https://github.com/marketplace/actions/sbomify)! This powerful tool simplifies the process of generating Software Bill of Materials (SBOMs) right within your CI/CD pipeline, ensuring that your software components are transparently documented and compliant with industry standards.

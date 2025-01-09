@@ -11,8 +11,7 @@ wordpress_id: 175
 wordpress_url: https://sbomify.com/?p=175
 date: '2024-04-07 11:32:45 +0200'
 date_gmt: '2024-04-07 11:32:45 +0200'
-categories:
-- Uncategorized
+categories: Security DevOps Best Practices
 tags: []
 comments: []
 redirect_from: /2024/04/07/how-to-create-an-sbom/
@@ -85,3 +84,6 @@ Navigate to your GitHub repository in your browser. Then go to:
 #### Using the RESTful API
 
 GitHub exposes the same functionality using this [RESTful API](https://docs.github.com/en/rest/dependency-graph/sboms?apiVersion=2022-11-28).
+
+```
+```

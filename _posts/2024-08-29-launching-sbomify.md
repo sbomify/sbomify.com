@@ -3,6 +3,7 @@ layout: post
 title: "Introducing sbomify: Revolutionizing SBOM Management"
 author:
   display_name: Viktor
+categories: announcement sbom security
 
 ---
 
