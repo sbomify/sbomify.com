@@ -4,7 +4,7 @@ title: "How SBOMs Can Help You Achieve PCI DSS 4.0 Compliance"
 date: 2025-01-07 09:00:00 +0000
 categories: compliance, security, pci-dss, sbom
 author:
-  display_name: Viktor Petersson
+  display_name: Viktor
 ---
 
 ### What Is PCI DSS 4.0?
