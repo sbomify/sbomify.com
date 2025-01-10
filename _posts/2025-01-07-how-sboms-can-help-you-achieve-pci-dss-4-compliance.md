@@ -28,7 +28,9 @@ SBOMs provide insight into potential security vulnerabilities and compliance ris
 PCI DSS 4.0 emphasizes **continuous risk assessments, vulnerability management, and secure software development practices**. These objectives hinge on being able to:
 
 1. **Identify Vulnerabilities Quickly**: You can't protect what you don't know exists. SBOMs offer a transparent, human-readable list of all your software components, making it easier to detect known vulnerabilities.
+
 2. **Maintain Detailed Audit Trails**: PCI DSS requires organizations to maintain accurate records that prove you're following security best practices. SBOMs serve as a living documentation of your software's composition, making audits less cumbersome.
+
 3. **Establish Accountability**: With an SBOM, teams can be held accountable for the components they choose and the updates or patches they apply (or don't apply). That traceability is crucial for demonstrating compliance.
 
 In industries like online gambling and e-commerce, where applications change rapidly due to continuous feature deployment, having an SBOM means you can react fast. Instead of scrambling to figure out where a newly discovered vulnerability might exist, you already have a reliable, up-to-date inventory of your software components.
