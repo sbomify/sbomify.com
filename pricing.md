@@ -81,7 +81,7 @@ description: Simple, transparent pricing for teams of all sizes
           <h3>Features</h3>
           <ul>
             <li><a href="/features/sbom-hierarchy/">5 Products</a> (suggested)</li>
-            <li><a href="/features/sbom-hierarchy/">5-10 Projects per Product</a> (adjust as needed)</li>
+            <li><a href="/features/sbom-hierarchy/">5 Projects per Product</a>
             <li><a href="/features/sbom-hierarchy/">200 Components per Project</a></li>
             <li>Unlimited SBOM generation</li>
             <li>Private SBOMs with optional public sharing</li>
