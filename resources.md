@@ -12,8 +12,9 @@ There's also a GitHub repository called [sbom-benchmarks](https://github.com/sbo
 ## Video Resources
 
 * Introduction to SBOMs: [sbomify at Ubuntu Engineering Sprint](https://www.youtube.com/watch?v=5mlR1lPz1no)
-* Interview with the creator of CycloneDX: [SBOMs, CycloneDX, and Software Security with Steve Springett](https://www.youtube.com/watch?v=oSBDSJf0FeA)
-* Interview with "the father of SBOMs": [SBOMs and Cybersecurity: A Deep Dive with Allan Friedman](https://youtu.be/E77ohYZA2vo)
+* Interview with the creator of CycloneDX: [SBOMs, CycloneDX, and Software Security with Steve Springett](https://vpetersson.com/podcast/S01E22.html)
+* Interview with "the father of SBOMs": [SBOMs and Cybersecurity: A Deep Dive with Allan Friedman](https://vpetersson.com/podcast/S01E16.html)
+* [A deep dive into the SBOM format SPDX](https://vpetersson.com/podcast/S02E01.html) with Kate Stewart from the Linux Foundation and Gary O’Neall, a long-time SPDX contributor.
 
 ## Generation / Authoring
 

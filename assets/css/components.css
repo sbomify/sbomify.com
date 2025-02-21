@@ -1,0 +1,64 @@
+@layer components {
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply btn bg-purple hover:bg-purple-700 text-white;
+  }
+
+  .btn-secondary {
+    @apply btn bg-primary-light hover:bg-primary-600 text-white border border-primary-700;
+  }
+
+  /* Cards */
+  .feature-card {
+    @apply flex flex-col h-auto justify-center items-center border px-6 lg:px-10 py-4 rounded-lg border-solid border-primary-700 bg-primary-light;
+  }
+
+  .feature-card-header {
+    @apply text-purple mb-4;
+  }
+
+  /* Typography */
+  .heading-1 {
+    @apply text-4xl lg:text-[68px] leading-tight font-medium;
+  }
+
+  .heading-2 {
+    @apply text-3xl lg:text-5xl leading-tight font-medium mb-4;
+  }
+
+  .section-title {
+    @apply uppercase text-sm mb-4 text-purple;
+  }
+
+  /* Layout */
+  .section-container {
+    @apply container py-12 lg:py-24;
+  }
+
+  .section-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-[230px] items-center;
+  }
+
+  /* Images */
+  .logo-container {
+    @apply flex items-center justify-center h-full;
+  }
+
+  .logo {
+    @apply w-[135px] max-h-[30px] object-contain;
+  }
+
+  /* Links */
+  .link-hover {
+    @apply transition-all duration-200 hover:text-purple;
+  }
+
+  /* Press logos */
+  .press-logo {
+    @apply grayscale hover:grayscale-0 transition-all;
+  }
+}

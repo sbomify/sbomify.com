@@ -1,0 +1,16 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "no-raw-characters": "off",
+    "void-style": "off",
+    "no-missing-references": "off",
+    "no-unknown-elements": "off",
+    "element-permitted-content": "off",
+    "element-required-content": "off",
+    "element-permitted-parent": "off",
+    "no-conditional-comment": "off",
+    "prefer-native-element": "off",
+    "no-inline-style": "off",
+    "no-trailing-whitespace": "off"
+  }
+}
