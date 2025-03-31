@@ -59,4 +59,4 @@ No problem! Our tool can can easily be integrated in any other CI/CD pipeline. J
 
 As software supply chains become increasingly complex, tools like sbomify are essential for maintaining transparency and security. By integrating sbomify into your workflows, you're taking a proactive step towards better software management and compliance.
 
-We’re excited to see how sbomify will help you build more secure and transparent software. Try it out today by visiting the [GitHub Marketplace](https://github.com/marketplace/actions/sbomify) and start sharing your  SBOMs with ease!
+We’re excited to see how sbomify will help you build more secure and transparent software. Try it out today by visiting the [GitHub Marketplace](https://github.com/marketplace/actions/sbomify) and start sharing your SBOMs with ease!

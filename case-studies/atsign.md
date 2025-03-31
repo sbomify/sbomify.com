@@ -35,16 +35,16 @@ software itself would be found such as Docker Hub).
 
 Partnering with **sbomify** helped Atsign overcome these challenges:
 
-* **Augmentation and Enrichment**: Atsign filled out the relevant metadata in
-sbomify so that it could be added to lock file generated components by the
-sbomify GitHub Action. The Action is run as part of their CD pipelines so
-that SBOMs are created for each release.
-* **sbomify badge**: An sbomify badge in the README.md for each open source
-repo sits alongside the SLSA and Scorecard badges, making the SBOM a visible
-part of the trifecta. It also provides an easy link through to the most
-recent SBOMs for that component. For example the
-[at_server](https://github.com/atsign-foundation/at_server/) repo, which
-contains the core software implementation of the atProtocol.
+- **Augmentation and Enrichment**: Atsign filled out the relevant metadata in
+  sbomify so that it could be added to lock file generated components by the
+  sbomify GitHub Action. The Action is run as part of their CD pipelines so
+  that SBOMs are created for each release.
+- **sbomify badge**: An sbomify badge in the README.md for each open source
+  repo sits alongside the SLSA and Scorecard badges, making the SBOM a visible
+  part of the trifecta. It also provides an easy link through to the most
+  recent SBOMs for that component. For example the
+  [at_server](https://github.com/atsign-foundation/at_server/) repo, which
+  contains the core software implementation of the atProtocol.
 
 ## Our Broader Partnership
 
@@ -65,10 +65,10 @@ in generating SBOMs for C based projects.
 
 ## The Results
 
-* **Complete, compliant SBOMs**: The SBOMs Atsign creates now carry the full
-set of metadata that a customer would expect to find.
-* **Enhanced Visibility**: SBOMs are no longer hidden away in releases, and
-have joined SLSA and Scorecard in showing that Atsign care about security.
+- **Complete, compliant SBOMs**: The SBOMs Atsign creates now carry the full
+  set of metadata that a customer would expect to find.
+- **Enhanced Visibility**: SBOMs are no longer hidden away in releases, and
+  have joined SLSA and Scorecard in showing that Atsign care about security.
 
 ## Conclusion
 

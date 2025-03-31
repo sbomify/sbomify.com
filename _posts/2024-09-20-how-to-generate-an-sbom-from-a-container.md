@@ -11,7 +11,7 @@ A lot of people are asking about how one can generate an SBOM based on a Docker 
 
 ## Why You Shouldn't Generate an SBOM from a Docker Container
 
-Before we dive into *how* to generate an SBOM from a Docker container, let's first talk about why you shouldn't do it this way. Or rather, what the limitations of generating an SBOM from a Docker container are.
+Before we dive into _how_ to generate an SBOM from a Docker container, let's first talk about why you shouldn't do it this way. Or rather, what the limitations of generating an SBOM from a Docker container are.
 
 Generally speaking, Docker containers will come with a set of system packages and runtime dependencies. Once you've installed your dependencies, you usually have a final step where you copy in your actual application codebase. There are, of course, countless exceptions to this (and multi-stage builds make things even murkier).
 

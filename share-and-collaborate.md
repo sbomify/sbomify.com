@@ -5,7 +5,6 @@ title: SBOM management - Share and Collaborate
 
 ---
 
-
 In today's fast-paced software development environment, ensuring the security and integrity of software components is more critical than ever. This necessity brings to light the essential role of SBOM management, and here, sbomify emerges as a transformative solution. sbomify redefines how Software Bills of Materials (SBOMs) are managed, shared, and collaborated upon. With the traditional, cumbersome methods of SBOM sharing behind us, sbomify introduces an efficient, automated platform that seamlessly integrates into your CI/CD pipeline and your Software Developer Life Cycle (SDLC). This integration facilitates suppliers in automatically uploading their most recent SBOMs, ensuring all stakeholders have instant access to the latest information. sbomify isn't just a tool; it's an integral component of a robust software security strategy, revolutionizing sbom management.
 
 ## Automated SBOM Management in CI/CD Pipelines

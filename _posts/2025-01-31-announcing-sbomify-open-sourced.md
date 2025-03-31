@@ -37,7 +37,7 @@ In addition to existing SBOM standards, we're committed to supporting [Project K
 
 ## Open Source at Heart
 
-Releasing sbomify under an *Apache 2.0 license plus Common Clause* reflects our desire to foster open collaboration while preventing unauthorized monetization. I want to extend special thanks to **OSS Capital** for their work on the [Common Clause](https://commonsclause.com/) which makes it easier to ensure that sbomify remains free for everyone to run, self-host, and adapt within their organizations.
+Releasing sbomify under an _Apache 2.0 license plus Common Clause_ reflects our desire to foster open collaboration while preventing unauthorized monetization. I want to extend special thanks to **OSS Capital** for their work on the [Common Clause](https://commonsclause.com/) which makes it easier to ensure that sbomify remains free for everyone to run, self-host, and adapt within their organizations.
 
 ## Join Us!
 

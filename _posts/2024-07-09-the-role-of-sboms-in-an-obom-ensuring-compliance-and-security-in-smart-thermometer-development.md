@@ -234,7 +234,7 @@ While the inclusion of Software Bills of Materials (SBOMs) is mandated by execut
 **References:**
 
 1. Executive Order on Improving the Nation's Cybersecurity. (2021). The White House. Retrieved from [White House](https://www.whitehouse.gov/briefing-room/statements-releases/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/)
-2. CycloneDX. (n.d.). *CycloneDX Specification*. Retrieved from [CycloneDX](https://cyclonedx.org/specification/overview/)
-3. National Institute of Standards and Technology (NIST). (2021). *Security and Privacy Controls for Information Systems and Organizations*. Retrieved from [NIST](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf)
+2. CycloneDX. (n.d.). _CycloneDX Specification_. Retrieved from [CycloneDX](https://cyclonedx.org/specification/overview/)
+3. National Institute of Standards and Technology (NIST). (2021). _Security and Privacy Controls for Information Systems and Organizations_. Retrieved from [NIST](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf)
 
 By focusing on the critical role of SBOMs within OBOMs, organizations can ensure compliance with executive mandates while leveraging the additional benefits of a comprehensive operational framework.

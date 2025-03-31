@@ -22,7 +22,6 @@ redirect_from: /2024/04/03/the-time-is-now-embracing-sboms-in-an-era-of-enhanced
 
 In the constantly evolving cybersecurity landscape, the importance of Software Bill of Materials (SBOMs) has surged to the forefront of industry discourse, underscored by its maturation as a standard and its critical role in national and global cybersecurity strategies. The inclusion of SBOMs in the United States' Executive Order on Improving the Nation’s Cybersecurity ([Executive Order 14028](https://www.nist.gov/itl/executive-order-14028-improving-nations-cybersecurity)) marked a significant milestone, positioning SBOMs as an essential element in the cybersecurity framework. This, combined with the native support for SBOM generation by popular platforms like GitHub and tools like Docker, underscores the urgency and necessity of adopting SBOMs in today's digital age.
 
-
 **Maturation of SBOM Standards**
 
 The journey of SBOMs from a conceptual tool to a standardized security measure illustrates its growing relevance. The maturation of SBOM standards, developed through collaborative efforts within the tech community, has made SBOMs more accessible and implementable for organizations of all sizes. This evolution ensures that SBOMs can serve as a universal language for software component transparency, facilitating better vulnerability management, compliance, and risk assessment.

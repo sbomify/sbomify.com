@@ -11,12 +11,12 @@ Over the last few weeks, we've made some significant updates to our [GitHub Acti
 
 ## Changelog
 
-* Support for Dart lockfiles
-* Support for Docker images (system packages only)
-* Full support for [Enrichment and Augmentation](https://sbomify.com/features/generate-collaborate-analyze/), meaning we can automatically complete your SBOMs to make them NTIA Minimum Elements compatible
-* Documentation on how to use attestation with the GitHub Actions module (more on that below)
-* Bumped versions of various sub-components
-* Various bug fixes
+- Support for Dart lockfiles
+- Support for Docker images (system packages only)
+- Full support for [Enrichment and Augmentation](https://sbomify.com/features/generate-collaborate-analyze/), meaning we can automatically complete your SBOMs to make them NTIA Minimum Elements compatible
+- Documentation on how to use attestation with the GitHub Actions module (more on that below)
+- Bumped versions of various sub-components
+- Various bug fixes
 
 ## Using Attestation
 
@@ -48,8 +48,8 @@ The job looks something like this:
 
 What’s great about this is that it removes the need to trust sbomify directly. You can verify the SBOM independently as follows:
 
-* Download the latest SBOM from the GitHub Action [sbomify public page](https://app.sbomify.com/component/Gu9wem8mkX)
-* Install the GitHub CLI if you don't already have it
+- Download the latest SBOM from the GitHub Action [sbomify public page](https://app.sbomify.com/component/Gu9wem8mkX)
+- Install the GitHub CLI if you don't already have it
 
 With this done, you can verify the file against GitHub:
 

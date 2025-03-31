@@ -25,7 +25,6 @@ If you’re committed to advancing your organization’s software security pract
 
 We look forward to seeing you at BSides Bristol and engaging in this important conversation about the future of software security.
 
-
 ## Update
 
 The slides from the talk can be found [here](https://speakerdeck.com/vpetersson/navigating-the-sbom-landscape-formats-relevance-and-tooling-in-2024-at-bsides-bristol-24).

@@ -49,9 +49,9 @@ This section introduces the various elements you can use in Markdown and HTML wi
 
 This is a normal paragraph. Below is a list of text formatting options:
 
-- *Italic text* using single asterisks.
+- _Italic text_ using single asterisks.
 - **Bold text** using double asterisks.
-- ***Bold and italic text*** using triple asterisks.
+- _**Bold and italic text**_ using triple asterisks.
 - ~~Strikethrough text~~ using double tildes.
 
 You can also create [links](#) and use `inline code` within a paragraph.
@@ -93,7 +93,6 @@ Here’s an example of a link: [OpenAI](https://www.openai.com).
 Here’s a button styled using Markdown and CSS:
 
 <button class="btn">Click Me!</button>
-
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
 

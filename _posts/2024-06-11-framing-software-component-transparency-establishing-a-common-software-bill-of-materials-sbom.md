@@ -32,7 +32,7 @@ As the digital world grows ever more complex, the tools we use to ensure softwar
 
 #### Looking Ahead to the 3rd Edition
 
-The forthcoming 3rd edition of *Framing Software Component Transparency: Establishing a Common Software Bill of Materials (SBOM)* is set to build on the robust foundation laid by its predecessor. Here’s what we can anticipate:
+The forthcoming 3rd edition of _Framing Software Component Transparency: Establishing a Common Software Bill of Materials (SBOM)_ is set to build on the robust foundation laid by its predecessor. Here’s what we can anticipate:
 
 - **Advanced Security Measures**: Introducing more robust protocols to counter sophisticated cyber threats.
 - **Greater Automation**: Incorporating advanced automation tools to streamline SBOM creation and management, reducing manual efforts and errors.

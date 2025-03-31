@@ -8,6 +8,7 @@ categories: Security DevOps Software Development Best Practices
 ---
 
 ## Abstract
+
 In a world where software is integral to almost every aspect of life, securing the software supply chain is more critical than ever. The increasing complexity of software systems has given rise to sophisticated cyberattacks, particularly those targeting the software supply chain. To combat these threats, Google introduced **SLSA (Supply chain Levels for Software Artifacts)**—a framework that provides a structured approach to safeguarding software development and ensuring that software artifacts are secure and tamper-free throughout their lifecycle. Pronounced "salsa," SLSA is essential for defending against supply chain attacks, maintaining software integrity, providing transparency, encouraging best practices, and meeting compliance standards. Additionally, GitHub now supports artifact attestations, further enhancing the ability to establish and verify provenance within the SLSA framework.
 
 ## What is SLSA?
@@ -31,7 +32,6 @@ The framework is structured into four levels, each corresponding to a progressiv
 ## Why SLSA Matters
 
 The importance of SLSA in today’s digital landscape cannot be overstated. As cyber threats continue to evolve, securing the software supply chain has become essential to preventing widespread damage and maintaining trust in digital systems. Here’s why SLSA is crucial:
-
 
 1. **Defending Against Supply Chain Attacks**
    Supply chain attacks are a growing concern, with attackers targeting the software development process to introduce malicious code. SLSA helps organizations defend against these threats by implementing robust security measures at every stage of software development.

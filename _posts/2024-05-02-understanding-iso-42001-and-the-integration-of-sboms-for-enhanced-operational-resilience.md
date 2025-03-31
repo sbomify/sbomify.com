@@ -58,4 +58,3 @@ Integrating SBOMs into an ORMS as per ISO 42001 can be strategically advantageou
 ## Conclusion
 
 ISO 42001 and SBOMs together provide a robust framework for enhancing operational resilience by offering a proactive approach to managing disruptions related to software vulnerabilities. By integrating SBOMs into their resilience strategies, organizations can achieve greater transparency, improve risk management, and expedite recovery processes, ensuring they are better equipped to handle disruptions and maintain continuity in today’s volatile business environment. Embracing this combined approach allows businesses to not only safeguard their operations but also enhance their overall resilience and reliability.
-

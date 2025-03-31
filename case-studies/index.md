@@ -30,4 +30,4 @@ Learn how Screenly, a secure digital signage platform trusted by Fortune 500 com
 
 ---
 
-*Want to share your sbomify success story? [Contact us](mailto:hello@sbomify.com).*
+_Want to share your sbomify success story? [Contact us](mailto:hello@sbomify.com)._
