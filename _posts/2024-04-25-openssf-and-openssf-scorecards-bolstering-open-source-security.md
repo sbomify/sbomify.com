@@ -61,4 +61,3 @@ For those who are keen on delving deeper into the specifics of OpenSSF Scorecard
 ## Conclusion
 
 The OpenSSF, with its comprehensive approach and powerful tools like the scorecards, is leading the charge in fortifying the security of open-source software. In an era where cyber threats are ever-evolving, the importance of such an initiative cannot be overstated. Whether you’re a developer, a project maintainer, or a company leveraging open source, engaging with OpenSSF and utilizing its scorecards can significantly enhance your software's security, ensuring it remains robust and resilient against threats. Embracing these resources is a step forward in fostering a safer, more secure open-source ecosystem.
-

@@ -1,0 +1,10 @@
+{
+  "default": true,
+  "MD013": { "line_length": 100 },
+  "MD024": { "siblings_only": true },
+  "MD033": false,
+  "MD041": false,
+  "MD046": { "style": "fenced" },
+  "MD049": { "style": "underscore" },
+  "MD050": { "style": "asterisk" }
+}

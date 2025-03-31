@@ -70,4 +70,3 @@ Engage with suppliers to ensure that they provide SBOMs for their components. Co
 The EU Cyber Resilience Act represents a significant step forward in enhancing cybersecurity for digital products and services. SBOMs are a cornerstone of this legislation, providing the transparency and insight needed to manage vulnerabilities and secure the software supply chain effectively. By embracing SBOMs and following best practices for their implementation, organizations can not only comply with the EU Cyber Resilience Act but also build a more resilient and secure digital ecosystem.
 
 At sbomify, we are committed to helping organizations navigate the complexities of SBOMs and achieve their cybersecurity goals. Contact us today to learn how we can support your journey towards enhanced cyber resilience.
-

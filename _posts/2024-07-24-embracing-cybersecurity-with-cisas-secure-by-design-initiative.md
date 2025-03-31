@@ -17,6 +17,7 @@ comments: []
 redirect_from: /2024/07/24/embracing-cybersecurity-with-cisas-secure-by-design-initiative/
 
 ---
+
 In the ever-evolving landscape of cyber threats, the importance of integrating robust security measures into the earliest stages of software development cannot be overstated. Recognizing this need, the Cybersecurity and Infrastructure Security Agency (CISA), alongside various international partners, has released an updated guide titled "Shifting the Balance of Cybersecurity Risk: Principles and Approaches for Secure by Design Software" ([CISA](https://www.cisa.gov/resources-tools/resources/secure-by-design)). This comprehensive document emphasizes the urgency for software manufacturers to prioritize security from the outset, fundamentally shifting the cybersecurity burden away from consumers and towards developers.
 
 #### Key Principles of Secure by Design
@@ -48,4 +49,3 @@ CISA's updated guidance is more than a set of recommendations; it is a call to a
 As the digital landscape continues to expand, the need for secure software becomes ever more critical. CISA's initiative represents a significant step towards a more secure digital future, where security is an integral part of the development process, rather than an afterthought ([CISA](https://www.cisa.gov/resources-tools/resources/secure-by-design)) ([CISA](https://www.cisa.gov/sites/default/files/2023-06/principles_approaches_for_security-by-design-default_508c.pdf#:~:text=URL%3A%20https%3A%2F%2Fwww.cisa.gov%2Fsites%2Fdefault%2Ffiles%2F2023)).
 
 For more detailed information and to access the full guide, visit the [CISA Secure by Design page](https://www.cisa.gov/resources-tools/resources/secure-by-design).
-

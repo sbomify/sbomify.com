@@ -8,9 +8,10 @@ The cybersecurity landscape has evolved rapidly in recent years, driven largely 
 This SBOM mandate has profoundly impacted the entire software industry. SBOMs provide detailed documentation of software components and are now recognized as essential tools for ensuring supply chain transparency and security. The requirement's cascading effect is particularly evident in compliance-related areas, where major regulatory frameworks and standards bodies increasingly incorporate SBOM requirements into their guidelines.
 
 A prime example is the EU's Cyber Resilience Act (CRA), which has established these firm implementation dates:
-* Goes into force: **December 10, 2024** (<span id="force-countdown" class="font-bold"></span>)
-* Mandatory reporting begins: **September 11, 2026** (<span id="reporting-countdown" class="font-bold"></span>)
-* Full implementation required: **December 11, 2027** (<span id="implementation-countdown" class="font-bold"></span>)
+
+- Goes into force: **December 10, 2024** (<span id="force-countdown" class="font-bold"></span>)
+- Mandatory reporting begins: **September 11, 2026** (<span id="reporting-countdown" class="font-bold"></span>)
+- Full implementation required: **December 11, 2027** (<span id="implementation-countdown" class="font-bold"></span>)
 
 <script>
     function formatCountdown(targetDate) {
@@ -67,8 +68,9 @@ A prime example is the EU's Cyber Resilience Act (CRA), which has established th
 These dates represent critical milestones for organizations operating in or selling to the EU market. Similarly, in the United States, the NIST Cybersecurity Framework has established SBOMs as a crucial element of comprehensive cybersecurity practices.
 
 As regulatory requirements continue to evolve, SBOMs are becoming the de facto standard for software supply chain transparency. Organizations that haven't yet implemented SBOM practices risk falling behind in both compliance and overall cybersecurity posture. The benefits of adoption are clear:
-* Enhanced visibility into software components
-* Improved vulnerability identification and remediation
-* Stronger trust relationships with customers and partners
+
+- Enhanced visibility into software components
+- Improved vulnerability identification and remediation
+- Stronger trust relationships with customers and partners
 
 Time is critical in this evolving landscape. Organizations that delay SBOM adoption risk falling out of compliance with regulatory requirements and industry best practices. More importantly, they expose themselves to increased risk in an era of increasingly sophisticated cyber threats. For organizations that haven't yet integrated SBOMs into their software development and procurement processes, the urgency is clear: SBOM adoption isn't just about compliance—it's fundamental to ensuring the security and resilience of modern software infrastructure.

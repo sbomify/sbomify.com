@@ -10,7 +10,7 @@ description: Simple, transparent pricing for teams of all sizes
     <p>Choose the plan that's right for your team</p>
   </div>
 
-  <div class="billing-toggle">
+<div class="billing-toggle">
     <span>Monthly</span>
     <label class="toggle">
       <input type="checkbox" id="billing-toggle">
@@ -19,7 +19,7 @@ description: Simple, transparent pricing for teams of all sizes
     <span>Annual <span class="save-tag">Save 20%</span></span>
   </div>
 
-  <div class="pricing-grid">
+<div class="pricing-grid">
     <div class="pricing-card">
       <div class="card-header">
         <h2>Community</h2>
@@ -138,7 +138,8 @@ description: Simple, transparent pricing for teams of all sizes
         })">Contact Us</a>
       </div>
     </div>
-  </div>
+
+</div>
 </div>
 
 <style>

@@ -49,6 +49,7 @@ generate-sbom:
     - /sbomify.sh
 [...]
 ```
+
 You can find an example implementation [here](https://gitlab.com/sbomify/gitlab-pipeline/-/blob/master/.gitlab-ci.yml), and the arguments are the same as for GitHub.
 
 ## BitBucket
