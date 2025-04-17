@@ -9,7 +9,7 @@ author:
 
 I recently [spent time with Yocto](https://vpetersson.com/2025/02/21/yocto-rockpi-and-sboms.html) to better understand how it works with SBOMs, and I was very impressed. In short, if you are building your own Linux distribution, Yocto is an excellent choice for many reasons, particularly if you want to provide SBOMs for your product.
 
-Since Yocto builds everything from source, it can provide a complete SBOM for all components it compiles. Because Yocto has a catalog of all the packages it can build, including the corresponding licensing, it is able to generate high-quality SBOMs out of the box.
+Since Yocto builds everything from source, it can provide a complete SBOM for all components it compiles. Because Yocto has a catalog of all the packages it can build, including the corresponding licensing, it is able to generate high-quality SBOMs out of the box. Other platforms are also adopting this approach; for example, the Raspberry Pi Foundation recently introduced [built-in SBOM generation with `rpi-image-gen`]({{ site.baseurl }}{% post_url 2025-04-17-unpacking-raspberry-pi-s-built-in-sbom-magic %}).
 
 ## Yocto and SBOMs
 
