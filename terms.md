@@ -6,9 +6,9 @@ description: Terms and conditions for using sbomify
 
 # Terms of Service
 
-Last updated: January 02, 2025
+Last updated: May 2, 2025
 
-These Terms of Service ("Terms") constitute a legally binding agreement between you and Viktopia UK Ltd ("Company", "we", "our", or "us"), a company registered in England and Wales (Company Registration Number: 09746536), with its registered office at 17-18 Berkeley Square, Clifton, Bristol, BS8 1HB, England.
+These Terms of Service ("Terms") constitute a legally binding agreement between you and sbomify ltd ("Company", "we", "our", or "us"), a company registered in England and Wales (Company Registration Number: 16181507), with its registered office at 17-18 Berkeley Square, Clifton, Bristol, BS8 1HB, England.
 
 By accessing or using any sbomify products or services, you agree to be bound by these Terms. If you disagree with any part of these terms, you may not access or use the Service.
 
@@ -18,9 +18,9 @@ We may update these Terms at any time. We will take appropriate measures to noti
 
 "Agreement" means these Terms of Service.
 
-"Company", "we", "our", or "us" refers to Viktopia UK Ltd, registered in England and Wales.
+"Company", "we", "our", or "us" refers to sbomify ltd, registered in England and Wales.
 
-"Services" refers to our websites, including sbomify.com, and any product created and maintained by Viktopia UK Ltd. This includes the sbomify platform and all associated services, whether delivered within a web browser, desktop application, mobile application, or another format.
+"Services" refers to our websites, including sbomify.com, and any product created and maintained by sbomify ltd. This includes the sbomify platform and all associated services, whether delivered within a web browser, desktop application, mobile application, or another format.
 
 "User", "you", or "your" refers to the individual, company, or legal entity accessing or using the Services.
 
@@ -145,7 +145,7 @@ If any provision of these Terms is found to be unenforceable, the remaining prov
 ## Contact Information
 
 For legal notices:
-Viktopia UK Ltd
+sbomify ltd
 17-18 Berkeley Square
 Clifton, Bristol
 BS8 1HB

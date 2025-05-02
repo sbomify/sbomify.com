@@ -6,7 +6,7 @@ description: Our commitment to protecting your privacy and personal data
 
 # Privacy Policy
 
-Last updated: January 02, 2025
+Last updated: May 2, 2025
 
 This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You. We are committed to protecting your privacy in accordance with the UK General Data Protection Regulation (UK GDPR), the Data Protection Act 2018, and other applicable UK data protection laws.
 
@@ -14,7 +14,7 @@ We use Your Personal data to provide and improve the Service. By using the Servi
 
 ## Data Controller Information
 
-Viktopia UK Ltd (Company Registration Number: 09746536) is the Data Controller for personal data collected through our Services. Our registered office is at 17-18 Berkeley Square, Clifton, Bristol, BS8 1HB, England. For data protection matters, you can contact our Data Protection Officer at <privacy@sbomify.com>.
+sbomify ltd (Company Registration Number: 16181507) is the Data Controller for personal data collected through our Services. Our registered office is at 17-18 Berkeley Square, Clifton, Bristol, BS8 1HB, England. For data protection matters, you can contact our Data Protection Officer at <privacy@sbomify.com>.
 
 ## Your Data Protection Rights
 
@@ -43,7 +43,7 @@ For the purposes of this Privacy Policy:
 
 - **Account** means a unique account created for You to access our Service or parts of our Service.
 - **Affiliate** means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.
-- **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Viktopia UK Ltd, 17-18 Berkeley Square, Clifton, Bristol, BS8 1HB, England.
+- **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to sbomify ltd, 17-18 Berkeley Square, Clifton, Bristol, BS8 1HB, England.
 - **Cookies** are small files that are placed on Your computer, mobile device or any other device by a website, containing the details of Your browsing history on that website among its many uses.
 - **Country** refers to: United Kingdom
 - **Device** means any device that can access the Service such as a computer, a cellphone or a digital tablet.
