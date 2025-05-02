@@ -60,13 +60,13 @@ Note that GitHub currently only allows you to export SBOMs in the SPDX format.
 To enable the SBOM feature in the GitHub CLI, you need to first install the SBOM extension:
 
 ```bash
-$ gh ext install advanced-security/gh-sbom
+gh ext install advanced-security/gh-sbom
 ```
 
 With the extension installed, you can generate an SBOM directly from your terminal using the `gh sbom` command. To use this, simply jump into the GitHub repository you want to generate an SBOM for, and then run:
 
 ```bash
-$ gh sbom > my-sbom.json
+gh sbom > my-sbom.json
 ```
 
 This will generate a file called `my-sbom.json` in your current working directory.

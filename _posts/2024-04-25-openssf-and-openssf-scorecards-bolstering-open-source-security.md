@@ -54,7 +54,7 @@ Scorecards are also a boon for project maintainers. They serve as a benchmark, h
 
 Using OpenSSF Scorecards is straightforward. They are publicly accessible and can be run against any open source project on GitHub. The results provide a score for each checked category, alongside recommendations for improvement. This makes the scorecards an essential tool not just for evaluating security but also for educating project maintainers and contributors on best practices in software security.
 
-For those who are keen on delving deeper into the specifics of OpenSSF Scorecards and their implications for open-source security, [Nerding Out with Cowboy Neil](https://www.youtube.com/@nerdingoutwithCowboy Neil) offers a detailed deep dive.
+For those who are keen on delving deeper into the specifics of OpenSSF Scorecards and their implications for open-source security, [Nerding Out with Cowboy Neil](<https://www.youtube.com/@nerdingoutwithCowboy> Neil) offers a detailed deep dive.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KdgkiWdhpZ8?si=NGn8LV09bHx5N0kb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 

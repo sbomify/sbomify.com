@@ -14,7 +14,7 @@ We use Your Personal data to provide and improve the Service. By using the Servi
 
 ## Data Controller Information
 
-Viktopia UK Ltd (Company Registration Number: 09746536) is the Data Controller for personal data collected through our Services. Our registered office is at 17-18 Berkeley Square, Clifton, Bristol, BS8 1HB, England. For data protection matters, you can contact our Data Protection Officer at privacy@sbomify.com.
+Viktopia UK Ltd (Company Registration Number: 09746536) is the Data Controller for personal data collected through our Services. Our registered office is at 17-18 Berkeley Square, Clifton, Bristol, BS8 1HB, England. For data protection matters, you can contact our Data Protection Officer at <privacy@sbomify.com>.
 
 ## Your Data Protection Rights
 

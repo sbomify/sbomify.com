@@ -30,7 +30,7 @@ An SBOM is essentially an ingredient list for software. It details the component
 
 The primer outlines different methods of SBOM sharing employed by various actors in the software supply chain, such as SBOM Authors, Consumers, and Distributors. Each method is examined through the phases of Discovery, Access, and Transport - key elements that influence the sophistication and effectiveness of sharing practices.
 
-### Examples of SBOM Sharing Practices:
+### Examples of SBOM Sharing Practices
 
 1. **Email-Based Sharing**: Simple but not scalable, used primarily by proprietary software vendors.
 2. **Vendor Portals**: More controlled but requires manual intervention, providing a medium sophistication level for both discovery and access.

@@ -73,10 +73,10 @@ When choosing between CycloneDX and SPDX for creating Software Bill of Materials
 - **Component Type**: No direct equivalent
 - **Usage**: SPDX does not natively support the documentation of SaaS or service components [5].
 
-## References:
+## References
 
-- [1] Sonatype. (n.d.). SPDX vs CycloneDX: Choosing the Right SBOM Format for Your Organization. Retrieved from https://www.sonatype.com/blog/spdx-vs-cyclonedx/
-- [2] Security Boulevard. (2020). CycloneDX vs SPDX: Which is Best for Your Use Case? Retrieved from https://securityboulevard.com/2020/02/cyclonedx-vs-spdx-which-is-best-for-your-use-case/
-- [3] Security Boulevard. (2020). Container Security with CycloneDX and SPDX. Retrieved from https://securityboulevard.com/2020/03/container-security-with-cyclonedx-and-spdx/
-- [4] Sonatype. (n.d.). Operating System and Device Documentation with CycloneDX. Retrieved from https://www.sonatype.com/blog/operating-system-and-device-documentation-with-cyclonedx/
-- [5] Security Boulevard. (2020). SaaS and Service Documentation with CycloneDX. Retrieved from https://securityboulevard.com/2020/04/saas-and-service-documentation-with-cyclonedx/
+- [1] Sonatype. (n.d.). SPDX vs CycloneDX: Choosing the Right SBOM Format for Your Organization. Retrieved from <https://www.sonatype.com/blog/spdx-vs-cyclonedx/>
+- [2] Security Boulevard. (2020). CycloneDX vs SPDX: Which is Best for Your Use Case? Retrieved from <https://securityboulevard.com/2020/02/cyclonedx-vs-spdx-which-is-best-for-your-use-case/>
+- [3] Security Boulevard. (2020). Container Security with CycloneDX and SPDX. Retrieved from <https://securityboulevard.com/2020/03/container-security-with-cyclonedx-and-spdx/>
+- [4] Sonatype. (n.d.). Operating System and Device Documentation with CycloneDX. Retrieved from <https://www.sonatype.com/blog/operating-system-and-device-documentation-with-cyclonedx/>
+- [5] Security Boulevard. (2020). SaaS and Service Documentation with CycloneDX. Retrieved from <https://securityboulevard.com/2020/04/saas-and-service-documentation-with-cyclonedx/>
