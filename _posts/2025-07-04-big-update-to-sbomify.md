@@ -26,7 +26,6 @@ With this new feature, that is now possible. All you need to do is create a new 
 
 In short, sbomify is evolving into a compliance hub. SBOMs remain important, but they are now just one part of a broader picture. Speaking of SBOMs, we have also exposed our product- and project-level SBOM aggregation download feature to public pages. This means that if you have a project with ten different components—for example, ten different microservices—you can now download an aggregated SBOM that links all of them together using externalReferences in CycloneDX*.
 
-Want a live demo? Check out our public page:
-https://app.sbomify.com/public/product/eP_4dk8ixV/
+Want a live demo? Check out our [public product page](https://app.sbomify.com/public/product/eP_4dk8ixV/)
 
 _* Note: This is currently available only for CycloneDX, and it assumes your SBOM components are marked as public._
