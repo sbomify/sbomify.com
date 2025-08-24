@@ -7,6 +7,7 @@ author:
   display_name: Viktor
 
 ---
+
 # CISA releases draft update to SBOM Minimum Elements
 
 [CISA](https://www.cisa.gov/sbom) has published a [public comment draft of updated SBOM Minimum Elements](https://www.cisa.gov/sites/default/files/2025-08/2025_CISA_SBOM_Minimum_Elements.pdf). This draft is intended as successor guidance to the [NTIA Minimum Elements](https://www.ntia.gov/files/ntia/publications/sbom_minimum_elements_report.pdf) first issued on July 12, 2021. Comments are open until **October 3, 2025** ([Federal Register notice](https://www.federalregister.gov/documents/2025/08/22/2025-18532/notice-of-draft-software-bill-of-materials-sbom-minimum-elements-guidance)).
@@ -14,24 +15,27 @@ author:
 ## What changed at a glance
 
 **New required data fields**
+
 - Component hash
 - License
 - Tool name used to generate the SBOM
 - Generation context: pre-build, build-time, or post-build
 
 **Renamed or clarified fields**
-- *Supplier Name* → *Software Producer*
-- *Author of SBOM Data* → *SBOM Author*
-- *Other Unique Identifiers* → *Software Identifiers* (at least one required; examples include CPE, purl, OmniBOR, SWHID)
-- *Version of the Component* → *Component Version* (file creation date allowed if no version)
-- *Depth* → *Coverage* (requires comprehensive listing, including transitive dependencies and duplicates when metadata differs)
-- *Accommodation of Mistakes* → *Accommodation of Updates to SBOM Data*
-- *Frequency* and *Distribution and Delivery* clarified
+
+- _Supplier Name_ → _Software Producer_
+- _Author of SBOM Data_ → _SBOM Author_
+- _Other Unique Identifiers_ → _Software Identifiers_ (at least one required; examples include CPE, purl, OmniBOR, SWHID)
+- _Version of the Component_ → _Component Version_ (file creation date allowed if no version)
+- _Depth_ → _Coverage_ (requires comprehensive listing, including transitive dependencies and duplicates when metadata differs)
+- _Accommodation of Mistakes_ → _Accommodation of Updates to SBOM Data_
+- _Frequency_ and _Distribution and Delivery_ clarified
 - Timestamp must follow ISO 8601
 - SWID removed from Automation Support examples
 
 **Removed**
-- *Access Control* as a standalone element (folded into Distribution and Delivery expectations for controlled sharing).
+
+- _Access Control_ as a standalone element (folded into Distribution and Delivery expectations for controlled sharing).
 
 ## Practical implications
 

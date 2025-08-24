@@ -11,8 +11,8 @@ Happy 4 July to our US friends.
 
 Today, we are pleased to announce that we have shipped yet another big update to sbomify, version 0.15. This release has two major focuses:
 
-* **Improving the look and feel – and overall experience – of all public pages**
-* **Introducing support for documents in addition to SBOMs**
+- **Improving the look and feel – and overall experience – of all public pages**
+- **Introducing support for documents in addition to SBOMs**
 
 The latter is especially important because it paves the way toward our ultimate goal: becoming the best open implementation of CycloneDX's Transparency Exchange API (TEA), where documents are first-class citizens.
 

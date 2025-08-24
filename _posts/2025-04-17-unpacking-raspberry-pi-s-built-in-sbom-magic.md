@@ -65,21 +65,21 @@ Components: 214
 
 Here are a few highlights from the report:
 
-| Category | Metric | Score | Notes |
-|---|---|---|---|
-| NTIA minimum elements | Unique IDs | 10.0 | All components identified |
-| NTIA minimum elements | Supplier info | 5.8 | 124 of 214 list a supplier |
-| Quality | Valid licenses | 7.0 | 187 of 214 carry a recognized license |
-| Semantic | Checksums | 0.0 | Checksums missing, an easy win for improvement |
-| Structural | Spec compliance | 10.0 | Valid SPDX 2.3 JSON |
+| Category              | Metric          | Score | Notes                                          |
+| --------------------- | --------------- | ----- | ---------------------------------------------- |
+| NTIA minimum elements | Unique IDs      | 10.0  | All components identified                      |
+| NTIA minimum elements | Supplier info   | 5.8   | 124 of 214 list a supplier                     |
+| Quality               | Valid licenses  | 7.0   | 187 of 214 carry a recognized license          |
+| Semantic              | Checksums       | 0.0   | Checksums missing, an easy win for improvement |
+| Structural            | Spec compliance | 10.0  | Valid SPDX 2.3 JSON                            |
 
 Even with a few gaps, an out‑of‑the‑box score of 7.8 is impressive. Most importantly, the file is fully parsable and ready for vulnerability scans and license audits.
 
 ## Why Built‑In SBOMs Matter
 
-* **Zero setup overhead** – You do not need to glue extra scanners into your pipeline; the SBOM arrives with every build.
-* **Reproducibility** – Anyone flashing your image can inspect exactly what shipped, making security reviews and bug hunts faster.
-* **Regulatory head‑start** – As governments push for transparency (think EU Cyber Resilience Act or US Executive Order 14028), having machine‑readable SBOMs from day one keeps you ahead of the curve.
+- **Zero setup overhead** – You do not need to glue extra scanners into your pipeline; the SBOM arrives with every build.
+- **Reproducibility** – Anyone flashing your image can inspect exactly what shipped, making security reviews and bug hunts faster.
+- **Regulatory head‑start** – As governments push for transparency (think EU Cyber Resilience Act or US Executive Order 14028), having machine‑readable SBOMs from day one keeps you ahead of the curve.
 
 ## Tips for Taking It Further
 
