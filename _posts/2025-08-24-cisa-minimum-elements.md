@@ -8,8 +8,6 @@ author:
 
 ---
 
-# CISA releases draft update to SBOM Minimum Elements
-
 [CISA](https://www.cisa.gov/sbom) has published a [public comment draft of updated SBOM Minimum Elements](https://www.cisa.gov/sites/default/files/2025-08/2025_CISA_SBOM_Minimum_Elements.pdf). This draft is intended as successor guidance to the [NTIA Minimum Elements](https://www.ntia.gov/files/ntia/publications/sbom_minimum_elements_report.pdf) first issued on July 12, 2021. Comments are open until **October 3, 2025** ([Federal Register notice](https://www.federalregister.gov/documents/2025/08/22/2025-18532/notice-of-draft-software-bill-of-materials-sbom-minimum-elements-guidance)).
 
 ## What changed at a glance
