@@ -48,11 +48,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
-  <link rel="preload" href="{{ '/assets/css/native.css' | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="{{ '/assets/css/styles.css' | bust_cache | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | bust_cache | relative_url }}">
+  <link rel="preload" href="{{ '/assets/css/native.css' | bust_cache | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript>
-    <link rel="stylesheet" href="{{ '/assets/css/native.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/native.css' | bust_cache | relative_url }}">
   </noscript>
 
   <link rel="icon" href="/favicon.ico" type="image/x-icon">

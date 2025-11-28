@@ -20,8 +20,16 @@ module Jekyll
     end
 
     def render(context)
-      webp_src = "/img/#{@filename}.webp"
-      jpg_src = "#{@src}"
+      source_dir = context.registers[:site].source
+      
+      # Use CacheBuster if available
+      if defined?(Jekyll::CacheBuster::Buster)
+        webp_src = Jekyll::CacheBuster::Buster.bust("/img/#{@filename}.webp", source_dir)
+        jpg_src = Jekyll::CacheBuster::Buster.bust(@src, source_dir)
+      else
+        webp_src = "/img/#{@filename}.webp"
+        jpg_src = "#{@src}"
+      end
 
       additional_attributes = @attributes.map { |key, value| "#{key}=\"#{value}\"" if value }.compact.join(' ')
 
