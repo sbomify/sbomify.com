@@ -7,7 +7,11 @@ description: "Discover the full SBOM life cycle: Generation, Distribution, and A
 
 The SBOM life cycle can be broken down into three phases: [generation, distribution, and analysis]({{ site.url }}/features/generate-collaborate-analyze/). The structure below aligns with the life cycle.
 
+![Lifecycle](/assets/images/d2/lifecycle.svg)
+
 There's also a GitHub repository called [sbom-benchmarks](https://github.com/sbomify/sbom-benchmarks) that sets to benchmark the various tools (from the Generation phase) against each other, along with providing examples how they are used.
+
+---
 
 ## Video Resources
 
@@ -15,6 +19,8 @@ There's also a GitHub repository called [sbom-benchmarks](https://github.com/sbo
 - Interview with the creator of CycloneDX: [SBOMs, CycloneDX, and Software Security with Steve Springett](https://vpetersson.com/podcast/S01E22.html)
 - Interview with "the father of SBOMs": [SBOMs and Cybersecurity: A Deep Dive with Allan Friedman](https://vpetersson.com/podcast/S01E16.html)
 - [A deep dive into the SBOM format SPDX](https://vpetersson.com/podcast/S02E01.html) with Kate Stewart from the Linux Foundation and Gary O’Neall, a long-time SPDX contributor, about the evolution of SPDX and its role in software transparency
+
+---
 
 ## Generation / Authoring
 
@@ -90,12 +96,16 @@ You can see how they compare side-by-side in the [sbom-benchmark](https://github
 - [sbomasm](https://github.com/interlynk-io/sbomasm) from Interlynk
 - [sbomaudit](https://github.com/anthonyharrison/sbomaudit) from Anthony Harrison
 
+---
+
 ## Distribution / Transportation
 
 The distribution phase, also known as Transportation, focuses on how you share the SBOM with internal and external stakeholders.
 
 - [sbomify]({{ site.url }})
 - [Project Koala](https://github.com/CycloneDX/transparency-exchange-api) (a.k.a. Transparency Exchange API) from CycloneDX
+
+---
 
 ## Analysis
 
@@ -117,6 +127,8 @@ The analysis phase involves how you use the SBOM, typically for compliance or se
 - [sbomqs](https://github.com/interlynk-io/sbomqs) from Interlynk
 - [SecObserve](https://github.com/SecObserve/SecObserve) from Stefan Fleckenstein
 
+---
+
 ## Other SBOM resources
 
 - CISA's [SBOM Sharing Primer](https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf)
@@ -124,4 +136,9 @@ The analysis phase involves how you use the SBOM, typically for compliance or se
 - CISA's [Framing Software Component Transparency: Establishing a Common Software Bill of Materials (SBOM)](https://www.cisa.gov/sites/default/files/2024-10/SBOM%20Framing%20Software%20Component%20Transparency%202024.pdf) (3rd Edition)
 - NTIA's [The Minimum Elements For a Software Bill of Materials (SBOM)](https://www.ntia.gov/sites/default/files/publications/sbom_minimum_elements_report_0.pdf)
 
-[Edit me on GitHub](https://github.com/sbomify/sbomify.com/blob/master/resources.md)
+<div class="mt-16 flex justify-center">
+  <a href="https://github.com/sbomify/sbomify.com/blob/master/resources.md" class="inline-flex items-center gap-2 !text-gray-500 hover:!text-gray-900 transition-colors !no-underline text-sm font-medium">
+    <svg viewBox="0 0 24 24" aria-hidden="true" class="w-5 h-5 fill-current"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+    <span>Edit this page on GitHub</span>
+  </a>
+</div>

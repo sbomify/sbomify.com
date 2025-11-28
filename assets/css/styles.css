@@ -1405,6 +1405,10 @@ video {
   --tw-gradient-to: #FFFFFF var(--tw-gradient-to-position);
 }
 
+.fill-current {
+  fill: currentColor;
+}
+
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
@@ -1684,6 +1688,11 @@ video {
   color: rgb(209 213 219 / var(--tw-text-opacity, 1)) !important;
 }
 
+.\!text-gray-500 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(107 114 128 / var(--tw-text-opacity, 1)) !important;
+}
+
 .\!text-white {
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1)) !important;
@@ -1946,6 +1955,11 @@ video {
 
 .hover\:bg-white\/10:hover {
   background-color: rgb(255 255 255 / 0.1);
+}
+
+.hover\:\!text-gray-900:hover {
+  --tw-text-opacity: 1 !important;
+  color: rgb(17 24 39 / var(--tw-text-opacity, 1)) !important;
 }
 
 .hover\:text-\[\#7A6DE5\]:hover {
