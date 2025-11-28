@@ -1,11 +1,11 @@
 <div class="flex gap-[13px] {%if include.vertical%} flex-col {%endif%}">
   <a href="{{ site.data.main.social.x }}" target="_new">
-    <img src="/assets/images/site/x-white.svg" alt="x logo" />
+    <img src="{{ '/assets/images/site/x-white.svg' | bust_cache }}" alt="x logo" />
   </a>
   <a href="{{ site.data.main.social.github }}" target="_new">
-    <img src="/assets/images/site/github-white.svg" alt="github logo" />
+    <img src="{{ '/assets/images/site/github-white.svg' | bust_cache }}" alt="github logo" />
   </a>
   <a href="{{ site.data.main.social.linkedIn }}" target="_new">
-    <img src="/assets/images/site/linkedin-white.svg" alt="linkedIn logo" />
+    <img src="{{ '/assets/images/site/linkedin-white.svg' | bust_cache }}" alt="linkedIn logo" />
   </a>
 </div>
