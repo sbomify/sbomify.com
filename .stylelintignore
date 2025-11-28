@@ -1,0 +1,9 @@
+# Jekyll SCSS files with front matter
+assets/css/main.scss
+
+# Node modules
+node_modules/
+
+# Generated files
+_site/
+

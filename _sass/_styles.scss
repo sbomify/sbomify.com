@@ -1,35 +1,7 @@
----
-# Only the main Sass file needs front matter (the dashes are enough)
----
+// Import variables and mixins so they're available
+@import 'variables';
+@import 'mixins';
 
-@charset "utf-8";
-@use 'sass:math';
-
-// Variables
-$base-font-size: 16px;
-$white: #FFF;
-$text-primary: #141035;
-$text-secondary: #5E5E5E;
-$bg-primary: #141035;
-$text-heading: $text-primary;
-
-$breakpoint-xs: 480px;
-$breakpoint-sm: 768px;
-$breakpoint-md: 992px;
-$breakpoint-lg: 1200px;
-$breakpoint-xl: 1400px;
-$breakpoint-xxl: 1920px;
-
-// Mixins
-@function strip-unit($value) {
-  @return math.div($value, ($value * 0 + 1));
-}
-
-@function rem($pxValue) {
-  @return #{math.div(strip-unit($pxValue), strip-unit($base-font-size))}rem;
-}
-
-// Base Styles
 body {
   color: $text-primary;
   font-family: "Inter";
@@ -88,6 +60,7 @@ button {
 
 .btn-secondary {
   @extend button;
+
   background: #F6F9FA;
   color: #141035;
 }
@@ -127,10 +100,12 @@ a.button {
   }
 }
 
-// Blog Post Styles
+/* Blog Styles */
+
 .blog-post, .page {
   font-family: "Inter";
 
+  /* Headings */
   h1, h2, h3, h4, h5, h6 {
     color: $text-primary;
     font-weight: 600;
@@ -200,6 +175,7 @@ a.button {
     }
   }
 
+  /* Paragraphs */
   p {
     color: $text-secondary;
     font-size: rem(18px);
@@ -212,14 +188,15 @@ a.button {
     }
   }
 
+  /* Links */
   a {
-    color: #8A7DFF;
+    color: #0242E5;
     text-decoration: underline;
     text-underline-offset: 3px;
     transition: all 0.2s ease;
 
     &:hover {
-      color: #7A6DE5;
+      color: #0134b8;
       text-decoration-thickness: 2px;
     }
   }
@@ -233,6 +210,7 @@ a.button {
     font-style: italic;
   }
 
+  /* Lists */
   ul, ol {
     font-size: rem(18px);
     line-height: 1.7;
@@ -255,6 +233,7 @@ a.button {
     }
   }
 
+  /* Task Lists */
   ul {
     list-style: disc;
 
@@ -262,7 +241,13 @@ a.button {
       position: relative;
 
       &::marker {
-        color: #8A7DFF;
+        color: #0242E5;
+      }
+
+      input[type="checkbox"] {
+        position: absolute;
+        left: rem(-24px);
+        top: rem(6px);
       }
     }
   }
@@ -271,7 +256,7 @@ a.button {
     list-style: decimal;
 
     li::marker {
-      color: #8A7DFF;
+      color: #0242E5;
       font-weight: 600;
     }
   }
@@ -285,6 +270,7 @@ a.button {
     }
   }
 
+  /* Images */
   img {
     max-width: 100%;
     height: auto;
@@ -294,6 +280,7 @@ a.button {
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   }
 
+  /* Image captions */
   img + em {
     display: block;
     font-size: rem(14px);
@@ -304,6 +291,7 @@ a.button {
     margin-bottom: rem(32px);
   }
 
+  /* Videos */
   iframe {
     max-width: 100%;
     margin: rem(32px) auto;
@@ -312,12 +300,13 @@ a.button {
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   }
 
+  /* Blockquotes */
   blockquote {
     position: relative;
     margin: rem(32px) 0;
     padding: rem(24px) rem(24px) rem(24px) rem(48px);
-    background: linear-gradient(135deg, rgba(138, 125, 255, 0.05) 0%, rgba(138, 125, 255, 0.02) 100%);
-    border-left: 4px solid #8A7DFF;
+    background: linear-gradient(135deg, rgba(2, 66, 229, 0.05) 0%, rgba(2, 66, 229, 0.02) 100%);
+    border-left: 4px solid #0242E5;
     border-radius: 0 8px 8px 0;
     font-style: italic;
     font-size: rem(18px);
@@ -337,8 +326,17 @@ a.button {
         margin-bottom: rem(16px);
       }
     }
+
+    &::before {
+      content: none;
+    }
+
+    &::after {
+      content: none;
+    }
   }
 
+  /* Code */
   code {
     background: #f1f5f9;
     color: #334155;
@@ -372,6 +370,7 @@ a.button {
     }
   }
 
+  /* Tables */
   table {
     width: 100%;
     border-collapse: separate;
@@ -393,7 +392,7 @@ a.button {
     }
 
     th {
-      background: linear-gradient(135deg, #8A7DFF 0%, #7A6DE5 100%);
+      background: linear-gradient(135deg, #0242E5 0%, #0134b8 100%);
       color: $white;
       font-weight: 600;
       text-transform: uppercase;
@@ -423,6 +422,7 @@ a.button {
     }
   }
 
+  /* Horizontal rules */
   hr {
     margin: rem(48px) 0;
     border: none;
@@ -434,6 +434,7 @@ a.button {
     }
   }
 
+  /* First paragraph styling */
   > p:first-of-type {
     font-size: rem(20px);
     color: $text-primary;
@@ -461,7 +462,6 @@ a.button {
   }
 }
 
-// Additional site styles
 .contact {
   position: relative;
 
@@ -517,12 +517,12 @@ a.button {
 }
 
 .header-search {
-  position: relative;
-  display: inline-block;
-  margin: 4px 2px;
-  height: 50px;
-  width: 50px;
-  vertical-align: bottom;
+    position: relative;
+    display: inline-block;
+    margin: 4px 2px;
+    height: 50px;
+    width: 50px;
+    vertical-align: bottom;
 
   .button {
     display: inline-block;
@@ -537,13 +537,29 @@ a.button {
     color: white;
     text-decoration: none;
     cursor: pointer;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
     user-select: none;
   }
 
   .button:hover {
     transition-duration: 0.4s;
+    -moz-transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s;
+    -o-transition-duration: 0.4s;
     background-color: white;
     color: black;
+  }
+
+  .mglass {
+    display: inline-block;
+    pointer-events: none;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
   }
 
   .searchbutton {
@@ -557,6 +573,9 @@ a.button {
 
   .search:focus + .searchbutton {
     transition-duration: 0.4s;
+    -moz-transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s;
+    -o-transition-duration: 0.4s;
     background-color: $white;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
@@ -576,10 +595,13 @@ a.button {
     height: 100%;
     z-index: 10;
     transition-duration: 0.4s;
+    -moz-transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s;
+    -o-transition-duration: 0.4s;
   }
 
   .search:focus {
-    width: 200px;
+    width: 200px; /* Bar width+1px */
     padding: 0 16px 0 0;
 
     @media (min-width: $breakpoint-xl) {
@@ -589,10 +611,65 @@ a.button {
 
   .expandright {
     left: auto;
-    right: 49px;
+    right: 49px; /* Button width-1px */
   }
 
   .expandright:focus {
     padding: 0 0 0 16px;
+  }
+}
+
+// Additional site styles
+.contact {
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    height: 10rem;
+    width: 80%;
+    border-radius: 15rem 15rem 0 0;
+    background: linear-gradient(94deg, #4059D0 8.79%, #CC58BB 56.82%, #F4B57F 100%);
+    filter: blur(60px);
+    opacity: 0.4;
+
+    @media (min-width: $breakpoint-lg) {
+      width: 40rem;
+    }
+  }
+}
+
+.podcast-page {
+  .author-img {
+    border-radius: 100%;
+    width: 162px;
+    height: 162px;
+  }
+}
+
+.search-results {
+  .search-item {
+    margin: rem(16px) 0;
+    display: flex;
+    flex-direction: column;
+    gap: rem(12px);
+
+    h3 {
+      font-size: rem(20px);
+    }
+
+    .search-content-type {
+      text-transform: capitalize;
+      font-size: rem(14px);
+    }
+  }
+
+  hr {
+    border-color: #d3d3d366;
   }
 }

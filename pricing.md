@@ -1,16 +1,17 @@
 ---
-layout: default
+layout: pricing
 title: Pricing
 description: Simple, transparent pricing for teams of all sizes
 ---
 
+<div class="bg-primaryBG py-16 lg:py-24">
 <div class="pricing-page">
   <div class="pricing-header">
     <h1>Pricing Plans</h1>
     <p>Choose the plan that's right for your team</p>
   </div>
 
-<div class="billing-toggle">
+  <div class="billing-toggle">
     <span>Monthly</span>
     <label class="toggle">
       <input type="checkbox" id="billing-toggle">
@@ -19,7 +20,7 @@ description: Simple, transparent pricing for teams of all sizes
     <span>Annual <span class="save-tag">Save 20%</span></span>
   </div>
 
-<div class="pricing-grid">
+  <div class="pricing-grid">
     <div class="pricing-card">
       <div class="card-header">
         <h2>Community</h2>
@@ -44,10 +45,11 @@ description: Simple, transparent pricing for teams of all sizes
             <li><a href="/features/sbom-hierarchy/">1 Product</a></li>
             <li><a href="/features/sbom-hierarchy/">1 Project per Product</a></li>
             <li><a href="/features/sbom-hierarchy/">5 Components per Project</a></li>
-            <li>Unlimited SBOM generation</li>
-            <li>Public SBOMs only</li>
+            <li>Unlimited SBOMs & compliance documents</li>
+            <li>Public documents only</li>
+            <li><a href="/features/public-sbom-portal/">Public trust center</a></li>
             <li>Manual exports only</li>
-            <li>Basic compliance reporting (manual export)</li>
+            <li>Basic compliance reporting</li>
             <li>Single user with community support</li>
           </ul>
         </div>
@@ -73,7 +75,7 @@ description: Simple, transparent pricing for teams of all sizes
         <div class="section">
           <h3>Ideal For</h3>
           <ul>
-            <li>Mid-size teams needing private SBOMs, compliance, & Hub Integrations</li>
+            <li>Mid-size teams needing private SBOMs, compliance documents & integrations</li>
           </ul>
         </div>
 
@@ -83,8 +85,9 @@ description: Simple, transparent pricing for teams of all sizes
             <li><a href="/features/sbom-hierarchy/">5 Products</a></li>
             <li><a href="/features/sbom-hierarchy/">5 Projects per Product</a></li>
             <li><a href="/features/sbom-hierarchy/">20 Components per Project</a></li>
-            <li>Unlimited SBOM generation</li>
-            <li>Private SBOMs with optional public sharing</li>
+            <li>Unlimited SBOMs & compliance documents</li>
+            <li>Private documents with optional public sharing</li>
+            <li><a href="/features/public-sbom-portal/">Custom trust center on your domain (CNAME)</a></li>
             <li>Standard Integrations</li>
             <li>Automated reports & vulnerability insights</li>
             <li>Team/role-based access</li>
@@ -122,7 +125,8 @@ description: Simple, transparent pricing for teams of all sizes
             <li><a href="/features/sbom-hierarchy/">Unlimited Products</a></li>
             <li><a href="/features/sbom-hierarchy/">Unlimited Projects</a></li>
             <li><a href="/features/sbom-hierarchy/">Unlimited Components</a></li>
-            <li>Unlimited SBOM generation</li>
+            <li>Unlimited SBOMs & compliance documents</li>
+            <li><a href="/features/public-sbom-portal/">Custom trust center on your domain (CNAME)</a></li>
             <li>Enterprise-grade controls (RBAC, audits, etc.)</li>
             <li>Custom & Advanced Integrations</li>
             <li>Advanced dashboards & compliance modules</li>
@@ -132,320 +136,45 @@ description: Simple, transparent pricing for teams of all sizes
         </div>
       </div>
       <div class="card-footer">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe1-SCbmyPnhHxP1RHIYi4iKP2CLy6SXcqFOP1i7B8VHZJYkw/viewform" class="cta-button" onclick="gtag('event', 'click', {
+        <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" onclick="gtag('event', 'click', {
           'event_category': 'Pricing',
           'event_label': 'Enterprise Plan Contact'
         })">Contact Us</a>
       </div>
     </div>
+  </div>
 
+  <!-- FAQ Section -->
+  <div class="mt-24">
+    <h2 class="text-white text-3xl font-medium mb-12 text-center">Frequently Asked Questions</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-8">
+        <h3 class="text-[#8A7DFF] text-lg font-semibold mb-4">What's included in the free tier?</h3>
+        <p class="text-gray-300 leading-relaxed">The Community tier is perfect for open source projects and includes public SBOM hosting, 1 product with 1 project and 5 components, and community support.</p>
+      </div>
+
+      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-8">
+        <h3 class="text-[#8A7DFF] text-lg font-semibold mb-4">Can I upgrade or downgrade at any time?</h3>
+        <p class="text-gray-300 leading-relaxed">Yes, you can change your plan at any time. Your billing will be prorated accordingly.</p>
+      </div>
+
+      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-8">
+        <h3 class="text-[#8A7DFF] text-lg font-semibold mb-4">What payment methods do you accept?</h3>
+        <p class="text-gray-300 leading-relaxed">We accept all major credit cards and can arrange alternative payment methods for enterprise customers.</p>
+      </div>
+
+      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-8">
+        <h3 class="text-[#8A7DFF] text-lg font-semibold mb-4">Do you offer custom solutions?</h3>
+        <p class="text-gray-300 leading-relaxed">Yes, our enterprise tier can be customized to meet your specific needs. Contact our sales team to learn more.</p>
+      </div>
+
+      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-8">
+        <h3 class="text-[#8A7DFF] text-lg font-semibold mb-4">Can I self-host Sbomify?</h3>
+        <p class="text-gray-300 leading-relaxed">Yes! Sbomify is open source and available for self-hosting. Check out our <a href="https://github.com/sbomify/sbomify" class="text-[#8A7DFF] hover:text-[#9A8DFF] underline">GitHub repository</a> for installation instructions and documentation.</p>
+      </div>
+    </div>
+  </div>
+  </div>
 </div>
-</div>
 
-<style>
-.pricing-page {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
-}
-
-.pricing-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.pricing-header h1 {
-  font-size: 3.5rem;
-  font-weight: 700;
-  color: #14162D;
-  margin-bottom: 1rem;
-}
-
-.pricing-header p {
-  font-size: 1.125rem;
-  color: #4B5563;
-}
-
-.billing-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 3rem;
-  font-size: 1rem;
-  color: #14162D;
-}
-
-.toggle {
-  position: relative;
-  width: 3.5rem;
-  height: 2rem;
-  display: inline-block;
-}
-
-.toggle input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.track {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #E5E7EB;
-  transition: .3s;
-  border-radius: 2rem;
-}
-
-.track:before {
-  position: absolute;
-  content: "";
-  height: 1.5rem;
-  width: 1.5rem;
-  left: 0.25rem;
-  bottom: 0.25rem;
-  background-color: white;
-  transition: .3s;
-  border-radius: 50%;
-}
-
-input:checked + .track {
-  background-color: #0066FF;
-}
-
-input:checked + .track:before {
-  transform: translateX(1.5rem);
-}
-
-.save-tag {
-  background-color: #22C55E;
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  font-size: 0.875rem;
-  margin-left: 0.5rem;
-}
-
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(360px, 1fr));
-  gap: 2rem;
-  margin: 0 auto;
-}
-
-.pricing-card {
-  background: white;
-  border: 1px solid #E5E7EB;
-  border-radius: 12px;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-}
-
-.pricing-card.featured {
-  border-color: #0066FF;
-}
-
-.card-header {
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 32px;
-}
-
-.trial-badge {
-  display: inline-block;
-  background: rgba(34, 197, 94, 0.1);
-  color: #16A34A;
-  padding: 4px 12px;
-  border-radius: 6px;
-  font-size: 14px;
-  border: 1px solid rgba(34, 197, 94, 0.2);
-  vertical-align: middle;
-  margin-left: 12px;
-  font-weight: normal;
-}
-
-h2 {
-  font-size: 32px;
-  font-weight: 700;
-  color: #14162D;
-  margin-bottom: 24px;
-}
-
-.price {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 24px;
-}
-
-.price .amount {
-  font-size: 48px;
-  font-weight: 600;
-  color: #0066FF;
-  line-height: 1;
-}
-
-.price .amount.custom {
-  font-size: 48px;
-}
-
-.price .suffix {
-  font-size: 24px;
-  color: #6B7280;
-  font-weight: 400;
-}
-
-.price .billing {
-  font-size: 16px;
-  color: #6B7280;
-  font-weight: 400;
-}
-
-.price.custom {
-  display: none;
-}
-
-.billing-period {
-  font-size: 16px;
-  color: #4B5563;
-  margin-left: 8px;
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.section + .section {
-  margin-top: 32px;
-}
-
-.card-footer {
-  margin-top: 32px;
-  text-align: center;
-  padding: 0;
-}
-
-.cta-button {
-  display: inline-block;
-  width: 100%;
-  background: #0066FF;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 16px 32px;
-  border-radius: 100px;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  border: none;
-  cursor: pointer;
-}
-
-.cta-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-.section {
-  display: block;
-  min-height: initial;
-}
-
-.section h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #14162D;
-  margin-bottom: 24px;
-}
-
-.section ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 16px;
-}
-
-.section li {
-  position: relative;
-  padding-left: 28px;
-  color: #4B5563;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.section li:before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: #22C55E;
-  font-weight: 600;
-}
-
-.section li a {
-  color: inherit;
-  text-decoration: none;
-  border-bottom: 1px dashed currentColor;
-}
-
-.section li a:hover {
-  opacity: 0.8;
-}
-
-@media (max-width: 1200px) {
-  .pricing-grid {
-    grid-template-columns: 1fr;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-}
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const toggle = document.getElementById('billing-toggle');
-  const priceElements = document.querySelectorAll('.price[data-monthly]');
-
-  function updatePrices(isAnnual) {
-    priceElements.forEach(el => {
-      const monthly = el.getAttribute('data-monthly');
-      const annual = el.getAttribute('data-annual');
-
-      if (isAnnual) {
-        el.innerHTML = `
-          <span class="amount">$${annual}</span>
-          <span class="suffix">/ Month</span>
-          <span class="billing">billed annually</span>
-        `;
-      } else {
-        el.innerHTML = `
-          <span class="amount">$${monthly}</span>
-          <span class="suffix">/ Month</span>
-        `;
-      }
-    });
-  }
-
-  toggle.addEventListener('change', function() {
-    const billingType = this.checked ? 'Annual' : 'Monthly';
-    gtag('event', 'billing_toggle', {
-      'event_category': 'Pricing',
-      'event_label': `Switch to ${billingType}`
-    });
-    updatePrices(this.checked);
-  });
-
-  // Set toggle to checked (annual) by default
-  toggle.checked = true;
-  // Initialize with annual pricing
-  updatePrices(true);
-});
-</script>

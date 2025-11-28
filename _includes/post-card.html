@@ -2,22 +2,29 @@
 {% assign dark = include.dark %}
 <a
   href="{{ post.url | relative_url }}"
-  class="flex flex-col justify-between rounded-lg"
+  class="group flex flex-col justify-between bg-white border border-gray-200 rounded-2xl p-8 hover:border-[#8A7DFF] hover:shadow-xl transition-all duration-300 h-full"
 >
-  <h4 class="text-[26px] leading-[34px] tracking-[0.4px] mb-[14px] {% if dark %}text-white{% endif %}">
-    {{ post.title | escape | truncate: 180 }}
-  </h4>
-  <p class="mb-10 text-base {% if dark %}text-[#C4C4C4]{% else %}text-secondaryText{% endif %}">{{ post.excerpt | strip_html | truncatewords: 28, "..." }}</p>
-  <div class="mt-3 text-xs">
-    {% assign date_format = site.minima.date_format | default: "%b %-d. %Y" %}
-    {% if post.author and post.author.display_name %}
-    <span>
-      By <span class="capitalize">{{ post.author.display_name }}</span>
-    </span>
-    <span>//</span>
-    {% endif %}
-    <span class="{% if dark %}text-white{% else %}text-gray-400{% endif %}">
-      {{ post.date | date: date_format }}
+  <div class="flex-grow">
+    <h4 class="text-2xl font-semibold leading-tight mb-4 text-primaryText group-hover:text-[#8A7DFF] transition-colors duration-200">
+      {{ post.title | escape | truncate: 180 }}
+    </h4>
+    <p class="text-base text-secondaryText leading-relaxed line-clamp-3">{{ post.excerpt | strip_html | truncatewords: 28, "..." }}</p>
+  </div>
+  <div class="flex items-center justify-between pt-6 mt-6 border-t border-gray-100">
+    <div class="text-sm text-gray-500">
+      {% assign date_format = site.minima.date_format | default: "%b %-d. %Y" %}
+      {% if post.author and post.author.display_name %}
+      <span class="font-medium text-gray-600">
+        {{ post.author.display_name }}
+      </span>
+      <span class="mx-2">•</span>
+      {% endif %}
+      <span>
+        {{ post.date | date: date_format }}
+      </span>
+    </div>
+    <span class="text-[#8A7DFF] text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+      Read more →
     </span>
   </div>
 </a>
