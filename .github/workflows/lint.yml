@@ -13,6 +13,10 @@ on:
       - '.github/workflows/lint.yml'
       - '.dprint.json'
       - 'package.json'
+      - 'Dockerfile'
+      - 'Gemfile'
+      - 'Gemfile.lock'
+      - 'bun.lock'
 
 permissions:
   contents: read
@@ -38,3 +42,13 @@ jobs:
 
       - name: Run linters
         run: bun run lint
+
+  docker-build:
+    name: Docker Build Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build container
+        run: docker build .
