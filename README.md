@@ -42,6 +42,7 @@ bun run watch:d2
 ```
 
 The compiled SVG files are output to two locations:
+
 - `assets/images/d2/` - for direct image references
 - `_includes/d2/` - for Jekyll includes
 
