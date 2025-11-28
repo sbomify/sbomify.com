@@ -1,0 +1,75 @@
+direction: up
+
+product: Product SBOM {
+  class: group
+  Screenly: {
+    class: accent
+  }
+}
+
+project: Project SBOM(s) {
+  class: group
+  Backend: {
+    class: accent
+  }
+  "Screenly Player": {
+    class: accent
+  }
+}
+
+component: Component SBOM(s) {
+  class: group
+  "JS SBOM": {
+    class: accent
+  }
+  "Python Backend SBOM": {
+    class: accent
+  }
+  "Docker SBOM": {
+    class: accent
+  }
+  "Rust SBOM": {
+    class: accent
+  }
+  "Python Player SBOM": {
+    class: accent
+  }
+  "QT SBOM": {
+    class: accent
+  }
+  "OS SBOM": {
+    class: accent
+  }
+}
+
+# Connections
+component."JS SBOM" -> project.Backend: {
+  class: flow-pink
+}
+component."Python Backend SBOM" -> project.Backend: {
+  class: flow-pink
+}
+component."Docker SBOM" -> project.Backend: {
+  class: flow-pink
+}
+
+component."Rust SBOM" -> project."Screenly Player": {
+  class: flow-pink
+}
+component."Python Player SBOM" -> project."Screenly Player": {
+  class: flow-pink
+}
+component."QT SBOM" -> project."Screenly Player": {
+  class: flow-pink
+}
+component."OS SBOM" -> project."Screenly Player": {
+  class: flow-pink
+}
+
+project.Backend -> product.Screenly: {
+  class: flow-pink
+}
+project."Screenly Player" -> product.Screenly: {
+  class: flow-pink
+}
+

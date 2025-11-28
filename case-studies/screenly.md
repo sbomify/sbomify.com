@@ -31,8 +31,7 @@ Partnering with **sbomify** helped Screenly overcome these challenges:
 - **Adoption of sbomify GitHub Action Module**: Screenly integrated the sbomify GitHub Action module into their CI/CD pipeline. This allowed for automated SBOM generation across all components directly within their existing workflow.
 - **Streamlined SBOM Management**: sbomify enabled them to group and manage their multiple SBOMs effectively. They created a logical hierarchy that mirrored how their products are built and maintained, simplifying management despite varying release schedules.
 
-![Screenly's SBOM hierarchy in sbomify](/assets/images/site/screenly-hierarchy.svg)
-_Partial diagram of Screenly's SBOM hierarchy in sbomify_
+![Screenly's SBOM hierarchy in sbomify](/assets/images/d2/screenly-hierarchy.svg) _Partial diagram of Screenly's SBOM hierarchy in sbomify_
 
 - **Automated Generation with GitHub Actions**: By leveraging the sbomify GitHub Action, every build automatically produced an up-to-date SBOM without manual effort. This seamless integration ensured consistency and saved valuable time.
 - **Efficient Distribution**: sbomify's distribution features allowed Screenly to share SBOMs with stakeholders easily. Stakeholders always had access to the latest versions, aligning with best practices highlighted in CISA's SBOM Sharing Primer.
