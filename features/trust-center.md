@@ -46,6 +46,7 @@ Turn transparency into a competitive advantage. Showcase your security posture w
             description="Choose your audience. Make your Trust Center <strong>public</strong> for broad transparency, or <strong>private</strong> for invited internal and external stakeholders only."
         %}
     </div>
+
 </div>
 
 {% include components/trust-center-pillars.html %}
@@ -96,6 +97,7 @@ Turn transparency into a competitive advantage. Showcase your security posture w
             link_text="Operational Efficiency"
         %}
     </div>
+
 </div>
 
 {% include components/cta-ready.html secondary_url="/features/integrations/" %}

@@ -19,11 +19,11 @@ CI: {
     label: "Sign"
   }
 
-  Generate -> Enrich {
+  Generate -> Enrich: {
     class: flow
   }
 
-  Enrich -> Sign {
+  Enrich -> Sign: {
     class: flow
   }
 }

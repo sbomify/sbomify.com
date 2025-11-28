@@ -10,7 +10,10 @@
     "build:d2": "bun scripts/watch-d2.ts",
     "watch:css": "postcss _assets/css/tailwind.css -o assets/css/styles.css --watch",
     "watch:d2": "bun scripts/watch-d2.ts --watch",
+    "lint": "bun run lint:markdown && bun run lint:scss && bun run lint:d2",
     "lint:d2": "d2 fmt _d2/*.d2",
+    "lint:markdown": "dprint check \"**/*.md\"",
+    "lint:markdown:fix": "dprint fmt \"**/*.md\"",
     "lint:scss": "stylelint \"**/*.scss\"",
     "lint:scss:fix": "stylelint \"**/*.scss\" --fix"
   },
@@ -24,6 +27,7 @@
     "update-browserslist-db": "^1.1.4"
   },
   "devDependencies": {
+    "dprint": "^0.50.2",
     "postcss-html": "^1.8.0",
     "postcss-scss": "^4.0.9",
     "stylelint": "^16.26.1",

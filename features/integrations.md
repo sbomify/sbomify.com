@@ -6,8 +6,8 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
 
 <div class="space-y-24">
 
-  <!-- CI/CD Section -->
-  <section>
+<!-- CI/CD Section -->
+<section>
     <div class="mb-10 text-center max-w-3xl mx-auto">
       <h2 class="text-3xl font-bold text-primaryText mb-4">CI/CD & Generation</h2>
       <p class="text-lg text-secondaryText">Generate SBOMs automatically in your pipelines. We support all major CI/CD providers.</p>
@@ -27,6 +27,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
           GitHub is at the core of many organizations. Our <a href="https://github.com/sbomify/github-action" class="text-[#8A7DFF] hover:text-white transition-colors">GitHub Action</a> makes integration straightforward.
         </p>
         <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">
+
 <pre><code>- name: Upload SBOM
   uses: sbomify/github-action@master
   env:
@@ -37,6 +38,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
     COMPONENT_VERSION: ${{ github.ref_name }}
     AUGMENT: true
     ENRICH: true</code></pre>
+
         </div>
       </div>
 
@@ -50,6 +52,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
           For GitLab users, we provide a dedicated pipeline template.
         </p>
         <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">
+
 <pre><code>generate-sbom:
   image: sbomifyhub/sbomify-action
   variables:
@@ -64,6 +67,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
     OUTPUT_FILE: test-sbom.cdx.json"
   script:
     - /sbomify.sh</code></pre>
+
         </div>
       </div>
 
@@ -77,6 +81,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
           Seamlessly integrate with Bitbucket Pipelines using our official pipe.
         </p>
         <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">
+
 <pre><code>- step:
     name: Build SBOM
     script:
@@ -91,6 +96,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
           COMPONENT_VERSION: $BITBUCKET_COMMIT
           LOCK_FILE: "poetry.lock"
           OUTPUT_FILE: "bitbucket-sbom.cdx.json"</code></pre>
+
         </div>
       </div>
 
@@ -104,6 +110,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
           For any other CI/CD system, you can use our Docker image directly.
         </p>
         <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">
+
 <pre><code>docker run --rm \
   -v $(pwd):/code \
   -e TOKEN=&lt;my token&gt; \
@@ -111,13 +118,15 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
   -e LOCK_FILE=/code/requirements.txt \
   -e COMPONENT_NAME=my-app \
   sbomifyhub/sbomify-action</code></pre>
+
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Vulnerability Analysis Section -->
-  <section>
+</section>
+
+<!-- Vulnerability Analysis Section -->
+<section>
     <div class="mb-10 text-center max-w-3xl mx-auto">
       <h2 class="text-3xl font-bold text-primaryText mb-4">Vulnerability Analysis</h2>
       <p class="text-lg text-secondaryText">Comprehensive scanning powered by industry-leading databases.</p>
@@ -150,10 +159,11 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Enrichment Section -->
-  <section>
+</section>
+
+<!-- Enrichment Section -->
+<section>
     <div class="mb-10 text-center max-w-3xl mx-auto">
       <h2 class="text-3xl font-bold text-primaryText mb-4">Enrichment</h2>
       <p class="text-lg text-secondaryText">Add context to your artifacts automatically.</p>
@@ -179,7 +189,8 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
         </div>
       </div>
     </div>
-  </section>
+
+</section>
 
 </div>
 

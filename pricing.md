@@ -11,7 +11,7 @@ description: Simple, transparent pricing for teams of all sizes
     <p>Choose the plan that's right for your team</p>
   </div>
 
-  <div class="billing-toggle">
+<div class="billing-toggle">
     <span>Monthly</span>
     <label class="toggle">
       <input type="checkbox" id="billing-toggle">
@@ -20,7 +20,7 @@ description: Simple, transparent pricing for teams of all sizes
     <span>Annual <span class="save-tag">Save 20%</span></span>
   </div>
 
-  <div class="pricing-grid">
+<div class="pricing-grid">
     <div class="pricing-card">
       <div class="card-header">
         <h2>Community</h2>
@@ -142,10 +142,11 @@ description: Simple, transparent pricing for teams of all sizes
         })">Contact Us</a>
       </div>
     </div>
-  </div>
 
-  <!-- FAQ Section -->
-  <div class="mt-24">
+</div>
+
+<!-- FAQ Section -->
+<div class="mt-24">
     <h2 class="text-white text-3xl font-medium mb-12 text-center">Frequently Asked Questions</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -174,7 +175,7 @@ description: Simple, transparent pricing for teams of all sizes
         <p class="text-gray-300 leading-relaxed">Yes! Sbomify is open source and available for self-hosting. Check out our <a href="https://github.com/sbomify/sbomify" class="text-[#8A7DFF] hover:text-[#9A8DFF] underline">GitHub repository</a> for installation instructions and documentation.</p>
       </div>
     </div>
-  </div>
+
+</div>
   </div>
 </div>
-

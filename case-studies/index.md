@@ -6,8 +6,8 @@ description: "Discover how leading organizations are using sbomify to streamline
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-  <!-- Atsign Case Study -->
-  <a href="/case-studies/atsign" class="group bg-[#201B4C] rounded-2xl p-10 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col h-full">
+<!-- Atsign Case Study -->
+<a href="/case-studies/atsign" class="group bg-[#201B4C] rounded-2xl p-10 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col h-full">
     <div class="mb-8 h-16 flex items-center justify-start">
       <img src="/assets/images/site/atsign.svg" class="h-full w-auto object-contain max-w-[200px]" alt="Atsign logo">
     </div>
@@ -26,10 +26,11 @@ description: "Discover how leading organizations are using sbomify to streamline
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
       </svg>
     </div>
-  </a>
 
-  <!-- Screenly Case Study -->
-  <a href="/case-studies/screenly" class="group bg-[#201B4C] rounded-2xl p-10 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col h-full">
+</a>
+
+<!-- Screenly Case Study -->
+<a href="/case-studies/screenly" class="group bg-[#201B4C] rounded-2xl p-10 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col h-full">
     <div class="mb-8 h-16 flex items-center justify-start">
       <img src="/assets/images/site/screenly.svg" class="h-full w-auto object-contain max-w-[200px]" alt="Screenly logo">
     </div>
@@ -48,7 +49,8 @@ description: "Discover how leading organizations are using sbomify to streamline
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
       </svg>
     </div>
-  </a>
+
+</a>
 
 </div>
 

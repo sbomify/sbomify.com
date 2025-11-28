@@ -4,7 +4,7 @@ direction: up
 product: Product SBOM {
   class: group
 
-  Smart Thermostat {
+  Smart Thermostat: {
     class: accent
   }
 }
@@ -12,11 +12,11 @@ product: Product SBOM {
 project: Project SBOM(s) {
   class: group
 
-  Backend {
+  Backend: {
     class: accent
   }
 
-  IoT Device {
+  IoT Device: {
     class: accent
   }
 }
@@ -24,19 +24,19 @@ project: Project SBOM(s) {
 component: Component SBOM(s) {
   class: group
 
-  Python SBOM {
+  Python SBOM: {
     class: accent
   }
 
-  Node SBOM {
+  Node SBOM: {
     class: accent
   }
 
-  Docker SBOM {
+  Docker SBOM: {
     class: accent
   }
 
-  Rust SBOM {
+  Rust SBOM: {
     class: accent
   }
 }
@@ -46,23 +46,22 @@ project.Backend -> product.Smart Thermostat: Project SBOM {
   class: flow-pink
 }
 
-component.Node SBOM -> project.Backend {
+component.Node SBOM -> project.Backend: {
   class: flow-pink
 }
 
-component.Python SBOM -> project.Backend {
+component.Python SBOM -> project.Backend: {
   class: flow-pink
 }
 
-component.Docker SBOM -> project.Backend {
+component.Docker SBOM -> project.Backend: {
   class: flow-pink
 }
 
-component.Rust SBOM -> project.IoT Device {
+component.Rust SBOM -> project.IoT Device: {
   class: flow-pink
 }
 
 project.IoT Device -> product.Smart Thermostat: Project SBOM {
   class: flow-pink
 }
-

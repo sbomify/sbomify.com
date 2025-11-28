@@ -277,7 +277,7 @@ a.button {
     display: block;
     margin: rem(32px) auto;
     border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
   }
 
   /* Image captions */
@@ -297,7 +297,7 @@ a.button {
     margin: rem(32px) auto;
     border-radius: 12px;
     border: none;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
   }
 
   /* Blockquotes */
@@ -305,7 +305,7 @@ a.button {
     position: relative;
     margin: rem(32px) 0;
     padding: rem(24px) rem(24px) rem(24px) rem(48px);
-    background: linear-gradient(135deg, rgba(2, 66, 229, 0.05) 0%, rgba(2, 66, 229, 0.02) 100%);
+    background: linear-gradient(135deg, rgb(2 66 229 / 5%) 0%, rgb(2 66 229 / 2%) 100%);
     border-left: 4px solid #0242E5;
     border-radius: 0 8px 8px 0;
     font-style: italic;
@@ -355,7 +355,7 @@ a.button {
     border-radius: 12px;
     margin: rem(32px) 0;
     line-height: 1.6;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
 
     code {
       background: transparent;
@@ -605,60 +605,5 @@ a.button {
 
   .expandright:focus {
     padding: 0 0 0 16px;
-  }
-}
-
-// Additional site styles
-.contact {
-  position: relative;
-
-  &::before {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0 auto;
-    height: 10rem;
-    width: 80%;
-    border-radius: 15rem 15rem 0 0;
-    background: linear-gradient(94deg, #4059D0 8.79%, #CC58BB 56.82%, #F4B57F 100%);
-    filter: blur(60px);
-    opacity: 0.4;
-
-    @media (min-width: $breakpoint-lg) {
-      width: 40rem;
-    }
-  }
-}
-
-.podcast-page {
-  .author-img {
-    border-radius: 100%;
-    width: 162px;
-    height: 162px;
-  }
-}
-
-.search-results {
-  .search-item {
-    margin: rem(16px) 0;
-    display: flex;
-    flex-direction: column;
-    gap: rem(12px);
-
-    h3 {
-      font-size: rem(20px);
-    }
-
-    .search-content-type {
-      text-transform: capitalize;
-      font-size: rem(14px);
-    }
-  }
-
-  hr {
-    border-color: #d3d3d366;
   }
 }
