@@ -135,7 +135,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <!-- OSV -->
       <div class="bg-[#201B4C] rounded-2xl p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col">
-        <img src="{{ '/assets/images/site/osv.png' | bust_cache }}" class="h-8 w-auto mb-6 self-start" alt="Google OSV">
+        <img src="{{ '/assets/images/site/osv.svg' | bust_cache }}" class="h-8 w-auto mb-6 self-start" alt="Google OSV">
         <h3 class="text-xl font-bold text-white mb-3">Google OSV</h3>
         <p class="text-gray-300 flex-grow">
           We integrate with the Open Source Vulnerability (OSV) database to provide precise, distributed vulnerability intelligence across a wide range of ecosystems.
