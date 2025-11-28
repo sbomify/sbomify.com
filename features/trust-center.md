@@ -1,14 +1,22 @@
 ---
 layout: page
-title: Public Trust Center
+title: Trust Center
 description: "Build customer confidence with a dedicated trust center. Share SBOMs, compliance documents, and security artifacts publicly to demonstrate transparency."
 redirect_from:
   - /features/sbom-hub/
   - /features/public-sbom-portal/
 ---
 
-<div class="text-xl leading-relaxed text-secondaryText mb-16 text-center max-w-3xl mx-auto font-medium">
+<div class="text-xl leading-relaxed text-secondaryText mb-8 text-center max-w-3xl mx-auto font-medium">
 Turn transparency into a competitive advantage. Showcase your security posture with a branded, automated <span class="text-[#201B4C] font-bold">Trust Center</span>.
+</div>
+
+<div class="mb-16 text-center">
+    <a href="https://app.sbomify.com/public/product/eP_4dk8ixV/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-4 px-8 py-4 bg-[#8A7DFF] hover:bg-[#7A6DE5] !text-white !no-underline rounded-full font-medium transition-all duration-200 shadow-lg hover:shadow-[#8A7DFF]/25 hover:-translate-y-0.5">
+        <span class="text-lg font-bold">View Live Demo</span>
+        <div class="w-px h-6 bg-white/30"></div>
+        <img src="/assets/images/logo/badge.svg" alt="sbomified" class="h-6 w-auto shadow-sm rounded-full" />
+    </a>
 </div>
 
 <div class="mb-24">

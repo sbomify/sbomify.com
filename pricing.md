@@ -87,7 +87,7 @@ description: Simple, transparent pricing for teams of all sizes
             <li><a href="/features/sbom-hierarchy/">20 Components per Project</a></li>
             <li>Unlimited SBOMs & compliance documents</li>
             <li>Private documents with optional public sharing</li>
-            <li><a href="/features/public-sbom-portal/">Custom trust center on your domain (CNAME)</a></li>
+            <li><a href="/features/public-sbom-portal/">Custom trust center on your domain</a></li>
             <li>Standard Integrations</li>
             <li>Automated reports & vulnerability insights</li>
             <li>Team/role-based access</li>
@@ -126,7 +126,7 @@ description: Simple, transparent pricing for teams of all sizes
             <li><a href="/features/sbom-hierarchy/">Unlimited Projects</a></li>
             <li><a href="/features/sbom-hierarchy/">Unlimited Components</a></li>
             <li>Unlimited SBOMs & compliance documents</li>
-            <li><a href="/features/public-sbom-portal/">Custom trust center on your domain (CNAME)</a></li>
+            <li><a href="/features/public-sbom-portal/">Custom trust center on your domain</a></li>
             <li>Enterprise-grade controls (RBAC, audits, etc.)</li>
             <li>Custom & Advanced Integrations</li>
             <li>Advanced dashboards & compliance modules</li>

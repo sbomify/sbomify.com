@@ -1,3 +1,12 @@
+{% if include.dark %}
+<div class="text-center bg-[#201B4C] border border-[#37306B] p-12 rounded-[40px]">
+    <h2 class="text-4xl font-bold text-white mb-8">{{ include.title | default: "Ready to build trust?" }}</h2>
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="{{ include.primary_url | default: 'https://app.sbomify.com' }}" class="px-8 py-4 bg-[#8A7DFF] hover:bg-[#7A6DE5] !text-white rounded-full font-bold transition-all shadow-lg hover:shadow-[#8A7DFF]/25 hover:-translate-y-0.5 text-lg !no-underline">{{ include.primary_text | default: "Start Your Trust Center" }}</a>
+        <a href="{{ include.secondary_url | default: '/features/integrations/' }}" class="px-8 py-4 bg-transparent border-2 border-white hover:border-[#8A7DFF] !text-white rounded-full font-bold transition-all hover:-translate-y-0.5 text-lg !no-underline">{{ include.secondary_text | default: "View Integrations" }}</a>
+    </div>
+</div>
+{% else %}
 <div class="text-center bg-gradient-to-b from-white to-gray-50 p-12 rounded-[40px] border border-gray-100">
     <h2 class="text-4xl font-bold text-[#201B4C] mb-8">{{ include.title | default: "Ready to build trust?" }}</h2>
     <div class="flex flex-col sm:flex-row justify-center gap-4">
@@ -5,4 +14,5 @@
         <a href="{{ include.secondary_url | default: '/features/integrations/' }}" class="px-8 py-4 bg-white border-2 border-gray-200 hover:border-[#8A7DFF] !text-[#201B4C] rounded-full font-bold transition-all hover:-translate-y-0.5 text-lg !no-underline">{{ include.secondary_text | default: "View Integrations" }}</a>
     </div>
 </div>
+{% endif %}
 
