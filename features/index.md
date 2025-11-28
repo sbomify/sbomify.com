@@ -13,7 +13,7 @@ Streamline your SBOM workflow from creation to analysis. Our comprehensive tools
 
 ### Trust Center
 
-Create a transparent software supply chain with your own public SBOM portal. Share SBOMs publicly, demonstrate compliance, and build trust with stakeholders through a branded, secure platform. [Explore Trust Center →]({{ site.url }}/features/trust-center/)
+Turn transparency into a competitive advantage. Share SBOMs, VEX statements, and security certifications (like SOC 2 and ISO 27001) with stakeholders through a branded, automated portal. Support for both public transparency and private, invited access ensures you stay in control. [Explore Trust Center →]({{ site.url }}/features/trust-center/)
 
 ### SBOM Hierarchy
 
