@@ -26,18 +26,23 @@ SBOMs are essential for three main reasons:
 Governments and regulatory bodies worldwide are recognizing the critical role of SBOMs.
 
 #### United States: Executive Order 14028
+
 In May 2021, the Biden administration issued an [Executive Order on Improving the Nation's Cybersecurity](https://www.whitehouse.gov/briefing-room/presidential-actions/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/). A key mandate of this order requires SBOMs for all software sold to the federal government, setting a new standard for transparency and trust in the US software supply chain.
 
 #### European Union: Cyber Resilience Act (CRA)
+
 On the other side of the pond, the EU is enforcing similar standards with the [Cyber Resilience Act]({{ site.url }}/2024/07/10/understanding-the-eu-cyber-resilience-act-the-role-of-sboms-in-enhancing-cybersecurity/). This landmark legislation mandates strict cybersecurity requirements for products with digital elements, placing SBOMs at the center of compliance for any company doing business in the EU.
 
 #### United Kingdom: Software Security Code of Practice
+
 It is not just the US and EU that are pushing for this. The UK's National Cyber Security Centre (NCSC) has released its [Software Security Code of Practice](https://www.ncsc.gov.uk/section/software-security-code-of-practice), emphasizing the importance of supply chain security and the role of SBOMs in ensuring software resilience.
 
 #### Global alignment and interoperability
+
 With different regions implementing their own requirements, alignment is key. The OpenSSF has published a [great overview](https://openssf.org/blog/2025/10/22/sboms-in-the-era-of-the-cra-toward-a-unified-and-actionable-framework/) of how these frameworks (CRA, CISA, etc.) are converging toward a unified, actionable model for the global software supply chain.
 
 #### Industry Standards: PCI DSS 4.0
+
 It's not just governments driving this change. Major compliance frameworks are following suit. For example, [PCI DSS 4.0]({{ site.url }}/2025/01/07/how-sboms-can-help-you-achieve-pci-dss-4-compliance/) now emphasizes the need for rigorous software lifecycle management, making SBOMs a practical necessity for securing payment data. Most other compliance frameworks are expected to adopt similar requirements soon.
 
 ### Competing SBOM Formats
