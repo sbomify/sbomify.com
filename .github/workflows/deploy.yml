@@ -34,7 +34,10 @@ jobs:
       - name: Build Jekyll Site
         env:
           JEKYLL_ENV: production
-        run: docker run --rm -v $(pwd):/usr/src/app -e JEKYLL_ENV=production web bundle exec jekyll build
+        run: docker run --rm -v $(pwd):/usr/src/app -e JEKYLL_ENV=production web sh -c "git config --global --add safe.directory /usr/src/app && bundle exec jekyll build"
+
+      - name: Fix permissions
+        run: docker run --rm -v $(pwd):/usr/src/app web chown -R $(id -u):$(id -g) .
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
