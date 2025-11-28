@@ -5,11 +5,15 @@ title: What is an SBOM?
 
 ---
 
-### Understanding SBOMs and Supply Chain Transparency
+### What are SBOMs?
 
-A Software Bill of Materials (SBOM) is like an ingredients list for your software. It provides a comprehensive inventory of all the components, libraries, and modules that make up your application. Much like a bill of materials for a physical product, an SBOM details every element that contributes to the final build, offering critical visibility into the software's dependencies and relationships. This transparency is the foundation for managing risks, ensuring compliance, and maintaining the integrity of your software supply chain.
+A Software Bill of Materials (SBOM) is like the ingredients list you find on the back of a chocolate bar—but for software. It provides a comprehensive inventory of all the components, libraries, and modules that make up your application. Much like a bill of materials for a physical product, an SBOM details every element that contributes to the final build, offering critical visibility into the software's dependencies and relationships. This transparency is the foundation for managing risks, ensuring compliance, and maintaining the integrity of your software supply chain.
 
-### Why SBOMs Matter
+<div class="w-full max-w-2xl mx-auto">
+  <img src="/assets/images/d2/what-is-sbom.svg" alt="What is an SBOM" class="w-full h-auto">
+</div>
+
+### Why is an SBOM important?
 
 SBOMs are essential for three main reasons:
 

@@ -1,0 +1,38 @@
+direction: down
+
+Software Product: {
+  class: group
+  label: "Modern Application"
+  
+  Transitive: {
+    class: secondary
+    label: "Dependencies of your libraries"
+  }
+
+  Open Source: {
+    class: accent
+    label: "Open Source Libraries"
+  }
+
+  Source Code: {
+    class: primary
+    label: "Your Source Code"
+  }
+
+  Transitive -> Open Source: "included in" {
+    class: flow-pink
+  }
+
+  Open Source -> Source Code: "included in" {
+    class: flow
+  }
+}
+
+SBOM: {
+  class: primary
+  label: "SBOM\n(Ingredients List)"
+}
+
+Software Product -> SBOM: "Cataloged by" {
+  class: flow
+}
