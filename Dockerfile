@@ -1,3 +1,16 @@
+FROM ruby:3-slim AS d2-source
+WORKDIR /tmp
+ARG D2_VERSION=0.7.1
+RUN apt-get update && apt-get install -y curl && \
+    ARCH=$(uname -m) && \
+    if [ "$ARCH" = "x86_64" ]; then D2_ARCH="amd64"; \
+    elif [ "$ARCH" = "aarch64" ]; then D2_ARCH="arm64"; \
+    else echo "Unsupported architecture: $ARCH"; exit 1; fi && \
+    curl -fsSL "https://github.com/terrastruct/d2/releases/download/v${D2_VERSION}/d2-v${D2_VERSION}-linux-${D2_ARCH}.tar.gz" -o d2.tar.gz && \
+    tar -xzf d2.tar.gz && \
+    find . -type f -name d2 -exec mv {} /usr/local/bin/d2 \; && \
+    chmod +x /usr/local/bin/d2
+
 FROM ruby:3-slim
 
 ENV LANG=C.UTF-8
@@ -24,6 +37,9 @@ ENV PATH="/root/.bun/bin:$PATH"
 
 # Symlink npm to bun for libraries that hardcode npm
 RUN ln -s /root/.bun/bin/bun /root/.bun/bin/npm
+
+# Install d2
+COPY --from=d2-source /usr/local/bin/d2 /usr/local/bin/d2
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app

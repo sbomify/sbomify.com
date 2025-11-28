@@ -1,0 +1,52 @@
+<div class="relative w-full max-w-md mx-auto">
+    <!-- Decorative blob -->
+    <div class="absolute -top-20 -right-20 w-64 h-64 bg-purple-100 rounded-full blur-3xl opacity-50"></div>
+
+    <div class="relative z-10 bg-gradient-to-br from-[#F6F9FA] to-white p-8 rounded-[40px] border border-gray-100 shadow-lg space-y-6">
+        {% capture artifact_1_svg %}
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+        {% endcapture %}
+        {% include components/artifact-card.html 
+            icon_bg_class="bg-red-50" 
+            icon_text_class="text-red-500" 
+            svg=artifact_1_svg 
+            title="SOC 2 Type II Report" 
+            badge_text="Verified" 
+            badge_text_class="text-green-600" 
+            badge_bg_class="bg-green-50" 
+            badge_border_class="border-green-100" 
+            subtext="Updated 2 days ago" 
+        %}
+
+        {% capture artifact_2_svg %}
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+        {% endcapture %}
+        {% include components/artifact-card.html 
+            icon_bg_class="bg-blue-50" 
+            icon_text_class="text-blue-500" 
+            svg=artifact_2_svg 
+            title="CycloneDX SBOM v1.5" 
+            badge_text="Automated" 
+            badge_text_class="text-[#8A7DFF]" 
+            badge_bg_class="bg-purple-50" 
+            badge_border_class="border-purple-100" 
+            subtext="via GitHub Actions" 
+        %}
+
+        {% capture artifact_3_svg %}
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+        {% endcapture %}
+        {% include components/artifact-card.html 
+            icon_bg_class="bg-gray-50" 
+            icon_text_class="text-gray-600" 
+            svg=artifact_3_svg 
+            title="Pentest Summary" 
+            badge_text="Public" 
+            badge_text_class="text-gray-600" 
+            badge_bg_class="bg-gray-100" 
+            badge_border_class="border-gray-200" 
+            subtext="Q3 2024" 
+        %}
+    </div>
+</div>
+

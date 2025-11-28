@@ -373,12 +373,8 @@ a.button {
   /* Tables */
   table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
+    border-collapse: collapse;
     margin: rem(32px) 0;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
     font-size: rem(16px);
 
     @media (min-width: $breakpoint-md) {
@@ -392,8 +388,8 @@ a.button {
     }
 
     th {
-      background: linear-gradient(135deg, #0242E5 0%, #0134b8 100%);
-      color: $white;
+      background-color: #f9fafb;
+      color: $text-primary;
       font-weight: 600;
       text-transform: uppercase;
       font-size: rem(14px);
@@ -406,14 +402,6 @@ a.button {
 
       &:hover {
         background: #f9fafb;
-      }
-
-      &:nth-child(even) {
-        background: #f9fafb;
-
-        &:hover {
-          background: #f3f4f6;
-        }
       }
     }
 
@@ -434,7 +422,7 @@ a.button {
     }
   }
 
-  /* First paragraph styling */
+  /* First paragraph styling - REMOVED
   > p:first-of-type {
     font-size: rem(20px);
     color: $text-primary;
@@ -444,6 +432,7 @@ a.button {
       line-height: 1.8;
     }
   }
+  */
 
   .tags {
     list-style: none;

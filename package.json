@@ -7,7 +7,10 @@
   "license": "MIT",
   "scripts": {
     "build:css": "postcss _assets/css/tailwind.css -o assets/css/styles.css",
+    "build:d2": "bun scripts/watch-d2.ts",
     "watch:css": "postcss _assets/css/tailwind.css -o assets/css/styles.css --watch",
+    "watch:d2": "bun scripts/watch-d2.ts --watch",
+    "lint:d2": "d2 fmt _d2/*.d2",
     "lint:scss": "stylelint \"**/*.scss\"",
     "lint:scss:fix": "stylelint \"**/*.scss\" --fix"
   },

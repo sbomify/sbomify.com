@@ -14,11 +14,11 @@ $bg-primary: #141035;
 $text-heading: $text-primary;
 
 $breakpoint-xs: 480px;
-$breakpoint-sm: 768px;
-$breakpoint-md: 992px;
-$breakpoint-lg: 1200px;
-$breakpoint-xl: 1400px;
-$breakpoint-xxl: 1920px;
+$breakpoint-sm: 640px;  // Aligned with Tailwind sm
+$breakpoint-md: 768px;  // Aligned with Tailwind md
+$breakpoint-lg: 1024px; // Aligned with Tailwind lg
+$breakpoint-xl: 1280px; // Aligned with Tailwind xl
+$breakpoint-xxl: 1536px; // Aligned with Tailwind 2xl
 
 // Mixins
 @function strip-unit($value) {
@@ -374,12 +374,8 @@ a.button {
 
   table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
+    border-collapse: collapse;
     margin: rem(32px) 0;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
     font-size: rem(16px);
 
     @media (min-width: $breakpoint-md) {
@@ -393,8 +389,8 @@ a.button {
     }
 
     th {
-      background: linear-gradient(135deg, #8A7DFF 0%, #7A6DE5 100%);
-      color: $white;
+      background-color: #f9fafb;
+      color: $text-primary;
       font-weight: 600;
       text-transform: uppercase;
       font-size: rem(14px);
@@ -407,14 +403,6 @@ a.button {
 
       &:hover {
         background: #f9fafb;
-      }
-
-      &:nth-child(even) {
-        background: #f9fafb;
-
-        &:hover {
-          background: #f3f4f6;
-        }
       }
     }
 

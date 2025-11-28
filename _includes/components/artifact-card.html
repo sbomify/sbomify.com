@@ -1,0 +1,13 @@
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-6 transform transition-transform hover:scale-[1.02] duration-300">
+    <div class="w-12 h-12 {{ include.icon_bg_class }} rounded-xl flex items-center justify-center {{ include.icon_text_class }} flex-shrink-0">
+        {{ include.svg }}
+    </div>
+    <div>
+        <div class="font-bold text-[#201B4C] text-lg mb-1">{{ include.title }}</div>
+        <div class="flex items-center gap-2">
+            <span class="text-xs font-medium {{ include.badge_text_class }} {{ include.badge_bg_class }} px-2 py-0.5 rounded-full border {{ include.badge_border_class }}">{{ include.badge_text }}</span>
+            <span class="text-xs text-gray-400">{{ include.subtext }}</span>
+        </div>
+    </div>
+</div>
+

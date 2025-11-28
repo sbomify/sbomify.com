@@ -82,8 +82,13 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 <div class="text-sm font-semibold uppercase tracking-wide mb-4 text-[#8A7DFF]">SBOM Lifecycle Tool</div>
                 <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-primaryText">Zero to SBOM Hero</h2>
                 <p class="mb-8 text-lg text-secondaryText leading-relaxed">
-                Build high-quality SBOMs directly in your CI pipeline with our <a href="/features/integrations/" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">GitHub Action module</a>. Once generated, SBOMs are automatically uploaded to sbomify where you can manage releases and share the latest versions with stakeholders—publicly or privately. No more manual SBOM distribution or version confusion.
+                Build high-quality SBOMs directly in your CI pipeline with our <a href="/features/integrations/" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">GitHub Action module</a>. Once generated, SBOMs are automatically uploaded to sbomify where you can manage releases and share the latest versions with stakeholders—publicly or privately. No more manual SBOM distribution or version confusion. Read our guide on <a href="/features/generate-collaborate-analyze" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">generating, collaborating, and analyzing SBOMs</a>.
                 </p>
+
+                <div class="mb-8">
+                    <img src="/assets/images/d2/zero-to-hero.svg" alt="Zero to SBOM Hero Process" class="w-full h-auto">
+                </div>
+
                 <a class="inline-block px-6 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium transition-all duration-200" href="/features/generate-collaborate-analyze">Learn More</a>
             </section>
 
@@ -91,31 +96,15 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 <div class="text-sm font-semibold uppercase tracking-wide mb-4 text-[#8A7DFF]">Trust Center</div>
                 <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-primaryText">Transparency That Builds Trust</h2>
                 <p class="mb-6 text-lg text-secondaryText leading-relaxed">
-                Share SBOMs, compliance documents, and security artifacts with stakeholders in a standardized way. Your <a href="/features/public-sbom-portal/" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">trust center</a> can be hosted on your own domain (via CNAME) and supports both web portal access and CycloneDX SBOM format for automated consumption.
+                Share SBOMs, compliance documents, and security artifacts with stakeholders in a standardized way. Your <a href="/features/trust-center/" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">trust center</a> can be hosted on your own domain (via CNAME) and supports both web portal access and CycloneDX SBOM format for automated consumption.
                 </p>
-                <div class="grid grid-cols-2 gap-4 mb-8">
-                    <div class="flex items-start gap-2">
-                        <svg class="w-5 h-5 text-[#8A7DFF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                        <span class="text-sm text-secondaryText">Vendor agnostic</span>
-                    </div>
-                    <div class="flex items-start gap-2">
-                        <svg class="w-5 h-5 text-[#8A7DFF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                        <span class="text-sm text-secondaryText">No vendor lock-in</span>
-                    </div>
-                    <div class="flex items-start gap-2">
-                        <svg class="w-5 h-5 text-[#8A7DFF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                        <span class="text-sm text-secondaryText">SBOM-driven</span>
-                    </div>
-                    <div class="flex items-start gap-2">
-                        <svg class="w-5 h-5 text-[#8A7DFF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                        <span class="text-sm text-secondaryText">CRA-focused</span>
-                    </div>
-                    <div class="flex items-start gap-2">
-                        <svg class="w-5 h-5 text-[#8A7DFF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                        <span class="text-sm text-secondaryText">Self-hostable</span>
+
+                <div class="my-12">
+                    {% include components/trust-center-artifacts.html %}
                 </div>
-                </div>
-                <a class="inline-block px-6 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium transition-all duration-200" href="/features/public-sbom-portal/">Learn More</a>
+
+                {% include components/trust-center-pillars-grid.html %}
+                <a class="inline-block px-6 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium transition-all duration-200" href="/features/trust-center/">Learn More</a>
             </section>
 
             <section class="max-w-4xl mx-auto mb-20 bg-white rounded-3xl p-10 lg:p-12 border border-gray-100 shadow-sm">
@@ -124,6 +113,11 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 <p class="mb-8 text-lg text-secondaryText leading-relaxed">
                 sbomify is designed not only to hold your security artifacts but also to send them off for analysis. We integrate with CI/CD pipelines (GitHub, GitLab, Bitbucket), analysis tools like <a href="/features/integrations/" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">Google OSV</a> and <a href="/features/integrations/" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">Dependency Track</a>, and enrichment platforms such as <a href="/features/integrations/" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">Ecosyste.ms</a>. Your security artifacts flow seamlessly from generation through analysis and enrichment, giving you actionable insights without manual work.
                 </p>
+
+                <div class="mb-8">
+                    <img src="/assets/images/d2/store-analyze-enrich.svg" alt="Store, Analyze & Enrich Process" class="w-full h-auto">
+                </div>
+
                 <a class="inline-block px-6 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium transition-all duration-200" href="/features/integrations/">View All Integrations</a>
             </section>
 
@@ -158,7 +152,10 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 <div class="text-sm font-semibold uppercase tracking-wide mb-4 text-[#8A7DFF]">Your Choice, Your Control</div>
                 <div class="flex items-center justify-between flex-wrap gap-4 mb-6">
                     <h2 class="text-4xl lg:text-5xl font-bold text-primaryText">Self-Host or Cloud</h2>
-                    <div id="gh-latest-version" class="hidden"></div>
+                    <div class="flex items-center gap-3">
+                        <div id="gh-star-cta" class="hidden"></div>
+                        <div id="gh-latest-version" class="hidden"></div>
+                    </div>
                 </div>
                 <p class="mb-6 text-lg text-secondaryText leading-relaxed">
                 sbomify gives you the flexibility to run it yourself or let us run it for you. <a href="https://github.com/sbomify/sbomify" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">Find us on GitHub</a> to self-host for complete control over your data and infrastructure, or use our managed cloud service for zero-maintenance convenience.
@@ -215,8 +212,9 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
     }, 1000);
 </script>
 
-<!-- GitHub Release Badge Script -->
+<!-- GitHub Stats Script -->
 <script>
+  // Fetch Latest Release
   fetch('https://api.github.com/repos/sbomify/sbomify/releases/latest')
     .then(response => response.json())
     .then(data => {
@@ -239,6 +237,29 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
       }
     })
     .catch(e => console.log('Error fetching release:', e));
+
+  // Fetch Star Count
+  fetch('https://api.github.com/repos/sbomify/sbomify')
+    .then(response => response.json())
+    .then(data => {
+      if (data.stargazers_count !== undefined) {
+        const starCount = data.stargazers_count.toLocaleString();
+        const starBtn = `
+          <a href="https://github.com/sbomify/sbomify" target="_blank" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-900 text-white hover:bg-gray-800 transition-colors no-underline group">
+            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <span class="text-xs font-medium">Star us</span>
+            <span class="text-xs font-medium text-gray-400 border-l border-gray-700 pl-2 ml-1 group-hover:text-white transition-colors">${starCount}</span>
+          </a>
+        `;
+
+        const container = document.getElementById('gh-star-cta');
+        if (container) {
+          container.innerHTML = starBtn;
+          container.classList.remove('hidden');
+        }
+      }
+    })
+    .catch(e => console.log('Error fetching stars:', e));
 </script>
 
 <style>
