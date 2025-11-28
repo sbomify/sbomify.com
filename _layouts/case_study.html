@@ -11,7 +11,7 @@ layout: default
       {% if page.logo %}
       <div class="mb-10 flex justify-center">
         <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-lg inline-block">
-          <img src="{{ page.logo }}" alt="{{ page.title }} logo" class="h-12 w-auto object-contain">
+          <img src="{{ page.logo | bust_cache }}" alt="{{ page.title }} logo" class="h-12 w-auto object-contain">
         </div>
       </div>
       {% endif %}

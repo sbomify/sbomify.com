@@ -18,7 +18,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
       <div class="bg-[#201B4C] rounded-2xl p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="github">
         <div class="flex items-center justify-between mb-6">
           <div class="flex items-center gap-3">
-            <img src="/assets/images/site/github.svg" class="h-8 w-auto" alt="GitHub">
+            <img src="{{ '/assets/images/site/github.svg' | bust_cache }}" class="h-8 w-auto" alt="GitHub">
             <div id="gh-latest-release" class="hidden"></div>
           </div>
           <a href="https://github.com/marketplace/actions/sbomify" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors" target="_blank">View on Marketplace →</a>
@@ -45,7 +45,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
       <!-- GitLab -->
       <div class="bg-[#201B4C] rounded-2xl p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="gitlab">
         <div class="flex items-center justify-between mb-6">
-          <img src="/assets/images/site/gitlab.svg" class="h-8 w-auto" alt="GitLab">
+          <img src="{{ '/assets/images/site/gitlab.svg' | bust_cache }}" class="h-8 w-auto" alt="GitLab">
           <a href="https://gitlab.com/sbomify/gitlab-pipeline" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors" target="_blank">View Pipeline →</a>
         </div>
         <p class="text-gray-300 mb-6">
@@ -74,7 +74,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
       <!-- Bitbucket -->
       <div class="bg-[#201B4C] rounded-2xl p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="bitbucket">
         <div class="flex items-center justify-between mb-6">
-          <img src="/assets/images/site/bitbucket.svg" class="h-8 w-auto" alt="Bitbucket">
+          <img src="{{ '/assets/images/site/bitbucket.svg' | bust_cache }}" class="h-8 w-auto" alt="Bitbucket">
           <a href="https://bitbucket.org/sbomify/bitbucket-pipe/" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors" target="_blank">View Pipe →</a>
         </div>
         <p class="text-gray-300 mb-6">
@@ -103,7 +103,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
       <!-- Docker -->
       <div class="bg-[#201B4C] rounded-2xl p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="docker">
         <div class="flex items-center justify-between mb-6">
-          <img src="/assets/images/site/docker.svg" class="h-8 w-auto" alt="Docker">
+          <img src="{{ '/assets/images/site/docker.svg' | bust_cache }}" class="h-8 w-auto" alt="Docker">
           <span class="text-sm font-semibold text-gray-400">Universal Support</span>
         </div>
         <p class="text-gray-300 mb-6">
@@ -135,7 +135,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <!-- OSV -->
       <div class="bg-[#201B4C] rounded-2xl p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col">
-        <img src="/assets/images/site/osv.png" class="h-8 w-auto mb-6 self-start" alt="Google OSV">
+        <img src="{{ '/assets/images/site/osv.png' | bust_cache }}" class="h-8 w-auto mb-6 self-start" alt="Google OSV">
         <h3 class="text-xl font-bold text-white mb-3">Google OSV</h3>
         <p class="text-gray-300 flex-grow">
           We integrate with the Open Source Vulnerability (OSV) database to provide precise, distributed vulnerability intelligence across a wide range of ecosystems.
@@ -144,7 +144,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
 
       <!-- Dependency Track -->
       <div class="bg-[#201B4C] rounded-2xl p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col">
-        <img src="/assets/images/site/dependency-track-white.svg" class="h-8 w-auto mb-6 self-start" alt="Dependency Track">
+        <img src="{{ '/assets/images/site/dependency-track-white.svg' | bust_cache }}" class="h-8 w-auto mb-6 self-start" alt="Dependency Track">
         <h3 class="text-xl font-bold text-white mb-3">Dependency Track</h3>
         <p class="text-gray-300 mb-4 flex-grow">
           Leverage the power of OWASP Dependency-Track for continuous component analysis.
@@ -172,7 +172,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
     <div class="bg-[#201B4C] rounded-2xl p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all">
       <div class="flex flex-col md:flex-row gap-8 items-start">
         <div class="flex-shrink-0">
-          <img src="/assets/images/site/ecosystems-white.svg" class="h-10 w-auto" alt="Ecosyste.ms">
+          <img src="{{ '/assets/images/site/ecosystems-white.svg' | bust_cache }}" class="h-10 w-auto" alt="Ecosyste.ms">
         </div>
         <div>
           <h3 class="text-xl font-bold text-white mb-3">Ecosyste.ms</h3>

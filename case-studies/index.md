@@ -9,7 +9,7 @@ description: "Discover how leading organizations are using sbomify to streamline
 <!-- Atsign Case Study -->
 <a href="/case-studies/atsign" class="group bg-[#201B4C] rounded-2xl p-10 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col h-full">
     <div class="mb-8 h-16 flex items-center justify-start">
-      <img src="/assets/images/site/atsign.svg" class="h-full w-auto object-contain max-w-[200px]" alt="Atsign logo">
+      <img src="{{ '/assets/images/site/atsign.svg' | bust_cache }}" class="h-full w-auto object-contain max-w-[200px]" alt="Atsign logo">
     </div>
 
     <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-[#8A7DFF] transition-colors">
@@ -32,7 +32,7 @@ description: "Discover how leading organizations are using sbomify to streamline
 <!-- Screenly Case Study -->
 <a href="/case-studies/screenly" class="group bg-[#201B4C] rounded-2xl p-10 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col h-full">
     <div class="mb-8 h-16 flex items-center justify-start">
-      <img src="/assets/images/site/screenly.svg" class="h-full w-auto object-contain max-w-[200px]" alt="Screenly logo">
+      <img src="{{ '/assets/images/site/screenly.svg' | bust_cache }}" class="h-full w-auto object-contain max-w-[200px]" alt="Screenly logo">
     </div>
 
     <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-[#8A7DFF] transition-colors">

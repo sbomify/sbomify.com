@@ -4,7 +4,7 @@
       <!-- Logo Section -->
       <div class="flex flex-col items-center lg:items-start gap-4 flex-1">
         <a href="/">
-          <img class="h-8 w-auto" src="/assets/images/site/logo.svg" alt="sbomify logo" />
+          <img class="h-8 w-auto" src="{{ '/assets/images/site/logo.svg' | bust_cache }}" alt="sbomify logo" />
         </a>
         <p class="text-tertiaryText text-sm text-center lg:text-left max-w-xs">
           Your Security Artifact Hub. Generate trust centers and share security artifacts with confidence.
@@ -24,13 +24,13 @@
       <div class="flex flex-col items-center lg:items-end gap-4 flex-1">
         <div class="flex gap-4">
           <a href="{{ site.data.main.social.x }}" class="opacity-70 hover:opacity-100 transition-opacity">
-            <img src="/assets/images/site/x-white.svg" alt="X (Twitter)" class="h-5 w-5" />
+            <img src="{{ '/assets/images/site/x-white.svg' | bust_cache }}" alt="X (Twitter)" class="h-5 w-5" />
           </a>
           <a href="{{ site.data.main.social.github }}" class="opacity-70 hover:opacity-100 transition-opacity">
-            <img src="/assets/images/site/github-white.svg" alt="GitHub" class="h-5 w-5" />
+            <img src="{{ '/assets/images/site/github-white.svg' | bust_cache }}" alt="GitHub" class="h-5 w-5" />
           </a>
           <a href="{{ site.data.main.social.linkedIn }}" class="opacity-70 hover:opacity-100 transition-opacity">
-            <img src="/assets/images/site/linkedin-white.svg" alt="LinkedIn" class="h-5 w-5" />
+            <img src="{{ '/assets/images/site/linkedin-white.svg' | bust_cache }}" alt="LinkedIn" class="h-5 w-5" />
           </a>
         </div>
         <div class="text-xs text-tertiaryText/60 text-center lg:text-right flex flex-col gap-1">
