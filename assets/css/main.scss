@@ -1,4 +1,586 @@
 ---
+# Only the main Sass file needs front matter (the dashes are enough)
 ---
 
-@import 'main';
+@charset "utf-8";
+@use 'sass:math';
+
+// Variables
+$base-font-size: 16px;
+$white: #FFF;
+$text-primary: #141035;
+$text-secondary: #5E5E5E;
+$bg-primary: #141035;
+$text-heading: $text-primary;
+
+$breakpoint-xs: 480px;
+$breakpoint-sm: 640px;  // Aligned with Tailwind sm
+$breakpoint-md: 768px;  // Aligned with Tailwind md
+$breakpoint-lg: 1024px; // Aligned with Tailwind lg
+$breakpoint-xl: 1280px; // Aligned with Tailwind xl
+$breakpoint-xxl: 1536px; // Aligned with Tailwind 2xl
+
+// Mixins
+@function strip-unit($value) {
+  @return math.div($value, ($value * 0 + 1));
+}
+
+@function rem($pxValue) {
+  @return #{math.div(strip-unit($pxValue), strip-unit($base-font-size))}rem;
+}
+
+// Base Styles
+body {
+  color: $text-primary;
+  font-family: "Inter";
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $text-heading;
+  font-family: "Inter";
+}
+
+h1 {
+  font-size: rem(68px);
+  font-weight: 500;
+  line-height: rem(78px);
+}
+
+h2 {
+  font-size: rem(32px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+
+  @media (min-width: $breakpoint-md) {
+    font-size: rem(48px);
+  }
+}
+
+p {
+  font-family: "Inter";
+  font-size: rem(14px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+
+  @media (min-width: $breakpoint-md) {
+    font-size: rem(18px);
+  }
+}
+
+button {
+  background-color: #0242E5;
+  color: $white;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: rem(18px);
+  font-style: normal;
+  font-weight: 400;
+  padding: 14px 16px 12px;
+  text-align: center;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.btn-secondary {
+  @extend button;
+  background: #F6F9FA;
+  color: #141035;
+}
+
+.btn-md {
+  font-size: rem(14px);
+}
+
+.btn-icon {
+  border: none;
+  background: none;
+}
+
+a.button {
+  @extend button;
+}
+
+.divider {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgb(0 0 0 / 0%), rgb(157 157 157 / 75%), rgb(0 0 0 / 0%));
+}
+
+.text-gradient {
+  background: var(--Gradient, linear-gradient(94deg, #4059D0 8.79%, #CC58BB 56.82%, #F4B57F 100%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.max-container {
+  width: 100%;
+  margin: auto;
+
+  @media (min-width: $breakpoint-xxl) {
+    max-width: 1920px;
+  }
+}
+
+// Blog Post Styles
+.blog-post, .page {
+  font-family: "Inter";
+
+  h1, h2, h3, h4, h5, h6 {
+    color: $text-primary;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-top: rem(32px);
+    margin-bottom: rem(16px);
+  }
+
+  h1 {
+    font-size: rem(36px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-top: 0;
+    margin-bottom: rem(24px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(48px);
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: rem(56px);
+    }
+  }
+
+  h2 {
+    font-size: rem(28px);
+    margin-top: rem(48px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(36px);
+    }
+  }
+
+  h3 {
+    font-size: rem(24px);
+    margin-top: rem(40px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(28px);
+    }
+  }
+
+  h4 {
+    font-size: rem(20px);
+    margin-top: rem(32px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(22px);
+    }
+  }
+
+  h5 {
+    font-size: rem(18px);
+    margin-top: rem(24px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(20px);
+    }
+  }
+
+  h6 {
+    font-size: rem(16px);
+    margin-top: rem(20px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(18px);
+    }
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: rem(18px);
+    line-height: 1.7;
+    margin-bottom: rem(24px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(20px);
+      line-height: 1.8;
+    }
+  }
+
+  a {
+    color: #8A7DFF;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: #7A6DE5;
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  strong, b {
+    color: $text-primary;
+    font-weight: 600;
+  }
+
+  em, i {
+    font-style: italic;
+  }
+
+  ul, ol {
+    font-size: rem(18px);
+    line-height: 1.7;
+    margin-bottom: rem(24px);
+    padding-left: rem(28px);
+    color: $text-secondary;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(20px);
+      line-height: 1.8;
+    }
+
+    li {
+      margin-bottom: rem(12px);
+      padding-left: rem(8px);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  ul {
+    list-style: disc;
+
+    li {
+      position: relative;
+
+      &::marker {
+        color: #8A7DFF;
+      }
+    }
+  }
+
+  ol {
+    list-style: decimal;
+
+    li::marker {
+      color: #8A7DFF;
+      font-weight: 600;
+    }
+  }
+
+  .task-list {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      padding-left: rem(28px);
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: rem(32px) auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  img + em {
+    display: block;
+    font-size: rem(14px);
+    color: #6b7280;
+    text-align: center;
+    font-style: italic;
+    margin-top: rem(-24px);
+    margin-bottom: rem(32px);
+  }
+
+  iframe {
+    max-width: 100%;
+    margin: rem(32px) auto;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  blockquote {
+    position: relative;
+    margin: rem(32px) 0;
+    padding: rem(24px) rem(24px) rem(24px) rem(48px);
+    background: linear-gradient(135deg, rgba(138, 125, 255, 0.05) 0%, rgba(138, 125, 255, 0.02) 100%);
+    border-left: 4px solid #8A7DFF;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    font-size: rem(18px);
+    color: $text-primary;
+
+    @media (min-width: $breakpoint-md) {
+      margin: rem(40px) 0;
+      padding: rem(32px) rem(32px) rem(32px) rem(56px);
+      font-size: rem(20px);
+    }
+
+    p {
+      margin: 0;
+      color: $text-primary;
+
+      &:not(:last-child) {
+        margin-bottom: rem(16px);
+      }
+    }
+  }
+
+  code {
+    background: #f1f5f9;
+    color: #334155;
+    padding: rem(3px) rem(8px);
+    font-size: 0.9em;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+  }
+
+  pre {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: rem(24px);
+    overflow-x: auto;
+    border-radius: 12px;
+    margin: rem(32px) 0;
+    line-height: 1.6;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+    code {
+      background: transparent;
+      padding: 0;
+      border: none;
+      color: inherit;
+      font-size: rem(14px);
+
+      @media (min-width: $breakpoint-md) {
+        font-size: rem(16px);
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: rem(32px) 0;
+    font-size: rem(16px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(18px);
+    }
+
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: rem(12px) rem(16px);
+      text-align: left;
+    }
+
+    th {
+      background-color: #f9fafb;
+      color: $text-primary;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: rem(14px);
+      letter-spacing: 0.05em;
+    }
+
+    tbody tr {
+      background: $white;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background: #f9fafb;
+      }
+    }
+
+    td {
+      color: $text-secondary;
+    }
+  }
+
+  hr {
+    margin: rem(48px) 0;
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #e5e7eb 20%, #e5e7eb 80%, transparent);
+
+    @media (min-width: $breakpoint-md) {
+      margin: rem(64px) 0;
+    }
+  }
+
+  > p:first-of-type {
+    font-size: rem(20px);
+    color: $text-primary;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(22px);
+      line-height: 1.8;
+    }
+  }
+
+  .tags {
+    list-style: none;
+
+    li {
+      padding: rem(4px) rem(16px);
+    }
+
+    a {
+      color: $white;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+// Additional site styles
+.contact {
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    height: 10rem;
+    width: 80%;
+    border-radius: 15rem 15rem 0 0;
+    background: linear-gradient(94deg, #4059D0 8.79%, #CC58BB 56.82%, #F4B57F 100%);
+    filter: blur(60px);
+    opacity: 0.4;
+
+    @media (min-width: $breakpoint-lg) {
+      width: 40rem;
+    }
+  }
+}
+
+.podcast-page {
+  .author-img {
+    border-radius: 100%;
+    width: 162px;
+    height: 162px;
+  }
+}
+
+.search-results {
+  .search-item {
+    margin: rem(16px) 0;
+    display: flex;
+    flex-direction: column;
+    gap: rem(12px);
+
+    h3 {
+      font-size: rem(20px);
+    }
+
+    .search-content-type {
+      text-transform: capitalize;
+      font-size: rem(14px);
+    }
+  }
+
+  hr {
+    border-color: #d3d3d366;
+  }
+}
+
+.header-search {
+  position: relative;
+  display: inline-block;
+  margin: 4px 2px;
+  height: 50px;
+  width: 50px;
+  vertical-align: bottom;
+
+  .button {
+    display: inline-block;
+    margin: 4px 2px;
+    background-color: #444;
+    font-size: 14px;
+    padding-left: 32px;
+    padding-right: 32px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .button:hover {
+    transition-duration: 0.4s;
+    background-color: white;
+    color: black;
+  }
+
+  .searchbutton {
+    background-color: transparent;
+    position: absolute;
+    font-size: 30px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .search:focus + .searchbutton {
+    transition-duration: 0.4s;
+    background-color: $white;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    color: black;
+  }
+
+  .search {
+    position: absolute;
+    left: 49px;
+    background-color: $white;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    outline: none;
+    border: none;
+    padding: 0;
+    width: 0;
+    height: 100%;
+    z-index: 10;
+    transition-duration: 0.4s;
+  }
+
+  .search:focus {
+    width: 200px;
+    padding: 0 16px 0 0;
+
+    @media (min-width: $breakpoint-xl) {
+      width: 363px;
+    }
+  }
+
+  .expandright {
+    left: auto;
+    right: 49px;
+  }
+
+  .expandright:focus {
+    padding: 0 0 0 16px;
+  }
+}

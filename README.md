@@ -23,6 +23,59 @@ _To use `.webp` in plain html, use the below markup:_
 
 **Note**: The `.webp` path points to `/img/image-name.webp`
 
+## D2 Diagrams
+
+D2 diagram files (`.d2`) are stored in the `_d2/` directory and automatically compiled to SVG format during the build process. The compilation script applies a shared theme from `_d2/theme.d2` to all diagrams for consistent styling.
+
+### Building Diagrams
+
+To compile all D2 files to SVG:
+
+```bash
+bun run build:d2
+```
+
+To watch for changes and automatically recompile:
+
+```bash
+bun run watch:d2
+```
+
+The compiled SVG files are output to two locations:
+
+- `assets/images/d2/` - for direct image references
+- `_includes/d2/` - for Jekyll includes
+
+### Using Diagrams
+
+There are two ways to include D2 diagrams in your content:
+
+**1. Using Jekyll includes (recommended for inline SVG):**
+
+```markdown
+<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+    {% include d2/lifecycle.svg %}
+</div>
+```
+
+**2. Using direct image references:**
+
+```markdown
+![SBOM hub](/assets/images/d2/sbom-hierarchy.svg)
+```
+
+### Linting
+
+To format D2 files:
+
+```bash
+bun run lint:d2
+```
+
+### Theme
+
+All diagrams automatically use the theme defined in `_d2/theme.d2`, which provides consistent styling across all diagrams. The theme includes predefined classes for nodes (`primary`, `accent`, `secondary`, `group`) and connections (`flow`, `flow-pink`).
+
 ## Meta Tags & Social Preview
 
 Meta keywords tag is dependent on `keywords` metadata

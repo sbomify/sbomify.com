@@ -3,10 +3,6 @@ nav:
     link: /blog
   - name: Case Studies
     link: /case-studies
-  - name: Guides
-    link: /guides
-  - name: SBOM Resources
-    link: /resources
   - name: Pricing
     link: /pricing
 

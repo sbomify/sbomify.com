@@ -1,0 +1,67 @@
+direction: up
+
+# Using the 'group' class for containers and 'accent' for items
+product: Product SBOM {
+  class: group
+
+  Smart Thermostat: {
+    class: accent
+  }
+}
+
+project: Project SBOM(s) {
+  class: group
+
+  Backend: {
+    class: accent
+  }
+
+  IoT Device: {
+    class: accent
+  }
+}
+
+component: Component SBOM(s) {
+  class: group
+
+  Python SBOM: {
+    class: accent
+  }
+
+  Node SBOM: {
+    class: accent
+  }
+
+  Docker SBOM: {
+    class: accent
+  }
+
+  Rust SBOM: {
+    class: accent
+  }
+}
+
+# Connections
+project.Backend -> product.Smart Thermostat: Project SBOM {
+  class: flow-pink
+}
+
+component.Node SBOM -> project.Backend: {
+  class: flow-pink
+}
+
+component.Python SBOM -> project.Backend: {
+  class: flow-pink
+}
+
+component.Docker SBOM -> project.Backend: {
+  class: flow-pink
+}
+
+component.Rust SBOM -> project.IoT Device: {
+  class: flow-pink
+}
+
+project.IoT Device -> product.Smart Thermostat: Project SBOM {
+  class: flow-pink
+}

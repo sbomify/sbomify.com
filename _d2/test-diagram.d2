@@ -1,0 +1,32 @@
+direction: right
+
+# Define nodes using classes
+Vendor.class: accent
+stack
+Regulator.class: accent
+stack
+Buyer.class: accent
+stack
+Analysis Tool.class: primary
+stack
+
+sbomify: {
+  class: primary
+}
+
+# Connections
+Vendor -> sbomify: SBOMs {
+  class: flow-pink
+}
+
+Vendor -> sbomify: Compliance Docs {
+  class: flow-pink
+}
+
+Buyer -> Analysis Tool: Audit {
+  class: flow
+}
+
+sbomify -> Regulator: Reports {
+  class: flow-pink
+}

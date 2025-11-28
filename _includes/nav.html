@@ -1,5 +1,5 @@
-<nav class="hidden lg:flex gap-[52px]">
+<nav class="hidden lg:flex gap-1">
   {% for item in site.data.main.nav %}
-    <a href="{{item.link}}" class="text-white">{{item.name}}</a>
+    <a href="{{item.link}}" class="text-white hover:text-[#8A7DFF] hover:bg-[#37306B] transition-all duration-200 font-medium text-sm px-4 py-2 rounded-full">{{item.name}}</a>
   {% endfor %}
 </nav>

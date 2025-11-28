@@ -22,11 +22,19 @@ jobs:
         run: |
           docker build . -t web
 
-      - name: Build content
+      - name: Install dependencies
+        run: docker run --rm -v $(pwd):/usr/src/app web bun install
+
+      - name: Build D2 diagrams
+        run: docker run --rm -v $(pwd):/usr/src/app web bun run build:d2
+
+      - name: Build CSS
+        run: docker run --rm -v $(pwd):/usr/src/app web bun run build:css
+
+      - name: Build Jekyll Site
         env:
           JEKYLL_ENV: production
-        run: |
-          docker run --rm -v $(pwd):/usr/src/app web bundle exec jekyll build
+        run: docker run --rm -v $(pwd):/usr/src/app -e JEKYLL_ENV=production web bundle exec jekyll build
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3

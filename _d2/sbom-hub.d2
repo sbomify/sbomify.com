@@ -1,0 +1,35 @@
+direction: up
+
+Vendor: {
+  class: accent
+  style.multiple: true
+}
+
+Buyer: {
+  class: accent
+  style.multiple: true
+}
+
+Analysis Tool: {
+  class: accent
+  style.multiple: true
+}
+
+sbomify: {
+  shape: image
+  icon: assets/images/logo/logo-circle.svg
+  width: 80
+  height: 80
+}
+
+Vendor -> sbomify: SBOM(s) {
+  class: flow-pink
+}
+
+sbomify -> Buyer: {
+  class: flow-pink
+}
+
+sbomify -> Analysis Tool: Audit {
+  class: flow-pink
+}

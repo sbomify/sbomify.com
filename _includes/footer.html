@@ -1,32 +1,50 @@
-<footer class=" bg-primaryBG">
-  <div class="contact pt-[140px] pb-[57px] text-center">
-    <h1 class="text-center mb-8 text-[68px] text-white">Let's talk</h1>
-    <p class="text-center mb-12 text-white">We are here to simlify your SBOM journey.</p>
-    <a class="btn-secondary mx-auto relative z-50" href="/pricing">Sign Up</a>
-  </div>
-  <hr class="divider" />
-  <div class="flex flex-col lg:flex-row justify-between py-20 items-center gap-14 px-5 lg:px-[80px] lg:h-[294px]">
-    <div class="flex flex-col gap-1 text-tertiaryText flex-1 items-center">
-      <div>Copyright © 2025 sbomify Ltd.</div>
-      <div>All rights reserved </div>
-      <div><a href="https://studio.viktopia.io">A Viktopia Studio project</a></div>
-      <div><a href="/privacy">Privacy Policy</a> • <a href="/terms">Terms of Service</a></div>
-    </div>
-    <div class="flex flex-1 justify-center">
-      <a href="/">
-        <img class="w-[132px]" src="/assets/images/site/logo.svg" alt="logo" />
-      </a>
-    </div>
-    <div class="flex flex-1 gap-[13px] justify-center">
-      <a href="{{ site.data.main.social.x }}">
-        <img src="/assets/images/site/x-white.svg" alt="x logo" />
-      </a>
-      <a href="{{ site.data.main.social.github }}">
-        <img src="/assets/images/site/github-white.svg" alt="github logo" />
-      </a>
-      <a href="{{ site.data.main.social.linkedIn }}">
-        <img src="/assets/images/site/linkedin-white.svg" alt="linkedIn logo" />
-      </a>
+<footer class="bg-primaryBG border-t border-[#37306B]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
+    <div class="flex flex-col lg:flex-row justify-between items-center gap-8">
+      <!-- Logo Section -->
+      <div class="flex flex-col items-center lg:items-start gap-4 flex-1">
+        <a href="/">
+          <img class="h-8 w-auto" src="/assets/images/site/logo.svg" alt="sbomify logo" />
+        </a>
+        <p class="text-tertiaryText text-sm text-center lg:text-left max-w-xs">
+          Your Security Artifact Hub. Generate trust centers and share security artifacts with confidence.
+        </p>
+      </div>
+
+      <!-- Links Section -->
+      <div class="flex gap-8 text-sm text-tertiaryText flex-[2] justify-center">
+        <a href="/blog" class="hover:text-[#8A7DFF] transition-colors whitespace-nowrap">Blog</a>
+        <a href="/case-studies" class="hover:text-[#8A7DFF] transition-colors whitespace-nowrap">Case Studies</a>
+        <a href="/resources" class="hover:text-[#8A7DFF] transition-colors whitespace-nowrap">Resources</a>
+        <a href="/pricing" class="hover:text-[#8A7DFF] transition-colors whitespace-nowrap">Pricing</a>
+        <a href="https://app.sbomify.com" class="hover:text-[#8A7DFF] transition-colors whitespace-nowrap">Login</a>
+      </div>
+
+      <!-- Social & Legal Section -->
+      <div class="flex flex-col items-center lg:items-end gap-4 flex-1">
+        <div class="flex gap-4">
+          <a href="{{ site.data.main.social.x }}" class="opacity-70 hover:opacity-100 transition-opacity">
+            <img src="/assets/images/site/x-white.svg" alt="X (Twitter)" class="h-5 w-5" />
+          </a>
+          <a href="{{ site.data.main.social.github }}" class="opacity-70 hover:opacity-100 transition-opacity">
+            <img src="/assets/images/site/github-white.svg" alt="GitHub" class="h-5 w-5" />
+          </a>
+          <a href="{{ site.data.main.social.linkedIn }}" class="opacity-70 hover:opacity-100 transition-opacity">
+            <img src="/assets/images/site/linkedin-white.svg" alt="LinkedIn" class="h-5 w-5" />
+          </a>
+        </div>
+        <div class="text-xs text-tertiaryText/60 text-center lg:text-right flex flex-col gap-1">
+          <div>© 2025 sbomify ltd. All rights reserved.</div>
+          <div class="flex gap-2 justify-center lg:justify-end">
+            <a href="/privacy" class="hover:text-white transition-colors">Privacy</a>
+            <span>•</span>
+            <a href="/terms" class="hover:text-white transition-colors">Terms</a>
+          </div>
+          <div class="mt-1">
+            <a href="https://studio.viktopia.io" class="hover:text-white transition-colors">A Viktopia Studio project</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </footer>

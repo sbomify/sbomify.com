@@ -1,5 +1,5 @@
 ---
-name: Markdown Lint
+name: Lint
 
 on:
   push:
@@ -8,24 +8,33 @@ on:
   pull_request:
     paths:
       - '**/*.md'
+      - '**/*.scss'
+      - '_d2/*.d2'
       - '.github/workflows/lint.yml'
       - '.dprint.json'
+      - 'package.json'
 
 permissions:
   contents: read
 
 jobs:
-  markdown-lint:
-    name: Lint Markdown Files
+  lint:
+    name: Lint All Files
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install dprint
-        run: |
-          curl -fsSL https://dprint.dev/install.sh | sh
-          echo "$HOME/.dprint/bin" >> $GITHUB_PATH
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
 
-      - name: Run dprint check
-        run: dprint check "**/*.md"
+      - name: Install dependencies
+        run: bun install
+
+      - name: Install d2
+        run: curl -fsSL https://d2lang.com/install.sh | sh -s --
+
+      - name: Run linters
+        run: bun run lint

@@ -3,7 +3,7 @@ $base-font-size: 16px;
 // Colors
 $white: #FFF;
 
-//New
+// New
 $text-primary: #141035;
 $text-secondary: #5E5E5E;
 $bg-primary: #141035;
@@ -11,8 +11,8 @@ $text-heading: $text-primary;
 
 // Define breakpoints
 $breakpoint-xs: 480px;  // Extra small devices (phones)
-$breakpoint-sm: 768px;  // Small devices (tablets)
-$breakpoint-md: 992px;  // Medium devices (desktops)
-$breakpoint-lg: 1200px; // Large devices (large desktops)
-$breakpoint-xl: 1400px; // Extra large devices (larger desktops)
-$breakpoint-xxl: 1920px;
+$breakpoint-sm: 640px;  // Small devices (tablets) - Aligned with Tailwind sm
+$breakpoint-md: 768px;  // Medium devices (desktops) - Aligned with Tailwind md
+$breakpoint-lg: 1024px; // Large devices (large desktops) - Aligned with Tailwind lg
+$breakpoint-xl: 1280px; // Extra large devices (larger desktops) - Aligned with Tailwind xl
+$breakpoint-xxl: 1536px; // Aligned with Tailwind 2xl

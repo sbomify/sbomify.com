@@ -11,13 +11,9 @@ description: "Explore sbomify's comprehensive feature set for managing, sharing,
 
 Streamline your SBOM workflow from creation to analysis. Our comprehensive toolset helps you generate accurate SBOMs, collaborate with your team, and gain insights from your software supply chain data. [Learn more about the SBOM lifecycle →]({{ site.url }}/features/generate-collaborate-analyze)
 
-### Public SBOM Portal
+### Trust Center
 
-Create a transparent software supply chain with your own public SBOM portal. Share SBOMs publicly, demonstrate compliance, and build trust with stakeholders through a branded, secure platform. [Explore public SBOM hosting →]({{ site.url }}/features/public-sbom-portal)
-
-### SBOM Hub
-
-Create a central source of truth for all your SBOMs. The SBOM Hub enables you to store, version, and manage your SBOMs in one secure location, making it easy to track changes and maintain compliance over time. [Explore the SBOM Hub →]({{ site.url }}/features/sbom-hub)
+Turn transparency into a competitive advantage. Share SBOMs, VEX statements, and security certifications (like SOC 2 and ISO 27001) with stakeholders through a branded, automated portal. Support for both public transparency and private, invited access ensures you stay in control. [Explore Trust Center →]({{ site.url }}/features/trust-center/)
 
 ### SBOM Hierarchy
 

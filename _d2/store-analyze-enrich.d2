@@ -1,0 +1,49 @@
+direction: right
+
+CI: {
+  class: group
+  label: "CI/CD Pipeline"
+
+  Generate: {
+    class: primary
+    label: "Generate"
+  }
+
+  Enrich: {
+    class: secondary
+    label: "Enrich & Augment"
+  }
+
+  Sign: {
+    class: accent
+    label: "Sign"
+  }
+
+  Generate -> Enrich: {
+    class: flow
+  }
+
+  Enrich -> Sign: {
+    class: flow
+  }
+}
+
+sbomify: {
+  shape: image
+  icon: assets/images/logo/logo-circle.svg
+  width: 60
+  height: 60
+}
+
+Analysis: {
+  class: accent
+  label: "Analysis"
+}
+
+CI.Sign -> sbomify: Upload {
+  class: flow
+}
+
+sbomify -> Analysis: Sync {
+  class: flow
+}

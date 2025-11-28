@@ -15,7 +15,16 @@
 # in the templates via {{ site.myvariable }}.
 title: Sbomify
 description: >- # this means to ignore newlines until "baseurl:"
-  Sbomify.com streamlines SBOM exchange for businesses. Our platform supports customers, vendors, and ISVs in sharing SBOMs efficiently—ideal for transactions, compliance, and mergers. Enhance trust and clarity in your software supply chain with transparent and effective SBOM management. Join us to revolutionize SBOM sharing and management.
+  Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.
+
+keywords: # default keywords
+  - SBOM
+  - Supply Chain Security
+  - CRA Compliance
+  - NTIA Compliant
+  - Software Bill of Materials
+  - SBOM Management
+  - Security Artifact Hub
 
 # the subpath of your site, e.g. /blog
 baseurl: ""
@@ -40,6 +49,7 @@ permalink: /:year/:month/:day/:title/
 sass:
   style: compressed
   sourcemap: never
+  sass_dir: _sass
 
 google_analytics: G-4DYDPF55FX
 
@@ -47,7 +57,6 @@ google_analytics: G-4DYDPF55FX
 # Build settings
 markdown: kramdown
 highlighter: rouge
-theme: minima
 plugins:
   - jekyll-feed
   - jekyll-sitemap
@@ -56,8 +65,7 @@ plugins:
   - jekyll-minifier
 
 jekyll-minifier:
-  uglifier_args:
-    harmony: true
+  uglifier_args: {}
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

@@ -1,3 +1,4 @@
+// Import variables and mixins so they're available
 @import 'variables';
 @import 'mixins';
 
@@ -48,7 +49,7 @@ button {
   font-size: rem(18px);
   font-style: normal;
   font-weight: 400;
-  padding: 14px 16px 12px 16px;
+  padding: 14px 16px 12px;
   text-align: center;
   transition: opacity 0.3s;
 
@@ -59,6 +60,7 @@ button {
 
 .btn-secondary {
   @extend button;
+
   background: #F6F9FA;
   color: #141035;
 }
@@ -73,13 +75,13 @@ button {
 }
 
 a.button {
-  @extend button
+  @extend button;
 }
 
 .divider {
   border: 0;
   height: 1px;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(157, 157, 157, 0.75), rgba(0, 0, 0, 0));
+  background-image: linear-gradient(to right, rgb(0 0 0 / 0%), rgb(157 157 157 / 75%), rgb(0 0 0 / 0%));
 }
 
 .text-gradient {
@@ -106,84 +108,157 @@ a.button {
   /* Headings */
   h1, h2, h3, h4, h5, h6 {
     color: $text-primary;
-    line-height: 1.2;
-    margin-bottom: rem(28px);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-top: rem(32px);
+    margin-bottom: rem(16px);
   }
 
   h1 {
-    font-size: rem(48);
+    font-size: rem(36px);
+    font-weight: 700;
+    line-height: 1.2;
     margin-top: 0;
+    margin-bottom: rem(24px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(48px);
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: rem(56px);
+    }
   }
 
   h2 {
-    font-size: rem(40);
+    font-size: rem(28px);
+    margin-top: rem(48px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(36px);
+    }
   }
 
   h3 {
-    font-size: rem(32);
+    font-size: rem(24px);
+    margin-top: rem(40px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(28px);
+    }
   }
 
   h4 {
-    font-size: rem(20);
+    font-size: rem(20px);
+    margin-top: rem(32px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(22px);
+    }
   }
 
   h5 {
-    font-size: rem(16);
+    font-size: rem(18px);
+    margin-top: rem(24px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(20px);
+    }
   }
 
   h6 {
-    font-size: rem(12);
+    font-size: rem(16px);
+    margin-top: rem(20px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(18px);
+    }
   }
 
   /* Paragraphs */
   p {
     color: $text-secondary;
-    line-height: 1.5;
-    margin-bottom: rem(20px);
+    font-size: rem(18px);
+    line-height: 1.7;
+    margin-bottom: rem(24px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(20px);
+      line-height: 1.8;
+    }
   }
 
   /* Links */
   a {
+    color: #0242E5;
     text-decoration: underline;
-    transition: color 0.2s;
+    text-underline-offset: 3px;
+    transition: all 0.2s ease;
 
     &:hover {
-      opacity: 0.8;
-      text-decoration: none;
+      color: #0134b8;
+      text-decoration-thickness: 2px;
     }
   }
 
-  strong {
+  strong, b {
     color: $text-primary;
+    font-weight: 600;
+  }
+
+  em, i {
+    font-style: italic;
   }
 
   /* Lists */
   ul, ol {
-    margin-bottom: 16px;
-    padding-left: 16px;
+    font-size: rem(18px);
+    line-height: 1.7;
+    margin-bottom: rem(24px);
+    padding-left: rem(28px);
+    color: $text-secondary;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(20px);
+      line-height: 1.8;
+    }
 
     li {
-      margin-bottom: 8px;
+      margin-bottom: rem(12px);
+      padding-left: rem(8px);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 
   /* Task Lists */
   ul {
     list-style: disc;
+
     li {
       position: relative;
-      padding-left: 4px;
-      
-      input {
+
+      &::marker {
+        color: #0242E5;
+      }
+
+      input[type="checkbox"] {
         position: absolute;
-        left: 0;
-        top: 6px;
+        left: rem(-24px);
+        top: rem(6px);
       }
     }
   }
 
   ol {
     list-style: decimal;
+
+    li::marker {
+      color: #0242E5;
+      font-weight: 600;
+    }
   }
 
   .task-list {
@@ -191,7 +266,7 @@ a.button {
     padding-left: 0;
 
     li {
-      padding-left: 20px;
+      padding-left: rem(28px);
     }
   }
 
@@ -200,62 +275,98 @@ a.button {
     max-width: 100%;
     height: auto;
     display: block;
-    margin-bottom: 16px;
-    border-radius: 8px;
+    margin: rem(32px) auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
   }
 
   /* Image captions */
   img + em {
     display: block;
-    font-size: 0.875em;
-    color: #7f8c8d;
+    font-size: rem(14px);
+    color: #6b7280;
     text-align: center;
-    margin-top: -12px;
-    margin-bottom: 16px;
+    font-style: italic;
+    margin-top: rem(-24px);
+    margin-bottom: rem(32px);
   }
 
   /* Videos */
   iframe {
     max-width: 100%;
-    margin-bottom: 16px;
-    border-radius: 8px;
-    border: 3px solid $white;
-    margin: 0 auto;
+    margin: rem(32px) auto;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
   }
 
   /* Blockquotes */
   blockquote {
-    margin: 16px 0;
-    padding: 16px;
-    background: $bg-primary;
+    position: relative;
+    margin: rem(32px) 0;
+    padding: rem(24px) rem(24px) rem(24px) rem(48px);
+    background: linear-gradient(135deg, rgb(2 66 229 / 5%) 0%, rgb(2 66 229 / 2%) 100%);
     border-left: 4px solid #0242E5;
-    color: $white;
+    border-radius: 0 8px 8px 0;
     font-style: italic;
+    font-size: rem(18px);
+    color: $text-primary;
+
+    @media (min-width: $breakpoint-md) {
+      margin: rem(40px) 0;
+      padding: rem(32px) rem(32px) rem(32px) rem(56px);
+      font-size: rem(20px);
+    }
 
     p {
       margin: 0;
+      color: $text-primary;
+
+      &:not(:last-child) {
+        margin-bottom: rem(16px);
+      }
+    }
+
+    &::before {
+      content: none;
+    }
+
+    &::after {
+      content: none;
     }
   }
 
   /* Code */
   code {
-    background: #EAEDF6;
-    padding: 2px 4px;
-    font-size: 0.875em;
-    border-radius: 4px;
+    background: #f1f5f9;
+    color: #334155;
+    padding: rem(3px) rem(8px);
+    font-size: 0.9em;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
   }
 
   pre {
-    background: #2c3e50;
-    color: #ecf0f1;
-    padding: 16px;
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: rem(24px);
     overflow-x: auto;
-    border-radius: 4px;
-    margin-bottom: 16px;
+    border-radius: 12px;
+    margin: rem(32px) 0;
+    line-height: 1.6;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
 
     code {
       background: transparent;
       padding: 0;
+      border: none;
+      color: inherit;
+      font-size: rem(14px);
+
+      @media (min-width: $breakpoint-md) {
+        font-size: rem(16px);
+      }
     }
   }
 
@@ -263,54 +374,65 @@ a.button {
   table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 16px;
+    margin: rem(32px) 0;
+    font-size: rem(16px);
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(18px);
+    }
 
     th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
+      border: 1px solid #e5e7eb;
+      padding: rem(12px) rem(16px);
       text-align: left;
     }
 
     th {
-      background: #3498db;
-      color: #fff;
+      background-color: #f9fafb;
+      color: $text-primary;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: rem(14px);
+      letter-spacing: 0.05em;
     }
 
-    tr:nth-child(even) {
-      background: #f4f4f4;
+    tbody tr {
+      background: $white;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background: #f9fafb;
+      }
+    }
+
+    td {
+      color: $text-secondary;
     }
   }
 
-  /* Quotes */
-  blockquote:before {
-    content: '\201C';
-    font-size: 4em;
-    color: #ecf0f1;
-    position: absolute;
-    left: 10px;
-    top: -10px;
-  }
-
-  blockquote:after {
-    content: '\201D';
-    font-size: 4em;
-    color: #ecf0f1;
-    position: absolute;
-    right: 10px;
-    bottom: -10px;
-  }
-
-  /* Additional margin and padding for readability */
-  .container p, .container h1, .container h2, .container h3, .container h4, .container h5, .container h6, .container ul, .container ol, .container blockquote, .container pre, .container table {
-    margin-bottom: 16px;
-  }
-
-  /* Adjust spacing for horizontal rules */
+  /* Horizontal rules */
   hr {
-    margin: 32px 0;
+    margin: rem(48px) 0;
     border: none;
-    border-top: 1px solid #ddd;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #e5e7eb 20%, #e5e7eb 80%, transparent);
+
+    @media (min-width: $breakpoint-md) {
+      margin: rem(64px) 0;
+    }
   }
+
+  /* First paragraph styling - REMOVED
+  > p:first-of-type {
+    font-size: rem(20px);
+    color: $text-primary;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: rem(22px);
+      line-height: 1.8;
+    }
+  }
+  */
 
   .tags {
     list-style: none;
@@ -318,10 +440,10 @@ a.button {
     li {
       padding: rem(4px) rem(16px);
     }
-  
+
     a {
       color: $white;
-      
+
       &:hover {
         opacity: 0.8;
       }
@@ -410,7 +532,7 @@ a.button {
     -ms-user-select: none;
     user-select: none;
   }
-  
+
   .button:hover {
     transition-duration: 0.4s;
     -moz-transition-duration: 0.4s;
@@ -428,7 +550,7 @@ a.button {
     -o-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
   }
-  
+
   .searchbutton {
     background-color: transparent;
     position: absolute;
@@ -437,7 +559,7 @@ a.button {
     margin: 0;
     padding: 0;
   }
-  
+
   .search:focus + .searchbutton {
     transition-duration: 0.4s;
     -moz-transition-duration: 0.4s;
@@ -448,7 +570,7 @@ a.button {
     border-bottom-right-radius: 8px;
     color: black;
   }
-  
+
   .search {
     position: absolute;
     left: 49px;
@@ -466,7 +588,7 @@ a.button {
     -webkit-transition-duration: 0.4s;
     -o-transition-duration: 0.4s;
   }
-  
+
   .search:focus {
     width: 200px; /* Bar width+1px */
     padding: 0 16px 0 0;
@@ -475,12 +597,12 @@ a.button {
       width: 363px;
     }
   }
-  
+
   .expandright {
     left: auto;
     right: 49px; /* Button width-1px */
   }
-  
+
   .expandright:focus {
     padding: 0 0 0 16px;
   }
