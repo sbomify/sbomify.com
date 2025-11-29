@@ -10,6 +10,11 @@ Buyer: {
   style.multiple: true
 }
 
+Regulator: {
+  class: accent
+  style.multiple: true
+}
+
 Analysis Tool: {
   class: accent
   style.multiple: true
@@ -20,13 +25,24 @@ sbomify: {
   icon: assets/images/logo/logo-circle.svg
   width: 80
   height: 80
+  style.stroke: "transparent"
 }
 
-Vendor -> sbomify: SBOM(s) {
+Vendor -> sbomify: SBOMs {
+  class: flow-pink
+}
+Vendor -> sbomify: Compliance Documents {
+  class: flow-pink
+}
+Vendor -> sbomify: Pentest Result {
   class: flow-pink
 }
 
 sbomify -> Buyer: {
+  class: flow-pink
+}
+
+sbomify -> Regulator: {
   class: flow-pink
 }
 

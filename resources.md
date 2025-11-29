@@ -30,6 +30,7 @@ The SBOM generation phase, also known as authoring, is where you create an SBOM 
 
 Tools that spans multiple formats and languages.
 
+- [sbomify GitHub Action](https://github.com/sbomify/github-action/) from sbomify
 - [Snyk](https://github.com/snyk/cli) from Snyk
 - [Syft](https://github.com/anchore/syft) from Anchore
 - [Trivy](https://github.com/aquasecurity/trivy) from Aqua

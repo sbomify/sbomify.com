@@ -196,11 +196,11 @@ Overall, Yocto's capabilities for generating SPDX SBOMs are robust, making it an
 
 Once you have your SBOMs, you can use sbomify to distribute your SBOMs to your stakeholders. Since we already have all the SBOMs for each package, we need to create a component in sbomify for each package. We can help you with this, but it's important to note that this is just the beginning of the [SBOM lifecycle]({{ site.url }}features/generate-collaborate-analyze/).
 
-![Generation Phases](/assets/images/site/generation.svg)
+![Generation Phases](/assets/images/d2/generation.svg)
 
 We still need to go through the augmentation process, which adds information to the SBOM about you as the vendor. In this particular case, you might not need to go through the Enrichment process, since Yocto already has all the information we need, but you might still want to sign your SBOMs.
 
-![SBOM hub](/assets/images/site/sbom-hierarchy.svg)
+![SBOM hub](/assets/images/d2/sbom-hierarchy.svg)
 
 Moreover, since sbomify supports [SBOM hierarchy natively]({{ site.url }}/features/sbom-hierarchy/), there is no need for `index.json`. Moreover, since we've mapped each package to a component, once we release an update to a package, we can track this and have a clear audit trail of the changes.
 
