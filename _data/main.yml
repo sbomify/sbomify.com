@@ -1,6 +1,8 @@
 nav:
   - name: What is an SBOM?
     link: /what-is-sbom
+  - name: About
+    link: /about
   - name: Blog
     link: /blog
   - name: Case Studies

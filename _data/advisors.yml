@@ -1,0 +1,17 @@
+- name: Chris Swan
+  role: Advisor
+  image: /assets/images/chris.png
+  linkedin: https://www.linkedin.com/in/chrisswan/
+  bio: Engineer at Atsign building the open-source atPlatform. Former Fellow at DXC Technology and CTO at UBS, Capital SCF, and Credit Suisse. InfoQ Editor, podcaster, and Google Developer Expert.
+
+- name: Dominique Guinard
+  role: Advisor
+  image: /assets/images/dom.png
+  linkedin: https://www.linkedin.com/in/domguinard/
+  bio: Pioneer in IoT and product transparency. Co-founder of EVRYTHNG and driver of the Product Passport initiative. PhD from ETH Zürich and former MIT Auto-ID Labs researcher.
+
+- name: Steve Springett
+  role: Advisor
+  image: /assets/images/steve.png
+  linkedin: https://www.linkedin.com/in/stevespringett/
+  bio: Creator of the CycloneDX SBOM standard and Dependency-Track platform. Recognized expert in software supply chain security and leader in the DevSecOps community.
