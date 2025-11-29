@@ -7,7 +7,7 @@ products: Product Releases {
   portal: Payment Portal {
     style.stroke: transparent
     style.fill: transparent
-    
+
     v2_0: v2.0 {
       class: primary
       tooltip: Stable Release
@@ -27,7 +27,7 @@ components: Component Artifacts {
   user_api: User API {
     class: group
     style.fill: "#fff"
-    
+
     v1_2: v1.2 {
       class: accent
     }
@@ -49,8 +49,8 @@ components: Component Artifacts {
 }
 
 # Connections for v2.0
-products.portal.v2_0 -> components.user_api.v1_2: { class: flow }
-products.portal.v2_0 -> components.stripe.v4_2: { class: flow }
+products.portal.v2_0 -> components.user_api.v1_2: {class: flow}
+products.portal.v2_0 -> components.stripe.v4_2: {class: flow}
 
 # Connections for v2.1
 products.portal.v2_1 -> components.user_api.v1_3: {
