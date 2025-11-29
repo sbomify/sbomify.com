@@ -13,4 +13,15 @@ As the complexity of your software architecture increases, so does the challenge
 
 At sbomify, we recognize this challenge and have developed a solution that simplifies SBOM management for complex software architectures. By introducing hierarchical grouping through products, projects, and components, sbomify allows you to organize your SBOMs in a way that reflects the structure of your entire system. This approach not only makes it easier to manage multiple SBOMs but also provides stakeholders with a clear, organized view of the software’s architecture. Whether you’re dealing with backend services, front-end components, or both, sbomify ensures that every part of your product is captured and presented in a way that’s easy to understand and analyze. Moreover, you can both export and share SBOMs on any of these levels. This fits perfectly into our [Generate, Collaborate, and Analyze]({{ site.url }}/features/generate-collaborate-analyze/) workflow.
 
-The hierarchical grouping feature in sbomify is designed to reduce confusion and streamline the SBOM sharing process. Instead of dealing with a disjointed collection of SBOMs, stakeholders can view and interact with a structured representation of the software, with products, projects, and components all neatly organized. This approach not only improves the clarity and usability of SBOMs but also enhances the overall efficiency of your software development and security processes. By leveraging sbomify’s advanced grouping capabilities, you can ensure that your SBOMs are both comprehensive and easily accessible, enabling better collaboration and more informed decision-making across your organization. You can distribute these hierarchies easily using our [SBOM Hub & Trust Center]({{ site.url }}/features/sbom-hub/).
+The hierarchical grouping feature in sbomify is designed to reduce confusion and streamline the SBOM sharing process. Instead of dealing with a disjointed collection of SBOMs, stakeholders can view and interact with a structured representation of the software, with products, projects, and components all neatly organized. This approach not only improves the clarity and usability of SBOMs but also enhances the overall efficiency of your software development and security processes. By leveraging sbomify’s advanced grouping capabilities, you can ensure that your SBOMs are both comprehensive and easily accessible, enabling better collaboration and more informed decision-making across your organization. You can distribute these hierarchies easily using our [SBOM Hub & Trust Center]({{ site.url }}/features/trust-center/).
+
+## Release Management & Component Reuse
+
+Beyond static hierarchies, sbomify supports full **release management** for your SBOMs. You can define a Product Release that points to specific versions of component SBOMs. This means:
+
+- **Accurate History**: When you create a new release, your old SBOMs remain unchanged and accurate for that point in time.
+- **Efficient Reuse**: Because we leverage linkage, multiple products (or versions of a product) can reuse the same component SBOMs. You simply create a composition that points to the relevant artifacts for a given release, avoiding duplication and keeping your data clean.
+
+<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+    {% include d2/sbom-releases.svg %}
+</div>

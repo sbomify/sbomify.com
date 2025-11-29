@@ -1,0 +1,64 @@
+direction: right
+
+products: Product Releases {
+  class: group
+
+  # Grouping releases under the product
+  portal: Payment Portal {
+    style.stroke: transparent
+    style.fill: transparent
+
+    v2_0: v2.0 {
+      class: primary
+      tooltip: Stable Release
+    }
+
+    v2_1: v2.1 {
+      class: primary
+      tooltip: Latest Release
+    }
+  }
+}
+
+components: Component Artifacts {
+  class: group
+
+  # A component with multiple versions (artifacts)
+  user_api: User API {
+    class: group
+    style.fill: "#fff"
+
+    v1_2: v1.2 {
+      class: accent
+    }
+
+    v1_3: v1.3 {
+      class: accent
+    }
+  }
+
+  # A component with a single relevant version
+  stripe: Stripe Service {
+    class: group
+    style.fill: "#fff"
+
+    v4_2: v4.2 {
+      class: secondary
+    }
+  }
+}
+
+# Connections for v2.0
+products.portal.v2_0 -> components.user_api.v1_2: {class: flow}
+products.portal.v2_0 -> components.stripe.v4_2: {class: flow}
+
+# Connections for v2.1
+products.portal.v2_1 -> components.user_api.v1_3: {
+  class: flow
+  label: Upgraded
+}
+products.portal.v2_1 -> components.stripe.v4_2: {
+  class: flow
+  label: Reused
+  style.stroke-dash: 3
+}

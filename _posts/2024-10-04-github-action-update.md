@@ -11,7 +11,7 @@ In the last few weeks, we've worked hard on overhauling the [sbomify GitHub Acti
 
 As a refresher, the SBOM lifecycle looks like this:
 
-![Lifecycle](/assets/images/site/lifecycle.svg)
+![Lifecycle](/assets/images/d2/lifecycle.svg)
 
 Notice that there are three required steps in the Authoring phase:
 

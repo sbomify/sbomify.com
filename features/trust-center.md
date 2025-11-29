@@ -15,7 +15,7 @@ Turn transparency into a competitive advantage. Showcase your security posture w
     <a href="https://app.sbomify.com/public/product/eP_4dk8ixV/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-4 px-8 py-4 bg-[#8A7DFF] hover:bg-[#7A6DE5] !text-white !no-underline rounded-full font-medium transition-all duration-200 shadow-lg hover:shadow-[#8A7DFF]/25 hover:-translate-y-0.5">
         <span class="text-lg font-bold">View Live Demo</span>
         <div class="w-px h-6 bg-white/30"></div>
-        <img src="{{ '/assets/images/logo/badge.svg' | bust_cache }}" alt="sbomified" class="h-6 w-auto shadow-sm rounded-full" />
+        <img src="{{ '/assets/images/logo/badge.svg' | bust_cache }}" alt="sbomified" class="h-6 w-auto" />
     </a>
 </div>
 
@@ -29,7 +29,7 @@ Turn transparency into a competitive advantage. Showcase your security posture w
             icon_text_class="text-[#8A7DFF]"
             svg=icon_1
             title="Branded Portal"
-            description="Your trust center, your brand. Use your own domain (CNAME) and logo to present a unified professional image to customers."
+            description="Your trust center, your brand. Use your own domain and logo to present a unified professional image to customers."
         %}
 
         {% capture icon_2 %}
@@ -40,7 +40,7 @@ Turn transparency into a competitive advantage. Showcase your security posture w
             icon_text_class="text-blue-500"
             svg=icon_2
             title="Automated Publishing"
-            description="Stop manual uploads. Your trust center stays in sync with your CI/CD pipeline, automatically publishing new SBOMs upon release."
+            description="Stop manual uploads. Your trust center stays in sync with your CI/CD pipeline, automatically publishing new SBOMs for every software release. <a href='/features/generate-collaborate-analyze' class='text-blue-500 hover:underline'>Manage complex hierarchies</a> with ease."
         %}
 
         {% capture icon_3 %}
@@ -57,6 +57,28 @@ Turn transparency into a competitive advantage. Showcase your security posture w
 
 </div>
 
+<div class="mb-24">
+    <div class="flex flex-col lg:flex-row gap-16 items-center">
+        <div class="flex-1">
+            <h2 class="text-4xl font-bold text-[#201B4C] mb-6">The New Standard for Transparency</h2>
+            <p class="text-lg text-secondaryText mb-6 leading-relaxed">
+                Trust Centers are becoming essential, and buyers today are now expecting their vendors to provide Trust Centers with near realtime data about security posture and compliance status.
+            </p>
+            <p class="text-lg text-secondaryText mb-6 leading-relaxed">
+                With the <strong>EU Cyber Resilience Act (CRA)</strong>, SBOMs are now expected to be provided to stakeholders as part of their Trust Center.
+            </p>
+            <p class="text-lg text-secondaryText mb-8 leading-relaxed">
+                It is expected that more compliance frameworks are to adopt SBOMs as part of their security posture litmus test. The first one doing so is <strong>PCI DSS 4.0</strong>.
+            </p>
+        </div>
+        <div class="flex-1 w-full flex justify-center">
+            <div class="w-full max-w-lg">
+                {% include d2/sbom-hub.svg %}
+            </div>
+        </div>
+    </div>
+</div>
+
 {% include components/trust-center-pillars.html %}
 
 <div class="mb-24">
@@ -71,6 +93,7 @@ Turn transparency into a competitive advantage. Showcase your security posture w
                 {% include components/check-list-item.html title="Security Certifications" description="SOC 2, ISO 27001, and other audits" %}
                 {% include components/check-list-item.html title="Penetration Test Reports" description="Share summaries or full reports securely" %}
                 {% include components/check-list-item.html title="Compliance Attestations" description="Proof of regulatory adherence" %}
+                {% include components/check-list-item.html title="Programmatic Compliance" description="Express compliance documents programmatically alongside your SBOMs" %}
             </ul>
         </div>
         <div class="flex-1 w-full flex justify-center">

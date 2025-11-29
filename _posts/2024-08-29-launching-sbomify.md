@@ -19,7 +19,7 @@ sbomify automates the entire SBOM management process by integrating directly wit
 
 To understand how sbomify fits into the SBOM ecosystem, it’s essential to recognize the three key parts of the SBOM life cycle: [**generation, collaboration, and analysis**]({{ site.url }}/features/generate-collaborate-analyze/). sbomify focuses purely on the collaboration aspect, ensuring that once SBOMs are generated, they can be easily shared and accessed in real-time by all relevant stakeholders. We believe that efficient collaboration is the backbone of effective SBOM management, which is why we’ve built sbomify to excel in this area.
 
-![SBOM hub](/assets/images/site/marketplace.svg)
+![SBOM hub](/assets/images/site/marketplace.webp)
 
 However, we also recognize the importance of the other two components - generation and analysis. That’s why sbomify will be partnering and integrating with leading third-party providers who specialize in these areas. Our goal is to create a seamless experience where SBOMs can be generated, collaborated on, and analyzed, all through interconnected tools that work together to ensure comprehensive SBOM management.
 

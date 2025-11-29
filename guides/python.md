@@ -77,7 +77,7 @@ There are a number of tools available to generate SBOMs for Python on our [Resou
 
 It's important to stress that regardless of the tool you use, you still need to go through all steps in the [SBOM lifecycle]({{ site.url }}/features/generate-collaborate-analyze/).
 
-![Lifecycle](/assets/images/site/lifecycle.svg)
+![Lifecycle](/assets/images/d2/lifecycle.svg)
 
 The output of any of the tools completes the first step (e.g., "Generation"), but you still need to do Enrichment and Augmentation to have a complete SBOM.
 

@@ -279,6 +279,12 @@ a.button {
     border-radius: 12px;
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
   }
+  
+  /* Add specific overrides for profile images in grid layouts to prevent large margins */
+  .grid img, .flex img {
+     margin-top: 0;
+     margin-bottom: 0;
+  }
 
   /* Image captions */
   img + em {

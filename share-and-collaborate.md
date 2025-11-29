@@ -13,7 +13,7 @@ sbomify's groundbreaking integration with CI/CD pipelines sets a new standard in
 
 ## Centralized SBOM Management Solutions
 
-![](/assets/images/site/marketplace.svg)
+![](/assets/images/site/marketplace.webp)
 
 Recognizing that an SBOM represents a specific moment in time highlights the importance of a centralized sbom management tool where the latest versions are always available. sbomify fulfills this need by offering a platform where stakeholders can access the most current SBOMs at any time. This immediate access is vital for informed decision-making regarding software security, compliance, and risk management.
 
@@ -31,7 +31,7 @@ In an era marked by the critical impact of software vulnerabilities, sbomify pro
 
 What also makes sbomify unique is our approach to constructing SBOMs. Unlike other tools that simply flattens SBOMs into one file, losing critical contextual data (such as where an affected component lives), sbomify uses a structure of product, project and components. This tree like structure leverages the latest functionalities in both CycloneDX and SPDX 3 to link together multiple SBOMs into a nested SBOM structure, rather than a flat singular file.
 
-![](/assets/images/site/sbom-hierarchy.svg)
+![](/assets/images/d2/sbom-hierarchy.svg)
 
 By doing this, we get the best of both world: clear clean structure, without leaving any data out. In the example above, we use the example of a Smart Thermostat. It has both a physical component (i.e. the thermostat firmware), as well as three separate SBOMs that makes up the Backend that the thermostat is communicating with. Using sbomify, the company can either share individual SBOMs (such as the Rust SBOM), or the entire product SBOM (aggregating all sub-components) with either internal or external stakeholders.
 

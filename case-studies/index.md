@@ -60,11 +60,11 @@ description: "Discover how leading organizations are using sbomify to streamline
     <p class="text-lg text-secondaryText mb-8">
       Join these organizations in securing your software supply chain.
     </p>
-    <div class="flex gap-4 justify-center">
-      <a href="https://app.sbomify.com" class="px-8 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-semibold transition-all duration-200">
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="https://app.sbomify.com" class="inline-flex items-center justify-center px-8 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-semibold transition-all duration-200">
         Get Started Free
       </a>
-      <a href="mailto:hello@sbomify.com" class="px-8 py-3 bg-white border-2 border-gray-200 hover:border-[#8A7DFF] text-primaryText rounded-full font-semibold transition-all duration-200">
+      <a href="mailto:hello@sbomify.com" class="inline-flex items-center justify-center px-8 py-3 bg-white border-2 border-gray-200 hover:border-[#8A7DFF] text-primaryText rounded-full font-semibold transition-all duration-200">
         Contact Sales
       </a>
     </div>

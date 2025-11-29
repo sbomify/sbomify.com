@@ -4,7 +4,7 @@ title: Pricing
 description: Simple, transparent pricing for teams of all sizes
 ---
 
-<div class="bg-primaryBG py-16 lg:py-24">
+<div class="bg-primaryBG py-12 md:py-16 lg:py-24">
 <div class="pricing-page">
   <div class="pricing-header">
     <h1>Pricing Plans</h1>
@@ -47,7 +47,7 @@ description: Simple, transparent pricing for teams of all sizes
             <li><a href="/features/sbom-hierarchy/">5 Components per Project</a></li>
             <li>Unlimited SBOMs & compliance documents</li>
             <li>Public documents only</li>
-            <li><a href="/features/public-sbom-portal/">Public trust center</a></li>
+            <li><a href="/features/trust-center/">Public trust center</a></li>
             <li>Manual exports only</li>
             <li>Basic compliance reporting</li>
             <li>Single user with community support</li>
@@ -87,7 +87,7 @@ description: Simple, transparent pricing for teams of all sizes
             <li><a href="/features/sbom-hierarchy/">20 Components per Project</a></li>
             <li>Unlimited SBOMs & compliance documents</li>
             <li>Private documents with optional public sharing</li>
-            <li><a href="/features/public-sbom-portal/">Custom trust center on your domain</a></li>
+            <li><a href="/features/trust-center/">Custom trust center on your domain</a></li>
             <li>Standard Integrations</li>
             <li>Automated reports & vulnerability insights</li>
             <li>Team/role-based access</li>
@@ -126,7 +126,7 @@ description: Simple, transparent pricing for teams of all sizes
             <li><a href="/features/sbom-hierarchy/">Unlimited Projects</a></li>
             <li><a href="/features/sbom-hierarchy/">Unlimited Components</a></li>
             <li>Unlimited SBOMs & compliance documents</li>
-            <li><a href="/features/public-sbom-portal/">Custom trust center on your domain</a></li>
+            <li><a href="/features/trust-center/">Custom trust center on your domain</a></li>
             <li>Enterprise-grade controls (RBAC, audits, etc.)</li>
             <li>Custom & Advanced Integrations</li>
             <li>Advanced dashboards & compliance modules</li>
@@ -146,31 +146,31 @@ description: Simple, transparent pricing for teams of all sizes
 </div>
 
 <!-- FAQ Section -->
-<div class="mt-24">
-    <h2 class="text-white text-3xl font-medium mb-12 text-center">Frequently Asked Questions</h2>
+<div class="mt-16 md:mt-24">
+    <h2 class="text-white text-2xl md:text-3xl font-medium mb-8 md:mb-12 text-center">Frequently Asked Questions</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-8">
+      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-6 md:p-8">
         <h3 class="text-[#8A7DFF] text-lg font-semibold mb-4">What's included in the free tier?</h3>
         <p class="text-gray-300 leading-relaxed">The Community tier is perfect for open source projects and includes public SBOM hosting, 1 product with 1 project and 5 components, and community support.</p>
       </div>
 
-      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-8">
+      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-6 md:p-8">
         <h3 class="text-[#8A7DFF] text-lg font-semibold mb-4">Can I upgrade or downgrade at any time?</h3>
         <p class="text-gray-300 leading-relaxed">Yes, you can change your plan at any time. Your billing will be prorated accordingly.</p>
       </div>
 
-      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-8">
+      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-6 md:p-8">
         <h3 class="text-[#8A7DFF] text-lg font-semibold mb-4">What payment methods do you accept?</h3>
         <p class="text-gray-300 leading-relaxed">We accept all major credit cards and can arrange alternative payment methods for enterprise customers.</p>
       </div>
 
-      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-8">
+      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-6 md:p-8">
         <h3 class="text-[#8A7DFF] text-lg font-semibold mb-4">Do you offer custom solutions?</h3>
         <p class="text-gray-300 leading-relaxed">Yes, our enterprise tier can be customized to meet your specific needs. Contact our sales team to learn more.</p>
       </div>
 
-      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-8">
+      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-6 md:p-8">
         <h3 class="text-[#8A7DFF] text-lg font-semibold mb-4">Can I self-host Sbomify?</h3>
         <p class="text-gray-300 leading-relaxed">Yes! Sbomify is open source and available for self-hosting. Check out our <a href="https://github.com/sbomify/sbomify" class="text-[#8A7DFF] hover:text-[#9A8DFF] underline">GitHub repository</a> for installation instructions and documentation.</p>
       </div>
