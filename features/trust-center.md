@@ -29,7 +29,7 @@ Turn transparency into a competitive advantage. Showcase your security posture w
             icon_text_class="text-[#8A7DFF]"
             svg=icon_1
             title="Branded Portal"
-            description="Your trust center, your brand. Use your own domain (CNAME) and logo to present a unified professional image to customers."
+            description="Your trust center, your brand. Use your own domain and logo to present a unified professional image to customers."
         %}
 
         {% capture icon_2 %}
@@ -40,7 +40,7 @@ Turn transparency into a competitive advantage. Showcase your security posture w
             icon_text_class="text-blue-500"
             svg=icon_2
             title="Automated Publishing"
-            description="Stop manual uploads. Your trust center stays in sync with your CI/CD pipeline, automatically publishing new SBOMs upon release."
+            description="Stop manual uploads. Your trust center stays in sync with your CI/CD pipeline, automatically publishing new SBOMs for every software release. <a href='/features/generate-collaborate-analyze' class='text-blue-500 hover:underline'>Manage complex hierarchies</a> with ease."
         %}
 
         {% capture icon_3 %}
@@ -71,6 +71,7 @@ Turn transparency into a competitive advantage. Showcase your security posture w
                 {% include components/check-list-item.html title="Security Certifications" description="SOC 2, ISO 27001, and other audits" %}
                 {% include components/check-list-item.html title="Penetration Test Reports" description="Share summaries or full reports securely" %}
                 {% include components/check-list-item.html title="Compliance Attestations" description="Proof of regulatory adherence" %}
+                {% include components/check-list-item.html title="Programmatic Compliance" description="Express compliance documents programmatically alongside your SBOMs" %}
             </ul>
         </div>
         <div class="flex-1 w-full flex justify-center">
