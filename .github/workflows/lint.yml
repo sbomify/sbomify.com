@@ -72,4 +72,4 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Run HTML Proofer
-        run: docker run --rm sbomify:test sh -c "bundle exec jekyll build && bundle exec htmlproofer ./_site --disable-external"
+        run: docker run --rm sbomify:test sh -c "git config --global --add safe.directory /usr/src/app && bundle exec jekyll build && bundle exec htmlproofer ./_site --disable-external"
