@@ -92,6 +92,6 @@ This ensures you're using verified dependency versions, reducing the risk of vul
 
 ### Wrapping up
 
-For a thorough walkthrough on generating SBOMs, check out our [comprehensive guide]( {{ site.url }}/2024/05/27/comprehensive-guide-to-generating-and-understanding-sboms-with-docker-and-django-cms/). This resource covers generating SBOMs using Docker and Django CMS, with applicable insights for any Python project.
+For a thorough walkthrough on generating SBOMs, check out our [comprehensive guide]({{ site.baseurl }}{% post_url 2024-05-27-comprehensive-guide-to-generating-and-understanding-sboms-with-docker-and-django-cms %}). This resource covers generating SBOMs using Docker and Django CMS, with applicable insights for any Python project.
 
 Generating SBOMs for Python packages, including all dependencies, is vital for security and compliance. Tools like `pipdeptree` and CycloneDX-Python make this process straightforward. By following best practices such as pinning dependencies with hashes, you can further secure your project.
