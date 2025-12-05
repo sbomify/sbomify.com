@@ -15,13 +15,13 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <!-- GitHub -->
-      <div class="bg-[#201B4C] rounded-2xl p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="github">
-        <div class="flex items-center justify-between mb-6">
-          <div class="flex items-center gap-3">
+      <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="github">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+          <div class="flex flex-wrap items-center gap-3">
             <img src="{{ '/assets/images/site/github.svg' | bust_cache }}" class="h-8 w-auto" alt="GitHub">
             <div id="gh-latest-release" class="hidden"></div>
           </div>
-          <a href="https://github.com/marketplace/actions/sbomify" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors" target="_blank">View on Marketplace →</a>
+          <a href="https://github.com/marketplace/actions/sbomify" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on Marketplace →</a>
         </div>
         <p class="text-gray-300 mb-6">
           GitHub is at the core of many organizations. Our <a href="https://github.com/sbomify/github-action" class="text-[#8A7DFF] hover:text-white transition-colors">GitHub Action</a> makes integration straightforward.
@@ -43,10 +43,10 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
       </div>
 
       <!-- GitLab -->
-      <div class="bg-[#201B4C] rounded-2xl p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="gitlab">
-        <div class="flex items-center justify-between mb-6">
-          <img src="{{ '/assets/images/site/gitlab.svg' | bust_cache }}" class="h-8 w-auto" alt="GitLab">
-          <a href="https://gitlab.com/sbomify/gitlab-pipeline" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors" target="_blank">View Pipeline →</a>
+      <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="gitlab">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+          <img src="{{ '/assets/images/site/gitlab.svg' | bust_cache }}" class="h-8 w-auto self-start md:self-center" alt="GitLab">
+          <a href="https://gitlab.com/sbomify/gitlab-pipeline" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View Pipeline →</a>
         </div>
         <p class="text-gray-300 mb-6">
           For GitLab users, we provide a dedicated pipeline template.
@@ -72,10 +72,10 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
       </div>
 
       <!-- Bitbucket -->
-      <div class="bg-[#201B4C] rounded-2xl p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="bitbucket">
-        <div class="flex items-center justify-between mb-6">
-          <img src="{{ '/assets/images/site/bitbucket.svg' | bust_cache }}" class="h-8 w-auto" alt="Bitbucket">
-          <a href="https://bitbucket.org/sbomify/bitbucket-pipe/" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors" target="_blank">View Pipe →</a>
+      <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="bitbucket">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+          <img src="{{ '/assets/images/site/bitbucket.svg' | bust_cache }}" class="h-8 w-auto self-start md:self-center" alt="Bitbucket">
+          <a href="https://bitbucket.org/sbomify/bitbucket-pipe/" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View Pipe →</a>
         </div>
         <p class="text-gray-300 mb-6">
           Seamlessly integrate with Bitbucket Pipelines using our official pipe.
@@ -101,10 +101,10 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
       </div>
 
       <!-- Docker -->
-      <div class="bg-[#201B4C] rounded-2xl p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="docker">
-        <div class="flex items-center justify-between mb-6">
-          <img src="{{ '/assets/images/site/docker.svg' | bust_cache }}" class="h-8 w-auto" alt="Docker">
-          <span class="text-sm font-semibold text-gray-400">Universal Support</span>
+      <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="docker">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+          <img src="{{ '/assets/images/site/docker.svg' | bust_cache }}" class="h-8 w-auto self-start md:self-center" alt="Docker">
+          <span class="text-sm font-semibold text-gray-400 whitespace-nowrap">Universal Support</span>
         </div>
         <p class="text-gray-300 mb-6">
           For any other CI/CD system, you can use our Docker image directly.
@@ -134,7 +134,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <!-- OSV -->
-      <div class="bg-[#201B4C] rounded-2xl p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col">
+      <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col">
         <img src="{{ '/assets/images/site/osv.svg' | bust_cache }}" class="h-8 w-auto mb-6 self-start" alt="Google OSV">
         <h3 class="text-xl font-bold text-white mb-3">Google OSV</h3>
         <p class="text-gray-300 flex-grow">
@@ -143,7 +143,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
       </div>
 
       <!-- Dependency Track -->
-      <div class="bg-[#201B4C] rounded-2xl p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col">
+      <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col">
         <img src="{{ '/assets/images/site/dependency-track-white.svg' | bust_cache }}" class="h-8 w-auto mb-6 self-start" alt="Dependency Track">
         <h3 class="text-xl font-bold text-white mb-3">Dependency Track</h3>
         <p class="text-gray-300 mb-4 flex-grow">
@@ -169,7 +169,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
       <p class="text-lg text-secondaryText">Add context to your artifacts automatically.</p>
     </div>
 
-    <div class="bg-[#201B4C] rounded-2xl p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all">
+    <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all">
       <div class="flex flex-col md:flex-row gap-8 items-start">
         <div class="flex-shrink-0">
           <img src="{{ '/assets/images/site/ecosystems-white.svg' | bust_cache }}" class="h-10 w-auto" alt="Ecosyste.ms">
