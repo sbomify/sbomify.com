@@ -46,6 +46,7 @@ This is a massive release for the sbomify platform, involving a complete fronten
 ### Architecture Changes
 
 We have almost completed the full migration from Vue.js to a stack of **Django + HTMX + Alpine.js**.
+
 - Removed ~3,700 lines of Vue code.
 - All frontend is now server-driven with Django templates.
 - Added [`ADR-001`](https://github.com/sbomify/sbomify/blob/master/docs/ADR/ADR-001.md) (Django Monolith) and [`ADR-002`](https://github.com/sbomify/sbomify/blob/master/docs/ADR/ADR-002.md) (Languages & Frameworks) to our architectural decision records.
@@ -55,9 +56,9 @@ We have almost completed the full migration from Vue.js to a stack of **Django +
 - **Caddy Reverse Proxy**: Now handling automatic Let's Encrypt TLS certificate management and health monitoring.
 - **Custom Domain Support**: Workspaces can now use custom domains with auto-provisioned TLS and automated validation.
 - **Security**:
-    - Added Turnstile CAPTCHA on enterprise contact forms.
-    - Enhanced client IP detection with spoofing protection.
-    - Keycloak authentication fixes.
+  - Added Turnstile CAPTCHA on enterprise contact forms.
+  - Enhanced client IP detection with spoofing protection.
+  - Keycloak authentication fixes.
 
 ### New Features
 
