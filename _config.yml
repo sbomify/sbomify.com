@@ -51,6 +51,8 @@ sass:
   sourcemap: never
   sass_dir: _sass
 
+posthog_api_key: phc_kWvZ17AgVDC3CAEHYG2oQBYEg5lUnyK3brPqJ6P4nPH
+
 # Build settings
 markdown: kramdown
 highlighter: rouge
