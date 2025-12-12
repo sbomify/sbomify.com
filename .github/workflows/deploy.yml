@@ -63,3 +63,37 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  sbom-javascript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Upload SBOM
+        uses: sbomify/github-action@master
+        env:
+          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+          COMPONENT_ID: 'XalR981KPFba'
+          COMPONENT_NAME: 'Marketing Site (JavaScript)'
+          COMPONENT_VERSION: ${{ github.ref_type == 'tag' && github.ref_name || format('{0}-{1}', github.ref_name, github.sha) }}
+          LOCK_FILE: 'package-lock.json'
+          AUGMENT: true
+          ENRICH: true
+          OUTPUT_FILE: sbom.cdx.json
+
+  sbom-ruby:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Upload SBOM
+        uses: sbomify/github-action@master
+        env:
+          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+          COMPONENT_ID: 'jtYGL1IMu1gQ'
+          COMPONENT_NAME: 'Marketing Site (Ruby)'
+          COMPONENT_VERSION: ${{ github.ref_type == 'tag' && github.ref_name || format('{0}-{1}', github.ref_name, github.sha) }}
+          LOCK_FILE: 'Gemfile.lock'
+          AUGMENT: true
+          ENRICH: true
+          OUTPUT_FILE: sbom.cdx.json
