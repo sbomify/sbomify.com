@@ -51,8 +51,7 @@ sass:
   sourcemap: never
   sass_dir: _sass
 
-google_analytics: G-4DYDPF55FX
-
+posthog_api_key: phc_kWvZ17AgVDC3CAEHYG2oQBYEg5lUnyK3brPqJ6P4nPH
 
 # Build settings
 markdown: kramdown

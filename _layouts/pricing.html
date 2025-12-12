@@ -293,10 +293,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   toggle.addEventListener('change', function() {
     const billingType = this.checked ? 'Annual' : 'Monthly';
-    gtag('event', 'billing_toggle', {
-      'event_category': 'Pricing',
-      'event_label': `Switch to ${billingType}`
-    });
+    posthog.capture('billing_toggle', { location: 'pricing', billing_type: billingType });
     updatePrices(this.checked);
   });
 
