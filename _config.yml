@@ -51,9 +51,6 @@ sass:
   sourcemap: never
   sass_dir: _sass
 
-google_analytics: G-4DYDPF55FX
-
-
 # Build settings
 markdown: kramdown
 highlighter: rouge
