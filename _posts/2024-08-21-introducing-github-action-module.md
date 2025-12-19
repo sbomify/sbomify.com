@@ -28,7 +28,7 @@ Getting started with sbomify is easy! Here's how you can integrate it into your 
 2. **Add sbomify to Your Workflow**: Add the sbomify Action to your GitHub Actions workflow by modifying your `.yml` file(s). You can find detailed setup instructions in the [sbomify GitHub repository](https://github.com/sbomify/github-action).
 3. **Run Your Workflow**: Once integrated, every time your workflow runs, sbomify will automaticaally upload the generated SBOM for your project, which in turn can shared with your stakeholders. No more manual sharing of SBOMs over emails, your stakeholders can automatically pull down the latest SBOM directly from sbomify when they need it, ensuring they always have the latest version.
 
-Here’s a quick example of how to include sbomify in your workflow:
+Here's a quick example of how to include sbomify in your workflow:
 
 ```yaml
 name: Build and Generate SBOM
@@ -46,10 +46,17 @@ jobs:
 
     - name: Upload SBOM
       uses: sbomify/github-action@master
-      with:
-        token: ${% raw %}{{ secrets.SBOMIFY_TOKEN }}{% endraw %}
-        sbom-file: 'sbom-file.json'
+      env:
+        TOKEN: ${%raw%}{{ secrets.SBOMIFY_TOKEN }}{%endraw%}
+        COMPONENT_ID: 'my-component-id'
+        SBOM_FILE: 'sbom-file.json'
+        COMPONENT_NAME: 'my-app'
+        COMPONENT_VERSION: ${%raw%}{{ github.ref_name }}{%endraw%}
+        AUGMENT: true
+        ENRICH: true
 ```
+
+For more details on using the GitHub Action and other CI/CD integrations, see our [integrations page]({{ site.url }}/features/integrations/).
 
 ## Not using GitHub Actions?
 

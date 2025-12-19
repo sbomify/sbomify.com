@@ -55,10 +55,7 @@ description: Simple, transparent pricing for teams of all sizes
         </div>
       </div>
       <div class="card-footer">
-        <a href="https://app.sbomify.com" class="cta-button" onclick="gtag('event', 'click', {
-          'event_category': 'Pricing',
-          'event_label': 'Community Plan Signup'
-        })">Sign Up</a>
+        <a href="https://app.sbomify.com" class="cta-button" onclick="posthog.capture('cta_click', { location: 'pricing', label: 'Community Plan Signup' })">Sign Up</a>
       </div>
     </div>
 
@@ -96,10 +93,7 @@ description: Simple, transparent pricing for teams of all sizes
         </div>
       </div>
       <div class="card-footer">
-        <a href="https://app.sbomify.com" class="cta-button" onclick="gtag('event', 'click', {
-          'event_category': 'Pricing',
-          'event_label': 'Business Plan Signup'
-        })">Sign Up</a>
+        <a href="https://app.sbomify.com" class="cta-button" onclick="posthog.capture('cta_click', { location: 'pricing', label: 'Business Plan Signup' })">Sign Up</a>
       </div>
     </div>
 
@@ -136,10 +130,7 @@ description: Simple, transparent pricing for teams of all sizes
         </div>
       </div>
       <div class="card-footer">
-        <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" onclick="gtag('event', 'click', {
-          'event_category': 'Pricing',
-          'event_label': 'Enterprise Plan Contact'
-        })">Contact Us</a>
+        <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" onclick="posthog.capture('cta_click', { location: 'pricing', label: 'Enterprise Plan Contact' })">Contact Us</a>
       </div>
     </div>
 

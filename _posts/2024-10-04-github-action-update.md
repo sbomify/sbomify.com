@@ -11,7 +11,9 @@ In the last few weeks, we've worked hard on overhauling the [sbomify GitHub Acti
 
 As a refresher, the SBOM lifecycle looks like this:
 
-![Lifecycle](/assets/images/d2/lifecycle.svg)
+<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+    {% include d2/lifecycle.svg %}
+</div>
 
 Notice that there are three required steps in the Authoring phase:
 
@@ -30,6 +32,8 @@ This is what it looks like in your Actions YAML file:
     TOKEN: ${%raw%}{{ secrets.SBOMIFY_TOKEN }}{%endraw%}
     COMPONENT_ID: 'my-component-id'
     SBOM_FILE: 'sbom-file.json'
+    COMPONENT_NAME: 'my-app'
+    COMPONENT_VERSION: ${%raw%}{{ github.ref_name }}{%endraw%}
     AUGMENT: true
     ENRICH: true
 ```
@@ -37,16 +41,17 @@ This is what it looks like in your Actions YAML file:
 We didn't stop there. You can also now use the action in stand-alone mode without sbomify to generate SBOMs:
 
 ```yaml
-- name: Upload SBOM
+- name: Generate SBOM
   uses: sbomify/github-action@master
   env:
-    TOKEN: ${%raw%}{{ secrets.SBOMIFY_TOKEN }}{%endraw%}
-    COMPONENT_ID: 'placeholder'
     LOCK_FILE: 'requirements.txt'
-    AUGMENT: false
+    COMPONENT_NAME: 'my-python-app'
+    COMPONENT_VERSION: ${%raw%}{{ github.ref_name }}{%endraw%}
     ENRICH: true
     UPLOAD: false
     OUTPUT_FILE: 'my_sbom.cdx.json'
 ```
 
-This will take the file `requirements.txt`, build an SBOM, then enrich the SBOM (using Parlay), and finally write the file `my_sbom.cdx.json` to disk.
+This will take the file `requirements.txt`, build an SBOM, then enrich the SBOM (using Ecosyste.ms), and finally write the file `my_sbom.cdx.json` to disk.
+
+For more details on using the GitHub Action and other CI/CD integrations, see our [integrations page]({{ site.url }}/features/integrations/).

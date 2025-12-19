@@ -34,7 +34,8 @@ The job looks something like this:
           TOKEN: ${%raw%}{{ secrets.SBOMIFY_TOKEN }}{%endraw%}
           COMPONENT_ID: 'Gu9wem8mkX'
           LOCK_FILE: 'poetry.lock'
-          SBOM_VERSION: [...]
+          COMPONENT_NAME: 'sbomify-github-action'
+          COMPONENT_VERSION: ${%raw%}{{ github.ref_name }}{%endraw%}
           AUGMENT: true
           ENRICH: true
           UPLOAD: true
@@ -43,8 +44,10 @@ The job looks something like this:
       - name: Attest
         uses: actions/attest-build-provenance@v1
         with:
-          subject-path: 'path/to/github-action.cdx.json'
+          subject-path: '${%raw%}{{ github.workspace }}{%endraw%}/github-action.cdx.json'
 ```
+
+For more details on using the GitHub Action and other CI/CD integrations, see our [integrations page]({{ site.url }}/features/integrations/).
 
 What’s great about this is that it removes the need to trust sbomify directly. You can verify the SBOM independently as follows:
 

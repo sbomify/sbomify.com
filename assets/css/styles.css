@@ -2197,6 +2197,10 @@ video {
     gap: 1rem;
   }
 
+  .md\:self-center {
+    align-self: center;
+  }
+
   .md\:p-10 {
     padding: 2.5rem;
   }
