@@ -3,13 +3,12 @@ module.exports = {
   content: [
     './_includes/**/*.html',
     './_layouts/**/*.html',
-    './_pages/**/*.html',
-    './_posts/**/*.md',
-    './_posts/**/*.html',
-    './*.md',
-    '*.html',
-    './*.html',
-    './**/*.html',
+    './_posts/**/*.{html,md}',
+    './*.{html,md}',
+    './features/**/*.{html,md}',
+    './case-studies/**/*.{html,md}',
+    './guides/**/*.{html,md}',
+    './blog/**/*.html',
   ],
   theme: {
     extend: {
