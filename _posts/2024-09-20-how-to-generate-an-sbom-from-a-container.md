@@ -3,7 +3,8 @@ layout: post
 title: "How to generate an SBOM from a Docker container"
 author:
   display_name: Viktor
-categories: sbom docker tutorial education
+category: guide
+tags: [sbom, docker, tutorial]
 
 ---
 

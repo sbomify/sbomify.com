@@ -4,7 +4,8 @@ status: publish
 published: true
 title: Understanding ISO 42001 and the Integration of SBOMs for Enhanced Operational
   Resilience
-categories: Standards, Security, Best Practices
+category: compliance
+tags: [sbom, iso42001, ai, standards]
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -15,7 +16,6 @@ wordpress_id: 218
 wordpress_url: https://sbomify.com/?p=218
 date: '2024-05-02 20:10:14 +0200'
 date_gmt: '2024-05-02 20:10:14 +0200'
-tags: []
 comments: []
 redirect_from: /2024/05/02/understanding-iso-42001-and-the-integration-of-sboms-for-enhanced-operational-resilience/
 

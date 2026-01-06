@@ -2,7 +2,8 @@
 layout: post
 title: "sbomify Goes Open Source: A New Chapter in SBOM Management"
 date: 2025-01-31 09:00:00 +0000
-categories: announcement opensource
+category: announcement
+tags: [sbom, open-source]
 author:
   display_name: Viktor
 ---

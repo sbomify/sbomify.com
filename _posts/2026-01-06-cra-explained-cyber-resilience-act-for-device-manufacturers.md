@@ -3,7 +3,8 @@ layout: post
 title: "CRA Explained: What the Cyber Resilience Act Means for Device Manufacturers"
 author:
   display_name: Viktor
-categories: compliance, security, CRA, podcast
+category: podcast
+tags: [CRA, compliance, security, sbom]
 ---
 
 The EU Cyber Resilience Act (CRA) is transforming how device manufacturers approach cybersecurity. To break down what this means in practice, Viktor sat down with Sarah Fluchs on the Nerding Out with Viktor podcast.

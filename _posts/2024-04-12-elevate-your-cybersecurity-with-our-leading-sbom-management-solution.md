@@ -3,7 +3,8 @@ layout: post
 status: publish
 published: true
 title: Elevate Your Cybersecurity with Our Leading SBOM Management Solution
-categories: security, sbom, cybersecurity
+category: education
+tags: [sbom, security]
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -14,9 +15,6 @@ wordpress_id: 202
 wordpress_url: https://sbomify.com/?p=202
 date: '2024-04-12 13:27:53 +0200'
 date_gmt: '2024-04-12 13:27:53 +0200'
-tags:
-- sbom
-- nist
 comments: []
 redirect_from: /2024/04/12/elevate-your-cybersecurity-with-our-leading-sbom-management-solution/
 

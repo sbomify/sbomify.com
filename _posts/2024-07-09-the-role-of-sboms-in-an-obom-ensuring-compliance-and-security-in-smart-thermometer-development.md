@@ -13,8 +13,8 @@ wordpress_id: 272
 wordpress_url: https://sbomify.com/?p=272
 date: '2024-07-09 15:04:57 +0200'
 date_gmt: '2024-07-09 15:04:57 +0200'
-categories: Security Compliance IoT SBOM
-tags: []
+category: education
+tags: [sbom, obom, iot, compliance]
 comments: []
 ---
 

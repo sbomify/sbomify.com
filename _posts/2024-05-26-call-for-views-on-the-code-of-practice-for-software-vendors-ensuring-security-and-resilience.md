@@ -14,8 +14,8 @@ wordpress_id: 244
 wordpress_url: https://sbomify.com/?p=244
 date: '2024-05-26 06:33:13 +0200'
 date_gmt: '2024-05-26 06:33:13 +0200'
-categories: security, tools, sbom
-tags: []
+category: news
+tags: [security, compliance, uk]
 comments: []
 redirect_from: /2024/05/26/call-for-views-on-the-code-of-practice-for-software-vendors-ensuring-security-and-resilience/
 

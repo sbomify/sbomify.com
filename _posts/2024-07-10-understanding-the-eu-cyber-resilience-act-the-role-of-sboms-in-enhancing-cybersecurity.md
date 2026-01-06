@@ -3,7 +3,8 @@ layout: post
 status: publish
 published: true
 title: 'Understanding the EU Cyber Resilience Act: The Role of SBOMs in Enhancing Cybersecurity'
-categories: compliance, security, sbom, standards, CRA
+category: compliance
+tags: [CRA, security, sbom, standards]
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -13,7 +14,6 @@ wordpress_id: 277
 wordpress_url: https://sbomify.com/?p=277
 date: '2024-07-10 09:11:34 +0200'
 date_gmt: '2024-07-10 09:11:34 +0200'
-tags: []
 comments: []
 redirect_from: /2024/07/10/understanding-the-eu-cyber-resilience-act-the-role-of-sboms-in-enhancing-cybersecurity/
 

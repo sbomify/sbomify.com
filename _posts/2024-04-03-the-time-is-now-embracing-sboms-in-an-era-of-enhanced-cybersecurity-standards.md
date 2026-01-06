@@ -13,8 +13,8 @@ wordpress_id: 146
 wordpress_url: https://sbomify.com/?p=146
 date: '2024-04-03 17:00:57 +0200'
 date_gmt: '2024-04-03 17:00:57 +0200'
-categories: Security Compliance SBOM
-tags: []
+category: compliance
+tags: [sbom, security, standards]
 comments: []
 redirect_from: /2024/04/03/the-time-is-now-embracing-sboms-in-an-era-of-enhanced-cybersecurity-standards/
 

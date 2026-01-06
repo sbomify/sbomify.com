@@ -3,7 +3,8 @@ layout: post
 title: "Announcing GitHub Action 0.7.0 and sbomify 0.19"
 author:
   display_name: Viktor
-categories: sbom, tools, announcement, release, github-actions
+category: announcement
+tags: [sbom, release, github-actions]
 ---
 
 ![Zero to SBOM Hero](/assets/images/release-0-19-cover.png)

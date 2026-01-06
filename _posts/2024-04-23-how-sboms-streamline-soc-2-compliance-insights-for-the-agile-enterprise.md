@@ -3,7 +3,8 @@ layout: post
 status: publish
 published: true
 title: 'How SBOMs Streamline SOC 2 Compliance: Insights for the Agile Enterprise'
-categories: sbom, compliance, security, enterprise
+category: compliance
+tags: [sbom, soc2, security]
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -14,7 +15,6 @@ wordpress_id: 211
 wordpress_url: https://sbomify.com/?p=211
 date: '2024-04-23 20:00:59 +0200'
 date_gmt: '2024-04-23 20:00:59 +0200'
-tags: []
 comments: []
 redirect_from: /2024/04/23/how-sboms-streamline-soc-2-compliance-insights-for-the-agile-enterprise/
 

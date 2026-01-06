@@ -13,8 +13,8 @@ wordpress_id: 144
 wordpress_url: https://sbomify.com/?p=144
 date: '2024-04-03 13:55:39 +0200'
 date_gmt: '2024-04-03 13:55:39 +0200'
-categories: Security Business Due-Diligence
-tags: []
+category: compliance
+tags: [sbom, mergers-acquisitions, due-diligence]
 comments: []
 redirect_from: /2024/04/03/elevating-ma-due-diligence-with-sbomifys-sbom-management/
 

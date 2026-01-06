@@ -3,7 +3,8 @@ layout: post
 title: "Announcing sbomify v0.20: Custom Domains & Streamlined Onboarding"
 author:
   display_name: Viktor
-categories: sbom, announcement, release
+category: announcement
+tags: [sbom, release]
 ---
 
 ![sbomify v0.20 Release](/assets/images/release-0-20-cover.png)

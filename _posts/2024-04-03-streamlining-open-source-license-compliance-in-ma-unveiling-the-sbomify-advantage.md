@@ -3,7 +3,8 @@ layout: post
 status: publish
 published: true
 title: "Streamlining Open Source License Compliance in M&A: Unveiling the sbomify Advantage"
-categories: compliance, sbom, open-source, mergers-acquisitions
+category: compliance
+tags: [sbom, open-source, licenses, mergers-acquisitions]
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -14,7 +15,6 @@ wordpress_id: 56
 wordpress_url: https://sbomify.com/?p=56
 date: '2024-04-03 12:29:20 +0200'
 date_gmt: '2024-04-03 12:29:20 +0200'
-tags: []
 comments: []
 redirect_from: /2024/04/03/streamlining-open-source-license-compliance-in-ma-unveiling-the-sbomify-advantage/
 

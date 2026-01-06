@@ -3,7 +3,8 @@ layout: post
 status: publish
 published: true
 title: Enhancing SBOM Management for Buyers with sbomify
-categories: security, sbom, tools
+category: education
+tags: [sbom, buyers, procurement]
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -14,7 +15,6 @@ wordpress_id: 140
 wordpress_url: https://sbomify.com/?p=140
 date: '2024-04-03 13:53:55 +0200'
 date_gmt: '2024-04-03 13:53:55 +0200'
-tags: []
 comments: []
 redirect_from: /2024/04/03/enhancing-sbom-management-for-buyers-with-sbomify/
 

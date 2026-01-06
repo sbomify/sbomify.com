@@ -3,7 +3,8 @@ layout: post
 title: "Understanding Sigstore: Securing the Software Supply Chain"
 author:
   display_name: Cowboy Neil
-categories: security, tools, sbom, education
+category: education
+tags: [sigstore, security, signing]
 
 ---
 
