@@ -3,7 +3,7 @@ layout: post
 status: publish
 published: true
 title: 'Understanding the EU Cyber Resilience Act: The Role of SBOMs in Enhancing Cybersecurity'
-categories: compliance, security, sbom, standards
+categories: compliance, security, sbom, standards, CRA
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
