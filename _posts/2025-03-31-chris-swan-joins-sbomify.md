@@ -2,7 +2,8 @@
 layout: post
 title: "Chris Swan Joins sbomify Advisory Board"
 date: 2025-02-21 09:00:00 +0000
-categories: []
+category: announcement
+tags: [team]
 author:
   display_name: Viktor
 

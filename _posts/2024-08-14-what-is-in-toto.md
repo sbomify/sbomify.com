@@ -3,7 +3,8 @@ layout: post
 title: "Understanding in-toto: Securing the Software Supply Chain"
 author:
   display_name: Cowboy Neil
-categories: security devops software-development
+category: education
+tags: [in-toto, security, supply-chain]
 
 ---
 

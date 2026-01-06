@@ -4,8 +4,8 @@ title: "Unpacking Raspberry Pi's Built‑In SBOM Magic"
 date: 2025-04-17
 author:
   display_name: Viktor
-categories: [Raspberry Pi, SBOM, Software Supply Chain]
-tags: [rpi-image-gen, pi-gen, Syft, SPDX, sbomqs, Embedded]
+category: news
+tags: [sbom, raspberry-pi, embedded, spdx]
 
 ---
 

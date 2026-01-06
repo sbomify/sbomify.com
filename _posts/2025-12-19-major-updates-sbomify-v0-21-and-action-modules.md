@@ -3,7 +3,8 @@ layout: post
 title: "Major Updates: sbomify v0.21 and Action Module v0.8 & v0.9"
 author:
   display_name: Viktor
-categories: sbom, tools, announcement, release
+category: announcement
+tags: [sbom, release, github-actions]
 ---
 
 ![Major Updates](/assets/images/sbomify-v0-21-release.png)

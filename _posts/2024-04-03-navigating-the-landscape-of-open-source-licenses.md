@@ -13,8 +13,8 @@ wordpress_id: 156
 wordpress_url: https://sbomify.com/?p=156
 date: '2024-04-03 17:27:35 +0200'
 date_gmt: '2024-04-03 17:27:35 +0200'
-categories: open-source, licenses, compliance
-tags: []
+category: education
+tags: [open-source, licenses, compliance]
 comments: []
 redirect_from: /2024/04/03/navigating-the-landscape-of-open-source-licenses/
 

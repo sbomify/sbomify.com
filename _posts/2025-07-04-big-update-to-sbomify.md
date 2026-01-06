@@ -2,7 +2,8 @@
 layout: post
 title: "Big Update to sbomify"
 date: 2025-07-04 09:00:00 +0000
-categories: announcement update
+category: announcement
+tags: [sbom, release]
 author:
   display_name: Viktor
 ---

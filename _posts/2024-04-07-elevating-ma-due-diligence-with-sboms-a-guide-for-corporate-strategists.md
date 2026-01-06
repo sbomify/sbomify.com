@@ -3,7 +3,8 @@ layout: post
 status: publish
 published: true
 title: 'Elevating M&A Due Diligence with SBOMs: A Guide for Corporate Strategists'
-categories: security, mergers, sbom
+category: compliance
+tags: [sbom, mergers-acquisitions, due-diligence]
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -14,8 +15,6 @@ wordpress_id: 171
 wordpress_url: https://sbomify.com/?p=171
 date: '2024-04-07 10:51:43 +0200'
 date_gmt: '2024-04-07 10:51:43 +0200'
-categories: Business Strategy Mergers & Acquisitions Software Supply Chain Risk Management
-tags: []
 comments: []
 redirect_from: /2024/04/07/elevating-ma-due-diligence-with-sboms-a-guide-for-corporate-strategists/
 

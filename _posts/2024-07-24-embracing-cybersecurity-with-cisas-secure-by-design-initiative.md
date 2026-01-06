@@ -11,8 +11,8 @@ wordpress_id: 317
 wordpress_url: https://sbomify.com/?p=317
 date: '2024-07-24 15:56:35 +0200'
 date_gmt: '2024-07-24 15:56:35 +0200'
-categories: security best-practices compliance
-tags: []
+category: compliance
+tags: [cisa, security, secure-by-design]
 comments: []
 redirect_from: /2024/07/24/embracing-cybersecurity-with-cisas-secure-by-design-initiative/
 

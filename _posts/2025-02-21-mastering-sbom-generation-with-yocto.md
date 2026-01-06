@@ -2,7 +2,8 @@
 layout: post
 title: "Mastering SBOM Generation with Yocto"
 date: 2025-02-21 09:00:00 +0000
-categories: [sbom, yocto, linux, embedded]
+category: guide
+tags: [sbom, yocto, linux, embedded]
 author:
   display_name: Viktor
 ---
