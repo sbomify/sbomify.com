@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: Introducing the NIST Cybersecurity Framework (CSF) 2.0
+description: "Overview of NIST CSF 2.0 released February 2024, covering its Core functions, Organizational Profiles, Tiers, and how organizations can use it for cybersecurity risk management."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil

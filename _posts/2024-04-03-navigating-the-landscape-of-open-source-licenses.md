@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: Navigating the Landscape of Open Source Licenses
+description: "Comprehensive guide to open source licenses including MIT, Apache 2.0, GPL, LGPL, BSD, MPL, Creative Commons, and their commercial compatibility considerations."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil

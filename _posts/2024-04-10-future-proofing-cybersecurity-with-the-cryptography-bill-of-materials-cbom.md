@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: Future-Proofing Cybersecurity with the Cryptography Bill of Materials (CBOM)
+description: "Introduction to CycloneDX's Cryptography Bill of Materials (CBOM) for managing cryptographic assets and preparing for quantum-resistant security in the post-quantum era."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil

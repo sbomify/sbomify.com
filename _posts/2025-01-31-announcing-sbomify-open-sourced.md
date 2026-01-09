@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "sbomify Goes Open Source: A New Chapter in SBOM Management"
+description: "sbomify is now open source under Apache 2.0 plus Common Clause. Learn about our hierarchical SBOM approach, CycloneDX support, and Project Koala integration plans."
 date: 2025-01-31 09:00:00 +0000
 category: announcement
 tags: [sbom, open-source]

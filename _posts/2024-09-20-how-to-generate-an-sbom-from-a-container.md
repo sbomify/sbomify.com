@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "How to generate an SBOM from a Docker container"
+description: "Guide to generating SBOMs from Docker container images using Syft, Trivy, and Docker Desktop, including limitations and best practices for separating container from application SBOMs."
 author:
   display_name: Viktor Petersson
 category: guide

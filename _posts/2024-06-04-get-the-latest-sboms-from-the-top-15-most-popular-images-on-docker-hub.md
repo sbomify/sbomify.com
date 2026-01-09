@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: Get the latest SBOMs from the top 15 most popular images on Docker Hub
+description: "Automated nightly SBOM generation for Docker Hub's top 15 images including nginx, postgres, redis, and node using Syft in GitHub Actions CI/CD pipeline."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil

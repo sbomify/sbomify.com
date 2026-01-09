@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "How SBOMs Can Help You Achieve PCI DSS 4.0 Compliance"
+description: "Discover how Software Bill of Materials (SBOMs) help online gambling and e-commerce businesses achieve PCI DSS 4.0 compliance through better vulnerability management and audit trails."
 date: 2025-01-07 09:00:00 +0000
 category: compliance
 tags: [sbom, pci-dss, security]

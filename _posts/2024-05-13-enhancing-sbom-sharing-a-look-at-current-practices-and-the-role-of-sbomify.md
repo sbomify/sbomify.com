@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: 'Enhancing SBOM Sharing: A Look at Current Practices and the Role of sbomify'
+description: "Analysis of CISA's SBOM Sharing Primer examining current SBOM sharing methods from email to automated tooling, and how sbomify simplifies the distribution process."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil

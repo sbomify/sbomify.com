@@ -1,6 +1,30 @@
 ---
 layout: default
 ---
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "{{ page.title }}",
+  "description": "{{ page.description | default: site.description }}",
+  "url": "{{ page.url | absolute_url }}",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Sbomify",
+    "url": "{{ site.url }}",
+    "logo": "{{ site.url }}/android-chrome-512x512.png",
+    "description": "{{ site.description }}",
+    "founder": {
+      "@type": "Person",
+      "name": "Viktor Petersson",
+      "url": "{{ site.url }}/authors/vpetersson/"
+    },
+    "sameAs": [
+      {% for profile in site.social.profiles %}"{{ profile.url }}"{% unless forloop.last %},{% endunless %}{% endfor %}
+    ]
+  }
+}
+</script>
 <div>
   <div class="bg-primaryBG relative overflow-hidden px-5 py-16 lg:py-24 lg:px-24">
     <!-- Subtle gradient overlay -->

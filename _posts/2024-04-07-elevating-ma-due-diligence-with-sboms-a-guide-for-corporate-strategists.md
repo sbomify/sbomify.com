@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: 'Elevating M&A Due Diligence with SBOMs: A Guide for Corporate Strategists'
+description: "How SBOMs accelerate M&A due diligence compared to traditional source code analysis with Black Duck, offering faster evaluation, IP protection, and streamlined compliance."
 category: compliance
 tags: [sbom, mergers-acquisitions, due-diligence]
 author:

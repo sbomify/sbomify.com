@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Unpacking Raspberry Pi's Built‑In SBOM Magic"
+description: "How Raspberry Pi's rpi-image-gen tool generates SPDX SBOMs out of the box, achieving a 7.8/10 quality score with sbomqs for embedded image builds."
 date: 2025-04-17
 author:
   display_name: Viktor Petersson

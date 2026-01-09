@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: What really happened to XZ?
+description: "Analysis of the XZ backdoor discovery in Linux distributions, exploring how this supply chain attack worked and the implications for open-source security."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil

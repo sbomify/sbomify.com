@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: How to Generate SBOMs for Python Packages with `pipdeptree` and `cyclonedx-py`
+description: "Tutorial on generating CycloneDX SBOMs for Python projects using pipdeptree and cyclonedx-py, including transitive dependencies and best practices for pinning with hashes."
 author:
   display_name: Viktor Petersson
 date: '2024-07-30 09:00:35 +0200'

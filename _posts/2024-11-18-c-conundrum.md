@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "The C conundrum - generating SBOMs when there's no lockfile"
+description: "Exploring the challenge of generating SBOMs for C/C++ projects without native package managers, reviewing cmake-sbom, Conan, cve-bin-tool, and CISA working group efforts."
 author:
   display_name: Chris Swan
 category: guide

@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: "Understanding Lock File Drift: A Hidden Risk in Dependency Management"
+description: "What lock file drift is, why it causes inconsistent builds and security vulnerabilities, and best practices to detect and prevent it in your projects."
 author:
   display_name: Cowboy Neil
 author_login: Cowboy Neil

@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: A Paradigm Shift for Software Vendors in SBOM Management
+description: "How sbomify transforms SBOM management for software vendors with seamless CI/CD integration, reducing administrative overhead while enhancing security and compliance."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil

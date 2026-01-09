@@ -4,6 +4,7 @@ status: publish
 published: true
 title: 'Call for Views on the Code of Practice for Software Vendors: Ensuring Security
   and Resilience'
+description: "UK government launches consultation on voluntary Code of Practice for Software Vendors to enhance security and resilience of digital products sold to businesses."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil

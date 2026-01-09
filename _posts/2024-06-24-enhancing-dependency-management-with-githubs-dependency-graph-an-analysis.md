@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: "Enhancing Dependency Management with GitHub's Dependency Graph: An Analysis"
+description: "Research analysis revealing inaccuracies in GitHub's dependency graph for Java and Python projects, with implications for Dependabot and SBOM generators."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil

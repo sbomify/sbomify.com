@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Securing the Software Supply Chain with SLSA: What You Need to Know"
+description: "Understanding SLSA (Supply chain Levels for Software Artifacts), Google's framework for securing software supply chains through build integrity and provenance tracking."
 author:
   display_name: Cowboy Neil
 category: education

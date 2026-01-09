@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: 'The Time is Now: Embracing SBOMs in an Era of Enhanced Cybersecurity Standards'
+description: "Why now is the critical time to adopt SBOMs, driven by US Executive Order 14028, native GitHub and Docker support, and the maturing SBOM ecosystem."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil

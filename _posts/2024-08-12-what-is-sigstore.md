@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Understanding Sigstore: Securing the Software Supply Chain"
+description: "Introduction to Sigstore, the open-source project for cryptographic signing of software artifacts using Cosign, Rekor transparency logs, Fulcio CA, and Gitsign."
 author:
   display_name: Cowboy Neil
 category: education
