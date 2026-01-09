@@ -132,125 +132,87 @@ cc = "1.0"                 # Build script dependency
 
 ## Generating an SBOM
 
-### Using cargo-sbom
+SBOM generation is the first step in the [SBOM lifecycle]({{ site.url }}/features/generate-collaborate-analyze/). After generation, you typically need to enrich your SBOM with package metadata and augment it with your organization's details.
 
-The Rust-native SBOM tool:
+### Using sbomify GitHub Action (Recommended)
+
+The [sbomify GitHub Action](https://github.com/sbomify/github-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
+
+For Rust, sbomify uses **cdxgen** under the hood with fallback to Trivy and Syft.
+
+**Standalone (no account needed):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    LOCK_FILE: Cargo.lock
+    OUTPUT_FILE: sbom.cdx.json
+    COMPONENT_NAME: my-rust-app
+    COMPONENT_VERSION: ${{ github.ref_name }}
+    ENRICH: true
+    UPLOAD: false
+```
+
+Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as the SBOM version. For rolling releases without tags, use `github.sha` instead. See our [SBOM versioning guide]({{ site.url }}/guides/how-to-version-sboms/) for best practices.
+
+**With sbomify platform (adds augmentation and upload):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    COMPONENT_ID: my-component-id
+    LOCK_FILE: Cargo.lock
+    OUTPUT_FILE: sbom.cdx.json
+    AUGMENT: true
+    ENRICH: true
+```
+
+### Alternative Tools
+
+If you prefer to run SBOM generation tools manually:
+
+**cargo-sbom (Rust-native):**
 
 ```bash
-# Install
 cargo install cargo-sbom
-
-# Generate CycloneDX SBOM
 cargo sbom > sbom.cdx.json
-
-# Generate SPDX SBOM
-cargo sbom --format spdx > sbom.spdx.json
 ```
 
-### Using cargo-cyclonedx
-
-Official CycloneDX tool for Rust:
+**cargo-cyclonedx:**
 
 ```bash
-# Install
 cargo install cargo-cyclonedx
-
-# Generate SBOM
 cargo cyclonedx --format json > sbom.cdx.json
-
-# Include dev dependencies
-cargo cyclonedx --format json --all > sbom.cdx.json
 ```
 
-### Using cdxgen
-
-[cdxgen](https://github.com/CycloneDX/cdxgen) supports Rust projects:
+**cdxgen:**
 
 ```bash
-# Install cdxgen
 npm install -g @cyclonedx/cdxgen
-
-# Generate SBOM
 cdxgen -t rust -o sbom.cdx.json
 ```
 
-### Using Trivy
-
-[Trivy](https://github.com/aquasecurity/trivy) can scan Rust projects:
+**Trivy:**
 
 ```bash
-# Generate CycloneDX SBOM
 trivy fs --format cyclonedx --output sbom.cdx.json .
-
-# Generate SPDX SBOM
-trivy fs --format spdx-json --output sbom.spdx.json .
 ```
 
-### Using Syft
+When using these tools directly, you'll need to handle enrichment and augmentation separately.
 
-[Syft](https://github.com/anchore/syft) supports Cargo.lock:
-
-```bash
-syft . -o cyclonedx-json=sbom.cdx.json
-```
-
-### Using sbom-rs
-
-A pure Rust SBOM library and CLI:
-
-```bash
-# Install
-cargo install sbom-rs
-
-# Generate SBOM
-sbom-rs --output sbom.cdx.json
-```
-
-## Automate with sbomify GitHub Action
-
-The [sbomify GitHub Action](https://github.com/sbomify/github-action/) supports Rust projects:
-
-```yaml
----
-name: Generate SBOM for Rust Project
-
-on: [push]
-
-jobs:
-  sbom:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Rust
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Generate and Upload SBOM
-        uses: sbomify/github-action@master
-        env:
-          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
-          COMPONENT_ID: 'my-rust-component'
-          LOCK_FILE: 'Cargo.lock'
-          OUTPUT_FILE: 'sbom.cdx.json'
-          ENRICH: true
-          UPLOAD: true
-```
-
-## GitLab and Other CI/CD
-
-For GitLab CI:
+### GitLab CI
 
 ```yaml
 generate-sbom:
-  image: ghcr.io/sbomify/github-action:latest
-  stage: build
-  script:
-    - /entrypoint.sh
+  image: sbomifyhub/sbomify-action
   variables:
-    LOCK_FILE: "Cargo.lock"
-    OUTPUT_FILE: "sbom.cdx.json"
+    LOCK_FILE: Cargo.lock
+    OUTPUT_FILE: sbom.cdx.json
+    UPLOAD: "false"
     ENRICH: "true"
+  script:
+    - /sbomify.sh
   artifacts:
     paths:
       - sbom.cdx.json

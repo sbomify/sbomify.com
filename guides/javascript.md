@@ -120,104 +120,81 @@ While `npm audit` provides quick vulnerability checking, SBOM-based scanning off
 
 ## Generating an SBOM
 
-### Using cdxgen (Recommended)
+SBOM generation is the first step in the [SBOM lifecycle]({{ site.url }}/features/generate-collaborate-analyze/). After generation, you typically need to enrich your SBOM with package metadata and augment it with your organization's details.
 
-[cdxgen](https://github.com/CycloneDX/cdxgen) has excellent JavaScript support and understands all major lockfile formats:
+### Using sbomify GitHub Action (Recommended)
+
+The [sbomify GitHub Action](https://github.com/sbomify/github-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
+
+For JavaScript, sbomify uses **cdxgen** under the hood as it has excellent support for all JavaScript lockfile formats.
+
+**Standalone (no account needed):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    LOCK_FILE: package-lock.json
+    OUTPUT_FILE: sbom.cdx.json
+    COMPONENT_NAME: my-node-app
+    COMPONENT_VERSION: ${{ github.ref_name }}
+    ENRICH: true
+    UPLOAD: false
+```
+
+Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as the SBOM version. For rolling releases without tags, use `github.sha` instead. See our [SBOM versioning guide]({{ site.url }}/guides/how-to-version-sboms/) for best practices.
+
+**With sbomify platform (adds augmentation and upload):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    COMPONENT_ID: my-component-id
+    LOCK_FILE: package-lock.json
+    OUTPUT_FILE: sbom.cdx.json
+    AUGMENT: true
+    ENRICH: true
+```
+
+The action supports all JavaScript lockfiles: `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, and `bun.lock`.
+
+### Alternative Tools
+
+If you prefer to run SBOM generation tools manually:
+
+**cdxgen (recommended for manual use):**
 
 ```bash
-# Install cdxgen
 npm install -g @cyclonedx/cdxgen
-
-# Generate SBOM from package-lock.json
 cdxgen -o sbom.cdx.json
-
-# Generate SBOM from specific lockfile
-cdxgen --type npm -o sbom.cdx.json
 ```
 
-### Using Trivy
-
-[Trivy](https://github.com/aquasecurity/trivy) can scan JavaScript projects and generate SBOMs:
+**Trivy:**
 
 ```bash
-# Generate CycloneDX SBOM
 trivy fs --format cyclonedx --output sbom.cdx.json .
-
-# Generate SPDX SBOM
-trivy fs --format spdx-json --output sbom.spdx.json .
 ```
 
-### Using Syft
-
-[Syft](https://github.com/anchore/syft) from Anchore also supports JavaScript lockfiles:
+**Syft:**
 
 ```bash
 syft . -o cyclonedx-json=sbom.cdx.json
 ```
 
-## Automate with sbomify GitHub Action
+When using these tools directly, you'll need to handle enrichment and augmentation separately.
 
-The [sbomify GitHub Action](https://github.com/sbomify/github-action/) simplifies SBOM generation in your CI/CD pipeline:
-
-```yaml
----
-name: Generate SBOM for JavaScript Project
-
-on: [push]
-
-jobs:
-  sbom:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Generate and Upload SBOM
-        uses: sbomify/github-action@master
-        env:
-          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
-          COMPONENT_ID: 'my-js-component'
-          LOCK_FILE: 'package-lock.json'
-          OUTPUT_FILE: 'sbom.cdx.json'
-          ENRICH: true
-          UPLOAD: true
-```
-
-For yarn projects:
-
-```yaml
-env:
-  LOCK_FILE: 'yarn.lock'
-```
-
-For pnpm projects:
-
-```yaml
-env:
-  LOCK_FILE: 'pnpm-lock.yaml'
-```
-
-For Bun projects:
-
-```yaml
-env:
-  LOCK_FILE: 'bun.lock'
-```
-
-## GitLab and Other CI/CD
-
-For GitLab CI, you can use the sbomify Docker image:
+### GitLab CI
 
 ```yaml
 generate-sbom:
-  image: ghcr.io/sbomify/github-action:latest
-  stage: build
-  script:
-    - /entrypoint.sh
+  image: sbomifyhub/sbomify-action
   variables:
-    LOCK_FILE: "package-lock.json"
-    OUTPUT_FILE: "sbom.cdx.json"
+    LOCK_FILE: package-lock.json
+    OUTPUT_FILE: sbom.cdx.json
+    UPLOAD: "false"
     ENRICH: "true"
+  script:
+    - /sbomify.sh
   artifacts:
     paths:
       - sbom.cdx.json

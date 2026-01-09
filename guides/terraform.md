@@ -157,91 +157,70 @@ module "eks" {
 
 ## Generating an SBOM
 
-### Using Syft
+SBOM generation is the first step in the [SBOM lifecycle]({{ site.url }}/features/generate-collaborate-analyze/). After generation, you typically need to enrich your SBOM with package metadata and augment it with your organization's details.
 
-[Syft](https://github.com/anchore/syft) supports Terraform lockfiles:
+### Using sbomify GitHub Action (Recommended)
+
+The [sbomify GitHub Action](https://github.com/sbomify/github-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
+
+For Terraform, sbomify uses **Syft** under the hood.
+
+**Standalone (no account needed):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    LOCK_FILE: .terraform.lock.hcl
+    OUTPUT_FILE: sbom.cdx.json
+    COMPONENT_NAME: my-terraform-infra
+    COMPONENT_VERSION: ${{ github.ref_name }}
+    ENRICH: true
+    UPLOAD: false
+```
+
+Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as the SBOM version. For rolling releases without tags, use `github.sha` instead. See our [SBOM versioning guide]({{ site.url }}/guides/how-to-version-sboms/) for best practices.
+
+**With sbomify platform (adds augmentation and upload):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    COMPONENT_ID: my-component-id
+    LOCK_FILE: .terraform.lock.hcl
+    OUTPUT_FILE: sbom.cdx.json
+    AUGMENT: true
+    ENRICH: true
+```
+
+### Alternative Tools
+
+If you prefer to run SBOM generation tools manually:
+
+**Syft:**
 
 ```bash
 syft . -o cyclonedx-json=sbom.cdx.json
 ```
 
-### Using cdxgen
+Syft is currently the only widely-available open source tool that supports generating SBOMs from Terraform lockfiles. Trivy supports Terraform for IaC misconfiguration scanning but not for SBOM generation from `.terraform.lock.hcl`.
 
-[cdxgen](https://github.com/CycloneDX/cdxgen) has Terraform support:
+When using Syft directly, you'll need to handle enrichment and augmentation separately.
 
-```bash
-npm install -g @cyclonedx/cdxgen
-
-cdxgen -t terraform -o sbom.cdx.json
-```
-
-### Manual Extraction
-
-For custom SBOM generation:
-
-```bash
-# Parse lockfile
-terraform providers
-
-# Output in JSON
-terraform providers -json > providers.json
-```
-
-## Automate with sbomify GitHub Action
-
-The [sbomify GitHub Action](https://github.com/sbomify/github-action/) supports Terraform:
-
-```yaml
----
-name: Generate SBOM for Terraform Project
-
-on: [push]
-
-jobs:
-  sbom:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: '1.7.0'
-
-      - name: Initialize Terraform
-        run: terraform init
-
-      - name: Generate and Upload SBOM
-        uses: sbomify/github-action@master
-        env:
-          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
-          COMPONENT_ID: 'my-terraform-component'
-          LOCK_FILE: '.terraform.lock.hcl'
-          OUTPUT_FILE: 'sbom.cdx.json'
-          ENRICH: true
-          UPLOAD: true
-```
-
-## GitLab and Other CI/CD
-
-For GitLab CI:
+### GitLab CI
 
 ```yaml
 generate-sbom:
-  image: ghcr.io/sbomify/github-action:latest
-  stage: build
+  image: sbomifyhub/sbomify-action
   before_script:
-    - apt-get update && apt-get install -y wget unzip
-    - wget https://releases.hashicorp.com/terraform/1.7.0/terraform_1.7.0_linux_amd64.zip
-    - unzip terraform_1.7.0_linux_amd64.zip -d /usr/local/bin/
     - terraform init
-  script:
-    - /entrypoint.sh
   variables:
-    LOCK_FILE: ".terraform.lock.hcl"
-    OUTPUT_FILE: "sbom.cdx.json"
+    LOCK_FILE: .terraform.lock.hcl
+    OUTPUT_FILE: sbom.cdx.json
+    UPLOAD: "false"
     ENRICH: "true"
+  script:
+    - /sbomify.sh
   artifacts:
     paths:
       - sbom.cdx.json

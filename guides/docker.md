@@ -92,130 +92,94 @@ CMD ["node", "dist/index.js"]
 
 ## Generating an SBOM
 
-### Using Trivy (Recommended)
+SBOM generation is the first step in the [SBOM lifecycle]({{ site.url }}/features/generate-collaborate-analyze/). After generation, you typically need to enrich your SBOM with package metadata and augment it with your organization's details.
 
-[Trivy](https://github.com/aquasecurity/trivy) excels at container scanning:
+### Using sbomify GitHub Action (Recommended)
 
-```bash
-# Scan a local image
-trivy image --format cyclonedx --output sbom.cdx.json myapp:latest
+The [sbomify GitHub Action](https://github.com/sbomify/github-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
 
-# Scan from a registry
-trivy image --format cyclonedx --output sbom.cdx.json docker.io/library/nginx:latest
+For Docker images, sbomify uses **cdxgen** under the hood with fallback to Trivy and Syft. Use `DOCKER_IMAGE` instead of `LOCK_FILE`.
 
-# Include SPDX format
-trivy image --format spdx-json --output sbom.spdx.json myapp:latest
-```
-
-### Using Syft
-
-[Syft](https://github.com/anchore/syft) from Anchore provides detailed container SBOMs:
-
-```bash
-# Scan a local image
-syft myapp:latest -o cyclonedx-json=sbom.cdx.json
-
-# Scan from registry
-syft registry:docker.io/library/nginx:latest -o cyclonedx-json=sbom.cdx.json
-
-# Include file metadata
-syft myapp:latest -o cyclonedx-json=sbom.cdx.json --catalogers all
-```
-
-### Using cdxgen
-
-[cdxgen](https://github.com/CycloneDX/cdxgen) supports container images:
-
-```bash
-cdxgen -t docker myapp:latest -o sbom.cdx.json
-```
-
-### Using Docker Scout
-
-Docker's built-in SBOM generation:
-
-```bash
-# Generate SBOM
-docker scout sbom myapp:latest --format cyclonedx > sbom.cdx.json
-
-# Or using Docker BuildKit
-docker buildx build --sbom=true -t myapp:latest .
-```
-
-### Using Buildkit SBOM Attestations
-
-Modern Docker builds can embed SBOMs as attestations:
-
-```bash
-# Build with SBOM attestation
-docker buildx build \
-  --sbom=true \
-  --provenance=true \
-  -t myapp:latest \
-  --push \
-  .
-```
-
-This stores the SBOM alongside the image in the registry.
-
-## Automate with sbomify GitHub Action
-
-The [sbomify GitHub Action](https://github.com/sbomify/github-action/) supports container images:
+**Standalone (no account needed):**
 
 ```yaml
----
-name: Generate SBOM for Docker Image
+- uses: sbomify/github-action@master
+  env:
+    DOCKER_IMAGE: ghcr.io/myorg/myapp:${{ github.sha }}
+    OUTPUT_FILE: sbom.cdx.json
+    COMPONENT_NAME: myapp
+    COMPONENT_VERSION: ${{ github.ref_name }}
+    ENRICH: true
+    UPLOAD: false
+```
 
-on:
-  push:
-    branches: [main]
+The `DOCKER_IMAGE` references the image built in a previous step (typically tagged with the commit SHA), while `COMPONENT_VERSION` uses the git tag for semantic versioning. See our [SBOM versioning guide]({{ site.url }}/guides/how-to-version-sboms/) for best practices.
 
-jobs:
-  build-and-sbom:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+**With sbomify platform (adds augmentation and upload):**
 
-      - name: Build Docker image
-        run: docker build -t myapp:${{ github.sha }} .
-
-      - name: Generate and Upload SBOM
-        uses: sbomify/github-action@master
-        env:
-          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
-          COMPONENT_ID: 'my-container'
-          DOCKER_IMAGE: 'myapp:${{ github.sha }}'
-          OUTPUT_FILE: 'sbom.cdx.json'
-          ENRICH: true
-          UPLOAD: true
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    COMPONENT_ID: my-component-id
+    DOCKER_IMAGE: myapp:latest
+    OUTPUT_FILE: sbom.cdx.json
+    AUGMENT: true
+    ENRICH: true
 ```
 
 For images in registries:
 
 ```yaml
-env:
-  DOCKER_IMAGE: 'ghcr.io/myorg/myapp:latest'
+DOCKER_IMAGE: ghcr.io/myorg/myapp:latest
 ```
 
-## GitLab and Other CI/CD
+### Alternative Tools
 
-For GitLab CI:
+If you prefer to run SBOM generation tools manually:
+
+**Trivy:**
+
+```bash
+trivy image --format cyclonedx --output sbom.cdx.json myapp:latest
+```
+
+**Syft:**
+
+```bash
+syft myapp:latest -o cyclonedx-json=sbom.cdx.json
+```
+
+**cdxgen:**
+
+```bash
+cdxgen -t docker myapp:latest -o sbom.cdx.json
+```
+
+**Docker Scout:**
+
+```bash
+docker scout sbom myapp:latest --format cyclonedx > sbom.cdx.json
+```
+
+When using these tools directly, you'll need to handle enrichment and augmentation separately.
+
+### GitLab CI
 
 ```yaml
 generate-sbom:
-  image: ghcr.io/sbomify/github-action:latest
-  stage: build
+  image: sbomifyhub/sbomify-action
   services:
     - docker:dind
   before_script:
     - docker build -t myapp:latest .
-  script:
-    - /entrypoint.sh
   variables:
-    DOCKER_IMAGE: "myapp:latest"
-    OUTPUT_FILE: "sbom.cdx.json"
+    DOCKER_IMAGE: myapp:latest
+    OUTPUT_FILE: sbom.cdx.json
+    UPLOAD: "false"
     ENRICH: "true"
+  script:
+    - /sbomify.sh
   artifacts:
     paths:
       - sbom.cdx.json

@@ -126,127 +126,87 @@ Consider generating separate SBOMs for each target framework if they differ sign
 
 ## Generating an SBOM
 
-### Using Microsoft SBOM Tool (Official)
+SBOM generation is the first step in the [SBOM lifecycle]({{ site.url }}/features/generate-collaborate-analyze/). After generation, you typically need to enrich your SBOM with package metadata and augment it with your organization's details.
 
-Microsoft's official SBOM tool is designed for .NET:
+### Using sbomify GitHub Action (Recommended)
 
-```bash
-# Install
-dotnet tool install --global Microsoft.Sbom.DotNetTool
+The [sbomify GitHub Action](https://github.com/sbomify/github-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
 
-# Generate SBOM (SPDX format)
-sbom-tool generate -b ./bin/Release -bc . -pn MyApp -pv 1.0.0 -ps MyCompany
+For .NET, sbomify uses **cdxgen** under the hood with fallback to Trivy and Syft.
 
-# Output in CycloneDX format
-sbom-tool generate -b ./bin/Release -bc . -pn MyApp -pv 1.0.0 -ps MyCompany -m cyclonedx
-```
-
-### Using cdxgen
-
-[cdxgen](https://github.com/CycloneDX/cdxgen) has strong .NET support:
-
-```bash
-# Install cdxgen
-npm install -g @cyclonedx/cdxgen
-
-# Generate SBOM
-cdxgen -t dotnet -o sbom.cdx.json
-
-# Include all project files
-cdxgen -t dotnet -o sbom.cdx.json --include-subprojects
-```
-
-### Using CycloneDX .NET Tool
-
-Official CycloneDX tool for .NET:
-
-```bash
-# Install
-dotnet tool install --global CycloneDX
-
-# Generate from solution
-dotnet CycloneDX MySolution.sln -o sbom.cdx.json -j
-
-# Generate from project
-dotnet CycloneDX MyProject.csproj -o sbom.cdx.json -j
-
-# Include dev dependencies
-dotnet CycloneDX MySolution.sln -o sbom.cdx.json -j -d
-```
-
-### Using Trivy
-
-[Trivy](https://github.com/aquasecurity/trivy) supports .NET projects:
-
-```bash
-# Generate CycloneDX SBOM
-trivy fs --format cyclonedx --output sbom.cdx.json .
-
-# Generate SPDX SBOM
-trivy fs --format spdx-json --output sbom.spdx.json .
-```
-
-### Using Syft
-
-[Syft](https://github.com/anchore/syft) supports NuGet packages:
-
-```bash
-syft . -o cyclonedx-json=sbom.cdx.json
-```
-
-## Automate with sbomify GitHub Action
-
-The [sbomify GitHub Action](https://github.com/sbomify/github-action/) supports .NET projects:
+**Standalone (no account needed):**
 
 ```yaml
----
-name: Generate SBOM for .NET Project
-
-on: [push]
-
-jobs:
-  sbom:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0'
-
-      - name: Restore with lockfile
-        run: dotnet restore --use-lock-file
-
-      - name: Generate and Upload SBOM
-        uses: sbomify/github-action@master
-        env:
-          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
-          COMPONENT_ID: 'my-dotnet-component'
-          LOCK_FILE: 'packages.lock.json'
-          OUTPUT_FILE: 'sbom.cdx.json'
-          ENRICH: true
-          UPLOAD: true
+- uses: sbomify/github-action@master
+  env:
+    LOCK_FILE: packages.lock.json
+    OUTPUT_FILE: sbom.cdx.json
+    COMPONENT_NAME: my-dotnet-app
+    COMPONENT_VERSION: ${{ github.ref_name }}
+    ENRICH: true
+    UPLOAD: false
 ```
 
-## GitLab and Other CI/CD
+Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as the SBOM version. For rolling releases without tags, use `github.sha` instead. See our [SBOM versioning guide]({{ site.url }}/guides/how-to-version-sboms/) for best practices.
 
-For GitLab CI:
+**With sbomify platform (adds augmentation and upload):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    COMPONENT_ID: my-component-id
+    LOCK_FILE: packages.lock.json
+    OUTPUT_FILE: sbom.cdx.json
+    AUGMENT: true
+    ENRICH: true
+```
+
+### Alternative Tools
+
+If you prefer to run SBOM generation tools manually:
+
+**Microsoft SBOM Tool (official):**
+
+```bash
+dotnet tool install --global Microsoft.Sbom.DotNetTool
+sbom-tool generate -b ./bin/Release -bc . -pn MyApp -pv 1.0.0 -ps MyCompany
+```
+
+**CycloneDX .NET Tool:**
+
+```bash
+dotnet tool install --global CycloneDX
+dotnet CycloneDX MySolution.sln -o sbom.cdx.json -j
+```
+
+**cdxgen:**
+
+```bash
+npm install -g @cyclonedx/cdxgen
+cdxgen -t dotnet -o sbom.cdx.json
+```
+
+**Trivy:**
+
+```bash
+trivy fs --format cyclonedx --output sbom.cdx.json .
+```
+
+When using these tools directly, you'll need to handle enrichment and augmentation separately.
+
+### GitLab CI
 
 ```yaml
 generate-sbom:
-  image: ghcr.io/sbomify/github-action:latest
-  stage: build
-  before_script:
-    - apt-get update && apt-get install -y dotnet-sdk-8.0
-    - dotnet restore --use-lock-file
-  script:
-    - /entrypoint.sh
+  image: sbomifyhub/sbomify-action
   variables:
-    LOCK_FILE: "packages.lock.json"
-    OUTPUT_FILE: "sbom.cdx.json"
+    LOCK_FILE: packages.lock.json
+    OUTPUT_FILE: sbom.cdx.json
+    UPLOAD: "false"
     ENRICH: "true"
+  script:
+    - /sbomify.sh
   artifacts:
     paths:
       - sbom.cdx.json

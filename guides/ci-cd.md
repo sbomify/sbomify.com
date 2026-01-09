@@ -20,7 +20,7 @@ Generating SBOMs in your CI/CD pipeline provides several advantages:
 
 ### Basic SBOM Generation
 
-Using the [sbomify GitHub Action](https://github.com/sbomify/github-action/):
+The [sbomify GitHub Action](https://github.com/sbomify/github-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
 
 ```yaml
 ---
@@ -41,9 +41,10 @@ jobs:
       - name: Generate SBOM
         uses: sbomify/github-action@master
         env:
-          LOCK_FILE: 'package-lock.json'
-          OUTPUT_FILE: 'sbom.cdx.json'
+          LOCK_FILE: package-lock.json
+          OUTPUT_FILE: sbom.cdx.json
           ENRICH: true
+          UPLOAD: false
 
       - name: Upload SBOM as artifact
         uses: actions/upload-artifact@v4
@@ -59,12 +60,11 @@ jobs:
   uses: sbomify/github-action@master
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
-    COMPONENT_ID: 'my-component'
-    LOCK_FILE: 'package-lock.json'
-    OUTPUT_FILE: 'sbom.cdx.json'
+    COMPONENT_ID: my-component
+    LOCK_FILE: package-lock.json
+    OUTPUT_FILE: sbom.cdx.json
     AUGMENT: true
     ENRICH: true
-    UPLOAD: true
 ```
 
 ### GitHub Attestation (Recommended)
@@ -97,9 +97,12 @@ jobs:
       - name: Generate SBOM
         uses: sbomify/github-action@master
         env:
-          LOCK_FILE: 'package-lock.json'
-          OUTPUT_FILE: 'sbom.cdx.json'
+          LOCK_FILE: package-lock.json
+          OUTPUT_FILE: sbom.cdx.json
+          COMPONENT_NAME: my-app
+          COMPONENT_VERSION: ${{ github.sha }}
           ENRICH: true
+          UPLOAD: false
 
       - name: Attest SBOM
         uses: actions/attest-sbom@v1
@@ -154,9 +157,12 @@ jobs:
       - name: Generate additional SBOM
         uses: sbomify/github-action@master
         env:
-          DOCKER_IMAGE: 'ghcr.io/${{ github.repository }}:${{ github.sha }}'
-          OUTPUT_FILE: 'container-sbom.cdx.json'
+          DOCKER_IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
+          OUTPUT_FILE: container-sbom.cdx.json
+          COMPONENT_NAME: ${{ github.repository }}
+          COMPONENT_VERSION: ${{ github.sha }}
           ENRICH: true
+          UPLOAD: false
 ```
 
 ## GitLab CI
@@ -179,13 +185,16 @@ build:
 
 generate-sbom:
   stage: sbom
-  image: ghcr.io/sbomify/github-action:latest
-  script:
-    - /entrypoint.sh
+  image: sbomifyhub/sbomify-action
   variables:
-    LOCK_FILE: "package-lock.json"
-    OUTPUT_FILE: "sbom.cdx.json"
+    LOCK_FILE: package-lock.json
+    OUTPUT_FILE: sbom.cdx.json
+    COMPONENT_NAME: my-app
+    COMPONENT_VERSION: $CI_COMMIT_TAG
+    UPLOAD: "false"
     ENRICH: "true"
+  script:
+    - /sbomify.sh
   artifacts:
     paths:
       - sbom.cdx.json
@@ -201,13 +210,14 @@ include:
 
 generate-sbom:
   stage: test
-  image: ghcr.io/sbomify/github-action:latest
-  script:
-    - /entrypoint.sh
+  image: sbomifyhub/sbomify-action
   variables:
-    LOCK_FILE: "package-lock.json"
-    OUTPUT_FILE: "gl-sbom-report.cdx.json"
+    LOCK_FILE: package-lock.json
+    OUTPUT_FILE: gl-sbom-report.cdx.json
+    UPLOAD: "false"
     ENRICH: "true"
+  script:
+    - /sbomify.sh
   artifacts:
     paths:
       - gl-sbom-report.cdx.json
@@ -220,21 +230,21 @@ generate-sbom:
 ```yaml
 container-sbom:
   stage: sbom
-  image: ghcr.io/sbomify/github-action:latest
+  image: sbomifyhub/sbomify-action
   services:
     - docker:dind
   variables:
     DOCKER_HOST: tcp://docker:2376
     DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_IMAGE: "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
+    OUTPUT_FILE: container-sbom.cdx.json
+    UPLOAD: "false"
+    ENRICH: "true"
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
   script:
-    - /entrypoint.sh
-  variables:
-    DOCKER_IMAGE: "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
-    OUTPUT_FILE: "container-sbom.cdx.json"
-    ENRICH: "true"
+    - /sbomify.sh
   artifacts:
     paths:
       - container-sbom.cdx.json
@@ -259,15 +269,20 @@ pipelines:
 
     - step:
         name: Generate SBOM
-        image: ghcr.io/sbomify/github-action:latest
         script:
-          - export LOCK_FILE="package-lock.json"
-          - export OUTPUT_FILE="sbom.cdx.json"
-          - export ENRICH="true"
-          - /entrypoint.sh
+          - pipe: docker://sbomifyhub/sbomify-action:latest
+            variables:
+              LOCK_FILE: package-lock.json
+              OUTPUT_FILE: sbom.cdx.json
+              COMPONENT_NAME: my-app
+              COMPONENT_VERSION: $BITBUCKET_TAG
+              UPLOAD: "false"
+              ENRICH: "true"
         artifacts:
           - sbom.cdx.json
 ```
+
+For rolling releases, use `$BITBUCKET_COMMIT` instead of `$BITBUCKET_TAG`. See our [SBOM versioning guide]({{ site.url }}/guides/how-to-version-sboms/) for best practices.
 
 ### Bitbucket with Upload
 
@@ -276,15 +291,14 @@ pipelines:
   default:
     - step:
         name: Generate and Upload SBOM
-        image: ghcr.io/sbomify/github-action:latest
         script:
-          - export TOKEN="$SBOMIFY_TOKEN"
-          - export COMPONENT_ID="my-component"
-          - export LOCK_FILE="package-lock.json"
-          - export OUTPUT_FILE="sbom.cdx.json"
-          - export ENRICH="true"
-          - export UPLOAD="true"
-          - /entrypoint.sh
+          - pipe: docker://sbomifyhub/sbomify-action:latest
+            variables:
+              TOKEN: $SBOMIFY_TOKEN
+              COMPONENT_ID: my-component
+              LOCK_FILE: package-lock.json
+              OUTPUT_FILE: sbom.cdx.json
+              ENRICH: "true"
 ```
 
 ## Jenkins
@@ -295,20 +309,23 @@ pipelines:
 pipeline {
     agent {
         docker {
-            image 'ghcr.io/sbomify/github-action:latest'
+            image 'sbomifyhub/sbomify-action'
         }
     }
 
     environment {
         LOCK_FILE = 'package-lock.json'
         OUTPUT_FILE = 'sbom.cdx.json'
+        COMPONENT_NAME = 'my-app'
+        COMPONENT_VERSION = "${env.GIT_TAG_NAME ?: env.GIT_COMMIT}"
+        UPLOAD = 'false'
         ENRICH = 'true'
     }
 
     stages {
         stage('Generate SBOM') {
             steps {
-                sh '/entrypoint.sh'
+                sh '/sbomify.sh'
             }
         }
 
@@ -331,14 +348,14 @@ pipeline {
         stage('Generate SBOM') {
             steps {
                 withCredentials([string(credentialsId: 'sbomify-token', variable: 'TOKEN')]) {
-                    docker.image('ghcr.io/sbomify/github-action:latest').inside {
+                    docker.image('sbomifyhub/sbomify-action').inside {
                         sh '''
                             export COMPONENT_ID="my-component"
                             export LOCK_FILE="package-lock.json"
                             export OUTPUT_FILE="sbom.cdx.json"
                             export ENRICH="true"
                             export UPLOAD="true"
-                            /entrypoint.sh
+                            /sbomify.sh
                         '''
                     }
                 }
@@ -358,7 +375,7 @@ version: 2.1
 jobs:
   generate-sbom:
     docker:
-      - image: ghcr.io/sbomify/github-action:latest
+      - image: sbomifyhub/sbomify-action
     steps:
       - checkout
       - run:
@@ -366,8 +383,11 @@ jobs:
           environment:
             LOCK_FILE: package-lock.json
             OUTPUT_FILE: sbom.cdx.json
+            COMPONENT_NAME: my-app
+            COMPONENT_VERSION: << pipeline.git.tag >>
+            UPLOAD: "false"
             ENRICH: "true"
-          command: /entrypoint.sh
+          command: /sbomify.sh
       - store_artifacts:
           path: sbom.cdx.json
 
@@ -400,9 +420,11 @@ steps:
         -w /workspace
         -e LOCK_FILE=package-lock.json
         -e OUTPUT_FILE=sbom.cdx.json
+        -e COMPONENT_NAME=my-app
+        -e COMPONENT_VERSION=$(Build.SourceVersion)
+        -e UPLOAD=false
         -e ENRICH=true
-        ghcr.io/sbomify/github-action:latest
-        /entrypoint.sh
+        sbomifyhub/sbomify-action
 
   - publish: $(Build.SourcesDirectory)/sbom.cdx.json
     artifact: sbom
@@ -417,9 +439,10 @@ Integrate with OWASP Dependency-Track:
 - name: Generate SBOM
   uses: sbomify/github-action@master
   env:
-    LOCK_FILE: 'package-lock.json'
-    OUTPUT_FILE: 'sbom.cdx.json'
+    LOCK_FILE: package-lock.json
+    OUTPUT_FILE: sbom.cdx.json
     ENRICH: true
+    UPLOAD: false
 
 - name: Upload to Dependency-Track
   run: |

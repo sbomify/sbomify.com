@@ -122,106 +122,78 @@ org.typelevel:cats-kernel_2.13:2.10.0
 
 ## Generating an SBOM
 
-### Using cdxgen (Recommended)
+SBOM generation is the first step in the [SBOM lifecycle]({{ site.url }}/features/generate-collaborate-analyze/). After generation, you typically need to enrich your SBOM with package metadata and augment it with your organization's details.
 
-[cdxgen](https://github.com/CycloneDX/cdxgen) has Scala/sbt support:
+### Using sbomify GitHub Action (Recommended)
+
+The [sbomify GitHub Action](https://github.com/sbomify/github-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
+
+For Scala, sbomify uses **cdxgen** under the hood.
+
+**Standalone (no account needed):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    LOCK_FILE: build.sbt
+    OUTPUT_FILE: sbom.cdx.json
+    COMPONENT_NAME: my-scala-app
+    COMPONENT_VERSION: ${{ github.ref_name }}
+    ENRICH: true
+    UPLOAD: false
+```
+
+Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as the SBOM version. For rolling releases without tags, use `github.sha` instead. See our [SBOM versioning guide]({{ site.url }}/guides/how-to-version-sboms/) for best practices.
+
+**With sbomify platform (adds augmentation and upload):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    COMPONENT_ID: my-component-id
+    LOCK_FILE: build.sbt
+    OUTPUT_FILE: sbom.cdx.json
+    AUGMENT: true
+    ENRICH: true
+```
+
+### Alternative Tools
+
+If you prefer to run SBOM generation tools manually:
+
+**cdxgen (recommended for manual use):**
 
 ```bash
-# Install cdxgen
 npm install -g @cyclonedx/cdxgen
-
-# Generate SBOM (requires sbt to be available)
 cdxgen -t sbt -o sbom.cdx.json
 ```
 
-### Using sbt-bom Plugin
-
-Generate CycloneDX directly from sbt:
+**sbt-sbom plugin:**
 
 ```scala
 // project/plugins.sbt
-addSbtPlugin("com.github.sbt" % "sbt-cyclonedx" % "0.1.0")
+addSbtPlugin("com.github.sbt" % "sbt-sbom" % "0.4.0")
 ```
 
 ```bash
-sbt makeBom
+sbt sbom
 ```
 
-### Manual Export with sbt-dependency-graph
+When using these tools directly, you'll need to handle enrichment and augmentation separately.
 
-Export dependencies and convert to SBOM:
-
-```bash
-# Export as JSON-like format
-sbt "print dependencyList" > deps.txt
-
-# Convert to SBOM (custom script needed)
-```
-
-### Using Syft
-
-[Syft](https://github.com/anchore/syft) has limited sbt support but can analyze built JARs:
-
-```bash
-# Build first
-sbt package
-
-# Analyze JAR
-syft target/scala-3.3.1/my-app_3-1.0.0.jar -o cyclonedx-json=sbom.cdx.json
-```
-
-## Automate with sbomify GitHub Action
-
-The [sbomify GitHub Action](https://github.com/sbomify/github-action/) supports Scala:
-
-```yaml
----
-name: Generate SBOM for Scala Project
-
-on: [push]
-
-jobs:
-  sbom:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-
-      - name: Set up sbt
-        uses: sbt/setup-sbt@v1
-
-      - name: Resolve dependencies
-        run: sbt update
-
-      - name: Generate and Upload SBOM
-        uses: sbomify/github-action@master
-        env:
-          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
-          COMPONENT_ID: 'my-scala-component'
-          LOCK_FILE: 'build.sbt'
-          OUTPUT_FILE: 'sbom.cdx.json'
-          ENRICH: true
-          UPLOAD: true
-```
-
-## GitLab and Other CI/CD
-
-For GitLab CI:
+### GitLab CI
 
 ```yaml
 generate-sbom:
-  image: hseeberger/scala-sbt:17.0.2_1.9.8_3.3.1
-  stage: build
+  image: sbomifyhub/sbomify-action
+  variables:
+    LOCK_FILE: build.sbt
+    OUTPUT_FILE: sbom.cdx.json
+    UPLOAD: "false"
+    ENRICH: "true"
   script:
-    - sbt update
-    - npm install -g @cyclonedx/cdxgen
-    - cdxgen -t sbt -o sbom.cdx.json
+    - /sbomify.sh
   artifacts:
     paths:
       - sbom.cdx.json

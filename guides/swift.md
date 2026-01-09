@@ -156,124 +156,79 @@ Or local XCFrameworks:
 
 ## Generating an SBOM
 
-### Using cdxgen
+SBOM generation is the first step in the [SBOM lifecycle]({{ site.url }}/features/generate-collaborate-analyze/). After generation, you typically need to enrich your SBOM with package metadata and augment it with your organization's details.
 
-[cdxgen](https://github.com/CycloneDX/cdxgen) supports Swift Package Manager:
+### Using sbomify GitHub Action (Recommended)
+
+The [sbomify GitHub Action](https://github.com/sbomify/github-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
+
+For Swift, sbomify uses **cdxgen** or **Syft** under the hood.
+
+**Standalone (no account needed):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    LOCK_FILE: Package.resolved
+    OUTPUT_FILE: sbom.cdx.json
+    COMPONENT_NAME: my-swift-app
+    COMPONENT_VERSION: ${{ github.ref_name }}
+    ENRICH: true
+    UPLOAD: false
+```
+
+Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as the SBOM version. For rolling releases without tags, use `github.sha` instead. See our [SBOM versioning guide]({{ site.url }}/guides/how-to-version-sboms/) for best practices.
+
+**With sbomify platform (adds augmentation and upload):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    COMPONENT_ID: my-component-id
+    LOCK_FILE: Package.resolved
+    OUTPUT_FILE: sbom.cdx.json
+    AUGMENT: true
+    ENRICH: true
+```
+
+For Xcode projects, use the full path to `Package.resolved`:
+
+```yaml
+LOCK_FILE: MyProject.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+```
+
+### Alternative Tools
+
+If you prefer to run SBOM generation tools manually:
+
+**cdxgen:**
 
 ```bash
-# Install cdxgen
 npm install -g @cyclonedx/cdxgen
-
-# Generate SBOM
 cdxgen -t swift -o sbom.cdx.json
 ```
 
-### Using Syft
-
-[Syft](https://github.com/anchore/syft) supports Package.resolved:
+**Syft:**
 
 ```bash
 syft . -o cyclonedx-json=sbom.cdx.json
 ```
 
-### Manual Conversion
+When using these tools directly, you'll need to handle enrichment and augmentation separately.
 
-For simple projects, you can convert `Package.resolved` to CycloneDX:
-
-```python
-#!/usr/bin/env python3
-import json
-
-with open('Package.resolved') as f:
-    resolved = json.load(f)
-
-components = []
-for pin in resolved['pins']:
-    components.append({
-        "type": "library",
-        "name": pin['identity'],
-        "version": pin['state'].get('version', pin['state'].get('revision')),
-        "purl": f"pkg:swift/{pin['identity']}@{pin['state'].get('version', 'unknown')}"
-    })
-
-sbom = {
-    "bomFormat": "CycloneDX",
-    "specVersion": "1.5",
-    "components": components
-}
-
-with open('sbom.cdx.json', 'w') as f:
-    json.dump(sbom, f, indent=2)
-```
-
-## Automate with sbomify GitHub Action
-
-The [sbomify GitHub Action](https://github.com/sbomify/github-action/) supports Swift projects:
-
-```yaml
----
-name: Generate SBOM for Swift Project
-
-on: [push]
-
-jobs:
-  sbom:
-    runs-on: macos-14
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Resolve dependencies
-        run: swift package resolve
-
-      - name: Generate and Upload SBOM
-        uses: sbomify/github-action@master
-        env:
-          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
-          COMPONENT_ID: 'my-swift-component'
-          LOCK_FILE: 'Package.resolved'
-          OUTPUT_FILE: 'sbom.cdx.json'
-          ENRICH: true
-          UPLOAD: true
-```
-
-For Xcode projects:
-
-```yaml
-env:
-  LOCK_FILE: 'MyProject.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved'
-```
-
-## GitLab and Other CI/CD
-
-For GitLab CI (requires macOS runner):
+### GitLab CI
 
 ```yaml
 generate-sbom:
-  stage: build
-  tags:
-    - macos
-  script:
-    - swift package resolve
-    - npm install -g @cyclonedx/cdxgen
-    - cdxgen -t swift -o sbom.cdx.json
-  artifacts:
-    paths:
-      - sbom.cdx.json
-```
-
-For Linux-based CI (server-side Swift):
-
-```yaml
-generate-sbom:
-  image: ghcr.io/sbomify/github-action:latest
-  stage: build
-  script:
-    - /entrypoint.sh
+  image: sbomifyhub/sbomify-action
   variables:
-    LOCK_FILE: "Package.resolved"
-    OUTPUT_FILE: "sbom.cdx.json"
+    LOCK_FILE: Package.resolved
+    OUTPUT_FILE: sbom.cdx.json
+    UPLOAD: "false"
     ENRICH: "true"
+  script:
+    - /sbomify.sh
   artifacts:
     paths:
       - sbom.cdx.json

@@ -118,128 +118,83 @@ The native code dependencies aren't captured in `pubspec.lock`. Consider documen
 
 ## Generating an SBOM
 
-### Using cdxgen (Recommended)
+SBOM generation is the first step in the [SBOM lifecycle]({{ site.url }}/features/generate-collaborate-analyze/). After generation, you typically need to enrich your SBOM with package metadata and augment it with your organization's details.
 
-[cdxgen](https://github.com/CycloneDX/cdxgen) has good Dart/Flutter support:
+### Using sbomify GitHub Action (Recommended)
 
-```bash
-# Install cdxgen
-npm install -g @cyclonedx/cdxgen
+The [sbomify GitHub Action](https://github.com/sbomify/github-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
 
-# Generate SBOM
-cdxgen -t dart -o sbom.cdx.json
+For Dart/Flutter, sbomify uses **cdxgen** or **Syft** under the hood (Trivy doesn't support Dart).
 
-# For Flutter projects
-cdxgen -t flutter -o sbom.cdx.json
+**Standalone (no account needed):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    LOCK_FILE: pubspec.lock
+    OUTPUT_FILE: sbom.cdx.json
+    COMPONENT_NAME: my-flutter-app
+    COMPONENT_VERSION: ${{ github.ref_name }}
+    ENRICH: true
+    UPLOAD: false
 ```
 
-### Using Syft
+Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as the SBOM version. For rolling releases without tags, use `github.sha` instead. See our [SBOM versioning guide]({{ site.url }}/guides/how-to-version-sboms/) for best practices.
 
-[Syft](https://github.com/anchore/syft) supports pubspec.lock:
+**With sbomify platform (adds augmentation and upload):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    COMPONENT_ID: my-component-id
+    LOCK_FILE: pubspec.lock
+    OUTPUT_FILE: sbom.cdx.json
+    AUGMENT: true
+    ENRICH: true
+```
+
+### Alternative Tools
+
+If you prefer to run SBOM generation tools manually:
+
+**cdxgen (recommended for manual use):**
+
+```bash
+npm install -g @cyclonedx/cdxgen
+cdxgen -t dart -o sbom.cdx.json
+```
+
+**Syft:**
 
 ```bash
 syft . -o cyclonedx-json=sbom.cdx.json
 ```
 
-**Note:** Trivy currently has limited Dart support. Use cdxgen or Syft for Dart projects.
-
-### Using dart_sbom Package
-
-A Dart-native SBOM generator:
+**sbom (Dart-native, SPDX only):**
 
 ```bash
-# Add to dev dependencies
-dart pub add --dev dart_sbom
-
-# Generate SBOM
-dart run dart_sbom
+dart pub add --dev sbom
 ```
 
-## Automate with sbomify GitHub Action
+Note: The `sbom` Dart package currently only supports SPDX format, not CycloneDX.
 
-The [sbomify GitHub Action](https://github.com/sbomify/github-action/) supports Dart projects:
+Trivy currently has limited Dart support. Use cdxgen or Syft for CycloneDX output.
 
-```yaml
----
-name: Generate SBOM for Dart Project
+When using these tools directly, you'll need to handle enrichment and augmentation separately.
 
-on: [push]
-
-jobs:
-  sbom:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Dart
-        uses: dart-lang/setup-dart@v1
-        with:
-          sdk: stable
-
-      - name: Install dependencies
-        run: dart pub get
-
-      - name: Generate and Upload SBOM
-        uses: sbomify/github-action@master
-        env:
-          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
-          COMPONENT_ID: 'my-dart-component'
-          LOCK_FILE: 'pubspec.lock'
-          OUTPUT_FILE: 'sbom.cdx.json'
-          ENRICH: true
-          UPLOAD: true
-```
-
-### For Flutter Projects
-
-```yaml
----
-name: Generate SBOM for Flutter Project
-
-on: [push]
-
-jobs:
-  sbom:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.16.0'
-          channel: 'stable'
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Generate and Upload SBOM
-        uses: sbomify/github-action@master
-        env:
-          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
-          COMPONENT_ID: 'my-flutter-component'
-          LOCK_FILE: 'pubspec.lock'
-          OUTPUT_FILE: 'sbom.cdx.json'
-          ENRICH: true
-          UPLOAD: true
-```
-
-## GitLab and Other CI/CD
-
-For GitLab CI:
+### GitLab CI
 
 ```yaml
 generate-sbom:
-  image: ghcr.io/sbomify/github-action:latest
-  stage: build
-  script:
-    - /entrypoint.sh
+  image: sbomifyhub/sbomify-action
   variables:
-    LOCK_FILE: "pubspec.lock"
-    OUTPUT_FILE: "sbom.cdx.json"
+    LOCK_FILE: pubspec.lock
+    OUTPUT_FILE: sbom.cdx.json
+    UPLOAD: "false"
     ENRICH: "true"
+  script:
+    - /sbomify.sh
   artifacts:
     paths:
       - sbom.cdx.json

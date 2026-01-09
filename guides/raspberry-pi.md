@@ -157,11 +157,39 @@ build-image:
       - output/*.sbom.spdx.json
 ```
 
-## Integration with sbomify
+## Enrichment and Augmentation with sbomify
 
-Use sbomify for SBOM lifecycle management:
+While rpi-image-gen generates SBOMs natively, you can use the [sbomify GitHub Action](https://github.com/sbomify/github-action/) to enrich and augment them further. The action accepts existing SBOMs via the `SBOM_FILE` input.
 
-1. **Upload** - Upload the generated SBOM to sbomify
+**Standalone (enrichment only, no account needed):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    SBOM_FILE: output/image.sbom.spdx.json
+    OUTPUT_FILE: enriched-sbom.cdx.json
+    ENRICH: true
+    UPLOAD: false
+```
+
+**With sbomify platform (enrichment + augmentation):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    COMPONENT_ID: my-raspberry-pi-image
+    SBOM_FILE: output/image.sbom.spdx.json
+    OUTPUT_FILE: enriched-sbom.cdx.json
+    ENRICH: true
+    AUGMENT: true
+```
+
+This enriches the rpi-image-gen SBOM with additional package metadata from public registries and optionally augments it with your business metadata (supplier, authors, licenses) from sbomify.
+
+Use sbomify for complete SBOM lifecycle management:
+
+1. **Upload** - Upload the enriched SBOM to sbomify
 2. **Augment** - Add vendor and supplier information
 3. **Distribute** - Share with customers and stakeholders
 4. **Monitor** - Track vulnerabilities across releases

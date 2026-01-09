@@ -140,113 +140,88 @@ echo "machine github.com login USERNAME password TOKEN" >> ~/.netrc
 
 ## Generating an SBOM
 
-### Using cdxgen
+SBOM generation is the first step in the [SBOM lifecycle]({{ site.url }}/features/generate-collaborate-analyze/). After generation, you typically need to enrich your SBOM with package metadata and augment it with your organization's details.
 
-[cdxgen](https://github.com/CycloneDX/cdxgen) has excellent Go support:
+### Using sbomify GitHub Action (Recommended)
+
+The [sbomify GitHub Action](https://github.com/sbomify/github-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
+
+For Go, sbomify uses **cdxgen** under the hood with fallback to Trivy and Syft.
+
+**Standalone (no account needed):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    LOCK_FILE: go.mod
+    OUTPUT_FILE: sbom.cdx.json
+    COMPONENT_NAME: my-go-app
+    COMPONENT_VERSION: ${{ github.ref_name }}
+    ENRICH: true
+    UPLOAD: false
+```
+
+Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as the SBOM version. For rolling releases without tags, use `github.sha` instead. See our [SBOM versioning guide]({{ site.url }}/guides/how-to-version-sboms/) for best practices.
+
+**With sbomify platform (adds augmentation and upload):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    COMPONENT_ID: my-component-id
+    LOCK_FILE: go.mod
+    OUTPUT_FILE: sbom.cdx.json
+    AUGMENT: true
+    ENRICH: true
+```
+
+The action supports both `go.mod` and `go.sum`.
+
+### Alternative Tools
+
+If you prefer to run SBOM generation tools manually:
+
+**cdxgen:**
 
 ```bash
-# Install cdxgen
 npm install -g @cyclonedx/cdxgen
-
-# Generate SBOM
 cdxgen -t go -o sbom.cdx.json
-
-# Include deep analysis
-cdxgen -t go --deep -o sbom.cdx.json
 ```
 
-### Using Trivy
-
-[Trivy](https://github.com/aquasecurity/trivy) can scan Go projects and binaries:
-
-```bash
-# From source
-trivy fs --format cyclonedx --output sbom.cdx.json .
-
-# From binary
-trivy rootfs --format cyclonedx --output sbom.cdx.json ./mybinary
-```
-
-### Using Syft
-
-[Syft](https://github.com/anchore/syft) supports Go modules and binaries:
-
-```bash
-# From source
-syft . -o cyclonedx-json=sbom.cdx.json
-
-# From binary
-syft ./mybinary -o cyclonedx-json=sbom.cdx.json
-```
-
-### Using cyclonedx-gomod
-
-The official CycloneDX Go tool:
+**cyclonedx-gomod (Go-native):**
 
 ```bash
 go install github.com/CycloneDX/cyclonedx-gomod/cmd/cyclonedx-gomod@latest
-
-# Generate SBOM from go.mod
 cyclonedx-gomod mod -output sbom.cdx.json
-
-# Generate SBOM from binary
-cyclonedx-gomod bin -output sbom.cdx.json ./mybinary
 ```
 
-## Automate with sbomify GitHub Action
+**Trivy:**
 
-The [sbomify GitHub Action](https://github.com/sbomify/github-action/) handles Go projects:
-
-```yaml
----
-name: Generate SBOM for Go Project
-
-on: [push]
-
-jobs:
-  sbom:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.21'
-
-      - name: Generate and Upload SBOM
-        uses: sbomify/github-action@master
-        env:
-          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
-          COMPONENT_ID: 'my-go-component'
-          LOCK_FILE: 'go.mod'
-          OUTPUT_FILE: 'sbom.cdx.json'
-          ENRICH: true
-          UPLOAD: true
+```bash
+trivy fs --format cyclonedx --output sbom.cdx.json .
 ```
 
-For projects using `go.sum`:
+**Syft:**
 
-```yaml
-env:
-  LOCK_FILE: 'go.sum'
+```bash
+syft . -o cyclonedx-json=sbom.cdx.json
 ```
 
-## GitLab and Other CI/CD
+When using these tools directly, you'll need to handle enrichment and augmentation separately.
 
-For GitLab CI:
+### GitLab CI
 
 ```yaml
 generate-sbom:
-  image: ghcr.io/sbomify/github-action:latest
-  stage: build
-  script:
-    - /entrypoint.sh
+  image: sbomifyhub/sbomify-action
   variables:
-    LOCK_FILE: "go.mod"
-    OUTPUT_FILE: "sbom.cdx.json"
+    LOCK_FILE: go.mod
+    OUTPUT_FILE: sbom.cdx.json
+    UPLOAD: "false"
     ENRICH: "true"
+  script:
+    - /sbomify.sh
   artifacts:
     paths:
       - sbom.cdx.json

@@ -162,16 +162,37 @@ sbomqs score *.spdx.json
 sbomaudit -i combined-sbom.spdx.json
 ```
 
-## Integration with sbomify
+## Enrichment and Augmentation with sbomify
 
-Once you have your Yocto SBOMs, you can use sbomify for lifecycle management:
+While Yocto generates high-quality SBOMs natively, you can use the [sbomify GitHub Action](https://github.com/sbomify/github-action/) to enrich and augment them further. The action accepts existing SBOMs via the `SBOM_FILE` input.
 
-1. **Create components** - Map each Yocto package to an sbomify component
-2. **Augment** - Add vendor and supplier information
-3. **Distribute** - Share SBOMs with stakeholders
-4. **Track updates** - Monitor package changes across releases
+**Standalone (enrichment only, no account needed):**
 
-sbomify supports [SBOM hierarchy]({{ site.url }}/features/sbom-hierarchy/) natively, replacing the need for `index.json` with a more flexible structure.
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    SBOM_FILE: sboms/combined-sbom.spdx.json
+    OUTPUT_FILE: enriched-sbom.cdx.json
+    ENRICH: true
+    UPLOAD: false
+```
+
+**With sbomify platform (enrichment + augmentation):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    COMPONENT_ID: my-yocto-image
+    SBOM_FILE: sboms/combined-sbom.spdx.json
+    OUTPUT_FILE: enriched-sbom.cdx.json
+    ENRICH: true
+    AUGMENT: true
+```
+
+This enriches the Yocto-generated SBOM with additional package metadata from public registries and optionally augments it with your business metadata (supplier, authors, licenses) from sbomify.
+
+sbomify also supports [SBOM hierarchy]({{ site.url }}/features/sbom-hierarchy/) natively, replacing the need for `index.json` with a more flexible structure.
 
 ## CI/CD Integration
 

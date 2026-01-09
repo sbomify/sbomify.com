@@ -73,72 +73,90 @@ flask==3.0.3 \
 
 It is however important to point out that this is less supported in SBOM generation tools compared to the those of other package managers as it is less common.
 
-## Generating an SBOM from a Python Lockfile
+## Generating an SBOM
 
-There are a number of tools available to generate SBOMs for Python on our [Resources page]({{ site.url }}/resources/#python). Your personal preferences may vary depending on whether you want a format-agnostic tool that can generate both SPDX and CycloneDX SBOMs or if you want a format-specific tool.
-
-It's important to stress that regardless of the tool you use, you still need to go through all steps in the [SBOM lifecycle]({{ site.url }}/features/generate-collaborate-analyze/).
+SBOM generation is the first step in the [SBOM lifecycle]({{ site.url }}/features/generate-collaborate-analyze/). After generation, you typically need to enrich your SBOM with package metadata and augment it with your organization's details.
 
 ![Lifecycle](/assets/images/d2/lifecycle.svg)
 
-The output of any of the tools completes the first step (e.g., "Generation"), but you still need to do Enrichment and Augmentation to have a complete SBOM.
+### Using sbomify GitHub Action (Recommended)
 
-With that out of the way, one of the more versatile SBOM tools is Trivy from Aqua Security. This tool is able to generate both CycloneDX and SPDX from a number of Python lockfiles.
+The [sbomify GitHub Action](https://github.com/sbomify/github-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
 
-```bash
-$ trivy fs \
-    --format cyclonedx \
-    --output my_sbom.cdx.json \
-    requirements.txt
-```
+For Python, sbomify uses **cyclonedx-py** under the hood as it provides the most accurate results for Python lockfiles, including proper hash support.
 
-As warned about above earlier, Trivy does not support reading hashes from `requirements.txt` files. For this, we might consider using a more specialized tool, like CycloneDX's own Python library:
-
-```bash
-$ cyclonedx-py \
-    requirements requirements.txt \
-    > my_sbom.cdx.json
-```
-
-## Let's Make Your Life Easier
-
-Hopefully, the steps above didn't scare you away from building SBOMs. Now that you understand the basics, you are probably thinking about how to automate this in your CI/CD pipeline. Enter the [sbomify GitHub Action](https://github.com/sbomify/github-action/), a swiss army knife for SBOMs. It's an abstraction layer that ties together various other open source SBOM tools to make your life easier.
-
-The GitHub Actions module is open source and can be run both with and without the sbomify platform.
-
-Instead of running the commands above, you can just add a job that looks like this:
+**Standalone (no account needed):**
 
 ```yaml
----
-name: Upload an SBOM to sbomify
-
-on: [push]
-
-jobs:
-  [...]
-  upload-sbom:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Upload SBOM
-        uses: sbomify/github-action@master
-        env:
-          TOKEN: 'My GitHub Secret Reference'
-          COMPONENT_ID: 'my-component-id'
-          LOCK_FILE: 'requirements.txt'
-          OUTPUT_FILE: 'my_sbom.cdx.json'
-          AUGMENT: false
-          ENRICH: false
-          UPLOAD: false
+- uses: sbomify/github-action@master
+  env:
+    LOCK_FILE: requirements.txt
+    OUTPUT_FILE: sbom.cdx.json
+    COMPONENT_NAME: my-python-app
+    COMPONENT_VERSION: ${{ github.ref_name }}
+    ENRICH: true
+    UPLOAD: false
 ```
 
-At the end of this run, you will have an SBOM.
+Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as the SBOM version. For rolling releases without tags, use `github.sha` instead. See our [SBOM versioning guide]({{ site.url }}/guides/how-to-version-sboms/) for best practices.
 
-If you have an sbomify account, you can also automatically augment this SBOM with your information (vendor, supplier, and license information) with the `AUGMENT: true` setting. We can also set `UPLOAD: true` to automatically upload the SBOM to our platform. Once uploaded, you can invite all your stakeholders.
+**With sbomify platform (adds augmentation and upload):**
 
-The GitHub Action can take most Python lockfiles (`Pipfile.lock`, `poetry.lock`, and `requirements.txt`) as input and build an SBOM for you with minimal fuss.
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    COMPONENT_ID: my-component-id
+    LOCK_FILE: requirements.txt
+    OUTPUT_FILE: sbom.cdx.json
+    AUGMENT: true
+    ENRICH: true
+```
+
+The action supports all Python lockfiles: `requirements.txt`, `poetry.lock`, `Pipfile.lock`, `uv.lock`, and `pyproject.toml`.
+
+### Alternative Tools
+
+If you prefer to run SBOM generation tools manually:
+
+**cyclonedx-py (Python-native, recommended for manual use):**
+
+```bash
+pip install cyclonedx-bom
+cyclonedx-py requirements requirements.txt --output-format json -o sbom.cdx.json
+```
+
+This is the same tool sbomify uses under the hood. It properly handles hashes in `requirements.txt` files.
+
+**Trivy:**
+
+```bash
+trivy fs --format cyclonedx --output sbom.cdx.json requirements.txt
+```
+
+Note: Trivy does not support reading hashes from `requirements.txt` files.
+
+**cdxgen:**
+
+```bash
+cdxgen -o sbom.cdx.json
+```
+
+When using these tools directly, you'll need to handle enrichment and augmentation separately. See our [Resources page]({{ site.url }}/resources/#python) for more Python SBOM tools.
+
+### GitLab CI
+
+```yaml
+generate-sbom:
+  image: sbomifyhub/sbomify-action
+  variables:
+    LOCK_FILE: requirements.txt
+    OUTPUT_FILE: sbom.cdx.json
+    UPLOAD: "false"
+    ENRICH: "true"
+  script:
+    - /sbomify.sh
+```
 
 ## Further Reading
 

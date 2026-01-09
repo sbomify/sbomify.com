@@ -144,122 +144,80 @@ Consider including these in your SBOM for completeness.
 
 ## Generating an SBOM
 
-### Using cdxgen (Recommended)
+SBOM generation is the first step in the [SBOM lifecycle]({{ site.url }}/features/generate-collaborate-analyze/). After generation, you typically need to enrich your SBOM with package metadata and augment it with your organization's details.
 
-[cdxgen](https://github.com/CycloneDX/cdxgen) has excellent PHP/Composer support:
+### Using sbomify GitHub Action (Recommended)
 
-```bash
-# Install cdxgen
-npm install -g @cyclonedx/cdxgen
+The [sbomify GitHub Action](https://github.com/sbomify/github-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
 
-# Generate SBOM
-cdxgen -t php -o sbom.cdx.json
+For PHP, sbomify uses **cdxgen** under the hood with fallback to Trivy and Syft.
 
-# Exclude dev dependencies
-cdxgen -t php -o sbom.cdx.json --no-dev
-```
-
-### Using CycloneDX PHP Composer Plugin
-
-The official CycloneDX Composer plugin:
-
-```bash
-# Install the plugin
-composer require --dev cyclonedx/cyclonedx-php-composer
-
-# Generate SBOM
-composer make-bom --output-file=sbom.cdx.json
-
-# Exclude dev dependencies
-composer make-bom --exclude-dev --output-file=sbom.cdx.json
-
-# Generate SPDX format
-composer make-bom --output-format=spdx --output-file=sbom.spdx.json
-```
-
-Or add to `composer.json`:
-
-```json
-{
-    "require-dev": {
-        "cyclonedx/cyclonedx-php-composer": "^4.0"
-    },
-    "scripts": {
-        "sbom": "composer make-bom --output-file=sbom.cdx.json"
-    }
-}
-```
-
-### Using Trivy
-
-[Trivy](https://github.com/aquasecurity/trivy) can scan PHP projects:
-
-```bash
-# Generate CycloneDX SBOM
-trivy fs --format cyclonedx --output sbom.cdx.json .
-
-# Generate SPDX SBOM
-trivy fs --format spdx-json --output sbom.spdx.json .
-```
-
-### Using Syft
-
-[Syft](https://github.com/anchore/syft) supports Composer lockfiles:
-
-```bash
-syft . -o cyclonedx-json=sbom.cdx.json
-```
-
-## Automate with sbomify GitHub Action
-
-The [sbomify GitHub Action](https://github.com/sbomify/github-action/) supports PHP projects:
+**Standalone (no account needed):**
 
 ```yaml
----
-name: Generate SBOM for PHP Project
-
-on: [push]
-
-jobs:
-  sbom:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-
-      - name: Install dependencies
-        run: composer install --no-dev
-
-      - name: Generate and Upload SBOM
-        uses: sbomify/github-action@master
-        env:
-          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
-          COMPONENT_ID: 'my-php-component'
-          LOCK_FILE: 'composer.lock'
-          OUTPUT_FILE: 'sbom.cdx.json'
-          ENRICH: true
-          UPLOAD: true
+- uses: sbomify/github-action@master
+  env:
+    LOCK_FILE: composer.lock
+    OUTPUT_FILE: sbom.cdx.json
+    COMPONENT_NAME: my-php-app
+    COMPONENT_VERSION: ${{ github.ref_name }}
+    ENRICH: true
+    UPLOAD: false
 ```
 
-## GitLab and Other CI/CD
+Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as the SBOM version. For rolling releases without tags, use `github.sha` instead. See our [SBOM versioning guide]({{ site.url }}/guides/how-to-version-sboms/) for best practices.
 
-For GitLab CI:
+**With sbomify platform (adds augmentation and upload):**
+
+```yaml
+- uses: sbomify/github-action@master
+  env:
+    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    COMPONENT_ID: my-component-id
+    LOCK_FILE: composer.lock
+    OUTPUT_FILE: sbom.cdx.json
+    AUGMENT: true
+    ENRICH: true
+```
+
+### Alternative Tools
+
+If you prefer to run SBOM generation tools manually:
+
+**CycloneDX PHP Composer Plugin:**
+
+```bash
+composer require --dev cyclonedx/cyclonedx-php-composer
+composer make-bom --output-file=sbom.cdx.json
+```
+
+**cdxgen:**
+
+```bash
+npm install -g @cyclonedx/cdxgen
+cdxgen -t php -o sbom.cdx.json
+```
+
+**Trivy:**
+
+```bash
+trivy fs --format cyclonedx --output sbom.cdx.json .
+```
+
+When using these tools directly, you'll need to handle enrichment and augmentation separately.
+
+### GitLab CI
 
 ```yaml
 generate-sbom:
-  image: ghcr.io/sbomify/github-action:latest
-  stage: build
-  script:
-    - /entrypoint.sh
+  image: sbomifyhub/sbomify-action
   variables:
-    LOCK_FILE: "composer.lock"
-    OUTPUT_FILE: "sbom.cdx.json"
+    LOCK_FILE: composer.lock
+    OUTPUT_FILE: sbom.cdx.json
+    UPLOAD: "false"
     ENRICH: "true"
+  script:
+    - /sbomify.sh
   artifacts:
     paths:
       - sbom.cdx.json
