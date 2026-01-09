@@ -136,7 +136,8 @@ The analysis phase involves how you use the SBOM, typically for compliance or se
 - CISA's [SBOM Sharing Primer](https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf)
 - CISA's [Software Bill of Materials (SBOM) Sharing Lifecycle Report](https://www.cisa.gov/sites/default/files/2023-04/sbom-sharing-lifecycle-report_508.pdf)
 - CISA's [Framing Software Component Transparency: Establishing a Common Software Bill of Materials (SBOM)](https://www.cisa.gov/sites/default/files/2024-10/SBOM%20Framing%20Software%20Component%20Transparency%202024.pdf) (3rd Edition)
-- NTIA's [The Minimum Elements For a Software Bill of Materials (SBOM)](https://www.ntia.gov/sites/default/files/publications/sbom_minimum_elements_report_0.pdf)
+- NTIA's [The Minimum Elements For a Software Bill of Materials (SBOM)](https://www.ntia.gov/sites/default/files/publications/sbom_minimum_elements_report_0.pdf) (2021)
+- CISA's [2025 Minimum Elements for a Software Bill of Materials (SBOM)](https://www.cisa.gov/resources-tools/resources/2025-minimum-elements-software-bill-materials-sbom) (Public Comment Draft, updates the 2021 NTIA guidance)
 
 <div class="mt-16 flex justify-center">
   <a href="https://github.com/sbomify/sbomify.com/blob/master/resources.md" class="inline-flex items-center gap-2 !text-gray-500 hover:!text-gray-900 transition-colors !no-underline text-sm font-medium">
