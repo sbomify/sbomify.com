@@ -3,7 +3,7 @@ layout: post
 title: "Unpacking Raspberry Pi's Built‑In SBOM Magic"
 date: 2025-04-17
 author:
-  display_name: Viktor
+  display_name: Viktor Petersson
 category: news
 tags: [sbom, raspberry-pi, embedded, spdx]
 

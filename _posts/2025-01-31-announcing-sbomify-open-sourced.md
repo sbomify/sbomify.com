@@ -5,7 +5,7 @@ date: 2025-01-31 09:00:00 +0000
 category: announcement
 tags: [sbom, open-source]
 author:
-  display_name: Viktor
+  display_name: Viktor Petersson
 ---
 
 I am thrilled to share that **sbomify** is now officially **open source**! As of today, you can find our project on [GitHub](https://github.com/sbomify/sbomify). This decision is a leap forward in our mission to promote transparency, collaboration, and innovation in Software Bill of Materials (SBOM) management.

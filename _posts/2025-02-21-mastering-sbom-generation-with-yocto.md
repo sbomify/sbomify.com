@@ -5,7 +5,7 @@ date: 2025-02-21 09:00:00 +0000
 category: guide
 tags: [sbom, yocto, linux, embedded]
 author:
-  display_name: Viktor
+  display_name: Viktor Petersson
 ---
 
 I recently [spent time with Yocto](https://vpetersson.com/2025/02/21/yocto-rockpi-and-sboms.html) to better understand how it works with SBOMs, and I was very impressed. In short, if you are building your own Linux distribution, Yocto is an excellent choice for many reasons, particularly if you want to provide SBOMs for your product.

@@ -1,0 +1,31 @@
+vpetersson:
+  display_name: Viktor Petersson
+  slug: vpetersson
+  image: /assets/images/viktor.png
+  linkedin: https://www.linkedin.com/in/vpetersson/
+  twitter: https://twitter.com/vpetersson
+  mastodon: https://hachyderm.io/@vpetersson
+  github: https://github.com/vpetersson
+  website: https://vpetersson.com
+  podcast: https://vpetersson.com/podcast
+  bio: >-
+    Serial entrepreneur and cybersecurity innovator, currently focused on shaping
+    the future of software security and compliance. As the founder of sbomify, he
+    simplifies Software Bill of Materials (SBOM) management, helping organizations
+    navigate emerging cybersecurity regulations such as the Cyber Resilience Act (CRA).
+    Viktor co-led the CISA SBOM Working Group on SBOM generation and is an invited
+    expert to ECMA TC54. He shares insights and industry trends through his podcast,
+    Nerding Out With Viktor.
+
+cswan:
+  display_name: Chris Swan
+  slug: cswan
+  image: /assets/images/chris.png
+  linkedin: https://www.linkedin.com/in/chrisswan/
+  website: https://cpswan.net
+  podcast: https://techdebtburndown.com/
+  bio: >-
+    Engineer at Atsign building the open-source atPlatform. Former Fellow at DXC
+    Technology and CTO at UBS, Capital SCF, and Credit Suisse. Co-host of the
+    Tech Debt Burndown podcast and Google Developer Expert. Chris brings extensive
+    experience in DevOps, open source, and cybersecurity to his role as an sbomify advisor.

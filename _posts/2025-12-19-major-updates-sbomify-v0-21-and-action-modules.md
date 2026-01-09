@@ -2,7 +2,7 @@
 layout: post
 title: "Major Updates: sbomify v0.21 and Action Module v0.8 & v0.9"
 author:
-  display_name: Viktor
+  display_name: Viktor Petersson
 category: announcement
 tags: [sbom, release, github-actions]
 ---

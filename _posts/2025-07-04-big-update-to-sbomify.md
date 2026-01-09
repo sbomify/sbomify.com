@@ -5,7 +5,7 @@ date: 2025-07-04 09:00:00 +0000
 category: announcement
 tags: [sbom, release]
 author:
-  display_name: Viktor
+  display_name: Viktor Petersson
 ---
 
 Happy 4 July to our US friends.

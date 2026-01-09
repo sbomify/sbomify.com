@@ -2,7 +2,7 @@
 layout: post
 title: "GitHub Action module with Attestation"
 author:
-  display_name: Viktor
+  display_name: Viktor Petersson
 category: announcement
 tags: [sbom, github-actions, docker, attestation]
 

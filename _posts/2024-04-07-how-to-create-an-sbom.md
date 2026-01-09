@@ -4,8 +4,7 @@ status: publish
 published: true
 title: How to create an SBOM
 author:
-  display_name: Viktor
-  url: https://sbomify.com
+  display_name: Viktor Petersson
 author_url: https://sbomify.com
 wordpress_id: 175
 wordpress_url: https://sbomify.com/?p=175

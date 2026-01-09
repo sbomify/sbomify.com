@@ -2,7 +2,7 @@
 layout: post
 title: "CRA Explained: What the Cyber Resilience Act Means for Device Manufacturers"
 author:
-  display_name: Viktor
+  display_name: Viktor Petersson
 category: podcast
 tags: [CRA, compliance, security, sbom]
 ---
