@@ -29,9 +29,13 @@ Governments and regulatory bodies worldwide are recognizing the critical role of
 
 In May 2021, the Biden administration issued an [Executive Order on Improving the Nation's Cybersecurity](https://www.whitehouse.gov/briefing-room/presidential-actions/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/). A key mandate of this order requires SBOMs for all software sold to the federal government, setting a new standard for transparency and trust in the US software supply chain.
 
+#### United States: FDA Medical Device Cybersecurity
+
+The FDA has also embraced SBOMs for medical devices. The [June 2025 guidance on medical device cybersecurity]({{ site.url }}/2026/01/09/fda-medical-device-sbom-requirements/) requires manufacturers to include SBOMs in premarket submissions, referencing the NTIA Minimum Elements as the baseline standard. For manufacturers of connected medical devices, SBOMs are now essential documentation for 510(k), PMA, and other regulatory submissions.
+
 #### European Union: Cyber Resilience Act (CRA)
 
-On the other side of the pond, the EU is enforcing similar standards with the [Cyber Resilience Act]({{ site.url }}/2024/07/10/understanding-the-eu-cyber-resilience-act-the-role-of-sboms-in-enhancing-cybersecurity/). This landmark legislation mandates strict cybersecurity requirements for products with digital elements, placing SBOMs at the center of compliance for any company doing business in the EU.
+On the other side of the pond, the EU is enforcing similar standards with the [Cyber Resilience Act]({{ site.url }}/2024/07/10/understanding-the-eu-cyber-resilience-act-the-role-of-sboms-in-enhancing-cybersecurity/). This landmark legislation mandates strict cybersecurity requirements for products with digital elements, placing SBOMs at the center of compliance for any company doing business in the EU. For a deep dive into what the CRA means for device manufacturers, check out our [podcast episode with EU CRA expert Sarah Fluchs]({{ site.url }}/2026/01/06/cra-explained-cyber-resilience-act-for-device-manufacturers/).
 
 #### United Kingdom: Software Security Code of Practice
 
@@ -59,6 +63,8 @@ While there is no single "winner" yet, both formats represent a positive step to
 If you want to do a deep dive into SBOMs, we recommend watching this interview with Allan Friedman (formerly CISA) on the podcast [Nerding Out with Viktor](https://vpetersson.com/podcast/).
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/E77ohYZA2vo?si=dZbcMfdO10EafVVw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+For more podcast episodes covering SBOMs, CycloneDX, SPDX, and the EU Cyber Resilience Act, see our [Video Resources]({{ site.url }}/resources/#video-resources).
 
 ### In Summary
 
