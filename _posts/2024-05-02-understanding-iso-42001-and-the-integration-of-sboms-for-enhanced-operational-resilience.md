@@ -4,6 +4,7 @@ status: publish
 published: true
 title: Understanding ISO 42001 and the Integration of SBOMs for Enhanced Operational
   Resilience
+description: "How to integrate SBOMs with ISO 42001 operational resilience management systems for better risk assessment, incident response, and compliance."
 category: compliance
 tags: [sbom, iso42001, ai, standards]
 author:

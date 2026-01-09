@@ -2,6 +2,17 @@
 layout: pricing
 title: Pricing
 description: Simple, transparent pricing for teams of all sizes
+faq:
+  - question: "What's included in the free tier?"
+    answer: "The Community tier is perfect for open source projects and includes public SBOM hosting, 1 product with 1 project and 5 components, and community support."
+  - question: "Can I upgrade or downgrade at any time?"
+    answer: "Yes, you can change your plan at any time. Your billing will be prorated accordingly."
+  - question: "What payment methods do you accept?"
+    answer: "We accept all major credit cards and can arrange alternative payment methods for enterprise customers."
+  - question: "Do you offer custom solutions?"
+    answer: "Yes, our enterprise tier can be customized to meet your specific needs. Contact our sales team to learn more."
+  - question: "Can I self-host Sbomify?"
+    answer: "Yes! Sbomify is open source and available for self-hosting. Check out our GitHub repository for installation instructions and documentation."
 ---
 
 <div class="bg-primaryBG py-12 md:py-16 lg:py-24">

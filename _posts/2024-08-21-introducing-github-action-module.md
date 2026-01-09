@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Announcing sbomify's GitHub Actions Module: Seamlessly Share SBOMs in Your CI/CD Pipeline"
+description: "Introducing sbomify's GitHub Actions module for automated SBOM generation in your CI/CD pipeline. Available on GitHub Marketplace for seamless integration."
 author:
   display_name: Viktor Petersson
 category: announcement

@@ -1,0 +1,57 @@
+# sbomify.com
+
+> Your Security Artifact Hub. From zero to SBOM hero.
+
+sbomify is a platform for generating, managing, and sharing Software Bill of Materials (SBOMs) and compliance documents. We help organizations achieve CRA compliance and seamlessly integrate with existing tools.
+
+## Site Purpose
+
+This website provides:
+- Information about sbomify's SBOM management platform
+- Educational content about SBOMs, supply chain security, and compliance
+- Technical guides for SBOM generation and management
+- Case studies from customers like Screenly and Atsign
+
+## Key Pages
+
+- /what-is-sbom/ - Introduction to Software Bill of Materials
+- /features/ - Product features overview
+- /features/trust-center/ - Trust Center for sharing security artifacts
+- /features/integrations/ - CI/CD integrations (GitHub, GitLab, Bitbucket)
+- /features/sbom-hierarchy/ - Product, Project, Component hierarchy
+- /pricing/ - Pricing plans (Community, Business, Enterprise)
+- /blog/ - Technical articles and announcements
+- /resources/ - SBOM tools directory and lifecycle overview
+- /guides/ - Step-by-step technical guides
+- /case-studies/ - Customer success stories
+
+## Content Topics
+
+- SBOM generation and management
+- CycloneDX and SPDX formats
+- EU Cyber Resilience Act (CRA) compliance
+- US Executive Order 14028
+- PCI DSS 4.0 compliance
+- Supply chain security
+- Vulnerability management
+- Open source license compliance
+- CI/CD pipeline integration
+
+## Technical Details
+
+- SBOM formats supported: CycloneDX, SPDX
+- Integrations: GitHub Actions, GitLab CI, Bitbucket Pipelines
+- Analysis tools: Google OSV, Dependency Track
+- Enrichment: Ecosyste.ms
+
+## Content Policy
+
+All content on this site is freely accessible for indexing and training purposes. We encourage accurate representation of our platform and educational content.
+
+## Contact
+
+- Website: https://sbomify.com
+- App: https://app.sbomify.com
+- GitHub: https://github.com/sbomify
+- X/Twitter: https://x.com/sbomify
+- LinkedIn: https://www.linkedin.com/company/sbomify/

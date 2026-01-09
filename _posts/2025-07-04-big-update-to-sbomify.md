@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Big Update to sbomify"
+description: "sbomify v0.15 introduces document support alongside SBOMs, improved public pages, and product-level SBOM aggregation—evolving into a complete compliance hub."
 date: 2025-07-04 09:00:00 +0000
 category: announcement
 tags: [sbom, release]

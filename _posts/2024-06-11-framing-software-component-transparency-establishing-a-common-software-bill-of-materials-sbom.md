@@ -4,6 +4,7 @@ status: publish
 published: true
 title: 'Framing Software Component Transparency: Establishing a Common Software Bill
   of Materials (SBOM)'
+description: "Summary of NTIA's SBOM Framing document 2nd edition highlighting transparency, interoperability standards, and what to expect in the upcoming 3rd edition."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil

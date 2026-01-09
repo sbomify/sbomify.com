@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: Elevating M&A Due Diligence with sbomify's SBOM Management
+description: "How sbomify streamlines M&A due diligence by providing comprehensive software asset evaluation, vulnerability assessment, and license compliance checking."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil

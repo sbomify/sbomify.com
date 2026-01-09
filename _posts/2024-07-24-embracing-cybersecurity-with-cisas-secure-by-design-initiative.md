@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: Embracing Cybersecurity with CISA's 'Secure by Design' Initiative
+description: "Overview of CISA's Secure by Design guide, its three core principles for software manufacturers, and practical steps for implementing security from the start."
 author:
   display_name: Cowboy Neil
 author_login: Cowboy Neil

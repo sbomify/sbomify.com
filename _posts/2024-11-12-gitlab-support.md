@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "sbomify GitHub Action v0.3.0: Now Faster and Compatible with GitLab!"
+description: "sbomify GitHub Action v0.3.0 release adds GitLab CI/CD support, 50% faster build times, and bug fixes for Docker image SBOM generation."
 author:
   display_name: Viktor Petersson
 category: announcement

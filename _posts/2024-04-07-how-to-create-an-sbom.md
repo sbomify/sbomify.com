@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: How to create an SBOM
+description: "Step-by-step guide to generating SBOMs using Docker CLI and GitHub tools including the command line interface, Dependency Graph, and REST API."
 author:
   display_name: Viktor Petersson
 author_url: https://sbomify.com

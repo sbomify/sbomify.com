@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Announcing GitHub Action 0.7.0 and sbomify 0.19"
+description: "Major releases: GitHub Action 0.7.0 with ecosyste.ms enrichment and SPDX support, plus sbomify 0.19 with full Django+HTMX migration, custom domains, and CycloneDX 1.7."
 author:
   display_name: Viktor Petersson
 category: announcement

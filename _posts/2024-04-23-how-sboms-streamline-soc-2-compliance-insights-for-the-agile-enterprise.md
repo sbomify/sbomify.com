@@ -3,6 +3,7 @@ layout: post
 status: publish
 published: true
 title: 'How SBOMs Streamline SOC 2 Compliance: Insights for the Agile Enterprise'
+description: "Guide on using SBOMs to simplify SOC 2 Type I and Type II compliance through improved transparency, proactive risk management, and streamlined audits."
 category: compliance
 tags: [sbom, soc2, security]
 author:

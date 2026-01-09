@@ -4,6 +4,7 @@ status: publish
 published: true
 title: 'The Role of SBOMs in an OBOM: Ensuring Compliance and Security in Smart Thermometer
   Development'
+description: "How to integrate SBOMs into Operations Bill of Materials (OBOM) for IoT devices, using a smart thermometer example with Python backend, Docker, and Rust firmware."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
