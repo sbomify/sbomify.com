@@ -69,3 +69,11 @@ For more podcast episodes covering SBOMs, CycloneDX, SPDX, and the EU Cyber Resi
 ### In Summary
 
 SBOMs are no longer optional; they are becoming a global standard for software transparency, security, and compliance. Driven by mandates like the US Executive Order and the EU Cyber Resilience Act, and reinforced by standards like PCI DSS 4.0, the ability to generate and manage SBOMs is essential for modern software organizations.
+
+### Next Steps
+
+Ready to start generating SBOMs for your projects? Here's where to go next:
+
+- **[SBOM Guides]({{ site.url }}/guides/)** - Step-by-step guides for generating SBOMs in Python, JavaScript, Java, Go, Rust, and 10+ other languages
+- **[SBOM Resources]({{ site.url }}/resources/)** - Comprehensive list of SBOM tools for generation, distribution, and analysis
+- **[sbomify GitHub Action](https://github.com/sbomify/github-action/)** - Automate SBOM generation in your CI/CD pipeline

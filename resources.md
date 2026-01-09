@@ -5,11 +5,15 @@ title: SBOM Resources
 description: "Discover the full SBOM life cycle: Generation, Distribution, and Analysis. Explore tools, benchmarks, and resources for creating, sharing, and utilizing Software Bills of Materials."
 ---
 
+New to SBOMs? Start with [What is an SBOM?]({{ site.url }}/what-is-sbom/) to learn the basics.
+
 The SBOM life cycle can be broken down into three phases: [generation, distribution, and analysis]({{ site.url }}/features/generate-collaborate-analyze/). The structure below aligns with the life cycle.
 
 ![Lifecycle](/assets/images/d2/lifecycle.svg)
 
 There's also a GitHub repository called [sbom-benchmarks](https://github.com/sbomify/sbom-benchmarks) that sets to benchmark the various tools (from the Generation phase) against each other, along with providing examples how they are used.
+
+For step-by-step guides on generating SBOMs for specific languages and platforms, see our comprehensive [SBOM Guides]({{ site.url }}/guides/).
 
 ---
 
@@ -42,6 +46,8 @@ Language or format-specific tools.
 
 #### Docker / Containers
 
+See guide [SBOM Generation Guide for Docker and Containers]({{ site.url }}/guides/docker/) for more details.
+
 You can see how they compare side-by-side in the [sbom-benchmark](https://github.com/sbomify/sbom-benchmarks/tree/master/docker) repository.
 
 - [bom](https://github.com/kubernetes-sigs/bom) from The Linux Foundation
@@ -49,7 +55,7 @@ You can see how they compare side-by-side in the [sbom-benchmark](https://github
 
 #### Python
 
-See guide [The ultimate SBOM guide for Python]({{ site.url }}/guides/python) for more language specific details.
+See guide [The ultimate SBOM guide for Python]({{ site.url }}/guides/python/) for more language specific details.
 
 You can see how they compare side-by-side in the [sbom-benchmark](https://github.com/sbomify/sbom-benchmarks/tree/master/python) repository.
 
@@ -59,30 +65,97 @@ You can see how they compare side-by-side in the [sbom-benchmark](https://github
 
 #### Rust
 
+See guide [SBOM Generation Guide for Rust - Cargo]({{ site.url }}/guides/rust/) for more language specific details.
+
 - [CycloneDX Rust](https://github.com/CycloneDX/cyclonedx-rust-cargo) from CycloneDX
 - [sbom-rs](https://github.com/psastras/sbom-rs) from Paul Sastrasinh
 - [sbom4rust](https://github.com/anthonyharrison/sbom4rust) from Anthony Harrison
 
 #### Go
 
+See guide [SBOM Generation Guide for Go - Go Modules]({{ site.url }}/guides/go/) for more language specific details.
+
 - [CycloneDX Go](https://github.com/CycloneDX/cyclonedx-gomod) from CycloneDX
 - [SPDX Golang](https://github.com/spdx/tools-golang) from SPDX
 
 #### .NET
+
+See guide [SBOM Generation Guide for .NET - NuGet]({{ site.url }}/guides/dotnet/) for more language specific details.
 
 - [CycloneDX .NET](https://github.com/CycloneDX/cyclonedx-dotnet-library) from CycloneDX
 - [SBOM Tool](https://github.com/microsoft/sbom-tool) from Microsoft
 
 #### Java
 
+See guide [SBOM Generation Guide for Java - Maven, Gradle]({{ site.url }}/guides/java/) for more language specific details.
+
 - [CycloneDX Java](https://github.com/CycloneDX/cyclonedx-core-java) from CycloneDX
 - [SPDX Java](https://github.com/spdx/Spdx-Java-Library) from SPDX
 
 #### JavaScript
 
+See guide [SBOM Generation Guide for JavaScript - npm, yarn, pnpm, Bun]({{ site.url }}/guides/javascript/) for more language specific details.
+
 - [CycloneDX JavaScript](https://github.com/CycloneDX/cyclonedx-javascript-library)
 - [Retire.js](https://github.com/RetireJS/retire.js) from RetireJS
 - [sbom4js](https://github.com/anthonyharrison/sbom4js) from Anthony Harrison
+
+#### Ruby
+
+See guide [SBOM Generation Guide for Ruby - Bundler]({{ site.url }}/guides/ruby/) for more language specific details.
+
+- [CycloneDX Ruby](https://github.com/CycloneDX/cyclonedx-ruby-gem) from CycloneDX
+
+#### PHP
+
+See guide [SBOM Generation Guide for PHP - Composer]({{ site.url }}/guides/php/) for more language specific details.
+
+- [CycloneDX PHP Composer](https://github.com/CycloneDX/cyclonedx-php-composer) from CycloneDX
+
+#### Swift
+
+See guide [SBOM Generation Guide for Swift - Swift Package Manager]({{ site.url }}/guides/swift/) for more language specific details.
+
+#### Dart / Flutter
+
+See guide [SBOM Generation Guide for Dart and Flutter - pub]({{ site.url }}/guides/dart/) for more language specific details.
+
+#### Elixir
+
+See guide [SBOM Generation Guide for Elixir - Mix]({{ site.url }}/guides/elixir/) for more language specific details.
+
+#### Scala
+
+See guide [SBOM Generation Guide for Scala - sbt]({{ site.url }}/guides/scala/) for more language specific details.
+
+#### C/C++
+
+See guide [SBOM Generation Guide for C/C++ - Conan]({{ site.url }}/guides/cpp/) for more language specific details.
+
+Related blog posts by [Chris Swan]({{ site.url }}/authors/cswan/):
+
+- [The C conundrum - generating SBOMs when there's no lockfile]({{ site.url }}/2024/11/18/c-conundrum/)
+- [Using Conan for C SBOMs]({{ site.url }}/2025/09/04/conan/)
+
+#### Terraform
+
+See guide [SBOM Generation Guide for Terraform - Infrastructure as Code]({{ site.url }}/guides/terraform/) for more language specific details.
+
+#### Yocto
+
+See guide [SBOM Generation Guide for Yocto - Embedded Linux]({{ site.url }}/guides/yocto/) for more details.
+
+Related blog posts:
+
+- [Mastering SBOM Generation with Yocto]({{ site.url }}/2025/02/21/mastering-sbom-generation-with-yocto/)
+
+#### Raspberry Pi
+
+See guide [SBOM Generation Guide for Raspberry Pi - rpi-image-gen]({{ site.url }}/guides/raspberry-pi/) for more details.
+
+Related blog posts:
+
+- [Unpacking Raspberry Pi's Built-In SBOM Magic]({{ site.url }}/2025/04/17/unpacking-raspberry-pi-s-built-in-sbom-magic/)
 
 #### Others
 

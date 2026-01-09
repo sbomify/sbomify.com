@@ -1,7 +1,9 @@
 ---
 layout: page
-permalink: /guides/how-to-version-sboms
-title: How to version SBOMs
+permalink: /guides/how-to-version-sboms/
+title: "How to Version SBOMs - Semantic Versioning and Rolling Releases"
+description: "Learn best practices for versioning Software Bill of Materials. Guide covers Semantic Versioning, rolling releases, and linking SBOMs to your release process."
+section: guides
 ---
 
 ## Introduction
