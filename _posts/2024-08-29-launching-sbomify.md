@@ -2,7 +2,7 @@
 layout: post
 title: "Introducing sbomify: Revolutionizing SBOM Management"
 author:
-  display_name: Viktor
+  display_name: Viktor Petersson
 category: announcement
 tags: [sbom, security]
 

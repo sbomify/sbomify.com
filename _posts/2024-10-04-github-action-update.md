@@ -2,7 +2,7 @@
 layout: post
 title: "Big update to our GitHub Action"
 author:
-  display_name: Viktor
+  display_name: Viktor Petersson
 category: announcement
 tags: [sbom, github-actions]
 

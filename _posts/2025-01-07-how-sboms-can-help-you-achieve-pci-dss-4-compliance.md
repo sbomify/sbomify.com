@@ -5,7 +5,7 @@ date: 2025-01-07 09:00:00 +0000
 category: compliance
 tags: [sbom, pci-dss, security]
 author:
-  display_name: Viktor
+  display_name: Viktor Petersson
 ---
 
 ### What Is PCI DSS 4.0?

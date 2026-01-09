@@ -13,8 +13,18 @@ layout: default
 
       <div class="flex flex-wrap items-center justify-center gap-3 text-gray-300 text-lg lg:text-xl mb-6">
         {% if page.author and page.author.display_name %}
+        {% assign author_found = nil %}
+        {% for author_entry in site.data.authors %}
+          {% assign author_key = author_entry[0] %}
+          {% assign author_data = author_entry[1] %}
+          {% assign first_name = author_data.display_name | split: ' ' | first %}
+          {% if author_data.display_name == page.author.display_name or first_name == page.author.display_name %}
+            {% assign author_found = author_data %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
         <span class="font-medium">
-          By <span class="capitalize">{{ page.author.display_name }}</span>
+          By {% if author_found %}<a href="/authors/{{ author_found.slug }}/" class="text-gray-300 hover:text-white transition-colors underline underline-offset-2">{{ page.author.display_name }}</a>{% else %}<span class="capitalize">{{ page.author.display_name }}</span>{% endif %}
         </span>
         <span class="text-gray-500">•</span>
         {% endif %}

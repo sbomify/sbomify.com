@@ -2,7 +2,7 @@
 layout: post
 title: "Announcing sbomify v0.20: Custom Domains & Streamlined Onboarding"
 author:
-  display_name: Viktor
+  display_name: Viktor Petersson
 category: announcement
 tags: [sbom, release]
 ---

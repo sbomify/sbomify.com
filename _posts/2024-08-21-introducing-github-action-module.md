@@ -2,7 +2,7 @@
 layout: post
 title: "Announcing sbomify's GitHub Actions Module: Seamlessly Share SBOMs in Your CI/CD Pipeline"
 author:
-  display_name: Viktor
+  display_name: Viktor Petersson
 category: announcement
 tags: [sbom, github-actions, security]
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "Announcing GitHub Action 0.7.0 and sbomify 0.19"
 author:
-  display_name: Viktor
+  display_name: Viktor Petersson
 category: announcement
 tags: [sbom, release, github-actions]
 ---

@@ -3,7 +3,7 @@ services:
   web:
     build: .
     ports:
-     - "8080:8080"
+      - "4040:8080"
     volumes:
       - .:/usr/src/app
     command: sh -c "bun run watch:d2 & bun run watch:css & bundle exec jekyll serve --config _config.yml,_config_development.yml"

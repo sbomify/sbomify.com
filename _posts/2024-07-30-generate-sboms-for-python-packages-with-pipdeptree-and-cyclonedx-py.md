@@ -4,7 +4,7 @@ status: publish
 published: true
 title: How to Generate SBOMs for Python Packages with `pipdeptree` and `cyclonedx-py`
 author:
-  display_name: Viktor
+  display_name: Viktor Petersson
 date: '2024-07-30 09:00:35 +0200'
 category: guide
 tags: [sbom, python, cyclonedx, security]
