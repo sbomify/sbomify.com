@@ -1,7 +1,9 @@
 ---
 layout: page
-permalink: /guides/python
-title: The ultimate SBOM guide for Python
+permalink: /guides/python/
+title: "SBOM Generation Guide for Python - pip, Poetry, Pipenv, uv"
+description: "Learn how to generate Software Bill of Materials for Python projects. Complete guide with requirements.txt, poetry.lock, Pipfile.lock, and pyproject.toml examples."
+section: guides
 ---
 
 ## Source vs Build SBOMs
@@ -137,3 +139,12 @@ At the end of this run, you will have an SBOM.
 If you have an sbomify account, you can also automatically augment this SBOM with your information (vendor, supplier, and license information) with the `AUGMENT: true` setting. We can also set `UPLOAD: true` to automatically upload the SBOM to our platform. Once uploaded, you can invite all your stakeholders.
 
 The GitHub Action can take most Python lockfiles (`Pipfile.lock`, `poetry.lock`, and `requirements.txt`) as input and build an SBOM for you with minimal fuss.
+
+## Further Reading
+
+Related blog posts:
+- [How to Generate SBOMs for Python Packages with pipdeptree and cyclonedx-py]({{ site.url }}/2024/07/30/generate-sboms-for-python-packages-with-pipdeptree-and-cyclonedx-py/) - Tutorial on generating CycloneDX SBOMs including transitive dependencies and best practices for pinning with hashes
+
+## Further Resources
+
+For more SBOM tools and resources, see our [SBOM Resources]({{ site.url }}/resources/) page, which includes additional Python-specific tools like CycloneDX Python, sbom4python, and SPDX Python libraries.
