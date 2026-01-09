@@ -182,7 +182,7 @@ While Yocto generates high-quality SBOMs natively, you can use the [sbomify GitH
 ```yaml
 - uses: sbomify/github-action@master
   env:
-    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    TOKEN: ${%raw%}{{ secrets.SBOMIFY_TOKEN }}{%endraw%}
     COMPONENT_ID: my-yocto-image
     SBOM_FILE: sboms/combined-sbom.spdx.json
     OUTPUT_FILE: enriched-sbom.cdx.json

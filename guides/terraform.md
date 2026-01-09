@@ -173,7 +173,7 @@ For Terraform, sbomify uses **Syft** under the hood.
     LOCK_FILE: .terraform.lock.hcl
     OUTPUT_FILE: sbom.cdx.json
     COMPONENT_NAME: my-terraform-infra
-    COMPONENT_VERSION: ${{ github.ref_name }}
+    COMPONENT_VERSION: ${%raw%}{{ github.ref_name }}{%endraw%}
     ENRICH: true
     UPLOAD: false
 ```
@@ -185,7 +185,7 @@ Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as 
 ```yaml
 - uses: sbomify/github-action@master
   env:
-    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    TOKEN: ${%raw%}{{ secrets.SBOMIFY_TOKEN }}{%endraw%}
     COMPONENT_ID: my-component-id
     LOCK_FILE: .terraform.lock.hcl
     OUTPUT_FILE: sbom.cdx.json
@@ -239,7 +239,7 @@ jobs:
 
       - uses: hashicorp/setup-terraform@v3
         with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          cli_config_credentials_token: ${%raw%}{{ secrets.TF_API_TOKEN }}{%endraw%}
 
       - name: Initialize
         run: terraform init

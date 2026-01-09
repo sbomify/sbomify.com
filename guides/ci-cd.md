@@ -59,7 +59,7 @@ jobs:
 - name: Generate and Upload SBOM
   uses: sbomify/github-action@master
   env:
-    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    TOKEN: ${%raw%}{{ secrets.SBOMIFY_TOKEN }}{%endraw%}
     COMPONENT_ID: my-component
     LOCK_FILE: package-lock.json
     OUTPUT_FILE: sbom.cdx.json
@@ -100,7 +100,7 @@ jobs:
           LOCK_FILE: package-lock.json
           OUTPUT_FILE: sbom.cdx.json
           COMPONENT_NAME: my-app
-          COMPONENT_VERSION: ${{ github.sha }}
+          COMPONENT_VERSION: ${%raw%}{{ github.sha }}{%endraw%}
           ENRICH: true
           UPLOAD: false
 
@@ -141,8 +141,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${%raw%}{{ github.actor }}{%endraw%}
+          password: ${%raw%}{{ secrets.GITHUB_TOKEN }}{%endraw%}
 
       - name: Build and push
         uses: docker/build-push-action@v5
@@ -150,17 +150,17 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
+          tags: ghcr.io/${%raw%}{{ github.repository }}{%endraw%}:${%raw%}{{ github.sha }}{%endraw%}
           sbom: true
           provenance: true
 
       - name: Generate additional SBOM
         uses: sbomify/github-action@master
         env:
-          DOCKER_IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
+          DOCKER_IMAGE: ghcr.io/${%raw%}{{ github.repository }}{%endraw%}:${%raw%}{{ github.sha }}{%endraw%}
           OUTPUT_FILE: container-sbom.cdx.json
-          COMPONENT_NAME: ${{ github.repository }}
-          COMPONENT_VERSION: ${{ github.sha }}
+          COMPONENT_NAME: ${%raw%}{{ github.repository }}{%endraw%}
+          COMPONENT_VERSION: ${%raw%}{{ github.sha }}{%endraw%}
           ENRICH: true
           UPLOAD: false
 ```
@@ -447,9 +447,9 @@ Integrate with OWASP Dependency-Track:
 - name: Upload to Dependency-Track
   run: |
     curl -X "POST" "https://dtrack.example.com/api/v1/bom" \
-      -H "X-Api-Key: ${{ secrets.DTRACK_API_KEY }}" \
+      -H "X-Api-Key: ${%raw%}{{ secrets.DTRACK_API_KEY }}{%endraw%}" \
       -H "Content-Type: multipart/form-data" \
-      -F "project=${{ secrets.DTRACK_PROJECT_UUID }}" \
+      -F "project=${%raw%}{{ secrets.DTRACK_PROJECT_UUID }}{%endraw%}" \
       -F "bom=@sbom.cdx.json"
 ```
 
@@ -478,17 +478,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate SBOM for ${{ matrix.name }}
+      - name: Generate SBOM for ${%raw%}{{ matrix.name }}{%endraw%}
         uses: sbomify/github-action@master
         env:
-          LOCK_FILE: ${{ matrix.lock_file }}
-          OUTPUT_FILE: 'sbom-${{ matrix.name }}.cdx.json'
+          LOCK_FILE: ${%raw%}{{ matrix.lock_file }}{%endraw%}
+          OUTPUT_FILE: 'sbom-${%raw%}{{ matrix.name }}{%endraw%}.cdx.json'
           ENRICH: true
 
       - uses: actions/upload-artifact@v4
         with:
-          name: sbom-${{ matrix.name }}
-          path: sbom-${{ matrix.name }}.cdx.json
+          name: sbom-${%raw%}{{ matrix.name }}{%endraw%}
+          path: sbom-${%raw%}{{ matrix.name }}{%endraw%}.cdx.json
 ```
 
 ## Best Practices

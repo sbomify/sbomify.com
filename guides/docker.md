@@ -105,10 +105,10 @@ For Docker images, sbomify uses **cdxgen** under the hood with fallback to Trivy
 ```yaml
 - uses: sbomify/github-action@master
   env:
-    DOCKER_IMAGE: ghcr.io/myorg/myapp:${{ github.sha }}
+    DOCKER_IMAGE: ghcr.io/myorg/myapp:${%raw%}{{ github.sha }}{%endraw%}
     OUTPUT_FILE: sbom.cdx.json
     COMPONENT_NAME: myapp
-    COMPONENT_VERSION: ${{ github.ref_name }}
+    COMPONENT_VERSION: ${%raw%}{{ github.ref_name }}{%endraw%}
     ENRICH: true
     UPLOAD: false
 ```
@@ -120,7 +120,7 @@ The `DOCKER_IMAGE` references the image built in a previous step (typically tagg
 ```yaml
 - uses: sbomify/github-action@master
   env:
-    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    TOKEN: ${%raw%}{{ secrets.SBOMIFY_TOKEN }}{%endraw%}
     COMPONENT_ID: my-component-id
     DOCKER_IMAGE: myapp:latest
     OUTPUT_FILE: sbom.cdx.json

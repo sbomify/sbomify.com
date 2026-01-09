@@ -136,7 +136,7 @@ For JavaScript, sbomify uses **cdxgen** under the hood as it has excellent suppo
     LOCK_FILE: package-lock.json
     OUTPUT_FILE: sbom.cdx.json
     COMPONENT_NAME: my-node-app
-    COMPONENT_VERSION: ${{ github.ref_name }}
+    COMPONENT_VERSION: ${%raw%}{{ github.ref_name }}{%endraw%}
     ENRICH: true
     UPLOAD: false
 ```
@@ -148,7 +148,7 @@ Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as 
 ```yaml
 - uses: sbomify/github-action@master
   env:
-    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+    TOKEN: ${%raw%}{{ secrets.SBOMIFY_TOKEN }}{%endraw%}
     COMPONENT_ID: my-component-id
     LOCK_FILE: package-lock.json
     OUTPUT_FILE: sbom.cdx.json
