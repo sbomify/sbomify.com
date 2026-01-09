@@ -14,6 +14,7 @@ Ruby's Bundler package manager provides excellent lockfile support through `Gemf
 - **Build SBOMs** are generated from installed gems in the bundle path
 
 For most Ruby projects, generating from `Gemfile.lock` is preferred because it contains:
+
 - Exact gem versions
 - Platform specifications
 - Complete dependency tree including transitive dependencies
@@ -23,10 +24,10 @@ For most Ruby projects, generating from `Gemfile.lock` is preferred because it c
 
 ### Gemfile vs Gemfile.lock
 
-| File | Purpose | Commit to VCS? |
-|------|---------|----------------|
-| `Gemfile` | Dependency declarations, version constraints | Always |
-| `Gemfile.lock` | Resolved versions, full dependency tree | Always for apps, Optional for gems |
+| File           | Purpose                                      | Commit to VCS?                     |
+| -------------- | -------------------------------------------- | ---------------------------------- |
+| `Gemfile`      | Dependency declarations, version constraints | Always                             |
+| `Gemfile.lock` | Resolved versions, full dependency tree      | Always for apps, Optional for gems |
 
 ### Gemfile
 
@@ -94,6 +95,7 @@ BUNDLED WITH
 ```
 
 Key sections:
+
 - **GEM specs**: All resolved gems with versions and dependencies
 - **PLATFORMS**: Target platforms for the bundle
 - **DEPENDENCIES**: Direct dependencies from Gemfile

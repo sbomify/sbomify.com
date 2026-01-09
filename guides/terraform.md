@@ -62,6 +62,7 @@ provider "registry.terraform.io/hashicorp/kubernetes" {
 ```
 
 Key information:
+
 - **provider address**: Full provider path (registry/namespace/name)
 - **version**: Exact resolved version
 - **constraints**: Version constraints from configuration
@@ -404,11 +405,13 @@ jobs:
 ## Security Considerations
 
 Terraform providers have elevated privileges:
+
 - They create/modify cloud infrastructure
 - They may store credentials
 - They make API calls to cloud providers
 
 Your SBOM helps track:
+
 - Which providers are in use
 - What versions are deployed
 - When updates are available

@@ -133,6 +133,7 @@ See guide [SBOM Generation Guide for Scala - sbt]({{ site.url }}/guides/scala/) 
 See guide [SBOM Generation Guide for C/C++ - Conan]({{ site.url }}/guides/cpp/) for more language specific details.
 
 Related blog posts by [Chris Swan]({{ site.url }}/authors/cswan/):
+
 - [The C conundrum - generating SBOMs when there's no lockfile]({{ site.url }}/2024/11/18/c-conundrum/)
 - [Using Conan for C SBOMs]({{ site.url }}/2025/09/04/conan/)
 
@@ -145,6 +146,7 @@ See guide [SBOM Generation Guide for Terraform - Infrastructure as Code]({{ site
 See guide [SBOM Generation Guide for Yocto - Embedded Linux]({{ site.url }}/guides/yocto/) for more details.
 
 Related blog posts:
+
 - [Mastering SBOM Generation with Yocto]({{ site.url }}/2025/02/21/mastering-sbom-generation-with-yocto/)
 
 #### Raspberry Pi
@@ -152,6 +154,7 @@ Related blog posts:
 See guide [SBOM Generation Guide for Raspberry Pi - rpi-image-gen]({{ site.url }}/guides/raspberry-pi/) for more details.
 
 Related blog posts:
+
 - [Unpacking Raspberry Pi's Built-In SBOM Magic]({{ site.url }}/2025/04/17/unpacking-raspberry-pi-s-built-in-sbom-magic/)
 
 #### Others

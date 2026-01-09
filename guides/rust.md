@@ -11,6 +11,7 @@ section: guides
 Rust has excellent support for reproducible builds through Cargo, its package manager. The `Cargo.lock` file provides precise dependency information, making source SBOMs highly accurate.
 
 The Rust ecosystem's security focus means:
+
 - Crates are immutable once published
 - `Cargo.lock` contains exact versions and checksums
 - Reproducible builds are a first-class concern
@@ -50,6 +51,7 @@ dependencies = [
 ```
 
 Each package entry includes:
+
 - **name**: Crate name
 - **version**: Exact semantic version
 - **source**: Where the crate comes from (usually crates.io)
@@ -58,10 +60,10 @@ Each package entry includes:
 
 ### Cargo.toml vs Cargo.lock
 
-| File | Purpose | Commit to VCS? |
-|------|---------|----------------|
-| `Cargo.toml` | Dependency declarations (can use ranges) | Always |
-| `Cargo.lock` | Exact resolved versions | Yes for binaries/apps, Optional for libraries |
+| File         | Purpose                                  | Commit to VCS?                                |
+| ------------ | ---------------------------------------- | --------------------------------------------- |
+| `Cargo.toml` | Dependency declarations (can use ranges) | Always                                        |
+| `Cargo.lock` | Exact resolved versions                  | Yes for binaries/apps, Optional for libraries |
 
 **Important for SBOMs:** Always use `Cargo.lock` for SBOM generation, as it contains the resolved versions.
 
@@ -123,6 +125,7 @@ cc = "1.0"                 # Build script dependency
 ```
 
 **SBOM considerations:**
+
 - `[dependencies]` - Should always be in your SBOM
 - `[dev-dependencies]` - Usually excluded from production SBOMs
 - `[build-dependencies]` - Consider including if build-time supply chain matters

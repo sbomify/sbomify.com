@@ -36,13 +36,13 @@ SBOM tools analyze all layers to build a complete picture of the image contents.
 
 Your base image significantly impacts your SBOM:
 
-| Base Image | Typical Package Count | Use Case |
-|------------|----------------------|----------|
-| `ubuntu:24.04` | ~100+ packages | General purpose |
-| `debian:bookworm-slim` | ~80+ packages | Smaller general purpose |
-| `alpine:3.19` | ~15 packages | Minimal Linux |
-| `gcr.io/distroless/base` | ~2 packages | Ultra-minimal |
-| `scratch` | 0 packages | Static binaries only |
+| Base Image               | Typical Package Count | Use Case                |
+| ------------------------ | --------------------- | ----------------------- |
+| `ubuntu:24.04`           | ~100+ packages        | General purpose         |
+| `debian:bookworm-slim`   | ~80+ packages         | Smaller general purpose |
+| `alpine:3.19`            | ~15 packages          | Minimal Linux           |
+| `gcr.io/distroless/base` | ~2 packages           | Ultra-minimal           |
+| `scratch`                | 0 packages            | Static binaries only    |
 
 ### Distroless Images
 
@@ -62,6 +62,7 @@ CMD ["/server"]
 ```
 
 Distroless SBOMs are much simpler but still include:
+
 - Base distroless packages (glibc, etc.)
 - Your application binary
 - Any files you COPY into the image
@@ -294,12 +295,14 @@ jobs:
 ### Missing Application Dependencies
 
 If your container SBOM is missing application-level dependencies, the scanner may not recognize your package manager files. Ensure:
+
 - Lockfiles are present in the final image
 - Or generate a separate application SBOM before containerizing
 
 ### Large SBOMs from Base Images
 
 If your SBOM is too large, consider:
+
 - Using slimmer base images
 - Using distroless images
 - Filtering the SBOM to focus on your application dependencies
@@ -317,6 +320,7 @@ FROM python:3.12-slim
 ## Further Reading
 
 Related blog posts:
+
 - [How to generate an SBOM from a Docker container]({{ site.url }}/2024/09/20/how-to-generate-an-sbom-from-a-container/) - Guide to using Syft, Trivy, and Docker Desktop, including best practices for separating container from application SBOMs
 - [GitHub Action module with Attestation]({{ site.url }}/2024/10/31/github-action-update-and-attestation/) - SLSA build provenance attestation for Docker images
 

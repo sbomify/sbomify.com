@@ -14,6 +14,7 @@ PHP's dependency management is handled primarily through Composer, which provide
 - **Build SBOMs** are generated from the installed `vendor/` directory
 
 For most PHP projects, the lockfile approach is preferred because `composer.lock` contains:
+
 - Exact resolved versions
 - Package hashes for integrity verification
 - Full dependency tree including transitive dependencies
@@ -22,10 +23,10 @@ For most PHP projects, the lockfile approach is preferred because `composer.lock
 
 ### composer.json vs composer.lock
 
-| File | Purpose | Commit to VCS? |
-|------|---------|----------------|
-| `composer.json` | Dependency declarations, version constraints | Always |
-| `composer.lock` | Resolved versions, hashes, full tree | Always |
+| File            | Purpose                                      | Commit to VCS? |
+| --------------- | -------------------------------------------- | -------------- |
+| `composer.json` | Dependency declarations, version constraints | Always         |
+| `composer.lock` | Resolved versions, hashes, full tree         | Always         |
 
 ### composer.json
 
@@ -88,6 +89,7 @@ The `composer.lock` file contains resolved dependencies:
 ```
 
 Key sections:
+
 - **packages**: Production dependencies
 - **packages-dev**: Development dependencies (tests, tools)
 - **content-hash**: Hash of composer.json for integrity
@@ -133,6 +135,7 @@ Composer tracks platform requirements:
 ```
 
 These platform requirements specify:
+
 - PHP version constraints
 - Required PHP extensions
 - System library dependencies

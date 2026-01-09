@@ -58,6 +58,7 @@ SBOM Quality by Interlynk Score: 7.8
 ```
 
 Key quality attributes:
+
 - ✅ Component names and versions
 - ✅ Supplier information
 - ✅ Package identifiers (PURLs)
@@ -183,6 +184,7 @@ Use sbomify for SBOM lifecycle management:
 ## Further Reading
 
 Related blog posts:
+
 - [Unpacking Raspberry Pi's Built-In SBOM Magic]({{ site.url }}/2025/04/17/unpacking-raspberry-pi-s-built-in-sbom-magic/) - How rpi-image-gen generates SBOMs for Raspberry Pi images
 
 ## Further Resources

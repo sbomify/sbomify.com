@@ -483,20 +483,24 @@ jobs:
 ### Common Issues
 
 **SBOM generation fails in CI:**
+
 - Ensure all dependencies are installed (`npm ci`, `pip install`, etc.)
 - Check that lockfiles are committed to the repository
 
 **Missing dependencies:**
+
 - Use `--frozen-lockfile` or equivalent to ensure lockfile is respected
 - Verify the correct lockfile path
 
 **Authentication issues:**
+
 - For private registries, configure credentials in CI secrets
 - Use service accounts with minimal permissions
 
 ## Further Reading
 
 Related blog posts:
+
 - [GitHub Action module with Attestation]({{ site.url }}/2024/10/31/github-action-update-and-attestation/) - SLSA build provenance attestation for SBOMs
 - [sbomify GitHub Action v0.3.0: Now Faster and Compatible with GitLab!]({{ site.url }}/2024/11/12/gitlab-support/) - GitLab CI/CD support and performance improvements
 

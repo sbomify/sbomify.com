@@ -11,6 +11,7 @@ section: guides
 Yocto is unique among build systems because it builds everything from source. This means Yocto generates true **build SBOMs** that accurately represent every component compiled into your Linux distribution.
 
 Unlike application-level SBOMs generated from lockfiles, Yocto's SBOMs capture:
+
 - Every package built from source
 - Complete file-level details including checksums
 - Licensing information from the OpenEmbedded catalog
@@ -88,6 +89,7 @@ SBOM Quality by Interlynk Score: 7.0
 ```
 
 Key quality attributes:
+
 - ✅ Component names and versions
 - ✅ Supplier information
 - ✅ Unique identifiers
@@ -225,6 +227,7 @@ build-image:
 ## Further Reading
 
 Related blog posts:
+
 - [Mastering SBOM Generation with Yocto]({{ site.url }}/2025/02/21/mastering-sbom-generation-with-yocto/) - Deep dive into Yocto's SPDX generation and quality analysis
 
 ## Further Resources

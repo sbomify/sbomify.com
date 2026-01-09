@@ -66,6 +66,7 @@ scalaVersion := "3.3.1"
 ```
 
 This means dependencies resolve to different artifacts based on Scala version:
+
 - `cats-core_2.13` for Scala 2.13
 - `cats-core_3` for Scala 3
 

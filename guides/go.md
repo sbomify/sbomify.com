@@ -40,6 +40,7 @@ require (
 ```
 
 **Key points:**
+
 - Direct dependencies are listed under `require`
 - Indirect dependencies are marked with `// indirect`
 - The Go version specifies minimum language version
@@ -56,6 +57,7 @@ github.com/lib/pq v1.10.9/go.mod h1:AlVN5x4E4T544tWzH6hKfbfQvm3HdbOxrmggDNAPY9o=
 ```
 
 Each entry has two lines:
+
 1. Hash of the module contents (`h1:`)
 2. Hash of the `go.mod` file
 
@@ -73,6 +75,7 @@ replace (
 ```
 
 **SBOM implications:**
+
 - Replaced modules should be reflected in the SBOM
 - Local replacements (`../local-module`) won't have version information
 - Some SBOM tools may not handle replacements correctly
@@ -118,6 +121,7 @@ go mod vendor
 ```
 
 This creates a `vendor/` directory with all dependencies. For SBOM generation:
+
 - Vendored projects should generate the same SBOM as non-vendored
 - Some tools analyze `vendor/` directly for additional accuracy
 - The `vendor/modules.txt` file provides a manifest
@@ -259,6 +263,7 @@ import "C"
 ```
 
 CGO dependencies (system libraries) won't appear in `go.mod`. You may need to:
+
 1. Document them manually using `ADDITIONAL_PACKAGES`
 2. Use a tool that analyzes the binary's dynamic linking
 

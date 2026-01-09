@@ -80,6 +80,7 @@ The `mix.lock` file contains resolved dependencies:
 ```
 
 Key information:
+
 - **Package format**: `{:hex, :package_name, "version", "hash", build_tools, dependencies, "hexpm", "checksum"}`
 - **Checksum**: SHA-256 hash for integrity verification
 - **Dependencies**: Nested dependency specifications

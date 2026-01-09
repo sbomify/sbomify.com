@@ -38,6 +38,7 @@ Step-by-step guides for generating SBOMs across all major programming languages 
 ## Additional Resources
 
 Looking for more tools and resources? Check out our [SBOM Resources]({{ site.url }}/resources/) page for:
+
 - SBOM generation tools (generic and language-specific)
 - Assembly and enrichment tools
 - Distribution and transportation solutions

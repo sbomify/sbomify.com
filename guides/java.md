@@ -40,6 +40,7 @@ Maven's `pom.xml` is both a manifest and a build file. Dependencies are declared
 ```
 
 **Important considerations:**
+
 - Maven doesn't have a traditional lockfile - versions in `pom.xml` can be ranges or managed by parent POMs
 - Use the `maven-enforcer-plugin` with `<dependencyConvergence>` to ensure consistent versions
 - Consider using a BOM (Bill of Materials) POM for version management
@@ -104,11 +105,11 @@ dependencyLocking {
 
 Both Maven and Gradle resolve transitive dependencies, but with different strategies:
 
-| Aspect | Maven | Gradle |
-|--------|-------|--------|
-| Conflict resolution | Nearest definition wins | Newest version wins (default) |
-| Dependency scope | compile, provided, runtime, test | implementation, api, compileOnly, runtimeOnly, testImplementation |
-| BOM support | `<dependencyManagement>` | `platform()` |
+| Aspect              | Maven                            | Gradle                                                            |
+| ------------------- | -------------------------------- | ----------------------------------------------------------------- |
+| Conflict resolution | Nearest definition wins          | Newest version wins (default)                                     |
+| Dependency scope    | compile, provided, runtime, test | implementation, api, compileOnly, runtimeOnly, testImplementation |
+| BOM support         | `<dependencyManagement>`         | `platform()`                                                      |
 
 Understanding these differences is crucial because your SBOM should accurately reflect what ends up in your final artifact.
 

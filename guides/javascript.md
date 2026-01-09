@@ -11,6 +11,7 @@ section: guides
 In the JavaScript ecosystem, SBOMs can be generated either from lockfiles (source/pre-build) or from the installed `node_modules` directory (build/post-install). The JavaScript ecosystem has one of the most mature dependency management systems, with multiple package managers each providing their own lockfile format.
 
 For most JavaScript projects, generating SBOMs from lockfiles is the preferred approach because:
+
 - Lockfiles contain exact versions and integrity hashes
 - They're committed to version control, ensuring reproducibility
 - They capture the full dependency tree including transitive dependencies
@@ -22,6 +23,7 @@ JavaScript projects have several package managers, each with their own lockfile 
 ### npm (package-lock.json)
 
 The `package-lock.json` file is npm's lockfile, introduced in npm 5. It contains:
+
 - Exact resolved versions of all dependencies
 - Integrity hashes (SHA-512) for verification
 - The full dependency tree structure
@@ -108,13 +110,13 @@ This affects SBOM generation because build-time SBOMs analyze what's actually in
 
 While `npm audit` provides quick vulnerability checking, SBOM-based scanning offers advantages:
 
-| Feature | npm audit | SBOM + Scanner |
-|---------|-----------|----------------|
-| Offline analysis | No | Yes |
-| Historical tracking | No | Yes |
-| Cross-project analysis | No | Yes |
-| Multiple vulnerability DBs | npm only | OSV, NVD, etc. |
-| License compliance | No | Yes |
+| Feature                    | npm audit | SBOM + Scanner |
+| -------------------------- | --------- | -------------- |
+| Offline analysis           | No        | Yes            |
+| Historical tracking        | No        | Yes            |
+| Cross-project analysis     | No        | Yes            |
+| Multiple vulnerability DBs | npm only  | OSV, NVD, etc. |
+| License compliance         | No        | Yes            |
 
 ## Generating an SBOM
 

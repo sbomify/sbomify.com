@@ -89,6 +89,7 @@ The `Package.resolved` file contains resolved dependencies:
 ```
 
 Key information:
+
 - **identity**: Package identifier (lowercase)
 - **location**: Git repository URL
 - **revision**: Exact Git commit hash
@@ -97,6 +98,7 @@ Key information:
 ### Xcode Project Location
 
 In Xcode projects, `Package.resolved` is typically located at:
+
 - **SPM projects**: Root directory
 - **Xcode projects**: `MyProject.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved`
 - **Xcode workspaces**: `MyWorkspace.xcworkspace/xcshareddata/swiftpm/Package.resolved`
@@ -147,6 +149,7 @@ Or local XCFrameworks:
 ```
 
 **SBOM considerations:**
+
 - Binary targets have checksums but limited metadata
 - Local XCFrameworks need manual documentation
 - Consider using `ADDITIONAL_PACKAGES` for binary dependencies

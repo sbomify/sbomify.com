@@ -143,6 +143,7 @@ The GitHub Action can take most Python lockfiles (`Pipfile.lock`, `poetry.lock`,
 ## Further Reading
 
 Related blog posts:
+
 - [How to Generate SBOMs for Python Packages with pipdeptree and cyclonedx-py]({{ site.url }}/2024/07/30/generate-sboms-for-python-packages-with-pipdeptree-and-cyclonedx-py/) - Tutorial on generating CycloneDX SBOMs including transitive dependencies and best practices for pinning with hashes
 
 ## Further Resources

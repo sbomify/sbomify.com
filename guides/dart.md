@@ -82,6 +82,7 @@ sdks:
 ```
 
 Key information:
+
 - **dependency**: "direct main", "direct dev", or "transitive"
 - **sha256**: Content hash for integrity verification
 - **source**: "hosted" (pub.dev), "git", or "path"
@@ -325,6 +326,7 @@ melos exec -- "cdxgen -t dart -o sbom.cdx.json"
 ## pub.dev Metadata Enrichment
 
 pub.dev provides rich metadata for packages:
+
 - License information
 - Repository URLs
 - Author information

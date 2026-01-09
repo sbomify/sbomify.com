@@ -67,6 +67,7 @@ The lockfile contains detailed dependency information:
 ```
 
 Key fields:
+
 - **type**: Direct or Transitive dependency
 - **requested**: Version range from your `.csproj`
 - **resolved**: Actual resolved version
@@ -93,11 +94,11 @@ Without a lockfile, dependencies are declared in `.csproj`:
 
 Different .NET versions handle dependencies differently:
 
-| Version | Package Format | Recommended SBOM Source |
-|---------|---------------|------------------------|
-| .NET Framework | packages.config or PackageReference | packages.lock.json |
-| .NET Core | PackageReference | packages.lock.json |
-| .NET 5+ | PackageReference | packages.lock.json |
+| Version        | Package Format                      | Recommended SBOM Source |
+| -------------- | ----------------------------------- | ----------------------- |
+| .NET Framework | packages.config or PackageReference | packages.lock.json      |
+| .NET Core      | PackageReference                    | packages.lock.json      |
+| .NET 5+        | PackageReference                    | packages.lock.json      |
 
 ## Multi-Targeting
 
@@ -315,6 +316,7 @@ Ensure your CI environment has access to all NuGet sources for accurate SBOM gen
 ### Missing Transitive Dependencies
 
 If your SBOM is missing transitive dependencies:
+
 1. Ensure you're using `packages.lock.json`
 2. Run `dotnet restore --force-evaluate` to regenerate the lockfile
 
