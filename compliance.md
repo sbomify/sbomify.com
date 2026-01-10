@@ -96,16 +96,16 @@ While the CRA does not enumerate specific SBOM fields (author, timestamp, suppli
 
 #### Technical documentation and authority access
 
-**Annex VII** anticipates providing the SBOM, **where applicable**, as part of technical documentation for vulnerability handling. Market surveillance authorities may request SBOMs **further to a reasoned request** for compliance verification:
+The CRA requires drawing up an SBOM (Annex I, Part II(1)). Authorities can request the information and documentation needed to demonstrate conformity upon a reasoned request; in practice this includes the SBOM.
 
-| CRA Requirement                 | Description                                                            | Status                         |
-| ------------------------------- | ---------------------------------------------------------------------- | ------------------------------ |
-| SBOM in technical documentation | Part of vulnerability handling process documentation, where applicable | Required where applicable      |
-| Authority access                | Producible and shareable with market surveillance authorities          | Required upon reasoned request |
+| CRA Requirement  | Description                                                                        | Status                         |
+| ---------------- | ---------------------------------------------------------------------------------- | ------------------------------ |
+| SBOM production  | Required as part of vulnerability handling (Annex I, Part II(1))                   | Required                       |
+| Authority access | Producible to market surveillance authorities upon reasoned request for conformity | Required upon reasoned request |
 
 #### User disclosure (optional)
 
-**Annex I, Part I, point 9** states: "If the manufacturer decides to make available the software bill of materials to the user, [provide] information on where the software bill of materials can be accessed."
+**Annex II, Part I, point 9** states: "If the manufacturer decides to make available the software bill of materials to the user, [provide] information on where the software bill of materials can be accessed."
 
 | CRA Requirement            | Description                                                 | Status              |
 | -------------------------- | ----------------------------------------------------------- | ------------------- |
@@ -122,9 +122,41 @@ For more on CRA implications, see our [CRA deep dive podcast episode]({{ site.ur
 
 ---
 
+### EU NIS2 Directive (Directive (EU) 2022/2555)
+
+The [NIS2 Directive](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX%3A32022L2555) is the EU's baseline cybersecurity law for "essential" and "important" entities. Unlike the CRA, **NIS2 does not explicitly mandate SBOMs by name or define SBOM field-level requirements**. Instead, it mandates cybersecurity risk-management outcomes (supply chain security, secure acquisition/development, vulnerability handling, and asset management) that SBOMs are commonly used to evidence.
+
+#### What NIS2 requires (SBOM-relevant)
+
+NIS2 requires risk-management measures including **supply chain security** and **security in acquisition, development and maintenance**, including **vulnerability handling and disclosure**, plus **asset management**. It also introduces strict incident reporting expectations (24h/72h timelines for significant incidents), which increases the operational need to rapidly determine whether a newly disclosed vulnerability affects your systems.
+
+#### NIS2 implementing rules get closer to "SBOM language"
+
+For certain NIS2 "relevant entities" (DNS, cloud, data centres, CDNs, managed services/MSSPs, online marketplaces/search engines/social networks, trust services), the [Commission Implementing Regulation (EU) 2024/2690](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX%3A32024R2690) specifies procurement and supply chain controls and explicitly requires **"information describing the hardware and software components used in the ICT services or ICT products"** as part of secure acquisition processes. This is effectively an "SBOM/HBOM or equivalent component inventory" expectation in procurement form.
+
+| NIS2 Requirement                             | Description                                                                                                                        | Status                         |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| Supply chain security                        | Security measures covering relationships with direct suppliers/service providers                                                   | Required                       |
+| Secure acquisition, development, maintenance | Includes vulnerability handling and disclosure                                                                                     | Required                       |
+| Asset management                             | Part of required cybersecurity risk-management measures                                                                            | Required                       |
+| Incident reporting speed                     | Significant incident notification within 24h/72h timelines                                                                         | Required                       |
+| Component information for acquired ICT       | "Information describing the hardware and software components used" (for in-scope entities under Implementing Regulation 2024/2690) | Required for in-scope entities |
+
+#### Practical SBOM takeaways for NIS2
+
+Even though NIS2 does not say "you must publish an SBOM", SBOMs are a practical way to operationalize and evidence NIS2 controls:
+
+- **Procurement:** Request SBOM/HBOM (or equivalent component inventory) from suppliers, and require updates over the lifecycle
+- **Vulnerability response:** Correlate SBOMs with vulnerability advisories to answer "are we affected?" within incident-reporting timelines
+- **Supplier governance:** Tie SBOM delivery + vulnerability handling obligations into supplier contracts and reviews
+
+**Key takeaway:** Since NIS2 does not define SBOM fields, align with NTIA/CISA minimum elements for component identity, version, supplier, identifiers, and dependency relationships. Treat that as your "NIS2-ready" SBOM baseline.
+
+---
+
 ### FDA Medical Device Guidance (2025)
 
-The [FDA Cybersecurity in Medical Devices guidance](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-system-considerations-and-content-premarket-submissions) (June 2025) adds sector-specific SBOM expectations for medical device manufacturers. The guidance recommends providing a machine-readable SBOM consistent with the [minimum elements](#ntia-minimum-elements-2021) / [baseline attributes](#cisa-framing-document-3rd-edition-2024) defined in the NTIA and CISA Framing documents, plus additional lifecycle properties.
+The [FDA Cybersecurity in Medical Devices guidance](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-system-considerations-and-content-premarket-submissions) (June 2025) adds sector-specific SBOM expectations for medical device manufacturers. The guidance recommends providing a machine-readable SBOM consistent with the [minimum elements](#ntia-minimum-elements-2021) (also referred to as baseline attributes) identified in NTIA's _Framing Software Component Transparency_ (October 2021), plus additional lifecycle properties.
 
 **Important:** This is FDA guidance, not a regulation. The document uses "should" language, meaning these are strong recommendations that FDA expects manufacturers to follow for premarket submissions, but they are not legally binding requirements in the same way as regulations.
 
@@ -177,39 +209,41 @@ This table compares SBOM data field expectations across major frameworks. All fr
 **Framework context:**
 
 - **NTIA 2021** and **CISA 2025** are US guidance documents (not law)
-- **CRA** is binding EU legislation
+- **CRA** and **NIS2** are binding EU legislation
 - **FDA 2025** is guidance for medical device premarket submissions
 
-| Property                        | NTIA 2021 | CISA 2025 | CRA | FDA 2025 |
-| ------------------------------- | :-------: | :-------: | :-: | :------: |
-| **Document-Level Metadata**     |           |           |     |          |
-| SBOM Author                     |     ✓     |     ✓     |  -  |    ✓     |
-| Timestamp                       |     ✓     |     ✓     |  -  |    ✓     |
-| Tool Name/Version               |     -     |     ✓     |  -  |    -     |
-| Generation Context              |     -     |     ✓     |  -  |    -     |
-| **Component Identification**    |           |           |     |          |
-| Supplier / Software Producer    |     ✓     |     ✓     |  -  |    ✓     |
-| Component Name                  |     ✓     |     ✓     |  -  |    ✓     |
-| Component Version               |     ✓     |     ✓     |  -  |    ✓     |
-| Unique Identifiers (purl/CPE)   |     ✓     |     ✓     |  -  |    ✓     |
-| Component Hash                  |     -     |     ✓     |  -  |    -     |
-| **Relationships**               |           |           |     |          |
-| Dependency Relationship         |     ✓     |     ✓     | ✓*  |    ✓     |
-| **Legal**                       |           |           |     |          |
-| License                         |     -     |     ✓     |  -  |    -     |
-| **Lifecycle**                   |           |           |     |          |
-| Support Level                   |     -     |     -     |  -  |    ✓     |
-| End-of-Support Date             |     -     |     -     |  -  |    ✓     |
-| **Process / Access**            |           |           |     |          |
-| SBOM in technical documentation |     -     |     -     |  ●  |    -     |
-| Authority access on request     |     -     |     -     |  ●  |    -     |
-| User access location disclosure |     -     |     -     |  ●  |    -     |
+| Property                        | NTIA 2021 | CISA 2025 | CRA | NIS2 | FDA 2025 |
+| ------------------------------- | :-------: | :-------: | :-: | :--: | :------: |
+| **Document-Level Metadata**     |           |           |     |      |          |
+| SBOM Author                     |     ✓     |     ✓     |  -  |  -   |    ✓     |
+| Timestamp                       |     ✓     |     ✓     |  -  |  -   |    ✓     |
+| Tool Name/Version               |     -     |     ✓     |  -  |  -   |    -     |
+| Generation Context              |     -     |     ✓     |  -  |  -   |    -     |
+| **Component Identification**    |           |           |     |      |          |
+| Supplier / Software Producer    |     ✓     |     ✓     |  -  |  -   |    ✓     |
+| Component Name                  |     ✓     |     ✓     |  -  |  ●   |    ✓     |
+| Component Version               |     ✓     |     ✓     |  -  |  ●   |    ✓     |
+| Unique Identifiers (purl/CPE)   |     ✓     |     ✓     |  -  |  -   |    ✓     |
+| Component Hash                  |     -     |     ✓     |  -  |  -   |    -     |
+| **Relationships**               |           |           |     |      |          |
+| Dependency Relationship         |     ✓     |     ✓     | ✓*  |  -   |    ✓     |
+| **Legal**                       |           |           |     |      |          |
+| License                         |     -     |     ✓     |  -  |  -   |    -     |
+| **Lifecycle**                   |           |           |     |      |          |
+| Support Level                   |     -     |     -     |  -  |  -   |    ✓     |
+| End-of-Support Date             |     -     |     -     |  -  |  -   |    ✓     |
+| **Process / Access**            |           |           |     |      |          |
+| SBOM production required        |     -     |     -     |  ✓  |  -   |    -     |
+| Authority access on request     |     -     |     -     |  ●  |  -   |    -     |
+| User access location disclosure |     -     |     -     |  ●  |  -   |    -     |
+| Supply chain security measures  |     -     |     -     |  -  |  ✓   |    -     |
+| Vulnerability handling process  |     -     |     -     |  -  |  ✓   |    -     |
 
 **Legend:**
 
-- **✓** = Expected (NTIA/CISA minimum element, or FDA recommended per Framing baseline)
+- **✓** = Expected (NTIA/CISA minimum element, FDA recommended, or NIS2 required)
 - **✓*** = CRA requires at least top-level (direct) dependencies
-- **●** = CRA conditional obligation (where applicable / upon reasoned request / if sharing)
+- **●** = Conditional obligation (CRA: where applicable; NIS2: for in-scope entities per Regulation 2024/2690)
 - **-** = Not specified by this framework
 
 **Important notes:**
@@ -218,6 +252,7 @@ This table compares SBOM data field expectations across major frameworks. All fr
 - CISA 2025 is a public comment draft and explicitly does not create new requirements
 - FDA uses "should" language (recommendations for premarket submissions)
 - CRA is binding law but does not specify individual data fields beyond dependency scope
+- NIS2 does not mandate SBOMs by name, but the implementing regulation (2024/2690) requires "information describing the hardware and software components used" for in-scope entities
 
 ---
 
@@ -231,10 +266,10 @@ This section maps SBOM properties to their specific field paths in CycloneDX, SP
 
 | Property           | CycloneDX 1.7                                                    | SPDX 2.3                                    | SPDX 3.0                     |
 | ------------------ | ---------------------------------------------------------------- | ------------------------------------------- | ---------------------------- |
-| SBOM Author        | `metadata.authors[]`                                             | `creationInfo.creators[]`                   | `CreationInfo.createdBy`     |
-| Timestamp          | `metadata.timestamp`                                             | `creationInfo.created`                      | `CreationInfo.created`       |
-| Tool Name/Version  | `metadata.tools.components[]` and/or `metadata.tools.services[]` | `creationInfo.creators[]` (tool identifier) | `CreationInfo.createdUsing`  |
-| Generation Context | `metadata.lifecycles[].phase`                                    | `creationInfo.comment` or `documentComment` | Profile-dependent properties |
+| SBOM Author        | `metadata.authors[]`                                             | `creationInfo.creators[]`                   | `creationInfo.createdBy`     |
+| Timestamp          | `metadata.timestamp`                                             | `creationInfo.created`                      | `creationInfo.created`       |
+| Tool Name/Version  | `metadata.tools.components[]` and/or `metadata.tools.services[]` | `creationInfo.creators[]` (tool identifier) | `creationInfo.createdUsing`  |
+| Generation Context | `metadata.lifecycles[].phase`                                    | `CreatorComment` or `DocumentComment`       | Profile-dependent properties |
 
 **Notes:**
 
@@ -306,6 +341,8 @@ CycloneDX supports CLE-style lifecycle data without breaking schema compliance:
 ```
 
 3. **External reference** - Optionally link to authoritative CLE documents via `externalReferences[]`
+
+**Note on key naming:** The property keys shown above (`cle:eos`, `cle:eol`, `cle:supportLevel`) are illustrative examples. For interoperability, key naming should follow ECMA-428's data model or a published property taxonomy/namespace.
 
 This approach satisfies FDA's lifecycle requirements while aligning with emerging standards.
 
