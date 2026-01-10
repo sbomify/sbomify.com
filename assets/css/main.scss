@@ -450,6 +450,52 @@ a.button {
       }
     }
   }
+
+  // CTA Box
+  .cta-box {
+    background-color: #201B4C;
+    border: 1px solid #37306B;
+    border-radius: 12px;
+    padding: rem(24px);
+    margin: rem(32px) 0;
+
+    p {
+      color: #ffffff;
+      font-family: "Inter";
+      font-size: rem(18px);
+      font-weight: 400;
+      line-height: 1.7;
+      margin-bottom: rem(16px);
+
+      @media (min-width: $breakpoint-md) {
+        font-size: rem(20px);
+      }
+    }
+
+    strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    a.cta-button {
+      display: inline-block;
+      padding: rem(12px) rem(24px);
+      background-color: #8A7DFF;
+      color: #ffffff;
+      font-family: "Inter";
+      font-size: rem(16px);
+      border-radius: 9999px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #7A6DE5;
+        color: #ffffff;
+        text-decoration: none;
+      }
+    }
+  }
 }
 
 // Additional site styles

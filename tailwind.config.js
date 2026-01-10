@@ -8,6 +8,7 @@ module.exports = {
     './features/**/*.{html,md}',
     './case-studies/**/*.{html,md}',
     './guides/**/*.{html,md}',
+    './compliance/**/*.{html,md}',
     './blog/**/*.html',
   ],
   theme: {

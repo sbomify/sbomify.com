@@ -9,9 +9,9 @@ New to SBOMs? Start with [What is an SBOM?]({{ site.url }}/what-is-sbom/) to lea
 
 Software Bill of Materials (SBOM) compliance requirements are rapidly evolving across the United States and European Union. Whether you're navigating the **NTIA minimum elements**, preparing for the **EU Cyber Resilience Act (CRA)**, meeting **NIS2 Directive** obligations, or submitting medical devices to the **FDA**, this guide provides a comprehensive reference for SBOM requirements across all major frameworks.
 
-<div class="not-prose my-8 p-6 bg-[#201B4C] border border-[#37306B] rounded-xl">
-  <p class="text-white text-lg mb-4"><strong>Feeling overwhelmed?</strong> If all these frameworks, acronyms, and requirements look like gibberish, you're not alone. SBOM compliance can be complex, but you don't have to figure it out on your own.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="inline-block px-6 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium transition-all duration-200">Get Help With Compliance</a>
+<div class="cta-box">
+  <p><strong>Feeling overwhelmed?</strong> If all these frameworks, acronyms, and requirements look like gibberish, you're not alone. SBOM compliance can be complex, but you don't have to figure it out on your own.</p>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get Help With Compliance</a>
 </div>
 
 **Disclaimer:** This page represents our interpretation of the referenced frameworks and standards. While we strive for accuracy, we may have made errors or omissions. This content is provided for informational purposes only and does not constitute legal advice. For compliance decisions, consult the official source documents and seek qualified legal counsel.
@@ -77,35 +77,33 @@ This table compares SBOM data field expectations across major frameworks. All fr
 - **FDA 2025** is guidance for medical device premarket submissions
 - **PCI DSS 4.0** is an industry standard for payment card security
 
-| Property                                     | EO 14028 | NTIA 2021 | CISA 2025 | CRA | NIS2 | FDA 2025 | PCI DSS 4.0 |
-| -------------------------------------------- | :------: | :-------: | :-------: | :-: | :--: | :------: | :---------: |
-| **Document-Level Metadata**                  |          |           |           |     |      |          |             |
-| SBOM Author                                  |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |
-| Timestamp                                    |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |
-| Tool Name/Version                            |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |
-| Generation Context                           |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |
-| **Component Identification**                 |          |           |           |     |      |          |             |
-| Supplier / Software Producer                 |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |
-| Component Name                               |    -     |     ✓     |     ✓     |  -  |  ●   |    ✓     |      -      |
-| Component Version                            |    -     |     ✓     |     ✓     |  -  |  ●   |    ✓     |      -      |
-| Unique Identifiers (purl/CPE)                |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |
-| Component Hash                               |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |
-| **Relationships**                            |          |           |           |     |      |          |             |
-| Dependency Relationship                      |    ●     |     ✓     |     ✓     | ✓*  |  -   |    ✓     |      -      |
-| **Legal**                                    |          |           |           |     |      |          |             |
-| License                                      |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |
-| **Lifecycle**                                |          |           |           |     |      |          |             |
-| Support Level                                |    -     |     -     |     -     |  -  |  -   |    ✓     |      -      |
-| End-of-Support Date                          |    -     |     -     |     -     |  -  |  -   |    ✓     |      -      |
-| **Process / Access**                         |          |           |           |     |      |          |             |
-| SBOM provision to purchasers                 |    ✓     |     -     |     -     |  -  |  -   |    -     |      -      |
-| SBOM production required                     |    -     |     -     |     -     |  ✓  |  -   |    -     |      -      |
-| Authority access on request                  |    -     |     -     |     -     |  ●  |  -   |    -     |      -      |
-| User access location disclosure              |    -     |     -     |     -     |  ●  |  -   |    -     |      -      |
-| Supply chain security measures               |    ✓     |     -     |     -     |  -  |  ✓   |    -     |     ✓†      |
-| Vulnerability handling process               |    ✓     |     -     |     -     |  -  |  ✓   |    -     |     ✓†      |
-| **Inventory Requirements**                   |          |           |           |     |      |          |             |
-| Software component inventory (custom + deps) |    -     |     -     |     -     |  -  |  -   |    -     |     ✓†      |
+| Property                        | EO 14028 | NTIA 2021 | CISA 2025 | CRA | NIS2 | FDA 2025 | PCI DSS 4.0 |
+| ------------------------------- | :------: | :-------: | :-------: | :-: | :--: | :------: | :---------: |
+| **Document-Level Metadata**     |          |           |           |     |      |          |             |
+| SBOM Author                     |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |
+| Timestamp                       |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |
+| Tool Name/Version               |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |
+| Generation Context              |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |
+| **Component Identification**    |          |           |           |     |      |          |             |
+| Supplier / Software Producer    |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |
+| Component Name                  |    -     |     ✓     |     ✓     |  -  |  ●   |    ✓     |      -      |
+| Component Version               |    -     |     ✓     |     ✓     |  -  |  ●   |    ✓     |      -      |
+| Unique Identifiers (purl/CPE)   |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |
+| Component Hash                  |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |
+| **Relationships**               |          |           |           |     |      |          |             |
+| Dependency Relationship         |    ●     |     ✓     |     ✓     | ✓*  |  -   |    ✓     |      -      |
+| **Legal**                       |          |           |           |     |      |          |             |
+| License                         |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |
+| **Lifecycle**                   |          |           |           |     |      |          |             |
+| Support Level                   |    -     |     -     |     -     |  -  |  -   |    ✓     |      -      |
+| End-of-Support Date             |    -     |     -     |     -     |  -  |  -   |    ✓     |      -      |
+| **Process / Access**            |          |           |           |     |      |          |             |
+| SBOM provision to purchasers    |    ✓     |     -     |     -     |  -  |  -   |    -     |      -      |
+| SBOM production required        |    -     |     -     |     -     |  ✓  |  -   |    -     |     ✓†      |
+| Authority access on request     |    -     |     -     |     -     |  ●  |  -   |    -     |      -      |
+| User access location disclosure |    -     |     -     |     -     |  ●  |  -   |    -     |      -      |
+| Supply chain security measures  |    ✓     |     -     |     -     |  -  |  ✓   |    -     |     ✓†      |
+| Vulnerability handling process  |    ✓     |     -     |     -     |  -  |  ✓   |    -     |     ✓†      |
 
 **Legend:**
 
@@ -119,6 +117,7 @@ This table compares SBOM data field expectations across major frameworks. All fr
 
 - EO 14028 requires SBOM provision in federal procurement but defers field-level requirements to NTIA minimum elements
 - NTIA 2021 and CISA 2025 define "minimum elements" as guidance, not legal requirements
+- NTIA 2021 discusses license information as a key SBOM use case and useful content, but it is not listed among the minimum SBOM data fields
 - CISA 2025 is a public comment draft and explicitly does not create new requirements
 - FDA uses "should" language (recommendations for premarket submissions)
 - CRA is binding law but does not specify individual data fields beyond dependency scope

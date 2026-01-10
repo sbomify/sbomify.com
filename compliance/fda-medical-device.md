@@ -10,9 +10,9 @@ section: compliance
 
 **Who it affects:** Medical device manufacturers preparing FDA premarket submissions (and their software suppliers) who must document cybersecurity, including SBOM expectations, for devices marketed in the US.
 
-<div class="not-prose my-6 p-5 bg-[#201B4C] border border-[#37306B] rounded-xl">
-  <p class="text-white mb-3"><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="inline-block px-5 py-2.5 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium text-sm transition-all duration-200">Get in Touch</a>
+<div class="cta-box">
+  <p><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get in Touch</a>
 </div>
 
 ---
