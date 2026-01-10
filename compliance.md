@@ -23,37 +23,37 @@ Software Bill of Materials (SBOM) compliance requirements are rapidly evolving a
 ### US Frameworks
 
 - **[Executive Order 14028 (2021)]({{ site.url }}/compliance/eo-14028/)** - The binding US directive that kicked off federal SBOM adoption
-  - *Who it affects:* US federal agencies and software vendors selling to the government
+  - _Who it affects:_ US federal agencies and software vendors selling to the government
 
 - **[NTIA Minimum Elements (2021)]({{ site.url }}/compliance/ntia-minimum-elements/)** - The foundational US baseline for SBOM data fields
-  - *Who it affects:* Software producers selling into federal or critical-infrastructure supply chains. Referenced by FDA, CISA, and other frameworks as the baseline.
+  - _Who it affects:_ Software producers selling into federal or critical-infrastructure supply chains. Referenced by FDA, CISA, and other frameworks as the baseline.
 
 - **[CISA Minimum Elements (2025 Draft)]({{ site.url }}/compliance/cisa-minimum-elements/)** - Updated US guidance with new fields for hash, license, and generation context
-  - *Who it affects:* Organizations in US public-sector and critical-infrastructure contexts
+  - _Who it affects:_ Organizations in US public-sector and critical-infrastructure contexts
 
 - **[FDA Medical Device Guidance (2025)]({{ site.url }}/compliance/fda-medical-device/)** - Healthcare sector SBOM requirements with lifecycle properties
-  - *Who it affects:* Medical device manufacturers and their software suppliers
+  - _Who it affects:_ Medical device manufacturers and their software suppliers
 
 ### EU Frameworks
 
 - **[EU Cyber Resilience Act (CRA)]({{ site.url }}/compliance/eu-cra/)** - Binding EU law requiring SBOMs for products with digital elements
-  - *Who it affects:* Manufacturers, importers, and distributors placing digital products on the EU market
+  - _Who it affects:_ Manufacturers, importers, and distributors placing digital products on the EU market
 
 - **[EU NIS2 Directive]({{ site.url }}/compliance/eu-nis2/)** - EU cybersecurity law for essential and important entities
-  - *Who it affects:* EU entities responsible for cybersecurity risk management and incident reporting
+  - _Who it affects:_ EU entities responsible for cybersecurity risk management and incident reporting
 
 ### Industry Standards
 
 - **[PCI DSS 4.0]({{ site.url }}/compliance/pci-dss/)** - Payment card industry software component inventory requirements
-  - *Who it affects:* Merchants and service providers handling cardholder data
+  - _Who it affects:_ Merchants and service providers handling cardholder data
 
 ### Reference Documents
 
 - **[CISA Framing Document (3rd Edition)]({{ site.url }}/compliance/cisa-framing/)** - Baseline attribute definitions and format normalization
-  - *Who it affects:* SBOM producers/consumers needing shared terminology and format crosswalk
+  - _Who it affects:_ SBOM producers/consumers needing shared terminology and format crosswalk
 
 - **[CISA SBOM Sharing Lifecycle Report]({{ site.url }}/compliance/cisa-sharing-lifecycle/)** - Operational guidance for SBOM distribution
-  - *Who it affects:* Organizations distributing or retrieving SBOMs across supply chains
+  - _Who it affects:_ Organizations distributing or retrieving SBOMs across supply chains
 
 ---
 

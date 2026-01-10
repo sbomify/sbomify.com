@@ -21,7 +21,7 @@ section: compliance
 
 The Payment Card Industry Data Security Standard (PCI DSS) is a security standard for protecting payment card account data. The current version is **PCI DSS v4.0.1** (June 2024).
 
-PCI DSS does **not** mandate SBOMs by name or prescribe SBOM fields/schemas, but it *does* create SBOM-adjacent requirements around software/component inventories and third-party dependencies.
+PCI DSS does **not** mandate SBOMs by name or prescribe SBOM fields/schemas, but it _does_ create SBOM-adjacent requirements around software/component inventories and third-party dependencies.
 
 ## Scope
 
@@ -35,11 +35,11 @@ PCI DSS scope covers:
 
 ## SBOM-Relevant Requirements
 
-| PCI DSS Requirement (v4.0.1)                                           | What It Requires                                                                                                                                                                                                                                | Status                                             |
-| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| **6.3.2 Software component inventory (custom + embedded third-party)** | Maintain an **inventory of bespoke/custom software and third-party software components incorporated into bespoke/custom software** to support **vulnerability and patch management** (and validate inventory coverage).                         | **Best practice until 31 Mar 2025**, then required |
-| **6.4.3 Payment page script inventory + integrity**                    | For payment pages, maintain an **inventory of all scripts** (with justification) and implement methods to confirm each script is **authorized** and to assure **integrity**.                                                                    | Required (where applicable)                        |
-| **12.8 Third-party service provider (TPSP) inventory**                 | Maintain a **list of TPSPs** with which account data is shared or that could affect account data security, including a description of services. Examples include payment gateways/processors and providers that manage in-scope components.     | Required                                           |
+| PCI DSS Requirement (v4.0.1)                                           | What It Requires                                                                                                                                                                                                                            | Status                                             |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| **6.3.2 Software component inventory (custom + embedded third-party)** | Maintain an **inventory of bespoke/custom software and third-party software components incorporated into bespoke/custom software** to support **vulnerability and patch management** (and validate inventory coverage).                     | **Best practice until 31 Mar 2025**, then required |
+| **6.4.3 Payment page script inventory + integrity**                    | For payment pages, maintain an **inventory of all scripts** (with justification) and implement methods to confirm each script is **authorized** and to assure **integrity**.                                                                | Required (where applicable)                        |
+| **12.8 Third-party service provider (TPSP) inventory**                 | Maintain a **list of TPSPs** with which account data is shared or that could affect account data security, including a description of services. Examples include payment gateways/processors and providers that manage in-scope components. | Required                                           |
 
 ## Requirement 6.3.2 in Detail
 

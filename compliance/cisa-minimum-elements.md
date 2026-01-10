@@ -44,15 +44,19 @@ The 2025 draft introduces new data fields (Component Hash, License, Tool Name, G
 ## New Fields Explained
 
 ### Component Hash
+
 Cryptographic hash of the component for integrity verification. Enables consumers to verify they have the exact component referenced in the SBOM.
 
 ### License
+
 Per-component license information. Critical for open source compliance and understanding legal obligations.
 
 ### SBOM Generation Tool
+
 The tool (name and version) used to generate the SBOM. Helps with troubleshooting and understanding SBOM quality.
 
 ### Generation Context
+
 Information about the SDLC phase and context ("how and where") the SBOM was generated. Helps consumers understand the SBOM's completeness and accuracy.
 
 ## Updated Practices
