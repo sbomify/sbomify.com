@@ -18,6 +18,20 @@ redirect_from: /2024/04/07/how-to-create-an-sbom/
 
 ---
 
+<div class="bg-blue-50 border-l-4 border-blue-500 p-6 my-8 rounded-r-lg">
+  <div class="flex items-start">
+    <div class="flex-shrink-0">
+      <svg class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </div>
+    <div class="ml-4">
+      <h3 class="text-lg font-semibold text-blue-800 mt-0">📘 Updated Guides Available</h3>
+      <p class="text-blue-700 mt-2 mb-0">This article provides a general overview, but we now have more comprehensive and up-to-date guides available. Check out our <a href="/guides/" class="font-semibold underline hover:text-blue-900">SBOM Generation Guides</a> for language-specific instructions covering Python, JavaScript, Go, Rust, Java, Docker, and many more.</p>
+    </div>
+  </div>
+</div>
+
 In the evolving landscape of software development and cybersecurity, the importance of creating a Software Bill of Materials (SBOM) has never been more critical. As organizations and developers seek to enhance transparency and security in their software supply chain, understanding how to generate an SBOM efficiently becomes a foundational step. This article serves as a comprehensive guide on how to create, generate, and build an SBOM, ensuring that you're equipped with the knowledge to improve your software's integrity and trustworthiness. By detailing the process of generating an SBOM, we aim to empower developers and organizations alike to take proactive steps in securing their software ecosystems against vulnerabilities and threats.
 
 ### Using Docker

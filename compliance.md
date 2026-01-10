@@ -2,7 +2,7 @@
 layout: page
 permalink: /compliance/
 title: "The Ultimate SBOM Compliance Guide (2026)"
-description: "Complete SBOM compliance guide covering NTIA minimum elements, CISA 2025 draft, EU Cyber Resilience Act (CRA), NIS2 Directive, FDA medical device requirements, and PCI DSS 4.0. Includes CycloneDX and SPDX schema mappings."
+description: "Complete SBOM compliance guide covering NTIA minimum elements, CISA 2025 draft, EU Cyber Resilience Act (CRA), NIS2 Directive, UK Software Security Code of Practice, FDA medical device requirements, and PCI DSS 4.0. Includes CycloneDX and SPDX schema mappings."
 ---
 
 New to SBOMs? Start with [What is an SBOM?]({{ site.url }}/what-is-sbom/) to learn the basics, or explore our [SBOM generation guides]({{ site.url }}/guides/) for language-specific tutorials.
@@ -42,6 +42,11 @@ Software Bill of Materials (SBOM) compliance requirements are rapidly evolving a
 - **[EU NIS2 Directive]({{ site.url }}/compliance/eu-nis2/)** - EU cybersecurity law for essential and important entities
   - _Who it affects:_ EU entities responsible for cybersecurity risk management and incident reporting
 
+### UK Frameworks
+
+- **[Software Security Code of Practice (UK, May 2025)]({{ site.url }}/compliance/uk-software-security-code-of-practice/)** - Voluntary UK government code setting baseline secure software development, supply chain resilience, and customer communication expectations
+  - _Who it affects:_ Organisations that **develop and/or sell software to businesses or other organisations** (especially B2B/proprietary software vendors and SaaS)
+
 ### Industry Standards
 
 - **[PCI DSS 4.0]({{ site.url }}/compliance/pci-dss/)** - Payment card industry software component inventory requirements
@@ -76,40 +81,42 @@ This table compares SBOM data field expectations across major frameworks. All fr
 - **CRA** and **NIS2** are binding EU legislation
 - **FDA 2025** is guidance for medical device premarket submissions
 - **PCI DSS 4.0** is an industry standard for payment card security
+- **UK SSCoP 2025** is voluntary UK government guidance for software vendors
 
-| Property                        | EO 14028 | NTIA 2021 | CISA 2025 | CRA | NIS2 | FDA 2025 | PCI DSS 4.0 |
-| ------------------------------- | :------: | :-------: | :-------: | :-: | :--: | :------: | :---------: |
-| **Document-Level Metadata**     |          |           |           |     |      |          |             |
-| SBOM Author                     |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |
-| Timestamp                       |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |
-| Tool Name/Version               |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |
-| Generation Context              |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |
-| **Component Identification**    |          |           |           |     |      |          |             |
-| Supplier / Software Producer    |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |
-| Component Name                  |    -     |     ✓     |     ✓     |  -  |  ●   |    ✓     |      -      |
-| Component Version               |    -     |     ✓     |     ✓     |  -  |  ●   |    ✓     |      -      |
-| Unique Identifiers (purl/CPE)   |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |
-| Component Hash                  |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |
-| **Relationships**               |          |           |           |     |      |          |             |
-| Dependency Relationship         |    ●     |     ✓     |     ✓     | ✓*  |  -   |    ✓     |      -      |
-| **Legal**                       |          |           |           |     |      |          |             |
-| License                         |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |
-| **Lifecycle**                   |          |           |           |     |      |          |             |
-| Support Level                   |    -     |     -     |     -     |  -  |  -   |    ✓     |      -      |
-| End-of-Support Date             |    -     |     -     |     -     |  -  |  -   |    ✓     |      -      |
-| **Process / Access**            |          |           |           |     |      |          |             |
-| SBOM provision to purchasers    |    ✓     |     -     |     -     |  -  |  -   |    -     |      -      |
-| SBOM production required        |    -     |     -     |     -     |  ✓  |  -   |    -     |     ✓†      |
-| Authority access on request     |    -     |     -     |     -     |  ●  |  -   |    -     |      -      |
-| User access location disclosure |    -     |     -     |     -     |  ●  |  -   |    -     |      -      |
-| Supply chain security measures  |    ✓     |     -     |     -     |  -  |  ✓   |    -     |     ✓†      |
-| Vulnerability handling process  |    ✓     |     -     |     -     |  -  |  ✓   |    -     |     ✓†      |
+| Property                        | EO 14028 | NTIA 2021 | CISA 2025 | CRA | NIS2 | FDA 2025 | PCI DSS 4.0 | UK SSCoP 2025 |
+| ------------------------------- | :------: | :-------: | :-------: | :-: | :--: | :------: | :---------: | :-----------: |
+| **Document-Level Metadata**     |          |           |           |     |      |          |             |               |
+| SBOM Author                     |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |       -       |
+| Timestamp                       |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |       -       |
+| Tool Name/Version               |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |       -       |
+| Generation Context              |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |       -       |
+| **Component Identification**    |          |           |           |     |      |          |             |               |
+| Supplier / Software Producer    |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |       -       |
+| Component Name                  |    -     |     ✓     |     ✓     |  -  |  ●   |    ✓     |      -      |       -       |
+| Component Version               |    -     |     ✓     |     ✓     |  -  |  ●   |    ✓     |      -      |       -       |
+| Unique Identifiers (purl/CPE)   |    -     |     ✓     |     ✓     |  -  |  -   |    ✓     |      -      |       -       |
+| Component Hash                  |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |       -       |
+| **Relationships**               |          |           |           |     |      |          |             |               |
+| Dependency Relationship         |    ●     |     ✓     |     ✓     | ✓*  |  -   |    ✓     |      -      |       -       |
+| **Legal**                       |          |           |           |     |      |          |             |               |
+| License                         |    -     |     -     |     ✓     |  -  |  -   |    -     |      -      |       -       |
+| **Lifecycle**                   |          |           |           |     |      |          |             |               |
+| Support Level                   |    -     |     -     |     -     |  -  |  -   |    ✓     |      -      |      ✓‡       |
+| End-of-Support Date             |    -     |     -     |     -     |  -  |  -   |    ✓     |      -      |      ✓‡       |
+| **Process / Access**            |          |           |           |     |      |          |             |               |
+| SBOM provision to purchasers    |    ✓     |     -     |     -     |  -  |  -   |    -     |      -      |       -       |
+| SBOM production required        |    -     |     -     |     -     |  ✓  |  -   |    -     |     ✓†      |       -       |
+| Authority access on request     |    -     |     -     |     -     |  ●  |  -   |    -     |      -      |       -       |
+| User access location disclosure |    -     |     -     |     -     |  ●  |  -   |    -     |      -      |       -       |
+| Supply chain security measures  |    ✓     |     -     |     -     |  -  |  ✓   |    -     |     ✓†      |      ✓‡       |
+| Vulnerability handling process  |    ✓     |     -     |     -     |  -  |  ✓   |    -     |     ✓†      |      ✓‡       |
 
 **Legend:**
 
 - **✓** = Expected (NTIA/CISA minimum element, FDA recommended, EO 14028/NIS2 required)
 - **✓*** = CRA requires at least top-level (direct) dependencies
 - **✓†** = PCI DSS Req 6.3.2 (best practice until 31 Mar 2025, then required)
+- **✓‡** = UK SSCoP voluntary guidance (not as SBOM fields, but as customer-facing expectations)
 - **●** = Conditional or implied (EO 14028: SBOM must include "supply chain relationships"; CRA: where applicable; NIS2: for in-scope entities per Regulation 2024/2690)
 - **-** = Not specified by this framework
 
@@ -123,6 +130,7 @@ This table compares SBOM data field expectations across major frameworks. All fr
 - CRA is binding law but does not specify individual data fields beyond dependency scope
 - NIS2 does not mandate SBOMs by name, but the implementing regulation (2024/2690) requires "information describing the hardware and software components used" for in-scope entities
 - PCI DSS 4.0 requires software component inventories for bespoke/custom software (Req 6.3.2) to facilitate vulnerability and patch management
+- UK SSCoP 2025 is voluntary guidance; it does not mandate SBOMs by name but expects software composition awareness, vulnerability management, and customer lifecycle communication
 
 ---
 
@@ -162,6 +170,7 @@ See our comprehensive [SBOM generation guides]({{ site.url }}/guides/) covering 
 - [EU Cyber Resilience Act (Regulation 2024/2847)](https://eur-lex.europa.eu/eli/reg/2024/2847/oj)
 - [EU NIS2 Directive (Directive 2022/2555)](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX%3A32022L2555)
 - [PCI DSS v4.0.1 (June 2024)](https://www.pcisecuritystandards.org/document_library/)
+- [Software Security Code of Practice (UK Government, May 2025)](https://www.gov.uk/government/publications/software-security-code-of-practice)
 - [CLE Specification (ECMA-428)](https://ecma-international.org/publications-and-standards/standards/ecma-428/)
 
 **Related sbomify Resources:**
