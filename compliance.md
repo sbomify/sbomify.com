@@ -9,6 +9,8 @@ New to SBOMs? Start with [What is an SBOM?]({{ site.url }}/what-is-sbom/) to lea
 
 Governments and industry bodies worldwide are converging on Software Bill of Materials (SBOM) requirements. This page provides a comprehensive reference for the major frameworks defining what SBOMs should contain, along with schema mappings to the two dominant formats: [CycloneDX](https://cyclonedx.org/) and [SPDX](https://spdx.dev/).
 
+**Disclaimer:** This page represents our interpretation of the referenced frameworks and standards. While we strive for accuracy, we may have made errors or omissions. This content is provided for informational purposes only and does not constitute legal advice. For compliance decisions, consult the official source documents and seek qualified legal counsel.
+
 ---
 
 ## Frameworks Overview
