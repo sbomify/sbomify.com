@@ -92,12 +92,12 @@ Use the video embed component for consistent, responsive YouTube embeds with bui
 
 ### Parameters
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `video_id` | Yes | YouTube video ID (e.g., `E77ohYZA2vo`) |
-| `title` | Yes | Video title for schema and accessibility |
-| `description` | No | Video description for schema (defaults to page description) |
-| `upload_date` | No | Video upload date for schema (defaults to page date) |
+| Parameter     | Required | Description                                                 |
+| ------------- | -------- | ----------------------------------------------------------- |
+| `video_id`    | Yes      | YouTube video ID (e.g., `E77ohYZA2vo`)                      |
+| `title`       | Yes      | Video title for schema and accessibility                    |
+| `description` | No       | Video description for schema (defaults to page description) |
+| `upload_date` | No       | Video upload date for schema (defaults to page date)        |
 
 ### Features
 

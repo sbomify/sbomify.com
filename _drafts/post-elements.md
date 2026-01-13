@@ -95,8 +95,8 @@ Here’s a button styled using Markdown and CSS:
 <button class="btn">Click Me!</button>
 
 {% include components/video-embed.html
-    video_id="dQw4w9WgXcQ"
-    title="Example Video"
+video_id="dQw4w9WgXcQ"
+title="Example Video"
 %}
 
 <blockquote cite="http://www.worldwildlife.org/who/index.html">
