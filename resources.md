@@ -19,11 +19,45 @@ For step-by-step guides on generating SBOMs for specific languages and platforms
 
 ## Video Resources
 
-- Introduction to SBOMs: [sbomify at Ubuntu Engineering Sprint](https://www.youtube.com/watch?v=5mlR1lPz1no)
-- Interview with the creator of CycloneDX: [SBOMs, CycloneDX, and Software Security with Steve Springett](https://vpetersson.com/podcast/S01E22.html)
-- Interview with "the father of SBOMs": [SBOMs and Cybersecurity: A Deep Dive with Allan Friedman](https://vpetersson.com/podcast/S01E16.html)
-- [A deep dive into the SBOM format SPDX](https://vpetersson.com/podcast/S02E01.html) with Kate Stewart from the Linux Foundation and Gary O'Neall, a long-time SPDX contributor, about the evolution of SPDX and its role in software transparency
-- CRA deep dive with a member of the EU Commission's CRA expert group: [CRA Explained: What the Cyber Resilience Act Means for Device Manufacturers with Sarah Fluchs](https://vpetersson.com/podcast/S02E21.html)
+### Introduction to SBOMs: sbomify at Ubuntu Engineering Sprint
+
+{% include components/video-embed.html
+    video_id="5mlR1lPz1no"
+    title="sbomify at Ubuntu Engineering Sprint"
+    description="Introduction to SBOMs and sbomify presented at the Ubuntu Engineering Sprint."
+%}
+
+### Interview with the creator of CycloneDX: Steve Springett
+
+{% include components/video-embed.html
+    video_id="oSBDSJf0FeA"
+    title="SBOMs, CycloneDX, and Software Security with Steve Springett"
+    description="Exploring the world of software security and compliance with Steve Springett, diving into how SBOMs and CycloneDX are reshaping how we track and secure our software supply chains."
+%}
+
+### Interview with "the father of SBOMs": Allan Friedman
+
+{% include components/video-embed.html
+    video_id="E77ohYZA2vo"
+    title="SBOMs and Cybersecurity: A Deep Dive with Allan Friedman"
+    description="An in-depth discussion about SBOMs with Allan Friedman, formerly of CISA."
+%}
+
+### A deep dive into the SBOM format SPDX
+
+{% include components/video-embed.html
+    video_id="fJS7_VO_Was"
+    title="A deep dive into the SBOM format SPDX with Kate Stewart and Gary O'Neall"
+    description="Exploring the evolution and impact of SPDX in software transparency with Kate Stewart from the Linux Foundation and Gary O'Neall, a long-time SPDX contributor."
+%}
+
+### CRA deep dive with Sarah Fluchs
+
+{% include components/video-embed.html
+    video_id="e9_bpsJKOL0"
+    title="CRA Explained: What the Cyber Resilience Act Means for Device Manufacturers"
+    description="Podcast episode with EU CRA expert Sarah Fluchs explaining SBOM requirements, the 5-year support mandate, and vulnerability management for device manufacturers."
+%}
 
 ---
 

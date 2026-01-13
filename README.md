@@ -76,6 +76,36 @@ bun run lint:d2
 
 All diagrams automatically use the theme defined in `_d2/theme.d2`, which provides consistent styling across all diagrams. The theme includes predefined classes for nodes (`primary`, `accent`, `secondary`, `group`) and connections (`flow`, `flow-pink`).
 
+## YouTube Video Embeds
+
+Use the video embed component for consistent, responsive YouTube embeds with built-in VideoObject structured data for SEO.
+
+### Usage
+
+```liquid
+{% include components/video-embed.html
+    video_id="E77ohYZA2vo"
+    title="SBOM Deep Dive with Allan Friedman"
+    description="An in-depth discussion about SBOMs with Allan Friedman, formerly of CISA."
+%}
+```
+
+### Parameters
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `video_id` | Yes | YouTube video ID (e.g., `E77ohYZA2vo`) |
+| `title` | Yes | Video title for schema and accessibility |
+| `description` | No | Video description for schema (defaults to page description) |
+| `upload_date` | No | Video upload date for schema (defaults to page date) |
+
+### Features
+
+- **Privacy-enhanced**: Uses `youtube-nocookie.com` to prevent cookies until user plays
+- **Responsive**: Full width on mobile, max 768px centered on desktop
+- **Lazy loading**: Defers iframe load until needed for better performance
+- **SEO-ready**: Each video includes its own VideoObject structured data
+
 ## Meta Tags & Social Preview
 
 Meta keywords tag is dependent on `keywords` metadata

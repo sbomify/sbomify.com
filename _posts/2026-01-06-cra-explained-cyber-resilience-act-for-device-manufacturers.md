@@ -12,7 +12,11 @@ The EU Cyber Resilience Act (CRA) is transforming how device manufacturers appro
 
 Sarah isn't just any commentator on the CRA - she serves on the **EU Commission's CRA expert group**, giving her first-hand involvement in shaping this landmark regulation. With a PhD in security-by-design and years of experience in OT (Operational Technology) cybersecurity, she brings a rare blend of technical depth and policy insight.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/e9_bpsJKOL0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+{% include components/video-embed.html
+    video_id="e9_bpsJKOL0"
+    title="CRA Explained: Cyber Resilience Act for Device Manufacturers"
+    description="Podcast episode with EU CRA expert Sarah Fluchs explaining SBOM requirements, the 5-year support mandate, and vulnerability management for device manufacturers."
+%}
 
 ## SBOMs Are Non-Negotiable for CRA Compliance
 

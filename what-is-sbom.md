@@ -45,7 +45,11 @@ While there is no single "winner" yet, both formats represent a positive step to
 
 If you want to do a deep dive into SBOMs, we recommend watching this interview with Allan Friedman (formerly CISA) on the podcast [Nerding Out with Viktor](https://vpetersson.com/podcast/).
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/E77ohYZA2vo?si=dZbcMfdO10EafVVw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+{% include components/video-embed.html
+    video_id="E77ohYZA2vo"
+    title="SBOM Deep Dive with Allan Friedman"
+    description="An in-depth discussion about SBOMs with Allan Friedman, formerly of CISA."
+%}
 
 For more podcast episodes covering SBOMs, CycloneDX, SPDX, and the EU Cyber Resilience Act, see our [Video Resources]({{ site.url }}/resources/#video-resources).
 

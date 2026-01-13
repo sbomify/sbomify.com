@@ -94,7 +94,10 @@ Here’s a button styled using Markdown and CSS:
 
 <button class="btn">Click Me!</button>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+{% include components/video-embed.html
+    video_id="dQw4w9WgXcQ"
+    title="Example Video"
+%}
 
 <blockquote cite="http://www.worldwildlife.org/who/index.html">
 For 50 years, WWF has been protecting the future of nature. The world's leading conservation organization, WWF works in 100 countries and is supported by 1.2 million members in the United States and close to 5 million globally.
