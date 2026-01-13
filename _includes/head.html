@@ -287,21 +287,6 @@
   }
   </script>
 
-  {% if content contains 'youtube.com/embed/' %}
-  {% assign video_url = content | split: 'youtube.com/embed/' | last | split: '"' | first | split: '?' | first %}
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    "name": "{{ page.title }}",
-    "description": "{{ page.description | default: site.description | strip_html | strip_newlines | escape }}",
-    "thumbnailUrl": "https://img.youtube.com/vi/{{ video_url }}/maxresdefault.jpg",
-    "uploadDate": "{{ page.date | default: page.git_created_date | date_to_xmlschema }}",
-    "embedUrl": "https://www.youtube.com/embed/{{ video_url }}",
-    "contentUrl": "https://www.youtube.com/watch?v={{ video_url }}"
-  }
-  </script>
-  {% endif %}
 
   {% if page.url contains '/guides/' and page.url != '/guides/' %}
   <script type="application/ld+json">

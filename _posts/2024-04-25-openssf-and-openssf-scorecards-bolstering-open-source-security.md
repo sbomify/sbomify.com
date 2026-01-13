@@ -57,7 +57,11 @@ Using OpenSSF Scorecards is straightforward. They are publicly accessible and ca
 
 For those who are keen on delving deeper into the specifics of OpenSSF Scorecards and their implications for open-source security, [Nerding Out with Cowboy Neil](<https://www.youtube.com/@nerdingoutwithCowboy> Neil) offers a detailed deep dive.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KdgkiWdhpZ8?si=NGn8LV09bHx5N0kb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+{% include components/video-embed.html
+video_id="KdgkiWdhpZ8"
+title="OpenSSF Scorecards Deep Dive"
+description="A detailed look at OpenSSF Scorecards and their implications for open-source security."
+%}
 
 ## Conclusion
 
