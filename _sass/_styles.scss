@@ -489,20 +489,20 @@ a.button {
     margin: 32px 0;
 
     p {
-      color: #ffffff;
+      color: #fff;
       font-size: rem(18px);
       margin-bottom: 16px;
     }
 
     strong {
-      color: #ffffff;
+      color: #fff;
     }
 
     a.cta-button {
       display: inline-block;
       padding: 12px 24px;
       background-color: #8A7DFF;
-      color: #ffffff;
+      color: #fff;
       border-radius: 9999px;
       font-weight: 500;
       text-decoration: none;
@@ -510,7 +510,7 @@ a.button {
 
       &:hover {
         background-color: #7A6DE5;
-        color: #ffffff;
+        color: #fff;
         text-decoration: none;
       }
     }
