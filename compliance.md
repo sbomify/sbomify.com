@@ -60,6 +60,9 @@ Software Bill of Materials (SBOM) compliance requirements are rapidly evolving a
 - **[CISA SBOM Sharing Lifecycle Report]({{ site.url }}/compliance/cisa-sharing-lifecycle/)** - Operational guidance for SBOM distribution
   - _Who it affects:_ Organizations distributing or retrieving SBOMs across supply chains
 
+- **[ENISA Package Manager Security Advisory (2025 Draft)]({{ site.url }}/2026/01/13/enisa-package-manager-guidance-sbom-first-teams/)** - EU agency guidance for secure dependency consumption
+  - _Who it affects:_ Development teams using npm, pip, Maven, Cargo and other package managers
+
 ---
 
 ## Technical Resources
@@ -171,6 +174,7 @@ See our comprehensive [SBOM generation guides]({{ site.url }}/guides/) covering 
 - [EU NIS2 Directive (Directive 2022/2555)](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX%3A32022L2555)
 - [PCI DSS v4.0.1 (June 2024)](https://www.pcisecuritystandards.org/document_library/)
 - [Software Security Code of Practice (UK Government, May 2025)](https://www.gov.uk/government/publications/software-security-code-of-practice)
+- [ENISA Technical Advisory for Secure Use of Package Managers (v0.8 draft, December 2025)](https://www.enisa.europa.eu/sites/default/files/2025-12/ENISA%20Technical%20Advisory%20-%20Package_Managers_v_0.8_draft.pdf)
 - [CLE Specification (ECMA-428)](https://ecma-international.org/publications-and-standards/standards/ecma-428/)
 
 **Related sbomify Resources:**
