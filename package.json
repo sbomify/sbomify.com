@@ -18,6 +18,7 @@
     "lint:scss:fix": "stylelint \"**/*.scss\" --fix"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
     "autoprefixer": "^10.4.22",
     "browserslist": "^4.28.0",
     "caniuse-lite": "^1.0.30001757",
