@@ -58,15 +58,15 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
   variables:
     TOKEN: $SBOMIFY_TOKEN
     COMPONENT_ID: 'Your Component ID'
-    UPLOAD: true
-    AUGMENT: true
-    ENRICH: true
+    UPLOAD: "true"
+    AUGMENT: "true"
+    ENRICH: "true"
     COMPONENT_NAME: 'my-python-app'
     COMPONENT_VERSION: $CI_COMMIT_SHA
     LOCK_FILE: 'poetry.lock'
-    OUTPUT_FILE: test-sbom.cdx.json"
+    OUTPUT_FILE: 'sbom.cdx.json'
   script:
-    - /sbomify.sh</code></pre>
+    - sbomify-action</code></pre>
 
         </div>
       </div>
@@ -116,7 +116,9 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
   -e TOKEN=&lt;my token&gt; \
   -e COMPONENT_ID=&lt;my component id&gt; \
   -e LOCK_FILE=/code/requirements.txt \
+  -e OUTPUT_FILE=/code/sbom.cdx.json \
   -e COMPONENT_NAME=my-app \
+  -e ENRICH=true \
   sbomifyhub/sbomify-action</code></pre>
 
         </div>
@@ -165,29 +167,157 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
 <!-- Enrichment Section -->
 <section>
     <div class="mb-10 text-center max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold text-primaryText mb-4">Enrichment</h2>
-      <p class="text-lg text-secondaryText">Add context to your artifacts automatically.</p>
+      <h2 class="text-3xl font-bold text-primaryText mb-4">Enrichment Data Sources</h2>
+      <p class="text-lg text-secondaryText">We integrate with 11 data sources to add metadata to your SBOM components: descriptions, licenses, supplier information, and more.</p>
     </div>
 
-    <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all">
-      <div class="flex flex-col md:flex-row gap-8 items-start">
-        <div class="flex-shrink-0">
-          <img src="{{ '/assets/images/site/ecosystems-white.svg' | bust_cache }}" class="h-10 w-auto" alt="Ecosyste.ms">
+    <!-- Pre-computed Databases -->
+    <div class="mb-8">
+      <h3 class="text-xl font-bold text-primaryText mb-4">Pre-computed Databases (Fastest)</h3>
+      <p class="text-secondaryText mb-4">Local data with zero network latency. Checked first for maximum performance.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+          <h4 class="text-lg font-bold text-white mb-2">LicenseDB</h4>
+          <p class="text-gray-300 text-sm mb-3">Pre-computed license database covering 28 Linux distro versions. Provides authoritative license data for APK, DEB, and RPM packages.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">pkg:apk/*</span>
+            <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">pkg:deb/*</span>
+            <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">pkg:rpm/*</span>
+          </div>
         </div>
-        <div>
-          <h3 class="text-xl font-bold text-white mb-3">Ecosyste.ms</h3>
-          <p class="text-gray-300 mb-4">
-            We partner with Ecosyste.ms to enrich your SBOMs with metadata, licensing information, and project health metrics.
-          </p>
-          <div class="bg-[#141035] rounded-lg p-4 text-sm text-gray-300 border border-[#37306B]">
-            <p class="mb-2">
-              <span class="font-semibold text-white">How it works:</span>
-              Enrichment happens automatically when using our <a href="https://github.com/sbomify/github-action" class="text-[#8A7DFF] hover:text-white transition-colors">GitHub Action module</a>.
-            </p>
-            <code class="bg-[#201B4C] px-2 py-1 rounded text-[#8A7DFF] font-mono border border-[#37306B]">ENRICH: true</code>
+        <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+          <h4 class="text-lg font-bold text-white mb-2">Lifecycle Database</h4>
+          <p class="text-gray-300 text-sm mb-3">CLE lifecycle dates (release, end-of-support, end-of-life) for major runtimes and frameworks following ECMA-428.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Python</span>
+            <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">PHP</span>
+            <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Go</span>
+            <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Rust</span>
+            <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Django</span>
+            <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Rails</span>
+            <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">+more</span>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Native Sources -->
+    <div class="mb-8">
+      <h3 class="text-xl font-bold text-primaryText mb-4">Native Package Registries</h3>
+      <p class="text-secondaryText mb-4">Authoritative data direct from the ecosystem's official source.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+          <h4 class="text-lg font-bold text-white mb-2">PyPI</h4>
+          <p class="text-gray-300 text-sm mb-3">Python Package Index</p>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">pkg:pypi/*</span>
+        </div>
+        <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+          <h4 class="text-lg font-bold text-white mb-2">crates.io</h4>
+          <p class="text-gray-300 text-sm mb-3">Rust Package Registry</p>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">pkg:cargo/*</span>
+        </div>
+        <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+          <h4 class="text-lg font-bold text-white mb-2">pub.dev</h4>
+          <p class="text-gray-300 text-sm mb-3">Dart/Flutter Packages</p>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">pkg:pub/*</span>
+        </div>
+        <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+          <h4 class="text-lg font-bold text-white mb-2">Debian Sources</h4>
+          <p class="text-gray-300 text-sm mb-3">Debian Package Archive</p>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">pkg:deb/debian/*</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aggregators -->
+    <div class="mb-8">
+      <h3 class="text-xl font-bold text-primaryText mb-4">Package Aggregators</h3>
+      <p class="text-secondaryText mb-4">Multi-ecosystem services providing broad coverage.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+          <div class="flex items-center gap-3 mb-3">
+            <h4 class="text-lg font-bold text-white">deps.dev</h4>
+            <span class="text-xs bg-[#8A7DFF]/10 text-[#8A7DFF] px-2 py-1 rounded">Google</span>
+          </div>
+          <p class="text-gray-300 text-sm">Open source dependency insights from Google. Covers most major ecosystems.</p>
+        </div>
+        <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+          <div class="flex items-center gap-3 mb-3">
+            <img src="{{ '/assets/images/site/ecosystems-white.svg' | bust_cache }}" class="h-6 w-auto" alt="Ecosyste.ms">
+          </div>
+          <p class="text-gray-300 text-sm">Community-driven package metadata and project health metrics across ecosystems.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fallback Sources -->
+    <div class="mb-8">
+      <h3 class="text-xl font-bold text-primaryText mb-4">Fallback Sources</h3>
+      <p class="text-secondaryText mb-4">Additional coverage when primary sources do not have data.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+          <h4 class="text-lg font-bold text-white mb-2">PURL Extraction</h4>
+          <p class="text-gray-300 text-sm">Local extraction from package URLs. Maps namespaces to suppliers without API calls.</p>
+        </div>
+        <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+          <h4 class="text-lg font-bold text-white mb-2">ClearlyDefined</h4>
+          <p class="text-gray-300 text-sm">Community-curated license and metadata for open source components.</p>
+        </div>
+        <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+          <h4 class="text-lg font-bold text-white mb-2">Repology</h4>
+          <p class="text-gray-300 text-sm">Cross-distribution package tracking for Linux packages.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- How to enable -->
+    <div class="bg-[#141035] rounded-2xl p-6 border border-[#37306B]">
+      <p class="text-gray-300 mb-3">
+        <span class="font-semibold text-white">How it works:</span>
+        Enrichment happens automatically when using our <a href="https://github.com/sbomify/github-action" class="text-[#8A7DFF] hover:text-white transition-colors">GitHub Action</a> or CLI with the enrich flag.
+      </p>
+      <code class="bg-[#201B4C] px-3 py-2 rounded text-[#8A7DFF] font-mono border border-[#37306B] inline-block">ENRICH=true</code>
+      <span class="text-gray-400 mx-2">or</span>
+      <code class="bg-[#201B4C] px-3 py-2 rounded text-[#8A7DFF] font-mono border border-[#37306B] inline-block">--enrich</code>
+    </div>
+
+</section>
+
+<!-- Augmentation Section -->
+<section>
+    <div class="mb-10 text-center max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold text-primaryText mb-4">Augmentation Providers</h2>
+      <p class="text-lg text-secondaryText">Add organizational metadata to your SBOM: supplier info, manufacturer details, VCS context, and more.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">sbomify API</h4>
+        <p class="text-gray-300 text-sm mb-3">Pull organizational metadata from your sbomify workspace: supplier, manufacturer, authors, and declared license.</p>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">Local Config</h4>
+        <p class="text-gray-300 text-sm mb-3">Override metadata via <code class="text-[#8A7DFF]">sbomify.json</code> in your repository for supplier, authors, license, and VCS info.</p>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">CI/CD Auto-Detection</h4>
+        <p class="text-gray-300 text-sm mb-3">Automatically detects VCS URL, commit SHA, and branch from GitHub Actions, GitLab CI, and Bitbucket Pipelines environment variables.</p>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">Fields Added</h4>
+        <p class="text-gray-300 text-sm">Supplier, manufacturer, authors, license, lifecycle phase, repository URL, commit SHA, branch/ref.</p>
+      </div>
+    </div>
+
+    <!-- How to enable -->
+    <div class="bg-[#141035] rounded-2xl p-6 border border-[#37306B]">
+      <p class="text-gray-300 mb-3">
+        <span class="font-semibold text-white">How it works:</span>
+        Augmentation pulls metadata from sbomify and your CI environment.
+      </p>
+      <code class="bg-[#201B4C] px-3 py-2 rounded text-[#8A7DFF] font-mono border border-[#37306B] inline-block">AUGMENT=true</code>
+      <span class="text-gray-400 mx-2">or</span>
+      <code class="bg-[#201B4C] px-3 py-2 rounded text-[#8A7DFF] font-mono border border-[#37306B] inline-block">--augment</code>
     </div>
 
 </section>
