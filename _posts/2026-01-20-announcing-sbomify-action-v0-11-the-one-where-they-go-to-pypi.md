@@ -37,7 +37,7 @@ One of the most frustrating aspects of generating SBOMs for container images is 
 
 When you generate an SBOM, LicenseDB automatically fills in license data for packages that would otherwise be missing it. The lookup is architecture-agnostic, so you get consistent results whether you are building for amd64 or arm64.
 
-LicenseDB is our primary license source, but not our only one. We integrate with multiple providers for license data, including PyPI, crates.io, and other package registries. LicenseDB is checked first because it is fast (no API calls, all data is bundled) and reliable. When LicenseDB does not have coverage for a package, we fall back to other sources. See our [integrations page]({{ site.url }}/features/integrations/) for the full list of data sources.
+LicenseDB is our primary license source, but not our only one. We integrate with multiple providers for license data, including PyPI, crates.io, and other package registries. LicenseDB is checked first because it is fast (downloaded once from GitHub releases then cached locally) and reliable. When LicenseDB does not have coverage for a package, we fall back to other sources. See our [integrations page]({{ site.url }}/features/integrations/) for the full list of data sources.
 
 We take a conservative approach: LicenseDB only includes licenses we can verify from authoritative sources. This means we do not have full coverage of every package, but we would rather provide a smaller, accurate database than try to guess licenses with heuristics. When it comes to license compliance, accuracy matters more than completeness.
 
