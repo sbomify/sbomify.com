@@ -7,22 +7,31 @@ redirect_from:
   - /features/public-sbom-portal/
 ---
 
-<div class="text-xl leading-relaxed text-secondaryText mb-8 text-center max-w-3xl mx-auto font-medium">
+<div class="text-xl leading-relaxed text-secondaryText mb-12 text-center max-w-3xl mx-auto font-medium">
 Turn transparency into a competitive advantage. Showcase your security posture with a branded, automated <span class="text-[#201B4C] font-bold">Trust Center</span>.
 </div>
 
-<div class="mb-16 text-center">
-    <a href="https://app.sbomify.com/public/product/eP_4dk8ixV/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-4 px-8 py-4 bg-[#8A7DFF] hover:bg-[#7A6DE5] !text-white !no-underline rounded-full font-medium transition-all duration-200 shadow-lg hover:shadow-[#8A7DFF]/25 hover:-translate-y-0.5">
-        <span class="text-lg font-bold">View Live Demo</span>
-        <div class="w-px h-6 bg-white/30"></div>
-        <img src="{{ '/assets/images/logo/badge.svg' | bust_cache }}" alt="sbomified" class="h-6 w-auto" />
+<div class="mb-16">
+    <a href="https://trust.sbomify.com/" target="_blank" rel="noopener noreferrer" class="group block max-w-md mx-auto !no-underline">
+        <div class="bg-white border-2 border-gray-100 hover:border-[#8A7DFF]/30 rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <div class="flex flex-col items-center gap-6">
+                <img src="{{ '/assets/images/logo/badge.svg' | bust_cache }}" alt="sbomified" class="w-72 h-auto" />
+                <div class="text-lg font-bold text-[#201B4C] group-hover:text-[#8A7DFF] transition-colors">View Live Trust Center</div>
+                <div class="flex items-center gap-2 text-[#8A7DFF] font-medium">
+                    <span>Explore Demo</span>
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></svg>
+                </div>
+            </div>
+        </div>
     </a>
 </div>
 
 <div class="mb-24">
+    <h2 class="text-3xl font-bold text-[#201B4C] mb-4 text-center">Everything You Need</h2>
+    <p class="text-secondaryText text-center mb-12 max-w-2xl mx-auto">A complete platform for managing and sharing your security posture</p>
     <div class="grid lg:grid-cols-3 gap-8">
         {% capture icon_1 %}
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 21l18 0" /><path d="M9 8l1 0" /><path d="M9 12l1 0" /><path d="M9 16l1 0" /><path d="M14 8l1 0" /><path d="M14 12l1 0" /><path d="M14 16l1 0" /><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" /></svg>
         {% endcapture %}
         {% include components/feature-card.html
             icon_bg_class="bg-purple-50"
@@ -33,7 +42,7 @@ Turn transparency into a competitive advantage. Showcase your security posture w
         %}
 
         {% capture icon_2 %}
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
         {% endcapture %}
         {% include components/feature-card.html
             icon_bg_class="bg-blue-50"
@@ -44,7 +53,7 @@ Turn transparency into a competitive advantage. Showcase your security posture w
         %}
 
         {% capture icon_3 %}
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6" /><path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" /><path d="M8 11v-4a4 4 0 1 1 8 0v4" /></svg>
         {% endcapture %}
         {% include components/feature-card.html
             icon_bg_class="bg-pink-50"
@@ -60,16 +69,27 @@ Turn transparency into a competitive advantage. Showcase your security posture w
 <div class="mb-24">
     <div class="flex flex-col lg:flex-row gap-16 items-center">
         <div class="flex-1">
+            <div class="inline-block px-4 py-1.5 bg-[#8A7DFF]/10 text-[#8A7DFF] border border-[#8A7DFF]/20 rounded-full text-xs font-bold uppercase tracking-wider mb-6">Why Now</div>
             <h2 class="text-4xl font-bold text-[#201B4C] mb-6">The New Standard for Transparency</h2>
             <p class="text-lg text-secondaryText mb-6 leading-relaxed">
-                Trust Centers are becoming essential, and buyers today are now expecting their vendors to provide Trust Centers with near realtime data about security posture and compliance status.
+                Trust Centers are becoming essential. Buyers now expect vendors to provide near real-time data about security posture and compliance status.
             </p>
-            <p class="text-lg text-secondaryText mb-6 leading-relaxed">
-                With the <strong>EU Cyber Resilience Act (CRA)</strong>, SBOMs are now expected to be provided to stakeholders as part of their Trust Center.
-            </p>
-            <p class="text-lg text-secondaryText mb-8 leading-relaxed">
-                It is expected that more compliance frameworks are to adopt SBOMs as part of their security posture litmus test. The first one doing so is <strong>PCI DSS 4.0</strong>.
-            </p>
+            <div class="space-y-4 mb-8">
+                <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+                    <svg class="w-6 h-6 text-[#8A7DFF] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11" /></svg>
+                    <div>
+                        <div class="font-semibold text-[#201B4C]">EU Cyber Resilience Act (CRA)</div>
+                        <div class="text-sm text-secondaryText">SBOMs are now expected as part of Trust Centers for stakeholders</div>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+                    <svg class="w-6 h-6 text-[#8A7DFF] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" /><path d="M15 19l2 2l4 -4" /></svg>
+                    <div>
+                        <div class="font-semibold text-[#201B4C]">PCI DSS 4.0</div>
+                        <div class="text-sm text-secondaryText">First major framework adopting SBOMs as security posture requirement</div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="flex-1 w-full flex justify-center">
             <div class="w-full max-w-lg">
@@ -105,24 +125,42 @@ Turn transparency into a competitive advantage. Showcase your security posture w
 {% include compliance-block.html %}
 
 <div class="mb-24">
-    <h2 class="text-4xl font-bold text-[#201B4C] mb-16 text-center">Real-World Impact</h2>
+    <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-[#201B4C] mb-4">Real-World Impact</h2>
+        <p class="text-secondaryText max-w-2xl mx-auto">See how Trust Centers transform the way you do business</p>
+    </div>
     <div class="grid md:grid-cols-3 gap-8">
+        {% capture impact_icon_1 %}
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3" /><path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" /><path d="M14 9a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
+        {% endcapture %}
         {% include components/impact-card.html
-            emoji="🚀"
+            svg=impact_icon_1
+            icon_bg_class="bg-purple-50"
+            icon_text_class="text-[#8A7DFF]"
             title="Accelerate Sales"
             description="\"Do you have a SOC 2?\" Send a link instead of scheduling a call. Reduce questionnaire response times from weeks to minutes."
             link_text="Sales Enablement"
         %}
 
+        {% capture impact_icon_2 %}
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" /></svg>
+        {% endcapture %}
         {% include components/impact-card.html
-            emoji="🛡️"
+            svg=impact_icon_2
+            icon_bg_class="bg-blue-50"
+            icon_text_class="text-blue-500"
             title="Build Trust"
             description="Show, don't just tell. Proactive transparency proves your commitment to security before a prospect even asks."
             link_text="Brand Reputation"
         %}
 
+        {% capture impact_icon_3 %}
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11" /></svg>
+        {% endcapture %}
         {% include components/impact-card.html
-            emoji="⚡"
+            svg=impact_icon_3
+            icon_bg_class="bg-amber-50"
+            icon_text_class="text-amber-500"
             title="Streamline Ops"
             description="Eliminate ad-hoc email requests. Give customers self-service access to the documents they need, 24/7."
             link_text="Operational Efficiency"

@@ -7,16 +7,19 @@ CI: {
   Generate: {
     class: primary
     label: "Generate"
+    icon: node_modules/@tabler/icons/icons/outline/settings-cog.svg
   }
 
   Enrich: {
     class: secondary
     label: "Enrich & Augment"
+    icon: node_modules/@tabler/icons/icons/outline/wand.svg
   }
 
   Sign: {
     class: accent
     label: "Sign"
+    icon: node_modules/@tabler/icons/icons/outline/signature.svg
   }
 
   Generate -> Enrich: {
@@ -38,6 +41,7 @@ sbomify: {
 Analysis: {
   class: accent
   label: "Analysis"
+  icon: node_modules/@tabler/icons/icons/outline/chart-line.svg
 }
 
 CI.Sign -> sbomify: Upload {

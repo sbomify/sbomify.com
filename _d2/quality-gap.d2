@@ -1,0 +1,37 @@
+direction: right
+
+SBOM: {
+  class: secondary
+  label: "Your SBOM"
+  icon: node_modules/@tabler/icons/icons/outline/file-code.svg
+}
+
+Lockfile: {
+  class: secondary
+  label: "Your Lockfile"
+  icon: node_modules/@tabler/icons/icons/outline/file-text.svg
+}
+
+Action: {
+  class: highlight
+  label: "sbomify action"
+  icon: node_modules/@tabler/icons/icons/filled/bolt.svg
+}
+
+Quality: {
+  class: primary
+  label: "Quality SBOM"
+  icon: node_modules/@tabler/icons/icons/filled/shield-check.svg
+}
+
+SBOM -> Action: "or" {
+  class: flow
+}
+
+Lockfile -> Action: {
+  class: flow
+}
+
+Action -> Quality: {
+  class: flow-pink
+}

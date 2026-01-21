@@ -7,17 +7,20 @@ Software Product: {
 
   Transitive: {
     class: secondary
-    label: "Dependencies of your libraries"
+    label: "Transitive Dependencies"
+    icon: node_modules/@tabler/icons/icons/filled/stack.svg
   }
 
   Open Source: {
     class: accent
     label: "Open Source Libraries"
+    icon: node_modules/@tabler/icons/icons/outline/git-branch.svg
   }
 
   Source Code: {
     class: primary
     label: "Your Source Code"
+    icon: node_modules/@tabler/icons/icons/outline/code.svg
   }
 
   Transitive -> Open Source: "included in" {
@@ -30,8 +33,9 @@ Software Product: {
 }
 
 SBOM: {
-  class: primary
+  class: highlight
   label: "SBOM\n(Ingredients List)"
+  icon: node_modules/@tabler/icons/icons/outline/checklist.svg
 }
 
 Software Product -> SBOM: "Cataloged by" {

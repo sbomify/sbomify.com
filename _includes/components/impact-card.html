@@ -1,10 +1,16 @@
 <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col h-full">
+    {% if include.svg %}
+    <div class="w-12 h-12 {{ include.icon_bg_class | default: 'bg-purple-50' }} rounded-2xl flex items-center justify-center {{ include.icon_text_class | default: 'text-[#8A7DFF]' }} mb-6 group-hover:scale-110 transition-transform duration-300">
+        {{ include.svg }}
+    </div>
+    {% else %}
     <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">{{ include.emoji }}</div>
+    {% endif %}
     <h3 class="text-2xl font-bold text-[#201B4C] mb-4">{{ include.title }}</h3>
     <p class="text-secondaryText leading-relaxed mb-8 flex-grow">
         {{ include.description }}
     </p>
     <div class="pt-6 border-t border-gray-50">
-        <span class="inline-block bg-[#F6F9FA] text-[#201B4C] text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider border border-gray-100">{{ include.link_text }}</span>
+        <span class="inline-block bg-[#F6F9FA] text-[#201B4C] text-xs font-bold px-3 py-1.5 rounded-lg uppercase tracking-wider border border-gray-100 text-center">{{ include.link_text }}</span>
     </div>
 </div>

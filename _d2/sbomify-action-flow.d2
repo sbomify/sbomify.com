@@ -1,0 +1,77 @@
+direction: right
+
+Input: {
+  class: secondary
+  label: "Your Code"
+  icon: node_modules/@tabler/icons/icons/outline/code.svg
+}
+
+Action: {
+  class: group
+  label: "sbomify action"
+
+  Generate: {
+    class: primary
+    label: "Generate"
+    icon: node_modules/@tabler/icons/icons/outline/settings-cog.svg
+  }
+
+  Augment: {
+    class: accent
+    label: "Augment"
+    icon: node_modules/@tabler/icons/icons/outline/puzzle.svg
+  }
+
+  Enrich: {
+    class: accent
+    label: "Enrich"
+    icon: node_modules/@tabler/icons/icons/outline/wand.svg
+  }
+
+  Generate -> Augment: {
+    class: flow
+  }
+
+  Augment -> Enrich: {
+    class: flow
+  }
+}
+
+Outputs: {
+  class: group
+  label: ""
+
+  Quality: {
+    class: highlight
+    label: "Compliance-Ready"
+    icon: node_modules/@tabler/icons/icons/filled/rosette-discount-check.svg
+  }
+
+  Compliance: {
+    class: primary
+    label: "Regulation Checks"
+    icon: node_modules/@tabler/icons/icons/outline/checklist.svg
+  }
+
+  Attestation: {
+    class: primary
+    label: "Verify Attestation"
+    icon: node_modules/@tabler/icons/icons/outline/certificate.svg
+  }
+}
+
+Input -> Action.Generate: {
+  class: flow
+}
+
+Action.Enrich -> Outputs.Quality: {
+  class: flow-pink
+}
+
+Outputs.Quality -> Outputs.Compliance: {
+  class: flow
+}
+
+Outputs.Quality -> Outputs.Attestation: {
+  class: flow
+}

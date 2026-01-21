@@ -1,0 +1,47 @@
+direction: right
+
+CICD: {
+  class: group
+  label: "CI/CD Pipeline"
+
+  Generate: {
+    class: primary
+    label: "Generate"
+    icon: node_modules/@tabler/icons/icons/outline/settings-cog.svg
+  }
+
+  Sign: {
+    class: accent
+    label: "Sign"
+    icon: node_modules/@tabler/icons/icons/outline/signature.svg
+  }
+
+  Generate -> Sign: {
+    class: flow
+  }
+}
+
+Distribute: {
+  class: secondary
+  label: "Distribute"
+  icon: node_modules/@tabler/icons/icons/outline/send.svg
+}
+
+Verify: {
+  class: primary
+  label: "Verify"
+  icon: node_modules/@tabler/icons/icons/filled/shield-check.svg
+}
+
+CICD.Sign -> Distribute: "Signed SBOM" {
+  class: flow-pink
+}
+
+Distribute -> Verify: {
+  class: flow-pink
+}
+
+Verify -> CICD: "Trust" {
+  class: flow
+  style.stroke-dash: 3
+}
