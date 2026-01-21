@@ -1,24 +1,47 @@
 direction: right
 
-Generate: {
+Zero: {
+  class: secondary
+  label: "Zero"
+  icon: node_modules/@tabler/icons/icons/outline/help-circle.svg
+}
+
+Learn: {
   class: primary
+  label: "Learn"
+  icon: node_modules/@tabler/icons/icons/outline/book.svg
+}
+
+Generate: {
+  class: accent
   label: "Generate"
+  icon: node_modules/@tabler/icons/icons/outline/settings-cog.svg
 }
 
 Manage: {
   class: accent
   label: "Manage"
+  icon: node_modules/@tabler/icons/icons/outline/folders.svg
 }
 
-Share: {
-  class: secondary
-  label: "Share"
+Hero: {
+  class: highlight
+  label: "Hero"
+  icon: node_modules/@tabler/icons/icons/filled/rosette-discount-check.svg
 }
 
-Generate -> Manage: CI/CD {
+Zero -> Learn: {
   class: flow
 }
 
-Manage -> Share: Trust Center {
+Learn -> Generate: {
   class: flow
+}
+
+Generate -> Manage: {
+  class: flow
+}
+
+Manage -> Hero: {
+  class: flow-pink
 }

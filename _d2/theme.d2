@@ -1,92 +1,114 @@
-# Sbomify D2 Theme
+# Sbomify D2 Theme - Clean & Modern
+#
+# Brand colors:
+# - Dark Blue: #201B4C
+# - Purple: #8A7DFF  
+# - Pink: #d874a9
+# - Light Pink: #FCDDEC
+# - Background: #F8F9FC
 
 # Global Defaults
 style: {
   fill: "transparent"
   stroke: "transparent"
   stroke-width: 0
-  font-size: 16
-  border-radius: 16
+  font-size: 14
+  border-radius: 8
 }
 
-# Reusable Classes
 classes: {
-  # Primary: Dark Blue Background (matches site), Purple Stroke
+  # Primary - Purple border, light fill
   primary: {
     style: {
-      fill: "#201B4C"
+      fill: "#FFFFFF"
       stroke: "#8A7DFF"
-      font-color: "#d874a9"
+      font-color: "#201B4C"
       stroke-width: 2
       shadow: false
-      bold: true
-      border-radius: 16
+      border-radius: 8
+      font-size: 14
     }
   }
 
-  # Accent: Dark Blue Background, Pink Stroke
+  # Accent - Pink border, light fill
   accent: {
     style: {
-      fill: "#201B4C"
+      fill: "#FFFFFF"
       stroke: "#d874a9"
-      font-color: "#d874a9"
+      font-color: "#201B4C"
       stroke-width: 2
       shadow: false
-      bold: true
-      border-radius: 16
+      border-radius: 8
+      font-size: 14
     }
   }
 
-  # Secondary: Dark Background, Light Pink Stroke
+  # Secondary - Light pink border, light fill (for less emphasis)
   secondary: {
     style: {
-      fill: "#201B4C"
-      stroke: "#FCDDEC"
-      font-color: "#d874a9"
+      fill: "#FFFFFF"
+      stroke: "#CCCCCC"
+      font-color: "#666666"
       stroke-width: 2
       shadow: false
-      bold: true
-      border-radius: 16
+      border-radius: 8
+      font-size: 14
+      stroke-dash: 3
     }
   }
 
-  # Group Container Style
-  # Use this class for grouping boxes like "Authoring"
+  # Highlight - Filled purple (for key items)
+  highlight: {
+    style: {
+      fill: "#8A7DFF"
+      stroke: "#8A7DFF"
+      font-color: "#FFFFFF"
+      stroke-width: 2
+      shadow: false
+      border-radius: 8
+      font-size: 14
+      bold: true
+    }
+  }
+
+  # Group Container
   group: {
     style: {
-      stroke: "#8A7DFF"
-      stroke-dash: 3
-      fill: "#F5F5FA"
-      font-color: "#141035"
-      border-radius: 16
-      stroke-width: 2
+      fill: "#F8F9FC"
+      stroke: "#E2E4E9"
+      font-color: "#201B4C"
+      stroke-width: 1
+      border-radius: 12
+      font-size: 13
     }
   }
 
-  # Visual style for stacks
+  # Stack style
   stack: {
     style: {
       multiple: true
     }
   }
 
-  # Animated Purple Connection
+  # Flow - Purple animated connection
   flow: {
     style: {
       animated: true
       stroke: "#8A7DFF"
-      font-color: "#8A7DFF"
+      font-color: "#666666"
       stroke-width: 2
+      font-size: 12
     }
   }
 
-  # Animated Pink Connection
+  # Flow Pink - Pink animated connection
   flow-pink: {
     style: {
       animated: true
       stroke: "#d874a9"
-      font-color: "#d874a9"
+      font-color: "#666666"
       stroke-width: 2
+      font-size: 12
     }
   }
 }
