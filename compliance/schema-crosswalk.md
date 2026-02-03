@@ -17,6 +17,8 @@ This page maps SBOM properties to their specific field paths in CycloneDX, SPDX 
 
 **Note:** The CISA Framing document's published crosswalk table references CycloneDX v1.6. This page uses CycloneDX 1.7 schema paths, which are largely compatible but include some updates (e.g., tools object structure).
 
+**BSI TR-03183-2 Note:** For EU CRA compliance via BSI TR-03183-2, SBOMs MUST use **CycloneDX 1.6+** or **SPDX 3.0.1+** in JSON or XML format. See the [EU CRA page]({{ site.url }}/compliance/eu-cra/) for full requirements.
+
 ---
 
 ## Document-Level Metadata
@@ -77,8 +79,31 @@ This page maps SBOM properties to their specific field paths in CycloneDX, SPDX 
 
 ---
 
+## BSI TR-03183-2 Component Properties
+
+BSI TR-03183-2 requires additional component properties not covered by standard SBOM fields. These use the [BSI CycloneDX property taxonomy](https://github.com/BSI-Bund/tr-03183-cyclonedx-property-taxonomy) for CycloneDX and `software_additionalPurpose` for SPDX.
+
+| Property                | CycloneDX 1.6+                                                               | SPDX 3.0.1                                                                                |
+| ----------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Filename                | `components[].properties[name="bsi:component:filename"]`                     | `software_File.name` via `hasDistributionArtifact` relationship                           |
+| Executable property     | `components[].properties[name="bsi:component:executable"]`                   | Add `executable` to `software_additionalPurpose` list                                     |
+| Archive property        | `components[].properties[name="bsi:component:archive"]`                      | Add `archive` to `software_additionalPurpose` list                                        |
+| Structured property     | `components[].properties[name="bsi:component:structured"]`                   | Add `container` (structured) or `firmware` (unstructured) to `software_additionalPurpose` |
+| Effective licence       | `components[].properties[name="bsi:component:effectiveLicense"]`             | Custom relationship with `relationshipType: other` and `comment: hasEffectiveLicense`     |
+| Hash (deployable)       | `components[].externalReferences[type="distribution"].hashes[alg="SHA-512"]` | `software_File.verifiedUsing` via `hasDistributionArtifact` relationship                  |
+| Dependency completeness | `compositions[].aggregate` (complete/incomplete/unknown)                     | `Relationship.completeness` (complete/incomplete/noAssertion)                             |
+
+**Notes:**
+
+- BSI requires **SHA-512** specifically for the deployable component hash
+- The BSI property taxonomy uses the `bsi:` namespace prefix for CycloneDX properties
+- For detailed JSON examples, see [BSI TR-03183-2 Section 8.2](https://bsi.bund.de/dok/TR-03183-en)
+
+---
+
 ## Related Pages
 
+- [EU CRA Requirements]({{ site.url }}/compliance/eu-cra/) - CRA SBOM requirements with BSI TR-03183-2 specifications
 - [CLE: Common Lifecycle Enumeration]({{ site.url }}/compliance/cle/) - Standard for machine-readable lifecycle events
 - [CISA Framing Document]({{ site.url }}/compliance/cisa-framing/) - Authoritative source for baseline attribute definitions
 - [NTIA Minimum Elements]({{ site.url }}/compliance/ntia-minimum-elements/) - US baseline for SBOM data fields
