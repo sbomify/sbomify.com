@@ -102,11 +102,11 @@ The sbomify API integration now extracts organizational data from the contact_pr
 
 We have updated lifecycle properties to use the official CycloneDX taxonomy. If you are using lifecycle data in your SBOMs, the property names have changed:
 
-| Old Property | New Property |
-|--------------|--------------|
+| Old Property      | New Property                                  |
+| ----------------- | --------------------------------------------- |
 | `cle:releaseDate` | `cdx:lifecycle:milestone:generalAvailability` |
-| `cle:eos` | `cdx:lifecycle:milestone:endOfSupport` |
-| `cle:eol` | `cdx:lifecycle:milestone:endOfLife` |
+| `cle:eos`         | `cdx:lifecycle:milestone:endOfSupport`        |
+| `cle:eol`         | `cdx:lifecycle:milestone:endOfLife`           |
 
 This aligns with the CycloneDX specification and improves interoperability with other tools.
 
