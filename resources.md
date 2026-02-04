@@ -19,6 +19,16 @@ For step-by-step guides on generating SBOMs for specific languages and platforms
 
 ## Video Resources
 
+### CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation
+
+{% include components/video-embed-native.html
+video_url="https://video.fosdem.org/2026/ud2208/UYTGWA-sbom-generation.av1.webm"
+title="CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation"
+description="A four-phase SBOM generation model addressing the EU's Cyber Resilience Act requirements, covering authoring, augmenting, enriching, and signing SBOMs to exceed minimal compliance standards."
+%}
+
+See also the [FOSDEM schedule page](https://fosdem.org/2026/schedule/event/UYTGWA-sbom-generation/) for more details.
+
 ### Introduction to SBOMs: sbomify at Ubuntu Engineering Sprint
 
 {% include components/video-embed.html
