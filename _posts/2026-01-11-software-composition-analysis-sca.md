@@ -4,6 +4,7 @@ title: "Software Composition Analysis (SCA): What It Is and How SBOMs Fit In"
 description: "Learn what software composition analysis is, how SCA tools work, how SCA compares to SAST and DAST, and how SBOMs complement SCA for full supply chain visibility."
 category: education
 tags: [sca, security, vulnerability, sbom]
+tldr: "Software Composition Analysis (SCA) identifies open source components in your codebase and checks them for known vulnerabilities and license issues. SBOMs complement SCA by providing a standardized, shareable inventory that feeds into continuous monitoring and compliance workflows."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -23,9 +24,9 @@ SCA tools automate the process of identifying these components and their associa
 
 The core functions of SCA are:
 
-1. **Component identification.** Scanning source code, dependency files, and sometimes binaries to produce a complete inventory of third-party components, including [transitive dependencies]({{ site.url }}/2026/03/24/what-is-a-dependency-in-software/) — the dependencies of your dependencies.
-2. **Vulnerability detection.** Matching identified components against vulnerability databases to flag known [CVEs]({{ site.url }}/2026/02/13/cve-vulnerability-explained/).
-3. **License compliance.** Identifying the license of each component and flagging potential conflicts or compliance obligations, such as [GPL copyleft requirements]({{ site.url }}/2026/02/17/gpl-license-guide/).
+1. **Component identification.** Scanning source code, dependency files, and sometimes binaries to produce a complete inventory of third-party components, including [transitive dependencies]({{ site.url }}/2026/01/29/what-is-a-dependency-in-software/) — the dependencies of your dependencies.
+2. **Vulnerability detection.** Matching identified components against vulnerability databases to flag known [CVEs]({{ site.url }}/2025/12/18/cve-vulnerability-explained/).
+3. **License compliance.** Identifying the license of each component and flagging potential conflicts or compliance obligations, such as [GPL copyleft requirements]({{ site.url }}/2025/12/22/gpl-license-guide/).
 4. **Policy enforcement.** Allowing organizations to define rules (e.g., "block any component with a critical CVE" or "reject AGPL-licensed dependencies") and enforce them in CI/CD pipelines.
 
 ## How SCA Tools Work
@@ -50,7 +51,7 @@ Advanced SCA tools resolve the full dependency tree, including transitive depend
 
 ## SCA vs. SAST vs. DAST
 
-SCA is one of several application security testing approaches. Each addresses different risk categories and operates at different points in the [software development life cycle]({{ site.url }}/2026/02/10/software-development-life-cycle-sdlc-sbom-integration/).
+SCA is one of several application security testing approaches. Each addresses different risk categories and operates at different points in the [software development life cycle]({{ site.url }}/2025/12/15/software-development-life-cycle-sdlc-sbom-integration/).
 
 | Aspect                  | SCA                                                       | SAST                                       | DAST                                             |
 | ----------------------- | --------------------------------------------------------- | ------------------------------------------ | ------------------------------------------------ |
@@ -95,11 +96,11 @@ SCA tools and [SBOMs]({{ site.url }}/what-is-sbom/) are closely related but serv
 
 ### SCA Generates SBOMs
 
-Many SCA tools produce SBOMs as an output of their analysis. Tools like [Syft](https://github.com/anchore/syft) and [Trivy](https://github.com/aquasecurity/trivy) generate SBOMs in standard formats ([CycloneDX](https://cyclonedx.org/) or [SPDX](https://spdx.dev/)) that document every component they identify. In this sense, SCA is one of the primary methods for [SBOM generation]({{ site.url }}/guides/).
+Many SCA tools produce SBOMs as an output of their analysis. The [sbomify GitHub Action](https://github.com/sbomify/github-action/) generates SBOMs and automatically enriches them with license, hash, and lifecycle metadata from 11+ data sources. Standalone tools like [Syft](https://github.com/anchore/syft) and [Trivy](https://github.com/aquasecurity/trivy) also generate SBOMs in standard formats ([CycloneDX](https://cyclonedx.org/) or [SPDX](https://spdx.dev/)). In this sense, SCA is one of the primary methods for [SBOM generation]({{ site.url }}/guides/).
 
 ### SBOMs Enable Continuous SCA
 
-A generated SBOM can be ingested by vulnerability monitoring platforms like OWASP Dependency-Track for continuous analysis. Instead of re-scanning your entire codebase every time a new CVE is published, the platform matches new vulnerabilities against your existing SBOM inventory. This is particularly valuable for monitoring production deployments where source code may not be readily accessible.
+A generated SBOM can be ingested by management platforms like [sbomify](https://sbomify.com) or [OWASP Dependency-Track](https://dependencytrack.org/) for continuous analysis. Instead of re-scanning your entire codebase every time a new CVE is published, the platform matches new vulnerabilities against your existing SBOM inventory. This is particularly valuable for monitoring production deployments where source code may not be readily accessible.
 
 ### SBOMs Go Beyond SCA
 
@@ -115,7 +116,7 @@ For organizations building a security program, SCA tools are the engine and SBOM
 
 1. **Integrate SCA into CI/CD.** Run SCA scans on every build and pull request. Catching vulnerable dependencies before they reach production is far less costly than remediating them after deployment.
 
-2. **Monitor continuously, not just at build time.** New vulnerabilities are disclosed daily. Use SBOM-based monitoring with tools like [OWASP Dependency-Track](https://dependencytrack.org/) to catch newly disclosed CVEs in your already-deployed components.
+2. **Monitor continuously, not just at build time.** New vulnerabilities are disclosed daily. Use SBOM-based monitoring with platforms like [sbomify](https://sbomify.com) or [OWASP Dependency-Track](https://dependencytrack.org/) to catch newly disclosed CVEs in your already-deployed components.
 
 3. **Resolve the full dependency tree.** Ensure your SCA tool analyzes transitive dependencies, not just direct ones. The majority of vulnerable components in most projects are transitive.
 
@@ -123,7 +124,7 @@ For organizations building a security program, SCA tools are the engine and SBOM
 
 5. **Combine SCA with SAST and DAST.** SCA only finds known vulnerabilities in third-party code. Pair it with SAST for your own code and DAST for runtime testing to cover all three risk categories.
 
-6. **Generate SBOMs from SCA output.** Use your SCA tool's SBOM generation capability to produce machine-readable component inventories in [CycloneDX or SPDX format]({{ site.url }}/2026/03/08/sbom-formats-cyclonedx-vs-spdx/). These SBOMs serve both security monitoring and compliance purposes.
+6. **Generate SBOMs from SCA output.** Use your SCA tool's SBOM generation capability to produce machine-readable component inventories in [CycloneDX or SPDX format]({{ site.url }}/2026/01/15/sbom-formats-cyclonedx-vs-spdx/). These SBOMs serve both security monitoring and compliance purposes.
 
 ## Frequently Asked Questions
 

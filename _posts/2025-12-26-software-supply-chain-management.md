@@ -4,6 +4,7 @@ title: "Software Supply Chain Management: Risks, Best Practices, and SBOM Integr
 description: "Learn what software supply chain management is, how attacks like Log4Shell and XZ Utils exploit it, and how SBOMs provide visibility and risk reduction."
 category: education
 tags: [supply-chain, security, sbom, risk-management]
+tldr: "Software supply chain management covers the processes, tools, and policies used to control the components flowing into your software. High-profile attacks like SolarWinds and Log4Shell show why visibility matters — SBOMs provide the component inventory that makes supply chain risk management actionable."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -86,9 +87,9 @@ An [SBOM]({{ site.url }}/what-is-sbom/) is the foundational tool for software su
 
 1. **Component visibility.** SBOMs provide a complete inventory of every library, framework, and module in your application, including transitive dependencies that developers may not be aware of.
 
-2. **Vulnerability identification.** Once you have an SBOM, tools like [Grype](https://github.com/anchore/grype) and [OWASP Dependency-Track](https://dependencytrack.org/) can continuously match your components against vulnerability databases like the [NVD](https://nvd.nist.gov/) and [CISA KEV catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog).
+2. **Vulnerability identification.** Once you have an SBOM, platforms like [sbomify](https://sbomify.com) and [OWASP Dependency-Track](https://dependencytrack.org/) can continuously match your components against vulnerability databases like the [NVD](https://nvd.nist.gov/) and [CISA KEV catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog).
 
-3. **License compliance.** SBOMs document the license of each component, enabling automated detection of copyleft or restrictive licenses that may create legal obligations. See our [GPL license guide]({{ site.url }}/2026/02/17/gpl-license-guide/) for details on copyleft compliance.
+3. **License compliance.** SBOMs document the license of each component, enabling automated detection of copyleft or restrictive licenses that may create legal obligations. See our [GPL license guide]({{ site.url }}/2025/12/22/gpl-license-guide/) for details on copyleft compliance.
 
 4. **Incident response.** When a new vulnerability is disclosed, SBOMs allow you to immediately determine which of your products are affected, drastically reducing response time.
 

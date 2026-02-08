@@ -4,6 +4,7 @@ title: "What Is a Dependency in Software? A Beginner's Guide"
 description: "Learn what software dependencies are, the difference between direct and transitive dependencies, how dependency trees work, and how SBOMs document them."
 category: education
 tags: [dependencies, security, sbom, supply-chain]
+tldr: "A dependency is any external component your software relies on to function — from direct imports to deeply nested transitive packages. SBOMs document the full dependency graph, making it possible to track vulnerabilities and license obligations across every layer."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -61,7 +62,7 @@ Dependencies are the primary attack surface for most applications. Several high-
 
 ### Vulnerable Dependencies
 
-The [Log4Shell vulnerability](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) ([CVE-2021-44228]({{ site.url }}/2026/02/13/cve-vulnerability-explained/)) in the Apache Log4j logging library affected millions of Java applications. Many organizations did not know they used Log4j because it was a transitive dependency — pulled in by frameworks and libraries they did depend on directly.
+The [Log4Shell vulnerability](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) ([CVE-2021-44228]({{ site.url }}/2025/12/18/cve-vulnerability-explained/)) in the Apache Log4j logging library affected millions of Java applications. Many organizations did not know they used Log4j because it was a transitive dependency — pulled in by frameworks and libraries they did depend on directly.
 
 ### Compromised Dependencies
 
@@ -69,13 +70,13 @@ The [XZ Utils backdoor](https://nvd.nist.gov/vuln/detail/CVE-2024-3094) demonstr
 
 ### Abandoned Dependencies
 
-Dependencies that are no longer maintained represent a growing risk. When a [CVE]({{ site.url }}/2026/02/13/cve-vulnerability-explained/) is found in an unmaintained package, there may be no one to produce a patch. The component stays vulnerable indefinitely unless consumers fork it or find an alternative.
+Dependencies that are no longer maintained represent a growing risk. When a [CVE]({{ site.url }}/2025/12/18/cve-vulnerability-explained/) is found in an unmaintained package, there may be no one to produce a patch. The component stays vulnerable indefinitely unless consumers fork it or find an alternative.
 
 ### Dependency Confusion
 
 Dependency confusion attacks exploit the way package managers resolve names. An attacker publishes a malicious package to a public registry with the same name as a private internal package. If the package manager checks the public registry first (or alongside) the private one, it may install the attacker's package instead.
 
-For a deeper discussion of supply chain attacks, see our [software supply chain management guide]({{ site.url }}/2026/02/20/software-supply-chain-management/).
+For a deeper discussion of supply chain attacks, see our [software supply chain management guide]({{ site.url }}/2025/12/26/software-supply-chain-management/).
 
 ## Lock Files
 
@@ -100,13 +101,13 @@ A [Software Bill of Materials]({{ site.url }}/what-is-sbom/) provides a complete
 
 1. **Full visibility.** An SBOM documents every package in the dependency tree, not just the direct dependencies listed in your manifest file. This is the only reliable way to know everything running in your application.
 
-2. **Vulnerability matching.** Once you have an SBOM, tools like [Grype](https://github.com/anchore/grype), [OWASP Dependency-Track](https://dependencytrack.org/), and [OSV-Scanner](https://google.github.io/osv-scanner/) can match every component against vulnerability databases like the [NVD](https://nvd.nist.gov/) and the [CISA KEV catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog). See our [SBOM scanning guide]({{ site.url }}/2026/03/28/sbom-scanning-vulnerability-detection/) for details.
+2. **Vulnerability matching.** Once you have an SBOM, platforms like [sbomify](https://sbomify.com) can continuously monitor every component against vulnerability databases. CLI tools like [Grype](https://github.com/anchore/grype) and [OSV-Scanner](https://google.github.io/osv-scanner/) provide point-in-time scanning, while [OWASP Dependency-Track](https://dependencytrack.org/) offers standalone continuous monitoring. See our [SBOM scanning guide]({{ site.url }}/2026/02/01/sbom-scanning-vulnerability-detection/) for details.
 
 3. **Dependency relationship mapping.** Both [CycloneDX](https://cyclonedx.org/) and [SPDX](https://spdx.dev/) support dependency relationship data, documenting which components depend on which others. This lets you trace the path from a vulnerable transitive dependency back to the direct dependency that brought it in.
 
-4. **License tracking.** Each dependency carries a license. SBOMs document these licenses, enabling automated compliance checking. A single [GPL-licensed]({{ site.url }}/2026/02/17/gpl-license-guide/) transitive dependency can trigger copyleft obligations for your entire application.
+4. **License tracking.** Each dependency carries a license. SBOMs document these licenses, enabling automated compliance checking. A single [GPL-licensed]({{ site.url }}/2025/12/22/gpl-license-guide/) transitive dependency can trigger copyleft obligations for your entire application.
 
-SBOM generation tools like [Syft](https://github.com/anchore/syft) and [Trivy](https://github.com/aquasecurity/trivy) analyze lock files and build artifacts to capture the full dependency tree. For language-specific SBOM generation instructions, see our [SBOM guides]({{ site.url }}/guides/).
+SBOM generation tools like the [sbomify GitHub Action](https://github.com/sbomify/github-action/), [Syft](https://github.com/anchore/syft), and [Trivy](https://github.com/aquasecurity/trivy) analyze lock files and build artifacts to capture the full dependency tree. For language-specific SBOM generation instructions, see our [SBOM guides]({{ site.url }}/guides/).
 
 ## Best Practices
 
@@ -116,9 +117,9 @@ SBOM generation tools like [Syft](https://github.com/anchore/syft) and [Trivy](h
 
 3. **Minimize your dependency footprint.** Every dependency is a potential risk vector. Before adding a new package, evaluate whether the functionality justifies the added surface area. Prefer well-maintained libraries with active security response processes.
 
-4. **Generate and monitor SBOMs.** Automate SBOM generation in your CI/CD pipeline and monitor SBOMs continuously against vulnerability databases. This catches newly disclosed CVEs in your existing dependencies. See our [SBOM management guide]({{ site.url }}/2026/03/12/sbom-management-best-practices/).
+4. **Generate and monitor SBOMs.** Automate SBOM generation in your CI/CD pipeline and monitor SBOMs continuously against vulnerability databases. This catches newly disclosed CVEs in your existing dependencies. See our [SBOM management guide]({{ site.url }}/2026/01/18/sbom-management-best-practices/).
 
-5. **Keep dependencies up to date.** Apply security updates promptly, especially for dependencies listed in the [CISA KEV catalog]({{ site.url }}/2026/02/23/what-is-kev-cisa-known-exploited-vulnerabilities/). Use tools like Dependabot or Renovate to automate update pull requests.
+5. **Keep dependencies up to date.** Apply security updates promptly, especially for dependencies listed in the [CISA KEV catalog]({{ site.url }}/2025/12/30/what-is-kev-cisa-known-exploited-vulnerabilities/). Use tools like Dependabot or Renovate to automate update pull requests.
 
 6. **Review dependency changes.** Treat dependency updates in pull requests with the same scrutiny as code changes. A bumped version may introduce new transitive dependencies, change licenses, or include unexpected modifications.
 

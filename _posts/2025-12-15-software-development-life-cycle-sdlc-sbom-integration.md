@@ -4,6 +4,7 @@ title: "Software Development Life Cycle (SDLC): A Complete Guide"
 description: "Learn what the Software Development Life Cycle (SDLC) is, its phases and models, and how SBOMs integrate into each stage for security and compliance."
 category: education
 tags: [sdlc, security, compliance, devsecops]
+tldr: "The Software Development Life Cycle (SDLC) defines the phases software goes through from planning to retirement. Integrating SBOMs and security checks at each phase — especially during build and deployment — catches vulnerabilities early and satisfies compliance frameworks like the EU CRA and EO 14028."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -37,7 +38,7 @@ Architects and senior developers translate requirements into a technical bluepri
 
 ### 3. Implementation (Coding)
 
-Developers write the actual source code based on the design specifications. This phase typically involves selecting libraries, frameworks, and third-party components. These [dependency]({{ site.url }}/2026/03/24/what-is-a-dependency-in-software/) choices directly impact the [software supply chain]({{ site.url }}/2026/02/20/software-supply-chain-management/) and are the foundation of what an [SBOM]({{ site.url }}/what-is-sbom/) will eventually document.
+Developers write the actual source code based on the design specifications. This phase typically involves selecting libraries, frameworks, and third-party components. These [dependency]({{ site.url }}/2026/01/29/what-is-a-dependency-in-software/) choices directly impact the [software supply chain]({{ site.url }}/2025/12/26/software-supply-chain-management/) and are the foundation of what an [SBOM]({{ site.url }}/what-is-sbom/) will eventually document.
 
 ### 4. Testing
 
@@ -75,7 +76,7 @@ The Secure Software Development Life Cycle (SSDLC or Secure SDLC) integrates sec
 - **Planning:** Threat modeling, security requirements definition
 - **Design:** Security architecture review, attack surface analysis
 - **Implementation:** Secure coding standards, dependency management, SBOM generation
-- **Testing:** Static Application Security Testing (SAST), Dynamic Application Security Testing (DAST), [Software Composition Analysis (SCA)]({{ site.url }}/2026/03/05/software-composition-analysis-sca/)
+- **Testing:** Static Application Security Testing (SAST), Dynamic Application Security Testing (DAST), [Software Composition Analysis (SCA)]({{ site.url }}/2026/01/11/software-composition-analysis-sca/)
 - **Deployment:** Configuration hardening, secrets management, SBOM distribution
 - **Maintenance:** Vulnerability monitoring, patch management, SBOM updates
 
@@ -91,7 +92,7 @@ When developers add dependencies — open source libraries, frameworks, and pack
 
 ### During Testing
 
-SBOMs enable automated [vulnerability scanning]({{ site.url }}/2026/03/28/sbom-scanning-vulnerability-detection/). Once you have a complete inventory of components, tools like [Grype](https://github.com/anchore/grype) and [OWASP Dependency-Track](https://dependencytrack.org/) can cross-reference your SBOM against known vulnerability databases such as the [National Vulnerability Database](https://nvd.nist.gov/) (NVD) and [OSV](https://osv.dev/).
+SBOMs enable automated [vulnerability scanning]({{ site.url }}/2026/02/01/sbom-scanning-vulnerability-detection/). Once you have a complete inventory of components, platforms like [sbomify](https://sbomify.com) can continuously monitor your SBOMs against vulnerability databases. Standalone tools like [Grype](https://github.com/anchore/grype) and [OWASP Dependency-Track](https://dependencytrack.org/) can also cross-reference your SBOM against the [National Vulnerability Database](https://nvd.nist.gov/) (NVD) and [OSV](https://osv.dev/).
 
 ### During Deployment
 

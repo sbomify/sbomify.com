@@ -339,6 +339,39 @@ a.button {
     }
   }
 
+  .tldr {
+    margin: 0 0 rem(32px) 0;
+    padding: rem(20px) rem(24px);
+    background: linear-gradient(135deg, rgba(138, 125, 255, 0.08) 0%, rgba(138, 125, 255, 0.03) 100%);
+    border-left: 4px solid #8A7DFF;
+    border-radius: 0 8px 8px 0;
+
+    @media (min-width: $breakpoint-md) {
+      padding: rem(24px) rem(32px);
+    }
+
+    .tldr-label {
+      display: block;
+      font-size: rem(12px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #8A7DFF;
+      margin-bottom: rem(8px);
+    }
+
+    p {
+      margin: 0;
+      font-size: rem(16px);
+      line-height: 1.7;
+      color: $text-primary;
+
+      @media (min-width: $breakpoint-md) {
+        font-size: rem(18px);
+      }
+    }
+  }
+
   code {
     background: #f1f5f9;
     color: #334155;

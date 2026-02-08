@@ -4,6 +4,7 @@ title: "SBOM Formats Compared: CycloneDX vs SPDX"
 description: "A practical comparison of CycloneDX and SPDX SBOM formats covering history, governance, field differences, tooling, compliance preferences, and when to use which."
 category: education
 tags: [sbom, cyclonedx, spdx, formats]
+tldr: "CycloneDX and SPDX are the two industry-standard SBOM formats. CycloneDX is security-focused with a compact model and native vulnerability support; SPDX is compliance-focused with deep license documentation. Most modern tools support both, and major compliance frameworks accept either."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -99,7 +100,7 @@ A minimal SBOM documenting a single component in each format:
   "specVersion": "1.6",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-03-08T12:00:00Z",
+    "timestamp": "2026-01-15T12:00:00Z",
     "component": {
       "type": "application",
       "name": "my-application",
@@ -128,7 +129,7 @@ A minimal SBOM documenting a single component in each format:
   "name": "my-application",
   "documentNamespace": "https://example.com/my-application-1.0.0",
   "creationInfo": {
-    "created": "2026-03-08T12:00:00Z",
+    "created": "2026-01-15T12:00:00Z",
     "creators": ["Tool: example-tool-1.0"]
   },
   "packages": [
@@ -174,21 +175,22 @@ Both formats have broad tooling support. Most modern SBOM tools support both for
 
 ### Generation Tools
 
-| Tool                                                               | CycloneDX | SPDX | Notes                                    |
-| ------------------------------------------------------------------ | --------- | ---- | ---------------------------------------- |
-| [Syft](https://github.com/anchore/syft)                            | Yes       | Yes  | Multi-ecosystem, container support       |
-| [Trivy](https://github.com/aquasecurity/trivy)                     | Yes       | Yes  | Vulnerability scanning + SBOM generation |
-| [cdxgen](https://github.com/CycloneDX/cdxgen)                      | Yes       | No   | CycloneDX-native, broad language support |
-| [Microsoft SBOM Tool](https://github.com/microsoft/sbom-tool)      | No        | Yes  | SPDX-native, CI/CD integration           |
-| [sbomify GitHub Action](https://github.com/sbomify/github-action/) | Yes       | Yes  | CI/CD pipeline integration               |
+| Tool                                                               | CycloneDX | SPDX | Notes                                                     |
+| ------------------------------------------------------------------ | --------- | ---- | --------------------------------------------------------- |
+| [sbomify GitHub Action](https://github.com/sbomify/github-action/) | Yes       | Yes  | Generation + enrichment + augmentation, CI/CD integration |
+| [Syft](https://github.com/anchore/syft)                            | Yes       | Yes  | Multi-ecosystem, container support                        |
+| [Trivy](https://github.com/aquasecurity/trivy)                     | Yes       | Yes  | Vulnerability scanning + SBOM generation                  |
+| [cdxgen](https://github.com/CycloneDX/cdxgen)                      | Yes       | No   | CycloneDX-native, broad language support                  |
+| [Microsoft SBOM Tool](https://github.com/microsoft/sbom-tool)      | No        | Yes  | SPDX-native, CI/CD integration                            |
 
-### Analysis Tools
+### Analysis and Management Tools
 
-| Tool                                                   | CycloneDX | SPDX | Notes                          |
-| ------------------------------------------------------ | --------- | ---- | ------------------------------ |
-| [Grype](https://github.com/anchore/grype)              | Yes       | Yes  | Vulnerability scanner          |
-| [OWASP Dependency-Track](https://dependencytrack.org/) | Yes       | Yes  | Continuous monitoring platform |
-| [OSV-Scanner](https://google.github.io/osv-scanner/)   | Yes       | Yes  | Google's vulnerability scanner |
+| Tool                                                   | CycloneDX | SPDX | Notes                                               |
+| ------------------------------------------------------ | --------- | ---- | --------------------------------------------------- |
+| [sbomify](https://sbomify.com)                         | Yes       | Yes  | Integrated management, monitoring, and distribution |
+| [Grype](https://github.com/anchore/grype)              | Yes       | Yes  | CLI vulnerability scanner                           |
+| [OWASP Dependency-Track](https://dependencytrack.org/) | Yes       | Yes  | Standalone monitoring platform                      |
+| [OSV-Scanner](https://google.github.io/osv-scanner/)   | Yes       | Yes  | Google's vulnerability scanner                      |
 
 For a comprehensive tool listing organized by lifecycle phase, see our [SBOM resources page]({{ site.url }}/resources/). For tool comparison and benchmarks, see the [sbom-benchmarks repository](https://github.com/sbomify/sbom-benchmarks).
 

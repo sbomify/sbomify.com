@@ -6,11 +6,15 @@ generate: "Generate" {
   ci: CI/CD\nPipeline {
     class: primary
     icon: node_modules/@tabler/icons/icons/outline/brand-github.svg
+    width: 140
+    height: 100
   }
 
   tool: SBOM Tool {
     class: highlight
     icon: node_modules/@tabler/icons/icons/outline/scan.svg
+    width: 130
+    height: 90
   }
 
   ci -> tool: build triggers {class: flow}
@@ -22,11 +26,15 @@ store: "Store" {
   sbom: SBOM\nRepository {
     class: highlight
     icon: node_modules/@tabler/icons/icons/outline/database.svg
+    width: 140
+    height: 100
   }
 
   version: Version\nTracking {
     class: primary
     icon: node_modules/@tabler/icons/icons/outline/clock.svg
+    width: 140
+    height: 100
   }
 }
 
@@ -36,11 +44,15 @@ monitor: "Monitor" {
   vuln: Vulnerability\nDatabases {
     class: accent
     icon: node_modules/@tabler/icons/icons/outline/alert-triangle.svg
+    width: 150
+    height: 100
   }
 
   license: License\nCompliance {
     class: primary
     icon: node_modules/@tabler/icons/icons/outline/certificate.svg
+    width: 150
+    height: 100
   }
 }
 
@@ -50,11 +62,15 @@ act: "Act" {
   alert: Alert &\nTriage {
     class: accent
     icon: node_modules/@tabler/icons/icons/outline/bell-ringing.svg
+    width: 130
+    height: 100
   }
 
   fix: Remediate {
     class: highlight
     icon: node_modules/@tabler/icons/icons/outline/check.svg
+    width: 130
+    height: 90
   }
 }
 

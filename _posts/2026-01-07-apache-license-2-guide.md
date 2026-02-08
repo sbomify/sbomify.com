@@ -4,6 +4,7 @@ title: "Apache License 2.0: What It Is, How It Works, and What It Means for Your
 description: "Understand the Apache License 2.0, its patent grant, attribution requirements, NOTICE file, compatibility with GPL, and how SBOMs track compliance."
 category: education
 tags: [apache, licensing, open-source, compliance]
+tldr: "The Apache License 2.0 is a permissive open source license that includes an explicit patent grant and requires attribution through NOTICE files. It is compatible with most other licenses, and SBOMs help ensure your projects track Apache-licensed components and their attribution requirements."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -45,7 +46,7 @@ The license requires:
 
 ### What Is NOT Required
 
-Unlike copyleft licenses such as the [GPL]({{ site.url }}/2026/02/17/gpl-license-guide/), the Apache License 2.0 does **not** require:
+Unlike copyleft licenses such as the [GPL]({{ site.url }}/2025/12/22/gpl-license-guide/), the Apache License 2.0 does **not** require:
 
 - Distributing your source code (you can distribute binaries only)
 - Licensing your derivative works under the Apache License
@@ -129,7 +130,7 @@ A [Software Bill of Materials]({{ site.url }}/what-is-sbom/) documents every com
 
 Both [CycloneDX](https://cyclonedx.org/) and [SPDX](https://spdx.dev/) support standardized license fields. The [CISA minimum elements draft]({{ site.url }}/compliance/cisa-minimum-elements/) includes license as a recommended SBOM field, recognizing that license information is increasingly expected in SBOMs.
 
-To start generating SBOMs with license data, see our [SBOM generation guides]({{ site.url }}/guides/).
+The [sbomify GitHub Action](https://github.com/sbomify/github-action/) automatically enriches SBOMs with license data from multiple sources, making it straightforward to identify all Apache-licensed components in your dependency tree. For language-specific instructions, see our [SBOM generation guides]({{ site.url }}/guides/).
 
 ## Frequently Asked Questions
 

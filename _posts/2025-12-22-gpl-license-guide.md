@@ -4,6 +4,7 @@ title: "The GPL License: A Comprehensive Guide to the GNU General Public License
 description: "Understand the GPL license, including GPL v2 vs v3, copyleft obligations, LGPL, AGPL, commercial use, and how SBOMs track GPL compliance."
 category: education
 tags: [gpl, licensing, open-source, compliance]
+tldr: "The GNU General Public License (GPL) is a copyleft license that requires derivative works to be distributed under the same terms. Understanding GPL v2 vs v3, LGPL, and AGPL obligations is critical for compliance — and SBOMs help track which components carry GPL requirements."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -146,7 +147,7 @@ A [Software Bill of Materials]({{ site.url }}/what-is-sbom/) plays a critical ro
 
 Both [CycloneDX](https://cyclonedx.org/) and [SPDX](https://spdx.dev/) (which originated as a license documentation format) include standardized license fields. SPDX license expressions (e.g., `GPL-2.0-only`, `GPL-3.0-or-later`, `LGPL-2.1-or-later`) provide machine-readable license identifiers that make automated compliance checking possible.
 
-To start generating SBOMs with license data for your projects, see our [SBOM generation guides]({{ site.url }}/guides/).
+The [sbomify GitHub Action](https://github.com/sbomify/github-action/) automatically enriches SBOMs with license data from multiple sources (including its LicenseDB covering 28 Linux distro versions), making GPL identification reliable even for system-level packages. For language-specific instructions, see our [SBOM generation guides]({{ site.url }}/guides/).
 
 ## GPL License Comparison Table
 

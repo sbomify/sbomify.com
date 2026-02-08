@@ -4,6 +4,7 @@ title: "Container Security: Best Practices for Securing Docker and Kubernetes"
 description: "A comprehensive guide to container security covering image scanning, runtime protection, network policies, and how SBOMs provide component visibility."
 category: education
 tags: [container, docker, kubernetes, security]
+tldr: "Container security requires a layered approach: minimal base images, vulnerability scanning, least-privilege runtime, and network policies. Generating separate SBOMs for the base image and application layers — rather than one monolithic SBOM — gives you targeted visibility for vulnerability triage and compliance audits."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -13,7 +14,7 @@ author:
 
 Container security is the practice of protecting containerized applications and their infrastructure throughout the entire lifecycle — from building container images through deployment and runtime operations. Containers package applications with their dependencies into isolated units, but this isolation does not automatically equal security. Every layer of a container image, from the base operating system to application dependencies, represents a potential attack surface that must be managed.
 
-![Container security layers from base image through application to security controls](/assets/images/d2/container-security-layers.svg)
+![Container image layers with separate SBOMs feeding into security controls](/assets/images/d2/container-security-layers.svg)
 
 ## What Is Container Security?
 
@@ -52,13 +53,17 @@ Key scanning tools include:
 
 Scanning should happen at multiple points: during the CI/CD build, before images are pushed to a registry, and continuously against images already in production (since new vulnerabilities are disclosed daily).
 
-### Container SBOMs
+### Container SBOMs: Separate Layers, Separate SBOMs
 
-A container SBOM documents every component inside a container image — OS packages, language-specific libraries, and application dependencies. This is distinct from an application SBOM that only covers your code's direct dependencies; a container SBOM captures the full stack.
+A containerized application has two distinct layers with different component profiles: the **base image layer** (OS packages, system libraries) and the **application layer** (your code's dependencies from lock files). Rather than combining everything into a single monolithic SBOM, the best practice is to generate **separate SBOMs for each layer** and organize them hierarchically.
 
-Tools like [Syft](https://github.com/anchore/syft) and [Trivy](https://github.com/aquasecurity/trivy) can generate SBOMs directly from container images. Docker itself includes built-in SBOM generation via `docker sbom`. For step-by-step instructions, see our [SBOM Generation Guide for Docker and Containers]({{ site.url }}/guides/docker/).
+This separation matters for several reasons:
 
-Container SBOMs are particularly valuable because they capture components that might not appear in your source code repository. A Debian base image, for instance, includes system libraries like glibc, openssl, and zlib that your application uses but that are not listed in any application-level dependency file.
+- **Different update cadences.** Base image packages change when you rebuild with a new base image; application dependencies change when you update your lock file. Separate SBOMs let you track each independently.
+- **Different vulnerability profiles.** A glibc vulnerability in the base image is a different remediation path than a vulnerability in an npm package. Separate SBOMs make triage clearer.
+- **Cleaner compliance.** Compliance reviewers can evaluate OS-level and application-level components independently, with the correct tool and context for each.
+
+The [sbomify GitHub Action](https://github.com/sbomify/github-action/) supports this workflow directly — generate an Application SBOM from your lock file and a Container SBOM from the built image, then organize both under a single product using sbomify's [Product → Project → Component hierarchy]({{ site.url }}/features/sbom-hierarchy/). For step-by-step instructions, see our [Docker SBOM guide]({{ site.url }}/guides/docker/).
 
 ## Runtime Security
 
@@ -125,18 +130,18 @@ Ensure that only trusted, scanned images run in your cluster:
 
 SBOMs play a central role in container security by providing the component visibility needed for effective vulnerability management.
 
-### Why Container SBOMs Matter
+### Why Separate Container SBOMs Matter
 
-A typical container image may contain hundreds of packages across multiple layers. Without an SBOM, identifying whether a newly disclosed vulnerability affects your containers requires manual investigation of each image — a process that does not scale.
+A typical container image may contain hundreds of packages across multiple layers. Without SBOMs, identifying whether a newly disclosed vulnerability affects your containers requires manual investigation of each image — a process that does not scale.
 
-With container SBOMs:
+With separate SBOMs for each container layer, organized in a [hierarchical structure]({{ site.url }}/features/sbom-hierarchy/):
 
-- **[Vulnerability scanning]({{ site.url }}/2026/03/28/sbom-scanning-vulnerability-detection/) becomes automated.** Match SBOM components against the [NVD](https://nvd.nist.gov/), [OSV](https://osv.dev/), and [CISA KEV catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) continuously.
-- **Incident response accelerates.** When a new critical [CVE]({{ site.url }}/2026/02/13/cve-vulnerability-explained/) is disclosed, query your SBOM repository to immediately identify affected images.
+- **[Vulnerability scanning]({{ site.url }}/2026/02/01/sbom-scanning-vulnerability-detection/) becomes targeted.** Match base image SBOMs against OS-level advisories and application SBOMs against language-specific vulnerability databases ([NVD](https://nvd.nist.gov/), [OSV](https://osv.dev/), [CISA KEV catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)).
+- **Incident response accelerates.** When a new critical [CVE]({{ site.url }}/2025/12/18/cve-vulnerability-explained/) is disclosed, query your SBOM repository to immediately identify affected images — and know whether the vulnerability is in the base image or your application dependencies.
 - **Compliance requirements are met.** The [EU CRA]({{ site.url }}/compliance/eu-cra/) and [EO 14028]({{ site.url }}/compliance/eo-14028/) require component documentation for software products, including containerized applications.
-- **Base image risk is visible.** SBOMs expose the full [dependency]({{ site.url }}/2026/03/24/what-is-a-dependency-in-software/) chain, including components inherited from base images that developers may not be aware of.
+- **Base image risk is visible.** Container SBOMs expose the [dependency]({{ site.url }}/2026/01/29/what-is-a-dependency-in-software/) chain inherited from base images that developers may not be aware of, kept separate from application-level components for clarity.
 
-For detailed instructions on generating SBOMs from container images, see our [Docker SBOM guide]({{ site.url }}/guides/docker/). For a broader overview of SBOM tools, see our [resources page]({{ site.url }}/resources/).
+For detailed instructions on generating separate SBOMs from container images, see our [Docker SBOM guide]({{ site.url }}/guides/docker/). For a broader overview of SBOM tools, see our [resources page]({{ site.url }}/resources/).
 
 ## Best Practices
 
@@ -144,7 +149,7 @@ For detailed instructions on generating SBOMs from container images, see our [Do
 
 2. **Use minimal base images.** Choose distroless or slim variants for production. Fewer packages means fewer vulnerabilities and a smaller attack surface.
 
-3. **Generate and maintain container SBOMs.** Automate SBOM generation as part of your image build pipeline. Store SBOMs alongside images in your registry for continuous vulnerability monitoring.
+3. **Generate separate SBOMs per layer.** Generate an application SBOM from your lock file and a container SBOM from the built image. Organize both under a single product in your [SBOM management platform]({{ site.url }}/2026/01/18/sbom-management-best-practices/) for continuous vulnerability monitoring.
 
 4. **Run containers as non-root.** Never run production containers as the root user. Configure security contexts to drop unnecessary capabilities and prevent privilege escalation.
 
@@ -168,7 +173,7 @@ Container images are scanned by analyzing their contents (OS packages, language 
 
 ### What is a container SBOM?
 
-A container SBOM is a Software Bill of Materials that documents every component inside a container image, including OS-level packages, system libraries, and application dependencies. Unlike application-level SBOMs that only cover your code's dependencies, container SBOMs capture the full stack. Tools like Syft and Trivy can generate container SBOMs from built images. See our [Docker SBOM guide]({{ site.url }}/guides/docker/) for detailed instructions.
+A container SBOM is a Software Bill of Materials generated from a built container image, documenting the OS-level packages and system libraries in the base image. Best practice is to generate this separately from your application SBOM (which covers your code's dependencies from lock files) and organize both under a product hierarchy. This separation keeps vulnerability triage and compliance clear. See our [Docker SBOM guide]({{ site.url }}/guides/docker/) for detailed instructions on generating separate SBOMs for each layer.
 
 ### How does Kubernetes improve container security?
 

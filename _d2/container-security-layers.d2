@@ -1,75 +1,67 @@
 direction: down
 
-Base Image: {
+Container: {
   class: group
-  label: "Base Image Layer"
+  label: "Container Image Layers"
 
-  OS Packages: {
+  Base: {
     class: primary
-    label: "OS Packages"
+    label: "Base Image"
     icon: node_modules/@tabler/icons/icons/outline/package.svg
   }
 
-  System Libs: {
-    class: primary
-    label: "System Libraries"
-    icon: node_modules/@tabler/icons/icons/outline/library.svg
-  }
-}
-
-Application: {
-  class: group
-  label: "Application Layer"
-
-  Dependencies: {
+  App: {
     class: accent
-    label: "App Dependencies"
-    icon: node_modules/@tabler/icons/icons/outline/git-branch.svg
-  }
-
-  Code: {
-    class: accent
-    label: "Application Code"
+    label: "Application"
     icon: node_modules/@tabler/icons/icons/outline/code.svg
   }
 }
 
-Security: {
+SBOMs: {
+  class: group
+  label: "Separate SBOMs per Layer"
+
+  Container SBOM: {
+    class: primary
+    icon: node_modules/@tabler/icons/icons/outline/file-text.svg
+  }
+
+  App SBOM: {
+    class: accent
+    label: "Application SBOM"
+    icon: node_modules/@tabler/icons/icons/outline/file-code-2.svg
+  }
+}
+
+Controls: {
   class: group
   label: "Security Controls"
-  direction: right
 
-  Image Scan: {
+  Scanning: {
     class: highlight
-    label: "Image Scanning\n+ SBOM"
+    label: "Vulnerability Scanning"
     icon: node_modules/@tabler/icons/icons/outline/shield-search.svg
   }
 
-  Runtime: {
+  Monitoring: {
     class: accent
-    label: "Runtime\nSecurity"
-    icon: node_modules/@tabler/icons/icons/outline/lock.svg
+    icon: node_modules/@tabler/icons/icons/outline/chart-line.svg
   }
 
-  Network: {
+  Compliance: {
     class: accent
-    label: "Network\nPolicies"
-    icon: node_modules/@tabler/icons/icons/outline/network.svg
-  }
-
-  Image Scan -> Runtime: {
-    class: flow-pink
-  }
-
-  Runtime -> Network: {
-    class: flow-pink
+    icon: node_modules/@tabler/icons/icons/outline/certificate.svg
   }
 }
 
-Base Image -> Application: {
+Container.Base -> SBOMs.Container SBOM: {
   class: flow
 }
 
-Application -> Security: "Secure at every layer" {
+Container.App -> SBOMs.App SBOM: {
+  class: flow-pink
+}
+
+SBOMs -> Controls: {
   class: flow-pink
 }

@@ -61,11 +61,11 @@ SBOMs are no longer optional; they are becoming a global standard for software t
 
 Want to go deeper? Explore these related topics:
 
-- **[SBOM Formats: CycloneDX vs SPDX]({{ site.url }}/2026/03/08/sbom-formats-cyclonedx-vs-spdx/)** - Detailed comparison of the two leading SBOM formats
-- **[SBOM Generation Tools Compared]({{ site.url }}/2026/03/20/sbom-generation-tools-comparison/)** - Overview of Syft, Trivy, cdxgen, and more
-- **[SBOM Management Best Practices]({{ site.url }}/2026/03/12/sbom-management-best-practices/)** - How to organize, monitor, and act on your SBOMs
-- **[The Role of SBOMs in Cybersecurity]({{ site.url }}/2026/04/05/sbom-cybersecurity-role/)** - How SBOMs strengthen vulnerability management and incident response
-- **[What Is a Dependency?]({{ site.url }}/2026/03/24/what-is-a-dependency-in-software/)** - Understanding the components that SBOMs document
+- **[SBOM Formats: CycloneDX vs SPDX]({{ site.url }}/2026/01/15/sbom-formats-cyclonedx-vs-spdx/)** - Detailed comparison of the two leading SBOM formats
+- **[SBOM Generation Tools Compared]({{ site.url }}/2026/01/26/sbom-generation-tools-comparison/)** - Overview of Syft, Trivy, cdxgen, and more
+- **[SBOM Management Best Practices]({{ site.url }}/2026/01/18/sbom-management-best-practices/)** - How to organize, monitor, and act on your SBOMs
+- **[The Role of SBOMs in Cybersecurity]({{ site.url }}/2026/02/08/sbom-cybersecurity-role/)** - How SBOMs strengthen vulnerability management and incident response
+- **[What Is a Dependency?]({{ site.url }}/2026/01/29/what-is-a-dependency-in-software/)** - Understanding the components that SBOMs document
 
 ### Frequently Asked Questions
 
@@ -79,7 +79,7 @@ An SBOM is a structured document that lists every component in a piece of softwa
 
 #### What format should an SBOM be in?
 
-The two industry-standard SBOM formats are [CycloneDX](https://cyclonedx.org/) (developed by OWASP) and [SPDX](https://spdx.dev/) (developed by the Linux Foundation). Both are widely accepted by compliance frameworks. See our [SBOM formats comparison]({{ site.url }}/2026/03/08/sbom-formats-cyclonedx-vs-spdx/) for a detailed guide.
+The two industry-standard SBOM formats are [CycloneDX](https://cyclonedx.org/) (developed by OWASP) and [SPDX](https://spdx.dev/) (developed by the Linux Foundation). Both are widely accepted by compliance frameworks. See our [SBOM formats comparison]({{ site.url }}/2026/01/15/sbom-formats-cyclonedx-vs-spdx/) for a detailed guide.
 
 ### Next Steps
 

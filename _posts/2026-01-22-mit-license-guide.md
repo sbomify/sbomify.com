@@ -4,6 +4,7 @@ title: "The MIT License: A Complete Guide for Developers"
 description: "Understand the MIT License — what it permits, what it requires, how it compares to BSD and Apache 2.0, and how SBOMs help track MIT license compliance."
 category: education
 tags: [mit, licensing, open-source, compliance]
+tldr: "The MIT License is the most popular open source license, allowing virtually unrestricted use, modification, and distribution with only an attribution requirement. SBOMs track MIT-licensed components across your dependency tree, ensuring attribution obligations are met at scale."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -80,7 +81,7 @@ The BSD 3-Clause License adds a "non-endorsement" clause: you may not use the na
 
 ### MIT vs. Apache 2.0
 
-The [Apache License 2.0]({{ site.url }}/2026/03/01/apache-license-2-guide/) is also permissive but includes two significant additions that the MIT License lacks:
+The [Apache License 2.0]({{ site.url }}/2026/01/07/apache-license-2-guide/) is also permissive but includes two significant additions that the MIT License lacks:
 
 1. **Explicit patent grant.** Apache 2.0 Section 3 grants users a patent license covering the contributor's contributions. The MIT License makes no mention of patents. While the broad language of the MIT License ("deal in the Software without restriction") may imply a patent license in some jurisdictions, this is not settled law.
 
@@ -88,7 +89,7 @@ The [Apache License 2.0]({{ site.url }}/2026/03/01/apache-license-2-guide/) is a
 
 3. **State changes requirement.** Apache 2.0 requires that modified files carry a prominent notice stating the changes. MIT has no such requirement.
 
-For a detailed comparison including GPL, see our [Apache License 2.0 guide]({{ site.url }}/2026/03/01/apache-license-2-guide/).
+For a detailed comparison including GPL, see our [Apache License 2.0 guide]({{ site.url }}/2026/01/07/apache-license-2-guide/).
 
 ### MIT vs. ISC License
 
@@ -96,7 +97,7 @@ The ISC License is a simplified rewrite of the MIT License. It removes the expli
 
 ## MIT License and Copyleft (GPL)
 
-The MIT License is compatible with copyleft licenses like the [GPL]({{ site.url }}/2026/02/17/gpl-license-guide/) — but only in one direction. MIT-licensed code can be included in a GPL-licensed project. The combined work is then licensed under the GPL. However, GPL-licensed code cannot be included in an MIT-licensed project, because the GPL requires that the entire combined work be distributed under the GPL.
+The MIT License is compatible with copyleft licenses like the [GPL]({{ site.url }}/2025/12/22/gpl-license-guide/) — but only in one direction. MIT-licensed code can be included in a GPL-licensed project. The combined work is then licensed under the GPL. However, GPL-licensed code cannot be included in an MIT-licensed project, because the GPL requires that the entire combined work be distributed under the GPL.
 
 | Combination                        | Result                                  | Permitted?             |
 | ---------------------------------- | --------------------------------------- | ---------------------- |
@@ -114,7 +115,7 @@ The MIT License is one of the most commercially friendly open source licenses. O
 - **No source disclosure.** You are not required to share your source code, even if you modify the MIT-licensed component.
 - **No license propagation.** Your proprietary code does not need to be licensed under MIT.
 - **Minimal compliance burden.** Including the license text in your distribution (typically in a NOTICES or THIRD-PARTY file) satisfies the only condition.
-- **No patent risk (with caveats).** While the MIT License does not include an explicit patent grant, its broad permission language is generally interpreted as an implied license. For maximum patent protection, consider [Apache 2.0]({{ site.url }}/2026/03/01/apache-license-2-guide/) instead.
+- **No patent risk (with caveats).** While the MIT License does not include an explicit patent grant, its broad permission language is generally interpreted as an implied license. For maximum patent protection, consider [Apache 2.0]({{ site.url }}/2026/01/07/apache-license-2-guide/) instead.
 
 The primary compliance risk with MIT is not the license itself but the volume. A typical web application may depend on hundreds of MIT-licensed packages. Each one requires its license text and copyright notice to be included in the distribution. Automated tooling — particularly SBOM-based compliance checking — is essential at this scale.
 
@@ -130,7 +131,7 @@ A [Software Bill of Materials]({{ site.url }}/what-is-sbom/) documents every com
 
 4. **Audit evidence.** SBOMs provide the documentation needed for license audits, M&A due diligence, and procurement assessments.
 
-Both [CycloneDX](https://cyclonedx.org/) and [SPDX](https://spdx.dev/) support standardized license fields. For a practical introduction to generating SBOMs with license data, see our [SBOM generation guides]({{ site.url }}/guides/).
+Both [CycloneDX](https://cyclonedx.org/) and [SPDX](https://spdx.dev/) support standardized license fields. The [sbomify GitHub Action](https://github.com/sbomify/github-action/) automatically enriches SBOMs with license data from multiple sources, making it practical to track MIT attribution requirements across hundreds of dependencies. For language-specific instructions, see our [SBOM generation guides]({{ site.url }}/guides/).
 
 For a broader overview of open source licenses, see our [guide to navigating the landscape of open source licenses]({{ site.url }}/2024/04/03/navigating-the-landscape-of-open-source-licenses/).
 
