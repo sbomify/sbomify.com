@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - master
+  schedule:
+    - cron: '0 5 * * *'
 jobs:
   deploy:
     runs-on: ubuntu-latest
