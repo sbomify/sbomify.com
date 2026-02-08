@@ -1,0 +1,75 @@
+direction: down
+
+Base Image: {
+  class: group
+  label: "Base Image Layer"
+
+  OS Packages: {
+    class: primary
+    label: "OS Packages"
+    icon: node_modules/@tabler/icons/icons/outline/package.svg
+  }
+
+  System Libs: {
+    class: primary
+    label: "System Libraries"
+    icon: node_modules/@tabler/icons/icons/outline/library.svg
+  }
+}
+
+Application: {
+  class: group
+  label: "Application Layer"
+
+  Dependencies: {
+    class: accent
+    label: "App Dependencies"
+    icon: node_modules/@tabler/icons/icons/outline/git-branch.svg
+  }
+
+  Code: {
+    class: accent
+    label: "Application Code"
+    icon: node_modules/@tabler/icons/icons/outline/code.svg
+  }
+}
+
+Security: {
+  class: group
+  label: "Security Controls"
+  direction: right
+
+  Image Scan: {
+    class: highlight
+    label: "Image Scanning\n+ SBOM"
+    icon: node_modules/@tabler/icons/icons/outline/shield-search.svg
+  }
+
+  Runtime: {
+    class: accent
+    label: "Runtime\nSecurity"
+    icon: node_modules/@tabler/icons/icons/outline/lock.svg
+  }
+
+  Network: {
+    class: accent
+    label: "Network\nPolicies"
+    icon: node_modules/@tabler/icons/icons/outline/network.svg
+  }
+
+  Image Scan -> Runtime: {
+    class: flow-pink
+  }
+
+  Runtime -> Network: {
+    class: flow-pink
+  }
+}
+
+Base Image -> Application: {
+  class: flow
+}
+
+Application -> Security: "Secure at every layer" {
+  class: flow-pink
+}

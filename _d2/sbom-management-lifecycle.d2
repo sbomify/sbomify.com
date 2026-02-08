@@ -1,0 +1,67 @@
+direction: right
+
+generate: "Generate" {
+  class: group
+
+  ci: CI/CD\nPipeline {
+    class: primary
+    icon: node_modules/@tabler/icons/icons/outline/brand-github.svg
+  }
+
+  tool: SBOM Tool {
+    class: highlight
+    icon: node_modules/@tabler/icons/icons/outline/scan.svg
+  }
+
+  ci -> tool: build triggers {class: flow}
+}
+
+store: "Store" {
+  class: group
+
+  sbom: SBOM\nRepository {
+    class: highlight
+    icon: node_modules/@tabler/icons/icons/outline/database.svg
+  }
+
+  version: Version\nTracking {
+    class: primary
+    icon: node_modules/@tabler/icons/icons/outline/clock.svg
+  }
+}
+
+monitor: "Monitor" {
+  class: group
+
+  vuln: Vulnerability\nDatabases {
+    class: accent
+    icon: node_modules/@tabler/icons/icons/outline/alert-triangle.svg
+  }
+
+  license: License\nCompliance {
+    class: primary
+    icon: node_modules/@tabler/icons/icons/outline/certificate.svg
+  }
+}
+
+act: "Act" {
+  class: group
+
+  alert: Alert &\nTriage {
+    class: accent
+    icon: node_modules/@tabler/icons/icons/outline/bell-ringing.svg
+  }
+
+  fix: Remediate {
+    class: highlight
+    icon: node_modules/@tabler/icons/icons/outline/check.svg
+  }
+}
+
+generate.tool -> store.sbom: store {class: flow}
+store.sbom -> store.version: {class: flow}
+store.sbom -> monitor.vuln: match {class: flow}
+store.sbom -> monitor.license: check {class: flow}
+monitor.vuln -> act.alert: notify {class: flow-pink}
+act.alert -> act.fix: prioritize {class: flow-pink}
+act.fix -> generate.ci: update & rebuild {class: flow-pink}

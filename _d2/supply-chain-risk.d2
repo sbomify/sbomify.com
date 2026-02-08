@@ -1,0 +1,72 @@
+direction: down
+
+Upstream: {
+  class: group
+  label: "Upstream Supply Chain"
+
+  Open Source: {
+    class: primary
+    label: "Open Source\nRepositories"
+    icon: node_modules/@tabler/icons/icons/outline/git-branch.svg
+  }
+
+  Package Registries: {
+    class: primary
+    label: "Package\nRegistries"
+    icon: node_modules/@tabler/icons/icons/outline/package.svg
+  }
+
+  Open Source -> Package Registries: {
+    class: flow
+  }
+}
+
+Build: {
+  class: group
+  label: "Build & Integration"
+
+  CI/CD: {
+    class: accent
+    label: "CI/CD Pipeline"
+    icon: node_modules/@tabler/icons/icons/outline/refresh.svg
+  }
+
+  SBOM Generation: {
+    class: highlight
+    label: "SBOM\nGeneration"
+    icon: node_modules/@tabler/icons/icons/outline/checklist.svg
+  }
+
+  CI/CD -> SBOM Generation: {
+    class: flow-pink
+  }
+}
+
+Downstream: {
+  class: group
+  label: "Downstream Distribution"
+
+  Artifact: {
+    class: accent
+    label: "Release\nArtifact"
+    icon: node_modules/@tabler/icons/icons/outline/archive.svg
+  }
+
+  Consumers: {
+    class: primary
+    label: "Consumers &\nCustomers"
+    icon: node_modules/@tabler/icons/icons/outline/users.svg
+  }
+
+  Artifact -> Consumers: {
+    class: flow
+  }
+}
+
+Upstream.Package Registries -> Build.CI/CD: "Dependencies" {
+  class: flow
+}
+
+Build.SBOM Generation -> Downstream.Artifact: "Ship with SBOM" {
+  class: flow-pink
+}

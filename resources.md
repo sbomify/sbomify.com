@@ -15,6 +15,13 @@ There's also a GitHub repository called [sbom-benchmarks](https://github.com/sbo
 
 For step-by-step guides on generating SBOMs for specific languages and platforms, see our comprehensive [SBOM Guides]({{ site.url }}/guides/).
 
+**Related educational content:**
+
+- [SBOM Generation Tools Compared]({{ site.url }}/2026/03/20/sbom-generation-tools-comparison/) — In-depth comparison of Syft, Trivy, cdxgen, and more
+- [SBOM Formats: CycloneDX vs SPDX]({{ site.url }}/2026/03/08/sbom-formats-cyclonedx-vs-spdx/) — Choosing the right format for your use case
+- [SBOM Scanning: Vulnerability Detection]({{ site.url }}/2026/03/28/sbom-scanning-vulnerability-detection/) — How to scan SBOMs for known vulnerabilities
+- [SBOM Management Best Practices]({{ site.url }}/2026/03/12/sbom-management-best-practices/) — Organizing, monitoring, and acting on SBOMs at scale
+
 ---
 
 ## Video Resources
