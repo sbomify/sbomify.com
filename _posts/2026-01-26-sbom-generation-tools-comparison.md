@@ -11,9 +11,9 @@ author:
   url: https://sbomify.com
 faq:
   - question: "What are SBOM generation tools?"
-    answer: "SBOM generation tools are software that analyzes your projects -- source code, dependency files, container images, or compiled binaries -- and produces a machine-readable Software Bill of Materials in a standard format like CycloneDX or SPDX. Leading tools include sbomify, Syft, Trivy, cdxgen, and Microsoft SBOM Tool."
+    answer: "SBOM generation tools are software that analyzes your projects -- source code, dependency files, container images, or compiled binaries -- and produces a machine-readable Software Bill of Materials in a standard format like CycloneDX or SPDX. Leading standalone generators include Syft, Trivy, cdxgen, and Microsoft SBOM Tool. Platforms like sbomify wrap the best generator for your ecosystem and then enrich and augment the output."
   - question: "What is the best SBOM generation tool?"
-    answer: "There is no single best tool. For an integrated platform covering generation, enrichment, management, and vulnerability monitoring, sbomify covers the full lifecycle. For multi-ecosystem CLI use with both CycloneDX and SPDX support, Syft and Trivy are versatile options. For deep language-specific analysis, CycloneDX ecosystem plugins and cdxgen provide the most accurate results."
+    answer: "There is no single best tool. For an integrated platform that selects the best generator for your ecosystem and then enriches, augments, and manages the output, sbomify covers the full lifecycle. For multi-ecosystem CLI use with both CycloneDX and SPDX support, Syft and Trivy are versatile standalone options. For deep language-specific analysis, CycloneDX ecosystem plugins and cdxgen provide the most accurate results."
   - question: "How do I generate an SBOM?"
     answer: "Install an SBOM generation tool such as Syft, Trivy, or cdxgen, point it at your project directory or container image, and specify your desired output format. For production use, integrate SBOM generation into your CI/CD pipeline using tools like the sbomify GitHub Action."
   - question: "What format should my SBOM be in?"
@@ -41,7 +41,7 @@ The following comparison covers the most widely used open source SBOM generation
 
 | Tool                                                              | Maintainer            | Output Formats              | Input Sources                                    | License    |
 | ----------------------------------------------------------------- | --------------------- | --------------------------- | ------------------------------------------------ | ---------- |
-| **[sbomify](https://sbomify.com)**                                | sbomify               | CycloneDX, SPDX             | Source directories, lock files, container images | Apache 2.0 |
+| **[sbomify](https://sbomify.com)**                                | sbomify               | CycloneDX, SPDX             | Source directories, lock files, container images (via best-fit generator + enrichment) | Apache 2.0 |
 | **[Syft](https://github.com/anchore/syft)**                       | Anchore               | CycloneDX, SPDX, Syft JSON  | Source directories, container images, archives   | Apache 2.0 |
 | **[Trivy](https://github.com/aquasecurity/trivy)**                | Aqua Security         | CycloneDX, SPDX, Trivy JSON | Source directories, container images, VMs, K8s   | Apache 2.0 |
 | **[cdxgen](https://github.com/CycloneDX/cdxgen)**                 | CycloneDX / AppThreat | CycloneDX                   | Source directories, container images             | Apache 2.0 |
@@ -51,11 +51,11 @@ The following comparison covers the most widely used open source SBOM generation
 
 ### sbomify
 
-[sbomify](https://sbomify.com) is an open source SBOM platform that covers the full SBOM lifecycle: generation, augmentation, enrichment, storage, distribution, and vulnerability monitoring. The [sbomify GitHub Action](https://github.com/sbomify/github-action/) automatically selects the best generation tool for your ecosystem, enriches the output with package metadata from 11+ data sources, and optionally augments it with your organization's details — all in one step.
+[sbomify](https://sbomify.com) is an open source SBOM platform that covers the full SBOM lifecycle: generation, augmentation, enrichment, storage, distribution, and vulnerability monitoring. Importantly, sbomify is not a standalone SBOM generator — the [sbomify GitHub Action](https://github.com/sbomify/github-action/) automatically selects the best generation tool for your ecosystem (such as Syft, cdxgen, or the CycloneDX ecosystem plugins) and then improves the quality of the generated SBOM through enrichment and augmentation. This means you get the most accurate generation for your stack, combined with metadata improvements that raw generators don't provide — all in one step.
 
 **Strengths:**
 
-- Full lifecycle coverage: generates, augments, enriches, and manages SBOMs in a single platform
+- Uses the best underlying generator for each ecosystem, then enriches and augments the output
 - Automatic metadata augmentation: adds supplier, manufacturer, and contact information to meet [NTIA minimum elements]({{ site.url }}/compliance/ntia-minimum-elements/)
 - Enrichment from 11+ data sources (deps.dev, ClearlyDefined, PyPI, crates.io, LicenseDB, and more) for license, hash, and lifecycle data
 - Native CI/CD integration via [GitHub Action](https://github.com/sbomify/github-action/), GitLab CI, and Bitbucket Pipelines
@@ -66,7 +66,7 @@ The following comparison covers the most widely used open source SBOM generation
 
 **Considerations:**
 
-- For generation only (no management or monitoring needed), a standalone CLI tool like Syft or Trivy is lighter weight
+- Not a standalone generator — it wraps and improves the output of other generation tools
 - Full platform features (Trust Center, vulnerability monitoring) require the cloud service or self-hosted deployment
 
 **Basic usage (GitHub Actions):**
@@ -263,11 +263,11 @@ The [sbom-benchmarks repository](https://github.com/sbomify/sbom-benchmarks) pro
 
 ### What are SBOM generation tools?
 
-SBOM generation tools are software that analyzes your projects — source code, dependency files, container images, or compiled binaries — and produces a machine-readable Software Bill of Materials in a standard format like CycloneDX or SPDX. Leading tools include sbomify, Syft (Anchore), Trivy (Aqua Security), cdxgen (CycloneDX), Microsoft SBOM Tool, and language-specific CycloneDX plugins.
+SBOM generation tools are software that analyzes your projects — source code, dependency files, container images, or compiled binaries — and produces a machine-readable Software Bill of Materials in a standard format like CycloneDX or SPDX. Leading standalone generators include Syft (Anchore), Trivy (Aqua Security), cdxgen (CycloneDX), Microsoft SBOM Tool, and language-specific CycloneDX plugins. Platforms like [sbomify](https://sbomify.com) wrap the best generator for your ecosystem and then enrich and augment the output for higher quality SBOMs.
 
 ### What is the best SBOM generation tool?
 
-There is no single best tool — the right choice depends on your ecosystems, format requirements, and workflow. For an integrated platform that combines generation, enrichment, management, and vulnerability monitoring, [sbomify](https://sbomify.com) covers the full lifecycle. For multi-ecosystem coverage with both CycloneDX and SPDX support as standalone CLI tools, Syft and Trivy are versatile options. For deep language-specific analysis, CycloneDX ecosystem plugins and cdxgen provide the most accurate results. For SPDX-only workflows integrated with Azure DevOps, Microsoft SBOM Tool is purpose-built.
+There is no single best tool — the right choice depends on your ecosystems, format requirements, and workflow. For an integrated platform that selects the best generator for your ecosystem and then enriches, augments, and manages the output, [sbomify](https://sbomify.com) covers the full lifecycle. For multi-ecosystem coverage with both CycloneDX and SPDX support as standalone CLI tools, Syft and Trivy are versatile options. For deep language-specific analysis, CycloneDX ecosystem plugins and cdxgen provide the most accurate results. For SPDX-only workflows integrated with Azure DevOps, Microsoft SBOM Tool is purpose-built.
 
 ### How do I generate an SBOM?
 

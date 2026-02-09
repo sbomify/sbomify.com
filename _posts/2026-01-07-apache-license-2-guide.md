@@ -75,7 +75,7 @@ Section 3 of the license states that each contributor grants "a perpetual, world
 - This protection applies to all users and redistributors of the software.
 - The patent grant is automatically revoked for any user who initiates patent litigation against the project (the "patent retaliation" clause in Section 3).
 
-Neither the [MIT license]({{ site.url }}/2024/04/03/navigating-the-landscape-of-open-source-licenses/) nor the BSD licenses include an explicit patent grant, which creates theoretical patent risk — a contributor could contribute code and later assert patent claims against users. The Apache License 2.0 eliminates this risk.
+Neither the [MIT license]({{ site.url }}/2026/01/22/mit-license-guide/) nor the BSD licenses include an explicit patent grant, which creates theoretical patent risk — a contributor could contribute code and later assert patent claims against users. The Apache License 2.0 eliminates this risk.
 
 ## The NOTICE File
 

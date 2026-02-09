@@ -29,7 +29,7 @@ The GPL (GNU General Public License) is a free software license that guarantees 
 
 The GNU General Public License, commonly called the GPL or GNU GPL, is a series of free software licenses published by the [Free Software Foundation](https://www.fsf.org/) (FSF). The GPL was first written by Richard Stallman in 1989 for the GNU Project and has since become the most prominent copyleft license in the world.
 
-The core idea behind the GPL is simple: software licensed under the GPL can be freely used, modified, and distributed, but anyone who distributes modified versions must also make their source code available under the same GPL terms. This "share-alike" obligation is what distinguishes copyleft licenses from permissive licenses like [MIT]({{ site.url }}/2024/04/03/navigating-the-landscape-of-open-source-licenses/) or Apache 2.0.
+The core idea behind the GPL is simple: software licensed under the GPL can be freely used, modified, and distributed, but anyone who distributes modified versions must also make their source code available under the same GPL terms. This "share-alike" obligation is what distinguishes copyleft licenses from permissive licenses like [MIT]({{ site.url }}/2026/01/22/mit-license-guide/) or [Apache 2.0]({{ site.url }}/2026/01/07/apache-license-2-guide/).
 
 The GPL family includes three major versions and two important variants:
 
