@@ -1,3 +1,22 @@
+/* Inter Variable Font - self-hosted from @fontsource-variable/inter */
+@font-face {
+  font-family: 'Inter Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/assets/fonts/inter-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Inter Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/assets/fonts/inter-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -104,9 +123,11 @@
   --tw-contain-layout:  ;
   --tw-contain-paint:  ;
   --tw-contain-style:  ;
-}/*
-! tailwindcss v3.4.18 | MIT License | https://tailwindcss.com
-*//*
+}
+
+/* ! tailwindcss v3.4.18 | MIT License | https://tailwindcss.com */
+
+/*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
@@ -142,7 +163,7 @@ html,
   -moz-tab-size: 4; /* 3 */
   -o-tab-size: 4;
      tab-size: 4; /* 3 */
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-family: "Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif; /* 4 */
   font-feature-settings: normal; /* 5 */
   font-variation-settings: normal; /* 6 */
   -webkit-tap-highlight-color: transparent; /* 7 */
@@ -423,6 +444,7 @@ menu {
 /*
 Reset default styling for dialogs.
 */
+
 dialog {
   padding: 0;
 }
@@ -463,6 +485,7 @@ button,
 /*
 Make sure disabled buttons don't get the pointer cursor.
 */
+
 :disabled {
   cursor: default;
 }
@@ -496,6 +519,7 @@ video {
 }
 
 /* Make elements with the HTML hidden attribute stay hidden by default */
+
 [hidden]:where(:not([hidden="until-found"])) {
   display: none;
 }
@@ -503,31 +527,26 @@ video {
   width: 100%;
 }
 @media (min-width: 640px) {
-
   .container {
     max-width: 640px;
   }
 }
 @media (min-width: 768px) {
-
   .container {
     max-width: 768px;
   }
 }
 @media (min-width: 1024px) {
-
   .container {
     max-width: 1024px;
   }
 }
 @media (min-width: 1280px) {
-
   .container {
     max-width: 1280px;
   }
 }
 @media (min-width: 1536px) {
-
   .container {
     max-width: 1536px;
   }
@@ -1060,7 +1079,6 @@ video {
 }
 
 @keyframes ping {
-
   75%, 100% {
     transform: scale(2);
     opacity: 0;
@@ -2240,99 +2258,76 @@ video {
 }
 
 @media (min-width: 640px) {
-
   .sm\:flex-row {
     flex-direction: row;
   }
-
   .sm\:rounded-2xl {
     border-radius: 1rem;
   }
 }
 
 @media (min-width: 768px) {
-
   .md\:float-left {
     float: left;
   }
-
   .md\:mb-12 {
     margin-bottom: 3rem;
   }
-
   .md\:mr-10 {
     margin-right: 2.5rem;
   }
-
   .md\:mt-24 {
     margin-top: 6rem;
   }
-
   .md\:block {
     display: block;
   }
-
   .md\:h-56 {
     height: 14rem;
   }
-
   .md\:w-56 {
     width: 14rem;
   }
-
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-
   .md\:flex-row {
     flex-direction: row;
   }
-
   .md\:flex-row-reverse {
     flex-direction: row-reverse;
   }
-
   .md\:items-center {
     align-items: center;
   }
-
   .md\:gap-12 {
     gap: 3rem;
   }
-
   .md\:gap-4 {
     gap: 1rem;
   }
-
   .md\:self-center {
     align-self: center;
   }
-
   .md\:p-10 {
     padding: 2.5rem;
   }
-
   .md\:p-12 {
     padding: 3rem;
   }
-
   .md\:p-16 {
     padding: 4rem;
   }
-
   .md\:p-8 {
     padding: 2rem;
   }
-
   .md\:py-16 {
     padding-top: 4rem;
     padding-bottom: 4rem;
   }
-
   .md\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -2340,139 +2335,108 @@ video {
 }
 
 @media (min-width: 1024px) {
-
   .lg\:mb-20 {
     margin-bottom: 5rem;
   }
-
   .lg\:block {
     display: block;
   }
-
   .lg\:flex {
     display: flex;
   }
-
   .lg\:hidden {
     display: none;
   }
-
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-
   .lg\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
-
   .lg\:flex-row {
     flex-direction: row;
   }
-
   .lg\:items-start {
     align-items: flex-start;
   }
-
   .lg\:items-end {
     align-items: flex-end;
   }
-
   .lg\:justify-end {
     justify-content: flex-end;
   }
-
   .lg\:gap-16 {
     gap: 4rem;
   }
-
   .lg\:gap-8 {
     gap: 2rem;
   }
-
   .lg\:p-12 {
     padding: 3rem;
   }
-
   .lg\:px-24 {
     padding-left: 6rem;
     padding-right: 6rem;
   }
-
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
   }
-
   .lg\:px-\[105px\] {
     padding-left: 105px;
     padding-right: 105px;
   }
-
   .lg\:py-16 {
     padding-top: 4rem;
     padding-bottom: 4rem;
   }
-
   .lg\:py-20 {
     padding-top: 5rem;
     padding-bottom: 5rem;
   }
-
   .lg\:py-24 {
     padding-top: 6rem;
     padding-bottom: 6rem;
   }
-
   .lg\:pb-20 {
     padding-bottom: 5rem;
   }
-
   .lg\:pt-24 {
     padding-top: 6rem;
   }
-
   .lg\:text-left {
     text-align: left;
   }
-
   .lg\:text-right {
     text-align: right;
   }
-
   .lg\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
   }
-
   .lg\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
   }
-
   .lg\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
   }
-
   .lg\:text-5xl {
     font-size: 3rem;
     line-height: 1;
   }
-
   .lg\:text-7xl {
     font-size: 4.5rem;
     line-height: 1;
   }
-
   .lg\:text-\[68px\] {
     font-size: 68px;
   }
-
   .lg\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
-
   .lg\:leading-\[78px\] {
     line-height: 78px;
   }
