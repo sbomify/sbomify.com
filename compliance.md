@@ -2,7 +2,7 @@
 layout: page
 permalink: /compliance/
 title: "The Ultimate SBOM Compliance Guide (2026)"
-description: "Complete SBOM compliance guide covering NTIA minimum elements, CISA 2025 draft, EU Cyber Resilience Act (CRA), NIS2 Directive, UK Software Security Code of Practice, FDA medical device requirements, and PCI DSS 4.0. Includes CycloneDX and SPDX schema mappings."
+description: "Complete SBOM compliance guide covering NTIA minimum elements, CISA 2025 draft, NIST 800-53, NIST 800-171, EU Cyber Resilience Act (CRA), NIS2 Directive, UK Software Security Code of Practice, FDA medical device requirements, and PCI DSS 4.0. Includes CycloneDX and SPDX schema mappings."
 ---
 
 New to SBOMs? Start with [What is an SBOM?]({{ site.url }}/what-is-sbom/) to learn the basics, or explore our [SBOM generation guides]({{ site.url }}/guides/) for language-specific tutorials.
@@ -33,6 +33,12 @@ Software Bill of Materials (SBOM) compliance requirements are rapidly evolving a
 
 - **[FDA Medical Device Guidance (2025)]({{ site.url }}/compliance/fda-medical-device/)** - Healthcare sector SBOM requirements with lifecycle properties
   - _Who it affects:_ Medical device manufacturers and their software suppliers
+
+- **[NIST SP 800-53 Rev 5]({{ site.url }}/compliance/nist-800-53/)** - Federal security control catalog with supply chain risk management controls
+  - _Who it affects:_ US federal agencies and organizations subject to FISMA
+
+- **[NIST SP 800-171 Rev 3]({{ site.url }}/compliance/nist-800-171/)** - CUI protection requirements for nonfederal systems
+  - _Who it affects:_ DoD contractors and organizations handling Controlled Unclassified Information (CUI)
 
 ### EU Frameworks
 
@@ -78,6 +84,7 @@ This table compares SBOM data field expectations across major frameworks. All fr
 
 - **EO 14028** is a binding US Executive Order for federal agencies and influences procurement expectations for software suppliers
 - **NTIA 2021** and **CISA 2025** are US guidance documents (not law)
+- **NIST 800-53** is the federal security control catalog; **NIST 800-171** applies to nonfederal organizations handling CUI
 - **CRA** and **NIS2** are binding EU legislation
 - **FDA 2025** is guidance for medical device premarket submissions
 - **PCI DSS 4.0** is an industry standard for payment card security
@@ -170,6 +177,8 @@ See our comprehensive [SBOM generation guides]({{ site.url }}/guides/) covering 
 - [EU Cyber Resilience Act (Regulation 2024/2847)](https://eur-lex.europa.eu/eli/reg/2024/2847/oj)
 - [EU NIS2 Directive (Directive 2022/2555)](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX%3A32022L2555)
 - [PCI DSS v4.0.1 (June 2024)](https://www.pcisecuritystandards.org/document_library/)
+- [NIST SP 800-53 Rev 5 (September 2020, updated December 2024)](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
+- [NIST SP 800-171 Rev 3 (May 2024)](https://csrc.nist.gov/pubs/sp/800/171/r3/final)
 - [Software Security Code of Practice (UK Government, May 2025)](https://www.gov.uk/government/publications/software-security-code-of-practice)
 - [CLE Specification (ECMA-428)](https://ecma-international.org/publications-and-standards/standards/ecma-428/)
 

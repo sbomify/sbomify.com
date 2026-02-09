@@ -1,0 +1,74 @@
+direction: down
+
+Container: {
+  class: group
+  label: "Container Image Layers"
+
+  Base: {
+    class: primary
+    label: "Base Image"
+    icon: node_modules/@tabler/icons/icons/outline/package.svg
+    height: 120
+  }
+
+  App: {
+    class: accent
+    label: "Application"
+    icon: node_modules/@tabler/icons/icons/outline/code.svg
+    height: 120
+  }
+}
+
+SBOMs: {
+  class: group
+  label: "Separate SBOMs per Layer"
+
+  Container SBOM: {
+    class: primary
+    icon: node_modules/@tabler/icons/icons/outline/file-text.svg
+    height: 120
+  }
+
+  App SBOM: {
+    class: accent
+    label: "Application SBOM"
+    icon: node_modules/@tabler/icons/icons/outline/file-code-2.svg
+    height: 120
+  }
+}
+
+Controls: {
+  class: group
+  label: "Security Controls"
+
+  Scanning: {
+    class: highlight
+    label: "Vulnerability Scanning"
+    icon: node_modules/@tabler/icons/icons/outline/shield-search.svg
+    height: 120
+  }
+
+  Monitoring: {
+    class: accent
+    icon: node_modules/@tabler/icons/icons/outline/chart-line.svg
+    height: 120
+  }
+
+  Compliance: {
+    class: accent
+    icon: node_modules/@tabler/icons/icons/outline/certificate.svg
+    height: 120
+  }
+}
+
+Container.Base -> SBOMs.Container SBOM: {
+  class: flow
+}
+
+Container.App -> SBOMs.App SBOM: {
+  class: flow-pink
+}
+
+SBOMs -> Controls: {
+  class: flow-pink
+}

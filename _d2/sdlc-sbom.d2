@@ -1,0 +1,76 @@
+direction: right
+
+Planning: {
+  class: primary
+  label: "Planning"
+  icon: node_modules/@tabler/icons/icons/outline/clipboard-list.svg
+  width: 130
+  height: 120
+}
+
+Design: {
+  class: primary
+  label: "Design"
+  icon: node_modules/@tabler/icons/icons/outline/layout.svg
+  width: 130
+  height: 120
+}
+
+Implementation: {
+  class: accent
+  label: "Implementation\n+ SBOM Generation"
+  icon: node_modules/@tabler/icons/icons/outline/code.svg
+  width: 180
+  height: 120
+}
+
+Testing: {
+  class: accent
+  label: "Testing\n+ Vulnerability Scan"
+  icon: node_modules/@tabler/icons/icons/outline/bug.svg
+  width: 180
+  height: 120
+}
+
+Deployment: {
+  class: accent
+  label: "Deployment\n+ SBOM Distribution"
+  icon: node_modules/@tabler/icons/icons/outline/rocket.svg
+  width: 180
+  height: 120
+}
+
+Maintenance: {
+  class: accent
+  label: "Maintenance\n+ SBOM Monitoring"
+  icon: node_modules/@tabler/icons/icons/outline/settings.svg
+  width: 180
+  height: 120
+}
+
+Planning -> Design: {
+  class: flow
+}
+
+Design -> Implementation: {
+  class: flow
+}
+
+Implementation -> Testing: {
+  class: flow-pink
+}
+
+Testing -> Deployment: {
+  class: flow-pink
+}
+
+Deployment -> Maintenance: {
+  class: flow-pink
+}
+
+Maintenance -> Planning: "Feedback" {
+  class: flow
+  style: {
+    stroke-dash: 3
+  }
+}

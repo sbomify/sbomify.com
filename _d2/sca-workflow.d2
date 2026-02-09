@@ -1,0 +1,69 @@
+direction: right
+
+source: Source Code {
+  class: primary
+  icon: node_modules/@tabler/icons/icons/outline/file-text.svg
+  width: 130
+  height: 120
+}
+
+manifests: Dependency\nManifests {
+  class: primary
+  icon: node_modules/@tabler/icons/icons/outline/list-details.svg
+  width: 150
+  height: 120
+}
+
+sca: SCA Tool {
+  class: highlight
+  icon: node_modules/@tabler/icons/icons/outline/scan.svg
+  width: 130
+  height: 120
+}
+
+inventory: Component\nInventory {
+  class: accent
+  icon: node_modules/@tabler/icons/icons/outline/cube.svg
+  width: 150
+  height: 120
+}
+
+vuln-db: Vulnerability\nDatabases {
+  class: primary
+  icon: node_modules/@tabler/icons/icons/outline/database.svg
+  width: 150
+  height: 120
+}
+
+sbom: SBOM {
+  class: highlight
+  icon: node_modules/@tabler/icons/icons/outline/list-check.svg
+  width: 110
+  height: 120
+}
+
+results: "Results" {
+  class: group
+
+  vulns: Vulnerabilities {
+    class: accent
+    icon: node_modules/@tabler/icons/icons/outline/alert-triangle.svg
+    width: 150
+    height: 120
+  }
+
+  licenses: License\nReport {
+    class: primary
+    icon: node_modules/@tabler/icons/icons/outline/certificate.svg
+    width: 140
+    height: 120
+  }
+}
+
+source -> sca: scan {class: flow}
+manifests -> sca: parse {class: flow}
+sca -> inventory: identify {class: flow}
+inventory -> sbom: export {class: flow-pink}
+inventory -> vuln-db: match {class: flow}
+vuln-db -> results.vulns: flag {class: flow}
+inventory -> results.licenses: check {class: flow}

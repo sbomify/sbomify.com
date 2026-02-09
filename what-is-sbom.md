@@ -57,6 +57,30 @@ For more podcast episodes covering SBOMs, CycloneDX, SPDX, and the EU Cyber Resi
 
 SBOMs are no longer optional; they are becoming a global standard for software transparency, security, and compliance. With regulations now in effect across the US and EU, the ability to generate and manage SBOMs is essential for modern software organizations. See our [SBOM Compliance Guide]({{ site.url }}/compliance/) for detailed requirements by framework.
 
+### Learn More
+
+Want to go deeper? Explore these related topics:
+
+- **[SBOM Formats: CycloneDX vs SPDX]({{ site.url }}/2026/01/15/sbom-formats-cyclonedx-vs-spdx/)** - Detailed comparison of the two leading SBOM formats
+- **[SBOM Generation Tools Compared]({{ site.url }}/2026/01/26/sbom-generation-tools-comparison/)** - Overview of Syft, Trivy, cdxgen, and more
+- **[SBOM Management Best Practices]({{ site.url }}/2026/01/18/sbom-management-best-practices/)** - How to organize, monitor, and act on your SBOMs
+- **[The Role of SBOMs in Cybersecurity]({{ site.url }}/2026/02/08/sbom-cybersecurity-role/)** - How SBOMs strengthen vulnerability management and incident response
+- **[What Is a Dependency?]({{ site.url }}/2026/01/29/what-is-a-dependency-in-software/)** - Understanding the components that SBOMs document
+
+### Frequently Asked Questions
+
+#### What does SBOM stand for?
+
+SBOM stands for Software Bill of Materials. It is a machine-readable inventory of all the components, libraries, and dependencies that make up a software product. The term draws an analogy to a bill of materials (BOM) in manufacturing, which lists every part used to build a physical product.
+
+#### What is the meaning of SBOM?
+
+An SBOM is a structured document that lists every component in a piece of software — including open source libraries, third-party packages, and their versions, licenses, and relationships. SBOMs provide the transparency needed for vulnerability management, license compliance, and supply chain security.
+
+#### What format should an SBOM be in?
+
+The two industry-standard SBOM formats are [CycloneDX](https://cyclonedx.org/) (developed by OWASP) and [SPDX](https://spdx.dev/) (developed by the Linux Foundation). Both are widely accepted by compliance frameworks. See our [SBOM formats comparison]({{ site.url }}/2026/01/15/sbom-formats-cyclonedx-vs-spdx/) for a detailed guide.
+
 ### Next Steps
 
 Ready to start generating SBOMs for your projects? Here's where to go next:
