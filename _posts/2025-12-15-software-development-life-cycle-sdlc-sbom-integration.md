@@ -9,6 +9,17 @@ author:
   display_name: Cowboy Neil
   login: Cowboy Neil
   url: https://sbomify.com
+faq:
+  - question: "What is SDLC in software development?"
+    answer: "SDLC stands for Software Development Life Cycle. It is a structured process that guides software development from initial planning through deployment and ongoing maintenance, providing a framework of phases including requirements analysis, design, implementation, testing, deployment, and maintenance."
+  - question: "What are the most common SDLC models?"
+    answer: "The most widely used models are Waterfall, Agile (including Scrum and Kanban), DevOps, V-Model, Spiral, and Lean. Agile and DevOps are the most popular for modern web and cloud applications due to their iterative approach and emphasis on continuous delivery."
+  - question: "How do SBOMs fit into the SDLC?"
+    answer: "SBOMs integrate into multiple SDLC phases. During implementation, SBOM generation tools capture component inventories. During testing, SBOMs enable automated vulnerability scanning. During deployment, SBOMs are distributed alongside release artifacts for compliance. During maintenance, SBOMs allow rapid identification of affected systems when new vulnerabilities are disclosed."
+  - question: "What is the difference between SDLC and DevOps?"
+    answer: "SDLC is the overall process framework for software development, while DevOps is a specific approach that emphasizes collaboration between development and operations teams with a focus on automation, continuous integration, and continuous delivery. DevOps can be seen as a modern SDLC model rather than an alternative to the SDLC concept itself."
+  - question: "What is a Secure SDLC?"
+    answer: "A Secure SDLC integrates security practices into every phase of the software development life cycle, rather than treating security as a final checkpoint. This includes threat modeling during planning, secure coding standards during implementation, SAST/DAST during testing, and vulnerability monitoring during maintenance."
 
 ---
 

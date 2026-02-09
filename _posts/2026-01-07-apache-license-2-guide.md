@@ -9,6 +9,17 @@ author:
   display_name: Cowboy Neil
   login: Cowboy Neil
   url: https://sbomify.com
+faq:
+  - question: "What is the Apache License 2.0?"
+    answer: "The Apache License 2.0 is a permissive open source license published by the Apache Software Foundation. It allows free use, modification, distribution, and sublicensing of the software, including in proprietary products. Its key features are an explicit patent grant protecting users from contributor patent claims and a NOTICE file mechanism for managing attribution."
+  - question: "Can I use Apache 2.0 licensed software in commercial products?"
+    answer: "Yes. The Apache License 2.0 explicitly permits commercial use, including incorporating Apache-licensed code into proprietary, closed-source products. The only requirements are including the Apache license text, retaining attribution notices, including the NOTICE file if one exists, and noting any modifications to original files."
+  - question: "What is the difference between Apache 2.0 and MIT?"
+    answer: "Both are permissive licenses that allow commercial use without requiring source code disclosure. The key differences are that Apache 2.0 includes an explicit patent grant and patent retaliation clause while MIT does not address patents, Apache 2.0 requires carrying forward NOTICE file attributions while MIT only requires including the license text, and Apache 2.0 requires stating changes to modified files."
+  - question: "Is Apache 2.0 compatible with the GPL?"
+    answer: "Apache 2.0 is compatible with GPL v3 but not with GPL v2. Apache 2.0 code can be included in a GPLv3 project where the combined work is licensed under GPLv3, but the Apache 2.0 patent termination clause is considered an additional restriction under GPLv2, making the two licenses incompatible."
+  - question: "What is the NOTICE file in the Apache License?"
+    answer: "The NOTICE file is a text file that Apache-licensed projects use to collect attribution notices, containing the project name, copyright notices, and any third-party attributions required by dependencies. When you redistribute Apache-licensed software, you must include the contents of the NOTICE file with your distribution."
 
 ---
 

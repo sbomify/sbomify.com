@@ -9,6 +9,17 @@ author:
   display_name: Cowboy Neil
   login: Cowboy Neil
   url: https://sbomify.com
+faq:
+  - question: "What is container security?"
+    answer: "Container security is the practice of protecting containerized applications and their infrastructure throughout the lifecycle, from building images through deployment and runtime operations. It encompasses image scanning, vulnerability management, runtime protection, network policies, secrets management, and access control for orchestration platforms like Kubernetes."
+  - question: "How do you scan container images for vulnerabilities?"
+    answer: "Container images are scanned by analyzing their contents (OS packages, language libraries, application dependencies) against vulnerability databases like the NVD and OSV. Tools like Trivy, Grype, and Snyk perform this analysis. Scanning should be integrated into CI/CD pipelines, container registries, and production monitoring."
+  - question: "What is a container SBOM?"
+    answer: "A container SBOM is a Software Bill of Materials generated from a built container image, documenting the OS-level packages and system libraries in the base image. Best practice is to generate this separately from your application SBOM and organize both under a product hierarchy for clearer vulnerability triage and compliance."
+  - question: "How does Kubernetes improve container security?"
+    answer: "Kubernetes provides security mechanisms including Pod Security Standards for restricting container privileges, Network Policies for controlling pod-to-pod communication, RBAC for role-based access control, Secrets management, and admission controllers for enforcing deployment policies. These features must be actively configured as Kubernetes defaults are permissive."
+  - question: "Why should containers run as non-root?"
+    answer: "Running containers as root means that a compromise of the application gives the attacker root privileges inside the container, which can lead to host escape in some configurations. Running as a non-root user, combined with dropping capabilities and preventing privilege escalation, limits the blast radius of a compromise."
 
 ---
 
@@ -35,11 +46,19 @@ The choice of base image has an outsized impact on security. A full Linux distri
 | Base Image Type                              | Packages                   | Attack Surface | Use Case                        |
 | -------------------------------------------- | -------------------------- | -------------- | ------------------------------- |
 | **Distroless** (e.g., `gcr.io/distroless`)   | Application runtime only   | Minimal        | Production workloads            |
+| **[Chainguard Images](https://www.chainguard.dev/chainguard-images)** | Minimal, zero/low-CVE packages | Minimal | Production workloads, compliance-sensitive environments |
+| **[Docker Hardened Images](https://www.docker.com/products/hardened-images/)** | Distroless Debian/Alpine, non-root | Minimal | Production workloads, regulated environments |
 | **Alpine Linux**                             | ~15 MB base, musl libc     | Small          | General purpose, size-sensitive |
 | **Slim variants** (e.g., `python:3.12-slim`) | Stripped-down distribution | Medium         | Language-specific applications  |
 | **Full distribution** (e.g., `ubuntu:24.04`) | Full package set           | Large          | Development, debugging          |
 
-For production, prefer distroless or slim images. Fewer packages means fewer potential vulnerabilities and a smaller SBOM — making both security management and compliance simpler.
+For production, prefer hardened, distroless, or slim images. Fewer packages means fewer potential vulnerabilities and a smaller SBOM — making both security management and compliance simpler.
+
+Two hardened image providers stand out for security-conscious teams:
+
+[Chainguard Images](https://www.chainguard.dev/chainguard-images) are built from the ground up on [Wolfi](https://github.com/wolfi-dev), a Linux distribution designed specifically for containers. They are rebuilt daily, ship with zero or near-zero known CVEs, and include high-quality SBOMs out of the box. Available as drop-in replacements for popular base images like Python, Node.js, and Go.
+
+[Docker Hardened Images](https://www.docker.com/products/hardened-images/) (DHI) take a different approach — hardening familiar Debian and Alpine bases by stripping them down to distroless principles (no shell, no package manager, non-root by default). Docker [made the full catalog of 1,000+ images free and open source](https://www.docker.com/blog/docker-hardened-images-for-every-developer/) under Apache 2.0 in late 2025. Every image ships with an SBOM, [SLSA](https://slsa.dev/) Build Level 3 provenance, and [VEX](https://www.cisa.gov/resources-tools/resources/minimum-requirements-vulnerability-exploitability-exchange-vex) metadata. The Enterprise tier adds FIPS-enabled and STIG-hardened variants for regulated environments.
 
 ### Image Scanning
 
@@ -125,6 +144,7 @@ Ensure that only trusted, scanned images run in your cluster:
 - Sign images and verify signatures before deployment (using tools like [Sigstore cosign](https://docs.sigstore.dev/cosign/))
 - Implement admission controllers that reject unsigned or unscanned images
 - Pin images to specific digests rather than mutable tags (`:latest` can change without notice)
+- Consider using hardened base images from [Chainguard](https://www.chainguard.dev/chainguard-images) or [Docker Hardened Images](https://www.docker.com/products/hardened-images/) that ship with built-in SBOMs, provenance attestations, and near-zero CVEs
 
 ## Container Security and SBOMs
 
@@ -147,7 +167,7 @@ For detailed instructions on generating separate SBOMs from container images, se
 
 1. **Scan images at every stage.** Integrate scanning into CI/CD (build-time), the container registry (push-time), and production (runtime). New vulnerabilities are disclosed daily — a clean image today may be vulnerable tomorrow.
 
-2. **Use minimal base images.** Choose distroless or slim variants for production. Fewer packages means fewer vulnerabilities and a smaller attack surface.
+2. **Use hardened or minimal base images.** Choose hardened images ([Chainguard](https://www.chainguard.dev/chainguard-images), [Docker Hardened Images](https://www.docker.com/products/hardened-images/)), distroless, or slim variants for production. Fewer packages means fewer vulnerabilities and a smaller attack surface.
 
 3. **Generate separate SBOMs per layer.** Generate an application SBOM from your lock file and a container SBOM from the built image. Organize both under a single product in your [SBOM management platform]({{ site.url }}/2026/01/18/sbom-management-best-practices/) for continuous vulnerability monitoring.
 

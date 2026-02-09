@@ -9,6 +9,17 @@ author:
   display_name: Cowboy Neil
   login: Cowboy Neil
   url: https://sbomify.com
+faq:
+  - question: "What is software supply chain management?"
+    answer: "Software supply chain management is the practice of identifying, assessing, and mitigating risks across the full chain of components, tools, and processes used to build and deliver software. It encompasses open source dependency management, build pipeline security, vendor assessment, and ongoing vulnerability monitoring."
+  - question: "What is a chain of custody in software?"
+    answer: "Chain of custody in the software context refers to the documented, verifiable record of who created, modified, built, and distributed each component in a software product. SBOMs, build attestations like SLSA provenance, and code signing are the primary tools for establishing software chain of custody."
+  - question: "How do SBOMs help with supply chain security?"
+    answer: "SBOMs provide the component-level visibility that is the foundation of supply chain security. They enable automated vulnerability scanning, license compliance checking, and rapid incident response when new vulnerabilities are disclosed. They are required or recommended by most major compliance frameworks."
+  - question: "What is the NIST risk management framework for supply chains?"
+    answer: "NIST SP 800-161 Rev 1 is the primary guidance for cybersecurity supply chain risk management (C-SCRM). NIST SP 800-53 Rev 5 includes the SR (Supply Chain Risk Management) control family with specific controls for provenance and supply chain processes. These frameworks are increasingly referenced in procurement requirements and compliance obligations."
+  - question: "What are the biggest software supply chain risks?"
+    answer: "The most significant risks include vulnerable open source dependencies, compromised build systems (as in SolarWinds), malicious packages in public registries (typosquatting and dependency confusion), and social engineering of open source maintainers (as in XZ Utils). Transitive dependencies represent a particularly underestimated risk."
 
 ---
 

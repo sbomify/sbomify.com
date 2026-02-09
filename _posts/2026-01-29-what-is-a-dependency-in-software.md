@@ -9,6 +9,17 @@ author:
   display_name: Cowboy Neil
   login: Cowboy Neil
   url: https://sbomify.com
+faq:
+  - question: "What is a dependency in software?"
+    answer: "A dependency is any external component -- a library, framework, module, or package -- that your application relies on to function. Dependencies are declared in manifest files like package.json or requirements.txt and installed from package registries. They allow developers to reuse existing code rather than building everything from scratch."
+  - question: "What is a transitive dependency?"
+    answer: "A transitive dependency is a dependency of your dependency. If your project depends on package A and package A depends on package B, then B is a transitive dependency. Transitive dependencies are often invisible to developers but can contain vulnerabilities, restrictive licenses, or outdated code, and typically outnumber direct dependencies by a factor of 5-30x."
+  - question: "What is a dependency tree?"
+    answer: "A dependency tree (or dependency graph) is the complete hierarchy of all dependencies in a project, showing both direct and transitive relationships. It reveals the full set of code your application actually uses at runtime. SBOM generation tools analyze dependency trees to produce complete component inventories."
+  - question: "Why are dependencies a security risk?"
+    answer: "Dependencies introduce code that your team did not write and may not audit. Known vulnerabilities in dependencies (CVEs) are a primary attack vector. Dependencies can also be intentionally compromised, abandoned by maintainers, or used in dependency confusion attacks."
+  - question: "What is a lock file?"
+    answer: "A lock file records the exact resolved versions of all dependencies (direct and transitive) in a project. Examples include package-lock.json for npm, poetry.lock for Python, and Cargo.lock for Rust. Lock files ensure reproducible builds and should always be committed to version control."
 
 ---
 

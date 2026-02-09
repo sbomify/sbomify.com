@@ -9,6 +9,17 @@ author:
   display_name: Cowboy Neil
   login: Cowboy Neil
   url: https://sbomify.com
+faq:
+  - question: "What is the GPL license?"
+    answer: "The GPL (GNU General Public License) is a copyleft free software license created by the Free Software Foundation. It guarantees that users can run, study, modify, and distribute the software, with the condition that any distributed derivative works must also be licensed under the GPL and include source code."
+  - question: "Can I use GPL software in commercial products?"
+    answer: "Yes. The GPL explicitly permits commercial use, distribution, and sale. The restriction is not on commerce but on making the software proprietary. If you distribute a product that includes GPL code, you must make the complete source code available under the GPL."
+  - question: "What is the difference between GPL and LGPL?"
+    answer: "The GPL requires that any derivative work be distributed under the GPL (strong copyleft). The LGPL (Lesser GPL) allows proprietary software to link against LGPL-licensed libraries without the copyleft applying to the proprietary code. If you modify the LGPL library itself, those modifications must be shared, but your application code can remain proprietary."
+  - question: "What is the difference between GPL v2 and GPL v3?"
+    answer: "GPL v3 added explicit patent grants, anti-tivoization provisions preventing hardware lockdown of modified software, anti-DRM clauses, broader international compatibility, and better compatibility with other open source licenses like Apache 2.0. GPL v2 remains widely used, notably by the Linux kernel, which is licensed under GPL v2 only."
+  - question: "How do SBOMs help with GPL compliance?"
+    answer: "SBOMs document every component in your software along with its license, making it possible to automatically identify GPL-licensed dependencies, track copyleft obligations, and enforce license policies in CI/CD pipelines. Both CycloneDX and SPDX include standardized license fields that support machine-readable GPL license identification."
 
 ---
 

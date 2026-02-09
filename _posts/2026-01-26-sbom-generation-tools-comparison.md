@@ -9,6 +9,17 @@ author:
   display_name: Cowboy Neil
   login: Cowboy Neil
   url: https://sbomify.com
+faq:
+  - question: "What are SBOM generation tools?"
+    answer: "SBOM generation tools are software that analyzes your projects -- source code, dependency files, container images, or compiled binaries -- and produces a machine-readable Software Bill of Materials in a standard format like CycloneDX or SPDX. Leading tools include sbomify, Syft, Trivy, cdxgen, and Microsoft SBOM Tool."
+  - question: "What is the best SBOM generation tool?"
+    answer: "There is no single best tool. For an integrated platform covering generation, enrichment, management, and vulnerability monitoring, sbomify covers the full lifecycle. For multi-ecosystem CLI use with both CycloneDX and SPDX support, Syft and Trivy are versatile options. For deep language-specific analysis, CycloneDX ecosystem plugins and cdxgen provide the most accurate results."
+  - question: "How do I generate an SBOM?"
+    answer: "Install an SBOM generation tool such as Syft, Trivy, or cdxgen, point it at your project directory or container image, and specify your desired output format. For production use, integrate SBOM generation into your CI/CD pipeline using tools like the sbomify GitHub Action."
+  - question: "What format should my SBOM be in?"
+    answer: "Choose CycloneDX for security-focused use cases and SPDX for license compliance focus. For EU CRA compliance via BSI TR-03183-2, you need CycloneDX 1.6+ or SPDX 3.0.1+. Most other compliance frameworks accept both formats."
+  - question: "How do I validate an SBOM?"
+    answer: "Use format-specific validation tools: the CycloneDX Validator for CycloneDX SBOMs and SPDX Online Tools for SPDX SBOMs. Validation checks structural correctness, required fields, and specification conformance. Tools like sbomqs can also score SBOM quality beyond basic structural validity."
 
 ---
 

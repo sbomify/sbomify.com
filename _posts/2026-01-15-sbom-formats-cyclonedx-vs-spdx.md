@@ -9,6 +9,17 @@ author:
   display_name: Cowboy Neil
   login: Cowboy Neil
   url: https://sbomify.com
+faq:
+  - question: "What are the main SBOM formats?"
+    answer: "The two industry-standard SBOM formats are CycloneDX (developed by OWASP, standardized as ECMA-424) and SPDX (developed by the Linux Foundation, standardized as ISO/IEC 5962:2021). Both support JSON and XML serialization, are accepted by major compliance frameworks, and have broad tooling support."
+  - question: "What is the difference between CycloneDX and SPDX?"
+    answer: "CycloneDX is a security-focused format with a compact, component-centric model and native support for vulnerability and VEX data. SPDX is a compliance-focused format with rich license documentation capabilities and support for file-level and snippet-level analysis. Both support purl, CPE, and hash-based component identification."
+  - question: "Which SBOM format should I use?"
+    answer: "If your primary concern is application security and vulnerability management, CycloneDX is often more straightforward. If license compliance is your primary driver, SPDX may be more appropriate. For EU CRA compliance via BSI TR-03183-2, you need CycloneDX 1.6+ or SPDX 3.0.1+ in JSON or XML format. Many organizations support both formats."
+  - question: "Can I convert between CycloneDX and SPDX?"
+    answer: "Yes. Tools like the CycloneDX CLI support conversion between formats. However, conversion may result in some data loss where one format supports fields that the other does not. For critical compliance use cases, it is better to generate natively in the required format."
+  - question: "What is an SBOM example?"
+    answer: "An SBOM is a machine-readable document listing every component in a software product, including names, versions, package identifiers (purl), licenses, and supplier information. Both CycloneDX and SPDX define JSON and XML representations for this data."
 
 ---
 

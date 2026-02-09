@@ -9,6 +9,17 @@ author:
   display_name: Cowboy Neil
   login: Cowboy Neil
   url: https://sbomify.com
+faq:
+  - question: "What is software composition analysis?"
+    answer: "Software Composition Analysis (SCA) is a category of security tooling that identifies open source and third-party components in your software, detects known vulnerabilities by matching them against databases like the NVD, and catalogs their licenses for compliance purposes. SCA tools analyze dependency manifests, lock files, and sometimes binaries to produce a complete component inventory."
+  - question: "What is the difference between SCA and SAST?"
+    answer: "SCA analyzes third-party and open source components for known vulnerabilities and license issues, covering the 70-90% of your application that is third-party code. SAST (Static Application Security Testing) analyzes your own source code for coding flaws like injection vulnerabilities and logic errors. Both are needed for comprehensive application security."
+  - question: "How does SCA relate to SBOMs?"
+    answer: "SCA tools are one of the primary methods for generating SBOMs. When an SCA tool identifies all components, that inventory can be exported as an SBOM in standard formats like CycloneDX or SPDX. Conversely, SBOMs enable continuous SCA by providing a persistent component inventory that can be monitored against new vulnerability disclosures without re-scanning source code."
+  - question: "What are the best open source SCA tools?"
+    answer: "Leading open source SCA tools include Grype (vulnerability scanner from Anchore), OWASP Dependency-Track (continuous SBOM analysis platform), OWASP Dependency-Check (mature CVE detection tool), OSV-Scanner (Google's vulnerability scanner using the OSV database), and Trivy (comprehensive scanner from Aqua Security)."
+  - question: "Does SCA find all vulnerabilities?"
+    answer: "No. SCA finds known vulnerabilities in third-party components that have been assigned CVE identifiers and added to vulnerability databases. It does not find zero-day vulnerabilities, vulnerabilities in your own code, or runtime configuration issues. SCA should be combined with SAST, DAST, and penetration testing for comprehensive coverage."
 
 ---
 

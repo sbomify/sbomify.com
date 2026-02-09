@@ -9,6 +9,19 @@ author:
   display_name: Cowboy Neil
   login: Cowboy Neil
   url: https://sbomify.com
+faq:
+  - question: "What is the MIT License?"
+    answer: "The MIT License is a permissive open source license that allows unrestricted use, modification, distribution, and sublicensing of software, including in proprietary and commercial products. Its only requirement is that the license text and copyright notice be included with any distribution."
+  - question: "Can I use MIT-licensed software commercially?"
+    answer: "Yes. The MIT License explicitly permits commercial use, including selling copies, incorporating MIT-licensed code into proprietary products, and distributing modified versions. The only requirement is including the MIT license text and copyright notice with your distribution."
+  - question: "What is the difference between MIT and Apache 2.0?"
+    answer: "Both are permissive licenses allowing commercial use without requiring source code disclosure. Apache 2.0 includes an explicit patent grant and patent retaliation clause while MIT does not address patents explicitly. Apache 2.0 also requires carrying forward NOTICE file attributions and noting changes to modified files, while MIT only requires including the license text."
+  - question: "Is the MIT License compatible with the GPL?"
+    answer: "Yes, but only in one direction. MIT-licensed code can be included in GPL-licensed projects, with the combined work distributed under the GPL. However, GPL-licensed code cannot be included in an MIT-licensed project without the entire project becoming GPL-licensed."
+  - question: "Do I need to include the MIT License text when distributing software?"
+    answer: "Yes. The MIT License requires that the copyright notice and permission notice be included in all copies or substantial portions of the Software. This applies to both source and binary distributions, typically via a LICENSE file or third-party attribution document."
+  - question: "How do I comply with the MIT License?"
+    answer: "Include the full MIT license text including the copyright notice in your distribution. This is typically done by maintaining a LICENSE or THIRD-PARTY-NOTICES file that aggregates the license texts of all open source dependencies. For applications with many MIT-licensed dependencies, automated tools that generate attribution documents from SBOMs are the most reliable approach."
 
 ---
 

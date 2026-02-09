@@ -9,6 +9,17 @@ author:
   display_name: Cowboy Neil
   login: Cowboy Neil
   url: https://sbomify.com
+faq:
+  - question: "How do SBOMs improve cybersecurity?"
+    answer: "SBOMs improve cybersecurity by providing component-level visibility into software. This enables automated vulnerability detection, rapid incident response when new vulnerabilities are disclosed, continuous compliance monitoring, and informed risk management across the full dependency chain."
+  - question: "Are SBOMs required for cybersecurity compliance?"
+    answer: "SBOMs are required or strongly recommended by multiple frameworks including U.S. Executive Order 14028, the EU Cyber Resilience Act, FDA medical device guidance, and NIST SP 800-53/800-171 supply chain controls."
+  - question: "How did Log4Shell demonstrate the need for SBOMs?"
+    answer: "When Log4Shell (CVE-2021-44228) was disclosed in December 2021, organizations with SBOMs identified affected systems in minutes by querying their component inventories. Organizations without SBOMs spent weeks manually auditing codebases and scanning infrastructure."
+  - question: "What is the relationship between SBOMs and vulnerability management?"
+    answer: "SBOMs provide the component inventory that vulnerability management depends on. Without knowing what components are in your software, you cannot determine which vulnerabilities affect you. SBOMs ingested into monitoring platforms are continuously matched against vulnerability databases, transforming vulnerability management from a periodic manual exercise into a continuous automated process."
+  - question: "How do I start using SBOMs for cybersecurity?"
+    answer: "Start by generating SBOMs for your applications using tools like Syft, Trivy, or language-specific generators. Automate generation in your CI/CD pipeline. Ingest SBOMs into a monitoring platform like OWASP Dependency-Track for continuous vulnerability scanning. Define remediation SLAs based on CVSS severity and KEV status."
 
 ---
 

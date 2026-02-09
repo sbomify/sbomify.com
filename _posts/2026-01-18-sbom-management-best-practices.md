@@ -9,6 +9,17 @@ author:
   display_name: Cowboy Neil
   login: Cowboy Neil
   url: https://sbomify.com
+faq:
+  - question: "What is SBOM management?"
+    answer: "SBOM management is the practice of organizing, storing, versioning, distributing, and continuously monitoring Software Bills of Materials across an organization's software portfolio. It encompasses the entire SBOM lifecycle from automated generation in CI/CD through vulnerability monitoring and distribution to customers and regulators."
+  - question: "Why is SBOM management important?"
+    answer: "Generating an SBOM is only the first step. Without management, SBOMs quickly become stale and unused. SBOM management enables rapid vulnerability response, continuous compliance monitoring, and supply chain visibility at scale."
+  - question: "What tools are used for SBOM management?"
+    answer: "Key tools include sbomify for integrated SBOM management covering generation, storage, monitoring, and distribution in one platform. OWASP Dependency-Track provides standalone vulnerability monitoring, and Grype offers CLI-based scanning. For generation, Syft, Trivy, and cdxgen produce SBOMs in CycloneDX or SPDX format."
+  - question: "How often should SBOMs be updated?"
+    answer: "SBOMs should be regenerated with every software release and ideally with every build in your CI/CD pipeline. The SBOM for a deployed application should always reflect its current composition, and SBOMs should be continuously monitored against vulnerability databases."
+  - question: "What should be included in an SBOM?"
+    answer: "At minimum, follow the NTIA minimum elements: supplier name, component name, component version, unique identifiers (purl or CPE), dependency relationships, SBOM author, and timestamp. The CISA minimum elements draft adds license information and generation context."
 
 ---
 
