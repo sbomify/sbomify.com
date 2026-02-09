@@ -6,7 +6,7 @@
   "author": "Devan Thakur <devanthakur89@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build:fonts": "mkdir -p assets/fonts && (cp node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2 assets/fonts/ 2>/dev/null || true) && (cp node_modules/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2 assets/fonts/ 2>/dev/null || true)",
+    "build:fonts": "mkdir -p assets/fonts && FONT_DIR=$([ -d /usr/local/bun-deps/node_modules/@fontsource-variable ] && echo /usr/local/bun-deps/node_modules || echo node_modules) && cp $FONT_DIR/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2 assets/fonts/ && cp $FONT_DIR/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2 assets/fonts/",
     "build:css": "bun run build:fonts && postcss _assets/css/tailwind.css -o assets/css/styles.css",
     "build:d2": "bun scripts/watch-d2.ts",
     "watch:css": "bun run build:fonts && postcss _assets/css/tailwind.css -o assets/css/styles.css --watch",
