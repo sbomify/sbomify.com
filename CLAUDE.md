@@ -70,6 +70,7 @@ bundle exec htmlproofer ./_site --disable-external
 **Diagrams:** D2 source files in `_d2/` compile to SVG in both `assets/images/d2/` (image refs) and `_includes/d2/` (inline SVG). All diagrams share a theme from `_d2/theme.d2`.
 
 **Custom Jekyll plugins** in `_plugins/`:
+
 - `picture_tag.rb` - `{% picture %}` tag for WebP images with fallback
 - `webp_converter.rb` - Converts jpg/png to WebP during build (output to `_site/img/`)
 - `cache_buster.rb` - Asset cache busting

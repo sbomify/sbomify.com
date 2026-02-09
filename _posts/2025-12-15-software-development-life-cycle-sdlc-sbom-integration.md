@@ -103,7 +103,7 @@ When developers add dependencies — open source libraries, frameworks, and pack
 
 ### During Testing
 
-SBOMs enable automated [vulnerability scanning]({{ site.url }}/2026/02/01/sbom-scanning-vulnerability-detection/). Once you have a complete inventory of components, platforms like [sbomify](https://sbomify.com) can continuously monitor your SBOMs against vulnerability databases. Standalone tools like [Grype](https://github.com/anchore/grype) and [OWASP Dependency-Track](https://dependencytrack.org/) can also cross-reference your SBOM against the [National Vulnerability Database](https://nvd.nist.gov/) (NVD) and [OSV](https://osv.dev/).
+SBOMs enable automated [vulnerability scanning]({{ site.url }}/2026/02/01/sbom-scanning-vulnerability-detection/). Once you have a complete inventory of components, platforms like [sbomify](https://sbomify.com) can continuously monitor your SBOMs against vulnerability databases. Standalone tools like [Grype](https://github.com/anchore/grype) and [OWASP Dependency-Track](https://dependencytrack.org/) can also cross-reference your SBOM against the [National Vulnerability Database](https://nvd.nist.gov/) (NVD) and [OSV](https://osv.dev/). See our [resources page]({{ site.url }}/resources/) for a complete list of SBOM generation and analysis tools.
 
 ### During Deployment
 

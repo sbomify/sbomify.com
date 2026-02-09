@@ -43,14 +43,14 @@ The container image is the foundation of container security. An image that ships
 
 The choice of base image has an outsized impact on security. A full Linux distribution (like Ubuntu or Debian) may include hundreds of packages that your application never uses but that increase the attack surface. Minimal base images reduce this risk.
 
-| Base Image Type                              | Packages                   | Attack Surface | Use Case                        |
-| -------------------------------------------- | -------------------------- | -------------- | ------------------------------- |
-| **Distroless** (e.g., `gcr.io/distroless`)   | Application runtime only   | Minimal        | Production workloads            |
-| **[Chainguard Images](https://www.chainguard.dev/chainguard-images)** | Minimal, zero/low-CVE packages | Minimal | Production workloads, compliance-sensitive environments |
-| **[Docker Hardened Images](https://www.docker.com/products/hardened-images/)** | Distroless Debian/Alpine, non-root | Minimal | Production workloads, regulated environments |
-| **Alpine Linux**                             | ~15 MB base, musl libc     | Small          | General purpose, size-sensitive |
-| **Slim variants** (e.g., `python:3.12-slim`) | Stripped-down distribution | Medium         | Language-specific applications  |
-| **Full distribution** (e.g., `ubuntu:24.04`) | Full package set           | Large          | Development, debugging          |
+| Base Image Type                                                                | Packages                           | Attack Surface | Use Case                                                |
+| ------------------------------------------------------------------------------ | ---------------------------------- | -------------- | ------------------------------------------------------- |
+| **Distroless** (e.g., `gcr.io/distroless`)                                     | Application runtime only           | Minimal        | Production workloads                                    |
+| **[Chainguard Images](https://www.chainguard.dev/chainguard-images)**          | Minimal, zero/low-CVE packages     | Minimal        | Production workloads, compliance-sensitive environments |
+| **[Docker Hardened Images](https://www.docker.com/products/hardened-images/)** | Distroless Debian/Alpine, non-root | Minimal        | Production workloads, regulated environments            |
+| **Alpine Linux**                                                               | ~15 MB base, musl libc             | Small          | General purpose, size-sensitive                         |
+| **Slim variants** (e.g., `python:3.12-slim`)                                   | Stripped-down distribution         | Medium         | Language-specific applications                          |
+| **Full distribution** (e.g., `ubuntu:24.04`)                                   | Full package set                   | Large          | Development, debugging                                  |
 
 For production, prefer hardened, distroless, or slim images. Fewer packages means fewer potential vulnerabilities and a smaller SBOM — making both security management and compliance simpler.
 

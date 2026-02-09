@@ -29,7 +29,7 @@ SBOM management is the practice of organizing, storing, versioning, distributing
 
 ## Why SBOM Management Matters
 
-Most organizations that begin their SBOM journey focus on generation — using tools like [sbomify](https://sbomify.com), [Syft](https://github.com/anchore/syft), [Trivy](https://github.com/aquasecurity/trivy), or [cdxgen](https://github.com/CycloneDX/cdxgen) to produce SBOMs from their projects. This is necessary but insufficient. An SBOM that is generated once and never updated or monitored provides little ongoing value.
+Most organizations that begin their SBOM journey focus on generation — using tools like [sbomify](https://sbomify.com), [Syft](https://github.com/anchore/syft), [Trivy](https://github.com/aquasecurity/trivy), or [cdxgen](https://github.com/CycloneDX/cdxgen) to produce SBOMs from their projects (see our [resources page]({{ site.url }}/resources/) for a complete list). This is necessary but insufficient. An SBOM that is generated once and never updated or monitored provides little ongoing value.
 
 The real benefits of SBOMs — rapid vulnerability response, continuous compliance, supply chain visibility — only materialize when SBOMs are actively managed. Consider the [Log4Shell](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) disclosure in December 2021: organizations with up-to-date, searchable SBOMs identified affected systems in minutes. Organizations without them spent weeks manually auditing codebases.
 

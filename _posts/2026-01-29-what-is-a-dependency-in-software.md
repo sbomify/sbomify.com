@@ -112,7 +112,7 @@ A [Software Bill of Materials]({{ site.url }}/what-is-sbom/) provides a complete
 
 1. **Full visibility.** An SBOM documents every package in the dependency tree, not just the direct dependencies listed in your manifest file. This is the only reliable way to know everything running in your application.
 
-2. **Vulnerability matching.** Once you have an SBOM, platforms like [sbomify](https://sbomify.com) can continuously monitor every component against vulnerability databases. CLI tools like [Grype](https://github.com/anchore/grype) and [OSV-Scanner](https://google.github.io/osv-scanner/) provide point-in-time scanning, while [OWASP Dependency-Track](https://dependencytrack.org/) offers standalone continuous monitoring. See our [SBOM scanning guide]({{ site.url }}/2026/02/01/sbom-scanning-vulnerability-detection/) for details.
+2. **Vulnerability matching.** Once you have an SBOM, platforms like [sbomify](https://sbomify.com) can continuously monitor every component against vulnerability databases. CLI tools like [Grype](https://github.com/anchore/grype) and [OSV-Scanner](https://google.github.io/osv-scanner/) provide point-in-time scanning, while [OWASP Dependency-Track](https://dependencytrack.org/) offers standalone continuous monitoring. See our [SBOM scanning guide]({{ site.url }}/2026/02/01/sbom-scanning-vulnerability-detection/) for details and our [resources page]({{ site.url }}/resources/) for a complete list of tools.
 
 3. **Dependency relationship mapping.** Both [CycloneDX](https://cyclonedx.org/) and [SPDX](https://spdx.dev/) support dependency relationship data, documenting which components depend on which others. This lets you trace the path from a vulnerable transitive dependency back to the direct dependency that brought it in.
 

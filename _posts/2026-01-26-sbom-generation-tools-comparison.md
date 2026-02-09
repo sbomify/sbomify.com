@@ -39,15 +39,15 @@ The following comparison covers the most widely used open source SBOM generation
 
 ### Overview
 
-| Tool                                                              | Maintainer            | Output Formats              | Input Sources                                    | License    |
-| ----------------------------------------------------------------- | --------------------- | --------------------------- | ------------------------------------------------ | ---------- |
+| Tool                                                              | Maintainer            | Output Formats              | Input Sources                                                                          | License    |
+| ----------------------------------------------------------------- | --------------------- | --------------------------- | -------------------------------------------------------------------------------------- | ---------- |
 | **[sbomify](https://sbomify.com)**                                | sbomify               | CycloneDX, SPDX             | Source directories, lock files, container images (via best-fit generator + enrichment) | Apache 2.0 |
-| **[Syft](https://github.com/anchore/syft)**                       | Anchore               | CycloneDX, SPDX, Syft JSON  | Source directories, container images, archives   | Apache 2.0 |
-| **[Trivy](https://github.com/aquasecurity/trivy)**                | Aqua Security         | CycloneDX, SPDX, Trivy JSON | Source directories, container images, VMs, K8s   | Apache 2.0 |
-| **[cdxgen](https://github.com/CycloneDX/cdxgen)**                 | CycloneDX / AppThreat | CycloneDX                   | Source directories, container images             | Apache 2.0 |
-| **[Microsoft SBOM Tool](https://github.com/microsoft/sbom-tool)** | Microsoft             | SPDX                        | Source directories, build outputs                | MIT        |
-| **CycloneDX CLI**                                                 | CycloneDX             | CycloneDX                   | Varies (ecosystem-specific)                      | Apache 2.0 |
-| **SPDX Tools**                                                    | Linux Foundation      | SPDX                        | Varies (ecosystem-specific)                      | Apache 2.0 |
+| **[Syft](https://github.com/anchore/syft)**                       | Anchore               | CycloneDX, SPDX, Syft JSON  | Source directories, container images, archives                                         | Apache 2.0 |
+| **[Trivy](https://github.com/aquasecurity/trivy)**                | Aqua Security         | CycloneDX, SPDX, Trivy JSON | Source directories, container images, VMs, K8s                                         | Apache 2.0 |
+| **[cdxgen](https://github.com/CycloneDX/cdxgen)**                 | CycloneDX / AppThreat | CycloneDX                   | Source directories, container images                                                   | Apache 2.0 |
+| **[Microsoft SBOM Tool](https://github.com/microsoft/sbom-tool)** | Microsoft             | SPDX                        | Source directories, build outputs                                                      | MIT        |
+| **CycloneDX CLI**                                                 | CycloneDX             | CycloneDX                   | Varies (ecosystem-specific)                                                            | Apache 2.0 |
+| **SPDX Tools**                                                    | Linux Foundation      | SPDX                        | Varies (ecosystem-specific)                                                            | Apache 2.0 |
 
 ### sbomify
 
