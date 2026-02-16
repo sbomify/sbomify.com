@@ -2,7 +2,7 @@
 layout: page
 permalink: /guides/yocto/
 title: "SBOM Generation Guide for Yocto - Embedded Linux"
-description: "Learn how to generate Software Bill of Materials for Yocto-based embedded Linux projects. Complete guide with SPDX output, bitbake integration, and quality analysis."
+description: "Learn how to generate Software Bill of Materials for Yocto-based embedded Linux projects. Complete guide covering SPDX 2.2 and SPDX 3.0.1 with bitbake integration."
 section: guides
 ---
 
@@ -19,17 +19,56 @@ Unlike application-level SBOMs generated from lockfiles, Yocto's SBOMs capture:
 
 This makes Yocto one of the most comprehensive SBOM solutions available for embedded Linux development.
 
+## Identifying Your Yocto Release
+
+Your Yocto release determines which SPDX versions are available. Starting with **scarthgap (Yocto 5.0, LTS)**, you can generate SPDX 3.0.1 documents alongside the existing SPDX 2.2 support.
+
+| Release                         | Default SPDX  | bbclass           | Output                         |
+| ------------------------------- | ------------- | ----------------- | ------------------------------ |
+| Honister (3.4) to pre-scarthgap | 2.2           | `create-spdx`     | Per-package SBOMs + index.json |
+| Scarthgap (5.0)+                | 2.2 (default) | `create-spdx`     | Per-package SBOMs + index.json |
+| Scarthgap with 3.0              | 3.0.1         | `create-spdx-3.0` | Single consolidated SBOM       |
+
+**Note:** SBOM support was first introduced in Yocto 3.4 (Honister). Releases before Honister do not have built-in SPDX generation.
+
+To check your release and current SPDX version:
+
+```bash
+# Check your Yocto release
+grep DISTRO_CODENAME meta-poky/conf/distro/poky.conf
+```
+
+```bash
+# Check the active SPDX version
+bitbake -e core-image-base | grep "^SPDX_VERSION="
+```
+
+See the [Yocto scarthgap documentation](https://docs.yoctoproject.org/scarthgap/) for full release details.
+
 ## Yocto's Built-in SBOM Generation
 
-Yocto has native SBOM support through the `create-spdx.bbclass`. It generates **SPDX 2.2** format SBOMs automatically during the build process.
+Yocto has native SBOM support through dedicated bbclasses that generate SPDX format SBOMs automatically during the build process.
 
 ### Enabling SBOM Generation
+
+#### SPDX 2.2 (Default)
 
 SBOM generation is typically enabled by default in modern Yocto releases. If not, add to your `local.conf`:
 
 ```bash
 INHERIT += "create-spdx"
 ```
+
+#### SPDX 3.0.1 (Scarthgap and Later)
+
+To switch to SPDX 3.0.1 on scarthgap or later, update your `local.conf`:
+
+```bash
+INHERIT:remove = "create-spdx"
+INHERIT += "create-spdx-3.0"
+```
+
+This replaces the default `create-spdx` class with the new `create-spdx-3.0` class, which produces a single consolidated SBOM instead of per-package files.
 
 ### Build and Extract SBOMs
 
@@ -49,6 +88,8 @@ tar --zstd -xvf tmp/deploy/images/*/*.spdx.tar.zst -C sboms/
 ```
 
 ### Understanding the Output
+
+#### SPDX 2.2
 
 Yocto generates a separate SBOM for each package:
 
@@ -79,25 +120,20 @@ The `index.json` file links all individual SBOMs together using SPDX document li
 }
 ```
 
-## SBOM Quality
+#### SPDX 3.0.1
 
-Yocto produces high-quality SBOMs. Using [sbomqs](https://github.com/interlynk-io/sbomqs) to analyze the output:
+With `create-spdx-3.0`, Yocto produces a single consolidated SBOM containing all packages in one document. There is no `index.json` — everything is in a single file:
 
 ```bash
-$ sbomqs score bash.spdx.json
-SBOM Quality by Interlynk Score: 7.0
+$ ls sboms/
+core-image-minimal.spdx.json
 ```
 
-Key quality attributes:
-
-- ✅ Component names and versions
-- ✅ Supplier information
-- ✅ Unique identifiers
-- ✅ Creation timestamps
-- ✅ Valid SPDX licenses
-- ✅ File-level checksums
+This is a significant simplification over the per-package approach in SPDX 2.2.
 
 ## SBOM Structure
+
+### SPDX 2.2
 
 Each package SBOM includes detailed metadata:
 
@@ -128,71 +164,34 @@ Each package SBOM includes detailed metadata:
 }
 ```
 
-## Working with Yocto SBOMs
+### SPDX 3.0.1
 
-### Merging SBOMs
+SPDX 3.0.1 uses a different top-level structure with a `@graph` array containing all elements in a single document:
 
-Since Yocto generates per-package SBOMs, you may want to merge them for distribution:
-
-```bash
-# Using sbomasm from Interlynk
-sbomasm assemble -i sboms/*.spdx.json -o combined-sbom.spdx.json
-
-# Or use the index.json for document linking
+```json
+{
+  "@context": "https://spdx.org/rdf/3.0.1/spdx-context.jsonld",
+  "@graph": [
+    {
+      "type": "SpdxDocument",
+      "spdxId": "SPDXRef-DOCUMENT",
+      "creationInfo": {
+        "created": "2025-02-18T21:58:47Z",
+        "createdBy": ["Tool: OpenEmbedded Core create-spdx-3.0.bbclass"],
+        "specVersion": "3.0.1"
+      }
+    },
+    {
+      "type": "software_Package",
+      "spdxId": "SPDXRef-Package-bash",
+      "name": "bash",
+      "software_packageVersion": "5.2.21"
+    }
+  ]
+}
 ```
 
-### Converting to CycloneDX
-
-If you need CycloneDX format:
-
-```bash
-# Using cyclonedx-cli
-cyclonedx convert --input-file bash.spdx.json --output-file bash.cdx.json
-```
-
-### Quality Analysis
-
-Analyze your SBOMs before distribution:
-
-```bash
-# Using sbomqs
-sbomqs score *.spdx.json
-
-# Using sbomaudit
-sbomaudit -i combined-sbom.spdx.json
-```
-
-## Enrichment and Augmentation with sbomify
-
-While Yocto generates high-quality SBOMs natively, you can use the [sbomify GitHub Action](https://github.com/sbomify/github-action/) to enrich and augment them further. The action accepts existing SBOMs via the `SBOM_FILE` input.
-
-**Standalone (enrichment only, no account needed):**
-
-```yaml
-- uses: sbomify/github-action@master
-  env:
-    SBOM_FILE: sboms/combined-sbom.spdx.json
-    OUTPUT_FILE: enriched-sbom.cdx.json
-    ENRICH: true
-    UPLOAD: false
-```
-
-**With sbomify platform (enrichment + augmentation):**
-
-```yaml
-- uses: sbomify/github-action@master
-  env:
-    TOKEN: ${%raw%}{{ secrets.SBOMIFY_TOKEN }}{%endraw%}
-    COMPONENT_ID: my-yocto-image
-    SBOM_FILE: sboms/combined-sbom.spdx.json
-    OUTPUT_FILE: enriched-sbom.cdx.json
-    ENRICH: true
-    AUGMENT: true
-```
-
-This enriches the Yocto-generated SBOM with additional package metadata from public registries and optionally augments it with your business metadata (supplier, authors, licenses) from sbomify.
-
-sbomify also supports [SBOM hierarchy]({{ site.url }}/features/sbom-hierarchy/) natively, replacing the need for `index.json` with a more flexible structure.
+All packages, files, and relationships are consolidated into the single `@graph` array instead of being spread across separate documents.
 
 ## CI/CD Integration
 
@@ -232,24 +231,32 @@ build-image:
 
 ## Best Practices
 
-1. **Enable SBOM generation by default** - Add `create-spdx` to your distro configuration
-2. **Archive SBOMs with releases** - Store SBOMs alongside your image artifacts
-3. **Validate before distribution** - Use sbomqs to check SBOM quality
+1. **Enable SBOM generation by default** - Add `create-spdx` (or `create-spdx-3.0` on scarthgap+) to your distro configuration
+2. **Prefer SPDX 3.0.1 on scarthgap and later** - The consolidated output simplifies distribution and eliminates the need for merging
+3. **Archive SBOMs with releases** - Store SBOMs alongside your image artifacts
 4. **Consider hierarchy** - Use sbomify's hierarchy support for complex products
 5. **Track package updates** - Map components to track changes across releases
 6. **Sign your SBOMs** - Add cryptographic signatures for authenticity
 
 ## Limitations
 
-- **SPDX only** - Yocto generates SPDX 2.2 format only (no CycloneDX)
-- **Per-package SBOMs** - May need merging for simpler distribution
+- **SPDX only** - Yocto generates SPDX format only (no native CycloneDX)
+- **Per-package SBOMs (SPDX 2.2)** - May need merging for simpler distribution (resolved in SPDX 3.0.1)
 - **No runtime dependencies** - Only captures build-time components
+- **Large SPDX 3.0.1 documents** - The consolidated single-file output can easily exceed 50 MB for full images, which may cause issues with some tools and storage systems
+- **SPDX 3.0 tooling maturity** - Some downstream tools may not yet fully support SPDX 3.0.1; verify your toolchain before switching
 
 ## Further Reading
 
 Related blog posts:
 
 - [Mastering SBOM Generation with Yocto]({{ site.url }}/2025/02/21/mastering-sbom-generation-with-yocto/) - Deep dive into Yocto's SPDX generation and quality analysis
+- [Exploring the New SPDX 3.0]({{ site.url }}/2024/04/28/exploring-the-new-spdx-3-0-a-game-changer-for-sboms/) - Overview of what SPDX 3.0 brings to the table
+- [What's New in SPDX 3: Enhanced Referencing]({{ site.url }}/2024/07/22/whats-new-in-spdx-3-enhanced-referencing-capabilities/) - Deep dive into SPDX 3.0 referencing capabilities
+
+Additional resources:
+
+- [Yocto scarthgap documentation](https://docs.yoctoproject.org/scarthgap/)
 
 ## Further Resources
 
