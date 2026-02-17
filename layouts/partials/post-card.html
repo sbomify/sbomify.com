@@ -6,7 +6,7 @@
 >
   <div class="flex-grow">
     <h4 class="text-2xl font-semibold leading-tight mb-4 group-hover:text-[#8A7DFF] transition-colors duration-200 {{ if $dark }}text-white{{ else }}text-primaryText{{ end }}">
-      {{ $post.Title | htmlEscape | truncate 180 }}
+      {{ $post.Title | truncate 180 }}
     </h4>
     <p class="text-base leading-relaxed line-clamp-3 {{ if $dark }}text-gray-300{{ else }}text-secondaryText{{ end }}">{{ $post.Summary | plainify | truncate 140 "..." }}</p>
   </div>
