@@ -2,7 +2,8 @@
 
 title: "The MIT License: A Complete Guide for Developers"
 description: "Understand the MIT License — what it permits, what it requires, how it compares to BSD and Apache 2.0, and how SBOMs help track MIT license compliance."
-category: education
+categories:
+  - education
 tags: [mit, licensing, open-source, compliance]
 tldr: "The MIT License is the most popular open source license, allowing virtually unrestricted use, modification, and distribution with only an attribution requirement. SBOMs track MIT-licensed components across your dependency tree, ensuring attribution obligations are met at scale."
 author:

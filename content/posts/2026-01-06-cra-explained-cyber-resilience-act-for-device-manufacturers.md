@@ -4,7 +4,8 @@ title: "CRA Explained: What the Cyber Resilience Act Means for Device Manufactur
 description: "Podcast episode with EU CRA expert Sarah Fluchs explaining SBOM requirements, the 5-year support mandate, and vulnerability management for device manufacturers."
 author:
   display_name: Viktor Petersson
-category: podcast
+categories:
+  - podcast
 tags: [CRA, compliance, security, sbom]
 date: 2026-01-06
 slug: cra-explained-cyber-resilience-act-for-device-manufacturers

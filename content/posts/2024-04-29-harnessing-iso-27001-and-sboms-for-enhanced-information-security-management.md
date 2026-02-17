@@ -2,7 +2,8 @@
 
 title: Harnessing ISO 27001 and SBOMs for Enhanced Information Security Management
 description: "How to integrate SBOMs into ISO 27001 information security management systems for better risk assessment, compliance auditing, and vendor management."
-category: compliance
+categories:
+  - compliance
 tags: [sbom, iso27001, security]
 author:
   display_name: Cowboy Neil

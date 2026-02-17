@@ -2,7 +2,8 @@
 
 title: "Streamlining Open Source License Compliance in M&A: Unveiling the sbomify Advantage"
 description: "Learn how sbomify simplifies open source license compliance during M&A due diligence by automating SBOM analysis to identify GPLv3 and other non-permissive licenses."
-category: compliance
+categories:
+  - compliance
 tags: [sbom, open-source, licenses, mergers-acquisitions]
 author:
   display_name: Cowboy Neil

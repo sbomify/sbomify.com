@@ -12,7 +12,8 @@ wordpress_id: 259
 wordpress_url: https://sbomify.com/?p=259
 date: '2024-06-04 14:52:07 +0200'
 date_gmt: '2024-06-04 14:52:07 +0200'
-category: news
+categories:
+  - news
 tags: [sbom, docker, containers]
 comments: []
 slug: get-the-latest-sboms-from-the-top-15-most-popular-images-on-docker-hub

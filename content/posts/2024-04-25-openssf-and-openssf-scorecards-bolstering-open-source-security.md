@@ -2,7 +2,8 @@
 
 title: 'OpenSSF and OpenSSF Scorecards: Bolstering Open Source Security'
 description: "Introduction to the Open Source Security Foundation and OpenSSF Scorecards, automated tools that assess the security health of open source projects."
-category: education
+categories:
+  - education
 tags: [openssf, security, open-source]
 author:
   display_name: Cowboy Neil

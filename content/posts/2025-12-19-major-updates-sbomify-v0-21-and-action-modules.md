@@ -4,7 +4,8 @@ title: "Major Updates: sbomify v0.21 and Action Module v0.8 & v0.9"
 description: "Triple release: sbomify v0.21 with vulnerability trends dashboard, plus GitHub Action v0.8 and v0.9 featuring modular generation plugins and 8 enrichment data sources."
 author:
   display_name: Viktor Petersson
-category: announcement
+categories:
+  - announcement
 tags: [sbom, release, github-actions]
 date: 2025-12-19
 slug: major-updates-sbomify-v0-21-and-action-modules

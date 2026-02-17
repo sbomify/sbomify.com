@@ -4,7 +4,8 @@ title: "Big update to our GitHub Action"
 description: "Major overhaul of sbomify GitHub Action transforming it from a simple upload tool to a complete SBOM Swiss Army knife with generation, augmentation, and enrichment."
 author:
   display_name: Viktor Petersson
-category: announcement
+categories:
+  - announcement
 tags: [sbom, github-actions]
 date: 2024-10-04
 slug: github-action-update

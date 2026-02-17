@@ -12,7 +12,8 @@ wordpress_id: 208
 wordpress_url: https://sbomify.com/?p=208
 date: '2024-04-13 11:49:21 +0200'
 date_gmt: '2024-04-13 11:49:21 +0200'
-category: news
+categories:
+  - news
 tags: [security, xz, supply-chain]
 comments: []
 slug: what-really-happened-to-xz

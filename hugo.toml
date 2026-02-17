@@ -20,10 +20,9 @@ ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfi
   [permalinks.section]
     posts = "/blog/"
 
-# Disable taxonomy pages (production Jekyll site doesn't generate them)
 [taxonomies]
   tag = "tags"
-  # category = "categories"  # disabled: not in production
+  category = "categories"
 
 # Markdown: goldmark with raw HTML enabled (matches kramdown behavior)
 [markup]

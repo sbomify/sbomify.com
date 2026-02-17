@@ -4,7 +4,8 @@ title: "Introducing sbomify: Revolutionizing SBOM Management"
 description: "Announcing the launch of sbomify, a platform for automated SBOM management and sharing that integrates with CI/CD pipelines to ensure stakeholders always have the latest SBOMs."
 author:
   display_name: Viktor Petersson
-category: announcement
+categories:
+  - announcement
 tags: [sbom, security]
 date: 2024-08-29
 slug: launching-sbomify

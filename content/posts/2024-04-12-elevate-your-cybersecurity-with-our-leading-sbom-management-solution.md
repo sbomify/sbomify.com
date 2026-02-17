@@ -2,7 +2,8 @@
 
 title: Elevate Your Cybersecurity with Our Leading SBOM Management Solution
 description: "How sbomify's SBOM management platform helps organizations comply with Executive Order 14028 through comprehensive visibility, vulnerability management, and streamlined reporting."
-category: education
+categories:
+  - education
 tags: [sbom, security]
 author:
   display_name: Cowboy Neil

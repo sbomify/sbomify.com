@@ -2,7 +2,8 @@
 
 title: 'Understanding the EU Cyber Resilience Act: The Role of SBOMs in Enhancing Cybersecurity'
 description: "Comprehensive guide to the EU Cyber Resilience Act explaining SBOM requirements for digital products, implementation best practices, and compliance strategies."
-category: compliance
+categories:
+  - compliance
 tags: [CRA, security, sbom, standards]
 author:
   display_name: Cowboy Neil

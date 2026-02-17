@@ -2,7 +2,8 @@
 
 title: "What Is a Dependency in Software? A Beginner's Guide"
 description: "Learn what software dependencies are, the difference between direct and transitive dependencies, how dependency trees work, and how SBOMs document them."
-category: education
+categories:
+  - education
 tags: [dependencies, security, sbom, supply-chain]
 tldr: "A dependency is any external component your software relies on to function — from direct imports to deeply nested transitive packages. SBOMs document the full dependency graph, making it possible to track vulnerabilities and license obligations across every layer."
 author:

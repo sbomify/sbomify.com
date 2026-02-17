@@ -2,7 +2,8 @@
 
 title: Comprehensive Guide to Generating and Understanding SBOMs with Docker and Django-CMS
 description: "Practical walkthrough of generating SBOMs from Docker containers and Python projects using Django-CMS as an example, covering cyclonedx-python, docker sbom, and transitive dependencies."
-category: guide
+categories:
+  - guide
 tags: [sbom, docker, django, tutorial]
 author:
   display_name: Cowboy Neil

@@ -29,19 +29,21 @@
         <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
           {{ .Date.Format "January 2, 2006" }}
         </time>
-        {{ with .Params.category }}
+        {{ with .GetTerms "categories" }}
+        {{ range . }}
         <span class="text-gray-500">&bull;</span>
-        <span class="capitalize">{{ . }}</span>
+        <a href="{{ .RelPermalink }}" class="capitalize text-gray-300 hover:text-white transition-colors underline underline-offset-2">{{ .LinkTitle }}</a>
         {{ end }}
+      {{ end }}
       </div>
 
-      {{ with .Params.tags }}{{ if gt (len .) 0 }}
+      {{ with .GetTerms "tags" }}
       <div class="flex flex-wrap items-center justify-center gap-2">
         {{ range . }}
-        <span class="px-3 py-1 text-sm bg-[#8A7DFF]/20 text-[#8A7DFF] rounded-full">{{ . }}</span>
+        <a href="{{ .RelPermalink }}" class="px-3 py-1 text-sm bg-[#8A7DFF]/20 text-[#8A7DFF] hover:bg-[#8A7DFF]/30 rounded-full no-underline transition-colors">{{ .LinkTitle }}</a>
         {{ end }}
       </div>
-      {{ end }}{{ end }}
+      {{ end }}
     </div>
   </div>
 

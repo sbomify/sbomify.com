@@ -2,7 +2,8 @@
 
 title: "SBOM Formats Compared: CycloneDX vs SPDX"
 description: "A practical comparison of CycloneDX and SPDX SBOM formats covering history, governance, field differences, tooling, compliance preferences, and when to use which."
-category: education
+categories:
+  - education
 tags: [sbom, cyclonedx, spdx, formats]
 tldr: "CycloneDX and SPDX are the two industry-standard SBOM formats. CycloneDX is security-focused with a compact model and native vulnerability support; SPDX is compliance-focused with deep license documentation. Most modern tools support both, and major compliance frameworks accept either."
 author:

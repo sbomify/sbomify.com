@@ -174,7 +174,7 @@
     "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
     "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
     "keywords": [{{ range $i, $tag := .Params.tags }}{{ if $i }},{{ end }}"{{ $tag }}"{{ end }}],
-    "articleSection": "{{ with .Params.categories }}{{ index . 0 }}{{ else }}{{ .Params.category }}{{ end }}",
+    "articleSection": "{{ with .Params.categories }}{{ index . 0 }}{{ end }}",
     "wordCount": "{{ .WordCount }}",
     "inLanguage": "en-US",
     "speakable": {

@@ -12,7 +12,8 @@ wordpress_id: 200
 wordpress_url: https://sbomify.com/?p=200
 date: '2024-04-11 13:15:33 +0200'
 date_gmt: '2024-04-11 13:15:33 +0200'
-category: compliance
+categories:
+  - compliance
 tags: [nist, security, standards]
 comments: []
 slug: introducing-the-nist-cybersecurity-framework-csf-2-0

@@ -3,7 +3,8 @@
 title: "Mastering SBOM Generation with Yocto"
 description: "Deep dive into Yocto's built-in SPDX 2.2 SBOM generation, analyzing output quality with sbomqs and integrating with sbomify for SBOM lifecycle management."
 date: 2025-02-21 09:00:00 +0000
-category: guide
+categories:
+  - guide
 tags: [sbom, yocto, linux, embedded]
 author:
   display_name: Viktor Petersson

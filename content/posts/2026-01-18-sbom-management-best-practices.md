@@ -2,7 +2,8 @@
 
 title: "SBOM Management: How to Organize, Track, and Act on Your SBOMs"
 description: "Learn how to manage SBOMs across the full lifecycle — from generation and storage to vulnerability monitoring, versioning, and distribution to consumers."
-category: education
+categories:
+  - education
 tags: [sbom, management, vulnerability, compliance]
 tldr: "Generating an SBOM is only the first step — you also need to store, version, distribute, and continuously monitor it. Effective SBOM management means automating generation in CI/CD, setting up vulnerability alerting, and keeping SBOMs current as your software evolves."
 author:

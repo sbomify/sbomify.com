@@ -4,7 +4,8 @@ title: "Announcing sbomify v0.25: The One with Attestations"
 description: "sbomify v0.25 introduces GitHub Attestation verification via Sigstore/cosign, SPDX 2.3 export, product lifecycle tracking, and compliance badges."
 author:
   display_name: Viktor Petersson
-category: announcement
+categories:
+  - announcement
 tags: [sbom, release, attestation, spdx, compliance]
 date: 2026-01-23
 slug: announcing-sbomify-v0-25-the-one-with-attestations

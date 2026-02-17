@@ -2,7 +2,8 @@
 
 title: 'Demystifying SBOMs: The Backbone of Modern Software Security'
 description: "An introduction to Software Bill of Materials (SBOMs), explaining what they are, their types (SPDX, CycloneDX, SWID), how to generate them, and their role in vulnerability audits."
-category: education
+categories:
+  - education
 tags: [sbom, security, intro]
 author:
   display_name: Cowboy Neil

@@ -2,7 +2,8 @@
 
 title: "Software Composition Analysis (SCA): What It Is and How SBOMs Fit In"
 description: "Learn what software composition analysis is, how SCA tools work, how SCA compares to SAST and DAST, and how SBOMs complement SCA for full supply chain visibility."
-category: education
+categories:
+  - education
 tags: [sca, security, vulnerability, sbom]
 tldr: "Software Composition Analysis (SCA) identifies open source components in your codebase and checks them for known vulnerabilities and license issues. SBOMs complement SCA by providing a standardized, shareable inventory that feeds into continuous monitoring and compliance workflows."
 author:

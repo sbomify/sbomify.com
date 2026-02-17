@@ -2,7 +2,8 @@
 
 title: "Software Development Life Cycle (SDLC): A Complete Guide"
 description: "Learn what the Software Development Life Cycle (SDLC) is, its phases and models, and how SBOMs integrate into each stage for security and compliance."
-category: education
+categories:
+  - education
 tags: [sdlc, security, compliance, devsecops]
 tldr: "The Software Development Life Cycle (SDLC) defines the phases software goes through from planning to retirement. Integrating SBOMs and security checks at each phase — especially during build and deployment — catches vulnerabilities early and satisfies compliance frameworks like the EU CRA and EO 14028."
 author:

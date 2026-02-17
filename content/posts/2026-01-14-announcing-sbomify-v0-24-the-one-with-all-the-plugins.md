@@ -4,7 +4,8 @@ title: "Announcing sbomify v0.24: The One with All the Plugins"
 description: "sbomify v0.24 introduces a powerful plugin-based assessment framework supporting security, license, compliance, and attestation plugins. Ships with NTIA, CISA, CRA, and FDA compliance plugins out of the box."
 author:
   display_name: Viktor Petersson
-category: announcement
+categories:
+  - announcement
 tags: [sbom, release, compliance, plugins]
 date: 2026-01-14
 slug: announcing-sbomify-v0-24-the-one-with-all-the-plugins

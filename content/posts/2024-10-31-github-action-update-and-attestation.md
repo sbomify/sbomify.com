@@ -4,7 +4,8 @@ title: "GitHub Action module with Attestation"
 description: "New features in sbomify's GitHub Action including Dart lockfile support, Docker image SBOMs, NTIA enrichment, and SLSA build provenance attestation."
 author:
   display_name: Viktor Petersson
-category: announcement
+categories:
+  - announcement
 tags: [sbom, github-actions, docker, attestation]
 date: 2024-10-31
 slug: github-action-update-and-attestation

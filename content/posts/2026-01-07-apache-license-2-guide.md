@@ -2,7 +2,8 @@
 
 title: "Apache License 2.0: What It Is, How It Works, and What It Means for Your Software"
 description: "Understand the Apache License 2.0, its patent grant, attribution requirements, NOTICE file, compatibility with GPL, and how SBOMs track compliance."
-category: education
+categories:
+  - education
 tags: [apache, licensing, open-source, compliance]
 tldr: "The Apache License 2.0 is a permissive open source license that includes an explicit patent grant and requires attribution through NOTICE files. It is compatible with most other licenses, and SBOMs help ensure your projects track Apache-licensed components and their attribution requirements."
 author:

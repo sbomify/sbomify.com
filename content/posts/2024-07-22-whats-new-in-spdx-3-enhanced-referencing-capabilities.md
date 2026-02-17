@@ -2,7 +2,8 @@
 
 title: "What's New in SPDX 3: Enhanced Referencing Capabilities"
 description: "SPDX 3 draft introduces nested references, cross-document references, and improved relationship types to match CycloneDX capabilities for complex SBOM management."
-category: education
+categories:
+  - education
 tags: [spdx, sbom, standards]
 author:
   display_name: Cowboy Neil

@@ -4,7 +4,8 @@ title: "Exploring the Future of Software Security: Join Us at BSides Bristol"
 description: "sbomify presents 'Navigating the SBOM Landscape: Formats, Relevance, and Tooling in 2024' at BSides Bristol, covering SPDX, CycloneDX, and current SBOM tooling."
 author:
   display_name: Viktor Petersson
-category: news
+categories:
+  - news
 tags: [sbom, security, conference]
 date: 2024-08-26
 slug: bsides-bristol

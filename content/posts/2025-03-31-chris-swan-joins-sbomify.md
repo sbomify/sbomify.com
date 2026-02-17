@@ -3,7 +3,8 @@
 title: "Chris Swan Joins sbomify Advisory Board"
 description: "Chris Swan, Engineer at Atsign and former CTO at UBS, joins sbomify's advisory board bringing DevOps, open source, and cybersecurity expertise."
 date: 2025-02-21 09:00:00 +0000
-category: announcement
+categories:
+  - announcement
 tags: [team]
 author:
   display_name: Viktor Petersson

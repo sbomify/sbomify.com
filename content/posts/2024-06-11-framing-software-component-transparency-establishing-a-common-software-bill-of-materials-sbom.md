@@ -13,7 +13,8 @@ wordpress_id: 263
 wordpress_url: https://sbomify.com/?p=263
 date: '2024-06-11 08:03:32 +0200'
 date_gmt: '2024-06-11 08:03:32 +0200'
-category: education
+categories:
+  - education
 tags: [sbom, supply-chain, ntia]
 comments: []
 slug: framing-software-component-transparency-establishing-a-common-software-bill-of-materials-sbom

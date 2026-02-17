@@ -2,7 +2,8 @@
 
 title: "The GPL License: A Comprehensive Guide to the GNU General Public License"
 description: "Understand the GPL license, including GPL v2 vs v3, copyleft obligations, LGPL, AGPL, commercial use, and how SBOMs track GPL compliance."
-category: education
+categories:
+  - education
 tags: [gpl, licensing, open-source, compliance]
 tldr: "The GNU General Public License (GPL) is a copyleft license that requires derivative works to be distributed under the same terms. Understanding GPL v2 vs v3, LGPL, and AGPL obligations is critical for compliance — and SBOMs help track which components carry GPL requirements."
 author:

@@ -5,7 +5,8 @@ description: "How Raspberry Pi's rpi-image-gen tool generates SPDX SBOMs out of 
 date: 2025-04-17
 author:
   display_name: Viktor Petersson
-category: news
+categories:
+  - news
 tags: [sbom, raspberry-pi, embedded, spdx]
 slug: unpacking-raspberry-pi-s-built-in-sbom-magic
 ---

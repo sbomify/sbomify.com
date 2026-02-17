@@ -12,7 +12,8 @@ wordpress_id: 272
 wordpress_url: https://sbomify.com/?p=272
 date: '2024-07-09 15:04:57 +0200'
 date_gmt: '2024-07-09 15:04:57 +0200'
-category: education
+categories:
+  - education
 tags: [sbom, obom, iot, compliance]
 comments: []
 slug: the-role-of-sboms-in-an-obom-ensuring-compliance-and-security-in-smart-thermometer-development

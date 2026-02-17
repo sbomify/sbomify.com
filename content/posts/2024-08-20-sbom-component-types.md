@@ -4,7 +4,8 @@ title: "Comparing SBOM Formats: Focus on Component Types in CycloneDX vs. SPDX"
 description: "A detailed comparison of CycloneDX and SPDX SBOM formats, analyzing their support for applications, libraries, containers, operating systems, and SaaS components."
 author:
   display_name: Cowboy Neil
-category: education
+categories:
+  - education
 tags: [sbom, standards, security]
 date: 2024-08-20
 slug: sbom-component-types

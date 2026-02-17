@@ -12,7 +12,8 @@ wordpress_id: 197
 wordpress_url: https://sbomify.com/?p=197
 date: '2024-04-10 19:13:20 +0200'
 date_gmt: '2024-04-10 19:13:20 +0200'
-category: education
+categories:
+  - education
 tags: [cbom, cryptography, security]
 comments: []
 slug: future-proofing-cybersecurity-with-the-cryptography-bill-of-materials-cbom

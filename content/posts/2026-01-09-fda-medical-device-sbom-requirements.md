@@ -4,7 +4,8 @@ title: "FDA Medical Device SBOM Requirements: What the New Cybersecurity Guidanc
 description: "Breakdown of the FDA's June 2025 guidance on medical device cybersecurity, explaining SBOM requirements, premarket submission expectations, and compliance strategies."
 author:
   display_name: Viktor Petersson
-category: compliance
+categories:
+  - compliance
 tags: [sbom, fda, medical-devices, cybersecurity, compliance]
 date: 2026-01-09
 slug: fda-medical-device-sbom-requirements

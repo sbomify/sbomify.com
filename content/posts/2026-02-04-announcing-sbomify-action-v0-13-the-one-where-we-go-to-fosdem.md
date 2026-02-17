@@ -4,7 +4,8 @@ title: "Announcing sbomify-action v0.13: The One Where We Go to FOSDEM"
 description: "sbomify-action v0.13 brings hash enrichment from lockfiles, an interactive configuration wizard, Conan Center integration for C/C++, and improved NTIA compliance with supplier fields and PURL generation from VCS URLs."
 author:
   display_name: Viktor Petersson
-category: announcement
+categories:
+  - announcement
 tags: [sbom, release, github-actions, fosdem, compliance]
 date: 2026-02-04
 slug: announcing-sbomify-action-v0-13-the-one-where-we-go-to-fosdem

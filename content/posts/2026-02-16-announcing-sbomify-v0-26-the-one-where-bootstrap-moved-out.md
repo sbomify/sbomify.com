@@ -3,7 +3,8 @@ title: "Announcing sbomify v0.26: The One Where Bootstrap Moved Out"
 description: "sbomify v0.26 delivers a faster, more accessible UI, real-time dashboard updates, BSI TR-03183-2 compliance, and GDPR self-service account deletion."
 author:
   display_name: Viktor Petersson
-category: announcement
+categories:
+  - announcement
 tags: [sbom, release, tailwind, websocket, compliance, gdpr]
 tldr: "sbomify v0.26 delivers a faster and more accessible UI, real-time dashboard updates, BSI TR-03183-2 compliance for the German market, GDPR self-service account deletion, and fine-grained access control for components and documents."
 date: 2026-02-16

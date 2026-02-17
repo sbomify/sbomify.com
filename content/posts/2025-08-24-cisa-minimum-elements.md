@@ -3,7 +3,8 @@
 title: "CISA's Minimum Elements now in Draft"
 description: "Analysis of CISA's 2025 draft SBOM Minimum Elements update, adding required hash, license, and tool provenance fields to succeed the 2021 NTIA guidance."
 date: 2025-08-23 09:00:00 +0000
-category: news
+categories:
+  - news
 tags: [sbom, cisa, standards]
 author:
   display_name: Viktor Petersson

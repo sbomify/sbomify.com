@@ -2,7 +2,8 @@
 
 title: "The Role of SBOMs in Cybersecurity: From Visibility to Vulnerability Response"
 description: "Learn how SBOMs strengthen cybersecurity through component visibility, vulnerability management, incident response, and compliance with EO 14028, EU CRA, and more."
-category: education
+categories:
+  - education
 tags: [sbom, cybersecurity, vulnerability, compliance]
 tldr: "SBOMs strengthen cybersecurity by providing the component visibility needed for vulnerability management, incident response, and compliance. When the next Log4Shell hits, an SBOM tells you in minutes whether you are affected — instead of days or weeks."
 author:

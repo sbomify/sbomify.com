@@ -4,7 +4,8 @@ title: "Understanding in-toto: Securing the Software Supply Chain"
 description: "Introduction to in-toto, the open-source framework from NYU for securing software supply chains through layout definitions, signed link metadata, and verification."
 author:
   display_name: Cowboy Neil
-category: education
+categories:
+  - education
 tags: [in-toto, security, supply-chain]
 date: 2024-08-14
 slug: what-is-in-toto

@@ -2,7 +2,8 @@
 
 title: Enhancing SBOM Management for Buyers with sbomify
 description: "How sbomify transforms SBOM management for CTOs and CISOs with centralized portals, automated vulnerability checks, and direct supplier communication."
-category: education
+categories:
+  - education
 tags: [sbom, buyers, procurement]
 author:
   display_name: Cowboy Neil

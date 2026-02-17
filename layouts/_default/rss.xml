@@ -35,9 +35,6 @@
       {{- range .Params.categories }}
       <category>{{ . }}</category>
       {{- end }}
-      {{- with .Params.category }}
-      <category>{{ . }}</category>
-      {{- end }}
     </item>
     {{- end }}
   </channel>

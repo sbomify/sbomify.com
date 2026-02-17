@@ -2,7 +2,8 @@
 
 title: 'Exploring the New SPDX 3.0: A Game Changer for SBOMs'
 description: "Overview of SPDX 3.0 improvements including enhanced compatibility, improved accuracy, streamlined automation, and broader software package support for SBOM generation."
-category: education
+categories:
+  - education
 tags: [sbom, spdx, standards]
 author:
   display_name: Cowboy Neil

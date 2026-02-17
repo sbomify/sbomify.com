@@ -4,7 +4,8 @@ title: "Announcing sbomify v0.20: Custom Domains & Streamlined Onboarding"
 description: "sbomify v0.20 release featuring custom domain support for Trust Centers, redesigned onboarding wizard, team invitation improvements, and security hardening."
 author:
   display_name: Viktor Petersson
-category: announcement
+categories:
+  - announcement
 tags: [sbom, release]
 date: 2025-12-12
 slug: announcing-sbomify-0-20

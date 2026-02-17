@@ -6,7 +6,8 @@ author:
   display_name: Cowboy Neil
 author_login: Cowboy Neil
 date: '2024-07-31 09:00:35 +0200'
-category: education
+categories:
+  - education
 tags: [dependencies, security, devops]
 comments: []
 slug: what-is-lock-file-drift

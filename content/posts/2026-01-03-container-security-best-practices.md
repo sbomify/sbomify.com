@@ -2,7 +2,8 @@
 
 title: "Container Security: Best Practices for Securing Docker and Kubernetes"
 description: "A comprehensive guide to container security covering image scanning, runtime protection, network policies, and how SBOMs provide component visibility."
-category: education
+categories:
+  - education
 tags: [container, docker, kubernetes, security]
 tldr: "Container security requires a layered approach: minimal base images, vulnerability scanning, least-privilege runtime, and network policies. Generating separate SBOMs for the base image and application layers — rather than one monolithic SBOM — gives you targeted visibility for vulnerability triage and compliance audits."
 author:

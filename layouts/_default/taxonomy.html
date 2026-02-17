@@ -1,0 +1,26 @@
+{{ define "main" }}
+<div>
+  <div class="bg-primaryBG relative overflow-hidden px-5 py-16 lg:py-24 lg:px-24">
+    <!-- Subtle gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#8A7DFF]/5 via-transparent to-transparent pointer-events-none"></div>
+
+    <div class="relative max-w-4xl mx-auto text-center">
+      <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+        <span class="text-gradient">{{ .Title }}</span>
+      </h1>
+    </div>
+  </div>
+
+  <div class="bg-[#F6F9FA]">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+      <div class="flex flex-wrap gap-3 justify-center">
+        {{ range .Pages }}
+        <a href="{{ .RelPermalink }}" class="px-4 py-2 bg-white border border-gray-200 hover:border-[#8A7DFF] text-primaryText hover:text-[#8A7DFF] rounded-full font-medium transition-all duration-200 no-underline capitalize">
+          {{ .LinkTitle }} <span class="text-gray-400 text-sm">({{ len .Pages }})</span>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

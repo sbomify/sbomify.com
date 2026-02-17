@@ -4,7 +4,8 @@ title: "Announcing sbomify-action v0.11: The One Where They Go to PyPI"
 description: "sbomify-action v0.11 transforms from a CI-only tool into a fully-fledged CLI available on PyPI. Major additions include audit trails for compliance, SPDX format support, a pre-computed license database covering 28 Linux distro versions, and native Rust SBOM generation."
 author:
   display_name: Viktor Petersson
-category: announcement
+categories:
+  - announcement
 tags: [sbom, release, github-actions, pypi, cli]
 date: 2026-01-20
 slug: announcing-sbomify-action-v0-11-the-one-where-they-go-to-pypi

@@ -9,7 +9,8 @@ wordpress_id: 175
 wordpress_url: https://sbomify.com/?p=175
 date: '2024-04-07 11:32:45 +0200'
 date_gmt: '2024-04-07 11:32:45 +0200'
-category: guide
+categories:
+  - guide
 tags: [sbom, tutorial]
 comments: []
 slug: how-to-create-an-sbom

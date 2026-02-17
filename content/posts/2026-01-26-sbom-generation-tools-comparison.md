@@ -2,7 +2,8 @@
 
 title: "SBOM Generation Tools Compared: Syft, Trivy, cdxgen, and More"
 description: "Compare the leading SBOM generation tools — Syft, Trivy, cdxgen, Microsoft SBOM Tool, and CycloneDX CLI — covering format support, ecosystems, and CI/CD integration."
-category: education
+categories:
+  - education
 tags: [sbom, tools, generation, comparison]
 tldr: "The leading SBOM generation tools — Syft, Trivy, cdxgen, and Microsoft SBOM Tool — differ in language support, output formats, and integration options. This comparison covers their strengths, limitations, and which tool fits your ecosystem best."
 author:

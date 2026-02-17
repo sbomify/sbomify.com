@@ -12,7 +12,8 @@ wordpress_id: 234
 wordpress_url: https://sbomify.com/?p=234
 date: '2024-05-13 10:20:11 +0200'
 date_gmt: '2024-05-13 10:20:11 +0200'
-category: education
+categories:
+  - education
 tags: [sbom, sharing, best-practices]
 comments: []
 slug: enhancing-sbom-sharing-a-look-at-current-practices-and-the-role-of-sbomify

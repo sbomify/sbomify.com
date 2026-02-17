@@ -5,7 +5,8 @@ description: "Tutorial on generating CycloneDX SBOMs for Python projects using p
 author:
   display_name: Viktor Petersson
 date: '2024-07-30 09:00:35 +0200'
-category: guide
+categories:
+  - guide
 tags: [sbom, python, cyclonedx, security]
 comments: []
 slug: generate-sboms-for-python-packages-with-pipdeptree-and-cyclonedx-py

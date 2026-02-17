@@ -12,7 +12,8 @@ wordpress_id: 142
 wordpress_url: https://sbomify.com/?p=142
 date: '2024-04-03 13:54:17 +0200'
 date_gmt: '2024-04-03 13:54:17 +0200'
-category: education
+categories:
+  - education
 tags: [sbom, supply-chain, vendors]
 comments: []
 slug: sbomify-a-paradigm-shift-for-software-vendors-in-sbom-management
