@@ -3,6 +3,7 @@
 url: /compliance/
 title: "The Ultimate SBOM Compliance Guide (2026)"
 description: "Complete SBOM compliance guide covering NTIA minimum elements, CISA 2025 draft, NIST 800-53, NIST 800-171, EU Cyber Resilience Act (CRA), NIS2 Directive, UK Software Security Code of Practice, FDA medical device requirements, and PCI DSS 4.0. Includes CycloneDX and SPDX schema mappings."
+tldr: "SBOM compliance requirements vary by jurisdiction and industry. In the US, Executive Order 14028 and NTIA minimum elements set the baseline; CISA's 2025 draft adds hash and license fields. In the EU, the Cyber Resilience Act legally requires SBOMs for digital products, while NIS2 mandates supply chain security. The UK's Software Security Code of Practice offers voluntary guidance. Use CycloneDX or SPDX format — both are widely accepted across all frameworks."
 ---
 
 New to SBOMs? Start with [What is an SBOM?](/what-is-sbom/) to learn the basics, or explore our [SBOM generation guides](/guides/) for language-specific tutorials.
