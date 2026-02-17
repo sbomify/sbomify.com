@@ -30,7 +30,7 @@ Getting started with sbomify is easy! Here's how you can integrate it into your 
 
 1. **Visit the Marketplace**: Head over to the [GitHub Marketplace](https://github.com/marketplace/actions/sbomify) to find the sbomify Action.
 2. **Add sbomify to Your Workflow**: Add the sbomify Action to your GitHub Actions workflow by modifying your `.yml` file(s). You can find detailed setup instructions in the [sbomify GitHub repository](https://github.com/sbomify/github-action).
-3. **Run Your Workflow**: Once integrated, every time your workflow runs, sbomify will automaticaally upload the generated SBOM for your project, which in turn can shared with your stakeholders. No more manual sharing of SBOMs over emails, your stakeholders can automatically pull down the latest SBOM directly from sbomify when they need it, ensuring they always have the latest version.
+3. **Run Your Workflow**: Once integrated, every time your workflow runs, sbomify will automatically upload the generated SBOM for your project, which in turn can be shared with your stakeholders. No more manual sharing of SBOMs over emails, your stakeholders can automatically pull down the latest SBOM directly from sbomify when they need it, ensuring they always have the latest version.
 
 Here's a quick example of how to include sbomify in your workflow:
 
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     # Build your SBOM...
 
@@ -64,7 +64,7 @@ For more details on using the GitHub Action and other CI/CD integrations, see ou
 
 ## Not using GitHub Actions?
 
-No problem! Our tool can can easily be integrated in any other CI/CD pipeline. Just get in touch and we'll help you.
+No problem! Our tool can easily be integrated in any other CI/CD pipeline. Just get in touch and we'll help you.
 
 ## Join Us in Building More Secure Software
 

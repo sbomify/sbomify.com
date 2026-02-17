@@ -110,8 +110,9 @@ Choose the option that fits your environment:
   uses: sbomify/github-action@master
   env:
     LOCK_FILE: 'requirements.txt'
-    AUGMENT: true
+    OUTPUT_FILE: 'sbom.cdx.json'
     ENRICH: true
+    UPLOAD: false
 ```
 
 **Other CI/CD environments** - We have ready-to-use templates for GitLab CI, Bitbucket Pipelines, and a Docker image for any environment.
