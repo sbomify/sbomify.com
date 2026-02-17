@@ -50,7 +50,7 @@
             <picture>
               {{ $filename := path.BaseName $author.image }}
               <source srcset="/img/{{ $filename }}.webp" type="image/webp">
-              <img src="{{ $author.image }}" alt="{{ $author.display_name }}" class="w-48 h-48 md:w-56 md:h-56 object-cover !mb-0 !mt-0 grayscale hover:grayscale-0 transition-all duration-500">
+              <img src="{{ $author.image }}" alt="{{ $author.display_name }}" class="w-48 h-48 md:w-56 md:h-56 object-cover !mb-0 !mt-0 grayscale hover:grayscale-0 transition-all duration-500" width="224" height="224" loading="lazy">
             </picture>
           </div>
 

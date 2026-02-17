@@ -1,26 +1,26 @@
 <div class="relative overflow-hidden lg:hidden">
-  <button class="btn-icon open-menu">
+  <button class="btn-icon open-menu" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
     {{ $hamburger := resources.Get "images/site/hamburger-menu.svg" }}
     {{ if $hamburger }}
     {{ $hamburger = $hamburger | fingerprint }}
-    <img src="{{ $hamburger.RelPermalink }}" alt="open menu" width="28" height="28" />
+    <img src="{{ $hamburger.RelPermalink }}" alt="" aria-hidden="true" width="28" height="28" />
     {{ else }}
-    <img src="/assets/images/site/hamburger-menu.svg" alt="open menu" width="28" height="28" />
+    <img src="/assets/images/site/hamburger-menu.svg" alt="" aria-hidden="true" width="28" height="28" />
     {{ end }}
   </button>
-  <div class="mobile-menu hidden fixed inset-0 w-full h-full bg-primaryBG z-10 px-6">
+  <div id="mobile-menu" class="mobile-menu hidden fixed inset-0 w-full h-full bg-primaryBG z-10 px-6" role="dialog" aria-label="Navigation menu">
     <div class="text-right py-[18px] mb-10">
-      <button class="btn-icon close-menu">
+      <button class="btn-icon close-menu" aria-label="Close navigation menu">
         {{ $close := resources.Get "images/site/close.svg" }}
         {{ if $close }}
         {{ $close = $close | fingerprint }}
-        <img src="{{ $close.RelPermalink }}" alt="close menu" width="33" height="33" />
+        <img src="{{ $close.RelPermalink }}" alt="" aria-hidden="true" width="33" height="33" />
         {{ else }}
-        <img src="/assets/images/site/close.svg" alt="close menu" width="33" height="33" />
+        <img src="/assets/images/site/close.svg" alt="" aria-hidden="true" width="33" height="33" />
         {{ end }}
       </button>
     </div>
-    <nav>
+    <nav aria-label="Mobile navigation">
       <div class="mb-6">
         <a href="/" class="text-white uppercase leading-[27px] text-lg tracking-[1.8px]">
           Home

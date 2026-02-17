@@ -44,7 +44,7 @@ Releasing sbomify under an _Apache 2.0 license plus Common Clause_ reflects our 
 
 ## Join Us
 
-<a href="https://github.com/sbomify/sbomify"><img src="https://img.shields.io/static/v1?label=&message=Star%20on%20GitHub&color=white&logo=github&logoColor=black" alt="Star sbomify on GitHub" width="200"></a>
+<a href="https://github.com/sbomify/sbomify"><img src="https://img.shields.io/static/v1?label=&message=Star%20on%20GitHub&color=white&logo=github&logoColor=black" alt="Star sbomify on GitHub" width="200" height="28"></a>
 
 Here are some ways you can get involved:
 

@@ -18,7 +18,7 @@ slug: how-to-create-an-sbom
 <div class="bg-blue-50 border-l-4 border-blue-500 p-6 my-8 rounded-r-lg">
   <div class="flex items-start">
     <div class="flex-shrink-0">
-      <svg class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     </div>
