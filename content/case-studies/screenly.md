@@ -2,7 +2,9 @@
 type: case-studies
 title: "Screenly Case Study: Simplifying SBOM Management with sbomify"
 description: "Screenly is a secure digital signage platform and this is how sbomify helped secure their SBOM supply chain."
-url: /case-studies/screenly
+url: /case-studies/screenly/
+aliases:
+  - /case-studies/screenly
 logo: /assets/images/site/screenly_dark.svg
 ---
 
