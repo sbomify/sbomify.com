@@ -1,0 +1,5 @@
+{{- $limit := .Get "limit" | default 0 | int -}}
+{{- $dark := eq (.Get "dark") "true" -}}
+{{- $hideViewAll := eq (.Get "hideViewAll") "true" -}}
+{{- $title := .Get "title" -}}
+{{ partial "posts.html" (dict "limit" $limit "dark" $dark "hideViewAll" $hideViewAll "title" $title "context" .Page) }}

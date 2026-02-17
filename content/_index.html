@@ -185,7 +185,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
             <div class="text-sm font-semibold uppercase tracking-wide mb-12 text-[#8A7DFF]">
                 Blog
             </div>
-            {{ partial "posts.html" (dict "limit" 3 "dark" true "title" "Latest blog posts" "context" .) }}
+            {{< posts limit="3" dark="true" title="Latest blog posts" >}}
         </div>
     </div>
 </div>
