@@ -169,8 +169,8 @@ Both formats express the same information — a component named `lodash` at vers
 
 Different regulatory frameworks have varying levels of format preference.
 
-| Framework                                                                         | Format Preference                                          |
-| --------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| Framework                                                           | Format Preference                                          |
+| ------------------------------------------------------------------- | ---------------------------------------------------------- |
 | [Executive Order 14028](/compliance/eo-14028/) (US)                 | Format-agnostic; both accepted                             |
 | [CISA Minimum Elements](/compliance/cisa-minimum-elements/)         | Format-agnostic; references both                           |
 | [EU Cyber Resilience Act](/compliance/eu-cra/) (via BSI TR-03183-2) | CycloneDX 1.6+ or SPDX 3.0.1+, JSON or XML format required |

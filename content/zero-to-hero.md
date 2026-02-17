@@ -85,8 +85,8 @@ A Software Bill of Materials (SBOM) is like the ingredients list on a food packa
 
 sbomify supports all major ecosystems:
 
-| Language/Platform                               | Package Managers        |
-| ----------------------------------------------- | ----------------------- |
+| Language/Platform                 | Package Managers        |
+| --------------------------------- | ----------------------- |
 | [Python](/guides/python/)         | pip, Poetry, Pipenv, uv |
 | [JavaScript](/guides/javascript/) | npm, yarn, pnpm, Bun    |
 | [Java](/guides/java/)             | Maven, Gradle           |
