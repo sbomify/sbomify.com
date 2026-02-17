@@ -1,0 +1,23 @@
+{{- $name := .Get "name" -}}
+{{- $src := .Get "src" -}}
+{{- $size := .Get "size" | default "small" -}}
+{{- $img := resources.Get $src -}}
+{{- if $img -}}
+  {{- $dim := "256x256" -}}
+  {{- $class := "w-32 h-32 object-cover !m-0 grayscale hover:grayscale-0 transition-all duration-500" -}}
+  {{- $w := 128 -}}
+  {{- $h := 128 -}}
+  {{- if eq $size "leader" -}}
+    {{- $dim = "448x448" -}}
+    {{- $class = "w-48 h-48 md:w-56 md:h-56 object-cover !mb-0 !mt-0 grayscale hover:grayscale-0 transition-all duration-500" -}}
+    {{- $w = 224 -}}
+    {{- $h = 224 -}}
+  {{- end -}}
+  {{- $webp := $img.Process (printf "fit %s webp q80" $dim) -}}
+  <picture>
+    <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+    <img src="{{ $img.RelPermalink }}" alt="{{ $name }}" class="{{ $class }}" width="{{ $w }}" height="{{ $h }}" loading="lazy">
+  </picture>
+{{- else -}}
+  <img src="/assets/{{ $src }}" alt="{{ $name }}" class="w-48 h-48 md:w-56 md:h-56 object-cover !mb-0 !mt-0 grayscale hover:grayscale-0 transition-all duration-500" width="224" height="224" loading="lazy">
+{{- end -}}

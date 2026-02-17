@@ -47,11 +47,17 @@
         <div class="flex flex-col md:flex-row gap-8 md:gap-12">
           <!-- Author Photo -->
           <div class="flex-shrink-0 flex justify-center md:block">
-            <picture>
-              {{ $filename := path.BaseName $author.image }}
-              <source srcset="/img/{{ $filename }}.webp" type="image/webp">
+            {{ $imgPath := strings.TrimPrefix "/assets/" $author.image }}
+            {{ $img := resources.Get $imgPath }}
+            {{ if $img }}
+              {{ $webp := $img.Process "fit 448x448 webp q80" }}
+              <picture>
+                <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+                <img src="{{ $img.RelPermalink }}" alt="{{ $author.display_name }}" class="w-48 h-48 md:w-56 md:h-56 object-cover !mb-0 !mt-0 grayscale hover:grayscale-0 transition-all duration-500" width="224" height="224" loading="lazy">
+              </picture>
+            {{ else }}
               <img src="{{ $author.image }}" alt="{{ $author.display_name }}" class="w-48 h-48 md:w-56 md:h-56 object-cover !mb-0 !mt-0 grayscale hover:grayscale-0 transition-all duration-500" width="224" height="224" loading="lazy">
-            </picture>
+            {{ end }}
           </div>
 
           <!-- Author Info -->
