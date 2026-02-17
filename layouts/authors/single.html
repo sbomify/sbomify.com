@@ -64,33 +64,33 @@
           <div class="flex-grow">
             <div class="flex flex-wrap items-center gap-3 mb-6">
               {{ with $author.linkedin }}
-              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-[#0077b5] hover:text-[#006097] transition-colors [&_svg]:w-6 [&_svg]:h-6" title="LinkedIn">
-                {{ partial "icon.html" "linkedin" }}
+              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-[#0077b5] hover:text-[#006097] transition-colors" title="LinkedIn">
+                {{ partial "icon.html" (dict "name" "linkedin" "class" "w-6 h-6") }}
               </a>
               {{ end }}
               {{ with $author.twitter }}
-              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-gray-800 hover:text-gray-600 transition-colors [&_svg]:w-6 [&_svg]:h-6" title="X (Twitter)">
-                {{ partial "icon.html" "x-twitter" }}
+              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-gray-800 hover:text-gray-600 transition-colors" title="X (Twitter)">
+                {{ partial "icon.html" (dict "name" "x-twitter" "class" "w-6 h-6") }}
               </a>
               {{ end }}
               {{ with $author.mastodon }}
-              <a href="{{ . }}" target="_blank" rel="me noopener noreferrer" class="inline-flex items-center text-[#6364FF] hover:text-[#563ACC] transition-colors [&_svg]:w-6 [&_svg]:h-6" title="Mastodon">
-                {{ partial "icon.html" "mastodon" }}
+              <a href="{{ . }}" target="_blank" rel="me noopener noreferrer" class="inline-flex items-center text-[#6364FF] hover:text-[#563ACC] transition-colors" title="Mastodon">
+                {{ partial "icon.html" (dict "name" "mastodon" "class" "w-6 h-6") }}
               </a>
               {{ end }}
               {{ with $author.github }}
-              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-gray-800 hover:text-gray-600 transition-colors [&_svg]:w-6 [&_svg]:h-6" title="GitHub">
-                {{ partial "icon.html" "github" }}
+              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-gray-800 hover:text-gray-600 transition-colors" title="GitHub">
+                {{ partial "icon.html" (dict "name" "github" "class" "w-6 h-6") }}
               </a>
               {{ end }}
               {{ with $author.website }}
-              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-gray-600 hover:text-[#8A7DFF] transition-colors [&_svg]:w-6 [&_svg]:h-6" title="Website">
-                {{ partial "icon.html" "globe" }}
+              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-gray-600 hover:text-[#8A7DFF] transition-colors" title="Website">
+                {{ partial "icon.html" (dict "name" "globe" "class" "w-6 h-6") }}
               </a>
               {{ end }}
               {{ with $author.podcast }}
-              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-gray-600 hover:text-[#8A7DFF] transition-colors [&_svg]:w-6 [&_svg]:h-6" title="Podcast">
-                {{ partial "icon.html" "podcast" }}
+              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-gray-600 hover:text-[#8A7DFF] transition-colors" title="Podcast">
+                {{ partial "icon.html" (dict "name" "podcast" "class" "w-6 h-6") }}
               </a>
               {{ end }}
             </div>

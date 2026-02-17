@@ -1,11 +1,5 @@
-{{- $name := "" -}}
-{{- $class := "w-5 h-5" -}}
-{{- if reflect.IsMap . -}}
-  {{- $name = .name -}}
-  {{- with .class }}{{ $class = . }}{{ end -}}
-{{- else -}}
-  {{- $name = . -}}
-{{- end -}}
+{{- $name := .Get 0 -}}
+{{- $class := .Get 1 | default "w-5 h-5" -}}
 {{- $faMap := dict
   "linkedin" "brands/linkedin-in.svg"
   "x-twitter" "brands/x-twitter.svg"

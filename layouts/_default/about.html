@@ -73,8 +73,8 @@
                 <div class="flex items-center gap-3 mb-2">
                   <h3 class="text-2xl font-bold text-primaryText !mt-0 !mb-0">{{ $advisor.name }}</h3>
                   {{ with $advisor.linkedin }}
-                    <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-[#0077b5] hover:text-[#006097] transition-colors [&_svg]:w-5 [&_svg]:h-5">
-                      {{ partial "icon.html" "linkedin" }}
+                    <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-[#0077b5] hover:text-[#006097] transition-colors">
+                      {{ partial "icon.html" (dict "name" "linkedin" "class" "w-5 h-5") }}
                     </a>
                   {{ end }}
                 </div>
