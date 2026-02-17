@@ -1,0 +1,105 @@
+baseURL = "https://sbomify.com"
+title = "Sbomify"
+languageCode = "en-us"
+
+# Pagination (matches jekyll-paginate-v2: 12 per page)
+[pagination]
+  pagerSize = 12
+  path = "page"
+
+# Enable .GitInfo (replaces _plugins/git_dates.rb)
+enableGitInfo = true
+
+# Ignore leftover Jekyll files
+ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfile\\.lock", "convert_to_webp\\.rb$"]
+
+# Match Jekyll permalink exactly: /:year/:month/:day/:slug/
+[permalinks]
+  [permalinks.page]
+    posts = "/:year/:month/:day/:slug/"
+  [permalinks.section]
+    posts = "/blog/"
+
+# Disable taxonomy pages (production Jekyll site doesn't generate them)
+[taxonomies]
+  tag = "tags"
+  # category = "categories"  # disabled: not in production
+
+# Markdown: goldmark with raw HTML enabled (matches kramdown behavior)
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "monokai"
+    noClasses = true
+
+# RSS feed at /feed.xml (not default /index.xml)
+[outputFormats.RSS]
+  baseName = "feed"
+  mediaType = "application/rss+xml"
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML"]
+
+# Sitemap (replaces jekyll-sitemap)
+[sitemap]
+  changefreq = ""
+  filename = "sitemap.xml"
+
+# Minification (replaces jekyll-minifier)
+[minify]
+  minifyOutput = true
+
+# Custom params
+[params]
+  description = "Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools."
+  keywords = ["SBOM", "Supply Chain Security", "CRA Compliance", "NTIA Compliant", "Software Bill of Materials", "SBOM Management", "Security Artifact Hub"]
+  posthog_api_key = "phc_kWvZ17AgVDC3CAEHYG2oQBYEg5lUnyK3brPqJ6P4nPH"
+
+  [params.social]
+    image = "/assets/images/site/sbomify.png"
+    [[params.social.profiles]]
+      platform = "X"
+      url = "https://x.com/sbomify"
+      handle = "sbomify"
+    [[params.social.profiles]]
+      platform = "LinkedIn"
+      url = "https://www.linkedin.com/company/sbomify/"
+
+# Module mounts: serve assets/images and assets/fonts as static files
+# so /assets/images/... URLs work in content, while assets/ also works
+# for Hugo Pipes (resources.Get) in templates
+[[module.mounts]]
+  source = "assets"
+  target = "assets"
+
+[[module.mounts]]
+  source = "assets/images"
+  target = "static/assets/images"
+
+[[module.mounts]]
+  source = "assets/fonts"
+  target = "static/assets/fonts"
+
+[[module.mounts]]
+  source = "static"
+  target = "static"
+
+[[module.mounts]]
+  source = "content"
+  target = "content"
+
+[[module.mounts]]
+  source = "layouts"
+  target = "layouts"
+
+[[module.mounts]]
+  source = "data"
+  target = "data"
+
+# Exclude files from Hugo processing
+[build]
+  [build.buildStats]
+    enable = false

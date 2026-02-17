@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sbomify</title><link>https://sbomify.com/tags/devsecops/</link><description>Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 15 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://sbomify.com/tags/devsecops/" rel="self" type="application/rss+xml"/><item><title>Software Development Life Cycle (SDLC): A Complete Guide</title><link>https://sbomify.com/2025/12/15/software-development-life-cycle-sdlc-sbom-integration/</link><pubDate>Mon, 15 Dec 2025 00:00:00 +0000</pubDate><guid>https://sbomify.com/2025/12/15/software-development-life-cycle-sdlc-sbom-integration/</guid><description>&lt;p>The Software Development Life Cycle (SDLC) is a structured process that defines the stages involved in developing software from initial concept through deployment and maintenance. SDLC provides a systematic framework that development teams use to plan, create, test, and deliver high-quality software. Understanding the SDLC is essential for any organization building software today, particularly as security and compliance requirements become integral to every phase of development.&lt;/p>
+&lt;p>&lt;img src="https://sbomify.com/assets/images/d2/sdlc-sbom.svg" alt="SDLC phases with SBOM integration points">&lt;/p>
+&lt;h2 id="what-is-the-software-development-life-cycle">What Is the Software Development Life Cycle?&lt;/h2>
+&lt;p>SDLC, short for Software Development Life Cycle, is a methodology used by software engineering teams to design, develop, and test software in a predictable and efficient manner. Rather than writing code ad hoc, SDLC defined processes ensure that each stage of development has clear objectives, deliverables, and quality checks.&lt;/p>
+&lt;p>The concept of a structured development life cycle emerged in the 1960s as software projects grew in complexity. What began as a simple sequential process has evolved into a family of software development life cycle models, each suited to different project types and organizational needs.&lt;/p>
+&lt;p>At its core, every SDLC framework answers the same questions: What are we building? How will we build it? How do we know it works? And how do we keep it running?&lt;/p>
+&lt;h2 id="the-phases-of-the-sdlc">The Phases of the SDLC&lt;/h2>
+&lt;p>While specific terminology varies between models, most SDLC frameworks include six to eight phases. Here are the core stages that appear in virtually every approach.&lt;/p>
+&lt;h3 id="1-planning-and-requirements-analysis">1. Planning and Requirements Analysis&lt;/h3>
+&lt;p>The first phase involves gathering business requirements, identifying stakeholders, and defining project scope. Teams assess feasibility, estimate resources, and create a project plan. Security considerations should enter the picture here through threat modeling and risk assessment.&lt;/p>
+&lt;h3 id="2-system-design">2. System Design&lt;/h3>
+&lt;p>Architects and senior developers translate requirements into a technical blueprint. This includes system architecture, technology stack selection, data models, and interface specifications. Design decisions made here have long-lasting implications for security and maintainability.&lt;/p>
+&lt;h3 id="3-implementation-coding">3. Implementation (Coding)&lt;/h3>
+&lt;p>Developers write the actual source code based on the design specifications. This phase typically involves selecting libraries, frameworks, and third-party components. These &lt;a href="https://sbomify.com/2026/01/29/what-is-a-dependency-in-software/">dependency&lt;/a> choices directly impact the &lt;a href="https://sbomify.com/2025/12/26/software-supply-chain-management/">software supply chain&lt;/a> and are the foundation of what an &lt;a href="https://sbomify.com/what-is-sbom/">SBOM&lt;/a> will eventually document.&lt;/p>
+&lt;h3 id="4-testing">4. Testing&lt;/h3>
+&lt;p>Quality assurance teams verify that the software meets requirements and is free of defects. Testing includes unit tests, integration tests, system tests, and user acceptance testing. Security testing, including vulnerability scanning and penetration testing, is increasingly part of this phase.&lt;/p>
+&lt;h3 id="5-deployment">5. Deployment&lt;/h3>
+&lt;p>The tested software is released to production environments. Deployment strategies such as blue-green deployments, canary releases, and rolling updates help reduce risk. This phase is where CI/CD pipelines automate the build, test, and release process.&lt;/p>
+&lt;h3 id="6-maintenance-and-operations">6. Maintenance and Operations&lt;/h3>
+&lt;p>After deployment, teams monitor the application, fix bugs, apply security patches, and release updates. This phase often lasts the longest and is where vulnerability management and ongoing compliance activities take place.&lt;/p>
+&lt;h2 id="software-development-life-cycle-models">Software Development Life Cycle Models&lt;/h2>
+&lt;p>Over the decades, several SDLC models have emerged to address different project needs. Each model organizes the core phases differently.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Model&lt;/th>
+&lt;th>Approach&lt;/th>
+&lt;th>Best Suited For&lt;/th>
+&lt;th>Key Characteristic&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>Waterfall&lt;/strong>&lt;/td>
+&lt;td>Sequential, linear&lt;/td>
+&lt;td>Well-defined projects with stable requirements&lt;/td>
+&lt;td>Each phase completes before the next begins&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Agile&lt;/strong>&lt;/td>
+&lt;td>Iterative, incremental&lt;/td>
+&lt;td>Projects with evolving requirements&lt;/td>
+&lt;td>Short sprints, continuous feedback&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Spiral&lt;/strong>&lt;/td>
+&lt;td>Risk-driven, iterative&lt;/td>
+&lt;td>Large, high-risk projects&lt;/td>
+&lt;td>Risk analysis at every iteration&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>V-Model&lt;/strong>&lt;/td>
+&lt;td>Verification and validation&lt;/td>
+&lt;td>Safety-critical and regulated systems&lt;/td>
+&lt;td>Each development phase has a corresponding test phase&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>DevOps&lt;/strong>&lt;/td>
+&lt;td>Continuous integration and delivery&lt;/td>
+&lt;td>Fast-moving organizations&lt;/td>
+&lt;td>Merges development and operations&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Lean&lt;/strong>&lt;/td>
+&lt;td>Waste elimination&lt;/td>
+&lt;td>Startups and rapid prototyping&lt;/td>
+&lt;td>Minimize overhead, maximize value&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>The Waterfall model was the original SDLC approach, moving linearly from requirements through deployment. Agile methodologies, including Scrum and Kanban, replaced the rigid sequential approach with iterative cycles that deliver working software in short sprints. Most modern teams use some form of Agile combined with DevOps practices.&lt;/p>
+&lt;h2 id="where-security-fits-from-sdlc-to-secure-sdlc">Where Security Fits: From SDLC to Secure SDLC&lt;/h2>
+&lt;p>Traditional SDLC models treated security as a gate at the end of development — a final check before release. This approach consistently proved inadequate. Vulnerabilities discovered late in the cycle are far more expensive to fix than those caught early.&lt;/p>
+&lt;p>The Secure Software Development Life Cycle (SSDLC or Secure SDLC) integrates security activities into every phase:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Planning:&lt;/strong> Threat modeling, security requirements definition&lt;/li>
+&lt;li>&lt;strong>Design:&lt;/strong> Security architecture review, attack surface analysis&lt;/li>
+&lt;li>&lt;strong>Implementation:&lt;/strong> Secure coding standards, dependency management, SBOM generation&lt;/li>
+&lt;li>&lt;strong>Testing:&lt;/strong> Static Application Security Testing (SAST), Dynamic Application Security Testing (DAST), &lt;a href="https://sbomify.com/2026/01/11/software-composition-analysis-sca/">Software Composition Analysis (SCA)&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Deployment:&lt;/strong> Configuration hardening, secrets management, SBOM distribution&lt;/li>
+&lt;li>&lt;strong>Maintenance:&lt;/strong> Vulnerability monitoring, patch management, SBOM updates&lt;/li>
+&lt;/ul>
+&lt;p>This shift-left approach — moving security earlier in the development process — is central to &lt;a href="https://www.nist.gov/publications/devsecops-nist-special-publication-800-218-secure-software-development-framework-ssdf">DevSecOps&lt;/a>, where security becomes a shared responsibility across the entire team rather than a bottleneck at the end.&lt;/p>
+&lt;h2 id="sdlc-and-sboms-integration-at-every-phase">SDLC and SBOMs: Integration at Every Phase&lt;/h2>
+&lt;p>A &lt;a href="https://sbomify.com/what-is-sbom/">Software Bill of Materials&lt;/a> (SBOM) documents every component, library, and dependency in a piece of software. Rather than treating SBOM generation as a one-time event, modern organizations integrate SBOMs throughout the SDLC.&lt;/p>
+&lt;h3 id="during-implementation">During Implementation&lt;/h3>
+&lt;p>When developers add dependencies — open source libraries, frameworks, and packages — they shape the software&amp;rsquo;s composition. This is the moment to begin tracking what goes into the build. Tools like the &lt;a href="https://github.com/sbomify/github-action/">sbomify GitHub Action&lt;/a> can generate SBOMs automatically as part of the build process. See our &lt;a href="https://sbomify.com/guides/">SBOM generation guides&lt;/a> for language-specific instructions covering Python, JavaScript, Java, Go, Rust, and more.&lt;/p>
+&lt;h3 id="during-testing">During Testing&lt;/h3>
+&lt;p>SBOMs enable automated &lt;a href="https://sbomify.com/2026/02/01/sbom-scanning-vulnerability-detection/">vulnerability scanning&lt;/a>. Once you have a complete inventory of components, platforms like &lt;a href="https://sbomify.com">sbomify&lt;/a> can continuously monitor your SBOMs against vulnerability databases. Standalone tools like &lt;a href="https://github.com/anchore/grype">Grype&lt;/a> and &lt;a href="https://dependencytrack.org/">OWASP Dependency-Track&lt;/a> can also cross-reference your SBOM against the &lt;a href="https://nvd.nist.gov/">National Vulnerability Database&lt;/a> (NVD) and &lt;a href="https://osv.dev/">OSV&lt;/a>. See our &lt;a href="https://sbomify.com/resources/">resources page&lt;/a> for a complete list of SBOM generation and analysis tools.&lt;/p>
+&lt;h3 id="during-deployment">During Deployment&lt;/h3>
+&lt;p>The SBOM becomes a release artifact alongside the software itself. Compliance frameworks including the &lt;a href="https://sbomify.com/compliance/eu-cra/">EU Cyber Resilience Act&lt;/a> and &lt;a href="https://sbomify.com/compliance/eo-14028/">Executive Order 14028&lt;/a> require SBOMs to be available to downstream consumers. Signing the SBOM provides tamper-evidence for the supply chain.&lt;/p>
+&lt;h3 id="during-maintenance">During Maintenance&lt;/h3>
+&lt;p>As new vulnerabilities are discovered — often months or years after deployment — SBOMs allow organizations to quickly determine whether they are affected. When the &lt;a href="https://nvd.nist.gov/vuln/detail/CVE-2021-44228">Log4Shell vulnerability&lt;/a> was disclosed in December 2021, organizations with SBOMs could identify affected systems in minutes rather than weeks.&lt;/p>
+&lt;h2 id="sdlc-best-practices-for-modern-teams">SDLC Best Practices for Modern Teams&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Choose the right model for your context.&lt;/strong> Agile works well for most web and cloud applications. V-Model or Spiral may be more appropriate for safety-critical systems in medical devices or automotive software.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Shift security left.&lt;/strong> Integrate threat modeling in planning, dependency review in implementation, and automated security testing in CI/CD. Catching vulnerabilities early saves time and reduces risk.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Automate everything repeatable.&lt;/strong> Use CI/CD pipelines to automate builds, tests, security scans, SBOM generation, and deployments. Manual processes introduce inconsistency and slow the cycle.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Track your dependencies.&lt;/strong> Every third-party library is a potential risk vector. Maintain SBOMs, monitor for vulnerabilities, and have a process for updating or replacing compromised components.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Build compliance into the workflow.&lt;/strong> Rather than scrambling for compliance at audit time, embed &lt;a href="https://sbomify.com/guides/">SBOM generation&lt;/a> and vulnerability scanning into your standard SDLC process. This is especially critical for organizations subject to the &lt;a href="https://sbomify.com/compliance/ntia-minimum-elements/">NTIA minimum elements&lt;/a> or &lt;a href="https://sbomify.com/compliance/cisa-minimum-elements/">CISA guidance&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Measure and improve.&lt;/strong> Track metrics like lead time, deployment frequency, mean time to recovery, and vulnerability remediation time. Use retrospectives to continuously improve the process.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="nist-and-the-sdlc">NIST and the SDLC&lt;/h2>
+&lt;p>The National Institute of Standards and Technology (NIST) has published several frameworks relevant to securing the SDLC:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://csrc.nist.gov/pubs/sp/800/218/final">NIST SP 800-218&lt;/a>&lt;/strong> (Secure Software Development Framework, SSDF) provides practices for integrating security into the development process, organized into four groups: Prepare the Organization, Protect the Software, Produce Well-Secured Software, and Respond to Vulnerabilities.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final">NIST SP 800-53&lt;/a>&lt;/strong> includes the SA (System and Services Acquisition) and SR (Supply Chain Risk Management) control families that directly address SDLC security controls.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://www.nist.gov/cyberframework">NIST Cybersecurity Framework 2.0&lt;/a>&lt;/strong> provides a high-level structure for managing cybersecurity risk that maps to SDLC activities.&lt;/li>
+&lt;/ul>
+&lt;p>These frameworks are increasingly referenced in procurement requirements and regulatory compliance, making them essential reading for teams working on government or critical infrastructure projects.&lt;/p>
+&lt;h2 id="frequently-asked-questions">Frequently Asked Questions&lt;/h2>
+&lt;h3 id="what-is-sdlc-in-software-development">What is SDLC in software development?&lt;/h3>
+&lt;p>SDLC stands for Software Development Life Cycle. It is a structured process that guides software development from initial planning through deployment and ongoing maintenance. The SDLC provides a framework of phases — including requirements analysis, design, implementation, testing, deployment, and maintenance — that help teams deliver reliable software in a systematic way.&lt;/p>
+&lt;h3 id="what-are-the-most-common-sdlc-models">What are the most common SDLC models?&lt;/h3>
+&lt;p>The most widely used software development life cycle models are Waterfall, Agile (including Scrum and Kanban), DevOps, V-Model, Spiral, and Lean. Agile and DevOps are the most popular for modern web and cloud applications due to their iterative approach and emphasis on continuous delivery.&lt;/p>
+&lt;h3 id="how-do-sboms-fit-into-the-sdlc">How do SBOMs fit into the SDLC?&lt;/h3>
+&lt;p>SBOMs integrate into multiple SDLC phases. During implementation, SBOM generation tools capture component inventories. During testing, SBOMs enable automated vulnerability scanning. During deployment, SBOMs are distributed alongside release artifacts for compliance. During maintenance, SBOMs allow rapid identification of affected systems when new vulnerabilities are disclosed. See our &lt;a href="https://sbomify.com/guides/">SBOM generation guides&lt;/a> for language-specific integration steps.&lt;/p>
+&lt;h3 id="what-is-the-difference-between-sdlc-and-devops">What is the difference between SDLC and DevOps?&lt;/h3>
+&lt;p>SDLC is the overall process framework for software development, while DevOps is a specific approach that emphasizes collaboration between development and operations teams with a focus on automation, continuous integration, and continuous delivery. DevOps can be seen as a modern SDLC model rather than an alternative to the SDLC concept itself.&lt;/p>
+&lt;h3 id="what-is-a-secure-sdlc">What is a Secure SDLC?&lt;/h3>
+&lt;p>A Secure SDLC (sometimes called SSDLC) integrates security practices into every phase of the software development life cycle, rather than treating security as a final checkpoint. This includes threat modeling during planning, secure coding standards during implementation, SAST/DAST during testing, and vulnerability monitoring during maintenance. NIST SP 800-218 (SSDF) provides a standardized framework for implementing a Secure SDLC.&lt;/p></description><category>education</category></item></channel></rss>

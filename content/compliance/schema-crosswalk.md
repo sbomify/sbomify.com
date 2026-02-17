@@ -1,0 +1,115 @@
+---
+
+url: /compliance/schema-crosswalk/
+title: "SBOM Schema Crosswalk: CycloneDX and SPDX Field Mappings"
+description: "Complete field mapping reference for CycloneDX 1.7, SPDX 2.3, and SPDX 3.0. Authoritative crosswalk for SBOM properties across formats."
+section: compliance
+---
+
+[← Back to Compliance Overview](/compliance/)
+
+This page maps SBOM properties to their specific field paths in CycloneDX, SPDX 2.3, and SPDX 3.0.
+
+<div class="cta-box">
+  <p><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get in Touch</a>
+</div>
+
+**Note:** The CISA Framing document's published crosswalk table references CycloneDX v1.6. This page uses CycloneDX 1.7 schema paths, which are largely compatible but include some updates (e.g., tools object structure).
+
+**BSI TR-03183-2 Note:** For EU CRA compliance via BSI TR-03183-2, SBOMs MUST use **CycloneDX 1.6+** or **SPDX 3.0.1+** in JSON or XML format. See the [EU CRA page](/compliance/eu-cra/) for full requirements.
+
+---
+
+## Document-Level Metadata
+
+| Property           | CycloneDX 1.7                                                    | SPDX 2.3                                    | SPDX 3.0                     |
+| ------------------ | ---------------------------------------------------------------- | ------------------------------------------- | ---------------------------- |
+| SBOM Author        | `metadata.authors[]`                                             | `creationInfo.creators[]`                   | `creationInfo.createdBy`     |
+| Timestamp          | `metadata.timestamp`                                             | `creationInfo.created`                      | `creationInfo.created`       |
+| Tool Name/Version  | `metadata.tools.components[]` and/or `metadata.tools.services[]` | `creationInfo.creators[]` (tool identifier) | `creationInfo.createdUsing`  |
+| Generation Context | `metadata.lifecycles[].phase`                                    | `CreatorComment` or `DocumentComment`       | Profile-dependent properties |
+
+**Notes:**
+
+- The CISA Framing crosswalk maps "SBOM Author Name" to `metadata.authors` (CycloneDX v1.6). CycloneDX 1.7 additionally provides `metadata.manufacturer` for organizational authorship if needed.
+- In CycloneDX 1.7, `metadata.tools` is an object containing `components` and/or `services` arrays. The legacy array format is deprecated.
+- The `metadata.lifecycles[].phase` field captures the stage(s) in which data in the BOM was captured (design, pre-build, build, post-build, operations, discovery, decommission).
+- **Generation Context** (per CISA 2025) includes both SDLC phase and context about "how and where" the SBOM was generated. For complete representation, you may also use `metadata.tools` (to express tooling) and `metadata.properties[]` (for additional context).
+
+---
+
+## Component Identification
+
+| Property           | CycloneDX 1.7                | SPDX 2.3                    | SPDX 3.0                             |
+| ------------------ | ---------------------------- | --------------------------- | ------------------------------------ |
+| Supplier Name      | `components[].supplier.name` | `packages[].supplier`       | Organization agent linked to element |
+| Component Name     | `components[].name`          | `packages[].name`           | Element name field                   |
+| Component Version  | `components[].version`       | `packages[].versionInfo`    | Element version field                |
+| Package URL (purl) | `components[].purl`          | `packages[].externalRefs[]` | External identifier support          |
+| CPE                | `components[].cpe`           | `packages[].externalRefs[]` | External identifier support          |
+| Component Hash     | `components[].hashes[]`      | `packages[].checksums[]`    | Verification/checksum properties     |
+
+---
+
+## Relationships
+
+| Property                | CycloneDX 1.7                                       | SPDX 2.3                       | SPDX 3.0                       |
+| ----------------------- | --------------------------------------------------- | ------------------------------ | ------------------------------ |
+| Dependency Relationship | `dependencies[].ref` + `dependencies[].dependsOn[]` | `relationships[]` (DEPENDS_ON) | Relationships between elements |
+
+---
+
+## Legal & Security
+
+| Property | CycloneDX 1.7             | SPDX 2.3                                                     | SPDX 3.0                                 |
+| -------- | ------------------------- | ------------------------------------------------------------ | ---------------------------------------- |
+| License  | `components[].licenses[]` | `packages[].licenseDeclared` / `packages[].licenseConcluded` | Rich licensing model (profile-dependent) |
+
+---
+
+## Lifecycle Properties (FDA/CLE)
+
+| Property            | CycloneDX 1.7               | SPDX 2.3                        | SPDX 3.0                    |
+| ------------------- | --------------------------- | ------------------------------- | --------------------------- |
+| Support Level       | `components[].properties[]` | `annotations` or `externalRefs` | Extension/property modeling |
+| End-of-Support Date | `components[].properties[]` | `packages[].validUntilDate`     | Extension/property modeling |
+
+**Note:** SPDX 2.3's `validUntilDate` field is defined as the "end of support period for the package from the supplier," making it the most appropriate mapping for FDA's end-of-support date requirement.
+
+---
+
+## BSI TR-03183-2 Component Properties
+
+BSI TR-03183-2 requires additional component properties not covered by standard SBOM fields. These use the [BSI CycloneDX property taxonomy](https://github.com/BSI-Bund/tr-03183-cyclonedx-property-taxonomy) for CycloneDX and `software_additionalPurpose` for SPDX.
+
+| Property                | CycloneDX 1.6+                                                               | SPDX 3.0.1                                                                                |
+| ----------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Filename                | `components[].properties[name="bsi:component:filename"]`                     | `software_File.name` via `hasDistributionArtifact` relationship                           |
+| Executable property     | `components[].properties[name="bsi:component:executable"]`                   | Add `executable` to `software_additionalPurpose` list                                     |
+| Archive property        | `components[].properties[name="bsi:component:archive"]`                      | Add `archive` to `software_additionalPurpose` list                                        |
+| Structured property     | `components[].properties[name="bsi:component:structured"]`                   | Add `container` (structured) or `firmware` (unstructured) to `software_additionalPurpose` |
+| Effective licence       | `components[].properties[name="bsi:component:effectiveLicense"]`             | Custom relationship with `relationshipType: other` and `comment: hasEffectiveLicense`     |
+| Hash (deployable)       | `components[].externalReferences[type="distribution"].hashes[alg="SHA-512"]` | `software_File.verifiedUsing` via `hasDistributionArtifact` relationship                  |
+| Dependency completeness | `compositions[].aggregate` (complete/incomplete/unknown)                     | `Relationship.completeness` (complete/incomplete/noAssertion)                             |
+
+**Notes:**
+
+- BSI requires **SHA-512** specifically for the deployable component hash
+- The BSI property taxonomy uses the `bsi:` namespace prefix for CycloneDX properties
+- For detailed JSON examples, see [BSI TR-03183-2 Section 8.2](https://bsi.bund.de/dok/TR-03183-en)
+
+---
+
+## Related Pages
+
+- [EU CRA Requirements](/compliance/eu-cra/) - CRA SBOM requirements with BSI TR-03183-2 specifications
+- [CLE: Common Lifecycle Enumeration](/compliance/cle/) - Standard for machine-readable lifecycle events
+- [CISA Framing Document](/compliance/cisa-framing/) - Authoritative source for baseline attribute definitions
+- [NTIA Minimum Elements](/compliance/ntia-minimum-elements/) - US baseline for SBOM data fields
+
+---
+
+**Disclaimer:** This page represents our interpretation of the referenced frameworks and standards. While we strive for accuracy, we may have made errors or omissions. This content is provided for informational purposes only and does not constitute legal advice. For compliance decisions, consult the official source documents and seek qualified legal counsel.
+
+[← Back to Compliance Overview](/compliance/)

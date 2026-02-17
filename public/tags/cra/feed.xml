@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sbomify</title><link>https://sbomify.com/tags/cra/</link><description>Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 06 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://sbomify.com/tags/cra/" rel="self" type="application/rss+xml"/><item><title>CRA Explained: What the Cyber Resilience Act Means for Device Manufacturers</title><link>https://sbomify.com/2026/01/06/cra-explained-cyber-resilience-act-for-device-manufacturers/</link><pubDate>Tue, 06 Jan 2026 00:00:00 +0000</pubDate><guid>https://sbomify.com/2026/01/06/cra-explained-cyber-resilience-act-for-device-manufacturers/</guid><description>&lt;p>The EU Cyber Resilience Act (CRA) is transforming how device manufacturers approach cybersecurity. To break down what this means in practice, Viktor sat down with Sarah Fluchs on the Nerding Out with Viktor podcast.&lt;/p>
+&lt;p>Sarah isn&amp;rsquo;t just any commentator on the CRA - she serves on the &lt;strong>EU Commission&amp;rsquo;s CRA expert group&lt;/strong>, giving her first-hand involvement in shaping this landmark regulation. With a PhD in security-by-design and years of experience in OT (Operational Technology) cybersecurity, she brings a rare blend of technical depth and policy insight.&lt;/p>
+&lt;div class="video-embed-wrapper my-8 w-full max-w-3xl mx-auto">
+&lt;div class="relative w-full overflow-hidden rounded-xl sm:rounded-2xl shadow-lg" style="padding-bottom: 56.25%;">
+&lt;iframe
+class="absolute top-0 left-0 w-full h-full border-0"
+src="https://www.youtube-nocookie.com/embed/e9_bpsJKOL0"
+title="CRA Explained: Cyber Resilience Act for Device Manufacturers"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen
+loading="lazy">
+&lt;/iframe>
+&lt;/div>
+&lt;/div>
+&lt;script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "VideoObject",
+"name": "CRA Explained: Cyber Resilience Act for Device Manufacturers",
+"description": "Podcast episode with EU CRA expert Sarah Fluchs explaining SBOM requirements, the 5-year support mandate, and vulnerability management for device manufacturers.",
+"thumbnailUrl": "https://img.youtube.com/vi/e9_bpsJKOL0/maxresdefault.jpg",
+"uploadDate": "2026-01-06T00:00:00Z",
+"embedUrl": "https://www.youtube.com/embed/e9_bpsJKOL0",
+"contentUrl": "https://www.youtube.com/watch?v=e9_bpsJKOL0"
+}
+&lt;/script>
+&lt;h2 id="sboms-are-non-negotiable-for-cra-compliance">SBOMs Are Non-Negotiable for CRA Compliance&lt;/h2>
+&lt;p>Sarah is emphatic: &lt;strong>SBOMs are critical for CRA compliance&lt;/strong>. The regulation requires manufacturers to maintain full visibility into their software supply chain, and SBOMs are the mechanism to achieve this.&lt;/p>
+&lt;p>But generating quality SBOMs is only half the battle. The real challenge lies in managing them over time - tracking versions, maintaining audit trails, and making software components traceable across complex supply chains. For manufacturers of long-lifecycle hardware, this represents a fundamental operational shift.&lt;/p>
+&lt;p>This is exactly where proper tooling becomes essential. A platform like &lt;a href="">sbomify&lt;/a> addresses these challenges by providing:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Lifecycle management&lt;/strong> - Archive and track SBOMs across product versions and releases&lt;/li>
+&lt;li>&lt;strong>Centralized portal&lt;/strong> - Manage all your security artifacts in one place, with full version history&lt;/li>
+&lt;li>&lt;strong>Trust Center&lt;/strong> - Share SBOMs with stakeholders (customers, auditors, regulators) through a branded portal&lt;/li>
+&lt;li>&lt;strong>CI/CD integration&lt;/strong> - Generate SBOMs automatically in your pipeline and upload them to sbomify&lt;/li>
+&lt;/ul>
+&lt;h2 id="the-5-year-support-requirement-changes-everything">The 5-Year Support Requirement Changes Everything&lt;/h2>
+&lt;p>The CRA mandates security updates for the expected product lifetime, with a &lt;strong>minimum of five years&lt;/strong>. For OT devices that often operate for 20+ years, this forces companies to fundamentally rethink their approach.&lt;/p>
+&lt;p>This isn&amp;rsquo;t just about patching - it&amp;rsquo;s about maintaining comprehensive records of what software was shipped, when, and to whom. You need to be able to answer: &amp;ldquo;What components were in version 2.3.1 that we shipped in 2024?&amp;rdquo; years down the line.&lt;/p>
+&lt;p>This is where SBOM archiving becomes critical. With sbomify, every release is captured and stored, creating an auditable trail that satisfies CRA&amp;rsquo;s documentation requirements without manual tracking.&lt;/p>
+&lt;h2 id="vulnerability-management-at-scale">Vulnerability Management at Scale&lt;/h2>
+&lt;p>Manufacturers must establish robust vulnerability handling processes, including responsible disclosure mechanisms. Sarah notes that the hardest part isn&amp;rsquo;t formal reporting - it&amp;rsquo;s building an efficient system to triage the influx of vulnerability reports.&lt;/p>
+&lt;p>sbomify integrates with vulnerability databases like &lt;a href="https://sbomify.com/features/integrations/">Google OSV&lt;/a> and &lt;a href="https://sbomify.com/features/integrations/">Dependency Track&lt;/a>, allowing you to continuously monitor your archived SBOMs for newly discovered vulnerabilities - even for products shipped years ago.&lt;/p>
+&lt;h2 id="sarahs-key-message">Sarah&amp;rsquo;s Key Message&lt;/h2>
+&lt;blockquote>
+&lt;p>&amp;ldquo;CRA compliance isn&amp;rsquo;t about ticking boxes. Done right, it&amp;rsquo;s a path to stronger engineering practices, deeper supply chain accountability, and better product security.&amp;rdquo;&lt;/p>&lt;/blockquote>
+&lt;p>Her advice for manufacturers getting started:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Find your showstoppers early&lt;/strong> - Run your products through the CRA requirements now to identify major blockers&lt;/li>
+&lt;li>&lt;strong>Start your risk assessment&lt;/strong> - This is the linchpin that informs all other decisions&lt;/li>
+&lt;li>&lt;strong>Establish vulnerability handling&lt;/strong> - Build the processes to manage the influx of security information&lt;/li>
+&lt;/ol>
+&lt;h2 id="listen-to-the-full-episode">Listen to the Full Episode&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://vpetersson.com/podcast/S02E21.html">Full episode with transcript&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.youtube.com/watch?v=e9_bpsJKOL0">YouTube&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://open.spotify.com/show/2eoSJgEN0YOgshqYkqnX2B">Spotify&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://podcasts.apple.com/podcast/nerding-out-with-viktor/id1722663668">Apple Podcasts&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://music.amazon.com/podcasts/c2443912-6c23-4ce9-804c-4caa827f63d7/nerding-out-with-viktor">Amazon Music&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="get-cra-ready-with-sbomify">Get CRA-Ready with sbomify&lt;/h2>
+&lt;p>The CRA deadline is approaching fast. &lt;a href="">sbomify&lt;/a> gives you the infrastructure to generate, manage, and share SBOMs throughout your product lifecycle - whether you&amp;rsquo;re shipping embedded devices, IoT products, or enterprise software.&lt;/p>
+&lt;p>&lt;a href="https://app.sbomify.com">Get started free →&lt;/a>&lt;/p>
+&lt;h2 id="related-resources">Related Resources&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://digital-strategy.ec.europa.eu/en/policies/cyber-resilience-act">EU Cyber Resilience Act - Official EU page&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://sbomify.com/features/why-now/">Why Now? CRA is Coming&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://sbomify.com/2024/07/10/understanding-the-eu-cyber-resilience-act-the-role-of-sboms-in-enhancing-cybersecurity/">Understanding the EU Cyber Resilience Act: The Role of SBOMs&lt;/a>&lt;/li>
+&lt;/ul></description><category>podcast</category></item><item><title>Understanding the EU Cyber Resilience Act: The Role of SBOMs in Enhancing Cybersecurity</title><link>https://sbomify.com/2024/07/10/understanding-the-eu-cyber-resilience-act-the-role-of-sboms-in-enhancing-cybersecurity/</link><pubDate>Wed, 10 Jul 2024 09:11:34 +0200</pubDate><guid>https://sbomify.com/2024/07/10/understanding-the-eu-cyber-resilience-act-the-role-of-sboms-in-enhancing-cybersecurity/</guid><description>&lt;p>In an era where digital transformation is the norm, cybersecurity has become a paramount concern for organizations and governments worldwide. The European Union (EU) is at the forefront of this endeavor with its Cyber Resilience Act, a landmark legislation designed to bolster the cybersecurity of products with digital elements. A critical component of this act is the Software Bill of Materials (SBOM), a tool that can significantly enhance transparency, security, and resilience in the software supply chain. In this post, we&amp;rsquo;ll delve into the EU Cyber Resilience Act with a particular focus on the importance and implications of SBOMs.&lt;/p>
+&lt;h2 id="what-is-the-eu-cyber-resilience-act">What is the EU Cyber Resilience Act?&lt;/h2>
+&lt;p>The EU Cyber Resilience Act aims to establish a unified cybersecurity framework across the EU, ensuring that digital products and services meet stringent security requirements. This legislation mandates that manufacturers, developers, and distributors of digital products, including hardware and software, adhere to comprehensive cybersecurity standards. The act covers a wide range of products, from consumer devices to industrial control systems, emphasizing the need for robust security measures throughout the product lifecycle.&lt;/p>
+&lt;h2 id="the-importance-of-sboms">The Importance of SBOMs&lt;/h2>
+&lt;p>A Software Bill of Materials (SBOM) is a detailed inventory of all components, libraries, and modules that make up a software product. It provides a transparent view of the software supply chain, allowing organizations to identify and address vulnerabilities more effectively. SBOMs play a crucial role in the EU Cyber Resilience Act for several reasons:&lt;/p>
+&lt;h3 id="1-enhanced-transparency">1. &lt;strong>Enhanced Transparency&lt;/strong>&lt;/h3>
+&lt;p>SBOMs offer unparalleled visibility into the components used in software products. This transparency helps organizations understand the origins of each component, track changes, and identify potential security risks. By knowing exactly what is in their software, organizations can make informed decisions about managing and mitigating vulnerabilities.&lt;/p>
+&lt;h3 id="2-improved-vulnerability-management">2. &lt;strong>Improved Vulnerability Management&lt;/strong>&lt;/h3>
+&lt;p>With an SBOM, organizations can quickly identify which components are affected by newly discovered vulnerabilities. This rapid identification is crucial for timely patching and mitigation, reducing the window of opportunity for attackers. The EU Cyber Resilience Act emphasizes the need for proactive vulnerability management, and SBOMs are a vital tool in achieving this goal.&lt;/p>
+&lt;h3 id="3-supply-chain-security">3. &lt;strong>Supply Chain Security&lt;/strong>&lt;/h3>
+&lt;p>The complexity of modern software often involves multiple third-party components, each potentially introducing security risks. SBOMs enable organizations to assess the security posture of their entire supply chain, ensuring that all components meet the required security standards. This holistic view is essential for maintaining the integrity of digital products and services.&lt;/p>
+&lt;h3 id="4-regulatory-compliance">4. &lt;strong>Regulatory Compliance&lt;/strong>&lt;/h3>
+&lt;p>Adhering to the EU Cyber Resilience Act requires organizations to demonstrate compliance with its security requirements. SBOMs provide a clear and auditable record of the components used in software products, simplifying the compliance process. Organizations can use SBOMs to prove that they have taken the necessary steps to secure their software and comply with the legislation.&lt;/p>
+&lt;h2 id="implementing-sboms-best-practices">Implementing SBOMs: Best Practices&lt;/h2>
+&lt;p>To fully leverage the benefits of SBOMs, organizations should adopt best practices for their implementation and management:&lt;/p>
+&lt;h3 id="1-automate-sbom-generation">1. &lt;strong>Automate SBOM Generation&lt;/strong>&lt;/h3>
+&lt;p>Manual creation of SBOMs can be time-consuming and error-prone. Automated tools can streamline the process, ensuring accuracy and completeness. Automation also facilitates continuous updating of SBOMs as software components change.&lt;/p>
+&lt;h3 id="2-integrate-sboms-into-devsecops">2. &lt;strong>Integrate SBOMs into DevSecOps&lt;/strong>&lt;/h3>
+&lt;p>Incorporating SBOMs into DevSecOps practices ensures that security is considered at every stage of the software development lifecycle. This integration helps identify and address vulnerabilities early in the development process, reducing the risk of security issues in the final product.&lt;/p>
+&lt;h3 id="3-educate-and-train-staff">3. &lt;strong>Educate and Train Staff&lt;/strong>&lt;/h3>
+&lt;p>Organizations should invest in training their staff on the importance of SBOMs and how to use them effectively. This education fosters a security-first mindset and ensures that employees are equipped to contribute to the organization&amp;rsquo;s cybersecurity efforts.&lt;/p>
+&lt;h3 id="4-collaborate-with-suppliers">4. &lt;strong>Collaborate with Suppliers&lt;/strong>&lt;/h3>
+&lt;p>Engage with suppliers to ensure that they provide SBOMs for their components. Collaboration with suppliers enhances the overall security of the software supply chain and helps build a culture of transparency and trust.&lt;/p>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>The EU Cyber Resilience Act represents a significant step forward in enhancing cybersecurity for digital products and services. SBOMs are a cornerstone of this legislation, providing the transparency and insight needed to manage vulnerabilities and secure the software supply chain effectively. By embracing SBOMs and following best practices for their implementation, organizations can not only comply with the EU Cyber Resilience Act but also build a more resilient and secure digital ecosystem.&lt;/p>
+&lt;p>At sbomify, we are committed to helping organizations navigate the complexities of SBOMs and achieve their cybersecurity goals. Contact us today to learn how we can support your journey towards enhanced cyber resilience.&lt;/p></description><category>compliance</category></item></channel></rss>

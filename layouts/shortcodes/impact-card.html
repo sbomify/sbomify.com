@@ -1,0 +1,12 @@
+<div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col h-full">
+    <div class="w-12 h-12 {{ .Get "icon_bg_class" | default "bg-purple-50" }} rounded-2xl flex items-center justify-center {{ .Get "icon_text_class" | default "text-[#8A7DFF]" }} mb-6 group-hover:scale-110 transition-transform duration-300">
+        {{ if .Get "svg" }}{{ .Get "svg" | safeHTML }}{{ else }}{{ .Inner | safeHTML }}{{ end }}
+    </div>
+    <h3 class="text-2xl font-bold text-[#201B4C] mb-4">{{ .Get "title" }}</h3>
+    <p class="text-secondaryText leading-relaxed mb-8 flex-grow">
+        {{ .Get "description" | safeHTML }}
+    </p>
+    <div class="pt-6 border-t border-gray-50">
+        <span class="inline-block bg-[#F6F9FA] text-[#201B4C] text-xs font-bold px-3 py-1.5 rounded-lg uppercase tracking-wider border border-gray-100 text-center">{{ .Get "link_text" }}</span>
+    </div>
+</div>

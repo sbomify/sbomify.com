@@ -1,0 +1,398 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>SBOM Generation in CI/CD Pipelines - GitHub Actions, GitLab CI, Bitbucket | Sbomify</title>
+<meta name=description content="Learn how to automate SBOM generation in CI/CD pipelines. Complete guide with GitHub Actions, GitLab CI, Bitbucket Pipelines, and attestation examples."><meta name=keywords content="SBOM,Supply Chain Security,CRA Compliance,NTIA Compliant,Software Bill of Materials,SBOM Management,Security Artifact Hub"><link rel=canonical href=https://sbomify.com/guides/ci-cd/><meta name=robots content="index, follow"><meta name=googlebot content="index, follow"><meta property="og:title" content="SBOM Generation in CI/CD Pipelines - GitHub Actions, GitLab CI, Bitbucket"><meta property="og:description" content="Learn how to automate SBOM generation in CI/CD pipelines. Complete guide with GitHub Actions, GitLab CI, Bitbucket Pipelines, and attestation examples."><meta property="og:type" content="website"><meta property="og:url" content="https://sbomify.com/guides/ci-cd/"><meta property="og:image" content="https://sbomify.com/assets/images/site/sbomify.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="SBOM Generation in CI/CD Pipelines - GitHub Actions, GitLab CI, Bitbucket"><meta property="og:site_name" content="Sbomify"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="SBOM Generation in CI/CD Pipelines - GitHub Actions, GitLab CI, Bitbucket"><meta name=twitter:description content="Learn how to automate SBOM generation in CI/CD pipelines. Complete guide with GitHub Actions, GitLab CI, Bitbucket Pipelines, and attestation examples."><meta name=twitter:image content="https://sbomify.com/assets/images/site/sbomify.png"><meta name=twitter:image:alt content="SBOM Generation in CI/CD Pipelines - GitHub Actions, GitLab CI, Bitbucket"><meta name=twitter:site content="@sbomify"><meta name=twitter:creator content="@sbomify"><meta property="linkedin:card" content="summary_large_image"><meta property="linkedin:title" content="SBOM Generation in CI/CD Pipelines - GitHub Actions, GitLab CI, Bitbucket"><meta property="linkedin:description" content="Learn how to automate SBOM generation in CI/CD pipelines. Complete guide with GitHub Actions, GitLab CI, Bitbucket Pipelines, and attestation examples."><meta property="linkedin:image" content="https://sbomify.com/assets/images/site/sbomify.png"><meta property="linkedin:author" content="https://www.linkedin.com/company/sbomify/"><link rel=preload href=/assets/fonts/inter-latin-wght-normal.woff2 as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/styles.619154fa68f893260face80cb319b226f06550f7202b864dfd6da0608d99ed27.css><link rel=preload href=/css/native.3a0f9240418a554cb8b26ab2a65cf96df65b24f916628fc0affb1fd9a356c4e0.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/css/native.3a0f9240418a554cb8b26ab2a65cf96df65b24f916628fc0affb1fd9a356c4e0.css></noscript><link rel=icon href=/favicon.ico type=image/x-icon><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=192x192 href=/android-chrome-192x192.png><link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=manifest href=/site.webmanifest><script>window.addEventListener("load",function(){setTimeout(function(){!function(e,t){var n,s,o,i;t.__SV||window.posthog&&window.posthog.__loaded||(window.posthog=t,t._i=[],t.init=function(a,r,c){function d(e,t){var n=t.split(".");2==n.length&&(e=e[n[0]],t=n[1]),e[t]=function(){e.push([t].concat(Array.prototype.slice.call(arguments,0)))}}(n=e.createElement("script")).type="text/javascript",n.crossOrigin="anonymous",n.async=!0,n.src=r.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(i=e.getElementsByTagName("script")[0]).parentNode.insertBefore(n,i);var l=t;for(void 0!==c?l=t[c]=[]:c="posthog",l.people=l.people||[],l.toString=function(e){var t="posthog";return"posthog"!==c&&(t+="."+c),e||(t+=" (stub)"),t},l.people.toString=function(){return l.toString(1)+".people (stub)"},o="init zr Wr fi Br Gr ci Nr Hr capture Ui calculateEventProperties Kr register register_once register_for_session unregister unregister_for_session Zr getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Xr Jr createPersonProfile Qr jr ts opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Vr debug O Yr getPageViewId captureTraceFeedback captureTraceMetric Or".split(" "),s=0;s<o.length;s++)d(l,o[s]);t._i.push([a,r,c])},t.__SV=1)}(document,window.posthog||[]),posthog.init("phc_kWvZ17AgVDC3CAEHYG2oQBYEg5lUnyK3brPqJ6P4nPH",{api_host:"https://us.i.posthog.com",defaults:"2025-11-30",person_profiles:"identified_only"})},2e3)})</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"Organization","name":"sbomify","url":"https:\/\/sbomify.com\/","logo":{"@type":"ImageObject","url":"https:\/\/sbomify.com\/android-chrome-512x512.png","width":512,"height":512},"sameAs":["https:\/\/x.com\/sbomify","https:\/\/www.linkedin.com\/company\/sbomify\/"],"description":"\"Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.\""}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"SoftwareApplication","name":"sbomify","applicationCategory":"BusinessApplication","applicationSubCategory":"Supply Chain Security","operatingSystem":"Cloud","offers":[{"@type":"Offer","name":"Community","price":"0","priceCurrency":"USD","description":"For OSS maintainers and hobby projects","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"Business","price":"199","priceCurrency":"USD","description":"For mid-size teams needing private SBOMs","availability":"https://schema.org/InStock","priceValidUntil":"2026-03-17"},{"@type":"Offer","name":"Enterprise","description":"For large orgs with advanced security & compliance needs. Contact for pricing.","availability":"https://schema.org/InStock"}],"description":"\"Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.\"","url":"https:\/\/sbomify.com\/","featureList":["SBOM Generation","SBOM Management","Supply Chain Security","Compliance Management","Vulnerability Tracking"],"softwareVersion":"1.0"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"WebSite","name":"Sbomify","url":"https:\/\/sbomify.com\/"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"TechArticle","name":"\"SBOM Generation in CI/CD Pipelines - GitHub Actions, GitLab CI, Bitbucket\"","description":"\"Learn how to automate SBOM generation in CI/CD pipelines. Complete guide with GitHub Actions, GitLab CI, Bitbucket Pipelines, and attestation examples.\"","image":"https:\/\/sbomify.com\/assets\/images\/site\/sbomify.png","proficiencyLevel":"Beginner","inLanguage":"en-US"}</script></head><body><header class="bg-primaryBG sticky top-0 z-50"><div class="max-w-7xl mx-auto px-6 py-4"><div class="flex justify-between items-center bg-[#201B4C] rounded-full px-6 py-3 border border-[#37306B]"><div class="flex gap-10 items-center"><a href=/ class="hover:opacity-90 transition-opacity"><img src=/images/site/logo.0dcb235ed731a5cff41bdefe2f677847f6680b9cc9ff701cbaedd68e431ea209.svg alt="sbomify logo" class=h-7 width=133 height=24></a></div><div class="flex gap-2 items-center"><div class="flex items-center gap-1"><nav class="hidden lg:flex gap-1"><a href=/zero-to-hero class="text-white hover:text-[#8A7DFF] hover:bg-[#37306B] transition-all duration-200 font-medium text-sm px-4 py-2 rounded-full">Zero to Hero</a>
+<a href=/what-is-sbom class="text-white hover:text-[#8A7DFF] hover:bg-[#37306B] transition-all duration-200 font-medium text-sm px-4 py-2 rounded-full">What is an SBOM?</a>
+<a href=/about class="text-white hover:text-[#8A7DFF] hover:bg-[#37306B] transition-all duration-200 font-medium text-sm px-4 py-2 rounded-full">About</a>
+<a href=/blog class="text-white hover:text-[#8A7DFF] hover:bg-[#37306B] transition-all duration-200 font-medium text-sm px-4 py-2 rounded-full">Blog</a>
+<a href=/case-studies class="text-white hover:text-[#8A7DFF] hover:bg-[#37306B] transition-all duration-200 font-medium text-sm px-4 py-2 rounded-full">Case Studies</a>
+<a href=/pricing class="text-white hover:text-[#8A7DFF] hover:bg-[#37306B] transition-all duration-200 font-medium text-sm px-4 py-2 rounded-full">Pricing</a></nav></div><div class="hidden lg:block ml-2"><a href=https://app.sbomify.com class="px-6 py-2.5 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium text-sm transition-all duration-200 inline-block" onclick='posthog.capture("cta_click",{location:"header",label:"Sign Up / Log In"})'>Sign Up / Log In</a></div><div class="relative overflow-hidden lg:hidden"><button class="btn-icon open-menu">
+<img src=/images/site/hamburger-menu.7f875bd0cdde6b66fb89fccf1913800425d7834dd590540bcd130e9a728f55b1.svg alt="open menu" width=28 height=28></button><div class="mobile-menu hidden fixed inset-0 w-full h-full bg-primaryBG z-10 px-6"><div class="text-right py-[18px] mb-10"><button class="btn-icon close-menu">
+<img src=/images/site/close.7ace7e368c5fbbaa3c70ca89235035e8dbff4b31e20e29f924c7e52179e21090.svg alt="close menu" width=33 height=33></button></div><nav><div class=mb-6><a href=/ class="text-white uppercase leading-[27px] text-lg tracking-[1.8px]">Home</a></div><div class=mb-6><a href=/zero-to-hero class="text-white uppercase leading-[27px] text-lg tracking-[1.8px]">Zero to Hero</a></div><div class=mb-6><a href=/what-is-sbom class="text-white uppercase leading-[27px] text-lg tracking-[1.8px]">What is an SBOM?</a></div><div class=mb-6><a href=/about class="text-white uppercase leading-[27px] text-lg tracking-[1.8px]">About</a></div><div class=mb-6><a href=/blog class="text-white uppercase leading-[27px] text-lg tracking-[1.8px]">Blog</a></div><div class=mb-6><a href=/case-studies class="text-white uppercase leading-[27px] text-lg tracking-[1.8px]">Case Studies</a></div><div class=mb-6><a href=/pricing class="text-white uppercase leading-[27px] text-lg tracking-[1.8px]">Pricing</a></div></nav><hr class="mt-4 mb-10 bg-white h-[1px] bg-opacity-20 border-0"><div class="flex justify-center items-center gap-4"><a href=https://app.sbomify.com class="text-white btn-secondary btn-md text-base" onclick='posthog.capture("cta_click",{location:"mobile_menu",label:"Sign Up / Log In"})'>Sign Up / Log In</a></div></div></div></div></div></div></header><main class=body><div><div class="bg-primaryBG relative overflow-hidden px-5 py-16 lg:py-24 lg:px-24"><div class="absolute inset-0 bg-gradient-to-br from-[#8A7DFF]/5 via-transparent to-transparent pointer-events-none"></div><div class="relative max-w-4xl mx-auto text-center"><h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6"><span class=text-gradient>SBOM Generation in CI/CD Pipelines - GitHub Actions, GitLab CI, Bitbucket</span></h1><p class="text-gray-300 text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">Learn how to automate SBOM generation in CI/CD pipelines. Complete guide with GitHub Actions, GitLab CI, Bitbucket Pipelines, and attestation examples.</p></div></div><div class=bg-[#F6F9FA]><div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24"><article class="page bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100"><h2 id=why-generate-sboms-in-cicd>Why Generate SBOMs in CI/CD?</h2><p>Generating SBOMs in your CI/CD pipeline provides several advantages:</p><ol><li><strong>Consistency</strong> - Every build produces an SBOM with the same tools and configuration</li><li><strong>Automation</strong> - No manual steps to forget</li><li><strong>Attestation</strong> - Link SBOMs cryptographically to specific builds</li><li><strong>Compliance</strong> - Automatically meet requirements like EO 14028</li><li><strong>Auditability</strong> - Full traceability from source to deployed artifact</li></ol><h2 id=github-actions>GitHub Actions</h2><h3 id=basic-sbom-generation>Basic SBOM Generation</h3><p>The <a href=https://github.com/sbomify/github-action/>sbomify GitHub Action</a> is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>---
+</span></span><span style=display:flex><span><span style=color:#f92672>name</span>: <span style=color:#ae81ff>Generate SBOM</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>on</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>push</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>branches</span>: [<span style=color:#ae81ff>main]</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>pull_request</span>:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>jobs</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>sbom</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-latest</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>steps</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Checkout code</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v4</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Generate SBOM</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>sbomify/github-action@master</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>env</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>LOCK_FILE</span>: <span style=color:#ae81ff>package-lock.json</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>OUTPUT_FILE</span>: <span style=color:#ae81ff>sbom.cdx.json</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>ENRICH</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>UPLOAD</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Upload SBOM as artifact</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/upload-artifact@v4</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>name</span>: <span style=color:#ae81ff>sbom</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>path</span>: <span style=color:#ae81ff>sbom.cdx.json</span>
+</span></span></code></pre></div><h3 id=with-sbomify-platform-upload>With sbomify Platform Upload</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Generate and Upload SBOM</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>sbomify/github-action@master</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>env</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>TOKEN</span>: <span style=color:#ae81ff>${{ secrets.SBOMIFY_TOKEN }}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>COMPONENT_ID</span>: <span style=color:#ae81ff>my-component</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>LOCK_FILE</span>: <span style=color:#ae81ff>package-lock.json</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>OUTPUT_FILE</span>: <span style=color:#ae81ff>sbom.cdx.json</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>AUGMENT</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>ENRICH</span>: <span style=color:#66d9ef>true</span>
+</span></span></code></pre></div><h3 id=github-attestation-recommended>GitHub Attestation (Recommended)</h3><p>Use GitHub&rsquo;s built-in attestation for tamper-proof SBOMs:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>---
+</span></span><span style=display:flex><span><span style=color:#f92672>name</span>: <span style=color:#ae81ff>Build with SBOM Attestation</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>on</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>push</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>branches</span>: [<span style=color:#ae81ff>main]</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>permissions</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>contents</span>: <span style=color:#ae81ff>read</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>id-token</span>: <span style=color:#ae81ff>write</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>attestations</span>: <span style=color:#ae81ff>write</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>jobs</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>build</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-latest</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>steps</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Checkout code</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v4</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Build</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: <span style=color:#ae81ff>npm ci &amp;&amp; npm run build</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Generate SBOM</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>sbomify/github-action@master</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>env</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>LOCK_FILE</span>: <span style=color:#ae81ff>package-lock.json</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>OUTPUT_FILE</span>: <span style=color:#ae81ff>sbom.cdx.json</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>COMPONENT_NAME</span>: <span style=color:#ae81ff>my-app</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>COMPONENT_VERSION</span>: <span style=color:#ae81ff>${{ github.sha }}</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>ENRICH</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>UPLOAD</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Attest SBOM</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/attest-sbom@v1</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>subject-path</span>: <span style=color:#e6db74>&#39;./dist&#39;</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>sbom-path</span>: <span style=color:#e6db74>&#39;./sbom.cdx.json&#39;</span>
+</span></span></code></pre></div><h3 id=docker-image-with-sbom>Docker Image with SBOM</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>---
+</span></span><span style=display:flex><span><span style=color:#f92672>name</span>: <span style=color:#ae81ff>Build and Push Container with SBOM</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>on</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>push</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>branches</span>: [<span style=color:#ae81ff>main]</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>permissions</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>contents</span>: <span style=color:#ae81ff>read</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>packages</span>: <span style=color:#ae81ff>write</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>id-token</span>: <span style=color:#ae81ff>write</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>attestations</span>: <span style=color:#ae81ff>write</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>jobs</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>build</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-latest</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>steps</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Checkout</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v4</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Set up Docker Buildx</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>docker/setup-buildx-action@v3</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Login to GHCR</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>docker/login-action@v3</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>registry</span>: <span style=color:#ae81ff>ghcr.io</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>username</span>: <span style=color:#ae81ff>${{ github.actor }}</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>password</span>: <span style=color:#ae81ff>${{ secrets.GITHUB_TOKEN }}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Build and push</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>docker/build-push-action@v5</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>id</span>: <span style=color:#ae81ff>build</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>context</span>: <span style=color:#ae81ff>.</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>push</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>tags</span>: <span style=color:#ae81ff>ghcr.io/${{ github.repository }}:${{ github.sha }}</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>sbom</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>provenance</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Generate additional SBOM</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>sbomify/github-action@master</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>env</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>DOCKER_IMAGE</span>: <span style=color:#ae81ff>ghcr.io/${{ github.repository }}:${{ github.sha }}</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>OUTPUT_FILE</span>: <span style=color:#ae81ff>container-sbom.cdx.json</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>COMPONENT_NAME</span>: <span style=color:#ae81ff>${{ github.repository }}</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>COMPONENT_VERSION</span>: <span style=color:#ae81ff>${{ github.sha }}</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>ENRICH</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>UPLOAD</span>: <span style=color:#66d9ef>false</span>
+</span></span></code></pre></div><h2 id=gitlab-ci>GitLab CI</h2><h3 id=basic-gitlab-sbom-generation>Basic GitLab SBOM Generation</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>stages</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#ae81ff>build</span>
+</span></span><span style=display:flex><span>  - <span style=color:#ae81ff>sbom</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>build</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>stage</span>: <span style=color:#ae81ff>build</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>script</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>npm ci</span>
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>npm run build</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>artifacts</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>paths</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>dist/</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>generate-sbom</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>stage</span>: <span style=color:#ae81ff>sbom</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>image</span>: <span style=color:#ae81ff>sbomifyhub/sbomify-action</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>variables</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>LOCK_FILE</span>: <span style=color:#ae81ff>package-lock.json</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>OUTPUT_FILE</span>: <span style=color:#ae81ff>sbom.cdx.json</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>COMPONENT_NAME</span>: <span style=color:#ae81ff>my-app</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>COMPONENT_VERSION</span>: <span style=color:#ae81ff>$CI_COMMIT_TAG</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>UPLOAD</span>: <span style=color:#e6db74>&#34;false&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>ENRICH</span>: <span style=color:#e6db74>&#34;true&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>script</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>/sbomify.sh</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>artifacts</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>paths</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>sbom.cdx.json</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>reports</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>cyclonedx</span>: <span style=color:#ae81ff>sbom.cdx.json</span>
+</span></span></code></pre></div><h3 id=gitlab-with-dependency-scanning-integration>GitLab with Dependency Scanning Integration</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>include</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>template</span>: <span style=color:#ae81ff>Security/Dependency-Scanning.gitlab-ci.yml</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>generate-sbom</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>stage</span>: <span style=color:#ae81ff>test</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>image</span>: <span style=color:#ae81ff>sbomifyhub/sbomify-action</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>variables</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>LOCK_FILE</span>: <span style=color:#ae81ff>package-lock.json</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>OUTPUT_FILE</span>: <span style=color:#ae81ff>gl-sbom-report.cdx.json</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>UPLOAD</span>: <span style=color:#e6db74>&#34;false&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>ENRICH</span>: <span style=color:#e6db74>&#34;true&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>script</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>/sbomify.sh</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>artifacts</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>paths</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>gl-sbom-report.cdx.json</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>reports</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>cyclonedx</span>: <span style=color:#ae81ff>gl-sbom-report.cdx.json</span>
+</span></span></code></pre></div><h3 id=gitlab-container-scanning-with-sbom>GitLab Container Scanning with SBOM</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>container-sbom</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>stage</span>: <span style=color:#ae81ff>sbom</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>image</span>: <span style=color:#ae81ff>sbomifyhub/sbomify-action</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>services</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>docker:dind</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>variables</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>DOCKER_HOST</span>: <span style=color:#ae81ff>tcp://docker:2376</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>DOCKER_TLS_CERTDIR</span>: <span style=color:#e6db74>&#34;/certs&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>DOCKER_IMAGE</span>: <span style=color:#e6db74>&#34;$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>OUTPUT_FILE</span>: <span style=color:#ae81ff>container-sbom.cdx.json</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>UPLOAD</span>: <span style=color:#e6db74>&#34;false&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>ENRICH</span>: <span style=color:#e6db74>&#34;true&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>before_script</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY</span>
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>script</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>/sbomify.sh</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>artifacts</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>paths</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>container-sbom.cdx.json</span>
+</span></span></code></pre></div><h2 id=bitbucket-pipelines>Bitbucket Pipelines</h2><h3 id=basic-bitbucket-sbom-generation>Basic Bitbucket SBOM Generation</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>image</span>: <span style=color:#ae81ff>node:20</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>pipelines</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>default</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>step</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Build</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>script</span>:
+</span></span><span style=display:flex><span>          - <span style=color:#ae81ff>npm ci</span>
+</span></span><span style=display:flex><span>          - <span style=color:#ae81ff>npm run build</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>artifacts</span>:
+</span></span><span style=display:flex><span>          - <span style=color:#ae81ff>dist/**</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>step</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Generate SBOM</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>script</span>:
+</span></span><span style=display:flex><span>          - <span style=color:#f92672>pipe</span>: <span style=color:#ae81ff>docker://sbomifyhub/sbomify-action:latest</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>variables</span>:
+</span></span><span style=display:flex><span>              <span style=color:#f92672>LOCK_FILE</span>: <span style=color:#ae81ff>package-lock.json</span>
+</span></span><span style=display:flex><span>              <span style=color:#f92672>OUTPUT_FILE</span>: <span style=color:#ae81ff>sbom.cdx.json</span>
+</span></span><span style=display:flex><span>              <span style=color:#f92672>COMPONENT_NAME</span>: <span style=color:#ae81ff>my-app</span>
+</span></span><span style=display:flex><span>              <span style=color:#f92672>COMPONENT_VERSION</span>: <span style=color:#ae81ff>$BITBUCKET_TAG</span>
+</span></span><span style=display:flex><span>              <span style=color:#f92672>UPLOAD</span>: <span style=color:#e6db74>&#34;false&#34;</span>
+</span></span><span style=display:flex><span>              <span style=color:#f92672>ENRICH</span>: <span style=color:#e6db74>&#34;true&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>artifacts</span>:
+</span></span><span style=display:flex><span>          - <span style=color:#ae81ff>sbom.cdx.json</span>
+</span></span></code></pre></div><p>For rolling releases, use <code>$BITBUCKET_COMMIT</code> instead of <code>$BITBUCKET_TAG</code>. See our <a href=/guides/how-to-version-sboms/>SBOM versioning guide</a> for best practices.</p><h3 id=bitbucket-with-upload>Bitbucket with Upload</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>pipelines</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>default</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>step</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Generate and Upload SBOM</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>script</span>:
+</span></span><span style=display:flex><span>          - <span style=color:#f92672>pipe</span>: <span style=color:#ae81ff>docker://sbomifyhub/sbomify-action:latest</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>variables</span>:
+</span></span><span style=display:flex><span>              <span style=color:#f92672>TOKEN</span>: <span style=color:#ae81ff>$SBOMIFY_TOKEN</span>
+</span></span><span style=display:flex><span>              <span style=color:#f92672>COMPONENT_ID</span>: <span style=color:#ae81ff>my-component</span>
+</span></span><span style=display:flex><span>              <span style=color:#f92672>LOCK_FILE</span>: <span style=color:#ae81ff>package-lock.json</span>
+</span></span><span style=display:flex><span>              <span style=color:#f92672>OUTPUT_FILE</span>: <span style=color:#ae81ff>sbom.cdx.json</span>
+</span></span><span style=display:flex><span>              <span style=color:#f92672>ENRICH</span>: <span style=color:#e6db74>&#34;true&#34;</span>
+</span></span></code></pre></div><h2 id=jenkins>Jenkins</h2><h3 id=jenkins-pipeline-with-sbom>Jenkins Pipeline with SBOM</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy><span style=display:flex><span>pipeline <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    agent <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        docker <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            image <span style=color:#e6db74>&#39;sbomifyhub/sbomify-action&#39;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    environment <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        LOCK_FILE <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;package-lock.json&#39;</span>
+</span></span><span style=display:flex><span>        OUTPUT_FILE <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;sbom.cdx.json&#39;</span>
+</span></span><span style=display:flex><span>        COMPONENT_NAME <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;my-app&#39;</span>
+</span></span><span style=display:flex><span>        COMPONENT_VERSION <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;${env.GIT_TAG_NAME ?: env.GIT_COMMIT}&#34;</span>
+</span></span><span style=display:flex><span>        UPLOAD <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;false&#39;</span>
+</span></span><span style=display:flex><span>        ENRICH <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;true&#39;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    stages <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        stage<span style=color:#f92672>(</span><span style=color:#e6db74>&#39;Generate SBOM&#39;</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            steps <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                sh <span style=color:#e6db74>&#39;/sbomify.sh&#39;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        stage<span style=color:#f92672>(</span><span style=color:#e6db74>&#39;Archive SBOM&#39;</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            steps <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                archiveArtifacts artifacts: <span style=color:#e6db74>&#39;sbom.cdx.json&#39;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><h3 id=jenkins-with-credentials>Jenkins with Credentials</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy><span style=display:flex><span>pipeline <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    agent any
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    stages <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        stage<span style=color:#f92672>(</span><span style=color:#e6db74>&#39;Generate SBOM&#39;</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            steps <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                withCredentials<span style=color:#f92672>([</span>string<span style=color:#f92672>(</span>credentialsId: <span style=color:#e6db74>&#39;sbomify-token&#39;</span><span style=color:#f92672>,</span> variable: <span style=color:#e6db74>&#39;TOKEN&#39;</span><span style=color:#f92672>)])</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    docker<span style=color:#f92672>.</span><span style=color:#a6e22e>image</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#39;sbomifyhub/sbomify-action&#39;</span><span style=color:#f92672>).</span><span style=color:#a6e22e>inside</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                        sh <span style=color:#e6db74>&#39;&#39;&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                            export COMPONENT_ID=&#34;my-component&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                            export LOCK_FILE=&#34;package-lock.json&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                            export OUTPUT_FILE=&#34;sbom.cdx.json&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                            export ENRICH=&#34;true&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                            export UPLOAD=&#34;true&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                            /sbomify.sh
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                        &#39;&#39;&#39;</span>
+</span></span><span style=display:flex><span>                    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><h2 id=circleci>CircleCI</h2><h3 id=circleci-sbom-generation>CircleCI SBOM Generation</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>version</span>: <span style=color:#ae81ff>2.1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>jobs</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>generate-sbom</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>docker</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>image</span>: <span style=color:#ae81ff>sbomifyhub/sbomify-action</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>steps</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>checkout</span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>run</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Generate SBOM</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>environment</span>:
+</span></span><span style=display:flex><span>            <span style=color:#f92672>LOCK_FILE</span>: <span style=color:#ae81ff>package-lock.json</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>OUTPUT_FILE</span>: <span style=color:#ae81ff>sbom.cdx.json</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>COMPONENT_NAME</span>: <span style=color:#ae81ff>my-app</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>COMPONENT_VERSION</span>: <span style=color:#ae81ff>&lt;&lt; pipeline.git.tag &gt;&gt;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>UPLOAD</span>: <span style=color:#e6db74>&#34;false&#34;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>ENRICH</span>: <span style=color:#e6db74>&#34;true&#34;</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>command</span>: <span style=color:#ae81ff>/sbomify.sh</span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>store_artifacts</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>path</span>: <span style=color:#ae81ff>sbom.cdx.json</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>workflows</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>build-and-sbom</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>jobs</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>generate-sbom</span>
+</span></span></code></pre></div><h2 id=azure-devops>Azure DevOps</h2><h3 id=azure-pipelines-sbom-generation>Azure Pipelines SBOM Generation</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>trigger</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#ae81ff>main</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>pool</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>vmImage</span>: <span style=color:#e6db74>&#39;ubuntu-latest&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>steps</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>checkout</span>: <span style=color:#ae81ff>self</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>task</span>: <span style=color:#ae81ff>Docker@2</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>displayName</span>: <span style=color:#e6db74>&#39;Generate SBOM&#39;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>inputs</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>command</span>: <span style=color:#e6db74>&#39;run&#39;</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>arguments</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        -v $(Build.SourcesDirectory):/workspace
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        -w /workspace
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        -e LOCK_FILE=package-lock.json
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        -e OUTPUT_FILE=sbom.cdx.json
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        -e COMPONENT_NAME=my-app
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        -e COMPONENT_VERSION=$(Build.SourceVersion)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        -e UPLOAD=false
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        -e ENRICH=true
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        sbomifyhub/sbomify-action</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>publish</span>: <span style=color:#ae81ff>$(Build.SourcesDirectory)/sbom.cdx.json</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>artifact</span>: <span style=color:#ae81ff>sbom</span>
+</span></span></code></pre></div><h2 id=uploading-to-dependency-track>Uploading to Dependency-Track</h2><p>Integrate with OWASP Dependency-Track:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e># GitHub Actions example</span>
+</span></span><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Generate SBOM</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>sbomify/github-action@master</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>env</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>LOCK_FILE</span>: <span style=color:#ae81ff>package-lock.json</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>OUTPUT_FILE</span>: <span style=color:#ae81ff>sbom.cdx.json</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>ENRICH</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>UPLOAD</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Upload to Dependency-Track</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>run</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    curl -X &#34;POST&#34; &#34;https://dtrack.example.com/api/v1/bom&#34; \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      -H &#34;X-Api-Key: ${{ secrets.DTRACK_API_KEY }}&#34; \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      -H &#34;Content-Type: multipart/form-data&#34; \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      -F &#34;project=${{ secrets.DTRACK_PROJECT_UUID }}&#34; \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      -F &#34;bom=@sbom.cdx.json&#34;</span>
+</span></span></code></pre></div><h2 id=multiple-language-projects>Multiple Language Projects</h2><p>For projects with multiple lockfiles:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>---
+</span></span><span style=display:flex><span><span style=color:#f92672>name</span>: <span style=color:#ae81ff>Generate Multiple SBOMs</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>on</span>: [<span style=color:#ae81ff>push]</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>jobs</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>sbom</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-latest</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>strategy</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>matrix</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>include</span>:
+</span></span><span style=display:flex><span>          - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>frontend</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>lock_file</span>: <span style=color:#ae81ff>frontend/package-lock.json</span>
+</span></span><span style=display:flex><span>          - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>backend</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>lock_file</span>: <span style=color:#ae81ff>backend/requirements.txt</span>
+</span></span><span style=display:flex><span>          - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>api</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>lock_file</span>: <span style=color:#ae81ff>api/go.mod</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>steps</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v4</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Generate SBOM for ${{ matrix.name }}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>sbomify/github-action@master</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>env</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>LOCK_FILE</span>: <span style=color:#ae81ff>${{ matrix.lock_file }}</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>OUTPUT_FILE</span>: <span style=color:#e6db74>&#39;sbom-${{ matrix.name }}.cdx.json&#39;</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>ENRICH</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/upload-artifact@v4</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>name</span>: <span style=color:#ae81ff>sbom-${{ matrix.name }}</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>path</span>: <span style=color:#ae81ff>sbom-${{ matrix.name }}.cdx.json</span>
+</span></span></code></pre></div><h2 id=best-practices>Best Practices</h2><ol><li><strong>Generate on every build</strong> - SBOMs should be artifacts of your CI/CD pipeline</li><li><strong>Store as build artifacts</strong> - Keep SBOMs alongside your build outputs</li><li><strong>Use attestations</strong> - Cryptographically link SBOMs to builds</li><li><strong>Version your SBOMs</strong> - Include build numbers or commit hashes</li><li><strong>Fail on errors</strong> - Don&rsquo;t ship if SBOM generation fails</li><li><strong>Scan immediately</strong> - Integrate vulnerability scanning with SBOM generation</li><li><strong>Centralize storage</strong> - Upload to platforms like sbomify for management</li></ol><h2 id=troubleshooting>Troubleshooting</h2><h3 id=common-issues>Common Issues</h3><p><strong>SBOM generation fails in CI:</strong></p><ul><li>Ensure all dependencies are installed (<code>npm ci</code>, <code>pip install</code>, etc.)</li><li>Check that lockfiles are committed to the repository</li></ul><p><strong>Missing dependencies:</strong></p><ul><li>Use <code>--frozen-lockfile</code> or equivalent to ensure lockfile is respected</li><li>Verify the correct lockfile path</li></ul><p><strong>Authentication issues:</strong></p><ul><li>For private registries, configure credentials in CI secrets</li><li>Use service accounts with minimal permissions</li></ul><h2 id=further-reading>Further Reading</h2><p>Related blog posts:</p><ul><li><a href=/2024/10/31/github-action-update-and-attestation/>GitHub Action module with Attestation</a> - SLSA build provenance attestation for SBOMs</li><li><a href=/2024/11/12/gitlab-support/>sbomify GitHub Action v0.3.0: Now Faster and Compatible with GitLab!</a> - GitLab CI/CD support and performance improvements</li></ul><h2 id=further-resources>Further Resources</h2><p>For more SBOM tools and resources, see our <a href=/resources/>SBOM Resources</a> page, which includes tools for SBOM generation, distribution, and analysis across all supported languages.</p></article></div></div></div></main><footer class="bg-primaryBG border-t border-[#37306B]"><div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16"><div class="flex flex-col lg:flex-row justify-between items-center gap-8"><div class="flex flex-col items-center lg:items-start gap-4 flex-1"><a href=/><img class="h-8 w-auto" src=/images/site/logo.0dcb235ed731a5cff41bdefe2f677847f6680b9cc9ff701cbaedd68e431ea209.svg alt="sbomify logo" width=133 height=24></a><p class="text-tertiaryText text-sm text-center lg:text-left max-w-xs">Your Security Artifact Hub. Generate trust centers and share security artifacts with confidence.</p></div><div class="flex flex-wrap gap-x-6 gap-y-3 lg:gap-8 text-sm text-tertiaryText flex-[2] justify-center"><a href=/blog class="hover:text-[#8A7DFF] transition-colors whitespace-nowrap">Blog</a>
+<a href=/guides class="hover:text-[#8A7DFF] transition-colors whitespace-nowrap">Guides</a>
+<a href=/case-studies class="hover:text-[#8A7DFF] transition-colors whitespace-nowrap">Case Studies</a>
+<a href=/resources class="hover:text-[#8A7DFF] transition-colors whitespace-nowrap">Resources</a>
+<a href=/compliance class="hover:text-[#8A7DFF] transition-colors whitespace-nowrap">Compliance</a>
+<a href=/pricing class="hover:text-[#8A7DFF] transition-colors whitespace-nowrap">Pricing</a>
+<a href=https://trust.sbomify.com/ class="hover:text-[#8A7DFF] transition-colors whitespace-nowrap" target=_blank rel="noopener noreferrer">Trust Center</a>
+<a href=https://app.sbomify.com class="hover:text-[#8A7DFF] transition-colors whitespace-nowrap">Login</a></div><div class="flex flex-col items-center lg:items-end gap-4 flex-1"><div class="flex gap-4"><a href=https://github.com/sbomify class="opacity-70 hover:opacity-100 transition-opacity"><img src=/images/site/github-white.0ecf994ed0158ecb3628e9129d991fc64c680a47da18eaedd85d8fcc1f14eb24.svg alt=GitHub class="h-5 w-5" width=20 height=20>
+</a><a href=https://www.linkedin.com/company/sbomify class="opacity-70 hover:opacity-100 transition-opacity"><img src=/images/site/linkedin-white.0fd23284e69340d1aff889d6d3d0decca6cf6cfda233c9b05bed00167d5bf6e1.svg alt=LinkedIn class="h-5 w-5" width=20 height=20>
+</a><a href=https://join.slack.com/t/sbomify/shared_invite/zt-3na54pa1f-MXrFWhotmZr0YxXc8sABTw class="opacity-70 hover:opacity-100 transition-opacity"><img src=/images/site/slack-white.bf92cb9fe1a16ca40039ced45a8e60a1fd72ddcf066779948f81a176ebc99fa1.svg alt=Slack class="h-5 w-5" width=20 height=20></a></div><div class="text-xs text-tertiaryText/60 text-center lg:text-right flex flex-col gap-1"><div>&copy; 2024 - 2026 sbomify ltd. All rights reserved.</div><div class="flex gap-2 justify-center lg:justify-end"><a href=/privacy class="hover:text-white transition-colors">Privacy</a>
+<span>&bull;</span>
+<a href=/terms class="hover:text-white transition-colors">Terms</a></div><div class=mt-1><a href=https://studio.viktopia.io class="hover:text-white transition-colors">A Viktopia Studio project</a></div></div></div></div></div></footer><script src=/js/main.96c7d1b829653c20cd0ad3fd5b50ddd2d3c8c1d565f8d5584c4480631c243f1a.js defer></script></body></html>

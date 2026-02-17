@@ -1,7 +1,12 @@
-FROM ruby:3-slim AS d2-source
+FROM golang:1.24-alpine AS hugo-build
+ARG HUGO_VERSION=0.145.0
+RUN apk add --no-cache git gcc g++ musl-dev && \
+    CGO_ENABLED=1 go install -tags extended github.com/gohugoio/hugo@v${HUGO_VERSION}
+
+FROM alpine:3.21 AS d2-source
 WORKDIR /tmp
 ARG D2_VERSION=0.7.1
-RUN apt-get update && apt-get install -y curl && \
+RUN apk add --no-cache curl && \
     ARCH=$(uname -m) && \
     if [ "$ARCH" = "x86_64" ]; then D2_ARCH="amd64"; \
     elif [ "$ARCH" = "aarch64" ]; then D2_ARCH="arm64"; \
@@ -11,25 +16,13 @@ RUN apt-get update && apt-get install -y curl && \
     find . -type f -name d2 -exec mv {} /usr/local/bin/d2 \; && \
     chmod +x /usr/local/bin/d2
 
-FROM ruby:3-slim
+FROM alpine:3.21
 
-ENV LANG=C.UTF-8
-
-# Install system dependencies including curl first
-RUN rm -rf /var/lib/apt/lists/* && \
-    apt-get clean && \
-    apt-get update -qq && \
-    apt-get install -y --no-install-recommends \
-    build-essential \
+RUN apk add --no-cache \
     curl \
-    unzip \
-    webp \
     git \
-    pkg-config \
-    zlib1g-dev \
-    libxml2-dev \
-    libxslt-dev && \
-    rm -rf /var/lib/apt/lists/*
+    libwebp-tools \
+    bash
 
 # Install Bun
 RUN curl -fsSL https://bun.sh/install | bash
@@ -38,20 +31,14 @@ ENV PATH="/root/.bun/bin:$PATH"
 # Symlink npm to bun for libraries that hardcode npm
 RUN ln -s /root/.bun/bin/bun /root/.bun/bin/npm
 
+# Install Hugo
+COPY --from=hugo-build /go/bin/hugo /usr/local/bin/hugo
+
 # Install d2
 COPY --from=d2-source /usr/local/bin/d2 /usr/local/bin/d2
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-
-ENV NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-
-# Install Ruby dependencies
-COPY Gemfile Gemfile.lock ./
-RUN gem install bundler --no-document && \
-    bundle config build.nokogiri --use-system-libraries && \
-    bundle config set --local force_ruby_platform true && \
-    bundle install
 
 # Install Bun dependencies to a separate location
 COPY package.json bun.lock /usr/local/bun-deps/

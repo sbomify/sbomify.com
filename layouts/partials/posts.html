@@ -1,0 +1,41 @@
+{{- $limit := .limit | default 0 -}}
+{{- $paginate := .paginate -}}
+{{- $dark := .dark -}}
+{{- $hideViewAll := .hideViewAll | default false -}}
+{{- $title := .title -}}
+{{- $context := .context -}}
+{{ with $title }}
+<h3 class="text-3xl lg:text-4xl font-semibold mb-12 {{ if $dark }}text-white{{ else }}text-primaryText{{ end }}">{{ . }}</h3>
+{{ end }}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {{ if $paginate }}
+    {{ $paginator := $context.Paginate (where site.RegularPages "Section" "posts") }}
+    {{ range $paginator.Pages }}
+      {{ partial "post-card.html" (dict "post" . "dark" $dark) }}
+    {{ end }}
+  {{ else }}
+    {{ $posts := where site.RegularPages "Section" "posts" }}
+    {{ if gt $limit 0 }}
+      {{ range first $limit $posts }}
+        {{ partial "post-card.html" (dict "post" . "dark" $dark) }}
+      {{ end }}
+    {{ else }}
+      {{ range $posts }}
+        {{ partial "post-card.html" (dict "post" . "dark" $dark) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+</div>
+{{ $allPosts := where site.RegularPages "Section" "posts" }}
+{{ if and (not $hideViewAll) (gt $limit 0) (gt (len $allPosts) $limit) }}
+<div class="mt-12 flex justify-center">
+  <a href="/blog/" class="px-6 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium transition-all duration-200">
+    View All Posts
+  </a>
+</div>
+{{ end }}
+{{ if $paginate }}
+<div class="mt-16">
+  {{ partial "pagination.html" $context }}
+</div>
+{{ end }}

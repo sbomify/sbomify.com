@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sbomify</title><link>https://sbomify.com/tags/cybersecurity/</link><description>Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 08 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://sbomify.com/tags/cybersecurity/" rel="self" type="application/rss+xml"/><item><title>The Role of SBOMs in Cybersecurity: From Visibility to Vulnerability Response</title><link>https://sbomify.com/2026/02/08/sbom-cybersecurity-role/</link><pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate><guid>https://sbomify.com/2026/02/08/sbom-cybersecurity-role/</guid><description>&lt;p>A &lt;a href="https://sbomify.com/what-is-sbom/">Software Bill of Materials&lt;/a> (SBOM) is a foundational cybersecurity tool that provides a complete, machine-readable inventory of every component in a software product. In cybersecurity, SBOMs answer the question that every security team must be able to answer: &lt;em>what is in our software?&lt;/em> Without this visibility, vulnerability management, incident response, and compliance are all reactive at best and impossible at worst.&lt;/p>
+&lt;h2 id="why-sboms-matter-for-cybersecurity">Why SBOMs Matter for Cybersecurity&lt;/h2>
+&lt;p>Modern software is assembled from open source and third-party components. A typical application consists of &lt;a href="https://www.linux.com/training-tutorials/estimating-total-number-linux-contributors-approach-using-linus-law/">70-90% open source code&lt;/a> drawn from package registries. Each component is a potential entry point for attackers — whether through known vulnerabilities, compromised packages, or abandoned libraries.&lt;/p>
+&lt;p>SBOMs make the composition of software visible. This visibility is the prerequisite for every other cybersecurity activity involving third-party code: you cannot patch what you do not know you are running.&lt;/p>
+&lt;h2 id="sboms-and-vulnerability-management">SBOMs and Vulnerability Management&lt;/h2>
+&lt;p>Vulnerability management is the cybersecurity function that benefits most directly from SBOMs. The workflow connects component inventories to threat intelligence, creating a continuous monitoring capability.&lt;/p>
+&lt;h3 id="the-problem-without-sboms">The Problem Without SBOMs&lt;/h3>
+&lt;p>When a new &lt;a href="https://sbomify.com/2025/12/18/cve-vulnerability-explained/">CVE&lt;/a> is disclosed, organizations without SBOMs must:&lt;/p>
+&lt;ol>
+&lt;li>Manually determine which components are used across all applications&lt;/li>
+&lt;li>Check each application&amp;rsquo;s dependency files (if accessible)&lt;/li>
+&lt;li>Search container images, build artifacts, and deployment manifests&lt;/li>
+&lt;li>Aggregate findings across teams and environments&lt;/li>
+&lt;/ol>
+&lt;p>This manual process can take days or weeks. During that time, the vulnerability may be actively exploited.&lt;/p>
+&lt;h3 id="the-solution-with-sboms">The Solution With SBOMs&lt;/h3>
+&lt;p>With SBOMs generated and ingested into a management platform like &lt;a href="https://sbomify.com">sbomify&lt;/a> or &lt;a href="https://dependencytrack.org/">OWASP Dependency-Track&lt;/a>:&lt;/p>
+&lt;ol>
+&lt;li>New CVE is published to vulnerability databases&lt;/li>
+&lt;li>Platform automatically matches the CVE to SBOM component inventories&lt;/li>
+&lt;li>Affected products and versions are identified within seconds&lt;/li>
+&lt;li>Alerts are sent to the responsible teams&lt;/li>
+&lt;li>Remediation begins immediately&lt;/li>
+&lt;/ol>
+&lt;p>This automated approach reduces the response window from days to minutes. The difference is especially critical for vulnerabilities listed in the &lt;a href="https://sbomify.com/2025/12/30/what-is-kev-cisa-known-exploited-vulnerabilities/">CISA KEV catalog&lt;/a> — those confirmed to be actively exploited in the wild.&lt;/p>
+&lt;h2 id="incident-response-the-log4shell-case-study">Incident Response: The Log4Shell Case Study&lt;/h2>
+&lt;p>The Log4Shell vulnerability (&lt;a href="https://nvd.nist.gov/vuln/detail/CVE-2021-44228">CVE-2021-44228&lt;/a>) in December 2021 is the defining example of why SBOMs matter for cybersecurity. Apache Log4j was a ubiquitous Java logging library used as both a direct and transitive &lt;a href="https://sbomify.com/2026/01/29/what-is-a-dependency-in-software/">dependency&lt;/a> in millions of applications.&lt;/p>
+&lt;p>&lt;strong>Organizations with SBOMs&lt;/strong> queried their component inventories and identified affected systems within minutes. They knew exactly which applications used Log4j, at which versions, and in which environments.&lt;/p>
+&lt;p>&lt;strong>Organizations without SBOMs&lt;/strong> spent weeks manually auditing codebases, scanning containers, and contacting vendors to determine exposure. Some discovered Log4j in applications they did not even know existed in their environment.&lt;/p>
+&lt;p>Log4Shell became the single most cited argument for SBOM adoption. It demonstrated that in a crisis, the ability to answer &amp;ldquo;which of our systems are affected?&amp;rdquo; is not optional — it is a core cybersecurity capability.&lt;/p>
+&lt;h2 id="sboms-and-the-compliance-landscape">SBOMs and the Compliance Landscape&lt;/h2>
+&lt;p>Multiple cybersecurity regulations and frameworks now require or strongly recommend SBOMs. This reflects the growing consensus that software transparency is essential for security.&lt;/p>
+&lt;h3 id="united-states">United States&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/eo-14028/">Executive Order 14028&lt;/a>&lt;/strong> (&amp;ldquo;Improving the Nation&amp;rsquo;s Cybersecurity&amp;rdquo;, 2021) directed federal agencies to require SBOMs from software vendors. It established SBOMs as a baseline expectation for government software procurement.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/cisa-minimum-elements/">CISA Minimum Elements&lt;/a>&lt;/strong> defines the recommended fields for SBOMs, building on the &lt;a href="https://sbomify.com/compliance/ntia-minimum-elements/">NTIA minimum elements&lt;/a>.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/nist-800-53/">NIST SP 800-53&lt;/a>&lt;/strong> includes supply chain risk management controls (SR family) that SBOMs help satisfy, particularly SR-4 (Provenance) and CM-8 (Component Inventory).&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/nist-800-171/">NIST SP 800-171&lt;/a>&lt;/strong> (Rev 3) added a Supply Chain Risk Management family (03.17) relevant to DoD contractors handling Controlled Unclassified Information.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/fda-medical-device/">FDA Medical Device Guidance&lt;/a>&lt;/strong> requires SBOMs for medical device premarket submissions.&lt;/li>
+&lt;/ul>
+&lt;h3 id="european-union">European Union&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/eu-cra/">EU Cyber Resilience Act&lt;/a>&lt;/strong> (CRA) requires manufacturers of products with digital elements to identify and document components, with SBOMs as the practical mechanism.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/eu-nis2/">NIS2 Directive&lt;/a>&lt;/strong> requires supply chain security measures for essential and important entities.&lt;/li>
+&lt;/ul>
+&lt;h3 id="industry-standards">Industry Standards&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/pci-dss/">PCI DSS 4.0&lt;/a>&lt;/strong> requires maintaining an inventory of third-party software components for payment card environments.&lt;/li>
+&lt;/ul>
+&lt;p>For a complete comparison of compliance frameworks, see our &lt;a href="https://sbomify.com/compliance/">compliance overview&lt;/a>.&lt;/p>
+&lt;h2 id="sboms-across-the-cybersecurity-lifecycle">SBOMs Across the Cybersecurity Lifecycle&lt;/h2>
+&lt;p>SBOMs support cybersecurity at every stage:&lt;/p>
+&lt;h3 id="prevention">Prevention&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Dependency auditing.&lt;/strong> SBOMs reveal the full dependency tree including &lt;a href="https://sbomify.com/2026/01/29/what-is-a-dependency-in-software/">transitive dependencies&lt;/a>, enabling teams to identify and replace risky components before deployment.&lt;/li>
+&lt;li>&lt;strong>License compliance.&lt;/strong> SBOMs document the license of every component, preventing license conflicts that can create legal exposure. See our &lt;a href="https://sbomify.com/2025/12/22/gpl-license-guide/">GPL&lt;/a>, &lt;a href="https://sbomify.com/2026/01/22/mit-license-guide/">MIT&lt;/a>, and &lt;a href="https://sbomify.com/2026/01/07/apache-license-2-guide/">Apache 2.0&lt;/a> guides for license-specific details.&lt;/li>
+&lt;li>&lt;strong>Policy enforcement.&lt;/strong> SBOM-based tools can block deployments that include components with known critical vulnerabilities or prohibited licenses.&lt;/li>
+&lt;/ul>
+&lt;h3 id="detection">Detection&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Continuous vulnerability monitoring.&lt;/strong> SBOMs ingested into platforms like OWASP Dependency-Track are continuously matched against the &lt;a href="https://nvd.nist.gov/">NVD&lt;/a>, &lt;a href="https://osv.dev/">OSV&lt;/a>, and &lt;a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog">CISA KEV catalog&lt;/a>. See our &lt;a href="https://sbomify.com/2026/02/01/sbom-scanning-vulnerability-detection/">SBOM scanning guide&lt;/a> for implementation details.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/2026/02/05/what-is-cvss-vulnerability-scoring/">CVSS&lt;/a>-based triage.&lt;/strong> SBOMs paired with vulnerability data enable automated severity assessment, prioritizing critical and high-severity issues.&lt;/li>
+&lt;/ul>
+&lt;h3 id="response">Response&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Rapid impact assessment.&lt;/strong> Query SBOM repositories to immediately identify which products and environments contain an affected component.&lt;/li>
+&lt;li>&lt;strong>Targeted remediation.&lt;/strong> Knowing exactly where a vulnerable component is deployed enables precise patching rather than broad emergency measures.&lt;/li>
+&lt;li>&lt;strong>VEX communication.&lt;/strong> Use Vulnerability Exploitability eXchange (VEX) documents to communicate whether a reported vulnerability actually affects your product.&lt;/li>
+&lt;/ul>
+&lt;h3 id="recovery">Recovery&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Audit trail.&lt;/strong> Retained SBOMs provide a historical record of what was deployed at any point in time, supporting post-incident analysis and regulatory reporting.&lt;/li>
+&lt;li>&lt;strong>Rebuild verification.&lt;/strong> SBOMs document the components that should be present, enabling verification that rebuilt or patched software matches the intended composition.&lt;/li>
+&lt;/ul>
+&lt;h2 id="getting-started">Getting Started&lt;/h2>
+&lt;p>If you are beginning your SBOM journey:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Start generating SBOMs.&lt;/strong> Use our &lt;a href="https://sbomify.com/guides/">language-specific SBOM guides&lt;/a> to generate SBOMs for your projects in &lt;a href="https://cyclonedx.org/">CycloneDX&lt;/a> or &lt;a href="https://spdx.dev/">SPDX&lt;/a> format. See our &lt;a href="https://sbomify.com/2026/01/15/sbom-formats-cyclonedx-vs-spdx/">SBOM formats comparison&lt;/a> for format guidance.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Automate generation in CI/CD.&lt;/strong> Integrate SBOM generation into your build pipeline using the &lt;a href="https://github.com/sbomify/github-action/">sbomify GitHub Action&lt;/a>, which handles generation, enrichment, and augmentation in one step. Standalone tools like &lt;a href="https://github.com/anchore/syft">Syft&lt;/a> and &lt;a href="https://github.com/aquasecurity/trivy">Trivy&lt;/a> are also available. See our &lt;a href="https://sbomify.com/2026/01/26/sbom-generation-tools-comparison/">SBOM generation tools comparison&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Set up vulnerability monitoring.&lt;/strong> Use &lt;a href="https://sbomify.com">sbomify&lt;/a> for integrated monitoring (built-in OSV and Dependency-Track scanning), or deploy a standalone &lt;a href="https://dependencytrack.org/">OWASP Dependency-Track&lt;/a> instance for continuous monitoring.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Establish a management process.&lt;/strong> Define how SBOMs are stored, versioned, and distributed. See our &lt;a href="https://sbomify.com/2026/01/18/sbom-management-best-practices/">SBOM management guide&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Map to compliance requirements.&lt;/strong> Identify which compliance frameworks apply to your organization and ensure your SBOM process meets their requirements. See our &lt;a href="https://sbomify.com/compliance/">compliance overview&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>For a comprehensive list of tools across the SBOM lifecycle, see our &lt;a href="https://sbomify.com/resources/">resources page&lt;/a>.&lt;/p>
+&lt;h2 id="frequently-asked-questions">Frequently Asked Questions&lt;/h2>
+&lt;h3 id="how-do-sboms-improve-cybersecurity">How do SBOMs improve cybersecurity?&lt;/h3>
+&lt;p>SBOMs improve cybersecurity by providing component-level visibility into software. This visibility enables automated vulnerability detection (matching components against CVE databases), rapid incident response (immediately identifying affected systems when a new vulnerability is disclosed), continuous compliance monitoring (tracking regulatory requirements), and informed risk management (understanding the full dependency chain and its associated risks).&lt;/p>
+&lt;h3 id="are-sboms-required-for-cybersecurity-compliance">Are SBOMs required for cybersecurity compliance?&lt;/h3>
+&lt;p>SBOMs are required or strongly recommended by multiple frameworks: U.S. Executive Order 14028 requires them for federal software procurement, the EU Cyber Resilience Act requires them for products with digital elements, FDA guidance requires them for medical device submissions, and NIST SP 800-53/800-171 include supply chain controls that SBOMs help satisfy. See our &lt;a href="https://sbomify.com/compliance/">compliance overview&lt;/a> for a framework-by-framework breakdown.&lt;/p>
+&lt;h3 id="how-did-log4shell-demonstrate-the-need-for-sboms">How did Log4Shell demonstrate the need for SBOMs?&lt;/h3>
+&lt;p>When the Log4Shell vulnerability (CVE-2021-44228) was disclosed in December 2021, organizations with SBOMs identified affected systems in minutes by querying their component inventories. Organizations without SBOMs spent weeks manually auditing codebases and scanning infrastructure. This stark contrast made Log4Shell the most commonly cited example of why SBOMs are essential for cybersecurity incident response.&lt;/p>
+&lt;h3 id="what-is-the-relationship-between-sboms-and-vulnerability-management">What is the relationship between SBOMs and vulnerability management?&lt;/h3>
+&lt;p>SBOMs provide the component inventory that vulnerability management depends on. Without knowing what components are in your software, you cannot determine which vulnerabilities affect you. SBOMs ingested into monitoring platforms are continuously matched against vulnerability databases, enabling automated detection and alerting. This transforms vulnerability management from a periodic manual exercise into a continuous automated process.&lt;/p>
+&lt;h3 id="how-do-i-start-using-sboms-for-cybersecurity">How do I start using SBOMs for cybersecurity?&lt;/h3>
+&lt;p>Start by generating SBOMs for your applications using tools like Syft, Trivy, or language-specific generators. Automate generation in your CI/CD pipeline. Ingest SBOMs into a monitoring platform like OWASP Dependency-Track for continuous vulnerability scanning. Define remediation SLAs based on CVSS severity and KEV status. See our &lt;a href="https://sbomify.com/guides/">SBOM guides&lt;/a> for step-by-step instructions.&lt;/p></description><category>education</category></item><item><title>FDA Medical Device SBOM Requirements: What the New Cybersecurity Guidance Means for Manufacturers</title><link>https://sbomify.com/2026/01/09/fda-medical-device-sbom-requirements/</link><pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate><guid>https://sbomify.com/2026/01/09/fda-medical-device-sbom-requirements/</guid><description>&lt;p>On June 27, 2025, the FDA issued updated guidance on &lt;strong>&amp;ldquo;Cybersecurity in Medical Devices: Quality System Considerations and Content of Premarket Submissions.&amp;rdquo;&lt;/strong> This document marks a significant step forward in how medical device manufacturers must approach software security and transparency. At the heart of these recommendations lies the &lt;a href="https://sbomify.com/what-is-sbom/">Software Bill of Materials (SBOM)&lt;/a> — now an essential element of premarket submissions for connected medical devices.&lt;/p>
+&lt;p>If you&amp;rsquo;re a manufacturer preparing a 510(k), PMA, or other premarket submission, here&amp;rsquo;s what you need to know about the FDA&amp;rsquo;s SBOM expectations and how to prepare.&lt;/p>
+&lt;h2 id="what-the-guidance-says-about-sboms">What the Guidance Says About SBOMs&lt;/h2>
+&lt;p>The FDA guidance recommends the inclusion of an SBOM under &lt;strong>Section V.A.4 (Software Bill of Materials)&lt;/strong> as part of cybersecurity documentation in premarket submissions. Additionally, &lt;strong>Appendix 4&lt;/strong> lists SBOM sections as recommended documentation when cybersecurity risk is relevant.&lt;/p>
+&lt;p>While the guidance language is technically &lt;strong>non-binding&lt;/strong> (&amp;ldquo;contains nonbinding recommendations&amp;rdquo;), the practical reality is different:&lt;/p>
+&lt;ul>
+&lt;li>Under &lt;strong>Section 524B of the FD&amp;amp;C Act&lt;/strong>, the FDA has authority over &amp;ldquo;cyber devices&amp;rdquo; — devices with software that can be vulnerable and are connected&lt;/li>
+&lt;li>FDA may &lt;strong>refuse to accept premarket submissions&lt;/strong> that do not provide adequate SBOM and related cybersecurity information&lt;/li>
+&lt;li>Insufficient SBOM documentation can lead to &lt;strong>delays in review&lt;/strong> or requests for resubmission&lt;/li>
+&lt;/ul>
+&lt;p>In practice, the SBOM has moved from &amp;ldquo;nice-to-have&amp;rdquo; to &lt;strong>essential cybersecurity documentation&lt;/strong> for medical device submissions. This mirrors the broader global trend toward &lt;a href="https://sbomify.com/features/why-now/">mandatory SBOM requirements&lt;/a> across regulatory frameworks.&lt;/p>
+&lt;h2 id="sbom-content-expectations">SBOM Content Expectations&lt;/h2>
+&lt;p>The FDA guidance does not define SBOM fields directly. Instead, it explicitly references the &lt;strong>&lt;a href="https://www.ntia.gov/sites/default/files/publications/sbom_minimum_elements_report_0.pdf">NTIA Minimum Elements for a Software Bill of Materials&lt;/a>&lt;/strong> as the baseline expectation for SBOM content in premarket submissions.&lt;/p>
+&lt;p>This distinction matters: the FDA is effectively saying &amp;ldquo;provide an SBOM that meets the NTIA minimum elements&amp;rdquo; — not &amp;ldquo;provide an SBOM with these FDA-defined fields.&amp;rdquo; This approach mirrors how other regulators (including the EU&amp;rsquo;s Cyber Resilience Act) reference SBOMs indirectly via standards bodies, allowing requirements to evolve without requiring agencies to reissue guidance.&lt;/p>
+&lt;h3 id="ntia-minimum-elements">NTIA Minimum Elements&lt;/h3>
+&lt;p>The NTIA baseline defines what every SBOM should contain. For each software component:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Supplier name&lt;/strong> — who supplied the component&lt;/li>
+&lt;li>&lt;strong>Component name&lt;/strong> — the name of the component&lt;/li>
+&lt;li>&lt;strong>Version&lt;/strong> — the version identifier&lt;/li>
+&lt;li>&lt;strong>Unique identifier&lt;/strong> — such as Package URL (purl) or CPE&lt;/li>
+&lt;li>&lt;strong>Dependency relationship&lt;/strong> — how components relate to each other&lt;/li>
+&lt;li>&lt;strong>Author of SBOM data&lt;/strong> — who created the SBOM&lt;/li>
+&lt;li>&lt;strong>Timestamp&lt;/strong> — when the SBOM was created&lt;/li>
+&lt;/ul>
+&lt;h3 id="machine-readable-formats">Machine-Readable Formats&lt;/h3>
+&lt;p>SBOMs should be provided in machine-readable formats that support the NTIA minimum elements:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>SPDX&lt;/strong> (Software Package Data Exchange)&lt;/li>
+&lt;li>&lt;strong>CycloneDX&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>Both formats are widely accepted and can represent the required NTIA data fields.&lt;/p>
+&lt;h3 id="complete-software-inventory">Complete Software Inventory&lt;/h3>
+&lt;p>All software included in the device must be identified:&lt;/p>
+&lt;ul>
+&lt;li>Commercial software&lt;/li>
+&lt;li>Open-source components&lt;/li>
+&lt;li>Third-party libraries&lt;/li>
+&lt;li>Off-the-shelf (OTS) components&lt;/li>
+&lt;/ul>
+&lt;h3 id="support-and-lifecycle-metadata">Support and Lifecycle Metadata&lt;/h3>
+&lt;p>Beyond the NTIA baseline, FDA expects additional context for medical device submissions:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Level of support&lt;/strong> from the component supplier (active, legacy, or unsupported)&lt;/li>
+&lt;li>&lt;strong>End-of-support and end-of-life dates&lt;/strong> for each component&lt;/li>
+&lt;/ul>
+&lt;h3 id="vulnerability-context">Vulnerability Context&lt;/h3>
+&lt;p>SBOMs should be supplemented with:&lt;/p>
+&lt;ul>
+&lt;li>A &lt;strong>known vulnerabilities assessment&lt;/strong> for identified components&lt;/li>
+&lt;li>&lt;strong>Controls or mitigation descriptions&lt;/strong> explaining whether vulnerabilities are mitigated by design&lt;/li>
+&lt;/ul>
+&lt;p>This means SBOMs are expected to be part of a comprehensive &lt;strong>vulnerability and risk management package&lt;/strong>, not just a flat inventory list.&lt;/p>
+&lt;h2 id="lifecycle-and-traceability-requirements">Lifecycle and Traceability Requirements&lt;/h2>
+&lt;p>The FDA guidance ties SBOMs into broader cybersecurity documentation expectations throughout the device lifecycle. Understanding the full &lt;a href="https://sbomify.com/features/generate-collaborate-analyze/">SBOM lifecycle&lt;/a> — from generation through distribution and analysis — is critical for FDA compliance:&lt;/p>
+&lt;h3 id="secure-product-development-and-traceability">Secure Product Development and Traceability&lt;/h3>
+&lt;ul>
+&lt;li>SBOMs must be &lt;strong>traceable to security architecture views&lt;/strong> and threat models that FDA reviewers evaluate&lt;/li>
+&lt;li>The documentation should demonstrate how software components affect device security risks&lt;/li>
+&lt;/ul>
+&lt;h3 id="ongoing-updates">Ongoing Updates&lt;/h3>
+&lt;ul>
+&lt;li>SBOMs should be &lt;strong>updated to reflect changes&lt;/strong> throughout software updates and the device lifecycle&lt;/li>
+&lt;li>This is not a one-time snapshot — it&amp;rsquo;s a living document&lt;/li>
+&lt;li>Proper &lt;a href="https://sbomify.com/guides/how-to-version-sboms">SBOM versioning practices&lt;/a> are essential for maintaining traceability&lt;/li>
+&lt;/ul>
+&lt;h3 id="integration-with-other-documentation">Integration with Other Documentation&lt;/h3>
+&lt;p>In premarket submissions, SBOMs typically appear alongside:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Security Risk Management Reports&lt;/strong> — showing how components affect device risks&lt;/li>
+&lt;li>&lt;strong>Vulnerability Assessments&lt;/strong> — outcomes derived from SBOM analysis&lt;/li>
+&lt;li>&lt;strong>Software Support Information&lt;/strong> — lifecycle and maintenance details&lt;/li>
+&lt;li>&lt;strong>Labeling and Transparency Materials&lt;/strong> — cybersecurity information for end users&lt;/li>
+&lt;/ul>
+&lt;h3 id="why-cicd-integration-is-essential">Why CI/CD Integration Is Essential&lt;/h3>
+&lt;p>Given the FDA&amp;rsquo;s emphasis on traceability and ongoing updates, &lt;strong>manual SBOM generation is not sustainable&lt;/strong> for medical device compliance. Every software build should automatically generate an SBOM that:&lt;/p>
+&lt;ul>
+&lt;li>Captures the exact components at the moment of build&lt;/li>
+&lt;li>Is cryptographically linked to that specific release&lt;/li>
+&lt;li>Can be traced back to source code and build artifacts&lt;/li>
+&lt;li>Is automatically stored and versioned for audit trails&lt;/li>
+&lt;/ul>
+&lt;p>Integrating SBOM generation into your CI/CD pipeline ensures that every release — whether it&amp;rsquo;s a major version update or a security patch — has accurate, reproducible documentation. This is particularly important for medical devices where you may need to answer FDA questions about software composition years after the initial submission.&lt;/p>
+&lt;h3 id="distribution-and-transparency">Distribution and Transparency&lt;/h3>
+&lt;p>The FDA expects manufacturers to share cybersecurity information with stakeholders, including healthcare providers and end users. This means having a reliable system for distributing SBOMs to:&lt;/p>
+&lt;ul>
+&lt;li>FDA reviewers during premarket submissions&lt;/li>
+&lt;li>Auditors during compliance assessments&lt;/li>
+&lt;li>Healthcare organizations evaluating your devices&lt;/li>
+&lt;li>Security researchers conducting vulnerability assessments&lt;/li>
+&lt;/ul>
+&lt;p>Email and shared drives don&amp;rsquo;t scale for this — you need a dedicated &lt;a href="https://sbomify.com/features/trust-center/">SBOM hub and Trust Center&lt;/a> that provides controlled access to current and historical SBOMs.&lt;/p>
+&lt;h2 id="practical-implications-for-manufacturers">Practical Implications for Manufacturers&lt;/h2>
+&lt;p>If you&amp;rsquo;re preparing a premarket submission (510(k), PMA, De Novo), here&amp;rsquo;s what the FDA expects in practice:&lt;/p>
+&lt;h3 id="sbom-compliance-checklist">SBOM Compliance Checklist&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>NTIA Minimum Elements&lt;/strong> — Ensure your SBOM includes all required fields (supplier, component name, version, unique identifier, dependencies, author, timestamp)&lt;/li>
+&lt;li>&lt;strong>Machine-readable format&lt;/strong> — Use SPDX or CycloneDX&lt;/li>
+&lt;li>&lt;strong>Inventory completeness&lt;/strong> — Cover all software elements in your device&lt;/li>
+&lt;li>&lt;strong>Support and lifecycle metadata&lt;/strong> — Document support status and EOL dates for each component&lt;/li>
+&lt;li>&lt;strong>Known vulnerability assessment&lt;/strong> — Tie vulnerabilities back to risk controls&lt;/li>
+&lt;li>&lt;strong>Traceability and architecture linkage&lt;/strong> — Connect SBOMs to documentation and risk models&lt;/li>
+&lt;li>&lt;strong>Ongoing maintenance strategy&lt;/strong> — Plan for SBOM updates through the device&amp;rsquo;s life&lt;/li>
+&lt;/ol>
+&lt;h3 id="consequences-of-non-compliance">Consequences of Non-Compliance&lt;/h3>
+&lt;p>Noncompliance or insufficient SBOM information can result in:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Refuse-to-accept decisions&lt;/strong> at the submission stage&lt;/li>
+&lt;li>&lt;strong>Delays in review&lt;/strong> requiring resubmission with complete SBOM and analysis&lt;/li>
+&lt;/ul>
+&lt;p>The message is clear: get your SBOM documentation right the first time.&lt;/p>
+&lt;h2 id="how-sbomify-helps-with-fda-compliance">How sbomify Helps with FDA Compliance&lt;/h2>
+&lt;p>Medical devices often have long lifecycles — sometimes 10-15 years or more. Managing SBOMs across that timespan, through multiple software updates and component changes, requires purpose-built tooling that automates the entire &lt;a href="https://sbomify.com/features/generate-collaborate-analyze/">SBOM lifecycle&lt;/a>.&lt;/p>
+&lt;p>&lt;a href="">sbomify&lt;/a> provides the infrastructure medical device manufacturers need:&lt;/p>
+&lt;h3 id="automated-cicd-integration">Automated CI/CD Integration&lt;/h3>
+&lt;p>This is the foundation of FDA-compliant SBOM management. sbomify integrates directly into your build pipeline:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/features/generate-collaborate-analyze/">Generate SBOMs automatically&lt;/a>&lt;/strong> during every build — no manual steps&lt;/li>
+&lt;li>&lt;strong>Augment and enrich&lt;/strong> SBOMs with supplier information, licensing, and metadata required by NTIA minimum elements&lt;/li>
+&lt;li>&lt;strong>Cryptographic signing and attestation&lt;/strong> for verifiable integrity&lt;/li>
+&lt;li>Upload to sbomify with our &lt;a href="https://github.com/sbomify/github-action">GitHub Action&lt;/a> and &lt;a href="https://sbomify.com/2024/11/12/gitlab-support/">GitLab modules&lt;/a>&lt;/li>
+&lt;li>Every release automatically documented and stored for regulatory review&lt;/li>
+&lt;/ul>
+&lt;p>By automating generation in CI/CD, you ensure that SBOMs are always accurate, reproducible, and traceable to specific builds — exactly what the FDA expects.&lt;/p>
+&lt;h3 id="trust-center-for-regulatory-distribution">Trust Center for Regulatory Distribution&lt;/h3>
+&lt;p>Email and file shares don&amp;rsquo;t meet FDA expectations for professional cybersecurity documentation. sbomify&amp;rsquo;s &lt;a href="https://sbomify.com/features/trust-center/">Trust Center&lt;/a> gives you:&lt;/p>
+&lt;ul>
+&lt;li>A &lt;strong>branded portal&lt;/strong> for sharing SBOMs with FDA reviewers, auditors, and healthcare organizations&lt;/li>
+&lt;li>&lt;strong>Controlled access&lt;/strong> — determine who can see which products and versions&lt;/li>
+&lt;li>&lt;strong>Always current&lt;/strong> — stakeholders access live data, not stale email attachments&lt;/li>
+&lt;li>&lt;strong>Audit trail&lt;/strong> — track who accessed what and when&lt;/li>
+&lt;li>Professional presentation that demonstrates your commitment to transparency&lt;/li>
+&lt;/ul>
+&lt;h3 id="sbom-lifecycle-management">SBOM Lifecycle Management&lt;/h3>
+&lt;ul>
+&lt;li>Archive and track SBOMs across product versions and releases&lt;/li>
+&lt;li>Maintain full version history for regulatory audits spanning years&lt;/li>
+&lt;li>Support long-lived medical devices with complete historical records&lt;/li>
+&lt;/ul>
+&lt;h3 id="centralized-sbom-hub">Centralized SBOM Hub&lt;/h3>
+&lt;ul>
+&lt;li>Manage SBOMs for multiple device products in one platform&lt;/li>
+&lt;li>Standardize generation and storage across engineering teams&lt;/li>
+&lt;li>Aggregate component-level SBOMs into product-level views with our &lt;a href="https://sbomify.com/features/sbom-hierarchy/">SBOM hierarchy&lt;/a> feature — essential for complex medical devices with multiple software subsystems&lt;/li>
+&lt;/ul>
+&lt;h3 id="continuous-vulnerability-monitoring">Continuous Vulnerability Monitoring&lt;/h3>
+&lt;ul>
+&lt;li>Integrate with &lt;a href="https://sbomify.com/features/integrations/">Google OSV and Dependency Track&lt;/a> for ongoing vulnerability detection&lt;/li>
+&lt;li>Monitor archived SBOMs for newly discovered CVEs&lt;/li>
+&lt;li>Track vulnerability status even for devices shipped years ago — critical for the FDA&amp;rsquo;s post-market cybersecurity expectations&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>The FDA&amp;rsquo;s June 2025 cybersecurity guidance makes it clear: SBOMs are no longer optional for medical device manufacturers. They&amp;rsquo;re a critical component of premarket submissions and ongoing compliance. The guidance sets clear expectations for SBOM content, format, and lifecycle management — and the FDA is prepared to refuse submissions that don&amp;rsquo;t meet these standards.&lt;/p>
+&lt;p>Getting ahead of these requirements isn&amp;rsquo;t just about regulatory compliance — it&amp;rsquo;s about building more secure devices and maintaining trust with healthcare providers and patients.&lt;/p>
+&lt;p>&lt;a href="https://app.sbomify.com">Get started with sbomify&lt;/a> and build FDA-ready SBOM documentation into your medical device development process.&lt;/p>
+&lt;h2 id="resources">Resources&lt;/h2>
+&lt;h3 id="official-documentation">Official Documentation&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.fda.gov/media/119933/download">FDA Guidance: Cybersecurity in Medical Devices (PDF)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.ntia.gov/sites/default/files/publications/sbom_minimum_elements_report_0.pdf">NTIA Minimum Elements for a Software Bill of Materials (PDF)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="learn-more-about-sboms">Learn More About SBOMs&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://sbomify.com/what-is-sbom/">What is an SBOM?&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://sbomify.com/features/generate-collaborate-analyze/">The SBOM Lifecycle: Generation, Distribution, and Analysis&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://sbomify.com/guides/how-to-version-sboms">How to Version SBOMs&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://sbomify.com/features/why-now/">The Growing Importance of SBOMs in Cybersecurity Compliance&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="related-compliance-frameworks">Related Compliance Frameworks&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://sbomify.com/2024/07/10/understanding-the-eu-cyber-resilience-act-the-role-of-sboms-in-enhancing-cybersecurity/">Understanding the EU Cyber Resilience Act&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://sbomify.com/2025/01/07/how-sboms-can-help-you-achieve-pci-dss-4-compliance/">How SBOMs Help with PCI DSS 4.0 Compliance&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://sbomify.com/2026/01/06/cra-explained-cyber-resilience-act-for-device-manufacturers/">CRA Explained: What the Cyber Resilience Act Means for Device Manufacturers&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="sbomify-features">sbomify Features&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://sbomify.com/features/sbom-hierarchy/">SBOM Hierarchy&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://sbomify.com/features/integrations/">Integrations&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://sbomify.com/features/trust-center/">Trust Center&lt;/a>&lt;/li>
+&lt;/ul></description><category>compliance</category></item></channel></rss>

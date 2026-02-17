@@ -1,0 +1,26 @@
+<div class="video-embed-wrapper my-8 w-full max-w-3xl mx-auto">
+    <div class="relative w-full overflow-hidden rounded-xl sm:rounded-2xl shadow-lg" style="padding-bottom: 56.25%;">
+        <iframe
+            class="absolute top-0 left-0 w-full h-full border-0"
+            src="https://www.youtube-nocookie.com/embed/{{ .Get "video_id" }}"
+            title="{{ .Get "title" | default "YouTube video player" }}"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+            loading="lazy">
+        </iframe>
+    </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "{{ (.Get "title") | default .Page.Title | htmlEscape }}",
+  "description": "{{ (.Get "description") | default (.Page.Params.description | default site.Params.description) | plainify | htmlEscape }}",
+  "thumbnailUrl": "https://img.youtube.com/vi/{{ .Get "video_id" }}/maxresdefault.jpg",
+  "uploadDate": "{{ with .Get "upload_date" }}{{ . }}{{ else }}{{ .Page.Date.Format "2006-01-02T15:04:05Z07:00" }}{{ end }}",
+  "embedUrl": "https://www.youtube.com/embed/{{ .Get "video_id" }}",
+  "contentUrl": "https://www.youtube.com/watch?v={{ .Get "video_id" }}"
+}
+</script>

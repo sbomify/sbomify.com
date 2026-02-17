@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sbomify</title><link>https://sbomify.com/tags/cpp/</link><description>Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 04 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://sbomify.com/tags/cpp/" rel="self" type="application/rss+xml"/><item><title>Using Conan for C SBOMs</title><link>https://sbomify.com/2025/09/04/conan/</link><pubDate>Thu, 04 Sep 2025 00:00:00 +0000</pubDate><guid>https://sbomify.com/2025/09/04/conan/</guid><description>&lt;p>Last November I wrote about
+&lt;a href="https://sbomify.com/2024/11/18/c-conundrum/">The C conundrum&lt;/a> as there&amp;rsquo;s so
+much C code that needs SBOMs, but there was no straightforward way to
+generate them.&lt;/p>
+&lt;p>&lt;a href="https://conan.io/">Conan&lt;/a> got a mention, but at the time wasn&amp;rsquo;t working as
+hoped.&lt;/p>
+&lt;p>Thankfully things have improved since then, which means that Conan provides
+a viable route to generating SBOMs for C (and C++) projects.&lt;/p>
+&lt;p>The most crucial change is that SBOM generation tools like Aqua&amp;rsquo;s
+&lt;a href="https://trivy.dev/">Trivy&lt;/a> can now generate reasonable output from Conan lock
+files. That in turn means that sbomify can use a &lt;code>conan.lock&lt;/code> file in the same
+way it would use a lock file for any other package manager.&lt;/p>
+&lt;p>The Conan &lt;a href="https://docs.conan.io/2/">documentation&lt;/a> and
+&lt;a href="https://academy.jfrog.com/conan-2-essentials">tutorial&lt;/a> have improved
+dramatically, which makes it much easier to get started.&lt;/p>
+&lt;p>It&amp;rsquo;s relatively straightforward to &amp;lsquo;bolt on&amp;rsquo; a &lt;code>conanfile.py&lt;/code> to a project and
+use it to describe dependencies. A &lt;code>conan.lock&lt;/code> can then be generated and
+used as the basis of an SBOM. The only problem is that any changes to the
+project dependencies need to be (manually) updated in the Conan file.&lt;/p>
+&lt;p>A more integrated approach means going all in on Conan, and using it to
+generate configuration and build descriptions like &lt;code>CMakeLists.txt&lt;/code>.
+Conan is very capable and flexible, and an easy win for a green field project.
+But the 6.5 billion lines of open source C out there are testament to a huge
+brown field problem. There&amp;rsquo;s been huge investment in the existing config and
+build systems for those projects, encapsulated in CMake, GNU Autotools, and
+many other systems. Refactoring those projects into Conan will require deep
+understanding of the existing tool chain, and how Conan generates builds.
+We might wish for an AI magic wand to make the transition easy, but it seems
+to be a task that&amp;rsquo;s beyond the present generation of coding assistants.&lt;/p>
+&lt;p>As regulatory pressure from the EU Cyber Resilience Act
+(&lt;a href="https://en.wikipedia.org/wiki/Cyber_Resilience_Act">CRA&lt;/a>) and other mandates
+mounts there&amp;rsquo;s going to be increasing interest in getting SBOMs for C stuff.
+Conan can be used as a &amp;lsquo;bolt on&amp;rsquo; workaround, and with increased adoption
+and familiarity may become the de facto way of doing things. At least for
+everything that lies outside of other package ecosystems like Yocto and
+Zephyr.&lt;/p>
+&lt;p>This is a guest post from &lt;a href="https://cpswan.net">Chris Swan&lt;/a>, an advisor at
+sbomify and an Engineer at &lt;a href="https://atsign.com">Atsign&lt;/a> who are an early
+adopter of sbomify.&lt;/p></description><category>guide</category></item><item><title>The C conundrum - generating SBOMs when there&amp;#39;s no lockfile</title><link>https://sbomify.com/2024/11/18/c-conundrum/</link><pubDate>Mon, 18 Nov 2024 00:00:00 +0000</pubDate><guid>https://sbomify.com/2024/11/18/c-conundrum/</guid><description>&lt;p>Generating an SBOM for something created in a modern language like Dart, Go,
+Python or Rust is pretty easy. Dependencies are declared using the language&amp;rsquo;s
+package manager, the package manager creates a .lock file, and then an SBOM
+can be generated from the .lock file. Under the hood sbomify uses
+&lt;a href="https://trivy.dev/">Trivy&lt;/a> to do that, and other tools like
+&lt;a href="https://github.com/anchore/syft">Syft&lt;/a> do the same.&lt;/p>
+&lt;p>There&amp;rsquo;s no package manager for C though, at least not a universally used one.&lt;/p>
+&lt;p>That&amp;rsquo;s a huge problem, because apps developed using modern languages where
+it&amp;rsquo;s easy to create SBOMs are the very tip of an iceberg where stuff developed
+in C is both the rest of the visible iceberg and everything beneath the
+surface - the apps we know are written in C, and the numerous libraries etc.
+that they&amp;rsquo;re built on top of.&lt;/p>
+&lt;p>How are people going to comply with Executive Order 14028 (in the US) and
+the forthcoming Cyber Resilience Act (CRA) in the EU if they&amp;rsquo;re dealing with
+that iceberg of C?&lt;/p>
+&lt;p>Where there are package managers we can reasonably expect their maintainers
+to start churning out SBOMs. &lt;a href="https://www.yoctoproject.org/">The Yocto Project&lt;/a>,
+which builds embedded Linux distributions, has taken an early lead with their
+machinery for
+&lt;a href="https://docs.yoctoproject.org/dev/dev-manual/sbom.html">Creating a Software Bill of Materials&lt;/a>.
+It&amp;rsquo;s also reasonable to expect that major distributions like Debian and Red Hat
+will follow suit. They do after all have all the metadata that&amp;rsquo;s needed, and
+they&amp;rsquo;ve already spent years on careful curation.&lt;/p>
+&lt;p>But what about all the apps that aren&amp;rsquo;t in major distro package managers?
+There are a few pieces to the puzzle out there, but not yet a complete
+solution.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/DEMCON/cmake-sbom">cmake-sbom&lt;/a> can add the SBOM creation
+process to CMake (a popular tool for building C projects), but a lot of the
+data entry (and subsequent maintenance) is manual. This perhaps provides the
+boilerplate for NTIA compliance, but doesn&amp;rsquo;t really help with upstream
+dependencies.&lt;/li>
+&lt;li>&lt;a href="https://www.zephyrproject.org/">Zephyr&lt;/a> has the ability to generate SPDX
+for the embedded systems it creates, based on earlier work in
+&lt;a href="https://github.com/swinslow/cmake-spdx">cmake-spdx&lt;/a>. But that hasn&amp;rsquo;t
+yet been cycled back into a generic tool that could be used by other
+CMake based projects.&lt;/li>
+&lt;li>&lt;a href="https://conan.io/">Conan&lt;/a> is a package manager for C/C++, with many popular
+dependencies already present there. That opens the door to generating SBOMs
+from &lt;code>conan.lock&lt;/code> files, but right now the resulting files (at least those
+generated by Syft) are of very poor quality, with incomplete CFEs.&lt;/li>
+&lt;li>&lt;a href="https://github.com/intel/cve-bin-tool">cve-bin-tool&lt;/a> can generate an SBOM
+from the libraries it finds in a binary, but:
+&lt;ul>
+&lt;li>Only a limited subset of libraries are discoverable to the tool.&lt;/li>
+&lt;li>When generating SBOMs from test binaries they were of poor quality.&lt;/li>
+&lt;li>cve-bin-tool flags binaries and the libraries they contain as being
+vulnerable even when they&amp;rsquo;ve been patched to fix the relevant CVE, implying
+a naive matching mechanism.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="https://github.com/trailofbits/it-depends">it-depends&lt;/a> finds nothing
+(and it seems it&amp;rsquo;s a
+&lt;a href="https://github.com/trailofbits/it-depends/issues/66">known issue&lt;/a>
+despite the README saying it supports CMake projects).&lt;/li>
+&lt;/ul>
+&lt;p>Thankfully efforts are underway to resolve these problems. C (and C++) is
+lined up for
+&lt;a href="https://github.com/CISA-SBOM-Community/SBOM-Generation?tab=readme-ov-file#phase-3">Phase 3&lt;/a>
+of the SBOM Generation Reference Implementations within the CISA SBOM
+Community; and the working group had a call in the past week to look at
+what&amp;rsquo;s already working and where effort can most effectively be applied
+to provide tools for a broader range of projects.&lt;/p>
+&lt;p>This is a guest post from &lt;a href="https://cpswan.net">Chris Swan&lt;/a>, an Engineer at
+&lt;a href="https://atsign.com">Atsign&lt;/a> who are an early adopter of sbomify.&lt;/p></description><category>guide</category></item></channel></rss>

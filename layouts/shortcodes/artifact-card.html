@@ -1,0 +1,12 @@
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-6 transform transition-transform hover:scale-[1.02] duration-300">
+    <div class="w-12 h-12 {{ .Get "icon_bg_class" }} rounded-xl flex items-center justify-center {{ .Get "icon_text_class" }} flex-shrink-0">
+        {{ .Get "svg" | safeHTML }}
+    </div>
+    <div>
+        <div class="font-bold text-[#201B4C] text-lg mb-1">{{ .Get "title" }}</div>
+        <div class="flex items-center gap-2">
+            <span class="text-xs font-medium {{ .Get "badge_text_class" }} {{ .Get "badge_bg_class" }} px-2 py-0.5 rounded-full border {{ .Get "badge_border_class" }}">{{ .Get "badge_text" }}</span>
+            <span class="text-xs text-gray-400">{{ .Get "subtext" }}</span>
+        </div>
+    </div>
+</div>

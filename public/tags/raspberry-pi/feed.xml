@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sbomify</title><link>https://sbomify.com/tags/raspberry-pi/</link><description>Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 17 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://sbomify.com/tags/raspberry-pi/" rel="self" type="application/rss+xml"/><item><title>Unpacking Raspberry Pi&amp;#39;s Built‑In SBOM Magic</title><link>https://sbomify.com/2025/04/17/unpacking-raspberry-pi-s-built-in-sbom-magic/</link><pubDate>Thu, 17 Apr 2025 00:00:00 +0000</pubDate><guid>https://sbomify.com/2025/04/17/unpacking-raspberry-pi-s-built-in-sbom-magic/</guid><description>&lt;p>When the Raspberry Pi Foundation quietly unveiled &lt;a href="https://github.com/raspberrypi/rpi-image-gen">rpi‑image‑gen&lt;/a>, most of the headlines focused on how it streamlines custom image creation. Tucked inside that announcement is something even more exciting for anyone who cares about software supply‑chain transparency: every image it builds comes with a Software Bill of Materials (SBOM) out of the box.&lt;/p>
+&lt;p>If you live and breathe SBOMs, or you just want to understand why this matters, read on. We will walk through how the tool works, where the SBOM lives, and what is inside it.&lt;/p>
+&lt;h2 id="a-quick-primer-on-rpiimagegen">A Quick Primer on rpi‑image‑gen&lt;/h2>
+&lt;p>Think of rpi‑image‑gen as the flexible cousin of the long‑standing &lt;a href="https://github.com/RPi-Distro/pi-gen">pi‑gen&lt;/a> project that the Raspberry Pi team uses for the official Raspberry Pi OS builds. While pi‑gen is opinionated and optimized for the distro maintainers&amp;rsquo; workflow, rpi‑image‑gen is designed for developers and device makers who need bespoke images.&lt;/p>
+&lt;p>Building a minimal Debian 12 image for 64‑bit devices takes just a few commands:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/raspberrypi/rpi-image-gen.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd rpi-image-gen
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo ./install_deps.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./build.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Important: run it on a Raspberry Pi OS (f.k.a. Raspbian) machine for the smoothest experience. Running under plain Debian or Ubuntu tends to trip over architecture mismatches.&lt;/p>
+&lt;p>Once the build finishes, you will find everything in &lt;code>work/deb12-arm64-min/artefacts/&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>boot.vfat
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>boot.vfat.sparse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>config.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>deb12-arm64-min.img
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>deb12-arm64-min.img.sparse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>deb12-arm64-min.sbom &amp;lt;-- the star of the show
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fstab
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>deb12-arm64-min.img&lt;/code> is the file you flash to your SD card. Right beside it sits &lt;code>deb12-arm64-min.sbom&lt;/code>, a 6.8 MB JSON document that catalogues every component in the image.&lt;/p>
+&lt;h2 id="how-the-sbom-gets-made">How the SBOM Gets Made&lt;/h2>
+&lt;p>Under the hood, rpi‑image‑gen calls a helper script at &lt;code>sbom/gen.sh&lt;/code>. That script invokes &lt;strong>Syft&lt;/strong>, Anchore&amp;rsquo;s open‑source SBOM generator, to crawl the root filesystem and spit out an SPDX 2.3‑compliant file. The default settings live in &lt;code>sbom/defaults&lt;/code>, so you can swap formats or tweak depth without touching the core builder.&lt;/p>
+&lt;p>Running &lt;code>jq&lt;/code> on the finished SBOM shows 214 packages detected:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cat deb12-arm64-min.sbom | jq &lt;span style="color:#e6db74">&amp;#39;.packages | length&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 214&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="measuring-quality-with-sbomqs">Measuring Quality with &lt;code>sbomqs&lt;/code>&lt;/h2>
+&lt;p>A big SBOM is not automatically a good SBOM. To gauge quality, we ran &lt;strong>sbomqs&lt;/strong> from Interlynk:&lt;/p>
+&lt;pre tabindex="0">&lt;code>SBOM Quality Score: 7.8 / 10.0
+Components: 214
+&lt;/code>&lt;/pre>&lt;p>Here are a few highlights from the report:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Category&lt;/th>
+&lt;th>Metric&lt;/th>
+&lt;th>Score&lt;/th>
+&lt;th>Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>NTIA minimum elements&lt;/td>
+&lt;td>Unique IDs&lt;/td>
+&lt;td>10.0&lt;/td>
+&lt;td>All components identified&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>NTIA minimum elements&lt;/td>
+&lt;td>Supplier info&lt;/td>
+&lt;td>5.8&lt;/td>
+&lt;td>124 of 214 list a supplier&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Quality&lt;/td>
+&lt;td>Valid licenses&lt;/td>
+&lt;td>7.0&lt;/td>
+&lt;td>187 of 214 carry a recognized license&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Semantic&lt;/td>
+&lt;td>Checksums&lt;/td>
+&lt;td>0.0&lt;/td>
+&lt;td>Checksums missing, an easy win for improvement&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Structural&lt;/td>
+&lt;td>Spec compliance&lt;/td>
+&lt;td>10.0&lt;/td>
+&lt;td>Valid SPDX 2.3 JSON&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Even with a few gaps, an out‑of‑the‑box score of 7.8 is impressive. Most importantly, the file is fully parsable and ready for vulnerability scans and license audits.&lt;/p>
+&lt;h2 id="why-builtin-sboms-matter">Why Built‑In SBOMs Matter&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Zero setup overhead&lt;/strong> – You do not need to glue extra scanners into your pipeline; the SBOM arrives with every build.&lt;/li>
+&lt;li>&lt;strong>Reproducibility&lt;/strong> – Anyone flashing your image can inspect exactly what shipped, making security reviews and bug hunts faster.&lt;/li>
+&lt;li>&lt;strong>Regulatory head‑start&lt;/strong> – As governments push for transparency (think EU Cyber Resilience Act or US Executive Order 14028), having machine‑readable SBOMs from day one keeps you ahead of the curve.&lt;/li>
+&lt;/ul>
+&lt;h2 id="tips-for-taking-it-further">Tips for Taking It Further&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Enable checksum generation&lt;/strong>: Edit &lt;code>sbom/defaults&lt;/code> and add &lt;code>--file-digests&lt;/code> to Syft&amp;rsquo;s args to fill that gap in the quality score.&lt;/li>
+&lt;li>&lt;strong>Switch formats&lt;/strong>: Need CycloneDX instead of SPDX? Change &lt;code>output_format&lt;/code> from &lt;code>spdx-json&lt;/code> to &lt;code>cyclonedx-json&lt;/code> in &lt;code>sbom/defaults&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Automate uploads&lt;/strong>: Pipe the &lt;code>.sbom&lt;/code> file into your CI artefact store or an SBOM analysis platform such as sbomify.&lt;/li>
+&lt;/ol>
+&lt;h2 id="final-thoughts">Final Thoughts&lt;/h2>
+&lt;p>Raspberry Pi has quietly raised the bar for embedded‑image builders by shipping SBOMs as a first‑class citizen. If you already depend on Raspberry Pi boards, rpi‑image‑gen is worth the upgrade for this feature alone. And if you are exploring ways to make your firmware supply chain more transparent, it is one of the simplest on‑ramps you will find. For those using other embedded build systems, check out how &lt;a href="https://sbomify.com/2025/02/21/mastering-sbom-generation-with-yocto/">Yocto handles SBOM generation&lt;/a>.&lt;/p>
+&lt;p>Give it a spin, peek inside the SBOM, and let us know what you discover.&lt;/p></description><category>news</category></item></channel></rss>

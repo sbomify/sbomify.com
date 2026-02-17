@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sbomify</title><link>https://sbomify.com/tags/plugins/</link><description>Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 14 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://sbomify.com/tags/plugins/" rel="self" type="application/rss+xml"/><item><title>Announcing sbomify v0.24: The One with All the Plugins</title><link>https://sbomify.com/2026/01/14/announcing-sbomify-v0-24-the-one-with-all-the-plugins/</link><pubDate>Wed, 14 Jan 2026 00:00:00 +0000</pubDate><guid>https://sbomify.com/2026/01/14/announcing-sbomify-v0-24-the-one-with-all-the-plugins/</guid><description>&lt;p>Today marks a pivotal release for sbomify. With v0.24, we are laying the foundation for what will become a fully extensible, plugin-based platform. This release introduces our new &lt;strong>Plugin-Based Assessment Framework&lt;/strong>, a unified architecture for running automated assessments on every SBOM upload. This represents a fundamental shift in how we think about sbomify&amp;rsquo;s architecture going forward.&lt;/p>
+&lt;h2 id="plugin-based-assessment-framework">Plugin-Based Assessment Framework&lt;/h2>
+&lt;p>The headline feature of v0.24 is our new assessment plugin system, documented in &lt;a href="https://github.com/sbomify/sbomify/blob/master/docs/ADR/ADR-003.md">ADR-003: Plugin-based Assessments for SBOM Uploads&lt;/a>. If you want to understand where sbomify is headed, this architectural decision record is essential reading.&lt;/p>
+&lt;h3 id="four-assessment-categories">Four Assessment Categories&lt;/h3>
+&lt;p>The plugin framework is designed to support four distinct categories of SBOM assessment:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Category&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Examples&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>Security&lt;/strong>&lt;/td>
+&lt;td>Vulnerability scanning via external tools and APIs&lt;/td>
+&lt;td>OSV, Dependency-Track&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>License&lt;/strong>&lt;/td>
+&lt;td>Policy evaluation against approved/denied license lists&lt;/td>
+&lt;td>License policy checks&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Compliance&lt;/strong>&lt;/td>
+&lt;td>Validation against regulatory and industry standards&lt;/td>
+&lt;td>NTIA, CISA, CRA, FDA&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Attestation&lt;/strong>&lt;/td>
+&lt;td>Integrity and provenance verification&lt;/td>
+&lt;td>Sigstore, in-toto&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Each category has different characteristics. Security plugins integrate with external vulnerability databases that change continuously, so they support scheduled re-runs. Compliance and license plugins are deterministic for a given ruleset version. Attestation plugins verify cryptographic signatures and provenance data.&lt;/p>
+&lt;h3 id="compliance-plugins-shipping-now">Compliance Plugins Shipping Now&lt;/h3>
+&lt;p>This release ships with five compliance plugins ready to use. Each plugin aligns with our &lt;a href="https://sbomify.com/compliance/">compliance documentation&lt;/a>, so you can understand exactly what is being validated:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/ntia-minimum-elements/">NTIA Minimum Elements&lt;/a>&lt;/strong> - Validates your SBOMs against the foundational US baseline for SBOM data fields&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/cisa-minimum-elements/">CISA 2025 Minimum Elements&lt;/a>&lt;/strong> - Checks compliance with the updated US guidance including hash, license, and generation context&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/eu-cra/">EU Cyber Resilience Act (CRA)&lt;/a>&lt;/strong> - Validates against Regulation 2024/2847 requirements (beta)&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/fda-medical-device/">FDA Medical Device Cybersecurity&lt;/a>&lt;/strong> - Ensures medical device SBOM requirements are met, including lifecycle properties&lt;/li>
+&lt;li>&lt;strong>Checksum Verification&lt;/strong> - A test plugin that validates SBOM integrity through checksum verification (useful as a reference implementation)&lt;/li>
+&lt;/ul>
+&lt;p>Each plugin runs automatically when you upload an SBOM. Simply enable the plugins you need in &lt;strong>Settings → Plugins&lt;/strong>, and assessments happen transparently in the background.&lt;/p>
+&lt;h3 id="why-this-architecture-matters">Why This Architecture Matters&lt;/h3>
+&lt;p>The design decisions in ADR-003 are intentional and set the stage for everything that follows:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Assessments tied to uploads, not content hashes&lt;/strong> - Each upload is assessed independently, giving you a complete history of checks over time&lt;/li>
+&lt;li>&lt;strong>Immutable AssessmentRun records&lt;/strong> - Every assessment is recorded permanently, enabling full audit trails and historical tracking&lt;/li>
+&lt;li>&lt;strong>Python SDK with normalized results&lt;/strong> - All plugins return results in a consistent &lt;code>AssessmentResult&lt;/code> schema with &lt;code>Finding&lt;/code> entries, making it easy to compare and aggregate data across plugin types&lt;/li>
+&lt;li>&lt;strong>Config hashing for reproducibility&lt;/strong> - When assessment results change, you can trace exactly why by comparing configuration hashes&lt;/li>
+&lt;li>&lt;strong>Per-team plugin enablement&lt;/strong> - Teams can enable the plugins relevant to their needs, with feature gating based on billing plans&lt;/li>
+&lt;/ul>
+&lt;h3 id="the-migration-path">The Migration Path&lt;/h3>
+&lt;p>This plugin system is the future of sbomify. In upcoming releases, we will be migrating our existing features into this architecture:&lt;/p>
+&lt;p>&lt;strong>Phase 2: Security Plugins&lt;/strong>
+Our current &lt;strong>OSV vulnerability scanning&lt;/strong> and &lt;strong>Dependency Track integration&lt;/strong> will be refactored into security plugins. This migration will make these features more modular, give you historical tracking of all vulnerability scans, and allow the same plugin architecture to power scheduled re-scans as vulnerability databases are updated.&lt;/p>
+&lt;p>&lt;strong>Phase 3 and Beyond&lt;/strong>
+We have a roadmap of additional plugins including license policy evaluation, attestation verification (Sigstore and in-toto), and VEX (Vulnerability Exploitability eXchange) statement processing. The goal is to make sbomify a platform where you can mix and match the capabilities you need.&lt;/p>
+&lt;hr>
+&lt;h2 id="vuejs-to-alpinejs-migration-complete">Vue.js to Alpine.js Migration Complete&lt;/h2>
+&lt;p>We have completed the frontend migration we started in previous releases. This release replaces the remaining &lt;strong>35 Vue.js components&lt;/strong> with lightweight Alpine.js implementations backed by Django templates.&lt;/p>
+&lt;p>This migration closes out &lt;a href="https://github.com/sbomify/sbomify/blob/master/docs/ADR/ADR-001.md">ADR-001: Django Monolith&lt;/a>. As documented there, our detour into Vue turned out to be a mistake. While we wanted to maintain an API-first approach, leveraging Django Templates with server-side rendering minimizes complexity compared to a separate Vue frontend. Equally important, Vue made end-to-end testing more challenging, and we had several blocks silently failing as a result.&lt;/p>
+&lt;p>The result is a significantly smaller bundle size, faster page loads, a more maintainable codebase, and much better test coverage. If you have been following our journey from Vue.js to Alpine.js + HTMX, this release marks the finish line.&lt;/p>
+&lt;hr>
+&lt;h2 id="contact-profiles-cyclonedx-alignment">Contact Profiles CycloneDX Alignment&lt;/h2>
+&lt;p>Contact profiles have been restructured to align with the CycloneDX specification. The new &lt;strong>3-level hierarchy&lt;/strong> (Profile → Entity → Contact) matches how CycloneDX represents organizational and contact information.&lt;/p>
+&lt;p>If you have existing contact profiles, they will be automatically migrated to the new structure. No action required on your part.&lt;/p>
+&lt;hr>
+&lt;h2 id="billing-system-improvements">Billing System Improvements&lt;/h2>
+&lt;p>We have made several improvements to how billing works:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Dynamic pricing from Stripe&lt;/strong> - Pricing is now synced directly from Stripe, ensuring consistency across the platform&lt;/li>
+&lt;li>&lt;strong>Promotion codes at checkout&lt;/strong> - You can now apply promotion codes when subscribing or upgrading&lt;/li>
+&lt;li>&lt;strong>Billing period visibility&lt;/strong> - Your current billing period and next billing date are now displayed in team settings&lt;/li>
+&lt;li>&lt;strong>Improved subscription management&lt;/strong> - New management commands for subscription reconciliation and better webhook handling&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="other-improvements">Other Improvements&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Trust Center&lt;/strong>: Consolidated templates, improved SEO, and better UX across the board&lt;/li>
+&lt;li>&lt;strong>CycloneDX 1.6+&lt;/strong>: Added manufacturer field support with backward compatibility for 1.5&lt;/li>
+&lt;li>&lt;strong>CI/CD Templates&lt;/strong>: New configuration templates for Azure DevOps and Jenkins&lt;/li>
+&lt;li>&lt;strong>License Expressions&lt;/strong>: Optimized parsing with server-side rendering support&lt;/li>
+&lt;li>&lt;strong>Mobile Experience&lt;/strong>: Improved search bar responsiveness on mobile devices&lt;/li>
+&lt;li>&lt;strong>Document Upload&lt;/strong>: Better drag-and-drop experience&lt;/li>
+&lt;li>&lt;strong>Workspace Labels&lt;/strong>: Now use title case (Product, Compliance Artifact, Project)&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="security-and-infrastructure">Security and Infrastructure&lt;/h2>
+&lt;p>On the security front, we addressed findings from Semgrep and Bandit scans, added &lt;code>noreferrer&lt;/code> to external links, and fixed a user invitation limit bypass vulnerability.&lt;/p>
+&lt;p>Infrastructure updates include upgrading our base image to &lt;strong>Debian Trixie&lt;/strong>, updating &lt;code>python-keycloak&lt;/code> to 7.0.1, and bumping our GitHub Actions dependencies to their latest versions.&lt;/p>
+&lt;hr>
+&lt;h2 id="bug-fixes">Bug Fixes&lt;/h2>
+&lt;ul>
+&lt;li>Fixed duplicate artifacts appearing in release pages when components belong to multiple projects&lt;/li>
+&lt;li>Fixed barcode rendering on private product identifiers page&lt;/li>
+&lt;li>Fixed latest badge display and modal issues in release UI&lt;/li>
+&lt;li>Fixed private component access returning 404 instead of 403 Forbidden&lt;/li>
+&lt;li>Fixed &lt;code>$schema&lt;/code> alias handling in CycloneDX SBOM serialization&lt;/li>
+&lt;li>Fixed domain verification cron job registration&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="getting-started">Getting Started&lt;/h2>
+&lt;p>If you are self-hosting sbomify, update to v0.24 to take advantage of the new plugin system. For users on our hosted platform, these features are already live.&lt;/p>
+&lt;p>To enable assessment plugins, navigate to &lt;strong>Settings → Plugins&lt;/strong> and enable the assessments relevant to your requirements. From there, every SBOM upload will be automatically assessed, with full historical tracking of all results.&lt;/p>
+&lt;p>Check out the &lt;a href="https://github.com/sbomify/sbomify/compare/v0.23...master">full changelog on GitHub&lt;/a> for complete details.&lt;/p>
+&lt;p>As always, I would love to hear your feedback. Drop us a note or open an issue on GitHub if you have questions, suggestions, or ideas for new plugins. The plugin architecture is designed to be extensible, and we are eager to hear what assessments would be most valuable to you!&lt;/p></description><category>announcement</category></item></channel></rss>

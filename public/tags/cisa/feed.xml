@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sbomify</title><link>https://sbomify.com/tags/cisa/</link><description>Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 30 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://sbomify.com/tags/cisa/" rel="self" type="application/rss+xml"/><item><title>What Is a KEV? Understanding CISA&amp;#39;s Known Exploited Vulnerabilities Catalog</title><link>https://sbomify.com/2025/12/30/what-is-kev-cisa-known-exploited-vulnerabilities/</link><pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate><guid>https://sbomify.com/2025/12/30/what-is-kev-cisa-known-exploited-vulnerabilities/</guid><description>&lt;p>A KEV (Known Exploited Vulnerability) is a vulnerability that has been confirmed as actively exploited in the wild. The &lt;a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog">CISA Known Exploited Vulnerabilities Catalog&lt;/a>, maintained by the Cybersecurity and Infrastructure Security Agency, is the authoritative list of these vulnerabilities. Unlike CVE databases that catalog all publicly known flaws, or CVSS scores that estimate theoretical severity, the KEV catalog answers a more urgent question: &lt;em>is this vulnerability being exploited right now?&lt;/em>&lt;/p>
+&lt;p>&lt;img src="https://sbomify.com/assets/images/d2/vulnerability-prioritization.svg" alt="Vulnerability prioritization flow from CVE through CVSS and KEV to SBOM-based remediation">&lt;/p>
+&lt;h2 id="what-is-the-kev-catalog">What Is the KEV Catalog?&lt;/h2>
+&lt;p>The CISA KEV catalog is a curated list of &lt;a href="https://sbomify.com/2025/12/18/cve-vulnerability-explained/">CVE&lt;/a> vulnerabilities that have reliable evidence of active exploitation. CISA launched the catalog in November 2021 alongside &lt;a href="https://www.cisa.gov/news-events/directives/bod-22-01-reducing-significant-risk-known-exploited-vulnerabilities">Binding Operational Directive (BOD) 22-01&lt;/a>, which requires U.S. federal civilian executive branch (FCEB) agencies to remediate KEV-listed vulnerabilities within specified timeframes.&lt;/p>
+&lt;p>As of early 2026, the KEV catalog contains nearly 1,500 entries. New vulnerabilities are added as CISA confirms evidence of exploitation, and each entry includes:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>CVE ID&lt;/strong> identifying the vulnerability&lt;/li>
+&lt;li>&lt;strong>Vendor and product&lt;/strong> affected&lt;/li>
+&lt;li>&lt;strong>Vulnerability name&lt;/strong> and description&lt;/li>
+&lt;li>&lt;strong>Date added&lt;/strong> to the catalog&lt;/li>
+&lt;li>&lt;strong>Due date&lt;/strong> for federal agency remediation&lt;/li>
+&lt;li>&lt;strong>Required action&lt;/strong> (typically &amp;ldquo;Apply updates per vendor instructions&amp;rdquo;)&lt;/li>
+&lt;li>&lt;strong>Known ransomware campaign use&lt;/strong> (yes/no flag)&lt;/li>
+&lt;/ul>
+&lt;p>The catalog is freely available as a &lt;a href="https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json">JSON feed&lt;/a>, a &lt;a href="https://www.cisa.gov/sites/default/files/csv/known_exploited_vulnerabilities.csv">CSV download&lt;/a>, and through the CISA website.&lt;/p>
+&lt;h2 id="kev-vs-cve-vs-cvss-how-they-work-together">KEV vs. CVE vs. CVSS: How They Work Together&lt;/h2>
+&lt;p>These three systems are complementary, not competing. Each answers a different question in the vulnerability management process.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>System&lt;/th>
+&lt;th>Question It Answers&lt;/th>
+&lt;th>Maintained By&lt;/th>
+&lt;th>Output&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>CVE&lt;/strong>&lt;/td>
+&lt;td>What is this vulnerability?&lt;/td>
+&lt;td>&lt;a href="https://www.cve.org/">MITRE Corporation&lt;/a>&lt;/td>
+&lt;td>Unique identifier (e.g., CVE-2021-44228)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CVSS&lt;/strong>&lt;/td>
+&lt;td>How severe is this vulnerability?&lt;/td>
+&lt;td>&lt;a href="https://www.first.org/cvss/">FIRST.org&lt;/a>&lt;/td>
+&lt;td>Severity score (0.0-10.0)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>KEV&lt;/strong>&lt;/td>
+&lt;td>Is this vulnerability being exploited?&lt;/td>
+&lt;td>&lt;a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog">CISA&lt;/a>&lt;/td>
+&lt;td>Binary yes/no (listed or not)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>A CVE tells you a vulnerability exists. CVSS tells you how bad it &lt;em>could&lt;/em> be. KEV tells you it &lt;em>is&lt;/em> being exploited. Effective vulnerability prioritization uses all three signals together.&lt;/p>
+&lt;p>Consider two vulnerabilities, both with CVSS scores of 9.8 (Critical). One is listed in the KEV catalog; the other is not. The KEV-listed vulnerability should be patched first because there is confirmed evidence that attackers are actively exploiting it, whereas the other, while theoretically severe, may not have working exploits in circulation.&lt;/p>
+&lt;h2 id="binding-operational-directive-22-01">Binding Operational Directive 22-01&lt;/h2>
+&lt;p>&lt;a href="https://www.cisa.gov/news-events/directives/bod-22-01-reducing-significant-risk-known-exploited-vulnerabilities">BOD 22-01&lt;/a> (&amp;ldquo;Reducing the Significant Risk of Known Exploited Vulnerabilities&amp;rdquo;) is the CISA directive that established the KEV catalog&amp;rsquo;s operational role. It requires FCEB agencies to:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Review&lt;/strong> the KEV catalog on an ongoing basis&lt;/li>
+&lt;li>&lt;strong>Remediate&lt;/strong> each KEV vulnerability by the due date specified in the catalog&lt;/li>
+&lt;li>&lt;strong>Report&lt;/strong> their remediation status to CISA&lt;/li>
+&lt;/ol>
+&lt;p>While BOD 22-01 only legally binds federal civilian agencies, CISA strongly recommends that all organizations — including state and local governments, critical infrastructure operators, and private sector companies — use the KEV catalog as a prioritization input for their vulnerability management programs.&lt;/p>
+&lt;p>The remediation timelines in BOD 22-01 are aggressive. Newly added KEVs typically have due dates of two to three weeks from the date of addition. This reflects the urgency: if a vulnerability is being actively exploited, delayed patching means continued exposure.&lt;/p>
+&lt;h2 id="how-the-kev-catalog-is-maintained">How the KEV Catalog Is Maintained&lt;/h2>
+&lt;p>CISA adds vulnerabilities to the KEV catalog based on three criteria, all of which must be met:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>The vulnerability has an assigned CVE ID.&lt;/strong> Only cataloged vulnerabilities with standard identifiers qualify.&lt;/li>
+&lt;li>&lt;strong>There is reliable evidence of active exploitation.&lt;/strong> This evidence may come from CISA&amp;rsquo;s own threat intelligence, reports from federal agencies, industry partners, or trusted cybersecurity organizations.&lt;/li>
+&lt;li>&lt;strong>A clear remediation action exists.&lt;/strong> Typically this means a vendor patch or mitigation is available. CISA does not add vulnerabilities for which there is no known fix, as doing so would disclose exploited flaws without offering a path to resolution.&lt;/li>
+&lt;/ol>
+&lt;p>Vulnerabilities are rarely removed from the KEV catalog once added — even after the remediation deadline passes. While CISA has removed entries in rare cases where evidence of exploitation was later found insufficient, the catalog serves primarily as a persistent historical record of exploitation activity.&lt;/p>
+&lt;h2 id="using-the-kev-catalog-for-patch-prioritization">Using the KEV Catalog for Patch Prioritization&lt;/h2>
+&lt;p>Most organizations face far more vulnerabilities than they can patch simultaneously. The KEV catalog provides a practical prioritization signal that cuts through the noise.&lt;/p>
+&lt;h3 id="a-prioritization-framework">A Prioritization Framework&lt;/h3>
+&lt;p>A common approach combines CVSS severity with KEV status and deployment context:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Critical + KEV-listed + Internet-facing&lt;/strong> — Patch immediately (within 24-48 hours)&lt;/li>
+&lt;li>&lt;strong>Critical + KEV-listed + Internal&lt;/strong> — Patch within the BOD 22-01 deadline (typically 2-3 weeks)&lt;/li>
+&lt;li>&lt;strong>Critical + Not KEV-listed&lt;/strong> — Patch within standard SLA (typically 30 days)&lt;/li>
+&lt;li>&lt;strong>High + KEV-listed&lt;/strong> — Treat as critical; patch within 2-3 weeks&lt;/li>
+&lt;li>&lt;strong>High + Not KEV-listed&lt;/strong> — Patch within standard SLA&lt;/li>
+&lt;li>&lt;strong>Medium/Low + Not KEV-listed&lt;/strong> — Schedule for regular maintenance windows&lt;/li>
+&lt;/ol>
+&lt;p>This framework is a starting point. Organizations should adjust based on their risk tolerance, asset criticality, and compensating controls.&lt;/p>
+&lt;h3 id="the-ransomware-flag">The Ransomware Flag&lt;/h3>
+&lt;p>Since October 2023, CISA has included a &amp;ldquo;Known Ransomware Campaign Use&amp;rdquo; flag in KEV entries, as part of its Ransomware Vulnerability Warning Pilot (RVWP). This binary indicator (yes/no) signals whether the vulnerability has been used in ransomware operations. Vulnerabilities flagged for ransomware use warrant heightened urgency due to the potential for data encryption and operational disruption.&lt;/p>
+&lt;h2 id="kev-and-sboms-automated-monitoring">KEV and SBOMs: Automated Monitoring&lt;/h2>
+&lt;p>The real power of the KEV catalog emerges when combined with &lt;a href="https://sbomify.com/what-is-sbom/">SBOMs&lt;/a>. An SBOM provides a machine-readable inventory of every component in your software. The KEV catalog provides a machine-readable list of actively exploited vulnerabilities. Connecting the two creates automated, continuous monitoring.&lt;/p>
+&lt;h3 id="how-it-works">How It Works&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Generate SBOMs&lt;/strong> for all your applications using tools from our &lt;a href="https://sbomify.com/guides/">SBOM generation guides&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Ingest SBOMs&lt;/strong> into a management platform such as &lt;a href="https://sbomify.com">sbomify&lt;/a> or &lt;a href="https://dependencytrack.org/">OWASP Dependency-Track&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Run vulnerability analysis&lt;/strong> — tools like Google OSV and Dependency-Track identify known CVEs in your SBOM components&lt;/li>
+&lt;li>&lt;strong>Cross-reference with KEV&lt;/strong> — check which of those CVEs appear in the KEV catalog to identify actively exploited vulnerabilities&lt;/li>
+&lt;li>&lt;strong>Prioritize remediation&lt;/strong> using the KEV due date and your deployment context&lt;/li>
+&lt;/ol>
+&lt;p>Because CISA adds new KEVs multiple times per week, building this cross-referencing into your workflow is important. The KEV catalog&amp;rsquo;s machine-readable formats make this feasible to automate.&lt;/p>
+&lt;h3 id="integration-points">Integration Points&lt;/h3>
+&lt;p>Several tools and data sources support KEV-SBOM workflows:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json">CISA KEV JSON feed&lt;/a>&lt;/strong> — Machine-readable, updated as new KEVs are added&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com">sbomify&lt;/a>&lt;/strong> — SBOM management platform with vulnerability analysis via Google OSV integration&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://dependencytrack.org/">OWASP Dependency-Track&lt;/a>&lt;/strong> — Ingests SBOMs and performs vulnerability analysis using multiple data sources&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/anchore/grype">Grype&lt;/a>&lt;/strong> — Command-line vulnerability scanner that can match against vulnerability data&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://osv.dev/">OSV&lt;/a>&lt;/strong> — Google&amp;rsquo;s open source vulnerability database&lt;/li>
+&lt;/ul>
+&lt;p>For a comprehensive list of analysis tools, see our &lt;a href="https://sbomify.com/resources/">SBOM resources page&lt;/a>.&lt;/p>
+&lt;h2 id="kev-in-the-compliance-context">KEV in the Compliance Context&lt;/h2>
+&lt;p>The KEV catalog intersects with several compliance frameworks:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/eo-14028/">Executive Order 14028&lt;/a>&lt;/strong> directs agencies to improve vulnerability management, and KEV provides the prioritization mechanism.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/cisa-minimum-elements/">CISA minimum elements&lt;/a>&lt;/strong> recommend unique identifiers (like purl or CPE) in SBOMs, enabling automated matching against KEV entries.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/nist-800-53/">NIST SP 800-53&lt;/a> SI-5&lt;/strong> requires receiving and acting on security alerts and advisories — the KEV catalog is a primary source for this control.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://sbomify.com/compliance/eu-cra/">EU CRA&lt;/a>&lt;/strong> requires vulnerability handling processes, and KEV status is a valuable input for prioritizing which vulnerabilities to address first.&lt;/li>
+&lt;/ul>
+&lt;h2 id="frequently-asked-questions">Frequently Asked Questions&lt;/h2>
+&lt;h3 id="what-is-a-kev">What is a KEV?&lt;/h3>
+&lt;p>A KEV (Known Exploited Vulnerability) is a CVE vulnerability that CISA has confirmed is being actively exploited in real-world attacks. The CISA KEV catalog lists these vulnerabilities along with remediation deadlines and required actions. Being listed in the KEV catalog means the vulnerability is not just theoretically dangerous — it is being used by attackers right now.&lt;/p>
+&lt;h3 id="what-is-the-kev-catalog-1">What is the KEV catalog?&lt;/h3>
+&lt;p>The CISA Known Exploited Vulnerabilities Catalog is a curated, continuously updated list of CVE vulnerabilities with confirmed active exploitation. Established by Binding Operational Directive 22-01, it requires U.S. federal agencies to remediate listed vulnerabilities within specified timeframes. The catalog is freely available as JSON, CSV, and via the CISA website, and is widely used by both government and private sector organizations for patch prioritization.&lt;/p>
+&lt;h3 id="how-is-kev-different-from-cve">How is KEV different from CVE?&lt;/h3>
+&lt;p>CVE is a system for assigning unique identifiers to all publicly known vulnerabilities, regardless of whether they are being exploited. The KEV catalog is a curated subset of CVEs that have confirmed evidence of active exploitation. There are over 330,000 CVE entries but only about 1,500 KEV entries. A CVE tells you a vulnerability exists; a KEV listing tells you attackers are actively using it.&lt;/p>
+&lt;h3 id="who-must-comply-with-the-kev-catalog">Who must comply with the KEV catalog?&lt;/h3>
+&lt;p>BOD 22-01 legally requires U.S. federal civilian executive branch (FCEB) agencies to remediate KEV-listed vulnerabilities by the specified due dates. However, CISA strongly recommends that all organizations use the KEV catalog for prioritization. Many private sector organizations, state and local governments, and critical infrastructure operators have adopted KEV as a standard input to their vulnerability management programs.&lt;/p>
+&lt;h3 id="how-can-i-monitor-the-kev-catalog-automatically">How can I monitor the KEV catalog automatically?&lt;/h3>
+&lt;p>Generate SBOMs for your applications, ingest them into a vulnerability management platform like OWASP Dependency-Track, and use vulnerability analysis to identify known CVEs in your components. Then cross-reference those CVEs against the KEV catalog. CISA publishes the KEV catalog as a machine-readable &lt;a href="https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json">JSON feed&lt;/a> that can be consumed by automated tools.&lt;/p></description><category>education</category></item><item><title>CISA&amp;#39;s Minimum Elements now in Draft</title><link>https://sbomify.com/2025/08/23/cisa-minimum-elements/</link><pubDate>Sat, 23 Aug 2025 09:00:00 +0000</pubDate><guid>https://sbomify.com/2025/08/23/cisa-minimum-elements/</guid><description>&lt;p>&lt;a href="https://www.cisa.gov/sbom">CISA&lt;/a> has published a &lt;a href="https://www.cisa.gov/sites/default/files/2025-08/2025_CISA_SBOM_Minimum_Elements.pdf">public comment draft of updated SBOM Minimum Elements&lt;/a>. This draft is intended as successor guidance to the &lt;a href="https://www.ntia.gov/files/ntia/publications/sbom_minimum_elements_report.pdf">NTIA Minimum Elements&lt;/a> first issued on July 12, 2021. Comments are open until &lt;strong>October 3, 2025&lt;/strong> (&lt;a href="https://www.federalregister.gov/documents/2025/08/22/2025-18532/notice-of-draft-software-bill-of-materials-sbom-minimum-elements-guidance">Federal Register notice&lt;/a>).&lt;/p>
+&lt;h2 id="what-changed-at-a-glance">What changed at a glance&lt;/h2>
+&lt;p>&lt;strong>New required data fields&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Component hash&lt;/li>
+&lt;li>License&lt;/li>
+&lt;li>Tool name used to generate the SBOM&lt;/li>
+&lt;li>Generation context: pre-build, build-time, or post-build&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Renamed or clarified fields&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;em>Supplier Name&lt;/em> → &lt;em>Software Producer&lt;/em>&lt;/li>
+&lt;li>&lt;em>Author of SBOM Data&lt;/em> → &lt;em>SBOM Author&lt;/em>&lt;/li>
+&lt;li>&lt;em>Other Unique Identifiers&lt;/em> → &lt;em>Software Identifiers&lt;/em> (at least one required; examples include CPE, purl, OmniBOR, SWHID)&lt;/li>
+&lt;li>&lt;em>Version of the Component&lt;/em> → &lt;em>Component Version&lt;/em> (file creation date allowed if no version)&lt;/li>
+&lt;li>&lt;em>Depth&lt;/em> → &lt;em>Coverage&lt;/em> (requires comprehensive listing, including transitive dependencies and duplicates when metadata differs)&lt;/li>
+&lt;li>&lt;em>Accommodation of Mistakes&lt;/em> → &lt;em>Accommodation of Updates to SBOM Data&lt;/em>&lt;/li>
+&lt;li>&lt;em>Frequency&lt;/em> and &lt;em>Distribution and Delivery&lt;/em> clarified&lt;/li>
+&lt;li>Timestamp must follow ISO 8601&lt;/li>
+&lt;li>SWID removed from Automation Support examples&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Removed&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;em>Access Control&lt;/em> as a standalone element (folded into Distribution and Delivery expectations for controlled sharing).&lt;/li>
+&lt;/ul>
+&lt;h2 id="practical-implications">Practical implications&lt;/h2>
+&lt;ul>
+&lt;li>SBOMs now must include &lt;strong>hashes, licenses, and tool provenance&lt;/strong>. This strengthens validation, license compliance, and reproducibility.&lt;/li>
+&lt;li>&lt;strong>Coverage is stricter&lt;/strong>. Transitive dependencies and duplicate instances are explicitly in scope.&lt;/li>
+&lt;li>&lt;strong>Known Unknowns&lt;/strong> must be flagged, with a distinction between unknown and intentionally redacted components, improving clarity during audits and incident response.&lt;/li>
+&lt;/ul>
+&lt;h2 id="how-this-relates-to-the-2021-ntia-minimum-elements">How this relates to the 2021 NTIA Minimum Elements&lt;/h2>
+&lt;p>The &lt;a href="https://www.ntia.gov/files/ntia/publications/sbom_minimum_elements_report.pdf">NTIA document&lt;/a> established the original baseline in 2021. CISA was tasked by &lt;a href="https://www.whitehouse.gov/wp-content/uploads/2022/09/M-22-18.pdf">OMB M-22-18&lt;/a> to produce successor guidance that reflects today’s SBOM maturity. This draft builds on and updates that baseline for federal use once finalized.&lt;/p>
+&lt;h2 id="comment-window">Comment window&lt;/h2>
+&lt;p>CISA is accepting public comments until &lt;strong>October 3, 2025&lt;/strong>. You can review the &lt;a href="https://www.cisa.gov/sites/default/files/2025-08/2025_CISA_SBOM_Minimum_Elements.pdf">draft PDF&lt;/a> and submit feedback through the &lt;a href="https://www.federalregister.gov/documents/2025/08/22/2025-18532/notice-of-draft-software-bill-of-materials-sbom-minimum-elements-guidance">Federal Register notice&lt;/a>.&lt;/p></description><category>news</category></item><item><title>Embracing Cybersecurity with CISA&amp;#39;s &amp;#39;Secure by Design&amp;#39; Initiative</title><link>https://sbomify.com/2024/07/24/embracing-cybersecurity-with-cisas-secure-by-design-initiative/</link><pubDate>Wed, 24 Jul 2024 15:56:35 +0200</pubDate><guid>https://sbomify.com/2024/07/24/embracing-cybersecurity-with-cisas-secure-by-design-initiative/</guid><description>&lt;p>In the ever-evolving landscape of cyber threats, the importance of integrating robust security measures into the earliest stages of software development cannot be overstated. Recognizing this need, the Cybersecurity and Infrastructure Security Agency (CISA), alongside various international partners, has released an updated guide titled &amp;ldquo;Shifting the Balance of Cybersecurity Risk: Principles and Approaches for Secure by Design Software&amp;rdquo; (&lt;a href="https://www.cisa.gov/resources-tools/resources/secure-by-design">CISA&lt;/a>). This comprehensive document emphasizes the urgency for software manufacturers to prioritize security from the outset, fundamentally shifting the cybersecurity burden away from consumers and towards developers.&lt;/p>
+&lt;h4 id="key-principles-of-secure-by-design">Key Principles of Secure by Design&lt;/h4>
+&lt;p>The guide outlines three core principles that software manufacturers are encouraged to adopt:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Take Ownership of Customer Security Outcomes&lt;/strong>: Manufacturers are urged to take full responsibility for the security of their products, ensuring that security features are enabled by default and that customers are protected without needing to take additional steps (&lt;a href="https://www.cisa.gov/news-events/news/cisa-us-and-international-partners-announce-updated-secure-design-principles-joint-guide">CISA&lt;/a>).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Embrace Radical Transparency and Accountability&lt;/strong>: This principle advocates for openness about vulnerabilities and security practices. By ensuring complete and accurate vulnerability advisories, manufacturers can build trust and enhance their products&amp;rsquo; security (&lt;a href="https://www.cisa.gov/news-events/news/us-and-international-partners-publish-secure-design-and-default-principles-and-approaches">CISA&lt;/a>).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Lead from the Top&lt;/strong>: Executive leadership must prioritize security as a critical element of product development. This cultural shift within organizations is crucial for embedding security into every stage of the software lifecycle (&lt;a href="https://www.cisa.gov/news-events/news/next-chapter-secure-design">CISA&lt;/a>).&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h4 id="international-collaboration">International Collaboration&lt;/h4>
+&lt;p>The updated guidance has garnered support from cybersecurity authorities worldwide, including agencies from Australia, Canada, Germany, the UK, and several other nations. This international coalition underscores the global consensus on the necessity of secure by design principles (&lt;a href="https://www.cisa.gov/news-events/news/us-and-international-partners-publish-secure-design-and-default-principles-and-approaches">CISA&lt;/a>).&lt;/p>
+&lt;p>CISA Director Jen Easterly highlighted the collaborative effort, stating, &amp;ldquo;Ensuring that software manufacturers integrate security into the earliest phases of design for their products is critical to building a secure and resilient technology ecosystem&amp;rdquo; (&lt;a href="https://www.cisa.gov/news-events/news/cisa-us-and-international-partners-announce-updated-secure-design-principles-joint-guide">CISA&lt;/a>).&lt;/p>
+&lt;h4 id="practical-steps-for-implementation">Practical Steps for Implementation&lt;/h4>
+&lt;p>To assist manufacturers in adopting these principles, the guide provides practical steps and examples of artifacts that can demonstrate a commitment to secure by design. These artifacts, ranging from secure coding practices to comprehensive vulnerability management processes, serve as evidence of a manufacturer&amp;rsquo;s dedication to security (&lt;a href="https://www.cisa.gov/news-events/news/next-chapter-secure-design">CISA&lt;/a>).&lt;/p>
+&lt;p>Moreover, the guide encourages manufacturers to engage in continuous learning and adaptation. This includes participating in secure by design summits, collaborating with educational institutions, and adhering to secure coding practices advocated by the broader cybersecurity community (&lt;a href="https://www.cisa.gov/news-events/news/next-chapter-secure-design">CISA&lt;/a>).&lt;/p>
+&lt;h4 id="the-road-ahead">The Road Ahead&lt;/h4>
+&lt;p>CISA&amp;rsquo;s updated guidance is more than a set of recommendations; it is a call to action for the entire software industry. By adopting secure by design principles, manufacturers can significantly reduce the prevalence of vulnerabilities and enhance the overall security of technology products used globally.&lt;/p>
+&lt;p>As the digital landscape continues to expand, the need for secure software becomes ever more critical. CISA&amp;rsquo;s initiative represents a significant step towards a more secure digital future, where security is an integral part of the development process, rather than an afterthought (&lt;a href="https://www.cisa.gov/resources-tools/resources/secure-by-design">CISA&lt;/a>) (&lt;a href="https://www.cisa.gov/sites/default/files/2023-06/principles_approaches_for_security-by-design-default_508c.pdf#:~:text=URL%3A%20https%3A%2F%2Fwww.cisa.gov%2Fsites%2Fdefault%2Ffiles%2F2023">CISA&lt;/a>).&lt;/p>
+&lt;p>For more detailed information and to access the full guide, visit the &lt;a href="https://www.cisa.gov/resources-tools/resources/secure-by-design">CISA Secure by Design page&lt;/a>.&lt;/p></description><category>compliance</category></item></channel></rss>

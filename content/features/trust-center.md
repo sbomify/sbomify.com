@@ -1,0 +1,127 @@
+---
+
+title: Trust Center
+description: "Build customer confidence with a dedicated trust center. Share SBOMs, compliance documents, and security artifacts publicly to demonstrate transparency."
+aliases:
+  - /features/sbom-hub/
+  - /features/public-sbom-portal/
+---
+
+<div class="text-xl leading-relaxed text-secondaryText mb-12 text-center max-w-3xl mx-auto font-medium">
+Turn transparency into a competitive advantage. Showcase your security posture with a branded, automated <span class="text-[#201B4C] font-bold">Trust Center</span>.
+</div>
+
+<div class="mb-16">
+    <a href="https://trust.sbomify.com/" target="_blank" rel="noopener noreferrer" class="group block max-w-md mx-auto !no-underline">
+        <div class="bg-white border-2 border-gray-100 hover:border-[#8A7DFF]/30 rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <div class="flex flex-col items-center gap-6">
+                <img src="/assets/images/logo/badge.svg" alt="sbomified" class="w-72 h-auto" />
+                <div class="text-lg font-bold text-[#201B4C] group-hover:text-[#8A7DFF] transition-colors">View Live Trust Center</div>
+                <div class="flex items-center gap-2 text-[#8A7DFF] font-medium">
+                    <span>Explore Demo</span>
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></svg>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="mb-24">
+    <h2 class="text-3xl font-bold text-[#201B4C] mb-4 text-center">Everything You Need</h2>
+    <p class="text-secondaryText text-center mb-12 max-w-2xl mx-auto">A complete platform for managing and sharing your security posture</p>
+    <div class="grid lg:grid-cols-3 gap-8">
+        {{< feature-card icon_bg_class="bg-purple-50" icon_text_class="text-[#8A7DFF]" title="Branded Portal" description="Your trust center, your brand. Use your own domain and logo to present a unified professional image to customers." >}}
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 21l18 0" /><path d="M9 8l1 0" /><path d="M9 12l1 0" /><path d="M9 16l1 0" /><path d="M14 8l1 0" /><path d="M14 12l1 0" /><path d="M14 16l1 0" /><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" /></svg>
+        {{< /feature-card >}}
+
+        {{< feature-card icon_bg_class="bg-blue-50" icon_text_class="text-blue-500" title="Automated Publishing" description="Stop manual uploads. Your trust center stays in sync with your CI/CD pipeline, automatically publishing new SBOMs for every software release. <a href='/features/generate-collaborate-analyze' class='text-blue-500 hover:underline'>Manage complex hierarchies</a> with ease." >}}
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
+        {{< /feature-card >}}
+
+        {{< feature-card icon_bg_class="bg-pink-50" icon_text_class="text-[#d874a9]" title="Flexible Access Control" description="Choose your audience. Make your Trust Center <strong>public</strong> for broad transparency, or <strong>private</strong> for invited internal and external stakeholders only." >}}
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6" /><path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" /><path d="M8 11v-4a4 4 0 1 1 8 0v4" /></svg>
+        {{< /feature-card >}}
+    </div>
+
+</div>
+
+<div class="mb-24">
+    <div class="flex flex-col lg:flex-row gap-16 items-center">
+        <div class="flex-1">
+            <div class="inline-block px-4 py-1.5 bg-[#8A7DFF]/10 text-[#8A7DFF] border border-[#8A7DFF]/20 rounded-full text-xs font-bold uppercase tracking-wider mb-6">Why Now</div>
+            <h2 class="text-4xl font-bold text-[#201B4C] mb-6">The New Standard for Transparency</h2>
+            <p class="text-lg text-secondaryText mb-6 leading-relaxed">
+                Trust Centers are becoming essential. Buyers now expect vendors to provide near real-time data about security posture and compliance status.
+            </p>
+            <div class="space-y-4 mb-8">
+                <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+                    <svg class="w-6 h-6 text-[#8A7DFF] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11" /></svg>
+                    <div>
+                        <div class="font-semibold text-[#201B4C]">EU Cyber Resilience Act (CRA)</div>
+                        <div class="text-sm text-secondaryText">SBOMs are now expected as part of Trust Centers for stakeholders</div>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+                    <svg class="w-6 h-6 text-[#8A7DFF] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" /><path d="M15 19l2 2l4 -4" /></svg>
+                    <div>
+                        <div class="font-semibold text-[#201B4C]">PCI DSS 4.0</div>
+                        <div class="text-sm text-secondaryText">First major framework adopting SBOMs as security posture requirement</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex-1 w-full flex justify-center">
+            <div class="w-full max-w-lg">
+                {{< d2 "sbom-hub" >}}
+            </div>
+        </div>
+    </div>
+</div>
+
+{{< trust-center-pillars >}}
+
+<div class="mb-24">
+    <div class="flex flex-col lg:flex-row gap-16 items-center">
+        <div class="flex-1">
+            <div class="inline-block px-4 py-1 bg-[#201B4C]/5 text-[#201B4C] border border-[#201B4C]/10 rounded-full text-xs font-bold uppercase tracking-wider mb-6">Comprehensive Coverage</div>
+            <h2 class="text-4xl font-bold text-[#201B4C] mb-6">Share More Than Just SBOMs</h2>
+            <p class="text-lg text-secondaryText mb-8 leading-relaxed">
+                A complete trust center goes beyond dependencies. Provide a comprehensive view of your security posture by hosting all critical artifacts in one searchable library.
+            </p>
+            <ul class="space-y-6">
+                {{< check-list-item title="Security Certifications" description="SOC 2, ISO 27001, and other audits" >}}
+                {{< check-list-item title="Penetration Test Reports" description="Share summaries or full reports securely" >}}
+                {{< check-list-item title="Compliance Attestations" description="Proof of regulatory adherence" >}}
+                {{< check-list-item title="Programmatic Compliance" description="Express compliance documents programmatically alongside your SBOMs" >}}
+            </ul>
+        </div>
+        <div class="flex-1 w-full flex justify-center">
+            {{< trust-center-artifacts >}}
+        </div>
+    </div>
+</div>
+
+{{< compliance-block >}}
+
+<div class="mb-24">
+    <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-[#201B4C] mb-4">Real-World Impact</h2>
+        <p class="text-secondaryText max-w-2xl mx-auto">See how Trust Centers transform the way you do business</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+        {{< impact-card icon_bg_class="bg-purple-50" icon_text_class="text-[#8A7DFF]" title="Accelerate Sales" description="\"Do you have a SOC 2?\" Send a link instead of scheduling a call. Reduce questionnaire response times from weeks to minutes." link_text="Sales Enablement" >}}
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3" /><path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" /><path d="M14 9a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
+        {{< /impact-card >}}
+
+        {{< impact-card icon_bg_class="bg-blue-50" icon_text_class="text-blue-500" title="Build Trust" description="Show, don't just tell. Proactive transparency proves your commitment to security before a prospect even asks." link_text="Brand Reputation" >}}
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" /></svg>
+        {{< /impact-card >}}
+
+        {{< impact-card icon_bg_class="bg-amber-50" icon_text_class="text-amber-500" title="Streamline Ops" description="Eliminate ad-hoc email requests. Give customers self-service access to the documents they need, 24/7." link_text="Operational Efficiency" >}}
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11" /></svg>
+        {{< /impact-card >}}
+    </div>
+
+</div>
+
+{{< cta-ready secondary_url="/features/integrations/" >}}

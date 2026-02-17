@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sbomify</title><link>https://sbomify.com/tags/comparison/</link><description>Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 26 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://sbomify.com/tags/comparison/" rel="self" type="application/rss+xml"/><item><title>SBOM Generation Tools Compared: Syft, Trivy, cdxgen, and More</title><link>https://sbomify.com/2026/01/26/sbom-generation-tools-comparison/</link><pubDate>Mon, 26 Jan 2026 00:00:00 +0000</pubDate><guid>https://sbomify.com/2026/01/26/sbom-generation-tools-comparison/</guid><description>&lt;p>SBOM generation tools analyze your software projects and produce machine-readable &lt;a href="https://sbomify.com/what-is-sbom/">Software Bills of Materials&lt;/a> in standard formats like &lt;a href="https://cyclonedx.org/">CycloneDX&lt;/a> and &lt;a href="https://spdx.dev/">SPDX&lt;/a>. These tools scan dependency manifests, lock files, container images, and sometimes compiled binaries to create a complete inventory of every component in your software. Choosing the right tool depends on your programming language ecosystem, deployment model, output format requirements, and CI/CD integration needs.&lt;/p>
+&lt;h2 id="why-sbom-generation-tools-matter">Why SBOM Generation Tools Matter&lt;/h2>
+&lt;p>SBOM generation is the foundation of the &lt;a href="https://sbomify.com/resources/">SBOM lifecycle&lt;/a>. Without accurate generation, downstream activities — vulnerability monitoring, license compliance, supply chain risk management — have nothing to work with.&lt;/p>
+&lt;p>Manual SBOM creation is not practical. A typical modern application has hundreds of dependencies, many of them &lt;a href="https://sbomify.com/2026/01/29/what-is-a-dependency-in-software/">transitive&lt;/a>. Automated tooling is the only reliable way to produce complete, accurate SBOMs at the pace of modern software development.&lt;/p>
+&lt;p>The SBOM generation tool landscape has matured significantly. Several open source tools now support dozens of package ecosystems, multiple output formats, and integration with CI/CD pipelines and container registries.&lt;/p>
+&lt;h2 id="tool-comparison">Tool Comparison&lt;/h2>
+&lt;p>The following comparison covers the most widely used open source SBOM generation tools as of early 2026.&lt;/p>
+&lt;h3 id="overview">Overview&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Tool&lt;/th>
+&lt;th>Maintainer&lt;/th>
+&lt;th>Output Formats&lt;/th>
+&lt;th>Input Sources&lt;/th>
+&lt;th>License&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>&lt;a href="https://sbomify.com">sbomify&lt;/a>&lt;/strong>&lt;/td>
+&lt;td>sbomify&lt;/td>
+&lt;td>CycloneDX, SPDX&lt;/td>
+&lt;td>Source directories, lock files, container images (via best-fit generator + enrichment)&lt;/td>
+&lt;td>Apache 2.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>&lt;a href="https://github.com/anchore/syft">Syft&lt;/a>&lt;/strong>&lt;/td>
+&lt;td>Anchore&lt;/td>
+&lt;td>CycloneDX, SPDX, Syft JSON&lt;/td>
+&lt;td>Source directories, container images, archives&lt;/td>
+&lt;td>Apache 2.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>&lt;a href="https://github.com/aquasecurity/trivy">Trivy&lt;/a>&lt;/strong>&lt;/td>
+&lt;td>Aqua Security&lt;/td>
+&lt;td>CycloneDX, SPDX, Trivy JSON&lt;/td>
+&lt;td>Source directories, container images, VMs, K8s&lt;/td>
+&lt;td>Apache 2.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>&lt;a href="https://github.com/CycloneDX/cdxgen">cdxgen&lt;/a>&lt;/strong>&lt;/td>
+&lt;td>CycloneDX / AppThreat&lt;/td>
+&lt;td>CycloneDX&lt;/td>
+&lt;td>Source directories, container images&lt;/td>
+&lt;td>Apache 2.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>&lt;a href="https://github.com/microsoft/sbom-tool">Microsoft SBOM Tool&lt;/a>&lt;/strong>&lt;/td>
+&lt;td>Microsoft&lt;/td>
+&lt;td>SPDX&lt;/td>
+&lt;td>Source directories, build outputs&lt;/td>
+&lt;td>MIT&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CycloneDX CLI&lt;/strong>&lt;/td>
+&lt;td>CycloneDX&lt;/td>
+&lt;td>CycloneDX&lt;/td>
+&lt;td>Varies (ecosystem-specific)&lt;/td>
+&lt;td>Apache 2.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>SPDX Tools&lt;/strong>&lt;/td>
+&lt;td>Linux Foundation&lt;/td>
+&lt;td>SPDX&lt;/td>
+&lt;td>Varies (ecosystem-specific)&lt;/td>
+&lt;td>Apache 2.0&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="sbomify">sbomify&lt;/h3>
+&lt;p>&lt;a href="https://sbomify.com">sbomify&lt;/a> is an open source SBOM platform that covers the full SBOM lifecycle: generation, augmentation, enrichment, storage, distribution, and vulnerability monitoring. Importantly, sbomify is not a standalone SBOM generator — the &lt;a href="https://github.com/sbomify/github-action/">sbomify GitHub Action&lt;/a> automatically selects the best generation tool for your ecosystem (such as Syft, cdxgen, or the CycloneDX ecosystem plugins) and then improves the quality of the generated SBOM through enrichment and augmentation. This means you get the most accurate generation for your stack, combined with metadata improvements that raw generators don&amp;rsquo;t provide — all in one step.&lt;/p>
+&lt;p>&lt;strong>Strengths:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Uses the best underlying generator for each ecosystem, then enriches and augments the output&lt;/li>
+&lt;li>Automatic metadata augmentation: adds supplier, manufacturer, and contact information to meet &lt;a href="https://sbomify.com/compliance/ntia-minimum-elements/">NTIA minimum elements&lt;/a>&lt;/li>
+&lt;li>Enrichment from 11+ data sources (deps.dev, ClearlyDefined, PyPI, crates.io, LicenseDB, and more) for license, hash, and lifecycle data&lt;/li>
+&lt;li>Native CI/CD integration via &lt;a href="https://github.com/sbomify/github-action/">GitHub Action&lt;/a>, GitLab CI, and Bitbucket Pipelines&lt;/li>
+&lt;li>Outputs both CycloneDX and SPDX formats&lt;/li>
+&lt;li>Built-in vulnerability monitoring via Google OSV and OWASP Dependency-Track integration&lt;/li>
+&lt;li>&lt;a href="https://sbomify.com/features/trust-center/">Trust Center&lt;/a> for distributing SBOMs and compliance documents to customers&lt;/li>
+&lt;li>Supports all major ecosystems: Python, JavaScript, Java, Go, Rust, Ruby, PHP, .NET, Swift, Dart, Elixir, Scala, C/C++, Docker, Terraform, Yocto&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Considerations:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Not a standalone generator — it wraps and improves the output of other generation tools&lt;/li>
+&lt;li>Full platform features (Trust Center, vulnerability monitoring) require the cloud service or self-hosted deployment&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Basic usage (GitHub Actions):&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">sbomify/github-action@master&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">env&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">LOCK_FILE&lt;/span>: &lt;span style="color:#ae81ff">package-lock.json&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">OUTPUT_FILE&lt;/span>: &lt;span style="color:#ae81ff">sbom.cdx.json&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ENRICH&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">UPLOAD&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>See our &lt;a href="https://sbomify.com/guides/ci-cd/">CI/CD guide&lt;/a> for GitHub Actions, GitLab CI, and Bitbucket Pipelines examples.&lt;/p>
+&lt;h3 id="syft">Syft&lt;/h3>
+&lt;p>&lt;a href="https://github.com/anchore/syft">Syft&lt;/a> is Anchore&amp;rsquo;s open source SBOM generation tool. It supports a broad range of package ecosystems and can scan source directories, container images (both local and from registries), and archive files.&lt;/p>
+&lt;p>&lt;strong>Strengths:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Wide ecosystem support: APK, DEB, RPM, npm, PyPI, Maven, Go, Rust, Ruby, PHP, and more&lt;/li>
+&lt;li>Container image scanning with layer-by-layer analysis&lt;/li>
+&lt;li>Outputs CycloneDX, SPDX 2.3, and its own Syft JSON format&lt;/li>
+&lt;li>Pairs naturally with &lt;a href="https://github.com/anchore/grype">Grype&lt;/a> for vulnerability scanning&lt;/li>
+&lt;li>Active development with frequent releases&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Considerations:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Does not resolve dependency trees from source manifests as deeply as some language-specific tools&lt;/li>
+&lt;li>No native vulnerability scanning (use Grype separately)&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Basic usage:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Scan a directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>syft dir:/path/to/project -o cyclonedx-json
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Scan a container image&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>syft registry:nginx:latest -o spdx-json
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="trivy">Trivy&lt;/h3>
+&lt;p>&lt;a href="https://github.com/aquasecurity/trivy">Trivy&lt;/a> is Aqua Security&amp;rsquo;s comprehensive security scanner. While best known for vulnerability scanning, Trivy also generates SBOMs and can scan a wider range of targets than most dedicated SBOM tools.&lt;/p>
+&lt;p>&lt;strong>Strengths:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Combined SBOM generation and vulnerability scanning in a single tool&lt;/li>
+&lt;li>Scans source directories, container images, VM images, Kubernetes clusters, and IaC files&lt;/li>
+&lt;li>Outputs CycloneDX and SPDX&lt;/li>
+&lt;li>Detects both OS-level packages and language-specific dependencies&lt;/li>
+&lt;li>Extensive ecosystem: npm, PyPI, Maven, Go, Rust, Ruby, NuGet, and more&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Considerations:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>SBOM generation is one feature among many; some SBOM-specific features may lag behind dedicated tools&lt;/li>
+&lt;li>Output verbosity can vary between scan targets&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Basic usage:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Generate SBOM from a directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trivy fs /path/to/project --format cyclonedx --output sbom.json
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Generate SBOM from a container image&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trivy image nginx:latest --format spdx-json --output sbom.spdx.json
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="cdxgen">cdxgen&lt;/h3>
+&lt;p>&lt;a href="https://github.com/CycloneDX/cdxgen">cdxgen&lt;/a> (CycloneDX Generator) is the official CycloneDX SBOM generation tool, maintained by the AppThreat team under the CycloneDX project. It focuses on deep analysis of language-specific dependency trees.&lt;/p>
+&lt;p>&lt;strong>Strengths:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Deep dependency resolution for many ecosystems (Java, JavaScript, Python, Go, Rust, .NET, Ruby, PHP, Swift, and more)&lt;/li>
+&lt;li>Generates evidence-based SBOMs with call graph analysis for supported languages&lt;/li>
+&lt;li>Supports SBOM signing and attestation workflows&lt;/li>
+&lt;li>Active development with rapid feature additions&lt;/li>
+&lt;li>Can generate SBOMs from container images and binary files&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Considerations:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>CycloneDX output only (no native SPDX support)&lt;/li>
+&lt;li>Requires Node.js runtime&lt;/li>
+&lt;li>Some advanced features (call graph analysis) require language-specific toolchain setup&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Basic usage:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Scan a project directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cdxgen -o sbom.json /path/to/project
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Scan a container image&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cdxgen -t docker -o sbom.json nginx:latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="microsoft-sbom-tool">Microsoft SBOM Tool&lt;/h3>
+&lt;p>&lt;a href="https://github.com/microsoft/sbom-tool">Microsoft SBOM Tool&lt;/a> is Microsoft&amp;rsquo;s open source tool for SBOM generation, designed for integration with build systems and CI/CD pipelines.&lt;/p>
+&lt;p>&lt;strong>Strengths:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Designed for CI/CD integration with structured build output support&lt;/li>
+&lt;li>Supports npm, NuGet, PyPI, Maven, Go, Rust, and more&lt;/li>
+&lt;li>Validates generated SBOMs against NTIA minimum element requirements&lt;/li>
+&lt;li>Integrates with Azure DevOps and GitHub Actions&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Considerations:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>SPDX 2.2 output only (no CycloneDX support)&lt;/li>
+&lt;li>Requires .NET runtime&lt;/li>
+&lt;li>Ecosystem support is narrower than Syft or Trivy&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Basic usage:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Generate SBOM from build output&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sbom-tool generate -b /path/to/build -bc /path/to/source -pn my-app -pv 1.0.0 -ps my-org
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="cyclonedx-ecosystem-tools">CycloneDX Ecosystem Tools&lt;/h3>
+&lt;p>The CycloneDX project maintains a collection of language-specific SBOM generation libraries and CLI tools. These are purpose-built for individual ecosystems and produce highly accurate results for their target languages.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Language&lt;/th>
+&lt;th>Tool&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Java/Maven&lt;/td>
+&lt;td>&lt;a href="https://github.com/CycloneDX/cyclonedx-maven-plugin">cyclonedx-maven-plugin&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Java/Gradle&lt;/td>
+&lt;td>&lt;a href="https://github.com/CycloneDX/cyclonedx-gradle-plugin">cyclonedx-gradle-plugin&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>JavaScript&lt;/td>
+&lt;td>&lt;a href="https://github.com/CycloneDX/cyclonedx-node-npm">cyclonedx-node-npm&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Python&lt;/td>
+&lt;td>&lt;a href="https://github.com/CycloneDX/cyclonedx-python">cyclonedx-python&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>.NET&lt;/td>
+&lt;td>&lt;a href="https://github.com/CycloneDX/cyclonedx-dotnet">cyclonedx-dotnet&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Go&lt;/td>
+&lt;td>&lt;a href="https://github.com/CycloneDX/cyclonedx-gomod">cyclonedx-gomod&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Rust&lt;/td>
+&lt;td>&lt;a href="https://github.com/CycloneDX/cyclonedx-rust-cargo">cyclonedx-rust-cargo&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>PHP&lt;/td>
+&lt;td>&lt;a href="https://github.com/CycloneDX/cyclonedx-php-composer">cyclonedx-php-composer&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>Strengths:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Deepest possible integration with each language&amp;rsquo;s package manager&lt;/li>
+&lt;li>Most accurate dependency resolution for the target ecosystem&lt;/li>
+&lt;li>Native CycloneDX output&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Considerations:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Language-specific: you need a different tool for each ecosystem in your stack&lt;/li>
+&lt;li>CycloneDX format only&lt;/li>
+&lt;li>Variable feature sets between language implementations&lt;/li>
+&lt;/ul>
+&lt;p>For a complete listing of language-specific tools and guides, see our &lt;a href="https://sbomify.com/guides/">SBOM generation guides&lt;/a> and &lt;a href="https://sbomify.com/resources/">resources page&lt;/a>.&lt;/p>
+&lt;h2 id="choosing-a-tool">Choosing a Tool&lt;/h2>
+&lt;h3 id="single-vs-multi-ecosystem">Single vs. Multi-Ecosystem&lt;/h3>
+&lt;p>If your organization uses a single language ecosystem, a language-specific CycloneDX plugin or SPDX tool will produce the most accurate results. If you work across multiple ecosystems (which most organizations do), a multi-ecosystem tool like &lt;a href="https://sbomify.com">sbomify&lt;/a>, Syft, Trivy, or cdxgen provides consistency and simplifies CI/CD integration. If you also need SBOM management, vulnerability monitoring, and distribution, sbomify provides these in an integrated platform rather than requiring separate tools.&lt;/p>
+&lt;h3 id="format-requirements">Format Requirements&lt;/h3>
+&lt;p>If you need CycloneDX output, all tools listed here support it except Microsoft SBOM Tool. If you need SPDX output, Syft, Trivy, and Microsoft SBOM Tool support it. If you need both, Syft and Trivy are the most flexible. For format conversion, the &lt;a href="https://github.com/CycloneDX/cyclonedx-cli">CycloneDX CLI&lt;/a> can convert between formats.&lt;/p>
+&lt;p>See our &lt;a href="https://sbomify.com/2026/01/15/sbom-formats-cyclonedx-vs-spdx/">SBOM formats comparison&lt;/a> for help choosing a format.&lt;/p>
+&lt;h3 id="container-image-support">Container Image Support&lt;/h3>
+&lt;p>For &lt;a href="https://sbomify.com/2026/01/03/container-security-best-practices/">container security&lt;/a> workflows, Syft and Trivy both provide strong container image scanning with layer-by-layer analysis. cdxgen also supports container images. Microsoft SBOM Tool does not scan container images directly.&lt;/p>
+&lt;p>For Docker-specific SBOM generation instructions, see our &lt;a href="https://sbomify.com/guides/docker/">Docker SBOM guide&lt;/a>.&lt;/p>
+&lt;h3 id="cicd-integration">CI/CD Integration&lt;/h3>
+&lt;p>All major SBOM generation tools can be integrated into CI/CD pipelines. The &lt;a href="https://github.com/sbomify/github-action/">sbomify GitHub Action&lt;/a> provides a streamlined way to generate and manage SBOMs in GitHub workflows. Trivy and Syft both provide official GitHub Actions and support integration with most CI/CD platforms.&lt;/p>
+&lt;h2 id="benchmarking-sbom-tools">Benchmarking SBOM Tools&lt;/h2>
+&lt;p>Different tools may produce different results for the same project — varying in the number of components detected, the accuracy of version information, and the completeness of transitive dependency resolution.&lt;/p>
+&lt;p>The &lt;a href="https://github.com/sbomify/sbom-benchmarks">sbom-benchmarks repository&lt;/a> provides a framework for comparing SBOM generation tools against reference projects, along with examples of how to run each tool. Benchmarking against your own projects is the best way to evaluate which tool produces the most accurate and complete results for your specific technology stack.&lt;/p>
+&lt;h2 id="best-practices">Best Practices&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Generate SBOMs from resolved dependencies.&lt;/strong> Use lock files and build outputs rather than unresolved manifests. Lock files capture exact versions including transitive dependencies; manifests may contain version ranges that resolve differently in different environments.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Automate in CI/CD.&lt;/strong> Integrate SBOM generation into your build pipeline so every release automatically produces an SBOM. See our &lt;a href="https://sbomify.com/guides/">language-specific guides&lt;/a> for setup instructions.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Validate generated SBOMs.&lt;/strong> Use validation tools like the &lt;a href="https://github.com/CycloneDX/cyclonedx-core-java">CycloneDX Validator&lt;/a> or &lt;a href="https://tools.spdx.org/app/validate/">SPDX Online Tools&lt;/a> to ensure your SBOMs conform to the specification. Invalid SBOMs may be rejected by consumers or analysis tools.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Combine tools for container SBOMs.&lt;/strong> A language-specific tool may miss OS-level packages in your container image. Use both a language-specific tool (for precise application dependency resolution) and a container scanner (for OS packages from the base image) to produce a complete picture.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Benchmark against your stack.&lt;/strong> Run multiple tools against your actual projects and compare the results. The best tool for a Python project may not be the best tool for a Java project.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Feed SBOMs into monitoring.&lt;/strong> SBOM generation is the starting point, not the end. Ingest generated SBOMs into a management platform like &lt;a href="https://sbomify.com">sbomify&lt;/a> for integrated vulnerability monitoring, or use &lt;a href="https://dependencytrack.org/">OWASP Dependency-Track&lt;/a> for standalone analysis. See our &lt;a href="https://sbomify.com/2026/01/18/sbom-management-best-practices/">SBOM management guide&lt;/a> for the full lifecycle.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="frequently-asked-questions">Frequently Asked Questions&lt;/h2>
+&lt;h3 id="what-are-sbom-generation-tools">What are SBOM generation tools?&lt;/h3>
+&lt;p>SBOM generation tools are software that analyzes your projects — source code, dependency files, container images, or compiled binaries — and produces a machine-readable Software Bill of Materials in a standard format like CycloneDX or SPDX. Leading standalone generators include Syft (Anchore), Trivy (Aqua Security), cdxgen (CycloneDX), Microsoft SBOM Tool, and language-specific CycloneDX plugins. Platforms like &lt;a href="https://sbomify.com">sbomify&lt;/a> wrap the best generator for your ecosystem and then enrich and augment the output for higher quality SBOMs.&lt;/p>
+&lt;h3 id="what-is-the-best-sbom-generation-tool">What is the best SBOM generation tool?&lt;/h3>
+&lt;p>There is no single best tool — the right choice depends on your ecosystems, format requirements, and workflow. For an integrated platform that selects the best generator for your ecosystem and then enriches, augments, and manages the output, &lt;a href="https://sbomify.com">sbomify&lt;/a> covers the full lifecycle. For multi-ecosystem coverage with both CycloneDX and SPDX support as standalone CLI tools, Syft and Trivy are versatile options. For deep language-specific analysis, CycloneDX ecosystem plugins and cdxgen provide the most accurate results. For SPDX-only workflows integrated with Azure DevOps, Microsoft SBOM Tool is purpose-built.&lt;/p>
+&lt;h3 id="how-do-i-generate-an-sbom">How do I generate an SBOM?&lt;/h3>
+&lt;p>Install an SBOM generation tool (Syft, Trivy, or cdxgen are good starting points for CLI use), point it at your project directory or container image, and specify your desired output format. For example: &lt;code>syft dir:. -o cyclonedx-json &amp;gt; sbom.json&lt;/code>. For production use, integrate SBOM generation into your CI/CD pipeline using the &lt;a href="https://github.com/sbomify/github-action/">sbomify GitHub Action&lt;/a>, which handles generation, enrichment, and augmentation in one step. See our &lt;a href="https://sbomify.com/guides/">language-specific SBOM guides&lt;/a> for detailed instructions.&lt;/p>
+&lt;h3 id="what-format-should-my-sbom-be-in">What format should my SBOM be in?&lt;/h3>
+&lt;p>Choose CycloneDX for security-focused use cases and SPDX for license compliance focus. For EU CRA compliance via BSI TR-03183-2, you need CycloneDX 1.6+ or SPDX 3.0.1+. Most other compliance frameworks accept both formats. See our &lt;a href="https://sbomify.com/2026/01/15/sbom-formats-cyclonedx-vs-spdx/">SBOM formats comparison&lt;/a> for detailed guidance.&lt;/p>
+&lt;h3 id="how-do-i-validate-an-sbom">How do I validate an SBOM?&lt;/h3>
+&lt;p>Use format-specific validation tools: the CycloneDX Validator for CycloneDX SBOMs and SPDX Online Tools for SPDX SBOMs. Validation checks structural correctness, required fields, and specification conformance. Additionally, tools like &lt;a href="https://github.com/interlynk-io/sbomqs">sbomqs&lt;/a> can score SBOM quality beyond basic structural validity.&lt;/p></description><category>education</category></item></channel></rss>

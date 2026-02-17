@@ -1,0 +1,17 @@
+{{- $src := .Get 0 -}}
+{{- $attrs := "" -}}
+{{- range $key := slice "alt" "class" "width" "height" "loading" -}}
+  {{- with $.Get $key -}}
+    {{- $attrs = printf `%s %s="%s"` $attrs $key . -}}
+  {{- end -}}
+{{- end -}}
+{{- $img := resources.Get (strings.TrimPrefix "/" $src) -}}
+{{- if $img -}}
+  {{- $webp := $img.Process "webp q80" -}}
+<picture>
+  <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+  <img src="{{ $img.RelPermalink }}"{{ $attrs | safeHTMLAttr }}>
+</picture>
+{{- else -}}
+<img src="{{ $src }}"{{ $attrs | safeHTMLAttr }}>
+{{- end -}}

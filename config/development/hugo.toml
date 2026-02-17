@@ -1,0 +1,3 @@
+baseURL = "http://localhost:4040"
+buildFuture = true
+buildDrafts = true

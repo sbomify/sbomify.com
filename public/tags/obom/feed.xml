@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sbomify</title><link>https://sbomify.com/tags/obom/</link><description>Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 09 Jul 2024 15:04:57 +0200</lastBuildDate><atom:link href="https://sbomify.com/tags/obom/" rel="self" type="application/rss+xml"/><item><title>The Role of SBOMs in an OBOM: Ensuring Compliance and Security in Smart Thermometer Development</title><link>https://sbomify.com/2024/07/09/the-role-of-sboms-in-an-obom-ensuring-compliance-and-security-in-smart-thermometer-development/</link><pubDate>Tue, 09 Jul 2024 15:04:57 +0200</pubDate><guid>https://sbomify.com/2024/07/09/the-role-of-sboms-in-an-obom-ensuring-compliance-and-security-in-smart-thermometer-development/</guid><description>&lt;p>In today&amp;rsquo;s software landscape, compliance with security and transparency mandates is more critical than ever. Executive orders, such as the one issued by the U.S. government in May 2021, emphasize the importance of Software Bill of Materials (SBOMs) for ensuring software security and integrity. While SBOMs provide detailed inventories of software components, integrating them into an Operations Bill of Materials (OBOM) offers an enhanced framework that encompasses both software and runtime operational dependencies. This article explores the central role of SBOMs in OBOMs, using the development of a smart thermometer as an example, and discusses how this integration ensures compliance and bolsters security.&lt;/p>
+&lt;h2 id="understanding-sboms">Understanding SBOMs&lt;/h2>
+&lt;h3 id="what-is-an-sbom">What is an SBOM?&lt;/h3>
+&lt;p>A Software Bill of Materials (SBOM) is a formal record that lists all components, libraries, and modules included in a software product. It provides a transparent view of the software’s codebase, aiding in dependency tracking, license management, and vulnerability identification. According to recent executive orders, SBOMs are essential for maintaining software security and transparency.&lt;/p>
+&lt;h2 id="example-smart-thermometer-development">Example: Smart Thermometer Development&lt;/h2>
+&lt;h3 id="components-of-the-smart-thermometer">Components of the Smart Thermometer&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Python Backend&lt;/strong>: The backend server written in Python, which handles data processing and user interactions.&lt;/li>
+&lt;li>&lt;strong>Docker Files&lt;/strong>: Containerization files used to ensure consistent deployment environments.&lt;/li>
+&lt;li>&lt;strong>Device Software&lt;/strong>: Firmware written in Rust, running on the thermometer device, which includes dependencies specific to the embedded system.&lt;/li>
+&lt;/ol>
+&lt;h2 id="central-role-of-sboms-in-oboms">Central Role of SBOMs in OBOMs&lt;/h2>
+&lt;h3 id="aggregated-sbom-for-compliance">Aggregated SBOM for Compliance&lt;/h3>
+&lt;p>In the context of a smart thermometer, an aggregated SBOM provides a comprehensive inventory of all software components involved:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Backend SBOM&lt;/strong>: Listing Python libraries and dependencies.&lt;/li>
+&lt;li>&lt;strong>Container SBOM&lt;/strong>: Including Docker configurations and base images.&lt;/li>
+&lt;li>&lt;strong>Device SBOM&lt;/strong>: Documenting Rust dependencies and embedded libraries.&lt;/li>
+&lt;/ul>
+&lt;h3 id="integrating-sboms-into-oboms">Integrating SBOMs into OBOMs&lt;/h3>
+&lt;p>An OBOM incorporates these SBOMs and extends them by adding runtime operational information:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Runtime Dependencies&lt;/strong>: Specific libraries and services required for the backend and device software to function during runtime.&lt;/li>
+&lt;li>&lt;strong>Configuration Settings&lt;/strong>: Environment variables, configuration files, and system settings necessary for deployment and operation.&lt;/li>
+&lt;li>&lt;strong>Infrastructure Components&lt;/strong>: Details about cloud servers, network configurations, and other infrastructure elements.&lt;/li>
+&lt;li>&lt;strong>Operational Tools&lt;/strong>: Monitoring, logging, and backup tools essential for maintaining the operational integrity of the system.&lt;/li>
+&lt;/ul>
+&lt;h3 id="benefits-of-sbom-integration">Benefits of SBOM Integration&lt;/h3>
+&lt;h4 id="enhanced-security-and-compliance">Enhanced Security and Compliance&lt;/h4>
+&lt;p>&lt;strong>Example: Comprehensive Vulnerability Management&lt;/strong>&lt;/p>
+&lt;p>Integrating SBOMs within an OBOM allows for detailed tracking of both software and operational components, ensuring compliance with security standards outlined in executive orders. For the smart thermometer, this means that any vulnerabilities identified in the Python libraries, Docker images, or Rust dependencies can be promptly addressed, ensuring the overall security of the product.&lt;/p>
+&lt;h4 id="operational-transparency">Operational Transparency&lt;/h4>
+&lt;p>&lt;strong>Example: Detailed Auditing and Compliance&lt;/strong>&lt;/p>
+&lt;p>An aggregated SBOM within an OBOM provides a transparent view of all software and runtime components used in the smart thermometer, facilitating easier audits and ensuring compliance with regulatory standards. This transparency is crucial for meeting the requirements set by executive orders, which mandate visibility into software supply chains.&lt;/p>
+&lt;h2 id="obom-as-a-value-added-extension">OBOM as a Value-Added Extension&lt;/h2>
+&lt;h3 id="runtime-information">Runtime Information&lt;/h3>
+&lt;p>While the SBOM is central to compliance, incorporating it into an OBOM adds valuable runtime information:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Runtime Dependencies&lt;/strong>: Ensuring that all necessary libraries and services are available and correctly configured during the operation of the smart thermometer.&lt;/li>
+&lt;li>&lt;strong>Configuration Management&lt;/strong>: Detailed documentation of environment variables, configuration files, and system settings for consistent deployments across different environments.&lt;/li>
+&lt;/ul>
+&lt;h3 id="enhancing-security-and-efficiency-with-obom">Enhancing Security and Efficiency with OBOM&lt;/h3>
+&lt;h4 id="streamlined-deployment">Streamlined Deployment&lt;/h4>
+&lt;p>By integrating SBOMs into an OBOM, the smart thermometer’s development team can ensure consistent deployment processes. This minimizes the risk of deployment failures and enhances operational efficiency.&lt;/p>
+&lt;h4 id="disaster-recovery">Disaster Recovery&lt;/h4>
+&lt;p>Incorporating SBOMs into an OBOM aids in disaster recovery by providing detailed information about the operational setup. This ensures that in case of a system failure, the exact configurations and dependencies can be quickly restored.&lt;/p>
+&lt;h4 id="improved-collaboration">Improved Collaboration&lt;/h4>
+&lt;p>An OBOM that includes SBOMs fosters better collaboration between development and operations teams, ensuring that deployment and maintenance processes are well-aligned.&lt;/p>
+&lt;h2 id="end-to-end-example-smart-thermometer-obom">End-to-End Example: Smart Thermometer OBOM&lt;/h2>
+&lt;p>To illustrate a valid end-to-end example that complies with the CycloneDX standard, here is a simplified version of an OBOM for a smart thermometer:&lt;/p>
+&lt;h3 id="example-json-structure">Example JSON Structure&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;bomFormat&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;CycloneDX&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;specVersion&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;1.3&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">1&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;components&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;application&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Smart Thermometer Backend&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2.0.0&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;bom-ref&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;backend-1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;components&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;library&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Flask&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;1.1.2&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;bom-ref&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;flask-1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;licenses&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;license&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;BSD-3-Clause&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;library&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Requests&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2.23.0&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;bom-ref&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;requests-1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;licenses&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;license&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Apache-2.0&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;container&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Smart Thermometer Container&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;1.0.0&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;bom-ref&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;container-1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;components&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;operating-system&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Ubuntu&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;20.04&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;bom-ref&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;ubuntu-1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;library&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Docker&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;19.03&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;bom-ref&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;docker-1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;firmware&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Smart Thermometer Device Firmware&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;3.2.1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;bom-ref&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;firmware-1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;components&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;library&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Rust Standard Library&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;1.49.0&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;bom-ref&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;rust-stdlib-1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;library&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Embedded HAL&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;0.2.4&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;bom-ref&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;embedded-hal-1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;dependencies&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ref&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;backend-1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;dependsOn&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;flask-1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;requests-1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ref&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;container-1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;dependsOn&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;ubuntu-1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;docker-1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ref&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;firmware-1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;dependsOn&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;rust-stdlib-1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;embedded-hal-1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;metadata&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2023-07-09T14:28:00Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;tools&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;vendor&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;CycloneDX&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;CycloneDX Maven Plugin&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;1.4.0&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;component&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;application&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Smart Thermometer&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;3.0.0&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;bom-ref&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;smart-thermometer-1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="explanation">Explanation&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Components&lt;/strong>: This section lists all components of the smart thermometer, including backend libraries, Docker container elements, and device firmware libraries.&lt;/li>
+&lt;li>&lt;strong>Dependencies&lt;/strong>: Specifies the relationships between components, indicating which components depend on others.&lt;/li>
+&lt;li>&lt;strong>Metadata&lt;/strong>: Contains additional information about the BOM, such as the timestamp, tools used to generate the BOM, and details about the top-level component (the smart thermometer).&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>While the inclusion of Software Bills of Materials (SBOMs) is mandated by executive orders for ensuring software security and transparency, integrating SBOMs into an Operations Bill of Materials (OBOM) provides additional operational benefits. For the development of a smart thermometer, this integration enhances security, compliance, and operational efficiency. By adopting SBOMs as a foundational element and viewing OBOM as a value-added extension, organizations can build a more secure, transparent, and resilient software ecosystem.&lt;/p>
+&lt;hr>
+&lt;p>&lt;strong>References:&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>Executive Order on Improving the Nation&amp;rsquo;s Cybersecurity. (2021). The White House. Retrieved from &lt;a href="https://www.whitehouse.gov/briefing-room/statements-releases/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/">White House&lt;/a>&lt;/li>
+&lt;li>CycloneDX. (n.d.). &lt;em>CycloneDX Specification&lt;/em>. Retrieved from &lt;a href="https://cyclonedx.org/specification/overview/">CycloneDX&lt;/a>&lt;/li>
+&lt;li>National Institute of Standards and Technology (NIST). (2021). &lt;em>Security and Privacy Controls for Information Systems and Organizations&lt;/em>. Retrieved from &lt;a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf">NIST&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;p>By focusing on the critical role of SBOMs within OBOMs, organizations can ensure compliance with executive mandates while leveraging the additional benefits of a comprehensive operational framework.&lt;/p></description><category>education</category></item></channel></rss>

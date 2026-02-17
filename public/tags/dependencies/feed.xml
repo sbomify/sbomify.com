@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sbomify</title><link>https://sbomify.com/tags/dependencies/</link><description>Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 29 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://sbomify.com/tags/dependencies/" rel="self" type="application/rss+xml"/><item><title>What Is a Dependency in Software? A Beginner&amp;#39;s Guide</title><link>https://sbomify.com/2026/01/29/what-is-a-dependency-in-software/</link><pubDate>Thu, 29 Jan 2026 00:00:00 +0000</pubDate><guid>https://sbomify.com/2026/01/29/what-is-a-dependency-in-software/</guid><description>&lt;p>A dependency in software is any external component — a library, framework, module, or package — that your application relies on to function. When you import a package from npm, add a library from PyPI, or include a Maven artifact, you are adding a dependency. Dependencies allow developers to reuse tested, maintained code rather than writing everything from scratch. Modern applications are built overwhelmingly from dependencies: studies consistently show that &lt;a href="https://www.linux.com/training-tutorials/estimating-total-number-linux-contributors-approach-using-linus-law/">70-90% of a typical application consists of open source components&lt;/a>.&lt;/p>
+&lt;h2 id="direct-vs-transitive-dependencies">Direct vs. Transitive Dependencies&lt;/h2>
+&lt;p>The most important distinction in dependency management is between direct and transitive dependencies.&lt;/p>
+&lt;p>&lt;strong>Direct dependencies&lt;/strong> are the packages your project explicitly declares. These appear in your dependency manifest — &lt;code>package.json&lt;/code> for JavaScript, &lt;code>requirements.txt&lt;/code> or &lt;code>pyproject.toml&lt;/code> for Python, &lt;code>pom.xml&lt;/code> for Java, &lt;code>go.mod&lt;/code> for Go, &lt;code>Cargo.toml&lt;/code> for Rust, and similar files for other ecosystems. You chose these packages, you decided which versions to use, and you are (presumably) aware of their purpose in your application.&lt;/p>
+&lt;p>&lt;strong>Transitive dependencies&lt;/strong> are the dependencies of your dependencies. When you add package A to your project, and package A depends on packages B and C, and package B depends on package D, then B, C, and D are all transitive dependencies of your project. You may never have heard of packages B, C, or D, yet they are running in your application and their vulnerabilities are your vulnerabilities.&lt;/p>
+&lt;h3 id="the-scale-of-transitive-dependencies">The Scale of Transitive Dependencies&lt;/h3>
+&lt;p>The ratio of transitive to direct dependencies is often surprising:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Ecosystem&lt;/th>
+&lt;th>Typical direct dependencies&lt;/th>
+&lt;th>Typical total (including transitive)&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>JavaScript&lt;/td>
+&lt;td>20-50&lt;/td>
+&lt;td>200-1,500+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Python&lt;/td>
+&lt;td>10-30&lt;/td>
+&lt;td>50-200&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Java/Maven&lt;/td>
+&lt;td>10-30&lt;/td>
+&lt;td>100-500&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Go&lt;/td>
+&lt;td>10-30&lt;/td>
+&lt;td>50-300&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Rust/Cargo&lt;/td>
+&lt;td>10-30&lt;/td>
+&lt;td>100-400&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>A JavaScript project with 30 direct dependencies may pull in over 1,000 transitive packages through the npm dependency tree. Each of those packages is code running in your application, with its own maintenance status, license, and vulnerability history.&lt;/p>
+&lt;h2 id="the-dependency-tree">The Dependency Tree&lt;/h2>
+&lt;p>A dependency tree (or dependency graph) is the complete set of relationships between a project and all of its dependencies, both direct and transitive. Visualizing this tree reveals the full scope of what your application depends on.&lt;/p>
+&lt;pre tabindex="0">&lt;code>my-application
+├── express@4.18.2 (direct)
+│ ├── body-parser@1.20.2 (transitive)
+│ │ ├── bytes@3.1.2
+│ │ └── iconv-lite@0.4.24
+│ │ └── safer-buffer@2.1.2
+│ ├── cookie@0.5.0
+│ └── ...
+├── lodash@4.17.21 (direct)
+└── axios@1.6.2 (direct)
+└── follow-redirects@1.15.3 (transitive)
+&lt;/code>&lt;/pre>&lt;p>In this example, &lt;code>express&lt;/code>, &lt;code>lodash&lt;/code>, and &lt;code>axios&lt;/code> are direct dependencies. Everything nested beneath them is transitive. The vulnerability in &lt;code>safer-buffer&lt;/code> — four levels deep — is just as dangerous as one in &lt;code>express&lt;/code> itself.&lt;/p>
+&lt;h2 id="why-dependencies-matter-for-security">Why Dependencies Matter for Security&lt;/h2>
+&lt;p>Dependencies are the primary attack surface for most applications. Several high-profile incidents illustrate the risks:&lt;/p>
+&lt;h3 id="vulnerable-dependencies">Vulnerable Dependencies&lt;/h3>
+&lt;p>The &lt;a href="https://nvd.nist.gov/vuln/detail/CVE-2021-44228">Log4Shell vulnerability&lt;/a> (&lt;a href="https://sbomify.com/2025/12/18/cve-vulnerability-explained/">CVE-2021-44228&lt;/a>) in the Apache Log4j logging library affected millions of Java applications. Many organizations did not know they used Log4j because it was a transitive dependency — pulled in by frameworks and libraries they did depend on directly.&lt;/p>
+&lt;h3 id="compromised-dependencies">Compromised Dependencies&lt;/h3>
+&lt;p>The &lt;a href="https://nvd.nist.gov/vuln/detail/CVE-2024-3094">XZ Utils backdoor&lt;/a> demonstrated that attackers can spend years gaining trust in a legitimate open source project before inserting malicious code. When a dependency is compromised, every application that uses it is affected.&lt;/p>
+&lt;h3 id="abandoned-dependencies">Abandoned Dependencies&lt;/h3>
+&lt;p>Dependencies that are no longer maintained represent a growing risk. When a &lt;a href="https://sbomify.com/2025/12/18/cve-vulnerability-explained/">CVE&lt;/a> is found in an unmaintained package, there may be no one to produce a patch. The component stays vulnerable indefinitely unless consumers fork it or find an alternative.&lt;/p>
+&lt;h3 id="dependency-confusion">Dependency Confusion&lt;/h3>
+&lt;p>Dependency confusion attacks exploit the way package managers resolve names. An attacker publishes a malicious package to a public registry with the same name as a private internal package. If the package manager checks the public registry first (or alongside) the private one, it may install the attacker&amp;rsquo;s package instead.&lt;/p>
+&lt;p>For a deeper discussion of supply chain attacks, see our &lt;a href="https://sbomify.com/2025/12/26/software-supply-chain-management/">software supply chain management guide&lt;/a>.&lt;/p>
+&lt;h2 id="lock-files">Lock Files&lt;/h2>
+&lt;p>Lock files are a critical tool for dependency management. They record the exact versions of every dependency (direct and transitive) that were resolved during installation, ensuring that subsequent installations produce identical results.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Ecosystem&lt;/th>
+&lt;th>Lock File&lt;/th>
+&lt;th>Manifest File&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>JavaScript&lt;/td>
+&lt;td>&lt;code>package-lock.json&lt;/code>&lt;/td>
+&lt;td>&lt;code>package.json&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Python&lt;/td>
+&lt;td>&lt;code>poetry.lock&lt;/code>&lt;/td>
+&lt;td>&lt;code>pyproject.toml&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Rust&lt;/td>
+&lt;td>&lt;code>Cargo.lock&lt;/code>&lt;/td>
+&lt;td>&lt;code>Cargo.toml&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Go&lt;/td>
+&lt;td>&lt;code>go.sum&lt;/code>&lt;/td>
+&lt;td>&lt;code>go.mod&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Ruby&lt;/td>
+&lt;td>&lt;code>Gemfile.lock&lt;/code>&lt;/td>
+&lt;td>&lt;code>Gemfile&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>PHP&lt;/td>
+&lt;td>&lt;code>composer.lock&lt;/code>&lt;/td>
+&lt;td>&lt;code>composer.json&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Without a lock file, the same manifest can resolve to different dependency versions on different machines or at different times. This non-determinism is both a reliability risk (builds may break unpredictably) and a security risk (a newly published malicious version could be pulled in automatically).&lt;/p>
+&lt;p>Lock files should always be committed to version control. They are the source of truth for what is actually installed in your project.&lt;/p>
+&lt;h2 id="how-sboms-document-dependencies">How SBOMs Document Dependencies&lt;/h2>
+&lt;p>A &lt;a href="https://sbomify.com/what-is-sbom/">Software Bill of Materials&lt;/a> provides a complete, machine-readable inventory of every component in your software, including all transitive dependencies. This is essential for security because:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Full visibility.&lt;/strong> An SBOM documents every package in the dependency tree, not just the direct dependencies listed in your manifest file. This is the only reliable way to know everything running in your application.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Vulnerability matching.&lt;/strong> Once you have an SBOM, platforms like &lt;a href="https://sbomify.com">sbomify&lt;/a> can continuously monitor every component against vulnerability databases. CLI tools like &lt;a href="https://github.com/anchore/grype">Grype&lt;/a> and &lt;a href="https://google.github.io/osv-scanner/">OSV-Scanner&lt;/a> provide point-in-time scanning, while &lt;a href="https://dependencytrack.org/">OWASP Dependency-Track&lt;/a> offers standalone continuous monitoring. See our &lt;a href="https://sbomify.com/2026/02/01/sbom-scanning-vulnerability-detection/">SBOM scanning guide&lt;/a> for details and our &lt;a href="https://sbomify.com/resources/">resources page&lt;/a> for a complete list of tools.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Dependency relationship mapping.&lt;/strong> Both &lt;a href="https://cyclonedx.org/">CycloneDX&lt;/a> and &lt;a href="https://spdx.dev/">SPDX&lt;/a> support dependency relationship data, documenting which components depend on which others. This lets you trace the path from a vulnerable transitive dependency back to the direct dependency that brought it in.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>License tracking.&lt;/strong> Each dependency carries a license. SBOMs document these licenses, enabling automated compliance checking. A single &lt;a href="https://sbomify.com/2025/12/22/gpl-license-guide/">GPL-licensed&lt;/a> transitive dependency can trigger copyleft obligations for your entire application.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>SBOM generation tools like the &lt;a href="https://github.com/sbomify/github-action/">sbomify GitHub Action&lt;/a>, &lt;a href="https://github.com/anchore/syft">Syft&lt;/a>, and &lt;a href="https://github.com/aquasecurity/trivy">Trivy&lt;/a> analyze lock files and build artifacts to capture the full dependency tree. For language-specific SBOM generation instructions, see our &lt;a href="https://sbomify.com/guides/">SBOM guides&lt;/a>.&lt;/p>
+&lt;h2 id="best-practices">Best Practices&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Always use and commit lock files.&lt;/strong> Lock files ensure reproducible builds and prevent unexpected dependency changes. Review lock file diffs in pull requests to catch unintended dependency updates.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Audit your dependency tree regularly.&lt;/strong> Use &lt;code>npm audit&lt;/code>, &lt;code>pip-audit&lt;/code>, &lt;code>cargo audit&lt;/code>, or equivalent tools to check for known vulnerabilities. Do not limit auditing to direct dependencies — transitive vulnerabilities are equally dangerous.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Minimize your dependency footprint.&lt;/strong> Every dependency is a potential risk vector. Before adding a new package, evaluate whether the functionality justifies the added surface area. Prefer well-maintained libraries with active security response processes.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Generate and monitor SBOMs.&lt;/strong> Automate SBOM generation in your CI/CD pipeline and monitor SBOMs continuously against vulnerability databases. This catches newly disclosed CVEs in your existing dependencies. See our &lt;a href="https://sbomify.com/2026/01/18/sbom-management-best-practices/">SBOM management guide&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Keep dependencies up to date.&lt;/strong> Apply security updates promptly, especially for dependencies listed in the &lt;a href="https://sbomify.com/2025/12/30/what-is-kev-cisa-known-exploited-vulnerabilities/">CISA KEV catalog&lt;/a>. Use tools like Dependabot or Renovate to automate update pull requests.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Review dependency changes.&lt;/strong> Treat dependency updates in pull requests with the same scrutiny as code changes. A bumped version may introduce new transitive dependencies, change licenses, or include unexpected modifications.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="frequently-asked-questions">Frequently Asked Questions&lt;/h2>
+&lt;h3 id="what-is-a-dependency-in-software">What is a dependency in software?&lt;/h3>
+&lt;p>A dependency is any external component — a library, framework, module, or package — that your application relies on to function. Dependencies are declared in manifest files (like &lt;code>package.json&lt;/code> or &lt;code>requirements.txt&lt;/code>) and installed from package registries (like npm or PyPI). They allow developers to reuse existing code rather than building everything from scratch.&lt;/p>
+&lt;h3 id="what-is-a-transitive-dependency">What is a transitive dependency?&lt;/h3>
+&lt;p>A transitive dependency is a dependency of your dependency. If your project depends on package A, and package A depends on package B, then B is a transitive dependency of your project. Transitive dependencies are often invisible to developers but can contain vulnerabilities, restrictive licenses, or outdated code. They typically outnumber direct dependencies by a factor of 5-30x depending on the ecosystem.&lt;/p>
+&lt;h3 id="what-is-a-dependency-tree">What is a dependency tree?&lt;/h3>
+&lt;p>A dependency tree (or dependency graph) is the complete hierarchy of all dependencies in a project, showing both direct and transitive relationships. It reveals the full set of code that your application actually uses at runtime. SBOM generation tools analyze dependency trees to produce complete component inventories.&lt;/p>
+&lt;h3 id="why-are-dependencies-a-security-risk">Why are dependencies a security risk?&lt;/h3>
+&lt;p>Dependencies are a security risk because each one introduces code that your team did not write and may not audit. Known vulnerabilities in dependencies (CVEs) are a primary attack vector — incidents like Log4Shell affected millions of applications through a single widely-used library. Dependencies can also be intentionally compromised (as in the XZ Utils backdoor), abandoned by maintainers, or used in dependency confusion attacks.&lt;/p>
+&lt;h3 id="what-is-a-lock-file">What is a lock file?&lt;/h3>
+&lt;p>A lock file records the exact resolved versions of all dependencies (direct and transitive) in a project. Examples include &lt;code>package-lock.json&lt;/code> (npm), &lt;code>poetry.lock&lt;/code> (Python), and &lt;code>Cargo.lock&lt;/code> (Rust). Lock files ensure reproducible builds — the same versions are installed every time, on every machine. They should always be committed to version control.&lt;/p></description><category>education</category></item><item><title>Understanding Lock File Drift: A Hidden Risk in Dependency Management</title><link>https://sbomify.com/2024/07/31/what-is-lock-file-drift/</link><pubDate>Wed, 31 Jul 2024 09:00:35 +0200</pubDate><guid>https://sbomify.com/2024/07/31/what-is-lock-file-drift/</guid><description>&lt;p>In the world of software development, managing dependencies is crucial for ensuring the stability and security of applications. One often overlooked aspect of this process is the phenomenon known as &amp;ldquo;lock file drift,&amp;rdquo; where the dependency lock file is out of sync with the primary dependency file. This misalignment can lead to inconsistent builds, security vulnerabilities, and compatibility issues, ultimately compromising the integrity and functionality of a project. By understanding the causes of lock file drift and implementing best practices to detect and prevent it, development teams can maintain consistent, secure, and reliable builds.&lt;/p>
+&lt;h2 id="what-is-a-lock-file">What is a Lock File?&lt;/h2>
+&lt;p>Before diving into lock file drift, it&amp;rsquo;s essential to understand the purpose of lock files. In most modern package managers, a lock file (such as &lt;code>package-lock.json&lt;/code> for npm or &lt;code>Pipfile.lock&lt;/code> for Pipenv) records the exact versions of dependencies installed in a project. This ensures that all environments (development, staging, production) use the same dependency versions, leading to consistent and reproducible builds.&lt;/p>
+&lt;h2 id="the-emergence-of-lock-file-drift">The Emergence of Lock File Drift&lt;/h2>
+&lt;p>Lock file drift occurs when the lock file becomes unsynchronized with the primary dependency file (&lt;code>package.json&lt;/code>, &lt;code>Pipfile&lt;/code>, &lt;code>requirements.txt&lt;/code> etc.). This misalignment can happen due to several reasons:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Manual Editing:&lt;/strong> Developers manually update the primary dependency file without running the package manager to regenerate the lock file.&lt;/li>
+&lt;li>&lt;strong>Merge Conflicts:&lt;/strong> In a collaborative environment, different branches might modify dependencies, leading to conflicts that are not correctly resolved in both files.&lt;/li>
+&lt;li>&lt;strong>Automated Tools:&lt;/strong> Continuous integration (CI) tools or scripts might update dependencies but fail to refresh the lock file accordingly.&lt;/li>
+&lt;/ol>
+&lt;h2 id="consequences-of-lock-file-drift">Consequences of Lock File Drift&lt;/h2>
+&lt;p>Lock file drift can introduce significant risks and challenges to a project:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Inconsistent Builds:&lt;/strong> When the lock file and the primary dependency file are out of sync, different environments might install varying versions of dependencies, leading to inconsistencies. This makes debugging difficult and can result in unexpected behavior in production.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Security Vulnerabilities:&lt;/strong> Lock file drift can prevent critical security updates from being applied. If the primary dependency file specifies a newer, secure version of a package but the lock file remains outdated, the application could be exposed to known vulnerabilities.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Compatibility Issues:&lt;/strong> Dependencies often rely on specific versions of other packages. A drifted lock file might cause version mismatches, leading to compatibility issues and potential runtime errors.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="detecting-and-preventing-lock-file-drift">Detecting and Preventing Lock File Drift&lt;/h2>
+&lt;p>To mitigate the risks associated with lock file drift, teams can adopt several best practices:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Regular Audits:&lt;/strong> Periodically check that the lock file is in sync with the primary dependency file. Tools like &lt;code>npm audit&lt;/code> or &lt;code>pipenv check&lt;/code> can help identify discrepancies and vulnerabilities.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Automated CI Checks:&lt;/strong> Integrate checks into your CI pipeline to ensure the lock file is updated whenever the primary dependency file changes. This can be achieved by running commands like &lt;code>npm install&lt;/code> or &lt;code>pipenv install&lt;/code> during the CI process.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Consistent Workflow:&lt;/strong> Encourage developers to follow a consistent workflow where changes to dependencies are always followed by regenerating the lock file. This can be enforced through pre-commit hooks or other automated scripts.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Education and Awareness:&lt;/strong> Educate your development team about the importance of&lt;/p>
+&lt;/li>
+&lt;/ol></description><category>education</category></item><item><title>Enhancing Dependency Management with GitHub&amp;#39;s Dependency Graph: An Analysis</title><link>https://sbomify.com/2024/06/24/enhancing-dependency-management-with-githubs-dependency-graph-an-analysis/</link><pubDate>Mon, 24 Jun 2024 15:44:51 +0200</pubDate><guid>https://sbomify.com/2024/06/24/enhancing-dependency-management-with-githubs-dependency-graph-an-analysis/</guid><description>&lt;p>&lt;strong>Introduction&lt;/strong>&lt;/p>
+&lt;p>In the evolving landscape of software development, dependency management is a critical component. GitHub’s dependency graph is a feature designed to provide insights into the dependencies and dependents of software projects. Leveraged by tools like Dependabot and SBOM (Software Bill of Materials) generators, this feature holds significant promise for improving software maintenance and security. However, a recent study by Daniele Bifolco and colleagues reveals some notable inaccuracies in GitHub’s dependency graph, raising concerns about its reliability for both researchers and practitioners.&lt;/p>
+&lt;p>&lt;strong>The Study&lt;/strong>&lt;/p>
+&lt;p>&lt;a href="https://dl.acm.org/doi/pdf/10.1145/3661167.3661175">The study&lt;/a>, conducted by researchers from the University of Sannio and the University of Salerno, aimed to assess the accuracy of GitHub’s dependency graph in Java and Python open-source projects. They randomly sampled 297 Java and 338 Python projects hosted on GitHub, analyzing their dependency graphs through three distinct methodologies: backward analysis, forward analysis, and manifest/lock file analysis.&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Backward Analysis&lt;/strong>: This involved checking if the dependencies listed in a target repository’s dependency graph were reciprocally listed as dependents in the source repository’s dependency graph.&lt;/li>
+&lt;li>&lt;strong>Forward Analysis&lt;/strong>: This focused on verifying if the dependents listed in a target repository’s dependency graph were accurately listed as dependencies in the source repository.&lt;/li>
+&lt;li>&lt;strong>Manifest/Lock File Analysis&lt;/strong>: This assessed the consistency between dependencies listed in the dependency graph and those specified in the project’s manifest or lock files.&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>Findings&lt;/strong>&lt;/p>
+&lt;p>The results highlighted several inaccuracies in GitHub’s dependency graph:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Backward Analysis&lt;/strong>: 75.17% of dependencies for Java projects and 84.48% for Python projects were correctly detected. The main issues included missing occurrences, incorrect package links, non-existent source repositories, and missing links to source repositories.&lt;/li>
+&lt;li>&lt;strong>Forward Analysis&lt;/strong>: 96.62% of dependents for Java projects and 70.94% for Python projects were correctly identified. Issues here mirrored those in the backward analysis, with a significant proportion of missing occurrences.&lt;/li>
+&lt;li>&lt;strong>Manifest/Lock File Analysis&lt;/strong>: For Java projects, only 77.19% of dependencies matched those in the manifest/lock files, while Python projects had a higher match rate of 95.71%. Discrepancies were often due to inconsistencies in version tags and missing dependencies in the dependency graph.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Implications&lt;/strong>&lt;/p>
+&lt;p>The inaccuracies found in GitHub’s dependency graph have several implications:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>For Researchers&lt;/strong>: Studies relying on GitHub’s dependency graph should validate the data independently to avoid skewed results. Researchers may need to develop more accurate dependency analyzers to complement GitHub’s data.&lt;/li>
+&lt;li>&lt;strong>For Practitioners&lt;/strong>: Tools like Dependabot and SBOM generators, which rely on GitHub’s dependency graph, may provide incomplete or inaccurate information, leading to potential security vulnerabilities or licensing issues. Developers should be aware of these limitations and consider supplementary tools or manual checks.&lt;/li>
+&lt;li>&lt;strong>For GitHub Developers&lt;/strong>: The insights from this study can guide improvements in the accuracy and reliability of the dependency graph feature. Enhancing this tool can significantly benefit the broader software development community.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Conclusion&lt;/strong>&lt;/p>
+&lt;p>While GitHub’s dependency graph is a valuable tool, this study underscores the need for caution and supplementary validation when using it for critical tasks. By addressing the highlighted inaccuracies, GitHub can enhance its utility, making dependency management more reliable and secure for developers worldwide.&lt;/p>
+&lt;p>&lt;strong>Future Work&lt;/strong>&lt;/p>
+&lt;p>The researchers plan to extend their study to other programming languages and investigate the impact of dependency graph inaccuracies on past studies. Continuous monitoring and analysis will be essential to track improvements in GitHub’s dependency graph accuracy over time.&lt;/p>
+&lt;p>By recognizing and addressing these challenges, we can improve dependency management practices, ensuring more robust and secure software development processes.&lt;/p></description><category>education</category></item></channel></rss>

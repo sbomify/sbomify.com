@@ -1,0 +1,26 @@
+<header class="bg-primaryBG sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4">
+    <div class="flex justify-between items-center bg-[#201B4C] rounded-full px-6 py-3 border border-[#37306B]">
+      <div class="flex gap-10 items-center">
+        <a href="/" class="hover:opacity-90 transition-opacity">
+          {{ $logo := resources.Get "images/site/logo.svg" }}
+          {{ if $logo }}
+          {{ $logo = $logo | fingerprint }}
+          <img src="{{ $logo.RelPermalink }}" alt="sbomify logo" class="h-7" width="133" height="24" />
+          {{ else }}
+          <img src="/assets/images/site/logo.svg" alt="sbomify logo" class="h-7" width="133" height="24" />
+          {{ end }}
+        </a>
+      </div>
+      <div class="flex gap-2 items-center">
+        <div class="flex items-center gap-1">
+          {{ partial "nav.html" . }}
+        </div>
+        <div class="hidden lg:block ml-2">
+          <a href="https://app.sbomify.com" class="px-6 py-2.5 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium text-sm transition-all duration-200 inline-block" onclick="posthog.capture('cta_click', { location: 'header', label: 'Sign Up / Log In' })">Sign Up / Log In</a>
+        </div>
+        {{ partial "nav-mobile.html" . }}
+      </div>
+    </div>
+  </div>
+</header>

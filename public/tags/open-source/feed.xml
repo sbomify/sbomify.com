@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sbomify</title><link>https://sbomify.com/tags/open-source/</link><description>Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 22 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://sbomify.com/tags/open-source/" rel="self" type="application/rss+xml"/><item><title>The MIT License: A Complete Guide for Developers</title><link>https://sbomify.com/2026/01/22/mit-license-guide/</link><pubDate>Thu, 22 Jan 2026 00:00:00 +0000</pubDate><guid>https://sbomify.com/2026/01/22/mit-license-guide/</guid><description>&lt;p>The MIT License is a permissive open source license that allows virtually unrestricted use, modification, distribution, and sublicensing of software, including use in proprietary and commercial products. Its only substantive requirement is that the license text and copyright notice must be included with any substantial distribution of the software. The MIT License is the most widely used open source license in the world — GitHub&amp;rsquo;s data consistently shows it as the most popular license choice across its platform.&lt;/p>
+&lt;h2 id="what-is-the-mit-license">What Is the MIT License?&lt;/h2>
+&lt;p>The MIT License (formally, the &amp;ldquo;MIT License&amp;rdquo; as listed in the &lt;a href="https://spdx.org/licenses/">SPDX License List&lt;/a> with identifier &lt;code>MIT&lt;/code>) is a permissive free software license originating at the Massachusetts Institute of Technology. It is sometimes referred to as the &amp;ldquo;Expat License&amp;rdquo; to distinguish it from other licenses historically associated with MIT.&lt;/p>
+&lt;p>The full text of the MIT License is remarkably short — approximately 170 words:&lt;/p>
+&lt;blockquote>
+&lt;p>Copyright (c) &amp;lt;year&amp;gt; &amp;lt;copyright holder&amp;gt;&lt;/p>
+&lt;p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &amp;ldquo;Software&amp;rdquo;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:&lt;/p>
+&lt;p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.&lt;/p>
+&lt;p>THE SOFTWARE IS PROVIDED &amp;ldquo;AS IS&amp;rdquo;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.&lt;/p>&lt;/blockquote>
+&lt;p>This brevity is intentional. The MIT License prioritizes simplicity and clarity, making it easy for developers and organizations to understand exactly what is permitted and what is required.&lt;/p>
+&lt;h2 id="what-the-mit-license-permits">What the MIT License Permits&lt;/h2>
+&lt;p>The MIT License grants the following rights without restriction:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Use&lt;/strong> — Run the software for any purpose, including commercial use&lt;/li>
+&lt;li>&lt;strong>Copy&lt;/strong> — Make copies of the software&lt;/li>
+&lt;li>&lt;strong>Modify&lt;/strong> — Create derivative works based on the software&lt;/li>
+&lt;li>&lt;strong>Merge&lt;/strong> — Combine the software with other software&lt;/li>
+&lt;li>&lt;strong>Publish&lt;/strong> — Make the software publicly available&lt;/li>
+&lt;li>&lt;strong>Distribute&lt;/strong> — Share copies with others&lt;/li>
+&lt;li>&lt;strong>Sublicense&lt;/strong> — Grant these same rights to third parties&lt;/li>
+&lt;li>&lt;strong>Sell&lt;/strong> — Sell copies of the software, including modified versions&lt;/li>
+&lt;/ul>
+&lt;p>The phrase &amp;ldquo;deal in the Software without restriction&amp;rdquo; is deliberately broad. There are no limitations on field of use, no requirements to share source code, and no requirements to license derivative works under the MIT License.&lt;/p>
+&lt;h2 id="what-the-mit-license-requires">What the MIT License Requires&lt;/h2>
+&lt;p>The MIT License has exactly one condition: &lt;strong>the copyright notice and permission notice must be included in all copies or substantial portions of the Software.&lt;/strong>&lt;/p>
+&lt;p>In practice, this means:&lt;/p>
+&lt;ul>
+&lt;li>If you distribute MIT-licensed code (in source or binary form), include the MIT license text and the original copyright notice&lt;/li>
+&lt;li>If you modify the code and redistribute it, the same requirement applies&lt;/li>
+&lt;li>If you include MIT-licensed code as part of a larger work, the license text must be present somewhere in the distribution (typically in a LICENSE file, NOTICES file, or third-party attribution document)&lt;/li>
+&lt;/ul>
+&lt;p>There is no requirement to:&lt;/p>
+&lt;ul>
+&lt;li>Make your source code available&lt;/li>
+&lt;li>License your derivative works under MIT&lt;/li>
+&lt;li>Notify the original author of your use&lt;/li>
+&lt;li>Display attribution in a user interface&lt;/li>
+&lt;/ul>
+&lt;h2 id="mit-license-vs-other-permissive-licenses">MIT License vs. Other Permissive Licenses&lt;/h2>
+&lt;p>The MIT License is one of several permissive licenses. Understanding the differences matters for license compliance, particularly in projects that combine code from multiple licenses.&lt;/p>
+&lt;h3 id="mit-vs-bsd-2-clause-and-3-clause">MIT vs. BSD (2-Clause and 3-Clause)&lt;/h3>
+&lt;p>The BSD 2-Clause License (&amp;ldquo;Simplified BSD&amp;rdquo;) is functionally equivalent to the MIT License — both require attribution and disclaim warranties, with no other conditions. The wording differs, but the legal effect is the same.&lt;/p>
+&lt;p>The BSD 3-Clause License adds a &amp;ldquo;non-endorsement&amp;rdquo; clause: you may not use the name of the copyright holder or contributors to endorse or promote derived products without permission. The MIT License has no such clause.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Feature&lt;/th>
+&lt;th>MIT&lt;/th>
+&lt;th>BSD 2-Clause&lt;/th>
+&lt;th>BSD 3-Clause&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>Attribution required&lt;/strong>&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Non-endorsement clause&lt;/strong>&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Patent grant&lt;/strong>&lt;/td>
+&lt;td>No (implicit)&lt;/td>
+&lt;td>No (implicit)&lt;/td>
+&lt;td>No (implicit)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>SPDX identifier&lt;/strong>&lt;/td>
+&lt;td>&lt;code>MIT&lt;/code>&lt;/td>
+&lt;td>&lt;code>BSD-2-Clause&lt;/code>&lt;/td>
+&lt;td>&lt;code>BSD-3-Clause&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="mit-vs-apache-20">MIT vs. Apache 2.0&lt;/h3>
+&lt;p>The &lt;a href="https://sbomify.com/2026/01/07/apache-license-2-guide/">Apache License 2.0&lt;/a> is also permissive but includes two significant additions that the MIT License lacks:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Explicit patent grant.&lt;/strong> Apache 2.0 Section 3 grants users a patent license covering the contributor&amp;rsquo;s contributions. The MIT License makes no mention of patents. While the broad language of the MIT License (&amp;ldquo;deal in the Software without restriction&amp;rdquo;) may imply a patent license in some jurisdictions, this is not settled law.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>NOTICE file requirement.&lt;/strong> Apache 2.0 requires that any redistribution carry forward the contents of a NOTICE file if one exists. The MIT License has no equivalent mechanism.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>State changes requirement.&lt;/strong> Apache 2.0 requires that modified files carry a prominent notice stating the changes. MIT has no such requirement.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>For a detailed comparison including GPL, see our &lt;a href="https://sbomify.com/2026/01/07/apache-license-2-guide/">Apache License 2.0 guide&lt;/a>.&lt;/p>
+&lt;h3 id="mit-vs-isc-license">MIT vs. ISC License&lt;/h3>
+&lt;p>The ISC License is a simplified rewrite of the MIT License. It removes the explicit enumeration of rights (&amp;ldquo;use, copy, modify&amp;hellip;&amp;rdquo;) in favor of a single clause: &amp;ldquo;Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted.&amp;rdquo; The legal effect is generally considered identical to MIT. The ISC License is used by OpenBSD and many npm packages.&lt;/p>
+&lt;h2 id="mit-license-and-copyleft-gpl">MIT License and Copyleft (GPL)&lt;/h2>
+&lt;p>The MIT License is compatible with copyleft licenses like the &lt;a href="https://sbomify.com/2025/12/22/gpl-license-guide/">GPL&lt;/a> — but only in one direction. MIT-licensed code can be included in a GPL-licensed project. The combined work is then licensed under the GPL. However, GPL-licensed code cannot be included in an MIT-licensed project, because the GPL requires that the entire combined work be distributed under the GPL.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Combination&lt;/th>
+&lt;th>Result&lt;/th>
+&lt;th>Permitted?&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>MIT code included in GPLv2 project&lt;/td>
+&lt;td>Combined work is GPLv2&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>MIT code included in GPLv3 project&lt;/td>
+&lt;td>Combined work is GPLv3&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>GPL code included in MIT project&lt;/td>
+&lt;td>Would require MIT project to become GPL&lt;/td>
+&lt;td>No (unless relicensed)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>MIT code included in AGPL project&lt;/td>
+&lt;td>Combined work is AGPL&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>This compatibility makes MIT one of the most versatile licenses for code reuse. MIT-licensed libraries can be used in virtually any project, regardless of the project&amp;rsquo;s own license.&lt;/p>
+&lt;h2 id="mit-license-in-commercial-software">MIT License in Commercial Software&lt;/h2>
+&lt;p>The MIT License is one of the most commercially friendly open source licenses. Organizations commonly use MIT-licensed code in proprietary products because:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>No source disclosure.&lt;/strong> You are not required to share your source code, even if you modify the MIT-licensed component.&lt;/li>
+&lt;li>&lt;strong>No license propagation.&lt;/strong> Your proprietary code does not need to be licensed under MIT.&lt;/li>
+&lt;li>&lt;strong>Minimal compliance burden.&lt;/strong> Including the license text in your distribution (typically in a NOTICES or THIRD-PARTY file) satisfies the only condition.&lt;/li>
+&lt;li>&lt;strong>No patent risk (with caveats).&lt;/strong> While the MIT License does not include an explicit patent grant, its broad permission language is generally interpreted as an implied license. For maximum patent protection, consider &lt;a href="https://sbomify.com/2026/01/07/apache-license-2-guide/">Apache 2.0&lt;/a> instead.&lt;/li>
+&lt;/ul>
+&lt;p>The primary compliance risk with MIT is not the license itself but the volume. A typical web application may depend on hundreds of MIT-licensed packages. Each one requires its license text and copyright notice to be included in the distribution. Automated tooling — particularly SBOM-based compliance checking — is essential at this scale.&lt;/p>
+&lt;h2 id="how-sboms-track-mit-license-compliance">How SBOMs Track MIT License Compliance&lt;/h2>
+&lt;p>A &lt;a href="https://sbomify.com/what-is-sbom/">Software Bill of Materials&lt;/a> documents every component in your software along with its license. For MIT-licensed components, SBOMs support compliance in several ways:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Identifying MIT dependencies.&lt;/strong> SBOMs include license information for each component, using the SPDX identifier &lt;code>MIT&lt;/code> for machine-readable identification. This makes it straightforward to enumerate all MIT-licensed components in a project.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Attribution aggregation.&lt;/strong> With hundreds of MIT-licensed dependencies, manually collecting license texts is impractical. SBOMs provide the component list from which attribution documents (NOTICES files, THIRD-PARTY files) can be generated automatically.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>License compatibility checking.&lt;/strong> SBOM-based compliance tools can detect potential issues — for example, flagging if MIT code is being redistributed without the required license text, or identifying MIT/GPL combinations that require the combined work to be GPL-licensed.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Audit evidence.&lt;/strong> SBOMs provide the documentation needed for license audits, M&amp;amp;A due diligence, and procurement assessments.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Both &lt;a href="https://cyclonedx.org/">CycloneDX&lt;/a> and &lt;a href="https://spdx.dev/">SPDX&lt;/a> support standardized license fields. The &lt;a href="https://github.com/sbomify/github-action/">sbomify GitHub Action&lt;/a> automatically enriches SBOMs with license data from multiple sources, making it practical to track MIT attribution requirements across hundreds of dependencies. For language-specific instructions, see our &lt;a href="https://sbomify.com/guides/">SBOM generation guides&lt;/a>.&lt;/p>
+&lt;p>For a broader overview of open source licenses, see our &lt;a href="https://sbomify.com/2024/04/03/navigating-the-landscape-of-open-source-licenses/">guide to navigating the landscape of open source licenses&lt;/a>.&lt;/p>
+&lt;h2 id="frequently-asked-questions">Frequently Asked Questions&lt;/h2>
+&lt;h3 id="what-is-the-mit-license-1">What is the MIT License?&lt;/h3>
+&lt;p>The MIT License is a permissive open source license that allows unrestricted use, modification, distribution, and sublicensing of software, including in proprietary and commercial products. Its only requirement is that the license text and copyright notice be included with any distribution. It is the most widely used open source license, identified in the SPDX License List as &lt;code>MIT&lt;/code>.&lt;/p>
+&lt;h3 id="can-i-use-mit-licensed-software-commercially">Can I use MIT-licensed software commercially?&lt;/h3>
+&lt;p>Yes. The MIT License explicitly permits commercial use, including selling copies, incorporating MIT-licensed code into proprietary products, and distributing modified versions. The only requirement is that you include the MIT license text and copyright notice with your distribution.&lt;/p>
+&lt;h3 id="what-is-the-difference-between-mit-and-apache-20">What is the difference between MIT and Apache 2.0?&lt;/h3>
+&lt;p>Both are permissive licenses that allow commercial use without requiring source code disclosure. The key differences are: Apache 2.0 includes an explicit patent grant and patent retaliation clause, while MIT does not address patents explicitly; Apache 2.0 requires carrying forward NOTICE file attributions, while MIT only requires including the license text; and Apache 2.0 requires noting changes to modified files, while MIT does not. For projects where patent protection is important, Apache 2.0 provides stronger guarantees.&lt;/p>
+&lt;h3 id="is-the-mit-license-compatible-with-the-gpl">Is the MIT License compatible with the GPL?&lt;/h3>
+&lt;p>Yes, but only in one direction. MIT-licensed code can be included in GPL-licensed projects — the combined work is then distributed under the GPL. However, GPL-licensed code cannot be included in an MIT-licensed project without the entire project becoming GPL-licensed. This one-directional compatibility is a feature of the GPL&amp;rsquo;s copyleft requirement, not a restriction in the MIT License.&lt;/p>
+&lt;h3 id="do-i-need-to-include-the-mit-license-text-when-distributing-software">Do I need to include the MIT License text when distributing software?&lt;/h3>
+&lt;p>Yes. The MIT License requires that &amp;ldquo;the above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.&amp;rdquo; In practice, this means including the license text in a LICENSE file, NOTICES file, or third-party attribution document shipped with your distribution. This applies to both source and binary distributions.&lt;/p>
+&lt;h3 id="how-do-i-comply-with-the-mit-license">How do I comply with the MIT License?&lt;/h3>
+&lt;p>Include the full MIT license text (including the copyright notice) in your distribution. This is typically done by maintaining a LICENSE or THIRD-PARTY-NOTICES file that aggregates the license texts of all open source dependencies. For applications with many MIT-licensed dependencies, automated tools that generate attribution documents from SBOMs are the most reliable approach.&lt;/p></description><category>education</category></item><item><title>Apache License 2.0: What It Is, How It Works, and What It Means for Your Software</title><link>https://sbomify.com/2026/01/07/apache-license-2-guide/</link><pubDate>Wed, 07 Jan 2026 00:00:00 +0000</pubDate><guid>https://sbomify.com/2026/01/07/apache-license-2-guide/</guid><description>&lt;p>The Apache License 2.0 is a permissive open source license published by the &lt;a href="https://www.apache.org/">Apache Software Foundation&lt;/a> (ASF) that allows users to freely use, modify, distribute, and sublicense software with minimal restrictions. Its defining features are an explicit patent grant that protects users from patent litigation by contributors, and straightforward attribution requirements through the NOTICE file mechanism. The Apache License 2.0 is one of the most popular open source licenses in the world, used by projects including Apache HTTP Server, Kubernetes, Android (AOSP), TensorFlow, and thousands of others.&lt;/p>
+&lt;h2 id="what-is-the-apache-license-20">What Is the Apache License 2.0?&lt;/h2>
+&lt;p>The Apache License 2.0 (formally, the &lt;a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0&lt;/a>) is a permissive free software license written by the Apache Software Foundation and released in January 2004. &amp;ldquo;Permissive&amp;rdquo; means that the license imposes minimal restrictions on how the software can be used, modified, and redistributed — including in proprietary, closed-source products.&lt;/p>
+&lt;p>The Apache License 2.0 replaced the earlier Apache License 1.1 and 1.0, which had more restrictive advertising clauses similar to the original BSD license. Version 2.0 was designed to be clear, comprehensive, and compatible with a broad range of other open source licenses.&lt;/p>
+&lt;p>The license is identified in the &lt;a href="https://spdx.org/licenses/">SPDX License List&lt;/a> as &lt;code>Apache-2.0&lt;/code>.&lt;/p>
+&lt;h2 id="key-provisions">Key Provisions&lt;/h2>
+&lt;h3 id="permissions-granted">Permissions Granted&lt;/h3>
+&lt;p>The Apache License 2.0 grants the following rights, in both copyright and patent terms:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Use&lt;/strong> — Run the software for any purpose, including commercial use&lt;/li>
+&lt;li>&lt;strong>Modify&lt;/strong> — Create derivative works based on the software&lt;/li>
+&lt;li>&lt;strong>Distribute&lt;/strong> — Distribute copies of the original or modified software&lt;/li>
+&lt;li>&lt;strong>Sublicense&lt;/strong> — Grant these same rights to others&lt;/li>
+&lt;li>&lt;strong>Patent use&lt;/strong> — Use any patents held by contributors that cover their contributions&lt;/li>
+&lt;/ul>
+&lt;h3 id="conditions">Conditions&lt;/h3>
+&lt;p>The license requires:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Attribution.&lt;/strong> You must include a copy of the Apache License 2.0 in any distribution and retain all copyright, patent, trademark, and attribution notices from the original source.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>NOTICE file.&lt;/strong> If the original work includes a NOTICE file (a text file containing attribution notices required by the license), you must include a readable copy of the NOTICE file in your distribution. You may add your own attribution notices to the NOTICE file, but you may not remove existing ones.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>State changes.&lt;/strong> If you modify the software, you must include a prominent notice stating that you changed the files.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="what-is-not-required">What Is NOT Required&lt;/h3>
+&lt;p>Unlike copyleft licenses such as the &lt;a href="https://sbomify.com/2025/12/22/gpl-license-guide/">GPL&lt;/a>, the Apache License 2.0 does &lt;strong>not&lt;/strong> require:&lt;/p>
+&lt;ul>
+&lt;li>Distributing your source code (you can distribute binaries only)&lt;/li>
+&lt;li>Licensing your derivative works under the Apache License&lt;/li>
+&lt;li>Making your modifications open source&lt;/li>
+&lt;/ul>
+&lt;p>This is what makes it &amp;ldquo;permissive&amp;rdquo; — you can incorporate Apache-licensed code into proprietary software without triggering any obligation to open-source your own code.&lt;/p>
+&lt;h2 id="the-patent-grant">The Patent Grant&lt;/h2>
+&lt;p>The Apache License 2.0&amp;rsquo;s explicit patent grant is one of its most important features and a key reason organizations choose it over other permissive licenses like MIT or BSD.&lt;/p>
+&lt;p>Section 3 of the license states that each contributor grants &amp;ldquo;a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable &amp;hellip; patent license&amp;rdquo; covering the contributor&amp;rsquo;s contributions. This means:&lt;/p>
+&lt;ul>
+&lt;li>If a contributor holds patents that cover their code contribution, they are granting you a license to those patents for the purpose of using, making, and selling the software.&lt;/li>
+&lt;li>This protection applies to all users and redistributors of the software.&lt;/li>
+&lt;li>The patent grant is automatically revoked for any user who initiates patent litigation against the project (the &amp;ldquo;patent retaliation&amp;rdquo; clause in Section 3).&lt;/li>
+&lt;/ul>
+&lt;p>Neither the &lt;a href="https://sbomify.com/2026/01/22/mit-license-guide/">MIT license&lt;/a> nor the BSD licenses include an explicit patent grant, which creates theoretical patent risk — a contributor could contribute code and later assert patent claims against users. The Apache License 2.0 eliminates this risk.&lt;/p>
+&lt;h2 id="the-notice-file">The NOTICE File&lt;/h2>
+&lt;p>The NOTICE file is a mechanism unique to the Apache License 2.0 for managing attribution requirements. The Apache Software Foundation &lt;a href="https://www.apache.org/legal/src-headers.html">requires&lt;/a> all ASF projects to include a NOTICE file containing:&lt;/p>
+&lt;ul>
+&lt;li>The project name and a brief description&lt;/li>
+&lt;li>Copyright notices from all contributors&lt;/li>
+&lt;li>Any third-party attribution notices required by dependencies&lt;/li>
+&lt;/ul>
+&lt;p>When you redistribute Apache-licensed software, you must include the contents of the NOTICE file in at least one of:&lt;/p>
+&lt;ul>
+&lt;li>A NOTICE file included with your distribution&lt;/li>
+&lt;li>Documentation provided alongside the distribution&lt;/li>
+&lt;li>A display generated by your software (if it has a user-facing display)&lt;/li>
+&lt;/ul>
+&lt;p>The NOTICE file is a common source of compliance failures. Organizations that use Apache-licensed components must ensure they carry forward all required attributions, especially when bundling multiple Apache-licensed libraries.&lt;/p>
+&lt;h2 id="license-compatibility">License Compatibility&lt;/h2>
+&lt;p>License compatibility determines whether code from different licenses can be combined in a single work. The Apache License 2.0 has broad compatibility with other open source licenses, but there are notable interactions.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>License&lt;/th>
+&lt;th>Compatible with Apache 2.0?&lt;/th>
+&lt;th>Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>MIT&lt;/strong>&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>MIT code can be included in Apache-licensed projects and vice versa&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>BSD (2-clause, 3-clause)&lt;/strong>&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Similar permissive terms; no conflict&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>GPL v3&lt;/strong>&lt;/td>
+&lt;td>Yes (one direction)&lt;/td>
+&lt;td>Apache 2.0 code can be included in GPLv3 projects; the combined work is GPLv3&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>GPL v2&lt;/strong>&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>The Apache 2.0 patent clause is considered an &amp;ldquo;additional restriction&amp;rdquo; under GPLv2&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>LGPL v3&lt;/strong>&lt;/td>
+&lt;td>Yes (one direction)&lt;/td>
+&lt;td>Similar to GPLv3 compatibility&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>MPL 2.0&lt;/strong>&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>MPL 2.0 was explicitly designed for compatibility&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>AGPL v3&lt;/strong>&lt;/td>
+&lt;td>Yes (one direction)&lt;/td>
+&lt;td>Apache 2.0 code can be included in AGPLv3 projects&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>The GPLv2 incompatibility is historically significant. It means you cannot combine Apache 2.0 code with GPLv2-only code (like the Linux kernel) in a single work. This was one of the issues addressed when GPLv3 was designed to be compatible with Apache 2.0.&lt;/p>
+&lt;h2 id="apache-license-20-vs-mit-vs-gpl">Apache License 2.0 vs. MIT vs. GPL&lt;/h2>
+&lt;p>These are the three most commonly encountered open source licenses. Understanding their differences is essential for license compliance.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Feature&lt;/th>
+&lt;th>Apache 2.0&lt;/th>
+&lt;th>MIT&lt;/th>
+&lt;th>GPL v3&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>License type&lt;/strong>&lt;/td>
+&lt;td>Permissive&lt;/td>
+&lt;td>Permissive&lt;/td>
+&lt;td>Copyleft&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Patent grant&lt;/strong>&lt;/td>
+&lt;td>Explicit&lt;/td>
+&lt;td>None&lt;/td>
+&lt;td>Explicit&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Source code required&lt;/strong>&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Yes (for distributed works)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Derivative works license&lt;/strong>&lt;/td>
+&lt;td>Any license&lt;/td>
+&lt;td>Any license&lt;/td>
+&lt;td>Must be GPL&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Attribution required&lt;/strong>&lt;/td>
+&lt;td>Yes (NOTICE file)&lt;/td>
+&lt;td>Yes (license text)&lt;/td>
+&lt;td>Yes (license text + source)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Commercial use&lt;/strong>&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>SPDX identifier&lt;/strong>&lt;/td>
+&lt;td>&lt;code>Apache-2.0&lt;/code>&lt;/td>
+&lt;td>&lt;code>MIT&lt;/code>&lt;/td>
+&lt;td>&lt;code>GPL-3.0-only&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>For organizations that want permissive licensing with patent protection, Apache 2.0 is the standard choice. For projects that prioritize simplicity and brevity, MIT is often preferred. For projects that want to ensure all derivatives remain open source, GPL is the appropriate choice.&lt;/p>
+&lt;p>For a broader overview of open source licenses, see our &lt;a href="https://sbomify.com/2024/04/03/navigating-the-landscape-of-open-source-licenses/">guide to navigating the landscape of open source licenses&lt;/a>.&lt;/p>
+&lt;h2 id="how-sboms-track-apache-license-compliance">How SBOMs Track Apache License Compliance&lt;/h2>
+&lt;p>A &lt;a href="https://sbomify.com/what-is-sbom/">Software Bill of Materials&lt;/a> documents every component in your software along with its license. For Apache-licensed components, SBOMs support compliance in several ways:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Identifying Apache-licensed dependencies.&lt;/strong> SBOMs include license information for each component, making it straightforward to identify all Apache 2.0 dependencies in your project. The SPDX identifier &lt;code>Apache-2.0&lt;/code> provides machine-readable identification.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>NOTICE file tracking.&lt;/strong> By identifying which components are Apache-licensed, SBOMs help teams ensure they are carrying forward all required NOTICE file attributions.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Compatibility checking.&lt;/strong> Automated license compliance tools can process SBOMs to detect potential compatibility conflicts — for example, flagging if Apache 2.0 and GPLv2-only components coexist in the same project.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Audit trail.&lt;/strong> SBOMs provide the evidence that organizations need for license audits and due diligence in M&amp;amp;A transactions, documenting exactly which licenses are present in a software product.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Both &lt;a href="https://cyclonedx.org/">CycloneDX&lt;/a> and &lt;a href="https://spdx.dev/">SPDX&lt;/a> support standardized license fields. The &lt;a href="https://sbomify.com/compliance/cisa-minimum-elements/">CISA minimum elements draft&lt;/a> includes license as a recommended SBOM field, recognizing that license information is increasingly expected in SBOMs.&lt;/p>
+&lt;p>The &lt;a href="https://github.com/sbomify/github-action/">sbomify GitHub Action&lt;/a> automatically enriches SBOMs with license data from multiple sources, making it straightforward to identify all Apache-licensed components in your dependency tree. For language-specific instructions, see our &lt;a href="https://sbomify.com/guides/">SBOM generation guides&lt;/a>.&lt;/p>
+&lt;h2 id="frequently-asked-questions">Frequently Asked Questions&lt;/h2>
+&lt;h3 id="what-is-the-apache-license-20-1">What is the Apache License 2.0?&lt;/h3>
+&lt;p>The Apache License 2.0 is a permissive open source license published by the Apache Software Foundation. It allows free use, modification, distribution, and sublicensing of the software, including in proprietary products. Its key features are an explicit patent grant protecting users from contributor patent claims, and a NOTICE file mechanism for managing attribution requirements.&lt;/p>
+&lt;h3 id="can-i-use-apache-20-licensed-software-in-commercial-products">Can I use Apache 2.0 licensed software in commercial products?&lt;/h3>
+&lt;p>Yes. The Apache License 2.0 explicitly permits commercial use, including incorporating Apache-licensed code into proprietary, closed-source products. The only requirements are that you include the Apache license text, retain attribution notices, include the NOTICE file if one exists, and note any modifications you made to the original files.&lt;/p>
+&lt;h3 id="what-is-the-difference-between-apache-20-and-mit">What is the difference between Apache 2.0 and MIT?&lt;/h3>
+&lt;p>Both are permissive licenses that allow commercial use without requiring source code disclosure. The key differences are: Apache 2.0 includes an explicit patent grant and patent retaliation clause, while MIT does not address patents; Apache 2.0 requires carrying forward NOTICE file attributions, while MIT only requires including the license text; and Apache 2.0 requires stating changes to modified files, while MIT does not.&lt;/p>
+&lt;h3 id="is-apache-20-compatible-with-the-gpl">Is Apache 2.0 compatible with the GPL?&lt;/h3>
+&lt;p>Apache 2.0 is compatible with GPL v3 but NOT with GPL v2. Apache 2.0 code can be included in a GPLv3 project (the combined work is licensed under GPLv3), but the Apache 2.0 patent termination clause is considered an &amp;ldquo;additional restriction&amp;rdquo; under GPLv2, making the two licenses incompatible. This distinction matters for projects like the Linux kernel, which is GPLv2-only.&lt;/p>
+&lt;h3 id="what-is-the-notice-file-in-the-apache-license">What is the NOTICE file in the Apache License?&lt;/h3>
+&lt;p>The NOTICE file is a text file that Apache-licensed projects use to collect attribution notices. It contains the project name, copyright notices, and any third-party attributions required by dependencies. When you redistribute Apache-licensed software, you must include the contents of the NOTICE file with your distribution. Failure to carry forward NOTICE attributions is a common compliance oversight.&lt;/p></description><category>education</category></item><item><title>The GPL License: A Comprehensive Guide to the GNU General Public License</title><link>https://sbomify.com/2025/12/22/gpl-license-guide/</link><pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate><guid>https://sbomify.com/2025/12/22/gpl-license-guide/</guid><description>&lt;p>The GPL (GNU General Public License) is a free software license that guarantees end users the freedom to run, study, modify, and share software. Created by Richard Stallman and the Free Software Foundation (FSF), the GPL is the most widely used copyleft license in open source software. Its defining characteristic is the copyleft requirement: any derivative work must also be distributed under the GPL, ensuring that the freedoms it grants are preserved downstream.&lt;/p>
+&lt;h2 id="what-is-the-gpl">What Is the GPL?&lt;/h2>
+&lt;p>The GNU General Public License, commonly called the GPL or GNU GPL, is a series of free software licenses published by the &lt;a href="https://www.fsf.org/">Free Software Foundation&lt;/a> (FSF). The GPL was first written by Richard Stallman in 1989 for the GNU Project and has since become the most prominent copyleft license in the world.&lt;/p>
+&lt;p>The core idea behind the GPL is simple: software licensed under the GPL can be freely used, modified, and distributed, but anyone who distributes modified versions must also make their source code available under the same GPL terms. This &amp;ldquo;share-alike&amp;rdquo; obligation is what distinguishes copyleft licenses from permissive licenses like &lt;a href="https://sbomify.com/2026/01/22/mit-license-guide/">MIT&lt;/a> or &lt;a href="https://sbomify.com/2026/01/07/apache-license-2-guide/">Apache 2.0&lt;/a>.&lt;/p>
+&lt;p>The GPL family includes three major versions and two important variants:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>GPL v2&lt;/strong> (1991) — The version that popularized copyleft; still used by the Linux kernel&lt;/li>
+&lt;li>&lt;strong>GPL v3&lt;/strong> (2007) — Updated to address patents, tivoization, and international compatibility&lt;/li>
+&lt;li>&lt;strong>LGPL&lt;/strong> (Lesser GPL) — A weaker copyleft for libraries, allowing proprietary linking&lt;/li>
+&lt;li>&lt;strong>AGPL&lt;/strong> (Affero GPL) — Extends copyleft to software accessed over a network&lt;/li>
+&lt;/ul>
+&lt;h2 id="gpl-v2-vs-gpl-v3-key-differences">GPL v2 vs. GPL v3: Key Differences&lt;/h2>
+&lt;p>Understanding the differences between GPL version 2 and version 3 matters because they have different implications for commercial use and distribution.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Feature&lt;/th>
+&lt;th>GPL v2 (1991)&lt;/th>
+&lt;th>GPL v3 (2007)&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>Patent grant&lt;/strong>&lt;/td>
+&lt;td>Implicit (not explicit)&lt;/td>
+&lt;td>Explicit patent license from contributors&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Tivoization protection&lt;/strong>&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Yes — prevents hardware that blocks modified software from running&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Anti-DRM provisions&lt;/strong>&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Yes — modified GPL software cannot be locked down by DRM&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>License compatibility&lt;/strong>&lt;/td>
+&lt;td>Narrower&lt;/td>
+&lt;td>Broader — compatible with Apache 2.0, for example&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Internationalization&lt;/strong>&lt;/td>
+&lt;td>US-centric language&lt;/td>
+&lt;td>Jurisdiction-neutral terminology&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Installation information&lt;/strong>&lt;/td>
+&lt;td>Not required&lt;/td>
+&lt;td>Required for &amp;ldquo;User Products&amp;rdquo; (consumer devices)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Notable users&lt;/strong>&lt;/td>
+&lt;td>Linux kernel, Git, WordPress (v2 or later)&lt;/td>
+&lt;td>GCC, GNU Bash, Samba&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>GPL v2 includes a clause that allows licensees to use &amp;ldquo;version 2 or any later version,&amp;rdquo; but this is optional — the copyright holder can specify &amp;ldquo;GPL v2 only.&amp;rdquo; The Linux kernel, for instance, is licensed under &amp;ldquo;GPL v2 only&amp;rdquo; because Linus Torvalds chose not to adopt v3.&lt;/p>
+&lt;p>GPL v3 was designed to close perceived loopholes in v2. The anti-tivoization provisions were a direct response to devices (like TiVo) that used GPL software but locked the hardware to prevent users from running modified versions. The explicit patent grant protects users and developers from patent litigation by contributors.&lt;/p>
+&lt;h2 id="understanding-copyleft">Understanding Copyleft&lt;/h2>
+&lt;p>Copyleft is the legal mechanism that makes the GPL distinctive. While copyright restricts copying and modification by default, copyleft uses copyright law to ensure that freedoms are preserved. Under a copyleft license:&lt;/p>
+&lt;ol>
+&lt;li>You can use, modify, and distribute the software freely&lt;/li>
+&lt;li>If you distribute the software (modified or unmodified), you must provide the source code&lt;/li>
+&lt;li>Your distribution must be under the same license terms&lt;/li>
+&lt;li>You cannot add restrictions beyond what the license specifies&lt;/li>
+&lt;/ol>
+&lt;p>This creates a &amp;ldquo;viral&amp;rdquo; effect: GPL code that enters a project tends to make the whole project (or at least the derivative portions) subject to the GPL. This is the characteristic that makes commercial adoption of GPL software more complex than permissive-licensed alternatives.&lt;/p>
+&lt;h3 id="what-counts-as-a-derivative-work">What Counts as a Derivative Work?&lt;/h3>
+&lt;p>This is the most debated question in GPL compliance. The GPL requires that &amp;ldquo;the work as a whole&amp;rdquo; be licensed under the GPL if it is based on GPL-licensed code. But what exactly constitutes a derivative work?&lt;/p>
+&lt;p>Generally accepted interpretations:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Modifying GPL source code and distributing it&lt;/strong> — clearly a derivative work&lt;/li>
+&lt;li>&lt;strong>Statically linking against a GPL library&lt;/strong> — generally considered a derivative work&lt;/li>
+&lt;li>&lt;strong>Dynamically linking against a GPL library&lt;/strong> — debated; the FSF considers it a derivative work, others disagree&lt;/li>
+&lt;li>&lt;strong>Using a GPL command-line tool in your build process&lt;/strong> — generally not a derivative work (the tool&amp;rsquo;s output is yours)&lt;/li>
+&lt;li>&lt;strong>Using a GPL library as a separate process via IPC&lt;/strong> — generally not a derivative work&lt;/li>
+&lt;/ul>
+&lt;p>The LGPL was created specifically to address the library linking question.&lt;/p>
+&lt;h2 id="the-lgpl-lesser-gpl-for-libraries">The LGPL: Lesser GPL for Libraries&lt;/h2>
+&lt;p>The GNU Lesser General Public License (LGPL) is a modified version of the GPL designed for software libraries. The LGPL allows proprietary software to link against LGPL-licensed libraries without the copyleft obligation applying to the proprietary code.&lt;/p>
+&lt;p>Under the LGPL:&lt;/p>
+&lt;ul>
+&lt;li>You can use the library in proprietary software without releasing your source code&lt;/li>
+&lt;li>If you modify the LGPL library itself, those modifications must be released under the LGPL&lt;/li>
+&lt;li>You must allow users to replace the LGPL library with modified versions (e.g., via dynamic linking)&lt;/li>
+&lt;/ul>
+&lt;p>Common LGPL-licensed projects include the GNU C Library (glibc), Qt (available under both LGPL and commercial licenses), and many Java libraries.&lt;/p>
+&lt;p>The LGPL is a pragmatic compromise: it keeps the library itself free while allowing commercial adoption that would be impractical under the full GPL.&lt;/p>
+&lt;h2 id="the-agpl-closing-the-network-loophole">The AGPL: Closing the Network Loophole&lt;/h2>
+&lt;p>The GNU Affero General Public License (AGPL) adds one significant provision to GPL v3: if you run modified AGPL software as a network service (such as a web application), you must make the modified source code available to users who interact with the software over the network.&lt;/p>
+&lt;p>Under the standard GPL, the copyleft obligation is triggered by &lt;em>distribution&lt;/em>. Running software on a server and letting users access it via a browser is not distribution — the users never receive a copy of the software. The AGPL closes this gap by treating network interaction as equivalent to distribution for the purpose of source code availability.&lt;/p>
+&lt;p>AGPL is commonly used by companies that offer open source software as a service but want to prevent competitors from running modified versions without contributing back. Notable AGPL projects include MongoDB (before its switch to SSPL), Grafana, and Nextcloud.&lt;/p>
+&lt;h2 id="gpl-and-commercial-use">GPL and Commercial Use&lt;/h2>
+&lt;p>A common misconception is that the GPL prohibits commercial use. It does not. The GPL explicitly allows commercial use, distribution, and even sale of GPL-licensed software. What it restricts is the ability to make the software proprietary.&lt;/p>
+&lt;h3 id="can-you-sell-gpl-software">Can You Sell GPL Software?&lt;/h3>
+&lt;p>Yes. You can sell copies of GPL software, charge for support, or sell services around GPL software. The FSF itself has always supported commercial free software. The key constraint is that buyers must receive the same freedoms: the source code and the right to modify and redistribute.&lt;/p>
+&lt;h3 id="commercial-strategies-with-gpl-software">Commercial Strategies with GPL Software&lt;/h3>
+&lt;p>Organizations commonly take one of these approaches:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Dual licensing&lt;/strong> — Offer the software under both the GPL (for open source users) and a commercial license (for proprietary users who want to avoid copyleft obligations). MySQL, Qt, and many others use this model.&lt;/li>
+&lt;li>&lt;strong>Open core&lt;/strong> — Release the core product under the GPL and sell proprietary extensions or enterprise features under a commercial license.&lt;/li>
+&lt;li>&lt;strong>Services and support&lt;/strong> — Distribute the software under the GPL and monetize through consulting, support contracts, and managed hosting. Red Hat built a multi-billion dollar business on this model.&lt;/li>
+&lt;li>&lt;strong>SaaS delivery&lt;/strong> — Run GPL software on your own servers without triggering the distribution clause (though this doesn&amp;rsquo;t apply to AGPL software).&lt;/li>
+&lt;/ol>
+&lt;h2 id="gpl-compliance-in-practice">GPL Compliance in Practice&lt;/h2>
+&lt;p>GPL compliance requires careful attention to three areas: distribution, source code availability, and license notices.&lt;/p>
+&lt;h3 id="when-you-distribute-gpl-software">When You Distribute GPL Software&lt;/h3>
+&lt;p>If you distribute GPL-licensed software (binary or source), you must:&lt;/p>
+&lt;ol>
+&lt;li>Include a copy of the GPL license text&lt;/li>
+&lt;li>Include copyright notices and any warranty disclaimers&lt;/li>
+&lt;li>Provide the complete corresponding source code (or a written offer to provide it)&lt;/li>
+&lt;li>License the whole work under the GPL (for derivative works)&lt;/li>
+&lt;/ol>
+&lt;h3 id="source-code-requirements">Source Code Requirements&lt;/h3>
+&lt;p>The source code you provide must be the &amp;ldquo;complete corresponding source&amp;rdquo; — everything needed to build the binary, including build scripts, interface definition files, and any shared libraries. For GPL v3, this extends to &amp;ldquo;Installation Information&amp;rdquo; for consumer products (the anti-tivoization clause).&lt;/p>
+&lt;h3 id="common-compliance-failures">Common Compliance Failures&lt;/h3>
+&lt;ul>
+&lt;li>Distributing binaries without source code or a valid written offer&lt;/li>
+&lt;li>Failing to include the license text with distributed software&lt;/li>
+&lt;li>Adding restrictions that the GPL does not permit (e.g., &amp;ldquo;no commercial use&amp;rdquo; clauses)&lt;/li>
+&lt;li>Confusing GPL v2 and GPL v3 obligations in mixed-license codebases&lt;/li>
+&lt;/ul>
+&lt;h2 id="how-sboms-track-gpl-license-compliance">How SBOMs Track GPL License Compliance&lt;/h2>
+&lt;p>A &lt;a href="https://sbomify.com/what-is-sbom/">Software Bill of Materials&lt;/a> plays a critical role in license compliance by documenting every component in your software along with its license. This is essential for GPL compliance because:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Identifying GPL components.&lt;/strong> SBOMs include license information for each component, making it straightforward to determine whether your project includes any GPL-licensed dependencies. The &lt;a href="https://sbomify.com/compliance/cisa-minimum-elements/">CISA minimum elements draft&lt;/a> now includes license as a recommended SBOM field.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Tracking copyleft obligations.&lt;/strong> When an SBOM shows a GPL-licensed component, your legal and engineering teams can assess whether the copyleft obligation applies to your distribution model. This is especially important for complex dependency trees with dozens or hundreds of transitive dependencies.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Automating license audits.&lt;/strong> Tools that process SBOMs can automatically flag components with copyleft licenses, allowing organizations to enforce license policies in their CI/CD pipeline. This is far more reliable than manual code review for license compliance.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Supporting dual-license decisions.&lt;/strong> When a component is available under both GPL and a commercial license, the SBOM documents which license applies to your specific use.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Both &lt;a href="https://cyclonedx.org/">CycloneDX&lt;/a> and &lt;a href="https://spdx.dev/">SPDX&lt;/a> (which originated as a license documentation format) include standardized license fields. SPDX license expressions (e.g., &lt;code>GPL-2.0-only&lt;/code>, &lt;code>GPL-3.0-or-later&lt;/code>, &lt;code>LGPL-2.1-or-later&lt;/code>) provide machine-readable license identifiers that make automated compliance checking possible.&lt;/p>
+&lt;p>The &lt;a href="https://github.com/sbomify/github-action/">sbomify GitHub Action&lt;/a> automatically enriches SBOMs with license data from multiple sources (including its LicenseDB covering 28 Linux distro versions), making GPL identification reliable even for system-level packages. For language-specific instructions, see our &lt;a href="https://sbomify.com/guides/">SBOM generation guides&lt;/a>.&lt;/p>
+&lt;h2 id="gpl-license-comparison-table">GPL License Comparison Table&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>License&lt;/th>
+&lt;th>Copyleft Strength&lt;/th>
+&lt;th>Commercial Use&lt;/th>
+&lt;th>Library Linking&lt;/th>
+&lt;th>Network Use Trigger&lt;/th>
+&lt;th>Patent Grant&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>GPL v2&lt;/strong>&lt;/td>
+&lt;td>Strong&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Copyleft applies&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Implicit&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>GPL v3&lt;/strong>&lt;/td>
+&lt;td>Strong&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Copyleft applies&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Explicit&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>LGPL v2.1&lt;/strong>&lt;/td>
+&lt;td>Weak (library)&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Allowed (proprietary)&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Implicit&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>LGPL v3&lt;/strong>&lt;/td>
+&lt;td>Weak (library)&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Allowed (proprietary)&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Explicit&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>AGPL v3&lt;/strong>&lt;/td>
+&lt;td>Strong + network&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Copyleft applies&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Explicit&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>MIT&lt;/strong>&lt;/td>
+&lt;td>None (permissive)&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>No restrictions&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>No&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Apache 2.0&lt;/strong>&lt;/td>
+&lt;td>None (permissive)&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>No restrictions&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Explicit&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>For a broader overview of open source licenses, see our &lt;a href="https://sbomify.com/2024/04/03/navigating-the-landscape-of-open-source-licenses/">guide to navigating the landscape of open source licenses&lt;/a>.&lt;/p>
+&lt;h2 id="frequently-asked-questions">Frequently Asked Questions&lt;/h2>
+&lt;h3 id="what-is-the-gpl-license">What is the GPL license?&lt;/h3>
+&lt;p>The GPL (GNU General Public License) is a copyleft free software license created by the Free Software Foundation. It guarantees that users can run, study, modify, and distribute the software, with the condition that any distributed derivative works must also be licensed under the GPL and include source code. It is the most widely used copyleft license in open source software.&lt;/p>
+&lt;h3 id="can-i-use-gpl-software-in-commercial-products">Can I use GPL software in commercial products?&lt;/h3>
+&lt;p>Yes. The GPL explicitly permits commercial use, distribution, and sale. The restriction is not on commerce but on making the software proprietary. If you distribute a product that includes GPL code, you must make the complete source code available under the GPL. Common commercial strategies include dual licensing, open core models, and selling services around GPL software.&lt;/p>
+&lt;h3 id="what-is-the-difference-between-gpl-and-lgpl">What is the difference between GPL and LGPL?&lt;/h3>
+&lt;p>The GPL requires that any derivative work be distributed under the GPL (strong copyleft). The LGPL (Lesser GPL) allows proprietary software to link against LGPL-licensed libraries without the copyleft applying to the proprietary code. If you modify the LGPL library itself, those modifications must be shared, but your application code that uses the library can remain proprietary.&lt;/p>
+&lt;h3 id="what-is-the-difference-between-gpl-v2-and-gpl-v3">What is the difference between GPL v2 and GPL v3?&lt;/h3>
+&lt;p>GPL v3 (2007) added explicit patent grants, anti-tivoization provisions (preventing hardware lockdown of modified software), anti-DRM clauses, broader international compatibility, and better compatibility with other open source licenses like Apache 2.0. GPL v2 (1991) remains widely used, notably by the Linux kernel, which is licensed under &amp;ldquo;GPL v2 only.&amp;rdquo;&lt;/p>
+&lt;h3 id="how-do-sboms-help-with-gpl-compliance">How do SBOMs help with GPL compliance?&lt;/h3>
+&lt;p>SBOMs document every component in your software along with its license, making it possible to automatically identify GPL-licensed dependencies, track copyleft obligations, and enforce license policies in CI/CD pipelines. Both CycloneDX and SPDX include standardized license fields that support machine-readable GPL license identification using SPDX license expressions like &lt;code>GPL-2.0-only&lt;/code> or &lt;code>GPL-3.0-or-later&lt;/code>.&lt;/p></description><category>education</category></item><item><title>sbomify Goes Open Source: A New Chapter in SBOM Management</title><link>https://sbomify.com/2025/01/31/announcing-sbomify-open-sourced/</link><pubDate>Fri, 31 Jan 2025 09:00:00 +0000</pubDate><guid>https://sbomify.com/2025/01/31/announcing-sbomify-open-sourced/</guid><description>&lt;p>I am thrilled to share that &lt;strong>sbomify&lt;/strong> is now officially &lt;strong>open source&lt;/strong>! As of today, you can find our project on &lt;a href="https://github.com/sbomify/sbomify">GitHub&lt;/a>. This decision is a leap forward in our mission to promote transparency, collaboration, and innovation in Software Bill of Materials (SBOM) management.&lt;/p>
+&lt;h2 id="why-now">Why Now?&lt;/h2>
+&lt;p>The timing of our open-source release couldn&amp;rsquo;t be more fitting. As the founder of sbomify and co-chair of a CISA Working Group on SBOM Reference Implementation, I&amp;rsquo;ve gained unique insights into the industry&amp;rsquo;s needs. The working group is entering its final phase, developing a comprehensive white paper that will shape the future of SBOM practices.&lt;/p>
+&lt;p>With the EU&amp;rsquo;s Cyber Resilience Act (CRA) on the horizon, organizations are facing increasing pressure to adopt robust SBOM practices. This regulatory shift makes the need for accessible, enterprise-grade SBOM tooling more urgent than ever. By open-sourcing sbomify in alignment with these emerging recommendations and regulatory requirements, our team hopes to empower organizations and individuals to adopt more robust and transparent SBOM practices, sooner rather than later.&lt;/p>
+&lt;h2 id="hierarchical-sboms-product-project--components">Hierarchical SBOMs: Product, Project, &amp;amp; Components&lt;/h2>
+&lt;p>One of sbomify&amp;rsquo;s standout features is the &lt;strong>hierarchical approach&lt;/strong> to structuring SBOMs. This wasn&amp;rsquo;t a theoretical design choice &amp;ndash; it emerged directly from our experience implementing SBOMs in real-world enterprise environments. We learned that instead of a one-size-fits-all model, organizations need a flexible, layered approach to effectively manage their software supply chain. That&amp;rsquo;s why we&amp;rsquo;ve designed sbomify to organize SBOM data across three logical levels:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Product&lt;/strong>: The overarching entity &amp;ndash; think a product line or service offering.&lt;/li>
+&lt;li>&lt;strong>Project&lt;/strong>: The specific application or module within that product line.&lt;/li>
+&lt;li>&lt;strong>Components&lt;/strong>: The libraries, frameworks, and resources that power each project.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a href="https://sbomify.com/features/sbom-hierarchy/">Learn more about our SBOM hierarchy approach here.&lt;/a>&lt;/p>
+&lt;p>By embracing this organized structure, you gain clearer insights into which components belong where, making it easier to assess impact, manage updates, and streamline compliance.&lt;/p>
+&lt;h2 id="focusing-on-standards-cyclonedx--eventually-spdx">Focusing on Standards: CycloneDX &amp;amp; (Eventually) SPDX&lt;/h2>
+&lt;p>Our immediate goal is to be fully compliant with &lt;strong>CycloneDX&lt;/strong>, and while we&amp;rsquo;re not yet 100% aligned with &lt;strong>SPDX&lt;/strong>, we are actively working towards it. Standardized formats are critical to ensuring consistent, dependable SBOM data. We believe that by supporting both CycloneDX and SPDX, sbomify will better serve the entire community, from open-source maintainers to enterprise security teams.&lt;/p>
+&lt;h2 id="looking-ahead-project-koala--tea">Looking Ahead: Project Koala &amp;amp; TEA&lt;/h2>
+&lt;p>In addition to existing SBOM standards, we&amp;rsquo;re committed to supporting &lt;a href="https://github.com/CycloneDX/transparency-exchange-api/">Project Koala&lt;/a> and the &lt;strong>Transparency Exchange API (TEA)&lt;/strong>. These emerging initiatives aim to standardize how security and compliance data is exchanged. By integrating Koala and TEA capabilities into sbomify, we&amp;rsquo;re helping lay the groundwork for a more unified and transparent ecosystem &amp;ndash; where all parties can confidently share, verify, and build upon each other&amp;rsquo;s work.&lt;/p>
+&lt;h2 id="open-source-at-heart">Open Source at Heart&lt;/h2>
+&lt;p>Releasing sbomify under an &lt;em>Apache 2.0 license plus Common Clause&lt;/em> reflects our desire to foster open collaboration while preventing unauthorized monetization. I want to extend special thanks to &lt;strong>OSS Capital&lt;/strong> for their work on the &lt;a href="https://commonsclause.com/">Common Clause&lt;/a> which makes it easier to ensure that sbomify remains free for everyone to run, self-host, and adapt within their organizations.&lt;/p>
+&lt;h2 id="join-us">Join Us&lt;/h2>
+&lt;p>&lt;a href="https://github.com/sbomify/sbomify">&lt;img src="https://img.shields.io/static/v1?label=&amp;message=Star%20on%20GitHub&amp;color=white&amp;logo=github&amp;logoColor=black" alt="Star sbomify on GitHub" width="200">&lt;/a>&lt;/p>
+&lt;p>Here are some ways you can get involved:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Explore sbomify&lt;/strong>: Check out our &lt;a href="https://github.com/sbomify/sbomify">GitHub repository&lt;/a> to install and run sbomify locally.&lt;/li>
+&lt;li>&lt;strong>Contribute&lt;/strong>: Whether you have suggestions for improvements, want to report issues, or can offer code contributions, we&amp;rsquo;d love your help shaping sbomify&amp;rsquo;s roadmap.&lt;/li>
+&lt;li>&lt;strong>Spread the Word&lt;/strong>: Share this announcement with your network to help us grow a vibrant community around open SBOM management.&lt;/li>
+&lt;/ol>
+&lt;p>Your feedback, ideas, and enthusiasm will help refine sbomify into an indispensable tool for anyone looking to streamline their SBOM processes. Our team can&amp;rsquo;t wait to see what we&amp;rsquo;ll build together as we embrace the principles of open source, transparency, and shared innovation.&lt;/p>
+&lt;p>&lt;strong>Thank you for being a part of this journey &amp;ndash; let&amp;rsquo;s make SBOM management easier, more secure, and more collaborative than ever before!&lt;/strong>&lt;/p></description><category>announcement</category></item><item><title>OpenSSF and OpenSSF Scorecards: Bolstering Open Source Security</title><link>https://sbomify.com/2024/04/25/openssf-and-openssf-scorecards-bolstering-open-source-security/</link><pubDate>Thu, 25 Apr 2024 20:02:29 +0200</pubDate><guid>https://sbomify.com/2024/04/25/openssf-and-openssf-scorecards-bolstering-open-source-security/</guid><description>&lt;h2 id="introducing-openssf-a-beacon-for-open-source-security">Introducing OpenSSF: A Beacon for Open Source Security&lt;/h2>
+&lt;p>In today&amp;rsquo;s digital-first landscape, open-source software is the backbone of countless applications across industries. However, this widespread adoption brings challenges, particularly in the realm of security. Enter the Open Source Security Foundation (OpenSSF), a collaborative effort that unites leaders from the most influential projects and companies in the tech world. OpenSSF’s mission is clear: improve the security of open-source software, ensuring it&amp;rsquo;s not just widely used but also well-protected.&lt;/p>
+&lt;h3 id="whos-behind-openssf">Who&amp;rsquo;s Behind OpenSSF?&lt;/h3>
+&lt;p>OpenSSF was formed by the merger of the Open Source Security Coalition and the Core Infrastructure Initiative, under the umbrella of the Linux Foundation. This powerhouse brings together experts from big names like Google, Microsoft, IBM, and more, all committed to safeguarding the open-source ecosystem through initiatives, security tooling, best practices, and more.&lt;/p>
+&lt;h2 id="understanding-openssf-scorecards-the-security-litmus-test">Understanding OpenSSF Scorecards: The Security Litmus Test&lt;/h2>
+&lt;p>One of the standout tools developed under the OpenSSF banner is the OpenSSF Scorecard. These scorecards are automated tools designed to give a quick, clear assessment of the security health of open source projects. Think of them as a health check-up for software, spotlighting potential vulnerabilities before they can cause major issues.&lt;/p>
+&lt;h3 id="what-do-openssf-scorecards-measure">What Do OpenSSF Scorecards Measure?&lt;/h3>
+&lt;p>OpenSSF Scorecards evaluate a variety of security practices across open source projects to ensure they meet high standards of security. Key areas of focus include:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Security Policies&lt;/strong>: Are there clear security guidelines for the project?&lt;/li>
+&lt;li>&lt;strong>Vulnerability Management&lt;/strong>: How effectively does the project handle known vulnerabilities?&lt;/li>
+&lt;li>&lt;strong>Code Review Standards&lt;/strong>: Is there a rigorous code review process in place?&lt;/li>
+&lt;li>&lt;strong>CI/CD Practices&lt;/strong>: How robust are the integration and deployment processes?&lt;/li>
+&lt;li>&lt;strong>Dependency Management&lt;/strong>: How well does the project manage its software dependencies?&lt;/li>
+&lt;/ul>
+&lt;p>Each of these areas is crucial, as vulnerabilities in one can compromise the entire project. By measuring these, the scorecards provide an open, transparent indicator of a project’s security posture.&lt;/p>
+&lt;h3 id="why-are-openssf-scorecards-important">Why Are OpenSSF Scorecards Important?&lt;/h3>
+&lt;p>The value of OpenSSF Scorecards lies in their ability to standardize the evaluation of open source security. For developers and companies relying on open source projects, scorecards offer a quick snapshot of security risks. This not only helps in making informed decisions about which open source projects to trust but also drives improvements in projects that want to maintain high scores.&lt;/p>
+&lt;p>Scorecards are also a boon for project maintainers. They serve as a benchmark, helping maintainers understand where their project stands in terms of security and where it can improve. Regular assessments with scorecards encourage ongoing vigilance and continuous enhancement of security measures.&lt;/p>
+&lt;h2 id="how-openssf-scorecards-work">How OpenSSF Scorecards Work&lt;/h2>
+&lt;p>Using OpenSSF Scorecards is straightforward. They are publicly accessible and can be run against any open source project on GitHub. The results provide a score for each checked category, alongside recommendations for improvement. This makes the scorecards an essential tool not just for evaluating security but also for educating project maintainers and contributors on best practices in software security.&lt;/p>
+&lt;p>For those who are keen on delving deeper into the specifics of OpenSSF Scorecards and their implications for open-source security, [Nerding Out with Cowboy Neil](&lt;a href="https://www.youtube.com/@nerdingoutwithCowboy">https://www.youtube.com/@nerdingoutwithCowboy&lt;/a> Neil) offers a detailed deep dive.&lt;/p>
+&lt;div class="video-embed-wrapper my-8 w-full max-w-3xl mx-auto">
+&lt;div class="relative w-full overflow-hidden rounded-xl sm:rounded-2xl shadow-lg" style="padding-bottom: 56.25%;">
+&lt;iframe
+class="absolute top-0 left-0 w-full h-full border-0"
+src="https://www.youtube-nocookie.com/embed/KdgkiWdhpZ8"
+title="OpenSSF Scorecards Deep Dive"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen
+loading="lazy">
+&lt;/iframe>
+&lt;/div>
+&lt;/div>
+&lt;script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "VideoObject",
+"name": "OpenSSF Scorecards Deep Dive",
+"description": "A detailed look at OpenSSF Scorecards and their implications for open-source security.",
+"thumbnailUrl": "https://img.youtube.com/vi/KdgkiWdhpZ8/maxresdefault.jpg",
+"uploadDate": "2024-04-25T20:02:29\u002b02:00",
+"embedUrl": "https://www.youtube.com/embed/KdgkiWdhpZ8",
+"contentUrl": "https://www.youtube.com/watch?v=KdgkiWdhpZ8"
+}
+&lt;/script>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>The OpenSSF, with its comprehensive approach and powerful tools like the scorecards, is leading the charge in fortifying the security of open-source software. In an era where cyber threats are ever-evolving, the importance of such an initiative cannot be overstated. Whether you’re a developer, a project maintainer, or a company leveraging open source, engaging with OpenSSF and utilizing its scorecards can significantly enhance your software&amp;rsquo;s security, ensuring it remains robust and resilient against threats. Embracing these resources is a step forward in fostering a safer, more secure open-source ecosystem.&lt;/p></description><category>education</category></item><item><title>Navigating the Landscape of Open Source Licenses</title><link>https://sbomify.com/2024/04/03/navigating-the-landscape-of-open-source-licenses/</link><pubDate>Wed, 03 Apr 2024 17:27:35 +0200</pubDate><guid>https://sbomify.com/2024/04/03/navigating-the-landscape-of-open-source-licenses/</guid><description>&lt;p>Open-source software forms the backbone of countless applications, from the smallest utilities to the infrastructure running the largest data centers. The licenses under which this software is released can significantly affect how it&amp;rsquo;s used, integrated, and distributed. This blog post aims to demystify open-source licenses, highlighting their key characteristics, especially in terms of legal compliance and commercial compatibility.&lt;/p>
+&lt;h3 id="1-mit-license">1. &lt;strong>MIT License&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>Description:&lt;/strong> One of the most permissive and straightforward open-source licenses. It allows almost unrestricted freedom to use, modify, and distribute the licensed software, provided that the original license and copyright notice are included with any substantial portions of the software.&lt;/p>
+&lt;p>&lt;strong>Commercial Compatibility:&lt;/strong> Highly compatible. Its permissiveness makes it favorable for commercial use, without imposing significant legal constraints on distribution.&lt;/p>
+&lt;h3 id="2-apache-license-20">2. &lt;strong>Apache License 2.0&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>Description:&lt;/strong> Similar to the MIT License in its permissiveness, the Apache License also provides an express grant of patent rights from contributors to users. It allows for commercial use, modification, and distribution of the licensed software.&lt;/p>
+&lt;p>&lt;strong>Commercial Compatibility:&lt;/strong> Generally considered commercially friendly. It requires explicit attribution and provides an explicit grant of patent rights, reducing legal risks for commercial applications.&lt;/p>
+&lt;h3 id="3-gnu-general-public-license-gpl-versions-2--3">3. &lt;strong>GNU General Public License (GPL) Versions 2 &amp;amp; 3&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>Description:&lt;/strong> The GPL licenses are copyleft licenses, which means that any derivative work must be distributed under the same license terms. Version 3 (GPLv3) introduced terms intended to protect against patent aggression and to prevent tivoization (the practice of designing hardware to prevent modifications to the software it runs).&lt;/p>
+&lt;p>&lt;strong>Commercial Compatibility:&lt;/strong> GPLv3 is often considered commercially &amp;ldquo;toxic&amp;rdquo; because it requires that derivative works be open-sourced under the same license, potentially exposing proprietary code. GPLv2 is seen as slightly more lenient, though still challenging for commercial proprietary use.&lt;/p>
+&lt;h3 id="4-gnu-lesser-general-public-license-lgpl">4. &lt;strong>GNU Lesser General Public License (LGPL)&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>Description:&lt;/strong> A compromise between the strong copyleft of the GPL and permissive licenses like MIT and Apache. It allows linking to open-source libraries (under LGPL) in proprietary software without the requirement to release the proprietary software&amp;rsquo;s source code.&lt;/p>
+&lt;p>&lt;strong>Commercial Compatibility:&lt;/strong> More commercially friendly than GPL, especially for use in proprietary software that uses open-source libraries without modifying them.&lt;/p>
+&lt;h3 id="5-bsd-licenses-2-clause-and-3-clause">5. &lt;strong>BSD Licenses (2-clause and 3-clause)&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>Description:&lt;/strong> The BSD licenses are permissive, similar to the MIT License. The 2-clause license is very straightforward, allowing for almost unrestricted use, while the 3-clause license adds a non-endorsement clause, preventing the use of the licensor&amp;rsquo;s name to promote derived products without permission.&lt;/p>
+&lt;p>&lt;strong>Commercial Compatibility:&lt;/strong> Both are considered commercially friendly due to their permissiveness and minimal requirements.&lt;/p>
+&lt;h3 id="6-mozilla-public-license-20-mpl-20">6. &lt;strong>Mozilla Public License 2.0 (MPL 2.0)&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>Description:&lt;/strong> A middle-ground license that allows the code to be combined with proprietary software. It requires that modifications to the licensed code be open-sourced, but allows for the combination of the MPL-licensed code with proprietary code into a larger work without open-sourcing the proprietary components.&lt;/p>
+&lt;p>&lt;strong>Commercial Compatibility:&lt;/strong> MPL 2.0 is seen as commercially friendly, especially for projects that want to ensure improvements to open-source code are shared while allowing for commercial application development.&lt;/p>
+&lt;h3 id="7-eclipse-public-license-epl">7. &lt;strong>Eclipse Public License (EPL)&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>Description:&lt;/strong> Similar to the MPL, the EPL is a moderate copyleft license that requires that modifications to EPL-licensed code be made available under the EPL, but allows for proprietary applications to link to EPL-licensed libraries without open-sourcing the proprietary code.&lt;/p>
+&lt;p>&lt;strong>Commercial Compatibility:&lt;/strong> The EPL is generally considered to be commercially friendly, especially for developers looking to use open-source libraries within proprietary applications without distributing the entire source code.&lt;/p>
+&lt;h3 id="8-creative-commons-licenses">8. &lt;strong>Creative Commons Licenses&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>Description:&lt;/strong> Creative Commons licenses are not typically used for software but for creative works such as videos, photographs, and documentation. CC licenses come in various forms, from the most permissive (CC0, which is essentially public domain) to more restrictive forms (such as CC BY-NC-ND, which allows sharing but not commercial use or derivative works without permission).&lt;/p>
+&lt;p>&lt;strong>Commercial Compatibility:&lt;/strong> The commercial friendliness of CC licenses varies. CC0 is highly compatible with commercial use, imposing no restrictions. Other, more restrictive licenses (like CC BY-NC-ND) limit commercial use and derivative works, making them less suitable for commercial projects that require modification or commercial distribution of the content.&lt;/p>
+&lt;h3 id="9-gnu-affero-general-public-license-agplv3">9. &lt;strong>GNU Affero General Public License (AGPLv3)&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>Description:&lt;/strong> Similar to GPLv3, but with an additional requirement that if you run a modified program on a server and let other users communicate with it there, you must also release the modified source code to those users. This license aims to close the &amp;ldquo;application service provider&amp;rdquo; loophole in the GPLv3.&lt;/p>
+&lt;p>&lt;strong>Commercial Compatibility:&lt;/strong> Like GPLv3, AGPLv3 is considered challenging for commercial use, especially for software offered as a service, due to its requirement to share source code modifications.&lt;/p>
+&lt;h3 id="10-european-union-public-license-eupl">10. &lt;strong>European Union Public License (EUPL)&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>Description:&lt;/strong> The EUPL is a strong copyleft license approved by the European Commission. It is compatible with several other licenses, including the GPL, allowing for the integration of EUPL-licensed code with code under those licenses.&lt;/p>
+&lt;p>&lt;strong>Commercial Compatibility:&lt;/strong> The EUPL&amp;rsquo;s copyleft nature makes it less commercially friendly for proprietary software, similar to the GPL. However, its compatibility with other licenses offers some flexibility for open-source projects.&lt;/p>
+&lt;h3 id="11-zliblibpng-license">11. &lt;strong>Zlib/libpng License&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>Description:&lt;/strong> This is a very permissive license for software libraries that allows for modification, distribution, and use in proprietary applications, provided that credit is given to the author.&lt;/p>
+&lt;p>&lt;strong>Commercial Compatibility:&lt;/strong> Highly compatible with commercial projects due to its minimal restrictions, making it favorable for use in both open-source and proprietary software.&lt;/p>
+&lt;h3 id="12-artistic-license-20">12. &lt;strong>Artistic License 2.0&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>Description:&lt;/strong> Originally designed for the Perl programming language, this license encourages artistic freedom by allowing modified versions of the software to be distributed under a different license or as closed source, provided that certain conditions are met.&lt;/p>
+&lt;p>&lt;strong>Commercial Compatibility:&lt;/strong> This license is generally considered commercially friendly, offering flexibility for developers to use and contribute to open-source projects while retaining the option to distribute proprietary versions.&lt;/p>
+&lt;h3 id="13-redis-license">13. &lt;strong>Redis License&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>Description:&lt;/strong> Redis uses a combination of open-source and proprietary licensing for different components of its software. The core of Redis is licensed under the BSD license, making it highly permissive and commercially friendly. However, certain Redis modules are licensed under the Redis Source Available License (RSAL), which restricts the use of the software in a database, caching, or a database-like functionality in a commercial product without purchasing a commercial license.&lt;/p>
+&lt;p>&lt;strong>Commercial Compatibility:&lt;/strong> The core BSD-licensed part of Redis is commercially friendly. The RSAL for certain modules introduces restrictions intended to protect the commercial interests of Redis Labs, the company behind Redis, making those modules less suitable for commercial products seeking to use advanced features of Redis without engaging in a commercial relationship with Redis Labs.&lt;/p>
+&lt;h3 id="14-mysql-license">14. &lt;strong>MySQL License&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>Description:&lt;/strong> MySQL, one of the world&amp;rsquo;s most popular open-source relational database management systems, is dual-licensed. For open-source projects, it can be used under the GNU General Public License (GPL), which allows for free use, modification, and distribution under the same GPL license. For organizations wishing to incorporate MySQL into proprietary products, commercial licenses are available from Oracle Corporation, which acquired MySQL as part of its purchase of Sun Microsystems.&lt;/p>
+&lt;p>&lt;strong>Commercial Compatibility:&lt;/strong> The GPL license for MySQL is suitable for open-source projects but can be restrictive for proprietary commercial use due to its copyleft requirements. The commercial licensing option provides the necessary legal framework for proprietary use but at the cost of licensing fees, making it a significant consideration for companies planning to use MySQL in their products or services.&lt;/p>
+&lt;h3 id="conclusion">Conclusion&lt;/h3>
+&lt;p>The landscape of open-source and creative licenses is broad and varied, catering to different needs, goals, and legal requirements. Creative Commons licenses expand the scope of open-source principles to creative works, offering a range of options from completely unrestricted use to more controlled scenarios. Understanding the specific terms and implications of each license type is crucial for ensuring legal compliance and aligning with project or organizational goals, whether the focus is on software, documentation, or other creative content. Careful consideration and, when necessary, legal consultation can help navigate this complex landscape effectively.&lt;/p>
+&lt;p>&lt;strong>This is not legal advice. Please consult a legal professional before making commercial decisions around licensing.&lt;/strong>&lt;/p></description><category>education</category></item><item><title>Streamlining Open Source License Compliance in M&amp;amp;A: Unveiling the sbomify Advantage</title><link>https://sbomify.com/2024/04/03/streamlining-open-source-license-compliance-in-ma-unveiling-the-sbomify-advantage/</link><pubDate>Wed, 03 Apr 2024 12:29:20 +0200</pubDate><guid>https://sbomify.com/2024/04/03/streamlining-open-source-license-compliance-in-ma-unveiling-the-sbomify-advantage/</guid><description>&lt;p>In the intricate arena of mergers and acquisitions (M&amp;amp;A) within the tech industry, the due diligence process is paramount, especially when evaluating the acquisition of software companies. One of the significant challenges encountered is navigating the complexities of open source licenses, which, if not thoroughly understood and managed, can introduce unforeseen complications. Licenses such as the GNU General Public License version 3 (GPLv3) along with other non-permissive licenses pose specific challenges due to their requirements, which might restrict the proprietary use of software. This is where sbomify emerges as a crucial tool, offering an innovative solution to effortlessly identify and manage these licenses.&lt;/p>
+&lt;h3 id="the-challenge-at-hand">The Challenge at Hand&lt;/h3>
+&lt;p>The integration of open source software (OSS) into commercial products is a common practice due to its benefits such as reduced development costs and accelerated innovation. However, the diversity of open source licenses, from permissive to non-permissive, necessitates meticulous management to ensure compliance. Non-permissive licenses, including GPLv3, AGPL, and LGPL, require that modifications to the open source code be made publicly available under the same license, potentially affecting proprietary software integration. In the context of M&amp;amp;A, identifying such licenses early in the due diligence process is critical to avoid legal and operational risks.&lt;/p>
+&lt;h3 id="the-comprehensive-solution-offered-by-sbomify">The Comprehensive Solution Offered by sbomify&lt;/h3>
+&lt;p>sbomify leverages the power of Software Bill of Materials (SBOMs) to provide a clear overview of all software components in a product, including their associated licenses. This automated approach delivers several key benefits for M&amp;amp;A due diligence:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Automated License Detection:&lt;/strong> sbomify scans and identifies all types of open source licenses within SBOMs, including permissive and non-permissive ones, ensuring a thorough compliance check.&lt;/li>
+&lt;li>&lt;strong>Insight into Compliance Risks:&lt;/strong> The platform highlights potential compliance issues, aiding acquirers in understanding the implications of integrating the target&amp;rsquo;s software assets into their portfolio.&lt;/li>
+&lt;li>&lt;strong>Efficiency in the Due Diligence Process:&lt;/strong> By automating the detection and reporting process, sbomify significantly accelerates the due diligence, enabling faster and more informed decision-making.&lt;/li>
+&lt;li>&lt;strong>Detailed Reporting for Compliance:&lt;/strong> sbomify generates comprehensive reports that detail compliance status and risks, valuable for negotiations, internal audits, and ongoing compliance monitoring.&lt;/li>
+&lt;/ul>
+&lt;h3 id="why-choose-sbomify">Why Choose sbomify?&lt;/h3>
+&lt;p>sbomify distinguishes itself through its user-friendly design, scalability, and commitment to continuous monitoring, making it an indispensable tool for companies undergoing M&amp;amp;A activities. It is equipped to manage the complexities of modern software portfolios, ensuring companies can navigate the landscape of open source licensing with confidence.&lt;/p>
+&lt;h3 id="conclusion">Conclusion&lt;/h3>
+&lt;p>For businesses in the tech sector considering M&amp;amp;A activities, understanding and managing the complexities of open source licensing is crucial. sbomify offers a streamlined, automated solution to tackle the challenges of compliance with both permissive and non-permissive open source licenses. By integrating sbomify into their due diligence strategy, businesses can ensure a smooth acquisition process, safeguarding their investments and embracing the benefits of open source software while mitigating legal and operational risks.&lt;/p></description><category>compliance</category></item></channel></rss>

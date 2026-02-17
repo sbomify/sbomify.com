@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sbomify</title><link>https://sbomify.com/tags/github-actions/</link><description>Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 04 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://sbomify.com/tags/github-actions/" rel="self" type="application/rss+xml"/><item><title>Announcing sbomify-action v0.13: The One Where We Go to FOSDEM</title><link>https://sbomify.com/2026/02/04/announcing-sbomify-action-v0-13-the-one-where-we-go-to-fosdem/</link><pubDate>Wed, 04 Feb 2026 00:00:00 +0000</pubDate><guid>https://sbomify.com/2026/02/04/announcing-sbomify-action-v0-13-the-one-where-we-go-to-fosdem/</guid><description>&lt;p>We timed the sbomify-action v0.13 release for &lt;a href="https://fosdem.org/2026/schedule/event/UYTGWA-sbom-generation/">FOSDEM 2026&lt;/a>, where we presented on CRA-ready SBOM generation.&lt;/p>
+&lt;h2 id="fosdem-2026-cra-ready-sboms">FOSDEM 2026: CRA-Ready SBOMs&lt;/h2>
+&lt;p>This past weekend, we presented at FOSDEM in the Software Bill of Materials devroom. The talk covers a four-phase SBOM generation model addressing the EU&amp;rsquo;s Cyber Resilience Act requirements: authoring, augmenting, enriching, and signing SBOMs to exceed minimal compliance standards. It includes a demo of an open-source workflow using sbomify-action, helping teams avoid compliance gaps as the CRA timeline approaches.&lt;/p>
+&lt;p>If you missed it, you can watch the full talk below.&lt;/p>
+&lt;div class="video-embed-wrapper my-8 w-full max-w-3xl mx-auto">
+&lt;div class="relative w-full overflow-hidden rounded-xl sm:rounded-2xl shadow-lg" style="padding-bottom: 56.25%;">
+&lt;video
+class="absolute top-0 left-0 w-full h-full border-0 bg-black"
+controls
+preload="metadata"
+title="CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation">
+&lt;source src="https://video.fosdem.org/2026/ud2208/UYTGWA-sbom-generation.av1.webm" type="video/webm">
+Your browser does not support the video tag.
+&lt;/video>
+&lt;/div>
+&lt;/div>
+&lt;script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "VideoObject",
+"name": "CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation",
+"description": "A four-phase SBOM generation model addressing the EU\u0026#39;s Cyber Resilience Act requirements, covering authoring, augmenting, enriching, and signing SBOMs.",
+"uploadDate": "2026-02-04T00:00:00Z",
+"contentUrl": "https:\/\/video.fosdem.org\/2026\/ud2208\/UYTGWA-sbom-generation.av1.webm"
+}
+&lt;/script>
+&lt;p>You can also find the talk on the &lt;a href="https://fosdem.org/2026/schedule/event/UYTGWA-sbom-generation/">FOSDEM schedule&lt;/a>.&lt;/p>
+&lt;hr>
+&lt;h2 id="whats-new-in-v013">What&amp;rsquo;s New in v0.13&lt;/h2>
+&lt;h3 id="breaking-changes">Breaking Changes&lt;/h3>
+&lt;p>&lt;strong>Python 3.11+ now required&lt;/strong> - We have increased the minimum Python version from 3.10 to 3.11 to take advantage of the built-in &lt;code>tomllib&lt;/code> module for TOML parsing. If you are running sbomify-action locally, ensure you have Python 3.11 or later installed.&lt;/p>
+&lt;hr>
+&lt;h2 id="new-features">New Features&lt;/h2>
+&lt;h3 id="hash-enrichment-from-lockfiles">Hash Enrichment from Lockfiles&lt;/h3>
+&lt;p>A common gap in SBOMs is missing cryptographic hashes for components. Many SBOM generation tools do not extract hashes, even when they are available in lockfiles.&lt;/p>
+&lt;p>The new hash enrichment subsystem automatically extracts cryptographic hashes from your lockfiles and adds them to SBOM components. This improves SBOM quality and supports integrity verification workflows.&lt;/p>
+&lt;p>&lt;strong>Supported lockfiles:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Cargo.lock (Rust)&lt;/li>
+&lt;li>package-lock.json (npm)&lt;/li>
+&lt;li>Pipfile.lock (Pipenv)&lt;/li>
+&lt;li>pnpm-lock.yaml (pnpm)&lt;/li>
+&lt;li>poetry.lock (Poetry)&lt;/li>
+&lt;li>pubspec.lock (Dart/Flutter)&lt;/li>
+&lt;li>uv.lock (uv)&lt;/li>
+&lt;li>yarn.lock (Yarn)&lt;/li>
+&lt;/ul>
+&lt;h3 id="interactive-configuration-wizard">Interactive Configuration Wizard&lt;/h3>
+&lt;p>Getting started with sbomify-action is now easier than ever. The new &lt;code>sbomify init&lt;/code> command walks you through an interactive wizard to create your &lt;code>sbomify.json&lt;/code> configuration file. Answer a few questions about your project, and the wizard generates a working configuration.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sbomify-action init
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="conan-center-enrichment">Conan Center Enrichment&lt;/h3>
+&lt;p>C/C++ projects using Conan now get automatic metadata enrichment from the Conan Center API. For each package, we fetch:&lt;/p>
+&lt;ul>
+&lt;li>License information&lt;/li>
+&lt;li>Author details&lt;/li>
+&lt;li>Homepage URL&lt;/li>
+&lt;li>Repository URL&lt;/li>
+&lt;li>Package description&lt;/li>
+&lt;/ul>
+&lt;p>This follows our enrichment-first philosophy: even if your SBOM generation tool produces sparse output, sbomify-action fills in the gaps from authoritative sources.&lt;/p>
+&lt;h3 id="component-supplier-field-ntia-compliance">Component Supplier Field (NTIA Compliance)&lt;/h3>
+&lt;p>NTIA&amp;rsquo;s minimum elements for SBOMs include supplier information. Previously, some tools would populate this with package authors, which is not quite right. The supplier should be the distribution platform, not the individual who wrote the code.&lt;/p>
+&lt;p>Components now include a &lt;code>supplier&lt;/code> field populated with the distribution platform:&lt;/p>
+&lt;ul>
+&lt;li>PyPI for Python packages&lt;/li>
+&lt;li>npm for JavaScript packages&lt;/li>
+&lt;li>crates.io for Rust packages&lt;/li>
+&lt;li>And so on for other ecosystems&lt;/li>
+&lt;/ul>
+&lt;p>This improves compliance with NTIA SBOM requirements.&lt;/p>
+&lt;h3 id="purl-generation-from-vcs-url">PURL Generation from VCS URL&lt;/h3>
+&lt;p>For SPDX SBOMs, the main package component now generates a PURL from the VCS (Version Control System) URL when no explicit PURL is available. This ensures better NTIA compliance by providing a unique identifier for your software, even when traditional package manager PURLs are not applicable.&lt;/p>
+&lt;h3 id="organization-data-from-contact-profile-api">Organization Data from Contact Profile API&lt;/h3>
+&lt;p>The sbomify API integration now extracts organizational data from the contact_profile structure. This means your SBOMs can include accurate manufacturer and supplier organization details from your sbomify account settings.&lt;/p>
+&lt;hr>
+&lt;h2 id="improvements">Improvements&lt;/h2>
+&lt;h3 id="lifecycle-property-standardization">Lifecycle Property Standardization&lt;/h3>
+&lt;p>We have updated lifecycle properties to use the official CycloneDX taxonomy. If you are using lifecycle data in your SBOMs, the property names have changed:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Old Property&lt;/th>
+&lt;th>New Property&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>cle:releaseDate&lt;/code>&lt;/td>
+&lt;td>&lt;code>cdx:lifecycle:milestone:generalAvailability&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>cle:eos&lt;/code>&lt;/td>
+&lt;td>&lt;code>cdx:lifecycle:milestone:endOfSupport&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>cle:eol&lt;/code>&lt;/td>
+&lt;td>&lt;code>cdx:lifecycle:milestone:endOfLife&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>This aligns with the CycloneDX specification and improves interoperability with other tools.&lt;/p>
+&lt;h3 id="better-error-handling">Better Error Handling&lt;/h3>
+&lt;p>We have made significant improvements to error handling throughout the tool:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>ToolNotAvailableError&lt;/strong> - Graceful handling when SBOM generation tools are missing, with clear instructions on what to install&lt;/li>
+&lt;li>&lt;strong>Improved &amp;ldquo;component not found&amp;rdquo; messages&lt;/strong> - More context about what failed and why&lt;/li>
+&lt;li>&lt;strong>Better diagnostic info&lt;/strong> - SBOM generation errors now include more details for debugging&lt;/li>
+&lt;li>&lt;strong>Path expansion errors&lt;/strong> - Now include the file name and searched paths&lt;/li>
+&lt;li>&lt;strong>CLI flag detection&lt;/strong> - Helpful error when a file path looks like a CLI flag (a common typo)&lt;/li>
+&lt;li>&lt;strong>Stdout capture&lt;/strong> - Tools that output errors to stdout instead of stderr are now handled correctly&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="getting-started">Getting Started&lt;/h2>
+&lt;p>Install from PyPI:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>pip install sbomify-action
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Or use the GitHub Action:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">sbomify/github-action@v0.13&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Check out the &lt;a href="https://github.com/sbomify/github-action/compare/v0.12...v0.13">full changelog on GitHub&lt;/a> for complete details.&lt;/p></description><category>announcement</category></item><item><title>Announcing sbomify-action v0.11: The One Where They Go to PyPI</title><link>https://sbomify.com/2026/01/20/announcing-sbomify-action-v0-11-the-one-where-they-go-to-pypi/</link><pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate><guid>https://sbomify.com/2026/01/20/announcing-sbomify-action-v0-11-the-one-where-they-go-to-pypi/</guid><description>&lt;p>With v0.11, sbomify-action is no longer tied to your CI/CD pipeline. Install it anywhere with &lt;code>pip install sbomify-action&lt;/code> and generate enriched SBOMs on your laptop, in your build scripts, or wherever you need them. This release also tackles two of the biggest pain points in SBOM generation: missing license data and tracking end-of-life software.&lt;/p>
+&lt;h2 id="highlights">Highlights&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Use it anywhere&lt;/strong> - Install from PyPI and run locally, in CI, or in any workflow&lt;/li>
+&lt;li>&lt;strong>Fill in missing licenses&lt;/strong> - LicenseDB automatically adds license data for 28 Linux distro versions&lt;/li>
+&lt;li>&lt;strong>Know when software goes EOL&lt;/strong> - Lifecycle Database tracks support dates for distros and frameworks&lt;/li>
+&lt;li>&lt;strong>Choose your format&lt;/strong> - SPDX and CycloneDX with feature parity&lt;/li>
+&lt;li>&lt;strong>Prove what happened&lt;/strong> - Audit trail logs every SBOM transformation for compliance&lt;/li>
+&lt;li>&lt;strong>Rust projects welcome&lt;/strong> - Native generation and enrichment for the Rust ecosystem&lt;/li>
+&lt;/ul>
+&lt;h2 id="never-miss-a-license-again">Never Miss a License Again&lt;/h2>
+&lt;p>One of the most frustrating aspects of generating SBOMs for container images is discovering that half your packages are missing license information. This happens because many Linux distribution packages do not include machine-readable license metadata in their package manifests.&lt;/p>
+&lt;p>&lt;strong>LicenseDB&lt;/strong> solves this. We have built a pre-computed database of valid package licenses covering 28 Linux distro versions:&lt;/p>
+&lt;ul>
+&lt;li>Debian (11, 12, 13)&lt;/li>
+&lt;li>Ubuntu (20.04, 22.04, 24.04)&lt;/li>
+&lt;li>Alpine (3.13-3.21)&lt;/li>
+&lt;li>Fedora (39, 40, 41, 42)&lt;/li>
+&lt;li>Amazon Linux (2, 2023)&lt;/li>
+&lt;li>CentOS Stream (8, 9)&lt;/li>
+&lt;li>AlmaLinux (8, 9)&lt;/li>
+&lt;li>Rocky Linux (8, 9)&lt;/li>
+&lt;li>Wolfi/Chainguard (rolling)&lt;/li>
+&lt;/ul>
+&lt;p>When you generate an SBOM, LicenseDB automatically fills in license data for packages that would otherwise be missing it. The lookup is architecture-agnostic, so you get consistent results whether you are building for amd64 or arm64.&lt;/p>
+&lt;p>LicenseDB is our primary license source, but not our only one. We integrate with multiple providers for license data, including PyPI, crates.io, and other package registries. LicenseDB is checked first because it is fast (downloaded once from GitHub releases then cached locally) and reliable. When LicenseDB does not have coverage for a package, we fall back to other sources. See our &lt;a href="https://sbomify.com/features/integrations/">integrations page&lt;/a> for the full list of data sources.&lt;/p>
+&lt;p>We take a conservative approach: LicenseDB only includes licenses we can verify from authoritative sources. This means we do not have full coverage of every package, but we would rather provide a smaller, accurate database than try to guess licenses with heuristics. When it comes to license compliance, accuracy matters more than completeness.&lt;/p>
+&lt;h2 id="know-when-your-software-goes-end-of-life">Know When Your Software Goes End-of-Life&lt;/h2>
+&lt;p>Compliance frameworks like FedRAMP and SOC2 increasingly require organizations to demonstrate they are not running end-of-life software. But tracking EOL dates across dozens of components, base images, and frameworks is tedious and error-prone.&lt;/p>
+&lt;p>The new &lt;strong>Lifecycle Database&lt;/strong> embeds &lt;a href="https://sbomify.com/compliance/cle/">CLE (Common Lifecycle Enumeration)&lt;/a> data directly into your SBOMs, following the ECMA-428 specification. For every component we recognize, you get:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>What You Learn&lt;/th>
+&lt;th>Why It Matters&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Release Date&lt;/td>
+&lt;td>Know how old a component is&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>End of Support&lt;/td>
+&lt;td>When bugfixes stop (security-only after this)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>End of Life&lt;/td>
+&lt;td>When all support ends, including security patches&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="coverage">Coverage&lt;/h3>
+&lt;p>&lt;strong>Linux Distributions&lt;/strong>: Alpine, Ubuntu, Debian, Fedora, Rocky Linux, AlmaLinux, Amazon Linux, CentOS Stream, Oracle Linux, openSUSE Leap, Wolfi&lt;/p>
+&lt;p>&lt;strong>Language Runtimes and Frameworks&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Python (2.7, 3.10-3.14)&lt;/li>
+&lt;li>PHP (7.4, 8.0-8.5)&lt;/li>
+&lt;li>Go (1.22-1.25)&lt;/li>
+&lt;li>Rust (1.90-1.92)&lt;/li>
+&lt;li>Django (4.2, 5.2, 6.0)&lt;/li>
+&lt;li>Rails (7.0-8.1)&lt;/li>
+&lt;li>Laravel (10-13)&lt;/li>
+&lt;li>React (17, 18, 19)&lt;/li>
+&lt;li>Vue.js (2, 3)&lt;/li>
+&lt;/ul>
+&lt;p>With this data in your SBOMs, you can answer questions like &amp;ldquo;Which of our containers are running EOL base images?&amp;rdquo; or &amp;ldquo;When does Python 3.12 stop receiving security patches?&amp;rdquo; without leaving your SBOM tooling.&lt;/p>
+&lt;p>Here is what the lifecycle data looks like in a CycloneDX SBOM:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;python3&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;3.12.1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;properties&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;cle:releaseDate&amp;#34;&lt;/span>, &lt;span style="color:#f92672">&amp;#34;value&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2023-10-02&amp;#34;&lt;/span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;cle:eos&amp;#34;&lt;/span>, &lt;span style="color:#f92672">&amp;#34;value&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2025-04-02&amp;#34;&lt;/span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;cle:eol&amp;#34;&lt;/span>, &lt;span style="color:#f92672">&amp;#34;value&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2028-10-31&amp;#34;&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="run-it-anywhere">Run It Anywhere&lt;/h2>
+&lt;p>Until now, sbomify-action lived exclusively in CI/CD pipelines. That made it hard to test configurations, debug issues, or generate SBOMs during local development.&lt;/p>
+&lt;p>With v0.11, install it from PyPI and run it wherever you need:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>pip install sbomify-action
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ sbomify-action
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> __ _ ____ ___ __ _
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _____/ /_ ____ ____ ___ &lt;span style="color:#f92672">(&lt;/span>_&lt;span style="color:#f92672">)&lt;/span> __/_ __ / | _____/ /_&lt;span style="color:#f92672">(&lt;/span>_&lt;span style="color:#f92672">)&lt;/span>___ ____
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> / ___/ __ &lt;span style="color:#ae81ff">\/&lt;/span> __ &lt;span style="color:#ae81ff">\/&lt;/span> __ &lt;span style="color:#e6db74">`&lt;/span>__ &lt;span style="color:#ae81ff">\/&lt;/span> / /_/ / / / / /| |/ ___/ __/ / __ &lt;span style="color:#ae81ff">\/&lt;/span> __ &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>&lt;span style="color:#f92672">(&lt;/span>__ &lt;span style="color:#f92672">)&lt;/span> /_/ / /_/ / / / / / / / __/ /_/ / / ___ / /__/ /_/ / /_/ / / / /
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/____/_.___/&lt;span style="color:#ae81ff">\_&lt;/span>___/_/ /_/ /_/_/_/ &lt;span style="color:#ae81ff">\_&lt;/span>_, / /_/ |_&lt;span style="color:#ae81ff">\_&lt;/span>__/&lt;span style="color:#ae81ff">\_&lt;/span>_/_/&lt;span style="color:#ae81ff">\_&lt;/span>___/_/ /_/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /____/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>v0.11 - Zero to SBOM hero
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The CLI supports both command-line flags and environment variables, so your existing CI configurations translate directly. Test locally, commit with confidence.&lt;/p>
+&lt;h2 id="choose-cyclonedx-or-spdx">Choose CycloneDX or SPDX&lt;/h2>
+&lt;p>Your supply chain partners may require SPDX. Your internal tooling may expect CycloneDX. You should not have to choose between them or accept a degraded experience with one format.&lt;/p>
+&lt;p>Our goal is &lt;strong>feature parity between CycloneDX and SPDX&lt;/strong>. With v0.11, we have made significant progress:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sbomify-action --lock-file requirements.txt -f spdx -o sbom.spdx.json
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>License sanitization, lifecycle data, and enrichment from all data sources now work identically regardless of output format. Whichever format your organization or supply chain partners require, you get the same high-quality, enriched SBOMs.&lt;/p>
+&lt;h2 id="prove-what-happened-to-your-sbom">Prove What Happened to Your SBOM&lt;/h2>
+&lt;p>When auditors or customers ask how an SBOM was generated, you need to show your work. The new &lt;strong>audit trail&lt;/strong> logs every transformation applied during generation and enrichment, with timestamps.&lt;/p>
+&lt;h3 id="what-gets-tracked">What Gets Tracked&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Overrides&lt;/strong> - Component name, version, and PURL changes from CLI or environment variables&lt;/li>
+&lt;li>&lt;strong>Augmentation&lt;/strong> - Supplier, manufacturer, authors, licenses, VCS info, lifecycle phase additions&lt;/li>
+&lt;li>&lt;strong>Enrichment&lt;/strong> - Per-component metadata additions (description, license, publisher, URLs)&lt;/li>
+&lt;li>&lt;strong>Sanitization&lt;/strong> - PURL normalizations, URL validations, stub components added&lt;/li>
+&lt;/ul>
+&lt;h3 id="output">Output&lt;/h3>
+&lt;p>Every run produces three outputs:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Summary table&lt;/strong> in the console showing counts by category&lt;/li>
+&lt;li>&lt;strong>audit_trail.txt&lt;/strong> written alongside your SBOM output with full details&lt;/li>
+&lt;li>&lt;strong>Collapsible group&lt;/strong> in GitHub Actions with the complete audit trail&lt;/li>
+&lt;/ol>
+&lt;p>Here is what the audit trail looks like:&lt;/p>
+&lt;pre tabindex="0">&lt;code># SBOM Audit Trail
+# Generated: 2026-01-18T12:34:56Z
+# Input: requirements.txt
+# Output: sbom.cdx.json
+## Override
+[2026-01-18T12:34:56Z] OVERRIDE component.version SET &amp;#34;2.0.0&amp;#34; (source: cli/env)
+[2026-01-18T12:34:56Z] OVERRIDE component.name MODIFIED &amp;#34;old-name&amp;#34; -&amp;gt; &amp;#34;my-app&amp;#34; (source: cli/env)
+## Enrichment
+[2026-01-18T12:34:57Z] ENRICHMENT pkg:pypi/requests@2.31.0 license ADDED (source: pypi)
+[2026-01-18T12:34:57Z] ENRICHMENT pkg:pypi/requests@2.31.0 description ADDED (source: pypi)
+&lt;/code>&lt;/pre>&lt;p>All timestamps are in UTC (ISO 8601 format), making it easy to correlate with CI logs and other audit evidence. This is exactly the provenance and integrity evidence that compliance frameworks like FedRAMP and SOC2 require.&lt;/p>
+&lt;h2 id="rust-ecosystem-support">Rust Ecosystem Support&lt;/h2>
+&lt;p>Rust projects now get first-class support:&lt;/p>
+&lt;ul>
+&lt;li>Native SBOM generation via cargo-cyclonedx&lt;/li>
+&lt;li>Package metadata enrichment from crates.io&lt;/li>
+&lt;/ul>
+&lt;p>This follows our &lt;a href="https://github.com/sbomify/github-action/blob/master/docs/adr/0001-plugin-architecture.md">plugin architecture&lt;/a> principle of &amp;ldquo;native-first with generic fallback.&amp;rdquo; Native sources like crates.io provide the most accurate metadata for their ecosystem, with generic aggregators as fallbacks for broader coverage.&lt;/p>
+&lt;h2 id="other-improvements">Other Improvements&lt;/h2>
+&lt;p>&lt;strong>Docker Image&lt;/strong>: Multi-arch support (amd64/arm64), lazy installation of Java/Maven and Go to reduce image size.&lt;/p>
+&lt;p>&lt;strong>PURL Handling&lt;/strong>: Fixed double-encoding issues, consistent version updates, short git hashes for SBOM versions.&lt;/p>
+&lt;p>&lt;strong>Compliance&lt;/strong>: NTIA compliance checkers aligned with the NTIA 2021 standard.&lt;/p>
+&lt;h2 id="breaking-changes">Breaking Changes&lt;/h2>
+&lt;ul>
+&lt;li>The &lt;code>rpmrepo&lt;/code> and &lt;code>ubuntu&lt;/code> enrichment sources have been removed, replaced by LicenseDB which provides broader and more consistent coverage.&lt;/li>
+&lt;/ul>
+&lt;h2 id="getting-started">Getting Started&lt;/h2>
+&lt;p>Install from PyPI:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>pip install sbomify-action
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Or continue using the GitHub Action as before. The CLI and Action share the same codebase and configuration options.&lt;/p>
+&lt;p>Check out the &lt;a href="https://github.com/sbomify/github-action/compare/v0.10...v0.11">full changelog on GitHub&lt;/a> for complete details.&lt;/p></description><category>announcement</category></item><item><title>Major Updates: sbomify v0.21 and Action Module v0.8 &amp;amp; v0.9</title><link>https://sbomify.com/2025/12/19/major-updates-sbomify-v0-21-and-action-modules/</link><pubDate>Fri, 19 Dec 2025 00:00:00 +0000</pubDate><guid>https://sbomify.com/2025/12/19/major-updates-sbomify-v0-21-and-action-modules/</guid><description>&lt;p>&lt;img src="https://sbomify.com/assets/images/sbomify-v0-21-release.png" alt="Major Updates">&lt;/p>
+&lt;p>We have been busy at sbomify! Today we are announcing a triple release covering significant updates to both the core platform and our GitHub Action module. Here is a breakdown of what&amp;rsquo;s new.&lt;/p>
+&lt;h2 id="sbomify-v021-the-one-where-we-almost-ditched-vue">sbomify v0.21: &amp;ldquo;The One Where We Almost Ditched Vue&amp;rdquo;&lt;/h2>
+&lt;p>This release brings substantial improvements to the user interface and underlying technology stack. As the release name suggests, we&amp;rsquo;ve undertaken a significant refactoring effort to streamline our frontend architecture.&lt;/p>
+&lt;h3 id="key-features">Key Features&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Vulnerability Trends Dashboard:&lt;/strong> A new interactive dashboard to visualize vulnerability trends over time.&lt;/li>
+&lt;li>&lt;strong>Enhanced Workspace Management:&lt;/strong> A new workspace switcher with a modal interface in the sidebar makes managing multiple environments easier than ever.&lt;/li>
+&lt;li>&lt;strong>Custom Keycloak Login:&lt;/strong> We&amp;rsquo;ve introduced a custom Keycloak login theme with Tailwind CSS styling for a more seamless authentication experience.&lt;/li>
+&lt;li>&lt;strong>Improved Navigation:&lt;/strong> A new navbar search, improved notifications, and version display in the footer.&lt;/li>
+&lt;/ul>
+&lt;p>Under the hood, we migrated the Documents and SBOMs tables from Vue.js to &lt;strong>HTMX and Alpine.js&lt;/strong>, resulting in a lighter and more responsive interface. We also cleaned up the codebase by removing deprecated Vue.js components.&lt;/p>
+&lt;p>&lt;a href="https://github.com/sbomify/sbomify/releases/tag/v0.21">Read the full v0.21 release notes&lt;/a>&lt;/p>
+&lt;hr>
+&lt;h2 id="sbomify-action-v09-the-one-where-generation-gets-modular">sbomify-action v0.9: &amp;ldquo;The One Where Generation Gets Modular&amp;rdquo;&lt;/h2>
+&lt;p>Our GitHub Action module has received a major architectural upgrade focused on modularity and extensibility.&lt;/p>
+&lt;h3 id="modular-generation">Modular Generation&lt;/h3>
+&lt;p>Version 0.9 introduces a &lt;strong>plugin architecture for SBOM generation&lt;/strong>. This system uses priority-based selection with automatic fallback (e.g., trying &lt;code>cyclonedx-py&lt;/code> first, then &lt;code>Trivy&lt;/code>, then &lt;code>Syft&lt;/code>), ensuring you get the best possible SBOM for your project type without manual configuration.&lt;/p>
+&lt;h3 id="ubuntu-apt-enrichment">Ubuntu APT Enrichment&lt;/h3>
+&lt;p>We&amp;rsquo;ve added native metadata source support for &lt;code>pkg:deb/ubuntu/*&lt;/code> packages, covering LTS versions from 18.04 to 24.04 and 24.10.&lt;/p>
+&lt;h3 id="built-in-validation">Built-in Validation&lt;/h3>
+&lt;p>Generated SBOMs are now automatically validated against the JSON Schema to ensure strict compliance.&lt;/p>
+&lt;hr>
+&lt;h2 id="sbomify-action-v08-the-one-with-enrichment-plugins">sbomify-action v0.8: &amp;ldquo;The One With Enrichment Plugins&amp;rdquo;&lt;/h2>
+&lt;p>Just prior to v0.9, we released v0.8, which completely rewrote the SBOM enrichment system.&lt;/p>
+&lt;h3 id="plugin-based-enrichment">Plugin-based Enrichment&lt;/h3>
+&lt;p>Similar to generation, enrichment is now plugin-based. We prioritize multiple data sources to maximize NTIA compliance. We have implemented 8 data sources including &lt;strong>PyPI, Debian, deps.dev, ecosyste.ms, PURL, ClearlyDefined, Repology, and RPM Repo&lt;/strong>.&lt;/p>
+&lt;p>Crucially, &lt;strong>lockfile components are now enriched&lt;/strong> rather than removed, preserving the integrity of your dependency graph while adding valuable metadata.&lt;/p>
+&lt;h3 id="expanded-ecosystem-support">Expanded Ecosystem Support&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>RPM Repository Enrichment:&lt;/strong> Native Tier 1 enrichment for RHEL-compatible distros (Rocky, Alma, CentOS Stream, Fedora, Amazon Linux).&lt;/li>
+&lt;li>&lt;strong>Dart/Flutter:&lt;/strong> Added support for Dart packages via pub.dev and &lt;code>pubspec.lock&lt;/code> enrichment.&lt;/li>
+&lt;li>&lt;strong>CycloneDX 1.7:&lt;/strong> Full support for the latest CycloneDX 1.7 schema.&lt;/li>
+&lt;/ul>
+&lt;p>These updates represent a significant step forward in making sbomify the most flexible and compliant SBOM management platform.&lt;/p>
+&lt;p>Check out the updated &lt;a href="https://github.com/sbomify/github-action">sbomify-action repository&lt;/a> to get started with these new features!&lt;/p></description><category>announcement</category></item><item><title>Announcing GitHub Action 0.7.0 and sbomify 0.19</title><link>https://sbomify.com/2025/12/05/announcing-github-action-0-7-0-and-sbomify-0-19/</link><pubDate>Fri, 05 Dec 2025 00:00:00 +0000</pubDate><guid>https://sbomify.com/2025/12/05/announcing-github-action-0-7-0-and-sbomify-0-19/</guid><description>&lt;p>&lt;img src="https://sbomify.com/assets/images/release-0-19-cover.png" alt="Zero to SBOM Hero">&lt;/p>
+&lt;p>We are excited to announce significant updates to both our GitHub Action and the core sbomify platform. This release brings major architectural improvements, enhanced security features, and expanded support for SBOM standards.&lt;/p>
+&lt;h2 id="github-action-070">&lt;a href="https://github.com/sbomify/github-action/releases/tag/v0.7.0">GitHub Action 0.7.0&lt;/a>&lt;/h2>
+&lt;p>The latest version of our GitHub Action includes major changes to enrichment, format support, and telemetry.&lt;/p>
+&lt;h3 id="major-changes">Major Changes&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Enrichment via ecosyste.ms&lt;/strong>: We have switched our package metadata enrichment from Parley to the &lt;a href="https://ecosyste.ms">ecosyste.ms&lt;/a> API. A big thank you to @andrew for this integration!&lt;/li>
+&lt;li>&lt;strong>SPDX Support&lt;/strong>: We now offer full support for SPDX 2.2 and 2.3 formats alongside CycloneDX, powered by the new &lt;code>spdx-tools&lt;/code> dependency.&lt;/li>
+&lt;li>&lt;strong>Enhanced Telemetry&lt;/strong>: Sentry error tracking now respects repository visibility, ensuring that private repositories do not send CI context.&lt;/li>
+&lt;/ul>
+&lt;h3 id="improvements">Improvements&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>API Updates&lt;/strong>: The product releases API now uses &lt;code>sbom_id&lt;/code> instead of &lt;code>artifact_id&lt;/code>/&lt;code>artifact_type&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Release Tagging&lt;/strong>: Improved workflow for release tagging with better ID resolution.&lt;/li>
+&lt;li>&lt;strong>Vendor Normalization&lt;/strong>: Fixed tool vendor normalization to prevent serialization comparison errors.&lt;/li>
+&lt;li>&lt;strong>Caching&lt;/strong>: Better cache management for enrichment API calls.&lt;/li>
+&lt;li>&lt;strong>Error Filtering&lt;/strong>: User errors (validation/configuration) are now filtered from telemetry to reduce noise.&lt;/li>
+&lt;/ul>
+&lt;h3 id="testing--dependencies">Testing &amp;amp; Dependencies&lt;/h3>
+&lt;p>We&amp;rsquo;ve added comprehensive Sentry filtering tests across GitHub Actions, GitLab CI, and Bitbucket Pipelines, along with new tool vendor normalization tests. Dependencies have been updated to include &lt;code>spdx-tools&lt;/code>, &lt;code>beartype&lt;/code>, &lt;code>click&lt;/code>, &lt;code>isodate&lt;/code>, &lt;code>ply&lt;/code>, &lt;code>rdflib&lt;/code>, &lt;code>semantic-version&lt;/code>, &lt;code>uritools&lt;/code>, and &lt;code>xmltodict&lt;/code>.&lt;/p>
+&lt;hr>
+&lt;h2 id="sbomify-019">&lt;a href="https://github.com/sbomify/sbomify/releases/tag/v0.19">sbomify 0.19&lt;/a>&lt;/h2>
+&lt;p>This is a massive release for the sbomify platform, involving a complete frontend architecture migration and significant infrastructure enhancements.&lt;/p>
+&lt;h3 id="summary">Summary&lt;/h3>
+&lt;ul>
+&lt;li>Major frontend architecture migration&lt;/li>
+&lt;li>Infrastructure enhancements&lt;/li>
+&lt;/ul>
+&lt;h3 id="architecture-changes">Architecture Changes&lt;/h3>
+&lt;p>We have almost completed the full migration from Vue.js to a stack of &lt;strong>Django + HTMX + Alpine.js&lt;/strong>.&lt;/p>
+&lt;ul>
+&lt;li>Removed ~3,700 lines of Vue code.&lt;/li>
+&lt;li>All frontend is now server-driven with Django templates.&lt;/li>
+&lt;li>Added &lt;a href="https://github.com/sbomify/sbomify/blob/master/docs/ADR/ADR-001.md">&lt;code>ADR-001&lt;/code>&lt;/a> (Django Monolith) and &lt;a href="https://github.com/sbomify/sbomify/blob/master/docs/ADR/ADR-002.md">&lt;code>ADR-002&lt;/code>&lt;/a> (Languages &amp;amp; Frameworks) to our architectural decision records.&lt;/li>
+&lt;/ul>
+&lt;h3 id="infrastructure--security">Infrastructure &amp;amp; Security&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Caddy Reverse Proxy&lt;/strong>: Now handling automatic Let&amp;rsquo;s Encrypt TLS certificate management and health monitoring.&lt;/li>
+&lt;li>&lt;strong>Custom Domain Support&lt;/strong>: Workspaces can now use custom domains with auto-provisioned TLS and automated validation.&lt;/li>
+&lt;li>&lt;strong>Security&lt;/strong>:
+&lt;ul>
+&lt;li>Added Turnstile CAPTCHA on enterprise contact forms.&lt;/li>
+&lt;li>Enhanced client IP detection with spoofing protection.&lt;/li>
+&lt;li>Keycloak authentication fixes.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="new-features">New Features&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Global Components&lt;/strong>: Workspace-level reusable components.&lt;/li>
+&lt;li>&lt;strong>Contact Profiles&lt;/strong>: Reusable supplier information for SBOMs.&lt;/li>
+&lt;li>&lt;strong>Workspace Visibility Controls&lt;/strong>: Toggle between public and private workspaces (paid plans).&lt;/li>
+&lt;li>&lt;strong>Improved CycloneDX 1.6 &amp;amp; added 1.7 Support&lt;/strong>: Support for the latest SBOM specifications.&lt;/li>
+&lt;li>&lt;strong>Release Date Tracking&lt;/strong>: Added an optional &lt;code>released_at&lt;/code> field.&lt;/li>
+&lt;li>&lt;strong>Vulnerability Scanning Dashboard&lt;/strong>: Centralized management for scans.&lt;/li>
+&lt;li>&lt;strong>Enhanced Trust Center&lt;/strong>: A redesigned public workspace page for better transparency.&lt;/li>
+&lt;/ul>
+&lt;p>These updates mark a significant step forward in our mission to simplify SBOM management and security compliance.&lt;/p></description><category>announcement</category></item><item><title>GitHub Action module with Attestation</title><link>https://sbomify.com/2024/10/31/github-action-update-and-attestation/</link><pubDate>Thu, 31 Oct 2024 00:00:00 +0000</pubDate><guid>https://sbomify.com/2024/10/31/github-action-update-and-attestation/</guid><description>&lt;p>Over the last few weeks, we&amp;rsquo;ve made some significant updates to our &lt;a href="https://github.com/sbomify/github-action">GitHub Actions module&lt;/a>. Since our last update, we&amp;rsquo;ve added a few new features.&lt;/p>
+&lt;h2 id="changelog">Changelog&lt;/h2>
+&lt;ul>
+&lt;li>Support for Dart lockfiles&lt;/li>
+&lt;li>Support for Docker images (system packages only)&lt;/li>
+&lt;li>Full support for &lt;a href="https://sbomify.com/features/generate-collaborate-analyze/">Enrichment and Augmentation&lt;/a>, meaning we can automatically complete your SBOMs to make them NTIA Minimum Elements compatible&lt;/li>
+&lt;li>Documentation on how to use attestation with the GitHub Actions module (more on that below)&lt;/li>
+&lt;li>Bumped versions of various sub-components&lt;/li>
+&lt;li>Various bug fixes&lt;/li>
+&lt;/ul>
+&lt;h2 id="using-attestation">Using Attestation&lt;/h2>
+&lt;p>Thanks to recent improvements by GitHub, generating an attestation is now very straightforward. Behind the scenes, the GitHub Actions module &lt;a href="https://github.com/actions/attest-build-provenance">attest-build-provenance&lt;/a> will automatically generate a &lt;a href="https://slsa.dev/spec/v1.0/provenance">SLSA build provenance&lt;/a> predicate using the &lt;a href="https://github.com/in-toto/attestation/tree/main/spec/v1">in-toto&lt;/a> format. All you need to do is instruct our GitHub Actions module to write the SBOM to disk, and then point the attestation tool to this file — voila! You now have a cryptographically signed attestation of your SBOM.&lt;/p>
+&lt;p>At sbomify, we are big fans of dogfooding our own product, so we&amp;rsquo;ve adopted this exact flow in the SBOM we generate for our GitHub Actions module itself, as you can see &lt;a href="https://github.com/sbomify/github-action/blob/master/.github/workflows/sbomify.yaml">here&lt;/a>.&lt;/p>
+&lt;p>The job looks something like this:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#ae81ff">...]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Upload SBOM&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">sbomify/github-action@master&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">env&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">TOKEN&lt;/span>: &lt;span style="color:#ae81ff">${{ secrets.SBOMIFY_TOKEN }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">COMPONENT_ID&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;Gu9wem8mkX&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">LOCK_FILE&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;poetry.lock&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">COMPONENT_NAME&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;sbomify-github-action&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">COMPONENT_VERSION&lt;/span>: &lt;span style="color:#ae81ff">${{ github.ref_name }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">AUGMENT&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ENRICH&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">UPLOAD&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">OUTPUT_FILE&lt;/span>: &lt;span style="color:#ae81ff">github-action.cdx.json&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Attest&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions/attest-build-provenance@v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">subject-path&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;${{ github.workspace }}/github-action.cdx.json&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For more details on using the GitHub Action and other CI/CD integrations, see our &lt;a href="https://sbomify.com/features/integrations/">integrations page&lt;/a>.&lt;/p>
+&lt;p>What’s great about this is that it removes the need to trust sbomify directly. You can verify the SBOM independently as follows:&lt;/p>
+&lt;ul>
+&lt;li>Download the latest SBOM from the GitHub Action &lt;a href="https://app.sbomify.com/component/Gu9wem8mkX">sbomify public page&lt;/a>&lt;/li>
+&lt;li>Install the GitHub CLI if you don&amp;rsquo;t already have it&lt;/li>
+&lt;/ul>
+&lt;p>With this done, you can verify the file against GitHub:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ gh attestation verify path/to/downloaded-sbom.json --owner sbomify
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Loaded digest sha256:aeee57eeb5b34e0f70ace59bfc2328e3332062523796837eb37883eb805cd8f9 &lt;span style="color:#66d9ef">for&lt;/span> file:///path/to/downloaded-sbom.json
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Loaded &lt;span style="color:#ae81ff">1&lt;/span> attestation from GitHub API
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>✓ Verification succeeded!
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sha256:aeee57eeb5b34e0f70ace59bfc2328e3332062523796837eb37883eb805cd8f9 was attested by:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>REPO PREDICATE_TYPE WORKFLOW
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sbomify/github-action https://slsa.dev/provenance/v1 .github/workflows/sbomify.yaml@refs/tags/v0.1.1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>And just like that! We can independently verify that sbomify (or any other intermediary) did not tamper with the SBOM in transit.&lt;/p></description><category>announcement</category></item><item><title>Big update to our GitHub Action</title><link>https://sbomify.com/2024/10/04/github-action-update/</link><pubDate>Fri, 04 Oct 2024 00:00:00 +0000</pubDate><guid>https://sbomify.com/2024/10/04/github-action-update/</guid><description>&lt;p>In the last few weeks, we&amp;rsquo;ve worked hard on overhauling the &lt;a href="https://github.com/sbomify/github-action/">sbomify GitHub Action&lt;/a> based on customer feedback. The initial purpose of the GitHub Action module was merely to upload SBOMs to the sbomify platform. We&amp;rsquo;ve now broadened the scope to make it more powerful, with the goal of creating NTIA Minimum Elements compliant SBOMs directly in your CI/CD pipeline with minimal fuss.&lt;/p>
+&lt;p>As a refresher, the SBOM lifecycle looks like this:&lt;/p>
+&lt;div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+&amp;lt;?xml version="1.0" encoding="utf-8"?>&lt;svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.7.1" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1595 397">&lt;svg class="d2-3897458564 d2-svg" width="1595" height="397" viewBox="-81 27 1595 397">&lt;rect x="-81.000000" y="27.000000" width="1595.000000" height="397.000000" rx="8.000000" stroke="transparent" fill="transparent" stroke-width="0" />&lt;style type="text/css">&lt;![CDATA[
+.d2-3897458564 .text {
+font-family: "d2-3897458564-font-regular";
+}
+@font-face {
+font-family: d2-3897458564-font-regular;
+src: url("data:application/font-woff;base64,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");
+}
+@keyframes dashdraw {
+from {
+stroke-dashoffset: 0;
+}
+}
+.d2-3897458564 .text-bold {
+font-family: "d2-3897458564-font-bold";
+}
+@font-face {
+font-family: d2-3897458564-font-bold;
+src: url("data:application/font-woff;base64,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");
+}]]>&lt;/style>&lt;style type="text/css">&lt;![CDATA[.shape {
+shape-rendering: geometricPrecision;
+stroke-linejoin: round;
+}
+.connection {
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+.blend {
+mix-blend-mode: multiply;
+opacity: 0.5;
+}
+.d2-3897458564 .fill-N1{fill:#0A0F25;}
+.d2-3897458564 .fill-N2{fill:#676C7E;}
+.d2-3897458564 .fill-N3{fill:#9499AB;}
+.d2-3897458564 .fill-N4{fill:#CFD2DD;}
+.d2-3897458564 .fill-N5{fill:#DEE1EB;}
+.d2-3897458564 .fill-N6{fill:#EEF1F8;}
+.d2-3897458564 .fill-N7{fill:#FFFFFF;}
+.d2-3897458564 .fill-B1{fill:#0A0F25;}
+.d2-3897458564 .fill-B2{fill:#676C7E;}
+.d2-3897458564 .fill-B3{fill:#9499AB;}
+.d2-3897458564 .fill-B4{fill:#CFD2DD;}
+.d2-3897458564 .fill-B5{fill:#DEE1EB;}
+.d2-3897458564 .fill-B6{fill:#EEF1F8;}
+.d2-3897458564 .fill-AA2{fill:#676C7E;}
+.d2-3897458564 .fill-AA4{fill:#CFD2DD;}
+.d2-3897458564 .fill-AA5{fill:#DEE1EB;}
+.d2-3897458564 .fill-AB4{fill:#CFD2DD;}
+.d2-3897458564 .fill-AB5{fill:#DEE1EB;}
+.d2-3897458564 .stroke-N1{stroke:#0A0F25;}
+.d2-3897458564 .stroke-N2{stroke:#676C7E;}
+.d2-3897458564 .stroke-N3{stroke:#9499AB;}
+.d2-3897458564 .stroke-N4{stroke:#CFD2DD;}
+.d2-3897458564 .stroke-N5{stroke:#DEE1EB;}
+.d2-3897458564 .stroke-N6{stroke:#EEF1F8;}
+.d2-3897458564 .stroke-N7{stroke:#FFFFFF;}
+.d2-3897458564 .stroke-B1{stroke:#0A0F25;}
+.d2-3897458564 .stroke-B2{stroke:#676C7E;}
+.d2-3897458564 .stroke-B3{stroke:#9499AB;}
+.d2-3897458564 .stroke-B4{stroke:#CFD2DD;}
+.d2-3897458564 .stroke-B5{stroke:#DEE1EB;}
+.d2-3897458564 .stroke-B6{stroke:#EEF1F8;}
+.d2-3897458564 .stroke-AA2{stroke:#676C7E;}
+.d2-3897458564 .stroke-AA4{stroke:#CFD2DD;}
+.d2-3897458564 .stroke-AA5{stroke:#DEE1EB;}
+.d2-3897458564 .stroke-AB4{stroke:#CFD2DD;}
+.d2-3897458564 .stroke-AB5{stroke:#DEE1EB;}
+.d2-3897458564 .background-color-N1{background-color:#0A0F25;}
+.d2-3897458564 .background-color-N2{background-color:#676C7E;}
+.d2-3897458564 .background-color-N3{background-color:#9499AB;}
+.d2-3897458564 .background-color-N4{background-color:#CFD2DD;}
+.d2-3897458564 .background-color-N5{background-color:#DEE1EB;}
+.d2-3897458564 .background-color-N6{background-color:#EEF1F8;}
+.d2-3897458564 .background-color-N7{background-color:#FFFFFF;}
+.d2-3897458564 .background-color-B1{background-color:#0A0F25;}
+.d2-3897458564 .background-color-B2{background-color:#676C7E;}
+.d2-3897458564 .background-color-B3{background-color:#9499AB;}
+.d2-3897458564 .background-color-B4{background-color:#CFD2DD;}
+.d2-3897458564 .background-color-B5{background-color:#DEE1EB;}
+.d2-3897458564 .background-color-B6{background-color:#EEF1F8;}
+.d2-3897458564 .background-color-AA2{background-color:#676C7E;}
+.d2-3897458564 .background-color-AA4{background-color:#CFD2DD;}
+.d2-3897458564 .background-color-AA5{background-color:#DEE1EB;}
+.d2-3897458564 .background-color-AB4{background-color:#CFD2DD;}
+.d2-3897458564 .background-color-AB5{background-color:#DEE1EB;}
+.d2-3897458564 .color-N1{color:#0A0F25;}
+.d2-3897458564 .color-N2{color:#676C7E;}
+.d2-3897458564 .color-N3{color:#9499AB;}
+.d2-3897458564 .color-N4{color:#CFD2DD;}
+.d2-3897458564 .color-N5{color:#DEE1EB;}
+.d2-3897458564 .color-N6{color:#EEF1F8;}
+.d2-3897458564 .color-N7{color:#FFFFFF;}
+.d2-3897458564 .color-B1{color:#0A0F25;}
+.d2-3897458564 .color-B2{color:#676C7E;}
+.d2-3897458564 .color-B3{color:#9499AB;}
+.d2-3897458564 .color-B4{color:#CFD2DD;}
+.d2-3897458564 .color-B5{color:#DEE1EB;}
+.d2-3897458564 .color-B6{color:#EEF1F8;}
+.d2-3897458564 .color-AA2{color:#676C7E;}
+.d2-3897458564 .color-AA4{color:#CFD2DD;}
+.d2-3897458564 .color-AA5{color:#DEE1EB;}
+.d2-3897458564 .color-AB4{color:#CFD2DD;}
+.d2-3897458564 .color-AB5{color:#DEE1EB;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0A0F25;--color-border-muted:#676C7E;--color-neutral-muted:#EEF1F8;--color-accent-fg:#676C7E;--color-accent-emphasis:#676C7E;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-3897458564);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-dark-d2-3897458564);mix-blend-mode:overlay}.sketch-overlay-B3{fill:url(#streaks-normal-d2-3897458564);mix-blend-mode:color-burn}.sketch-overlay-B4{fill:url(#streaks-normal-d2-3897458564);mix-blend-mode:color-burn}.sketch-overlay-B5{fill:url(#streaks-bright-d2-3897458564);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-3897458564);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-3897458564);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-normal-d2-3897458564);mix-blend-mode:color-burn}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-3897458564);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-normal-d2-3897458564);mix-blend-mode:color-burn}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-3897458564);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-3897458564);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-3897458564);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-3897458564);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-3897458564);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-3897458564);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-3897458564);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-3897458564);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]>&lt;/style>&lt;g class="QXV0aG9yaW5n group">&lt;g class="shape" >&lt;rect x="20.000000" y="149.000000" width="911.000000" height="174.000000" rx="12.000000" stroke="#E2E4E9" fill="#F8F9FC" style="stroke-width:1;" />&lt;/g>&lt;text x="475.500000" y="140.000000" fill="#201B4C" class="text" style="text-anchor:middle;font-size:13px">Authoring&lt;/text>&lt;/g>&lt;g class="RGlzdHJpYnV0aW9u accent">&lt;g class="shape" >&lt;rect x="1051.000000" y="179.000000" width="142.000000" height="114.000000" rx="8.000000" stroke="#d874a9" fill="#FFFFFF" style="stroke-width:2;" />&lt;/g>&lt;image href="data:image/svg+xml;base64,PHN2ZwogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICB3aWR0aD0iMjQiCiAgaGVpZ2h0PSIyNCIKICB2aWV3Qm94PSIwIDAgMjQgMjQiCiAgZmlsbD0ibm9uZSIKICBzdHJva2U9ImN1cnJlbnRDb2xvciIKICBzdHJva2Utd2lkdGg9IjIiCiAgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIgogIHN0cm9rZS1saW5lam9pbj0icm91bmQiCiAgY2xhc3M9Imljb24gaWNvbi10YWJsZXIgaWNvbnMtdGFibGVyLW91dGxpbmUgaWNvbi10YWJsZXItc2VuZCIKPgogIDxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogIDxwYXRoIGQ9Ik0xMCAxNGwxMSAtMTEiIC8+CiAgPHBhdGggZD0iTTIxIDNsLTYuNSAxOGEuNTUgLjU1IDAgMCAxIC0xIDBsLTMuNSAtN2wtNyAtMy41YS41NSAuNTUgMCAwIDEgMCAtMWwxOCAtNi41IiAvPgo8L3N2Zz4=" x="1093.500000" y="207.500000" width="57" height="57" />&lt;text x="1122.000000" y="198.000000" fill="#201B4C" class="text-bold" style="text-anchor:middle;font-size:14px">Distribution&lt;/text>&lt;/g>&lt;g class="QW5hbHlzaXM= accent">&lt;g class="shape" >&lt;rect x="1293.000000" y="179.000000" width="120.000000" height="114.000000" rx="8.000000" stroke="#d874a9" fill="#FFFFFF" style="stroke-width:2;" />&lt;/g>&lt;image href="data:image/svg+xml;base64,PHN2ZwogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICB3aWR0aD0iMjQiCiAgaGVpZ2h0PSIyNCIKICB2aWV3Qm94PSIwIDAgMjQgMjQiCiAgZmlsbD0ibm9uZSIKICBzdHJva2U9ImN1cnJlbnRDb2xvciIKICBzdHJva2Utd2lkdGg9IjIiCiAgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIgogIHN0cm9rZS1saW5lam9pbj0icm91bmQiCiAgY2xhc3M9Imljb24gaWNvbi10YWJsZXIgaWNvbnMtdGFibGVyLW91dGxpbmUgaWNvbi10YWJsZXItY2hhcnQtbGluZSIKPgogIDxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogIDxwYXRoIGQ9Ik00IDE5bDE2IDAiIC8+CiAgPHBhdGggZD0iTTQgMTVsNCAtNmw0IDJsNCAtNWw0IDQiIC8+Cjwvc3ZnPg==" x="1324.500000" y="207.500000" width="57" height="57" />&lt;text x="1353.000000" y="198.000000" fill="#201B4C" class="text-bold" style="text-anchor:middle;font-size:14px">Analysis&lt;/text>&lt;/g>&lt;g class="QXV0aG9yaW5nLkdlbmVyYXRpb24= accent">&lt;g class="shape" >&lt;rect x="50.000000" y="179.000000" width="138.000000" height="114.000000" rx="8.000000" stroke="#d874a9" fill="#FFFFFF" style="stroke-width:2;" />&lt;/g>&lt;image href="data:image/svg+xml;base64,PHN2ZwogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICB3aWR0aD0iMjQiCiAgaGVpZ2h0PSIyNCIKICB2aWV3Qm94PSIwIDAgMjQgMjQiCiAgZmlsbD0ibm9uZSIKICBzdHJva2U9ImN1cnJlbnRDb2xvciIKICBzdHJva2Utd2lkdGg9IjIiCiAgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIgogIHN0cm9rZS1saW5lam9pbj0icm91bmQiCiAgY2xhc3M9Imljb24gaWNvbi10YWJsZXIgaWNvbnMtdGFibGVyLW91dGxpbmUgaWNvbi10YWJsZXItc2V0dGluZ3MtY29nIgo+CiAgPHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+CiAgPHBhdGggZD0iTTEyLjAwMyAyMWMtLjczMiAuMDAxIC0xLjQ2NSAtLjQzOCAtMS42NzggLTEuMzE3YTEuNzI0IDEuNzI0IDAgMCAwIC0yLjU3MyAtMS4wNjZjLTEuNTQzIC45NCAtMy4zMSAtLjgyNiAtMi4zNyAtMi4zN2ExLjcyNCAxLjcyNCAwIDAgMCAtMS4wNjUgLTIuNTcyYy0xLjc1NiAtLjQyNiAtMS43NTYgLTIuOTI0IDAgLTMuMzVhMS43MjQgMS43MjQgMCAwIDAgMS4wNjYgLTIuNTczYy0uOTQgLTEuNTQzIC44MjYgLTMuMzEgMi4zNyAtMi4zN2MxIC42MDggMi4yOTYgLjA3IDIuNTcyIC0xLjA2NWMuNDI2IC0xLjc1NiAyLjkyNCAtMS43NTYgMy4zNSAwYTEuNzI0IDEuNzI0IDAgMCAwIDIuNTczIDEuMDY2YzEuNTQzIC0uOTQgMy4zMSAuODI2IDIuMzcgMi4zN2ExLjcyNCAxLjcyNCAwIDAgMCAxLjA2NSAyLjU3MmMuODg2IC4yMTUgMS4zMjUgLjk1NyAxLjMxOCAxLjY5NCIgLz4KICA8cGF0aCBkPSJNOSAxMmEzIDMgMCAxIDAgNiAwYTMgMyAwIDAgMCAtNiAwIiAvPgogIDxwYXRoIGQ9Ik0xNy4wMDEgMTlhMiAyIDAgMSAwIDQgMGEyIDIgMCAxIDAgLTQgMCIgLz4KICA8cGF0aCBkPSJNMTkuMDAxIDE1LjV2MS41IiAvPgogIDxwYXRoIGQ9Ik0xOS4wMDEgMjF2MS41IiAvPgogIDxwYXRoIGQ9Ik0yMi4wMzIgMTcuMjVsLTEuMjk5IC43NSIgLz4KICA8cGF0aCBkPSJNMTcuMjcgMjBsLTEuMyAuNzUiIC8+CiAgPHBhdGggZD0iTTE1Ljk3IDE3LjI1bDEuMyAuNzUiIC8+CiAgPHBhdGggZD0iTTIwLjczMyAyMGwxLjMgLjc1IiAvPgo8L3N2Zz4=" x="90.500000" y="207.500000" width="57" height="57" />&lt;text x="119.000000" y="198.000000" fill="#201B4C" class="text-bold" style="text-anchor:middle;font-size:14px">Generation&lt;/text>&lt;/g>&lt;g class="QXV0aG9yaW5nLkF1Z21lbnRhdGlvbg== accent">&lt;g class="shape" >&lt;rect x="288.000000" y="179.000000" width="158.000000" height="114.000000" rx="8.000000" stroke="#d874a9" fill="#FFFFFF" style="stroke-width:2;" />&lt;/g>&lt;image href="data:image/svg+xml;base64,PHN2ZwogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICB3aWR0aD0iMjQiCiAgaGVpZ2h0PSIyNCIKICB2aWV3Qm94PSIwIDAgMjQgMjQiCiAgZmlsbD0ibm9uZSIKICBzdHJva2U9ImN1cnJlbnRDb2xvciIKICBzdHJva2Utd2lkdGg9IjIiCiAgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIgogIHN0cm9rZS1saW5lam9pbj0icm91bmQiCiAgY2xhc3M9Imljb24gaWNvbi10YWJsZXIgaWNvbnMtdGFibGVyLW91dGxpbmUgaWNvbi10YWJsZXItcHV6emxlIgo+CiAgPHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+CiAgPHBhdGggZD0iTTQgN2gzYTEgMSAwIDAgMCAxIC0xdi0xYTIgMiAwIDAgMSA0IDB2MWExIDEgMCAwIDAgMSAxaDNhMSAxIDAgMCAxIDEgMXYzYTEgMSAwIDAgMCAxIDFoMWEyIDIgMCAwIDEgMCA0aC0xYTEgMSAwIDAgMCAtMSAxdjNhMSAxIDAgMCAxIC0xIDFoLTNhMSAxIDAgMCAxIC0xIC0xdi0xYTIgMiAwIDAgMCAtNCAwdjFhMSAxIDAgMCAxIC0xIDFoLTNhMSAxIDAgMCAxIC0xIC0xdi0zYTEgMSAwIDAgMSAxIC0xaDFhMiAyIDAgMCAwIDAgLTRoLTFhMSAxIDAgMCAxIC0xIC0xdi0zYTEgMSAwIDAgMSAxIC0xIiAvPgo8L3N2Zz4=" x="338.500000" y="207.500000" width="57" height="57" />&lt;text x="367.000000" y="198.000000" fill="#201B4C" class="text-bold" style="text-anchor:middle;font-size:14px">Augmentation&lt;/text>&lt;/g>&lt;g class="QXV0aG9yaW5nLkVucmljaG1lbnQ= accent">&lt;g class="shape" >&lt;rect x="546.000000" y="179.000000" width="140.000000" height="114.000000" rx="8.000000" stroke="#d874a9" fill="#FFFFFF" style="stroke-width:2;" />&lt;/g>&lt;image href="data:image/svg+xml;base64,PHN2ZwogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICB3aWR0aD0iMjQiCiAgaGVpZ2h0PSIyNCIKICB2aWV3Qm94PSIwIDAgMjQgMjQiCiAgZmlsbD0ibm9uZSIKICBzdHJva2U9ImN1cnJlbnRDb2xvciIKICBzdHJva2Utd2lkdGg9IjIiCiAgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIgogIHN0cm9rZS1saW5lam9pbj0icm91bmQiCiAgY2xhc3M9Imljb24gaWNvbi10YWJsZXIgaWNvbnMtdGFibGVyLW91dGxpbmUgaWNvbi10YWJsZXItd2FuZCIKPgogIDxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogIDxwYXRoIGQ9Ik02IDIxbDE1IC0xNWwtMyAtM2wtMTUgMTVsMyAzIiAvPgogIDxwYXRoIGQ9Ik0xNSA2bDMgMyIgLz4KICA8cGF0aCBkPSJNOSAzYTIgMiAwIDAgMCAyIDJhMiAyIDAgMCAwIC0yIDJhMiAyIDAgMCAwIC0yIC0yYTIgMiAwIDAgMCAyIC0yIiAvPgogIDxwYXRoIGQ9Ik0xOSAxM2EyIDIgMCAwIDAgMiAyYTIgMiAwIDAgMCAtMiAyYTIgMiAwIDAgMCAtMiAtMmEyIDIgMCAwIDAgMiAtMiIgLz4KPC9zdmc+" x="587.500000" y="207.500000" width="57" height="57" />&lt;text x="616.000000" y="198.000000" fill="#201B4C" class="text-bold" style="text-anchor:middle;font-size:14px">Enrichment&lt;/text>&lt;/g>&lt;g class="QXV0aG9yaW5nLlNpZ25pbmc= accent">&lt;g class="shape" >&lt;rect x="786.000000" y="179.000000" width="115.000000" height="114.000000" rx="8.000000" stroke="#d874a9" fill="#FFFFFF" style="stroke-width:2;stroke-dasharray:6.000000,5.919384;" />&lt;/g>&lt;image href="data:image/svg+xml;base64,PHN2ZwogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICB3aWR0aD0iMjQiCiAgaGVpZ2h0PSIyNCIKICB2aWV3Qm94PSIwIDAgMjQgMjQiCiAgZmlsbD0ibm9uZSIKICBzdHJva2U9ImN1cnJlbnRDb2xvciIKICBzdHJva2Utd2lkdGg9IjIiCiAgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIgogIHN0cm9rZS1saW5lam9pbj0icm91bmQiCiAgY2xhc3M9Imljb24gaWNvbi10YWJsZXIgaWNvbnMtdGFibGVyLW91dGxpbmUgaWNvbi10YWJsZXItc2lnbmF0dXJlIgo+CiAgPHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+CiAgPHBhdGggZD0iTTMgMTdjMy4zMzMgLTMuMzMzIDUgLTYgNSAtOGMwIC0zIC0xIC0zIC0yIC0zcy0yLjAzMiAxLjA4NSAtMiAzYy4wMzQgMi4wNDggMS42NTggNC44NzcgMi41IDZjMS41IDIgMi41IDIuNSAzLjUgMWwyIC0zYy4zMzMgMi42NjcgMS4zMzMgNCAzIDRjLjUzIDAgMi42MzkgLTIgMyAtMmMuNTE3IDAgMS41MTcgLjY2NyAzIDIiIC8+Cjwvc3ZnPg==" x="815.000000" y="207.500000" width="57" height="57" />&lt;text x="843.500000" y="198.000000" fill="#201B4C" class="text-bold" style="text-anchor:middle;font-size:14px">Signing&lt;/text>&lt;/g>&lt;g class="QXV0aG9yaW5nLihHZW5lcmF0aW9uIC0mZ3Q7IEF1Z21lbnRhdGlvbilbMF0= flow-pink">&lt;marker id="mk-d2-3897458564-3088021031" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> &lt;polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#d874a9" class="connection" stroke-width="2" /> &lt;/marker>&lt;path d="M 190.000000 278.000000 C 228.000000 278.000000 248.000000 278.000000 284.000000 278.000000" stroke="#d874a9" fill="none" class="connection animated-connection" style="stroke-width:2;stroke-dasharray:10.000000,9.865639;stroke-dashoffset:-198.656393;animation: dashdraw 4.932820s linear infinite;" marker-end="url(#mk-d2-3897458564-3088021031)" mask="url(#d2-3897458564)" />&lt;/g>&lt;g class="QXV0aG9yaW5nLihBdWdtZW50YXRpb24gLSZndDsgRW5yaWNobWVudClbMF0= flow-pink">&lt;path d="M 448.000000 278.000000 C 486.000000 278.000000 506.000000 278.000000 542.000000 278.000000" stroke="#d874a9" fill="none" class="connection animated-connection" style="stroke-width:2;stroke-dasharray:10.000000,9.865639;stroke-dashoffset:-198.656393;animation: dashdraw 4.932820s linear infinite;" marker-end="url(#mk-d2-3897458564-3088021031)" mask="url(#d2-3897458564)" />&lt;/g>&lt;g class="QXV0aG9yaW5nLihFbnJpY2htZW50IC0mZ3Q7IFNpZ25pbmcpWzBd flow-pink">&lt;path d="M 688.000000 278.000000 C 726.000000 278.000000 746.000000 278.000000 782.000000 278.000000" stroke="#d874a9" fill="none" class="connection animated-connection" style="stroke-width:2;stroke-dasharray:10.000000,9.865639;stroke-dashoffset:-198.656393;animation: dashdraw 4.932820s linear infinite;" marker-end="url(#mk-d2-3897458564-3088021031)" mask="url(#d2-3897458564)" />&lt;/g>&lt;g class="KEF1dGhvcmluZy5TaWduaW5nIC0mZ3Q7IERpc3RyaWJ1dGlvbilbMF0= flow-pink">&lt;path d="M 903.000000 278.000000 C 941.000000 278.000000 1011.000000 278.000000 1047.000000 278.000000" stroke="#d874a9" fill="none" class="connection animated-connection" style="stroke-width:2;stroke-dasharray:10.000000,9.865639;stroke-dashoffset:-198.656393;animation: dashdraw 4.932820s linear infinite;" marker-end="url(#mk-d2-3897458564-3088021031)" mask="url(#d2-3897458564)" />&lt;/g>&lt;g class="KERpc3RyaWJ1dGlvbiAtJmd0OyBBbmFseXNpcylbMF0= flow-pink">&lt;path d="M 1195.000000 278.000000 C 1233.000000 278.000000 1253.000000 278.000000 1289.000000 278.000000" stroke="#d874a9" fill="none" class="connection animated-connection" style="stroke-width:2;stroke-dasharray:10.000000,9.865639;stroke-dashoffset:-198.656393;animation: dashdraw 4.932820s linear infinite;" marker-end="url(#mk-d2-3897458564-3088021031)" mask="url(#d2-3897458564)" />&lt;/g>&lt;mask id="d2-3897458564" maskUnits="userSpaceOnUse" x="-81" y="27" width="1595" height="397">
+&lt;rect x="-81" y="27" width="1595" height="397" fill="white">&lt;/rect>
+&lt;/mask>&lt;/svg>&lt;/svg>
+&lt;/div>
+&lt;p>Notice that there are three required steps in the Authoring phase:&lt;/p>
+&lt;ul>
+&lt;li>Generation&lt;/li>
+&lt;li>Augmentation&lt;/li>
+&lt;li>Enrichment&lt;/li>
+&lt;/ul>
+&lt;p>Thus, we&amp;rsquo;ve gone from being a simple upload tool to a complete SBOM Swiss Army knife, where we combine the best open-source tools in the industry to generate a complete SBOM. All you need to do is provide either an SBOM or a (supported) lockfile, and we take care of the rest.&lt;/p>
+&lt;p>This is what it looks like in your Actions YAML file:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Upload SBOM&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">sbomify/github-action@master&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">env&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">TOKEN&lt;/span>: &lt;span style="color:#ae81ff">${{ secrets.SBOMIFY_TOKEN }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">COMPONENT_ID&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;my-component-id&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">SBOM_FILE&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;sbom-file.json&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">COMPONENT_NAME&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;my-app&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">COMPONENT_VERSION&lt;/span>: &lt;span style="color:#ae81ff">${{ github.ref_name }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">AUGMENT&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ENRICH&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>We didn&amp;rsquo;t stop there. You can also now use the action in stand-alone mode without sbomify to generate SBOMs:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Generate SBOM&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">sbomify/github-action@master&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">env&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">LOCK_FILE&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;requirements.txt&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">COMPONENT_NAME&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;my-python-app&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">COMPONENT_VERSION&lt;/span>: &lt;span style="color:#ae81ff">${{ github.ref_name }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ENRICH&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">UPLOAD&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">OUTPUT_FILE&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;my_sbom.cdx.json&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will take the file &lt;code>requirements.txt&lt;/code>, build an SBOM, then enrich the SBOM (using Ecosyste.ms), and finally write the file &lt;code>my_sbom.cdx.json&lt;/code> to disk.&lt;/p>
+&lt;p>For more details on using the GitHub Action and other CI/CD integrations, see our &lt;a href="https://sbomify.com/features/integrations/">integrations page&lt;/a>.&lt;/p></description><category>announcement</category></item><item><title>Announcing sbomify&amp;#39;s GitHub Actions Module: Seamlessly Share SBOMs in Your CI/CD Pipeline</title><link>https://sbomify.com/2024/08/21/introducing-github-action-module/</link><pubDate>Wed, 21 Aug 2024 00:00:00 +0000</pubDate><guid>https://sbomify.com/2024/08/21/introducing-github-action-module/</guid><description>&lt;p>We are thrilled to announce the launch of &lt;strong>sbomify&amp;rsquo;s GitHub Actions Module&lt;/strong> — now available in the &lt;a href="https://github.com/marketplace/actions/sbomify">GitHub Marketplace&lt;/a>! This powerful tool simplifies the process of generating Software Bill of Materials (SBOMs) right within your CI/CD pipeline, ensuring that your software components are transparently documented and compliant with industry standards.&lt;/p>
+&lt;h2 id="why-sbomify">Why sbomify?&lt;/h2>
+&lt;p>As software development evolves, transparency and security have become paramount. A Software Bill of Materials (SBOM) is a detailed list of components used in building a piece of software, allowing teams to manage vulnerabilities, license compliance, and supply chain risks effectively. With sbomify, you can automatically generate SBOMs as part of your development workflow, making it easier to maintain a secure and compliant software development lifecycle.&lt;/p>
+&lt;h2 id="introducing-sbomifys-github-actions-module">Introducing sbomify’s GitHub Actions Module&lt;/h2>
+&lt;p>The sbomify GitHub Action is designed to integrate seamlessly with your existing CI/CD pipelines, offering:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Automated SBOM Generation&lt;/strong>: Automatically create SBOMs for your software projects as part of your CI/CD process, ensuring consistent documentation across all builds.&lt;/li>
+&lt;li>&lt;strong>Compliance and Security&lt;/strong>: Maintain compliance with industry standards and improve your software’s security posture by documenting all dependencies and components.&lt;/li>
+&lt;li>&lt;strong>Easy Integration&lt;/strong>: Simply add the sbomify Action to your workflow file, and it takes care of the rest. No complex configurations are required.&lt;/li>
+&lt;/ul>
+&lt;h2 id="how-to-get-started">How to Get Started&lt;/h2>
+&lt;p>Getting started with sbomify is easy! Here&amp;rsquo;s how you can integrate it into your project:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Visit the Marketplace&lt;/strong>: Head over to the &lt;a href="https://github.com/marketplace/actions/sbomify">GitHub Marketplace&lt;/a> to find the sbomify Action.&lt;/li>
+&lt;li>&lt;strong>Add sbomify to Your Workflow&lt;/strong>: Add the sbomify Action to your GitHub Actions workflow by modifying your &lt;code>.yml&lt;/code> file(s). You can find detailed setup instructions in the &lt;a href="https://github.com/sbomify/github-action">sbomify GitHub repository&lt;/a>.&lt;/li>
+&lt;li>&lt;strong>Run Your Workflow&lt;/strong>: Once integrated, every time your workflow runs, sbomify will automaticaally upload the generated SBOM for your project, which in turn can shared with your stakeholders. No more manual sharing of SBOMs over emails, your stakeholders can automatically pull down the latest SBOM directly from sbomify when they need it, ensuring they always have the latest version.&lt;/li>
+&lt;/ol>
+&lt;p>Here&amp;rsquo;s a quick example of how to include sbomify in your workflow:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Build and Generate SBOM&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">on&lt;/span>: [&lt;span style="color:#ae81ff">push]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">jobs&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">build&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">runs-on&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-latest&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">steps&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions/checkout@v2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Build your SBOM...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Upload SBOM&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">sbomify/github-action@master&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">env&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">TOKEN&lt;/span>: &lt;span style="color:#ae81ff">${{ secrets.SBOMIFY_TOKEN }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">COMPONENT_ID&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;my-component-id&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">SBOM_FILE&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;sbom-file.json&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">COMPONENT_NAME&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;my-app&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">COMPONENT_VERSION&lt;/span>: &lt;span style="color:#ae81ff">${{ github.ref_name }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">AUGMENT&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ENRICH&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For more details on using the GitHub Action and other CI/CD integrations, see our &lt;a href="https://sbomify.com/features/integrations/">integrations page&lt;/a>.&lt;/p>
+&lt;h2 id="not-using-github-actions">Not using GitHub Actions?&lt;/h2>
+&lt;p>No problem! Our tool can can easily be integrated in any other CI/CD pipeline. Just get in touch and we&amp;rsquo;ll help you.&lt;/p>
+&lt;h2 id="join-us-in-building-more-secure-software">Join Us in Building More Secure Software&lt;/h2>
+&lt;p>As software supply chains become increasingly complex, tools like sbomify are essential for maintaining transparency and security. By integrating sbomify into your workflows, you&amp;rsquo;re taking a proactive step towards better software management and compliance.&lt;/p>
+&lt;p>We’re excited to see how sbomify will help you build more secure and transparent software. Try it out today by visiting the &lt;a href="https://github.com/marketplace/actions/sbomify">GitHub Marketplace&lt;/a> and start sharing your SBOMs with ease!&lt;/p></description><category>announcement</category></item></channel></rss>

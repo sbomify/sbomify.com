@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sbomify</title><link>https://sbomify.com/tags/cli/</link><description>Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools.</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 20 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://sbomify.com/tags/cli/" rel="self" type="application/rss+xml"/><item><title>Announcing sbomify-action v0.11: The One Where They Go to PyPI</title><link>https://sbomify.com/2026/01/20/announcing-sbomify-action-v0-11-the-one-where-they-go-to-pypi/</link><pubDate>Tue, 20 Jan 2026 00:00:00 +0000</pubDate><guid>https://sbomify.com/2026/01/20/announcing-sbomify-action-v0-11-the-one-where-they-go-to-pypi/</guid><description>&lt;p>With v0.11, sbomify-action is no longer tied to your CI/CD pipeline. Install it anywhere with &lt;code>pip install sbomify-action&lt;/code> and generate enriched SBOMs on your laptop, in your build scripts, or wherever you need them. This release also tackles two of the biggest pain points in SBOM generation: missing license data and tracking end-of-life software.&lt;/p>
+&lt;h2 id="highlights">Highlights&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Use it anywhere&lt;/strong> - Install from PyPI and run locally, in CI, or in any workflow&lt;/li>
+&lt;li>&lt;strong>Fill in missing licenses&lt;/strong> - LicenseDB automatically adds license data for 28 Linux distro versions&lt;/li>
+&lt;li>&lt;strong>Know when software goes EOL&lt;/strong> - Lifecycle Database tracks support dates for distros and frameworks&lt;/li>
+&lt;li>&lt;strong>Choose your format&lt;/strong> - SPDX and CycloneDX with feature parity&lt;/li>
+&lt;li>&lt;strong>Prove what happened&lt;/strong> - Audit trail logs every SBOM transformation for compliance&lt;/li>
+&lt;li>&lt;strong>Rust projects welcome&lt;/strong> - Native generation and enrichment for the Rust ecosystem&lt;/li>
+&lt;/ul>
+&lt;h2 id="never-miss-a-license-again">Never Miss a License Again&lt;/h2>
+&lt;p>One of the most frustrating aspects of generating SBOMs for container images is discovering that half your packages are missing license information. This happens because many Linux distribution packages do not include machine-readable license metadata in their package manifests.&lt;/p>
+&lt;p>&lt;strong>LicenseDB&lt;/strong> solves this. We have built a pre-computed database of valid package licenses covering 28 Linux distro versions:&lt;/p>
+&lt;ul>
+&lt;li>Debian (11, 12, 13)&lt;/li>
+&lt;li>Ubuntu (20.04, 22.04, 24.04)&lt;/li>
+&lt;li>Alpine (3.13-3.21)&lt;/li>
+&lt;li>Fedora (39, 40, 41, 42)&lt;/li>
+&lt;li>Amazon Linux (2, 2023)&lt;/li>
+&lt;li>CentOS Stream (8, 9)&lt;/li>
+&lt;li>AlmaLinux (8, 9)&lt;/li>
+&lt;li>Rocky Linux (8, 9)&lt;/li>
+&lt;li>Wolfi/Chainguard (rolling)&lt;/li>
+&lt;/ul>
+&lt;p>When you generate an SBOM, LicenseDB automatically fills in license data for packages that would otherwise be missing it. The lookup is architecture-agnostic, so you get consistent results whether you are building for amd64 or arm64.&lt;/p>
+&lt;p>LicenseDB is our primary license source, but not our only one. We integrate with multiple providers for license data, including PyPI, crates.io, and other package registries. LicenseDB is checked first because it is fast (downloaded once from GitHub releases then cached locally) and reliable. When LicenseDB does not have coverage for a package, we fall back to other sources. See our &lt;a href="https://sbomify.com/features/integrations/">integrations page&lt;/a> for the full list of data sources.&lt;/p>
+&lt;p>We take a conservative approach: LicenseDB only includes licenses we can verify from authoritative sources. This means we do not have full coverage of every package, but we would rather provide a smaller, accurate database than try to guess licenses with heuristics. When it comes to license compliance, accuracy matters more than completeness.&lt;/p>
+&lt;h2 id="know-when-your-software-goes-end-of-life">Know When Your Software Goes End-of-Life&lt;/h2>
+&lt;p>Compliance frameworks like FedRAMP and SOC2 increasingly require organizations to demonstrate they are not running end-of-life software. But tracking EOL dates across dozens of components, base images, and frameworks is tedious and error-prone.&lt;/p>
+&lt;p>The new &lt;strong>Lifecycle Database&lt;/strong> embeds &lt;a href="https://sbomify.com/compliance/cle/">CLE (Common Lifecycle Enumeration)&lt;/a> data directly into your SBOMs, following the ECMA-428 specification. For every component we recognize, you get:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>What You Learn&lt;/th>
+&lt;th>Why It Matters&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Release Date&lt;/td>
+&lt;td>Know how old a component is&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>End of Support&lt;/td>
+&lt;td>When bugfixes stop (security-only after this)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>End of Life&lt;/td>
+&lt;td>When all support ends, including security patches&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="coverage">Coverage&lt;/h3>
+&lt;p>&lt;strong>Linux Distributions&lt;/strong>: Alpine, Ubuntu, Debian, Fedora, Rocky Linux, AlmaLinux, Amazon Linux, CentOS Stream, Oracle Linux, openSUSE Leap, Wolfi&lt;/p>
+&lt;p>&lt;strong>Language Runtimes and Frameworks&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Python (2.7, 3.10-3.14)&lt;/li>
+&lt;li>PHP (7.4, 8.0-8.5)&lt;/li>
+&lt;li>Go (1.22-1.25)&lt;/li>
+&lt;li>Rust (1.90-1.92)&lt;/li>
+&lt;li>Django (4.2, 5.2, 6.0)&lt;/li>
+&lt;li>Rails (7.0-8.1)&lt;/li>
+&lt;li>Laravel (10-13)&lt;/li>
+&lt;li>React (17, 18, 19)&lt;/li>
+&lt;li>Vue.js (2, 3)&lt;/li>
+&lt;/ul>
+&lt;p>With this data in your SBOMs, you can answer questions like &amp;ldquo;Which of our containers are running EOL base images?&amp;rdquo; or &amp;ldquo;When does Python 3.12 stop receiving security patches?&amp;rdquo; without leaving your SBOM tooling.&lt;/p>
+&lt;p>Here is what the lifecycle data looks like in a CycloneDX SBOM:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;python3&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;3.12.1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;properties&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;cle:releaseDate&amp;#34;&lt;/span>, &lt;span style="color:#f92672">&amp;#34;value&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2023-10-02&amp;#34;&lt;/span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;cle:eos&amp;#34;&lt;/span>, &lt;span style="color:#f92672">&amp;#34;value&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2025-04-02&amp;#34;&lt;/span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;cle:eol&amp;#34;&lt;/span>, &lt;span style="color:#f92672">&amp;#34;value&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2028-10-31&amp;#34;&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="run-it-anywhere">Run It Anywhere&lt;/h2>
+&lt;p>Until now, sbomify-action lived exclusively in CI/CD pipelines. That made it hard to test configurations, debug issues, or generate SBOMs during local development.&lt;/p>
+&lt;p>With v0.11, install it from PyPI and run it wherever you need:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>pip install sbomify-action
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ sbomify-action
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> __ _ ____ ___ __ _
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _____/ /_ ____ ____ ___ &lt;span style="color:#f92672">(&lt;/span>_&lt;span style="color:#f92672">)&lt;/span> __/_ __ / | _____/ /_&lt;span style="color:#f92672">(&lt;/span>_&lt;span style="color:#f92672">)&lt;/span>___ ____
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> / ___/ __ &lt;span style="color:#ae81ff">\/&lt;/span> __ &lt;span style="color:#ae81ff">\/&lt;/span> __ &lt;span style="color:#e6db74">`&lt;/span>__ &lt;span style="color:#ae81ff">\/&lt;/span> / /_/ / / / / /| |/ ___/ __/ / __ &lt;span style="color:#ae81ff">\/&lt;/span> __ &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>&lt;span style="color:#f92672">(&lt;/span>__ &lt;span style="color:#f92672">)&lt;/span> /_/ / /_/ / / / / / / / __/ /_/ / / ___ / /__/ /_/ / /_/ / / / /
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/____/_.___/&lt;span style="color:#ae81ff">\_&lt;/span>___/_/ /_/ /_/_/_/ &lt;span style="color:#ae81ff">\_&lt;/span>_, / /_/ |_&lt;span style="color:#ae81ff">\_&lt;/span>__/&lt;span style="color:#ae81ff">\_&lt;/span>_/_/&lt;span style="color:#ae81ff">\_&lt;/span>___/_/ /_/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /____/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>v0.11 - Zero to SBOM hero
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The CLI supports both command-line flags and environment variables, so your existing CI configurations translate directly. Test locally, commit with confidence.&lt;/p>
+&lt;h2 id="choose-cyclonedx-or-spdx">Choose CycloneDX or SPDX&lt;/h2>
+&lt;p>Your supply chain partners may require SPDX. Your internal tooling may expect CycloneDX. You should not have to choose between them or accept a degraded experience with one format.&lt;/p>
+&lt;p>Our goal is &lt;strong>feature parity between CycloneDX and SPDX&lt;/strong>. With v0.11, we have made significant progress:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sbomify-action --lock-file requirements.txt -f spdx -o sbom.spdx.json
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>License sanitization, lifecycle data, and enrichment from all data sources now work identically regardless of output format. Whichever format your organization or supply chain partners require, you get the same high-quality, enriched SBOMs.&lt;/p>
+&lt;h2 id="prove-what-happened-to-your-sbom">Prove What Happened to Your SBOM&lt;/h2>
+&lt;p>When auditors or customers ask how an SBOM was generated, you need to show your work. The new &lt;strong>audit trail&lt;/strong> logs every transformation applied during generation and enrichment, with timestamps.&lt;/p>
+&lt;h3 id="what-gets-tracked">What Gets Tracked&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Overrides&lt;/strong> - Component name, version, and PURL changes from CLI or environment variables&lt;/li>
+&lt;li>&lt;strong>Augmentation&lt;/strong> - Supplier, manufacturer, authors, licenses, VCS info, lifecycle phase additions&lt;/li>
+&lt;li>&lt;strong>Enrichment&lt;/strong> - Per-component metadata additions (description, license, publisher, URLs)&lt;/li>
+&lt;li>&lt;strong>Sanitization&lt;/strong> - PURL normalizations, URL validations, stub components added&lt;/li>
+&lt;/ul>
+&lt;h3 id="output">Output&lt;/h3>
+&lt;p>Every run produces three outputs:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Summary table&lt;/strong> in the console showing counts by category&lt;/li>
+&lt;li>&lt;strong>audit_trail.txt&lt;/strong> written alongside your SBOM output with full details&lt;/li>
+&lt;li>&lt;strong>Collapsible group&lt;/strong> in GitHub Actions with the complete audit trail&lt;/li>
+&lt;/ol>
+&lt;p>Here is what the audit trail looks like:&lt;/p>
+&lt;pre tabindex="0">&lt;code># SBOM Audit Trail
+# Generated: 2026-01-18T12:34:56Z
+# Input: requirements.txt
+# Output: sbom.cdx.json
+## Override
+[2026-01-18T12:34:56Z] OVERRIDE component.version SET &amp;#34;2.0.0&amp;#34; (source: cli/env)
+[2026-01-18T12:34:56Z] OVERRIDE component.name MODIFIED &amp;#34;old-name&amp;#34; -&amp;gt; &amp;#34;my-app&amp;#34; (source: cli/env)
+## Enrichment
+[2026-01-18T12:34:57Z] ENRICHMENT pkg:pypi/requests@2.31.0 license ADDED (source: pypi)
+[2026-01-18T12:34:57Z] ENRICHMENT pkg:pypi/requests@2.31.0 description ADDED (source: pypi)
+&lt;/code>&lt;/pre>&lt;p>All timestamps are in UTC (ISO 8601 format), making it easy to correlate with CI logs and other audit evidence. This is exactly the provenance and integrity evidence that compliance frameworks like FedRAMP and SOC2 require.&lt;/p>
+&lt;h2 id="rust-ecosystem-support">Rust Ecosystem Support&lt;/h2>
+&lt;p>Rust projects now get first-class support:&lt;/p>
+&lt;ul>
+&lt;li>Native SBOM generation via cargo-cyclonedx&lt;/li>
+&lt;li>Package metadata enrichment from crates.io&lt;/li>
+&lt;/ul>
+&lt;p>This follows our &lt;a href="https://github.com/sbomify/github-action/blob/master/docs/adr/0001-plugin-architecture.md">plugin architecture&lt;/a> principle of &amp;ldquo;native-first with generic fallback.&amp;rdquo; Native sources like crates.io provide the most accurate metadata for their ecosystem, with generic aggregators as fallbacks for broader coverage.&lt;/p>
+&lt;h2 id="other-improvements">Other Improvements&lt;/h2>
+&lt;p>&lt;strong>Docker Image&lt;/strong>: Multi-arch support (amd64/arm64), lazy installation of Java/Maven and Go to reduce image size.&lt;/p>
+&lt;p>&lt;strong>PURL Handling&lt;/strong>: Fixed double-encoding issues, consistent version updates, short git hashes for SBOM versions.&lt;/p>
+&lt;p>&lt;strong>Compliance&lt;/strong>: NTIA compliance checkers aligned with the NTIA 2021 standard.&lt;/p>
+&lt;h2 id="breaking-changes">Breaking Changes&lt;/h2>
+&lt;ul>
+&lt;li>The &lt;code>rpmrepo&lt;/code> and &lt;code>ubuntu&lt;/code> enrichment sources have been removed, replaced by LicenseDB which provides broader and more consistent coverage.&lt;/li>
+&lt;/ul>
+&lt;h2 id="getting-started">Getting Started&lt;/h2>
+&lt;p>Install from PyPI:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>pip install sbomify-action
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Or continue using the GitHub Action as before. The CLI and Action share the same codebase and configuration options.&lt;/p>
+&lt;p>Check out the &lt;a href="https://github.com/sbomify/github-action/compare/v0.10...v0.11">full changelog on GitHub&lt;/a> for complete details.&lt;/p></description><category>announcement</category></item></channel></rss>
