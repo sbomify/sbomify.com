@@ -1,2 +1,3 @@
-{{ $file := printf "d2/%s.svg" (.Get 0) }}
-{{ partial $file }}
+{{- $name := .Get 0 -}}
+{{- $file := printf "layouts/partials/d2/%s.svg" $name -}}
+{{- readFile $file | safeHTML -}}
