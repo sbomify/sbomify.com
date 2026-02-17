@@ -23,7 +23,7 @@ Software Bill of Materials (SBOM) compliance requirements are rapidly evolving a
 
 ### US Frameworks
 
-- **[Executive Order 14028 (2021)](/compliance/eo-14028/)** - The binding US directive that kicked off federal SBOM adoption
+- **[Executive Order 14028 (2021)](/compliance/eo-14028/)** - The binding US directive that kicked off federal SBOM adoption. _Updated:_ OMB Memorandum M-26-05 (January 2026) rescinded the mandatory attestation memos (M-22-18, M-23-16), shifting to an agency-led, risk-based approach. EO 14028 itself remains in effect.
   - _Who it affects:_ US federal agencies and software vendors selling to the government
 
 - **[NTIA Minimum Elements (2021)](/compliance/ntia-minimum-elements/)** - The foundational US baseline for SBOM data fields
@@ -130,7 +130,7 @@ This table compares SBOM data field expectations across major frameworks. All fr
 
 **Important notes:**
 
-- EO 14028 requires SBOM provision in federal procurement but defers field-level requirements to NTIA minimum elements
+- EO 14028 requires SBOM provision in federal procurement but defers field-level requirements to NTIA minimum elements. Note: OMB M-26-05 (January 2026) rescinded the mandatory attestation memos (M-22-18, M-23-16), making vendor attestations optional and shifting to agency-led risk-based assurance. EO 14028's core SBOM and supply chain provisions remain in effect
 - NTIA 2021 and CISA 2025 define "minimum elements" as guidance, not legal requirements
 - NTIA 2021 discusses license information as a key SBOM use case and useful content, but it is not listed among the minimum SBOM data fields
 - CISA 2025 is a public comment draft and explicitly does not create new requirements
