@@ -10,6 +10,7 @@ languageCode = "en-us"
 # Enable .GitInfo (replaces _plugins/git_dates.rb)
 enableGitInfo = true
 
+
 # Ignore leftover Jekyll files
 ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfile\\.lock", "convert_to_webp\\.rb$"]
 
@@ -31,7 +32,7 @@ ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfi
       unsafe = true
   [markup.highlight]
     style = "monokai"
-    noClasses = true
+    noClasses = false
 
 # RSS feed at /feed.xml (not default /index.xml)
 [outputFormats.RSS]

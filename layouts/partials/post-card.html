@@ -1,13 +1,14 @@
 {{- $post := .post -}}
 {{- $dark := .dark -}}
+{{- $headingLevel := .headingLevel | default "h3" -}}
 <a
   href="{{ $post.RelPermalink }}"
   class="group flex flex-col justify-between rounded-2xl p-8 hover:shadow-xl transition-all duration-300 h-full {{ if $dark }}bg-[#201B4C] border border-[#37306B] hover:border-[#8A7DFF]{{ else }}bg-white border border-gray-200 hover:border-[#8A7DFF]{{ end }}"
 >
   <div class="flex-grow">
-    <h4 class="text-2xl font-semibold leading-tight mb-4 group-hover:text-[#8A7DFF] transition-colors duration-200 {{ if $dark }}text-white{{ else }}text-primaryText{{ end }}">
+    <{{ $headingLevel }} class="text-2xl font-semibold leading-tight mb-4 group-hover:text-[#8A7DFF] transition-colors duration-200 {{ if $dark }}text-white{{ else }}text-primaryText{{ end }}">
       {{ $post.Title | truncate 180 }}
-    </h4>
+    </{{ $headingLevel }}>
     <p class="text-base leading-relaxed line-clamp-3 {{ if $dark }}text-gray-300{{ else }}text-secondaryText{{ end }}">{{ $post.Summary | plainify | truncate 140 "..." }}</p>
   </div>
   <div class="flex items-center justify-between pt-6 mt-6 {{ if $dark }}border-t border-[#37306B]{{ else }}border-t border-gray-100{{ end }}">

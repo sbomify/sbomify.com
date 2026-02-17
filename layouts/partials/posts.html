@@ -4,24 +4,26 @@
 {{- $hideViewAll := .hideViewAll | default false -}}
 {{- $title := .title -}}
 {{- $context := .context -}}
+{{- $cardHeading := "h2" -}}
 {{ with $title }}
-<h3 class="text-3xl lg:text-4xl font-semibold mb-12 {{ if $dark }}text-white{{ else }}text-primaryText{{ end }}">{{ . }}</h3>
+<h2 class="text-3xl lg:text-4xl font-semibold mb-12 {{ if $dark }}text-white{{ else }}text-primaryText{{ end }}">{{ . }}</h2>
+{{- $cardHeading = "h3" -}}
 {{ end }}
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
   {{ if $paginate }}
     {{ $paginator := $context.Paginate (where site.RegularPages "Section" "posts") }}
     {{ range $paginator.Pages }}
-      {{ partial "post-card.html" (dict "post" . "dark" $dark) }}
+      {{ partial "post-card.html" (dict "post" . "dark" $dark "headingLevel" $cardHeading) }}
     {{ end }}
   {{ else }}
     {{ $posts := where site.RegularPages "Section" "posts" }}
     {{ if gt $limit 0 }}
       {{ range first $limit $posts }}
-        {{ partial "post-card.html" (dict "post" . "dark" $dark) }}
+        {{ partial "post-card.html" (dict "post" . "dark" $dark "headingLevel" $cardHeading) }}
       {{ end }}
     {{ else }}
       {{ range $posts }}
-        {{ partial "post-card.html" (dict "post" . "dark" $dark) }}
+        {{ partial "post-card.html" (dict "post" . "dark" $dark "headingLevel" $cardHeading) }}
       {{ end }}
     {{ end }}
   {{ end }}
