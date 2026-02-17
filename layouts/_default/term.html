@@ -15,30 +15,16 @@
   </div>
 
   <div class="bg-[#F6F9FA]">
-    <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
       {{ $paginator := .Paginate .Pages }}
-      <div class="flex flex-col gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {{ range $paginator.Pages }}
-        <a href="{{ .RelPermalink }}" class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 transition-all duration-300 hover:border-[#8A7DFF] hover:shadow-md block no-underline">
-          <h2 class="text-xl font-bold text-primaryText mb-2 !mt-0">{{ .Title }}</h2>
-          <div class="flex flex-wrap items-center gap-3 text-sm text-gray-500 mb-3">
-            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
-              {{ .Date.Format "January 2, 2006" }}
-            </time>
-            {{ with .GetTerms "categories" }}{{ range . }}
-            <span>&bull;</span>
-            <span class="capitalize">{{ .LinkTitle }}</span>
-            {{ end }}{{ end }}
-          </div>
-          {{ with .Params.description }}
-          <p class="text-gray-600 mb-0">{{ . | truncate 150 }}</p>
-          {{ end }}
-        </a>
+          {{ partial "post-card.html" (dict "post" . "headingLevel" "h2") }}
         {{ end }}
       </div>
 
       {{ if gt $paginator.TotalPages 1 }}
-      <div class="mt-12">
+      <div class="mt-16">
         {{ partial "pagination.html" . }}
       </div>
       {{ end }}
