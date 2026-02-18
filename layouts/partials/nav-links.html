@@ -1,0 +1,8 @@
+{{ range .items }}
+  {{ $nav_item := index (where site.Data.main.nav "name" .) 0 }}
+  {{ with $nav_item }}
+    <li>
+      <a href="{{ .link }}">{{ .name }}</a>
+    </li>
+  {{ end }}
+{{ end }}

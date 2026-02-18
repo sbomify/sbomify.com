@@ -1,0 +1,73 @@
+{{ define "main" }}
+<div>
+  <div class="bg-primaryBG relative overflow-hidden px-5 py-16 lg:py-24 lg:px-24">
+    <!-- Subtle gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#8A7DFF]/5 via-transparent to-transparent pointer-events-none"></div>
+
+    <div class="relative max-w-4xl mx-auto text-center">
+      <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+        <span class="text-gradient">{{ .Title }}</span>
+      </h1>
+
+      <div class="flex flex-wrap items-center justify-center gap-3 text-gray-300 text-lg lg:text-xl mb-6">
+        {{ with .Params.author }}{{ with .display_name }}
+        {{- $authorName := . -}}
+        {{- $authorFound := false -}}
+        {{- $authorSlug := "" -}}
+        {{- range $key, $data := site.Data.authors -}}
+          {{- $firstName := index (split $data.display_name " ") 0 -}}
+          {{- if or (eq $data.display_name $authorName) (eq $firstName $authorName) -}}
+            {{- $authorFound = true -}}
+            {{- $authorSlug = $data.slug -}}
+          {{- end -}}
+        {{- end -}}
+        <span class="font-medium">
+          By {{ if $authorFound }}<a href="/authors/{{ $authorSlug }}/" class="text-gray-300 hover:text-white transition-colors underline underline-offset-2">{{ $authorName }}</a>{{ else }}<span class="capitalize">{{ $authorName }}</span>{{ end }}
+        </span>
+        <span class="text-gray-500">&bull;</span>
+        {{ end }}{{ end }}
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+          {{ .Date.Format "January 2, 2006" }}
+        </time>
+        {{ with .GetTerms "categories" }}
+        {{ range . }}
+        <span class="text-gray-500">&bull;</span>
+        <a href="{{ .RelPermalink }}" class="capitalize text-gray-300 hover:text-white transition-colors underline underline-offset-2">{{ .LinkTitle }}</a>
+        {{ end }}
+      {{ end }}
+      </div>
+
+      {{ with .GetTerms "tags" }}
+      <div class="flex flex-wrap items-center justify-center gap-2">
+        {{ range . }}
+        <a href="{{ .RelPermalink }}" class="px-3 py-1 text-sm bg-[#8A7DFF]/20 text-[#8A7DFF] hover:bg-[#8A7DFF]/30 rounded-full no-underline transition-colors">{{ .LinkTitle }}</a>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+
+  <div class="bg-[#F6F9FA]">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+      <article class="blog-post bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100">
+        {{ partial "tldr.html" . }}
+        {{ .Content }}
+        <div class="mt-12 pt-8 border-t border-gray-200">
+          <p class="text-sm text-gray-500 italic">
+            Found an error or typo? File a PR against <a href="https://github.com/sbomify/sbomify.com/tree/master/{{ .File.Path }}" rel="nofollow" class="text-[#8A7DFF] hover:text-[#7A6DE5] no-underline">this file</a>.
+          </p>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<div class=" bg-primaryBG">
+  <div class="max-container text-white px-5 md:px-12 lg:px-24 py-12 lg:py-24">
+    <div class="uppercase text-sm mb-4">
+      &gt; Blog
+    </div>
+    {{ partial "posts.html" (dict "limit" 3 "dark" true "hideViewAll" true "title" "Recent Posts" "context" .) }}
+  </div>
+</div>
+{{ end }}

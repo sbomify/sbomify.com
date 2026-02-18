@@ -6,4 +6,4 @@ services:
       - "4040:4040"
     volumes:
       - .:/usr/src/app
-    command: sh -c "bun run watch:d2 & bun run watch:css & bundle exec jekyll serve --config _config.yml,_config_development.yml"
+    command: sh -c "bun run watch:d2 & bun run watch:css & hugo server --bind 0.0.0.0 --port 4040 --environment development --buildFuture --buildDrafts"

@@ -1,0 +1,17 @@
+{{ $paginator := .Paginator }}
+
+<div class="flex justify-center items-center gap-4">
+  {{ if $paginator.HasPrev }}
+    <a href="{{ $paginator.Prev.URL }}" class="px-8 py-3 bg-white border border-gray-200 hover:border-[#8A7DFF] text-primaryText hover:text-[#8A7DFF] rounded-full font-medium transition-all duration-200">&larr; Previous</a>
+  {{ else }}
+    <span class="px-8 py-3 bg-gray-100 border border-gray-200 text-gray-400 rounded-full font-medium cursor-not-allowed">&larr; Previous</span>
+  {{ end }}
+
+  <span class="px-6 py-3 text-gray-600 font-medium">Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
+
+  {{ if $paginator.HasNext }}
+    <a href="{{ $paginator.Next.URL }}" class="px-8 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium transition-all duration-200">Next &rarr;</a>
+  {{ else }}
+    <span class="px-8 py-3 bg-gray-100 border border-gray-200 text-gray-400 rounded-full font-medium cursor-not-allowed">Next &rarr;</span>
+  {{ end }}
+</div>

@@ -1,0 +1,94 @@
+{{ define "main" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "{{ .Title }}",
+  "description": "{{ .Params.description | default site.Params.description }}",
+  "url": "{{ .Permalink }}",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "sbomify",
+    "url": "{{ site.BaseURL }}",
+    "logo": "{{ site.BaseURL }}android-chrome-512x512.png",
+    "description": "{{ site.Params.description }}",
+    "founder": {
+      "@type": "Person",
+      "name": "Viktor Petersson",
+      "url": "{{ site.BaseURL }}authors/vpetersson/"
+    },
+    "sameAs": [
+      {{ range $i, $p := site.Params.social.profiles }}{{ if $i }},{{ end }}"{{ $p.url }}"{{ end }}
+    ]
+  }
+}
+</script>
+<div>
+  <div class="bg-primaryBG relative overflow-hidden px-5 py-16 lg:py-24 lg:px-24">
+    <!-- Subtle gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#8A7DFF]/5 via-transparent to-transparent pointer-events-none"></div>
+
+    <div class="relative max-w-4xl mx-auto text-center">
+      <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+        <span class="text-gradient">{{ .Title }}</span>
+      </h1>
+      {{ with .Params.description }}
+      <p class="text-gray-300 text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
+        {{ . }}
+      </p>
+      {{ end }}
+    </div>
+  </div>
+
+  <div class="bg-[#F6F9FA]">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+      <article class="page bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100 mb-16">
+        {{ .Content }}
+      </article>
+
+      <!-- Advisors Section -->
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl lg:text-4xl font-bold text-primaryText mb-12 text-center">Advisors</h2>
+
+        <div class="flex flex-col gap-8">
+          {{ range $i, $advisor := site.Data.advisors }}
+            {{ $mod := mod (add $i 1) 2 }}
+            <div class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 flex flex-col {{ if eq $mod 0 }}md:flex-row-reverse{{ else }}md:flex-row{{ end }} items-center gap-8 md:gap-12 transition-all duration-300 hover:border-[#8A7DFF]">
+
+              <div class="flex-shrink-0">
+                {{ $imgPath := strings.TrimPrefix "/assets/" $advisor.image }}
+                {{ $img := resources.Get $imgPath }}
+                {{ if $img }}
+                  {{ $webp := $img.Process "fit 256x256 webp q80" }}
+                  <picture>
+                    <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+                    <img src="{{ $img.RelPermalink }}" alt="{{ $advisor.name }}" class="w-32 h-32 object-cover !m-0 grayscale hover:grayscale-0 transition-all duration-500" width="128" height="128" loading="lazy">
+                  </picture>
+                {{ else }}
+                  <img src="{{ $advisor.image }}" alt="{{ $advisor.name }}" class="w-32 h-32 object-cover !m-0 grayscale hover:grayscale-0 transition-all duration-500" width="128" height="128" loading="lazy">
+                {{ end }}
+              </div>
+
+              <div class="text-left flex-grow">
+                <div class="flex items-center gap-3 mb-2">
+                  <h3 class="text-2xl font-bold text-primaryText !mt-0 !mb-0">{{ $advisor.name }}</h3>
+                  {{ with $advisor.linkedin }}
+                    <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-[#0077b5] hover:text-[#006097] transition-colors" title="{{ $advisor.name }} on LinkedIn">
+                      {{ partial "icon.html" (dict "name" "linkedin" "class" "w-5 h-5") }}
+                    </a>
+                  {{ end }}
+                </div>
+                <p class="text-[#8A7DFF] font-medium text-sm uppercase tracking-wide mb-4">{{ $advisor.role }}</p>
+                <p class="text-secondaryText leading-relaxed mb-0 text-lg">
+                  {{ $advisor.bio }}
+                </p>
+              </div>
+
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

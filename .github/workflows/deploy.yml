@@ -19,48 +19,47 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build container
-        uses: docker/build-push-action@v5
         with:
-          context: .
-          load: true
-          tags: web
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          fetch-depth: 0
 
-      - name: Cache node_modules
+      - name: Install Hugo
+        run: |
+          HUGO_VERSION=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep -oP '"tag_name": "v\K[^"]+')
+          curl -fsSL -o hugo.deb "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i hugo.deb
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install d2
+        run: curl -fsSL https://d2lang.com/install.sh | sh -s --
+
+      - name: Cache Bun dependencies
         uses: actions/cache@v4
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('bun.lock') }}
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node_modules-
+            ${{ runner.os }}-bun-
 
       - name: Install dependencies
-        run: docker run --rm -v $(pwd):/usr/src/app web bun install
+        run: bun install
 
       - name: Build D2 diagrams
-        run: docker run --rm -v $(pwd):/usr/src/app web bun run build:d2
+        run: bun run build:d2
 
       - name: Build CSS
-        run: docker run --rm -v $(pwd):/usr/src/app web bun run build:css
+        run: bun run build:css
 
-      - name: Build Jekyll Site
-        env:
-          JEKYLL_ENV: production
-        run: docker run --rm -v $(pwd):/usr/src/app -e JEKYLL_ENV=production web sh -c "git config --global --add safe.directory /usr/src/app && bundle exec jekyll build"
-
-      - name: Fix permissions
-        run: docker run --rm -v $(pwd):/usr/src/app web chown -R $(id -u):$(id -g) .
+      - name: Build Hugo site
+        run: hugo --minify --environment production
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '_site'
+          path: 'public'
 
       - name: Deploy to GitHub Pages
         id: deployment
@@ -83,19 +82,27 @@ jobs:
           ENRICH: true
           OUTPUT_FILE: sbom.cdx.json
 
-  sbom-ruby:
+  sbom-hugo:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Install Hugo
+        id: hugo-version
+        run: |
+          HUGO_VERSION=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep -oP '"tag_name": "v\K[^"]+')
+          curl -fsSL -o hugo.deb "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i hugo.deb
+          echo "version=v${HUGO_VERSION}" >> "$GITHUB_OUTPUT"
 
       - name: Upload SBOM
         uses: sbomify/github-action@master
         env:
           TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
           COMPONENT_ID: 'jtYGL1IMu1gQ'
-          COMPONENT_NAME: 'Marketing Site (Ruby)'
+          COMPONENT_NAME: 'Marketing Site (Hugo)'
           COMPONENT_VERSION: ${{ github.ref_type == 'tag' && github.ref_name || format('{0}-{1}', github.ref_name, github.sha) }}
-          LOCK_FILE: 'Gemfile.lock'
+          ADDITIONAL_PACKAGES: 'pkg:golang/github.com/gohugoio/hugo@${{ steps.hugo-version.outputs.version }}'
           AUGMENT: true
           ENRICH: true
           OUTPUT_FILE: sbom.cdx.json

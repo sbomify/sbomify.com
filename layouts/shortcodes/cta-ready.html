@@ -1,0 +1,24 @@
+{{ $dark := .Get "dark" }}
+{{ $title := .Get "title" | default "Ready to build trust?" }}
+{{ $primary_url := .Get "primary_url" | default "https://app.sbomify.com" }}
+{{ $primary_text := .Get "primary_text" | default "Start Your Trust Center" }}
+{{ $secondary_url := .Get "secondary_url" | default "/features/integrations/" }}
+{{ $secondary_text := .Get "secondary_text" | default "View Integrations" }}
+
+{{ if $dark }}
+<div class="text-center bg-[#201B4C] border border-[#37306B] p-12 rounded-[40px]">
+    <h2 class="text-4xl font-bold text-white mb-8">{{ $title }}</h2>
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="{{ $primary_url }}" class="px-8 py-4 bg-[#8A7DFF] hover:bg-[#7A6DE5] !text-white rounded-full font-bold transition-all shadow-lg hover:shadow-[#8A7DFF]/25 hover:-translate-y-0.5 text-lg !no-underline" onclick="posthog.capture('cta_click', { location: 'cta_component', label: '{{ $primary_text }}', destination: '{{ $primary_url }}' })">{{ $primary_text }}</a>
+        <a href="{{ $secondary_url }}" class="px-8 py-4 bg-transparent border-2 border-white hover:border-[#8A7DFF] !text-white rounded-full font-bold transition-all hover:-translate-y-0.5 text-lg !no-underline" onclick="posthog.capture('cta_click', { location: 'cta_component', label: '{{ $secondary_text }}', destination: '{{ $secondary_url }}' })">{{ $secondary_text }}</a>
+    </div>
+</div>
+{{ else }}
+<div class="text-center bg-gradient-to-b from-white to-gray-50 p-12 rounded-[40px] border border-gray-100">
+    <h2 class="text-4xl font-bold text-[#201B4C] mb-8">{{ $title }}</h2>
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="{{ $primary_url }}" class="px-8 py-4 bg-[#8A7DFF] hover:bg-[#7A6DE5] !text-white rounded-full font-bold transition-all shadow-lg hover:shadow-[#8A7DFF]/25 hover:-translate-y-0.5 text-lg !no-underline" onclick="posthog.capture('cta_click', { location: 'cta_component', label: '{{ $primary_text }}', destination: '{{ $primary_url }}' })">{{ $primary_text }}</a>
+        <a href="{{ $secondary_url }}" class="px-8 py-4 bg-white border-2 border-gray-200 hover:border-[#8A7DFF] !text-[#201B4C] rounded-full font-bold transition-all hover:-translate-y-0.5 text-lg !no-underline" onclick="posthog.capture('cta_click', { location: 'cta_component', label: '{{ $secondary_text }}', destination: '{{ $secondary_url }}' })">{{ $secondary_text }}</a>
+    </div>
+</div>
+{{ end }}

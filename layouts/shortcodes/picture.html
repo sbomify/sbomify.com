@@ -1,0 +1,28 @@
+{{- $src := .Get 0 -}}
+{{- $attrs := "" -}}
+{{- range $key := slice "alt" "class" "loading" -}}
+  {{- with $.Get $key -}}
+    {{- $attrs = printf `%s %s="%s"` $attrs $key . -}}
+  {{- end -}}
+{{- end -}}
+{{- $img := resources.Get (strings.TrimPrefix "/" $src) -}}
+{{- if $img -}}
+  {{- $webp := $img.Process "webp q80" -}}
+  {{- $width := .Get "width" | default (printf "%d" $img.Width) -}}
+  {{- $height := .Get "height" | default (printf "%d" $img.Height) -}}
+  {{- $attrs = printf `%s width="%s" height="%s"` $attrs $width $height -}}
+  {{- if not (.Get "loading") -}}
+    {{- $attrs = printf `%s loading="lazy"` $attrs -}}
+  {{- end -}}
+<picture>
+  <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+  <img src="{{ $img.RelPermalink }}"{{ $attrs | safeHTMLAttr }}>
+</picture>
+{{- else -}}
+{{- with .Get "width" -}}{{- $attrs = printf `%s width="%s"` $attrs . -}}{{- end -}}
+{{- with .Get "height" -}}{{- $attrs = printf `%s height="%s"` $attrs . -}}{{- end -}}
+{{- if not (.Get "loading") -}}
+  {{- $attrs = printf `%s loading="lazy"` $attrs -}}
+{{- end -}}
+<img src="{{ $src }}"{{ $attrs | safeHTMLAttr }}>
+{{- end -}}

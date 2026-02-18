@@ -1,15 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './_includes/**/*.html',
-    './_layouts/**/*.html',
-    './_posts/**/*.{html,md}',
-    './*.{html,md}',
-    './features/**/*.{html,md}',
-    './case-studies/**/*.{html,md}',
-    './guides/**/*.{html,md}',
-    './compliance/**/*.{html,md}',
-    './blog/**/*.html',
+    './layouts/**/*.html',
+    './content/**/*.{html,md}',
   ],
   theme: {
     extend: {
@@ -39,4 +32,3 @@ module.exports = {
   },
   plugins: [],
 }
-

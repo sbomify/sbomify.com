@@ -1,0 +1,42 @@
+{{ $currentTags := .Params.tags }}
+{{ $currentURL := .RelPermalink }}
+{{ $allPosts := where site.RegularPages "Section" "posts" }}
+
+{{ $related := slice }}
+{{ range $allPosts }}
+  {{ if and (ne .RelPermalink $currentURL) (gt (len .Params.tags) 0) }}
+    {{ $intersection := intersect .Params.tags $currentTags }}
+    {{ if gt (len $intersection) 0 }}
+      {{ $related = $related | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if gt (len $related) 0 }}
+  <h3>Related Posts</h3>
+  <ul>
+    {{ range $related }}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{ end }}
+  </ul>
+{{ end }}
+
+{{ if lt (len $related) 3 }}
+  {{ $needed := sub 3 (len $related) }}
+  {{ $latest := slice }}
+  {{ range $allPosts }}
+    {{ if ne .RelPermalink $currentURL }}
+      {{ $latest = $latest | append . }}
+    {{ end }}
+  {{ end }}
+  {{ $latest = first $needed $latest }}
+
+  {{ if gt (len $latest) 0 }}
+    <h3>Latest Posts</h3>
+    <ul>
+      {{ range $latest }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+  {{ end }}
+{{ end }}

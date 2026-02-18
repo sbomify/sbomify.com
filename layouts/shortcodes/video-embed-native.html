@@ -1,0 +1,25 @@
+<div class="video-embed-wrapper my-8 w-full max-w-3xl mx-auto">
+    <div class="relative w-full overflow-hidden rounded-xl sm:rounded-2xl shadow-lg" style="padding-bottom: 56.25%;">
+        <video
+            class="absolute top-0 left-0 w-full h-full border-0 bg-black"
+            controls
+            preload="metadata"
+            {{ with .Get "poster" }}poster="{{ . }}"{{ end }}
+            title="{{ .Get "title" | default "Video player" }}">
+            <source src="{{ .Get "video_url" }}" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "{{ (.Get "title") | default .Page.Title | htmlEscape }}",
+  "description": "{{ (.Get "description") | default (.Page.Params.description | default site.Params.description) | plainify | htmlEscape }}",
+  {{ with .Get "poster" }}"thumbnailUrl": "{{ . }}",{{ end }}
+  "uploadDate": "{{ with .Get "upload_date" }}{{ . }}{{ else }}{{ .Page.Date.Format "2006-01-02T15:04:05Z07:00" }}{{ end }}",
+  "contentUrl": "{{ .Get "video_url" }}"
+}
+</script>

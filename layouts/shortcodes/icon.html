@@ -1,0 +1,16 @@
+{{- $name := .Get 0 -}}
+{{- $class := .Get 1 | default "w-5 h-5" -}}
+{{- $faMap := dict
+  "linkedin" "brands/linkedin-in.svg"
+  "x-twitter" "brands/x-twitter.svg"
+  "mastodon" "brands/mastodon.svg"
+  "github" "brands/github.svg"
+  "globe" "solid/globe.svg"
+  "podcast" "solid/podcast.svg"
+-}}
+{{- $path := index $faMap $name -}}
+{{- if $path -}}
+  {{- $svg := readFile (printf "node_modules/@fortawesome/fontawesome-free/svgs/%s" $path) -}}
+  {{- $svg = replace $svg "<svg " (printf "<svg class=\"%s\" fill=\"currentColor\" " $class) -}}
+  {{- $svg | safeHTML -}}
+{{- end -}}

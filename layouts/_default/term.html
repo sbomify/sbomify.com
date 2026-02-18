@@ -1,0 +1,18 @@
+{{ define "main" }}
+<div>
+  <div class="bg-primaryBG relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#8A7DFF]/5 via-transparent to-transparent pointer-events-none"></div>
+    <div class="relative px-5 py-16 lg:py-24 lg:px-24 max-w-7xl mx-auto">
+      <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+        <span class="text-gradient capitalize">{{ .Title }}</span>
+      </h1>
+      <p class="text-gray-300 text-lg lg:text-xl max-w-4xl leading-relaxed">
+        {{ .Data.Singular | title }}
+      </p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+    {{ partial "posts.html" (dict "paginate" true "context" . "pages" .Pages) }}
+  </div>
+</div>
+{{ end }}

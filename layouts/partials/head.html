@@ -1,0 +1,395 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ if eq .RelPermalink "/" }}{{ .Title | default site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ .Params.description | default site.Params.description }}">
+  <meta name="keywords" content="{{ with .Params.keywords }}{{ delimit . ", " }}{{ else }}{{ delimit site.Params.keywords ", " }}{{ end }}">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ .Permalink }}">
+
+  <!-- Robots meta -->
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="{{ .Title | default site.Title }}">
+  <meta property="og:description" content="{{ .Params.description | default site.Params.description }}">
+  <meta property="og:type" content="{{ if eq .Type "posts" }}article{{ else }}website{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  {{- $ogImage := .Params.image | default site.Params.social.image -}}
+  <meta property="og:image" content="{{ $ogImage | absURL }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ .Title | default site.Title }}">
+  <meta property="og:site_name" content="{{ site.Title }}">
+  {{- $linkedinUrl := "" -}}
+  {{- range site.Params.social.profiles -}}
+    {{- if eq .platform "LinkedIn" -}}{{ $linkedinUrl = .url }}{{- end -}}
+  {{- end -}}
+  {{ if eq .Type "posts" }}
+  <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+  <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+  <meta property="article:author" content="{{ $linkedinUrl }}">
+  {{ range .Params.categories }}
+  <meta property="article:tag" content="{{ . }}">
+  {{ end }}
+  {{ end }}
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ .Title | default site.Title }}">
+  <meta name="twitter:description" content="{{ .Params.description | default site.Params.description }}">
+  <meta name="twitter:image" content="{{ $ogImage | absURL }}">
+  <meta name="twitter:image:alt" content="{{ .Title | default site.Title }}">
+  {{- $twitterHandle := "" -}}
+  {{- range site.Params.social.profiles -}}
+    {{- if eq .platform "X" -}}{{ $twitterHandle = .handle }}{{- end -}}
+  {{- end -}}
+  <meta name="twitter:site" content="@{{ $twitterHandle }}">
+  <meta name="twitter:creator" content="@{{ $twitterHandle }}">
+
+  <!-- LinkedIn Card Meta Tags -->
+  <meta property="linkedin:card" content="summary_large_image">
+  <meta property="linkedin:title" content="{{ .Title | default site.Title }}">
+  <meta property="linkedin:description" content="{{ .Params.description | default site.Params.description }}">
+  <meta property="linkedin:image" content="{{ $ogImage | absURL }}">
+  <meta property="linkedin:author" content="{{ $linkedinUrl }}">
+
+  <link rel="dns-prefetch" href="//us.i.posthog.com">
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  {{ $css := resources.Get "css/styles.css" | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+  {{ $nativeCss := resources.Get "css/native.css" | fingerprint }}
+  <link rel="preload" href="{{ $nativeCss.RelPermalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ $nativeCss.RelPermalink }}"></noscript>
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  {{ partial "posthog.html" . }}
+
+  <!-- Schema.org structured data: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "sbomify",
+    "url": "{{ site.BaseURL }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.BaseURL }}android-chrome-512x512.png",
+      "width": 512,
+      "height": 512
+    },
+    "sameAs": [
+      {{ range $i, $p := site.Params.social.profiles }}{{ if $i }},{{ end }}"{{ $p.url }}"{{ end }}
+    ],
+    "description": {{ site.Params.description | jsonify }}
+  }
+  </script>
+
+  <!-- Schema.org structured data: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "sbomify",
+    "applicationCategory": "BusinessApplication",
+    "applicationSubCategory": "Supply Chain Security",
+    "operatingSystem": "Cloud",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Community",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "For OSS maintainers and hobby projects",
+        "availability": "https://schema.org/InStock"
+      },
+      {
+        "@type": "Offer",
+        "name": "Business",
+        "price": "199",
+        "priceCurrency": "USD",
+        "description": "For mid-size teams needing private SBOMs",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "{{ now.AddDate 0 1 0 | time.Format "2006-01-02" }}"
+      },
+      {
+        "@type": "Offer",
+        "name": "Enterprise",
+        "description": "For large orgs with advanced security & compliance needs. Contact for pricing.",
+        "availability": "https://schema.org/InStock"
+      }
+    ],
+    "description": {{ site.Params.description | jsonify }},
+    "url": "{{ site.BaseURL }}",
+    "featureList": [
+      "SBOM Generation",
+      "SBOM Management",
+      "Supply Chain Security",
+      "Compliance Management",
+      "Vulnerability Tracking"
+    ],
+    "softwareVersion": "1.0"
+  }
+  </script>
+
+  {{ if eq .Type "posts" }}
+  <!-- Schema.org structured data: BlogPosting / TechArticle -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    {{- $isTech := false -}}
+    {{- if .Params.categories -}}
+      {{- range .Params.categories -}}
+        {{- if or (eq . "compliance") (eq . "security") (eq . "sbom") -}}{{ $isTech = true }}{{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if or (in .Title "Docker") (in .Title "Django") (in .Title "SBOM") -}}{{ $isTech = true }}{{- end -}}
+    "@type": [{{ if $isTech }}"BlogPosting", "TechArticle"{{ else }}"BlogPosting"{{ end }}],
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ .Permalink }}"
+    },
+    "headline": {{ .Title | jsonify }},
+    "description": {{ (.Params.description | default site.Params.description) | jsonify }},
+    "image": "{{ $ogImage | absURL }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ with .Params.author }}{{ with .display_name }}{{ . }}{{ end }}{{ end }}",
+      "url": "{{ $authorName := "" }}{{ with .Params.author }}{{ with .display_name }}{{ $authorName = . }}{{ end }}{{ end }}{{ range $key, $data := site.Data.authors }}{{ if eq $data.display_name $authorName }}{{ site.BaseURL }}authors/{{ $data.slug }}/{{ end }}{{ end }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "sbomify",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ site.BaseURL }}android-chrome-512x512.png"
+      }
+    },
+    "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+    "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+    "keywords": [{{ range $i, $tag := .Params.tags }}{{ if $i }},{{ end }}"{{ $tag }}"{{ end }}],
+    "articleSection": "{{ with .Params.categories }}{{ index . 0 }}{{ end }}",
+    "wordCount": "{{ .WordCount }}",
+    "inLanguage": "en-US",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": ["h1", ".blog-post > p:first-of-type", "article > p:first-of-type"]
+    }
+    {{- if $isTech -}}
+    ,"proficiencyLevel": "{{ .Params.proficiency_level | default "Expert" }}",
+    "dependencies": "{{ .Params.tech_dependencies | default "SBOM Tools" }}"
+    {{- end -}}
+  }
+  </script>
+
+  <!-- Schema.org structured data: BreadcrumbList (Blog Post) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ site.BaseURL }}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "{{ site.BaseURL }}blog/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": {{ .Title | jsonify }},
+        "item": "{{ .Permalink }}"
+      }
+    ]
+  }
+  </script>
+  {{ end }}
+
+  {{ if and (in .RelPermalink "/case-studies/") (ne .RelPermalink "/case-studies/") }}
+  <!-- Schema.org structured data: Product (Case Study) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "sbomify SBOM Management Platform",
+    "description": {{ (.Params.description | default site.Params.description) | jsonify }},
+    "brand": {
+      "@type": "Brand",
+      "name": "sbomify"
+    },
+    "category": "SBOM Management Software",
+    "applicationCategory": "Security Software",
+    "image": "{{ (.Params.company_logo | default site.Params.social.image) | absURL }}"
+  }
+  </script>
+
+  <!-- Schema.org structured data: BreadcrumbList (Case Study) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ site.BaseURL }}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Case Studies",
+        "item": "{{ site.BaseURL }}case-studies/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": {{ .Title | jsonify }},
+        "item": "{{ .Permalink }}"
+      }
+    ]
+  }
+  </script>
+  {{ end }}
+
+  {{ if .Params.faq }}
+  <!-- Schema.org structured data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {{ range $i, $qa := .Params.faq }}
+      {{ if $i }},{{ end }}{
+        "@type": "Question",
+        "name": {{ $qa.question | jsonify }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ $qa.answer | jsonify }}
+        }
+      }
+      {{ end }}
+    ]
+  }
+  </script>
+  {{ end }}
+
+  <!-- Schema.org structured data: WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{{ site.Title }}",
+    "url": "{{ site.BaseURL }}"
+  }
+  </script>
+
+  {{ if and (in .RelPermalink "/guides/") (ne .RelPermalink "/guides/") }}
+  <!-- Schema.org structured data: TechArticle (Guide) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": {{ .Title | jsonify }},
+    "description": {{ (.Params.description | default site.Params.description) | jsonify }},
+    "image": "{{ $ogImage | absURL }}",
+    "proficiencyLevel": "Beginner",
+    "inLanguage": "en-US"
+  }
+  </script>
+  {{ end }}
+
+  {{ if or (eq .RelPermalink "/blog/") (in .RelPermalink "/blog/page/") }}
+  <!-- Schema.org structured data: CollectionPage (Blog Listing) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "sbomify Blog",
+    "description": "Technical articles about SBOMs, supply chain security, and compliance",
+    "url": "{{ site.BaseURL }}blog/",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {{ $posts := where site.RegularPages "Section" "posts" }}
+        {{ range $i, $post := (first 10 $posts) }}
+        {{ if $i }},{{ end }}{
+          "@type": "ListItem",
+          "position": {{ add $i 1 }},
+          "url": "{{ $post.Permalink }}",
+          "name": "{{ $post.Title | htmlEscape }}"
+        }
+        {{ end }}
+      ]
+    }
+  }
+  </script>
+  {{ end }}
+
+  {{ if eq .RelPermalink "/case-studies/" }}
+  <!-- Schema.org structured data: CollectionPage (Case Studies) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "sbomify Case Studies",
+    "description": "Customer success stories with sbomify SBOM management",
+    "url": "{{ site.BaseURL }}case-studies/",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {{ $studies := where site.RegularPages "Section" "case-studies" }}
+        {{ range $i, $study := $studies }}
+        {{ if $i }},{{ end }}{
+          "@type": "ListItem",
+          "position": {{ add $i 1 }},
+          "url": "{{ $study.Permalink }}",
+          "name": "{{ $study.Title | htmlEscape }}"
+        }
+        {{ end }}
+      ]
+    }
+  }
+  </script>
+  {{ end }}
+
+  {{ if eq .RelPermalink "/guides/" }}
+  <!-- Schema.org structured data: CollectionPage (Guides) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "SBOM Guides",
+    "description": "Technical guides for SBOM generation and management",
+    "url": "{{ site.BaseURL }}guides/",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {{ $guides := where site.RegularPages "Section" "guides" }}
+        {{ range $i, $guide := $guides }}
+        {{ if $i }},{{ end }}{
+          "@type": "ListItem",
+          "position": {{ add $i 1 }},
+          "url": "{{ $guide.Permalink }}",
+          "name": "{{ $guide.Title | htmlEscape }}"
+        }
+        {{ end }}
+      ]
+    }
+  }
+  </script>
+  {{ end }}
+</head>

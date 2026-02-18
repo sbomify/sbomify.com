@@ -1,0 +1,22 @@
+{{- $name := "" -}}
+{{- $class := "w-5 h-5" -}}
+{{- if reflect.IsMap . -}}
+  {{- $name = .name -}}
+  {{- with .class }}{{ $class = . }}{{ end -}}
+{{- else -}}
+  {{- $name = . -}}
+{{- end -}}
+{{- $faMap := dict
+  "linkedin" "brands/linkedin-in.svg"
+  "x-twitter" "brands/x-twitter.svg"
+  "mastodon" "brands/mastodon.svg"
+  "github" "brands/github.svg"
+  "globe" "solid/globe.svg"
+  "podcast" "solid/podcast.svg"
+-}}
+{{- $path := index $faMap $name -}}
+{{- if $path -}}
+  {{- $svg := readFile (printf "node_modules/@fortawesome/fontawesome-free/svgs/%s" $path) -}}
+  {{- $svg = replace $svg "<svg " (printf "<svg class=\"%s\" fill=\"currentColor\" " $class) -}}
+  {{- $svg | safeHTML -}}
+{{- end -}}

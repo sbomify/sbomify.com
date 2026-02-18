@@ -4,7 +4,7 @@ import { spawn } from "child_process";
 
 const SOURCE_DIR = "_d2";
 const DEST_DIR = "assets/images/d2";
-const INCLUDES_DIR = "_includes/d2";
+const INCLUDES_DIR = "layouts/partials/d2";
 const THEME_FILE = join(SOURCE_DIR, "theme.d2");
 
 const isWatchMode = process.argv.includes("--watch");
