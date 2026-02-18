@@ -81,3 +81,30 @@ jobs:
           AUGMENT: true
           ENRICH: true
           OUTPUT_FILE: sbom.cdx.json
+
+  sbom-hugo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Get Hugo version
+        id: hugo-version
+        run: echo "version=$(hugo version | grep -oP 'v[\d.]+')" >> "$GITHUB_OUTPUT"
+
+      - name: Upload SBOM
+        uses: sbomify/github-action@master
+        env:
+          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+          COMPONENT_ID: 'jtYGL1IMu1gQ'
+          COMPONENT_NAME: 'Marketing Site (Hugo)'
+          COMPONENT_VERSION: ${{ github.ref_type == 'tag' && github.ref_name || format('{0}-{1}', github.ref_name, github.sha) }}
+          ADDITIONAL_PACKAGES: 'pkg:golang/github.com/gohugoio/hugo@${{ steps.hugo-version.outputs.version }}'
+          AUGMENT: true
+          ENRICH: true
+          OUTPUT_FILE: sbom.cdx.json
