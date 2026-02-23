@@ -15,7 +15,7 @@ slug: announcing-github-action-0-7-0-and-sbomify-0-19
 
 We are excited to announce significant updates to both our GitHub Action and the core sbomify platform. This release brings major architectural improvements, enhanced security features, and expanded support for SBOM standards.
 
-## [GitHub Action 0.7.0](https://github.com/sbomify/github-action/releases/tag/v0.7.0)
+## [GitHub Action 0.7.0](https://github.com/sbomify/sbomify-action/releases/tag/v0.7.0)
 
 The latest version of our GitHub Action includes major changes to enrichment, format support, and telemetry.
 

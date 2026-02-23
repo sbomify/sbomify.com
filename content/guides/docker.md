@@ -96,14 +96,14 @@ SBOM generation is the first step in the [SBOM lifecycle](/features/generate-col
 
 ### Using sbomify GitHub Action (Recommended)
 
-The [sbomify GitHub Action](https://github.com/sbomify/github-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
+The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
 
 For Docker images, sbomify uses **cdxgen** under the hood with fallback to Trivy and Syft. Use `DOCKER_IMAGE` instead of `LOCK_FILE`.
 
 **Standalone (no account needed):**
 
 ```yaml
-- uses: sbomify/github-action@master
+- uses: sbomify/sbomify-action@master
   env:
     DOCKER_IMAGE: ghcr.io/myorg/myapp:${{ github.sha }}
     OUTPUT_FILE: sbom.cdx.json
@@ -118,7 +118,7 @@ The `DOCKER_IMAGE` references the image built in a previous step (typically tagg
 **With sbomify platform (adds augmentation and upload):**
 
 ```yaml
-- uses: sbomify/github-action@master
+- uses: sbomify/sbomify-action@master
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
     COMPONENT_ID: my-component-id
@@ -229,7 +229,7 @@ jobs:
   sbom:
     steps:
       - name: Generate Application SBOM
-        uses: sbomify/github-action@master
+        uses: sbomify/sbomify-action@master
         env:
           LOCK_FILE: 'package-lock.json'
           OUTPUT_FILE: 'app-sbom.cdx.json'
@@ -238,7 +238,7 @@ jobs:
         run: docker build -t myapp:latest --push .
 
       - name: Generate Container SBOM
-        uses: sbomify/github-action@master
+        uses: sbomify/sbomify-action@master
         env:
           DOCKER_IMAGE: 'myapp:latest'
           OUTPUT_FILE: 'container-sbom.cdx.json'

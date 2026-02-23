@@ -101,7 +101,7 @@ A [Software Bill of Materials](/what-is-sbom/) (SBOM) documents every component,
 
 ### During Implementation
 
-When developers add dependencies — open source libraries, frameworks, and packages — they shape the software's composition. This is the moment to begin tracking what goes into the build. Tools like the [sbomify GitHub Action](https://github.com/sbomify/github-action/) can generate SBOMs automatically as part of the build process. See our [SBOM generation guides](/guides/) for language-specific instructions covering Python, JavaScript, Java, Go, Rust, and more.
+When developers add dependencies — open source libraries, frameworks, and packages — they shape the software's composition. This is the moment to begin tracking what goes into the build. Tools like the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) can generate SBOMs automatically as part of the build process. See our [SBOM generation guides](/guides/) for language-specific instructions covering Python, JavaScript, Java, Go, Rust, and more.
 
 ### During Testing
 

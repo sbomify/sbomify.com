@@ -68,4 +68,4 @@ Crucially, **lockfile components are now enriched** rather than removed, preserv
 
 These updates represent a significant step forward in making sbomify the most flexible and compliant SBOM management platform.
 
-Check out the updated [sbomify-action repository](https://github.com/sbomify/github-action) to get started with these new features!
+Check out the updated [sbomify-action repository](https://github.com/sbomify/sbomify-action) to get started with these new features!

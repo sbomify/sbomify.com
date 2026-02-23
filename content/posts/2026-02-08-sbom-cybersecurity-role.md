@@ -125,7 +125,7 @@ If you are beginning your SBOM journey:
 
 1. **Start generating SBOMs.** Use our [language-specific SBOM guides](/guides/) to generate SBOMs for your projects in [CycloneDX](https://cyclonedx.org/) or [SPDX](https://spdx.dev/) format. See our [SBOM formats comparison](/2026/01/15/sbom-formats-cyclonedx-vs-spdx/) for format guidance.
 
-2. **Automate generation in CI/CD.** Integrate SBOM generation into your build pipeline using the [sbomify GitHub Action](https://github.com/sbomify/github-action/), which handles generation, enrichment, and augmentation in one step. Standalone tools like [Syft](https://github.com/anchore/syft) and [Trivy](https://github.com/aquasecurity/trivy) are also available. See our [SBOM generation tools comparison](/2026/01/26/sbom-generation-tools-comparison/).
+2. **Automate generation in CI/CD.** Integrate SBOM generation into your build pipeline using the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/), which handles generation, enrichment, and augmentation in one step. Standalone tools like [Syft](https://github.com/anchore/syft) and [Trivy](https://github.com/aquasecurity/trivy) are also available. See our [SBOM generation tools comparison](/2026/01/26/sbom-generation-tools-comparison/).
 
 3. **Set up vulnerability monitoring.** Use [sbomify](https://sbomify.com) for integrated monitoring (built-in OSV and Dependency-Track scanning), or deploy a standalone [OWASP Dependency-Track](https://dependencytrack.org/) instance for continuous monitoring.
 

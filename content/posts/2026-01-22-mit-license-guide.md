@@ -146,7 +146,7 @@ A [Software Bill of Materials](/what-is-sbom/) documents every component in your
 
 4. **Audit evidence.** SBOMs provide the documentation needed for license audits, M&A due diligence, and procurement assessments.
 
-Both [CycloneDX](https://cyclonedx.org/) and [SPDX](https://spdx.dev/) support standardized license fields. The [sbomify GitHub Action](https://github.com/sbomify/github-action/) automatically enriches SBOMs with license data from multiple sources, making it practical to track MIT attribution requirements across hundreds of dependencies. For language-specific instructions, see our [SBOM generation guides](/guides/).
+Both [CycloneDX](https://cyclonedx.org/) and [SPDX](https://spdx.dev/) support standardized license fields. The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) automatically enriches SBOMs with license data from multiple sources, making it practical to track MIT attribution requirements across hundreds of dependencies. For language-specific instructions, see our [SBOM generation guides](/guides/).
 
 For a broader overview of open source licenses, see our [guide to navigating the landscape of open source licenses](/2024/04/03/navigating-the-landscape-of-open-source-licenses/).
 

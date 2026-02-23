@@ -93,7 +93,7 @@ You can also use the [sbomify SBOM Generation tool](https://github.com/marketpla
 
 ```yaml
 - name: Upload SBOM
-  uses: sbomify/github-action@master
+  uses: sbomify/sbomify-action@master
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
     COMPONENT_ID: 'my-component-id'

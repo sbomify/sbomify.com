@@ -185,14 +185,14 @@ SBOM generation is the first step in the [SBOM lifecycle](/features/generate-col
 
 ### Using sbomify GitHub Action (Recommended)
 
-The [sbomify GitHub Action](https://github.com/sbomify/github-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
+The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
 
 For Ruby, sbomify uses **cdxgen** under the hood with fallback to Trivy and Syft.
 
 **Standalone (no account needed):**
 
 ```yaml
-- uses: sbomify/github-action@master
+- uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: Gemfile.lock
     OUTPUT_FILE: sbom.cdx.json
@@ -207,7 +207,7 @@ Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as 
 **With sbomify platform (adds augmentation and upload):**
 
 ```yaml
-- uses: sbomify/github-action@master
+- uses: sbomify/sbomify-action@master
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
     COMPONENT_ID: my-component-id
@@ -276,13 +276,13 @@ If using Webpacker/Shakapacker, also generate a JavaScript SBOM:
 
 ```yaml
 - name: Generate Ruby SBOM
-  uses: sbomify/github-action@master
+  uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: 'Gemfile.lock'
     OUTPUT_FILE: 'ruby-sbom.cdx.json'
 
 - name: Generate JS SBOM
-  uses: sbomify/github-action@master
+  uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: 'yarn.lock'
     OUTPUT_FILE: 'js-sbom.cdx.json'

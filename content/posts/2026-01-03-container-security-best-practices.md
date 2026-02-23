@@ -84,7 +84,7 @@ This separation matters for several reasons:
 - **Different vulnerability profiles.** A glibc vulnerability in the base image is a different remediation path than a vulnerability in an npm package. Separate SBOMs make triage clearer.
 - **Cleaner compliance.** Compliance reviewers can evaluate OS-level and application-level components independently, with the correct tool and context for each.
 
-The [sbomify GitHub Action](https://github.com/sbomify/github-action/) supports this workflow directly — generate an Application SBOM from your lock file and a Container SBOM from the built image, then organize both under a single product using sbomify's [Product → Project → Component hierarchy](/features/sbom-hierarchy/). For step-by-step instructions, see our [Docker SBOM guide](/guides/docker/).
+The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) supports this workflow directly — generate an Application SBOM from your lock file and a Container SBOM from the built image, then organize both under a single product using sbomify's [Product → Project → Component hierarchy](/features/sbom-hierarchy/). For step-by-step instructions, see our [Docker SBOM guide](/guides/docker/).
 
 ## Runtime Security
 

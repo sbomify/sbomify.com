@@ -112,7 +112,7 @@ To start generating SBOMs for your projects, see our [language-specific SBOM gui
 
 ## Best Practices for Software Supply Chain Security
 
-1. **Generate and maintain SBOMs.** Automate SBOM generation in your CI/CD pipeline using tools like the [sbomify GitHub Action](https://github.com/sbomify/github-action/). Keep SBOMs current with every release.
+1. **Generate and maintain SBOMs.** Automate SBOM generation in your CI/CD pipeline using tools like the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/). Keep SBOMs current with every release.
 
 2. **Monitor dependencies continuously.** Do not rely on point-in-time audits. Use SBOM-based monitoring to catch newly disclosed vulnerabilities in your deployed components.
 

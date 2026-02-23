@@ -51,7 +51,7 @@ SBOM generation should be automated in your CI/CD pipeline so that every build p
 
 - **Format choice.** Select [CycloneDX](https://cyclonedx.org/) or [SPDX](https://spdx.dev/) based on your compliance requirements and tooling. See our [SBOM formats comparison](/2026/01/15/sbom-formats-cyclonedx-vs-spdx/) for guidance. Many organizations generate in both formats.
 - **Generation point.** Generate SBOMs at build time from resolved dependency trees (lock files, built artifacts), not from unresolved manifests. Build-time SBOMs capture the exact versions that will be deployed, including transitive dependencies.
-- **Automation.** Integrate SBOM generation into your CI/CD pipeline using tools like the [sbomify GitHub Action](https://github.com/sbomify/github-action/). Every release should produce an SBOM automatically.
+- **Automation.** Integrate SBOM generation into your CI/CD pipeline using tools like the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/). Every release should produce an SBOM automatically.
 - **Completeness.** Ensure SBOMs capture all layers. For [containerized applications](/2026/01/03/container-security-best-practices/), this means generating container-level SBOMs that include base image packages in addition to application dependencies.
 
 For language-specific generation instructions, see our [SBOM guides](/guides/).

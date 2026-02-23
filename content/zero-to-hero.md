@@ -33,7 +33,7 @@ Most SBOM generation tools produce incomplete SBOMs that:
 
 ### The sbomify Difference
 
-The [sbomify action](https://github.com/sbomify/github-action) is **fully open source** and the only tool that produces compliance-ready SBOMs out of the box by automatically:
+The [sbomify action](https://github.com/sbomify/sbomify-action) is **fully open source** and the only tool that produces compliance-ready SBOMs out of the box by automatically:
 
 - Augmenting with supplier/author/manufacturer metadata
   - Data comes from your [sbomify profile](https://app.sbomify.com/) or a `sbomify.json` file in your repo
@@ -107,7 +107,7 @@ Choose the option that fits your environment:
 
 ```yaml
 - name: Generate SBOM
-  uses: sbomify/github-action@master
+  uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: 'requirements.txt'
     OUTPUT_FILE: 'sbom.cdx.json'

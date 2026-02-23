@@ -24,12 +24,12 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
           <a href="https://github.com/marketplace/actions/sbomify" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on Marketplace →</a>
         </div>
         <p class="text-gray-300 mb-6">
-          GitHub is at the core of many organizations. Our <a href="https://github.com/sbomify/github-action" class="text-[#8A7DFF] hover:text-white transition-colors">GitHub Action</a> makes integration straightforward.
+          GitHub is at the core of many organizations. Our <a href="https://github.com/sbomify/sbomify-action" class="text-[#8A7DFF] hover:text-white transition-colors">GitHub Action</a> makes integration straightforward.
         </p>
         <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">
 
 <pre><code>- name: Upload SBOM
-  uses: sbomify/github-action@master
+  uses: sbomify/sbomify-action@master
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
     COMPONENT_ID: 'my-component-id'
@@ -274,7 +274,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
     <div class="bg-[#141035] rounded-2xl p-6 border border-[#37306B]">
       <p class="text-gray-300 mb-3">
         <span class="font-semibold text-white">How it works:</span>
-        Enrichment happens automatically when using our <a href="https://github.com/sbomify/github-action" class="text-[#8A7DFF] hover:text-white transition-colors">GitHub Action</a> or CLI with the enrich flag.
+        Enrichment happens automatically when using our <a href="https://github.com/sbomify/sbomify-action" class="text-[#8A7DFF] hover:text-white transition-colors">GitHub Action</a> or CLI with the enrich flag.
       </p>
       <code class="bg-[#201B4C] px-3 py-2 rounded text-[#8A7DFF] font-mono border border-[#37306B] inline-block">ENRICH=true</code>
       <span class="text-gray-400 mx-2">or</span>
@@ -325,7 +325,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
 </div>
 
 <script>
-  fetch('https://api.github.com/repos/sbomify/github-action/releases/latest')
+  fetch('https://api.github.com/repos/sbomify/sbomify-action/releases/latest')
     .then(response => response.json())
     .then(data => {
       if (data.tag_name) {

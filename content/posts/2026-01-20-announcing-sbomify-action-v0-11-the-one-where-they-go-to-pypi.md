@@ -168,7 +168,7 @@ Rust projects now get first-class support:
 - Native SBOM generation via cargo-cyclonedx
 - Package metadata enrichment from crates.io
 
-This follows our [plugin architecture](https://github.com/sbomify/github-action/blob/master/docs/adr/0001-plugin-architecture.md) principle of "native-first with generic fallback." Native sources like crates.io provide the most accurate metadata for their ecosystem, with generic aggregators as fallbacks for broader coverage.
+This follows our [plugin architecture](https://github.com/sbomify/sbomify-action/blob/master/docs/adr/0001-plugin-architecture.md) principle of "native-first with generic fallback." Native sources like crates.io provide the most accurate metadata for their ecosystem, with generic aggregators as fallbacks for broader coverage.
 
 ## Other Improvements
 
@@ -192,4 +192,4 @@ pip install sbomify-action
 
 Or continue using the GitHub Action as before. The CLI and Action share the same codebase and configuration options.
 
-Check out the [full changelog on GitHub](https://github.com/sbomify/github-action/compare/v0.10...v0.11) for complete details.
+Check out the [full changelog on GitHub](https://github.com/sbomify/sbomify-action/compare/v0.10...v0.11) for complete details.
