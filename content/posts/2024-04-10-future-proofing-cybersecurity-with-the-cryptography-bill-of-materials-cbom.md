@@ -96,12 +96,12 @@ Even outside the quantum context, organizations regularly need to retire comprom
 
 CBOMs and [SBOMs](/what-is-sbom/) are complementary inventories that address different dimensions of software transparency.
 
-| | SBOM | CBOM |
-| --- | --- | --- |
-| **Inventories** | Software components (libraries, packages) | Cryptographic assets (algorithms, keys, certificates) |
-| **Primary use case** | Vulnerability management, license compliance | Cryptographic risk assessment, quantum migration |
-| **Format** | [SPDX, CycloneDX](/2026/01/15/sbom-formats-cyclonedx-vs-spdx/) | CycloneDX |
-| **Answers** | "What's in my software?" | "What crypto does my software use?" |
+|                      | SBOM                                                           | CBOM                                                  |
+| -------------------- | -------------------------------------------------------------- | ----------------------------------------------------- |
+| **Inventories**      | Software components (libraries, packages)                      | Cryptographic assets (algorithms, keys, certificates) |
+| **Primary use case** | Vulnerability management, license compliance                   | Cryptographic risk assessment, quantum migration      |
+| **Format**           | [SPDX, CycloneDX](/2026/01/15/sbom-formats-cyclonedx-vs-spdx/) | CycloneDX                                             |
+| **Answers**          | "What's in my software?"                                       | "What crypto does my software use?"                   |
 
 CycloneDX supports both in the same document. An organization generating CycloneDX SBOMs can extend them to include cryptographic asset data, producing a unified inventory that covers both component composition and cryptographic posture.
 

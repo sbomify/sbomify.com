@@ -98,13 +98,13 @@ Consumers verify provenance by checking the signature, confirming the builder id
 
 SLSA's levels map to specific threat categories in the software supply chain. The framework's [threat model](https://slsa.dev/spec/v1.0/threats-overview) identifies attacks at each stage of the development process.
 
-| Threat | Example | SLSA Level |
-| --- | --- | --- |
-| No provenance | Consumers cannot verify how an artifact was built | Build L1 |
-| Forged provenance | Developer fabricates provenance for a modified build | Build L2 |
-| Compromised build platform | Attacker injects code via CI/CD infrastructure | Build L3 |
-| Compromised source | Unauthorized commit pushed to repo | Source track (separate) |
-| Compromised dependencies | Malicious transitive dependency | Not yet covered by SLSA |
+| Threat                     | Example                                              | SLSA Level              |
+| -------------------------- | ---------------------------------------------------- | ----------------------- |
+| No provenance              | Consumers cannot verify how an artifact was built    | Build L1                |
+| Forged provenance          | Developer fabricates provenance for a modified build | Build L2                |
+| Compromised build platform | Attacker injects code via CI/CD infrastructure       | Build L3                |
+| Compromised source         | Unauthorized commit pushed to repo                   | Source track (separate) |
+| Compromised dependencies   | Malicious transitive dependency                      | Not yet covered by SLSA |
 
 Note that SLSA v1.0 focuses on the _build_ track. Source integrity (protecting the source repository from unauthorized changes) is being developed as a separate track. Dependency management is out of scope for SLSA but is addressed by complementary tools like [SBOMs](/what-is-sbom/) and [vulnerability scanning](/2026/02/01/sbom-scanning-vulnerability-detection/).
 

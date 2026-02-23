@@ -33,16 +33,16 @@ OpenSSF is a cross-industry initiative under the Linux Foundation that brings to
 
 OpenSSF is not a single tool — it is an umbrella for a portfolio of projects that together address different layers of the software supply chain security problem.
 
-| Project | What It Does |
-| --- | --- |
-| **[Scorecards](https://securityscorecards.dev/)** | Automated security health assessment for open source projects |
-| **[SLSA](/2024/08/17/what-is-slsa/)** | Build integrity and provenance framework (Supply chain Levels for Software Artifacts) |
-| **[Sigstore](/2024/08/12/what-is-sigstore/)** | Keyless signing and verification infrastructure |
-| **[GUAC](https://guac.sh/)** | Graph for Understanding Artifact Composition — aggregates supply chain metadata |
-| **[Alpha-Omega](https://openssf.org/community/alpha-omega/)** | Funds security improvements for critical open source projects |
-| **[Best Practices Badge](https://www.bestpractices.dev/)** | Self-assessment program for open source project security maturity |
-| **[Package Analysis](https://github.com/ossf/package-analysis)** | Detects malicious packages in open source registries |
-| **[Allstar](https://github.com/ossf/allstar)** | Enforces security policies on GitHub organizations |
+| Project                                                          | What It Does                                                                          |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| **[Scorecards](https://securityscorecards.dev/)**                | Automated security health assessment for open source projects                         |
+| **[SLSA](/2024/08/17/what-is-slsa/)**                            | Build integrity and provenance framework (Supply chain Levels for Software Artifacts) |
+| **[Sigstore](/2024/08/12/what-is-sigstore/)**                    | Keyless signing and verification infrastructure                                       |
+| **[GUAC](https://guac.sh/)**                                     | Graph for Understanding Artifact Composition — aggregates supply chain metadata       |
+| **[Alpha-Omega](https://openssf.org/community/alpha-omega/)**    | Funds security improvements for critical open source projects                         |
+| **[Best Practices Badge](https://www.bestpractices.dev/)**       | Self-assessment program for open source project security maturity                     |
+| **[Package Analysis](https://github.com/ossf/package-analysis)** | Detects malicious packages in open source registries                                  |
+| **[Allstar](https://github.com/ossf/allstar)**                   | Enforces security policies on GitHub organizations                                    |
 
 This guide focuses on **Scorecards** — the most widely used and immediately actionable tool in the OpenSSF portfolio.
 

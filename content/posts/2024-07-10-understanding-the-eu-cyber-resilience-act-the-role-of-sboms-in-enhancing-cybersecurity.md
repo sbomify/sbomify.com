@@ -33,11 +33,11 @@ For organizations already invested in [SBOM practices](/what-is-sbom/), the CRA 
 
 The CRA's obligations phase in over a three-year transition period:
 
-| Date | Milestone |
-| --- | --- |
-| **October 2024** | CRA adopted by European Parliament and Council |
-| **December 2024** | CRA entered into force (published in Official Journal) |
-| **September 2026** | Vulnerability reporting obligations apply — manufacturers must report actively exploited vulnerabilities to ENISA within 24 hours |
+| Date               | Milestone                                                                                                                                 |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **October 2024**   | CRA adopted by European Parliament and Council                                                                                            |
+| **December 2024**  | CRA entered into force (published in Official Journal)                                                                                    |
+| **September 2026** | Vulnerability reporting obligations apply — manufacturers must report actively exploited vulnerabilities to ENISA within 24 hours         |
 | **September 2027** | Full essential requirements apply, including SBOM obligations, security by design, conformity assessment, and security update commitments |
 
 Organizations should not wait until 2027. Building SBOM infrastructure, establishing vulnerability handling processes, and ensuring products meet security-by-design requirements takes time. Starting now provides a buffer for the organizational and technical changes required.
