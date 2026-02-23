@@ -1,5 +1,6 @@
 ---
 type: case-studies
+date: 2024-11-22
 title: "Atsign Case Study: Working towards NTIA compliance"
 description: "Atsign provides a platform for secure and private communication, and its NoPorts product is used for zero-trust infrastructure access. This is how sbomify helped them improve the quality of their SBOMs."
 url: /case-studies/atsign/
