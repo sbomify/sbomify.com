@@ -219,20 +219,28 @@
   {{ end }}
 
   {{ if and (in .RelPermalink "/case-studies/") (ne .RelPermalink "/case-studies/") }}
-  <!-- Schema.org structured data: Product (Case Study) -->
+  <!-- Schema.org structured data: Article (Case Study) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "sbomify SBOM Management Platform",
+    "@type": "Article",
+    "headline": {{ .Title | jsonify }},
     "description": {{ (.Params.description | default site.Params.description) | jsonify }},
-    "brand": {
-      "@type": "Brand",
-      "name": "sbomify"
+    "image": "{{ (.Params.logo | default site.Params.social.image) | absURL }}",
+    "publisher": {
+      "@type": "Organization",
+      "name": "sbomify",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ site.BaseURL }}android-chrome-512x512.png"
+      }
     },
-    "category": "SBOM Management Software",
-    "applicationCategory": "Security Software",
-    "image": "{{ (.Params.company_logo | default site.Params.social.image) | absURL }}"
+    "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+    "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ .Permalink }}"
+    }
   }
   </script>
 
