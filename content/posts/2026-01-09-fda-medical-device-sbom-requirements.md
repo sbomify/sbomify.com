@@ -161,7 +161,7 @@ This is the foundation of FDA-compliant SBOM management. sbomify integrates dire
 - **[Generate SBOMs automatically](/features/generate-collaborate-analyze/)** during every build — no manual steps
 - **Augment and enrich** SBOMs with supplier information, licensing, and metadata required by NTIA minimum elements
 - **Cryptographic signing and attestation** for verifiable integrity
-- Upload to sbomify with our [GitHub Action](https://github.com/sbomify/github-action) and [GitLab modules](/2024/11/12/gitlab-support/)
+- Upload to sbomify with our [GitHub Action](https://github.com/sbomify/sbomify-action) and [GitLab modules](/2024/11/12/gitlab-support/)
 - Every release automatically documented and stored for regulatory review
 
 By automating generation in CI/CD, you ensure that SBOMs are always accurate, reproducible, and traceable to specific builds — exactly what the FDA expects.

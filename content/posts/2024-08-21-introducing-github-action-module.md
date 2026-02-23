@@ -30,7 +30,7 @@ The sbomify GitHub Action is designed to integrate seamlessly with your existing
 Getting started with sbomify is easy! Here's how you can integrate it into your project:
 
 1. **Visit the Marketplace**: Head over to the [GitHub Marketplace](https://github.com/marketplace/actions/sbomify) to find the sbomify Action.
-2. **Add sbomify to Your Workflow**: Add the sbomify Action to your GitHub Actions workflow by modifying your `.yml` file(s). You can find detailed setup instructions in the [sbomify GitHub repository](https://github.com/sbomify/github-action).
+2. **Add sbomify to Your Workflow**: Add the sbomify Action to your GitHub Actions workflow by modifying your `.yml` file(s). You can find detailed setup instructions in the [sbomify GitHub repository](https://github.com/sbomify/sbomify-action).
 3. **Run Your Workflow**: Once integrated, every time your workflow runs, sbomify will automatically upload the generated SBOM for your project, which in turn can be shared with your stakeholders. No more manual sharing of SBOMs over emails, your stakeholders can automatically pull down the latest SBOM directly from sbomify when they need it, ensuring they always have the latest version.
 
 Here's a quick example of how to include sbomify in your workflow:
@@ -50,7 +50,7 @@ jobs:
     # Build your SBOM...
 
     - name: Upload SBOM
-      uses: sbomify/github-action@master
+      uses: sbomify/sbomify-action@master
       env:
         TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
         COMPONENT_ID: 'my-component-id'

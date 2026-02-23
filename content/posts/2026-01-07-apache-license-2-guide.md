@@ -143,7 +143,7 @@ A [Software Bill of Materials](/what-is-sbom/) documents every component in your
 
 Both [CycloneDX](https://cyclonedx.org/) and [SPDX](https://spdx.dev/) support standardized license fields. The [CISA minimum elements draft](/compliance/cisa-minimum-elements/) includes license as a recommended SBOM field, recognizing that license information is increasingly expected in SBOMs.
 
-The [sbomify GitHub Action](https://github.com/sbomify/github-action/) automatically enriches SBOMs with license data from multiple sources, making it straightforward to identify all Apache-licensed components in your dependency tree. For language-specific instructions, see our [SBOM generation guides](/guides/).
+The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) automatically enriches SBOMs with license data from multiple sources, making it straightforward to identify all Apache-licensed components in your dependency tree. For language-specific instructions, see our [SBOM generation guides](/guides/).
 
 ## Frequently Asked Questions
 

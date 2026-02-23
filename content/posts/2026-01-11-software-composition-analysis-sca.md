@@ -109,7 +109,7 @@ SCA tools and [SBOMs](/what-is-sbom/) are closely related but serve different pu
 
 ### SCA Generates SBOMs
 
-Many SCA tools produce SBOMs as an output of their analysis. The [sbomify GitHub Action](https://github.com/sbomify/github-action/) generates SBOMs and automatically enriches them with license, hash, and lifecycle metadata from 11+ data sources. Standalone tools like [Syft](https://github.com/anchore/syft) and [Trivy](https://github.com/aquasecurity/trivy) also generate SBOMs in standard formats ([CycloneDX](https://cyclonedx.org/) or [SPDX](https://spdx.dev/)). In this sense, SCA is one of the primary methods for [SBOM generation](/guides/).
+Many SCA tools produce SBOMs as an output of their analysis. The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) generates SBOMs and automatically enriches them with license, hash, and lifecycle metadata from 11+ data sources. Standalone tools like [Syft](https://github.com/anchore/syft) and [Trivy](https://github.com/aquasecurity/trivy) also generate SBOMs in standard formats ([CycloneDX](https://cyclonedx.org/) or [SPDX](https://spdx.dev/)). In this sense, SCA is one of the primary methods for [SBOM generation](/guides/).
 
 ### SBOMs Enable Continuous SCA
 

@@ -11,7 +11,7 @@ date: 2024-10-31
 slug: github-action-update-and-attestation
 ---
 
-Over the last few weeks, we've made some significant updates to our [GitHub Actions module](https://github.com/sbomify/github-action). Since our last update, we've added a few new features.
+Over the last few weeks, we've made some significant updates to our [GitHub Actions module](https://github.com/sbomify/sbomify-action). Since our last update, we've added a few new features.
 
 ## Changelog
 
@@ -26,14 +26,14 @@ Over the last few weeks, we've made some significant updates to our [GitHub Acti
 
 Thanks to recent improvements by GitHub, generating an attestation is now very straightforward. Behind the scenes, the GitHub Actions module [attest-build-provenance](https://github.com/actions/attest-build-provenance) will automatically generate a [SLSA build provenance](https://slsa.dev/spec/v1.0/provenance) predicate using the [in-toto](https://github.com/in-toto/attestation/tree/main/spec/v1) format. All you need to do is instruct our GitHub Actions module to write the SBOM to disk, and then point the attestation tool to this file — voila! You now have a cryptographically signed attestation of your SBOM.
 
-At sbomify, we are big fans of dogfooding our own product, so we've adopted this exact flow in the SBOM we generate for our GitHub Actions module itself, as you can see [here](https://github.com/sbomify/github-action/blob/master/.github/workflows/sbomify.yaml).
+At sbomify, we are big fans of dogfooding our own product, so we've adopted this exact flow in the SBOM we generate for our GitHub Actions module itself, as you can see [here](https://github.com/sbomify/sbomify-action/blob/master/.github/workflows/sbomify.yaml).
 
 The job looks something like this:
 
 ```yaml
 [...]
       - name: Upload SBOM
-        uses: sbomify/github-action@master
+        uses: sbomify/sbomify-action@master
         env:
           TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
           COMPONENT_ID: 'Gu9wem8mkX'
@@ -68,7 +68,7 @@ Loaded 1 attestation from GitHub API
 
 sha256:aeee57eeb5b34e0f70ace59bfc2328e3332062523796837eb37883eb805cd8f9 was attested by:
 REPO                   PREDICATE_TYPE                  WORKFLOW
-sbomify/github-action  https://slsa.dev/provenance/v1  .github/workflows/sbomify.yaml@refs/tags/v0.1.1
+sbomify/sbomify-action  https://slsa.dev/provenance/v1  .github/workflows/sbomify.yaml@refs/tags/v0.1.1
 ```
 
 And just like that! We can independently verify that sbomify (or any other intermediary) did not tamper with the SBOM in transit.

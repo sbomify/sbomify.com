@@ -133,7 +133,7 @@ pip install sbomify-action
 Or use the GitHub Action:
 
 ```yaml
-- uses: sbomify/github-action@v0.13
+- uses: sbomify/sbomify-action@v0.13
 ```
 
-Check out the [full changelog on GitHub](https://github.com/sbomify/github-action/compare/v0.12...v0.13) for complete details.
+Check out the [full changelog on GitHub](https://github.com/sbomify/sbomify-action/compare/v0.12...v0.13) for complete details.

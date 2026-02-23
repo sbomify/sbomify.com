@@ -11,7 +11,7 @@ date: 2024-10-04
 slug: github-action-update
 ---
 
-In the last few weeks, we've worked hard on overhauling the [sbomify GitHub Action](https://github.com/sbomify/github-action/) based on customer feedback. The initial purpose of the GitHub Action module was merely to upload SBOMs to the sbomify platform. We've now broadened the scope to make it more powerful, with the goal of creating NTIA Minimum Elements compliant SBOMs directly in your CI/CD pipeline with minimal fuss.
+In the last few weeks, we've worked hard on overhauling the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) based on customer feedback. The initial purpose of the GitHub Action module was merely to upload SBOMs to the sbomify platform. We've now broadened the scope to make it more powerful, with the goal of creating NTIA Minimum Elements compliant SBOMs directly in your CI/CD pipeline with minimal fuss.
 
 As a refresher, the SBOM lifecycle looks like this:
 
@@ -31,7 +31,7 @@ This is what it looks like in your Actions YAML file:
 
 ```yaml
 - name: Upload SBOM
-  uses: sbomify/github-action@master
+  uses: sbomify/sbomify-action@master
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
     COMPONENT_ID: 'my-component-id'
@@ -46,7 +46,7 @@ We didn't stop there. You can also now use the action in stand-alone mode withou
 
 ```yaml
 - name: Generate SBOM
-  uses: sbomify/github-action@master
+  uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: 'requirements.txt'
     COMPONENT_NAME: 'my-python-app'

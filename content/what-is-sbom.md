@@ -82,4 +82,4 @@ Ready to start generating SBOMs for your projects? Here's where to go next:
 
 - **[SBOM Guides](/guides/)** - Step-by-step guides for generating SBOMs in Python, JavaScript, Java, Go, Rust, and 10+ other languages
 - **[SBOM Resources](/resources/)** - Comprehensive list of SBOM tools for generation, distribution, and analysis
-- **[sbomify GitHub Action](https://github.com/sbomify/github-action/)** - Automate SBOM generation in your CI/CD pipeline
+- **[sbomify GitHub Action](https://github.com/sbomify/sbomify-action/)** - Automate SBOM generation in your CI/CD pipeline

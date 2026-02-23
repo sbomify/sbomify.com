@@ -20,7 +20,7 @@ Generating SBOMs in your CI/CD pipeline provides several advantages:
 
 ### Basic SBOM Generation
 
-The [sbomify GitHub Action](https://github.com/sbomify/github-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
+The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
 
 ```yaml
 ---
@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Generate SBOM
-        uses: sbomify/github-action@master
+        uses: sbomify/sbomify-action@master
         env:
           LOCK_FILE: package-lock.json
           OUTPUT_FILE: sbom.cdx.json
@@ -57,7 +57,7 @@ jobs:
 
 ```yaml
 - name: Generate and Upload SBOM
-  uses: sbomify/github-action@master
+  uses: sbomify/sbomify-action@master
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
     COMPONENT_ID: my-component
@@ -95,7 +95,7 @@ jobs:
         run: npm ci && npm run build
 
       - name: Generate SBOM
-        uses: sbomify/github-action@master
+        uses: sbomify/sbomify-action@master
         env:
           LOCK_FILE: package-lock.json
           OUTPUT_FILE: sbom.cdx.json
@@ -155,7 +155,7 @@ jobs:
           provenance: true
 
       - name: Generate additional SBOM
-        uses: sbomify/github-action@master
+        uses: sbomify/sbomify-action@master
         env:
           DOCKER_IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
           OUTPUT_FILE: container-sbom.cdx.json
@@ -437,7 +437,7 @@ Integrate with OWASP Dependency-Track:
 ```yaml
 # GitHub Actions example
 - name: Generate SBOM
-  uses: sbomify/github-action@master
+  uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: package-lock.json
     OUTPUT_FILE: sbom.cdx.json
@@ -479,7 +479,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Generate SBOM for ${{ matrix.name }}
-        uses: sbomify/github-action@master
+        uses: sbomify/sbomify-action@master
         env:
           LOCK_FILE: ${{ matrix.lock_file }}
           OUTPUT_FILE: 'sbom-${{ matrix.name }}.cdx.json'

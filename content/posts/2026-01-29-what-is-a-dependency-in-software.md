@@ -120,7 +120,7 @@ A [Software Bill of Materials](/what-is-sbom/) provides a complete, machine-read
 
 4. **License tracking.** Each dependency carries a license. SBOMs document these licenses, enabling automated compliance checking. A single [GPL-licensed](/2025/12/22/gpl-license-guide/) transitive dependency can trigger copyleft obligations for your entire application.
 
-SBOM generation tools like the [sbomify GitHub Action](https://github.com/sbomify/github-action/), [Syft](https://github.com/anchore/syft), and [Trivy](https://github.com/aquasecurity/trivy) analyze lock files and build artifacts to capture the full dependency tree. For language-specific SBOM generation instructions, see our [SBOM guides](/guides/).
+SBOM generation tools like the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/), [Syft](https://github.com/anchore/syft), and [Trivy](https://github.com/aquasecurity/trivy) analyze lock files and build artifacts to capture the full dependency tree. For language-specific SBOM generation instructions, see our [SBOM guides](/guides/).
 
 ## Best Practices
 

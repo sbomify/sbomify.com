@@ -188,13 +188,13 @@ Both formats have broad tooling support. Most modern SBOM tools support both for
 
 ### Generation Tools
 
-| Tool                                                               | CycloneDX | SPDX | Notes                                                     |
-| ------------------------------------------------------------------ | --------- | ---- | --------------------------------------------------------- |
-| [sbomify GitHub Action](https://github.com/sbomify/github-action/) | Yes       | Yes  | Generation + enrichment + augmentation, CI/CD integration |
-| [Syft](https://github.com/anchore/syft)                            | Yes       | Yes  | Multi-ecosystem, container support                        |
-| [Trivy](https://github.com/aquasecurity/trivy)                     | Yes       | Yes  | Vulnerability scanning + SBOM generation                  |
-| [cdxgen](https://github.com/CycloneDX/cdxgen)                      | Yes       | No   | CycloneDX-native, broad language support                  |
-| [Microsoft SBOM Tool](https://github.com/microsoft/sbom-tool)      | No        | Yes  | SPDX-native, CI/CD integration                            |
+| Tool                                                                | CycloneDX | SPDX | Notes                                                     |
+| ------------------------------------------------------------------- | --------- | ---- | --------------------------------------------------------- |
+| [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) | Yes       | Yes  | Generation + enrichment + augmentation, CI/CD integration |
+| [Syft](https://github.com/anchore/syft)                             | Yes       | Yes  | Multi-ecosystem, container support                        |
+| [Trivy](https://github.com/aquasecurity/trivy)                      | Yes       | Yes  | Vulnerability scanning + SBOM generation                  |
+| [cdxgen](https://github.com/CycloneDX/cdxgen)                       | Yes       | No   | CycloneDX-native, broad language support                  |
+| [Microsoft SBOM Tool](https://github.com/microsoft/sbom-tool)       | No        | Yes  | SPDX-native, CI/CD integration                            |
 
 ### Analysis and Management Tools
 
