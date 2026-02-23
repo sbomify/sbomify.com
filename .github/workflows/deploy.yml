@@ -77,7 +77,7 @@ jobs:
           COMPONENT_ID: 'XalR981KPFba'
           COMPONENT_NAME: 'Marketing Site (JavaScript)'
           COMPONENT_VERSION: ${{ github.ref_type == 'tag' && github.ref_name || format('{0}-{1}', github.ref_name, github.sha) }}
-          LOCK_FILE: none
+          LOCK_FILE: 'package-lock.json'
           AUGMENT: true
           ENRICH: true
           OUTPUT_FILE: sbom.cdx.json
