@@ -72,15 +72,15 @@ jobs:
 
       - name: Upload SBOM
         uses: sbomify/sbomify-action@master
-        with:
-          token: ${{ secrets.SBOMIFY_TOKEN }}
-          component-id: 'XalR981KPFba'
-          component-name: 'Marketing Site (JavaScript)'
-          component-version: ${{ github.ref_type == 'tag' && github.ref_name || format('{0}-{1}', github.ref_name, github.sha) }}
-          lock-file: none
-          augment: true
-          enrich: true
-          output-file: sbom.cdx.json
+        env:
+          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+          COMPONENT_ID: 'XalR981KPFba'
+          COMPONENT_NAME: 'Marketing Site (JavaScript)'
+          COMPONENT_VERSION: ${{ github.ref_type == 'tag' && github.ref_name || format('{0}-{1}', github.ref_name, github.sha) }}
+          LOCK_FILE: none
+          AUGMENT: true
+          ENRICH: true
+          OUTPUT_FILE: sbom.cdx.json
 
   sbom-hugo:
     runs-on: ubuntu-latest
@@ -97,13 +97,13 @@ jobs:
 
       - name: Upload SBOM
         uses: sbomify/sbomify-action@master
-        with:
-          token: ${{ secrets.SBOMIFY_TOKEN }}
-          component-id: 'jtYGL1IMu1gQ'
-          component-name: 'Marketing Site (Hugo)'
-          component-version: ${{ github.ref_type == 'tag' && github.ref_name || format('{0}-{1}', github.ref_name, github.sha) }}
-          lock-file: none
-          additional-packages: 'pkg:golang/github.com/gohugoio/hugo@${{ steps.hugo-version.outputs.version }}'
-          augment: true
-          enrich: true
-          output-file: sbom.cdx.json
+        env:
+          TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
+          COMPONENT_ID: 'jtYGL1IMu1gQ'
+          COMPONENT_NAME: 'Marketing Site (Hugo)'
+          COMPONENT_VERSION: ${{ github.ref_type == 'tag' && github.ref_name || format('{0}-{1}', github.ref_name, github.sha) }}
+          LOCK_FILE: none
+          ADDITIONAL_PACKAGES: 'pkg:golang/github.com/gohugoio/hugo@${{ steps.hugo-version.outputs.version }}'
+          AUGMENT: true
+          ENRICH: true
+          OUTPUT_FILE: sbom.cdx.json
