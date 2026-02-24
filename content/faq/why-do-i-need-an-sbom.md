@@ -2,6 +2,7 @@
 title: "Why do I need an SBOM?"
 description: "Discover why your organization needs a Software Bill of Materials for vulnerability management, regulatory compliance, and customer trust."
 answer: "You need an SBOM to track what's inside your software, respond quickly to vulnerabilities, meet regulatory requirements like the EU CRA, and build trust with customers and partners."
+tldr: "You need an SBOM to track what's inside your software, respond quickly to vulnerabilities, meet regulatory requirements like the EU CRA, and build trust with customers and partners."
 weight: 20
 keywords: [why SBOM, SBOM benefits, SBOM requirements, software supply chain]
 url: /faq/why-do-i-need-an-sbom/

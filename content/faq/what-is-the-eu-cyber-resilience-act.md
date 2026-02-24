@@ -2,6 +2,7 @@
 title: "What is the EU Cyber Resilience Act (CRA)?"
 description: "Understand the EU Cyber Resilience Act, its SBOM requirements, timeline, and how sbomify helps you achieve CRA compliance."
 answer: "The EU Cyber Resilience Act (CRA) is an EU regulation requiring manufacturers of products with digital elements to provide SBOMs, handle vulnerabilities, and meet cybersecurity requirements throughout the product lifecycle."
+tldr: "The EU Cyber Resilience Act (CRA) is an EU regulation requiring manufacturers of products with digital elements to provide SBOMs, handle vulnerabilities, and meet cybersecurity requirements throughout the product lifecycle."
 weight: 50
 keywords: [EU CRA, Cyber Resilience Act, CRA SBOM, EU SBOM compliance, CRA requirements]
 url: /faq/what-is-the-eu-cyber-resilience-act/

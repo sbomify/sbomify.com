@@ -2,6 +2,7 @@
 title: "What is a Trust Center?"
 description: "Learn what a Trust Center is, how it helps you share security artifacts transparently, and how sbomify makes it easy to create one."
 answer: "A Trust Center is a public-facing page where organizations share security artifacts like SBOMs, compliance documents, and attestations with customers and partners — building transparency and trust."
+tldr: "A Trust Center is a public-facing page where organizations share security artifacts like SBOMs, compliance documents, and attestations with customers and partners — building transparency and trust."
 weight: 70
 keywords: [Trust Center, security artifacts, SBOM sharing, sbomify Trust Center, software transparency]
 url: /faq/what-is-a-trust-center/

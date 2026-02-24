@@ -2,6 +2,7 @@
 title: "Is sbomify free?"
 description: "Learn about sbomify's pricing tiers including the free Community plan for open-source projects, the Business plan for teams, and Enterprise options."
 answer: "Yes — sbomify offers a free Community tier for open-source maintainers and hobby projects. Paid Business and Enterprise plans are available for teams that need private SBOMs and advanced features."
+tldr: "Yes — sbomify offers a free Community tier for open-source maintainers and hobby projects. Paid Business and Enterprise plans are available for teams that need private SBOMs and advanced features."
 weight: 40
 keywords: [sbomify pricing, sbomify free, SBOM tool free, sbomify plans]
 url: /faq/is-sbomify-free/

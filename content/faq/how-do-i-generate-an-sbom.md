@@ -2,6 +2,7 @@
 title: "How do I generate an SBOM?"
 description: "Step-by-step guide to generating your first SBOM using open-source tools for Python, JavaScript, Java, Go, Docker, and more."
 answer: "You can generate an SBOM using open-source tools like Syft, Trivy, or language-specific generators (pip-audit, npm sbom, etc.). Most tools produce CycloneDX or SPDX output from your project's dependency files."
+tldr: "You can generate an SBOM using open-source tools like Syft, Trivy, or language-specific generators (pip-audit, npm sbom, etc.). Most tools produce CycloneDX or SPDX output from your project's dependency files."
 weight: 60
 keywords: [generate SBOM, create SBOM, SBOM tools, SBOM generation, how to SBOM]
 url: /faq/how-do-i-generate-an-sbom/

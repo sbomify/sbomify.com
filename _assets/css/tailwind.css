@@ -485,7 +485,7 @@
 }
 
 /* TL;DR blocks */
-.blog-post .tldr, .page .tldr {
+.blog-post .tldr, .page .tldr, .faq-content .tldr {
   margin: 0 0 2rem 0; /* 32px */
   padding: 1.25rem 1.5rem; /* 20px 24px */
   background: linear-gradient(135deg, rgba(138, 125, 255, 0.08) 0%, rgba(138, 125, 255, 0.03) 100%);
@@ -494,12 +494,12 @@
 }
 
 @media (min-width: 768px) {
-  .blog-post .tldr, .page .tldr {
+  .blog-post .tldr, .page .tldr, .faq-content .tldr {
     padding: 1.5rem 2rem; /* 24px 32px */
   }
 }
 
-.blog-post .tldr .tldr-label, .page .tldr .tldr-label {
+.blog-post .tldr .tldr-label, .page .tldr .tldr-label, .faq-content .tldr .tldr-label {
   display: block;
   font-size: 0.75rem; /* 12px */
   font-weight: 700;
@@ -509,7 +509,7 @@
   margin-bottom: 0.5rem; /* 8px */
 }
 
-.blog-post .tldr p, .page .tldr p {
+.blog-post .tldr p, .page .tldr p, .faq-content .tldr p {
   margin: 0;
   font-size: 1rem; /* 16px */
   line-height: 1.7;
@@ -517,7 +517,7 @@
 }
 
 @media (min-width: 768px) {
-  .blog-post .tldr p, .page .tldr p {
+  .blog-post .tldr p, .page .tldr p, .faq-content .tldr p {
     font-size: 1.125rem; /* 18px */
   }
 }

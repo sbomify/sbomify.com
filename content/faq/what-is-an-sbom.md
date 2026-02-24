@@ -2,6 +2,7 @@
 title: "What is an SBOM?"
 description: "Learn what a Software Bill of Materials (SBOM) is, why it matters for supply chain security, and how it lists every component in your software."
 answer: "An SBOM (Software Bill of Materials) is a machine-readable inventory of all components, libraries, and dependencies that make up a piece of software — like an ingredients list for your code."
+tldr: "An SBOM (Software Bill of Materials) is a machine-readable inventory of all components, libraries, and dependencies that make up a piece of software — like an ingredients list for your code."
 weight: 10
 keywords: [SBOM, Software Bill of Materials, what is SBOM, SBOM definition]
 url: /faq/what-is-an-sbom/

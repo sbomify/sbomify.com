@@ -2,6 +2,7 @@
 title: "What SBOM formats does sbomify support?"
 description: "sbomify supports CycloneDX and SPDX SBOM formats in JSON and XML, with automatic validation and schema compliance checking."
 answer: "sbomify supports both CycloneDX and SPDX — the two industry-standard SBOM formats — in JSON and XML representations, with automatic validation against official schemas."
+tldr: "sbomify supports both CycloneDX and SPDX — the two industry-standard SBOM formats — in JSON and XML representations, with automatic validation against official schemas."
 weight: 30
 keywords: [SBOM formats, CycloneDX, SPDX, sbomify formats, SBOM standard]
 url: /faq/what-sbom-formats-does-sbomify-support/
