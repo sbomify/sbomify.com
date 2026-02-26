@@ -1,8 +1,8 @@
 ---
 title: "Is sbomify free?"
 description: "Learn about sbomify's pricing tiers including the free Community plan for open-source projects, the Business plan for teams, and Enterprise options."
-answer: "Yes — sbomify offers a free Community tier for open-source maintainers and hobby projects. Paid Business and Enterprise plans are available for teams that need private SBOMs and advanced features."
-tldr: "Yes — sbomify offers a free Community tier for open-source maintainers and hobby projects. Paid Business and Enterprise plans are available for teams that need private SBOMs and advanced features."
+answer: "Yes - sbomify offers a free Community tier for open-source maintainers and hobby projects. Paid Business and Enterprise plans are available for teams that need private SBOMs and advanced features."
+tldr: "Yes - sbomify offers a free Community tier for open-source maintainers and hobby projects. Paid Business and Enterprise plans are available for teams that need private SBOMs and advanced features."
 weight: 40
 keywords: [sbomify pricing, sbomify free, SBOM tool free, sbomify plans]
 url: /faq/is-sbomify-free/
@@ -42,6 +42,10 @@ For large organizations with advanced security and compliance needs:
 
 Visit our [Pricing page](/pricing/) for the full feature comparison, or [sign up for a free account](https://app.sbomify.com) to get started immediately.
 
+## Self-hosting
+
+sbomify is also available as a self-hosted solution. If you prefer to run sbomify on your own infrastructure, you can deploy it using Docker. Visit our [GitHub repository](https://github.com/sbomify/sbomify) for setup instructions.
+
 ## No credit card required
 
-You can create a Community account and start uploading SBOMs right away — no credit card or commitment needed. Upgrade to a paid plan whenever your needs grow.
+You can create a Community account and start uploading SBOMs right away - no credit card or commitment needed. Upgrade to a paid plan whenever your needs grow.

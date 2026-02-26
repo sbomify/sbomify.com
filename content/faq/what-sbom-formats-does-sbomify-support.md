@@ -1,8 +1,8 @@
 ---
 title: "What SBOM formats does sbomify support?"
-description: "sbomify supports CycloneDX and SPDX SBOM formats in JSON and XML, with automatic validation and schema compliance checking."
-answer: "sbomify supports both CycloneDX and SPDX — the two industry-standard SBOM formats — in JSON and XML representations, with automatic validation against official schemas."
-tldr: "sbomify supports both CycloneDX and SPDX — the two industry-standard SBOM formats — in JSON and XML representations, with automatic validation against official schemas."
+description: "sbomify supports CycloneDX and SPDX SBOM formats in JSON, with automatic validation and schema compliance checking."
+answer: "sbomify supports both CycloneDX and SPDX - the two industry-standard SBOM formats - in JSON representation, with automatic validation against official schemas."
+tldr: "sbomify supports both CycloneDX and SPDX - the two industry-standard SBOM formats - in JSON representation, with automatic validation against official schemas."
 weight: 30
 keywords: [SBOM formats, CycloneDX, SPDX, sbomify formats, SBOM standard]
 url: /faq/what-sbom-formats-does-sbomify-support/
@@ -16,16 +16,16 @@ sbomify supports the two major SBOM standards:
 
 [CycloneDX](https://cyclonedx.org/) is an OWASP project designed specifically for security use cases. It is lightweight, easy to generate, and widely supported by tooling.
 
-- **Versions supported:** CycloneDX 1.4, 1.5, 1.6
-- **Representations:** JSON, XML
+- **Versions supported:** CycloneDX 1.6, 1.7
+- **Representations:** JSON
 - **Strengths:** Security-focused, supports VEX (Vulnerability Exploitability eXchange), extensive tooling ecosystem
 
 ### SPDX
 
 [SPDX](https://spdx.dev/) (Software Package Data Exchange) is an ISO/IEC international standard (5962:2021) with deep roots in license compliance.
 
-- **Versions supported:** SPDX 2.3
-- **Representations:** JSON, XML, tag-value
+- **Versions supported:** SPDX 2.3, 3.0
+- **Representations:** JSON
 - **Strengths:** ISO standard, strong license compliance support, widely used in automotive and enterprise
 
 ## Automatic validation
@@ -41,6 +41,8 @@ Both formats are well supported and meet regulatory requirements. Some considera
 
 Most SBOM generation tools support both formats. See our [language guides](/guides/) for tool-specific instructions.
 
-## Converting between formats
+## Can I convert between formats?
 
-If you need to convert between CycloneDX and SPDX, tools like [CycloneDX CLI](https://github.com/CycloneDX/cyclonedx-cli) and [cdx2spdx](https://github.com/CycloneDX/cyclonedx-cli) can help. Keep in mind that some fields may not map perfectly between formats due to differences in their data models.
+We strongly recommend against converting between CycloneDX and SPDX. The two formats have different data models, and conversion is inherently lossy - fields, relationships, and metadata will be dropped or misrepresented in the process. The resulting SBOM may look valid but will be incomplete or inaccurate.
+
+Instead, generate your SBOMs natively in the format you need. Some tools like Syft and Trivy support both formats, but many generators only output one. Check our [Resources page](/resources/) for a list of SBOM generation tools and their supported formats.

@@ -6,14 +6,9 @@
 
     <!-- Content -->
     <div class="relative max-w-4xl mx-auto text-center">
-      <h1 class="text-white text-3xl lg:text-5xl font-bold leading-tight mb-6">
+      <h1 class="text-white text-3xl lg:text-5xl font-bold leading-tight">
         {{ .Title }}
       </h1>
-      {{ with .Params.answer }}
-      <p class="text-gray-300 text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto">
-        {{ . }}
-      </p>
-      {{ end }}
     </div>
   </div>
 
@@ -47,75 +42,4 @@
     </div>
   </div>
 </div>
-
-<style>
-  .faq-content {
-    color: #5E5E5E;
-    font-size: 1.125rem;
-    line-height: 1.75;
-  }
-  .faq-content h2 {
-    color: #141035;
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-    font-weight: 700;
-    margin-top: 3rem;
-    margin-bottom: 1.5rem;
-  }
-  .faq-content h2:first-child {
-    margin-top: 0;
-  }
-  .faq-content h3 {
-    color: #141035;
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 600;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
-  .faq-content p {
-    margin-bottom: 1.5rem;
-  }
-  .faq-content ul {
-    list-style-type: disc;
-    padding-left: 1.625rem;
-    margin-bottom: 1.5rem;
-  }
-  .faq-content ol {
-    list-style-type: decimal;
-    padding-left: 1.625rem;
-    margin-bottom: 1.5rem;
-  }
-  .faq-content li {
-    margin-bottom: 0.5rem;
-  }
-  .faq-content li::marker {
-    color: #8A7DFF;
-  }
-  .faq-content strong {
-    color: #141035;
-    font-weight: 600;
-  }
-  .faq-content a {
-    color: #8A7DFF;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-  .faq-content a:hover {
-    color: #7A6DE5;
-  }
-  .faq-content blockquote {
-    border-left: 4px solid #8A7DFF;
-    padding-left: 1.5rem;
-    font-style: italic;
-    color: #141035;
-    margin: 2rem 0;
-  }
-  .faq-content code {
-    background-color: #F3F4F6;
-    padding: 0.125rem 0.375rem;
-    border-radius: 0.25rem;
-    font-size: 0.875em;
-  }
-</style>
 {{ end }}

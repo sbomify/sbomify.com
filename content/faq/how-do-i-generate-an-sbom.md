@@ -1,65 +1,74 @@
 ---
 title: "How do I generate an SBOM?"
-description: "Step-by-step guide to generating your first SBOM using open-source tools for Python, JavaScript, Java, Go, Docker, and more."
-answer: "You can generate an SBOM using open-source tools like Syft, Trivy, or language-specific generators (pip-audit, npm sbom, etc.). Most tools produce CycloneDX or SPDX output from your project's dependency files."
-tldr: "You can generate an SBOM using open-source tools like Syft, Trivy, or language-specific generators (pip-audit, npm sbom, etc.). Most tools produce CycloneDX or SPDX output from your project's dependency files."
+description: "Step-by-step guide to generating your first SBOM using sbomify-action, open-source tools, and CI/CD integration."
+answer: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. You can also use standalone tools like Syft or Trivy."
+tldr: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. You can also use standalone tools like Syft or Trivy."
 weight: 60
-keywords: [generate SBOM, create SBOM, SBOM tools, SBOM generation, how to SBOM]
+keywords: [generate SBOM, create SBOM, SBOM tools, SBOM generation, how to SBOM, sbomify-action]
 url: /faq/how-do-i-generate-an-sbom/
 ---
 
-## Quick start
+## Recommended: sbomify-action
 
-The fastest way to generate an SBOM is with a multi-ecosystem tool like **Syft** or **Trivy**:
+The [sbomify-action](https://github.com/sbomify/sbomify-action) is a CI/CD tool that generates, augments, enriches, and uploads SBOMs from your lockfiles or Docker images. It works as a GitHub Action, Docker image, or pip package, and includes SBOM generators (Trivy, Syft, cdxgen) pre-installed.
+
+```yaml
+- uses: sbomify/sbomify-action@master
+  env:
+    LOCK_FILE: requirements.txt
+    OUTPUT_FILE: sbom.cdx.json
+    ENRICH: true
+```
+
+sbomify-action supports Python, Node, Rust, Go, Ruby, Dart, C++, Docker images, and Yocto/OpenEmbedded builds. It outputs both CycloneDX and SPDX formats.
+
+Beyond basic generation, sbomify-action can:
+
+- **Enrich** SBOMs with metadata from package registries (PyPI, npm, crates.io, etc.)
+- **Augment** with business metadata (supplier, authors, licenses, lifecycle phase)
+- **Inject** additional packages not in lockfiles (vendored code, system libraries)
+- **Upload** to sbomify for collaboration and vulnerability management
+- **Attest** with GitHub's build provenance
+
+It also works with [GitLab CI and Bitbucket Pipelines](https://github.com/sbomify/sbomify-action#other-cicd-platforms). See our [CI/CD integration guide](/guides/ci-cd/) for details.
+
+### Using Docker directly
+
+The sbomify-action Docker image can be used standalone, without any CI platform:
 
 ```bash
-# Using Syft (supports most languages and containers)
+docker run --rm \
+  -v $(pwd):/github/workspace \
+  -w /github/workspace \
+  -e LOCK_FILE=/github/workspace/requirements.txt \
+  -e OUTPUT_FILE=/github/workspace/sbom.cdx.json \
+  -e UPLOAD=false \
+  -e ENRICH=true \
+  sbomifyhub/sbomify-action
+```
+
+This is useful for local development, scripted workflows, or CI systems that don't have a native sbomify-action integration.
+
+## Standalone tools
+
+If you prefer standalone tools outside of CI/CD, **Syft** and **Trivy** are popular options:
+
+```bash
+# Using Syft
 syft . -o cyclonedx-json > sbom.cdx.json
 
-# Using Trivy (also does vulnerability scanning)
+# Using Trivy
 trivy fs . --format cyclonedx --output sbom.cdx.json
 ```
 
-Both tools auto-detect your project type and produce a valid CycloneDX or SPDX document.
+For language-specific generators, see our [language guides](/guides/) covering Python, JavaScript, Java, Go, Rust, Docker, and more.
 
-## Language-specific tools
+## See it in action
 
-For more control, use tools built for your ecosystem:
+Watch our FOSDEM 2026 talk for a real-world walkthrough of CRA-ready SBOM generation using sbomify-action:
 
-| Language   | Tool             | Command                                            |
-| ---------- | ---------------- | -------------------------------------------------- |
-| Python     | CycloneDX Python | `cyclonedx-py requirements`                        |
-| JavaScript | npm              | `npm sbom --sbom-format cyclonedx`                 |
-| Java       | CycloneDX Maven  | `mvn org.cyclonedx:cyclonedx-maven-plugin:makeBom` |
-| Go         | CycloneDX Go     | `cyclonedx-gomod app`                              |
-| Rust       | cargo-cyclonedx  | `cargo cyclonedx`                                  |
-| Docker     | Syft             | `syft your-image:tag -o cyclonedx-json`            |
-
-See our complete [language guides](/guides/) for detailed instructions for each ecosystem, including Poetry, Gradle, pnpm, and more.
-
-## Integrating into CI/CD
-
-The best practice is to generate SBOMs automatically in your CI/CD pipeline so they stay up to date with every release. Our [CI/CD integration guide](/guides/ci-cd/) covers GitHub Actions, GitLab CI, and Bitbucket Pipelines.
-
-You can then upload the generated SBOM to sbomify using the [sbomify GitHub Action](https://github.com/sbomify/github-action) or our API:
-
-```bash
-# Upload to sbomify via CLI
-curl -X POST https://app.sbomify.com/api/v1/sboms/ \
-  -H "Authorization: Token YOUR_API_TOKEN" \
-  -F "file=@sbom.cdx.json"
-```
-
-## What's in the output?
-
-A generated SBOM typically includes:
-
-- **Component names and versions** — Every library and package
-- **Package URLs (purl)** — Unique identifiers for each component
-- **Licenses** — Declared licenses for each dependency
-- **Dependency tree** — How components relate to each other
-- **Hashes** — Integrity checksums for verification
+{{< video-embed-native video_url="https://video.fosdem.org/2026/ud2208/UYTGWA-sbom-generation.av1.webm" title="CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation" description="A four-phase SBOM generation model addressing the EU's Cyber Resilience Act requirements, covering authoring, augmenting, enriching, and signing SBOMs to exceed minimal compliance standards." >}}
 
 ## Next steps
 
-Once you have your SBOM, [upload it to sbomify](https://app.sbomify.com) to monitor for vulnerabilities, track compliance, and share it with customers through your Trust Center.
+Once you have your SBOM, [upload it to sbomify](https://app.sbomify.com) to monitor for vulnerabilities, track compliance, and share it with customers through your [Trust Center](https://trust.sbomify.com/).

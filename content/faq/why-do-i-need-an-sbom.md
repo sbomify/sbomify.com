@@ -10,7 +10,7 @@ url: /faq/why-do-i-need-an-sbom/
 
 ## The software supply chain problem
 
-Over 90% of modern applications contain open-source components. When a critical vulnerability is disclosed, the first question every security team asks is: _"Are we affected?"_ Without an SBOM, answering that question requires manually auditing codebases across every product and service — a process that can take days or weeks.
+Over 90% of modern applications contain open-source components. When a critical vulnerability is disclosed, the first question every security team asks is: _"Are we affected?"_ Without an SBOM, answering that question requires manually auditing codebases across every product and service - a process that can take days or weeks.
 
 ## Key reasons to adopt SBOMs
 
@@ -22,11 +22,11 @@ When a new CVE drops, an SBOM lets you search your entire software portfolio in 
 
 SBOMs are increasingly required by law and industry standards:
 
-- **[EU Cyber Resilience Act (CRA)](/compliance/eu-cra/)** — Requires SBOMs for all products with digital elements sold in the EU
-- **[NTIA Minimum Elements](/compliance/ntia/)** — US government baseline for SBOM content
-- **[NIST 800-171](/compliance/nist-800-171/)** — Supply chain risk management requirements
-- **[FDA guidance](/compliance/fda/)** — Medical device manufacturers must submit SBOMs
-- **[PCI DSS 4.0](/compliance/pci-dss/)** — Payment industry now references software composition analysis
+- **[EU Cyber Resilience Act (CRA)](/compliance/eu-cra/)** - Requires SBOMs for all products with digital elements sold in the EU
+- **[NTIA Minimum Elements](/compliance/ntia/)** - US government baseline for SBOM content
+- **[NIST 800-171](/compliance/nist-800-171/)** - Supply chain risk management requirements
+- **[FDA guidance](/compliance/fda/)** - Medical device manufacturers must submit SBOMs
+- **[PCI DSS 4.0](/compliance/pci-dss/)** - Payment industry now references software composition analysis
 
 See our full [Compliance guide](/compliance/) for details on each framework.
 
