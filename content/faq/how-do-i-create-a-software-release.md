@@ -8,6 +8,10 @@ keywords: [product release, software release, sbomify release, create release, S
 url: /faq/how-do-i-create-a-software-release/
 ---
 
+## Walkthrough
+
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/release_creation.webm" title="How to create a software release in sbomify" description="Step-by-step screencast showing how to create a product release in sbomify by linking component SBOMs." >}}
+
 ## Creating a product release
 
 A product release in sbomify ties together one or more component SBOMs under a single version tag. This is how you represent a shipped version of your software.
@@ -29,8 +33,4 @@ Before creating a release, you need:
 
 ### How versioning works
 
-Component SBOMs and product releases are versioned independently. For example, your product `v2.1.0` might include a backend component at `v1.8.3` and a frontend at `v3.0.1`. The same component SBOM can also be shared across multiple product releases -if two products ship the same library version, there's no need to upload it twice.
-
-## Walkthrough
-
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/release_creation.webm" title="How to create a software release in sbomify" description="Step-by-step screencast showing how to create a product release in sbomify by linking component SBOMs." >}}
+Component SBOMs and product releases are versioned independently. For example, your product `v2.1.0` might include a backend component at `v1.8.3` and a frontend at `v3.0.1`. The same component SBOM can also be shared across multiple product releases - if two products ship the same library version, there's no need to upload it twice.

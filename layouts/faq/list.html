@@ -53,6 +53,9 @@
             <a href="{{ .RelPermalink }}" class="hover:text-[#8A7DFF] transition-colors no-underline">
               {{ .Title }}
             </a>
+            {{ with .Params.plan }}
+            <span class="inline-block align-middle ml-2 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#8A7DFF]/10 text-[#8A7DFF]">{{ . }}</span>
+            {{ end }}
           </h2>
           {{ with .Params.answer }}
           <p class="text-gray-600 leading-relaxed mb-4">{{ . }}</p>

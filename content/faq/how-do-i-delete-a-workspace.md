@@ -8,6 +8,10 @@ keywords: [delete workspace, remove workspace, sbomify workspace, workspace sett
 url: /faq/how-do-i-delete-a-workspace/
 ---
 
+## Walkthrough
+
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/workspace_deletion.webm" title="How to delete a workspace in sbomify" description="Step-by-step screencast showing how to delete a workspace in sbomify." >}}
+
 ## Deleting a workspace
 
 To delete a workspace in sbomify:
@@ -19,7 +23,3 @@ To delete a workspace in sbomify:
 5. Confirm the deletion when prompted
 
 This action is **permanent** and cannot be undone. All data associated with the workspace will be deleted, including products, projects, components, SBOMs, and documents.
-
-## Walkthrough
-
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/workspace_deletion.webm" title="How to delete a workspace in sbomify" description="Step-by-step screencast showing how to delete a workspace in sbomify." >}}

@@ -8,6 +8,10 @@ keywords: [delete account, remove account, sbomify account, account settings, ac
 url: /faq/how-do-i-delete-my-account/
 ---
 
+## Walkthrough
+
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/account_deletion.webm" title="How to delete your account in sbomify" description="Step-by-step screencast showing how to delete your account in sbomify." >}}
+
 ## Deleting your account
 
 To delete your account in sbomify:
@@ -18,7 +22,3 @@ To delete your account in sbomify:
 4. Confirm the deletion when prompted
 
 This action is **permanent** and cannot be undone. All data associated with your account will be deleted.
-
-## Walkthrough
-
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/account_deletion.webm" title="How to delete your account in sbomify" description="Step-by-step screencast showing how to delete your account in sbomify." >}}
