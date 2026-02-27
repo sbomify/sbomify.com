@@ -400,4 +400,145 @@
   }
   </script>
   {{ end }}
+
+  {{ if eq .RelPermalink "/faq/" }}
+  <!-- Schema.org structured data: FAQPage (FAQ Index) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {{ range $i, $faq := .Pages.ByWeight }}
+      {{ if $i }},{{ end }}{
+        "@type": "Question",
+        "name": {{ $faq.Title | jsonify }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ $faq.Params.answer | jsonify }}
+        }
+      }
+      {{ end }}
+    ]
+  }
+  </script>
+
+  <!-- Schema.org structured data: CollectionPage (FAQ) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Frequently Asked Questions",
+    "description": "Common questions about SBOMs, software supply chain security, and the sbomify platform",
+    "url": "{{ site.BaseURL }}faq/",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {{ range $i, $faq := .Pages.ByWeight }}
+        {{ if $i }},{{ end }}{
+          "@type": "ListItem",
+          "position": {{ add $i 1 }},
+          "url": "{{ $faq.Permalink }}",
+          "name": {{ $faq.Title | jsonify }}
+        }
+        {{ end }}
+      ]
+    }
+  }
+  </script>
+
+  <!-- Schema.org structured data: BreadcrumbList (FAQ Index) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ site.BaseURL }}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "FAQ",
+        "item": "{{ site.BaseURL }}faq/"
+      }
+    ]
+  }
+  </script>
+  {{ end }}
+
+  {{ if and (eq .Section "faq") (ne .RelPermalink "/faq/") }}
+  <!-- Schema.org structured data: FAQPage (Individual FAQ) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": {{ .Title | jsonify }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ .Params.answer | jsonify }}
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org structured data: WebPage (Individual FAQ) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": {{ .Title | jsonify }},
+    "description": {{ (.Params.description | default site.Params.description) | jsonify }},
+    "url": "{{ .Permalink }}",
+    "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "{{ site.Title }}",
+      "url": "{{ site.BaseURL }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "sbomify",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ site.BaseURL }}android-chrome-512x512.png"
+      }
+    }
+  }
+  </script>
+
+  <!-- Schema.org structured data: BreadcrumbList (Individual FAQ) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ site.BaseURL }}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "FAQ",
+        "item": "{{ site.BaseURL }}faq/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": {{ .Title | jsonify }},
+        "item": "{{ .Permalink }}"
+      }
+    ]
+  }
+  </script>
+  {{ end }}
 </head>

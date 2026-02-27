@@ -1,0 +1,171 @@
+{{ define "main" }}
+<div>
+  <div class="bg-primaryBG relative overflow-hidden px-5 py-16 lg:py-24 lg:px-24">
+    <!-- Subtle gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#8A7DFF]/5 via-transparent to-transparent pointer-events-none"></div>
+
+    <!-- Content -->
+    <div class="relative max-w-7xl mx-auto text-center">
+      <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+        <span class="text-gradient">{{ .Title }}</span>
+      </h1>
+      {{ with .Params.description }}
+      <p class="text-gray-300 text-lg lg:text-xl max-w-4xl mx-auto leading-relaxed">
+        {{ . }}
+      </p>
+      {{ end }}
+    </div>
+  </div>
+
+  <div class="bg-[#F6F9FA]">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+      {{ with .Content }}
+      <div class="mb-12 text-gray-600 text-lg leading-relaxed">
+        {{ . }}
+      </div>
+      {{ end }}
+
+      <!-- Search input -->
+      <div class="mb-8">
+        <input
+          type="search"
+          id="faq-search"
+          placeholder="Search questions..."
+          autocomplete="off"
+          class="w-full px-5 py-3 rounded-full border border-gray-200 bg-white text-primaryText placeholder-gray-400 focus:outline-none focus:border-[#8A7DFF] focus:ring-2 focus:ring-[#8A7DFF]/20 transition-all text-base"
+        />
+        <p id="faq-count" class="text-sm text-gray-500 mt-3 ml-2 hidden"></p>
+      </div>
+
+      <!-- No results message -->
+      <div id="faq-no-results" class="hidden text-center py-12">
+        <p class="text-gray-500 text-lg">No questions match your search.</p>
+        <button type="button" onclick="document.getElementById('faq-search').value='';document.getElementById('faq-search').dispatchEvent(new Event('input'));" class="mt-4 text-[#8A7DFF] hover:text-[#7A6DE5] font-semibold text-sm transition-colors">
+          Clear search
+        </button>
+      </div>
+
+      <!-- FAQ entries -->
+      <div id="faq-list" class="space-y-6">
+        {{ range .Pages.ByWeight }}
+        <div class="faq-card bg-white rounded-2xl shadow-sm border border-gray-100 p-8" data-title="{{ .Title | lower }}" data-answer="{{ with .Params.answer }}{{ . | lower }}{{ end }}">
+          <h2 class="text-xl lg:text-2xl font-bold text-primaryText mb-3">
+            <a href="{{ .RelPermalink }}" class="hover:text-[#8A7DFF] transition-colors no-underline">
+              {{ .Title }}
+            </a>
+            {{ with .Params.plan }}
+            <span class="inline-block align-middle ml-2 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#8A7DFF]/10 text-[#8A7DFF]">{{ . }}</span>
+            {{ end }}
+          </h2>
+          {{ with .Params.answer }}
+          <p class="text-gray-600 leading-relaxed mb-4">{{ . }}</p>
+          {{ end }}
+          <a href="{{ .RelPermalink }}" class="text-[#8A7DFF] hover:text-[#7A6DE5] font-semibold text-sm transition-colors no-underline">
+            Read full answer &rarr;
+          </a>
+        </div>
+        {{ end }}
+      </div>
+
+      <!-- Show more button -->
+      <div id="faq-show-more" class="text-center mt-8 hidden">
+        <button type="button" id="faq-show-more-btn" class="px-8 py-3 bg-white border border-gray-200 hover:border-[#8A7DFF] text-primaryText rounded-full font-semibold transition-all duration-200 text-base">
+          Show more questions
+        </button>
+      </div>
+
+      <!-- CTA Section -->
+      <div class="mt-16 text-center border-t border-gray-200 pt-12">
+        <h3 class="text-2xl font-bold text-primaryText mb-4">Still have questions?</h3>
+        <p class="text-gray-600 mb-8">Our team is here to help you get started with SBOMs and supply chain security.</p>
+        <div class="flex gap-4 justify-center flex-wrap">
+          <a href="https://app.sbomify.com" class="px-6 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-semibold transition-all duration-200 text-base no-underline">
+            Try sbomify Free
+          </a>
+          <a href="/blog/" class="px-6 py-3 bg-white border border-gray-200 hover:border-[#8A7DFF] text-primaryText rounded-full font-semibold transition-all duration-200 text-base no-underline">
+            Read Our Blog
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var PAGE_SIZE = 10;
+  var input = document.getElementById('faq-search');
+  var list = document.getElementById('faq-list');
+  var cards = list.querySelectorAll('.faq-card');
+  var countEl = document.getElementById('faq-count');
+  var noResults = document.getElementById('faq-no-results');
+  var showMoreWrap = document.getElementById('faq-show-more');
+  var showMoreBtn = document.getElementById('faq-show-more-btn');
+  var total = cards.length;
+  var visible = PAGE_SIZE;
+
+  function render() {
+    var query = input.value.toLowerCase().trim();
+    var isSearching = query.length > 0;
+    var matched = 0;
+    var shown = 0;
+
+    for (var i = 0; i < total; i++) {
+      var card = cards[i];
+      var title = card.getAttribute('data-title');
+      var answer = card.getAttribute('data-answer');
+      var match = !isSearching || title.indexOf(query) !== -1 || answer.indexOf(query) !== -1;
+
+      if (match) {
+        matched++;
+        if (isSearching || matched <= visible) {
+          card.style.display = '';
+          shown++;
+        } else {
+          card.style.display = 'none';
+        }
+      } else {
+        card.style.display = 'none';
+      }
+    }
+
+    // Count indicator — only show during search
+    if (isSearching) {
+      countEl.textContent = 'Showing ' + matched + ' of ' + total + ' questions';
+      countEl.classList.remove('hidden');
+    } else {
+      countEl.classList.add('hidden');
+    }
+
+    // No results message
+    if (matched === 0 && isSearching) {
+      noResults.classList.remove('hidden');
+      list.classList.add('hidden');
+    } else {
+      noResults.classList.add('hidden');
+      list.classList.remove('hidden');
+    }
+
+    // Show more button — only when not searching and there are more to show
+    if (!isSearching && total > visible) {
+      showMoreWrap.classList.remove('hidden');
+      showMoreBtn.textContent = 'Show all ' + total + ' questions';
+    } else {
+      showMoreWrap.classList.add('hidden');
+    }
+  }
+
+  input.addEventListener('input', function() {
+    visible = PAGE_SIZE;
+    render();
+  });
+
+  showMoreBtn.addEventListener('click', function() {
+    visible = total;
+    render();
+  });
+
+  render();
+})();
+</script>
+{{ end }}

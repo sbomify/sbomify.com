@@ -1,0 +1,48 @@
+{{ define "main" }}
+<div>
+  <div class="bg-primaryBG relative overflow-hidden px-5 py-16 lg:py-24 lg:px-24">
+    <!-- Subtle gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#8A7DFF]/5 via-transparent to-transparent pointer-events-none"></div>
+
+    <!-- Content -->
+    <div class="relative max-w-4xl mx-auto text-center">
+      <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+        <span class="text-gradient">{{ .Title }}</span>
+      </h1>
+      {{ with .Params.plan }}
+      <span class="inline-block px-4 py-1.5 rounded-full text-sm font-semibold bg-[#8A7DFF]/20 text-[#8A7DFF] border border-[#8A7DFF]/30">{{ . }} plan</span>
+      {{ end }}
+    </div>
+  </div>
+
+  <div class="bg-[#F6F9FA]">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+      <!-- Breadcrumb -->
+      <nav class="mb-8 text-sm text-gray-500" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-2">
+          <li><a href="/" class="hover:text-[#8A7DFF] transition-colors">Home</a></li>
+          <li class="text-gray-400">/</li>
+          <li><a href="/faq/" class="hover:text-[#8A7DFF] transition-colors">FAQ</a></li>
+          <li class="text-gray-400">/</li>
+          <li class="text-gray-700">{{ .Title }}</li>
+        </ol>
+      </nav>
+
+      <article class="faq-content bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100">
+        {{ partial "tldr.html" . }}
+        {{ .Content }}
+      </article>
+
+      <!-- Bottom navigation -->
+      <div class="mt-12 flex flex-wrap items-center justify-between gap-4">
+        <a href="/faq/" class="text-[#8A7DFF] hover:text-[#7A6DE5] font-semibold transition-colors no-underline">
+          &larr; All FAQ
+        </a>
+        <a href="https://app.sbomify.com" class="px-6 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-semibold transition-all duration-200 text-base no-underline">
+          Try sbomify Free
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

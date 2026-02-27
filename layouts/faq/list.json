@@ -1,0 +1,11 @@
+{{- $entries := slice -}}
+{{- range .Pages.ByWeight -}}
+  {{- $entry := dict
+    "title" .Title
+    "answer" .Params.answer
+    "url" .RelPermalink
+    "keywords" .Params.keywords
+  -}}
+  {{- $entries = $entries | append $entry -}}
+{{- end -}}
+{{- $entries | jsonify -}}
