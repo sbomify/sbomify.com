@@ -89,12 +89,12 @@ sbomify-action will fetch the profile metadata from sbomify and apply it to the 
 
 Augmentation addresses specific NTIA and CISA minimum element fields:
 
-| Field | NTIA 2021 | CISA 2025 |
-| --- | --- | --- |
-| Supplier Name | Required | Required |
-| Author of SBOM Data | Required | Required |
-| License | - | Required (new) |
-| Generation Context | - | Required (new) |
+| Field               | NTIA 2021 | CISA 2025      |
+| ------------------- | --------- | -------------- |
+| Supplier Name       | Required  | Required       |
+| Author of SBOM Data | Required  | Required       |
+| License             | -         | Required (new) |
+| Generation Context  | -         | Required (new) |
 
 For the full list of supported augmentation fields, see the [sbomify-action documentation](https://github.com/sbomify/sbomify-action#augmentation-vs-enrichment).
 
