@@ -7,10 +7,30 @@
   "github" "brands/github.svg"
   "globe" "solid/globe.svg"
   "podcast" "solid/podcast.svg"
+  "python" "brands/python.svg"
+  "javascript" "brands/js.svg"
+  "java" "brands/java.svg"
+  "golang" "brands/golang.svg"
+  "rust" "brands/rust.svg"
+  "php" "brands/php.svg"
+  "swift" "brands/swift.svg"
+  "dart" "brands/dart-lang.svg"
+  "docker" "brands/docker.svg"
+  "gitlab" "brands/gitlab.svg"
+  "bitbucket" "brands/bitbucket.svg"
+-}}
+{{- $tablerMap := dict
+  "cpp" "brand-cpp.svg"
+  "terraform" "brand-terraform.svg"
 -}}
 {{- $path := index $faMap $name -}}
+{{- $tablerPath := index $tablerMap $name -}}
 {{- if $path -}}
   {{- $svg := readFile (printf "node_modules/@fortawesome/fontawesome-free/svgs/%s" $path) -}}
   {{- $svg = replace $svg "<svg " (printf "<svg class=\"%s\" fill=\"currentColor\" " $class) -}}
+  {{- $svg | safeHTML -}}
+{{- else if $tablerPath -}}
+  {{- $svg := readFile (printf "node_modules/@tabler/icons/icons/outline/%s" $tablerPath) -}}
+  {{- $svg = replace $svg "<svg " (printf "<svg class=\"%s\" " $class) -}}
   {{- $svg | safeHTML -}}
 {{- end -}}

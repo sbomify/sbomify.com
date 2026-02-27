@@ -18,7 +18,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="github">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <div class="flex flex-wrap items-center gap-3">
-            <img src="/assets/images/site/github.svg" class="h-8 w-auto" alt="GitHub" width="129" height="32">
+            <span class="flex items-center gap-2 text-2xl font-bold text-white"><span class="text-[#8A7DFF]">{{< icon "github" "w-8 h-8" >}}</span> GitHub</span>
             <div id="gh-latest-release" class="hidden"></div>
           </div>
           <a href="https://github.com/marketplace/actions/sbomify" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on Marketplace →</a>
@@ -45,28 +45,30 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
       <!-- GitLab -->
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="gitlab">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-          <img src="/assets/images/site/gitlab.svg" class="h-8 w-auto self-start md:self-center" alt="GitLab" width="83" height="32">
-          <a href="https://gitlab.com/sbomify/gitlab-pipeline" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View Pipeline →</a>
+          <span class="flex items-center gap-2 text-2xl font-bold text-white"><span class="text-[#8A7DFF]">{{< icon "gitlab" "w-8 h-8" >}}</span> GitLab</span>
+          <a href="https://github.com/sbomify/sbomify-action" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on GitHub →</a>
         </div>
         <p class="text-gray-300 mb-6">
-          For GitLab users, we provide a dedicated pipeline template.
+          Use our <a href="https://hub.docker.com/r/sbomifyhub/sbomify-action" class="text-[#8A7DFF] hover:text-white transition-colors">Docker image</a> directly in GitLab CI with built-in caching support.
         </p>
         <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">
 
 <pre><code>generate-sbom:
   image: sbomifyhub/sbomify-action
+  cache:
+    key: sbomify-cache
+    paths:
+      - .sbomify-cache/
   variables:
-    TOKEN: $SBOMIFY_TOKEN
-    COMPONENT_ID: 'Your Component ID'
-    UPLOAD: "true"
-    AUGMENT: "true"
+    SBOMIFY_CACHE_DIR: "${CI_PROJECT_DIR}/.sbomify-cache/sbomify"
+    TRIVY_CACHE_DIR: "${CI_PROJECT_DIR}/.sbomify-cache/trivy"
+    SYFT_CACHE_DIR: "${CI_PROJECT_DIR}/.sbomify-cache/syft"
+    LOCK_FILE: poetry.lock
+    OUTPUT_FILE: sbom.cdx.json
+    UPLOAD: "false"
     ENRICH: "true"
-    COMPONENT_NAME: 'my-python-app'
-    COMPONENT_VERSION: $CI_COMMIT_SHA
-    LOCK_FILE: 'poetry.lock'
-    OUTPUT_FILE: 'sbom.cdx.json'
   script:
-    - /sbomify.sh</code></pre>
+    - sbomify-action</code></pre>
 
         </div>
       </div>
@@ -74,28 +76,33 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
       <!-- Bitbucket -->
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="bitbucket">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-          <img src="/assets/images/site/bitbucket.svg" class="h-8 w-auto self-start md:self-center" alt="Bitbucket" width="159" height="32">
-          <a href="https://bitbucket.org/sbomify/bitbucket-pipe/" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View Pipe →</a>
+          <span class="flex items-center gap-2 text-2xl font-bold text-white"><span class="text-[#8A7DFF]">{{< icon "bitbucket" "w-8 h-8" >}}</span> Bitbucket</span>
+          <a href="https://github.com/sbomify/sbomify-action" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on GitHub →</a>
         </div>
         <p class="text-gray-300 mb-6">
-          Seamlessly integrate with Bitbucket Pipelines using our official pipe.
+          Seamlessly integrate with Bitbucket Pipelines using our Docker image with built-in caching.
         </p>
         <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">
 
-<pre><code>- step:
-    name: Build SBOM
-    script:
-      - pipe: docker://sbomifyhub/sbomify-action:latest
-        variables:
-          TOKEN: $SBOMIFY_TOKEN
-          COMPONENT_ID: "Your Component ID"
-          UPLOAD: "true"
-          AUGMENT: "true"
-          ENRICH: "true"
-          COMPONENT_NAME: "my-python-app"
-          COMPONENT_VERSION: $BITBUCKET_COMMIT
-          LOCK_FILE: "poetry.lock"
-          OUTPUT_FILE: "bitbucket-sbom.cdx.json"</code></pre>
+<pre><code>pipelines:
+  default:
+    - step:
+        caches:
+          - sbomify
+        script:
+          - pipe: docker://sbomifyhub/sbomify-action:latest
+            variables:
+              SBOMIFY_CACHE_DIR: "${BITBUCKET_CLONE_DIR}/.sbomify-cache/sbomify"
+              TRIVY_CACHE_DIR: "${BITBUCKET_CLONE_DIR}/.sbomify-cache/trivy"
+              SYFT_CACHE_DIR: "${BITBUCKET_CLONE_DIR}/.sbomify-cache/syft"
+              LOCK_FILE: poetry.lock
+              OUTPUT_FILE: sbom.cdx.json
+              UPLOAD: "false"
+              ENRICH: "true"
+
+definitions:
+  caches:
+    sbomify: .sbomify-cache</code></pre>
 
         </div>
       </div>
@@ -103,25 +110,270 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
       <!-- Docker -->
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="docker">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-          <img src="/assets/images/site/docker.svg" class="h-8 w-auto self-start md:self-center" alt="Docker" width="140" height="32">
-          <span class="text-sm font-semibold text-gray-400 whitespace-nowrap">Universal Support</span>
+          <span class="flex items-center gap-2 text-2xl font-bold text-white"><span class="text-[#8A7DFF]">{{< icon "docker" "w-8 h-8" >}}</span> Docker</span>
+          <a href="https://hub.docker.com/r/sbomifyhub/sbomify-action" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on Docker Hub →</a>
         </div>
         <p class="text-gray-300 mb-6">
-          For any other CI/CD system, you can use our Docker image directly.
+          For any other CI/CD system, use our Docker image directly. All generators are pre-installed.
         </p>
         <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">
 
-<pre><code>docker run --rm \
-  -v $(pwd):/code \
-  -e TOKEN=&lt;my token&gt; \
-  -e COMPONENT_ID=&lt;my component id&gt; \
-  -e LOCK_FILE=/code/requirements.txt \
-  -e OUTPUT_FILE=/code/sbom.cdx.json \
-  -e COMPONENT_NAME=my-app \
+<pre><code># Create persistent cache volume
+docker volume create sbomify-cache
+
+docker run --rm \
+  -v $(pwd):/github/workspace \
+  -v sbomify-cache:/cache \
+  -w /github/workspace \
+  -e SBOMIFY_CACHE_DIR=/cache/sbomify \
+  -e TRIVY_CACHE_DIR=/cache/trivy \
+  -e SYFT_CACHE_DIR=/cache/syft \
+  -e LOCK_FILE=/github/workspace/requirements.txt \
+  -e OUTPUT_FILE=/github/workspace/sbom.cdx.json \
+  -e UPLOAD=false \
   -e ENRICH=true \
   sbomifyhub/sbomify-action</code></pre>
 
         </div>
+      </div>
+
+      <!-- pip / CLI -->
+      <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="pip">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+          <span class="flex items-center gap-2 text-2xl font-bold text-white"><span class="text-[#8A7DFF]">{{< icon "python" "w-8 h-8" >}}</span> pip / CLI</span>
+          <a href="https://pypi.org/project/sbomify-action/" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on PyPI →</a>
+        </div>
+        <p class="text-gray-300 mb-6">
+          Install via pip for local development or non-Docker environments. Requires external generators (Trivy, Syft, or cdxgen) to be installed separately.
+        </p>
+        <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">
+
+<pre><code>pip install sbomify-action
+
+# CLI usage
+sbomify-action --lock-file requirements.txt \
+  --enrich --no-upload -o sbom.cdx.json
+
+# Or use environment variables
+export LOCK_FILE=requirements.txt
+export ENRICH=true
+export UPLOAD=false
+sbomify-action</code></pre>
+
+        </div>
+      </div>
+    </div>
+
+</section>
+
+<!-- Supported Ecosystems Section -->
+<section>
+    <div class="mb-10 text-center max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold text-primaryText mb-4">Supported Ecosystems</h2>
+      <p class="text-lg text-secondaryText">Generate SBOMs from lockfiles across 14 languages, plus Docker images and Yocto/OpenEmbedded builds.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="flex items-center gap-2 text-lg font-bold text-white mb-2"><span class="text-[#8A7DFF]">{{< icon "python" "w-5 h-5" >}}</span> Python</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">requirements.txt</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">poetry.lock</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Pipfile.lock</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">uv.lock</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">pyproject.toml</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="flex items-center gap-2 text-lg font-bold text-white mb-2"><span class="text-[#8A7DFF]">{{< icon "javascript" "w-5 h-5" >}}</span> JavaScript</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">package.json</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">package-lock.json</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">yarn.lock</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">pnpm-lock.yaml</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">bun.lock</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="flex items-center gap-2 text-lg font-bold text-white mb-2"><span class="text-[#8A7DFF]">{{< icon "java" "w-5 h-5" >}}</span> Java</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">pom.xml</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">build.gradle</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">build.gradle.kts</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">gradle.lockfile</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="flex items-center gap-2 text-lg font-bold text-white mb-2"><span class="text-[#8A7DFF]">{{< icon "golang" "w-5 h-5" >}}</span> Go</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">go.mod</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">go.sum</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="flex items-center gap-2 text-lg font-bold text-white mb-2"><span class="text-[#8A7DFF]">{{< icon "rust" "w-5 h-5" >}}</span> Rust</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Cargo.lock</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">Ruby</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Gemfile.lock</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="flex items-center gap-2 text-lg font-bold text-white mb-2"><span class="text-[#8A7DFF]">{{< icon "php" "w-5 h-5" >}}</span> PHP</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">composer.json</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">composer.lock</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">.NET / C#</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">packages.lock.json</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="flex items-center gap-2 text-lg font-bold text-white mb-2"><span class="text-[#8A7DFF]">{{< icon "swift" "w-5 h-5" >}}</span> Swift</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Package.swift</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Package.resolved</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="flex items-center gap-2 text-lg font-bold text-white mb-2"><span class="text-[#8A7DFF]">{{< icon "dart" "w-5 h-5" >}}</span> Dart</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">pubspec.lock</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">Elixir</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">mix.lock</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">Scala</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">build.sbt</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="flex items-center gap-2 text-lg font-bold text-white mb-2"><span class="text-[#8A7DFF]">{{< icon "cpp" "w-5 h-5" >}}</span> C++</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">conan.lock</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="flex items-center gap-2 text-lg font-bold text-white mb-2"><span class="text-[#8A7DFF]">{{< icon "terraform" "w-5 h-5" >}}</span> Terraform</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">.terraform.lock.hcl</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">Docker Images</h4>
+        <p class="text-gray-300 text-sm">Generate SBOMs directly from container images using <code class="text-[#8A7DFF]">DOCKER_IMAGE</code> instead of a lockfile. Scans all layers and installed packages.</p>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">Yocto / OpenEmbedded</h4>
+        <p class="text-gray-300 text-sm">Batch process SPDX SBOMs from Yocto builds. Extracts <code class="text-[#8A7DFF]">.spdx.tar.zst</code> archives, uploads package SBOMs, and tags them with a product release.</p>
+      </div>
+    </div>
+
+</section>
+
+<!-- SBOM Generators Section -->
+<section>
+    <div class="mb-10 text-center max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold text-primaryText mb-4">SBOM Generators</h2>
+      <p class="text-lg text-secondaryText">Five generators with automatic fallback. The best tool for each ecosystem is selected automatically.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="text-lg font-bold text-white">cyclonedx-py</h4>
+          <span class="text-xs bg-[#8A7DFF]/10 text-[#8A7DFF] px-2 py-1 rounded font-mono">Priority 10</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-3">Native Python generator. Most accurate for Python ecosystems.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Python</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="text-lg font-bold text-white">cargo-cyclonedx</h4>
+          <span class="text-xs bg-[#8A7DFF]/10 text-[#8A7DFF] px-2 py-1 rounded font-mono">Priority 10</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-3">Native Rust generator. Most accurate for Rust ecosystems.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Rust</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="text-lg font-bold text-white">cdxgen</h4>
+          <span class="text-xs bg-[#8A7DFF]/10 text-[#8A7DFF] px-2 py-1 rounded font-mono">Priority 20</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-3">Broadest ecosystem support. Best choice for Java/Gradle and multi-language projects.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Python</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">JS</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Java</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Go</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Rust</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Ruby</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">+8 more</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="text-lg font-bold text-white">Trivy</h4>
+          <span class="text-xs bg-[#8A7DFF]/10 text-[#8A7DFF] px-2 py-1 rounded font-mono">Priority 30</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-3">Security-focused scanner by Aqua Security. Supports CycloneDX and SPDX output.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Python</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">JS</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Java</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Go</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Docker</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">+5 more</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="text-lg font-bold text-white">Syft</h4>
+          <span class="text-xs bg-[#8A7DFF]/10 text-[#8A7DFF] px-2 py-1 rounded font-mono">Priority 35</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-3">Comprehensive scanner by Anchore. Supports CycloneDX and SPDX output including Terraform.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Python</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">JS</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Go</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Terraform</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Docker</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">+7 more</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SBOM Formats -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-[#141035] rounded-2xl p-6 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">CycloneDX</h4>
+        <p class="text-gray-300 text-sm mb-3">Default format. Versions 1.3 through 1.7 supported depending on generator.</p>
+        <code class="bg-[#201B4C] px-3 py-2 rounded text-[#8A7DFF] font-mono border border-[#37306B] inline-block text-sm">SBOM_FORMAT=cyclonedx</code>
+      </div>
+      <div class="bg-[#141035] rounded-2xl p-6 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">SPDX</h4>
+        <p class="text-gray-300 text-sm mb-3">Versions 2.2 and 2.3 via Trivy or Syft, plus 3.0 via Yocto/OpenEmbedded. Validated against JSON schemas.</p>
+        <code class="bg-[#201B4C] px-3 py-2 rounded text-[#8A7DFF] font-mono border border-[#37306B] inline-block text-sm">SBOM_FORMAT=spdx</code>
       </div>
     </div>
 
@@ -149,9 +401,15 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
         <img src="/assets/images/site/dependency-track-white.svg" class="h-8 w-auto mb-6 self-start" alt="Dependency Track" width="149" height="32">
         <h3 class="text-xl font-bold text-white mb-3">Dependency Track</h3>
         <p class="text-gray-300 mb-4 flex-grow">
-          Leverage the power of OWASP Dependency-Track for continuous component analysis.
+          Leverage the power of OWASP Dependency-Track for continuous component analysis. Upload SBOMs directly from CI/CD with <code class="text-[#8A7DFF]">UPLOAD_DESTINATIONS=dependency-track</code>.
         </p>
-        <div class="mt-4 pt-4 border-t border-[#37306B]">
+        <div class="mt-4 pt-4 border-t border-[#37306B] space-y-3">
+          <div class="flex items-start gap-2">
+            <span class="bg-green-500/10 text-green-400 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">CI/CD</span>
+            <p class="text-sm text-gray-400">
+              <strong>Direct Upload:</strong> sbomify-action can upload SBOMs directly to your Dependency Track instance from any CI pipeline.
+            </p>
+          </div>
           <div class="flex items-start gap-2">
             <span class="bg-[#8A7DFF]/10 text-[#8A7DFF] text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Enterprise</span>
             <p class="text-sm text-gray-400">
@@ -168,7 +426,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
 <section>
     <div class="mb-10 text-center max-w-3xl mx-auto">
       <h2 class="text-3xl font-bold text-primaryText mb-4">Enrichment Data Sources</h2>
-      <p class="text-lg text-secondaryText">We integrate with 11 data sources to add metadata to your SBOM components: descriptions, licenses, supplier information, and more.</p>
+      <p class="text-lg text-secondaryText">We integrate with 12 data sources to add metadata to your SBOM components: descriptions, licenses, supplier information, and more.</p>
     </div>
 
     <!-- Pre-computed Databases -->
@@ -205,7 +463,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
     <div class="mb-8">
       <h3 class="text-xl font-bold text-primaryText mb-4">Native Package Registries</h3>
       <p class="text-secondaryText mb-4">Authoritative data direct from the ecosystem's official source.</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
         <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
           <h4 class="text-lg font-bold text-white mb-2">PyPI</h4>
           <p class="text-gray-300 text-sm mb-3">Python Package Index</p>
@@ -225,6 +483,11 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
           <h4 class="text-lg font-bold text-white mb-2">Debian Sources</h4>
           <p class="text-gray-300 text-sm mb-3">Debian Package Archive</p>
           <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">pkg:deb/debian/*</span>
+        </div>
+        <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
+          <h4 class="text-lg font-bold text-white mb-2">Conan Center</h4>
+          <p class="text-gray-300 text-sm mb-3">C/C++ (Conan)</p>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">pkg:conan/*</span>
         </div>
       </div>
     </div>
