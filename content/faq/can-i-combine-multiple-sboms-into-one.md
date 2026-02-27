@@ -23,7 +23,7 @@ Consider a product with a Python backend and a Node frontend, each with its own 
 
 ## What about SPDX 3 and CycloneDX 2?
 
-The next generation of both formats (SPDX 3.0 and CycloneDX 2.0) do support linking multiple documents together without losing context. They allow referencing external SBOM documents while preserving the relationship between components and their source. However, this is significantly more complex than simply concatenating files, and tooling support is still maturing.
+The latest versions of both formats (SPDX 3.0, which is the current version, and the upcoming CycloneDX 2.0) do support linking multiple documents together without losing context. They allow referencing external SBOM documents while preserving the relationship between components and their source. However, this is significantly more complex than simply concatenating files, and tooling support is still maturing.
 
 ## Our recommendation: link, don't merge
 
