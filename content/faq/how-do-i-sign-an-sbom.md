@@ -71,7 +71,7 @@ A successful verification confirms:
 
 This is exactly the point: the consumer does not need to trust sbomify, your CDN, or any other intermediary. They can independently verify the SBOM's provenance by checking the attestation against the Sigstore transparency log.
 
-We use this exact workflow for our own [sbomify-action SBOM](https://github.com/sbomify/sbomify-action/blob/master/.github/workflows/sbomify.yaml). You can download the SBOM from our [public component page](https://app.sbomify.com/component/Gu9wem8mkX) and verify it yourself. For a detailed walkthrough, see our [attestation blog post](/2024/10/31/github-action-update-and-attestation/).
+We use this exact workflow for our own [sbomify-action SBOM](https://github.com/sbomify/sbomify-action/blob/master/.github/workflows/sbomify.yaml). You can download the SBOM from our [public Trust Center page](https://trust.sbomify.com/product/sbomify-action/) and verify it yourself. For a detailed walkthrough, see our [attestation blog post](/2024/10/31/github-action-update-and-attestation/).
 
 ## What is happening under the hood
 
@@ -88,6 +88,14 @@ The combination means the signature is tied to a verified identity (your GitHub 
 sbomify can verify attestations automatically when you upload signed SBOMs. The [GitHub Attestation Plugin](/2026/01/23/announcing-sbomify-v0-25-the-one-with-attestations/) uses Sigstore and cosign to check signatures on upload, giving you a verified provenance status for every SBOM in your portfolio.
 
 This closes the loop: your CI pipeline signs the SBOM, sbomify verifies the signature on ingestion, and your customers can independently verify the same signature when they download the SBOM from your Trust Center.
+
+## Alternative: signing with PKI/X.509
+
+GitHub Attestations and Sigstore are not the only way to sign an SBOM. Organizations with existing PKI (Public Key Infrastructure) or X.509 certificate infrastructure can use their own signing keys to achieve the same goal. The underlying principle is identical: cryptographically bind the SBOM to a known identity so that consumers can verify authenticity and integrity.
+
+Both CycloneDX and SPDX support signing using standard X.509 certificates. CycloneDX additionally supports inlining the signature directly within the SBOM document itself. This makes the SBOM a self-contained bundle - the data and its proof of authenticity travel together in a single file. The trade-off is that verification becomes slightly more involved, since the verifier needs to extract the signature, reconstruct the original unsigned content, and validate the certificate chain. But for organizations that already operate their own certificate authority or have enterprise signing infrastructure, this approach integrates naturally into existing workflows without depending on any external service like Sigstore or GitHub.
+
+Whichever method you choose, the core guarantees are the same: the recipient can verify who produced the SBOM and confirm it has not been altered since signing. The best approach depends on your existing infrastructure and your consumers' verification capabilities.
 
 ## Further reading
 
