@@ -95,6 +95,8 @@ GitHub Attestations and Sigstore are not the only way to sign an SBOM. Organizat
 
 Both CycloneDX and SPDX 3.0 support inlining the signature directly within the SBOM document. This makes the SBOM a self-contained bundle where the data and its proof of authenticity travel together in a single file. The trade-off is that both generation and verification are more involved. To sign, you generate the SBOM, sign the content, then assemble the final document with the signature embedded. To verify, you need to disassemble the SBOM to separate the signature from the content, validate the certificate chain (and obtain the public key if the certificate is self-signed), and then verify the signature against the original content. It is more work than running `gh attestation verify`, but the benefit is that everything is in one place and the workflow integrates naturally with enterprise signing infrastructure.
 
+It is also possible to sign SBOMs using PGP, though this is less common today given the shift toward Sigstore's keyless model and X.509 certificate-based signing.
+
 Whichever method you choose, the core guarantees are the same: the recipient can verify who produced the SBOM and confirm it has not been altered since signing. The best approach depends on your existing infrastructure and your consumers' verification capabilities.
 
 ## Further reading
