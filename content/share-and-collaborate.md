@@ -1,38 +1,45 @@
 ---
 
 url: /share-and-collaborate/
-title: SBOM management - Share and Collaborate
+title: Share and Collaborate on SBOMs
+description: "Centralize SBOM management and share software transparency artifacts with customers, auditors, and internal teams through sbomify's Trust Center and integrations."
 
 ---
 
-In today's fast-paced software development environment, ensuring the security and integrity of software components is more critical than ever. This necessity brings to light the essential role of SBOM management, and here, sbomify emerges as a transformative solution. sbomify redefines how Software Bills of Materials (SBOMs) are managed, shared, and collaborated upon. With the traditional, cumbersome methods of SBOM sharing behind us, sbomify introduces an efficient, automated platform that seamlessly integrates into your CI/CD pipeline and your Software Developer Life Cycle (SDLC). This integration facilitates suppliers in automatically uploading their most recent SBOMs, ensuring all stakeholders have instant access to the latest information. sbomify isn't just a tool; it's an integral component of a robust software security strategy, revolutionizing sbom management.
+sbomify is a central hub for managing and sharing SBOMs and compliance artifacts. Suppliers upload SBOMs automatically through CI/CD integrations, while stakeholders (customers, auditors, and internal teams) access them through the [Trust Center](/features/trust-center/) or direct exports.
 
-## Automated SBOM Management in CI/CD Pipelines
+<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+    {{< d2 "sbom-sharing" >}}
+</div>
 
-sbomify's groundbreaking integration with CI/CD pipelines sets a new standard in SBOM management software. This innovation allows for the automatic update of SBOMs by suppliers within their regular development and deployment workflows. Such automation guarantees that each SBOM accurately reflects the most recent snapshot of software components, eradicating outdated information and boosting transparency and trust across all parties involved.
+## Centralized SBOM Hub
 
-## Centralized SBOM Management Solutions
+Instead of sharing SBOMs over email or scattered file shares, sbomify provides a single source of truth. Vendors and internal teams upload SBOMs via [CI/CD integrations](/features/integrations/) (GitHub Actions, GitLab CI, etc.), and sbomify stores, enriches, and distributes them automatically.
 
-![](/assets/images/site/marketplace.webp)
+Because an SBOM is a snapshot of a specific point in time, having a centralized platform where the latest versions are always available is critical. sbomify ensures stakeholders can access the most current SBOMs at any time, whether for compliance audits, vulnerability management, or procurement decisions.
 
-Recognizing that an SBOM represents a specific moment in time highlights the importance of a centralized sbom management tool where the latest versions are always available. sbomify fulfills this need by offering a platform where stakeholders can access the most current SBOMs at any time. This immediate access is vital for informed decision-making regarding software security, compliance, and risk management.
+Both CycloneDX and SPDX formats are fully supported.
 
-## Consolidation of SBOMs for Enhanced Vulnerability Management
+## Hierarchical Organization
 
-One significant challenge in sbom vulnerability management is navigating the complexities of multiple SBOM sources and formats, such as those from Docker and various application stacks. sbomify addresses this issue by providing a feature to consolidate multiple SBOMs into a single, comprehensive document. This feature enables a complete view of all software components, simplifying the process for stakeholders to identify and address potential vulnerabilities.
+Most real-world products are composed of multiple backend services, frontend components, and infrastructure, each with its own SBOM. sbomify organizes these through a hierarchy of **Products**, **Projects**, and **Components**, reflecting how your software is actually structured.
 
-## Facilitating Collaboration in SBOM Management
+<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+    {{< d2 "sbom-hierarchy" >}}
+</div>
 
-Designed with collaboration in mind, sbomify serves as an sbom management tool that encourages seamless interaction among internal and external stakeholders. It offers a collaborative platform for suppliers, developers, security teams, and customers to access and work on SBOMs together. Through functionalities that allow commenting on components, annotating issues, or verifying compliance, sbomify dismantles operational silos and cultivates a culture of transparency and collective responsibility.
+In the example above, a Smart Thermostat product contains both an IoT device firmware and a backend composed of Python, Node, and Docker SBOMs. With sbomify, you can share individual component SBOMs or the entire product SBOM (aggregating all sub-components) with stakeholders.
 
-## Why Choose sbomify for SBOM Management Solutions
+This hierarchical approach uses linkage rather than flattening, so no contextual data is lost. You always know exactly where an affected component lives. Learn more about [SBOM hierarchy and release management](/features/sbom-hierarchy/).
 
-In an era marked by the critical impact of software vulnerabilities, sbomify provides a proactive approach to sbom management solutions. By automating SBOM uploads, offering centralized access to the latest versions, consolidating multiple sources, and facilitating stakeholder collaboration, sbomify ensures that software security management is not only efficient but highly effective. sbomify is the platform that meets today's software development and security needs while foreseeing the challenges of the future.
+## Trust Center
 
-What also makes sbomify unique is our approach to constructing SBOMs. Unlike other tools that simply flattens SBOMs into one file, losing critical contextual data (such as where an affected component lives), sbomify uses a structure of product, project and components. This tree like structure leverages the latest functionalities in both CycloneDX and SPDX 3 to link together multiple SBOMs into a nested SBOM structure, rather than a flat singular file.
+The [Trust Center](/features/trust-center/) is the primary way to share SBOMs and compliance artifacts with external stakeholders. It's a branded portal on your own domain where customers and auditors can access:
 
-![](/assets/images/d2/sbom-hierarchy.svg)
+- Current SBOMs for your products
+- Compliance documents and certifications
+- Penetration test results and security assessments
 
-By doing this, we get the best of both world: clear clean structure, without leaving any data out. In the example above, we use the example of a Smart Thermostat. It has both a physical component (i.e. the thermostat firmware), as well as three separate SBOMs that makes up the Backend that the thermostat is communicating with. Using sbomify, the company can either share individual SBOMs (such as the Rust SBOM), or the entire product SBOM (aggregating all sub-components) with either internal or external stakeholders.
+The Trust Center stays in sync with your CI/CD pipeline, automatically publishing new SBOMs with every release. Access can be public (for broad transparency) or private (for invited stakeholders only). Available on Business and Enterprise plans.
 
-Opt for sbomify to equip your team with the advanced tools and platform necessary for unparalleled levels of software security management. With sbomify, you're not just managing SBOMs; you're safeguarding the continuous security, compliance, and success of your software projects.
+{{< cta-ready >}}
