@@ -1,8 +1,8 @@
 ---
 title: "How do I sign an SBOM?"
 description: "Learn how to cryptographically sign your SBOMs using GitHub Attestations, Sigstore, and in-toto so that consumers can verify authenticity without trusting any intermediary."
-answer: "You sign an SBOM by wrapping it in a cryptographic attestation — typically using GitHub's built-in attestation support or Sigstore's cosign — so that anyone who receives the SBOM can verify it came from your CI/CD pipeline and was not tampered with in transit."
-tldr: "You sign an SBOM by wrapping it in a cryptographic attestation — typically using GitHub's built-in attestation support or Sigstore's cosign — so that anyone who receives the SBOM can verify it came from your CI/CD pipeline and was not tampered with in transit."
+answer: "You sign an SBOM by wrapping it in a cryptographic attestation - typically using GitHub's built-in attestation support or Sigstore's cosign - so that anyone who receives the SBOM can verify it came from your CI/CD pipeline and was not tampered with in transit."
+tldr: "You sign an SBOM by wrapping it in a cryptographic attestation - typically using GitHub's built-in attestation support or Sigstore's cosign - so that anyone who receives the SBOM can verify it came from your CI/CD pipeline and was not tampered with in transit."
 weight: 54
 keywords: [sign SBOM, SBOM signing, SBOM attestation, Sigstore SBOM, GitHub attestation, in-toto SBOM, SBOM integrity]
 url: /faq/how-do-i-sign-an-sbom/
@@ -12,18 +12,26 @@ url: /faq/how-do-i-sign-an-sbom/
 
 An unsigned SBOM is a claim. A signed SBOM is evidence.
 
-Without a signature, anyone who receives your SBOM has to trust every system it passed through — your CI pipeline, the SBOM management platform, the file transfer, the download link. If any of those are compromised, the SBOM could be silently altered, and the recipient would never know.
+Without a signature, anyone who receives your SBOM has to trust every system it passed through - your CI pipeline, the SBOM management platform, the file transfer, the download link. If any of those are compromised, the SBOM could be silently altered, and the recipient would never know.
 
 Signing eliminates this problem. A cryptographically signed SBOM lets the consumer verify two things independently:
 
-1. **Authenticity** — the SBOM was produced by your organization's CI/CD pipeline, not fabricated by a third party
-2. **Integrity** — the SBOM has not been modified since it was signed, regardless of how many systems it passed through
+1. **Authenticity** - the SBOM was produced by your organization's CI/CD pipeline, not fabricated by a third party
+2. **Integrity** - the SBOM has not been modified since it was signed, regardless of how many systems it passed through
 
 This means you never need to trust the transportation layer. Whether the SBOM is hosted on [sbomify](https://app.sbomify.com), downloaded from a [Trust Center](https://trust.sbomify.com/), or received via email, the signature lets you trace it back to the issuing party and verify it has not been tampered with.
 
+## Signing must be the last step
+
+A signature is a cryptographic seal over the exact bytes of the SBOM. Any tool that modifies the SBOM after signing - whether it adds fields, strips whitespace, re-formats JSON, merges data, or converts between formats - breaks the chain of trust. The signature no longer matches the file, and verification will fail.
+
+This means that all enrichment, augmentation, and transformation must happen _before_ signing. If you need to modify a signed SBOM for any reason, you must re-sign it afterward, and the new signature will reflect the new signer's identity rather than the original issuer's. This is by design: the signature proves exactly who produced the final artifact.
+
+In practice, this is why sbomify-action's pipeline runs augmentation and enrichment first, then writes the final SBOM to disk, and only then passes it to the attestation step. Any tool that modifies an SBOM post-generation and post-signing - even with good intentions - invalidates the attestation and forces a re-sign.
+
 ## How to sign an SBOM with GitHub Attestations
 
-The simplest way to sign an SBOM today is with GitHub's built-in attestation support. Behind the scenes, it uses [Sigstore](/2024/08/12/what-is-sigstore/) for keyless signing and the [in-toto](/2024/08/14/what-is-in-toto/) attestation format — but you do not need to manage any keys or understand the underlying protocols.
+The simplest way to sign an SBOM today is with GitHub's built-in attestation support. Behind the scenes, it uses [Sigstore](/2024/08/12/what-is-sigstore/) for keyless signing and the [in-toto](/2024/08/14/what-is-in-toto/) attestation format - but you do not need to manage any keys or understand the underlying protocols.
 
 In your GitHub Actions workflow, generate the SBOM and then pass it to the attestation action:
 
@@ -69,11 +77,11 @@ We use this exact workflow for our own [sbomify-action SBOM](https://github.com/
 
 When you sign an SBOM with GitHub Attestations, several things happen:
 
-1. **[Sigstore](/2024/08/12/what-is-sigstore/) keyless signing** — a short-lived certificate is issued based on the workflow's OIDC identity. No long-lived keys to manage or rotate.
-2. **[in-toto](/2024/08/14/what-is-in-toto/) attestation format** — the SBOM digest and build provenance are wrapped in a standardized [SLSA](/2024/08/17/what-is-slsa/) provenance predicate inside an in-toto envelope.
-3. **Transparency log** — the signing event is recorded in Sigstore's Rekor transparency log, creating tamper-evident, publicly auditable proof that the signature existed at a specific time.
+1. **[Sigstore](/2024/08/12/what-is-sigstore/) keyless signing** - a short-lived certificate is issued based on the workflow's OIDC identity. No long-lived keys to manage or rotate.
+2. **[in-toto](/2024/08/14/what-is-in-toto/) attestation format** - the SBOM digest and build provenance are wrapped in a standardized [SLSA](/2024/08/17/what-is-slsa/) provenance predicate inside an in-toto envelope.
+3. **Transparency log** - the signing event is recorded in Sigstore's Rekor transparency log, creating tamper-evident, publicly auditable proof that the signature existed at a specific time.
 
-The combination means the signature is tied to a verified identity (your GitHub repository and workflow), recorded in an immutable log, and verifiable by anyone — without any key distribution.
+The combination means the signature is tied to a verified identity (your GitHub repository and workflow), recorded in an immutable log, and verifiable by anyone - without any key distribution.
 
 ## sbomify attestation verification
 
@@ -83,8 +91,8 @@ This closes the loop: your CI pipeline signs the SBOM, sbomify verifies the sign
 
 ## Further reading
 
-- [What is Sigstore?](/2024/08/12/what-is-sigstore/) — how keyless signing works
-- [What is in-toto?](/2024/08/14/what-is-in-toto/) — the attestation framework behind SBOM signing
-- [GitHub Action with attestation](/2024/10/31/github-action-update-and-attestation/) — step-by-step walkthrough
-- [sbomify v0.25: attestation verification](/2026/01/23/announcing-sbomify-v0-25-the-one-with-attestations/) — server-side verification
-- [What is SLSA?](/2024/08/17/what-is-slsa/) — the provenance framework built on in-toto and Sigstore
+- [What is Sigstore?](/2024/08/12/what-is-sigstore/) - how keyless signing works
+- [What is in-toto?](/2024/08/14/what-is-in-toto/) - the attestation framework behind SBOM signing
+- [GitHub Action with attestation](/2024/10/31/github-action-update-and-attestation/) - step-by-step walkthrough
+- [sbomify v0.25: attestation verification](/2026/01/23/announcing-sbomify-v0-25-the-one-with-attestations/) - server-side verification
+- [What is SLSA?](/2024/08/17/what-is-slsa/) - the provenance framework built on in-toto and Sigstore
