@@ -2,7 +2,7 @@
 title: "How do I sign an SBOM?"
 description: "Learn how to cryptographically sign your SBOMs using GitHub Attestations, Sigstore, and in-toto so that consumers can verify authenticity without trusting any intermediary."
 answer: "You sign an SBOM by wrapping it in a cryptographic attestation - typically using GitHub's built-in attestation support or Sigstore's cosign - so that anyone who receives the SBOM can verify it came from your CI/CD pipeline and was not tampered with in transit."
-tldr: "You sign an SBOM by wrapping it in a cryptographic attestation - typically using GitHub's built-in attestation support or Sigstore's cosign - so that anyone who receives the SBOM can verify it came from your CI/CD pipeline and was not tampered with in transit."
+tldr: "You should always sign your SBOMs so that consumers never need to trust the transportation layer. Whether you use GitHub Attestations, Sigstore, X.509 certificates, or PGP, a signed SBOM lets the recipient verify authenticity and integrity directly back to the issuing party."
 weight: 54
 keywords: [sign SBOM, SBOM signing, SBOM attestation, Sigstore SBOM, GitHub attestation, in-toto SBOM, SBOM integrity]
 url: /faq/how-do-i-sign-an-sbom/
