@@ -1,0 +1,76 @@
+direction: up
+
+# --- Suppliers (bottom) ---
+suppliers: Suppliers {
+  class: group
+
+  Vendor A: {
+    class: accent
+    icon: node_modules/@tabler/icons/icons/outline/building-skyscraper.svg
+  }
+
+  Vendor B: {
+    class: accent
+    icon: node_modules/@tabler/icons/icons/outline/building-store.svg
+  }
+
+  CI/CD: {
+    class: primary
+    icon: node_modules/@tabler/icons/icons/outline/brand-github.svg
+  }
+}
+
+# --- sbomify (center) ---
+sbomify: {
+  shape: image
+  icon: assets/images/logo/logo-circle.svg
+  width: 80
+  height: 80
+  style.stroke: "transparent"
+}
+
+# --- Stakeholders (top) ---
+stakeholders: Stakeholders {
+  class: group
+
+  Customers: {
+    class: accent
+    icon: node_modules/@tabler/icons/icons/outline/users-group.svg
+  }
+
+  Auditors: {
+    class: accent
+    icon: node_modules/@tabler/icons/icons/outline/clipboard-check.svg
+  }
+
+  Internal Teams: {
+    class: accent
+    icon: node_modules/@tabler/icons/icons/outline/user-shield.svg
+  }
+}
+
+# --- Connections: suppliers → sbomify ---
+suppliers.Vendor A -> sbomify: SBOMs {
+  class: flow-pink
+}
+
+suppliers.Vendor B -> sbomify: SBOMs {
+  class: flow-pink
+}
+
+suppliers.CI/CD -> sbomify: Upload {
+  class: flow
+}
+
+# --- Connections: sbomify → stakeholders ---
+sbomify -> stakeholders.Customers: Trust Center {
+  class: flow
+}
+
+sbomify -> stakeholders.Auditors: Export {
+  class: flow
+}
+
+sbomify -> stakeholders.Internal Teams: Dashboard {
+  class: flow
+}

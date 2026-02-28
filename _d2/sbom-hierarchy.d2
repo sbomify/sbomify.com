@@ -19,6 +19,10 @@ project: Project SBOM(s) {
   IoT Device: {
     class: accent
   }
+
+  Compliance: {
+    class: accent
+  }
 }
 
 component: Component SBOM(s) {
@@ -36,7 +40,15 @@ component: Component SBOM(s) {
     class: accent
   }
 
-  Rust SBOM: {
+  Yocto SBOM: {
+    class: accent
+  }
+
+  SOC 2 Type II: {
+    class: accent
+  }
+
+  CE Certificate: {
     class: accent
   }
 }
@@ -58,10 +70,22 @@ component.Docker SBOM -> project.Backend: {
   class: flow-pink
 }
 
-component.Rust SBOM -> project.IoT Device: {
+component.Yocto SBOM -> project.IoT Device: {
+  class: flow-pink
+}
+
+component.SOC 2 Type II -> project.Compliance: {
+  class: flow-pink
+}
+
+component.CE Certificate -> project.Compliance: {
   class: flow-pink
 }
 
 project.IoT Device -> product.Smart Thermostat: Project SBOM {
+  class: flow-pink
+}
+
+project.Compliance -> product.Smart Thermostat: {
   class: flow-pink
 }
