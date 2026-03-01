@@ -1,0 +1,66 @@
+direction: up
+
+# --- Bottom tier: Vendor and Consumer ---
+actors: " " {
+  class: group
+
+  vendor: Software\nVendor {
+    class: primary
+    icon: node_modules/@tabler/icons/icons/outline/building-skyscraper.svg
+  }
+
+  client: TEA\nClient {
+    class: primary
+    icon: node_modules/@tabler/icons/icons/outline/download.svg
+  }
+}
+
+# --- Middle: TEA Server hub ---
+server: TEA Server {
+  class: highlight
+  icon: node_modules/@tabler/icons/icons/outline/server.svg
+}
+
+# --- Top tier: Artifacts ---
+artefacts: Transparency Artifacts {
+  class: group
+
+  sbom: SBOM {
+    class: accent
+    style.multiple: true
+    icon: node_modules/@tabler/icons/icons/outline/file-code.svg
+  }
+
+  vex: VEX {
+    class: accent
+    style.multiple: true
+    icon: node_modules/@tabler/icons/icons/outline/file-certificate.svg
+  }
+
+  attestation: Attestation {
+    class: accent
+    style.multiple: true
+    icon: node_modules/@tabler/icons/icons/outline/shield-check.svg
+  }
+}
+
+# --- Connections ---
+actors.vendor -> server: Publish {
+  class: flow
+}
+
+actors.client -> server: "TEI → DNS → .well-known" {
+  class: flow-pink
+}
+
+server -> artefacts.sbom {
+  class: flow-pink
+}
+
+server -> artefacts.vex {
+  class: flow-pink
+}
+
+server -> artefacts.attestation {
+  class: flow-pink
+}
