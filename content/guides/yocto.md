@@ -246,6 +246,12 @@ build-image:
 - **Large SPDX 3.0.1 documents** - The consolidated single-file output can easily exceed 50 MB for full images, which may cause issues with some tools and storage systems
 - **SPDX 3.0 tooling maturity** - Some downstream tools may not yet fully support SPDX 3.0.1; verify your toolchain before switching
 
+## Frequently Asked Questions
+
+### Can I use CycloneDX with Yocto?
+
+No. Yocto only supports SPDX format natively and there is no built-in CycloneDX generation. Converting SPDX output to CycloneDX is not recommended either, as the two formats have different data models and conversion inevitably loses context. See [Can I convert between CycloneDX and SPDX?](/faq/can-i-convert-between-cyclonedx-and-spdx/) for a detailed explanation of why format conversion is problematic.
+
 ## Further Reading
 
 Related blog posts:
