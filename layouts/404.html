@@ -1,22 +1,39 @@
 {{ define "main" }}
-<style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
+<div>
+  <div class="bg-primaryBG relative overflow-hidden px-5 py-16 lg:py-24 lg:px-24">
+    <!-- Subtle gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#8A7DFF]/5 via-transparent to-transparent pointer-events-none"></div>
 
-<div class="container">
-  <h1>404</h1>
+    <div class="relative max-w-4xl mx-auto text-center">
+      <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+        <span class="text-gradient">404</span>
+      </h1>
+      <p class="text-gray-300 text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
+        Page not found
+      </p>
+    </div>
+  </div>
 
-  <p><strong>Page not found :)</strong></p>
-  <p>The requested page could not be found.</p>
+  <div class="bg-[#F6F9FA]">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+      <div class="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100 text-center">
+        <p class="text-gray-600 text-lg mb-8">
+          The page you're looking for doesn't exist or has been moved.
+        </p>
+        <a href="/" class="inline-block bg-gradient-to-r from-[#6C5CE7] to-[#8A7DFF] text-white font-semibold px-8 py-3 rounded-lg hover:opacity-90 transition-opacity mb-8">
+          Go to Homepage
+        </a>
+        <div class="border-t border-gray-100 pt-8">
+          <p class="text-gray-500 text-sm mb-4">Or check out these pages:</p>
+          <div class="flex flex-wrap justify-center gap-4 text-sm">
+            <a href="/blog/" class="text-[#6C5CE7] hover:underline">Blog</a>
+            <a href="/guides/" class="text-[#6C5CE7] hover:underline">Guides</a>
+            <a href="/faq/" class="text-[#6C5CE7] hover:underline">FAQ</a>
+            <a href="/pricing/" class="text-[#6C5CE7] hover:underline">Pricing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {{ end }}
