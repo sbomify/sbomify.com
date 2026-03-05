@@ -87,6 +87,8 @@ Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as 
 
 The action supports all Python lockfiles: `uv.lock`, `poetry.lock`, `Pipfile.lock`, and `pyproject.toml`.
 
+**Still on requirements.txt?** If you haven't migrated to UV or Poetry yet, sbomify-action can still help. When given a `requirements.txt`, the action uses [pipdeptree](https://github.com/tox-dev/pipdeptree) to discover transitive dependencies that aren't listed in your requirements file and automatically adds them to the SBOM. This means you get a more complete SBOM even without a proper lockfile, though we still recommend migrating to UV or Poetry for the best results.
+
 ### Alternative Tools
 
 If you prefer to run SBOM generation tools manually:
@@ -128,10 +130,15 @@ generate-sbom:
     - /sbomify.sh
 ```
 
+## PEP 770: Shipping SBOMs Inside Python Packages
+
+[PEP 770](https://peps.python.org/pep-0770/) standardizes including SBOMs directly inside Python wheels via the `.dist-info/sboms/` directory. If you publish Python packages to PyPI, this means your users get the SBOM automatically when they `pip install` your package. Build backends like hatchling (>= 1.28.0) already support it. Read our [full write-up on PEP 770](/2026/03/05/pep-770-sboms-in-python-packages/) for implementation details and real-world examples.
+
 ## Further Reading
 
 Related blog posts:
 
+- [PEP 770: SBOMs Are Now a First-Class Citizen in Python Packages](/2026/03/05/pep-770-sboms-in-python-packages/) - How PEP 770 works and how we adopted it in two projects with minimal effort
 - [How to Generate SBOMs for Python Packages with pipdeptree and cyclonedx-py](/2024/07/30/generate-sboms-for-python-packages-with-pipdeptree-and-cyclonedx-py/) - Tutorial on generating CycloneDX SBOMs including transitive dependencies and best practices for pinning with hashes
 
 ## Further Resources
