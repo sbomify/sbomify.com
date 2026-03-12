@@ -1,0 +1,64 @@
+direction: down
+
+# --- Top: Total packages analyzed ---
+total: "15,021 Packages Analyzed" {
+  class: highlight
+}
+
+# --- Split: With vs Without SBOMs ---
+breakdown: " " {
+  class: group
+
+  with: "238 With SBOMs\n(1.58%)" {
+    class: accent
+  }
+
+  without: "14,783 Without SBOMs\n(98.42%)" {
+    class: secondary
+  }
+}
+
+total -> breakdown.with {
+  class: flow
+}
+total -> breakdown.without {
+  class: flow
+}
+
+# --- Format: All CycloneDX ---
+format: "Format: All CycloneDX JSON" {
+  class: group
+
+  v15: "CycloneDX 1.5\n1,194 wheels" {
+    class: primary
+  }
+
+  v14: "CycloneDX 1.4\n311 wheels" {
+    class: primary
+  }
+
+  v16: "CycloneDX 1.6\n1 wheel" {
+    class: primary
+  }
+}
+
+breakdown.with -> format {
+  class: flow-pink
+}
+
+# --- Validation ---
+validation: "Validation" {
+  class: group
+
+  valid: "1,469 Valid" {
+    class: primary
+  }
+
+  invalid: "37 Invalid\n(cargo-cyclonedx bug)" {
+    class: accent
+  }
+}
+
+format -> validation {
+  class: flow
+}
