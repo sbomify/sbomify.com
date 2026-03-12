@@ -28,7 +28,7 @@ The vision is bigger than Python: do this for every binary package ecosystem, so
 
 When we shared PyPI-TEA with [Seth Larson](https://www.linkedin.com/in/sethmlarson/) (the author of PEP 770), he asked if we had data on adoption. We didn't, but we had all the tooling to get it.
 
-We pulled the [top PyPI packages list](https://hugovk.github.io/top-pypi-packages/) and analyzed the latest x86 wheels for the top 15,000 packages. A quick note on terminology: a *package* is a project on PyPI (e.g. `cryptography`), while a *wheel* is a specific build artifact for that package, often per platform and Python version. A single package can publish dozens of wheels per release. For each package, PyPI-TEA fetched the wheel, inspected the `.dist-info/sboms/` directory, validated any SBOMs found, and recorded the results.
+We pulled the [top PyPI packages list](https://hugovk.github.io/top-pypi-packages/) and analyzed the latest x86 wheels for the top 15,000 packages. A quick note on terminology: a _package_ is a project on PyPI (e.g. `cryptography`), while a _wheel_ is a specific build artifact for that package, often per platform and Python version. A single package can publish dozens of wheels per release. For each package, PyPI-TEA fetched the wheel, inspected the `.dist-info/sboms/` directory, validated any SBOMs found, and recorded the results.
 
 Live stats are available at [pypi.sbomify.com/stats](https://pypi.sbomify.com/stats).
 
