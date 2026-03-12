@@ -18,10 +18,10 @@ breakdown: " " {
   }
 }
 
-total -> breakdown.with {
+total -> breakdown.with: {
   class: flow
 }
-total -> breakdown.without {
+total -> breakdown.without: {
   class: flow
 }
 
@@ -42,7 +42,7 @@ format: "Format: All CycloneDX JSON" {
   }
 }
 
-breakdown.with -> format {
+breakdown.with -> format: {
   class: flow-pink
 }
 
@@ -59,6 +59,6 @@ validation: "Validation" {
   }
 }
 
-format -> validation {
+format -> validation: {
   class: flow
 }
