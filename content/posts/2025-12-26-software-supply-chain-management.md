@@ -5,7 +5,7 @@ description: "Learn what software supply chain management is, how attacks like L
 categories:
   - education
 tags: [supply-chain, security, sbom, risk-management]
-tldr: "Software supply chain management covers the processes, tools, and policies used to control the components flowing into your software. High-profile attacks like SolarWinds and Log4Shell show why visibility matters — SBOMs provide the component inventory that makes supply chain risk management actionable."
+tldr: "Software supply chain management covers the processes, tools, and policies used to control the components flowing into your software. High-profile attacks like SolarWinds and Log4Shell show why visibility matters – SBOMs provide the component inventory that makes supply chain risk management actionable."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil

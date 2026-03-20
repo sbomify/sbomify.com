@@ -1,7 +1,7 @@
 ---
 
 title: "Big Update to sbomify"
-description: "sbomify v0.15 introduces document support alongside SBOMs, improved public pages, and product-level SBOM aggregation—evolving into a complete compliance hub."
+description: "sbomify v0.15 introduces document support alongside SBOMs, improved public pages, and product-level SBOM aggregation – evolving into a complete compliance hub."
 date: 2025-07-04 09:00:00 +0000
 categories:
   - announcement
@@ -28,7 +28,7 @@ With this new feature, that is now possible. All you need to do is create a new 
 
 ## A Compliance Hub
 
-In short, sbomify is evolving into a compliance hub. SBOMs remain important, but they are now just one part of a broader picture. Speaking of SBOMs, we have also exposed our product- and project-level SBOM aggregation download feature to public pages. This means that if you have a project with ten different components—for example, ten different microservices—you can now download an aggregated SBOM that links all of them together using externalReferences in CycloneDX*.
+In short, sbomify is evolving into a compliance hub. SBOMs remain important, but they are now just one part of a broader picture. Speaking of SBOMs, we have also exposed our product- and project-level SBOM aggregation download feature to public pages. This means that if you have a project with ten different components – for example, ten different microservices – you can now download an aggregated SBOM that links all of them together using externalReferences in CycloneDX*.
 
 Want a live demo? Check out our [public product page](https://app.sbomify.com/public/product/eP_4dk8ixV/)
 

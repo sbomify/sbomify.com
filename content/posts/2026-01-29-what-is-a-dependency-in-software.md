@@ -5,7 +5,7 @@ description: "Learn what software dependencies are, the difference between direc
 categories:
   - education
 tags: [dependencies, security, sbom, supply-chain]
-tldr: "A dependency is any external component your software relies on to function — from direct imports to deeply nested transitive packages. SBOMs document the full dependency graph, making it possible to track vulnerabilities and license obligations across every layer."
+tldr: "A dependency is any external component your software relies on to function – from direct imports to deeply nested transitive packages. SBOMs document the full dependency graph, making it possible to track vulnerabilities and license obligations across every layer."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -25,13 +25,13 @@ date: 2026-01-29
 slug: what-is-a-dependency-in-software
 ---
 
-A dependency in software is any external component — a library, framework, module, or package — that your application relies on to function. When you import a package from npm, add a library from PyPI, or include a Maven artifact, you are adding a dependency. Dependencies allow developers to reuse tested, maintained code rather than writing everything from scratch. Modern applications are built overwhelmingly from dependencies: studies consistently show that [70-90% of a typical application consists of open source components](https://www.linux.com/training-tutorials/estimating-total-number-linux-contributors-approach-using-linus-law/).
+A dependency in software is any external component – a library, framework, module, or package – that your application relies on to function. When you import a package from npm, add a library from PyPI, or include a Maven artifact, you are adding a dependency. Dependencies allow developers to reuse tested, maintained code rather than writing everything from scratch. Modern applications are built overwhelmingly from dependencies: studies consistently show that [70-90% of a typical application consists of open source components](https://www.linux.com/training-tutorials/estimating-total-number-linux-contributors-approach-using-linus-law/).
 
 ## Direct vs. Transitive Dependencies
 
 The most important distinction in dependency management is between direct and transitive dependencies.
 
-**Direct dependencies** are the packages your project explicitly declares. These appear in your dependency manifest — `package.json` for JavaScript, `requirements.txt` or `pyproject.toml` for Python, `pom.xml` for Java, `go.mod` for Go, `Cargo.toml` for Rust, and similar files for other ecosystems. You chose these packages, you decided which versions to use, and you are (presumably) aware of their purpose in your application.
+**Direct dependencies** are the packages your project explicitly declares. These appear in your dependency manifest – `package.json` for JavaScript, `requirements.txt` or `pyproject.toml` for Python, `pom.xml` for Java, `go.mod` for Go, `Cargo.toml` for Rust, and similar files for other ecosystems. You chose these packages, you decided which versions to use, and you are (presumably) aware of their purpose in your application.
 
 **Transitive dependencies** are the dependencies of your dependencies. When you add package A to your project, and package A depends on packages B and C, and package B depends on package D, then B, C, and D are all transitive dependencies of your project. You may never have heard of packages B, C, or D, yet they are running in your application and their vulnerabilities are your vulnerabilities.
 
@@ -67,7 +67,7 @@ my-application
     └── follow-redirects@1.15.3 (transitive)
 ```
 
-In this example, `express`, `lodash`, and `axios` are direct dependencies. Everything nested beneath them is transitive. The vulnerability in `safer-buffer` — four levels deep — is just as dangerous as one in `express` itself.
+In this example, `express`, `lodash`, and `axios` are direct dependencies. Everything nested beneath them is transitive. The vulnerability in `safer-buffer` – four levels deep – is just as dangerous as one in `express` itself.
 
 ## Why Dependencies Matter for Security
 
@@ -75,7 +75,7 @@ Dependencies are the primary attack surface for most applications. Several high-
 
 ### Vulnerable Dependencies
 
-The [Log4Shell vulnerability](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) ([CVE-2021-44228](/2025/12/18/cve-vulnerability-explained/)) in the Apache Log4j logging library affected millions of Java applications. Many organizations did not know they used Log4j because it was a transitive dependency — pulled in by frameworks and libraries they did depend on directly.
+The [Log4Shell vulnerability](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) ([CVE-2021-44228](/2025/12/18/cve-vulnerability-explained/)) in the Apache Log4j logging library affected millions of Java applications. Many organizations did not know they used Log4j because it was a transitive dependency – pulled in by frameworks and libraries they did depend on directly.
 
 ### Compromised Dependencies
 
@@ -126,7 +126,7 @@ SBOM generation tools like the [sbomify GitHub Action](https://github.com/sbomif
 
 1. **Always use and commit lock files.** Lock files ensure reproducible builds and prevent unexpected dependency changes. Review lock file diffs in pull requests to catch unintended dependency updates.
 
-2. **Audit your dependency tree regularly.** Use `npm audit`, `pip-audit`, `cargo audit`, or equivalent tools to check for known vulnerabilities. Do not limit auditing to direct dependencies — transitive vulnerabilities are equally dangerous.
+2. **Audit your dependency tree regularly.** Use `npm audit`, `pip-audit`, `cargo audit`, or equivalent tools to check for known vulnerabilities. Do not limit auditing to direct dependencies – transitive vulnerabilities are equally dangerous.
 
 3. **Minimize your dependency footprint.** Every dependency is a potential risk vector. Before adding a new package, evaluate whether the functionality justifies the added surface area. Prefer well-maintained libraries with active security response processes.
 
@@ -140,7 +140,7 @@ SBOM generation tools like the [sbomify GitHub Action](https://github.com/sbomif
 
 ### What is a dependency in software?
 
-A dependency is any external component — a library, framework, module, or package — that your application relies on to function. Dependencies are declared in manifest files (like `package.json` or `requirements.txt`) and installed from package registries (like npm or PyPI). They allow developers to reuse existing code rather than building everything from scratch.
+A dependency is any external component – a library, framework, module, or package – that your application relies on to function. Dependencies are declared in manifest files (like `package.json` or `requirements.txt`) and installed from package registries (like npm or PyPI). They allow developers to reuse existing code rather than building everything from scratch.
 
 ### What is a transitive dependency?
 
@@ -152,8 +152,8 @@ A dependency tree (or dependency graph) is the complete hierarchy of all depende
 
 ### Why are dependencies a security risk?
 
-Dependencies are a security risk because each one introduces code that your team did not write and may not audit. Known vulnerabilities in dependencies (CVEs) are a primary attack vector — incidents like Log4Shell affected millions of applications through a single widely-used library. Dependencies can also be intentionally compromised (as in the XZ Utils backdoor), abandoned by maintainers, or used in dependency confusion attacks.
+Dependencies are a security risk because each one introduces code that your team did not write and may not audit. Known vulnerabilities in dependencies (CVEs) are a primary attack vector – incidents like Log4Shell affected millions of applications through a single widely-used library. Dependencies can also be intentionally compromised (as in the XZ Utils backdoor), abandoned by maintainers, or used in dependency confusion attacks.
 
 ### What is a lock file?
 
-A lock file records the exact resolved versions of all dependencies (direct and transitive) in a project. Examples include `package-lock.json` (npm), `poetry.lock` (Python), and `Cargo.lock` (Rust). Lock files ensure reproducible builds — the same versions are installed every time, on every machine. They should always be committed to version control.
+A lock file records the exact resolved versions of all dependencies (direct and transitive) in a project. Examples include `package-lock.json` (npm), `poetry.lock` (Python), and `Cargo.lock` (Rust). Lock files ensure reproducible builds – the same versions are installed every time, on every machine. They should always be committed to version control.

@@ -29,7 +29,7 @@ The Apache License 2.0 is a permissive open source license published by the [Apa
 
 ## What Is the Apache License 2.0?
 
-The Apache License 2.0 (formally, the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)) is a permissive free software license written by the Apache Software Foundation and released in January 2004. "Permissive" means that the license imposes minimal restrictions on how the software can be used, modified, and redistributed — including in proprietary, closed-source products.
+The Apache License 2.0 (formally, the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)) is a permissive free software license written by the Apache Software Foundation and released in January 2004. "Permissive" means that the license imposes minimal restrictions on how the software can be used, modified, and redistributed – including in proprietary, closed-source products.
 
 The Apache License 2.0 replaced the earlier Apache License 1.1 and 1.0, which had more restrictive advertising clauses similar to the original BSD license. Version 2.0 was designed to be clear, comprehensive, and compatible with a broad range of other open source licenses.
 
@@ -41,11 +41,11 @@ The license is identified in the [SPDX License List](https://spdx.org/licenses/)
 
 The Apache License 2.0 grants the following rights, in both copyright and patent terms:
 
-- **Use** — Run the software for any purpose, including commercial use
-- **Modify** — Create derivative works based on the software
-- **Distribute** — Distribute copies of the original or modified software
-- **Sublicense** — Grant these same rights to others
-- **Patent use** — Use any patents held by contributors that cover their contributions
+- **Use** – Run the software for any purpose, including commercial use
+- **Modify** – Create derivative works based on the software
+- **Distribute** – Distribute copies of the original or modified software
+- **Sublicense** – Grant these same rights to others
+- **Patent use** – Use any patents held by contributors that cover their contributions
 
 ### Conditions
 
@@ -65,7 +65,7 @@ Unlike copyleft licenses such as the [GPL](/2025/12/22/gpl-license-guide/), the 
 - Licensing your derivative works under the Apache License
 - Making your modifications open source
 
-This is what makes it "permissive" — you can incorporate Apache-licensed code into proprietary software without triggering any obligation to open-source your own code.
+This is what makes it "permissive" – you can incorporate Apache-licensed code into proprietary software without triggering any obligation to open-source your own code.
 
 ## The Patent Grant
 
@@ -77,7 +77,7 @@ Section 3 of the license states that each contributor grants "a perpetual, world
 - This protection applies to all users and redistributors of the software.
 - The patent grant is automatically revoked for any user who initiates patent litigation against the project (the "patent retaliation" clause in Section 3).
 
-Neither the [MIT license](/2026/01/22/mit-license-guide/) nor the BSD licenses include an explicit patent grant, which creates theoretical patent risk — a contributor could contribute code and later assert patent claims against users. The Apache License 2.0 eliminates this risk.
+Neither the [MIT license](/2026/01/22/mit-license-guide/) nor the BSD licenses include an explicit patent grant, which creates theoretical patent risk – a contributor could contribute code and later assert patent claims against users. The Apache License 2.0 eliminates this risk.
 
 ## The NOTICE File
 
@@ -137,7 +137,7 @@ A [Software Bill of Materials](/what-is-sbom/) documents every component in your
 
 2. **NOTICE file tracking.** By identifying which components are Apache-licensed, SBOMs help teams ensure they are carrying forward all required NOTICE file attributions.
 
-3. **Compatibility checking.** Automated license compliance tools can process SBOMs to detect potential compatibility conflicts — for example, flagging if Apache 2.0 and GPLv2-only components coexist in the same project.
+3. **Compatibility checking.** Automated license compliance tools can process SBOMs to detect potential compatibility conflicts – for example, flagging if Apache 2.0 and GPLv2-only components coexist in the same project.
 
 4. **Audit trail.** SBOMs provide the evidence that organizations need for license audits and due diligence in M&A transactions, documenting exactly which licenses are present in a software product.
 

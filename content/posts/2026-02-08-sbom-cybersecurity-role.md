@@ -5,7 +5,7 @@ description: "Learn how SBOMs strengthen cybersecurity through component visibil
 categories:
   - education
 tags: [sbom, cybersecurity, vulnerability, compliance]
-tldr: "SBOMs strengthen cybersecurity by providing the component visibility needed for vulnerability management, incident response, and compliance. When the next Log4Shell hits, an SBOM tells you in minutes whether you are affected — instead of days or weeks."
+tldr: "SBOMs strengthen cybersecurity by providing the component visibility needed for vulnerability management, incident response, and compliance. When the next Log4Shell hits, an SBOM tells you in minutes whether you are affected – instead of days or weeks."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -29,7 +29,7 @@ A [Software Bill of Materials](/what-is-sbom/) (SBOM) is a foundational cybersec
 
 ## Why SBOMs Matter for Cybersecurity
 
-Modern software is assembled from open source and third-party components. A typical application consists of [70-90% open source code](https://www.linux.com/training-tutorials/estimating-total-number-linux-contributors-approach-using-linus-law/) drawn from package registries. Each component is a potential entry point for attackers — whether through known vulnerabilities, compromised packages, or abandoned libraries.
+Modern software is assembled from open source and third-party components. A typical application consists of [70-90% open source code](https://www.linux.com/training-tutorials/estimating-total-number-linux-contributors-approach-using-linus-law/) drawn from package registries. Each component is a potential entry point for attackers – whether through known vulnerabilities, compromised packages, or abandoned libraries.
 
 SBOMs make the composition of software visible. This visibility is the prerequisite for every other cybersecurity activity involving third-party code: you cannot patch what you do not know you are running.
 
@@ -58,7 +58,7 @@ With SBOMs generated and ingested into a management platform like [sbomify](http
 4. Alerts are sent to the responsible teams
 5. Remediation begins immediately
 
-This automated approach reduces the response window from days to minutes. The difference is especially critical for vulnerabilities listed in the [CISA KEV catalog](/2025/12/30/what-is-kev-cisa-known-exploited-vulnerabilities/) — those confirmed to be actively exploited in the wild.
+This automated approach reduces the response window from days to minutes. The difference is especially critical for vulnerabilities listed in the [CISA KEV catalog](/2025/12/30/what-is-kev-cisa-known-exploited-vulnerabilities/) – those confirmed to be actively exploited in the wild.
 
 ## Incident Response: The Log4Shell Case Study
 
@@ -68,7 +68,7 @@ The Log4Shell vulnerability ([CVE-2021-44228](https://nvd.nist.gov/vuln/detail/C
 
 **Organizations without SBOMs** spent weeks manually auditing codebases, scanning containers, and contacting vendors to determine exposure. Some discovered Log4j in applications they did not even know existed in their environment.
 
-Log4Shell became the single most cited argument for SBOM adoption. It demonstrated that in a crisis, the ability to answer "which of our systems are affected?" is not optional — it is a core cybersecurity capability.
+Log4Shell became the single most cited argument for SBOM adoption. It demonstrated that in a crisis, the ability to answer "which of our systems are affected?" is not optional – it is a core cybersecurity capability.
 
 ## SBOMs and the Compliance Landscape
 

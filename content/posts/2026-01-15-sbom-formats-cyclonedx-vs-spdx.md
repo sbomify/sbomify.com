@@ -25,7 +25,7 @@ date: 2026-01-15
 slug: sbom-formats-cyclonedx-vs-spdx
 ---
 
-An SBOM format defines the structure, fields, and serialization of a [Software Bill of Materials](/what-is-sbom/). Two formats have emerged as industry standards: [CycloneDX](https://cyclonedx.org/), developed by OWASP, and [SPDX](https://spdx.dev/) (Software Package Data Exchange), developed by the Linux Foundation. Both are actively maintained, widely supported by tooling, and accepted by major compliance frameworks. Understanding their differences helps organizations choose the right format for their use case — or, as is increasingly common, support both.
+An SBOM format defines the structure, fields, and serialization of a [Software Bill of Materials](/what-is-sbom/). Two formats have emerged as industry standards: [CycloneDX](https://cyclonedx.org/), developed by OWASP, and [SPDX](https://spdx.dev/) (Software Package Data Exchange), developed by the Linux Foundation. Both are actively maintained, widely supported by tooling, and accepted by major compliance frameworks. Understanding their differences helps organizations choose the right format for their use case – or, as is increasingly common, support both.
 
 ## A Brief History
 
@@ -83,7 +83,7 @@ For a complete field-by-field mapping, see our [SBOM Schema Crosswalk](/complian
 
 ### License Data
 
-SPDX has historically been stronger for license documentation, reflecting its origins. SPDX defines the [SPDX License List](https://spdx.org/licenses/) — the standard set of license identifiers (e.g., `MIT`, `Apache-2.0`, `GPL-3.0-only`) used across the industry, including by CycloneDX.
+SPDX has historically been stronger for license documentation, reflecting its origins. SPDX defines the [SPDX License List](https://spdx.org/licenses/) – the standard set of license identifiers (e.g., `MIT`, `Apache-2.0`, `GPL-3.0-only`) used across the industry, including by CycloneDX.
 
 CycloneDX supports license data through `components[].licenses[]`, which can reference SPDX license identifiers or include full license text. Both formats support SPDX license expressions (compound expressions like `MIT OR Apache-2.0`).
 
@@ -164,7 +164,7 @@ A minimal SBOM documenting a single component in each format:
 }
 ```
 
-Both formats express the same information — a component named `lodash` at version `4.17.21`, licensed under MIT. CycloneDX uses a more compact syntax; SPDX 2.3 requires additional fields like `downloadLocation`, `SPDXID`, and `documentNamespace`.
+Both formats express the same information – a component named `lodash` at version `4.17.21`, licensed under MIT. CycloneDX uses a more compact syntax; SPDX 2.3 requires additional fields like `downloadLocation`, `SPDXID`, and `documentNamespace`.
 
 ## Compliance Framework Preferences
 

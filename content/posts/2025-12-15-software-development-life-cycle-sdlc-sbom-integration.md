@@ -5,7 +5,7 @@ description: "Learn what the Software Development Life Cycle (SDLC) is, its phas
 categories:
   - education
 tags: [sdlc, security, compliance, devsecops]
-tldr: "The Software Development Life Cycle (SDLC) defines the phases software goes through from planning to retirement. Integrating SBOMs and security checks at each phase — especially during build and deployment — catches vulnerabilities early and satisfies compliance frameworks like the EU CRA and EO 14028."
+tldr: "The Software Development Life Cycle (SDLC) defines the phases software goes through from planning to retirement. Integrating SBOMs and security checks at each phase – especially during build and deployment – catches vulnerabilities early and satisfies compliance frameworks like the EU CRA and EO 14028."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -82,7 +82,7 @@ The Waterfall model was the original SDLC approach, moving linearly from require
 
 ## Where Security Fits: From SDLC to Secure SDLC
 
-Traditional SDLC models treated security as a gate at the end of development — a final check before release. This approach consistently proved inadequate. Vulnerabilities discovered late in the cycle are far more expensive to fix than those caught early.
+Traditional SDLC models treated security as a gate at the end of development – a final check before release. This approach consistently proved inadequate. Vulnerabilities discovered late in the cycle are far more expensive to fix than those caught early.
 
 The Secure Software Development Life Cycle (SSDLC or Secure SDLC) integrates security activities into every phase:
 
@@ -93,7 +93,7 @@ The Secure Software Development Life Cycle (SSDLC or Secure SDLC) integrates sec
 - **Deployment:** Configuration hardening, secrets management, SBOM distribution
 - **Maintenance:** Vulnerability monitoring, patch management, SBOM updates
 
-This shift-left approach — moving security earlier in the development process — is central to [DevSecOps](https://www.nist.gov/publications/devsecops-nist-special-publication-800-218-secure-software-development-framework-ssdf), where security becomes a shared responsibility across the entire team rather than a bottleneck at the end.
+This shift-left approach – moving security earlier in the development process – is central to [DevSecOps](https://www.nist.gov/publications/devsecops-nist-special-publication-800-218-secure-software-development-framework-ssdf), where security becomes a shared responsibility across the entire team rather than a bottleneck at the end.
 
 ## SDLC and SBOMs: Integration at Every Phase
 
@@ -101,7 +101,7 @@ A [Software Bill of Materials](/what-is-sbom/) (SBOM) documents every component,
 
 ### During Implementation
 
-When developers add dependencies — open source libraries, frameworks, and packages — they shape the software's composition. This is the moment to begin tracking what goes into the build. Tools like the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) can generate SBOMs automatically as part of the build process. See our [SBOM generation guides](/guides/) for language-specific instructions covering Python, JavaScript, Java, Go, Rust, and more.
+When developers add dependencies – open source libraries, frameworks, and packages – they shape the software's composition. This is the moment to begin tracking what goes into the build. Tools like the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) can generate SBOMs automatically as part of the build process. See our [SBOM generation guides](/guides/) for language-specific instructions covering Python, JavaScript, Java, Go, Rust, and more.
 
 ### During Testing
 
@@ -113,7 +113,7 @@ The SBOM becomes a release artifact alongside the software itself. Compliance fr
 
 ### During Maintenance
 
-As new vulnerabilities are discovered — often months or years after deployment — SBOMs allow organizations to quickly determine whether they are affected. When the [Log4Shell vulnerability](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) was disclosed in December 2021, organizations with SBOMs could identify affected systems in minutes rather than weeks.
+As new vulnerabilities are discovered – often months or years after deployment – SBOMs allow organizations to quickly determine whether they are affected. When the [Log4Shell vulnerability](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) was disclosed in December 2021, organizations with SBOMs could identify affected systems in minutes rather than weeks.
 
 ## SDLC Best Practices for Modern Teams
 
@@ -143,7 +143,7 @@ These frameworks are increasingly referenced in procurement requirements and reg
 
 ### What is SDLC in software development?
 
-SDLC stands for Software Development Life Cycle. It is a structured process that guides software development from initial planning through deployment and ongoing maintenance. The SDLC provides a framework of phases — including requirements analysis, design, implementation, testing, deployment, and maintenance — that help teams deliver reliable software in a systematic way.
+SDLC stands for Software Development Life Cycle. It is a structured process that guides software development from initial planning through deployment and ongoing maintenance. The SDLC provides a framework of phases – including requirements analysis, design, implementation, testing, deployment, and maintenance – that help teams deliver reliable software in a systematic way.
 
 ### What are the most common SDLC models?
 

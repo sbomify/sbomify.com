@@ -129,7 +129,7 @@
       }
     }
 
-    // Count indicator — only show during search
+    // Count indicator – only show during search
     if (isSearching) {
       countEl.textContent = 'Showing ' + matched + ' of ' + total + ' questions';
       countEl.classList.remove('hidden');
@@ -146,7 +146,7 @@
       list.classList.remove('hidden');
     }
 
-    // Show more button — only when not searching and there are more to show
+    // Show more button – only when not searching and there are more to show
     if (!isSearching && total > visible) {
       showMoreWrap.classList.remove('hidden');
       showMoreBtn.textContent = 'Show all ' + total + ' questions';

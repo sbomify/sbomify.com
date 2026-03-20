@@ -62,7 +62,7 @@ in generating SBOMs for C based projects.
         This gives us confidence that sbomify will become a platform that follows
         industry practices as they emerge."
     </p>
-    <p class="mt-4 font-semibold text-gray-800">— Chris Swan</p>
+    <p class="mt-4 font-semibold text-gray-800"> – Chris Swan</p>
 </div>
 
 ## The Results

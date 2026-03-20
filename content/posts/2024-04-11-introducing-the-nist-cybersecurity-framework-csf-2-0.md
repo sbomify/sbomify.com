@@ -25,9 +25,9 @@ date: 2024-04-11
 slug: introducing-the-nist-cybersecurity-framework-csf-2-0
 ---
 
-In February 2024, the National Institute of Standards and Technology (NIST) released version 2.0 of the Cybersecurity Framework — the most significant update since the framework's original publication in 2014. CSF 2.0 reflects a decade of lessons learned from real-world cybersecurity incidents, supply chain attacks, and the growing recognition that cybersecurity governance is as important as technical controls.
+In February 2024, the National Institute of Standards and Technology (NIST) released version 2.0 of the Cybersecurity Framework – the most significant update since the framework's original publication in 2014. CSF 2.0 reflects a decade of lessons learned from real-world cybersecurity incidents, supply chain attacks, and the growing recognition that cybersecurity governance is as important as technical controls.
 
-For organizations building or consuming software, CSF 2.0 is particularly relevant because of its expanded treatment of supply chain risk management — and [SBOMs](/what-is-sbom/) are a foundational capability for meeting many of its outcomes.
+For organizations building or consuming software, CSF 2.0 is particularly relevant because of its expanded treatment of supply chain risk management – and [SBOMs](/what-is-sbom/) are a foundational capability for meeting many of its outcomes.
 
 ## The Six Core Functions
 
@@ -35,14 +35,14 @@ CSF 2.0 organizes cybersecurity outcomes into six core functions. The most signi
 
 ### GOVERN (New in CSF 2.0)
 
-The GOVERN function establishes and monitors the organization's cybersecurity risk management strategy, expectations, and policy. It elevates cybersecurity governance from a background concern to an explicit, measurable function — recognizing that cybersecurity decisions are fundamentally business decisions.
+The GOVERN function establishes and monitors the organization's cybersecurity risk management strategy, expectations, and policy. It elevates cybersecurity governance from a background concern to an explicit, measurable function – recognizing that cybersecurity decisions are fundamentally business decisions.
 
 Key outcomes include:
 
-- **Organizational context** — Understanding the organization's mission, stakeholder expectations, and legal/regulatory requirements
-- **Risk management strategy** — Establishing risk tolerance, priorities, and resource allocation
-- **Supply chain risk management** — Policies and processes for managing cybersecurity risk in the supply chain
-- **Roles and responsibilities** — Clear accountability for cybersecurity outcomes
+- **Organizational context** – Understanding the organization's mission, stakeholder expectations, and legal/regulatory requirements
+- **Risk management strategy** – Establishing risk tolerance, priorities, and resource allocation
+- **Supply chain risk management** – Policies and processes for managing cybersecurity risk in the supply chain
+- **Roles and responsibilities** – Clear accountability for cybersecurity outcomes
 
 The explicit inclusion of supply chain risk management in GOVERN signals that NIST considers it a governance-level concern, not just a technical one.
 
@@ -52,9 +52,9 @@ The IDENTIFY function focuses on understanding the organization's assets, busine
 
 Key categories:
 
-- **Asset Management (ID.AM)** — Inventorying hardware, software, data, and services
-- **Risk Assessment (ID.RA)** — Understanding threats, vulnerabilities, and their potential impact
-- **Improvement (ID.IM)** — Continuous assessment and refinement of cybersecurity practices
+- **Asset Management (ID.AM)** – Inventorying hardware, software, data, and services
+- **Risk Assessment (ID.RA)** – Understanding threats, vulnerabilities, and their potential impact
+- **Improvement (ID.IM)** – Continuous assessment and refinement of cybersecurity practices
 
 ### PROTECT
 
@@ -66,11 +66,11 @@ The DETECT function defines activities to identify cybersecurity events in a tim
 
 ### RESPOND
 
-The RESPOND function covers activities to take action on detected cybersecurity incidents — including communication, analysis, mitigation, and improvements based on lessons learned.
+The RESPOND function covers activities to take action on detected cybersecurity incidents – including communication, analysis, mitigation, and improvements based on lessons learned.
 
 ### RECOVER
 
-The RECOVER function focuses on restoring capabilities impaired by a cybersecurity incident — including recovery planning, improvements, and communications.
+The RECOVER function focuses on restoring capabilities impaired by a cybersecurity incident – including recovery planning, improvements, and communications.
 
 ## CSF 2.0 Components
 
@@ -78,18 +78,18 @@ Beyond the six functions, CSF 2.0 provides structural tools for implementation:
 
 ### Organizational Profiles
 
-Profiles help organizations articulate their current cybersecurity posture ("Current Profile") and their target state ("Target Profile"). The gap between the two drives prioritized improvements. This is particularly useful for organizations beginning their supply chain security journey — the Current Profile honestly assesses what's in place, while the Target Profile defines what "good" looks like.
+Profiles help organizations articulate their current cybersecurity posture ("Current Profile") and their target state ("Target Profile"). The gap between the two drives prioritized improvements. This is particularly useful for organizations beginning their supply chain security journey – the Current Profile honestly assesses what's in place, while the Target Profile defines what "good" looks like.
 
 ### Tiers
 
 CSF 2.0 defines four tiers of cybersecurity risk management maturity:
 
-1. **Partial** — Ad hoc, reactive practices with limited awareness of supply chain risk
-2. **Risk Informed** — Risk management processes are in place but may not be organization-wide
-3. **Repeatable** — Formal policies and procedures consistently applied, including supply chain risk management
-4. **Adaptive** — Continuous improvement based on lessons learned and predictive indicators
+1. **Partial** – Ad hoc, reactive practices with limited awareness of supply chain risk
+2. **Risk Informed** – Risk management processes are in place but may not be organization-wide
+3. **Repeatable** – Formal policies and procedures consistently applied, including supply chain risk management
+4. **Adaptive** – Continuous improvement based on lessons learned and predictive indicators
 
-Organizations should use tiers honestly — most organizations starting their SBOM journey are at Tier 1 or 2, and that's a legitimate starting point.
+Organizations should use tiers honestly – most organizations starting their SBOM journey are at Tier 1 or 2, and that's a legitimate starting point.
 
 ### Community Profiles and Quick Start Guides
 
@@ -101,7 +101,7 @@ SBOMs are not mentioned as a standalone requirement in CSF 2.0, but they directl
 
 ### GOVERN: Supply Chain Risk Management Policy
 
-The GOVERN function expects organizations to have policies and processes for managing supply chain risk. Implementing SBOM requirements — for both internally developed software and vendor-provided software — is a concrete, auditable way to demonstrate supply chain governance.
+The GOVERN function expects organizations to have policies and processes for managing supply chain risk. Implementing SBOM requirements – for both internally developed software and vendor-provided software – is a concrete, auditable way to demonstrate supply chain governance.
 
 Specific actions:
 
@@ -112,7 +112,7 @@ Specific actions:
 
 ### IDENTIFY: Software Asset Management
 
-The IDENTIFY function's Asset Management category (ID.AM) requires organizations to inventory their assets, including software. SBOMs provide the most granular and accurate form of software asset inventory available — down to the individual library version and its transitive dependencies.
+The IDENTIFY function's Asset Management category (ID.AM) requires organizations to inventory their assets, including software. SBOMs provide the most granular and accurate form of software asset inventory available – down to the individual library version and its transitive dependencies.
 
 Without SBOMs, software asset management typically stops at the application level ("we use Product X version Y"). With SBOMs, asset management extends to "Product X version Y contains 847 open source components, including Log4j 2.17.1 and OpenSSL 3.0.8." This granularity is exactly what vulnerability response requires.
 
@@ -122,7 +122,7 @@ sbomify's [SBOM hierarchy](/features/sbom-hierarchy/) maps this to organizationa
 
 The PROTECT function includes safeguards for data security and platform integrity. In the supply chain context, this means verifying that software components are authentic and haven't been tampered with.
 
-SBOM attestation provides cryptographic verification of integrity and provenance. On GitHub Actions, the `attest-build-provenance` action creates SLSA build provenance attestations for SBOMs generated by the sbomify action, allowing recipients to verify that the SBOM was produced by a legitimate CI/CD pipeline — not manually assembled or modified after the fact.
+SBOM attestation provides cryptographic verification of integrity and provenance. On GitHub Actions, the `attest-build-provenance` action creates SLSA build provenance attestations for SBOMs generated by the sbomify action, allowing recipients to verify that the SBOM was produced by a legitimate CI/CD pipeline – not manually assembled or modified after the fact.
 
 ### DETECT: Continuous Vulnerability Monitoring
 
@@ -139,7 +139,7 @@ This transforms vulnerability response from "search every application to see if 
 
 ### RESPOND and RECOVER: Incident Context
 
-During incident response, SBOMs provide the context needed for rapid triage. When a zero-day vulnerability is disclosed, the first question is always "are we affected?" With SBOMs managed in sbomify, the answer is immediate — and the SBOM hierarchy tells you exactly which services need attention.
+During incident response, SBOMs provide the context needed for rapid triage. When a zero-day vulnerability is disclosed, the first question is always "are we affected?" With SBOMs managed in sbomify, the answer is immediate – and the SBOM hierarchy tells you exactly which services need attention.
 
 This aligns with CSF 2.0's emphasis on rapid, informed response and the ability to recover quickly from cybersecurity events.
 
@@ -147,24 +147,24 @@ This aligns with CSF 2.0's emphasis on rapid, informed response and the ability 
 
 CSF 2.0 is designed to be complementary to other frameworks and regulations:
 
-- **[Executive Order 14028](/compliance/eo-14028/)** — Directly references NIST guidelines and SBOM requirements
-- **[EU Cyber Resilience Act](/compliance/eu-cra/)** — Aligns with CSF 2.0's supply chain risk management outcomes
-- **[PCI DSS 4.0](/compliance/pci-dss/)** — Maps to CSF 2.0 categories for organizations in the payment card industry
-- **CMMC** — The Cybersecurity Maturity Model Certification builds on NIST 800-171, which aligns with CSF categories
-- **ISO 27001** — CSF 2.0 Organizational Profiles can be aligned with ISO 27001 controls
+- **[Executive Order 14028](/compliance/eo-14028/)** – Directly references NIST guidelines and SBOM requirements
+- **[EU Cyber Resilience Act](/compliance/eu-cra/)** – Aligns with CSF 2.0's supply chain risk management outcomes
+- **[PCI DSS 4.0](/compliance/pci-dss/)** – Maps to CSF 2.0 categories for organizations in the payment card industry
+- **CMMC** – The Cybersecurity Maturity Model Certification builds on NIST 800-171, which aligns with CSF categories
+- **ISO 27001** – CSF 2.0 Organizational Profiles can be aligned with ISO 27001 controls
 
-For organizations subject to multiple frameworks, CSF 2.0 serves as a unifying structure — implement once, map to many. For a broader view of the [compliance landscape](/compliance/), see our compliance hub.
+For organizations subject to multiple frameworks, CSF 2.0 serves as a unifying structure – implement once, map to many. For a broader view of the [compliance landscape](/compliance/), see our compliance hub.
 
 ## Getting Started with CSF 2.0 and SBOMs
 
 For organizations adopting CSF 2.0 and integrating SBOMs:
 
-1. **Assess your current state** — Create a CSF 2.0 Current Profile. Be honest about where your supply chain risk management practices stand today.
-2. **Define your target** — Determine what tier and profile you're targeting, and which outcomes are highest priority.
-3. **Start with IDENTIFY** — You can't protect, detect, or govern what you don't know about. Add SBOM generation to your CI/CD pipelines using the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) and build your software asset inventory.
-4. **Enable DETECT** — Ingest SBOMs into [sbomify](https://sbomify.com) and enable continuous vulnerability monitoring.
-5. **Formalize GOVERN** — Establish SBOM policies, procurement requirements, and vulnerability response SLAs.
-6. **Iterate** — CSF 2.0 is explicitly designed for continuous improvement. Start where you are and build capability over time.
+1. **Assess your current state** – Create a CSF 2.0 Current Profile. Be honest about where your supply chain risk management practices stand today.
+2. **Define your target** – Determine what tier and profile you're targeting, and which outcomes are highest priority.
+3. **Start with IDENTIFY** – You can't protect, detect, or govern what you don't know about. Add SBOM generation to your CI/CD pipelines using the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) and build your software asset inventory.
+4. **Enable DETECT** – Ingest SBOMs into [sbomify](https://sbomify.com) and enable continuous vulnerability monitoring.
+5. **Formalize GOVERN** – Establish SBOM policies, procurement requirements, and vulnerability response SLAs.
+6. **Iterate** – CSF 2.0 is explicitly designed for continuous improvement. Start where you are and build capability over time.
 
 For more on the role of SBOMs in cybersecurity programs, see our guide on [the role of SBOMs in cybersecurity](/2026/02/08/sbom-cybersecurity-role/).
 
