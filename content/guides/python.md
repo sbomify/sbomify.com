@@ -31,7 +31,7 @@ For a Flask-based Python server, your `pyproject.toml` would declare:
 dependencies = ["flask>=3.0.3"]
 ```
 
-Running `uv lock` generates a `uv.lock` file that captures Flask and all its dependencies with exact versions and hashes—ready for accurate SBOM generation.
+Running `uv lock` generates a `uv.lock` file that captures Flask and all its dependencies with exact versions and hashes – ready for accurate SBOM generation.
 
 Similarly, with Poetry, running `poetry lock` generates a `poetry.lock` file with the same completeness.
 
@@ -43,7 +43,7 @@ The key point is that the SBOM is directly correlated to the quality of the lock
 
 ### Hashes Are Included Automatically
 
-UV and Poetry automatically add cryptographic hashes to all packages in their lockfiles. This is required for NTIA Minimum Elements compliance—no extra tooling needed.
+UV and Poetry automatically add cryptographic hashes to all packages in their lockfiles. This is required for NTIA Minimum Elements compliance – no extra tooling needed.
 
 ## Generating an SBOM
 
@@ -53,7 +53,7 @@ SBOM generation is the first step in the [SBOM lifecycle](/features/generate-col
 
 ### Using sbomify GitHub Action (Recommended)
 
-The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
+The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step.
 
 For Python, sbomify uses **cyclonedx-py** under the hood as it provides the most accurate results for Python lockfiles, including proper hash support.
 

@@ -1,11 +1,11 @@
 ---
 
 title: "SBOM Management: How to Organize, Track, and Act on Your SBOMs"
-description: "Learn how to manage SBOMs across the full lifecycle — from generation and storage to vulnerability monitoring, versioning, and distribution to consumers."
+description: "Learn how to manage SBOMs across the full lifecycle – from generation and storage to vulnerability monitoring, versioning, and distribution to consumers."
 categories:
   - education
 tags: [sbom, management, vulnerability, compliance]
-tldr: "Generating an SBOM is only the first step — you also need to store, version, distribute, and continuously monitor it. Effective SBOM management means automating generation in CI/CD, setting up vulnerability alerting, and keeping SBOMs current as your software evolves."
+tldr: "Generating an SBOM is only the first step – you also need to store, version, distribute, and continuously monitor it. Effective SBOM management means automating generation in CI/CD, setting up vulnerability alerting, and keeping SBOMs current as your software evolves."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -31,9 +31,9 @@ SBOM management is the practice of organizing, storing, versioning, distributing
 
 ## Why SBOM Management Matters
 
-Most organizations that begin their SBOM journey focus on generation — using tools like [sbomify](https://sbomify.com), [Syft](https://github.com/anchore/syft), [Trivy](https://github.com/aquasecurity/trivy), or [cdxgen](https://github.com/CycloneDX/cdxgen) to produce SBOMs from their projects (see our [resources page](/resources/) for a complete list). This is necessary but insufficient. An SBOM that is generated once and never updated or monitored provides little ongoing value.
+Most organizations that begin their SBOM journey focus on generation – using tools like [sbomify](https://sbomify.com), [Syft](https://github.com/anchore/syft), [Trivy](https://github.com/aquasecurity/trivy), or [cdxgen](https://github.com/CycloneDX/cdxgen) to produce SBOMs from their projects (see our [resources page](/resources/) for a complete list). This is necessary but insufficient. An SBOM that is generated once and never updated or monitored provides little ongoing value.
 
-The real benefits of SBOMs — rapid vulnerability response, continuous compliance, supply chain visibility — only materialize when SBOMs are actively managed. Consider the [Log4Shell](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) disclosure in December 2021: organizations with up-to-date, searchable SBOMs identified affected systems in minutes. Organizations without them spent weeks manually auditing codebases.
+The real benefits of SBOMs – rapid vulnerability response, continuous compliance, supply chain visibility – only materialize when SBOMs are actively managed. Consider the [Log4Shell](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) disclosure in December 2021: organizations with up-to-date, searchable SBOMs identified affected systems in minutes. Organizations without them spent weeks manually auditing codebases.
 
 SBOM management addresses three challenges:
 
@@ -62,11 +62,11 @@ Generated SBOMs need a durable, queryable storage location. Approaches range fro
 
 **Artifact repository.** Store SBOMs alongside the build artifacts they describe. If you use a container registry, attach SBOMs to container images using OCI artifacts. If you use a package registry, publish SBOMs as companion files.
 
-**Dedicated SBOM platform.** Use a purpose-built platform like [sbomify](https://sbomify.com) that ingests, indexes, and monitors SBOMs across your portfolio. sbomify organizes SBOMs in a hierarchy of Products, Projects, and Components — matching how software is actually built — and provides centralized visibility, search, and policy enforcement. Its [Trust Center](/features/trust-center/) feature also handles distribution to customers and auditors.
+**Dedicated SBOM platform.** Use a purpose-built platform like [sbomify](https://sbomify.com) that ingests, indexes, and monitors SBOMs across your portfolio. sbomify organizes SBOMs in a hierarchy of Products, Projects, and Components – matching how software is actually built – and provides centralized visibility, search, and policy enforcement. Its [Trust Center](/features/trust-center/) feature also handles distribution to customers and auditors.
 
 **Version control.** Each SBOM should be versioned in lockstep with the software it describes. When version 2.1.3 of your application is released, the SBOM for 2.1.3 should be generated and stored. Previous versions should be retained for audit and incident response purposes.
 
-**Retention policy.** Define how long SBOMs are retained. At minimum, retain SBOMs for all currently deployed versions. For compliance, retain SBOMs for the duration required by your applicable frameworks — the [EU CRA](/compliance/eu-cra/) requires vulnerability handling for the expected product lifetime or a minimum of five years.
+**Retention policy.** Define how long SBOMs are retained. At minimum, retain SBOMs for all currently deployed versions. For compliance, retain SBOMs for the duration required by your applicable frameworks – the [EU CRA](/compliance/eu-cra/) requires vulnerability handling for the expected product lifetime or a minimum of five years.
 
 ### Phase 3: Monitoring and Analysis
 
@@ -111,7 +111,7 @@ The most natural organization maps SBOMs to the products and versions they descr
 
 ### By Deployment Environment
 
-Different environments (development, staging, production) may run different versions. Track which SBOM corresponds to what is currently deployed in each environment. This is especially important for incident response — when a new vulnerability is disclosed, you need to know what is in production right now, not what was released last quarter.
+Different environments (development, staging, production) may run different versions. Track which SBOM corresponds to what is currently deployed in each environment. This is especially important for incident response – when a new vulnerability is disclosed, you need to know what is in production right now, not what was released last quarter.
 
 ### By Supply Chain Position
 
@@ -129,7 +129,7 @@ If you both consume and produce software, maintain SBOMs in both directions: SBO
 
 5. **Centralize visibility.** As your SBOM inventory grows, centralize it in a platform that supports search, filtering, and cross-portfolio analysis. Being able to answer "which of our products use Log4j?" in seconds is the goal.
 
-6. **Keep SBOMs current.** A stale SBOM is worse than no SBOM — it provides false confidence. Ensure that deployed software always has a corresponding current SBOM. Flag and investigate any deployed artifacts without an associated SBOM.
+6. **Keep SBOMs current.** A stale SBOM is worse than no SBOM – it provides false confidence. Ensure that deployed software always has a corresponding current SBOM. Flag and investigate any deployed artifacts without an associated SBOM.
 
 7. **Act on findings.** SBOM management is not complete without a remediation process. When monitoring surfaces a vulnerability, define SLAs for response based on severity, [KEV status](/2025/12/30/what-is-kev-cisa-known-exploited-vulnerabilities/), and deployment context.
 

@@ -20,7 +20,7 @@ Generating SBOMs in your CI/CD pipeline provides several advantages:
 
 ### Basic SBOM Generation
 
-The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information—all in one step.
+The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step.
 
 ```yaml
 ---

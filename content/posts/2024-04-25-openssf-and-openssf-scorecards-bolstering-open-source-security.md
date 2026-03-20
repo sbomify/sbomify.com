@@ -5,7 +5,7 @@ description: "What is OpenSSF? The Open Source Security Foundation coordinates i
 categories:
   - education
 tags: [openssf, security, open-source, supply-chain]
-tldr: "The Open Source Security Foundation (OpenSSF) coordinates the industry's efforts to secure open source software. Its most visible tool — OpenSSF Scorecards — automatically evaluates the security practices of any GitHub project across 18+ checks, producing a 0-10 score. Scorecards help consumers choose trustworthy dependencies and help maintainers identify security gaps."
+tldr: "The Open Source Security Foundation (OpenSSF) coordinates the industry's efforts to secure open source software. Its most visible tool – OpenSSF Scorecards – automatically evaluates the security practices of any GitHub project across 18+ checks, producing a 0-10 score. Scorecards help consumers choose trustworthy dependencies and help maintainers identify security gaps."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -25,26 +25,26 @@ date: 2024-04-25
 slug: openssf-and-openssf-scorecards-bolstering-open-source-security
 ---
 
-After the [Log4Shell vulnerability](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) exposed how a single widely-used open source library could affect hundreds of thousands of organizations, the technology industry confronted an uncomfortable question: who is responsible for securing the open source software that underpins the modern internet? The answer, increasingly, is everyone — and the **[Open Source Security Foundation (OpenSSF)](https://openssf.org/)** is the organization coordinating that effort.
+After the [Log4Shell vulnerability](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) exposed how a single widely-used open source library could affect hundreds of thousands of organizations, the technology industry confronted an uncomfortable question: who is responsible for securing the open source software that underpins the modern internet? The answer, increasingly, is everyone – and the **[Open Source Security Foundation (OpenSSF)](https://openssf.org/)** is the organization coordinating that effort.
 
 OpenSSF is a cross-industry initiative under the Linux Foundation that brings together developers, security professionals, and organizations to improve the security of open source software. Formed in 2020 by merging the Core Infrastructure Initiative (CII) and the Open Source Security Coalition, OpenSSF includes members like Google, Microsoft, Amazon, Intel, IBM, and dozens of other companies that depend on open source and have a shared interest in securing it.
 
 ## The OpenSSF Ecosystem
 
-OpenSSF is not a single tool — it is an umbrella for a portfolio of projects that together address different layers of the software supply chain security problem.
+OpenSSF is not a single tool – it is an umbrella for a portfolio of projects that together address different layers of the software supply chain security problem.
 
 | Project                                                          | What It Does                                                                          |
 | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | **[Scorecards](https://securityscorecards.dev/)**                | Automated security health assessment for open source projects                         |
 | **[SLSA](/2024/08/17/what-is-slsa/)**                            | Build integrity and provenance framework (Supply chain Levels for Software Artifacts) |
 | **[Sigstore](/2024/08/12/what-is-sigstore/)**                    | Keyless signing and verification infrastructure                                       |
-| **[GUAC](https://guac.sh/)**                                     | Graph for Understanding Artifact Composition — aggregates supply chain metadata       |
+| **[GUAC](https://guac.sh/)**                                     | Graph for Understanding Artifact Composition – aggregates supply chain metadata       |
 | **[Alpha-Omega](https://openssf.org/community/alpha-omega/)**    | Funds security improvements for critical open source projects                         |
 | **[Best Practices Badge](https://www.bestpractices.dev/)**       | Self-assessment program for open source project security maturity                     |
 | **[Package Analysis](https://github.com/ossf/package-analysis)** | Detects malicious packages in open source registries                                  |
 | **[Allstar](https://github.com/ossf/allstar)**                   | Enforces security policies on GitHub organizations                                    |
 
-This guide focuses on **Scorecards** — the most widely used and immediately actionable tool in the OpenSSF portfolio.
+This guide focuses on **Scorecards** – the most widely used and immediately actionable tool in the OpenSSF portfolio.
 
 ## OpenSSF Scorecards: How They Work
 
@@ -54,29 +54,29 @@ This guide focuses on **Scorecards** — the most widely used and immediately ac
 
 Scorecards currently run 18+ checks. The most important ones:
 
-**Branch Protection** — Is the default branch protected? Are force pushes blocked? Are status checks required before merging? Branch protection prevents unauthorized code from entering the main branch.
+**Branch Protection** – Is the default branch protected? Are force pushes blocked? Are status checks required before merging? Branch protection prevents unauthorized code from entering the main branch.
 
-**Code Review** — Are pull requests reviewed before merging? Code review is one of the most effective defenses against malicious or accidental introduction of vulnerabilities.
+**Code Review** – Are pull requests reviewed before merging? Code review is one of the most effective defenses against malicious or accidental introduction of vulnerabilities.
 
-**CI Tests** — Does the project run tests in CI? Automated testing catches regressions that manual review might miss.
+**CI Tests** – Does the project run tests in CI? Automated testing catches regressions that manual review might miss.
 
-**Dependency Update Tool** — Does the project use Dependabot, Renovate, or a similar tool to keep dependencies current? Outdated dependencies are a common source of vulnerabilities.
+**Dependency Update Tool** – Does the project use Dependabot, Renovate, or a similar tool to keep dependencies current? Outdated dependencies are a common source of vulnerabilities.
 
-**Pinned Dependencies** — Are CI/CD workflow dependencies pinned to specific versions (by hash, not tag)? Unpinned dependencies in GitHub Actions workflows are a supply chain attack vector — an attacker who compromises a dependency can inject code into every workflow that references it by tag.
+**Pinned Dependencies** – Are CI/CD workflow dependencies pinned to specific versions (by hash, not tag)? Unpinned dependencies in GitHub Actions workflows are a supply chain attack vector – an attacker who compromises a dependency can inject code into every workflow that references it by tag.
 
-**Vulnerabilities** — Does the project have unaddressed vulnerabilities in the OSV database? This checks whether known security issues are being resolved.
+**Vulnerabilities** – Does the project have unaddressed vulnerabilities in the OSV database? This checks whether known security issues are being resolved.
 
-**Security Policy** — Does the project have a `SECURITY.md` file describing how to report vulnerabilities? A clear disclosure process encourages responsible reporting.
+**Security Policy** – Does the project have a `SECURITY.md` file describing how to report vulnerabilities? A clear disclosure process encourages responsible reporting.
 
-**Signed Releases** — Are releases cryptographically signed? Signed releases let consumers verify artifact integrity. This is where [Sigstore](/2024/08/12/what-is-sigstore/) and Scorecards intersect.
+**Signed Releases** – Are releases cryptographically signed? Signed releases let consumers verify artifact integrity. This is where [Sigstore](/2024/08/12/what-is-sigstore/) and Scorecards intersect.
 
-**Fuzzing** — Does the project participate in OSS-Fuzz or use other fuzzing infrastructure? Fuzzing finds bugs that unit tests typically miss.
+**Fuzzing** – Does the project participate in OSS-Fuzz or use other fuzzing infrastructure? Fuzzing finds bugs that unit tests typically miss.
 
-**SAST** — Does the project run static analysis security testing tools? SAST catches common vulnerability patterns in code.
+**SAST** – Does the project run static analysis security testing tools? SAST catches common vulnerability patterns in code.
 
-**Token Permissions** — Are GitHub Actions workflow tokens scoped to minimum necessary permissions? Overly broad tokens increase the blast radius of a compromised workflow.
+**Token Permissions** – Are GitHub Actions workflow tokens scoped to minimum necessary permissions? Overly broad tokens increase the blast radius of a compromised workflow.
 
-**Dangerous Workflow** — Does the project have CI workflows that run untrusted code in a privileged context (e.g., `pull_request_target` with checkout)? This is a known attack vector for GitHub Actions.
+**Dangerous Workflow** – Does the project have CI workflows that run untrusted code in a privileged context (e.g., `pull_request_target` with checkout)? This is a known attack vector for GitHub Actions.
 
 ### Running Scorecards
 
@@ -107,7 +107,7 @@ Pre-computed scores for popular projects are available at [securityscorecards.de
 
 ### Interpreting Results
 
-Scorecard results are most useful when viewed at the individual check level, not just as an aggregate score. A project might score 9/10 overall but have a 0 on Branch-Protection — which is a critical gap regardless of the overall score.
+Scorecard results are most useful when viewed at the individual check level, not just as an aggregate score. A project might score 9/10 overall but have a 0 on Branch-Protection – which is a critical gap regardless of the overall score.
 
 When evaluating a dependency, focus on the checks that matter most for your threat model:
 
@@ -119,7 +119,7 @@ When evaluating a dependency, focus on the checks that matter most for your thre
 
 Scorecards and [SBOMs](/what-is-sbom/) address different dimensions of dependency risk, and they are most powerful when used together.
 
-An SBOM tells you _what_ dependencies you have and [whether they contain known vulnerabilities](/2026/02/01/sbom-scanning-vulnerability-detection/). Scorecards tell you _how well those dependencies are maintained_ — which is a leading indicator of future vulnerability risk. A dependency with no known CVEs but a Scorecard score of 2/10 (no code review, no CI tests, no branch protection) is a risk that an SBOM alone would not flag.
+An SBOM tells you _what_ dependencies you have and [whether they contain known vulnerabilities](/2026/02/01/sbom-scanning-vulnerability-detection/). Scorecards tell you _how well those dependencies are maintained_ – which is a leading indicator of future vulnerability risk. A dependency with no known CVEs but a Scorecard score of 2/10 (no code review, no CI tests, no branch protection) is a risk that an SBOM alone would not flag.
 
 **Practical workflow:**
 

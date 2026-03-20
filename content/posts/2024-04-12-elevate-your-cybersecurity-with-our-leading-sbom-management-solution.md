@@ -23,13 +23,13 @@ In an era where digital security is paramount, the recent Executive Order 14028 
 
 #### The SBOM Mandate: A Game-Changer in Cybersecurity
 
-The Executive Order marks a pivotal moment in cybersecurity policy, directing the National Institute of Standards and Technology (NIST) to develop guidelines for improving software supply chain security. One of the cornerstone achievements of this initiative is the formalization of the SBOM—a comprehensive record of the components that make up software products. This development is not just a regulatory milestone; it's a transformative step towards ensuring that organizations can identify, manage, and mitigate vulnerabilities effectively.
+The Executive Order marks a pivotal moment in cybersecurity policy, directing the National Institute of Standards and Technology (NIST) to develop guidelines for improving software supply chain security. One of the cornerstone achievements of this initiative is the formalization of the SBOM – a comprehensive record of the components that make up software products. This development is not just a regulatory milestone; it's a transformative step towards ensuring that organizations can identify, manage, and mitigate vulnerabilities effectively.
 
 #### How Our SBOM Management Solution Can Help
 
 **Comprehensive Visibility and Compliance:** Our SBOM management software provides an exhaustive view of your software components, ensuring you meet the Executive Order's requirements. With our tool, you can generate, maintain, and audit SBOMs efficiently, giving you and your stakeholders confidence in the security and compliance of your software products.
 
-**Proactive Vulnerability Management:** By leveraging our SBOM management solution, you're not just complying with regulations—you're proactively enhancing your cybersecurity posture. Our platform enables you to quickly identify vulnerabilities within your software components, facilitating rapid response and remediation to protect against potential threats.
+**Proactive Vulnerability Management:** By leveraging our SBOM management solution, you're not just complying with regulations – you're proactively enhancing your cybersecurity posture. Our platform enables you to quickly identify vulnerabilities within your software components, facilitating rapid response and remediation to protect against potential threats.
 
 **Streamlined Collaboration and Reporting:** Compliance with the new SBOM mandates requires seamless collaboration across teams and with external stakeholders. Our platform simplifies this process, providing intuitive tools for generating and sharing SBOMs and compliance reports, ensuring you can communicate your cybersecurity measures effectively.
 

@@ -39,7 +39,7 @@ const compile = (filename: string) => {
   const fullContent = themeContent + "\n" + sourceContent;
 
   // Spawn d2 with stdin
-  const proc = spawn("d2", ["--theme=1", "-", outputPath]);
+  const proc = spawn("d2", ["--sketch", "--theme=1", "-", outputPath]);
 
   proc.stdout.on("data", (data) => console.log(data.toString().trim()));
   proc.stderr.on("data", (data) => console.error(data.toString().trim()));

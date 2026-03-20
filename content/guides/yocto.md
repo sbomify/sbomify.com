@@ -124,7 +124,7 @@ The `index.json` file links all individual SBOMs together using SPDX document li
 
 #### SPDX 3.0.1
 
-With `create-spdx-3.0`, Yocto produces a single consolidated SBOM containing all packages in one document. There is no `index.json` — everything is in a single file:
+With `create-spdx-3.0`, Yocto produces a single consolidated SBOM containing all packages in one document. There is no `index.json` – everything is in a single file:
 
 ```bash
 $ ls sboms/

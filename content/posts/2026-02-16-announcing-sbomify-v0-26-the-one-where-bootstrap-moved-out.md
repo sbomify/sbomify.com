@@ -33,7 +33,7 @@ From your perspective, it just works.
 
 ## BSI TR-03183-2 Compliance
 
-If you operate in Germany or sell into the German market, sbomify now supports automated compliance checking against **BSI TR-03183-2** — the German Federal Office for Information Security's technical guideline for SBOM quality and completeness.
+If you operate in Germany or sell into the German market, sbomify now supports automated compliance checking against **BSI TR-03183-2** – the German Federal Office for Information Security's technical guideline for SBOM quality and completeness.
 
 Like our other compliance plugins, you can enable it in **Settings -> Plugins**. Once enabled, every SBOM upload is assessed automatically against the BSI requirements.
 
@@ -53,16 +53,16 @@ With v0.26, you can **delete your own account** directly from your profile setti
 
 You can now control who sees what at a more granular level. Set **component visibility** to restrict which components are visible to which roles, and control **document-level access** to limit who can view specific SBOM documents.
 
-This is particularly useful for organizations sharing SBOMs externally through the **Trust Center**. You can make some components public for customers and partners while keeping internal components private — all from the same workspace.
+This is particularly useful for organizations sharing SBOMs externally through the **Trust Center**. You can make some components public for customers and partners while keeping internal components private – all from the same workspace.
 
 ---
 
 ## Other Improvements
 
-- **Version field on Releases** — You can now track release versions aligned with the Transparency Exchange API (TEA), making it easier to correlate SBOMs with specific product versions.
-- **Improved error tracking** — We catch and resolve issues faster now, often before you notice them.
-- **Custom login experience** — The login page now uses a branded sbomify theme with better password validation feedback, so you know exactly what is needed when setting or changing your password.
-- **Zero-downtime deployments** — Deployments no longer cause brief interruptions. Updates happen seamlessly in the background, so the platform is always available.
+- **Version field on Releases** – You can now track release versions aligned with the Transparency Exchange API (TEA), making it easier to correlate SBOMs with specific product versions.
+- **Improved error tracking** – We catch and resolve issues faster now, often before you notice them.
+- **Custom login experience** – The login page now uses a branded sbomify theme with better password validation feedback, so you know exactly what is needed when setting or changing your password.
+- **Zero-downtime deployments** – Deployments no longer cause brief interruptions. Updates happen seamlessly in the background, so the platform is always available.
 
 ---
 
@@ -70,7 +70,7 @@ This is particularly useful for organizations sharing SBOMs externally through t
 
 - Fixed an issue where compliance assessments could fail on retry.
 - Fixed IP address capture in NDA audit trails.
-- Improved error responses for duplicate SBOM uploads — the API response now includes an error code for easier debugging in CI/CD pipelines.
+- Improved error responses for duplicate SBOM uploads – the API response now includes an error code for easier debugging in CI/CD pipelines.
 
 ---
 
@@ -82,8 +82,8 @@ For self-hosted users, note that sbomify v0.26 now requires **Python 3.13**. We 
 
 ## Getting Started
 
-If you are on the **hosted platform**, everything is already live — no action needed.
+If you are on the **hosted platform**, everything is already live – no action needed.
 
 For **self-hosted** deployments, update to v0.26.0 by pulling the latest release.
 
-Check out the [full changelog on GitHub](https://github.com/sbomify/sbomify/compare/v0.25.1...v0.26.0) for complete details. We would love to hear your feedback — reach out via [GitHub Issues](https://github.com/sbomify/sbomify/issues) or our community channels.
+Check out the [full changelog on GitHub](https://github.com/sbomify/sbomify/compare/v0.25.1...v0.26.0) for complete details. We would love to hear your feedback – reach out via [GitHub Issues](https://github.com/sbomify/sbomify/issues) or our community channels.

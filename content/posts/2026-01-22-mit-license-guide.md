@@ -1,7 +1,7 @@
 ---
 
 title: "The MIT License: A Complete Guide for Developers"
-description: "Understand the MIT License — what it permits, what it requires, how it compares to BSD and Apache 2.0, and how SBOMs help track MIT license compliance."
+description: "Understand the MIT License – what it permits, what it requires, how it compares to BSD and Apache 2.0, and how SBOMs help track MIT license compliance."
 categories:
   - education
 tags: [mit, licensing, open-source, compliance]
@@ -27,13 +27,13 @@ date: 2026-01-22
 slug: mit-license-guide
 ---
 
-The MIT License is a permissive open source license that allows virtually unrestricted use, modification, distribution, and sublicensing of software, including use in proprietary and commercial products. Its only substantive requirement is that the license text and copyright notice must be included with any substantial distribution of the software. The MIT License is the most widely used open source license in the world — GitHub's data consistently shows it as the most popular license choice across its platform.
+The MIT License is a permissive open source license that allows virtually unrestricted use, modification, distribution, and sublicensing of software, including use in proprietary and commercial products. Its only substantive requirement is that the license text and copyright notice must be included with any substantial distribution of the software. The MIT License is the most widely used open source license in the world – GitHub's data consistently shows it as the most popular license choice across its platform.
 
 ## What Is the MIT License?
 
 The MIT License (formally, the "MIT License" as listed in the [SPDX License List](https://spdx.org/licenses/) with identifier `MIT`) is a permissive free software license originating at the Massachusetts Institute of Technology. It is sometimes referred to as the "Expat License" to distinguish it from other licenses historically associated with MIT.
 
-The full text of the MIT License is remarkably short — approximately 170 words:
+The full text of the MIT License is remarkably short – approximately 170 words:
 
 > Copyright (c) \<year\> \<copyright holder\>
 >
@@ -49,14 +49,14 @@ This brevity is intentional. The MIT License prioritizes simplicity and clarity,
 
 The MIT License grants the following rights without restriction:
 
-- **Use** — Run the software for any purpose, including commercial use
-- **Copy** — Make copies of the software
-- **Modify** — Create derivative works based on the software
-- **Merge** — Combine the software with other software
-- **Publish** — Make the software publicly available
-- **Distribute** — Share copies with others
-- **Sublicense** — Grant these same rights to third parties
-- **Sell** — Sell copies of the software, including modified versions
+- **Use** – Run the software for any purpose, including commercial use
+- **Copy** – Make copies of the software
+- **Modify** – Create derivative works based on the software
+- **Merge** – Combine the software with other software
+- **Publish** – Make the software publicly available
+- **Distribute** – Share copies with others
+- **Sublicense** – Grant these same rights to third parties
+- **Sell** – Sell copies of the software, including modified versions
 
 The phrase "deal in the Software without restriction" is deliberately broad. There are no limitations on field of use, no requirements to share source code, and no requirements to license derivative works under the MIT License.
 
@@ -83,7 +83,7 @@ The MIT License is one of several permissive licenses. Understanding the differe
 
 ### MIT vs. BSD (2-Clause and 3-Clause)
 
-The BSD 2-Clause License ("Simplified BSD") is functionally equivalent to the MIT License — both require attribution and disclaim warranties, with no other conditions. The wording differs, but the legal effect is the same.
+The BSD 2-Clause License ("Simplified BSD") is functionally equivalent to the MIT License – both require attribution and disclaim warranties, with no other conditions. The wording differs, but the legal effect is the same.
 
 The BSD 3-Clause License adds a "non-endorsement" clause: you may not use the name of the copyright holder or contributors to endorse or promote derived products without permission. The MIT License has no such clause.
 
@@ -112,7 +112,7 @@ The ISC License is a simplified rewrite of the MIT License. It removes the expli
 
 ## MIT License and Copyleft (GPL)
 
-The MIT License is compatible with copyleft licenses like the [GPL](/2025/12/22/gpl-license-guide/) — but only in one direction. MIT-licensed code can be included in a GPL-licensed project. The combined work is then licensed under the GPL. However, GPL-licensed code cannot be included in an MIT-licensed project, because the GPL requires that the entire combined work be distributed under the GPL.
+The MIT License is compatible with copyleft licenses like the [GPL](/2025/12/22/gpl-license-guide/) – but only in one direction. MIT-licensed code can be included in a GPL-licensed project. The combined work is then licensed under the GPL. However, GPL-licensed code cannot be included in an MIT-licensed project, because the GPL requires that the entire combined work be distributed under the GPL.
 
 | Combination                        | Result                                  | Permitted?             |
 | ---------------------------------- | --------------------------------------- | ---------------------- |
@@ -132,7 +132,7 @@ The MIT License is one of the most commercially friendly open source licenses. O
 - **Minimal compliance burden.** Including the license text in your distribution (typically in a NOTICES or THIRD-PARTY file) satisfies the only condition.
 - **No patent risk (with caveats).** While the MIT License does not include an explicit patent grant, its broad permission language is generally interpreted as an implied license. For maximum patent protection, consider [Apache 2.0](/2026/01/07/apache-license-2-guide/) instead.
 
-The primary compliance risk with MIT is not the license itself but the volume. A typical web application may depend on hundreds of MIT-licensed packages. Each one requires its license text and copyright notice to be included in the distribution. Automated tooling — particularly SBOM-based compliance checking — is essential at this scale.
+The primary compliance risk with MIT is not the license itself but the volume. A typical web application may depend on hundreds of MIT-licensed packages. Each one requires its license text and copyright notice to be included in the distribution. Automated tooling – particularly SBOM-based compliance checking – is essential at this scale.
 
 ## How SBOMs Track MIT License Compliance
 
@@ -142,7 +142,7 @@ A [Software Bill of Materials](/what-is-sbom/) documents every component in your
 
 2. **Attribution aggregation.** With hundreds of MIT-licensed dependencies, manually collecting license texts is impractical. SBOMs provide the component list from which attribution documents (NOTICES files, THIRD-PARTY files) can be generated automatically.
 
-3. **License compatibility checking.** SBOM-based compliance tools can detect potential issues — for example, flagging if MIT code is being redistributed without the required license text, or identifying MIT/GPL combinations that require the combined work to be GPL-licensed.
+3. **License compatibility checking.** SBOM-based compliance tools can detect potential issues – for example, flagging if MIT code is being redistributed without the required license text, or identifying MIT/GPL combinations that require the combined work to be GPL-licensed.
 
 4. **Audit evidence.** SBOMs provide the documentation needed for license audits, M&A due diligence, and procurement assessments.
 
@@ -166,7 +166,7 @@ Both are permissive licenses that allow commercial use without requiring source 
 
 ### Is the MIT License compatible with the GPL?
 
-Yes, but only in one direction. MIT-licensed code can be included in GPL-licensed projects — the combined work is then distributed under the GPL. However, GPL-licensed code cannot be included in an MIT-licensed project without the entire project becoming GPL-licensed. This one-directional compatibility is a feature of the GPL's copyleft requirement, not a restriction in the MIT License.
+Yes, but only in one direction. MIT-licensed code can be included in GPL-licensed projects – the combined work is then distributed under the GPL. However, GPL-licensed code cannot be included in an MIT-licensed project without the entire project becoming GPL-licensed. This one-directional compatibility is a feature of the GPL's copyleft requirement, not a restriction in the MIT License.
 
 ### Do I need to include the MIT License text when distributing software?
 

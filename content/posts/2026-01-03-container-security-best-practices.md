@@ -5,7 +5,7 @@ description: "A comprehensive guide to container security covering image scannin
 categories:
   - education
 tags: [container, docker, kubernetes, security]
-tldr: "Container security requires a layered approach: minimal base images, vulnerability scanning, least-privilege runtime, and network policies. Generating separate SBOMs for the base image and application layers — rather than one monolithic SBOM — gives you targeted visibility for vulnerability triage and compliance audits."
+tldr: "Container security requires a layered approach: minimal base images, vulnerability scanning, least-privilege runtime, and network policies. Generating separate SBOMs for the base image and application layers – rather than one monolithic SBOM – gives you targeted visibility for vulnerability triage and compliance audits."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -25,7 +25,7 @@ date: 2026-01-03
 slug: container-security-best-practices
 ---
 
-Container security is the practice of protecting containerized applications and their infrastructure throughout the entire lifecycle — from building container images through deployment and runtime operations. Containers package applications with their dependencies into isolated units, but this isolation does not automatically equal security. Every layer of a container image, from the base operating system to application dependencies, represents a potential attack surface that must be managed.
+Container security is the practice of protecting containerized applications and their infrastructure throughout the entire lifecycle – from building container images through deployment and runtime operations. Containers package applications with their dependencies into isolated units, but this isolation does not automatically equal security. Every layer of a container image, from the base operating system to application dependencies, represents a potential attack surface that must be managed.
 
 ![Container image layers with separate SBOMs feeding into security controls](/assets/images/d2/container-security-layers.svg)
 
@@ -33,7 +33,7 @@ Container security is the practice of protecting containerized applications and 
 
 Container security encompasses the tools, practices, and policies used to protect containerized workloads. Unlike traditional application security, container security must address concerns at multiple layers: the container image, the container runtime, the orchestration platform (typically Kubernetes), the host operating system, and the network.
 
-Containers have become the standard deployment model for cloud-native applications. According to the [Cloud Native Computing Foundation](https://www.cncf.io/), the majority of organizations now run containerized workloads in production. This widespread adoption makes container security a critical discipline — a compromised container image pulled from a public registry can affect thousands of deployments.
+Containers have become the standard deployment model for cloud-native applications. According to the [Cloud Native Computing Foundation](https://www.cncf.io/), the majority of organizations now run containerized workloads in production. This widespread adoption makes container security a critical discipline – a compromised container image pulled from a public registry can affect thousands of deployments.
 
 The challenge is compounded by the ephemeral nature of containers. Unlike traditional servers that persist for months or years, containers may exist for seconds or minutes. Security practices must be automated and embedded into the build and deployment pipeline rather than applied manually.
 
@@ -54,13 +54,13 @@ The choice of base image has an outsized impact on security. A full Linux distri
 | **Slim variants** (e.g., `python:3.12-slim`)                                   | Stripped-down distribution         | Medium         | Language-specific applications                          |
 | **Full distribution** (e.g., `ubuntu:24.04`)                                   | Full package set                   | Large          | Development, debugging                                  |
 
-For production, prefer hardened, distroless, or slim images. Fewer packages means fewer potential vulnerabilities and a smaller SBOM — making both security management and compliance simpler.
+For production, prefer hardened, distroless, or slim images. Fewer packages means fewer potential vulnerabilities and a smaller SBOM – making both security management and compliance simpler.
 
 Two hardened image providers stand out for security-conscious teams:
 
 [Chainguard Images](https://www.chainguard.dev/chainguard-images) are built from the ground up on [Wolfi](https://github.com/wolfi-dev), a Linux distribution designed specifically for containers. They are rebuilt daily, ship with zero or near-zero known CVEs, and include high-quality SBOMs out of the box. Available as drop-in replacements for popular base images like Python, Node.js, and Go.
 
-[Docker Hardened Images](https://www.docker.com/products/hardened-images/) (DHI) take a different approach — hardening familiar Debian and Alpine bases by stripping them down to distroless principles (no shell, no package manager, non-root by default). Docker [made the full catalog of 1,000+ images free and open source](https://www.docker.com/blog/docker-hardened-images-for-every-developer/) under Apache 2.0 in late 2025. Every image ships with an SBOM, [SLSA](https://slsa.dev/) Build Level 3 provenance, and [VEX](https://www.cisa.gov/resources-tools/resources/minimum-requirements-vulnerability-exploitability-exchange-vex) metadata. The Enterprise tier adds FIPS-enabled and STIG-hardened variants for regulated environments.
+[Docker Hardened Images](https://www.docker.com/products/hardened-images/) (DHI) take a different approach – hardening familiar Debian and Alpine bases by stripping them down to distroless principles (no shell, no package manager, non-root by default). Docker [made the full catalog of 1,000+ images free and open source](https://www.docker.com/blog/docker-hardened-images-for-every-developer/) under Apache 2.0 in late 2025. Every image ships with an SBOM, [SLSA](https://slsa.dev/) Build Level 3 provenance, and [VEX](https://www.cisa.gov/resources-tools/resources/minimum-requirements-vulnerability-exploitability-exchange-vex) metadata. The Enterprise tier adds FIPS-enabled and STIG-hardened variants for regulated environments.
 
 ### Image Scanning
 
@@ -68,9 +68,9 @@ Container image scanning analyzes the contents of an image for known vulnerabili
 
 Key scanning tools include:
 
-- **[Trivy](https://github.com/aquasecurity/trivy)** — Open source scanner from Aqua that detects vulnerabilities in OS packages, language-specific dependencies, and misconfigurations
-- **[Grype](https://github.com/anchore/grype)** — Open source vulnerability scanner from Anchore
-- **[Snyk Container](https://snyk.io/product/container-vulnerability-management/)** — Commercial scanner with developer workflow integration
+- **[Trivy](https://github.com/aquasecurity/trivy)** – Open source scanner from Aqua that detects vulnerabilities in OS packages, language-specific dependencies, and misconfigurations
+- **[Grype](https://github.com/anchore/grype)** – Open source vulnerability scanner from Anchore
+- **[Snyk Container](https://snyk.io/product/container-vulnerability-management/)** – Commercial scanner with developer workflow integration
 
 Scanning should happen at multiple points: during the CI/CD build, before images are pushed to a registry, and continuously against images already in production (since new vulnerabilities are disclosed daily).
 
@@ -84,7 +84,7 @@ This separation matters for several reasons:
 - **Different vulnerability profiles.** A glibc vulnerability in the base image is a different remediation path than a vulnerability in an npm package. Separate SBOMs make triage clearer.
 - **Cleaner compliance.** Compliance reviewers can evaluate OS-level and application-level components independently, with the correct tool and context for each.
 
-The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) supports this workflow directly — generate an Application SBOM from your lock file and a Container SBOM from the built image, then organize both under a single product using sbomify's [Product → Project → Component hierarchy](/features/sbom-hierarchy/). For step-by-step instructions, see our [Docker SBOM guide](/guides/docker/).
+The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) supports this workflow directly – generate an Application SBOM from your lock file and a Container SBOM from the built image, then organize both under a single product using sbomify's [Product → Project → Component hierarchy](/features/sbom-hierarchy/). For step-by-step instructions, see our [Docker SBOM guide](/guides/docker/).
 
 ## Runtime Security
 
@@ -111,10 +111,10 @@ Never bake secrets (API keys, database credentials, certificates) into container
 
 Runtime security tools observe container behavior and detect anomalies:
 
-- **Unexpected processes** — A web server container suddenly running a shell may indicate compromise
-- **Unusual network connections** — Outbound connections to unknown IP addresses
-- **File system modifications** — Changes to binaries or configuration files in a read-only container
-- **Privilege escalation attempts** — Attempts to gain root access
+- **Unexpected processes** – A web server container suddenly running a shell may indicate compromise
+- **Unusual network connections** – Outbound connections to unknown IP addresses
+- **File system modifications** – Changes to binaries or configuration files in a read-only container
+- **Privilege escalation attempts** – Attempts to gain root access
 
 ## Kubernetes Security
 
@@ -132,9 +132,9 @@ By default, Kubernetes allows all pod-to-pod communication within a cluster. Net
 
 Kubernetes [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/) define three levels of restriction:
 
-- **Privileged** — Unrestricted (use only when necessary)
-- **Baseline** — Prevents known privilege escalations
-- **Restricted** — Hardened configuration following security best practices
+- **Privileged** – Unrestricted (use only when necessary)
+- **Baseline** – Prevents known privilege escalations
+- **Restricted** – Hardened configuration following security best practices
 
 Enforce at least the Baseline level for all production workloads. Use the Restricted level where possible.
 
@@ -154,12 +154,12 @@ SBOMs play a central role in container security by providing the component visib
 
 ### Why Separate Container SBOMs Matter
 
-A typical container image may contain hundreds of packages across multiple layers. Without SBOMs, identifying whether a newly disclosed vulnerability affects your containers requires manual investigation of each image — a process that does not scale.
+A typical container image may contain hundreds of packages across multiple layers. Without SBOMs, identifying whether a newly disclosed vulnerability affects your containers requires manual investigation of each image – a process that does not scale.
 
 With separate SBOMs for each container layer, organized in a [hierarchical structure](/features/sbom-hierarchy/):
 
 - **[Vulnerability scanning](/2026/02/01/sbom-scanning-vulnerability-detection/) becomes targeted.** Match base image SBOMs against OS-level advisories and application SBOMs against language-specific vulnerability databases ([NVD](https://nvd.nist.gov/), [OSV](https://osv.dev/), [CISA KEV catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)).
-- **Incident response accelerates.** When a new critical [CVE](/2025/12/18/cve-vulnerability-explained/) is disclosed, query your SBOM repository to immediately identify affected images — and know whether the vulnerability is in the base image or your application dependencies.
+- **Incident response accelerates.** When a new critical [CVE](/2025/12/18/cve-vulnerability-explained/) is disclosed, query your SBOM repository to immediately identify affected images – and know whether the vulnerability is in the base image or your application dependencies.
 - **Compliance requirements are met.** The [EU CRA](/compliance/eu-cra/) and [EO 14028](/compliance/eo-14028/) require component documentation for software products, including containerized applications.
 - **Base image risk is visible.** Container SBOMs expose the [dependency](/2026/01/29/what-is-a-dependency-in-software/) chain inherited from base images that developers may not be aware of, kept separate from application-level components for clarity.
 
@@ -167,7 +167,7 @@ For detailed instructions on generating separate SBOMs from container images, se
 
 ## Best Practices
 
-1. **Scan images at every stage.** Integrate scanning into CI/CD (build-time), the container registry (push-time), and production (runtime). New vulnerabilities are disclosed daily — a clean image today may be vulnerable tomorrow.
+1. **Scan images at every stage.** Integrate scanning into CI/CD (build-time), the container registry (push-time), and production (runtime). New vulnerabilities are disclosed daily – a clean image today may be vulnerable tomorrow.
 
 2. **Use hardened or minimal base images.** Choose hardened images ([Chainguard](https://www.chainguard.dev/chainguard-images), [Docker Hardened Images](https://www.docker.com/products/hardened-images/)), distroless, or slim variants for production. Fewer packages means fewer vulnerabilities and a smaller attack surface.
 
@@ -187,7 +187,7 @@ For detailed instructions on generating separate SBOMs from container images, se
 
 ### What is container security?
 
-Container security is the practice of protecting containerized applications and their infrastructure throughout the lifecycle — from building images through deployment and runtime operations. It encompasses image scanning, vulnerability management, runtime protection, network policies, secrets management, and access control for container orchestration platforms like Kubernetes.
+Container security is the practice of protecting containerized applications and their infrastructure throughout the lifecycle – from building images through deployment and runtime operations. It encompasses image scanning, vulnerability management, runtime protection, network policies, secrets management, and access control for container orchestration platforms like Kubernetes.
 
 ### How do you scan container images for vulnerabilities?
 
@@ -199,7 +199,7 @@ A container SBOM is a Software Bill of Materials generated from a built containe
 
 ### How does Kubernetes improve container security?
 
-Kubernetes provides security mechanisms including Pod Security Standards (restricting container privileges), Network Policies (controlling pod-to-pod communication), RBAC (role-based access control), Secrets management, and admission controllers (enforcing policies on what can be deployed). These features must be actively configured — Kubernetes defaults are permissive.
+Kubernetes provides security mechanisms including Pod Security Standards (restricting container privileges), Network Policies (controlling pod-to-pod communication), RBAC (role-based access control), Secrets management, and admission controllers (enforcing policies on what can be deployed). These features must be actively configured – Kubernetes defaults are permissive.
 
 ### Why should containers run as non-root?
 

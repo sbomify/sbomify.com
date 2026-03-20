@@ -5,7 +5,7 @@ description: "Understand the GPL license, including GPL v2 vs v3, copyleft oblig
 categories:
   - education
 tags: [gpl, licensing, open-source, compliance]
-tldr: "The GNU General Public License (GPL) is a copyleft license that requires derivative works to be distributed under the same terms. Understanding GPL v2 vs v3, LGPL, and AGPL obligations is critical for compliance — and SBOMs help track which components carry GPL requirements."
+tldr: "The GNU General Public License (GPL) is a copyleft license that requires derivative works to be distributed under the same terms. Understanding GPL v2 vs v3, LGPL, and AGPL obligations is critical for compliance – and SBOMs help track which components carry GPL requirements."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -35,10 +35,10 @@ The core idea behind the GPL is simple: software licensed under the GPL can be f
 
 The GPL family includes three major versions and two important variants:
 
-- **GPL v2** (1991) — The version that popularized copyleft; still used by the Linux kernel
-- **GPL v3** (2007) — Updated to address patents, tivoization, and international compatibility
-- **LGPL** (Lesser GPL) — A weaker copyleft for libraries, allowing proprietary linking
-- **AGPL** (Affero GPL) — Extends copyleft to software accessed over a network
+- **GPL v2** (1991) – The version that popularized copyleft; still used by the Linux kernel
+- **GPL v3** (2007) – Updated to address patents, tivoization, and international compatibility
+- **LGPL** (Lesser GPL) – A weaker copyleft for libraries, allowing proprietary linking
+- **AGPL** (Affero GPL) – Extends copyleft to software accessed over a network
 
 ## GPL v2 vs. GPL v3: Key Differences
 
@@ -47,14 +47,14 @@ Understanding the differences between GPL version 2 and version 3 matters becaus
 | Feature                      | GPL v2 (1991)                              | GPL v3 (2007)                                                      |
 | ---------------------------- | ------------------------------------------ | ------------------------------------------------------------------ |
 | **Patent grant**             | Implicit (not explicit)                    | Explicit patent license from contributors                          |
-| **Tivoization protection**   | No                                         | Yes — prevents hardware that blocks modified software from running |
-| **Anti-DRM provisions**      | No                                         | Yes — modified GPL software cannot be locked down by DRM           |
-| **License compatibility**    | Narrower                                   | Broader — compatible with Apache 2.0, for example                  |
+| **Tivoization protection**   | No                                         | Yes – prevents hardware that blocks modified software from running |
+| **Anti-DRM provisions**      | No                                         | Yes – modified GPL software cannot be locked down by DRM           |
+| **License compatibility**    | Narrower                                   | Broader – compatible with Apache 2.0, for example                  |
 | **Internationalization**     | US-centric language                        | Jurisdiction-neutral terminology                                   |
 | **Installation information** | Not required                               | Required for "User Products" (consumer devices)                    |
 | **Notable users**            | Linux kernel, Git, WordPress (v2 or later) | GCC, GNU Bash, Samba                                               |
 
-GPL v2 includes a clause that allows licensees to use "version 2 or any later version," but this is optional — the copyright holder can specify "GPL v2 only." The Linux kernel, for instance, is licensed under "GPL v2 only" because Linus Torvalds chose not to adopt v3.
+GPL v2 includes a clause that allows licensees to use "version 2 or any later version," but this is optional – the copyright holder can specify "GPL v2 only." The Linux kernel, for instance, is licensed under "GPL v2 only" because Linus Torvalds chose not to adopt v3.
 
 GPL v3 was designed to close perceived loopholes in v2. The anti-tivoization provisions were a direct response to devices (like TiVo) that used GPL software but locked the hardware to prevent users from running modified versions. The explicit patent grant protects users and developers from patent litigation by contributors.
 
@@ -75,11 +75,11 @@ This is the most debated question in GPL compliance. The GPL requires that "the 
 
 Generally accepted interpretations:
 
-- **Modifying GPL source code and distributing it** — clearly a derivative work
-- **Statically linking against a GPL library** — generally considered a derivative work
-- **Dynamically linking against a GPL library** — debated; the FSF considers it a derivative work, others disagree
-- **Using a GPL command-line tool in your build process** — generally not a derivative work (the tool's output is yours)
-- **Using a GPL library as a separate process via IPC** — generally not a derivative work
+- **Modifying GPL source code and distributing it** – clearly a derivative work
+- **Statically linking against a GPL library** – generally considered a derivative work
+- **Dynamically linking against a GPL library** – debated; the FSF considers it a derivative work, others disagree
+- **Using a GPL command-line tool in your build process** – generally not a derivative work (the tool's output is yours)
+- **Using a GPL library as a separate process via IPC** – generally not a derivative work
 
 The LGPL was created specifically to address the library linking question.
 
@@ -101,7 +101,7 @@ The LGPL is a pragmatic compromise: it keeps the library itself free while allow
 
 The GNU Affero General Public License (AGPL) adds one significant provision to GPL v3: if you run modified AGPL software as a network service (such as a web application), you must make the modified source code available to users who interact with the software over the network.
 
-Under the standard GPL, the copyleft obligation is triggered by _distribution_. Running software on a server and letting users access it via a browser is not distribution — the users never receive a copy of the software. The AGPL closes this gap by treating network interaction as equivalent to distribution for the purpose of source code availability.
+Under the standard GPL, the copyleft obligation is triggered by _distribution_. Running software on a server and letting users access it via a browser is not distribution – the users never receive a copy of the software. The AGPL closes this gap by treating network interaction as equivalent to distribution for the purpose of source code availability.
 
 AGPL is commonly used by companies that offer open source software as a service but want to prevent competitors from running modified versions without contributing back. Notable AGPL projects include MongoDB (before its switch to SSPL), Grafana, and Nextcloud.
 
@@ -117,10 +117,10 @@ Yes. You can sell copies of GPL software, charge for support, or sell services a
 
 Organizations commonly take one of these approaches:
 
-1. **Dual licensing** — Offer the software under both the GPL (for open source users) and a commercial license (for proprietary users who want to avoid copyleft obligations). MySQL, Qt, and many others use this model.
-2. **Open core** — Release the core product under the GPL and sell proprietary extensions or enterprise features under a commercial license.
-3. **Services and support** — Distribute the software under the GPL and monetize through consulting, support contracts, and managed hosting. Red Hat built a multi-billion dollar business on this model.
-4. **SaaS delivery** — Run GPL software on your own servers without triggering the distribution clause (though this doesn't apply to AGPL software).
+1. **Dual licensing** – Offer the software under both the GPL (for open source users) and a commercial license (for proprietary users who want to avoid copyleft obligations). MySQL, Qt, and many others use this model.
+2. **Open core** – Release the core product under the GPL and sell proprietary extensions or enterprise features under a commercial license.
+3. **Services and support** – Distribute the software under the GPL and monetize through consulting, support contracts, and managed hosting. Red Hat built a multi-billion dollar business on this model.
+4. **SaaS delivery** – Run GPL software on your own servers without triggering the distribution clause (though this doesn't apply to AGPL software).
 
 ## GPL Compliance in Practice
 
@@ -137,7 +137,7 @@ If you distribute GPL-licensed software (binary or source), you must:
 
 ### Source Code Requirements
 
-The source code you provide must be the "complete corresponding source" — everything needed to build the binary, including build scripts, interface definition files, and any shared libraries. For GPL v3, this extends to "Installation Information" for consumer products (the anti-tivoization clause).
+The source code you provide must be the "complete corresponding source" – everything needed to build the binary, including build scripts, interface definition files, and any shared libraries. For GPL v3, this extends to "Installation Information" for consumer products (the anti-tivoization clause).
 
 ### Common Compliance Failures
 

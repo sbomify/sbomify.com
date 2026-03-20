@@ -15,9 +15,9 @@ Screenly delivers secure digital signage solutions trusted by Fortune 500 compan
 
 ## The Challenge
 
-Over the past year, Screenly noticed a growing demand from customers for Software Bill of Materials (SBOMs). Clients wanted transparency into the components that make up Screenly's digital signage solutions. Committed to meeting these needs — and as part of their pledge in joining CISA's Secure by Design program — they set out to provide comprehensive SBOMs.
+Over the past year, Screenly noticed a growing demand from customers for Software Bill of Materials (SBOMs). Clients wanted transparency into the components that make up Screenly's digital signage solutions. Committed to meeting these needs – and as part of their pledge in joining CISA's Secure by Design program – they set out to provide comprehensive SBOMs.
 
-However, they quickly encountered a significant hurdle: instead of managing a single SBOM, Screenly had dozens across their product line. Each component — be it backend services, frontend applications, or device firmware — had its own SBOM with its own release schedule. Grouping and managing these multiple SBOMs became a complex and time-consuming task.
+However, they quickly encountered a significant hurdle: instead of managing a single SBOM, Screenly had dozens across their product line. Each component – be it backend services, frontend applications, or device firmware – had its own SBOM with its own release schedule. Grouping and managing these multiple SBOMs became a complex and time-consuming task.
 
 Their challenges included:
 
@@ -52,6 +52,6 @@ Partnering with **sbomify** helped Screenly overcome these challenges:
 
 ## Conclusion
 
-By teaming up with sbomify, Screenly transformed how they handle SBOMs. They overcame the complexities of managing multiple SBOMs, automated their processes using the sbomify GitHub Action module, ensured compliance, and added a layer of security with SBOM attestation — all while enhancing transparency for their customers.
+By teaming up with sbomify, Screenly transformed how they handle SBOMs. They overcame the complexities of managing multiple SBOMs, automated their processes using the sbomify GitHub Action module, ensured compliance, and added a layer of security with SBOM attestation – all while enhancing transparency for their customers.
 
 Screenly is dedicated to providing secure and reliable digital signage solutions. With sbomify, they have taken a significant step forward in fulfilling that commitment, reinforcing their position as a trusted partner for security-conscious organizations.

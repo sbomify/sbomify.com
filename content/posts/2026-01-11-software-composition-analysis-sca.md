@@ -33,11 +33,11 @@ Software Composition Analysis (SCA) is a category of application security toolin
 
 Software Composition Analysis addresses a fundamental reality of modern software development: most applications are not written from scratch. Studies consistently show that [70-90% of a typical application consists of open source components](https://www.linux.com/training-tutorials/estimating-total-number-linux-contributors-approach-using-linus-law/) pulled from package registries like npm, PyPI, Maven Central, and crates.io. Each of these components introduces potential security vulnerabilities, license obligations, and maintenance risks.
 
-SCA tools automate the process of identifying these components and their associated risks. Without SCA, development teams would need to manually track every library version across every project — an approach that does not scale given the pace of vulnerability disclosure (the NVD published over 28,000 CVEs in 2023 alone).
+SCA tools automate the process of identifying these components and their associated risks. Without SCA, development teams would need to manually track every library version across every project – an approach that does not scale given the pace of vulnerability disclosure (the NVD published over 28,000 CVEs in 2023 alone).
 
 The core functions of SCA are:
 
-1. **Component identification.** Scanning source code, dependency files, and sometimes binaries to produce a complete inventory of third-party components, including [transitive dependencies](/2026/01/29/what-is-a-dependency-in-software/) — the dependencies of your dependencies.
+1. **Component identification.** Scanning source code, dependency files, and sometimes binaries to produce a complete inventory of third-party components, including [transitive dependencies](/2026/01/29/what-is-a-dependency-in-software/) – the dependencies of your dependencies.
 2. **Vulnerability detection.** Matching identified components against vulnerability databases to flag known [CVEs](/2025/12/18/cve-vulnerability-explained/).
 3. **License compliance.** Identifying the license of each component and flagging potential conflicts or compliance obligations, such as [GPL copyleft requirements](/2025/12/22/gpl-license-guide/).
 4. **Policy enforcement.** Allowing organizations to define rules (e.g., "block any component with a critical CVE" or "reject AGPL-licensed dependencies") and enforce them in CI/CD pipelines.
@@ -48,11 +48,11 @@ SCA tools typically operate through one or more of these analysis methods:
 
 ### Manifest and Lock File Analysis
 
-The most common approach. SCA tools parse dependency declaration files — `package.json` and `package-lock.json` (JavaScript), `requirements.txt` and `poetry.lock` (Python), `pom.xml` (Java), `go.sum` (Go), `Cargo.lock` (Rust), and similar files for other ecosystems. This provides a definitive list of declared dependencies and their resolved versions.
+The most common approach. SCA tools parse dependency declaration files – `package.json` and `package-lock.json` (JavaScript), `requirements.txt` and `poetry.lock` (Python), `pom.xml` (Java), `go.sum` (Go), `Cargo.lock` (Rust), and similar files for other ecosystems. This provides a definitive list of declared dependencies and their resolved versions.
 
 ### Source Code Scanning
 
-Some SCA tools scan source code files to detect component usage that may not be declared in manifests — for example, vendored code (source files copied directly into a repository rather than managed through a package manager), or code snippets pulled from Stack Overflow or other sources.
+Some SCA tools scan source code files to detect component usage that may not be declared in manifests – for example, vendored code (source files copied directly into a repository rather than managed through a package manager), or code snippets pulled from Stack Overflow or other sources.
 
 ### Binary Analysis
 
@@ -88,18 +88,18 @@ Several tools provide SCA capabilities. The ecosystem spans open source and comm
 
 ### Open Source SCA Tools
 
-- **[Grype](https://github.com/anchore/grype)** — Vulnerability scanner from Anchore that matches SBOMs and container images against vulnerability databases. Works well in combination with Syft for SBOM generation.
-- **[OWASP Dependency-Check](https://owasp.org/www-project-dependency-check/)** — Mature OWASP project that identifies project dependencies and checks for known CVEs. Supports Java, .NET, JavaScript, Ruby, and Python.
-- **[OWASP Dependency-Track](https://dependencytrack.org/)** — Continuous SBOM analysis platform that ingests SBOMs and monitors components against multiple vulnerability databases. Provides a dashboard for tracking risk across an entire portfolio.
-- **[OSV-Scanner](https://google.github.io/osv-scanner/)** — Google's open source vulnerability scanner that uses the [OSV database](https://osv.dev/) and supports multiple ecosystems.
-- **[Trivy](https://github.com/aquasecurity/trivy)** — Comprehensive scanner from Aqua Security that detects vulnerabilities in OS packages, language dependencies, container images, and IaC configurations.
+- **[Grype](https://github.com/anchore/grype)** – Vulnerability scanner from Anchore that matches SBOMs and container images against vulnerability databases. Works well in combination with Syft for SBOM generation.
+- **[OWASP Dependency-Check](https://owasp.org/www-project-dependency-check/)** – Mature OWASP project that identifies project dependencies and checks for known CVEs. Supports Java, .NET, JavaScript, Ruby, and Python.
+- **[OWASP Dependency-Track](https://dependencytrack.org/)** – Continuous SBOM analysis platform that ingests SBOMs and monitors components against multiple vulnerability databases. Provides a dashboard for tracking risk across an entire portfolio.
+- **[OSV-Scanner](https://google.github.io/osv-scanner/)** – Google's open source vulnerability scanner that uses the [OSV database](https://osv.dev/) and supports multiple ecosystems.
+- **[Trivy](https://github.com/aquasecurity/trivy)** – Comprehensive scanner from Aqua Security that detects vulnerabilities in OS packages, language dependencies, container images, and IaC configurations.
 
 ### Commercial SCA Tools
 
-- **Snyk Open Source** — Developer-focused SCA with IDE integrations and automated fix PRs
-- **Sonatype Lifecycle** — Enterprise SCA with policy engine and supply chain firewall
-- **Black Duck** (Synopsys) — Enterprise SCA with extensive binary analysis capabilities
-- **FOSSA** — SCA focused on license compliance and open source management
+- **Snyk Open Source** – Developer-focused SCA with IDE integrations and automated fix PRs
+- **Sonatype Lifecycle** – Enterprise SCA with policy engine and supply chain firewall
+- **Black Duck** (Synopsys) – Enterprise SCA with extensive binary analysis capabilities
+- **FOSSA** – SCA focused on license compliance and open source management
 
 For a comprehensive list of tools in the SBOM ecosystem, see our [resources page](/resources/).
 
@@ -119,7 +119,7 @@ A generated SBOM can be ingested by management platforms like [sbomify](https://
 
 While SCA focuses on vulnerability detection and license compliance, SBOMs serve a broader purpose:
 
-- **Regulatory compliance.** Frameworks like [Executive Order 14028](/compliance/eo-14028/), the [EU Cyber Resilience Act](/compliance/eu-cra/), and [FDA medical device guidance](/compliance/fda-medical-device/) require SBOMs as a compliance artifact — not just SCA scan results.
+- **Regulatory compliance.** Frameworks like [Executive Order 14028](/compliance/eo-14028/), the [EU Cyber Resilience Act](/compliance/eu-cra/), and [FDA medical device guidance](/compliance/fda-medical-device/) require SBOMs as a compliance artifact – not just SCA scan results.
 - **Supply chain transparency.** SBOMs document the provenance and composition of software for consumers, auditors, and regulators.
 - **Incident response.** When a vulnerability like [Log4Shell](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) is disclosed, SBOMs allow you to immediately identify affected products without re-running scans.
 
@@ -159,4 +159,4 @@ Leading open source SCA tools include Grype (vulnerability scanner from Anchore)
 
 ### Does SCA find all vulnerabilities?
 
-No. SCA finds known vulnerabilities in third-party components — those that have been assigned CVE identifiers and added to vulnerability databases. It does not find zero-day vulnerabilities (those not yet publicly known), vulnerabilities in your own code, or runtime configuration issues. SCA should be combined with SAST, DAST, and penetration testing for comprehensive coverage.
+No. SCA finds known vulnerabilities in third-party components – those that have been assigned CVE identifiers and added to vulnerability databases. It does not find zero-day vulnerabilities (those not yet publicly known), vulnerabilities in your own code, or runtime configuration issues. SCA should be combined with SAST, DAST, and penetration testing for comprehensive coverage.

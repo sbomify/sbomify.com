@@ -18,7 +18,7 @@ The Software Bill of Materials (SBOM) lifecycle comprises three key stages: **Au
 
 Newcomers to SBOMs often underestimate the complexities involved in creating a complete SBOM (also known as 'authoring'). There are many [SBOM generation tools](/resources/#generation) available, so it might seem like it's just a matter of running one of these tools and you're done.
 
-While this _might_ suffice for internal SBOM needs when starting out, the reality is far more complicated if you need to meet industry requirements, such as the NTIA Minimum Elements. But don’t worry — we’re here to help.
+While this _might_ suffice for internal SBOM needs when starting out, the reality is far more complicated if you need to meet industry requirements, such as the NTIA Minimum Elements. But don’t worry – we’re here to help.
 
 To produce an SBOM that complies with standards like the NTIA Minimum Elements, it's helpful to view the process in four phases.
 
@@ -51,7 +51,7 @@ _If you want to avoid this step, our agent automates the entire process for you.
 
 Next is the _enrichment_ phase. Depending on the tool used to generate the SBOM, this step might be optional. Some tools automatically enrich the SBOM, typically by calling out to a third-party service (like PyPI) during generation to gather component details, such as licensing data.
 
-For example, [sbomify's GitHub Action](https://github.com/sbomify/sbomify-action) (which can be used either with sbomify or in standalone mode) automatically augments your SBOM with identity data and enriches it with metadata from [ecosyste.ms](https://ecosyste.ms) to create the most complete SBOM possible — all within your CI pipeline before upload.
+For example, [sbomify's GitHub Action](https://github.com/sbomify/sbomify-action) (which can be used either with sbomify or in standalone mode) automatically augments your SBOM with identity data and enriches it with metadata from [ecosyste.ms](https://ecosyste.ms) to create the most complete SBOM possible – all within your CI pipeline before upload.
 
 ### 4. Signing / Attestation
 
@@ -63,13 +63,13 @@ You can read more about this in our [blog post on attestation](/2024/10/31/githu
 
 ## Distribution (a.k.a Transportation)
 
-Each stage of the SBOM lifecycle is crucial to maintaining transparency and security within the software supply chain. Yet, effective collaboration remains a significant challenge. SBOMs must be shared efficiently with internal teams and external stakeholders, such as customers and partners — a process often referred to as "Transportation." Unfortunately, many organizations still rely on outdated distribution methods. Conversations with CTOs and CISOs reveal that email remains the primary sharing tool, reminiscent of how software patches were distributed in the 1990s. As a result, SBOMs are often stored haphazardly on internal file shares, leading to labor-intensive processes, disorganized storage, and outdated information.
+Each stage of the SBOM lifecycle is crucial to maintaining transparency and security within the software supply chain. Yet, effective collaboration remains a significant challenge. SBOMs must be shared efficiently with internal teams and external stakeholders, such as customers and partners – a process often referred to as "Transportation." Unfortunately, many organizations still rely on outdated distribution methods. Conversations with CTOs and CISOs reveal that email remains the primary sharing tool, reminiscent of how software patches were distributed in the 1990s. As a result, SBOMs are often stored haphazardly on internal file shares, leading to labor-intensive processes, disorganized storage, and outdated information.
 
 The limitations of these traditional sharing methods pose real risks to supply chain integrity. The [CISA SBOM Sharing Primer](https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf) underscores the need for streamlined SBOM “Transport” to improve visibility and reduce risk. The document advocates for automated, standardized processes, cautioning that manual methods create inconsistencies and errors that could compromise the entire ecosystem.
 
 This is where sbomify transforms the landscape. sbomify automates the distribution and collaboration process, integrating directly into the Continuous Integration/Continuous Deployment (CI/CD) workflow to eliminate manual distribution and ad-hoc storage. Instead of relying on scattered email chains and file shares, sbomify ensures that stakeholders always have access to accurate, up-to-date SBOM data. By automating the process, sbomify minimizes manual work and significantly enhances security, reducing the risk of circulating outdated or incorrect information. You can learn more about this in our [SBOM Hub & Trust Center](/features/trust-center/) feature page.
 
-A frequently overlooked but essential step in the SBOM lifecycle is the creation of a consolidated [SBOM hierarchy](/features/sbom-hierarchy/), which is especially valuable in complex software architectures. Take a basic SaaS product, for instance: with an API service running in a Docker container and a JavaScript-based frontend, you’ll quickly accumulate multiple SBOMs—for the backend, the Docker environment, and the JavaScript libraries.
+A frequently overlooked but essential step in the SBOM lifecycle is the creation of a consolidated [SBOM hierarchy](/features/sbom-hierarchy/), which is especially valuable in complex software architectures. Take a basic SaaS product, for instance: with an API service running in a Docker container and a JavaScript-based frontend, you’ll quickly accumulate multiple SBOMs – for the backend, the Docker environment, and the JavaScript libraries.
 
 <div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
     {{< d2 "sbom-hierarchy" >}}
@@ -79,7 +79,7 @@ In such setups, merging the JavaScript and backend SBOMs might be feasible, but 
 
 _If this sounds complex, reach out, and we can automate SBOM hierarchy generation for you._
 
-As the software industry increasingly recognizes the value of SBOMs for security and transparency, the need for efficient, automated collaboration tools becomes critical. Solutions like sbomify address this need by modernizing SBOM workflows and aligning with CISA’s best practices. For organizations aiming to streamline SBOM processes and bolster their cybersecurity, implementing a solution like sbomify is not just beneficial—it’s essential.
+As the software industry increasingly recognizes the value of SBOMs for security and transparency, the need for efficient, automated collaboration tools becomes critical. Solutions like sbomify address this need by modernizing SBOM workflows and aligning with CISA’s best practices. For organizations aiming to streamline SBOM processes and bolster their cybersecurity, implementing a solution like sbomify is not just beneficial – it’s essential.
 
 ---
 
