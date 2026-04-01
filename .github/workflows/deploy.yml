@@ -66,6 +66,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
   sbom-javascript:
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -83,6 +84,7 @@ jobs:
           OUTPUT_FILE: sbom.cdx.json
 
   sbom-hugo:
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
