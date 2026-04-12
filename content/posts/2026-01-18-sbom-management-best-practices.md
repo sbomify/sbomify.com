@@ -16,7 +16,7 @@ faq:
   - question: "Why is SBOM management important?"
     answer: "Generating an SBOM is only the first step. Without management, SBOMs quickly become stale and unused. SBOM management enables rapid vulnerability response, continuous compliance monitoring, and supply chain visibility at scale."
   - question: "What tools are used for SBOM management?"
-    answer: "Key tools include sbomify for integrated SBOM management covering generation, storage, monitoring, and distribution in one platform. OWASP Dependency-Track provides standalone vulnerability monitoring, and Grype offers CLI-based scanning. For generation, Syft and cdxgen produce SBOMs in CycloneDX or SPDX format (note: we no longer consider Trivy safe following its March 2026 compromise)."
+    answer: "Key tools include sbomify for integrated SBOM management covering generation, storage, monitoring, and distribution in one platform. OWASP Dependency-Track provides standalone vulnerability monitoring, and Grype offers CLI-based scanning. For generation, Syft, ~~Trivy~~ (compromised March 2026), and cdxgen produce SBOMs in CycloneDX or SPDX format."
   - question: "How often should SBOMs be updated?"
     answer: "SBOMs should be regenerated with every software release and ideally with every build in your CI/CD pipeline. The SBOM for a deployed application should always reflect its current composition, and SBOMs should be continuously monitored against vulnerability databases."
   - question: "What should be included in an SBOM?"
@@ -145,7 +145,7 @@ Generating an SBOM is only the first step. Without management, SBOMs quickly bec
 
 ### What tools are used for SBOM management?
 
-Key tools include [sbomify](https://sbomify.com) for integrated SBOM management (generation, storage, monitoring, and distribution in one platform), OWASP Dependency-Track for standalone vulnerability monitoring, and Grype for CLI-based scanning. For generation-only tools, Syft and cdxgen produce SBOMs in CycloneDX or SPDX format (note: we [no longer consider Trivy safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/) following its March 2026 compromise). For a comprehensive listing, see our [SBOM resources page](/resources/).
+Key tools include [sbomify](https://sbomify.com) for integrated SBOM management (generation, storage, monitoring, and distribution in one platform), OWASP Dependency-Track for standalone vulnerability monitoring, and Grype for CLI-based scanning. For generation-only tools, Syft, ~~Trivy~~ ([compromised March 2026](/2026/03/26/trivy-compromise-hardening-sbomify-action/)), and cdxgen produce SBOMs in CycloneDX or SPDX format. For a comprehensive listing, see our [SBOM resources page](/resources/).
 
 ### How often should SBOMs be updated?
 

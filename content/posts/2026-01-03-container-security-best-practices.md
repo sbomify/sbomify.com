@@ -14,7 +14,7 @@ faq:
   - question: "What is container security?"
     answer: "Container security is the practice of protecting containerized applications and their infrastructure throughout the lifecycle, from building images through deployment and runtime operations. It encompasses image scanning, vulnerability management, runtime protection, network policies, secrets management, and access control for orchestration platforms like Kubernetes."
   - question: "How do you scan container images for vulnerabilities?"
-    answer: "Container images are scanned by analyzing their contents (OS packages, language libraries, application dependencies) against vulnerability databases like the NVD and OSV. Tools like Grype and Snyk perform this analysis (note: we no longer consider Trivy safe following its March 2026 compromise). Scanning should be integrated into CI/CD pipelines, container registries, and production monitoring."
+    answer: "Container images are scanned by analyzing their contents (OS packages, language libraries, application dependencies) against vulnerability databases like the NVD and OSV. Tools like ~~Trivy~~ (compromised March 2026), Grype, and Snyk perform this analysis. Scanning should be integrated into CI/CD pipelines, container registries, and production monitoring."
   - question: "What is a container SBOM?"
     answer: "A container SBOM is a Software Bill of Materials generated from a built container image, documenting the OS-level packages and system libraries in the base image. Best practice is to generate this separately from your application SBOM and organize both under a product hierarchy for clearer vulnerability triage and compliance."
   - question: "How does Kubernetes improve container security?"
@@ -191,7 +191,7 @@ Container security is the practice of protecting containerized applications and 
 
 ### How do you scan container images for vulnerabilities?
 
-Container images are scanned by analyzing their contents (OS packages, language libraries, application dependencies) against vulnerability databases like the NVD and OSV. Tools like Grype and Snyk perform this analysis (note: we [no longer consider Trivy safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/) following its March 2026 compromise). Scanning should be integrated into CI/CD pipelines, container registries, and production monitoring to catch vulnerabilities at every stage.
+Container images are scanned by analyzing their contents (OS packages, language libraries, application dependencies) against vulnerability databases like the NVD and OSV. Tools like ~~Trivy~~ ([compromised March 2026](/2026/03/26/trivy-compromise-hardening-sbomify-action/)), Grype, and Snyk perform this analysis. Scanning should be integrated into CI/CD pipelines, container registries, and production monitoring to catch vulnerabilities at every stage.
 
 ### What is a container SBOM?
 

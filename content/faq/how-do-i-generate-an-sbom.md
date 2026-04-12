@@ -1,8 +1,8 @@
 ---
 title: "How do I generate an SBOM?"
 description: "Step-by-step guide to generating your first SBOM using sbomify-action, open-source tools, and CI/CD integration."
-answer: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. You can also use standalone tools like Syft or cdxgen."
-tldr: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. You can also use standalone tools like Syft or cdxgen."
+answer: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. You can also use standalone tools like Syft, ~~Trivy~~ (compromised March 2026), or cdxgen."
+tldr: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. You can also use standalone tools like Syft, ~~Trivy~~ (compromised March 2026), or cdxgen."
 weight: 60
 keywords: [generate SBOM, create SBOM, SBOM tools, SBOM generation, how to SBOM, sbomify-action]
 url: /faq/how-do-i-generate-an-sbom/
@@ -10,7 +10,7 @@ url: /faq/how-do-i-generate-an-sbom/
 
 ## Recommended: sbomify-action
 
-The [sbomify-action](https://github.com/sbomify/sbomify-action) is a CI/CD tool that generates, augments, enriches, and uploads SBOMs from your lockfiles or Docker images. It works as a GitHub Action, Docker image, or pip package, and includes SBOM generators (Syft, cdxgen) pre-installed. (Note: Trivy was [removed from sbomify-action](/2026/03/26/trivy-compromise-hardening-sbomify-action/) as of v26.1.0 following its March 2026 compromise.)
+The [sbomify-action](https://github.com/sbomify/sbomify-action) is a CI/CD tool that generates, augments, enriches, and uploads SBOMs from your lockfiles or Docker images. It works as a GitHub Action, Docker image, or pip package, and includes SBOM generators (Syft, ~~Trivy~~, cdxgen) pre-installed. (Note: Trivy was [removed from sbomify-action](/2026/03/26/trivy-compromise-hardening-sbomify-action/) as of v26.1.0 following its March 2026 compromise.)
 
 ```yaml
 - uses: sbomify/sbomify-action@master
@@ -51,11 +51,14 @@ This is useful for local development, scripted workflows, or CI systems that don
 
 ## Standalone tools
 
-If you prefer standalone tools outside of CI/CD, **Syft** is a popular option:
+If you prefer standalone tools outside of CI/CD, **Syft** and **~~Trivy~~** are popular options:
 
 ```bash
 # Using Syft
 syft . -o cyclonedx-json > sbom.cdx.json
+
+# Using Trivy (see advisory below)
+trivy fs . --format cyclonedx --output sbom.cdx.json
 ```
 
 Note: We [no longer consider Trivy safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/) following two successful supply chain attacks in March 2026 and have removed it from sbomify-action.

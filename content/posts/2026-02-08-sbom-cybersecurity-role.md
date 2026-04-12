@@ -20,7 +20,7 @@ faq:
   - question: "What is the relationship between SBOMs and vulnerability management?"
     answer: "SBOMs provide the component inventory that vulnerability management depends on. Without knowing what components are in your software, you cannot determine which vulnerabilities affect you. SBOMs ingested into monitoring platforms are continuously matched against vulnerability databases, transforming vulnerability management from a periodic manual exercise into a continuous automated process."
   - question: "How do I start using SBOMs for cybersecurity?"
-    answer: "Start by generating SBOMs for your applications using tools like Syft or language-specific generators (note: we no longer consider Trivy safe following its March 2026 compromise). Automate generation in your CI/CD pipeline. Ingest SBOMs into a monitoring platform like OWASP Dependency-Track for continuous vulnerability scanning. Define remediation SLAs based on CVSS severity and KEV status."
+    answer: "Start by generating SBOMs for your applications using tools like Syft, ~~Trivy~~ (compromised March 2026), or language-specific generators. Automate generation in your CI/CD pipeline. Ingest SBOMs into a monitoring platform like OWASP Dependency-Track for continuous vulnerability scanning. Define remediation SLAs based on CVSS severity and KEV status."
 date: 2026-02-08
 slug: sbom-cybersecurity-role
 ---
@@ -155,4 +155,4 @@ SBOMs provide the component inventory that vulnerability management depends on. 
 
 ### How do I start using SBOMs for cybersecurity?
 
-Start by generating SBOMs for your applications using tools like Syft or language-specific generators (note: we no longer consider Trivy safe following its March 2026 compromise). Automate generation in your CI/CD pipeline. Ingest SBOMs into a monitoring platform like OWASP Dependency-Track for continuous vulnerability scanning. Define remediation SLAs based on CVSS severity and KEV status. See our [SBOM guides](/guides/) for step-by-step instructions.
+Start by generating SBOMs for your applications using tools like Syft, ~~Trivy~~ (compromised March 2026), or language-specific generators. Automate generation in your CI/CD pipeline. Ingest SBOMs into a monitoring platform like OWASP Dependency-Track for continuous vulnerability scanning. Define remediation SLAs based on CVSS severity and KEV status. See our [SBOM guides](/guides/) for step-by-step instructions.

@@ -18,7 +18,7 @@ faq:
   - question: "Why are SBOMs important for security?"
     answer: "SBOMs enable rapid vulnerability response. When a new CVE is disclosed, an SBOM lets you determine in seconds whether your software contains the affected component – without manually auditing source code or build systems. This is critical for monitoring against databases like the CISA KEV catalog and for meeting regulatory compliance requirements."
   - question: "How do I generate an SBOM?"
-    answer: "SBOMs can be generated using tools like the sbomify GitHub Action, Syft, or CycloneDX CLI plugins (note: we no longer consider Trivy safe, see /2026/03/26/trivy-compromise-hardening-sbomify-action/). The sbomify GitHub Action automatically selects the best generator for your ecosystem and enriches the output with package metadata. The most accurate SBOMs are generated at build time, when the full dependency tree is resolved."
+    answer: "SBOMs can be generated using tools like the sbomify GitHub Action, Syft, ~~Trivy~~ (compromised March 2026, see /2026/03/26/trivy-compromise-hardening-sbomify-action/), or CycloneDX CLI plugins. The sbomify GitHub Action automatically selects the best generator for your ecosystem and enriches the output with package metadata. The most accurate SBOMs are generated at build time, when the full dependency tree is resolved."
   - question: "Are SBOMs required by law?"
     answer: "Increasingly, yes. U.S. Executive Order 14028 requires SBOMs for software sold to the federal government. The EU Cyber Resilience Act requires manufacturers of products with digital elements to identify and document components. The FDA requires SBOMs for medical device software. Many procurement contracts now include SBOM requirements as well."
 date: 2024-04-03
