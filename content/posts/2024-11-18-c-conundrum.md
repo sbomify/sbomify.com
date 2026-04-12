@@ -16,7 +16,7 @@ Python or Rust is pretty easy. Dependencies are declared using the language's
 package manager, the package manager creates a .lock file, and then an SBOM
 can be generated from the .lock file. Under the hood sbomify uses
 [Trivy](https://trivy.dev/) to do that, and other tools like
-[Syft](https://github.com/anchore/syft) do the same.
+[Syft](https://github.com/anchore/syft) do the same. (Note: we [no longer consider Trivy safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/) following its March 2026 compromise and have removed it from sbomify-action.)
 
 There's no package manager for C though, at least not a universally used one.
 

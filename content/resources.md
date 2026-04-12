@@ -18,6 +18,7 @@ For step-by-step guides on generating SBOMs for specific languages and platforms
 **Related educational content:**
 
 - [SBOM Generation Tools Compared](/2026/01/26/sbom-generation-tools-comparison/) – In-depth comparison of Syft, Trivy, cdxgen, and more
+- [Trivy Compromise: Hardening sbomify-action](/2026/03/26/trivy-compromise-hardening-sbomify-action/) – March 2026 supply chain advisory
 - [SBOM Formats: CycloneDX vs SPDX](/2026/01/15/sbom-formats-cyclonedx-vs-spdx/) – Choosing the right format for your use case
 - [SBOM Scanning: Vulnerability Detection](/2026/02/01/sbom-scanning-vulnerability-detection/) – How to scan SBOMs for known vulnerabilities
 - [SBOM Management Best Practices](/2026/01/18/sbom-management-best-practices/) – Organizing, monitoring, and acting on SBOMs at scale
@@ -65,7 +66,7 @@ Tools that spans multiple formats and languages.
 - [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) from sbomify
 - [Snyk](https://github.com/snyk/cli) from Snyk
 - [Syft](https://github.com/anchore/syft) from Anchore
-- [Trivy](https://github.com/aquasecurity/trivy) from Aqua
+- ~~[Trivy](https://github.com/aquasecurity/trivy) from Aqua~~ ([removed from sbomify-action](/2026/03/26/trivy-compromise-hardening-sbomify-action/) following its March 2026 compromise)
 
 ### Specific
 

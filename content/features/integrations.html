@@ -144,7 +144,7 @@ docker run --rm \
           <a href="https://pypi.org/project/sbomify-action/" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on PyPI →</a>
         </div>
         <p class="text-gray-300 mb-6">
-          Install via pip for local development or non-Docker environments. Requires external generators (Trivy, Syft, or cdxgen) to be installed separately.
+          Install via pip for local development or non-Docker environments. Requires external generators (Syft or cdxgen) to be installed separately.
         </p>
         <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">
 
@@ -333,21 +333,6 @@ sbomify-action</code></pre>
       </div>
       <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
         <div class="flex items-center justify-between mb-3">
-          <h4 class="text-lg font-bold text-white">Trivy</h4>
-          <span class="text-xs bg-[#8A7DFF]/10 text-[#8A7DFF] px-2 py-1 rounded font-mono">Priority 30</span>
-        </div>
-        <p class="text-gray-300 text-sm mb-3">Security-focused scanner by Aqua Security. Supports CycloneDX and SPDX output.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Python</span>
-          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">JS</span>
-          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Java</span>
-          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Go</span>
-          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">Docker</span>
-          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">+5 more</span>
-        </div>
-      </div>
-      <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
-        <div class="flex items-center justify-between mb-3">
           <h4 class="text-lg font-bold text-white">Syft</h4>
           <span class="text-xs bg-[#8A7DFF]/10 text-[#8A7DFF] px-2 py-1 rounded font-mono">Priority 35</span>
         </div>
@@ -372,7 +357,7 @@ sbomify-action</code></pre>
       </div>
       <div class="bg-[#141035] rounded-2xl p-6 border border-[#37306B]">
         <h4 class="text-lg font-bold text-white mb-2">SPDX</h4>
-        <p class="text-gray-300 text-sm mb-3">Versions 2.2 and 2.3 via Trivy or Syft, plus 3.0 via Yocto/OpenEmbedded. Validated against JSON schemas.</p>
+        <p class="text-gray-300 text-sm mb-3">Versions 2.2 and 2.3 via Syft, plus 3.0 via Yocto/OpenEmbedded. Validated against JSON schemas.</p>
         <code class="bg-[#201B4C] px-3 py-2 rounded text-[#8A7DFF] font-mono border border-[#37306B] inline-block text-sm">SBOM_FORMAT=spdx</code>
       </div>
     </div>

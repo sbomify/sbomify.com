@@ -57,6 +57,8 @@ $ syft \
 
 ### Trivy
 
+> **Note (March 2026):** Following two successful supply chain attacks on Trivy, we no longer consider it safe for CI/CD use. We have removed Trivy from sbomify-action as of v26.1.0. See [Trivy Compromise: How We Are Hardening sbomify-action](/2026/03/26/trivy-compromise-hardening-sbomify-action/) for details.
+
 You can download [Trivy](https://github.com/aquasecurity/trivy), and then run it with the following command to generate an SBOM in CycloneDX format, and save it to `trivy.cdx.json`.
 
 ```bash

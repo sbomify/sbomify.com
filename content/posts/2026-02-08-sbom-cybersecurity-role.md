@@ -20,7 +20,7 @@ faq:
   - question: "What is the relationship between SBOMs and vulnerability management?"
     answer: "SBOMs provide the component inventory that vulnerability management depends on. Without knowing what components are in your software, you cannot determine which vulnerabilities affect you. SBOMs ingested into monitoring platforms are continuously matched against vulnerability databases, transforming vulnerability management from a periodic manual exercise into a continuous automated process."
   - question: "How do I start using SBOMs for cybersecurity?"
-    answer: "Start by generating SBOMs for your applications using tools like Syft, Trivy, or language-specific generators. Automate generation in your CI/CD pipeline. Ingest SBOMs into a monitoring platform like OWASP Dependency-Track for continuous vulnerability scanning. Define remediation SLAs based on CVSS severity and KEV status."
+    answer: "Start by generating SBOMs for your applications using tools like Syft, ~~Trivy~~ (compromised March 2026), or language-specific generators. Automate generation in your CI/CD pipeline. Ingest SBOMs into a monitoring platform like OWASP Dependency-Track for continuous vulnerability scanning. Define remediation SLAs based on CVSS severity and KEV status."
 date: 2026-02-08
 slug: sbom-cybersecurity-role
 ---
@@ -125,7 +125,7 @@ If you are beginning your SBOM journey:
 
 1. **Start generating SBOMs.** Use our [language-specific SBOM guides](/guides/) to generate SBOMs for your projects in [CycloneDX](https://cyclonedx.org/) or [SPDX](https://spdx.dev/) format. See our [SBOM formats comparison](/2026/01/15/sbom-formats-cyclonedx-vs-spdx/) for format guidance.
 
-2. **Automate generation in CI/CD.** Integrate SBOM generation into your build pipeline using the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/), which handles generation, enrichment, and augmentation in one step. Standalone tools like [Syft](https://github.com/anchore/syft) and [Trivy](https://github.com/aquasecurity/trivy) are also available. See our [SBOM generation tools comparison](/2026/01/26/sbom-generation-tools-comparison/).
+2. **Automate generation in CI/CD.** Integrate SBOM generation into your build pipeline using the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/), which handles generation, enrichment, and augmentation in one step. Standalone tools like [Syft](https://github.com/anchore/syft) are also available (note: we [no longer consider Trivy safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/) and have removed it from sbomify-action). See our [SBOM generation tools comparison](/2026/01/26/sbom-generation-tools-comparison/).
 
 3. **Set up vulnerability monitoring.** Use [sbomify](https://sbomify.com) for integrated monitoring (built-in OSV and Dependency-Track scanning), or deploy a standalone [OWASP Dependency-Track](https://dependencytrack.org/) instance for continuous monitoring.
 
@@ -155,4 +155,4 @@ SBOMs provide the component inventory that vulnerability management depends on. 
 
 ### How do I start using SBOMs for cybersecurity?
 
-Start by generating SBOMs for your applications using tools like Syft, Trivy, or language-specific generators. Automate generation in your CI/CD pipeline. Ingest SBOMs into a monitoring platform like OWASP Dependency-Track for continuous vulnerability scanning. Define remediation SLAs based on CVSS severity and KEV status. See our [SBOM guides](/guides/) for step-by-step instructions.
+Start by generating SBOMs for your applications using tools like Syft, ~~Trivy~~ (compromised March 2026), or language-specific generators. Automate generation in your CI/CD pipeline. Ingest SBOMs into a monitoring platform like OWASP Dependency-Track for continuous vulnerability scanning. Define remediation SLAs based on CVSS severity and KEV status. See our [SBOM guides](/guides/) for step-by-step instructions.

@@ -45,4 +45,4 @@ Most SBOM generation tools support both formats. See our [language guides](/guid
 
 We strongly recommend against converting between CycloneDX and SPDX. The two formats have different data models, and conversion is inherently lossy - fields, relationships, and metadata will be dropped or misrepresented in the process. The resulting SBOM may look valid but will be incomplete or inaccurate.
 
-Instead, generate your SBOMs natively in the format you need. Some tools like Syft and Trivy support both formats, but many generators only output one. Check our [Resources page](/resources/) for a list of SBOM generation tools and their supported formats.
+Instead, generate your SBOMs natively in the format you need. Some tools like Syft and ~~Trivy~~ ([compromised March 2026](/2026/03/26/trivy-compromise-hardening-sbomify-action/)) support both formats, but many generators only output one. Check our [Resources page](/resources/) for a list of SBOM generation tools and their supported formats.
