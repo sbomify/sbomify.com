@@ -131,7 +131,7 @@ Identify all products with digital elements that you place on the EU market. Cla
 
 ### Step 2: Establish SBOM Practices
 
-Generate SBOMs for all covered products. Integrate SBOM generation into your CI/CD pipeline using tools like the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/), Syft, or Trivy so SBOMs are produced at every build and kept current. Use [sbomify](https://sbomify.com) to manage, monitor, and share SBOMs across your product portfolio.
+Generate SBOMs for all covered products. Integrate SBOM generation into your CI/CD pipeline using tools like the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/), or Syft so SBOMs are produced at every build and kept current (note: we [no longer consider Trivy safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/) and have removed it from sbomify-action). Use [sbomify](https://sbomify.com) to manage, monitor, and share SBOMs across your product portfolio.
 
 ### Step 3: Build Vulnerability Handling Processes
 

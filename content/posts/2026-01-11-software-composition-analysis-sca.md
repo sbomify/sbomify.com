@@ -18,7 +18,7 @@ faq:
   - question: "How does SCA relate to SBOMs?"
     answer: "SCA tools are one of the primary methods for generating SBOMs. When an SCA tool identifies all components, that inventory can be exported as an SBOM in standard formats like CycloneDX or SPDX. Conversely, SBOMs enable continuous SCA by providing a persistent component inventory that can be monitored against new vulnerability disclosures without re-scanning source code."
   - question: "What are the best open source SCA tools?"
-    answer: "Leading open source SCA tools include Grype (vulnerability scanner from Anchore), OWASP Dependency-Track (continuous SBOM analysis platform), OWASP Dependency-Check (mature CVE detection tool), OSV-Scanner (Google's vulnerability scanner using the OSV database), and Trivy (comprehensive scanner from Aqua Security)."
+    answer: "Leading open source SCA tools include Grype (vulnerability scanner from Anchore), OWASP Dependency-Track (continuous SBOM analysis platform), OWASP Dependency-Check (mature CVE detection tool), OSV-Scanner (Google's vulnerability scanner using the OSV database), and Trivy (comprehensive scanner from Aqua Security, though we no longer consider it safe following its March 2026 compromise)."
   - question: "Does SCA find all vulnerabilities?"
     answer: "No. SCA finds known vulnerabilities in third-party components that have been assigned CVE identifiers and added to vulnerability databases. It does not find zero-day vulnerabilities, vulnerabilities in your own code, or runtime configuration issues. SCA should be combined with SAST, DAST, and penetration testing for comprehensive coverage."
 date: 2026-01-11
@@ -92,7 +92,7 @@ Several tools provide SCA capabilities. The ecosystem spans open source and comm
 - **[OWASP Dependency-Check](https://owasp.org/www-project-dependency-check/)** – Mature OWASP project that identifies project dependencies and checks for known CVEs. Supports Java, .NET, JavaScript, Ruby, and Python.
 - **[OWASP Dependency-Track](https://dependencytrack.org/)** – Continuous SBOM analysis platform that ingests SBOMs and monitors components against multiple vulnerability databases. Provides a dashboard for tracking risk across an entire portfolio.
 - **[OSV-Scanner](https://google.github.io/osv-scanner/)** – Google's open source vulnerability scanner that uses the [OSV database](https://osv.dev/) and supports multiple ecosystems.
-- **[Trivy](https://github.com/aquasecurity/trivy)** – Comprehensive scanner from Aqua Security that detects vulnerabilities in OS packages, language dependencies, container images, and IaC configurations.
+- **[Trivy](https://github.com/aquasecurity/trivy)** – Comprehensive scanner from Aqua Security that detects vulnerabilities in OS packages, language dependencies, container images, and IaC configurations. (Note: we [no longer consider Trivy safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/) following two successful supply chain attacks in March 2026 and have removed it from sbomify-action.)
 
 ### Commercial SCA Tools
 
@@ -155,7 +155,7 @@ SCA tools are one of the primary methods for generating SBOMs. When an SCA tool 
 
 ### What are the best open source SCA tools?
 
-Leading open source SCA tools include Grype (vulnerability scanner from Anchore), OWASP Dependency-Track (continuous SBOM analysis platform), OWASP Dependency-Check (mature CVE detection tool), OSV-Scanner (Google's vulnerability scanner using the OSV database), and Trivy (comprehensive scanner from Aqua Security). Choice depends on your ecosystem, integration requirements, and whether you need CLI scanning, CI/CD integration, or continuous monitoring.
+Leading open source SCA tools include Grype (vulnerability scanner from Anchore), OWASP Dependency-Track (continuous SBOM analysis platform), OWASP Dependency-Check (mature CVE detection tool), OSV-Scanner (Google's vulnerability scanner using the OSV database), and Trivy (comprehensive scanner from Aqua Security, though we [no longer consider it safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/) following its March 2026 compromise). Choice depends on your ecosystem, integration requirements, and whether you need CLI scanning, CI/CD integration, or continuous monitoring.
 
 ### Does SCA find all vulnerabilities?
 

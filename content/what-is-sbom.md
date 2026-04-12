@@ -57,7 +57,7 @@ SBOMs are no longer optional; they are becoming a global standard for software t
 Want to go deeper? Explore these related topics:
 
 - **[SBOM Formats: CycloneDX vs SPDX](/2026/01/15/sbom-formats-cyclonedx-vs-spdx/)** - Detailed comparison of the two leading SBOM formats
-- **[SBOM Generation Tools Compared](/2026/01/26/sbom-generation-tools-comparison/)** - Overview of Syft, Trivy, cdxgen, and more
+- **[SBOM Generation Tools Compared](/2026/01/26/sbom-generation-tools-comparison/)** - Overview of Syft, cdxgen, and more (note: we [no longer consider Trivy safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/) following its March 2026 compromise)
 - **[SBOM Management Best Practices](/2026/01/18/sbom-management-best-practices/)** - How to organize, monitor, and act on your SBOMs
 - **[The Role of SBOMs in Cybersecurity](/2026/02/08/sbom-cybersecurity-role/)** - How SBOMs strengthen vulnerability management and incident response
 - **[What Is a Dependency?](/2026/01/29/what-is-a-dependency-in-software/)** - Understanding the components that SBOMs document

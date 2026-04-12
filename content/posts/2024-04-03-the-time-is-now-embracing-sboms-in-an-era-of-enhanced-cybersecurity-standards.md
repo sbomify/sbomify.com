@@ -16,11 +16,11 @@ faq:
   - question: "What regulations require SBOMs?"
     answer: "Key regulations include U.S. Executive Order 14028 (federal software procurement), the EU Cyber Resilience Act (products with digital elements sold in the EU), PCI DSS 4.0 (payment card industry), FDA pre-market guidance (medical device software), and the UK Code of Practice for Software Vendors. Many private-sector procurement contracts also now include SBOM requirements."
   - question: "How do I get started with SBOMs?"
-    answer: "Start by adding SBOM generation to your CI/CD pipeline using a tool like the sbomify GitHub Action, Syft, or Trivy. Then ingest the generated SBOMs into a management platform for vulnerability monitoring and compliance tracking. sbomify's zero-to-hero guide walks through the complete process from first SBOM to continuous monitoring."
+    answer: "Start by adding SBOM generation to your CI/CD pipeline using a tool like the sbomify GitHub Action or Syft (note: we no longer consider Trivy safe, see /2026/03/26/trivy-compromise-hardening-sbomify-action/). Then ingest the generated SBOMs into a management platform for vulnerability monitoring and compliance tracking. sbomify's zero-to-hero guide walks through the complete process from first SBOM to continuous monitoring."
   - question: "Are SBOMs only relevant for large enterprises?"
     answer: "No. SBOMs benefit organizations of all sizes. Small teams often have the most to gain because they rely heavily on open source dependencies but have fewer resources for manual security audits. SBOM generation is automated and free – the sbomify GitHub Action is open source – so the barrier to entry is low regardless of organization size."
   - question: "What SBOM tools are available today?"
-    answer: "The ecosystem is mature. GitHub natively generates SBOMs via Dependency Graph. Docker Scout provides container SBOMs. Open source generators include the sbomify GitHub Action, Syft, Trivy, and CycloneDX plugins. Management platforms include sbomify (with vulnerability monitoring via Google OSV) and OWASP Dependency-Track. Most organizations can go from zero to continuous SBOM monitoring in a single sprint."
+    answer: "The ecosystem is mature. GitHub natively generates SBOMs via Dependency Graph. Docker Scout provides container SBOMs. Open source generators include the sbomify GitHub Action, Syft, and CycloneDX plugins (note: we no longer consider Trivy safe, see /2026/03/26/trivy-compromise-hardening-sbomify-action/). Management platforms include sbomify (with vulnerability monitoring via Google OSV) and OWASP Dependency-Track. Most organizations can go from zero to continuous SBOM monitoring in a single sprint."
 date: 2024-04-03
 slug: the-time-is-now-embracing-sboms-in-an-era-of-enhanced-cybersecurity-standards
 ---
@@ -73,7 +73,7 @@ The open source ecosystem offers mature SBOM generation tools for every major la
 
 - **[sbomify GitHub Action](https://github.com/sbomify/sbomify-action/)** – Automatically selects the best generator for your stack and enriches the output with metadata from 11 data sources
 - **[Syft](https://github.com/anchore/syft)** – Generates SBOMs from container images, file systems, and archives
-- **[Trivy](https://trivy.dev/)** – Aqua Security's multi-purpose scanner with SBOM generation
+- **[Trivy](https://trivy.dev/)** – Aqua Security's multi-purpose scanner with SBOM generation (we [no longer consider Trivy safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/))
 - **[CycloneDX plugins](https://cyclonedx.org/tool-center/)** – Language-specific generators for npm, Maven, pip, Go, and more
 
 ### Management and Monitoring

@@ -188,13 +188,13 @@ Both formats have broad tooling support. Most modern SBOM tools support both for
 
 ### Generation Tools
 
-| Tool                                                                | CycloneDX | SPDX | Notes                                                     |
-| ------------------------------------------------------------------- | --------- | ---- | --------------------------------------------------------- |
-| [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) | Yes       | Yes  | Generation + enrichment + augmentation, CI/CD integration |
-| [Syft](https://github.com/anchore/syft)                             | Yes       | Yes  | Multi-ecosystem, container support                        |
-| [Trivy](https://github.com/aquasecurity/trivy)                      | Yes       | Yes  | Vulnerability scanning + SBOM generation                  |
-| [cdxgen](https://github.com/CycloneDX/cdxgen)                       | Yes       | No   | CycloneDX-native, broad language support                  |
-| [Microsoft SBOM Tool](https://github.com/microsoft/sbom-tool)       | No        | Yes  | SPDX-native, CI/CD integration                            |
+| Tool                                                                | CycloneDX | SPDX | Notes                                                                                                                        |
+| ------------------------------------------------------------------- | --------- | ---- | ---------------------------------------------------------------------------------------------------------------------------- |
+| [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) | Yes       | Yes  | Generation + enrichment + augmentation, CI/CD integration                                                                    |
+| [Syft](https://github.com/anchore/syft)                             | Yes       | Yes  | Multi-ecosystem, container support                                                                                           |
+| [Trivy](https://github.com/aquasecurity/trivy)                      | Yes       | Yes  | Vulnerability scanning + SBOM generation (see [March 2026 advisory](/2026/03/26/trivy-compromise-hardening-sbomify-action/)) |
+| [cdxgen](https://github.com/CycloneDX/cdxgen)                       | Yes       | No   | CycloneDX-native, broad language support                                                                                     |
+| [Microsoft SBOM Tool](https://github.com/microsoft/sbom-tool)       | No        | Yes  | SPDX-native, CI/CD integration                                                                                               |
 
 ### Analysis and Management Tools
 
@@ -231,7 +231,7 @@ There is no single "winner" between CycloneDX and SPDX. The right choice depends
 
 - You distribute software to diverse customers with different format preferences
 - Your compliance obligations span multiple frameworks with different preferences
-- You use tools like Syft or Trivy that generate both formats from a single scan
+- You use tools like Syft that generate both formats from a single scan (note: we [no longer consider Trivy safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/) following its March 2026 compromise)
 
 Many organizations generate SBOMs in both formats or convert between them using tools like the [CycloneDX CLI](https://github.com/CycloneDX/cyclonedx-cli). The formats are converging in capability, and the practical differences are narrowing with each release.
 

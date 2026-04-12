@@ -18,7 +18,7 @@ faq:
   - question: "Why are SBOMs important for security?"
     answer: "SBOMs enable rapid vulnerability response. When a new CVE is disclosed, an SBOM lets you determine in seconds whether your software contains the affected component – without manually auditing source code or build systems. This is critical for monitoring against databases like the CISA KEV catalog and for meeting regulatory compliance requirements."
   - question: "How do I generate an SBOM?"
-    answer: "SBOMs can be generated using tools like the sbomify GitHub Action, Syft, Trivy, or CycloneDX CLI plugins. The sbomify GitHub Action automatically selects the best generator for your ecosystem and enriches the output with package metadata. The most accurate SBOMs are generated at build time, when the full dependency tree is resolved."
+    answer: "SBOMs can be generated using tools like the sbomify GitHub Action, Syft, or CycloneDX CLI plugins (note: we no longer consider Trivy safe, see /2026/03/26/trivy-compromise-hardening-sbomify-action/). The sbomify GitHub Action automatically selects the best generator for your ecosystem and enriches the output with package metadata. The most accurate SBOMs are generated at build time, when the full dependency tree is resolved."
   - question: "Are SBOMs required by law?"
     answer: "Increasingly, yes. U.S. Executive Order 14028 requires SBOMs for software sold to the federal government. The EU Cyber Resilience Act requires manufacturers of products with digital elements to identify and document components. The FDA requires SBOMs for medical device software. Many procurement contracts now include SBOM requirements as well."
 date: 2024-04-03
@@ -70,7 +70,7 @@ The most accurate SBOMs are generated during the build process, when the full de
 
 - **[sbomify GitHub Action](https://github.com/sbomify/sbomify-action/)** – A multi-ecosystem SBOM generator that automatically selects the best generation tool for your stack, enriches the output with package metadata, and optionally augments it with business information
 - **[Syft](https://github.com/anchore/syft)** – Generates SBOMs from container images, file systems, and archives in both SPDX and CycloneDX formats
-- **[Trivy](https://trivy.dev/)** – Aqua Security's scanner that generates SBOMs alongside vulnerability reports
+- **[Trivy](https://trivy.dev/)** – Aqua Security's scanner that generates SBOMs alongside vulnerability reports (we [no longer consider Trivy safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/))
 - **[CycloneDX CLI tools](https://cyclonedx.org/tool-center/)** – Language-specific plugins for npm, Maven, Gradle, pip, Go, and more
 
 ### Analysis-Time Generation

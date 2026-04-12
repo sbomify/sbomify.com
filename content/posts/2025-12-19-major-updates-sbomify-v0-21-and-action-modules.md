@@ -38,7 +38,7 @@ Our GitHub Action module has received a major architectural upgrade focused on m
 
 ### Modular Generation
 
-Version 0.9 introduces a **plugin architecture for SBOM generation**. This system uses priority-based selection with automatic fallback (e.g., trying `cyclonedx-py` first, then `Trivy`, then `Syft`), ensuring you get the best possible SBOM for your project type without manual configuration.
+Version 0.9 introduces a **plugin architecture for SBOM generation**. This system uses priority-based selection with automatic fallback (e.g., trying `cyclonedx-py` first, then `Trivy`, then `Syft`), ensuring you get the best possible SBOM for your project type without manual configuration. (Note: Trivy has since been [removed from sbomify-action](/2026/03/26/trivy-compromise-hardening-sbomify-action/) as of v26.1.0 following its March 2026 compromise.)
 
 ### Ubuntu APT Enrichment
 

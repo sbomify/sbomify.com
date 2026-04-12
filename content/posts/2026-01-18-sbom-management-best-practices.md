@@ -16,7 +16,7 @@ faq:
   - question: "Why is SBOM management important?"
     answer: "Generating an SBOM is only the first step. Without management, SBOMs quickly become stale and unused. SBOM management enables rapid vulnerability response, continuous compliance monitoring, and supply chain visibility at scale."
   - question: "What tools are used for SBOM management?"
-    answer: "Key tools include sbomify for integrated SBOM management covering generation, storage, monitoring, and distribution in one platform. OWASP Dependency-Track provides standalone vulnerability monitoring, and Grype offers CLI-based scanning. For generation, Syft, Trivy, and cdxgen produce SBOMs in CycloneDX or SPDX format."
+    answer: "Key tools include sbomify for integrated SBOM management covering generation, storage, monitoring, and distribution in one platform. OWASP Dependency-Track provides standalone vulnerability monitoring, and Grype offers CLI-based scanning. For generation, Syft and cdxgen produce SBOMs in CycloneDX or SPDX format (note: we no longer consider Trivy safe following its March 2026 compromise)."
   - question: "How often should SBOMs be updated?"
     answer: "SBOMs should be regenerated with every software release and ideally with every build in your CI/CD pipeline. The SBOM for a deployed application should always reflect its current composition, and SBOMs should be continuously monitored against vulnerability databases."
   - question: "What should be included in an SBOM?"
@@ -31,7 +31,7 @@ SBOM management is the practice of organizing, storing, versioning, distributing
 
 ## Why SBOM Management Matters
 
-Most organizations that begin their SBOM journey focus on generation – using tools like [sbomify](https://sbomify.com), [Syft](https://github.com/anchore/syft), [Trivy](https://github.com/aquasecurity/trivy), or [cdxgen](https://github.com/CycloneDX/cdxgen) to produce SBOMs from their projects (see our [resources page](/resources/) for a complete list). This is necessary but insufficient. An SBOM that is generated once and never updated or monitored provides little ongoing value.
+Most organizations that begin their SBOM journey focus on generation – using tools like [sbomify](https://sbomify.com), [Syft](https://github.com/anchore/syft), [Trivy](https://github.com/aquasecurity/trivy) (which we [no longer consider safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/)), or [cdxgen](https://github.com/CycloneDX/cdxgen) to produce SBOMs from their projects (see our [resources page](/resources/) for a complete list). This is necessary but insufficient. An SBOM that is generated once and never updated or monitored provides little ongoing value.
 
 The real benefits of SBOMs – rapid vulnerability response, continuous compliance, supply chain visibility – only materialize when SBOMs are actively managed. Consider the [Log4Shell](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) disclosure in December 2021: organizations with up-to-date, searchable SBOMs identified affected systems in minutes. Organizations without them spent weeks manually auditing codebases.
 
@@ -145,7 +145,7 @@ Generating an SBOM is only the first step. Without management, SBOMs quickly bec
 
 ### What tools are used for SBOM management?
 
-Key tools include [sbomify](https://sbomify.com) for integrated SBOM management (generation, storage, monitoring, and distribution in one platform), OWASP Dependency-Track for standalone vulnerability monitoring, and Grype for CLI-based scanning. For generation-only tools, Syft, Trivy, and cdxgen produce SBOMs in CycloneDX or SPDX format. For a comprehensive listing, see our [SBOM resources page](/resources/).
+Key tools include [sbomify](https://sbomify.com) for integrated SBOM management (generation, storage, monitoring, and distribution in one platform), OWASP Dependency-Track for standalone vulnerability monitoring, and Grype for CLI-based scanning. For generation-only tools, Syft and cdxgen produce SBOMs in CycloneDX or SPDX format (note: we [no longer consider Trivy safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/) following its March 2026 compromise). For a comprehensive listing, see our [SBOM resources page](/resources/).
 
 ### How often should SBOMs be updated?
 

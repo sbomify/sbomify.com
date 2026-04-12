@@ -71,11 +71,11 @@ This completes the Python story we have been building across releases: PyPI enri
 
 ## Other Improvements
 
-- **Caching** - License databases, Trivy, and Syft are now cached between runs. This significantly reduces execution time for repeat CI runs where the tooling has not changed.
+- **Caching** - License databases, Trivy, and Syft are now cached between runs. (Note: Trivy has since been [removed from sbomify-action](/2026/03/26/trivy-compromise-hardening-sbomify-action/) as of v26.1.0 following its March 2026 compromise.) This significantly reduces execution time for repeat CI runs where the tooling has not changed.
 - **Standalone mode** - Use `--lock-file none` to run sbomify-action without a lockfile. This is useful when you want to inject additional packages or metadata into an existing SBOM without re-running dependency analysis.
 - **Gzip compression** - Large SBOM uploads are now automatically compressed with gzip to avoid timeouts on slow or constrained network connections.
 - **Configurable upload timeout** - You can now set a custom timeout for SBOM uploads, and the tool will stop early if your plan's component limit is reached.
-- **Updated Trivy** - Bumped from 0.68.2 to 0.69.2 for the latest vulnerability database and scanning improvements.
+- **Updated Trivy** - Bumped from 0.68.2 to 0.69.2 for the latest vulnerability database and scanning improvements. (Note: Trivy has since been [removed from sbomify-action](/2026/03/26/trivy-compromise-hardening-sbomify-action/) as of v26.1.0 following its March 2026 compromise.)
 - **Updated dependencies** - All project dependencies have been bumped to their latest versions.
 
 ---
