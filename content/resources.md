@@ -53,6 +53,24 @@ See also the [FOSDEM schedule page](https://fosdem.org/2026/schedule/event/UYTGW
 
 {{< video-embed video_id="e9_bpsJKOL0" title="CRA Explained: What the Cyber Resilience Act Means for Device Manufacturers" description="Podcast episode with EU CRA expert Sarah Fluchs explaining SBOM requirements, the 5-year support mandate, and vulnerability management for device manufacturers." >}}
 
+### SBOMs & CRA Deep Dive: Compliance, Liability & the Future of Secure Products
+
+{{< video-embed video_id="EIBj-eVlu80" title="SBOMs & CRA Deep Dive: Compliance, Liability & the Future of Secure Products" description="A deep dive into SBOMs and the EU Cyber Resilience Act, covering compliance obligations, liability implications, and what the future of secure products looks like." >}}
+
+### How SBOMs and Engineering Discipline Can Help You Avoid Trivy's Compromise
+
+{{< video-embed video_id="thfUpenosBs" title="How SBOMs and Engineering Discipline Can Help You Avoid Trivy's Compromise" description="InfoQ podcast episode with Viktor Petersson on how SBOMs and engineering discipline help teams detect and respond to supply chain compromises like the March 2026 Trivy incident." >}}
+
+Also available on [Spotify](https://open.spotify.com/episode/5wzJM6Sk3ZRbvC8sfmFBPb) and [Apple Podcasts](https://podcasts.apple.com/gb/podcast/how-sboms-and-engineering-discipline-can-help-you/id1106971805?i=1000761075185).
+
+---
+
+## Articles & Press
+
+- [QCon London 2026: SBOMs Move from Best Practice to Legal Obligation as CRA Enforcement Looms](https://www.infoq.com/news/2026/03/sbom-viktor-petersson/) – InfoQ coverage of Viktor Petersson's QCon London 2026 talk on how the EU CRA and existing US regulations are turning SBOMs into a mandatory compliance requirement.
+- [U.S. Army, Lockheed Martin detail SBOM progress](https://www.techtarget.com/searchitoperations/feature/366611692/US-Army-Lockheed-Martin-detail-SBOM-progress) – TechTarget reporting on how the U.S. Army and Lockheed Martin are operationalizing SBOMs, with commentary from sbomify.
+- [Cybersecurity Legislation Driving SBOMs](https://www.eetimes.eu/cybersecurity-legislation-driving-sboms/) – EE Times Europe on how cybersecurity legislation is driving SBOM adoption.
+
 ---
 
 ## Generation / Authoring
