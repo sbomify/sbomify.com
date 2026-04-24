@@ -85,6 +85,12 @@ Then in your CI pipeline, simply enable augmentation with a sbomify account:
 
 sbomify-action will fetch the profile metadata from sbomify and apply it to the generated SBOM automatically.
 
+## Score uploaded SBOMs against the NTIA checklist
+
+sbomify ships a built-in **NTIA Minimum Elements (2021)** plugin that grades every uploaded SBOM against the seven required fields and surfaces the result on the SBOM detail page. Enable it from the **Plugins** page in your workspace sidebar:
+
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/plugin_enablement_ntia-minimum-elements-2021.webm" title="Enabling the NTIA Minimum Elements plugin in sbomify" description="Step-by-step screencast showing how to enable the NTIA Minimum Elements (2021) compliance plugin in sbomify." >}}
+
 ## What gets added
 
 Augmentation addresses specific NTIA and CISA minimum element fields:
