@@ -1,10 +1,10 @@
 ---
 title: "How do I delete my account?"
 description: "Step-by-step guide to deleting your account in sbomify, including what happens to your data."
-answer: "You can delete your account from Settings > Account > Delete Your Account. This permanently removes your account and all associated data."
-tldr: "You can delete your account from Settings > Account > Delete Your Account. This permanently removes your account and all associated data."
+answer: "Open Settings > Account, expand the Danger Zone, click Delete Account, type 'delete' to confirm, then click Delete My Account. This permanently removes your account and all associated data."
+tldr: "Open Settings > Account, expand the Danger Zone, click Delete Account, type 'delete' to confirm, then click Delete My Account. This permanently removes your account and all associated data."
 weight: 81
-keywords: [delete account, remove account, sbomify account, account settings, account deletion]
+keywords: [delete account, remove account, sbomify account, account settings, account deletion, danger zone]
 url: /faq/how-do-i-delete-my-account/
 ---
 
@@ -16,9 +16,9 @@ url: /faq/how-do-i-delete-my-account/
 
 To delete your account in sbomify:
 
-1. Navigate to **Settings**
-2. Go to the **Account** tab
-3. Click **Delete Your Account**
-4. Confirm the deletion when prompted
+1. Navigate to **Settings** and open the **Account** tab
+2. Scroll to the **Danger Zone** and expand it
+3. Click **Delete Account**
+4. In the confirmation modal, type `delete` and click **Delete My Account**
 
 This action is **permanent** and cannot be undone. All data associated with your account will be deleted.

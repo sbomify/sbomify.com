@@ -1,11 +1,11 @@
 ---
 title: "How do I enable the Transparency Exchange API (TEA) in sbomify?"
 description: "Step-by-step guide to enabling the Transparency Exchange API (TEA) in sbomify for automated SBOM discovery and distribution."
-answer: "You can enable TEA from your workspace settings. TEA requires a Business plan or higher."
-tldr: "You can enable TEA from your workspace settings. TEA requires a Business plan or higher."
+answer: "Enable your Trust Center under Settings > Trust Center, configure and validate a custom domain, then toggle on TEA. TEA requires a Business plan or higher."
+tldr: "Enable your Trust Center under Settings > Trust Center, configure and validate a custom domain, then toggle on TEA. TEA requires a Business plan or higher."
 plan: "Business+"
 weight: 72
-keywords: [TEA, Transparency Exchange API, SBOM distribution, SBOM discovery, sbomify TEA, enable TEA]
+keywords: [TEA, Transparency Exchange API, SBOM distribution, SBOM discovery, sbomify TEA, enable TEA, .well-known/tea]
 url: /faq/how-do-i-enable-tea-in-sbomify/
 ---
 
@@ -29,13 +29,14 @@ Instead of manually exchanging files via email or portals, TEA lets consumers pr
 
 ## Enabling TEA
 
-TEA is available on the **Business** plan and above.
+TEA is available on the **Business** plan and above. It is delivered through your Trust Center, so the Trust Center must be enabled and reachable on a validated custom domain before TEA can be turned on.
 
 To enable it:
 
-1. Navigate to your workspace **Settings**
-2. Go to the **TEA** section
-3. Toggle TEA on
-4. Configure your TEA endpoint settings
+1. Navigate to **Settings** and open the **Trust Center** tab
+2. **Enable** the Trust Center
+3. Set a **custom domain** (e.g. `trust.yourcompany.com`) and click **Save Domain**
+4. Configure the CNAME record at your DNS provider so the domain points to sbomify, then wait for validation
+5. Once the domain is validated, toggle **TEA** on
 
-Once enabled, your published SBOMs become discoverable via the TEA protocol, making it easy for customers and partners to access your transparency data automatically.
+After TEA is enabled, sbomify exposes a discovery URL at `https://<your-custom-domain>/.well-known/tea`. Consumers can hit that endpoint to programmatically discover and pull your published SBOMs and other transparency artifacts.

@@ -56,19 +56,19 @@ This is ideal for individual projects or teams that want to manage metadata per-
 
 ## Option 2: Central profile management in sbomify
 
-For organizations managing many components, sbomify provides centrally managed augmentation profiles. Instead of maintaining `sbomify.json` files in every repository, you configure the metadata once in sbomify and it gets applied automatically during augmentation.
+For organizations managing many components, sbomify provides centrally managed **Contact Profiles**. Instead of maintaining `sbomify.json` files in every repository, you configure the supplier, author, and contact metadata once in sbomify and it gets applied automatically during augmentation.
 
 ### Creating a profile
 
-Navigate to your workspace settings to create an augmentation profile with your organization's supplier info, authors, licenses, and other metadata:
+In **Settings**, open the **Contacts** tab and click **Add Profile**. A profile contains one or more **Entities** (with manufacturer / supplier / author roles, name, email, phone, address, and website) and one or more **Contacts** on each entity (with author / security / technical roles). Toggle **Set as default** if this profile should apply to every component that does not override it.
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/profile_editing.webm" title="Creating an augmentation profile in sbomify" description="Walkthrough of creating a centrally managed augmentation profile in sbomify for NTIA/CISA compliance." >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/profile_editing.webm" title="Creating a contact profile in sbomify" description="Walkthrough of creating a centrally managed contact profile in sbomify for NTIA/CISA compliance." >}}
 
 ### Using profiles
 
 Once you have a profile, there are two ways to apply it:
 
-- **Default profile** - Set a profile as the workspace default, and it will be used for all components in that workspace during augmentation
+- **Default profile** - Mark a profile as the workspace default, and it will be used for all components in that workspace during augmentation
 - **Per-component profile** - Manually select a specific profile on individual components for cases where different components need different metadata
 
 Then in your CI pipeline, simply enable augmentation with a sbomify account:
@@ -84,6 +84,12 @@ Then in your CI pipeline, simply enable augmentation with a sbomify account:
 ```
 
 sbomify-action will fetch the profile metadata from sbomify and apply it to the generated SBOM automatically.
+
+## Score uploaded SBOMs against the NTIA checklist
+
+sbomify ships a built-in **NTIA Minimum Elements (2021)** plugin that grades every uploaded SBOM against the seven required fields and surfaces the result on the SBOM detail page. Enable it from the **Plugins** page in your workspace sidebar:
+
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/plugin_enablement_ntia-minimum-elements-2021.webm" title="Enabling the NTIA Minimum Elements plugin in sbomify" description="Step-by-step screencast showing how to enable the NTIA Minimum Elements (2021) compliance plugin in sbomify." >}}
 
 ## What gets added
 

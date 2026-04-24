@@ -68,7 +68,7 @@ The CRA empowers the European Commission to "specify the format and elements of 
 
 ## BSI TR-03183-2: Concrete SBOM Requirements
 
-[BSI TR-03183-2](https://bsi.bund.de/dok/TR-03183-en) (v2.1.0, August 2025) from Germany's Federal Office for Information Security provides detailed technical specifications for CRA-compliant SBOMs. Key requirements follow.
+[BSI TR-03183-2](https://bsi.bund.de/dok/TR-03183-en) (v2.1.0, August 2025) from Germany's Federal Office for Information Security provides detailed technical specifications for CRA-compliant SBOMs. Key requirements follow. For the standalone summary, see our [BSI TR-03183-2 page](/compliance/bsi-tr-03183/).
 
 > **Note on interpretations:** BSI TR-03183-2 represents the **first published technical interpretation** of CRA SBOM requirements by an EU member state authority. Other EU countries may publish their own interpretations, which could differ in specific requirements. As additional national interpretations emerge, we will update this page to reflect the evolving compliance landscape.
 
