@@ -49,6 +49,9 @@ Software Bill of Materials (SBOM) compliance requirements are rapidly evolving a
 - **[EU NIS2 Directive](/compliance/eu-nis2/)** - EU cybersecurity law for essential and important entities
   - _Who it affects:_ EU entities responsible for cybersecurity risk management and incident reporting
 
+- **[BSI TR-03183-2 (v2.1.0)](/compliance/bsi-tr-03183/)** - German Federal Office for Information Security technical guideline defining concrete SBOM format and content requirements aligned with the EU CRA
+  - _Who it affects:_ Manufacturers placing products with digital elements on the EU market, and vendors selling into German federal procurement
+
 ### UK Frameworks
 
 - **[Software Security Code of Practice (UK, May 2025)](/compliance/uk-software-security-code-of-practice/)** - Voluntary UK government code setting baseline secure software development, supply chain resilience, and customer communication expectations
