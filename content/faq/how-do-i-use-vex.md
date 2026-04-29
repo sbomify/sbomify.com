@@ -49,13 +49,13 @@ A minimal CycloneDX VEX statement looks like this:
 
 The `analysis.state` field is the heart of VEX. CycloneDX defines five states:
 
-| State | When to use |
-|---|---|
-| `not_affected` | Vulnerability is present in the dependency tree but not exploitable in your product |
-| `affected` | Vulnerability is present and your product is exposed - patch is in flight |
-| `exploitable` | Active exploitation is possible right now - alert your customers |
-| `under_investigation` | You are still triaging - publish to acknowledge but do not commit yet |
-| `fixed` | Vulnerability was present in an earlier release; the version your customer is using has the patch |
+| State                 | When to use                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------- |
+| `not_affected`        | Vulnerability is present in the dependency tree but not exploitable in your product               |
+| `affected`            | Vulnerability is present and your product is exposed - patch is in flight                         |
+| `exploitable`         | Active exploitation is possible right now - alert your customers                                  |
+| `under_investigation` | You are still triaging - publish to acknowledge but do not commit yet                             |
+| `fixed`               | Vulnerability was present in an earlier release; the version your customer is using has the patch |
 
 When you mark a finding `not_affected`, you must also provide a `justification` from the standard set: `code_not_present`, `code_not_reachable`, `requires_configuration`, `requires_dependency`, `requires_environment`, `protected_by_compiler`, `protected_at_runtime`, `protected_at_perimeter`, `protected_by_mitigating_control`. Free-form prose goes in `detail`.
 
@@ -63,7 +63,7 @@ This structure means a VEX statement is auditable: a regulator or a security tea
 
 ## VEX and the EU Cyber Resilience Act
 
-[BSI TR-03183-2](https://bsi.bund.de/dok/TR-03183-en) - the technical specification the [CRA](/faq/what-is-the-eu-cyber-resilience-act/) points at - explicitly forbids embedding vulnerability data inside the SBOM itself (§3.1, §8.1.14). Vulnerability handling is the *job* of VEX or [CSAF](https://oasis-open.github.io/csaf-documentation/), not of the SBOM.
+[BSI TR-03183-2](https://bsi.bund.de/dok/TR-03183-en) - the technical specification the [CRA](/faq/what-is-the-eu-cyber-resilience-act/) points at - explicitly forbids embedding vulnerability data inside the SBOM itself (§3.1, §8.1.14). Vulnerability handling is the _job_ of VEX or [CSAF](https://oasis-open.github.io/csaf-documentation/), not of the SBOM.
 
 In practice this means a CRA-compliant manufacturer publishes:
 
