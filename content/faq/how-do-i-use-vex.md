@@ -8,6 +8,10 @@ keywords: [VEX, CycloneDX VEX, vulnerability exploitability, SBOM VEX, CSAF VEX,
 url: /faq/how-do-i-use-vex/
 ---
 
+## Walkthrough
+
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/vex_upload.webm" title="How VEX appears alongside an SBOM in sbomify" description="Screencast showing a CycloneDX VEX artifact rendered next to its SBOM on a sbomify component, with the colour-coded VEX and SBOM badges in the BOMs table." >}}
+
 ## The problem VEX solves
 
 Run any modern vulnerability scanner against a real-world SBOM and you will get a list. A long list. Most of those CVEs do not actually affect your product:
@@ -63,7 +67,7 @@ This structure means a VEX statement is auditable: a regulator or a security tea
 
 ## VEX and the EU Cyber Resilience Act
 
-[BSI TR-03183-2](https://bsi.bund.de/dok/TR-03183-en) - the technical specification the [CRA](/faq/what-is-the-eu-cyber-resilience-act/) points at - explicitly forbids embedding vulnerability data inside the SBOM itself (§3.1, §8.1.14). Vulnerability handling is the _job_ of VEX or [CSAF](https://oasis-open.github.io/csaf-documentation/), not of the SBOM.
+[BSI TR-03183-2](https://bsi.bund.de/dok/TR-03183-en) - the technical specification the [CRA](/compliance/eu-cra/) points at - explicitly forbids embedding vulnerability data inside the SBOM itself (§3.1, §8.1.14). Vulnerability handling is the _job_ of VEX or [CSAF](https://oasis-open.github.io/csaf-documentation/), not of the SBOM.
 
 In practice this means a CRA-compliant manufacturer publishes:
 
@@ -145,9 +149,11 @@ VEX-aware filtering of the OSV and Dependency-Track scanner results - automatica
 
 ## Further reading
 
-- [What is the EU Cyber Resilience Act?](/faq/what-is-the-eu-cyber-resilience-act/) - why VEX is required for CRA compliance
+- [EU Cyber Resilience Act compliance guide](/compliance/eu-cra/) - the regulatory framing for SBOM/VEX separation
+- [What is the EU Cyber Resilience Act?](/faq/what-is-the-eu-cyber-resilience-act/) - the higher-level FAQ
 - [How do I sign an SBOM?](/faq/how-do-i-sign-an-sbom/) - sign your VEX the same way
 - [How do I enable vulnerability scanning?](/faq/how-do-i-enable-vulnerability-scanning/) - the scanner output your VEX is responsive to
+- [Schema crosswalk](/compliance/schema-crosswalk/) - how vulnerability data maps across CycloneDX, SPDX, CSAF, and VEX
 - [CycloneDX VEX use case](https://cyclonedx.org/use-cases/#vulnerability-exploitability) - the upstream spec
 - [OpenVEX](https://github.com/openvex/spec) - a lightweight VEX format that converts to CycloneDX
 - [CSAF VEX](https://oasis-open.github.io/csaf-documentation/) - the OASIS standard, used heavily in the OS-vendor ecosystem
