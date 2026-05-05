@@ -1,0 +1,76 @@
+{{- $author := . -}}
+{{- $hasSocial := or $author.linkedin $author.twitter $author.mastodon $author.github $author.website $author.podcast -}}
+
+<div class="bg-primaryBG relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-[#8A7DFF]/10 via-transparent to-transparent pointer-events-none"></div>
+  <div class="hidden lg:block absolute top-1/2 left-[12%] -translate-y-1/2 w-[460px] h-[460px] bg-[#8A7DFF]/20 rounded-full blur-[140px] pointer-events-none"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 py-16 lg:py-24">
+    <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+
+      <div class="flex-shrink-0">
+        {{ $imgPath := strings.TrimPrefix "/assets/" $author.image }}
+        {{ $img := resources.Get $imgPath }}
+        {{ if $img }}
+          {{ $webp := $img.Process "fit 448x448 webp q85" }}
+          <picture>
+            <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+            <img src="{{ $img.RelPermalink }}" alt="{{ $author.display_name }}" class="w-40 h-40 lg:w-56 lg:h-56 object-cover rounded-full ring-2 ring-[#8A7DFF]/40 shadow-[0_0_80px_-20px_rgba(138,125,255,0.6)] !m-0" width="224" height="224" loading="eager" fetchpriority="high">
+          </picture>
+        {{ else if $author.image }}
+          <img src="{{ $author.image }}" alt="{{ $author.display_name }}" class="w-40 h-40 lg:w-56 lg:h-56 object-cover rounded-full ring-2 ring-[#8A7DFF]/40 shadow-[0_0_80px_-20px_rgba(138,125,255,0.6)] !m-0" width="224" height="224" loading="eager" fetchpriority="high">
+        {{ end }}
+      </div>
+
+      <div class="flex-1 min-w-0 text-center lg:text-left">
+        <div class="max-w-2xl mx-auto lg:mx-0">
+        <p class="text-fuschia60 text-xs tracking-[0.25em] uppercase font-medium mb-4">Author</p>
+
+        <h1 class="text-white text-[40px] lg:text-[64px] leading-[44px] lg:leading-[68px] mb-6">
+          <span class="text-gradient">{{ $author.display_name }}</span>
+        </h1>
+
+        <p class="text-gray-300 text-base lg:text-lg leading-relaxed mb-8">
+          {{ $author.bio }}
+        </p>
+
+        {{ if $hasSocial }}
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
+          {{ with $author.linkedin }}
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }} on LinkedIn" aria-label="{{ $author.display_name }} on LinkedIn">
+            {{ partial "icon.html" (dict "name" "linkedin" "class" "w-4 h-4") }}
+          </a>
+          {{ end }}
+          {{ with $author.twitter }}
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }} on X" aria-label="{{ $author.display_name }} on X">
+            {{ partial "icon.html" (dict "name" "x-twitter" "class" "w-4 h-4") }}
+          </a>
+          {{ end }}
+          {{ with $author.mastodon }}
+          <a href="{{ . }}" target="_blank" rel="me noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }} on Mastodon" aria-label="{{ $author.display_name }} on Mastodon">
+            {{ partial "icon.html" (dict "name" "mastodon" "class" "w-4 h-4") }}
+          </a>
+          {{ end }}
+          {{ with $author.github }}
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }} on GitHub" aria-label="{{ $author.display_name }} on GitHub">
+            {{ partial "icon.html" (dict "name" "github" "class" "w-4 h-4") }}
+          </a>
+          {{ end }}
+          {{ with $author.website }}
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }}'s website" aria-label="{{ $author.display_name }}'s website">
+            {{ partial "icon.html" (dict "name" "globe" "class" "w-4 h-4") }}
+          </a>
+          {{ end }}
+          {{ with $author.podcast }}
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }}'s podcast" aria-label="{{ $author.display_name }}'s podcast">
+            {{ partial "icon.html" (dict "name" "podcast" "class" "w-4 h-4") }}
+          </a>
+          {{ end }}
+        </div>
+        {{ end }}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
