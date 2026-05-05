@@ -29,3 +29,16 @@ cswan:
     Technology and CTO at UBS, Capital SCF, and Credit Suisse. Co-host of the
     Tech Debt Burndown podcast and Google Developer Expert. Chris brings extensive
     experience in DevOps, open source, and cybersecurity to his role as an sbomify advisor.
+
+jwatt:
+  display_name: Joshua Watt
+  slug: jwatt
+  image: /assets/images/joshua_watt.jpg
+  linkedin: https://www.linkedin.com/in/joshua-watt-dev/
+  github: https://github.com/JoshuaWatt
+  bio: >-
+    Software Developer at Garmin, member of the OpenEmbedded Technical Steering
+    Committee, and member of the Yocto Project Technical Steering Committee. Joshua
+    works extensively on SBOM generation in the Yocto Project, including the SPDX 2.2
+    and SPDX 3.0 implementations in OpenEmbedded-Core, and maintains standalone
+    tooling for working with SPDX 3.0 documents.
