@@ -94,6 +94,23 @@ input:checked + .track:before {
   border: 2px solid #8A7DFF;
   position: relative;
 }
+.pricing-card.featured::before {
+  content: "Most Popular";
+  position: absolute;
+  top: -0.875rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #8A7DFF;
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.875rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(138, 125, 255, 0.35);
+}
 .card-header {
   min-height: 200px;
   display: flex;
@@ -256,11 +273,6 @@ document.addEventListener('DOMContentLoaded', function() {
     posthog.capture('billing_toggle', { location: 'pricing', billing_type: billingType });
     updatePrices(this.checked);
   });
-
-  // Set toggle to checked (annual) by default
-  toggle.checked = true;
-  // Initialize with annual pricing
-  updatePrices(true);
 });
 </script>
 {{ end }}

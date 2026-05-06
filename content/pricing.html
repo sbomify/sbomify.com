@@ -23,12 +23,12 @@ faq:
   </div>
 
 <div class="billing-toggle">
-    <span>Monthly</span>
+    <span id="billing-monthly-label">Monthly</span>
     <label class="toggle">
-      <input type="checkbox" id="billing-toggle">
+      <input type="checkbox" id="billing-toggle" role="switch" checked aria-labelledby="billing-monthly-label billing-annual-label" aria-describedby="billing-savings">
       <span class="track"></span>
     </label>
-    <span>Annual <span class="save-tag">Save 20%</span></span>
+    <span id="billing-annual-label">Annual <span class="save-tag" id="billing-savings">Save 20%</span></span>
   </div>
 
 <div class="pricing-grid">
@@ -74,8 +74,9 @@ faq:
       <div class="card-header">
         <h2>Business <span class="trial-badge">14-day free trial</span></h2>
         <div class="price" data-monthly="199" data-annual="159">
-          <span class="amount">$199</span>
+          <span class="amount">$159</span>
           <span class="suffix">/ Month</span>
+          <span class="billing">billed annually</span>
         </div>
       </div>
 

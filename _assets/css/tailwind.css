@@ -25,6 +25,20 @@
     font-family: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
   }
 
+  :focus-visible {
+    outline: 2px solid #8A7DFF;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Avoid double rings on already-rounded targets */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  [role="switch"]:focus-visible {
+    outline-offset: 2px;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     color: #141035;
     font-family: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;

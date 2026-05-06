@@ -8,7 +8,7 @@
     <img src="/assets/images/site/hamburger-menu.svg" alt="" aria-hidden="true" width="28" height="28" />
     {{ end }}
   </button>
-  <div id="mobile-menu" class="mobile-menu hidden fixed inset-0 w-full h-full bg-primaryBG z-10 px-6" role="dialog" aria-label="Navigation menu">
+  <div id="mobile-menu" class="mobile-menu hidden fixed inset-0 w-full h-full bg-primaryBG z-[60] px-6 overflow-y-auto" role="dialog" aria-modal="true" aria-label="Navigation menu">
     <div class="text-right py-[18px] mb-10">
       <button class="btn-icon close-menu" aria-label="Close navigation menu">
         {{ $close := resources.Get "images/site/close.svg" }}
