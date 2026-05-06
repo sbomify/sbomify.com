@@ -529,6 +529,21 @@ body {
     font-family: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
   }
 
+:focus-visible {
+    outline: 2px solid #8A7DFF;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+/* Avoid double rings on already-rounded targets */
+
+a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  [role="switch"]:focus-visible {
+    outline-offset: 2px;
+  }
+
 h1, h2, h3, h4, h5, h6 {
     color: #141035;
     font-family: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -779,6 +794,10 @@ a.button:hover {
   z-index: 50;
 }
 
+.z-\[60\] {
+  z-index: 60;
+}
+
 .\!m-0 {
   margin: 0px !important;
 }
@@ -959,6 +978,10 @@ a.button:hover {
   display: inline-block;
 }
 
+.inline {
+  display: inline;
+}
+
 .flex {
   display: flex;
 }
@@ -1059,10 +1082,6 @@ a.button:hover {
   max-height: 3rem;
 }
 
-.max-h-\[30px\] {
-  max-height: 30px;
-}
-
 .w-12 {
   width: 3rem;
 }
@@ -1105,10 +1124,6 @@ a.button:hover {
 
 .w-8 {
   width: 2rem;
-}
-
-.w-\[100px\] {
-  width: 100px;
 }
 
 .w-\[500px\] {
@@ -1353,6 +1368,10 @@ a.button:hover {
   overflow-x: auto;
 }
 
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1435,6 +1454,10 @@ a.button:hover {
 
 .border-\[\#8A7DFF\]\/20 {
   border-color: rgb(138 125 255 / 0.2);
+}
+
+.border-\[\#8A7DFF\]\/30 {
+  border-color: rgb(138 125 255 / 0.3);
 }
 
 .border-blue-500 {
@@ -1632,6 +1655,12 @@ a.button:hover {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
+.from-\[\#6C5CE7\] {
+  --tw-gradient-from: #6C5CE7 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(108 92 231 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .from-\[\#8A7DFF\]\/5 {
   --tw-gradient-from: rgb(138 125 255 / 0.05) var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(138 125 255 / 0) var(--tw-gradient-to-position);
@@ -1663,6 +1692,10 @@ a.button:hover {
 
 .to-\[\#151236\] {
   --tw-gradient-to: #151236 var(--tw-gradient-to-position);
+}
+
+.to-\[\#8A7DFF\] {
+  --tw-gradient-to: #8A7DFF var(--tw-gradient-to-position);
 }
 
 .to-gray-50 {
@@ -1722,6 +1755,11 @@ a.button:hover {
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.px-2\.5 {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
 }
 
 .px-3 {
@@ -1851,6 +1889,10 @@ a.button:hover {
 
 .text-right {
   text-align: right;
+}
+
+.align-middle {
+  vertical-align: middle;
 }
 
 .font-mono {
@@ -2000,6 +2042,11 @@ a.button:hover {
 .text-\[\#6364FF\] {
   --tw-text-opacity: 1;
   color: rgb(99 100 255 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#6C5CE7\] {
+  --tw-text-opacity: 1;
+  color: rgb(108 92 231 / var(--tw-text-opacity, 1));
 }
 
 .text-\[\#8A7DFF\] {
@@ -3110,9 +3157,6 @@ a.button:hover {
   }
   .md\:gap-y-8 {
     row-gap: 2rem;
-  }
-  .md\:self-center {
-    align-self: center;
   }
   .md\:p-10 {
     padding: 2.5rem;
