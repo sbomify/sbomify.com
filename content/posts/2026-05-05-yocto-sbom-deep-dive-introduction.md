@@ -61,7 +61,7 @@ Both inherit a shared base class, `spdx-common.bbclass`, which contains logic co
 
 ## Why This Matters Now
 
-Regulatory pressure around software supply chain transparency is intensifying. The EU [Cyber Resilience Act](/cra/) requires SBOM documentation for products placed on the EU market. The U.S. Executive Order on Improving the Nation's Cybersecurity established SBOM requirements for software sold to federal agencies. Industry standards bodies and procurement teams are following suit.
+Regulatory pressure around software supply chain transparency is intensifying. The EU [Cyber Resilience Act](/compliance/eu-cra/) requires SBOM documentation for products placed on the EU market. The U.S. Executive Order on Improving the Nation's Cybersecurity established SBOM requirements for software sold to federal agencies. Industry standards bodies and procurement teams are following suit.
 
 In this environment, the quality of your SBOM matters. A post-build scanner that guesses at patch history is a different artifact than a build-integrated pipeline that recorded every source fetch, patch application, and package assembly as it happened.
 
