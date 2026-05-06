@@ -133,7 +133,7 @@ With SPDX 2.2, you get an SBOM that describes your software components, but vuln
 
 With SPDX 3.0, vulnerability assessments are first-class citizens in the SBOM. The security profile provides typed elements for vulnerabilities and VEX relationships, and the Yocto implementation populates these automatically from the same `CVE_STATUS` data that `cve-check` uses. The result is a single document that answers both "what is in my image?" and "which CVEs affect it, and what is their status?"
 
-For teams subject to regulatory requirements like the [EU Cyber Resilience Act](/cra/), having integrated VEX data in the SBOM significantly simplifies compliance workflows.
+For teams subject to regulatory requirements like the [EU Cyber Resilience Act](/compliance/eu-cra/), having integrated VEX data in the SBOM significantly simplifies compliance workflows.
 
 ---
 
