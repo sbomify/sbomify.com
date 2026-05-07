@@ -7,19 +7,28 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
 
 <div>
     <div class="bg-primaryBG relative overflow-hidden">
-        <!-- Subtle gradient overlay -->
-        <div class="absolute inset-0 bg-gradient-to-br from-[#8A7DFF]/5 via-transparent to-transparent pointer-events-none"></div>
+        <!-- Animated aurora -->
+        <div aria-hidden="true" class="absolute inset-0 pointer-events-none">
+            <div class="aurora aurora-1"></div>
+            <div class="aurora aurora-2"></div>
+            <div class="aurora aurora-3"></div>
+        </div>
+        <!-- Soft top vignette to anchor the headline -->
+        <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-b from-primaryBG/0 via-primaryBG/0 to-primaryBG/40 pointer-events-none"></div>
 
         <div class="relative max-w-7xl mx-auto px-6 lg:px-8 pt-16 lg:pt-24 pb-16 lg:pb-20">
             <!-- Hero Section -->
             <div class="text-white mb-16 lg:mb-20 text-center">
-                <h1 class="text-5xl lg:text-7xl font-bold leading-tight mb-8">
+                <h1 class="text-5xl lg:text-7xl font-bold leading-[1.05] tracking-tight mb-8">
                     <span class="text-gradient">Your Security Artifact Hub</span>
-                    </h1>
-                <p class="text-2xl lg:text-3xl leading-relaxed text-gray-300 max-w-4xl mx-auto">From zero to SBOM hero. Generate, manage, and share <a href="/what-is-sbom/" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">SBOMs</a> and compliance documents with your stakeholders.</p>
+                </h1>
+                <p class="text-xl lg:text-2xl leading-relaxed text-gray-300 max-w-3xl mx-auto text-pretty">From zero to SBOM hero. Generate, manage, and share <a href="/what-is-sbom/" class="text-purple hover:text-purple-700 underline underline-offset-4 decoration-purple/40 hover:decoration-purple-700">SBOMs</a> and compliance documents with your stakeholders.</p>
                 <div class="mt-10 flex flex-wrap gap-4 justify-center">
-                    <a href="https://app.sbomify.com" class="px-8 py-4 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-semibold text-lg transition-all duration-200">Get Started Free</a>
-                    <a href="https://app.sbomify.com/enterprise-contact/" class="px-8 py-4 bg-[#201B4C] border-2 border-[#37306B] hover:border-[#8A7DFF] text-white rounded-full font-semibold text-lg transition-all duration-200">Contact Us</a>
+                    <a href="https://app.sbomify.com" class="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-purple hover:bg-purple-700 text-white rounded-full font-semibold text-lg shadow-lg shadow-purple/25 hover:shadow-xl hover:shadow-purple/40 motion-safe:hover:-translate-y-0.5 transition-[background-color,box-shadow,transform] duration-200">
+                        Get Started Free
+                        <svg aria-hidden="true" class="w-4 h-4 motion-safe:group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="https://app.sbomify.com/enterprise-contact/" class="inline-flex items-center justify-center px-8 py-4 bg-white/5 border border-white/15 hover:bg-white/10 hover:border-white/25 text-white rounded-full font-semibold text-lg backdrop-blur-sm motion-safe:hover:-translate-y-0.5 transition-[background-color,border-color,transform] duration-200">Contact Us</a>
                 </div>
             </div>
 
@@ -88,8 +97,8 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
 
     <div class="bg-[#F6F9FA]">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-            <section class="max-w-4xl mx-auto mb-20 bg-white rounded-3xl p-10 lg:p-12 border border-gray-100 shadow-sm">
-                <div class="text-sm font-semibold uppercase tracking-wide mb-4 text-[#8A7DFF]">SBOM Lifecycle Tool</div>
+            <section class="max-w-4xl mx-auto mb-20 bg-white rounded-3xl p-10 lg:p-12 border border-gray-200/70 ring-1 ring-black/[0.02] shadow-[0_1px_3px_rgba(20,16,53,0.04),0_8px_24px_-12px_rgba(20,16,53,0.08)] hover:shadow-[0_1px_3px_rgba(20,16,53,0.04),0_24px_48px_-16px_rgba(138,125,255,0.18)] hover:border-purple/20 motion-safe:hover:-translate-y-1 transition-[box-shadow,transform,border-color] duration-300">
+                <div class="eyebrow-chip mb-5">SBOM Lifecycle Tool</div>
                 <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-primaryText">Zero to SBOM Hero</h2>
                 <p class="mb-8 text-lg text-secondaryText leading-relaxed">
                 Build high-quality SBOMs directly in your CI pipeline with our <a href="/features/integrations/" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">open source action</a>. Once generated, SBOMs are automatically uploaded to sbomify where you can manage releases (including <a href="/features/sbom-hierarchy/" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">complex hierarchies</a>) and share the latest software versions with stakeholders – publicly or privately via your <a href="/features/trust-center/" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">Trust Center</a>. No more manual SBOM distribution or version confusion.
@@ -99,11 +108,11 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                     <img src="/assets/images/d2/zero-to-hero.svg" alt="Zero to SBOM Hero Process" class="w-full h-auto" width="1140" height="316" loading="lazy">
                 </div>
 
-                <a class="inline-block px-6 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium transition-all duration-200" href="/zero-to-hero/">Get Started</a>
+                <a class="inline-flex items-center px-6 py-3 bg-purple hover:bg-purple-700 text-white rounded-full font-medium shadow-md shadow-purple/20 hover:shadow-lg hover:shadow-purple/30 motion-safe:hover:-translate-y-0.5 transition-[background-color,box-shadow,transform] duration-200" href="/zero-to-hero/">Get Started</a>
             </section>
 
-            <section class="max-w-4xl mx-auto mb-20 bg-white rounded-3xl p-10 lg:p-12 border border-gray-100 shadow-sm">
-                <div class="text-sm font-semibold uppercase tracking-wide mb-4 text-[#8A7DFF]">Trust Center</div>
+            <section class="max-w-4xl mx-auto mb-20 bg-white rounded-3xl p-10 lg:p-12 border border-gray-200/70 ring-1 ring-black/[0.02] shadow-[0_1px_3px_rgba(20,16,53,0.04),0_8px_24px_-12px_rgba(20,16,53,0.08)] hover:shadow-[0_1px_3px_rgba(20,16,53,0.04),0_24px_48px_-16px_rgba(138,125,255,0.18)] hover:border-purple/20 motion-safe:hover:-translate-y-1 transition-[box-shadow,transform,border-color] duration-300">
+                <div class="eyebrow-chip mb-5">Trust Center</div>
                 <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-primaryText">Transparency That Builds Trust</h2>
                 <p class="mb-6 text-lg text-secondaryText leading-relaxed">
                 Share SBOMs, compliance documents, and security artifacts with stakeholders in a standardized way. Your <a href="/features/trust-center/" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">trust center</a> can be hosted on your own domain and supports both web portal access and standardized SBOM formats for automated consumption. Compliance documents are expressed programmatically alongside your SBOMs.
@@ -114,11 +123,11 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 </div>
 
                 {{< trust-center-pillars-grid >}}
-                <a class="inline-block px-6 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium transition-all duration-200" href="/features/trust-center/">Learn More</a>
+                <a class="inline-flex items-center px-6 py-3 bg-purple hover:bg-purple-700 text-white rounded-full font-medium shadow-md shadow-purple/20 hover:shadow-lg hover:shadow-purple/30 motion-safe:hover:-translate-y-0.5 transition-[background-color,box-shadow,transform] duration-200" href="/features/trust-center/">Learn More</a>
             </section>
 
-            <section class="max-w-4xl mx-auto mb-20 bg-white rounded-3xl p-10 lg:p-12 border border-gray-100 shadow-sm">
-                <div class="text-sm font-semibold uppercase tracking-wide mb-4 text-[#8A7DFF]">Security Artifact Hub</div>
+            <section class="max-w-4xl mx-auto mb-20 bg-white rounded-3xl p-10 lg:p-12 border border-gray-200/70 ring-1 ring-black/[0.02] shadow-[0_1px_3px_rgba(20,16,53,0.04),0_8px_24px_-12px_rgba(20,16,53,0.08)] hover:shadow-[0_1px_3px_rgba(20,16,53,0.04),0_24px_48px_-16px_rgba(138,125,255,0.18)] hover:border-purple/20 motion-safe:hover:-translate-y-1 transition-[box-shadow,transform,border-color] duration-300">
+                <div class="eyebrow-chip mb-5">Security Artifact Hub</div>
                 <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-primaryText">Store, Analyze & Enrich</h2>
                 <p class="mb-8 text-lg text-secondaryText leading-relaxed">
                 sbomify is designed not only to hold your security artifacts but also to send them off for analysis. We integrate with CI/CD pipelines (GitHub, GitLab, Bitbucket), analysis tools like <a href="/features/integrations/" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">Google OSV</a> and <a href="/features/integrations/" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">Dependency Track</a>, and enrichment platforms such as <a href="/features/integrations/" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">Ecosyste.ms</a>. Your security artifacts flow seamlessly from generation through analysis and enrichment, giving you actionable insights without manual work.
@@ -128,7 +137,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                     <img src="/assets/images/d2/store-analyze-enrich.svg" alt="Store, Analyze & Enrich Process" class="w-full h-auto" width="1323" height="407" loading="lazy">
                 </div>
 
-                <a class="inline-block px-6 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium transition-all duration-200" href="/features/integrations/">View All Integrations</a>
+                <a class="inline-flex items-center px-6 py-3 bg-purple hover:bg-purple-700 text-white rounded-full font-medium shadow-md shadow-purple/20 hover:shadow-lg hover:shadow-purple/30 motion-safe:hover:-translate-y-0.5 transition-[background-color,box-shadow,transform] duration-200" href="/features/integrations/">View All Integrations</a>
             </section>
 
             <!-- Trusted By section -->
@@ -146,8 +155,8 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 </div>
             </div>
 
-            <section class="max-w-4xl mx-auto mb-20 bg-white rounded-3xl p-10 lg:p-12 border border-gray-100 shadow-sm">
-                <div class="text-sm font-semibold uppercase tracking-wide mb-4 text-[#8A7DFF]">Why Now?</div>
+            <section class="max-w-4xl mx-auto mb-20 bg-white rounded-3xl p-10 lg:p-12 border border-gray-200/70 ring-1 ring-black/[0.02] shadow-[0_1px_3px_rgba(20,16,53,0.04),0_8px_24px_-12px_rgba(20,16,53,0.08)] hover:shadow-[0_1px_3px_rgba(20,16,53,0.04),0_24px_48px_-16px_rgba(138,125,255,0.18)] hover:border-purple/20 motion-safe:hover:-translate-y-1 transition-[box-shadow,transform,border-color] duration-300">
+                <div class="eyebrow-chip mb-5">Why Now?</div>
                 <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-primaryText">CRA is Coming. Ready or Not.</h2>
                 <p class="mb-6 text-lg text-secondaryText leading-relaxed">
                 The EU's Cyber Resilience Act (CRA) is now in force, with <strong>mandatory reporting starting September 11, 2026</strong>. Whether you sell to European customers or not, CRA compliance is becoming a baseline expectation for B2B software.
@@ -155,11 +164,11 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 <p class="mb-8 text-lg text-secondaryText leading-relaxed">
                 Combined with US <a href="https://www.federalregister.gov/documents/2021/05/17/2021-10460/improving-the-nations-cybersecurity" class="text-[#8A7DFF] hover:text-[#7A6DE5] underline">Executive Order 14028</a> requiring SBOMs for federal procurement, the message is clear: transparency isn't optional anymore. sbomify helps you meet these requirements efficiently, whether you need public trust centers, automated SBOM generation, or compliance reporting.
                 </p>
-                <a class="inline-block px-6 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium transition-all duration-200" href="/features/why-now">Learn More About CRA</a>
+                <a class="inline-flex items-center px-6 py-3 bg-purple hover:bg-purple-700 text-white rounded-full font-medium shadow-md shadow-purple/20 hover:shadow-lg hover:shadow-purple/30 motion-safe:hover:-translate-y-0.5 transition-[background-color,box-shadow,transform] duration-200" href="/features/why-now">Learn More About CRA</a>
             </section>
 
-            <section class="max-w-4xl mx-auto bg-white rounded-3xl p-10 lg:p-12 border border-gray-100 shadow-sm">
-                <div class="text-sm font-semibold uppercase tracking-wide mb-4 text-[#8A7DFF]">Your Choice, Your Control</div>
+            <section class="max-w-4xl mx-auto bg-white rounded-3xl p-10 lg:p-12 border border-gray-200/70 ring-1 ring-black/[0.02] shadow-[0_1px_3px_rgba(20,16,53,0.04),0_8px_24px_-12px_rgba(20,16,53,0.08)] hover:shadow-[0_1px_3px_rgba(20,16,53,0.04),0_24px_48px_-16px_rgba(138,125,255,0.18)] hover:border-purple/20 motion-safe:hover:-translate-y-1 transition-[box-shadow,transform,border-color] duration-300">
+                <div class="eyebrow-chip mb-5">Your Choice, Your Control</div>
                 <div class="flex items-center justify-between flex-wrap gap-4 mb-6">
                     <h2 class="text-4xl lg:text-5xl font-bold text-primaryText">Self-Host or Cloud</h2>
                     <div class="flex items-center gap-3">
@@ -174,8 +183,8 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 Either way, you get the same powerful SBOM and compliance document management, support for CycloneDX and SPDX formats, and seamless integrations with your existing tools. No vendor lock-in, no compromises.
                 </p>
                 <div class="flex gap-4">
-                    <a class="inline-block px-6 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium transition-all duration-200" href="https://app.sbomify.com">Try Cloud Free</a>
-                    <a class="inline-block px-6 py-3 bg-white border-2 border-gray-200 hover:border-[#8A7DFF] text-primaryText rounded-full font-medium transition-all duration-200" href="https://github.com/sbomify/sbomify">Self-Host</a>
+                    <a class="inline-flex items-center px-6 py-3 bg-purple hover:bg-purple-700 text-white rounded-full font-medium shadow-md shadow-purple/20 hover:shadow-lg hover:shadow-purple/30 motion-safe:hover:-translate-y-0.5 transition-[background-color,box-shadow,transform] duration-200" href="https://app.sbomify.com">Try Cloud Free</a>
+                    <a class="inline-flex items-center px-6 py-3 bg-white border-2 border-gray-200 hover:border-purple text-primaryText rounded-full font-medium motion-safe:hover:-translate-y-0.5 transition-[border-color,transform] duration-200" href="https://github.com/sbomify/sbomify">Self-Host</a>
                 </div>
             </section>
         </div>

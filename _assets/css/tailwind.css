@@ -20,9 +20,25 @@
 @tailwind base;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Offset anchors so they clear the sticky pill header */
+    scroll-padding-top: 6rem;
+  }
+
   body {
     color: #141035;
     font-family: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Inter Variable stylistic alternates: better i/l/g, single-storey a, etc. */
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+  }
+
+  ::selection {
+    background-color: rgba(138, 125, 255, 0.28);
+    color: inherit;
   }
 
   :focus-visible {
@@ -42,12 +58,14 @@
   h1, h2, h3, h4, h5, h6 {
     color: #141035;
     font-family: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+    text-wrap: balance;
   }
 
   h1 {
     font-size: 4.25rem; /* 68px */
     font-weight: 500;
     line-height: 4.875rem; /* 78px */
+    letter-spacing: -0.025em;
   }
 
   h2 {
@@ -55,6 +73,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
+    letter-spacing: -0.018em;
   }
 
   @media (min-width: 768px) {
@@ -63,12 +82,17 @@
     }
   }
 
+  h3 {
+    letter-spacing: -0.012em;
+  }
+
   p {
     font-family: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
     font-size: 0.875rem; /* 14px */
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
+    text-wrap: pretty;
   }
 
   @media (min-width: 768px) {
@@ -217,6 +241,79 @@
     -webkit-text-fill-color: transparent;
   }
 
+  /* Hero aurora — animated radial gradients drifting behind the hero text. */
+  .aurora {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    will-change: transform;
+    pointer-events: none;
+  }
+  .aurora-1 {
+    width: 32rem;
+    height: 32rem;
+    top: 2rem;
+    left: -4rem;
+    background: radial-gradient(circle at center, rgba(138, 125, 255, 0.55), rgba(138, 125, 255, 0) 70%);
+    animation: aurora-drift-1 20s ease-in-out infinite alternate;
+  }
+  .aurora-2 {
+    width: 38rem;
+    height: 38rem;
+    bottom: -8rem;
+    right: -6rem;
+    background: radial-gradient(circle at center, rgba(204, 88, 187, 0.4), rgba(204, 88, 187, 0) 70%);
+    animation: aurora-drift-2 26s ease-in-out infinite alternate;
+  }
+  .aurora-3 {
+    width: 28rem;
+    height: 28rem;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(circle at center, rgba(64, 89, 208, 0.3), rgba(64, 89, 208, 0) 70%);
+    animation: aurora-drift-3 24s ease-in-out infinite alternate;
+  }
+  @keyframes aurora-drift-1 {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    100% { transform: translate3d(8rem, 5rem, 0) scale(1.15); }
+  }
+  @keyframes aurora-drift-2 {
+    0%   { transform: translate3d(0, 0, 0) scale(1.1); }
+    100% { transform: translate3d(-6rem, -8rem, 0) scale(1); }
+  }
+  @keyframes aurora-drift-3 {
+    0%   { transform: translate3d(-50%, 0, 0) scale(1); }
+    100% { transform: translate3d(-50%, 4rem, 0) scale(1.2); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .aurora-1, .aurora-2, .aurora-3 { animation: none; }
+  }
+
+  /* Eyebrow chip — refined section-label component. */
+  .eyebrow-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8A7DFF;
+    background: rgba(138, 125, 255, 0.08);
+    border: 1px solid rgba(138, 125, 255, 0.2);
+  }
+  .eyebrow-chip::before {
+    content: "";
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 9999px;
+    background: #8A7DFF;
+    box-shadow: 0 0 0 3px rgba(138, 125, 255, 0.18);
+  }
+
   .divider {
     border: 0;
     height: 1px;
@@ -332,6 +429,7 @@
   font-size: 1.125rem; /* 18px */
   line-height: 1.7;
   margin-bottom: 1.5rem; /* 24px */
+  text-wrap: pretty;
 }
 
 @media (min-width: 768px) {

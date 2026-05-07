@@ -1,7 +1,12 @@
 {{ define "main" }}
 <div>
   <div class="bg-primaryBG relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-[#8A7DFF]/5 via-transparent to-transparent pointer-events-none"></div>
+    <!-- Animated aurora -->
+    <div aria-hidden="true" class="absolute inset-0 pointer-events-none">
+      <div class="aurora aurora-1"></div>
+      <div class="aurora aurora-2"></div>
+      <div class="aurora aurora-3"></div>
+    </div>
     <div class="relative px-5 py-16 lg:py-24 lg:px-24 max-w-7xl mx-auto">
       <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
         <span class="text-gradient">{{ .Title }}</span>

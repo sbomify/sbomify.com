@@ -1,6 +1,6 @@
 <header class="bg-primaryBG sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-6 py-4">
-    <div class="flex justify-between items-center bg-[#201B4C] rounded-full px-6 py-3 border border-[#37306B]">
+    <div class="flex justify-between items-center bg-primary-light rounded-full px-6 py-3 border border-primary-600">
       <div class="flex gap-10 items-center">
         <a href="/" class="hover:opacity-90 transition-opacity">
           {{ $logo := resources.Get "images/site/logo.svg" }}
@@ -17,7 +17,7 @@
           {{ partial "nav.html" . }}
         </div>
         <div class="hidden lg:block ml-2">
-          <a href="https://app.sbomify.com" class="px-6 py-2.5 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-medium text-sm transition-all duration-200 inline-block" onclick="posthog.capture('cta_click', { location: 'header', label: 'Sign Up / Log In' })">Sign Up / Log In</a>
+          <a href="https://app.sbomify.com" class="inline-block px-6 py-2.5 bg-purple hover:bg-purple-700 text-white rounded-full font-medium text-sm shadow-md shadow-purple/20 hover:shadow-lg hover:shadow-purple/30 motion-safe:hover:-translate-y-0.5 transition-[background-color,box-shadow,transform] duration-200" onclick="posthog.capture('cta_click', { location: 'header', label: 'Sign Up / Log In' })">Sign Up / Log In</a>
         </div>
         {{ partial "nav-mobile.html" . }}
       </div>

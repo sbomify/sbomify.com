@@ -1,8 +1,8 @@
-<div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-all group">
-    <div class="w-14 h-14 {{ .Get "icon_bg_class" }} rounded-2xl flex items-center justify-center {{ .Get "icon_text_class" }} mb-6 group-hover:scale-110 transition-transform duration-300">
+<div class="group bg-white p-8 rounded-3xl border border-gray-200/70 ring-1 ring-black/[0.02] shadow-[0_1px_3px_rgba(20,16,53,0.04),0_8px_24px_-12px_rgba(20,16,53,0.08)] hover:shadow-[0_1px_3px_rgba(20,16,53,0.04),0_24px_48px_-16px_rgba(138,125,255,0.18)] hover:border-purple/20 motion-safe:hover:-translate-y-1 transition-[box-shadow,transform,border-color] duration-300">
+    <div class="w-14 h-14 {{ .Get "icon_bg_class" }} rounded-2xl flex items-center justify-center {{ .Get "icon_text_class" }} mb-6 motion-safe:group-hover:scale-110 transition-transform duration-300">
         {{ if .Get "svg" }}{{ .Get "svg" | safeHTML }}{{ else }}{{ .Inner | safeHTML }}{{ end }}
     </div>
-    <h3 class="text-2xl font-bold text-[#201B4C] mb-4">{{ .Get "title" }}</h3>
+    <h3 class="text-2xl font-bold text-primary-light mb-4">{{ .Get "title" }}</h3>
     <p class="text-secondaryText leading-relaxed">
         {{ .Get "description" | safeHTML }}
     </p>
