@@ -41,6 +41,13 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
   }
 
+  /* Firefox legacy alias — autoprefixer also emits this from ::selection,
+     but we declare both explicitly so source ↔ compiled CSS stay 1:1. */
+  ::-moz-selection {
+    background-color: rgba(138, 125, 255, 0.28);
+    color: inherit;
+  }
+
   ::selection {
     background-color: rgba(138, 125, 255, 0.28);
     color: inherit;

@@ -201,17 +201,38 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
     function makeEl(tag, className, attrs) {
       var el = document.createElement(tag);
       if (className) el.className = className;
-      if (attrs) for (var k in attrs) el.setAttribute(k, attrs[k]);
+      if (attrs) {
+        var keys = Object.keys(attrs);
+        for (var i = 0; i < keys.length; i++) el.setAttribute(keys[i], attrs[keys[i]]);
+      }
       return el;
     }
 
+    /* Allow only https links to a known sbomify GitHub host on hrefs derived
+       from the API response — defends against javascript: / data: URLs and
+       redirects to unrelated origins. */
+    function safeGithubUrl(url) {
+      if (typeof url !== 'string') return null;
+      try {
+        var parsed = new URL(url);
+        if (parsed.protocol !== 'https:') return null;
+        if (parsed.hostname !== 'github.com' && parsed.hostname !== 'www.github.com') return null;
+        if (parsed.pathname.indexOf('/sbomify/sbomify') !== 0) return null;
+        return parsed.href;
+      } catch (e) {
+        return null;
+      }
+    }
+
     function renderRelease(data) {
-      var container = document.getElementById('gh-latest-version');
-      if (!container || !data || !data.tag_name) return;
+      var slot = document.getElementById('gh-latest-version');
+      if (!slot || !data || !data.tag_name) return;
+      var href = safeGithubUrl(data.html_url);
+      if (!href) return;
 
       var a = makeEl('a',
         'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple/10 border border-purple/20 hover:bg-purple/20 transition-colors group no-underline',
-        { href: data.html_url, target: '_blank', rel: 'noopener noreferrer' });
+        { href: href, target: '_blank', rel: 'noopener noreferrer' });
 
       var dot = makeEl('span', 'relative flex h-2 w-2', { 'aria-hidden': 'true' });
       dot.appendChild(makeEl('span', 'animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75'));
@@ -222,13 +243,13 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
       label.textContent = 'Release ' + data.tag_name;
       a.appendChild(label);
 
-      container.replaceChildren(a);
-      container.classList.remove('hidden');
+      slot.replaceChildren(a);
+      slot.classList.remove('hidden');
     }
 
     function renderStars(data) {
-      var container = document.getElementById('gh-star-cta');
-      if (!container || !data || data.stargazers_count === undefined) return;
+      var slot = document.getElementById('gh-star-cta');
+      if (!slot || !data || data.stargazers_count === undefined) return;
 
       var a = makeEl('a',
         'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-900 text-white hover:bg-gray-800 transition-colors no-underline group',
@@ -253,8 +274,8 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
       count.textContent = data.stargazers_count.toLocaleString();
       a.appendChild(count);
 
-      container.replaceChildren(a);
-      container.classList.remove('hidden');
+      slot.replaceChildren(a);
+      slot.classList.remove('hidden');
     }
 
     (window.requestIdleCallback || function(cb) { setTimeout(cb, 1); })(function() {
