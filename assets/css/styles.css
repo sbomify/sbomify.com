@@ -525,9 +525,14 @@ video {
 }
 
 html {
-    scroll-behavior: smooth;
     /* Offset anchors so they clear the sticky pill header */
     scroll-padding-top: 6rem;
+  }
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
 body {
@@ -2556,13 +2561,14 @@ a.button:hover {
     -webkit-text-fill-color: transparent;
   }
 
-/* Hero aurora — animated radial gradients drifting behind the hero text. */
+/* Hero aurora — animated radial gradients drifting behind the hero text.
+     Animation + GPU-promotion are gated behind prefers-reduced-motion: no-preference,
+     so reduced-motion users get static orbs without an idle compositor layer. */
 
 .aurora {
     position: absolute;
     border-radius: 9999px;
     filter: blur(80px);
-    will-change: transform;
     pointer-events: none;
   }
 
@@ -2572,7 +2578,6 @@ a.button:hover {
     top: 2rem;
     left: -4rem;
     background: radial-gradient(circle at center, rgba(138, 125, 255, 0.55), rgba(138, 125, 255, 0) 70%);
-    animation: aurora-drift-1 20s ease-in-out infinite alternate;
   }
 
 .aurora-2 {
@@ -2581,7 +2586,6 @@ a.button:hover {
     bottom: -8rem;
     right: -6rem;
     background: radial-gradient(circle at center, rgba(204, 88, 187, 0.4), rgba(204, 88, 187, 0) 70%);
-    animation: aurora-drift-2 26s ease-in-out infinite alternate;
   }
 
 .aurora-3 {
@@ -2591,7 +2595,15 @@ a.button:hover {
     left: 50%;
     transform: translateX(-50%);
     background: radial-gradient(circle at center, rgba(64, 89, 208, 0.3), rgba(64, 89, 208, 0) 70%);
-    animation: aurora-drift-3 24s ease-in-out infinite alternate;
+  }
+
+@media (prefers-reduced-motion: no-preference) {
+    .aurora {
+      will-change: transform;
+    }
+    .aurora-1 { animation: aurora-drift-1 20s ease-in-out infinite alternate; }
+    .aurora-2 { animation: aurora-drift-2 26s ease-in-out infinite alternate; }
+    .aurora-3 { animation: aurora-drift-3 24s ease-in-out infinite alternate; }
   }
 
 @keyframes aurora-drift-1 {
@@ -2607,10 +2619,6 @@ a.button:hover {
 @keyframes aurora-drift-3 {
     0%   { transform: translate3d(-50%, 0, 0) scale(1); }
     100% { transform: translate3d(-50%, 4rem, 0) scale(1.2); }
-  }
-
-@media (prefers-reduced-motion: reduce) {
-    .aurora-1, .aurora-2, .aurora-3 { animation: none; }
   }
 
 /* Eyebrow chip — refined section-label component. */
