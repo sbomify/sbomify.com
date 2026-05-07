@@ -285,6 +285,18 @@
     .aurora-2 { animation: aurora-drift-2 26s ease-in-out infinite alternate; }
     .aurora-3 { animation: aurora-drift-3 24s ease-in-out infinite alternate; }
   }
+
+  /* Globally respect prefers-reduced-motion for Tailwind's built-in keyframe
+     utilities. Tailwind doesn't auto-gate these, and our motion-safe: prefix
+     isn't picked up by purge inside JS string literals. */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-ping,
+    .animate-pulse,
+    .animate-spin,
+    .animate-bounce {
+      animation: none;
+    }
+  }
   @keyframes aurora-drift-1 {
     0%   { transform: translate3d(0, 0, 0) scale(1); }
     100% { transform: translate3d(8rem, 5rem, 0) scale(1.15); }
