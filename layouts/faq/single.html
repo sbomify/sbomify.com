@@ -9,7 +9,7 @@
         <span class="text-gradient">{{ .Title }}</span>
       </h1>
       {{ with .Params.plan }}
-      <span class="inline-block px-4 py-1.5 rounded-full text-sm font-semibold bg-[#8A7DFF]/20 text-[#8A7DFF] border border-[#8A7DFF]/30">{{ . }} plan</span>
+      <span class="inline-block px-4 py-1.5 rounded-full text-sm font-semibold bg-purple/20 text-purple border border-purple/30">{{ . }} plan</span>
       {{ end }}
     </div>
   </div>
@@ -19,9 +19,9 @@
       <!-- Breadcrumb -->
       <nav class="mb-8 text-sm text-gray-500" aria-label="Breadcrumb">
         <ol class="flex items-center gap-2">
-          <li><a href="/" class="hover:text-[#8A7DFF] transition-colors">Home</a></li>
+          <li><a href="/" class="hover:text-purple transition-colors">Home</a></li>
           <li class="text-gray-400">/</li>
-          <li><a href="/faq/" class="hover:text-[#8A7DFF] transition-colors">FAQ</a></li>
+          <li><a href="/faq/" class="hover:text-purple transition-colors">FAQ</a></li>
           <li class="text-gray-400">/</li>
           <li class="text-gray-700">{{ .Title }}</li>
         </ol>
@@ -34,10 +34,10 @@
 
       <!-- Bottom navigation -->
       <div class="mt-12 flex flex-wrap items-center justify-between gap-4">
-        <a href="/faq/" class="text-[#8A7DFF] hover:text-[#7A6DE5] font-semibold transition-colors no-underline">
+        <a href="/faq/" class="text-purple hover:text-purple-700 font-semibold transition-colors no-underline">
           &larr; All FAQ
         </a>
-        <a href="https://app.sbomify.com" class="px-6 py-3 bg-[#8A7DFF] hover:bg-[#7A6DE5] text-white rounded-full font-semibold transition-all duration-200 text-base no-underline">
+        <a href="https://app.sbomify.com" class="px-6 py-3 bg-purple hover:bg-purple-700 text-white rounded-full font-semibold transition-colors duration-200 text-base no-underline">
           Try sbomify Free
         </a>
       </div>

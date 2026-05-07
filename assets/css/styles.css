@@ -1552,10 +1552,6 @@ a.button:hover {
   border-color: rgb(138 125 255 / 0.2);
 }
 
-.border-\[\#8A7DFF\]\/30 {
-  border-color: rgb(138 125 255 / 0.3);
-}
-
 .border-blue-500 {
   --tw-border-opacity: 1;
   border-color: rgb(59 130 246 / var(--tw-border-opacity, 1));
@@ -1598,6 +1594,14 @@ a.button:hover {
 .border-purple-100 {
   --tw-border-opacity: 1;
   border-color: rgb(243 232 255 / var(--tw-border-opacity, 1));
+}
+
+.border-purple\/20 {
+  border-color: rgb(138 125 255 / 0.2);
+}
+
+.border-purple\/30 {
+  border-color: rgb(138 125 255 / 0.3);
 }
 
 .border-white {
@@ -1734,6 +1738,14 @@ a.button:hover {
   background-color: rgb(250 245 255 / var(--tw-bg-opacity, 1));
 }
 
+.bg-purple\/10 {
+  background-color: rgb(138 125 255 / 0.1);
+}
+
+.bg-purple\/20 {
+  background-color: rgb(138 125 255 / 0.2);
+}
+
 .bg-red-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));
@@ -1774,12 +1786,6 @@ a.button:hover {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.from-\[\#6C5CE7\] {
-  --tw-gradient-from: #6C5CE7 var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(108 92 231 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
 .from-\[\#8A7DFF\]\/10 {
   --tw-gradient-from: rgb(138 125 255 / 0.1) var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(138 125 255 / 0) var(--tw-gradient-to-position);
@@ -1801,6 +1807,12 @@ a.button:hover {
 .from-primaryBG\/0 {
   --tw-gradient-from: rgb(20 16 53 / 0) var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(20 16 53 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-purple-700 {
+  --tw-gradient-from: #7A6DE5 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(122 109 229 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
@@ -1835,16 +1847,16 @@ a.button:hover {
   --tw-gradient-to: #151236 var(--tw-gradient-to-position);
 }
 
-.to-\[\#8A7DFF\] {
-  --tw-gradient-to: #8A7DFF var(--tw-gradient-to-position);
-}
-
 .to-gray-50 {
   --tw-gradient-to: #f9fafb var(--tw-gradient-to-position);
 }
 
 .to-primaryBG\/40 {
   --tw-gradient-to: rgb(20 16 53 / 0.4) var(--tw-gradient-to-position);
+}
+
+.to-purple {
+  --tw-gradient-to: #8A7DFF var(--tw-gradient-to-position);
 }
 
 .to-transparent {
@@ -2506,14 +2518,32 @@ a.button:hover {
   transition-duration: 150ms;
 }
 
+.transition-\[border-color\2c box-shadow\] {
+  transition-property: border-color,box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .transition-\[border-color\2c transform\] {
   transition-property: border-color,transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
 
+.transition-\[box-shadow\2c border-color\] {
+  transition-property: box-shadow,border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .transition-\[box-shadow\2c transform\2c border-color\] {
   transition-property: box-shadow,transform,border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-\[filter\] {
+  transition-property: filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -3319,10 +3349,6 @@ a.button:hover {
   background-color: rgb(138 125 255 / 0.2);
 }
 
-.hover\:bg-\[\#8A7DFF\]\/30:hover {
-  background-color: rgb(138 125 255 / 0.3);
-}
-
 .hover\:bg-gray-800:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
@@ -3331,6 +3357,14 @@ a.button:hover {
 .hover\:bg-purple-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(122 109 229 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-purple\/20:hover {
+  background-color: rgb(138 125 255 / 0.2);
+}
+
+.hover\:bg-purple\/30:hover {
+  background-color: rgb(138 125 255 / 0.3);
 }
 
 .hover\:bg-white\/10:hover {
@@ -3349,11 +3383,6 @@ a.button:hover {
 .hover\:text-\[\#006097\]:hover {
   --tw-text-opacity: 1;
   color: rgb(0 96 151 / var(--tw-text-opacity, 1));
-}
-
-.hover\:text-\[\#7A6DE5\]:hover {
-  --tw-text-opacity: 1;
-  color: rgb(122 109 229 / var(--tw-text-opacity, 1));
 }
 
 .hover\:text-\[\#8A7DFF\]:hover {
@@ -3460,7 +3489,7 @@ a.button:hover {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
-.focus\:border-\[\#8A7DFF\]:focus {
+.focus\:border-purple:focus {
   --tw-border-opacity: 1;
   border-color: rgb(138 125 255 / var(--tw-border-opacity, 1));
 }
@@ -3476,7 +3505,7 @@ a.button:hover {
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
-.focus\:ring-\[\#8A7DFF\]\/20:focus {
+.focus\:ring-purple\/20:focus {
   --tw-ring-color: rgb(138 125 255 / 0.2);
 }
 
@@ -3491,14 +3520,19 @@ a.button:hover {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.group:hover .group-hover\:text-\[\#7A6DE5\] {
-  --tw-text-opacity: 1;
-  color: rgb(122 109 229 / var(--tw-text-opacity, 1));
-}
-
 .group:hover .group-hover\:text-\[\#8A7DFF\] {
   --tw-text-opacity: 1;
   color: rgb(138 125 255 / var(--tw-text-opacity, 1));
+}
+
+.group:hover .group-hover\:text-purple {
+  --tw-text-opacity: 1;
+  color: rgb(138 125 255 / var(--tw-text-opacity, 1));
+}
+
+.group:hover .group-hover\:text-purple-700 {
+  --tw-text-opacity: 1;
+  color: rgb(122 109 229 / var(--tw-text-opacity, 1));
 }
 
 .group:hover .group-hover\:text-white {
