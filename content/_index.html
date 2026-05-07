@@ -208,16 +208,18 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
       return el;
     }
 
-    /* Allow only https links to a known sbomify GitHub host on hrefs derived
-       from the API response — defends against javascript: / data: URLs and
-       redirects to unrelated origins. */
+    /* Allow only https links to the exact sbomify/sbomify GitHub repo on
+       hrefs derived from the API response — defends against javascript: /
+       data: URLs and redirects to unrelated origins (including sibling repos
+       like /sbomify/sbomify-evil that would slip past a prefix check). */
     function safeGithubUrl(url) {
       if (typeof url !== 'string') return null;
       try {
         var parsed = new URL(url);
         if (parsed.protocol !== 'https:') return null;
         if (parsed.hostname !== 'github.com' && parsed.hostname !== 'www.github.com') return null;
-        if (parsed.pathname.indexOf('/sbomify/sbomify') !== 0) return null;
+        var p = parsed.pathname;
+        if (p !== '/sbomify/sbomify' && p.indexOf('/sbomify/sbomify/') !== 0) return null;
         return parsed.href;
       } catch (e) {
         return null;
