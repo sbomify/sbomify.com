@@ -11,7 +11,7 @@ url: /faq/how-do-i-set-up-a-trust-center/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/trust_center_setup.webm" title="How to set up a Trust Center in sbomify" description="Step-by-step screencast showing how to enable and configure a Trust Center in sbomify." >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/trust_center_setup.webm" title="How to set up a Trust Center in sbomify" description="Step-by-step screencast showing how to enable and configure a Trust Center in sbomify." >}}
 
 ## Setting up a Trust Center
 

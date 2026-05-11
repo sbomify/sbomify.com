@@ -62,7 +62,7 @@ For organizations managing many components, sbomify provides centrally managed *
 
 In **Settings**, open the **Contacts** tab and click **Add Profile**. A profile contains one or more **Entities** (with manufacturer / supplier / author roles, name, email, phone, address, and website) and one or more **Contacts** on each entity (with author / security / technical roles). Toggle **Set as default** if this profile should apply to every component that does not override it.
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/profile_editing.webm" title="Creating a contact profile in sbomify" description="Walkthrough of creating a centrally managed contact profile in sbomify for NTIA/CISA compliance." >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/profile_editing.webm" title="Creating a contact profile in sbomify" description="Walkthrough of creating a centrally managed contact profile in sbomify for NTIA/CISA compliance." >}}
 
 ### Using profiles
 
@@ -89,7 +89,7 @@ sbomify-action will fetch the profile metadata from sbomify and apply it to the 
 
 sbomify ships a built-in **NTIA Minimum Elements (2021)** plugin that grades every uploaded SBOM against the seven required fields and surfaces the result on the SBOM detail page. Enable it from the **Plugins** page in your workspace sidebar:
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/plugin_enablement_ntia-minimum-elements-2021.webm" title="Enabling the NTIA Minimum Elements plugin in sbomify" description="Step-by-step screencast showing how to enable the NTIA Minimum Elements (2021) compliance plugin in sbomify." >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/plugin_enablement_ntia-minimum-elements-2021.webm" title="Enabling the NTIA Minimum Elements plugin in sbomify" description="Step-by-step screencast showing how to enable the NTIA Minimum Elements (2021) compliance plugin in sbomify." >}}
 
 ## What gets added
 

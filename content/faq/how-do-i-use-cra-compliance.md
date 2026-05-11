@@ -10,7 +10,7 @@ url: /faq/how-do-i-use-cra-compliance/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/cra_compliance.webm" title="How to use the CRA Compliance Wizard in sbomify" description="Screencast walking through the sbomify CRA Compliance Wizard from scope screening through the five-step assessment to bundle export." >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/cra_compliance.webm" title="How to use the CRA Compliance Wizard in sbomify" description="Screencast walking through the sbomify CRA Compliance Wizard from scope screening through the five-step assessment to bundle export." >}}
 
 ## Plan availability
 

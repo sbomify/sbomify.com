@@ -10,7 +10,7 @@ url: /faq/how-do-i-use-vex/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/vex_upload.webm" title="How VEX appears alongside an SBOM in sbomify" description="Screencast showing a CycloneDX VEX artifact rendered next to its SBOM on a sbomify component, with the colour-coded VEX and SBOM badges in the BOMs table." >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/vex_upload.webm" title="How VEX appears alongside an SBOM in sbomify" description="Screencast showing a CycloneDX VEX artifact rendered next to its SBOM on a sbomify component, with the colour-coded VEX and SBOM badges in the BOMs table." >}}
 
 ## The problem VEX solves
 

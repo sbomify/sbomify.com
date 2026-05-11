@@ -83,7 +83,7 @@ Once attached, two badges render on the SBOM detail page (Components → compone
 - **Signed** (green padlock) — the SBOM has a stored `signature_blob_key`.
 - **Provenance** (blue shield) — the SBOM has a stored `provenance_blob_key`.
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/document_signatures.webm" title="Signed and Provenance badges on a sbomify SBOM detail page" description="Step-by-step screencast walking from Components into the SBOM detail page where the Signed and Provenance badges render once a signature and a provenance attestation are attached via the API." >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/document_signatures.webm" title="Signed and Provenance badges on a sbomify SBOM detail page" description="Step-by-step screencast walking from Components into the SBOM detail page where the Signed and Provenance badges render once a signature and a provenance attestation are attached via the API." >}}
 
 The badges are visible to authenticated users in the workspace. The same fields (`signature_blob_key`, `signature_type`, `provenance_blob_key`) are exposed in `SBOMResponseSchema` so external pipelines querying the API can tell at a glance whether either artefact is present.
 

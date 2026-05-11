@@ -10,7 +10,7 @@ url: /faq/how-do-i-create-a-software-release/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/release_creation.webm" title="How to create a software release in sbomify" description="Step-by-step screencast showing how to create a product release in sbomify by linking component SBOMs." >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/release_creation.webm" title="How to create a software release in sbomify" description="Step-by-step screencast showing how to create a product release in sbomify by linking component SBOMs." >}}
 
 ## Creating a product release
 
