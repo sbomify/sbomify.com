@@ -18,7 +18,7 @@ This website provides:
 - /features/ - Product features overview
 - /features/trust-center/ - Trust Center for sharing security artifacts
 - /features/integrations/ - CI/CD integrations (GitHub, GitLab, Bitbucket)
-- /features/sbom-hierarchy/ - Product, Project, Component hierarchy
+- /features/sbom-hierarchy/ - Product, Component, Release hierarchy
 - /pricing/ - Pricing plans (Community, Business, Enterprise)
 - /blog/ - Technical articles and announcements
 - /resources/ - SBOM tools directory and lifecycle overview
