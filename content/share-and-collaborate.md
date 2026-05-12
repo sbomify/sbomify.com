@@ -22,7 +22,7 @@ Both CycloneDX and SPDX formats are fully supported.
 
 ## Hierarchical Organization
 
-Most real-world products are composed of multiple backend services, frontend components, and infrastructure, each with its own SBOM. sbomify organizes these through a hierarchy of **Products**, **Projects**, and **Components**, reflecting how your software is actually structured.
+Most real-world products are composed of multiple backend services, frontend components, and infrastructure, each with its own SBOM. sbomify organizes these by grouping **Components** directly under **Products**, reflecting how your software is actually structured.
 
 <div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
     {{< d2 "sbom-hierarchy" >}}

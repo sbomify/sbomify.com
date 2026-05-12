@@ -21,4 +21,4 @@ To delete a workspace in sbomify:
 3. Expand the Danger Zone and click **Delete Workspace**
 4. In the confirmation modal, type `delete` and click **Delete Workspace**
 
-This action is **permanent** and cannot be undone. All data associated with the workspace will be deleted, including products, projects, components, SBOMs, and documents.
+This action is **permanent** and cannot be undone. All data associated with the workspace will be deleted, including products, components, SBOMs, and documents.

@@ -9,22 +9,6 @@ product: Product SBOM {
   }
 }
 
-project: Project SBOM(s) {
-  class: group
-
-  Backend: {
-    class: accent
-  }
-
-  IoT Device: {
-    class: accent
-  }
-
-  Compliance: {
-    class: accent
-  }
-}
-
 component: Component SBOM(s) {
   class: group
 
@@ -53,39 +37,27 @@ component: Component SBOM(s) {
   }
 }
 
-# Connections
-project.Backend -> product.Smart Thermostat: Project SBOM {
+# Connections — components attach directly to the product
+component.Node SBOM -> product.Smart Thermostat: {
   class: flow-pink
 }
 
-component.Node SBOM -> project.Backend: {
+component.Python SBOM -> product.Smart Thermostat: {
   class: flow-pink
 }
 
-component.Python SBOM -> project.Backend: {
+component.Docker SBOM -> product.Smart Thermostat: {
   class: flow-pink
 }
 
-component.Docker SBOM -> project.Backend: {
+component.Yocto SBOM -> product.Smart Thermostat: {
   class: flow-pink
 }
 
-component.Yocto SBOM -> project.IoT Device: {
+component.SOC 2 Type II -> product.Smart Thermostat: {
   class: flow-pink
 }
 
-component.SOC 2 Type II -> project.Compliance: {
-  class: flow-pink
-}
-
-component.CE Certificate -> project.Compliance: {
-  class: flow-pink
-}
-
-project.IoT Device -> product.Smart Thermostat: Project SBOM {
-  class: flow-pink
-}
-
-project.Compliance -> product.Smart Thermostat: {
+component.CE Certificate -> product.Smart Thermostat: {
   class: flow-pink
 }
