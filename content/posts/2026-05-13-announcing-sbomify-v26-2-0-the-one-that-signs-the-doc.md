@@ -19,11 +19,11 @@ If you are putting a product on the EU market under the CRA, you need a [Declara
 
 With v26.2.0, you can produce one inside sbomify, end to end. The CRA Compliance Wizard now covers the full workflow:
 
-1. **Scope screening.** Figure out whether your product is in scope. *(shipped in v26.1.0)*
-2. **Fix guidance.** Resolve any SBOM gaps that would block conformity. *(shipped in v26.1.0)*
-3. **EN 18031 opt-in.** If your product is in scope for the harmonised radio equipment standards, layer EN 18031-1/2/3 assessment on top. *(new in v26.2.0)*
-4. **Sign the DoC.** Generate the Declaration of Conformity, capture a manufacturer signature directly in the browser (no DocuSign required), and export it as a PDF. Optionally seal the whole bundle with a sigstore signature for cryptographic provenance. *(new in v26.2.0)*
-5. **Publish.** The resulting DoC is available on your product's public page, ready to share with customers and regulators with a single link. *(new in v26.2.0)*
+1. **Scope screening.** Figure out whether your product is in scope. _(shipped in v26.1.0)_
+2. **Fix guidance.** Resolve any SBOM gaps that would block conformity. _(shipped in v26.1.0)_
+3. **EN 18031 opt-in.** If your product is in scope for the harmonised radio equipment standards, layer EN 18031-1/2/3 assessment on top. _(new in v26.2.0)_
+4. **Sign the DoC.** Generate the Declaration of Conformity, capture a manufacturer signature directly in the browser (no DocuSign required), and export it as a PDF. Optionally seal the whole bundle with a sigstore signature for cryptographic provenance. _(new in v26.2.0)_
+5. **Publish.** The resulting DoC is available on your product's public page, ready to share with customers and regulators with a single link. _(new in v26.2.0)_
 
 We have also added a **stale-assessment guard**. If your SBOM has been updated since the last CRA assessment, the wizard surfaces a banner so you do not accidentally publish a DoC against outdated evidence.
 

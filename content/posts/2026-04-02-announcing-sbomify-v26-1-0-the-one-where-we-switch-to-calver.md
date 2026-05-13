@@ -23,7 +23,7 @@ That is the only "breaking change" in this release, and it only matters if you h
 
 The headline feature of v26.1.0 is the new **CRA Compliance Wizard**, a guided workflow for assessing your readiness against the [EU Cyber Resilience Act](/compliance/eu-cra/).
 
-The CRA starts biting in 2027, and the most common question we get from device manufacturers is some variation of *"how do I even know if my product is in scope, and what do I need to do about it?"* The wizard walks you through that, step by step:
+The CRA starts biting in 2027, and the most common question we get from device manufacturers is some variation of _"how do I even know if my product is in scope, and what do I need to do about it?"_ The wizard walks you through that, step by step:
 
 1. **Scope screening.** Figure out whether your product is in scope for the CRA at all, and if so, whether it falls under the standard, important, or critical category.
 2. **Fix guidance.** When the BSI plugin flags missing or malformed fields in your SBOM, the wizard tells you exactly which fields need attention and where, rather than just handing you a failed assessment.
