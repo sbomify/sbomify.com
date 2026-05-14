@@ -57,7 +57,7 @@ Most of the new variables control build provenance features that are disabled by
 
 **`do_create_spdx`** — Similar in purpose to its SPDX 2.2 counterpart, but the output format and data model are very different. It creates an `ObjSet` (object set), a `software_Package` element for the recipe, a `Build` element representing the recipe's build, links source files as `hasInput` relationships on the `Build`, links produced packages as `hasOutput` relationships on the `Build`, adds license information using the `simpleLicensing` profile, and processes CVE data to create VEX relationship elements. The per-recipe data is written as individual JSON-LD files to the deploy directory.
 
-**`do_create_package_spdx`** — A new task (not present in SPDX 2.2) that creates SPDX data for each individual package, including file-level detail for packaged files with checksums.
+**`do_create_package_spdx`** — This task replaces `do_create_runtime_spdx` from SPDX 2.2 and creates SPDX data for each individual package, including file-level detail for packaged files with checksums and runtime dependencies.
 
 **`do_create_image_spdx` / `do_create_image_sbom`** — The image-level task merges all per-recipe JSON-LD documents into a single output file. The merging algorithm loads the image recipe's own SPDX data, then for each package included in the image loads its SPDX document and its recipe's SPDX document, merges all objects into a single object set deduplicating by SPDX ID, and serializes the merged object set as a single JSON-LD document. The result is a single `IMAGE-MACHINE.spdx.json` file in `tmp/deploy/images/MACHINE/`.
 
@@ -88,7 +88,7 @@ SPDX_PACKAGE_SUPPLIER_name = "Acme Corporation"
 SPDX_PACKAGE_SUPPLIER_type = "organization"
 ```
 
-All of these provenance features are disabled by default because they make the SPDX output non-reproducible. In a CI/CD environment where reproducibility of the SPDX metadata is less important than traceability, you would enable the ones relevant to your compliance requirements.
+All of these provenance features are disabled by default because it is not feasible for the core project to guess the correct values that should be provided. If desired, you should enable the ones relevant to your compliance requirements.
 
 ## The Supporting Libraries
 
@@ -98,9 +98,9 @@ All of these provenance features are disabled by default because they make the S
 
 ## The Size Question
 
-A compressed SPDX 3.0 document for a standard Styhead distro can be around 250 MB compressed and roughly 2 GB uncompressed. This is partly because the single-document approach includes everything, and partly because the JSON-LD format with its `@context` declarations and full IRIs is more verbose than SPDX 2.2's simpler JSON.
+A compressed SPDX 3.0 document for a standard Styhead distro can be around 250 MB compressed and roughly 2 GB uncompressed. This is largely because the single-document approach includes everything in one place rather than splitting it across many smaller files.
 
-It is also easy to generate SPDX 3.0 output that is larger than the deliverable it describes, because compilers are very good at compressing source code into small binaries. The SBOM that describes a 50 MB root filesystem might be 500 MB of structured data.
+It is easy to generate SPDX 3.0 output that is larger than the deliverable it describes, because compilers are very good at compressing source code into smaller binaries. The SBOM that describes a 50 MB root filesystem might be 500 MB of structured data.
 
 If you are generating a new SBOM with every release build (as you should be for traceability and compliance), you need a storage strategy for these large files.
 
@@ -116,7 +116,7 @@ INHERIT:remove = "create-spdx"
 INHERIT += "create-spdx-3.0"
 ```
 
-SPDX 2.2 has broader tooling support today, while SPDX 3.0 offers richer data and a more future-proof format. There are no plans to backport SPDX 3.0 support to older Yocto releases. The implementation is invasive and touches many parts of the build system.
+SPDX 2.2 has broader tooling support today, while SPDX 3.0 offers richer data and a more future-proof format. However, due to demand, SPDX 3.0 was backported to the Yocto 5.0 (styhead) LTS release, and thus should be available to more users. Additionally, starting with the Yocto 6.0 (wrynose) LTS release, SPDX 2.2 support has been removed so SPDX 3.0 is the only option.
 
 ---
 
