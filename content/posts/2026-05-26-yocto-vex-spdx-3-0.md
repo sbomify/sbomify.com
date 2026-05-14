@@ -98,34 +98,9 @@ The output of this script feeds back into the CVE status data, which in turn flo
 
 ## VEX in Practice: What Shows Up in the Output
 
-In the final SPDX 3.0 document, a patched CVE might appear as:
+In the final SPDX 3.0 document, each CVE shows up as a `security_Vulnerability` element (carrying the CVE identifier and any external references) plus one of the VEX relationship subtypes covered above (`VexFixedVulnAssessmentRelationship`, `VexAffectedVulnAssessmentRelationship`, or `VexNotAffectedVulnAssessmentRelationship`) linking that vulnerability to the affected package. The relationship element also carries the detail string and human-readable description originally captured from `CVE_STATUS`.
 
-```json
-{
-  "@type": "security_VexFixedVulnAssessmentRelationship",
-  "security_vexVersion": "...",
-  "from": "urn:spdx:...:vulnerability-CVE-2023-50495",
-  "to": ["urn:spdx:...:package-ncurses"],
-  "relationshipType": "fixedIn",
-  "security_assessedElement": "urn:spdx:...:package-ncurses"
-}
-```
-
-And the corresponding vulnerability element:
-
-```json
-{
-  "@type": "security_Vulnerability",
-  "@id": "urn:spdx:...:vulnerability-CVE-2023-50495",
-  "name": "CVE-2023-50495",
-  "externalIdentifier": [{
-    "externalIdentifierType": "cve",
-    "identifier": "CVE-2023-50495"
-  }]
-}
-```
-
-This means that any tool capable of reading SPDX 3.0 can extract a complete picture of which CVEs affect your image, which have been patched, and which have been assessed and dismissed — all from a single document.
+The upshot is that any tool capable of reading SPDX 3.0 can extract a complete picture of which CVEs affect your image, which have been patched, and which have been assessed and dismissed — all from a single document.
 
 ## Contrast: VEX in SPDX 2.2 vs. SPDX 3.0
 
@@ -134,6 +109,13 @@ With SPDX 2.2, you get an SBOM that describes your software components, but vuln
 With SPDX 3.0, vulnerability assessments are first-class citizens in the SBOM. The security profile provides typed elements for vulnerabilities and VEX relationships, and the Yocto implementation populates these automatically from the same `CVE_STATUS` data that `cve-check` uses. The result is a single document that answers both "what is in my image?" and "which CVEs affect it, and what is their status?"
 
 For teams subject to regulatory requirements like the [EU Cyber Resilience Act](/compliance/eu-cra/), having integrated VEX data in the SBOM significantly simplifies compliance workflows.
+
+## A Note on Yocto 6.0 (Wrynose)
+
+Two changes are worth flagging for anyone tracking the current direction of the project:
+
+1. **`cve_check.bbclass` has been removed.** The `CVE_*` variables (`CVE_PRODUCT`, `CVE_VERSION`, `CVE_STATUS`, and friends) remain in the metadata and are still consumed by the SPDX class, so the recipe-level inputs described above continue to work as before.
+2. **CVE scanning has moved to [`sbom-cve-check`](https://sbom-cve-check.readthedocs.io/en/latest/sbom.html).** Instead of scanning the build tree, the project now runs CVE checks against the generated SBOM itself. The result is a workflow where the SBOM is the source of truth for vulnerability assessment.
 
 ---
 
