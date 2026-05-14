@@ -98,7 +98,7 @@ All of these provenance features are disabled by default because it is not feasi
 
 ## The Size Question
 
-A compressed SPDX 3.0 document for a standard Styhead distro can be around 250 MB compressed and roughly 2 GB uncompressed. This is largely because the single-document approach includes everything in one place rather than splitting it across many smaller files.
+A compressed SPDX 3.0 document for a standard Styhead distro can be around 250 MB compressed and roughly 2 GB uncompressed. This is partly because the single-document approach includes everything, and partly because the JSON-LD format with its `@context` declarations and full IRIs is more verbose than SPDX 2.2's simpler JSON.
 
 It is easy to generate SPDX 3.0 output that is larger than the deliverable it describes, because compilers are very good at compressing source code into smaller binaries. The SBOM that describes a 50 MB root filesystem might be 500 MB of structured data.
 
