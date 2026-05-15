@@ -30,11 +30,10 @@ The latest versions of both formats (SPDX 3.0, which is the current version, and
 Instead of merging SBOMs, use sbomify's [hierarchy](/faq/how-do-products-work-in-sbomify/) to link them together:
 
 - Each repository gets its own **component** with its own SBOM
-- Components are grouped into **projects** (e.g. "Backend", "Frontend")
-- Projects roll up into **products** (e.g. "My App")
+- Components are grouped directly under **products** (e.g. "My App")
 - **Releases** snapshot specific SBOM versions across the product
 
-This preserves full context - you always know which component a dependency belongs to, which project it's part of, and which product release it shipped in. Customers and auditors can drill down to any level of detail, and you can share the full product SBOM or individual component SBOMs as needed.
+This preserves full context - you always know which component a dependency belongs to and which product release it shipped in. Customers and auditors can drill down to any level of detail, and you can share the full product SBOM or individual component SBOMs as needed.
 
 ## Further reading
 
