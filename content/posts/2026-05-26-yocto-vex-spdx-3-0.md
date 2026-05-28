@@ -27,7 +27,6 @@ Before getting to the SPDX output, it helps to understand the CVE infrastructure
 **`CVE_STATUS`** — A per-CVE variable flag that records the status of individual CVEs for a recipe. Each flag entry encodes a status mapping, a detail string, and an optional description:
 
 ```bash
-CVE_STATUS[CVE-2023-50495] = "backported-patch: Fix applied in our layer"
 CVE_STATUS[CVE-2022-12345] = "not-applicable-config: Feature not enabled in our build"
 ```
 
