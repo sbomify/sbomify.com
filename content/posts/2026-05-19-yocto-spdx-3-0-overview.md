@@ -125,5 +125,5 @@ SPDX 2.2 has broader tooling support today, while SPDX 3.0 offers richer data an
 - Part 1: [How Yocto Generates SBOMs Behind the Scenes](/2026/05/05/yocto-sbom-deep-dive-introduction/)
 - Part 2: [A Deep Dive into Yocto's SPDX 2.2 Pipeline](/2026/05/12/yocto-spdx-2-2-pipeline/)
 - Part 3: SPDX 3.0 in Yocto: What Changed and Why It Matters _(this post)_
-- Part 4: VEX in the SBOM: How Yocto Embeds Vulnerability Assessments _(coming soon)_
+- Part 4: [VEX in the SBOM: How Yocto Embeds Vulnerability Assessments](/2026/05/26/yocto-vex-spdx-3-0/)
 - Part 5: Yocto SBOM in Production: Configuration, Tooling, and What's Still Missing _(coming soon)_
