@@ -16,7 +16,7 @@ faq:
   - question: "What is a Trust Center for SBOM sharing?"
     answer: "A Trust Center is a branded, self-service portal where software vendors publish their SBOMs and compliance documents (such as SOC 2 reports, ISO 27001 certificates, and pentest summaries) for customers to access. sbomify's Trust Center can be hosted on the vendor's own domain and provides always-current SBOMs without requiring manual email exchanges."
   - question: "How does SBOM hierarchy help buyers understand complex software?"
-    answer: "Modern software products often consist of multiple services, written in different languages, with separate dependency trees. SBOM hierarchy maps this structure – product to project to individual components – giving buyers a clear picture of how a complex product is composed rather than presenting a single flat list of thousands of dependencies."
+    answer: "Modern software products often consist of multiple services, written in different languages, with separate dependency trees. SBOM hierarchy maps this structure – product to individual components – giving buyers a clear picture of how a complex product is composed rather than presenting a single flat list of thousands of dependencies."
   - question: "Can sbomify monitor vendor SBOMs for new vulnerabilities?"
     answer: "Yes. When SBOMs are ingested into sbomify, the platform continuously cross-references every component against vulnerability databases including Google OSV. When a new vulnerability is disclosed that affects a component in a vendor's SBOM, the buyer is alerted – even if the vendor hasn't communicated the issue yet."
   - question: "What should buyers look for when evaluating vendor SBOM practices?"
@@ -58,8 +58,7 @@ Modern software products are rarely monolithic. A typical SaaS product might con
 sbomify's [SBOM hierarchy](/features/sbom-hierarchy/) maps this complexity with a clear structure:
 
 - **Product** – The top-level entity (e.g., "Acme Platform v3.2")
-- **Projects** – Individual services or components within the product (e.g., "API Service," "Web Frontend," "Auth Service")
-- **Components** – The actual dependencies within each project
+- **Components** – The individual services, deployable units, or dependencies within the product (e.g., "API Service," "Web Frontend," "Auth Service")
 
 This hierarchy gives buyers a structured view of software composition rather than a single flat list of thousands of entries. It answers questions like "which service uses this vulnerable library?" and "how many different components in this product use Log4j?" – questions that are critical during incident response.
 

@@ -18,7 +18,7 @@ faq:
   - question: "How do vendors share SBOMs with customers?"
     answer: "sbomify's Trust Center is a branded, self-service portal that vendors host on their own domain. Customers access current SBOMs and compliance documents (SOC 2 reports, ISO 27001 certificates, pentest summaries) directly, without email requests. SBOMs update automatically with each release because they're generated and published in CI/CD."
   - question: "Can sbomify handle products with multiple services or languages?"
-    answer: "Yes. sbomify's SBOM hierarchy organizes SBOMs at three levels: product, project, and component. A product like 'Acme Platform v3.2' can contain projects for each service (API, frontend, auth service), each with its own dependency tree and technology stack. This gives both vendors and their customers a structured view of complex software composition."
+    answer: "Yes. sbomify's SBOM hierarchy organizes SBOMs across two levels: product and component. A product like 'Acme Platform v3.2' can contain a component for each service (API, frontend, auth service), each with its own dependency tree and technology stack. This gives both vendors and their customers a structured view of complex software composition."
   - question: "Is sbomify self-hostable?"
     answer: "Yes. sbomify can be self-hosted for organizations that need to keep SBOM data within their own infrastructure. The sbomify GitHub Action is fully open source, and the platform supports on-premises deployment for teams with strict data residency or air-gapped environment requirements."
 date: 2024-04-03
@@ -75,13 +75,12 @@ Real-world software products are rarely a single application with a single depen
 - Infrastructure definitions (Terraform, Helm charts)
 - Shared libraries used across services
 
-sbomify's [SBOM hierarchy](/features/sbom-hierarchy/) organizes this complexity with a three-level structure:
+sbomify's [SBOM hierarchy](/features/sbom-hierarchy/) organizes this complexity with a two-level structure:
 
 - **Product** – The top-level entity that customers purchase or use (e.g., "Acme Platform v3.2")
-- **Projects** – Individual services or deployable units within the product
-- **Components** – The actual dependencies within each project
+- **Components** – The individual services, deployable units, or dependencies that make up the product
 
-This structure means that both vendors and customers can navigate the SBOM at the right level of detail – product-level for procurement decisions, project-level for service-specific risk assessment, component-level for vulnerability investigation.
+This structure means that both vendors and customers can navigate the SBOM at the right level of detail – product-level for procurement decisions and component-level for service-specific risk assessment and vulnerability investigation.
 
 ## Trust Center: Professional SBOM Distribution
 
@@ -120,7 +119,7 @@ The path from no SBOMs to fully automated SBOM management is straightforward:
 
 1. **Add the sbomify GitHub Action** to your CI/CD workflow. It detects your stack and generates SBOMs automatically.
 2. **Connect to sbomify** for enrichment, vulnerability monitoring, and centralized management.
-3. **Organize with SBOM hierarchy** – Map your product's services and components into the product → project → component structure.
+3. **Organize with SBOM hierarchy** – Map your product's services and dependencies into the product → component structure.
 4. **Set up your Trust Center** – Give customers self-service access to your SBOMs and compliance documents.
 5. **Enable attestation** – Pair with GitHub's `attest-build-provenance` action for cryptographic SBOM verification.
 
