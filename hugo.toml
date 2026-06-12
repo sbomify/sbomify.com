@@ -103,3 +103,10 @@ ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfi
 [build]
   [build.buildStats]
     enable = false
+
+# Recent Hugo releases tightened the default `security.allowContent` policy to
+# deny `text/html` content files. This site intentionally authors several pages
+# as raw .html (homepage, pricing, about, integrations, trust-center), so we
+# restore the previous permissive behaviour here.
+[security]
+  allowContent = ['.*']
