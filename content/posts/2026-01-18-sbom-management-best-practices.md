@@ -62,7 +62,7 @@ Generated SBOMs need a durable, queryable storage location. Approaches range fro
 
 **Artifact repository.** Store SBOMs alongside the build artifacts they describe. If you use a container registry, attach SBOMs to container images using OCI artifacts. If you use a package registry, publish SBOMs as companion files.
 
-**Dedicated SBOM platform.** Use a purpose-built platform like [sbomify](https://sbomify.com) that ingests, indexes, and monitors SBOMs across your portfolio. sbomify organizes SBOMs in a hierarchy of Products, Projects, and Components – matching how software is actually built – and provides centralized visibility, search, and policy enforcement. Its [Trust Center](/features/trust-center/) feature also handles distribution to customers and auditors.
+**Dedicated SBOM platform.** Use a purpose-built platform like [sbomify](https://sbomify.com) that ingests, indexes, and monitors SBOMs across your portfolio. sbomify organizes SBOMs in a hierarchy of Products and Components – matching how software is actually built – and provides centralized visibility, search, and policy enforcement. Its [Trust Center](/features/trust-center/) feature also handles distribution to customers and auditors.
 
 **Version control.** Each SBOM should be versioned in lockstep with the software it describes. When version 2.1.3 of your application is released, the SBOM for 2.1.3 should be generated and stored. Previous versions should be retained for audit and incident response purposes.
 

@@ -47,15 +47,14 @@ In industries like online gambling and e-commerce, where applications change rap
 
 At [sbomify](https://sbomify.com), we understand that creating SBOMs is just the first step. Managing them, especially for a portfolio of applications, can quickly become **time-consuming** and **error-prone**. That's why we developed features to help you **organize**, **review**, and **aggregate** your SBOM data effectively.
 
-#### SBOM Hierarchy: Products, Projects, and Components
+#### SBOM Hierarchy: Products and Components
 
 Our platform offers a **hierarchical approach** to managing SBOMs:
 
-- **Component-Level**: Each SBOM represents the building blocks (think individual libraries or modules)
-- **Project-Level**: Projects aggregate multiple SBOMs. For instance, if your e-commerce platform consists of a front-end, back-end, and payment gateway, each part has its own SBOM, but you can view them collectively under the same project
-- **Product-Level**: For organizations that have multiple projects, such as a gaming platform, payment processor, and marketing tool, you can roll up all those SBOMs into one product-level view
+- **Component-Level**: Each SBOM represents the building blocks (think individual libraries, services, or modules)
+- **Product-Level**: Products aggregate multiple components. For instance, if your e-commerce platform consists of a front-end, back-end, and payment gateway, each part has its own component SBOM, but you can view them collectively under the same product
 
-**Why does this matter?** Because PCI DSS isn't limited to just one application, it concerns your entire environment handling payment data. By grouping and reviewing SBOMs at different levels, you can quickly identify shared vulnerabilities or outdated components **across** your organization.
+**Why does this matter?** Because PCI DSS isn't limited to just one application, it concerns your entire environment handling payment data. By grouping and reviewing SBOMs at both levels, you can quickly identify shared vulnerabilities or outdated components **across** your organization.
 
 [Learn more about SBOM hierarchy](https://sbomify.com/features/sbom-hierarchy/)
 
@@ -85,7 +84,7 @@ Being proactive now by implementing SBOMs and centralizing their management will
 
 PCI DSS 4.0 sets the bar high for payment security, requiring organizations to be vigilant, transparent, and accountable in how they handle cardholder data. **SBOMs are a powerful tool** in meeting these requirements because they give security teams the visibility and traceability they need to manage vulnerabilities and prove compliance.
 
-[sbomify](https://sbomify.com) goes a step further by making **SBOM management simpler**, offering product, project, and component-level views and a central hub for consolidating all your SBOMs. If you operate in online gambling or e-commerce, where the risks and compliance stakes are especially high, adopting a single, centralized platform to manage your SBOMs is no longer optional, it's essential.
+[sbomify](https://sbomify.com) goes a step further by making **SBOM management simpler**, offering product- and component-level views and a central hub for consolidating all your SBOMs. If you operate in online gambling or e-commerce, where the risks and compliance stakes are especially high, adopting a single, centralized platform to manage your SBOMs is no longer optional, it's essential.
 
 Ready to take control of your software supply chain and secure your path to PCI DSS 4.0 compliance?
 [Get started with sbomify](https://sbomify.com/)
