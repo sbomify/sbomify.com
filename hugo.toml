@@ -39,8 +39,20 @@ ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfi
   baseName = "feed"
   mediaType = "application/rss+xml"
 
+# llms.txt (index) and llms-full.txt (full content) per https://llmstxt.org
+# Rendered from layouts/home.llms.txt and layouts/home.llmsfull.txt
+[outputFormats.llms]
+  baseName = "llms"
+  mediaType = "text/plain"
+  isPlainText = true
+
+[outputFormats.llmsfull]
+  baseName = "llms-full"
+  mediaType = "text/plain"
+  isPlainText = true
+
 [outputs]
-  home = ["HTML", "RSS"]
+  home = ["HTML", "RSS", "llms", "llmsfull"]
   section = ["HTML"]
 
 # Sitemap (replaces jekyll-sitemap)

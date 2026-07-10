@@ -1,0 +1,43 @@
+# {{ .Site.Title }} — Full Content
+
+> {{ .Site.Params.description }}
+
+This file contains the full text of {{ .Site.BaseURL }} in Markdown, intended for consumption by large language models. A shorter index is available at {{ "llms.txt" | absURL }}
+{{- $sections := slice
+  (dict "title" "Key Pages" "key" "")
+  (dict "title" "Features" "key" "features")
+  (dict "title" "Compliance" "key" "compliance")
+  (dict "title" "Guides" "key" "guides")
+  (dict "title" "FAQ" "key" "faq")
+  (dict "title" "Case Studies" "key" "case-studies")
+  (dict "title" "Blog" "key" "posts")
+}}
+{{- range $sections }}
+{{- $pages := where site.RegularPages "Section" .key }}
+{{- if eq .key "posts" }}{{ $pages = $pages.ByDate.Reverse }}{{ end }}
+{{- if ne .key "" }}
+{{- with site.GetPage (printf "/%s" .key) }}{{ $pages = union (slice .) $pages }}{{ end }}
+{{- end }}
+{{- range $pages }}
+
+---
+
+# {{ .Title }}
+
+URL: {{ .Permalink }}
+{{- if eq .Section "posts" }}
+Date: {{ .Date.Format "2006-01-02" }}
+{{- end }}
+{{- with .Description }}
+Description: {{ . }}
+{{- end }}
+
+{{ if and .File (eq .File.Ext "md") -}}
+{{- /* Markdown pages: raw Markdown with Hugo shortcodes stripped */ -}}
+{{ .RawContent | replaceRE `(?s)\{\{[<%].*?[>%]\}\}` "" | strings.TrimSpace }}
+{{- else -}}
+{{- /* Raw-HTML pages (trust center, pricing, integrations, ...): plain text, with inline SVG diagrams removed */ -}}
+{{ .Content | replaceRE `(?s)<\?xml.*?\?>` " " | replaceRE `(?s)<svg.*?</svg>` " " | plainify | htmlUnescape | strings.TrimSpace }}
+{{- end }}
+{{- end }}
+{{- end }}
