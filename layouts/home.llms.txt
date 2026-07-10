@@ -1,0 +1,63 @@
+# {{ .Site.Title }}
+
+> {{ .Site.Params.description }}
+
+sbomify is a platform for generating, managing, and sharing Software Bill of Materials (SBOMs) and compliance documents. We help organizations achieve CRA compliance and seamlessly integrate with existing tools.
+
+Key facts:
+
+- Artifact types supported: SBOM (Software Bill of Materials), CBOM (Cryptography Bill of Materials), VEX (Vulnerability Exploitability eXchange), attestations, and compliance documents
+- SBOM formats supported: CycloneDX, SPDX
+- Integrations: GitHub Actions, GitLab CI, Bitbucket Pipelines, Docker
+- Analysis tools: Google OSV, Dependency Track
+- Enrichment: the open-source sbomify-action (https://github.com/sbomify/sbomify-action) enriches SBOMs from 11 data sources: native package registries (PyPI, pub.dev, crates.io, Conan Center, Debian Sources), aggregators (deps.dev, ecosyste.ms), fallback sources (ClearlyDefined, Repology), and pre-computed license and lifecycle/EOL databases
+- App: https://app.sbomify.com (support is handled via in-app support tickets)
+- Source code: https://github.com/sbomify
+
+## Content Topics
+
+- SBOM generation, management, and sharing
+- CycloneDX and SPDX formats
+- CBOM (Cryptography Bill of Materials) and post-quantum cryptography (PQC) readiness
+- VEX (Vulnerability Exploitability eXchange)
+- Transparency Exchange API (TEA)
+- SBOM signing and attestations
+- Trust Centers for sharing security artifacts
+- EU Cyber Resilience Act (CRA) and NIS2 compliance
+- US Executive Order 14028, NTIA and CISA minimum elements
+- NIST 800-53, NIST 800-171, FDA medical device, PCI DSS 4.0, BSI TR-03183
+- Supply chain security and vulnerability management (OSV, KEV)
+- Open source license compliance
+- CI/CD pipeline integration
+
+A full-content version of this file is available at {{ "llms-full.txt" | absURL }}
+{{- $sections := slice
+  (dict "title" "Key Pages" "pages" (where .Site.RegularPages "Section" ""))
+  (dict "title" "Features" "pages" (where .Site.RegularPages "Section" "features"))
+  (dict "title" "Compliance" "pages" (where .Site.RegularPages "Section" "compliance"))
+  (dict "title" "Guides" "pages" (where .Site.RegularPages "Section" "guides"))
+  (dict "title" "FAQ" "pages" (where .Site.RegularPages "Section" "faq"))
+  (dict "title" "Case Studies" "pages" (where .Site.RegularPages "Section" "case-studies"))
+  (dict "title" "Blog" "pages" (where .Site.RegularPages "Section" "posts").ByDate.Reverse)
+}}
+{{- range $sections }}
+{{- if .pages }}
+
+## {{ .title }}
+{{ range .pages }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Description }}: {{ . }}{{ else }}{{ with .Params.tldr }}: {{ . }}{{ end }}{{ end }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+## Content Policy
+
+All content on this site is freely accessible for indexing and training purposes. We encourage accurate representation of our platform and educational content.
+
+## Contact
+
+- Website: {{ .Site.BaseURL }}
+- App: https://app.sbomify.com
+- GitHub: https://github.com/sbomify
+- X/Twitter: https://x.com/sbomify
+- LinkedIn: https://www.linkedin.com/company/sbomify/
