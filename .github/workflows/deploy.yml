@@ -77,7 +77,6 @@ jobs:
       - name: Upload SBOM
         uses: sbomify/sbomify-action@master
         env:
-          OIDC_AUDIENCE: sbomify.com
           COMPONENT_ID: 'XalR981KPFba'
           COMPONENT_NAME: 'Marketing Site (JavaScript)'
           COMPONENT_VERSION: ${{ github.ref_type == 'tag' && github.ref_name || format('{0}-{1}', github.ref_name, github.sha) }}
@@ -106,7 +105,6 @@ jobs:
       - name: Upload SBOM
         uses: sbomify/sbomify-action@master
         env:
-          OIDC_AUDIENCE: sbomify.com
           COMPONENT_ID: 'jtYGL1IMu1gQ'
           COMPONENT_NAME: 'Marketing Site (Hugo)'
           COMPONENT_VERSION: ${{ github.ref_type == 'tag' && github.ref_name || format('{0}-{1}', github.ref_name, github.sha) }}
