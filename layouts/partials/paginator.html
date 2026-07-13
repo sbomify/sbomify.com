@@ -1,0 +1,15 @@
+{{- /* Returns the page's paginator for paginated list pages, or "" otherwise.
+     Mirrors the .Paginate calls in posts.html (via posts/list.html and
+     authors/list.html) and term.html: Hugo errors if .Paginate is invoked
+     with different arguments for the same page, so keep these in sync. */ -}}
+{{- $paginator := "" -}}
+{{- if eq .Kind "term" -}}
+  {{- $paginator = .Paginate .Pages -}}
+{{- else if and (eq .Kind "section") (eq .Section "posts") -}}
+  {{- $paginator = .Paginate (where site.RegularPages "Section" "posts") -}}
+{{- else if and (eq .Kind "section") .Params.author_key -}}
+  {{- with index site.Data.authors .Params.author_key -}}
+    {{- $paginator = $.Paginate (where (where site.RegularPages "Section" "posts") ".Params.author.display_name" .display_name) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $paginator -}}
