@@ -1,6 +1,7 @@
 ---
 
 title: The Growing Importance of SBOMs in Cybersecurity Compliance
+description: "Why SBOMs matter now: Executive Order 14028, the EU Cyber Resilience Act, PCI DSS 4.0, and the FDA are turning SBOMs into a baseline compliance requirement across industries."
 ---
 
 The cybersecurity landscape has evolved rapidly in recent years, driven largely by increased awareness of software supply chain vulnerabilities. A significant milestone in this evolution was the US government's introduction of [Executive Order 14028](https://www.federalregister.gov/documents/2021/05/17/2021-10460/improving-the-nations-cybersecurity) in May 2021. This executive order responded directly to escalating cyber threats targeting critical infrastructure, government agencies, and private enterprises. One of its key components mandated Software Bill of Materials (SBOMs) for all vendors selling software to the federal government.

@@ -1,22 +1,58 @@
 <head>
+  {{- /* Paginated pages (/blog/page/2/ etc.) need their own canonical URL,
+       title, and description so they don't count as duplicates of page 1. */ -}}
+  {{- $paginator := partial "paginator.html" . -}}
+  {{- $pageSuffix := "" -}}
+  {{- $canonical := .Permalink -}}
+  {{- with $paginator -}}
+    {{- if gt .PageNumber 1 -}}
+      {{- $pageSuffix = printf " - Page %d of %d" .PageNumber .TotalPages -}}
+      {{- $canonical = .URL | absURL -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $desc := or .Params.description "" -}}
+  {{- if not $desc -}}
+    {{- if eq .Kind "term" -}}
+      {{- if eq .Data.Plural "categories" -}}
+        {{- $desc = printf "All sbomify blog posts in the %s category: articles on SBOMs, software supply chain security, and compliance." (.Title | lower) -}}
+      {{- else -}}
+        {{- $desc = printf "All sbomify blog posts tagged %s: articles on SBOMs, software supply chain security, and compliance." (.Title | lower) -}}
+      {{- end -}}
+    {{- else if eq .Kind "taxonomy" -}}
+      {{- $desc = printf "Browse the sbomify blog by %s to find articles on SBOMs, software supply chain security, and compliance." (.Title | lower) -}}
+    {{- else -}}
+      {{- $desc = site.Params.description -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $desc = printf "%s%s" $desc $pageSuffix -}}
+  {{- /* Distinguish term page titles from same-named content pages
+       (e.g. /tags/integrations/ vs /features/integrations/). */ -}}
+  {{- $title := .Title -}}
+  {{- if eq .Kind "term" -}}
+    {{- if eq .Data.Plural "categories" -}}
+      {{- $title = printf "%s Category" .Title -}}
+    {{- else -}}
+      {{- $title = printf "%s Articles" .Title -}}
+    {{- end -}}
+  {{- end -}}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ if eq .RelPermalink "/" }}{{ .Title | default site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
-  <meta name="description" content="{{ .Params.description | default site.Params.description }}">
+  <title>{{ if eq .RelPermalink "/" }}{{ $title | default site.Title }}{{ else }}{{ $title }}{{ $pageSuffix }} | {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ $desc }}">
   <meta name="keywords" content="{{ with .Params.keywords }}{{ delimit . ", " }}{{ else }}{{ delimit site.Params.keywords ", " }}{{ end }}">
 
   <!-- Canonical URL -->
-  <link rel="canonical" href="{{ .Permalink }}">
+  <link rel="canonical" href="{{ $canonical }}">
 
   <!-- Robots meta -->
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index, follow">
 
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="{{ .Title | default site.Title }}">
-  <meta property="og:description" content="{{ .Params.description | default site.Params.description }}">
+  <meta property="og:title" content="{{ $title | default site.Title }}{{ $pageSuffix }}">
+  <meta property="og:description" content="{{ $desc }}">
   <meta property="og:type" content="{{ if eq .Type "posts" }}article{{ else }}website{{ end }}">
-  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:url" content="{{ $canonical }}">
   {{- $ogImage := .Params.image | default site.Params.social.image -}}
   <meta property="og:image" content="{{ $ogImage | absURL }}">
   <meta property="og:image:width" content="1200">
@@ -38,8 +74,8 @@
 
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ .Title | default site.Title }}">
-  <meta name="twitter:description" content="{{ .Params.description | default site.Params.description }}">
+  <meta name="twitter:title" content="{{ $title | default site.Title }}{{ $pageSuffix }}">
+  <meta name="twitter:description" content="{{ $desc }}">
   <meta name="twitter:image" content="{{ $ogImage | absURL }}">
   <meta name="twitter:image:alt" content="{{ .Title | default site.Title }}">
   {{- $twitterHandle := "" -}}
@@ -51,8 +87,8 @@
 
   <!-- LinkedIn Card Meta Tags -->
   <meta property="linkedin:card" content="summary_large_image">
-  <meta property="linkedin:title" content="{{ .Title | default site.Title }}">
-  <meta property="linkedin:description" content="{{ .Params.description | default site.Params.description }}">
+  <meta property="linkedin:title" content="{{ $title | default site.Title }}{{ $pageSuffix }}">
+  <meta property="linkedin:description" content="{{ $desc }}">
   <meta property="linkedin:image" content="{{ $ogImage | absURL }}">
   <meta property="linkedin:author" content="{{ $linkedinUrl }}">
 
