@@ -109,7 +109,7 @@ SBOM generation is the first step in the [SBOM lifecycle](/features/generate-col
 
 The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step.
 
-For C/C++ with Conan, sbomify uses **cdxgen** under the hood with fallback to Trivy and Syft.
+For C/C++ with Conan, sbomify uses **cdxgen** under the hood with fallback to Syft.
 
 **Standalone (no account needed):**
 
@@ -168,7 +168,7 @@ When using these tools directly, you'll need to handle enrichment and augmentati
 
 ```yaml
 generate-sbom:
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   before_script:
     - pip install conan
     - conan lock create .

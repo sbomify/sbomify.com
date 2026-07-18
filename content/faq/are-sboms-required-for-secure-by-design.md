@@ -36,7 +36,7 @@ Several major frameworks now connect Secure by Design directly to SBOM requireme
 - **US Executive Order 14028** - directs federal agencies to require SBOMs from software suppliers, with NIST's Secure Software Development Framework (SSDF) reinforcing this
 - **DoD/Pentagon** - requires SBOMs in all new software contracts as of February 2025
 
-For detailed compliance guidance, see our pages on [EU CRA compliance](/compliance/eu-cra/), [NTIA minimum elements](/compliance/ntia/), and [CISA framing](/compliance/cisa-framing/).
+For detailed compliance guidance, see our pages on [EU CRA compliance](/compliance/eu-cra/), [NTIA minimum elements](/compliance/ntia-minimum-elements/), and [CISA framing](/compliance/cisa-framing/).
 
 ## How sbomify helps
 
@@ -45,6 +45,6 @@ sbomify provides the tooling to put Secure by Design into practice:
 - **Generate and manage SBOMs** across your entire product portfolio using [sbomify-action](https://github.com/sbomify/sbomify-action)
 - **Automated vulnerability scanning** against known CVEs so you can respond to disclosures immediately
 - **Share compliance artifacts** with customers and auditors via your [Trust Center](https://trust.sbomify.com/)
-- **Track compliance** against [NTIA](/compliance/ntia/), [CISA](/compliance/cisa-framing/), and [CRA](/compliance/eu-cra/) requirements with built-in compliance plugins
+- **Track compliance** against [NTIA](/compliance/ntia-minimum-elements/), [CISA](/compliance/cisa-framing/), and [CRA](/compliance/eu-cra/) requirements with built-in compliance plugins
 
 Get started for free at [app.sbomify.com](https://app.sbomify.com).

@@ -169,12 +169,6 @@ npm install -g @cyclonedx/cdxgen
 cdxgen -o sbom.cdx.json
 ```
 
-**Trivy:**
-
-```bash
-trivy fs --format cyclonedx --output sbom.cdx.json .
-```
-
 **Syft:**
 
 ```bash
@@ -187,7 +181,7 @@ When using these tools directly, you'll need to handle enrichment and augmentati
 
 ```yaml
 generate-sbom:
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   variables:
     LOCK_FILE: package-lock.json
     OUTPUT_FILE: sbom.cdx.json

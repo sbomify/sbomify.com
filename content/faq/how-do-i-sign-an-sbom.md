@@ -36,22 +36,28 @@ The simplest way to sign an SBOM today is with GitHub's built-in attestation sup
 In your GitHub Actions workflow, generate the SBOM and then pass it to the attestation action:
 
 ```yaml
-- name: Generate SBOM
-  uses: sbomify/sbomify-action@master
-  env:
-    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
-    COMPONENT_ID: 'your-component-id'
-    LOCK_FILE: 'requirements.txt'
-    AUGMENT: true
-    ENRICH: true
-    UPLOAD: true
-    OUTPUT_FILE: sbom.cdx.json
+permissions:
+  id-token: write
+  attestations: write
 
-- name: Attest SBOM
-  uses: actions/attest-build-provenance@v1
-  with:
-    subject-path: '${{ github.workspace }}/sbom.cdx.json'
+steps:
+  - name: Generate SBOM
+    uses: sbomify/sbomify-action@master
+    env:
+      COMPONENT_ID: 'your-component-id'
+      LOCK_FILE: 'requirements.txt'
+      AUGMENT: true
+      ENRICH: true
+      UPLOAD: true
+      OUTPUT_FILE: sbom.cdx.json
+
+  - name: Attest SBOM
+    uses: actions/attest-build-provenance@v1
+    with:
+      subject-path: '${{ github.workspace }}/sbom.cdx.json'
 ```
+
+The `id-token: write` permission also enables [OIDC trusted publishing](/faq/how-do-i-set-up-oidc-trusted-publishing/), so the upload itself needs no token secret either.
 
 That is it. GitHub signs the SBOM using your workflow's identity, records the signature in a [Sigstore transparency log](/2024/08/12/what-is-sigstore/), and links it to the exact repository and workflow run that produced it.
 

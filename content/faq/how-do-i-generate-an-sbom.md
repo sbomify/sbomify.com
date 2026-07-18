@@ -1,16 +1,27 @@
 ---
 title: "How do I generate an SBOM?"
 description: "Step-by-step guide to generating your first SBOM using sbomify-action, open-source tools, and CI/CD integration."
-answer: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. You can also use standalone tools like Syft, ~~Trivy~~ (compromised March 2026), or cdxgen."
-tldr: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. You can also use standalone tools like Syft, ~~Trivy~~ (compromised March 2026), or cdxgen."
+answer: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. Run its interactive setup wizard (sbomify-action init) to get a working pipeline in minutes. You can also use standalone tools like Syft or cdxgen."
+tldr: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. Run its interactive setup wizard (sbomify-action init) to get a working pipeline in minutes. You can also use standalone tools like Syft or cdxgen."
 weight: 60
 keywords: [generate SBOM, create SBOM, SBOM tools, SBOM generation, how to SBOM, sbomify-action]
 url: /faq/how-do-i-generate-an-sbom/
 ---
 
+## Fastest path: the setup wizard
+
+If you are starting from scratch, run the interactive [setup wizard](/faq/how-do-i-use-the-sbomify-setup-wizard/) in your repository:
+
+```bash
+pip install sbomify-action
+sbomify-action init
+```
+
+The wizard scans your repo for lockfiles, signs you in to sbomify, creates your product and components, registers [OIDC trusted publishing](/faq/how-do-i-set-up-oidc-trusted-publishing/), and writes a ready-to-commit `.github/workflows/sboms.yml`. Commit the file and your next push generates and uploads an SBOM.
+
 ## Recommended: sbomify-action
 
-The [sbomify-action](https://github.com/sbomify/sbomify-action) is a CI/CD tool that generates, augments, enriches, and uploads SBOMs from your lockfiles or Docker images. It works as a GitHub Action, Docker image, or pip package, and includes SBOM generators (Syft, ~~Trivy~~, cdxgen) pre-installed. (Note: Trivy was [removed from sbomify-action](/2026/03/26/trivy-compromise-hardening-sbomify-action/) as of v26.1.0 following its March 2026 compromise.)
+The [sbomify-action](https://github.com/sbomify/sbomify-action) is a CI/CD tool that generates, augments, enriches, and uploads SBOMs from your lockfiles or Docker images. It works as a GitHub Action, Docker image, or pip package, and includes SBOM generators (Syft, cdxgen, and native ecosystem tools) pre-installed.
 
 ```yaml
 - uses: sbomify/sbomify-action@master
@@ -20,7 +31,7 @@ The [sbomify-action](https://github.com/sbomify/sbomify-action) is a CI/CD tool 
     ENRICH: true
 ```
 
-sbomify-action supports Python, Node, Rust, Go, Ruby, Dart, C++, Docker images, and Yocto/OpenEmbedded builds. It outputs both CycloneDX and SPDX formats.
+sbomify-action supports 14 ecosystems (Python, JavaScript, Java, Go, Rust, Ruby, PHP, .NET, Swift, Dart, Elixir, Scala, C++, and Terraform), plus Docker images and Yocto/OpenEmbedded builds. It outputs both CycloneDX and SPDX formats.
 
 Beyond basic generation, sbomify-action can:
 
@@ -44,21 +55,18 @@ docker run --rm \
   -e OUTPUT_FILE=/github/workspace/sbom.cdx.json \
   -e UPLOAD=false \
   -e ENRICH=true \
-  sbomifyhub/sbomify-action
+  ghcr.io/sbomify/sbomify-action
 ```
 
 This is useful for local development, scripted workflows, or CI systems that don't have a native sbomify-action integration.
 
 ## Standalone tools
 
-If you prefer standalone tools outside of CI/CD, **Syft** and **~~Trivy~~** are popular options:
+If you prefer standalone tools outside of CI/CD, **Syft** is a popular option:
 
 ```bash
 # Using Syft
 syft . -o cyclonedx-json > sbom.cdx.json
-
-# Using Trivy (see advisory below)
-trivy fs . --format cyclonedx --output sbom.cdx.json
 ```
 
 Note: We [no longer consider Trivy safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/) following two successful supply chain attacks in March 2026 and have removed it from sbomify-action.

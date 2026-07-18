@@ -102,12 +102,6 @@ cyclonedx-py environment --output-format json -o sbom.cdx.json
 
 This is the same tool sbomify uses under the hood. It reads from your installed environment and properly handles hashes.
 
-**Trivy:**
-
-```bash
-trivy fs --format cyclonedx --output sbom.cdx.json .
-```
-
 **cdxgen:**
 
 ```bash
@@ -120,7 +114,7 @@ When using these tools directly, you'll need to handle enrichment and augmentati
 
 ```yaml
 generate-sbom:
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   variables:
     LOCK_FILE: uv.lock
     OUTPUT_FILE: sbom.cdx.json

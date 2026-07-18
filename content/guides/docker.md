@@ -98,7 +98,7 @@ SBOM generation is the first step in the [SBOM lifecycle](/features/generate-col
 
 The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step.
 
-For Docker images, sbomify uses **cdxgen** under the hood with fallback to Trivy and Syft. Use `DOCKER_IMAGE` instead of `LOCK_FILE`.
+For Docker images, sbomify uses **cdxgen** under the hood with fallback to Syft. Use `DOCKER_IMAGE` instead of `LOCK_FILE`.
 
 **Standalone (no account needed):**
 
@@ -138,12 +138,6 @@ DOCKER_IMAGE: ghcr.io/myorg/myapp:latest
 
 If you prefer to run SBOM generation tools manually:
 
-**Trivy:**
-
-```bash
-trivy image --format cyclonedx --output sbom.cdx.json myapp:latest
-```
-
 **Syft:**
 
 ```bash
@@ -168,7 +162,7 @@ When using these tools directly, you'll need to handle enrichment and augmentati
 
 ```yaml
 generate-sbom:
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   services:
     - docker:dind
   before_script:

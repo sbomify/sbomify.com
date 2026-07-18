@@ -146,7 +146,7 @@ SBOM generation is the first step in the [SBOM lifecycle](/features/generate-col
 
 The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step.
 
-For Go, sbomify uses **cdxgen** under the hood with fallback to Trivy and Syft.
+For Go, sbomify uses **cdxgen** under the hood with fallback to Syft.
 
 **Standalone (no account needed):**
 
@@ -196,12 +196,6 @@ go install github.com/CycloneDX/cyclonedx-gomod/cmd/cyclonedx-gomod@latest
 cyclonedx-gomod mod -output sbom.cdx.json
 ```
 
-**Trivy:**
-
-```bash
-trivy fs --format cyclonedx --output sbom.cdx.json .
-```
-
 **Syft:**
 
 ```bash
@@ -214,7 +208,7 @@ When using these tools directly, you'll need to handle enrichment and augmentati
 
 ```yaml
 generate-sbom:
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   variables:
     LOCK_FILE: go.mod
     OUTPUT_FILE: sbom.cdx.json

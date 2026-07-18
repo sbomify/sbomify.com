@@ -210,19 +210,13 @@ plugins {
 gradle cyclonedxBom
 ```
 
-**Trivy:**
-
-```bash
-trivy fs --format cyclonedx --output sbom.cdx.json .
-```
-
 When using these tools directly, you'll need to handle enrichment and augmentation separately.
 
 ### GitLab CI
 
 ```yaml
 generate-sbom:
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   variables:
     LOCK_FILE: pom.xml
     OUTPUT_FILE: sbom.cdx.json

@@ -28,6 +28,10 @@ The Business tier is built for mid-size teams that need:
 
 - Private SBOM repositories
 - Team collaboration features
+- Custom trust center on your own domain
+- [Transparency Exchange API (TEA)](/faq/how-do-i-enable-tea-in-sbomify/)
+- [CRA Compliance Wizard](/faq/how-do-i-use-cra-compliance/)
+- [Dependency Track integration](/faq/how-do-i-enable-vulnerability-scanning/) and daily vulnerability re-scans
 - Compliance reporting
 - Priority support
 
