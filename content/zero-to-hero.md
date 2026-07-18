@@ -106,8 +106,11 @@ Choose the option that fits your environment:
 **Setup wizard** (quickest)
 
 ```bash
-pip install sbomify-action
-sbomify-action init
+docker run --rm -it \
+  -v "$(pwd):/github/workspace" \
+  -w /github/workspace \
+  ghcr.io/sbomify/sbomify-action \
+  sbomify-action wizard
 ```
 
 The interactive [setup wizard](/faq/how-do-i-use-the-sbomify-setup-wizard/) scans your repo for lockfiles, creates your product and components in sbomify, registers [OIDC trusted publishing](/faq/how-do-i-set-up-oidc-trusted-publishing/) (so you never store a token secret), and writes a ready-to-commit `.github/workflows/sboms.yml`.

@@ -1,8 +1,8 @@
 ---
 title: "How do I generate an SBOM?"
 description: "Step-by-step guide to generating your first SBOM using sbomify-action, open-source tools, and CI/CD integration."
-answer: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. Run its interactive setup wizard (sbomify-action init) to get a working pipeline in minutes. You can also use standalone tools like Syft or cdxgen."
-tldr: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. Run its interactive setup wizard (sbomify-action init) to get a working pipeline in minutes. You can also use standalone tools like Syft or cdxgen."
+answer: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. Run its interactive setup wizard (sbomify-action wizard) to get a working pipeline in minutes. You can also use standalone tools like Syft or cdxgen."
+tldr: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. Run its interactive setup wizard (sbomify-action wizard) to get a working pipeline in minutes. You can also use standalone tools like Syft or cdxgen."
 weight: 60
 keywords: [generate SBOM, create SBOM, SBOM tools, SBOM generation, how to SBOM, sbomify-action]
 url: /faq/how-do-i-generate-an-sbom/
@@ -10,11 +10,14 @@ url: /faq/how-do-i-generate-an-sbom/
 
 ## Fastest path: the setup wizard
 
-If you are starting from scratch, run the interactive [setup wizard](/faq/how-do-i-use-the-sbomify-setup-wizard/) in your repository:
+If you are starting from scratch, run the interactive [setup wizard](/faq/how-do-i-use-the-sbomify-setup-wizard/) from the root of your repository. The Docker image bundles everything it needs:
 
 ```bash
-pip install sbomify-action
-sbomify-action init
+docker run --rm -it \
+  -v "$(pwd):/github/workspace" \
+  -w /github/workspace \
+  ghcr.io/sbomify/sbomify-action \
+  sbomify-action wizard
 ```
 
 The wizard scans your repo for lockfiles, signs you in to sbomify, creates your product and components, registers [OIDC trusted publishing](/faq/how-do-i-set-up-oidc-trusted-publishing/), and writes a ready-to-commit `.github/workflows/sboms.yml`. Commit the file and your next push generates and uploads an SBOM.

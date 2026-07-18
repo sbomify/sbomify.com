@@ -20,11 +20,14 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
         <a href="/faq/how-do-i-use-the-sbomify-setup-wizard/" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap">Read the FAQ →</a>
       </div>
       <p class="text-gray-300 mb-6">
-        The fastest way to get started. Run <code class="text-[#8A7DFF]">sbomify-action init</code> in your repository and the wizard scans your lockfiles, creates your products and components, registers OIDC trusted publishing, and writes a ready-to-commit <code class="text-[#8A7DFF]">.github/workflows/sboms.yml</code>. No tokens to copy, no YAML to hand-write.
+        The fastest way to get started. Run the wizard from the root of your repository and it scans your lockfiles, creates your products and components, registers OIDC trusted publishing, and writes a ready-to-commit <code class="text-[#8A7DFF]">.github/workflows/sboms.yml</code>. No tokens to copy, no YAML to hand-write.
       </p>
       <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">
-<pre><code>pip install sbomify-action
-sbomify-action init</code></pre>
+<pre><code>docker run --rm -it \
+  -v "$(pwd):/github/workspace" \
+  -w /github/workspace \
+  ghcr.io/sbomify/sbomify-action \
+  sbomify-action wizard</code></pre>
       </div>
     </div>
 

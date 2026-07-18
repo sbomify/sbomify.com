@@ -1,7 +1,7 @@
 ---
 title: "How do I use the sbomify setup wizard?"
-description: "The interactive setup wizard (sbomify-action init) scans your repository, creates your products and components, sets up OIDC trusted publishing, and writes a ready-to-commit GitHub Actions workflow."
-answer: "Run 'pip install sbomify-action' followed by 'sbomify-action init' in your repository. The interactive wizard scans your repo for lockfiles, signs you in to sbomify, lets you pick or create the product and components, registers OIDC trusted publishing, and writes a ready-to-commit .github/workflows/sboms.yml. Commit the file and your next push generates and uploads an SBOM."
+description: "The interactive setup wizard (sbomify-action wizard) scans your repository, creates your products and components, sets up OIDC trusted publishing, and writes a ready-to-commit GitHub Actions workflow."
+answer: "Run 'sbomify-action wizard' from the root of your repository using the Docker image, which bundles everything the wizard needs. The interactive wizard scans your repo for lockfiles, signs you in to sbomify, lets you pick or create the product and components, registers OIDC trusted publishing, and writes a ready-to-commit .github/workflows/sboms.yml. Commit the file and your next push generates and uploads an SBOM."
 tldr: "The setup wizard is the fastest way from zero to automated SBOMs. It is an interactive terminal UI that configures everything - products, components, OIDC trusted publishing, and the CI workflow file - so you never hand-write YAML or copy a token."
 weight: 61
 keywords: [sbomify setup wizard, sbomify-action init, SBOM onboarding, SBOM CI setup, generate SBOM quickly, sbomify getting started]
@@ -23,18 +23,23 @@ Commit the generated workflow file and your next push generates, enriches, and u
 
 ## Running it
 
+Run the wizard from the root of your repository with the Docker image. The image bundles every tool the wizard needs, so there is nothing else to install:
+
 ```bash
-pip install sbomify-action
-sbomify-action init
+docker run --rm -it \
+  -v "$(pwd):/github/workspace" \
+  -w /github/workspace \
+  ghcr.io/sbomify/sbomify-action \
+  sbomify-action wizard
 ```
 
-`sbomify-action wizard` is an alias for the same command. Useful flags:
+The `-it` flags are required because the wizard is interactive, and the volume mount is what lets it write the generated workflow back into your repo. If you prefer not to use Docker, you can also `pip install sbomify-action` and run `sbomify-action wizard` directly (`sbomify-action init` is a backwards-compatible alias). Useful flags:
 
-- `--dry-run` - walk through the wizard without creating anything
+- `--dry-run` - preview the full plan without making API changes or writing files
 - `--repo-root <path>` - point at a repository other than the current directory
-- `--output-dir <path>` - write the workflow file somewhere else
+- `--output-dir <path>` - where the workflow is written (must resolve to `.github/workflows`)
 
-The wizard is designed for interactive use and refuses to run inside CI. In CI, you run the workflow file the wizard produced.
+The wizard is designed for interactive use and refuses to run inside CI. It also will not overwrite a hand-authored `sboms.yml`; it only manages workflows it generated. In CI, you run the workflow file the wizard produced.
 
 ## When to configure things manually instead
 
