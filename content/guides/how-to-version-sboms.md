@@ -12,7 +12,17 @@ Depending on the type of software you are producing, versioning may or may not b
 
 Since SBOMs are directly related to software releases, the way you version and/or deploy your software will determine how you version your SBOM.
 
-Both CycloneDX and SPDX recognize that the way you version your software is highly customized, and neither enforces any specific versioning scheme. Instead, they treat version identifiers as a text string. For clarity, when we discuss versioning, we are referring to the top-level component version.
+Both CycloneDX and SPDX recognize that the way you version your software is highly customized, and neither enforces any specific versioning scheme. Instead, they treat version identifiers as a text string. For clarity, when we discuss versioning, we are referring to the version of the top-level component (i.e., your software), not the document-level `version` field found in CycloneDX. If that distinction is new to you, read the next section carefully, as this is one of the most common mistakes people make with SBOMs.
+
+## A Common Pitfall: The Top-Level `version` Field
+
+If you are new to SBOMs and open up a CycloneDX document, the first `version` field you will see sits at the very top of the file, right next to `serialNumber`. It is tempting to put your software version there. Don't. That field versions the SBOM document itself, not the software it describes.
+
+In CycloneDX, your software version belongs in [`metadata.component.version`](https://cyclonedx.org/docs/1.6/json/#metadata_component), the top-level component that represents your application. The document-level [`version`](https://cyclonedx.org/docs/1.6/json/#version) field exists for one narrow purpose: amending an SBOM you have already published. If you need to correct a published SBOM (say you discover a missing component or a licensing error), you keep the same [`serialNumber`](https://cyclonedx.org/docs/1.6/json/#serialNumber) and increment the document `version` (1, 2, 3, and so on). The unchanged `serialNumber` tells consumers that both documents describe the same release, and the higher `version` tells them which one supersedes the other.
+
+Amending should be an edge case. In the normal flow, every release of your software gets a brand-new SBOM: a freshly generated `serialNumber`, a document `version` of `1`, and your actual software version in `metadata.component.version`. That component version is what you (and anyone consuming your SBOMs) should be tracking from release to release. If your document `version` says anything other than `1` and you have not deliberately amended a published SBOM, something in your pipeline is misusing the field.
+
+SPDX works the same way in spirit. Your software version goes in the [`versionInfo`](https://spdx.github.io/spdx-spec/v2.3/package-information/#73-package-version-field) field of the package your document describes, and each new document gets a unique [document namespace](https://spdx.github.io/spdx-spec/v2.3/document-creation-information/#65-spdx-document-namespace-field). SPDX has no built-in revision counter like CycloneDX. Instead, a correction is a new document that declares an [`AMENDS` relationship](https://spdx.github.io/spdx-spec/v2.3/relationships-between-SPDX-elements/) pointing back to the document it amends. Again, this is only for fixing an SBOM you have already published, not for shipping a new version of your software.
 
 ## Best Practices
 
