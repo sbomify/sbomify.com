@@ -1,6 +1,8 @@
 ---
 
 url: /compliance/ntia-minimum-elements/
+aliases:
+  - /compliance/ntia/
 title: "NTIA Minimum Elements for SBOM (2021)"
 description: "Complete guide to the NTIA Minimum Elements for a Software Bill of Materials, the foundational US baseline for SBOM data fields."
 section: compliance

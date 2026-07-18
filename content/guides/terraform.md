@@ -203,7 +203,7 @@ If you prefer to run SBOM generation tools manually:
 syft . -o cyclonedx-json=sbom.cdx.json
 ```
 
-Syft is currently the only widely-available open source tool that supports generating SBOMs from Terraform lockfiles. Trivy supports Terraform for IaC misconfiguration scanning but not for SBOM generation from `.terraform.lock.hcl`.
+Syft is currently the only widely-available open source tool that supports generating SBOMs from Terraform lockfiles.
 
 When using Syft directly, you'll need to handle enrichment and augmentation separately.
 
@@ -211,7 +211,7 @@ When using Syft directly, you'll need to handle enrichment and augmentation sepa
 
 ```yaml
 generate-sbom:
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   before_script:
     - terraform init
   variables:

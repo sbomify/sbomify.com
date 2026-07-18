@@ -185,7 +185,7 @@ build:
 
 generate-sbom:
   stage: sbom
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   variables:
     LOCK_FILE: package-lock.json
     OUTPUT_FILE: sbom.cdx.json
@@ -210,7 +210,7 @@ include:
 
 generate-sbom:
   stage: test
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   variables:
     LOCK_FILE: package-lock.json
     OUTPUT_FILE: gl-sbom-report.cdx.json
@@ -230,7 +230,7 @@ generate-sbom:
 ```yaml
 container-sbom:
   stage: sbom
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   services:
     - docker:dind
   variables:
@@ -270,7 +270,7 @@ pipelines:
     - step:
         name: Generate SBOM
         script:
-          - pipe: docker://sbomifyhub/sbomify-action:latest
+          - pipe: docker://ghcr.io/sbomify/sbomify-action:latest
             variables:
               LOCK_FILE: package-lock.json
               OUTPUT_FILE: sbom.cdx.json
@@ -292,7 +292,7 @@ pipelines:
     - step:
         name: Generate and Upload SBOM
         script:
-          - pipe: docker://sbomifyhub/sbomify-action:latest
+          - pipe: docker://ghcr.io/sbomify/sbomify-action:latest
             variables:
               TOKEN: $SBOMIFY_TOKEN
               COMPONENT_ID: my-component
@@ -309,7 +309,7 @@ pipelines:
 pipeline {
     agent {
         docker {
-            image 'sbomifyhub/sbomify-action'
+            image 'ghcr.io/sbomify/sbomify-action'
         }
     }
 
@@ -348,7 +348,7 @@ pipeline {
         stage('Generate SBOM') {
             steps {
                 withCredentials([string(credentialsId: 'sbomify-token', variable: 'TOKEN')]) {
-                    docker.image('sbomifyhub/sbomify-action').inside {
+                    docker.image('ghcr.io/sbomify/sbomify-action').inside {
                         sh '''
                             export COMPONENT_ID="my-component"
                             export LOCK_FILE="package-lock.json"
@@ -375,7 +375,7 @@ version: 2.1
 jobs:
   generate-sbom:
     docker:
-      - image: sbomifyhub/sbomify-action
+      - image: ghcr.io/sbomify/sbomify-action
     steps:
       - checkout
       - run:
@@ -424,7 +424,7 @@ steps:
         -e COMPONENT_VERSION=$(Build.SourceVersion)
         -e UPLOAD=false
         -e ENRICH=true
-        sbomifyhub/sbomify-action
+        ghcr.io/sbomify/sbomify-action
 
   - publish: $(Build.SourcesDirectory)/sbom.cdx.json
     artifact: sbom

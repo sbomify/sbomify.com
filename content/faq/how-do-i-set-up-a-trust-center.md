@@ -26,7 +26,7 @@ To set up your Trust Center:
 5. Set your **custom domain** (e.g. `trust.yourcompany.com`) and click **Save Domain**
 6. Configure a CNAME record with your DNS provider pointing to sbomify, then wait for the domain to validate
 
-Once enabled, your uploaded SBOMs and compliance documents are automatically published to your Trust Center. You can see a live example at [trust.sbomify.com](https://trust.sbomify.com/).
+Once enabled, your uploaded SBOMs and compliance documents are automatically published to your Trust Center. Public release pages also expose release-level [VEX](/faq/how-do-i-use-vex/) and [CBOM](/faq/what-is-a-cbom/) downloads next to the release SBOM. You can see a live example at [trust.sbomify.com](https://trust.sbomify.com/).
 
 ## Component visibility
 

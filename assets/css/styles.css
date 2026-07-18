@@ -1551,6 +1551,11 @@ a.button:hover {
   border-color: rgb(55 48 107 / var(--tw-border-opacity, 1));
 }
 
+.border-\[\#8A7DFF\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(138 125 255 / var(--tw-border-opacity, 1));
+}
+
 .border-\[\#8A7DFF\]\/20 {
   border-color: rgb(138 125 255 / 0.2);
 }

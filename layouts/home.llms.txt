@@ -7,10 +7,12 @@ sbomify is a platform for generating, managing, and sharing Software Bill of Mat
 Key facts:
 
 - Artifact types supported: SBOM (Software Bill of Materials), CBOM (Cryptography Bill of Materials), VEX (Vulnerability Exploitability eXchange), attestations, and compliance documents
-- SBOM formats supported: CycloneDX, SPDX
-- Integrations: GitHub Actions, GitLab CI, Bitbucket Pipelines, Docker
-- Analysis tools: Google OSV, Dependency Track
-- Enrichment: the open-source sbomify-action (https://github.com/sbomify/sbomify-action) enriches SBOMs from 11 data sources: native package registries (PyPI, pub.dev, crates.io, Conan Center, Debian Sources), aggregators (deps.dev, ecosyste.ms), fallback sources (ClearlyDefined, Repology), and pre-computed license and lifecycle/EOL databases
+- SBOM formats supported: CycloneDX 1.3 through 1.7 and SPDX 2.2, 2.3, and 3.0.1 (JSON), validated against official schemas
+- VEX formats supported: CycloneDX VEX (JSON and XML), OpenVEX, and CSAF 2.0 VEX, with automatic format detection; VEX statements suppress findings in OSV and Dependency Track results
+- Integrations: GitHub Actions (including OIDC trusted publishing for tokenless uploads), GitLab CI, Bitbucket Pipelines, Docker
+- Onboarding: the interactive setup wizard (sbomify-action wizard, run via the Docker image) scans a repository, creates products and components, registers OIDC trusted publishing, and writes a ready-to-commit GitHub Actions workflow
+- Analysis tools: Google OSV, Dependency Track, CISA KEV flagging, post-quantum cryptography (PQC) readiness assessment
+- Enrichment: the open-source sbomify-action (https://github.com/sbomify/sbomify-action) enriches SBOMs from 12 data sources: native package registries (PyPI, pub.dev, crates.io, Conan Center, Debian Sources), aggregators (deps.dev, ecosyste.ms), fallback sources (PURL extraction, ClearlyDefined, Repology), and pre-computed license and lifecycle/EOL databases
 - App: https://app.sbomify.com (support is handled via in-app support tickets)
 - Source code: https://github.com/sbomify
 

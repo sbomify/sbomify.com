@@ -9,7 +9,7 @@ description: "Explore sbomify's comprehensive feature set for managing, sharing,
 
 ### Generate, Collaborate, and Analyze
 
-Streamline your SBOM workflow from creation to analysis. Our comprehensive toolset helps you generate accurate SBOMs, collaborate with your team, and gain insights from your software supply chain data. [Learn more about the SBOM lifecycle →](/features/generate-collaborate-analyze)
+Streamline your SBOM workflow from creation to analysis. Our comprehensive toolset helps you generate accurate SBOMs, collaborate with your team, and gain insights from your software supply chain data. Triage vulnerabilities with [multi-format VEX](/faq/how-do-i-use-vex/) (CycloneDX, OpenVEX, CSAF), and inventory your cryptography with [CBOMs](/faq/what-is-a-cbom/) including post-quantum readiness scoring. [Learn more about the SBOM lifecycle →](/features/generate-collaborate-analyze)
 
 ### Trust Center
 

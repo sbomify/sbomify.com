@@ -37,7 +37,7 @@ The [sbomify action](https://github.com/sbomify/sbomify-action) is **fully open 
 
 - Augmenting with supplier/author/manufacturer metadata
   - Data comes from your [sbomify profile](https://app.sbomify.com/) or a `sbomify.json` file in your repo
-- Enriching from **11 data sources** including:
+- Enriching from **12 data sources** including:
   - Pre-computed databases (LicenseDB, Lifecycle Database for EOL dates)
   - Native registries (PyPI, crates.io, pub.dev, Debian)
   - Aggregators (deps.dev, ecosyste.ms)
@@ -56,7 +56,7 @@ See [Integrations](/features/integrations/) for the full list of enrichment sour
 - **GitHub Actions** - Native integration
 - **Any CI/CD** - GitLab CI, Bitbucket Pipelines, Jenkins, CircleCI, etc.
 - **Python package** - `pip install sbomify-action` for standalone use
-- **Docker** - `sbomifyhub/sbomify-action` runs anywhere
+- **Docker** - `ghcr.io/sbomify/sbomify-action` runs anywhere
 
 ### Deployment Flexibility
 
@@ -103,7 +103,19 @@ sbomify supports all major ecosystems:
 
 Choose the option that fits your environment:
 
-**GitHub Actions** (quickest)
+**Setup wizard** (quickest)
+
+```bash
+docker run --rm -it \
+  -v "$(pwd):/github/workspace" \
+  -w /github/workspace \
+  ghcr.io/sbomify/sbomify-action \
+  sbomify-action wizard
+```
+
+The interactive [setup wizard](/faq/how-do-i-use-the-sbomify-setup-wizard/) scans your repo for lockfiles, creates your product and components in sbomify, registers [OIDC trusted publishing](/faq/how-do-i-set-up-oidc-trusted-publishing/) (so you never store a token secret), and writes a ready-to-commit `.github/workflows/sboms.yml`.
+
+**GitHub Actions** (manual setup)
 
 ```yaml
 - name: Generate SBOM

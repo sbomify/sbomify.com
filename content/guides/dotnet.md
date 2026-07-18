@@ -132,7 +132,7 @@ SBOM generation is the first step in the [SBOM lifecycle](/features/generate-col
 
 The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step.
 
-For .NET, sbomify uses **cdxgen** under the hood with fallback to Trivy and Syft.
+For .NET, sbomify uses **cdxgen** under the hood with fallback to Syft.
 
 **Standalone (no account needed):**
 
@@ -187,19 +187,13 @@ npm install -g @cyclonedx/cdxgen
 cdxgen -t dotnet -o sbom.cdx.json
 ```
 
-**Trivy:**
-
-```bash
-trivy fs --format cyclonedx --output sbom.cdx.json .
-```
-
 When using these tools directly, you'll need to handle enrichment and augmentation separately.
 
 ### GitLab CI
 
 ```yaml
 generate-sbom:
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   variables:
     LOCK_FILE: packages.lock.json
     OUTPUT_FILE: sbom.cdx.json

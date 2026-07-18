@@ -124,7 +124,7 @@ SBOM generation is the first step in the [SBOM lifecycle](/features/generate-col
 
 The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step.
 
-For Dart/Flutter, sbomify uses **cdxgen** or **Syft** under the hood (Trivy doesn't support Dart).
+For Dart/Flutter, sbomify uses **cdxgen** or **Syft** under the hood.
 
 **Standalone (no account needed):**
 
@@ -179,7 +179,7 @@ dart pub add --dev sbom
 
 Note: The `sbom` Dart package currently only supports SPDX format, not CycloneDX.
 
-Trivy currently has limited Dart support. Use cdxgen or Syft for CycloneDX output.
+Use cdxgen or Syft for CycloneDX output.
 
 When using these tools directly, you'll need to handle enrichment and augmentation separately.
 
@@ -187,7 +187,7 @@ When using these tools directly, you'll need to handle enrichment and augmentati
 
 ```yaml
 generate-sbom:
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   variables:
     LOCK_FILE: pubspec.lock
     OUTPUT_FILE: sbom.cdx.json
