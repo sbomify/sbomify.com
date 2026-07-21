@@ -4,7 +4,7 @@ url: /compliance/ntia-minimum-elements/
 aliases:
   - /compliance/ntia/
 title: "NTIA Minimum Elements for SBOM (2021)"
-description: "Complete guide to the NTIA Minimum Elements for a Software Bill of Materials, the foundational US baseline for SBOM data fields."
+description: "Complete guide to the NTIA Minimum Elements for a Software Bill of Materials, the foundational US baseline for SBOM data fields, and where the baseline stands today: CISA's 2025 update, AI SBOM guidance, and OMB M-26-05."
 section: compliance
 ---
 
@@ -23,9 +23,19 @@ section: compliance
 
 The [NTIA Minimum Elements for a Software Bill of Materials](https://www.ntia.gov/sites/default/files/publications/sbom_minimum_elements_report_0.pdf) is the foundational baseline for SBOM guidance in the United States. Published in July 2021, it defines seven core data fields that every SBOM should contain, plus implementation practices for SBOM generation and sharing.
 
-This document emerged from a multi-stakeholder process and represents the consensus "minimum viable SBOM" that balances utility with practicality. It remains the canonical reference point for US federal SBOM expectations.
+This document emerged from a multi-stakeholder process and represents the consensus "minimum viable SBOM" that balances utility with practicality. It remains the operative published baseline for US SBOM content: CISA's proposed successor has not been finalized, and other frameworks (such as [FDA medical device guidance](/compliance/fda-medical-device/)) continue to reference the NTIA elements.
 
 **Note:** NTIA frames these as "minimum elements" (guidance), not legally binding requirements. However, they are widely adopted as the de facto standard.
+
+## Where the Baseline Stands Today
+
+The 2021 minimum elements are the starting point of an evolving lineage, and several things have moved recently:
+
+- **CISA's 2025 update is still a draft.** CISA published the [2025 Minimum Elements for an SBOM](/compliance/cisa-minimum-elements/) as a public comment draft, with the [comment period closing on 3 October 2025](https://www.federalregister.gov/documents/2025/08/22/2025-16147/request-for-comment-on-2025-minimum-elements-for-a-software-bill-of-materials). A final version has not been published, so the 2021 NTIA elements remain the operative baseline while the draft signals where US guidance is heading (new fields such as component hash, license, generation tool, and generation context).
+- **The minimum elements concept has been extended to AI.** In May 2026, CISA and its G7 partners released [Software Bill of Materials for AI - Minimum Elements](https://www.cisa.gov/resources-tools/resources/software-bill-materials-ai-minimum-elements), joint guidance applying SBOM-style transparency to AI systems, covering models, datasets, and their dependencies.
+- **Federal procurement expectations became agency-led.** In January 2026, OMB memo [M-26-05](https://www.whitehouse.gov/wp-content/uploads/2026/01/M-26-05-Adopting-a-Risk-based-Approach-to-Software-and-Hardware-Security.pdf) rescinded the government-wide secure software attestation "common form" requirement from M-22-18 and M-23-16 in favor of risk-based, agency-defined assurance requirements. Agencies may still require SBOMs where they judge it appropriate, which makes the NTIA elements the natural baseline for those requests.
+
+The practical consequence: if you build your SBOM practice on the seven NTIA fields today and track the CISA 2025 draft's additions, you are well positioned for both current requests and the successor guidance.
 
 ## Required Data Fields
 
@@ -61,9 +71,12 @@ For CycloneDX and SPDX field mappings, see our [Schema Crosswalk](/compliance/sc
 - [CISA 2025 Minimum Elements](/compliance/cisa-minimum-elements/) - Updated guidance that expands on NTIA 2021
 - [Executive Order 14028](/compliance/eo-14028/) - The directive that led to NTIA minimum elements
 
-## Official Source
+## Official Sources
 
 - [NTIA Minimum Elements for a Software Bill of Materials (2021)](https://www.ntia.gov/sites/default/files/publications/sbom_minimum_elements_report_0.pdf)
+- [Federal Register: Request for Comment on 2025 Minimum Elements for a Software Bill of Materials](https://www.federalregister.gov/documents/2025/08/22/2025-16147/request-for-comment-on-2025-minimum-elements-for-a-software-bill-of-materials)
+- [CISA: Software Bill of Materials for AI - Minimum Elements](https://www.cisa.gov/resources-tools/resources/software-bill-materials-ai-minimum-elements) (May 2026)
+- [OMB Memorandum M-26-05: Adopting a Risk-based Approach to Software and Hardware Security](https://www.whitehouse.gov/wp-content/uploads/2026/01/M-26-05-Adopting-a-Risk-based-Approach-to-Software-and-Hardware-Security.pdf) (January 2026)
 
 ---
 
