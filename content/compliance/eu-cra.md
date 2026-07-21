@@ -2,7 +2,7 @@
 
 url: /compliance/eu-cra/
 title: "EU Cyber Resilience Act (CRA) SBOM Requirements"
-description: "Complete guide to CRA SBOM requirements with BSI TR-03183-2 technical specifications. Covers format requirements, data fields, dependency depth, and compliance checklist."
+description: "Complete guide to CRA SBOM requirements with BSI TR-03183-2 technical specifications. Covers format requirements, data fields, dependency depth, the 2026-2027 timeline, and compliance checklist."
 section: compliance
 ---
 
@@ -27,6 +27,38 @@ This page covers:
 - **BSI TR-03183-2** - Germany's Federal Office for Information Security (BSI) provides a [Technical Guideline](https://bsi.bund.de/dok/TR-03183-en) specifying concrete SBOM format and content requirements as a detailed interpretation of CRA obligations
 
 > **Terminology note:** In BSI TR-03183-2, RFC 2119 keywords (MUST, SHALL, SHOULD, etc.) are normative **only when written in ALL CAPS**. (BSI TR-03183-2, Section 2)
+
+---
+
+## CRA Timeline: Where Things Stand
+
+The CRA applies in stages (Article 71):
+
+| Date              | Milestone                                                                                                                            | Status   |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------- |
+| 10 December 2024  | CRA entered into force                                                                                                               | Done     |
+| 11 June 2026      | Rules on notified bodies and conformity assessment (Chapter IV, Articles 35-51) began to apply                                       | Done     |
+| 11 September 2026 | Reporting obligations for actively exploited vulnerabilities and severe incidents begin (Article 14)                                 | Upcoming |
+| 11 December 2027  | Full application: all essential requirements, including the SBOM obligation, become enforceable for products placed on the EU market | Upcoming |
+
+The nearest deadline is the most consequential for SBOM practice: from **11 September 2026**, manufacturers must report actively exploited vulnerabilities and severe incidents. Meeting the reporting clock in practice depends on knowing what is in your products, which is exactly what an SBOM provides.
+
+---
+
+## Reporting Obligations from 11 September 2026
+
+From 11 September 2026, manufacturers must notify actively exploited vulnerabilities and severe incidents affecting their products with digital elements. Notifications are submitted through the [CRA Single Reporting Platform](https://www.enisa.europa.eu/topics/product-security-and-certification/single-reporting-platform-srp), operated by ENISA under Article 16, and are addressed to the CSIRT of the Member State where the manufacturer has its main establishment. ENISA states the platform will be operational by 11 September 2026, with a testing period beforehand.
+
+The deadlines are tight (Article 14):
+
+| Deadline | Obligation                                                                                   |
+| -------- | -------------------------------------------------------------------------------------------- |
+| 24 hours | Early warning after becoming aware of an actively exploited vulnerability or severe incident |
+| 72 hours | Full notification, including corrective or mitigating measures                               |
+| 14 days  | Final vulnerability report, after a corrective measure is available                          |
+| 1 month  | Final report for severe incidents, after the initial notification                            |
+
+**The SBOM connection:** a 24-hour early-warning window leaves no time for manual component archaeology. When a vulnerability in a widely used library starts being exploited, you need to answer "which of our products and versions contain this component?" in minutes. That requires up-to-date, machine-readable SBOMs for every shipped version, matched continuously against vulnerability intelligence. Manufacturers who wait until December 2027 to build their SBOM pipeline will find the September 2026 reporting obligations hard to meet.
 
 ---
 
@@ -60,9 +92,14 @@ Annex II, Part I, point 9: "If the manufacturer decides to make available the so
 | User delivery              | Providing SBOM to end users                                 | Optional            |
 | Access location disclosure | If SBOM is shared with users, must state where to access it | Required if sharing |
 
-### Future Specifications
+### Future Specifications, Standards, and Guidance
 
-The CRA empowers the European Commission to "specify the format and elements of the software bill of materials" via implementing acts (Annex I, Part II(1)).
+The CRA empowers the European Commission to "specify the format and elements of the software bill of materials" via implementing acts (Annex I, Part II(1)). No such act has been adopted yet, which is why BSI TR-03183-2 (below) remains the most concrete technical interpretation available.
+
+Related implementation work is underway:
+
+- **Harmonized standards:** CEN, CENELEC, and ETSI [accepted the Commission's CRA standardisation request on 3 April 2025](https://www.cencenelec.eu/news-events/news/2025/newsletter/ots-62-cra/). The work programme covers horizontal (product-agnostic) and vertical (product-specific) standards, to be delivered at least one year before the CRA fully applies in December 2027.
+- **Commission FAQ:** The Commission maintains a living [CRA implementation FAQ](https://digital-strategy.ec.europa.eu/en/library/cyber-resilience-act-implementation-frequently-asked-questions) covering scope questions, the open-source regime, support periods, and reporting obligations.
 
 ---
 
@@ -180,6 +217,7 @@ SBOMs of used components MAY be referenced instead of merged, if they are TR-031
 8. **Digitally sign** the SBOM so recipients can verify authenticity (recommended)
 9. **Be prepared to provide** the SBOM to market surveillance authorities upon request
 10. **If sharing with users**, document where the SBOM can be accessed
+11. **Stand up SBOM-driven vulnerability monitoring now** - reporting obligations for actively exploited vulnerabilities begin 11 September 2026, with a 24-hour early-warning deadline
 
 ---
 
@@ -205,6 +243,9 @@ BSI maintains a CycloneDX property taxonomy for TR-03183-2 specific fields: [git
 
 - [EU Cyber Resilience Act (Regulation 2024/2847)](https://eur-lex.europa.eu/eli/reg/2024/2847/oj)
 - [BSI TR-03183-2: Software Bill of Materials (SBOM)](https://bsi.bund.de/dok/TR-03183-en) - v2.1.0, August 2025
+- [European Commission: CRA Reporting Obligations](https://digital-strategy.ec.europa.eu/en/policies/cra-reporting)
+- [European Commission: CRA Implementation FAQ](https://digital-strategy.ec.europa.eu/en/library/cyber-resilience-act-implementation-frequently-asked-questions)
+- [ENISA: CRA Single Reporting Platform](https://www.enisa.europa.eu/topics/product-security-and-certification/single-reporting-platform-srp)
 
 ---
 
