@@ -19,6 +19,7 @@ This website provides:
 - /features/trust-center/ - Trust Center for sharing security artifacts
 - /features/integrations/ - CI/CD integrations (GitHub, GitLab, Bitbucket)
 - /features/sbom-hierarchy/ - Product, Component, Release hierarchy
+- /features/cbom/ - CBOM (Cryptography Bill of Materials) management and post-quantum readiness
 - /pricing/ - Pricing plans (Community, Business, Enterprise)
 - /blog/ - Technical articles and announcements
 - /resources/ - SBOM tools directory and lifecycle overview

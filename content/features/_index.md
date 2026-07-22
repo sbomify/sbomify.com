@@ -15,6 +15,10 @@ Streamline your SBOM workflow from creation to analysis. Our comprehensive tools
 
 Turn transparency into a competitive advantage. Share SBOMs, VEX statements, and security certifications (like SOC 2 and ISO 27001) with stakeholders through a branded, automated portal. Support for both public transparency and private, invited access ensures you stay in control. [Explore Trust Center →](/features/trust-center/)
 
+### CBOM: Cryptography Bill of Materials
+
+Know your cryptographic posture before the post-quantum deadlines arrive. Upload CBOMs (or SBOMs with embedded crypto assets), get every algorithm graded for quantum readiness, track certificate expiry, export cipher-suite inventories for PCI DSS 12.3.3, and share your posture on your Trust Center. [Explore CBOM support →](/features/cbom/)
+
 ### SBOM Hierarchy
 
 Understand complex relationships between your software components with our hierarchical view. Map dependencies across your entire software portfolio and identify potential vulnerabilities at any level. [Discover SBOM Hierarchy →](/features/sbom-hierarchy)
