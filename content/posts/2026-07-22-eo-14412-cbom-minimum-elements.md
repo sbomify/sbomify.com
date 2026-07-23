@@ -40,7 +40,7 @@ This sits on top of deadlines that already exist. [NSA CNSA 2.0](https://media.d
 
 While federal guidance is being written, one commercial requirement is already enforceable: **PCI DSS 4.x requirement 12.3.3**, mandatory since March 31, 2025, requires a documented inventory of the cipher suites and protocols in use across the cardholder data environment, reviewed at least annually.
 
-Read that requirement next to the CycloneDX CBOM specification and the overlap is complete: an inventory of protocols and cipher suites *is* CBOM data. Organizations producing CBOMs today can [export exactly that inventory as evidence](/features/cbom/), while everyone else assembles it by hand every assessment cycle.
+Read that requirement next to the CycloneDX CBOM specification and the overlap is complete: an inventory of protocols and cipher suites _is_ CBOM data. Organizations producing CBOMs today can [export exactly that inventory as evidence](/features/cbom/), while everyone else assembles it by hand every assessment cycle.
 
 ## What minimum elements will likely contain
 
