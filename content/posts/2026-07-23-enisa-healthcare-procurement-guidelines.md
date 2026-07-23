@@ -81,6 +81,6 @@ The guidelines hand procurement teams a checklist, and Annex B makes it filterab
 
 ## How sbomify Helps
 
-This is the workflow sbomify was built for. Suppliers can generate SBOMs automatically in CI/CD with the [sbomify GitHub Action](https://github.com/sbomify/github-action), organize them by product and release, and share them with customers through a portal instead of email attachments. Healthcare buyers get continuous vulnerability monitoring of every collected SBOM, so the component inventory ENISA asks for stays live instead of going stale in a filing cabinet.
+This is the workflow sbomify was built for. Suppliers can generate SBOMs automatically in CI/CD with the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action), organize them by product and release, and share them with customers through a portal instead of email attachments. Healthcare buyers get continuous vulnerability monitoring of every collected SBOM, so the component inventory ENISA asks for stays live instead of going stale in a filing cabinet.
 
 The pattern behind these guidelines is bigger than healthcare: regulators and buyers everywhere are converging on the same demand, namely that software suppliers know and disclose what is inside their products. ENISA did not need to write the word SBOM for that to be the answer.
