@@ -62,6 +62,24 @@ The deadlines are tight (Article 14):
 
 ---
 
+## Penalties (Article 64)
+
+Enforcement is national: Member States lay down the penalty rules, and market surveillance authorities or national courts impose the fines (Article 64(1), (7) and (8)). The administrative fine ceilings, however, are set EU-wide:
+
+| Infringement                                                                                                                                                                                                  | Maximum administrative fine                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Non-compliance with the essential cybersecurity requirements (Annex I) or the manufacturer obligations in Articles 13 and 14, which include the SBOM duty and the reporting obligations above (Article 64(2)) | EUR 15,000,000 or, for an undertaking, up to 2.5% of total worldwide annual turnover for the preceding financial year, whichever is higher |
+| Non-compliance with other operator obligations, including those of importers and distributors (Articles 18 to 23, 28, 30 to 32, 33(5), 39, 41, 47, 49 and 53) (Article 64(3))                                 | EUR 10,000,000 or up to 2% of total worldwide annual turnover, whichever is higher                                                         |
+| Supplying incorrect, incomplete or misleading information to notified bodies and market surveillance authorities (Article 64(4))                                                                              | EUR 5,000,000 or up to 1% of total worldwide annual turnover, whichever is higher                                                          |
+
+When setting the amount, authorities must take into account the nature, gravity and duration of the infringement, whether fines have already been applied for similar infringements, and the size and market share of the offender, with particular regard to microenterprises, SMEs and start-ups (Article 64(5)).
+
+Article 64(10) carves out two derogations from the fines in paragraphs (3) to (9): manufacturers that qualify as microenterprises or small enterprises cannot be fined for missing the 24-hour early-warning deadlines in Article 14(2), point (a), or Article 14(4), point (a), and **open-source software stewards** cannot be fined under those paragraphs for any infringement of the Regulation.
+
+**Timing:** the reporting obligations bind from 11 September 2026 and the essential requirements, including the SBOM obligation, from 11 December 2027 (Article 71). The fine ceilings above are the exposure once the corresponding obligation applies.
+
+---
+
 ## CRA Legal Baseline
 
 ### SBOM Requirement
