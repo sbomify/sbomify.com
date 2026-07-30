@@ -1,22 +1,58 @@
 <head>
+  {{- /* Paginated pages (/blog/page/2/ etc.) need their own canonical URL,
+       title, and description so they don't count as duplicates of page 1. */ -}}
+  {{- $paginator := partial "paginator.html" . -}}
+  {{- $pageSuffix := "" -}}
+  {{- $canonical := .Permalink -}}
+  {{- with $paginator -}}
+    {{- if gt .PageNumber 1 -}}
+      {{- $pageSuffix = printf " - Page %d of %d" .PageNumber .TotalPages -}}
+      {{- $canonical = .URL | absURL -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $desc := or .Params.description "" -}}
+  {{- if not $desc -}}
+    {{- if eq .Kind "term" -}}
+      {{- if eq .Data.Plural "categories" -}}
+        {{- $desc = printf "All sbomify blog posts in the %s category: articles on SBOMs, software supply chain security, and compliance." (.Title | lower) -}}
+      {{- else -}}
+        {{- $desc = printf "All sbomify blog posts tagged %s: articles on SBOMs, software supply chain security, and compliance." (.Title | lower) -}}
+      {{- end -}}
+    {{- else if eq .Kind "taxonomy" -}}
+      {{- $desc = printf "Browse the sbomify blog by %s to find articles on SBOMs, software supply chain security, and compliance." (.Title | lower) -}}
+    {{- else -}}
+      {{- $desc = site.Params.description -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $desc = printf "%s%s" $desc $pageSuffix -}}
+  {{- /* Distinguish term page titles from same-named content pages
+       (e.g. /tags/integrations/ vs /features/integrations/). */ -}}
+  {{- $title := .Title -}}
+  {{- if eq .Kind "term" -}}
+    {{- if eq .Data.Plural "categories" -}}
+      {{- $title = printf "%s Category" .Title -}}
+    {{- else -}}
+      {{- $title = printf "%s Articles" .Title -}}
+    {{- end -}}
+  {{- end -}}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ if eq .RelPermalink "/" }}{{ .Title | default site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
-  <meta name="description" content="{{ .Params.description | default site.Params.description }}">
+  <title>{{ if eq .RelPermalink "/" }}{{ $title | default site.Title }}{{ else }}{{ $title }}{{ $pageSuffix }} | {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ $desc }}">
   <meta name="keywords" content="{{ with .Params.keywords }}{{ delimit . ", " }}{{ else }}{{ delimit site.Params.keywords ", " }}{{ end }}">
 
   <!-- Canonical URL -->
-  <link rel="canonical" href="{{ .Permalink }}">
+  <link rel="canonical" href="{{ $canonical }}">
 
   <!-- Robots meta -->
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index, follow">
 
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="{{ .Title | default site.Title }}">
-  <meta property="og:description" content="{{ .Params.description | default site.Params.description }}">
+  <meta property="og:title" content="{{ $title | default site.Title }}{{ $pageSuffix }}">
+  <meta property="og:description" content="{{ $desc }}">
   <meta property="og:type" content="{{ if eq .Type "posts" }}article{{ else }}website{{ end }}">
-  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:url" content="{{ $canonical }}">
   {{- $ogImage := .Params.image | default site.Params.social.image -}}
   <meta property="og:image" content="{{ $ogImage | absURL }}">
   <meta property="og:image:width" content="1200">
@@ -38,8 +74,8 @@
 
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ .Title | default site.Title }}">
-  <meta name="twitter:description" content="{{ .Params.description | default site.Params.description }}">
+  <meta name="twitter:title" content="{{ $title | default site.Title }}{{ $pageSuffix }}">
+  <meta name="twitter:description" content="{{ $desc }}">
   <meta name="twitter:image" content="{{ $ogImage | absURL }}">
   <meta name="twitter:image:alt" content="{{ .Title | default site.Title }}">
   {{- $twitterHandle := "" -}}
@@ -51,8 +87,8 @@
 
   <!-- LinkedIn Card Meta Tags -->
   <meta property="linkedin:card" content="summary_large_image">
-  <meta property="linkedin:title" content="{{ .Title | default site.Title }}">
-  <meta property="linkedin:description" content="{{ .Params.description | default site.Params.description }}">
+  <meta property="linkedin:title" content="{{ $title | default site.Title }}{{ $pageSuffix }}">
+  <meta property="linkedin:description" content="{{ $desc }}">
   <meta property="linkedin:image" content="{{ $ogImage | absURL }}">
   <meta property="linkedin:author" content="{{ $linkedinUrl }}">
 
@@ -88,19 +124,27 @@
     "sameAs": [
       {{ range $i, $p := site.Params.social.profiles }}{{ if $i }},{{ end }}"{{ $p.url }}"{{ end }}
     ],
-    "description": {{ site.Params.description | jsonify }}
+    "description": {{ site.Params.description | jsonify | safeJS }}
   }
   </script>
 
-  <!-- Schema.org structured data: SoftwareApplication -->
+  {{ if .IsHome }}
+  <!-- Schema.org structured data: Product (Google requires aggregateRating or
+       review on SoftwareApplication; Product validates with offers alone) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "Product",
+    "additionalType": "https://schema.org/SoftwareApplication",
     "name": "sbomify",
-    "applicationCategory": "BusinessApplication",
-    "applicationSubCategory": "Supply Chain Security",
-    "operatingSystem": "Cloud",
+    "description": {{ site.Params.description | jsonify | safeJS }},
+    "url": "{{ site.BaseURL }}",
+    "image": "{{ site.BaseURL }}android-chrome-512x512.png",
+    "brand": {
+      "@type": "Organization",
+      "name": "sbomify"
+    },
+    "category": "Supply Chain Security Software",
     "offers": [
       {
         "@type": "Offer",
@@ -108,7 +152,8 @@
         "price": "0",
         "priceCurrency": "USD",
         "description": "For OSS maintainers and hobby projects",
-        "availability": "https://schema.org/InStock"
+        "availability": "https://schema.org/InStock",
+        "url": "{{ site.BaseURL }}pricing/"
       },
       {
         "@type": "Offer",
@@ -117,27 +162,13 @@
         "priceCurrency": "USD",
         "description": "For mid-size teams needing private SBOMs",
         "availability": "https://schema.org/InStock",
-        "priceValidUntil": "{{ now.AddDate 0 1 0 | time.Format "2006-01-02" }}"
-      },
-      {
-        "@type": "Offer",
-        "name": "Enterprise",
-        "description": "For large orgs with advanced security & compliance needs. Contact for pricing.",
-        "availability": "https://schema.org/InStock"
+        "priceValidUntil": "{{ now.AddDate 0 1 0 | time.Format "2006-01-02" }}",
+        "url": "{{ site.BaseURL }}pricing/"
       }
-    ],
-    "description": {{ site.Params.description | jsonify }},
-    "url": "{{ site.BaseURL }}",
-    "featureList": [
-      "SBOM Generation",
-      "SBOM Management",
-      "Supply Chain Security",
-      "Compliance Management",
-      "Vulnerability Tracking"
-    ],
-    "softwareVersion": "1.0"
+    ]
   }
   </script>
+  {{ end }}
 
   {{ if eq .Type "posts" }}
   <!-- Schema.org structured data: BlogPosting / TechArticle -->
@@ -156,8 +187,8 @@
       "@type": "WebPage",
       "@id": "{{ .Permalink }}"
     },
-    "headline": {{ .Title | jsonify }},
-    "description": {{ (.Params.description | default site.Params.description) | jsonify }},
+    "headline": {{ .Title | jsonify | safeJS }},
+    "description": {{ (.Params.description | default site.Params.description) | jsonify | safeJS }},
     "image": "{{ $ogImage | absURL }}",
     "author": {
       "@type": "Person",
@@ -210,7 +241,7 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": {{ .Title | jsonify }},
+        "name": {{ .Title | jsonify | safeJS }},
         "item": "{{ .Permalink }}"
       }
     ]
@@ -224,8 +255,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": {{ .Title | jsonify }},
-    "description": {{ (.Params.description | default site.Params.description) | jsonify }},
+    "headline": {{ .Title | jsonify | safeJS }},
+    "description": {{ (.Params.description | default site.Params.description) | jsonify | safeJS }},
     "image": "{{ (.Params.logo | default site.Params.social.image) | absURL }}",
     "publisher": {
       "@type": "Organization",
@@ -265,7 +296,7 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": {{ .Title | jsonify }},
+        "name": {{ .Title | jsonify | safeJS }},
         "item": "{{ .Permalink }}"
       }
     ]
@@ -283,10 +314,10 @@
       {{ range $i, $qa := .Params.faq }}
       {{ if $i }},{{ end }}{
         "@type": "Question",
-        "name": {{ $qa.question | jsonify }},
+        "name": {{ $qa.question | jsonify | safeJS }},
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": {{ $qa.answer | jsonify }}
+          "text": {{ $qa.answer | jsonify | safeJS }}
         }
       }
       {{ end }}
@@ -311,8 +342,8 @@
   {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    "name": {{ .Title | jsonify }},
-    "description": {{ (.Params.description | default site.Params.description) | jsonify }},
+    "name": {{ .Title | jsonify | safeJS }},
+    "description": {{ (.Params.description | default site.Params.description) | jsonify | safeJS }},
     "image": "{{ $ogImage | absURL }}",
     "proficiencyLevel": "Beginner",
     "inLanguage": "en-US"
@@ -411,10 +442,10 @@
       {{ range $i, $faq := .Pages.ByWeight }}
       {{ if $i }},{{ end }}{
         "@type": "Question",
-        "name": {{ $faq.Title | jsonify }},
+        "name": {{ $faq.Title | jsonify | safeJS }},
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": {{ $faq.Params.answer | jsonify }}
+          "text": {{ $faq.Params.answer | jsonify | safeJS }}
         }
       }
       {{ end }}
@@ -438,7 +469,7 @@
           "@type": "ListItem",
           "position": {{ add $i 1 }},
           "url": "{{ $faq.Permalink }}",
-          "name": {{ $faq.Title | jsonify }}
+          "name": {{ $faq.Title | jsonify | safeJS }}
         }
         {{ end }}
       ]
@@ -478,10 +509,10 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": {{ .Title | jsonify }},
+        "name": {{ .Title | jsonify | safeJS }},
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": {{ .Params.answer | jsonify }}
+          "text": {{ .Params.answer | jsonify | safeJS }}
         }
       }
     ]
@@ -493,8 +524,8 @@
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": {{ .Title | jsonify }},
-    "description": {{ (.Params.description | default site.Params.description) | jsonify }},
+    "name": {{ .Title | jsonify | safeJS }},
+    "description": {{ (.Params.description | default site.Params.description) | jsonify | safeJS }},
     "url": "{{ .Permalink }}",
     "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
     "isPartOf": {
@@ -534,7 +565,7 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": {{ .Title | jsonify }},
+        "name": {{ .Title | jsonify | safeJS }},
         "item": "{{ .Permalink }}"
       }
     ]
