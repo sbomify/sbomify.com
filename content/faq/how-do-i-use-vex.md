@@ -1,8 +1,8 @@
 ---
 title: "How do I use VEX with sbomify?"
 description: "Learn how Vulnerability Exploitability eXchange (VEX) lets you communicate which vulnerabilities actually affect your product, and how to upload, triage, and distribute VEX documents through sbomify."
-answer: "A VEX document tells consumers which vulnerabilities in your SBOM are actually exploitable in your product and which are not. sbomify ingests CycloneDX VEX, OpenVEX, and CSAF 2.0 VEX, applies your statements to OSV and Dependency Track findings so noise is suppressed, and publishes the VEX alongside your SBOMs in your Trust Center. You can also triage vulnerabilities directly in sbomify and generate a VEX from your decisions."
-tldr: "VEX is the companion to your SBOM that says \"this CVE is in our dependency tree but it does not actually affect our product, here is why.\" sbomify accepts VEX in CycloneDX, OpenVEX, and CSAF 2.0 formats, suppresses VEX'd findings in your vulnerability results, flags CISA KEV entries, and shares VEX next to SBOMs in the Trust Center."
+answer: "A VEX document tells consumers which vulnerabilities in your SBOM are actually exploitable in your product and which are not. sbomify ingests CycloneDX VEX, OpenVEX, and CSAF 2.0 VEX, applies your statements to OSV and Dependency Track findings so noise is suppressed, and publishes the VEX alongside your SBOMs in your Trust Center. You can also triage vulnerabilities directly in sbomify, generate a VEX from your decisions, and have sbomify flag statements that have gone stale or High and Critical findings that no statement covers."
+tldr: "VEX is the companion to your SBOM that says \"this CVE is in our dependency tree but it does not actually affect our product, here is why.\" sbomify accepts VEX in CycloneDX, OpenVEX, and CSAF 2.0 formats, suppresses VEX'd findings in your vulnerability results, flags CISA KEV entries, shares VEX next to SBOMs in the Trust Center, and runs scheduled drift detection so stale statements and uncovered High/Critical findings do not go unnoticed."
 weight: 67
 keywords: [VEX, CycloneDX VEX, OpenVEX, CSAF VEX, vulnerability exploitability, SBOM VEX, vulnerability triage, CISA KEV, false positive, CRA VEX]
 url: /faq/how-do-i-use-vex/
@@ -133,9 +133,20 @@ You do not have to author VEX by hand or in an external tool. sbomify has an in-
 - **In-app triage.** Review scanner findings on the vulnerability dashboard, record `not_affected` decisions with justifications, apply bulk decisions across CVEs, and preview the effect with a dry run before committing.
 - **CISA KEV flags.** Findings that appear in the CISA Known Exploited Vulnerabilities catalog are flagged so you triage the vulnerabilities that attackers actually use first.
 - **Self-VEX generation.** sbomify generates a CycloneDX VEX from your triage decisions, complete with CISA tracking fields (serial number and statement timestamps), so your published VEX always matches your ledger.
-- **Dependency Track sync.** If Dependency Track is your triage system of record, sbomify syncs your DT analysis decisions in as VEX and pins them to the matching releases.
+- **Dependency Track sync.** If Dependency Track is your triage system of record, opt in and sbomify syncs your DT analysis decisions in as VEX, pinning them to the matching releases so you do not triage the same finding twice.
 
 Alternatively, keep a source-controlled `vex/` directory in the same repo that produces the SBOM, merge the per-CVE statements in CI, and upload the result alongside the SBOM. Pull requests on `vex/` carry the audit trail.
+
+## Keeping your statements current
+
+A VEX statement is a claim about a specific version of your product, and claims expire. The vulnerable code path you ruled unreachable last quarter may be reachable after a refactor, and a new release can pull in High or Critical findings that no existing statement covers. Left alone, a stale `not_affected` is worse than no VEX at all: it tells your customers you have assessed something you have not.
+
+sbomify checks for this on a schedule and tells you when your VEX has drifted away from reality:
+
+- **Stale statements.** Statements that no longer match the findings on your current release are surfaced rather than silently carried forward.
+- **Uncovered High and Critical findings.** New findings at High or Critical severity with no VEX statement covering them are flagged, so the gap between "scanned" and "assessed" does not quietly widen between releases.
+
+This runs without configuration. The point is that VEX becomes something you can rely on for audit and customer questions, instead of a document that was accurate on the day it was written.
 
 ## Signing your VEX
 
