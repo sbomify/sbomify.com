@@ -9,7 +9,6 @@ tags: [sbom, release, vex, openvex, csaf, cbom, vulnerability-management, trust-
 tldr: "sbomify v26.7.1 makes VEX a first-class citizen: author or upload VEX in CycloneDX, OpenVEX, or CSAF, triage findings in the product, sync triage decisions from Dependency-Track, and let scheduled drift detection tell you when your statements have gone stale or a new High/Critical finding is uncovered. The release also broadens CBOM ingestion to every lineage, surfaces VEX and CBOM per release in the Trust Center, and fixes vulnerability counts so they reflect your current release rather than every SBOM you have ever uploaded."
 date: 2026-07-30
 slug: announcing-sbomify-v26-7-1-the-one-that-says-not-affected
-draft: true
 ---
 
 An SBOM tells you what is in your software. A vulnerability scanner tells you which of those components have known CVEs. Neither answers the question your customers actually ask: **are you affected?**
