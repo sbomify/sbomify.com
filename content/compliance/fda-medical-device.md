@@ -59,7 +59,7 @@ sbomify ships an **FDA Medical Device (2025)** plugin that grades each uploaded 
 
 ## Additional Resources
 
-For more details, see our [FDA Medical Device SBOM Requirements guide](/blog/fda-medical-device-sbom-requirements/).
+For more details, see our [FDA Medical Device SBOM Requirements guide](/2026/01/09/fda-medical-device-sbom-requirements/).
 
 ## Official Source
 
