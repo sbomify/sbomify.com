@@ -34,7 +34,23 @@ jobs:
           bun-version: latest
 
       - name: Install d2
-        run: curl -fsSL https://d2lang.com/install.sh | sh -s --
+        env:
+          # Pinned: the upstream install.sh runs `make install`, which writes a
+          # man page into /usr/local/share/man/man1 and fails on GitHub runners
+          # with "Permission denied". Installing the binary directly avoids that,
+          # and pins the version instead of piping an unversioned script to sh.
+          D2_VERSION: 0.7.1
+          D2_SHA256: eb172adf59f38d1e5a70ab177591356754ffaf9bebb84e0ca8b767dfb421dad7
+        run: |
+          curl -fsSL -o d2.tar.gz \
+            "https://github.com/terrastruct/d2/releases/download/v${D2_VERSION}/d2-v${D2_VERSION}-linux-amd64.tar.gz"
+          echo "${D2_SHA256}  d2.tar.gz" | sha256sum -c -
+          tar -xzf d2.tar.gz
+          mkdir -p "${HOME}/.local/bin"
+          install -m 0755 "d2-v${D2_VERSION}/bin/d2" "${HOME}/.local/bin/d2"
+          echo "${HOME}/.local/bin" >> "${GITHUB_PATH}"
+          rm -rf d2.tar.gz "d2-v${D2_VERSION}"
+          "${HOME}/.local/bin/d2" --version
 
       - name: Cache Bun dependencies
         uses: actions/cache@v4
