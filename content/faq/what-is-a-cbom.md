@@ -2,7 +2,7 @@
 title: "What is a CBOM and how does sbomify support it?"
 description: "A Cryptography Bill of Materials (CBOM) inventories the cryptographic assets in your software. sbomify auto-detects CBOMs, builds a crypto inventory, and assesses post-quantum readiness."
 answer: "A CBOM (Cryptography Bill of Materials) is a CycloneDX BOM that inventories cryptographic assets: algorithms, keys, certificates, and protocols. sbomify auto-detects CBOM content on upload, renders a crypto-asset inventory, runs a post-quantum cryptography (PQC) readiness assessment against NIST guidance, and publishes CBOMs on your public release pages next to your SBOMs."
-tldr: "A CBOM is the cryptographic sibling of an SBOM: it lists the algorithms, keys, certificates, and protocols your software uses. sbomify ingests and auto-classifies CBOMs, shows a crypto inventory with a post-quantum readiness view, and shares them through your Trust Center."
+tldr: "A CBOM is the cryptographic sibling of an SBOM: it lists the algorithms, keys, certificates, and protocols your software uses. sbomify ingests and auto-classifies CBOMs from any generator, normalizes them against the CycloneDX 1.7 crypto registry, shows a crypto inventory with a post-quantum readiness view, and shares them through your Trust Center."
 weight: 68
 keywords: [CBOM, Cryptography Bill of Materials, crypto inventory, post-quantum cryptography, PQC readiness, quantum-safe, CycloneDX CBOM]
 url: /faq/what-is-a-cbom/
@@ -16,9 +16,10 @@ That question is becoming urgent. Migrating to post-quantum cryptography starts 
 
 ## What sbomify does with CBOMs
 
-- **Auto-detection.** Upload a CycloneDX document containing cryptographic assets and sbomify automatically classifies it as a CBOM, no special flag needed. You can also be explicit with `BOM_TYPE: cbom` in [sbomify-action](https://github.com/sbomify/sbomify-action), which uploads the document verbatim.
+- **Auto-detection, whatever produced it.** Upload a CycloneDX document containing cryptographic assets and sbomify automatically classifies it as a CBOM, no special flag needed. Every CBOM lineage is ingested, and assets are normalized against the CycloneDX 1.7 cryptographic registry, so output from different generators lands in the same shape instead of depending on which tool you happened to use. You can also be explicit with `BOM_TYPE: cbom` in [sbomify-action](https://github.com/sbomify/sbomify-action), which uploads the document verbatim.
 - **Crypto-asset inventory.** The document detail page renders an inventory of the cryptographic assets found: algorithms, key sizes, certificates, and protocols.
 - **Post-quantum readiness.** The PQC readiness assessment plugin classifies each asset against NIST guidance and gives your component a post-quantum posture view, so you can see at a glance which algorithms are quantum-vulnerable and where.
+- **Workspace-level crypto posture.** Your workspace dashboard summarizes crypto posture alongside your other artifacts, so post-quantum readiness is visible across the estate rather than one component at a time.
 - **Trust Center distribution.** CBOMs appear on your public release pages next to SBOMs and VEX, with the same access controls, and are exposed through the [Transparency Exchange API](/faq/how-do-i-enable-tea-in-sbomify/) as a supported artifact type.
 
 ## How do I generate a CBOM?

@@ -43,7 +43,7 @@ Knowing when your software reaches end-of-support or end-of-life is critical for
 
 You can set these dates manually in the UI for both **products** and **components**. This is useful for tracking your own release schedules and support commitments.
 
-For common Linux distributions and frameworks, lifecycle data can also be added automatically. The [Lifecycle Database](/blog/2026/01/20/announcing-sbomify-action-v0-11-the-one-where-they-go-to-pypi/#know-when-your-software-goes-end-of-life) in sbomify-action embeds CLE data directly into your SBOMs during generation. This covers distributions like Ubuntu, Debian, Alpine, and Fedora, as well as language runtimes and frameworks including Python, Go, Django, Rails, and React.
+For common Linux distributions and frameworks, lifecycle data can also be added automatically. The [Lifecycle Database](/2026/01/20/announcing-sbomify-action-v0-11-the-one-where-they-go-to-pypi/#know-when-your-software-goes-end-of-life) in sbomify-action embeds CLE data directly into your SBOMs during generation. This covers distributions like Ubuntu, Debian, Alpine, and Fedora, as well as language runtimes and frameworks including Python, Go, Django, Rails, and React.
 
 These dates flow through to your Trust Center and can be displayed on public product pages. For organizations subject to regulations like the [EU Cyber Resilience Act](/compliance/eu-cra/), tracking lifecycle information is a requirement.
 
