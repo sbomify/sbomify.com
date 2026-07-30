@@ -25,7 +25,7 @@ SBOMs are increasingly required by law and industry standards:
 - **[EU Cyber Resilience Act (CRA)](/compliance/eu-cra/)** - Requires SBOMs for all products with digital elements sold in the EU
 - **[NTIA Minimum Elements](/compliance/ntia-minimum-elements/)** - US government baseline for SBOM content
 - **[NIST 800-171](/compliance/nist-800-171/)** - Supply chain risk management requirements
-- **[FDA guidance](/compliance/fda/)** - Medical device manufacturers must submit SBOMs
+- **[FDA guidance](/compliance/fda-medical-device/)** - Medical device manufacturers must submit SBOMs
 - **[PCI DSS 4.0](/compliance/pci-dss/)** - Payment industry now references software composition analysis
 
 See our full [Compliance guide](/compliance/) for details on each framework.
