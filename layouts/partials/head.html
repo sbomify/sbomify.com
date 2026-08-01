@@ -146,7 +146,7 @@
     "url": "{{ site.BaseURL }}",
     "image": "{{ site.BaseURL }}android-chrome-512x512.png",
     "brand": {
-      "@type": "Organization",
+      "@type": "Brand",
       "name": "sbomify"
     },
     "category": "Supply Chain Security Software",
@@ -173,6 +173,8 @@
         "priceCurrency": "USD",
         "description": "For OSS maintainers and hobby projects",
         "availability": "https://schema.org/InStock",
+        "validFrom": "{{ now.Format "2006-01-02" }}",
+        "priceValidUntil": "{{ now.AddDate 0 1 0 | time.Format "2006-01-02" }}",
         "url": "{{ site.BaseURL }}pricing/"
       },
       {
@@ -182,6 +184,7 @@
         "priceCurrency": "USD",
         "description": "For mid-size teams needing private SBOMs",
         "availability": "https://schema.org/InStock",
+        "validFrom": "{{ now.Format "2006-01-02" }}",
         "priceValidUntil": "{{ now.AddDate 0 1 0 | time.Format "2006-01-02" }}",
         "url": "{{ site.BaseURL }}pricing/"
       }
