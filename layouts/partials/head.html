@@ -130,7 +130,12 @@
 
   {{ if .IsHome }}
   <!-- Schema.org structured data: Product (Google requires aggregateRating or
-       review on SoftwareApplication; Product validates with offers alone) -->
+       review on SoftwareApplication; Product validates with offers alone).
+       The review below is the Atsign testimonial rendered in the "Trusted By"
+       section of this same page — structured data must reflect content the
+       visitor can actually see, so the reviewBody matches that blockquote
+       verbatim. No reviewRating/aggregateRating: we have collected no ratings,
+       and inventing one would breach Google's review policy. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -141,10 +146,25 @@
     "url": "{{ site.BaseURL }}",
     "image": "{{ site.BaseURL }}android-chrome-512x512.png",
     "brand": {
-      "@type": "Organization",
+      "@type": "Brand",
       "name": "sbomify"
     },
     "category": "Supply Chain Security Software",
+    "review": {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Chris Swan",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Atsign",
+          "url": "https://atsign.com"
+        }
+      },
+      "datePublished": "2024-11-22",
+      "reviewBody": "Using sbomify has hugely accelerated our work on NTIA compliance. Viktor has also been leading a group that\u2019s creating standards for making SBOMs \u2014 this gives us confidence that sbomify will become a platform that follows industry practices as they emerge.",
+      "url": "{{ site.BaseURL }}case-studies/atsign/"
+    },
     "offers": [
       {
         "@type": "Offer",
@@ -153,6 +173,8 @@
         "priceCurrency": "USD",
         "description": "For OSS maintainers and hobby projects",
         "availability": "https://schema.org/InStock",
+        "validFrom": "{{ now.Format "2006-01-02" }}",
+        "priceValidUntil": "{{ now.AddDate 0 1 0 | time.Format "2006-01-02" }}",
         "url": "{{ site.BaseURL }}pricing/"
       },
       {
@@ -162,6 +184,7 @@
         "priceCurrency": "USD",
         "description": "For mid-size teams needing private SBOMs",
         "availability": "https://schema.org/InStock",
+        "validFrom": "{{ now.Format "2006-01-02" }}",
         "priceValidUntil": "{{ now.AddDate 0 1 0 | time.Format "2006-01-02" }}",
         "url": "{{ site.BaseURL }}pricing/"
       }
