@@ -85,18 +85,16 @@
   <meta name="twitter:site" content="@{{ $twitterHandle }}">
   <meta name="twitter:creator" content="@{{ $twitterHandle }}">
 
-  <!-- LinkedIn Card Meta Tags -->
-  <meta property="linkedin:card" content="summary_large_image">
-  <meta property="linkedin:title" content="{{ $title | default site.Title }}{{ $pageSuffix }}">
-  <meta property="linkedin:description" content="{{ $desc }}">
-  <meta property="linkedin:image" content="{{ $ogImage | absURL }}">
-  <meta property="linkedin:author" content="{{ $linkedinUrl }}">
+  {{/* No linkedin:* meta tags. There is no such vocabulary -- LinkedIn reads
+       the standard Open Graph tags above. Emitting them with property=""
+       declares RDFa properties in an undefined "linkedin" prefix, which
+       validators report as a structured-data error on every page. */}}
 
   <link rel="dns-prefetch" href="//us.i.posthog.com">
   <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  {{ $css := resources.Get "css/styles.css" | fingerprint }}
+  {{ $css := resources.Get "css/styles.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}">
-  {{ $nativeCss := resources.Get "css/native.css" | fingerprint }}
+  {{ $nativeCss := resources.Get "css/native.css" | minify | fingerprint }}
   <link rel="preload" href="{{ $nativeCss.RelPermalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="{{ $nativeCss.RelPermalink }}"></noscript>
 

@@ -1,16 +1,16 @@
 nav:
   - name: Zero to Hero
-    link: /zero-to-hero
+    link: /zero-to-hero/
   - name: What is an SBOM?
-    link: /what-is-sbom
+    link: /what-is-sbom/
   - name: About
-    link: /about
+    link: /about/
   - name: Blog
-    link: /blog
+    link: /blog/
   - name: Case Studies
-    link: /case-studies
+    link: /case-studies/
   - name: Pricing
-    link: /pricing
+    link: /pricing/
 
 social:
   x: https://x.com/sbomify
