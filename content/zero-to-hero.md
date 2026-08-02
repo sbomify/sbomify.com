@@ -221,6 +221,6 @@ Regulators and buyers are no longer asking "do you have security?" - they're ask
 <div class="cta-box">
   <p><strong>Ready to become an SBOM Hero?</strong></p>
   <p>Start generating compliance-ready SBOMs in minutes with sbomify.</p>
-  <a href="https://app.sbomify.com/" class="cta-button" rel="nofollow">Get Started Free</a>
+  <a href="https://app.sbomify.com/" class="cta-button">Get Started Free</a>
   <p class="mt-4 text-sm text-gray-600">Or <a href="/guides/">explore our guides</a> to learn more.</p>
 </div>

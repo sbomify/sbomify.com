@@ -12,7 +12,7 @@ This page maps SBOM properties to their specific field paths in CycloneDX, SPDX 
 
 <div class="cta-box">
   <p><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" rel="nofollow">Get in Touch</a>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get in Touch</a>
 </div>
 
 **Note:** The CISA Framing document's published crosswalk table references CycloneDX v1.6. This page uses CycloneDX 1.7 schema paths, which are largely compatible but include some updates (e.g., tools object structure).

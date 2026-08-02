@@ -12,7 +12,7 @@ Software Bill of Materials (SBOM) compliance requirements are rapidly evolving a
 
 <div class="cta-box">
   <p><strong>Feeling overwhelmed?</strong> If all these frameworks, acronyms, and requirements look like gibberish, you're not alone. SBOM compliance can be complex, but you don't have to figure it out on your own.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" rel="nofollow">Get Help With Compliance</a>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get Help With Compliance</a>
 </div>
 
 **Disclaimer:** This page represents our interpretation of the referenced frameworks and standards. While we strive for accuracy, we may have made errors or omissions. This content is provided for informational purposes only and does not constitute legal advice. For compliance decisions, consult the official source documents and seek qualified legal counsel.

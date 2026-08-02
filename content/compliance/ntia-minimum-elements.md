@@ -14,7 +14,7 @@ section: compliance
 
 <div class="cta-box">
   <p><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" rel="nofollow">Get in Touch</a>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get in Touch</a>
 </div>
 
 ---
