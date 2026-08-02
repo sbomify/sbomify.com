@@ -28,7 +28,7 @@
         <a href="/compliance/" class="hover:text-purple transition-colors whitespace-nowrap">Compliance</a>
         <a href="/pricing/" class="hover:text-purple transition-colors whitespace-nowrap">Pricing</a>
         <a href="https://trust.sbomify.com/" class="hover:text-purple transition-colors whitespace-nowrap" target="_blank" rel="noopener noreferrer">Trust Center</a>
-        <a href="https://app.sbomify.com" class="hover:text-purple transition-colors whitespace-nowrap">Login</a>
+        <a href="https://app.sbomify.com" class="hover:text-purple transition-colors whitespace-nowrap" rel="nofollow">Login</a>
       </nav>
 
       <!-- Social & Legal Section -->
@@ -52,7 +52,7 @@
             <img src="/assets/images/site/linkedin-white.svg" alt="" aria-hidden="true" class="h-5 w-5" width="20" height="20" loading="lazy" />
             {{ end }}
           </a>
-          <a href="{{ site.Data.main.social.slack }}" class="opacity-70 hover:opacity-100 transition-opacity" aria-label="Join the sbomify Slack community" target="_blank" rel="noopener noreferrer">
+          <a href="{{ site.Data.main.social.slack }}" class="opacity-70 hover:opacity-100 transition-opacity" aria-label="Join the sbomify Slack community" target="_blank" rel="noopener noreferrer nofollow">
             {{ $slIcon := resources.Get "images/site/slack-white.svg" }}
             {{ if $slIcon }}
             {{ $slIcon = $slIcon | fingerprint }}
