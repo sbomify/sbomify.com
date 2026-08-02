@@ -52,7 +52,7 @@
             <img src="/assets/images/site/linkedin-white.svg" alt="" aria-hidden="true" class="h-5 w-5" width="20" height="20" loading="lazy" />
             {{ end }}
           </a>
-          <a href="{{ site.Data.main.social.slack }}" class="opacity-70 hover:opacity-100 transition-opacity" aria-label="Join the sbomify Slack community" target="_blank" rel="noopener noreferrer">
+          <a href="{{ site.Data.main.social.slack }}" class="opacity-70 hover:opacity-100 transition-opacity" aria-label="Join the sbomify Slack community" target="_blank" rel="noopener noreferrer nofollow">
             {{ $slIcon := resources.Get "images/site/slack-white.svg" }}
             {{ if $slIcon }}
             {{ $slIcon = $slIcon | fingerprint }}
@@ -65,9 +65,9 @@
         <div class="text-xs text-tertiaryText/60 text-center lg:text-right flex flex-col gap-1">
           <div>&copy; 2024 - {{ now.Format "2006" }} sbomify ltd. All rights reserved.</div>
           <div class="flex gap-2 justify-center lg:justify-end">
-            <a href="/privacy" class="hover:text-white transition-colors">Privacy</a>
+            <a href="/privacy/" class="hover:text-white transition-colors">Privacy</a>
             <span>&bull;</span>
-            <a href="/terms" class="hover:text-white transition-colors">Terms</a>
+            <a href="/terms/" class="hover:text-white transition-colors">Terms</a>
           </div>
           <div class="mt-1">
             <a href="https://studio.viktopia.io" class="hover:text-white transition-colors">A Viktopia Studio project</a>

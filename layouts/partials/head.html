@@ -13,10 +13,29 @@
   {{- $desc := or .Params.description "" -}}
   {{- if not $desc -}}
     {{- if eq .Kind "term" -}}
-      {{- if eq .Data.Plural "categories" -}}
-        {{- $desc = printf "All sbomify blog posts in the %s category: articles on SBOMs, software supply chain security, and compliance." (.Title | lower) -}}
+      {{- /* Derive the description from what the term actually contains. The
+           previous wording differed only by the term itself, which left ~12
+           taxonomy pages sharing a near-identical description; the post count
+           and newest headline make each one genuinely distinct and more
+           informative than boilerplate. */ -}}
+      {{- $n := len .Pages -}}
+      {{- $noun := cond (eq $n 1) "article" "articles" -}}
+      {{- $rel := cond (eq .Data.Plural "categories") "in the" "tagged" -}}
+      {{- $suffix := cond (eq .Data.Plural "categories") " category" "" -}}
+      {{- $latest := "" -}}
+      {{- with .Pages.ByDate.Reverse -}}
+        {{- /* Post titles may contain straight quotes (eg. v26.7.1 "Not
+             Affected"), which would end the attribute early. Fold them to
+             single quotes rather than relying on the minifier to swap the
+             surrounding quote style -- and so they stay legible next to the
+             typographic quotes wrapping the title itself. */ -}}
+        {{- $latest = replace (index . 0).Title "\"" "'" -}}
+      {{- end -}}
+      {{- $term := .Title | lower -}}
+      {{- if $latest -}}
+        {{- $desc = printf "%d sbomify %s %s %s%s, most recently “%s”." $n $noun $rel $term $suffix $latest -}}
       {{- else -}}
-        {{- $desc = printf "All sbomify blog posts tagged %s: articles on SBOMs, software supply chain security, and compliance." (.Title | lower) -}}
+        {{- $desc = printf "sbomify %s %s %s%s." $noun $rel $term $suffix -}}
       {{- end -}}
     {{- else if eq .Kind "taxonomy" -}}
       {{- $desc = printf "Browse the sbomify blog by %s to find articles on SBOMs, software supply chain security, and compliance." (.Title | lower) -}}
@@ -85,18 +104,16 @@
   <meta name="twitter:site" content="@{{ $twitterHandle }}">
   <meta name="twitter:creator" content="@{{ $twitterHandle }}">
 
-  <!-- LinkedIn Card Meta Tags -->
-  <meta property="linkedin:card" content="summary_large_image">
-  <meta property="linkedin:title" content="{{ $title | default site.Title }}{{ $pageSuffix }}">
-  <meta property="linkedin:description" content="{{ $desc }}">
-  <meta property="linkedin:image" content="{{ $ogImage | absURL }}">
-  <meta property="linkedin:author" content="{{ $linkedinUrl }}">
+  {{/* No linkedin:* meta tags. There is no such vocabulary -- LinkedIn reads
+       the standard Open Graph tags above. Emitting them with property=""
+       declares RDFa properties in an undefined "linkedin" prefix, which
+       validators report as a structured-data error on every page. */}}
 
   <link rel="dns-prefetch" href="//us.i.posthog.com">
   <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  {{ $css := resources.Get "css/styles.css" | fingerprint }}
+  {{ $css := resources.Get "css/styles.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}">
-  {{ $nativeCss := resources.Get "css/native.css" | fingerprint }}
+  {{ $nativeCss := resources.Get "css/native.css" | minify | fingerprint }}
   <link rel="preload" href="{{ $nativeCss.RelPermalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="{{ $nativeCss.RelPermalink }}"></noscript>
 
