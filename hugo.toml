@@ -2,17 +2,24 @@ baseURL = "https://sbomify.com"
 title = "Sbomify"
 languageCode = "en-us"
 
+# Enable .GitInfo (replaces _plugins/git_dates.rb)
+#
+# Keep this and ignoreFiles ABOVE the first table header. TOML assigns every
+# bare key to the table that precedes it, so while these sat under
+# [pagination] they were parsed as pagination.enableGitInfo /
+# pagination.ignoreFiles -- silently dropped by Hugo, with no root-level
+# enableGitInfo in `hugo config` at all. The visible symptom was .GitInfo nil
+# and .Lastmod zero on every page, which put "0001-01-01T00:00:00Z" into the
+# dateModified of 28 FAQ pages.
+enableGitInfo = true
+
+# Ignore leftover Jekyll files
+ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfile\\.lock", "convert_to_webp\\.rb$"]
+
 # Pagination (matches jekyll-paginate-v2: 12 per page)
 [pagination]
   pagerSize = 12
   path = "page"
-
-# Enable .GitInfo (replaces _plugins/git_dates.rb)
-enableGitInfo = true
-
-
-# Ignore leftover Jekyll files
-ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfile\\.lock", "convert_to_webp\\.rb$"]
 
 # Match Jekyll permalink exactly: /:year/:month/:day/:slug/
 [permalinks]
