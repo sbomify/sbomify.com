@@ -42,7 +42,7 @@ Because sbomify uses linkage rather than copying, multiple products (or versions
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/product_creation.webm" title="Creating components and products in sbomify" description="Walkthrough of setting up the sbomify hierarchy: creating components and attaching them to a product." >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/product_creation.webm" title="Creating components and products in sbomify" description="Walkthrough of setting up the sbomify hierarchy: creating components and attaching them to a product." upload_date="2026-02-26T19:24:17Z" >}}
 
 ## Sharing and exporting
 

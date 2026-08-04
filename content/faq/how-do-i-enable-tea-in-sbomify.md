@@ -11,7 +11,7 @@ url: /faq/how-do-i-enable-tea-in-sbomify/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/tea_enabling.webm" title="How to enable TEA in sbomify" description="Step-by-step screencast showing how to enable the Transparency Exchange API (TEA) in sbomify." >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/tea_enabling.webm" title="How to enable TEA in sbomify" description="Step-by-step screencast showing how to enable the Transparency Exchange API (TEA) in sbomify." upload_date="2026-02-26T19:24:17Z" >}}
 
 ## What is TEA?
 

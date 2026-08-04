@@ -10,7 +10,7 @@ url: /faq/how-do-i-delete-my-account/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/account_deletion.webm" title="How to delete your account in sbomify" description="Step-by-step screencast showing how to delete your account in sbomify." >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/account_deletion.webm" title="How to delete your account in sbomify" description="Step-by-step screencast showing how to delete your account in sbomify." upload_date="2026-02-26T13:02:46Z" >}}
 
 ## Deleting your account
 

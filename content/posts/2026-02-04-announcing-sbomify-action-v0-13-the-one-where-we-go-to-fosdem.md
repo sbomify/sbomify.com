@@ -19,7 +19,7 @@ This past weekend, we presented at FOSDEM in the Software Bill of Materials devr
 
 If you missed it, you can watch the full talk below.
 
-{{< video-embed-native video_url="https://video.fosdem.org/2026/ud2208/UYTGWA-sbom-generation.av1.webm" title="CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation" description="A four-phase SBOM generation model addressing the EU's Cyber Resilience Act requirements, covering authoring, augmenting, enriching, and signing SBOMs." >}}
+{{< video-embed-native video_url="https://video.fosdem.org/2026/ud2208/UYTGWA-sbom-generation.av1.webm" title="CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation" description="A four-phase SBOM generation model addressing the EU's Cyber Resilience Act requirements, covering authoring, augmenting, enriching, and signing SBOMs." upload_date="2026-02-03T18:53:55Z" >}}
 
 You can also find the talk on the [FOSDEM schedule](https://fosdem.org/2026/schedule/event/UYTGWA-sbom-generation/).
 

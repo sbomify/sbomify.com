@@ -29,37 +29,37 @@ For step-by-step guides on generating SBOMs for specific languages and platforms
 
 ### CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation
 
-{{< video-embed-native video_url="https://video.fosdem.org/2026/ud2208/UYTGWA-sbom-generation.av1.webm" title="CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation" description="A four-phase SBOM generation model addressing the EU's Cyber Resilience Act requirements, covering authoring, augmenting, enriching, and signing SBOMs to exceed minimal compliance standards." >}}
+{{< video-embed-native video_url="https://video.fosdem.org/2026/ud2208/UYTGWA-sbom-generation.av1.webm" title="CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation" description="A four-phase SBOM generation model addressing the EU's Cyber Resilience Act requirements, covering authoring, augmenting, enriching, and signing SBOMs to exceed minimal compliance standards." upload_date="2026-02-03T18:53:55Z" >}}
 
 See also the [FOSDEM schedule page](https://fosdem.org/2026/schedule/event/UYTGWA-sbom-generation/) for more details.
 
 ### Introduction to SBOMs: sbomify at Ubuntu Engineering Sprint
 
-{{< video-embed video_id="5mlR1lPz1no" title="sbomify at Ubuntu Engineering Sprint" description="Introduction to SBOMs and sbomify presented at the Ubuntu Engineering Sprint." >}}
+{{< video-embed video_id="5mlR1lPz1no" title="sbomify at Ubuntu Engineering Sprint" description="Introduction to SBOMs and sbomify presented at the Ubuntu Engineering Sprint." upload_date="2024-11-22T03:02:16-08:00" >}}
 
 ### Interview with the creator of CycloneDX: Steve Springett
 
-{{< video-embed video_id="oSBDSJf0FeA" title="SBOMs, CycloneDX, and Software Security with Steve Springett" description="Exploring the world of software security and compliance with Steve Springett, diving into how SBOMs and CycloneDX are reshaping how we track and secure our software supply chains." >}}
+{{< video-embed video_id="oSBDSJf0FeA" title="SBOMs, CycloneDX, and Software Security with Steve Springett" description="Exploring the world of software security and compliance with Steve Springett, diving into how SBOMs and CycloneDX are reshaping how we track and secure our software supply chains." upload_date="2024-10-21T09:00:59-07:00" >}}
 
 ### Interview with "the father of SBOMs": Allan Friedman
 
-{{< video-embed video_id="E77ohYZA2vo" title="SBOMs and Cybersecurity: A Deep Dive with Allan Friedman" description="An in-depth discussion about SBOMs with Allan Friedman, formerly of CISA." >}}
+{{< video-embed video_id="E77ohYZA2vo" title="SBOMs and Cybersecurity: A Deep Dive with Allan Friedman" description="An in-depth discussion about SBOMs with Allan Friedman, formerly of CISA." upload_date="2024-07-29T07:37:01-07:00" >}}
 
 ### A deep dive into the SBOM format SPDX
 
-{{< video-embed video_id="fJS7_VO_Was" title="A deep dive into the SBOM format SPDX with Kate Stewart and Gary O'Neall" description="Exploring the evolution and impact of SPDX in software transparency with Kate Stewart from the Linux Foundation and Gary O'Neall, a long-time SPDX contributor." >}}
+{{< video-embed video_id="fJS7_VO_Was" title="A deep dive into the SBOM format SPDX with Kate Stewart and Gary O'Neall" description="Exploring the evolution and impact of SPDX in software transparency with Kate Stewart from the Linux Foundation and Gary O'Neall, a long-time SPDX contributor." upload_date="2025-01-16T16:00:34-08:00" >}}
 
 ### CRA deep dive with Sarah Fluchs
 
-{{< video-embed video_id="e9_bpsJKOL0" title="CRA Explained: What the Cyber Resilience Act Means for Device Manufacturers" description="Podcast episode with EU CRA expert Sarah Fluchs explaining SBOM requirements, the 5-year support mandate, and vulnerability management for device manufacturers." >}}
+{{< video-embed video_id="e9_bpsJKOL0" title="CRA Explained: What the Cyber Resilience Act Means for Device Manufacturers" description="Podcast episode with EU CRA expert Sarah Fluchs explaining SBOM requirements, the 5-year support mandate, and vulnerability management for device manufacturers." upload_date="2025-12-17T06:01:09-08:00" >}}
 
 ### SBOMs & CRA Deep Dive: Compliance, Liability & the Future of Secure Products
 
-{{< video-embed video_id="EIBj-eVlu80" title="SBOMs & CRA Deep Dive: Compliance, Liability & the Future of Secure Products" description="A deep dive into SBOMs and the EU Cyber Resilience Act, covering compliance obligations, liability implications, and what the future of secure products looks like." >}}
+{{< video-embed video_id="EIBj-eVlu80" title="SBOMs & CRA Deep Dive: Compliance, Liability & the Future of Secure Products" description="A deep dive into SBOMs and the EU Cyber Resilience Act, covering compliance obligations, liability implications, and what the future of secure products looks like." upload_date="2026-03-24T04:18:49-07:00" >}}
 
 ### How SBOMs and Engineering Discipline Can Help You Avoid Trivy's Compromise
 
-{{< video-embed video_id="thfUpenosBs" title="How SBOMs and Engineering Discipline Can Help You Avoid Trivy's Compromise" description="InfoQ podcast episode with Viktor Petersson on how SBOMs and engineering discipline help teams detect and respond to supply chain compromises like the March 2026 Trivy incident." >}}
+{{< video-embed video_id="thfUpenosBs" title="How SBOMs and Engineering Discipline Can Help You Avoid Trivy's Compromise" description="InfoQ podcast episode with Viktor Petersson on how SBOMs and engineering discipline help teams detect and respond to supply chain compromises like the March 2026 Trivy incident." upload_date="2026-04-13T03:27:37-07:00" >}}
 
 Also available on [Spotify](https://open.spotify.com/episode/5wzJM6Sk3ZRbvC8sfmFBPb) and [Apple Podcasts](https://podcasts.apple.com/gb/podcast/how-sboms-and-engineering-discipline-can-help-you/id1106971805?i=1000761075185).
 
