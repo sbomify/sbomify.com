@@ -10,7 +10,7 @@ url: /faq/how-do-i-delete-a-workspace/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/workspace_deletion.webm" title="How to delete a workspace in sbomify" description="Step-by-step screencast showing how to delete a workspace in sbomify." >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/workspace_deletion.webm" title="How to delete a workspace in sbomify" description="Step-by-step screencast showing how to delete a workspace in sbomify." upload_date="2026-02-26T13:02:46Z" >}}
 
 ## Deleting a workspace
 

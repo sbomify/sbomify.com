@@ -16,6 +16,10 @@ Instead of a stored secret, GitHub Actions mints a short-lived OpenID Connect (O
 
 ## Setting it up
 
+The screencast below walks the whole flow end to end: adding the repository binding, expanding the generated GitHub Actions snippet, the runner exchanging its OIDC token for a short-lived sbomify token, and the resulting SBOM landing on the component.
+
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/oidc_trusted_publishing.webm" title="Setting up OIDC trusted publishing in sbomify" description="Step-by-step screencast showing how to add a GitHub trusted publisher binding to a component, update the workflow, and upload an SBOM with a short-lived OIDC token." upload_date="2026-05-22T12:35:48+05:00" >}}
+
 ### 1. Create the trusted publisher binding
 
 In the [sbomify app](https://app.sbomify.com), open your component's settings and add a **Trusted Publisher** with your GitHub organization and repository. Private repositories are supported. To defeat repository resurrection attacks, sbomify pins the immutable GitHub repository and owner IDs, not just the names.

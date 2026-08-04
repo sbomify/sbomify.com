@@ -10,7 +10,7 @@ url: /faq/how-do-i-upload-compliance-documents/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/document_upload.webm" title="How to upload compliance documents in sbomify" description="Step-by-step screencast showing how to upload compliance documents like SOC 2 and ISO 27001 in sbomify." >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/document_upload.webm" title="How to upload compliance documents in sbomify" description="Step-by-step screencast showing how to upload compliance documents like SOC 2 and ISO 27001 in sbomify." upload_date="2026-02-27T15:21:10Z" >}}
 
 ## Uploading compliance documents
 

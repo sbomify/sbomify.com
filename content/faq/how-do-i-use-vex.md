@@ -10,7 +10,13 @@ url: /faq/how-do-i-use-vex/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/vex_upload.webm" title="How VEX appears alongside an SBOM in sbomify" description="Screencast showing a CycloneDX VEX artifact rendered next to its SBOM on a sbomify component, with the colour-coded VEX and SBOM badges in the BOMs table." >}}
+The full lifecycle - a scanner finding, a VEX that marks it `not_affected`, the finding dropping out of the component's severity counts, and a re-issued VEX superseding the previous one:
+
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/vex_lifecycle.webm" title="The VEX lifecycle in sbomify: generate, upload, suppress, publish" description="Screencast walking the full VEX journey - uploading a CycloneDX VEX that marks a critical finding not_affected, watching it drop from the component's severity counts and the Trust Center, then re-issuing a second VEX that supersedes the first." upload_date="2026-07-13T14:27:55+05:00" >}}
+
+And how a VEX artifact renders next to its SBOM once uploaded:
+
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/vex_upload.webm" title="How VEX appears alongside an SBOM in sbomify" description="Screencast showing a CycloneDX VEX artifact rendered next to its SBOM on a sbomify component, with the colour-coded VEX and SBOM badges in the BOMs table." upload_date="2026-04-29T14:14:17+05:00" >}}
 
 ## The problem VEX solves
 
