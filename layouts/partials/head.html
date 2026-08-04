@@ -383,7 +383,14 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "name": {{ .Title | jsonify | safeJS }},
-    "description": {{ (.Params.description | default site.Params.description) | jsonify | safeJS }},
+    {{/* headline is what Google reads for Article-family types; name alone is
+         not a substitute. Guides carry no date in frontmatter, so the date
+         fields are emitted only when Hugo actually resolves one (enableGitInfo)
+         — a zero date is worse than no date. */}}
+    "headline": {{ .Title | jsonify | safeJS }},
+    {{ if not .Lastmod.IsZero }}"datePublished": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+    "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+    {{ end }}"description": {{ (.Params.description | default site.Params.description) | jsonify | safeJS }},
     "image": "{{ $ogImage | absURL }}",
     "proficiencyLevel": "Beginner",
     "inLanguage": "en-US"
