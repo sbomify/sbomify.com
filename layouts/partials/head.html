@@ -612,4 +612,40 @@
   }
   </script>
   {{ end }}
+
+  {{/* Blog posts, case studies and FAQ pages get their own BreadcrumbList above.
+       The compliance / features / guides trees had none, leaving every page in
+       them without breadcrumbs. One generic block covers all three rather than
+       three near-identical copies. */}}
+  {{ $crumbSections := dict "compliance" "Compliance" "features" "Features" "guides" "Guides" }}
+  {{ $crumbLabel := index $crumbSections .Section }}
+  {{ if $crumbLabel }}
+  <!-- Schema.org structured data: BreadcrumbList (Section) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ site.BaseURL }}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ $crumbLabel }}",
+        "item": "{{ site.BaseURL }}{{ .Section }}/"
+      }{{ if not .IsSection }},
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": {{ .Title | jsonify | safeJS }},
+        "item": "{{ .Permalink }}"
+      }{{ end }}
+    ]
+  }
+  </script>
+  {{ end }}
 </head>
