@@ -82,7 +82,11 @@
   {{- range site.Params.social.profiles -}}
     {{- if eq .platform "LinkedIn" -}}{{ $linkedinUrl = .url }}{{- end -}}
   {{- end -}}
-  {{ if eq .Type "posts" }}
+  {{/* .Kind "page" excludes the /blog/ listing and its paginated pages, which
+       share Type "posts" but have no date of their own — they were emitting
+       article:published_time "0001-01-01T00:00:00Z". They get their own
+       CollectionPage schema further down. */}}
+  {{ if and (eq .Type "posts") (eq .Kind "page") }}
   <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
   <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
   <meta property="article:author" content="{{ $linkedinUrl }}">
@@ -210,7 +214,9 @@
   </script>
   {{ end }}
 
-  {{ if eq .Type "posts" }}
+  {{/* .Kind "page" only — the /blog/ listing is not a BlogPosting, and was
+       emitting one with datePublished "0001-01-01T00:00:00Z". */}}
+  {{ if and (eq .Type "posts") (eq .Kind "page") }}
   <!-- Schema.org structured data: BlogPosting / TechArticle -->
   <script type="application/ld+json">
   {
@@ -384,12 +390,14 @@
     "@type": "TechArticle",
     "name": {{ .Title | jsonify | safeJS }},
     {{/* headline is what Google reads for Article-family types; name alone is
-         not a substitute. Guides carry no date in frontmatter, so the date
-         fields are emitted only when Hugo actually resolves one (enableGitInfo)
-         — a zero date is worse than no date. */}}
+         not a substitute. */}}
     "headline": {{ .Title | jsonify | safeJS }},
-    {{ if not .Lastmod.IsZero }}"datePublished": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
-    "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+    {{/* .Lastmod is the file's latest git commit, so it is dateModified and
+         nothing else. Using it for datePublished would restamp a guide as
+         newly published on every edit. Guides carry no date in frontmatter,
+         so datePublished is emitted only when one is authored explicitly. */}}
+    {{ with .Params.date }}"datePublished": "{{ (time .).Format "2006-01-02T15:04:05Z07:00" }}",
+    {{ end }}{{ if not .Lastmod.IsZero }}"dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
     {{ end }}"description": {{ (.Params.description | default site.Params.description) | jsonify | safeJS }},
     "image": "{{ $ogImage | absURL }}",
     "proficiencyLevel": "Beginner",
@@ -421,6 +429,31 @@
         {{ end }}
       ]
     }
+  }
+  </script>
+
+  {{/* The listing's breadcrumb used to come from the blog-post block, which is
+       now restricted to .Kind "page". Emitted here so /blog/ and its paginated
+       pages keep their trail without also claiming to be a BlogPosting. */}}
+  <!-- Schema.org structured data: BreadcrumbList (Blog Listing) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ site.BaseURL }}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "{{ site.BaseURL }}blog/"
+      }
+    ]
   }
   </script>
   {{ end }}
@@ -574,8 +607,10 @@
     "name": {{ .Title | jsonify | safeJS }},
     "description": {{ (.Params.description | default site.Params.description) | jsonify | safeJS }},
     "url": "{{ .Permalink }}",
-    "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
-    "isPartOf": {
+    {{/* Guarded: this is the field that shipped "0001-01-01T00:00:00Z" on 28
+         FAQ pages while enableGitInfo was silently inert. */}}
+    {{ if not .Lastmod.IsZero }}"dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+    {{ end }}"isPartOf": {
       "@type": "WebSite",
       "name": "{{ site.Title }}",
       "url": "{{ site.BaseURL }}"
