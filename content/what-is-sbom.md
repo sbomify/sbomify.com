@@ -41,6 +41,8 @@ There are several formats in use today, but two have emerged as the industry sta
 
 While there is no single "winner" yet, both formats represent a positive step toward a more transparent and secure software ecosystem.
 
+If you would rather see the files than read about them, our [annotated SBOM examples](/sbom-examples/) show the same software in both CycloneDX and SPDX, field by field.
+
 ### SBOM Deep Dive
 
 If you want to do a deep dive into SBOMs, we recommend watching this interview with Allan Friedman (formerly CISA) on the podcast [Nerding Out with Viktor](https://vpetersson.com/podcast/).
