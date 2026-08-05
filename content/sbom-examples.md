@@ -106,6 +106,8 @@ The mapping is close to one-to-one:
 
 `dataLicense` is an SPDX quirk with no CycloneDX equivalent: it is the license of _the SBOM document itself_, and the spec requires `CC0-1.0`.
 
+For the differences that go beyond naming — governance, license depth, native vulnerability support, and which compliance frameworks expect which — see our [comparison of the two formats](/2026/01/15/sbom-formats-cyclonedx-vs-spdx/).
+
 ## A real component entry
 
 An empty `components` array is not much of an example. This entry is taken verbatim from an SBOM generated against the `alpine:3.18` container image, and it is what a well-formed component actually looks like:
