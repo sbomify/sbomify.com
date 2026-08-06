@@ -22,6 +22,7 @@ faq:
   - question: "How do I generate a CBOM?"
     answer: "CycloneDX tools can generate CBOMs by analyzing codebases for cryptographic library usage, certificate stores, and protocol configurations. IBM's CBOM toolkit and Crypto Discovery tools provide automated scanning. For many organizations, the first CBOM is compiled manually by inventorying TLS configurations, key management systems, and cryptographic library dependencies."
 date: 2024-04-10
+lastmod: 2026-07-22
 slug: future-proofing-cybersecurity-with-the-cryptography-bill-of-materials-cbom
 ---
 
@@ -105,7 +106,9 @@ CBOMs and [SBOMs](/what-is-sbom/) are complementary inventories that address dif
 
 CycloneDX supports both in the same document. An organization generating CycloneDX SBOMs can extend them to include cryptographic asset data, producing a unified inventory that covers both component composition and cryptographic posture.
 
-For organizations managing SBOMs with [sbomify](https://sbomify.com), adding CBOM data to the same CycloneDX documents means cryptographic assets become part of the same management, monitoring, and sharing workflow already in place for software components.
+CBOM support is standardized: CycloneDX 1.6 (ECMA-424, 1st edition, June 2024) made cryptographic assets a first-class component type, and CycloneDX 1.7 (2nd edition, December 2025) added a cryptography registry of canonical algorithm and curve identifiers so different scanners name the same algorithm the same way.
+
+[sbomify](https://sbomify.com) treats CBOMs as first-class artifacts, whether they arrive as standalone CBOM documents or as crypto assets embedded in ordinary SBOMs. Uploads auto-detect cryptographic content, every asset is graded for post-quantum readiness with a concrete FIPS 203/204/205 migration target, certificates get live expiry countdowns, cipher suites export as PCI DSS 12.3.3 evidence, and a workspace dashboard ranks which algorithms to migrate first. The full walkthrough is on the [CBOM feature page](/features/cbom/).
 
 ## Generating a CBOM
 
@@ -113,8 +116,8 @@ For organizations managing SBOMs with [sbomify](https://sbomify.com), adding CBO
 
 Several tools support automated cryptographic asset discovery:
 
-- **[CycloneDX CBOM tools](https://cyclonedx.org/capabilities/cbom/)** – Generate CycloneDX-formatted CBOMs by analyzing dependencies and configurations
-- **IBM Quantum Safe tools** – Scan codebases and running systems for cryptographic usage patterns
+- **[sbomify-action](https://github.com/sbomify/sbomify-action)** – set `cbom-generate: true` and it runs [cdxgen](https://github.com/cdxgen/cdxgen) crypto detection over your project and uploads the result
+- **[cbomkit](https://github.com/cbomkit)** (PQCA / Linux Foundation, formerly IBM) – deep source analysis for Java and Python via sonar-cryptography, plus [cbomkit-theia](https://github.com/cbomkit/cbomkit-theia) for container images
 - **Certificate inventory tools** – Tools like `certbot`, `openssl`, and cloud provider APIs can enumerate certificates across infrastructure
 
 ### Manual Inventory
@@ -135,10 +138,11 @@ Like SBOMs, CBOMs should be treated as living documents. Certificate expirations
 
 Cryptographic transparency is gaining regulatory attention:
 
+- **[Executive Order 14412](https://www.whitehouse.gov/presidential-actions/2026/06/securing-the-nation-against-advanced-cryptographic-attacks/)** (June 2026) – the first US federal document to name the CBOM: CISA and NIST must publish CBOM minimum-elements guidance by roughly March 2027, with federal post-quantum deadlines behind it (key establishment on high-value assets by end of 2030, signatures by end of 2031). Our [EO 14412 deep dive](/2026/07/22/eo-14412-cbom-minimum-elements/) covers what to expect
 - **NSA CNSA 2.0** – The Commercial National Security Algorithm Suite 2.0 sets timelines for U.S. national security systems to transition to quantum-resistant algorithms, starting in 2025
 - **[Executive Order 14028](/compliance/eo-14028/)** and subsequent White House memoranda on quantum computing direct federal agencies to inventory cryptographic systems and develop migration plans
 - **[EU Cyber Resilience Act](/compliance/eu-cra/)** requires products with digital elements to implement "appropriate" cryptographic protection – documenting that cryptography via CBOMs supports compliance
-- **PCI DSS 4.0** requires inventories of cryptographic algorithms and key management practices for payment card environments
+- **PCI DSS 4.x requirement 12.3.3** – mandatory since March 31, 2025 – requires a documented, annually reviewed inventory of the cipher suites and protocols in use in payment card environments, which is CBOM data by another name
 
 Organizations that proactively build CBOMs will be ahead of the compliance curve as these requirements mature.
 
