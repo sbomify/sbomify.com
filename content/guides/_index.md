@@ -30,6 +30,7 @@ Step-by-step guides for generating SBOMs across all major programming languages 
 - [Yocto](/guides/yocto/) - Embedded Linux
 - [Raspberry Pi](/guides/raspberry-pi/) - rpi-image-gen
 - [CI/CD Integration](/guides/ci-cd/) - GitHub Actions, GitLab CI, Bitbucket
+- [AI Agents (MCP)](/guides/mcp/) - Query your workspace from Claude and other AI agents
 
 ## General Guides
 
