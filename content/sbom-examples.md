@@ -106,7 +106,7 @@ The mapping is close to one-to-one:
 
 `dataLicense` is an SPDX quirk with no CycloneDX equivalent: it is the license of _the SBOM document itself_, and the spec requires `CC0-1.0`.
 
-For the differences that go beyond naming — governance, license depth, native vulnerability support, and which compliance frameworks expect which — see our [comparison of the two formats](/2026/01/15/sbom-formats-cyclonedx-vs-spdx/).
+For the differences that go beyond naming, governance, license depth, native vulnerability support, and which compliance frameworks expect which, see our [comparison of the two formats](/2026/01/15/sbom-formats-cyclonedx-vs-spdx/).
 
 ## A real component entry
 
@@ -166,7 +166,7 @@ Note that two of the seven elements live in the header, not in the component. An
 
 ## Live SBOMs you can download
 
-Hand-written snippets are tidy in a way that real SBOMs are not. sbomify publishes the SBOMs for its own product, in both formats, on its [public Trust Center](https://trust.sbomify.com/product/sbomify/) — including the product-level SBOM that references the SBOMs of each underlying component rather than flattening everything into one list.
+Hand-written snippets are tidy in a way that real SBOMs are not. sbomify publishes the SBOMs for its own product, in both formats, on its [public Trust Center](https://trust.sbomify.com/product/sbomify/), including the product-level SBOM that references the SBOMs of each underlying component rather than flattening everything into one list.
 
 Two other sources worth knowing, both from the projects that maintain the specifications themselves:
 

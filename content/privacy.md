@@ -4,8 +4,6 @@ title: Privacy Policy
 description: Our commitment to protecting your privacy and personal data
 ---
 
-# Privacy Policy
-
 Last updated: May 2, 2025
 
 This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You. We are committed to protecting your privacy in accordance with the UK General Data Protection Regulation (UK GDPR), the Data Protection Act 2018, and other applicable UK data protection laws.
@@ -240,5 +238,5 @@ Wilmslow
 Cheshire
 SK9 5AF
 
-Website: [https://ico.org.uk](https://ico.org.uk)
+Website: [Information Commissioner's Office](https://ico.org.uk)
 Telephone: 0303 123 1113

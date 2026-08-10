@@ -1,2 +1,5 @@
 {{- $result := transform.HighlightCodeBlock . -}}
+{{- /* The figure wrapper is also what partials/content.html matches on to
+     wrap code blocks in Cloudflare <!--email_off--> markers, so keep the
+     class name and this markup in sync with the regexp there. */ -}}
 <figure class="code-block">{{ $result.Wrapped }}</figure>

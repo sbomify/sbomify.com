@@ -1,4 +1,4 @@
-# {{ .Site.Title }} — Full Content
+# {{ .Site.Title }}, Full Content
 
 > {{ .Site.Params.description }}
 

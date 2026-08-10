@@ -90,7 +90,7 @@ sbomify supports all major ecosystems:
 | [Python](/guides/python/)         | pip, Poetry, Pipenv, uv |
 | [JavaScript](/guides/javascript/) | npm, yarn, pnpm, Bun    |
 | [Java](/guides/java/)             | Maven, Gradle           |
-| [Go](/guides/go/)                 | Go Modules              |
+| [Go (Golang)](/guides/go/)        | Go Modules              |
 | [Rust](/guides/rust/)             | Cargo                   |
 | [Ruby](/guides/ruby/)             | Bundler                 |
 | [PHP](/guides/php/)               | Composer                |

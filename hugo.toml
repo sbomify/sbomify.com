@@ -70,6 +70,12 @@ ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfi
 # Minification (replaces jekyll-minifier)
 [minify]
   minifyOutput = true
+  [minify.tdewolff.html]
+    # Cloudflare's email obfuscation is switched off per-region with
+    # <!--email_off--> markers (see layouts/_default/_markup/render-codeblock.html),
+    # and the minifier drops every comment unless told otherwise. Template
+    # comments use {{/* */}} so this only preserves the markers themselves.
+    keepComments = true
 
 # Custom params
 [params]

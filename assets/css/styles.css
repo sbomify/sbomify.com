@@ -545,7 +545,7 @@ body {
     font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
   }
 
-/* Firefox legacy alias — autoprefixer also emits this from ::selection,
+/* Firefox legacy alias, autoprefixer also emits this from ::selection,
      but we declare both explicitly so source ↔ compiled CSS stay 1:1. */
 
 ::-moz-selection {
@@ -2613,7 +2613,7 @@ a.button:hover {
     -webkit-text-fill-color: transparent;
   }
 
-/* Hero aurora — animated radial gradients drifting behind the hero text.
+/* Hero aurora, animated radial gradients drifting behind the hero text.
      Animation + GPU-promotion are gated behind prefers-reduced-motion: no-preference,
      so reduced-motion users get static orbs without an idle compositor layer. */
 
@@ -2686,7 +2686,7 @@ a.button:hover {
     100% { transform: translate3d(-50%, 4rem, 0) scale(1.2); }
   }
 
-/* Eyebrow chip — refined section-label component. */
+/* Eyebrow chip, refined section-label component. */
 
 .eyebrow-chip {
     display: inline-flex;

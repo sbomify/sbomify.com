@@ -6,14 +6,14 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
 
 <div class="space-y-24">
 
-<!-- CI/CD Section -->
+{{< comment >}}CI/CD Section{{< /comment >}}
 <section>
     <div class="mb-10 text-center max-w-3xl mx-auto">
       <h2 class="text-3xl font-bold text-primaryText mb-4">CI/CD & Generation</h2>
       <p class="text-lg text-secondaryText">Generate SBOMs automatically in your pipelines. We support all major CI/CD providers.</p>
     </div>
 
-    <!-- Setup Wizard -->
+    {{< comment >}}Setup Wizard{{< /comment >}}
     <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#8A7DFF] shadow-sm mb-8" id="wizard">
       <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
         <span class="text-2xl font-bold text-white">New: Interactive Setup Wizard</span>
@@ -32,7 +32,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- GitHub -->
+      {{< comment >}}GitHub{{< /comment >}}
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="github">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <div class="flex flex-wrap items-center gap-3">
@@ -42,7 +42,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
           <a href="https://github.com/marketplace/actions/sbomify" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on Marketplace →</a>
         </div>
         <p class="text-gray-300 mb-6">
-          GitHub is at the core of many organizations. Our <a href="https://github.com/sbomify/sbomify-action" class="text-[#8A7DFF] hover:text-white transition-colors">GitHub Action</a> supports <a href="/faq/how-do-i-set-up-oidc-trusted-publishing/" class="text-[#8A7DFF] hover:text-white transition-colors">OIDC trusted publishing</a>, so no long-lived token secret is needed.
+          GitHub is at the core of many organizations. Our <a href="/sbomify-action/" class="text-[#8A7DFF] hover:text-white transition-colors">sbomify Action</a> supports <a href="/faq/how-do-i-set-up-oidc-trusted-publishing/" class="text-[#8A7DFF] hover:text-white transition-colors">OIDC trusted publishing</a>, so no long-lived token secret is needed.
         </p>
         <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">
 
@@ -64,7 +64,7 @@ steps:
         <p class="text-sm text-gray-400 mt-4">Prefer token auth, or using another CI system? Set <code class="text-[#8A7DFF]">TOKEN: ${SBOMIFY_TOKEN}</code> instead.</p>
       </div>
 
-      <!-- GitLab -->
+      {{< comment >}}GitLab{{< /comment >}}
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="gitlab">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-white"><span class="text-[#8A7DFF]">{{< icon "gitlab" "w-8 h-8" >}}</span> GitLab</span>
@@ -94,7 +94,7 @@ steps:
         </div>
       </div>
 
-      <!-- Bitbucket -->
+      {{< comment >}}Bitbucket{{< /comment >}}
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="bitbucket">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-white"><span class="text-[#8A7DFF]">{{< icon "bitbucket" "w-8 h-8" >}}</span> Bitbucket</span>
@@ -127,7 +127,7 @@ definitions:
         </div>
       </div>
 
-      <!-- Docker -->
+      {{< comment >}}Docker{{< /comment >}}
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="docker">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-white"><span class="text-[#8A7DFF]">{{< icon "docker" "w-8 h-8" >}}</span> Docker</span>
@@ -156,7 +156,7 @@ docker run --rm \
         </div>
       </div>
 
-      <!-- pip / CLI -->
+      {{< comment >}}pip / CLI{{< /comment >}}
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="pip">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-white"><span class="text-[#8A7DFF]">{{< icon "python" "w-8 h-8" >}}</span> pip / CLI</span>
@@ -185,7 +185,7 @@ sbomify-action</code></pre>
 
 </section>
 
-<!-- Supported Ecosystems Section -->
+{{< comment >}}Supported Ecosystems Section{{< /comment >}}
 <section>
     <div class="mb-10 text-center max-w-3xl mx-auto">
       <h2 class="text-3xl font-bold text-primaryText mb-4">Supported Ecosystems</h2>
@@ -306,7 +306,7 @@ sbomify-action</code></pre>
 
 </section>
 
-<!-- SBOM Generators Section -->
+{{< comment >}}SBOM Generators Section{{< /comment >}}
 <section>
     <div class="mb-10 text-center max-w-3xl mx-auto">
       <h2 class="text-3xl font-bold text-primaryText mb-4">SBOM Generators</h2>
@@ -367,7 +367,7 @@ sbomify-action</code></pre>
       </div>
     </div>
 
-    <!-- SBOM Formats -->
+    {{< comment >}}SBOM Formats{{< /comment >}}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="bg-[#141035] rounded-2xl p-6 border border-[#37306B]">
         <h4 class="text-lg font-bold text-white mb-2">CycloneDX</h4>
@@ -381,7 +381,7 @@ sbomify-action</code></pre>
       </div>
     </div>
 
-    <!-- Beyond SBOMs -->
+    {{< comment >}}Beyond SBOMs{{< /comment >}}
     <div class="bg-[#141035] rounded-2xl p-6 border border-[#37306B] mt-6">
       <h4 class="text-lg font-bold text-white mb-2">Beyond SBOMs</h4>
       <p class="text-gray-300 text-sm">The same pipeline can upload pre-authored <a href="/faq/what-vex-formats-does-sbomify-support/" class="text-[#8A7DFF] hover:text-white transition-colors">VEX</a>, <a href="/faq/what-is-a-cbom/" class="text-[#8A7DFF] hover:text-white transition-colors">CBOM</a>, and HBOM documents verbatim with <code class="text-[#8A7DFF]">BOM_TYPE=vex</code>, <code class="text-[#8A7DFF]">cbom</code>, or <code class="text-[#8A7DFF]">hbom</code>.</p>
@@ -389,7 +389,7 @@ sbomify-action</code></pre>
 
 </section>
 
-<!-- Vulnerability Analysis Section -->
+{{< comment >}}Vulnerability Analysis Section{{< /comment >}}
 <section>
     <div class="mb-10 text-center max-w-3xl mx-auto">
       <h2 class="text-3xl font-bold text-primaryText mb-4">Vulnerability Analysis</h2>
@@ -397,7 +397,7 @@ sbomify-action</code></pre>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- OSV -->
+      {{< comment >}}OSV{{< /comment >}}
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col">
         <img src="/assets/images/site/osv.svg" class="h-8 w-auto mb-6 self-start" alt="Google OSV" width="160" height="32">
         <h3 class="text-xl font-bold text-white mb-3">Google OSV</h3>
@@ -406,7 +406,7 @@ sbomify-action</code></pre>
         </p>
       </div>
 
-      <!-- Dependency Track -->
+      {{< comment >}}Dependency Track{{< /comment >}}
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col">
         <img src="/assets/images/site/dependency-track-white.svg" class="h-8 w-auto mb-6 self-start" alt="Dependency Track" width="149" height="32">
         <h3 class="text-xl font-bold text-white mb-3">Dependency Track</h3>
@@ -432,14 +432,14 @@ sbomify-action</code></pre>
 
 </section>
 
-<!-- Enrichment Section -->
+{{< comment >}}Enrichment Section{{< /comment >}}
 <section>
     <div class="mb-10 text-center max-w-3xl mx-auto">
       <h2 class="text-3xl font-bold text-primaryText mb-4">Enrichment Data Sources</h2>
       <p class="text-lg text-secondaryText">We integrate with 12 data sources to add metadata to your SBOM components: descriptions, licenses, supplier information, and more.</p>
     </div>
 
-    <!-- Pre-computed Databases -->
+    {{< comment >}}Pre-computed Databases{{< /comment >}}
     <div class="mb-8">
       <h3 class="text-xl font-bold text-primaryText mb-4">Pre-computed Databases (Fastest)</h3>
       <p class="text-secondaryText mb-4">Local data with zero network latency. Checked first for maximum performance.</p>
@@ -469,7 +469,7 @@ sbomify-action</code></pre>
       </div>
     </div>
 
-    <!-- Native Sources -->
+    {{< comment >}}Native Sources{{< /comment >}}
     <div class="mb-8">
       <h3 class="text-xl font-bold text-primaryText mb-4">Native Package Registries</h3>
       <p class="text-secondaryText mb-4">Authoritative data direct from the ecosystem's official source.</p>
@@ -502,7 +502,7 @@ sbomify-action</code></pre>
       </div>
     </div>
 
-    <!-- Aggregators -->
+    {{< comment >}}Aggregators{{< /comment >}}
     <div class="mb-8">
       <h3 class="text-xl font-bold text-primaryText mb-4">Package Aggregators</h3>
       <p class="text-secondaryText mb-4">Multi-ecosystem services providing broad coverage.</p>
@@ -523,7 +523,7 @@ sbomify-action</code></pre>
       </div>
     </div>
 
-    <!-- Fallback Sources -->
+    {{< comment >}}Fallback Sources{{< /comment >}}
     <div class="mb-8">
       <h3 class="text-xl font-bold text-primaryText mb-4">Fallback Sources</h3>
       <p class="text-secondaryText mb-4">Additional coverage when primary sources do not have data.</p>
@@ -543,7 +543,7 @@ sbomify-action</code></pre>
       </div>
     </div>
 
-    <!-- How to enable -->
+    {{< comment >}}How to enable{{< /comment >}}
     <div class="bg-[#141035] rounded-2xl p-6 border border-[#37306B]">
       <p class="text-gray-300 mb-3">
         <span class="font-semibold text-white">How it works:</span>
@@ -556,7 +556,7 @@ sbomify-action</code></pre>
 
 </section>
 
-<!-- Augmentation Section -->
+{{< comment >}}Augmentation Section{{< /comment >}}
 <section>
     <div class="mb-10 text-center max-w-3xl mx-auto">
       <h2 class="text-3xl font-bold text-primaryText mb-4">Augmentation Providers</h2>
@@ -582,7 +582,7 @@ sbomify-action</code></pre>
       </div>
     </div>
 
-    <!-- How to enable -->
+    {{< comment >}}How to enable{{< /comment >}}
     <div class="bg-[#141035] rounded-2xl p-6 border border-[#37306B]">
       <p class="text-gray-300 mb-3">
         <span class="font-semibold text-white">How it works:</span>

@@ -8,11 +8,11 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
 <div>
     <div class="bg-primaryBG relative overflow-hidden">
         {{< aurora >}}
-        <!-- Soft top vignette to anchor the headline -->
+        {{< comment >}}Soft top vignette to anchor the headline{{< /comment >}}
         <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-b from-primaryBG/0 via-primaryBG/0 to-primaryBG/40 pointer-events-none"></div>
 
         <div class="relative max-w-7xl mx-auto px-6 lg:px-8 pt-16 lg:pt-24 pb-16 lg:pb-20">
-            <!-- Hero Section -->
+            {{< comment >}}Hero Section{{< /comment >}}
             <div class="text-white mb-16 lg:mb-20 text-center">
                 <h1 class="text-5xl lg:text-7xl font-bold leading-[1.05] tracking-tight mb-8">
                     <span class="text-gradient">Your Security Artifact Hub</span>
@@ -24,16 +24,16 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                         <svg aria-hidden="true" class="w-4 h-4 motion-safe:group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                     </a>
                     <a href="https://app.sbomify.com/enterprise-contact/" class="inline-flex items-center justify-center px-8 py-4 bg-white/5 border border-white/15 hover:bg-white/10 hover:border-white/25 text-white rounded-full font-semibold text-lg backdrop-blur-sm motion-safe:hover:-translate-y-0.5 transition-[background-color,border-color,transform] duration-200">Contact Us</a>
-                    <a href="https://sbomify.com/slack" target="_blank" rel="noopener noreferrer nofollow" class="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-white/5 border border-white/15 hover:bg-white/10 hover:border-white/25 text-white rounded-full font-semibold text-lg backdrop-blur-sm motion-safe:hover:-translate-y-0.5 transition-[background-color,border-color,transform] duration-200" onclick="posthog.capture('cta_click', { location: 'hero', label: 'Chat on Slack', destination: 'https://sbomify.com/slack' })">
+                    <a href="https://sbomify.com/slack" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-white/5 border border-white/15 hover:bg-white/10 hover:border-white/25 text-white rounded-full font-semibold text-lg backdrop-blur-sm motion-safe:hover:-translate-y-0.5 transition-[background-color,border-color,transform] duration-200" onclick="posthog.capture('cta_click', { location: 'hero', label: 'Chat on Slack', destination: 'https://sbomify.com/slack' })">
                         {{< icon "slack" "w-5 h-5" >}}
                         Chat on Slack
                     </a>
                 </div>
             </div>
 
-            <!-- Integration Sections -->
+            {{< comment >}}Integration Sections{{< /comment >}}
             <div class="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
-                <!-- Integrates With section -->
+                {{< comment >}}Integrates With section{{< /comment >}}
                 <div class="bg-primary-light border border-primary-600 rounded-2xl px-8 py-8 hover:border-purple transition-colors duration-300">
                     <span class="text-purple text-sm font-semibold uppercase tracking-wide mb-6 block text-center">Integrates With</span>
                     <div class="flex flex-wrap items-center justify-center gap-6 md:gap-12 gap-y-6 md:gap-y-8">
@@ -64,7 +64,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
         </div>
     </div>
 
-    <!-- Press Coverage Section -->
+    {{< comment >}}Press Coverage Section{{< /comment >}}
     <div class="bg-white border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 py-10">
             <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
@@ -84,7 +84,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
         </div>
     </div>
 
-    <!-- Mission Statement Section -->
+    {{< comment >}}Mission Statement Section{{< /comment >}}
     <div class="bg-white py-16 lg:py-20 border-b border-gray-100">
         <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
             <h2 class="text-3xl lg:text-4xl font-bold text-primaryText mb-6">Our Mission</h2>
@@ -99,7 +99,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
 
     <div class="bg-[#F6F9FA]">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-            <!-- Persona routing -->
+            {{< comment >}}Persona routing{{< /comment >}}
             <div class="max-w-4xl mx-auto mb-20">
                 <p class="text-center text-gray-500 text-sm font-semibold uppercase tracking-wide mb-8">Find Your Path</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -142,7 +142,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 <div class="eyebrow-chip mb-5">Trust Center</div>
                 <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-primaryText">Transparency That Builds Trust</h2>
                 <p class="mb-4 text-lg text-primaryText leading-relaxed font-semibold">
-                Send a link instead of scheduling a call — and cut security questionnaire response times from weeks to minutes.
+                Send a link instead of scheduling a call, and cut security questionnaire response times from weeks to minutes.
                 </p>
                 <p class="mb-6 text-lg text-secondaryText leading-relaxed">
                 Share SBOMs, VEX, CBOMs, compliance documents, and security artifacts with stakeholders in a standardized way. Your <a href="/features/trust-center/" class="text-purple hover:text-purple-700 underline">trust center</a> can be hosted on your own domain and supports web portal access, standardized SBOM formats, and the Transparency Exchange API (TEA) for automated consumption. Compliance documents are expressed programmatically alongside your SBOMs.
@@ -153,7 +153,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 </div>
 
                 {{< trust-center-pillars-grid >}}
-                <a class="inline-flex items-center px-6 py-3 bg-purple hover:bg-purple-700 text-white rounded-full font-medium shadow-md shadow-purple/20 hover:shadow-lg hover:shadow-purple/30 motion-safe:hover:-translate-y-0.5 transition-[background-color,box-shadow,transform] duration-200" href="/features/trust-center/">Learn More</a>
+                <a class="inline-flex items-center px-6 py-3 bg-purple hover:bg-purple-700 text-white rounded-full font-medium shadow-md shadow-purple/20 hover:shadow-lg hover:shadow-purple/30 motion-safe:hover:-translate-y-0.5 transition-[background-color,box-shadow,transform] duration-200" href="/features/trust-center/">Explore the Trust Center</a>
             </section>
 
             <section class="max-w-4xl mx-auto mb-20 bg-white rounded-3xl p-10 lg:p-12 border border-gray-200/70 ring-1 ring-black/[0.02] shadow-[0_1px_3px_rgba(20,16,53,0.04),0_8px_24px_-12px_rgba(20,16,53,0.08)] hover:shadow-[0_1px_3px_rgba(20,16,53,0.04),0_24px_48px_-16px_rgba(138,125,255,0.18)] hover:border-purple/20 motion-safe:hover:-translate-y-1 transition-[box-shadow,transform,border-color] duration-300">
@@ -170,7 +170,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 <a class="inline-flex items-center px-6 py-3 bg-purple hover:bg-purple-700 text-white rounded-full font-medium shadow-md shadow-purple/20 hover:shadow-lg hover:shadow-purple/30 motion-safe:hover:-translate-y-0.5 transition-[background-color,box-shadow,transform] duration-200" href="/features/integrations/">View All Integrations</a>
             </section>
 
-            <!-- Trusted By section -->
+            {{< comment >}}Trusted By section{{< /comment >}}
             <div class="max-w-4xl mx-auto mb-20 bg-primary-light border border-primary-600 rounded-2xl px-8 py-10 hover:border-purple transition-colors duration-300 overflow-hidden">
                 <span class="text-purple text-sm font-semibold uppercase tracking-wide mb-8 block text-center">Trusted By</span>
                 <figure class="max-w-2xl mx-auto mb-10 text-center">
@@ -252,7 +252,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
     }
 
     /* Allow only https links to the exact sbomify/sbomify GitHub repo on
-       hrefs derived from the API response — defends against javascript: /
+       hrefs derived from the API response, defends against javascript: /
        data: URLs and redirects to unrelated origins (including sibling repos
        like /sbomify/sbomify-evil that would slip past a prefix check). */
     function safeGithubUrl(url) {

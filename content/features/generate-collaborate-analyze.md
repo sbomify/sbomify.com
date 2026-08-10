@@ -10,7 +10,7 @@ The Software Bill of Materials (SBOM) lifecycle comprises three key stages: **Au
     {{< d2 "lifecycle" >}}
 </div>
 
-> **TL;DR:** If this workflow sounds overly complex, rest assured that sbomify automates the entire process for you. All you need is a few lines of YAML in your CI/CD pipeline using our [GitHub Action](/features/integrations/).
+> **TL;DR:** If this workflow sounds overly complex, rest assured that sbomify automates the entire process for you. All you need is a few lines of YAML in your CI/CD pipeline using the [sbomify Action](/sbomify-action/).
 
 ---
 
@@ -51,7 +51,7 @@ _If you want to avoid this step, our agent automates the entire process for you.
 
 Next is the _enrichment_ phase. Depending on the tool used to generate the SBOM, this step might be optional. Some tools automatically enrich the SBOM, typically by calling out to a third-party service (like PyPI) during generation to gather component details, such as licensing data.
 
-For example, [sbomify's GitHub Action](https://github.com/sbomify/sbomify-action) (which can be used either with sbomify or in standalone mode) automatically augments your SBOM with identity data and enriches it with metadata from [ecosyste.ms](https://ecosyste.ms) to create the most complete SBOM possible – all within your CI pipeline before upload.
+For example, the [sbomify Action](/sbomify-action/) (which can be used either with sbomify or in standalone mode) automatically augments your SBOM with identity data and enriches it with metadata from [ecosyste.ms](https://ecosyste.ms) to create the most complete SBOM possible – all within your CI pipeline before upload.
 
 ### 4. Signing / Attestation
 

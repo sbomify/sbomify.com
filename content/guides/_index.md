@@ -12,7 +12,7 @@ Step-by-step guides for generating SBOMs across all major programming languages 
 - [Python](/guides/python/) - pip, Poetry, Pipenv, uv
 - [JavaScript](/guides/javascript/) - npm, yarn, pnpm, Bun
 - [Java](/guides/java/) - Maven, Gradle
-- [Go](/guides/go/) - Go Modules
+- [Go (Golang)](/guides/go/) - Go Modules
 - [Rust](/guides/rust/) - Cargo
 - [Ruby](/guides/ruby/) - Bundler
 - [PHP](/guides/php/) - Composer
@@ -29,6 +29,7 @@ Step-by-step guides for generating SBOMs across all major programming languages 
 - [Terraform](/guides/terraform/)
 - [Yocto](/guides/yocto/) - Embedded Linux
 - [Raspberry Pi](/guides/raspberry-pi/) - rpi-image-gen
+- [sbomify Action](/sbomify-action/) - generate SBOMs from any of the lock files below
 - [CI/CD Integration](/guides/ci-cd/) - GitHub Actions, GitLab CI, Bitbucket
 
 ## General Guides

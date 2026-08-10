@@ -1,0 +1,8 @@
+{{- /* Author-only note that renders nothing.
+
+     HTML content files (content/*.html) are not processed by goldmark, so an
+     <!-- ... --> comment in one reaches the built page now that
+     minify.tdewolff.html keepComments is enabled for Cloudflare's
+     <!--email_off--> markers. Use {{< comment >}}Section label{{< /comment >}}
+     instead to keep notes out of the output. */ -}}
+{{- $_ := .Inner -}}

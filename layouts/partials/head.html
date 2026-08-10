@@ -54,20 +54,26 @@
       {{- $title = printf "%s Articles" .Title -}}
     {{- end -}}
   {{- end -}}
+  {{- /* seo_title lets a page keep a long editorial headline as its <h1>
+       while the <title> tag stays inside Google's ~60 character display
+       limit. Falls back to .Title when unset. */ -}}
+  {{- with .Params.seo_title -}}
+    {{- $title = . -}}
+  {{- end -}}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ if eq .RelPermalink "/" }}{{ $title | default site.Title }}{{ else }}{{ $title }}{{ $pageSuffix }} | {{ site.Title }}{{ end }}</title>
   <meta name="description" content="{{ $desc }}">
   <meta name="keywords" content="{{ with .Params.keywords }}{{ delimit . ", " }}{{ else }}{{ delimit site.Params.keywords ", " }}{{ end }}">
 
-  <!-- Canonical URL -->
+  {{/* Canonical URL */}}
   <link rel="canonical" href="{{ $canonical }}">
 
-  <!-- Robots meta -->
+  {{/* Robots meta */}}
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index, follow">
 
-  <!-- Open Graph Meta Tags -->
+  {{/* Open Graph Meta Tags */}}
   <meta property="og:title" content="{{ $title | default site.Title }}{{ $pageSuffix }}">
   <meta property="og:description" content="{{ $desc }}">
   <meta property="og:type" content="{{ if eq .Type "posts" }}article{{ else }}website{{ end }}">
@@ -83,7 +89,7 @@
     {{- if eq .platform "LinkedIn" -}}{{ $linkedinUrl = .url }}{{- end -}}
   {{- end -}}
   {{/* .Kind "page" excludes the /blog/ listing and its paginated pages, which
-       share Type "posts" but have no date of their own — they were emitting
+       share Type "posts" but have no date of their own, they were emitting
        article:published_time "0001-01-01T00:00:00Z". They get their own
        CollectionPage schema further down. */}}
   {{ if and (eq .Type "posts") (eq .Kind "page") }}
@@ -95,7 +101,7 @@
   {{ end }}
   {{ end }}
 
-  <!-- Twitter Card Meta Tags -->
+  {{/* Twitter Card Meta Tags */}}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ $title | default site.Title }}{{ $pageSuffix }}">
   <meta name="twitter:description" content="{{ $desc }}">
@@ -129,7 +135,7 @@
 
   {{ partial "posthog.html" . }}
 
-  <!-- Schema.org structured data: Organization -->
+  {{/* Schema.org structured data: Organization */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -150,13 +156,12 @@
   </script>
 
   {{ if .IsHome }}
-  <!-- Schema.org structured data: Product (Google requires aggregateRating or
-       review on SoftwareApplication; Product validates with offers alone).
-       The review below is the Atsign testimonial rendered in the "Trusted By"
-       section of this same page — structured data must reflect content the
-       visitor can actually see, so the reviewBody matches that blockquote
-       verbatim. No reviewRating/aggregateRating: we have collected no ratings,
-       and inventing one would breach Google's review policy. -->
+  {{/* Schema.org structured data: Product, which validates on offers alone.
+       No review/aggregateRating: Google requires reviewRating on every Review,
+       and we have collected no ratings -- inventing one would breach Google's
+       review policy, while a rating-less Review is a markup error that
+       invalidates the whole Product snippet. The Atsign testimonial in the
+       "Trusted By" section stays as on-page content only. */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -171,21 +176,6 @@
       "name": "sbomify"
     },
     "category": "Supply Chain Security Software",
-    "review": {
-      "@type": "Review",
-      "author": {
-        "@type": "Person",
-        "name": "Chris Swan",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "Atsign",
-          "url": "https://atsign.com"
-        }
-      },
-      "datePublished": "2024-11-22",
-      "reviewBody": "Using sbomify has hugely accelerated our work on NTIA compliance. Viktor has also been leading a group that\u2019s creating standards for making SBOMs \u2014 this gives us confidence that sbomify will become a platform that follows industry practices as they emerge.",
-      "url": "{{ site.BaseURL }}case-studies/atsign/"
-    },
     "offers": [
       {
         "@type": "Offer",
@@ -214,10 +204,10 @@
   </script>
   {{ end }}
 
-  {{/* .Kind "page" only — the /blog/ listing is not a BlogPosting, and was
+  {{/* .Kind "page" only, the /blog/ listing is not a BlogPosting, and was
        emitting one with datePublished "0001-01-01T00:00:00Z". */}}
   {{ if and (eq .Type "posts") (eq .Kind "page") }}
-  <!-- Schema.org structured data: BlogPosting / TechArticle -->
+  {{/* Schema.org structured data: BlogPosting / TechArticle */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -266,7 +256,7 @@
   }
   </script>
 
-  <!-- Schema.org structured data: BreadcrumbList (Blog Post) -->
+  {{/* Schema.org structured data: BreadcrumbList (Blog Post) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -296,7 +286,7 @@
   {{ end }}
 
   {{ if and (in .RelPermalink "/case-studies/") (ne .RelPermalink "/case-studies/") }}
-  <!-- Schema.org structured data: Article (Case Study) -->
+  {{/* Schema.org structured data: Article (Case Study) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -321,7 +311,7 @@
   }
   </script>
 
-  <!-- Schema.org structured data: BreadcrumbList (Case Study) -->
+  {{/* Schema.org structured data: BreadcrumbList (Case Study) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -351,7 +341,7 @@
   {{ end }}
 
   {{ if .Params.faq }}
-  <!-- Schema.org structured data: FAQPage -->
+  {{/* Schema.org structured data: FAQPage */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -372,7 +362,7 @@
   </script>
   {{ end }}
 
-  <!-- Schema.org structured data: WebSite -->
+  {{/* Schema.org structured data: WebSite */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -383,7 +373,7 @@
   </script>
 
   {{ if and (in .RelPermalink "/guides/") (ne .RelPermalink "/guides/") }}
-  <!-- Schema.org structured data: TechArticle (Guide) -->
+  {{/* Schema.org structured data: TechArticle (Guide) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -407,7 +397,7 @@
   {{ end }}
 
   {{ if or (eq .RelPermalink "/blog/") (in .RelPermalink "/blog/page/") }}
-  <!-- Schema.org structured data: CollectionPage (Blog Listing) -->
+  {{/* Schema.org structured data: CollectionPage (Blog Listing) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -435,7 +425,7 @@
   {{/* The listing's breadcrumb used to come from the blog-post block, which is
        now restricted to .Kind "page". Emitted here so /blog/ and its paginated
        pages keep their trail without also claiming to be a BlogPosting. */}}
-  <!-- Schema.org structured data: BreadcrumbList (Blog Listing) -->
+  {{/* Schema.org structured data: BreadcrumbList (Blog Listing) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -459,7 +449,7 @@
   {{ end }}
 
   {{ if eq .RelPermalink "/case-studies/" }}
-  <!-- Schema.org structured data: CollectionPage (Case Studies) -->
+  {{/* Schema.org structured data: CollectionPage (Case Studies) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -486,7 +476,7 @@
   {{ end }}
 
   {{ if eq .RelPermalink "/guides/" }}
-  <!-- Schema.org structured data: CollectionPage (Guides) -->
+  {{/* Schema.org structured data: CollectionPage (Guides) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -513,7 +503,7 @@
   {{ end }}
 
   {{ if eq .RelPermalink "/faq/" }}
-  <!-- Schema.org structured data: FAQPage (FAQ Index) -->
+  {{/* Schema.org structured data: FAQPage (FAQ Index) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -533,7 +523,7 @@
   }
   </script>
 
-  <!-- Schema.org structured data: CollectionPage (FAQ) -->
+  {{/* Schema.org structured data: CollectionPage (FAQ) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -557,7 +547,7 @@
   }
   </script>
 
-  <!-- Schema.org structured data: BreadcrumbList (FAQ Index) -->
+  {{/* Schema.org structured data: BreadcrumbList (FAQ Index) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -581,7 +571,7 @@
   {{ end }}
 
   {{ if and (eq .Section "faq") (ne .RelPermalink "/faq/") }}
-  <!-- Schema.org structured data: FAQPage (Individual FAQ) -->
+  {{/* Schema.org structured data: FAQPage (Individual FAQ) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -599,7 +589,7 @@
   }
   </script>
 
-  <!-- Schema.org structured data: WebPage (Individual FAQ) -->
+  {{/* Schema.org structured data: WebPage (Individual FAQ) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -626,7 +616,7 @@
   }
   </script>
 
-  <!-- Schema.org structured data: BreadcrumbList (Individual FAQ) -->
+  {{/* Schema.org structured data: BreadcrumbList (Individual FAQ) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -662,7 +652,7 @@
   {{ $crumbSections := dict "compliance" "Compliance" "features" "Features" "guides" "Guides" }}
   {{ $crumbLabel := index $crumbSections .Section }}
   {{ if $crumbLabel }}
-  <!-- Schema.org structured data: BreadcrumbList (Section) -->
+  {{/* Schema.org structured data: BreadcrumbList (Section) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",

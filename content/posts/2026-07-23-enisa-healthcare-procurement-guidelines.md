@@ -1,6 +1,7 @@
 ---
 
 title: "ENISA's New Healthcare Procurement Guidelines Ask for SBOMs Without Saying the Word"
+seo_title: "ENISA Healthcare Procurement Guidelines and SBOMs"
 description: "ENISA's July 2026 procurement guidelines for hospitals and healthcare providers require supply chain transparency, component listings, and vulnerability management. Here is how SBOMs satisfy them."
 keywords: "ENISA healthcare procurement guidelines, hospital cybersecurity procurement, NIS2 healthcare, medical device SBOM, healthcare supply chain security"
 categories:
