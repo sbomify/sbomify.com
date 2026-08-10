@@ -18,7 +18,7 @@
   "@type": "VideoObject",
   "name": "{{ (.Get "title") | default .Page.Title | htmlEscape }}",
   "description": "{{ (.Get "description") | default (.Page.Params.description | default site.Params.description) | plainify | htmlEscape }}",
-  {{/* thumbnailUrl is REQUIRED by Google for VideoObject — without it the whole
+  {{/* thumbnailUrl is REQUIRED by Google for VideoObject, without it the whole
        entity is dropped. No call site passes a poster today, so fall back to the
        page's social image (same source head.html uses for og:image) rather than
        emitting an invalid entity. */}}

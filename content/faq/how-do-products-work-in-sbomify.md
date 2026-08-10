@@ -28,7 +28,7 @@ Note that the component SBOM version is different from the product version - a c
 
 ### Products
 
-A product represents the thing you actually sell or distribute. A product groups one or more components directly. For example, a "Smart Thermostat" product might attach backend, IoT, and compliance components — Python SBOM, Node SBOM, Docker SBOM, Yocto SBOM, SOC 2 Type II, CE Certificate — all under the one product.
+A product represents the thing you actually sell or distribute. A product groups one or more components directly. For example, a "Smart Thermostat" product might attach backend, IoT, and compliance components, Python SBOM, Node SBOM, Docker SBOM, Yocto SBOM, SOC 2 Type II, CE Certificate, all under the one product.
 
 ### Releases
 

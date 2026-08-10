@@ -4,8 +4,6 @@ title: Terms of Service
 description: Terms and conditions for using sbomify
 ---
 
-# Terms of Service
-
 Last updated: May 2, 2025
 
 These Terms of Service ("Terms") constitute a legally binding agreement between you and sbomify ltd ("Company", "we", "our", or "us"), a company registered in England and Wales (Company Registration Number: 16181507), with its registered office at 17-18 Berkeley Square, Clifton, Bristol, BS8 1HB, England.

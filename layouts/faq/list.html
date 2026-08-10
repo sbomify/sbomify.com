@@ -3,7 +3,7 @@
   <div class="bg-primaryBG relative overflow-hidden px-5 py-16 lg:py-24 lg:px-24">
     {{ partial "aurora.html" . }}
 
-    <!-- Content -->
+    {{/* Content */}}
     <div class="relative max-w-7xl mx-auto text-center">
       <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
         <span class="text-gradient">{{ .Title }}</span>
@@ -20,11 +20,11 @@
     <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
       {{ with .Content }}
       <div class="mb-12 text-gray-600 text-lg leading-relaxed">
-        {{ . }}
+        {{ partial "content.html" $ }}
       </div>
       {{ end }}
 
-      <!-- Search input -->
+      {{/* Search input */}}
       <div class="mb-8">
         <input
           type="search"
@@ -36,7 +36,7 @@
         <p id="faq-count" class="text-sm text-gray-500 mt-3 ml-2 hidden"></p>
       </div>
 
-      <!-- No results message -->
+      {{/* No results message */}}
       <div id="faq-no-results" class="hidden text-center py-12">
         <p class="text-gray-500 text-lg">No questions match your search.</p>
         <button type="button" onclick="document.getElementById('faq-search').value='';document.getElementById('faq-search').dispatchEvent(new Event('input'));" class="mt-4 text-purple hover:text-purple-700 font-semibold text-sm transition-colors">
@@ -44,7 +44,7 @@
         </button>
       </div>
 
-      <!-- FAQ entries -->
+      {{/* FAQ entries */}}
       <div id="faq-list" class="space-y-6">
         {{ range .Pages.ByWeight }}
         <div class="faq-card bg-white rounded-2xl shadow-sm border border-gray-100 p-8" data-title="{{ .Title | lower }}" data-answer="{{ with .Params.answer }}{{ . | lower }}{{ end }}">
@@ -66,14 +66,14 @@
         {{ end }}
       </div>
 
-      <!-- Show more button -->
+      {{/* Show more button */}}
       <div id="faq-show-more" class="text-center mt-8 hidden">
         <button type="button" id="faq-show-more-btn" class="px-8 py-3 bg-white border border-gray-200 hover:border-purple text-primaryText rounded-full font-semibold transition-colors duration-200 text-base">
           Show more questions
         </button>
       </div>
 
-      <!-- CTA Section -->
+      {{/* CTA Section */}}
       <div class="mt-16 text-center border-t border-gray-200 pt-12">
         <h3 class="text-2xl font-bold text-primaryText mb-4">Still have questions?</h3>
         <p class="text-gray-600 mb-8">Our team is here to help you get started with SBOMs and supply chain security.</p>

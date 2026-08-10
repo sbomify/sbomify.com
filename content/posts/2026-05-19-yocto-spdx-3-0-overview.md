@@ -7,7 +7,7 @@ categories:
   - guide
 tags: [sbom, yocto, openembedded, spdx, spdx-3, json-ld, embedded-linux]
 keywords: [yocto spdx 3.0, create-spdx-3.0 bbclass, spdx json-ld, yocto styhead spdx, build provenance sbom, spdx 3 vex]
-tldr: "SPDX 3.0 support landed in Yocto Styhead (5.1) and is a major architectural leap: single-document JSON-LD output instead of tarballs, first-class Build elements with hasInput/hasOutput relationships, profile-based architecture, and native VEX support through the security profile. The trade-off is size — SBOMs can run 250 MB compressed and 2 GB uncompressed."
+tldr: "SPDX 3.0 support landed in Yocto Styhead (5.1) and is a major architectural leap: single-document JSON-LD output instead of tarballs, first-class Build elements with hasInput/hasOutput relationships, profile-based architecture, and native VEX support through the security profile. The trade-off is size, SBOMs can run 250 MB compressed and 2 GB uncompressed."
 date: 2026-05-19
 slug: yocto-spdx-3-0-overview
 ---
@@ -53,19 +53,19 @@ Most of the new variables control build provenance features that are disabled by
 
 ## SPDX 3.0 Task Flow
 
-**`spdx30_build_started_handler`** — A BitBake event handler (not a task) that fires at the beginning of the build. If `SPDX_INCLUDE_BITBAKE_PARENT_BUILD` is set, it creates a `Build` element representing the overall BitBake invocation and writes it to `bitbake.spdx.json` in the deploy directory. This is the parent build that individual recipe builds can reference.
+**`spdx30_build_started_handler`**: A BitBake event handler (not a task) that fires at the beginning of the build. If `SPDX_INCLUDE_BITBAKE_PARENT_BUILD` is set, it creates a `Build` element representing the overall BitBake invocation and writes it to `bitbake.spdx.json` in the deploy directory. This is the parent build that individual recipe builds can reference.
 
-**`do_create_spdx`** — Similar in purpose to its SPDX 2.2 counterpart, but the output format and data model are very different. It creates an `ObjSet` (object set), a `software_Package` element for the recipe, a `Build` element representing the recipe's build, links source files as `hasInput` relationships on the `Build`, links produced packages as `hasOutput` relationships on the `Build`, adds license information using the `simpleLicensing` profile, and processes CVE data to create VEX relationship elements. The per-recipe data is written as individual JSON-LD files to the deploy directory.
+**`do_create_spdx`**: Similar in purpose to its SPDX 2.2 counterpart, but the output format and data model are very different. It creates an `ObjSet` (object set), a `software_Package` element for the recipe, a `Build` element representing the recipe's build, links source files as `hasInput` relationships on the `Build`, links produced packages as `hasOutput` relationships on the `Build`, adds license information using the `simpleLicensing` profile, and processes CVE data to create VEX relationship elements. The per-recipe data is written as individual JSON-LD files to the deploy directory.
 
-**`do_create_package_spdx`** — This task replaces `do_create_runtime_spdx` from SPDX 2.2 and creates SPDX data for each individual package, including file-level detail for packaged files with checksums and runtime dependencies.
+**`do_create_package_spdx`**: This task replaces `do_create_runtime_spdx` from SPDX 2.2 and creates SPDX data for each individual package, including file-level detail for packaged files with checksums and runtime dependencies.
 
-**`do_create_image_spdx` / `do_create_image_sbom`** — The image-level task merges all per-recipe JSON-LD documents into a single output file. The merging algorithm loads the image recipe's own SPDX data, then for each package included in the image loads its SPDX document and its recipe's SPDX document, merges all objects into a single object set deduplicating by SPDX ID, and serializes the merged object set as a single JSON-LD document. The result is a single `IMAGE-MACHINE.spdx.json` file in `tmp/deploy/images/MACHINE/`.
+**`do_create_image_spdx` / `do_create_image_sbom`**: The image-level task merges all per-recipe JSON-LD documents into a single output file. The merging algorithm loads the image recipe's own SPDX data, then for each package included in the image loads its SPDX document and its recipe's SPDX document, merges all objects into a single object set deduplicating by SPDX ID, and serializes the merged object set as a single JSON-LD document. The result is a single `IMAGE-MACHINE.spdx.json` file in `tmp/deploy/images/MACHINE/`.
 
 ## Build Provenance Features in SPDX 3.0
 
-**Build Variables** (`SPDX_INCLUDE_BUILD_VARIABLES = "1"`) — Captures every BitBake variable visible during the SPDX task and attaches it to the `Build` element. This is a lot of data, but it means you can determine exactly how a recipe was configured just from the SBOM.
+**Build Variables** (`SPDX_INCLUDE_BUILD_VARIABLES = "1"`), Captures every BitBake variable visible during the SPDX task and attaches it to the `Build` element. This is a lot of data, but it means you can determine exactly how a recipe was configured just from the SBOM.
 
-**Nested Builds** (`SPDX_INCLUDE_BITBAKE_PARENT_BUILD = "1"`) — Creates a hierarchy of `Build` elements. The top-level `Build` represents the BitBake invocation, and each recipe's `Build` is linked to it via `ancestorOf`. This is particularly useful for tracking shared state (sstate): you can see which recipes were rebuilt in a given BitBake run versus pulled from cache.
+**Nested Builds** (`SPDX_INCLUDE_BITBAKE_PARENT_BUILD = "1"`), Creates a hierarchy of `Build` elements. The top-level `Build` represents the BitBake invocation, and each recipe's `Build` is linked to it via `ancestorOf`. This is particularly useful for tracking shared state (sstate): you can see which recipes were rebuilt in a given BitBake run versus pulled from cache.
 
 **Agent Tracking:**
 
@@ -79,7 +79,7 @@ SPDX_ON_BEHALF_OF_id_email = "jane@example.com"
 
 This records that your CI system ran the build on behalf of a specific person. The idea here is that GitHub Actions is the software agent that mechanically ran BitBake, but it was triggered by a pull request or tag made by a specific user.
 
-**Build Host Linking** (`SPDX_BUILD_HOST`) — If you have an SBOM for the host system you are building on, you can link it into the generated documents using the `hasHost` relationship. This gives you a deep supply chain that extends from the build environment itself down through your target image.
+**Build Host Linking** (`SPDX_BUILD_HOST`), If you have an SBOM for the host system you are building on, you can link it into the generated documents using the `hasHost` relationship. This gives you a deep supply chain that extends from the build environment itself down through your target image.
 
 **Package Supplier:**
 
@@ -92,9 +92,9 @@ All of these provenance features are disabled by default because it is not feasi
 
 ## The Supporting Libraries
 
-**`oe/spdx30.py`** — Auto-generated SPDX 3.0 Python bindings, roughly 6,000 lines of code. These are generated by the `shacl2code` tool from the official SPDX 3.0 RDF model. This means the Yocto implementation automatically stays in sync with the SPDX specification, and other tools can use these same bindings to manipulate SPDX 3.0 documents. `shacl2code` can also generate C++ and Go bindings and is available as a standalone project.
+**`oe/spdx30.py`**: Auto-generated SPDX 3.0 Python bindings, roughly 6,000 lines of code. These are generated by the `shacl2code` tool from the official SPDX 3.0 RDF model. This means the Yocto implementation automatically stays in sync with the SPDX specification, and other tools can use these same bindings to manipulate SPDX 3.0 documents. `shacl2code` can also generate C++ and Go bindings and is available as a standalone project.
 
-**`oe/sbom30.py`** — SPDX 3.0 SBOM assembly utilities, including the document merging algorithm and convenience methods for creating VEX relationships.
+**`oe/sbom30.py`**: SPDX 3.0 SBOM assembly utilities, including the document merging algorithm and convenience methods for creating VEX relationships.
 
 ## The Size Question
 

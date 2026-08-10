@@ -3,7 +3,7 @@
   <div class="bg-primaryBG relative overflow-hidden px-5 py-16 lg:py-24 lg:px-24">
     {{ partial "aurora.html" . }}
 
-    <!-- Content -->
+    {{/* Content */}}
     <div class="relative max-w-7xl mx-auto text-center">
       <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
         <span class="text-gradient">{{ .Title }}</span>
@@ -18,7 +18,7 @@
 
   <div class="bg-[#F6F9FA]">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-      {{ .Content }}
+      {{ partial "content.html" . }}
     </div>
   </div>
 </div>

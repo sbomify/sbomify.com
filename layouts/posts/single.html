@@ -50,10 +50,10 @@
     <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
       <article class="blog-post bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100">
         {{ partial "tldr.html" . }}
-        {{ .Content }}
+        {{ partial "content.html" . }}
         <div class="mt-12 pt-8 border-t border-gray-200">
           <p class="text-sm text-gray-500 italic">
-            Found an error or typo? File a PR against <a href="https://github.com/sbomify/sbomify.com/tree/master/{{ .File.Path }}" rel="nofollow" class="text-purple hover:text-purple-700 no-underline">this file</a>.
+            Found an error or typo? File a PR against <a href="https://github.com/sbomify/sbomify.com/tree/master/{{ .File.Path }}" class="text-purple hover:text-purple-700 no-underline">the source of this post on GitHub</a>.
           </p>
         </div>
       </article>
