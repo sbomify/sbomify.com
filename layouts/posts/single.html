@@ -53,7 +53,7 @@
         {{ partial "content.html" . }}
         <div class="mt-12 pt-8 border-t border-gray-200">
           <p class="text-sm text-gray-500 italic">
-            Found an error or typo? File a PR against <a href="https://github.com/sbomify/sbomify.com/tree/master/{{ .File.Path }}" class="text-purple hover:text-purple-700 no-underline">the source of this post on GitHub</a>.
+            Found an error or typo? File a PR against <a href="https://github.com/sbomify/sbomify.com/tree/master/{{ .File.Path }}"{{ partial "link-attrs.html" (printf "https://github.com/sbomify/sbomify.com/tree/master/%s" .File.Path) }} class="text-purple hover:text-purple-700 no-underline">the source of this post on GitHub</a>.
           </p>
         </div>
       </article>

@@ -83,6 +83,15 @@ ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfi
   keywords = ["SBOM", "Supply Chain Security", "CRA Compliance", "NTIA Compliant", "Software Bill of Materials", "SBOM Management", "Security Artifact Hub"]
   posthog_api_key = "phc_kWvZ17AgVDC3CAEHYG2oQBYEg5lUnyK3brPqJ6P4nPH"
 
+  # Outbound link policy, applied by layouts/_markup/render-link.html and the
+  # layouts/partials/link-attrs.html helper. Any link whose host is not the site
+  # host or one of these (subdomains included) is treated as outbound and gets
+  # `externalRel`. Set `externalTarget = "_blank"` to also open them in a new tab.
+  [params.links]
+    internalHosts = ["sbomify.com"]
+    externalRel = "nofollow noopener noreferrer"
+    externalTarget = ""
+
   [params.social]
     image = "/assets/images/site/sbomify.png"
     [[params.social.profiles]]

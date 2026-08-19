@@ -100,3 +100,13 @@ bun run lint:d2            # Format D2 diagram files
 - Hugo config lives in `hugo.toml` (main) and `config/development/hugo.toml` (dev overrides)
 - Hugo live-reloads automatically when content or templates change
 - Output directory is `public/` (not `_site/`)
+
+## Outbound Links (rel="nofollow")
+
+Links to anything outside our own domains automatically get `rel="nofollow noopener noreferrer"`. Do not add it by hand. The policy lives in `[params.links]` in `hugo.toml` (`internalHosts`, `externalRel`, `externalTarget`); `sbomify.com` and its subdomains are internal.
+
+Three pieces apply it:
+
+- `layouts/_markup/render-link.html` — render hook for every Markdown link
+- `layouts/partials/nofollow-links.html` — filter over rendered page content, covering hand-written `<a>` tags and `.html` content pages. Applied inside `layouts/partials/content.html`, which every layout already uses to render `.Content`, so no layout changes are needed
+- `layouts/partials/link-attrs.html` — helper for links written in templates/shortcodes: `<a href="{{ $url }}"{{ partial "link-attrs.html" $url }}>`, or pass `(dict "url" $url "rel" "noopener noreferrer" "target" "_blank")` to keep baseline attributes for internal links

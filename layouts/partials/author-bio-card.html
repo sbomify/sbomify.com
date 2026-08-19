@@ -37,32 +37,32 @@
         {{ if $hasSocial }}
         <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
           {{ with $author.linkedin }}
-          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }} on LinkedIn" aria-label="{{ $author.display_name }} on LinkedIn">
+          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }} on LinkedIn" aria-label="{{ $author.display_name }} on LinkedIn">
             {{ partial "icon.html" (dict "name" "linkedin" "class" "w-4 h-4") }}
           </a>
           {{ end }}
           {{ with $author.twitter }}
-          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }} on X" aria-label="{{ $author.display_name }} on X">
+          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }} on X" aria-label="{{ $author.display_name }} on X">
             {{ partial "icon.html" (dict "name" "x-twitter" "class" "w-4 h-4") }}
           </a>
           {{ end }}
           {{ with $author.mastodon }}
-          <a href="{{ . }}" target="_blank" rel="me noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }} on Mastodon" aria-label="{{ $author.display_name }} on Mastodon">
+          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "me noopener noreferrer" "target" "_blank") }} class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }} on Mastodon" aria-label="{{ $author.display_name }} on Mastodon">
             {{ partial "icon.html" (dict "name" "mastodon" "class" "w-4 h-4") }}
           </a>
           {{ end }}
           {{ with $author.github }}
-          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }} on GitHub" aria-label="{{ $author.display_name }} on GitHub">
+          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }} on GitHub" aria-label="{{ $author.display_name }} on GitHub">
             {{ partial "icon.html" (dict "name" "github" "class" "w-4 h-4") }}
           </a>
           {{ end }}
           {{ with $author.website }}
-          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }}'s website" aria-label="{{ $author.display_name }}'s website">
+          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }}'s website" aria-label="{{ $author.display_name }}'s website">
             {{ partial "icon.html" (dict "name" "globe" "class" "w-4 h-4") }}
           </a>
           {{ end }}
           {{ with $author.podcast }}
-          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }}'s podcast" aria-label="{{ $author.display_name }}'s podcast">
+          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#8A7DFF]/60 transition-all duration-200" title="{{ $author.display_name }}'s podcast" aria-label="{{ $author.display_name }}'s podcast">
             {{ partial "icon.html" (dict "name" "podcast" "class" "w-4 h-4") }}
           </a>
           {{ end }}

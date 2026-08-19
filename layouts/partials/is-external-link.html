@@ -1,0 +1,40 @@
+{{- /*
+  is-external-link — reports whether a URL points outside our own domains.
+
+  Returns true for absolute (or protocol-relative) URLs whose host is neither the
+  site host nor listed in `params.links.internalHosts`. Subdomains of an internal
+  host count as internal (app.sbomify.com, trust.sbomify.com, ...).
+
+  Relative URLs, in-page anchors and non-http schemes (mailto:, tel:) are always
+  treated as internal.
+
+  @param {string} . The URL to test.
+  @returns {bool}
+
+  @example {{ if partial "is-external-link.html" "https://example.com" }}...{{ end }}
+*/ -}}
+
+{{- $url := . -}}
+{{- $external := false -}}
+
+{{- $internalHosts := slice -}}
+{{- with urls.Parse site.BaseURL -}}
+  {{- $internalHosts = $internalHosts | append (lower (index (split .Host ":") 0)) -}}
+{{- end -}}
+{{- range site.Params.links.internalHosts -}}
+  {{- $internalHosts = $internalHosts | append (lower .) -}}
+{{- end -}}
+
+{{- with urls.Parse $url -}}
+  {{- $host := lower (index (split .Host ":") 0) -}}
+  {{- if $host -}}
+    {{- $external = true -}}
+    {{- range $internalHosts -}}
+      {{- if or (eq $host .) (hasSuffix $host (printf ".%s" .)) -}}
+        {{- $external = false -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $external -}}

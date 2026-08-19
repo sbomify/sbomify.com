@@ -1,0 +1,7 @@
+{{- /*
+  Markdown link render hook: every [text](url) written in content passes through
+  here, so links pointing outside our own domains automatically get
+  rel="nofollow ...". See layouts/partials/link-attrs.html for the rules and the
+  configuration knobs.
+*/ -}}
+<a href="{{ .Destination | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ partial "link-attrs.html" .Destination }}>{{ .Text }}</a>

@@ -1,0 +1,62 @@
+{{- /*
+  nofollow-links — adds rel="nofollow" to outbound anchors in an HTML string.
+
+  Markdown links are rewritten by layouts/_markup/render-link.html, but content
+  files also contain hand-written <a> tags (and whole pages are authored as
+  .html). Piping rendered content through this filter covers those too.
+
+  Rules:
+    - Relative links, anchors, mailto:/tel: and our own hosts are left alone.
+      Internal hosts are the site host plus `params.links.internalHosts`;
+      subdomains of those count as internal.
+    - An outbound link with no rel gets the full `params.links.externalRel`.
+    - An outbound link that already has a rel keeps it, with `nofollow` prepended
+      (so an authored rel="noopener noreferrer" becomes "nofollow noopener
+      noreferrer" rather than being replaced).
+
+  @param {string} . The rendered HTML (typically .Content).
+  @returns {template.HTML}
+
+  @example {{ partial "nofollow-links.html" .Content }}
+*/ -}}
+
+{{- $html := . | string -}}
+{{- $rel := site.Params.links.externalRel | default "nofollow noopener noreferrer" -}}
+
+{{- if $rel -}}
+  {{- $hosts := slice -}}
+  {{- with urls.Parse site.BaseURL -}}
+    {{- $hosts = $hosts | append (lower (index (split .Host ":") 0)) -}}
+  {{- end -}}
+  {{- range site.Params.links.internalHosts -}}
+    {{- $hosts = $hosts | append (lower .) -}}
+  {{- end -}}
+  {{- $escaped := slice -}}
+  {{- range $hosts -}}
+    {{- $escaped = $escaped | append (replace . "." `\.`) -}}
+  {{- end -}}
+  {{- $pattern := delimit $escaped "|" -}}
+
+  {{- /* Go's regexp has no lookahead, so tag the anchors we care about with a
+         marker that no longer parses as an opening <a> tag, narrow the set down
+         pass by pass, and drop the marker as each case is handled. */ -}}
+
+  {{- /* Attributes preceding the one we are looking for, quoted values (which
+         may themselves contain a ">") included. */ -}}
+  {{- $attrs := `(?:[^>"']|"[^"]*"|'[^']*')*?` -}}
+
+  {{- /* 1. Tag every absolute link, then untag the ones on our own hosts. */ -}}
+  {{- $html = replaceRE (printf `(?i)<a(\s%shref=["'](?:https?:)?//)` $attrs) "<aXOUT$1" $html -}}
+  {{- $html = replaceRE (printf `(?i)<aXOUT(\s%shref=["'](?:https?:)?//(?:[^"'/]*\.)?(?:%s)(?:[:/?#]|["']))` $attrs $pattern) "<a$1" $html -}}
+
+  {{- /* 2. Untag outbound links that already say nofollow. */ -}}
+  {{- $html = replaceRE (printf `(?i)<aXOUT(\s%s\srel=["'][^"']*nofollow)` $attrs) "<a$1" $html -}}
+
+  {{- /* 3. Outbound links with some other rel: keep it, prepend nofollow. */ -}}
+  {{- $html = replaceRE (printf `(?i)<aXOUT(\s%s)\srel=(["'])` $attrs) `<a$1 rel=${2}nofollow ` $html -}}
+
+  {{- /* 4. Whatever is still tagged has no rel at all: give it the full one. */ -}}
+  {{- $html = replaceRE `<aXOUT(\s)` (printf `<a rel="%s"$1` $rel) $html -}}
+{{- end -}}
+
+{{- return (safeHTML $html) -}}
