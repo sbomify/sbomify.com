@@ -258,6 +258,7 @@ For detailed information on SBOM compliance requirements across NTIA, CISA, EU C
 **External resources:**
 
 - [OpenChain CRA Compliance](https://openchainproject.org/cracompliance) – The OpenChain Project's CRA requirement and self-certification checklist, developed in the open on [GitHub](https://github.com/OpenChain-Project/CRA-Compliance) and building on ISO/IEC 18974 (open source security assurance). Where [BSI TR-03183-2](/compliance/bsi-tr-03183/) specifies what a CRA-ready SBOM must contain, OpenChain's checklist covers the process and policy side of getting an organisation ready. The two complement each other.
+- [Open Regulatory Compliance Working Group (ORC WG)](https://orcwg.org/) – Hosted by the Eclipse Foundation, ORC WG is where open source foundations, maintainers, and industry work out what the CRA means for open source in practice. Its [CRA Hub](https://github.com/orcwg/cra-hub) collects an FAQ, a resource inventory, a summary of the requested harmonised standards, and input on the important and critical product categories. Start here if you are working out whether you are an **open-source steward** under [CRA Article 24](/compliance/eu-cra/) rather than a manufacturer.
 
 <div class="mt-16 flex justify-center">
   <a href="https://github.com/sbomify/sbomify.com/blob/master/resources.md" class="inline-flex items-center gap-2 !text-gray-500 hover:!text-gray-900 transition-colors !no-underline text-sm font-medium">
