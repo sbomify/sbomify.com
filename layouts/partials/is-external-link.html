@@ -5,8 +5,11 @@
   site host nor listed in `params.links.internalHosts`. Subdomains of an internal
   host count as internal (app.sbomify.com, trust.sbomify.com, ...).
 
-  Relative URLs, in-page anchors and non-http schemes (mailto:, tel:) are always
-  treated as internal.
+  The test is "does this URL have a host that is not ours", not "is this http".
+  Relative URLs, in-page anchors and hostless schemes (mailto:, tel:) parse with
+  an empty host and so count as internal. A scheme that does carry a host, such
+  as ftp://example.com, counts as external and picks up rel="nofollow ..." —
+  which is what we want for an outbound link, whatever its scheme.
 
   @param {string} . The URL to test.
   @returns {bool}
