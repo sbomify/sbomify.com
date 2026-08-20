@@ -1,11 +1,11 @@
 <div class="flex gap-[13px] {{ if .vertical }} flex-col {{ end }}">
-  <a href="{{ site.Data.main.social.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+  <a href="{{ site.Data.main.social.github }}"{{ partial "link-attrs.html" (dict "url" site.Data.main.social.github "rel" "noopener noreferrer" "target" "_blank") }} aria-label="GitHub">
     <img src="/assets/images/site/github-white.svg" alt="" aria-hidden="true" width="20" height="20" />
   </a>
-  <a href="{{ site.Data.main.social.linkedIn }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+  <a href="{{ site.Data.main.social.linkedIn }}"{{ partial "link-attrs.html" (dict "url" site.Data.main.social.linkedIn "rel" "noopener noreferrer" "target" "_blank") }} aria-label="LinkedIn">
     <img src="/assets/images/site/linkedin-white.svg" alt="" aria-hidden="true" width="20" height="20" />
   </a>
-  <a href="{{ site.Data.main.social.slack }}" target="_blank" rel="noopener noreferrer" aria-label="Slack">
+  <a href="{{ site.Data.main.social.slack }}"{{ partial "link-attrs.html" (dict "url" site.Data.main.social.slack "rel" "noopener noreferrer" "target" "_blank") }} aria-label="Slack">
     <img src="/assets/images/site/slack-white.svg" alt="" aria-hidden="true" width="20" height="20" />
   </a>
 </div>

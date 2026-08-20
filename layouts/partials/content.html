@@ -1,19 +1,27 @@
-{{- /* Renders page content with Cloudflare's Email Address Obfuscation
-     switched off around code blocks only.
+{{- /* Renders page content through the site's content filters.
 
-     Cloudflare rewrites anything shaped like an email address, which mangles
-     package identifiers in samples: express@4.18.2 was served as
-     "[email protected]" in the JavaScript guide, and the rewritten link points
-     at /cdn-cgi/l/email-protection, which 404s. The <!--email_off--> markers
-     scope the feature out of code blocks while genuine mailto: addresses in
-     prose stay obfuscated.
+     1. nofollow-links.html adds rel="nofollow" to outbound anchors that were
+        written as raw <a> tags in content (Markdown links are handled earlier
+        by layouts/_markup/render-link.html). See CLAUDE.md, "Outbound Links".
 
-     The markers live here rather than in the code block render hook because
-     Hugo strips HTML comments emitted by render hooks. They also need
-     minify.tdewolff.html keepComments in hugo.toml, or the minifier removes
-     them, so templates use Go template comments and content HTML files use
-     the comment shortcode -- an HTML comment anywhere else now reaches the
-     built page. */ -}}
-{{- .Content
+     2. Cloudflare's Email Address Obfuscation is switched off around code
+        blocks only. Cloudflare rewrites anything shaped like an email address,
+        which mangles package identifiers in samples: express@4.18.2 was served
+        as "[email protected]" in the JavaScript guide, and the rewritten link
+        points at /cdn-cgi/l/email-protection, which 404s. The <!--email_off-->
+        markers scope the feature out of code blocks while genuine mailto:
+        addresses in prose stay obfuscated.
+
+        The markers live here rather than in the code block render hook because
+        Hugo strips HTML comments emitted by render hooks. They also need
+        minify.tdewolff.html keepComments in hugo.toml, or the minifier removes
+        them, so templates use Go template comments and content HTML files use
+        the comment shortcode -- an HTML comment anywhere else now reaches the
+        built page.
+
+     Every layout renders page content through this partial, so anything that
+     has to apply site-wide to rendered content belongs here rather than in
+     each layout. */ -}}
+{{- partial "nofollow-links.html" .Content
   | replaceRE `(?s)(<figure class="code-block">.*?</figure>)` `<!--email_off-->${1}<!--email_on-->`
   | safeHTML -}}
