@@ -27,9 +27,9 @@ This page is current as of **August 2026**. The CRA landscape has moved substant
 | [Commission Implementing Regulation (EU) 2025/2392](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202502392) - technical descriptions of important and critical products | 28 November 2025 | Determines your conformity assessment route, and therefore how much scrutiny your technical documentation (including the SBOM) gets |
 | [BSI TR-03183-3](https://bsi.bund.de/dok/TR-03183-en) v1.0.0 - Vulnerability Reports and Notifications                                                                                  | September 2025   | The intake side of vulnerability handling: security.txt, CVD policy, CSAF advisories                                                |
 | [BSI TR-03183-H](https://bsi.bund.de/dok/TR-03183-en) v1.1.0 - Conformity based on full quality assurance (Module H)                                                                    | 30 May 2026      | Lets manufacturers demonstrate CRA conformity through an ISO/IEC 27001 ISMS rather than per-product assessment                      |
-| [Commission CRA guidance](https://digital-strategy.ec.europa.eu/en/library/commission-publishes-new-guidance-support-timely-cyber-resilience-act-implementation) C(2026) 5252           | 27 July 2026     | ~80 pages and 67 worked examples on scope, open source, support periods and reporting. Non-binding, but shapes enforcement          |
+| [Commission CRA guidance](https://digital-strategy.ec.europa.eu/en/library/commission-publishes-new-guidance-support-timely-cyber-resilience-act-implementation) C(2026) 5252           | 27 July 2026     | 84 pages and 67 worked examples on scope, open source, support periods and reporting. Non-binding, but shapes enforcement           |
 | [ENISA Single Reporting Platform](https://www.enisa.europa.eu/topics/product-security-and-certification/single-reporting-platform-srp) step-by-step instructions                        | 31 July 2026     | You need EU Login accounts and named representatives registered before the 24-hour clock can ever start                             |
-| [BSI TR-03183-1](https://bsi.bund.de/dok/TR-03183-en) v1.0.0 - General requirements                                                                                                     | 31 July 2026     | BSI's first full-scope CRA guideline, with a machine-readable OSCAL control catalogue                                               |
+| [BSI TR-03183-1](https://bsi.bund.de/dok/TR-03183-en) v1.0.0 - General requirements                                                                                                     | 31 July 2026     | First stable release of BSI's general CRA requirements guideline, after two years in draft                                          |
 
 The single most important thing on that list is the one that is not a document: **reporting obligations bind from 11 September 2026**, and the [Single Reporting Platform](#reporting-obligations-from-11-september-2026) requires registration you cannot do retroactively.
 
@@ -61,7 +61,7 @@ The CRA applies in stages (Article 71):
 | 27 July 2026      | Commission published its first set of CRA application guidance (C(2026) 5252)                                                        | Done     |
 | 11 September 2026 | Reporting obligations for actively exploited vulnerabilities and severe incidents begin (Article 14)                                 | Upcoming |
 | 31 October 2026   | Proposed deadline for the horizontal (Type A) and vulnerability-management (Type B) harmonised standards under mandate M/606         | Proposed |
-| 11 December 2026  | Sufficient notified bodies to be available across Member States                                                                      | Upcoming |
+| 11 December 2026  | Member States to "strive to ensure" a sufficient number of notified bodies in the Union (Article 35(2))                              | Upcoming |
 | 31 December 2026  | Proposed deadline for product-specific (Type C) harmonised standards                                                                 | Proposed |
 | 11 December 2027  | Full application: all essential requirements, including the SBOM obligation, become enforceable for products placed on the EU market | Upcoming |
 
@@ -86,13 +86,21 @@ The deadlines are tight (Article 14):
 
 ENISA released step-by-step SRP instructions on 31 July 2026. The practical takeaways:
 
-- **Registration is a prerequisite, not a formality.** Organisations register through **EU Login** and nominate a Primary and a Secondary representative; the Secondary receives a time-limited invitation link. Accounts can be created ahead of the platform going live. If you have not done this before an incident, you cannot file within 24 hours.
+- **Register in advance.** Representatives sign in through **EU Login**, and ENISA states that EU Login accounts can be created before the platform goes live. Validation of a representative is carried out by the coordinator CSIRT after first access to the platform, in parallel with the reporting process, so an unregistered manufacturer is not strictly locked out - but a 24-hour window is the wrong moment to be meeting the flow for the first time.
 - **There is no reporting API at launch.** ENISA has stated that no submission API will be provided at this stage. You can automate your internal workflow right up to the point of submission, but a human will be typing into a browser at the end of it. That makes the quality of your internal triage data (which product, which version, which component) the rate-limiting factor.
 - **The 24-hour early warning is deliberately thin.** Only the notification type and level, manufacturer or steward name, product, title, and (for incidents) whether unlawful or malicious acts are suspected. The 72-hour notification expands to the nature of the vulnerability, exploitation details, and corrective measures. The final report is the comprehensive one.
 
 **The SBOM connection:** a 24-hour early-warning window leaves no time for manual component archaeology. When a vulnerability in a widely used library starts being exploited, you need to answer "which of our products and versions contain this component?" in minutes. That requires up-to-date, machine-readable SBOMs for every shipped version, matched continuously against vulnerability intelligence. Manufacturers who wait until December 2027 to build their SBOM pipeline will find the September 2026 reporting obligations hard to meet.
 
-One useful clarification from the Commission's July 2026 guidance: a vulnerability in a third-party component is a reportable _actively exploited_ vulnerability in **your** product only where the vulnerable code is actually reachable and exploitable there. That is a VEX-shaped question, and answering it credibly at speed presupposes an SBOM you trust.
+### Two clarifications from the Commission's July 2026 guidance
+
+**Third-party components (paragraph 218).** Where your product contains an actively exploited vulnerability originating from a third-party component, you must notify it. But if you are aware that a third-party component contains a vulnerability and that vulnerability either (i) cannot be exploited in your product - the guidance's example is that the vulnerable code is not reachable - or (ii) has not been exploited in your product, it does not qualify as an actively exploited vulnerability contained in your product and is not subject to mandatory reporting by you. You may still notify voluntarily under Article 15, and the vulnerability handling requirements of Annex I Part II still apply, as does the duty to report it upstream to the component's maintainer under Article 13(6).
+
+That is a VEX-shaped determination, and making it credibly under time pressure presupposes an SBOM you trust plus a reachability answer you can defend.
+
+**No retroactive reporting (paragraph 217).** You do not have to report vulnerabilities whose active exploitation you were already aware of before 11 September 2026. But if you knew about a vulnerability before that date without knowing it was being exploited, and exploitation occurs or comes to your attention afterwards, it becomes reportable then.
+
+Note that the guidance does **not** address SBOM format or content - the words "software bill of materials" and "SBOM" do not appear in it at all. For that, BSI TR-03183-2 remains the only detailed public reference.
 
 ---
 
@@ -114,7 +122,7 @@ Article 64(10) carves out two derogations from the fines in paragraphs (3) to (9
 
 ### Who enforces this in Germany
 
-Germany is putting the BSI at the centre of CRA enforcement. The **CRA-Durchführungsgesetz** (Gesetz zur Durchführung der Cyberresilienz-Verordnung, [Bundestag Drucksache 21/6134](https://dserver.bundestag.de/btd/21/061/2106134.pdf)) amends the BSI Act to designate the BSI as market surveillance authority, notifying authority for conformity assessment bodies, and the national reporting point for vulnerabilities and incidents. The cabinet adopted the draft on 29 April 2026, the Bundestag held its first reading on 11 June 2026, and the Bundesrat raised no objections on 17 June 2026. The bill was still in committee at the time of writing, so details may change, but the authority architecture is unlikely to.
+Germany is putting the BSI at the centre of CRA enforcement. The **CRA-Durchführungsgesetz** (Gesetz zur Durchführung der Cyberresilienz-Verordnung, [Bundestag Drucksache 21/6134](https://dserver.bundestag.de/btd/21/061/2106134.pdf) of 26 May 2026) amends the BSI Act (BSI-Gesetz) so that the BSI becomes "die zuständige nationale Marktüberwachungsbehörde" and "die notifizierende Behörde" under Regulation (EU) 2024/2847. The Bundestag held its first reading on 11 June 2026 and referred the bill to committee, with the Interior Committee in the lead; the Bundesrat raised no objections. The bill was still in the parliamentary process as of August 2026, so details may change, but the authority architecture is unlikely to.
 
 This matters for how you read TR-03183: the authority writing the technical guideline is the same authority that will be knocking on the door.
 
@@ -163,7 +171,7 @@ Annex II, Part I, point 9: "If the manufacturer decides to make available the so
 
 Related implementation work:
 
-- **Commission guidance (27 July 2026):** the Commission published its first set of CRA application guidance as [C(2026) 5252](https://digital-strategy.ec.europa.eu/en/library/commission-publishes-new-guidance-support-timely-cyber-resilience-act-implementation), roughly 80 pages with 67 practical examples, flowcharts and use cases. It covers scope (including remote data processing and free and open-source software), what counts as a substantial modification, support periods, product classification, and reporting obligations. It is explicitly non-binding: only the Court of Justice can authoritatively interpret the CRA. It nevertheless steers market surveillance authorities and notified bodies toward a consistent reading.
+- **Commission guidance (27 July 2026):** the Commission approved the content of its first set of CRA application guidance as [C(2026) 5252 final](https://digital-strategy.ec.europa.eu/en/library/commission-publishes-new-guidance-support-timely-cyber-resilience-act-implementation), an 84-page annex containing 67 numbered practical examples. It covers scope (including remote data processing and free and open-source software), what counts as a substantial modification, support periods, product classification, and reporting obligations. It is explicitly non-binding: only the Court of Justice can authoritatively interpret the CRA. It nevertheless steers market surveillance authorities and notified bodies toward a consistent reading. It says nothing about SBOM format or content.
 - **Commission FAQ:** the Commission maintains a living [CRA implementation FAQ](https://digital-strategy.ec.europa.eu/en/library/cyber-resilience-act-implementation-frequently-asked-questions) covering scope questions, the open-source regime, support periods, and reporting obligations.
 - **Product classification:** [Implementing Regulation (EU) 2025/2392](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202502392) (adopted 28 November 2025, in force 21 December 2025) fills in the technical descriptions behind the Annex III "important" and Annex IV "critical" product categories, and clarifies that a product's **core functionality** drives classification rather than ancillary or embedded features. Classification determines the conformity assessment route, which determines whether a notified body reads your technical documentation.
 
@@ -171,7 +179,7 @@ Related implementation work:
 
 ## Harmonised Standards: Not Yet Available
 
-CEN, CENELEC and ETSI [accepted the Commission's CRA standardisation request (M/606) on 3 April 2025](https://www.cencenelec.eu/news-events/news/2025/newsletter/ots-62-cra/). The horizontal work is being developed by CEN-CLC/JTC 13 as the **EN 40000** series, with vertical, product-specific standards in the **EN 50770** series.
+CEN, CENELEC and ETSI [accepted the Commission's CRA standardisation request (M/606) on 3 April 2025](https://www.cencenelec.eu/news-events/news/2025/newsletter/ots-62-cra/). The Commission [describes M/606](https://digital-strategy.ec.europa.eu/en/policies/cra-standardisation) as covering a set of **41 standards**, horizontal and product-specific. The horizontal work is being developed by CEN-CLC/JTC 13 as the **EN 40000** series, with vertical, product-specific standards in the **EN 50770** series.
 
 | Standard        | Scope                                                                             | Status (as of mid-2026)                                                                              |
 | --------------- | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
@@ -181,7 +189,7 @@ CEN, CENELEC and ETSI [accepted the Commission's CRA standardisation request (M/
 | prEN 40000-1-4  | Technical security controls                                                       | Not scheduled until autumn 2027                                                                      |
 | prEN 50770-1..6 | Vertical OT products (firewalls, network management, VPN, routers/switches, SIEM) | In development, leaning on IEC 62443                                                                 |
 
-Two things follow from this that matter more than the standard numbers:
+Drafts are not public documents, so the status column above is drawn from CEN/CENELEC communications and public standardisation trackers rather than from the Official Journal. Treat it as directional. Two things follow from it that matter more than the standard numbers:
 
 1. **No CRA harmonised standard has been cited in the Official Journal yet.** Until one is, the Article 27 presumption of conformity is not available to anyone. Everybody is currently demonstrating conformity by describing the solutions they adopted.
 2. **The deadlines slipped.** In early July 2026 the Commission issued a draft amendment to M/606 pushing delivery back two months: Type A and Type B (vulnerability management) from 30 August 2026 to 31 October 2026, and Type C (product-specific) from 30 October 2026 to 31 December 2026. The implementing decision had not been published at the time of writing, so those dates remain proposed rather than binding.
@@ -205,13 +213,15 @@ BSI states plainly that TR-03183 "will be gradually developed further and replac
 
 ### Part 1: General requirements (v1.0.0, July 2026)
 
-BSI published Part 1 in version 1.0.0 on 31 July 2026 and [announced it on 5 August 2026](https://www.bsi.bund.de/DE/Service-Navi/Presse/Alle-Meldungen-News/Meldungen/2026/TR-03183_Einstiegshilfe_CRA_260805.html). It is aimed squarely at manufacturers who do not yet have mature secure-development and vulnerability-handling processes, and is positioned as an entry aid to the CRA for the "default" product class.
+Part 1 is not a new document, but 1.0.0 is its **first stable release**. It has been a living draft since 2023 (v0.9.0, then v0.10.0 in October 2025); the document carrying version 1.0.0 is dated 31 July 2026, and BSI [announced it on 5 August 2026](https://www.bsi.bund.de/DE/Service-Navi/Presse/Alle-Meldungen-News/Meldungen/2026/TR-03183_Einstiegshilfe_CRA_260805.html). It is aimed squarely at manufacturers who do not yet have mature secure-development and vulnerability-handling processes, and is positioned as an entry aid to the CRA for the "default" product class.
 
-What is genuinely new:
+What it contains:
 
-- **Adaptable Risk-based Controls (ARC).** Each control is paired with one or more risk scenarios describing affected assets and impact, plus environment parameters (access restriction, interface restriction, user capabilities). You match your product's assets and environment against the scenarios to select controls, rather than applying a flat checklist.
-- **A machine-readable OSCAL control catalogue**, published at [github.com/tr-03183/tr-03183-1](https://github.com/tr-03183/tr-03183-1). Access and usage notes are provided on request to BSI. Expressing CRA controls in [OSCAL](https://pages.nist.gov/OSCAL/) makes filtering, custom catalogues, and structured assessment evidence practical.
+- **Adaptable Risk-based Controls (ARC)** - the framing that is genuinely new in 1.0.0. Each control is paired with one or more risk scenarios describing affected assets and impact, plus environment parameters (access restriction, interface restriction, user capabilities). You match your product's assets and environment against the scenarios to select controls, rather than applying a flat checklist. The underlying risk-scenario method was already present in v0.10.0; 1.0.0 names and structures it.
+- **A machine-readable OSCAL control catalogue**, published at [github.com/tr-03183/tr-03183-1](https://github.com/tr-03183/tr-03183-1), with access and usage notes provided on request to BSI. This is not new in 1.0.0 either - the same repository was referenced in v0.10.0 - but it remains the most useful part for tooling. Expressing CRA controls in [OSCAL](https://pages.nist.gov/OSCAL/) makes filtering, custom catalogues, and structured assessment evidence practical.
 - **An assessment report template** that mirrors Annex VII. Its required contents include the product identification, versions of hardware and software, and the **SBOM where applicable**, alongside the risk assessment, design documentation, selected controls, and vulnerability handling description.
+
+In other words, the news is the release status rather than a wholesale change in content. If you evaluated the October 2025 draft, re-read it for the ARC structure rather than expecting a different document.
 
 Part 1 restates the SBOM's home in the CRA: technical documentation under Article 31 must include a cybersecurity risk assessment and an SBOM. If you have been treating SBOM generation as a build-pipeline concern, Part 1 is a useful reminder that it is a documentation-of-conformity concern.
 
@@ -259,7 +269,9 @@ For SBOM programmes this is a meaningful lever: if your SBOM generation, storage
 
 ### Compliance Versioning
 
-To be compliant with the Technical Guideline, the **most recent version MUST be used**. The immediately preceding version MAY be used for up to **six months** after a new version is issued. (Section 7)
+To be compliant with the Technical Guideline, the **most recent version MUST be used** for generating SBOMs. Any earlier version MUST NOT be applied, except the immediately preceding one, which MAY be used for up to **six months** after a new version is issued. (Section 7)
+
+Importantly for anyone worried about the 10-year retention duty: an SBOM that was compliant at its **delivery date remains compliant**, even after BSI publishes newer versions of the guideline. You do not have to regenerate your archive every time the TR moves. Consumers of SBOMs SHOULD be able to interpret versions that were compliant when delivered. (Section 7)
 
 ### Required Formats
 
@@ -367,7 +379,7 @@ Ideally, SBOMs should be digitally signed so recipients can verify their authent
 
 **Before 11 September 2026:**
 
-1. **Register on the ENISA Single Reporting Platform** - EU Login accounts, a Primary and a Secondary representative, done in advance. There is no API, so make sure the humans who will submit have access.
+1. **Get EU Login sorted for the ENISA Single Reporting Platform** - accounts created in advance, Primary and Secondary representatives named. There is no submission API, so make sure the humans who will submit have access.
 2. **Stand up SBOM-driven vulnerability monitoring** so you can answer "which products and versions contain this component?" inside the 24-hour early-warning window.
 3. **Publish a security.txt and CVD policy** per BSI TR-03183-3 and RFC 9116, and be ready to issue CSAF v2.0 advisories.
 
