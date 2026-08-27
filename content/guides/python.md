@@ -121,7 +121,7 @@ generate-sbom:
     UPLOAD: "false"
     ENRICH: "true"
   script:
-    - /sbomify.sh
+    - sbomify-action
 ```
 
 ## PEP 770: Shipping SBOMs Inside Python Packages

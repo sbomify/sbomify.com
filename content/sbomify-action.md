@@ -11,7 +11,7 @@ image, or a Python package, and it is [open source on
 GitHub](https://github.com/sbomify/sbomify-action).
 
 ```yaml
-- uses: sbomify/sbomify-action@master
+- uses: sbomify/sbomify-action@v26.8.0
   env:
     COMPONENT_ID: your-component-id
     LOCK_FILE: poetry.lock
@@ -77,14 +77,24 @@ without asking.
 
 ## Beyond GitHub
 
-The same tool runs anywhere. Use the Docker image in GitLab CI or Bitbucket
-Pipelines, or install it from PyPI and run it locally. See the [CI/CD
-guide](/guides/ci-cd/) for configuration in each environment, and the
-[Yocto](/guides/yocto/) and [Raspberry Pi](/guides/raspberry-pi/) guides for
-embedded builds.
+The same tool runs anywhere. It is a CLI shipped as a container image, and
+GitHub Actions is just one way to invoke it. Use the image in GitLab CI,
+Bitbucket Pipelines, Jenkins, CircleCI, Azure DevOps or any other container
+runner, or run it locally with `uvx`.
+
+See the [runtime guides](/guides/sbomify-action/runtimes/) for setup on each
+platform, and the [Yocto](/guides/yocto/) and [Raspberry Pi](/guides/raspberry-pi/)
+guides for embedded builds.
 
 ## Get started
 
-The [zero to hero guide](/zero-to-hero/) walks through a first SBOM end to end.
-For the full set of configuration options, see the [action on
-GitHub](https://github.com/sbomify/sbomify-action).
+The [quick start](/guides/sbomify-action/quickstart/) gets you a first SBOM in
+minutes, and the [zero to hero guide](/zero-to-hero/) walks through the wider
+workflow end to end.
+
+For everything else, see the [full documentation](/guides/sbomify-action/):
+
+- [Why SBOM quality matters](/guides/sbomify-action/why/) - scanners versus pipelines, and why generating and signing in CI is what makes an SBOM verifiable
+- [Configuration reference](/guides/sbomify-action/configuration/) - every input, environment variable and CLI flag
+- [Runtimes](/guides/sbomify-action/runtimes/) - setup for your CI platform
+- [Enrichment](/guides/sbomify-action/enrichment/) and [augmentation](/guides/sbomify-action/augmentation/) - how components get their metadata

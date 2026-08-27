@@ -1,532 +1,76 @@
 ---
 
 url: /guides/ci-cd/
-title: "SBOM Generation in CI/CD Pipelines - GitHub Actions, GitLab CI, Bitbucket"
-description: "Learn how to automate SBOM generation in CI/CD pipelines. Complete guide with GitHub Actions, GitLab CI, Bitbucket Pipelines, and attestation examples."
+title: "SBOM Generation in CI/CD Pipelines"
+description: "Why SBOMs belong in your build pipeline, what to generate on every commit versus every release, and where to find setup instructions for your CI platform."
+keywords: ["SBOM CI/CD", "SBOM automation", "SBOM pipeline", "continuous integration SBOM"]
 section: guides
+tldr: "Generate SBOMs at build time, where the full dependency context exists and the result can be signed at origin. Reconstructing one later is guesswork by comparison."
 ---
 
-## Why Generate SBOMs in CI/CD?
+## Why build time
 
-Generating SBOMs in your CI/CD pipeline provides several advantages:
+An SBOM describes what went into a build. The only moment that information is complete and unambiguous is **while the build is happening** - when the lockfile, the resolved dependency tree, the commit SHA and the build environment all exist together.
 
-1. **Consistency** - Every build produces an SBOM with the same tools and configuration
-2. **Automation** - No manual steps to forget
-3. **Attestation** - Link SBOMs cryptographically to specific builds
-4. **Compliance** - Automatically meet requirements like EO 14028
-5. **Auditability** - Full traceability from source to deployed artifact
+Afterwards you are reconstructing. Scanning a released artifact tells you what can be detected from the outside, which is not the same as what went in: vendored code, statically linked libraries and files copied between Docker build stages are routinely invisible to an external scan.
 
-## GitHub Actions
+Generating in CI gives you five things:
 
-### Basic SBOM Generation
+1. **Consistency** - every build produces an SBOM the same way, with the same tools.
+2. **Automation** - no manual step anyone can forget before a release.
+3. **Attestation** - the SBOM can be signed where it was made, tied to the pipeline run and commit that produced it.
+4. **Compliance** - obligations under the [EU CRA](/compliance/eu-cra/), [EO 14028](/compliance/eo-14028/) and [FDA guidance](/compliance/fda-medical-device/) are met continuously rather than scrambled for at audit time.
+5. **Traceability** - a complete path from source commit to deployed artifact.
 
-The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step.
+## Signing at origin
 
-```yaml
----
-name: Generate SBOM
+The reason build-time generation matters so much is that it is the only point at which you can sign the SBOM as the party that actually produced it.
 
-on:
-  push:
-    branches: [main]
-  pull_request:
+A signature made in your pipeline binds the document to a specific commit and a specific build. Anyone can verify it later without trusting the platform that stored it. That property only holds if nothing modifies the artifact afterwards - which is why sbomify [never alters an SBOM you upload](/guides/sbomify-action/why/#the-part-most-platforms-get-wrong).
 
-jobs:
-  sbom:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+See [how to sign an SBOM](/faq/how-do-i-sign-an-sbom/).
 
-      - name: Generate SBOM
-        uses: sbomify/sbomify-action@master
-        env:
-          LOCK_FILE: package-lock.json
-          OUTPUT_FILE: sbom.cdx.json
-          ENRICH: true
-          UPLOAD: false
+## What to generate, and when
 
-      - name: Upload SBOM as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: sbom
-          path: sbom.cdx.json
-```
+| Trigger                         | What to do                                | Why                                                                                   |
+| ------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------- |
+| Every commit on the main branch | Generate, do not upload                   | Catches breakage early, costs nothing                                                 |
+| Pull requests                   | Generate, do not upload                   | Verifies the pipeline still works; CI secrets are usually unavailable to forks anyway |
+| Tagged releases                 | Generate, upload, tag a product release   | This is the artifact customers and auditors will ask for                              |
+| Container builds                | Generate from the image, not the lockfile | Captures OS packages as well as application dependencies                              |
 
-### With sbomify Platform Upload
+For what to put in the version field, see [how to version SBOMs](/guides/how-to-version-sboms/).
 
-```yaml
-- name: Generate and Upload SBOM
-  uses: sbomify/sbomify-action@master
-  env:
-    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
-    COMPONENT_ID: my-component
-    LOCK_FILE: package-lock.json
-    OUTPUT_FILE: sbom.cdx.json
-    AUGMENT: true
-    ENRICH: true
-```
+## Set it up
 
-### GitHub Attestation (Recommended)
+The [sbomify action](/guides/sbomify-action/) is a CLI shipped as a container image. It selects the right generator for your ecosystem, adds your business metadata, and enriches every component from package registries - in one step. Configuration is environment variables, and they are identical on every platform.
 
-Use GitHub's built-in attestation for tamper-proof SBOMs:
+Pick your runtime:
 
-```yaml
----
-name: Build with SBOM Attestation
+- [GitHub Actions](/guides/sbomify-action/runtimes/github-actions/) - native action, OIDC trusted publishing, attestation
+- [GitLab CI](/guides/sbomify-action/runtimes/gitlab-ci/) - container image, automatic VCS detection
+- [Bitbucket Pipelines](/guides/sbomify-action/runtimes/bitbucket/) - container image via a Docker pipe
+- [Jenkins](/guides/sbomify-action/runtimes/jenkins/) - declarative and scripted pipelines
+- [CircleCI](/guides/sbomify-action/runtimes/circleci/) - container executor
+- [Azure DevOps](/guides/sbomify-action/runtimes/azure-devops/) - container job or Docker task
+- [Any container runner](/guides/sbomify-action/runtimes/docker/) - Drone, Woodpecker, Buildkite, TeamCity, Concourse
+- [Your local machine](/guides/sbomify-action/runtimes/local/) - `uvx`, `pipx` or Docker
 
-on:
-  push:
-    branches: [main]
+If your platform can run a container, it is supported even without a dedicated page.
 
-permissions:
-  contents: read
-  id-token: write
-  attestations: write
+## Good practice
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+- **Do not fail the build on SBOM generation errors** while you are still rolling this out. Once it is stable, do - a missing SBOM should be as loud as a failing test.
+- **Store SBOMs as build artifacts** as well as uploading them, so they are available even if an upload fails.
+- **Cache the license database.** It avoids re-downloading 20-50 MB on every run and reduces exposure to [rate limits](/guides/sbomify-action/enrichment/#license-database-rate-limits).
+- **Set `GITHUB_TOKEN`** whatever platform you are on. License databases come from GitHub Releases, and unauthenticated requests are throttled hard enough that enrichment quietly degrades.
+- **Prefer short-lived credentials.** On GitHub Actions, [OIDC trusted publishing](/guides/sbomify-action/publishing/#oidc-trusted-publishing) removes the long-lived token entirely.
+- **Keep the audit trail.** `audit_trail.txt` records every change the pipeline made and where it came from - archive it next to the SBOM.
 
-      - name: Build
-        run: npm ci && npm run build
+## Related reading
 
-      - name: Generate SBOM
-        uses: sbomify/sbomify-action@master
-        env:
-          LOCK_FILE: package-lock.json
-          OUTPUT_FILE: sbom.cdx.json
-          COMPONENT_NAME: my-app
-          COMPONENT_VERSION: ${{ github.sha }}
-          ENRICH: true
-          UPLOAD: false
-
-      - name: Attest SBOM
-        uses: actions/attest-sbom@v1
-        with:
-          subject-path: './dist'
-          sbom-path: './sbom.cdx.json'
-```
-
-### Docker Image with SBOM
-
-```yaml
----
-name: Build and Push Container with SBOM
-
-on:
-  push:
-    branches: [main]
-
-permissions:
-  contents: read
-  packages: write
-  id-token: write
-  attestations: write
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Login to GHCR
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        id: build
-        with:
-          context: .
-          push: true
-          tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
-          sbom: true
-          provenance: true
-
-      - name: Generate additional SBOM
-        uses: sbomify/sbomify-action@master
-        env:
-          DOCKER_IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
-          OUTPUT_FILE: container-sbom.cdx.json
-          COMPONENT_NAME: ${{ github.repository }}
-          COMPONENT_VERSION: ${{ github.sha }}
-          ENRICH: true
-          UPLOAD: false
-```
-
-## GitLab CI
-
-### Basic GitLab SBOM Generation
-
-```yaml
-stages:
-  - build
-  - sbom
-
-build:
-  stage: build
-  script:
-    - npm ci
-    - npm run build
-  artifacts:
-    paths:
-      - dist/
-
-generate-sbom:
-  stage: sbom
-  image: ghcr.io/sbomify/sbomify-action
-  variables:
-    LOCK_FILE: package-lock.json
-    OUTPUT_FILE: sbom.cdx.json
-    COMPONENT_NAME: my-app
-    COMPONENT_VERSION: $CI_COMMIT_TAG
-    UPLOAD: "false"
-    ENRICH: "true"
-  script:
-    - /sbomify.sh
-  artifacts:
-    paths:
-      - sbom.cdx.json
-    reports:
-      cyclonedx: sbom.cdx.json
-```
-
-### GitLab with Dependency Scanning Integration
-
-```yaml
-include:
-  - template: Security/Dependency-Scanning.gitlab-ci.yml
-
-generate-sbom:
-  stage: test
-  image: ghcr.io/sbomify/sbomify-action
-  variables:
-    LOCK_FILE: package-lock.json
-    OUTPUT_FILE: gl-sbom-report.cdx.json
-    UPLOAD: "false"
-    ENRICH: "true"
-  script:
-    - /sbomify.sh
-  artifacts:
-    paths:
-      - gl-sbom-report.cdx.json
-    reports:
-      cyclonedx: gl-sbom-report.cdx.json
-```
-
-### GitLab Container Scanning with SBOM
-
-```yaml
-container-sbom:
-  stage: sbom
-  image: ghcr.io/sbomify/sbomify-action
-  services:
-    - docker:dind
-  variables:
-    DOCKER_HOST: tcp://docker:2376
-    DOCKER_TLS_CERTDIR: "/certs"
-    DOCKER_IMAGE: "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
-    OUTPUT_FILE: container-sbom.cdx.json
-    UPLOAD: "false"
-    ENRICH: "true"
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-  script:
-    - /sbomify.sh
-  artifacts:
-    paths:
-      - container-sbom.cdx.json
-```
-
-## Bitbucket Pipelines
-
-### Basic Bitbucket SBOM Generation
-
-```yaml
-image: node:20
-
-pipelines:
-  default:
-    - step:
-        name: Build
-        script:
-          - npm ci
-          - npm run build
-        artifacts:
-          - dist/**
-
-    - step:
-        name: Generate SBOM
-        script:
-          - pipe: docker://ghcr.io/sbomify/sbomify-action:latest
-            variables:
-              LOCK_FILE: package-lock.json
-              OUTPUT_FILE: sbom.cdx.json
-              COMPONENT_NAME: my-app
-              COMPONENT_VERSION: $BITBUCKET_TAG
-              UPLOAD: "false"
-              ENRICH: "true"
-        artifacts:
-          - sbom.cdx.json
-```
-
-For rolling releases, use `$BITBUCKET_COMMIT` instead of `$BITBUCKET_TAG`. See our [SBOM versioning guide](/guides/how-to-version-sboms/) for best practices.
-
-### Bitbucket with Upload
-
-```yaml
-pipelines:
-  default:
-    - step:
-        name: Generate and Upload SBOM
-        script:
-          - pipe: docker://ghcr.io/sbomify/sbomify-action:latest
-            variables:
-              TOKEN: $SBOMIFY_TOKEN
-              COMPONENT_ID: my-component
-              LOCK_FILE: package-lock.json
-              OUTPUT_FILE: sbom.cdx.json
-              ENRICH: "true"
-```
-
-## Jenkins
-
-### Jenkins Pipeline with SBOM
-
-```groovy
-pipeline {
-    agent {
-        docker {
-            image 'ghcr.io/sbomify/sbomify-action'
-        }
-    }
-
-    environment {
-        LOCK_FILE = 'package-lock.json'
-        OUTPUT_FILE = 'sbom.cdx.json'
-        COMPONENT_NAME = 'my-app'
-        COMPONENT_VERSION = "${env.GIT_TAG_NAME ?: env.GIT_COMMIT}"
-        UPLOAD = 'false'
-        ENRICH = 'true'
-    }
-
-    stages {
-        stage('Generate SBOM') {
-            steps {
-                sh '/sbomify.sh'
-            }
-        }
-
-        stage('Archive SBOM') {
-            steps {
-                archiveArtifacts artifacts: 'sbom.cdx.json'
-            }
-        }
-    }
-}
-```
-
-### Jenkins with Credentials
-
-```groovy
-pipeline {
-    agent any
-
-    stages {
-        stage('Generate SBOM') {
-            steps {
-                withCredentials([string(credentialsId: 'sbomify-token', variable: 'TOKEN')]) {
-                    docker.image('ghcr.io/sbomify/sbomify-action').inside {
-                        sh '''
-                            export COMPONENT_ID="my-component"
-                            export LOCK_FILE="package-lock.json"
-                            export OUTPUT_FILE="sbom.cdx.json"
-                            export ENRICH="true"
-                            export UPLOAD="true"
-                            /sbomify.sh
-                        '''
-                    }
-                }
-            }
-        }
-    }
-}
-```
-
-## CircleCI
-
-### CircleCI SBOM Generation
-
-```yaml
-version: 2.1
-
-jobs:
-  generate-sbom:
-    docker:
-      - image: ghcr.io/sbomify/sbomify-action
-    steps:
-      - checkout
-      - run:
-          name: Generate SBOM
-          environment:
-            LOCK_FILE: package-lock.json
-            OUTPUT_FILE: sbom.cdx.json
-            COMPONENT_NAME: my-app
-            COMPONENT_VERSION: << pipeline.git.tag >>
-            UPLOAD: "false"
-            ENRICH: "true"
-          command: /sbomify.sh
-      - store_artifacts:
-          path: sbom.cdx.json
-
-workflows:
-  build-and-sbom:
-    jobs:
-      - generate-sbom
-```
-
-## Azure DevOps
-
-### Azure Pipelines SBOM Generation
-
-```yaml
-trigger:
-  - main
-
-pool:
-  vmImage: 'ubuntu-latest'
-
-steps:
-  - checkout: self
-
-  - task: Docker@2
-    displayName: 'Generate SBOM'
-    inputs:
-      command: 'run'
-      arguments: |
-        -v $(Build.SourcesDirectory):/workspace
-        -w /workspace
-        -e LOCK_FILE=package-lock.json
-        -e OUTPUT_FILE=sbom.cdx.json
-        -e COMPONENT_NAME=my-app
-        -e COMPONENT_VERSION=$(Build.SourceVersion)
-        -e UPLOAD=false
-        -e ENRICH=true
-        ghcr.io/sbomify/sbomify-action
-
-  - publish: $(Build.SourcesDirectory)/sbom.cdx.json
-    artifact: sbom
-```
-
-## Uploading to Dependency-Track
-
-Integrate with OWASP Dependency-Track:
-
-```yaml
-# GitHub Actions example
-- name: Generate SBOM
-  uses: sbomify/sbomify-action@master
-  env:
-    LOCK_FILE: package-lock.json
-    OUTPUT_FILE: sbom.cdx.json
-    ENRICH: true
-    UPLOAD: false
-
-- name: Upload to Dependency-Track
-  run: |
-    curl -X "POST" "https://dtrack.example.com/api/v1/bom" \
-      -H "X-Api-Key: ${{ secrets.DTRACK_API_KEY }}" \
-      -H "Content-Type: multipart/form-data" \
-      -F "project=${{ secrets.DTRACK_PROJECT_UUID }}" \
-      -F "bom=@sbom.cdx.json"
-```
-
-## Multiple Language Projects
-
-For projects with multiple lockfiles:
-
-```yaml
----
-name: Generate Multiple SBOMs
-
-on: [push]
-
-jobs:
-  sbom:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - name: frontend
-            lock_file: frontend/package-lock.json
-          - name: backend
-            lock_file: backend/requirements.txt
-          - name: api
-            lock_file: api/go.mod
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Generate SBOM for ${{ matrix.name }}
-        uses: sbomify/sbomify-action@master
-        env:
-          LOCK_FILE: ${{ matrix.lock_file }}
-          OUTPUT_FILE: 'sbom-${{ matrix.name }}.cdx.json'
-          ENRICH: true
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: sbom-${{ matrix.name }}
-          path: sbom-${{ matrix.name }}.cdx.json
-```
-
-## Best Practices
-
-1. **Generate on every build** - SBOMs should be artifacts of your CI/CD pipeline
-2. **Store as build artifacts** - Keep SBOMs alongside your build outputs
-3. **Use attestations** - Cryptographically link SBOMs to builds
-4. **Version your SBOMs** - Include build numbers or commit hashes
-5. **Fail on errors** - Don't ship if SBOM generation fails
-6. **Scan immediately** - Integrate vulnerability scanning with SBOM generation
-7. **Centralize storage** - Upload to platforms like sbomify for management
-
-## Troubleshooting
-
-### Common Issues
-
-**SBOM generation fails in CI:**
-
-- Ensure all dependencies are installed (`npm ci`, `pip install`, etc.)
-- Check that lockfiles are committed to the repository
-
-**Missing dependencies:**
-
-- Use `--frozen-lockfile` or equivalent to ensure lockfile is respected
-- Verify the correct lockfile path
-
-**Authentication issues:**
-
-- For private registries, configure credentials in CI secrets
-- Use service accounts with minimal permissions
-
-## Further Reading
-
-Related blog posts:
-
-- [GitHub Action module with Attestation](/2024/10/31/github-action-update-and-attestation/) - SLSA build provenance attestation for SBOMs
-- [sbomify GitHub Action v0.3.0: Now Faster and Compatible with GitLab!](/2024/11/12/gitlab-support/) - GitLab CI/CD support and performance improvements
-
-## Further Resources
-
-For more SBOM tools and resources, see our [SBOM Resources](/resources/) page, which includes tools for SBOM generation, distribution, and analysis across all supported languages.
+- [Why SBOM quality matters](/guides/sbomify-action/why/) - scanners versus pipelines, and chain of custody
+- [Language and platform guides](/guides/) - ecosystem-specific instructions
+- [SBOM generation tools compared](/2026/01/26/sbom-generation-tools-comparison/)
+- [GitHub Action with attestation](/2024/10/31/github-action-update-and-attestation/)
+- [SBOM resources](/resources/) - the wider tooling landscape

@@ -55,7 +55,7 @@ See [Integrations](/features/integrations/) for the full list of enrichment sour
 
 - **GitHub Actions** - Native integration
 - **Any CI/CD** - GitLab CI, Bitbucket Pipelines, Jenkins, CircleCI, etc.
-- **Python package** - `pip install sbomify-action` for standalone use
+- **Python package** - `uvx sbomify-action` for standalone use
 - **Docker** - `ghcr.io/sbomify/sbomify-action` runs anywhere
 
 ### Deployment Flexibility
