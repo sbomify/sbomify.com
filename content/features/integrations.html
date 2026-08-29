@@ -39,7 +39,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
             <span class="flex items-center gap-2 text-2xl font-bold text-white"><span class="text-[#8A7DFF]">{{< icon "github" "w-8 h-8" >}}</span> GitHub</span>
             <div id="gh-latest-release" class="hidden"></div>
           </div>
-          <a href="https://github.com/marketplace/actions/sbomify" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on Marketplace →</a>
+          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/guides/sbomify-action/runtimes/github-actions/" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors">Documentation →</a><a href="https://github.com/marketplace/actions/sbomify" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on Marketplace →</a></span>
         </div>
         <p class="text-gray-300 mb-6">
           GitHub is at the core of many organizations. Our <a href="/sbomify-action/" class="text-[#8A7DFF] hover:text-white transition-colors">sbomify Action</a> supports <a href="/faq/how-do-i-set-up-oidc-trusted-publishing/" class="text-[#8A7DFF] hover:text-white transition-colors">OIDC trusted publishing</a>, so no long-lived token secret is needed.
@@ -68,7 +68,8 @@ steps:
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="gitlab">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-white"><span class="text-[#8A7DFF]">{{< icon "gitlab" "w-8 h-8" >}}</span> GitLab</span>
-          <a href="https://github.com/sbomify/sbomify-action" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on GitHub →</a>
+          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/guides/sbomify-action/runtimes/gitlab-ci/" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap">Documentation →</a>
+          <a href="https://github.com/sbomify/sbomify-action" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on GitHub →</a></span>
         </div>
         <p class="text-gray-300 mb-6">
           Use our <a href="https://github.com/sbomify/sbomify-action/pkgs/container/sbomify-action" class="text-[#8A7DFF] hover:text-white transition-colors">Docker image</a> directly in GitLab CI with built-in caching support.
@@ -98,7 +99,8 @@ steps:
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="bitbucket">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-white"><span class="text-[#8A7DFF]">{{< icon "bitbucket" "w-8 h-8" >}}</span> Bitbucket</span>
-          <a href="https://github.com/sbomify/sbomify-action" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on GitHub →</a>
+          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/guides/sbomify-action/runtimes/bitbucket/" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap">Documentation →</a>
+          <a href="https://github.com/sbomify/sbomify-action" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on GitHub →</a></span>
         </div>
         <p class="text-gray-300 mb-6">
           Seamlessly integrate with Bitbucket Pipelines using our Docker image with built-in caching.
@@ -131,7 +133,8 @@ definitions:
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="docker">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-white"><span class="text-[#8A7DFF]">{{< icon "docker" "w-8 h-8" >}}</span> Docker</span>
-          <a href="https://github.com/sbomify/sbomify-action/pkgs/container/sbomify-action" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on GHCR →</a>
+          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/guides/sbomify-action/runtimes/docker/" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap">Documentation →</a>
+          <a href="https://github.com/sbomify/sbomify-action/pkgs/container/sbomify-action" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on GHCR →</a></span>
         </div>
         <p class="text-gray-300 mb-6">
           For any other CI/CD system, use our multi-arch (amd64 and arm64) Docker image directly. All generators are pre-installed.
@@ -159,25 +162,28 @@ docker run --rm \
       {{< comment >}}pip / CLI{{< /comment >}}
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all" id="pip">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-          <span class="flex items-center gap-2 text-2xl font-bold text-white"><span class="text-[#8A7DFF]">{{< icon "python" "w-8 h-8" >}}</span> pip / CLI</span>
+          <span class="flex items-center gap-2 text-2xl font-bold text-white"><span class="text-[#8A7DFF]">{{< icon "python" "w-8 h-8" >}}</span> Local CLI</span>
           <a href="https://pypi.org/project/sbomify-action/" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on PyPI →</a>
         </div>
         <p class="text-gray-300 mb-6">
-          Install via pip for local development or non-Docker environments. Requires external generators (Syft or cdxgen) to be installed separately.
+          Run the CLI on your machine with <code>uvx</code> or <code>pipx</code> for local development, one-off SBOMs and the setup wizard. Requires external generators (Syft or cdxgen) to be installed separately &mdash; the Docker image bundles them.
+          <a href="/guides/sbomify-action/runtimes/local/" class="text-[#8A7DFF] hover:text-white transition-colors">Read the guide &rarr;</a>
         </p>
         <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">
 
-<pre><code>pip install sbomify-action
-
-# CLI usage
-sbomify-action --lock-file requirements.txt \
+<pre><code># Run without installing anything
+uvx sbomify-action --lock-file requirements.txt \
   --enrich --no-upload -o sbom.cdx.json
 
-# Or use environment variables
+# Or with pipx
+pipx run sbomify-action --lock-file requirements.txt \
+  --enrich --no-upload -o sbom.cdx.json
+
+# Environment variables work too
 export LOCK_FILE=requirements.txt
 export ENRICH=true
 export UPLOAD=false
-sbomify-action</code></pre>
+uvx sbomify-action</code></pre>
 
         </div>
       </div>
@@ -189,7 +195,7 @@ sbomify-action</code></pre>
 <section>
     <div class="mb-10 text-center max-w-3xl mx-auto">
       <h2 class="text-3xl font-bold text-primaryText mb-4">Supported Ecosystems</h2>
-      <p class="text-lg text-secondaryText">Generate SBOMs from lockfiles across 14 ecosystems, plus Docker images and Yocto/OpenEmbedded builds.</p>
+      <p class="text-lg text-secondaryText">Generate SBOMs from lockfiles across 17 ecosystems, plus container images, directory scans and Yocto/OpenEmbedded builds.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
@@ -291,11 +297,32 @@ sbomify-action</code></pre>
           <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">.terraform.lock.hcl</span>
         </div>
       </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">Haskell</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">stack.yaml.lock</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">stack.yaml</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">cabal.project.freeze</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">Erlang</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">rebar.lock</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">Clojure</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">deps.edn</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">project.clj</span>
+        </div>
+      </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
-        <h4 class="text-lg font-bold text-white mb-2">Docker Images</h4>
+        <h4 class="text-lg font-bold text-white mb-2">Container Images</h4>
         <p class="text-gray-300 text-sm">Generate SBOMs directly from container images using <code class="text-[#8A7DFF]">DOCKER_IMAGE</code> instead of a lockfile. Scans all layers and installed packages.</p>
       </div>
       <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
@@ -392,7 +419,7 @@ sbomify-action</code></pre>
 {{< comment >}}Vulnerability Analysis Section{{< /comment >}}
 <section>
     <div class="mb-10 text-center max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold text-primaryText mb-4">Vulnerability Analysis</h2>
+      <h2 id="vulnerability-analysis" class="text-3xl font-bold text-primaryText mb-4">Vulnerability Analysis</h2>
       <p class="text-lg text-secondaryText">Comprehensive scanning powered by industry-leading databases.</p>
     </div>
 
@@ -400,7 +427,7 @@ sbomify-action</code></pre>
       {{< comment >}}OSV{{< /comment >}}
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col">
         <img src="/assets/images/site/osv.svg" class="h-8 w-auto mb-6 self-start" alt="Google OSV" width="160" height="32">
-        <h3 class="text-xl font-bold text-white mb-3">Google OSV</h3>
+        <h3 id="osv" class="text-xl font-bold text-white mb-3">Google OSV</h3>
         <p class="text-gray-300 flex-grow">
           We integrate with the Open Source Vulnerability (OSV) database to provide precise, distributed vulnerability intelligence across a wide range of ecosystems.
         </p>
@@ -409,7 +436,7 @@ sbomify-action</code></pre>
       {{< comment >}}Dependency Track{{< /comment >}}
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col">
         <img src="/assets/images/site/dependency-track-white.svg" class="h-8 w-auto mb-6 self-start" alt="Dependency Track" width="149" height="32">
-        <h3 class="text-xl font-bold text-white mb-3">Dependency Track</h3>
+        <h3 id="dependency-track" class="text-xl font-bold text-white mb-3">Dependency Track</h3>
         <p class="text-gray-300 mb-4 flex-grow">
           Leverage the power of OWASP Dependency-Track for continuous component analysis. Upload SBOMs directly from CI/CD with <code class="text-[#8A7DFF]">UPLOAD_DESTINATIONS=dependency-track</code>.
         </p>

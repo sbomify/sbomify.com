@@ -33,7 +33,7 @@ docker run --rm -it \
   sbomify-action wizard
 ```
 
-The `-it` flags are required because the wizard is interactive, and the volume mount is what lets it write the generated workflow back into your repo. If you prefer not to use Docker, you can also `pip install sbomify-action` and run `sbomify-action wizard` directly (`sbomify-action init` is a backwards-compatible alias). Useful flags:
+The `-it` flags are required because the wizard is interactive, and the volume mount is what lets it write the generated workflow back into your repo. If you prefer not to use Docker, you can also run `uvx sbomify-action wizard` (or `pipx run sbomify-action wizard`) directly (`sbomify-action init` is a backwards-compatible alias). Useful flags:
 
 - `--dry-run` - preview the full plan without making API changes or writing files
 - `--repo-root <path>` - point at a repository other than the current directory

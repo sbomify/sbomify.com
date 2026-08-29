@@ -30,7 +30,15 @@ Step-by-step guides for generating SBOMs across all major programming languages 
 - [Yocto](/guides/yocto/) - Embedded Linux
 - [Raspberry Pi](/guides/raspberry-pi/) - rpi-image-gen
 - [sbomify Action](/sbomify-action/) - generate SBOMs from any of the lock files below
-- [CI/CD Integration](/guides/ci-cd/) - GitHub Actions, GitLab CI, Bitbucket
+- [CI/CD Integration](/guides/ci-cd/) - Why SBOMs belong in your build pipeline
+
+## The sbomify Action
+
+- [Overview](/sbomify-action/) - what it is, in brief
+- [Full documentation](/guides/sbomify-action/) - complete reference for generating SBOMs in any pipeline
+- [Quick start](/guides/sbomify-action/quickstart/) - Setup wizard and your first run
+- [Configuration reference](/guides/sbomify-action/configuration/) - Every option
+- [Runtimes](/guides/sbomify-action/runtimes/) - GitHub Actions, GitLab CI, Bitbucket, Jenkins, CircleCI, Azure DevOps, TeamCity and more
 
 ## General Guides
 
