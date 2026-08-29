@@ -24,7 +24,7 @@ jobs:
   sbom:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: sbomify/sbomify-action@v26.8.0
         env:
@@ -33,7 +33,7 @@ jobs:
           ENRICH: true
           UPLOAD: false
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: sbom
           path: sbom.cdx.json
@@ -54,7 +54,7 @@ jobs:
   sbom:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: sbomify/sbomify-action@v26.8.0
         env:
           COMPONENT_ID: your-component-id
@@ -93,7 +93,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: sbomify/sbomify-action@v26.8.0
         env:
@@ -104,7 +104,7 @@ jobs:
           ENRICH: true
           UPLOAD: false
 
-      - uses: actions/attest-build-provenance@v1
+      - uses: actions/attest-build-provenance@v4
         with:
           subject-path: sbom.cdx.json
 ```
@@ -131,7 +131,7 @@ The image must be pullable from the runner, so push it or load it into the local
 Worth doing - it avoids re-downloading the license database on every run, and reduces exposure to [rate limits](/guides/sbomify-action/enrichment/#license-database-rate-limits).
 
 ```yaml
-- uses: actions/cache@v4
+- uses: actions/cache@v6
   with:
     path: .sbomify-cache
     key: sbomify-${{ runner.os }}

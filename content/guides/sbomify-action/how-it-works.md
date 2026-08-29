@@ -36,20 +36,27 @@ Input          LOCK_FILE, SBOM_FILE or DOCKER_IMAGE
 
 ## 1. Generation
 
-One of `LOCK_FILE`, `SBOM_FILE` or `DOCKER_IMAGE` is required. If you pass `SBOM_FILE`, generation is skipped and your existing document is processed instead.
+One of `LOCK_FILE`, `SBOM_FILE`, `DOCKER_IMAGE` or `SOURCE_DIR` is required. If you pass `SBOM_FILE`, generation is skipped and your existing document is processed instead.
 
 Generators are registered with a priority, and the highest-priority generator that supports your input wins. If it fails, the next one is tried automatically.
 
-| Priority | Generator         | Ecosystems                                                                                                     | Output                          |
-| -------- | ----------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------- |
-| 10       | `cyclonedx-py`    | Python                                                                                                         | CycloneDX 1.0-1.7               |
-| 10       | `cargo-cyclonedx` | Rust                                                                                                           | CycloneDX 1.4-1.6               |
-| 20       | `cdxgen`          | Python, JavaScript, Java, Gradle, Go, Rust, Ruby, Dart, C++, PHP, .NET, Swift, Elixir, Scala, container images | CycloneDX 1.4-1.7               |
-| 35       | Syft              | Python, JavaScript, Go, Rust, Ruby, Dart, C++, PHP, .NET, Swift, Elixir, Terraform, container images           | CycloneDX 1.2-1.6, SPDX 2.2-2.3 |
+| Priority | Generator          | Ecosystems                                                                                 | Output                          |
+| -------- | ------------------ | ------------------------------------------------------------------------------------------ | ------------------------------- |
+| 10       | `cyclonedx-py`     | Python                                                                                     | CycloneDX 1.2-1.7               |
+| 10       | `cargo-cyclonedx`  | Rust                                                                                       | CycloneDX 1.3-1.5, SPDX 2.3     |
+| 10       | `cyclonedx-gomod`  | Go                                                                                         | CycloneDX 1.4-1.6, SPDX 2.3     |
+| 10       | `cyclonedx-maven`  | Java (`pom.xml`)                                                                           | CycloneDX 1.4-1.6, SPDX 2.3     |
+| 10       | `cyclonedx-gradle` | Java (Gradle build scripts)                                                                | CycloneDX 1.4-1.6, SPDX 2.3     |
+| 10       | `cyclonedx-sbt`    | Scala                                                                                      | CycloneDX 1.4-1.6, SPDX 2.3     |
+| 10       | `gradle-lockfile`  | Java (`gradle.lockfile`), read directly                                                    | CycloneDX 1.2-1.7, SPDX 2.2-2.3 |
+| 20       | `cdxgen`           | JavaScript, Ruby, Dart, C++, PHP, .NET, Elixir, Clojure, and elsewhere no native tool wins | CycloneDX 1.4-1.7               |
+| 35       | Syft               | Swift, Terraform, Haskell, Erlang, container images, directory scans                       | CycloneDX 1.2-1.6, SPDX 2.2-2.3 |
 
-Native tools rank above generic scanners because they understand their ecosystem's resolution rules. See [input sources](/guides/sbomify-action/sources/) for the full routing logic.
+Native tools rank above generic scanners because they resolve dependencies the way the ecosystem itself does. Several emit SPDX directly rather than deferring to Syft. See [input sources](/guides/sbomify-action/sources/) for the full routing logic.
 
-> Trivy is currently not shipped in the container image. It was removed after [compromised releases were published in March 2026](/2026/03/26/trivy-compromise-hardening-sbomify-action/), and Syft and cdxgen cover every supported ecosystem.
+The generators are not baked into the image - they are fetched on first use, digest-pinned and cached. See [tool runtimes](/guides/sbomify-action/advanced/#tool-runtimes).
+
+> Trivy was removed from the tool set after [compromised releases were published in March 2026](/2026/03/26/trivy-compromise-hardening-sbomify-action/). The remaining generators cover every supported ecosystem.
 
 ## 1b. Additional package injection
 

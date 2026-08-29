@@ -26,7 +26,7 @@ This website provides:
 - /guides/sbomify-action/ - sbomify action documentation (generate SBOMs in any CI pipeline)
 - /guides/sbomify-action/why/ - Why scanner output is not a compliance-grade SBOM
 - /guides/sbomify-action/configuration/ - Full configuration reference
-- /guides/sbomify-action/runtimes/ - Per-platform setup (GitHub, GitLab, Bitbucket, Jenkins, CircleCI, Azure)
+- /guides/sbomify-action/runtimes/ - Per-platform setup (GitHub, GitLab, Bitbucket, Jenkins, CircleCI, Azure, TeamCity)
 - /case-studies/ - Customer success stories
 
 ## Content Topics

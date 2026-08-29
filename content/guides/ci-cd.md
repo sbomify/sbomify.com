@@ -53,7 +53,8 @@ Pick your runtime:
 - [Jenkins](/guides/sbomify-action/runtimes/jenkins/) - declarative and scripted pipelines
 - [CircleCI](/guides/sbomify-action/runtimes/circleci/) - container executor
 - [Azure DevOps](/guides/sbomify-action/runtimes/azure-devops/) - container job or Docker task
-- [Any container runner](/guides/sbomify-action/runtimes/docker/) - Drone, Woodpecker, Buildkite, TeamCity, Concourse
+- [TeamCity](/guides/sbomify-action/runtimes/teamcity/) - Docker Wrapper build feature
+- [Any container runner](/guides/sbomify-action/runtimes/docker/) - Drone, Woodpecker, Buildkite, Concourse
 - [Your local machine](/guides/sbomify-action/runtimes/local/) - `uvx`, `pipx` or Docker
 
 If your platform can run a container, it is supported even without a dedicated page.

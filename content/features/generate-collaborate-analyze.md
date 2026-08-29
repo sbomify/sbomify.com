@@ -16,7 +16,7 @@ The Software Bill of Materials (SBOM) lifecycle comprises three key stages: **Au
 
 ## Generation (a.k.a Authoring)
 
-Newcomers to SBOMs often underestimate the complexities involved in creating a complete SBOM (also known as 'authoring'). There are many [SBOM generation tools](/resources/#generation) available, so it might seem like it's just a matter of running one of these tools and you're done.
+Newcomers to SBOMs often underestimate the complexities involved in creating a complete SBOM (also known as 'authoring'). There are many [SBOM generation tools](/resources/#generation--authoring) available, so it might seem like it's just a matter of running one of these tools and you're done.
 
 While this _might_ suffice for internal SBOM needs when starting out, the reality is far more complicated if you need to meet industry requirements, such as the NTIA Minimum Elements. But don’t worry – we’re here to help.
 

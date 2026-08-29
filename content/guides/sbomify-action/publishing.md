@@ -35,7 +35,7 @@ jobs:
   sbom:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: sbomify/sbomify-action@v26.8.0
         env:
           COMPONENT_ID: your-component-id

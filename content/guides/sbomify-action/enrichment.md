@@ -69,8 +69,10 @@ Coverage varies by ecosystem. Popular packages on PyPI, npm and crates.io have e
 | Debian Sources | Debian                                                                     | Maintainer, description, homepage                  |
 | deps.dev       | Python, npm, Maven, Go, Ruby, NuGet                                        | License, homepage, repository                      |
 | ecosyste.ms    | All major ecosystems                                                       | License, description, maintainer                   |
-| ClearlyDefined | Python, npm, Cargo, Maven, Ruby, NuGet, Go                                 | License, attribution                               |
+| ClearlyDefined | Python, npm, Cargo, Maven, Ruby, NuGet, Go                                 | License, homepage, repository                      |
 | Repology       | Linux distros                                                              | License, homepage                                  |
+
+ClearlyDefined is queried through [clearly-cached](https://github.com/sbomify/clearly-cached), a caching front end run at `https://clearly-cached.sbomify.com`. It retries the transient upstream failures that would otherwise be recorded as "this package has no licence", and returns a roughly 0.4 KB projection instead of a definition that can run to 190 KB. Point `SBOMIFY_CLEARLY_CACHED_URL` at your own instance if you prefer. If the service is unreachable or failing, enrichment stops consulting it for the rest of the run and continues with the other sources.
 
 ### Priority order
 
@@ -154,7 +156,7 @@ Version cycles are derived from the full version, so `3.12.7` matches the `3.12`
   "version": "12.12",
   "properties": [
     {"name": "cdx:lifecycle:milestone:generalAvailability", "value": "2023-06-10"},
-    {"name": "cdx:lifecycle:milestone:endOfSupport", "value": "2026-06-10"},
+    {"name": "cdx:lifecycle:milestone:endOfSupport", "value": "2026-06-11"},
     {"name": "cdx:lifecycle:milestone:endOfLife", "value": "2028-06-30"}
   ]
 }
@@ -193,7 +195,8 @@ That is informational, not an error, and it never fails a build. To get the most
 
 Worth knowing before you rely on it:
 
-- **Network access is required.** Enrichment calls external APIs, so it is not suitable for air-gapped builds. Generation and augmentation still work offline; run with `ENRICH: false`.
+- **Network access is required.** Enrichment calls external APIs, so it is not suitable for air-gapped builds. Generation and augmentation still work offline; run with `ENRICH: false`, and set `SBOMIFY_FETCH_RUNTIMES=0` so the [tool runtimes](/guides/sbomify-action/advanced/#tool-runtimes) are not fetched either.
+- **Responses are cached** on disk between runs. Disable with `SBOMIFY_ENRICHMENT_CACHE=0`, or change the lifetime with `SBOMIFY_ENRICHMENT_CACHE_TTL`.
 - **Rate limits apply.** Very large dependency trees, in the region of a thousand packages or more, may enrich slowly. Caching and backoff help, but the ceiling is real.
 - **It is best effort.** Private packages, vendored code and obscure libraries are not in any public registry, so nothing will be found for them. Declare what you know about those through [augmentation](/guides/sbomify-action/augmentation/) instead.
 - **Results are not deterministic.** Registry data changes over time, so the same input can produce slightly different output on different days. This is the trade-off for richer data. Every value that was added is recorded in the [audit trail](/guides/sbomify-action/advanced/#audit-trail) along with the source it came from, so any given SBOM remains fully explainable even though it is not reproducible byte-for-byte.

@@ -24,7 +24,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: sbomify/sbomify-action@v26.8.0
         env:
@@ -33,19 +33,12 @@ jobs:
           ENRICH: true
           UPLOAD: false
 
-      - uses: actions/attest-build-provenance@v1
+      - uses: actions/attest-build-provenance@v4
         with:
           subject-path: sbom.cdx.json
 ```
 
-You can also attest the artifact itself and reference the SBOM:
-
-```yaml
-- uses: actions/attest-sbom@v1
-  with:
-    subject-path: './dist'
-    sbom-path: './sbom.cdx.json'
-```
+You can also attest the build artifact itself and attach the SBOM to it, with [`actions/attest-sbom`](https://github.com/actions/attest-sbom), passing your build output as `subject-path` and the generated SBOM as `sbom-path`.
 
 ### Where attestation is available
 
@@ -114,7 +107,7 @@ Two caches are worth persisting: the license databases, at roughly 20-50 MB, and
 **GitHub Actions**
 
 ```yaml
-- uses: actions/cache@v4
+- uses: actions/cache@v6
   with:
     path: .sbomify-cache
     key: sbomify-${{ runner.os }}
@@ -166,6 +159,27 @@ docker run --rm \
 
 Caching reduces network calls, which also reduces exposure to the [license database rate limit](/guides/sbomify-action/enrichment/#license-database-rate-limits).
 
+## Tool runtimes
+
+The generators are not baked into the container image. Syft, cdxgen, the JVM toolchain, Go, Rust, PHP, .NET, `crane` and `cosign` are downloaded on first use, verified against a digest pinned at build time, and unpacked into a cache directory.
+
+This is why the image is small, why the same tool selection works identically under `uvx`, and why the tool set cannot change without a release - which matters for something whose output is a provenance document.
+
+Two things follow that are worth configuring:
+
+**Cache the runtimes.** Without a persistent cache every run re-downloads them. Set `SBOMIFY_TOOL_CACHE` to a path your CI restores between builds. If it is unset, the cache falls back to `XDG_CACHE_HOME`, then `$HOME/.cache`, then the temp directory - the last of which does not survive a run.
+
+```yaml
+env:
+  SBOMIFY_TOOL_CACHE: ${{ github.workspace }}/.sbomify-cache/runtimes
+```
+
+**Air-gapped builds need an opt-out.** Set `SBOMIFY_FETCH_RUNTIMES=0` to refuse downloads and use only preinstalled tools.
+
+Be deliberate about that flag. Declining to fetch does not leave the tool without an opinion - it silently falls back to whatever generator is already available, which is usually the worse one. A Rust project resolved by Syft instead of `cargo-cyclonedx` is not a neutral outcome, and nothing in the output says so. If you set it, make sure the native generators you care about are installed.
+
+Bundles published by sbomify also carry a Sigstore attestation, verified with `cosign` before use. `cosign` itself is digest-pinned only, since verifying it would require it to already be present.
+
 ## Monorepos
 
 Use the `working-dir` input to point at a subdirectory:
@@ -199,7 +213,7 @@ jobs:
             lock_file: backend/requirements.txt
             component_id: def456
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: sbomify/sbomify-action@v26.8.0
         env:
           TOKEN: ${{ secrets.SBOMIFY_TOKEN }}

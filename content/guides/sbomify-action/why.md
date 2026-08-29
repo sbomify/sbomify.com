@@ -69,13 +69,16 @@ This is the whole argument for treating SBOM generation as a pipeline rather tha
 
 Because there isn't one.
 
-| Ecosystem        | Most accurate generator |
-| ---------------- | ----------------------- |
-| Python           | `cyclonedx-py`          |
-| Rust             | `cargo-cyclonedx`       |
-| Java, Gradle     | `cdxgen`                |
-| Container images | Syft or `cdxgen`        |
-| Terraform        | Syft                    |
+| Ecosystem                          | Most accurate generator |
+| ---------------------------------- | ----------------------- |
+| Python                             | `cyclonedx-py`          |
+| Rust                               | `cargo-cyclonedx`       |
+| Go                                 | `cyclonedx-gomod`       |
+| Java (Maven)                       | `cyclonedx-maven`       |
+| Java (Gradle)                      | `cyclonedx-gradle`      |
+| Scala                              | `cyclonedx-sbt`         |
+| JavaScript, Ruby, PHP, .NET        | `cdxgen`                |
+| Container images, Swift, Terraform | Syft                    |
 
 Native tools understand their ecosystem's resolution rules; generic scanners guess from files on disk. `sbomify-action` routes each input to the best available generator and falls back automatically if one fails or does not support the input, so you get the right tool without having to maintain that knowledge yourself. See [input sources](/guides/sbomify-action/sources/) for the full routing table.
 

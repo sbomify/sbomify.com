@@ -2,7 +2,7 @@
 
 url: /sbomify-action/
 title: "sbomify Action: Generate SBOMs in your CI/CD pipeline"
-description: "Generate Software Bills of Materials from your lockfiles, container images and source directories. 14 ecosystems, CycloneDX and SPDX, free and open source."
+description: "Generate Software Bills of Materials from your lockfiles, container images and source directories. 17 ecosystems, CycloneDX and SPDX, free and open source."
 ---
 
 The sbomify Action generates a Software Bill of Materials as part of your build,

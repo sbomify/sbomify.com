@@ -60,6 +60,7 @@ docker run --rm \
   -w /github/workspace \
   -e SBOMIFY_CACHE_DIR=/cache/sbomify \
   -e SYFT_CACHE_DIR=/cache/syft \
+  -e SBOMIFY_TOOL_CACHE=/cache/runtimes \
   -e GITHUB_TOKEN="$GITHUB_TOKEN" \
   -e LOCK_FILE=requirements.txt \
   -e OUTPUT_FILE=sbom.cdx.json \
@@ -165,18 +166,22 @@ jobs:
             path: sbomify-action
 ```
 
-**TeamCity** - add a Docker Wrapper build feature to a command line step, set the image, and pass configuration as build parameters mapped to environment variables.
+**TeamCity** has [its own page](/guides/sbomify-action/runtimes/teamcity/).
 
 **A plain shell script** - the `docker run` invocation at the top of this page works in cron, a Makefile, or a deployment script.
 
 ## What is in the image
 
-The image bundles everything needed, so nothing else has to be installed: Syft, cdxgen, `cyclonedx-py`, `cargo-cyclonedx`, `crane` and `cosign` for Chainguard detection, `conan` for C and C++ metadata, and `git`.
+The image is deliberately small: Python, the sbomify CLI, `conan` for C and C++ metadata, and `git`.
 
-A couple of practical notes:
+Everything else - Syft, cdxgen, the JVM toolchain, Go, Rust, PHP, .NET, `crane` and `cosign` - is **downloaded on first use**, verified against a digest pinned at build time, and cached. You do not install anything; the tool fetches exactly the versions it was tested against.
 
-- **Java and Maven are installed on demand** the first time a Java or Scala project is processed, which keeps the image roughly 330 MB smaller. Expect a one-off package installation partway through those runs.
-- **The container runs as root**, because it needs to write to the mounted workspace. Files it creates will be root-owned on the host unless you pass `--user`.
+Two practical consequences:
+
+- **Cache the runtimes** or every run re-downloads them. Point `SBOMIFY_TOOL_CACHE` at a volume, as in the caching example above. See [tool runtimes](/guides/sbomify-action/advanced/#tool-runtimes).
+- **Air-gapped runners need `SBOMIFY_FETCH_RUNTIMES=0`**, plus whatever generators you need preinstalled. Without them the run falls back to a lesser generator rather than failing, so check the output.
+
+The container runs as root, because it needs to write to the mounted workspace. Files it creates will be root-owned on the host unless you pass `--user`.
 
 ## Next steps
 

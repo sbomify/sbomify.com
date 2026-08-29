@@ -195,7 +195,7 @@ uvx sbomify-action</code></pre>
 <section>
     <div class="mb-10 text-center max-w-3xl mx-auto">
       <h2 class="text-3xl font-bold text-primaryText mb-4">Supported Ecosystems</h2>
-      <p class="text-lg text-secondaryText">Generate SBOMs from lockfiles across 14 ecosystems, plus Docker images and Yocto/OpenEmbedded builds.</p>
+      <p class="text-lg text-secondaryText">Generate SBOMs from lockfiles across 17 ecosystems, plus container images, directory scans and Yocto/OpenEmbedded builds.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
@@ -297,11 +297,32 @@ uvx sbomify-action</code></pre>
           <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">.terraform.lock.hcl</span>
         </div>
       </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">Haskell</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">stack.yaml.lock</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">stack.yaml</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">cabal.project.freeze</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">Erlang</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">rebar.lock</span>
+        </div>
+      </div>
+      <div class="bg-[#201B4C] rounded-2xl p-5 border border-[#37306B]">
+        <h4 class="text-lg font-bold text-white mb-2">Clojure</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">deps.edn</span>
+          <span class="text-xs bg-[#141035] text-gray-400 px-2 py-1 rounded border border-[#37306B]">project.clj</span>
+        </div>
+      </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
-        <h4 class="text-lg font-bold text-white mb-2">Docker Images</h4>
+        <h4 class="text-lg font-bold text-white mb-2">Container Images</h4>
         <p class="text-gray-300 text-sm">Generate SBOMs directly from container images using <code class="text-[#8A7DFF]">DOCKER_IMAGE</code> instead of a lockfile. Scans all layers and installed packages.</p>
       </div>
       <div class="bg-[#201B4C] rounded-2xl p-6 border border-[#37306B]">
@@ -398,7 +419,7 @@ uvx sbomify-action</code></pre>
 {{< comment >}}Vulnerability Analysis Section{{< /comment >}}
 <section>
     <div class="mb-10 text-center max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold text-primaryText mb-4">Vulnerability Analysis</h2>
+      <h2 id="vulnerability-analysis" class="text-3xl font-bold text-primaryText mb-4">Vulnerability Analysis</h2>
       <p class="text-lg text-secondaryText">Comprehensive scanning powered by industry-leading databases.</p>
     </div>
 
@@ -406,7 +427,7 @@ uvx sbomify-action</code></pre>
       {{< comment >}}OSV{{< /comment >}}
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col">
         <img src="/assets/images/site/osv.svg" class="h-8 w-auto mb-6 self-start" alt="Google OSV" width="160" height="32">
-        <h3 class="text-xl font-bold text-white mb-3">Google OSV</h3>
+        <h3 id="osv" class="text-xl font-bold text-white mb-3">Google OSV</h3>
         <p class="text-gray-300 flex-grow">
           We integrate with the Open Source Vulnerability (OSV) database to provide precise, distributed vulnerability intelligence across a wide range of ecosystems.
         </p>
@@ -415,7 +436,7 @@ uvx sbomify-action</code></pre>
       {{< comment >}}Dependency Track{{< /comment >}}
       <div class="bg-[#201B4C] rounded-2xl p-6 md:p-8 border border-[#37306B] shadow-sm hover:border-[#8A7DFF] transition-all flex flex-col">
         <img src="/assets/images/site/dependency-track-white.svg" class="h-8 w-auto mb-6 self-start" alt="Dependency Track" width="149" height="32">
-        <h3 class="text-xl font-bold text-white mb-3">Dependency Track</h3>
+        <h3 id="dependency-track" class="text-xl font-bold text-white mb-3">Dependency Track</h3>
         <p class="text-gray-300 mb-4 flex-grow">
           Leverage the power of OWASP Dependency-Track for continuous component analysis. Upload SBOMs directly from CI/CD with <code class="text-[#8A7DFF]">UPLOAD_DESTINATIONS=dependency-track</code>.
         </p>

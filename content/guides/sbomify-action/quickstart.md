@@ -24,13 +24,13 @@ docker run --rm -it \
   sbomify-action wizard
 ```
 
-The container image bundles every tool the wizard needs, so there is nothing else to install. If you have [uv](https://docs.astral.sh/uv/) available and would rather not use Docker:
+If you have [uv](https://docs.astral.sh/uv/) available and would rather not use Docker:
 
 ```bash
 uvx sbomify-action wizard
 ```
 
-Note that `uvx` does not bring the SBOM generators with it - see [running locally](/guides/sbomify-action/runtimes/local/) for what you need installed.
+Either way there is nothing else to install - the generators are downloaded on first use and cached. See [running locally](/guides/sbomify-action/runtimes/local/).
 
 ### What it does
 
@@ -75,7 +75,7 @@ The minimum viable configuration is four environment variables. This generates a
 
 That is a complete, working setup. No account required.
 
-Swap `requirements.txt` for whichever lockfile your project uses - [14 ecosystems are supported](/guides/sbomify-action/sources/). For SPDX output, add `SBOM_FORMAT: spdx`.
+Swap `requirements.txt` for whichever lockfile your project uses - [17 ecosystems are supported](/guides/sbomify-action/sources/). For SPDX output, add `SBOM_FORMAT: spdx`.
 
 On any runtime other than GitHub Actions, the same configuration is passed to the container image as environment variables:
 
@@ -127,7 +127,7 @@ jobs:
   sbom:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: sbomify/sbomify-action@v26.8.0
         env:
           COMPONENT_ID: your-component-id

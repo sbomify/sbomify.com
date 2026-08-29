@@ -65,6 +65,7 @@ The core tool behaves identically everywhere. What differs is how you invoke it,
 | [CircleCI](/guides/sbomify-action/runtimes/circleci/)             | Container image | Token         | Manual          | No                 | No          |
 | [Azure DevOps](/guides/sbomify-action/runtimes/azure-devops/)     | Container image | Token         | Manual          | No                 | No          |
 | [Any container runner](/guides/sbomify-action/runtimes/docker/)   | Container image | Token         | Manual          | No                 | No          |
+| [TeamCity](/guides/sbomify-action/runtimes/teamcity/)             | Container image | Token         | Manual          | No                 | No          |
 | [Local machine](/guides/sbomify-action/runtimes/local/)           | `uvx` or `pipx` | Token         | Manual          | Yes                | No          |
 
 **Manual** means the runtime does not expose enough environment information for automatic detection, so you set `vcs_url`, `vcs_commit_sha` and `vcs_ref` in [`sbomify.json`](/guides/sbomify-action/augmentation/) instead. Everything else works the same.

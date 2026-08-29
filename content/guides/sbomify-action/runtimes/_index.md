@@ -20,21 +20,23 @@ If your platform can run a container, it is supported - even if it does not have
 - [**Jenkins**](/guides/sbomify-action/runtimes/jenkins/) - declarative and scripted pipelines
 - [**CircleCI**](/guides/sbomify-action/runtimes/circleci/) - container executor
 - [**Azure DevOps**](/guides/sbomify-action/runtimes/azure-devops/) - container job or Docker task
-- [**Any container runner**](/guides/sbomify-action/runtimes/docker/) - Drone, Woodpecker, TeamCity, Buildkite, Concourse, or a plain shell
+- [**TeamCity**](/guides/sbomify-action/runtimes/teamcity/) - Docker Wrapper build feature or Kotlin DSL
+- [**Any container runner**](/guides/sbomify-action/runtimes/docker/) - Drone, Woodpecker, Buildkite, Concourse, or a plain shell
 - [**Local machine**](/guides/sbomify-action/runtimes/local/) - `uvx`, `pipx` or Docker on your laptop
 
 ## What differs
 
-| Runtime              | Integration     | Auth          | VCS auto-detect | Wizard             | Attestation |
-| -------------------- | --------------- | ------------- | --------------- | ------------------ | ----------- |
-| GitHub Actions       | Native action   | OIDC or token | Yes             | Generates workflow | Yes         |
-| GitLab CI            | Container image | Token         | Yes             | No                 | No          |
-| Bitbucket            | Container image | Token         | Yes             | No                 | No          |
-| Jenkins              | Container image | Token         | Manual          | No                 | No          |
-| CircleCI             | Container image | Token         | Manual          | No                 | No          |
-| Azure DevOps         | Container image | Token         | Manual          | No                 | No          |
-| Any container runner | Container image | Token         | Manual          | No                 | No          |
-| Local machine        | `uvx` or `pipx` | Token         | Manual          | Yes                | No          |
+| Runtime                                               | Integration     | Auth          | VCS auto-detect | Wizard             | Attestation |
+| ----------------------------------------------------- | --------------- | ------------- | --------------- | ------------------ | ----------- |
+| GitHub Actions                                        | Native action   | OIDC or token | Yes             | Generates workflow | Yes         |
+| GitLab CI                                             | Container image | Token         | Yes             | No                 | No          |
+| Bitbucket                                             | Container image | Token         | Yes             | No                 | No          |
+| Jenkins                                               | Container image | Token         | Manual          | No                 | No          |
+| CircleCI                                              | Container image | Token         | Manual          | No                 | No          |
+| Azure DevOps                                          | Container image | Token         | Manual          | No                 | No          |
+| Any container runner                                  | Container image | Token         | Manual          | No                 | No          |
+| [TeamCity](/guides/sbomify-action/runtimes/teamcity/) | Container image | Token         | Manual          | No                 | No          |
+| Local machine                                         | `uvx` or `pipx` | Token         | Manual          | Yes                | No          |
 
 **VCS auto-detect** means the action reads repository URL, commit SHA and branch from the environment without configuration. Where it says _Manual_, the platform does not expose that information in a standard enough form, so you set `vcs_url`, `vcs_commit_sha` and `vcs_ref` in [`sbomify.json`](/guides/sbomify-action/augmentation/#automatic-vcs-detection) instead. It is a few lines, and everything else behaves the same.
 

@@ -38,7 +38,7 @@ Step-by-step guides for generating SBOMs across all major programming languages 
 - [Full documentation](/guides/sbomify-action/) - complete reference for generating SBOMs in any pipeline
 - [Quick start](/guides/sbomify-action/quickstart/) - Setup wizard and your first run
 - [Configuration reference](/guides/sbomify-action/configuration/) - Every option
-- [Runtimes](/guides/sbomify-action/runtimes/) - GitHub Actions, GitLab CI, Bitbucket, Jenkins, CircleCI, Azure DevOps and more
+- [Runtimes](/guides/sbomify-action/runtimes/) - GitHub Actions, GitLab CI, Bitbucket, Jenkins, CircleCI, Azure DevOps, TeamCity and more
 
 ## General Guides
 

@@ -5,16 +5,16 @@ title: "Running the sbomify Action Locally"
 description: "Generate SBOMs on your own machine with uvx, pipx or Docker - for trying things out, debugging a pipeline, or running the setup wizard."
 keywords: ["uvx sbomify", "pipx sbomify", "local SBOM generation", "SBOM CLI"]
 section: guides
-tldr: "Docker is the easiest way to run locally because it bundles the generators. With uvx or pipx you get the CLI instantly but must install the generators yourself."
+tldr: "Run it with uvx, pipx or Docker. The generators are downloaded on first use and cached, so there is nothing to install either way."
 ---
 
 Running locally is useful for trying the tool out, debugging a pipeline that behaves unexpectedly, generating a one-off SBOM, and running the [setup wizard](/guides/sbomify-action/quickstart/) - which is interactive and deliberately refuses to run in CI.
 
 For actual SBOM generation in a pipeline, use [your CI platform](/guides/sbomify-action/runtimes/).
 
-## Docker (recommended)
+## Docker
 
-The container image bundles every generator, so there is nothing else to install:
+Closest to what CI does, which makes it the best choice for reproducing a pipeline problem:
 
 ```bash
 docker run --rm \
@@ -26,8 +26,6 @@ docker run --rm \
   -e UPLOAD=false \
   ghcr.io/sbomify/sbomify-action
 ```
-
-This is the closest match to what your CI will do, which makes it the right choice for reproducing a pipeline problem.
 
 Note that the container runs as root, so generated files will be root-owned on the host. Add `--user "$(id -u):$(id -g)"` if that is inconvenient.
 
@@ -67,24 +65,29 @@ pipx run sbomify-action wizard
 
 Both `uvx` and `pipx run` keep the tool out of your global Python environment, which is what you want for something you invoke occasionally.
 
-## You still need the generators
+## The generators come down on first use
 
-**This is the catch with `uvx` and `pipx`.** They install the sbomify CLI, not the tools that actually produce SBOMs. Without at least one generator you will get `No generator found for input`.
+You do not need to install Syft or cdxgen yourself. The tool downloads the generators it needs on first use, verified against a pinned digest and cached under `~/.cache/sbomify/runtimes` (or wherever `SBOMIFY_TOOL_CACHE` points).
 
-| Tool              | Install                                                                                  | Covers                                         |
-| ----------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| `cyclonedx-py`    | Bundled as a dependency                                                                  | Python                                         |
-| Syft              | `brew install syft` or the [install guide](https://github.com/anchore/syft#installation) | Most ecosystems, container images, SPDX output |
-| cdxgen            | `npm install -g @cyclonedx/cdxgen`                                                       | Most ecosystems, best Java support             |
-| `cargo-cyclonedx` | `cargo install cargo-cyclonedx`                                                          | Rust                                           |
-| `crane`           | `brew install crane`                                                                     | Chainguard image detection                     |
-| `cosign`          | `brew install cosign`                                                                    | Chainguard SBOM retrieval                      |
+That means `uvx sbomify-action --lock-file Cargo.lock ...` gets you `cargo-cyclonedx`, not a Syft fallback, without any setup. The first run for a given ecosystem pays a download; later runs reuse the cache.
 
-Python works out of the box, since `cyclonedx-py` comes along as a dependency. Everything else needs Syft or cdxgen installed separately.
+If you would rather use only what is already on your machine, opt out:
 
-If a required tool is missing, the CLI tells you which one and how to install it.
+```bash
+SBOMIFY_FETCH_RUNTIMES=0 uvx sbomify-action --lock-file requirements.txt --enrich --no-upload -o sbom.cdx.json
+```
 
-This is why Docker is the recommended local option - it sidesteps the whole question.
+Be aware of what that trades away. Opting out does not make the tool fail when a native generator is missing - it falls back to whatever is installed, which is usually a worse answer, and the SBOM does not say so. If you set this flag, install the generators you care about:
+
+| Tool                 | Install                                                                                  | Covers                                         |
+| -------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| `cyclonedx-py`       | Bundled as a dependency                                                                  | Python                                         |
+| Syft                 | `brew install syft` or the [install guide](https://github.com/anchore/syft#installation) | Most ecosystems, container images, SPDX output |
+| cdxgen               | `npm install -g @cyclonedx/cdxgen`                                                       | JavaScript, Ruby, PHP, .NET and more           |
+| `cargo-cyclonedx`    | `cargo install cargo-cyclonedx`                                                          | Rust                                           |
+| `crane` and `cosign` | `brew install crane cosign`                                                              | Chainguard image detection                     |
+
+If a required tool is missing and fetching is disabled, the CLI tells you which one and how to install it.
 
 ## Environment variables work too
 

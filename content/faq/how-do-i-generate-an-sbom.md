@@ -34,7 +34,7 @@ The [sbomify Action](/sbomify-action/) is a CI/CD tool that generates, augments,
     ENRICH: true
 ```
 
-sbomify-action supports 14 ecosystems (Python, JavaScript, Java, Go, Rust, Ruby, PHP, .NET, Swift, Dart, Elixir, Scala, C++, and Terraform), plus Docker images and Yocto/OpenEmbedded builds. It outputs both CycloneDX and SPDX formats.
+sbomify-action supports 17 ecosystems (Python, JavaScript, Java, Go, Rust, Ruby, PHP, .NET, Swift, Dart, Elixir, Scala, C++, Terraform, Haskell, Erlang, and Clojure), plus Docker images, directory scans and Yocto/OpenEmbedded builds. It outputs both CycloneDX and SPDX formats.
 
 Beyond basic generation, sbomify-action can:
 

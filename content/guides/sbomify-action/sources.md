@@ -1,18 +1,18 @@
 ---
 
 url: /guides/sbomify-action/sources/
-title: "Input Sources: Lockfiles, Containers, Yocto and Manual Packages"
-description: "Every input the sbomify action accepts - 14 lockfile ecosystems, container images, Chainguard SBOM reuse, Yocto builds, existing SBOMs and manually declared packages."
-keywords: ["SBOM lockfile support", "container SBOM", "Chainguard SBOM", "Yocto SBOM", "SBOM formats"]
+title: "Input Sources: Lockfiles, Containers, Directories and Yocto"
+description: "Every input the sbomify action accepts - 17 lockfile ecosystems, container images, directory scans, Chainguard SBOM reuse, Yocto builds, git submodules and manually declared packages."
+keywords: ["SBOM lockfile support", "container SBOM", "Chainguard SBOM", "Yocto SBOM", "SOURCE_DIR", "SBOM formats"]
 section: guides
-tldr: "Point the action at a lockfile, a container image or an existing SBOM. It routes to the best generator for that ecosystem and falls back automatically. Packages no lockfile knows about can be declared manually."
+tldr: "Point the action at a lockfile, a container image, a directory or an existing SBOM. It routes to the best generator for that ecosystem and falls back automatically. Prefer a lockfile wherever one exists."
 ---
 
-Exactly one input source is required: `LOCK_FILE`, `DOCKER_IMAGE` or `SBOM_FILE`.
+Exactly one input source is required: `LOCK_FILE`, `SBOM_FILE`, `DOCKER_IMAGE` or `SOURCE_DIR`.
 
 ## Lockfiles
 
-Set `LOCK_FILE` to the path of your lockfile. Fourteen ecosystems are supported.
+Set `LOCK_FILE` to the path of your lockfile. Seventeen ecosystems are supported.
 
 | Language    | Recognised files                                                               |
 | ----------- | ------------------------------------------------------------------------------ |
@@ -20,7 +20,7 @@ Set `LOCK_FILE` to the path of your lockfile. Fourteen ecosystems are supported.
 | JavaScript  | `package.json`, `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, `bun.lock` |
 | Java        | `pom.xml`, `build.gradle`, `build.gradle.kts`, `gradle.lockfile`               |
 | Go          | `go.mod`, `go.sum`                                                             |
-| Rust        | `Cargo.lock`, `Cargo.toml`                                                     |
+| Rust        | `Cargo.lock`                                                                   |
 | Ruby        | `Gemfile.lock`                                                                 |
 | PHP         | `composer.json`, `composer.lock`                                               |
 | .NET and C# | `packages.lock.json`                                                           |
@@ -30,28 +30,51 @@ Set `LOCK_FILE` to the path of your lockfile. Fourteen ecosystems are supported.
 | Scala       | `build.sbt`                                                                    |
 | C and C++   | `conan.lock`                                                                   |
 | Terraform   | `.terraform.lock.hcl`                                                          |
+| Haskell     | `stack.yaml.lock`, `stack.yaml`, `cabal.project.freeze`                        |
+| Erlang      | `rebar.lock` (rebar3 projects)                                                 |
+| Clojure     | `deps.edn`, `project.clj`                                                      |
 
 For language-specific walkthroughs, see the [SBOM guides](/guides/).
 
+### Manifests defer to lockfiles
+
+Naming a _manifest_ that sits beside its lockfile reads the lockfile instead. `package.json` defers to `package-lock.json`, `pyproject.toml` to `poetry.lock`, `Package.swift` to `Package.resolved`.
+
+This is deliberate: a manifest states version _ranges_, a lockfile states what was actually _resolved_. You get the more precise answer without having to know which file to point at.
+
 ### Which generator runs
 
-Generators are registered with a priority. The highest-priority generator that supports your input runs first, and if it fails or does not support the input, the next one is tried automatically.
+Generators are registered with a priority. The highest-priority generator that supports your input runs first; if it fails or does not support the input, the next is tried automatically.
 
-| Priority | Generator         | Ecosystems                                                                                                     | Output formats                  |
-| -------- | ----------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------- |
-| 10       | `cyclonedx-py`    | Python                                                                                                         | CycloneDX 1.0-1.7               |
-| 10       | `cargo-cyclonedx` | Rust                                                                                                           | CycloneDX 1.4-1.6               |
-| 20       | `cdxgen`          | Python, JavaScript, Java, Gradle, Go, Rust, Ruby, Dart, C++, PHP, .NET, Swift, Elixir, Scala, container images | CycloneDX 1.4-1.7               |
-| 35       | Syft              | Python, JavaScript, Go, Rust, Ruby, Dart, C++, PHP, .NET, Swift, Elixir, Terraform, container images           | CycloneDX 1.2-1.6, SPDX 2.2-2.3 |
+| Priority | Generator          | Ecosystems                                                                                                | Output formats                  |
+| -------- | ------------------ | --------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| 10       | `cyclonedx-py`     | Python                                                                                                    | CycloneDX 1.2-1.7               |
+| 10       | `cargo-cyclonedx`  | Rust                                                                                                      | CycloneDX 1.3-1.5, SPDX 2.3     |
+| 10       | `cyclonedx-gomod`  | Go                                                                                                        | CycloneDX 1.4-1.6, SPDX 2.3     |
+| 10       | `cyclonedx-maven`  | Java (`pom.xml`)                                                                                          | CycloneDX 1.4-1.6, SPDX 2.3     |
+| 10       | `cyclonedx-gradle` | Java (`build.gradle`, `build.gradle.kts`)                                                                 | CycloneDX 1.4-1.6, SPDX 2.3     |
+| 10       | `cyclonedx-sbt`    | Scala (`build.sbt`)                                                                                       | CycloneDX 1.4-1.6, SPDX 2.3     |
+| 10       | `gradle-lockfile`  | Java (`gradle.lockfile`), read directly with no Gradle run                                                | CycloneDX 1.2-1.7, SPDX 2.2-2.3 |
+| 20       | `cdxgen`           | JavaScript, Ruby, Dart, C++, PHP, .NET, Elixir, Clojure, and Python, Go or Java where no native tool wins | CycloneDX 1.4-1.7               |
+| 35       | Syft               | Swift, Terraform, Haskell, Erlang, container images, and SPDX wherever no native tool emits it            | CycloneDX 1.2-1.6, SPDX 2.2-2.3 |
+
+The native generators at priority 10 resolve dependencies the way the ecosystem itself does, which is why they outrank the generic scanners. Several emit SPDX directly rather than leaving it to Syft.
 
 In practice:
 
-- Python lockfiles use `cyclonedx-py`, the most accurate option for Python.
-- `Cargo.lock` uses `cargo-cyclonedx`.
-- Java and Gradle files use `cdxgen`, which has the best Java support.
-- Everything else, including container images, uses `cdxgen` and falls back to Syft.
+1. **Python** (`requirements.txt`, `poetry.lock`, `Pipfile.lock`) uses `cyclonedx-py`
+2. **Rust** (`Cargo.lock`) uses `cargo-cyclonedx`
+3. **Go** (`go.mod`, `go.sum`) uses `cyclonedx-gomod`
+4. **Java** uses `cyclonedx-maven` for `pom.xml`, `cyclonedx-gradle` for Gradle build scripts, and reads `gradle.lockfile` directly
+5. **Scala** (`build.sbt`) uses `cyclonedx-sbt`
+6. **Everything else with a lockfile** uses `cdxgen`, then Syft
+7. **Container images** use Syft, then `cdxgen`
 
-> Trivy was removed from the container image after [compromised releases were published in March 2026](/2026/03/26/trivy-compromise-hardening-sbomify-action/). Syft and cdxgen cover every supported ecosystem, so nothing is lost.
+> Trivy was removed from the tool set after [compromised releases were published in March 2026](/2026/03/26/trivy-compromise-hardening-sbomify-action/). The remaining generators cover every supported ecosystem.
+
+### Where the generators come from
+
+The generators are not baked into the container image. They are downloaded on first use, verified against a pinned digest, and cached - see [tool runtimes](/guides/sbomify-action/advanced/#tool-runtimes). This is why the image is small and why the same tool selection works identically under `uvx`.
 
 ## Container images
 
@@ -86,11 +109,44 @@ env:
   UPLOAD: false
 ```
 
-Chainguard detection needs the `crane` and `cosign` CLI tools. Both are bundled in the container image; if you are [running locally](/guides/sbomify-action/runtimes/local/), install them yourself.
+Chainguard detection needs `crane` and `cosign`, which are fetched automatically like the other tools.
+
+## Directory scanning
+
+`SOURCE_DIR` scans a whole tree with Syft rather than reading a manifest. **Treat it as a last resort** - point the action at a lockfile wherever one exists.
+
+The two are different claims. A lockfile is the dependency graph its ecosystem _resolved_: every transitive dependency, at the exact version that would be installed, whether or not it is present on this machine. A directory is whatever happens to be _on disk_, catalogued by whatever Syft recognises. In practice a directory scan:
+
+- **misses what is not installed** - dev and optional dependencies, anything pruned from a production install, anything the build has not fetched yet
+- **misses what Syft does not recognise** - an unsupported ecosystem, a vendored tree with no manifest, a statically linked binary carrying no build metadata - and it does not tell you
+- **reports whatever else is lying around** - build caches, test fixtures, a stale `node_modules`, a second copy of a toolchain
+- **varies with the machine** - the same commit scanned on a different runner, or at a different point in the build, can produce a different SBOM
+
+None of that is Syft doing badly. It is the difference between reading a declaration and inspecting a filesystem.
+
+Use `SOURCE_DIR` for what no lockfile can describe: an unpacked release archive, a vendored dependency tree, a build output.
+
+```yaml
+env:
+  SOURCE_DIR: dist/
+  OUTPUT_FILE: sbom.cdx.json
+  ENRICH: true
+  UPLOAD: false
+```
+
+If a lockfile exists and you use `SOURCE_DIR` anyway, you are choosing a less complete and less reproducible SBOM.
 
 ## Existing SBOMs
 
-Set `SBOM_FILE` to process a document you already have. Generation is skipped and the file goes straight into augmentation and enrichment. This is how you enrich an SBOM produced by another tool, or convert one you were handed into something compliance-ready.
+Set `SBOM_FILE` to process a document you already have. Generation is skipped and the file goes straight into augmentation and enrichment. This is how you enrich an SBOM produced by another tool, or turn one you were handed into something compliance-ready.
+
+## Git submodules
+
+`SUBMODULE_PATH` treats the component as a git submodule pinned at that path. The pin is resolved to a version - an exact version tag if one matches, otherwise the short commit SHA - and the component's existing SBOM at that version is attached if one exists. If not, the SBOM is generated and uploaded.
+
+This keeps a product SBOM pointing at the exact submodule revision your build used, without regenerating an SBOM that has already been published.
+
+Requires `LOCK_FILE` and the `sbomify` upload destination.
 
 ## Additional packages
 
@@ -192,8 +248,8 @@ See the [Yocto guide](/guides/yocto/) for the wider workflow.
 Set the format with `SBOM_FORMAT` and the version with `SPEC_VERSION`.
 
 - **CycloneDX** is the default and emits 1.6 unless you ask for something else. The list starts at 1.2 because CycloneDX only gained a JSON representation in that version.
-- **SPDX** is produced by Syft, which emits 2.2 or 2.3. The default is 2.3.
-- **SPDX 3.0.1** cannot be generated - no bundled generator emits it. It is fully supported as _input_: pass an existing 3.0.1 document via `SBOM_FILE` and it will be parsed, augmented, enriched and written back as 3.0.1.
+- **SPDX** is emitted natively where the ecosystem's own tool can (Maven, Gradle, sbt, Go, Cargo), and by Syft everywhere else. The default is 2.3; select 2.2 with `SPEC_VERSION=2.2`.
+- **SPDX 3.0.1** cannot be generated - no generator emits it, and asking for it fails with `No generator found for input`. It is fully supported as _input_: pass an existing 3.0.1 document via `SBOM_FILE` and it will be parsed, augmented, enriched and written back as 3.0.1.
 
 Every generated SBOM is validated against its JSON schema before it is written. A document that fails validation is not emitted.
 
@@ -201,4 +257,4 @@ Every generated SBOM is validated against its JSON schema before it is written. 
 
 `BOM_TYPE` lets you upload related artifacts through the same tooling: `vex`, `cbom` or `hbom`. These are uploaded verbatim to sbomify - augmentation, enrichment, overrides and package injection are all skipped, and Dependency Track and product releases are rejected.
 
-External VEX documents are detected by content: OpenVEX by its `@context`, and CSAF VEX by `document.category`. See [how VEX works in sbomify](/faq/how-do-i-use-vex/).
+External VEX documents are detected by content: OpenVEX by its `@context`, and CSAF VEX by `document.category`. CycloneDX documents containing cryptographic assets are classified as `cbom` automatically. See [how VEX works in sbomify](/faq/how-do-i-use-vex/).

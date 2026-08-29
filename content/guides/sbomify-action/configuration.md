@@ -27,11 +27,12 @@ These are the only values passed with `with:` rather than `env:`. Each maps to t
 
 Exactly one of these is required.
 
-| Variable       | Description                                                                                                |
-| -------------- | ---------------------------------------------------------------------------------------------------------- |
-| `LOCK_FILE`    | Path to a lockfile. Set to `none` for additional-packages-only mode.                                       |
-| `SBOM_FILE`    | Path to an existing SBOM to process rather than generate. Set to `none` for additional-packages-only mode. |
-| `DOCKER_IMAGE` | Container image reference, for example `nginx:latest`.                                                     |
+| Variable       | Description                                                                                                                                                          |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `LOCK_FILE`    | Path to a lockfile. Set to `none` for additional-packages-only mode.                                                                                                 |
+| `SBOM_FILE`    | Path to an existing SBOM to process rather than generate. Set to `none` for additional-packages-only mode.                                                           |
+| `DOCKER_IMAGE` | Container image reference, for example `nginx:latest`.                                                                                                               |
+| `SOURCE_DIR`   | Directory to scan with Syft. **Last resort** - prefer `LOCK_FILE` whenever one exists, see [directory scanning](/guides/sbomify-action/sources/#directory-scanning). |
 
 ## Output
 
@@ -46,18 +47,19 @@ Non-SBOM `BOM_TYPE` values are uploaded verbatim to sbomify: augmentation, enric
 
 ## Processing
 
-| Variable                   | Default                   | Description                                                                |
-| -------------------------- | ------------------------- | -------------------------------------------------------------------------- |
-| `ENRICH`                   | `false`                   | Add per-component metadata from package registries.                        |
-| `AUGMENT`                  | `false`                   | Add organisational metadata from `sbomify.json` or the sbomify API.        |
-| `OVERRIDE_SBOM_METADATA`   | `false`                   | Let augmentation overwrite existing metadata instead of only filling gaps. |
-| `COMPONENT_NAME`           | none                      | Override the component name.                                               |
-| `COMPONENT_VERSION`        | none                      | Override the component version.                                            |
-| `COMPONENT_PURL`           | none                      | Add or override the component PURL.                                        |
-| `ADDITIONAL_PACKAGES`      | none                      | Inline PURLs to inject, comma or newline separated.                        |
-| `ADDITIONAL_PACKAGES_FILE` | `additional_packages.txt` | Path to a file of PURLs, one per line.                                     |
-| `DISABLE_VCS_AUGMENTATION` | `false`                   | Disable automatic VCS detection from the CI environment.                   |
-| `WORKING_DIR`              | none                      | Working directory. On GitHub Actions prefer the `working-dir` input.       |
+| Variable                   | Default                   | Description                                                                                                                                                                                                |
+| -------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ENRICH`                   | `false`                   | Add per-component metadata from package registries.                                                                                                                                                        |
+| `AUGMENT`                  | `false`                   | Add organisational metadata from `sbomify.json` or the sbomify API.                                                                                                                                        |
+| `OVERRIDE_SBOM_METADATA`   | `false`                   | Let augmentation overwrite existing metadata instead of only filling gaps.                                                                                                                                 |
+| `COMPONENT_NAME`           | none                      | Override the component name.                                                                                                                                                                               |
+| `COMPONENT_VERSION`        | none                      | Override the component version.                                                                                                                                                                            |
+| `COMPONENT_PURL`           | none                      | Add or override the component PURL.                                                                                                                                                                        |
+| `ADDITIONAL_PACKAGES`      | none                      | Inline PURLs to inject, comma or newline separated.                                                                                                                                                        |
+| `ADDITIONAL_PACKAGES_FILE` | `additional_packages.txt` | Path to a file of PURLs, one per line.                                                                                                                                                                     |
+| `DISABLE_VCS_AUGMENTATION` | `false`                   | Disable automatic VCS detection from the CI environment.                                                                                                                                                   |
+| `SUBMODULE_PATH`           | none                      | Treat the component as a git submodule pinned at this path. Resolves the pin to a version and reuses an existing SBOM at that version if there is one. Requires `LOCK_FILE` and the `sbomify` destination. |
+| `WORKING_DIR`              | none                      | Working directory. On GitHub Actions prefer the `working-dir` input.                                                                                                                                       |
 
 ## Uploading
 
@@ -94,12 +96,17 @@ Required when `dependency-track` is in `UPLOAD_DESTINATIONS`. CycloneDX only - D
 
 ## Caching and performance
 
-| Variable                     | Default            | Description                                                         |
-| ---------------------------- | ------------------ | ------------------------------------------------------------------- |
-| `SBOMIFY_CACHE_DIR`          | `~/.cache/sbomify` | Where license databases are cached. Roughly 20-50 MB.               |
-| `SYFT_CACHE_DIR`             | none               | Syft's own package metadata cache.                                  |
-| `XDG_CACHE_HOME`             | `~/.cache`         | Fallback cache root when `SBOMIFY_CACHE_DIR` is unset.              |
-| `GITHUB_TOKEN` or `GH_TOKEN` | none               | **Strongly recommended.** Authenticates license database downloads. |
+| Variable                       | Default                              | Description                                                                                                                                 |
+| ------------------------------ | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SBOMIFY_CACHE_DIR`            | `~/.cache/sbomify`                   | Where license databases are cached. Roughly 20-50 MB.                                                                                       |
+| `SYFT_CACHE_DIR`               | none                                 | Syft's own package metadata cache.                                                                                                          |
+| `XDG_CACHE_HOME`               | `~/.cache`                           | Fallback cache root when `SBOMIFY_CACHE_DIR` is unset.                                                                                      |
+| `SBOMIFY_TOOL_CACHE`           | none                                 | Where fetched tool runtimes are unpacked. Falls back to `XDG_CACHE_HOME`, then `$HOME/.cache`, then the temp directory.                     |
+| `SBOMIFY_FETCH_RUNTIMES`       | `1`                                  | Set to `0` to refuse downloading tool runtimes, for air-gapped builds. See [tool runtimes](/guides/sbomify-action/advanced/#tool-runtimes). |
+| `SBOMIFY_ENRICHMENT_CACHE`     | `1`                                  | Set to `0` to disable the on-disk enrichment response cache.                                                                                |
+| `SBOMIFY_ENRICHMENT_CACHE_TTL` | none                                 | Override how long cached enrichment responses stay valid, in seconds.                                                                       |
+| `SBOMIFY_CLEARLY_CACHED_URL`   | `https://clearly-cached.sbomify.com` | Point ClearlyDefined lookups at your own [clearly-cached](https://github.com/sbomify/clearly-cached) instance.                              |
+| `GITHUB_TOKEN` or `GH_TOKEN`   | none                                 | **Strongly recommended.** Authenticates license database downloads.                                                                         |
 
 `GITHUB_TOKEN` is worth calling out. License databases are downloaded from GitHub Releases, and unauthenticated requests are limited to 60 per hour per IP address. On shared CI runners that limit is often already exhausted, and when it is, **enrichment degrades silently** - you get an SBOM with fewer licenses populated and no hard error. This applies on every runtime, not just GitHub Actions. See [license database rate limits](/guides/sbomify-action/enrichment/#license-database-rate-limits).
 
@@ -147,25 +154,26 @@ Every variable has a matching flag when you invoke the CLI directly. Flags win o
 sbomify-action --lock-file requirements.txt --enrich --no-upload -o sbom.cdx.json
 ```
 
-| Flag                                                          | Equivalent                         |
-| ------------------------------------------------------------- | ---------------------------------- |
-| `--lock-file`, `--sbom-file`, `--docker-image`                | input source                       |
-| `-o`, `--output-file`                                         | `OUTPUT_FILE`                      |
-| `-f`, `--sbom-format`                                         | `SBOM_FORMAT`                      |
-| `--spec-version`                                              | `SPEC_VERSION`                     |
-| `--bom-type`                                                  | `BOM_TYPE`                         |
-| `--enrich`, `--no-enrich`                                     | `ENRICH`                           |
-| `--augment`, `--no-augment`                                   | `AUGMENT`                          |
-| `--override-sbom-metadata`                                    | `OVERRIDE_SBOM_METADATA`           |
-| `--upload`, `--no-upload`                                     | `UPLOAD`                           |
-| `--upload-destination`                                        | `UPLOAD_DESTINATIONS`. Repeatable. |
-| `--token`, `--component-id`                                   | `TOKEN`, `COMPONENT_ID`            |
-| `--component-name`, `--component-version`, `--component-purl` | matching variables                 |
-| `--product-release`                                           | `PRODUCT_RELEASE`                  |
-| `--api-base-url`, `--oidc-audience`                           | matching variables                 |
-| `--working-dir`                                               | `WORKING_DIR`                      |
-| `--telemetry`, `--no-telemetry`                               | `TELEMETRY`                        |
-| `-v`, `--verbose`, `-q`, `--quiet`                            | `VERBOSE`                          |
+| Flag                                                           | Equivalent                         |
+| -------------------------------------------------------------- | ---------------------------------- |
+| `--lock-file`, `--sbom-file`, `--docker-image`, `--source-dir` | input source                       |
+| `--submodule-path`                                             | `SUBMODULE_PATH`                   |
+| `-o`, `--output-file`                                          | `OUTPUT_FILE`                      |
+| `-f`, `--sbom-format`                                          | `SBOM_FORMAT`                      |
+| `--spec-version`                                               | `SPEC_VERSION`                     |
+| `--bom-type`                                                   | `BOM_TYPE`                         |
+| `--enrich`, `--no-enrich`                                      | `ENRICH`                           |
+| `--augment`, `--no-augment`                                    | `AUGMENT`                          |
+| `--override-sbom-metadata`                                     | `OVERRIDE_SBOM_METADATA`           |
+| `--upload`, `--no-upload`                                      | `UPLOAD`                           |
+| `--upload-destination`                                         | `UPLOAD_DESTINATIONS`. Repeatable. |
+| `--token`, `--component-id`                                    | `TOKEN`, `COMPONENT_ID`            |
+| `--component-name`, `--component-version`, `--component-purl`  | matching variables                 |
+| `--product-release`                                            | `PRODUCT_RELEASE`                  |
+| `--api-base-url`, `--oidc-audience`                            | matching variables                 |
+| `--working-dir`                                                | `WORKING_DIR`                      |
+| `--telemetry`, `--no-telemetry`                                | `TELEMETRY`                        |
+| `-v`, `--verbose`, `-q`, `--quiet`                             | `VERBOSE`                          |
 
 ### Subcommands
 
