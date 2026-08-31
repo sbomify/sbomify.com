@@ -132,6 +132,8 @@ TeamCity is not like the other three, and the differences are worth knowing.
 
 The practical consequence: **a self-hosted Git server whose URL has neither a `.git` suffix nor a known host** - `https://git.example.com/team/app`, say - cannot be detected. Set `SBOMIFY_VCS_URL` and it is recorded as given. For an attestation artifact, omitting provenance is better than asserting a repository that might not be Git.
 
+**No commit URL is emitted**, unlike the other three runtimes. TeamCity is host-agnostic, and the path to a commit differs by forge - `/commit/`, `/-/commit/`, `/commits/` - so the repository URL and the SHA are recorded without a browsable link rather than guessing one that may not resolve.
+
 ### Manual fallback
 
 To set everything yourself instead, generate `sbomify.json` from build parameters in an earlier Command Line step:
