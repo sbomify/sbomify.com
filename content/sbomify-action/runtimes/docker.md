@@ -6,7 +6,6 @@ aliases:
 title: "SBOM Generation on Any Container Runner"
 description: "Run the sbomify action with plain Docker or Podman on any CI platform - Drone, Woodpecker, TeamCity, Buildkite, Concourse - or from a shell script."
 keywords: ["Docker SBOM", "Podman SBOM", "Drone CI SBOM", "Buildkite SBOM", "TeamCity SBOM"]
-section: sbomify-action
 tldr: "If your platform can run a container, it is supported. Mount your repository at /github/workspace, pass configuration as environment variables, and run the image."
 ---
 

@@ -5,7 +5,6 @@ aliases:
   - /compliance/ntia/
 title: "NTIA Minimum Elements for SBOM (2021)"
 description: "Complete guide to the NTIA Minimum Elements for a Software Bill of Materials, the foundational US baseline for SBOM data fields, and where the baseline stands today: CISA's 2025 update, AI SBOM guidance, and OMB M-26-05."
-section: compliance
 ---
 
 [← Back to Compliance Overview](/compliance/)

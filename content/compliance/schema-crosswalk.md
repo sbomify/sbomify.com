@@ -3,7 +3,6 @@
 url: /compliance/schema-crosswalk/
 title: "SBOM Schema Crosswalk: CycloneDX and SPDX Field Mappings"
 description: "Complete field mapping reference for CycloneDX 1.7, SPDX 2.3, and SPDX 3.0. Authoritative crosswalk for SBOM properties across formats."
-section: compliance
 ---
 
 [← Back to Compliance Overview](/compliance/)

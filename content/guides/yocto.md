@@ -3,7 +3,6 @@
 url: /guides/yocto/
 title: "SBOM Generation Guide for Yocto - Embedded Linux"
 description: "Learn how to generate Software Bill of Materials for Yocto-based embedded Linux projects. Complete guide covering SPDX 2.2 and SPDX 3.0.1 with bitbake integration."
-section: guides
 ---
 
 ## Source vs Build SBOMs

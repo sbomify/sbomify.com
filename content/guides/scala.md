@@ -3,7 +3,6 @@
 url: /guides/scala/
 title: "SBOM Generation Guide for Scala - sbt"
 description: "Learn how to generate Software Bill of Materials for Scala projects. Complete guide with build.sbt examples, cross-compilation, and dependency management."
-section: guides
 ---
 
 ## Source vs Build SBOMs

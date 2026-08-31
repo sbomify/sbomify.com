@@ -6,7 +6,6 @@ aliases:
 title: "Advanced Usage: Attestation, Audit Trail, Caching and Troubleshooting"
 description: "Attestation and signing, the SBOM audit trail, cache configuration, monorepo layouts, telemetry, version pinning and troubleshooting for the sbomify action."
 keywords: ["SBOM attestation", "build provenance", "SBOM audit trail", "SBOM caching", "action pinning"]
-section: sbomify-action
 tldr: "Sign your SBOM in CI with build provenance attestation, keep the audit trail as evidence of what the pipeline changed, and cache the license database so runs stay fast."
 ---
 

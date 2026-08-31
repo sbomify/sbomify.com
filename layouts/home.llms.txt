@@ -38,6 +38,7 @@ A full-content version of this file is available at {{ "llms-full.txt" | absURL 
   (dict "title" "Features" "pages" (where .Site.RegularPages "Section" "features"))
   (dict "title" "Compliance" "pages" (where .Site.RegularPages "Section" "compliance"))
   (dict "title" "Guides" "pages" (where .Site.RegularPages "Section" "guides"))
+  (dict "title" "sbomify Action" "pages" (where .Site.RegularPages "Section" "sbomify-action"))
   (dict "title" "FAQ" "pages" (where .Site.RegularPages "Section" "faq"))
   (dict "title" "Case Studies" "pages" (where .Site.RegularPages "Section" "case-studies"))
   (dict "title" "Blog" "pages" (where .Site.RegularPages "Section" "posts").ByDate.Reverse)

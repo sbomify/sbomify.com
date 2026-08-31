@@ -6,7 +6,6 @@ aliases:
 title: "SBOM Generation in GitHub Actions"
 description: "Run the sbomify action in GitHub Actions with OIDC trusted publishing, build provenance attestation, caching and matrix builds."
 keywords: ["GitHub Actions SBOM", "SBOM workflow", "OIDC trusted publishing", "attest build provenance"]
-section: sbomify-action
 tldr: "GitHub Actions is the most fully featured runtime: a native action, tokenless OIDC publishing, build provenance attestation and wizard-generated workflows."
 ---
 

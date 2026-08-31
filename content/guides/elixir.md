@@ -3,7 +3,6 @@
 url: /guides/elixir/
 title: "SBOM Generation Guide for Elixir - Mix"
 description: "Learn how to generate Software Bill of Materials for Elixir projects. Complete guide with mix.lock examples, Hex packages, and umbrella applications."
-section: guides
 ---
 
 ## Source vs Build SBOMs

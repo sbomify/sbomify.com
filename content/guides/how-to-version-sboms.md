@@ -3,7 +3,6 @@
 url: /guides/how-to-version-sboms/
 title: "How to Version SBOMs - SemVer, CalVer, and Rolling Releases"
 description: "Learn best practices for versioning Software Bill of Materials. Guide covers Semantic Versioning, Calendar Versioning, rolling releases, and linking SBOMs to your release process."
-section: guides
 ---
 
 ## Introduction

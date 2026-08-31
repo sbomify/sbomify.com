@@ -3,7 +3,6 @@
 url: /compliance/eu-nis2/
 title: "EU NIS2 Directive SBOM Requirements"
 description: "Understanding NIS2 Directive cybersecurity requirements and how SBOMs support supply chain security, asset management, and incident response."
-section: compliance
 ---
 
 [← Back to Compliance Overview](/compliance/)

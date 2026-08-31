@@ -3,7 +3,6 @@
 url: /guides/python/
 title: "SBOM Generation Guide for Python - UV, Poetry, Pipenv"
 description: "Learn how to generate Software Bill of Materials for Python projects. Complete guide with uv.lock, poetry.lock, and Pipfile.lock examples."
-section: guides
 ---
 
 ## Source vs Build SBOMs

@@ -6,7 +6,6 @@ aliases:
 title: "Input Sources: Lockfiles, Containers, Directories and Yocto"
 description: "Every input the sbomify action accepts - 17 lockfile ecosystems, container images, directory scans, Chainguard SBOM reuse, Yocto builds, git submodules and manually declared packages."
 keywords: ["SBOM lockfile support", "container SBOM", "Chainguard SBOM", "Yocto SBOM", "SOURCE_DIR", "SBOM formats"]
-section: sbomify-action
 tldr: "Point the action at a lockfile, a container image, a directory or an existing SBOM. It routes to the best generator for that ecosystem and falls back automatically. Prefer a lockfile wherever one exists."
 ---
 

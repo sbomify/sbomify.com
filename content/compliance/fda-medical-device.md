@@ -3,7 +3,6 @@
 url: /compliance/fda-medical-device/
 title: "FDA Medical Device SBOM Requirements (2025)"
 description: "Guide to FDA cybersecurity guidance for medical devices, including SBOM requirements, support level, and end-of-support date expectations."
-section: compliance
 ---
 
 [← Back to Compliance Overview](/compliance/)

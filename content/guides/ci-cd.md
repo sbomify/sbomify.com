@@ -4,7 +4,6 @@ url: /guides/ci-cd/
 title: "SBOM Generation in CI/CD Pipelines"
 description: "Why SBOMs belong in your build pipeline, what to generate on every commit versus every release, and where to find setup instructions for your CI platform."
 keywords: ["SBOM CI/CD", "SBOM automation", "SBOM pipeline", "continuous integration SBOM"]
-section: guides
 tldr: "Generate SBOMs at build time, where the full dependency context exists and the result can be signed at origin. Reconstructing one later is guesswork by comparison."
 ---
 

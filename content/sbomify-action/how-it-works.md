@@ -6,7 +6,6 @@ aliases:
 title: "How the sbomify Action Works"
 description: "The full sbomify-action pipeline, step by step: generation, package injection, transitive discovery, hash enrichment, augmentation, enrichment, validation and upload."
 keywords: ["SBOM pipeline", "SBOM generation process", "SBOM enrichment", "transitive dependencies"]
-section: sbomify-action
 tldr: "One invocation runs an eight-stage pipeline: generate, inject, discover transitive dependencies, extract hashes, augment, enrich, validate, upload. Every stage records what it changed in the audit trail."
 ---
 

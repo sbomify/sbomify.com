@@ -3,7 +3,6 @@
 url: /guides/docker/
 title: "SBOM Generation Guide for Docker and Containers"
 description: "Learn how to generate Software Bill of Materials for Docker images and containers. Complete guide with multi-stage builds, distroless images, and attestation examples."
-section: guides
 ---
 
 ## Source vs Build SBOMs

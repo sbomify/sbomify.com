@@ -3,7 +3,6 @@
 url: /guides/swift/
 title: "SBOM Generation Guide for Swift - Swift Package Manager"
 description: "Learn how to generate Software Bill of Materials for Swift projects. Complete guide with Package.resolved examples, Xcode integration, and CycloneDX output."
-section: guides
 ---
 
 ## Source vs Build SBOMs
