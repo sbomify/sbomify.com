@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/runtimes/circleci/
+url: /sbomify-action/runtimes/circleci/
+aliases:
+  - /guides/sbomify-action/runtimes/circleci/
 title: "SBOM Generation in CircleCI"
 description: "Run the sbomify action in CircleCI using the container image as a Docker executor, with caching, contexts and manual VCS configuration."
 keywords: ["CircleCI SBOM", "CircleCI CycloneDX", "SBOM pipeline"]
-section: guides
+section: sbomify-action
 tldr: "Use the container image as the Docker executor and run sbomify-action. Set VCS details in sbomify.json, since CircleCI's variables are not auto-detected."
 ---
 
@@ -95,7 +97,7 @@ jobs:
           path: sbom.cdx.json
 ```
 
-Set `GITHUB_TOKEN` in your context as well. License databases are downloaded from GitHub Releases regardless of CI platform, and unauthenticated requests are capped at 60 per hour per IP. When that limit is hit, enrichment degrades silently rather than failing. See [license database rate limits](/guides/sbomify-action/enrichment/#license-database-rate-limits).
+Set `GITHUB_TOKEN` in your context as well. License databases are downloaded from GitHub Releases regardless of CI platform, and unauthenticated requests are capped at 60 per hour per IP. When that limit is hit, enrichment degrades silently rather than failing. See [license database rate limits](/sbomify-action/enrichment/#license-database-rate-limits).
 
 ## Versioning
 
@@ -149,7 +151,7 @@ To fill these from the build, write the file in a step first:
       EOF
 ```
 
-Then set `AUGMENT: "true"`. See [augmentation](/guides/sbomify-action/augmentation/).
+Then set `AUGMENT: "true"`. See [augmentation](/sbomify-action/augmentation/).
 
 ## Container images
 
@@ -190,6 +192,6 @@ Build provenance attestation is GitHub-specific. Use [cosign](/faq/how-do-i-sign
 
 ## Next steps
 
-- [Configuration reference](/guides/sbomify-action/configuration/) - every option
-- [Augmentation](/guides/sbomify-action/augmentation/) - setting VCS details manually
-- [Advanced](/guides/sbomify-action/advanced/) - caching, audit trail, troubleshooting
+- [Configuration reference](/sbomify-action/configuration/) - every option
+- [Augmentation](/sbomify-action/augmentation/) - setting VCS details manually
+- [Advanced](/sbomify-action/advanced/) - caching, audit trail, troubleshooting

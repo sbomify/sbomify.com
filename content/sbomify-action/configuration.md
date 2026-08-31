@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/configuration/
+url: /sbomify-action/configuration/
+aliases:
+  - /guides/sbomify-action/configuration/
 title: "sbomify Action Configuration Reference"
 description: "Every input, environment variable and CLI flag for the sbomify action, including precedence rules and deprecated aliases."
 keywords: ["sbomify action configuration", "SBOM environment variables", "sbomify-action reference"]
-section: guides
+section: sbomify-action
 tldr: "Configuration is environment variables, and they are the same on every runtime. Exactly one input source is required; everything else has a sensible default."
 ---
 
@@ -27,12 +29,12 @@ These are the only values passed with `with:` rather than `env:`. Each maps to t
 
 Exactly one of these is required.
 
-| Variable       | Description                                                                                                                                                          |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `LOCK_FILE`    | Path to a lockfile. Set to `none` for additional-packages-only mode.                                                                                                 |
-| `SBOM_FILE`    | Path to an existing SBOM to process rather than generate. Set to `none` for additional-packages-only mode.                                                           |
-| `DOCKER_IMAGE` | Container image reference, for example `nginx:latest`.                                                                                                               |
-| `SOURCE_DIR`   | Directory to scan with Syft. **Last resort** - prefer `LOCK_FILE` whenever one exists, see [directory scanning](/guides/sbomify-action/sources/#directory-scanning). |
+| Variable       | Description                                                                                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `LOCK_FILE`    | Path to a lockfile. Set to `none` for additional-packages-only mode.                                                                                          |
+| `SBOM_FILE`    | Path to an existing SBOM to process rather than generate. Set to `none` for additional-packages-only mode.                                                    |
+| `DOCKER_IMAGE` | Container image reference, for example `nginx:latest`.                                                                                                        |
+| `SOURCE_DIR`   | Directory to scan with Syft. **Last resort** - prefer `LOCK_FILE` whenever one exists, see [directory scanning](/sbomify-action/sources/#directory-scanning). |
 
 ## Output
 
@@ -75,7 +77,7 @@ Non-SBOM `BOM_TYPE` values are uploaded verbatim to sbomify: augmentation, enric
 | `OIDC_AUDIENCE`          | `sbomify.com`             | Audience for trusted publishing. Derived from `API_BASE_URL` when self-hosted.  |
 | `SBOMIFY_UPLOAD_TIMEOUT` | `120`                     | Upload timeout in seconds. Raise for very large SBOMs.                          |
 
-Credential precedence is the `--token` flag, then `SBOMIFY_TOKEN`, then `TOKEN`. If no token is present on GitHub Actions and the workflow grants `id-token: write`, [OIDC trusted publishing](/guides/sbomify-action/publishing/#oidc-trusted-publishing) is used automatically.
+Credential precedence is the `--token` flag, then `SBOMIFY_TOKEN`, then `TOKEN`. If no token is present on GitHub Actions and the workflow grants `id-token: write`, [OIDC trusted publishing](/sbomify-action/publishing/#oidc-trusted-publishing) is used automatically.
 
 ### Dependency Track
 
@@ -96,19 +98,19 @@ Required when `dependency-track` is in `UPLOAD_DESTINATIONS`. CycloneDX only - D
 
 ## Caching and performance
 
-| Variable                       | Default                              | Description                                                                                                                                 |
-| ------------------------------ | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `SBOMIFY_CACHE_DIR`            | `~/.cache/sbomify`                   | Where license databases are cached. Roughly 20-50 MB.                                                                                       |
-| `SYFT_CACHE_DIR`               | none                                 | Syft's own package metadata cache.                                                                                                          |
-| `XDG_CACHE_HOME`               | `~/.cache`                           | Fallback cache root when `SBOMIFY_CACHE_DIR` is unset.                                                                                      |
-| `SBOMIFY_TOOL_CACHE`           | none                                 | Where fetched tool runtimes are unpacked. Falls back to `XDG_CACHE_HOME`, then `$HOME/.cache`, then the temp directory.                     |
-| `SBOMIFY_FETCH_RUNTIMES`       | `1`                                  | Set to `0` to refuse downloading tool runtimes, for air-gapped builds. See [tool runtimes](/guides/sbomify-action/advanced/#tool-runtimes). |
-| `SBOMIFY_ENRICHMENT_CACHE`     | `1`                                  | Set to `0` to disable the on-disk enrichment response cache.                                                                                |
-| `SBOMIFY_ENRICHMENT_CACHE_TTL` | none                                 | Override how long cached enrichment responses stay valid, in seconds.                                                                       |
-| `SBOMIFY_CLEARLY_CACHED_URL`   | `https://clearly-cached.sbomify.com` | Point ClearlyDefined lookups at your own [clearly-cached](https://github.com/sbomify/clearly-cached) instance.                              |
-| `GITHUB_TOKEN` or `GH_TOKEN`   | none                                 | **Strongly recommended.** Authenticates license database downloads.                                                                         |
+| Variable                       | Default                              | Description                                                                                                                          |
+| ------------------------------ | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `SBOMIFY_CACHE_DIR`            | `~/.cache/sbomify`                   | Where license databases are cached. Roughly 20-50 MB.                                                                                |
+| `SYFT_CACHE_DIR`               | none                                 | Syft's own package metadata cache.                                                                                                   |
+| `XDG_CACHE_HOME`               | `~/.cache`                           | Fallback cache root when `SBOMIFY_CACHE_DIR` is unset.                                                                               |
+| `SBOMIFY_TOOL_CACHE`           | none                                 | Where fetched tool runtimes are unpacked. Falls back to `XDG_CACHE_HOME`, then `$HOME/.cache`, then the temp directory.              |
+| `SBOMIFY_FETCH_RUNTIMES`       | `1`                                  | Set to `0` to refuse downloading tool runtimes, for air-gapped builds. See [tool runtimes](/sbomify-action/advanced/#tool-runtimes). |
+| `SBOMIFY_ENRICHMENT_CACHE`     | `1`                                  | Set to `0` to disable the on-disk enrichment response cache.                                                                         |
+| `SBOMIFY_ENRICHMENT_CACHE_TTL` | none                                 | Override how long cached enrichment responses stay valid, in seconds.                                                                |
+| `SBOMIFY_CLEARLY_CACHED_URL`   | `https://clearly-cached.sbomify.com` | Point ClearlyDefined lookups at your own [clearly-cached](https://github.com/sbomify/clearly-cached) instance.                       |
+| `GITHUB_TOKEN` or `GH_TOKEN`   | none                                 | **Strongly recommended.** Authenticates license database downloads.                                                                  |
 
-`GITHUB_TOKEN` is worth calling out. License databases are downloaded from GitHub Releases, and unauthenticated requests are limited to 60 per hour per IP address. On shared CI runners that limit is often already exhausted, and when it is, **enrichment degrades silently** - you get an SBOM with fewer licenses populated and no hard error. This applies on every runtime, not just GitHub Actions. See [license database rate limits](/guides/sbomify-action/enrichment/#license-database-rate-limits).
+`GITHUB_TOKEN` is worth calling out. License databases are downloaded from GitHub Releases, and unauthenticated requests are limited to 60 per hour per IP address. On shared CI runners that limit is often already exhausted, and when it is, **enrichment degrades silently** - you get an SBOM with fewer licenses populated and no hard error. This applies on every runtime, not just GitHub Actions. See [license database rate limits](/sbomify-action/enrichment/#license-database-rate-limits).
 
 ## Diagnostics and privacy
 
@@ -118,7 +120,7 @@ Required when `dependency-track` is in `UPLOAD_DESTINATIONS`. CycloneDX only - D
 | `TELEMETRY`  | `true`  | **Error telemetry is enabled by default.** Set to `false` to disable. |
 | `SENTRY_DSN` | none    | Point error telemetry at your own Sentry instance.                    |
 
-The action reports unhandled errors to Sentry unless you opt out. If your policy prohibits outbound diagnostics, set `TELEMETRY=false` or pass `--no-telemetry`. See [telemetry and privacy](/guides/sbomify-action/advanced/#telemetry-and-privacy).
+The action reports unhandled errors to Sentry unless you opt out. If your policy prohibits outbound diagnostics, set `TELEMETRY=false` or pass `--no-telemetry`. See [telemetry and privacy](/sbomify-action/advanced/#telemetry-and-privacy).
 
 ## Advanced
 
@@ -177,8 +179,8 @@ sbomify-action --lock-file requirements.txt --enrich --no-upload -o sbom.cdx.jso
 
 ### Subcommands
 
-| Command                 | Purpose                                                                                                                    |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `sbomify-action wizard` | Interactive setup. `init` is an alias. See [quick start](/guides/sbomify-action/quickstart/).                              |
-| `sbomify-action yocto`  | Process Yocto and OpenEmbedded SPDX archives. See [input sources](/guides/sbomify-action/sources/#yocto-and-openembedded). |
-| `sbomify-license-db`    | Generate a distro license database locally. Advanced.                                                                      |
+| Command                 | Purpose                                                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `sbomify-action wizard` | Interactive setup. `init` is an alias. See [quick start](/sbomify-action/quickstart/).                              |
+| `sbomify-action yocto`  | Process Yocto and OpenEmbedded SPDX archives. See [input sources](/sbomify-action/sources/#yocto-and-openembedded). |
+| `sbomify-license-db`    | Generate a distro license database locally. Advanced.                                                               |

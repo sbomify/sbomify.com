@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/quickstart/
+url: /sbomify-action/quickstart/
+aliases:
+  - /guides/sbomify-action/quickstart/
 title: "sbomify Action Quick Start"
 description: "Get your first SBOM generated in minutes with the interactive setup wizard, or by writing the configuration by hand."
 keywords: ["sbomify quick start", "SBOM setup wizard", "generate SBOM CI"]
-section: guides
+section: sbomify-action
 tldr: "Run the setup wizard from your repository root and it scans for lockfiles, signs you in, and writes a ready-to-commit workflow. If you would rather write the configuration yourself, four environment variables is the whole minimum."
 ---
 
@@ -30,7 +32,7 @@ If you have [uv](https://docs.astral.sh/uv/) available and would rather not use 
 uvx sbomify-action wizard
 ```
 
-Either way there is nothing else to install - the generators are downloaded on first use and cached. See [running locally](/guides/sbomify-action/runtimes/local/).
+Either way there is nothing else to install - the generators are downloaded on first use and cached. See [running locally](/sbomify-action/runtimes/local/).
 
 ### What it does
 
@@ -57,7 +59,7 @@ Either way there is nothing else to install - the generators are downloaded on f
 - It only manages `.github/workflows/sboms.yml`, and marks files it generated with a header. It will never overwrite a workflow you wrote by hand.
 - It pins the action to a specific commit SHA at generation time, which is the recommended practice.
 - All components in one repository share a single release strategy, credential mode and format set. If you need them to differ, edit the generated workflow or write your own.
-- The wizard currently emits **GitHub Actions** workflows only. On other runtimes, configure by hand - see the [runtime guides](/guides/sbomify-action/runtimes/).
+- The wizard currently emits **GitHub Actions** workflows only. On other runtimes, configure by hand - see the [runtime guides](/sbomify-action/runtimes/).
 - `sbomify-action init` is a backwards-compatible alias for `wizard`.
 
 ## Option 2: configure it by hand
@@ -65,7 +67,7 @@ Either way there is nothing else to install - the generators are downloaded on f
 The minimum viable configuration is four environment variables. This generates a CycloneDX SBOM from a lockfile, enriches it from package registries, and writes it to disk without uploading anywhere:
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: requirements.txt
     OUTPUT_FILE: sbom.cdx.json
@@ -75,7 +77,7 @@ The minimum viable configuration is four environment variables. This generates a
 
 That is a complete, working setup. No account required.
 
-Swap `requirements.txt` for whichever lockfile your project uses - [17 ecosystems are supported](/guides/sbomify-action/sources/). For SPDX output, add `SBOM_FORMAT: spdx`.
+Swap `requirements.txt` for whichever lockfile your project uses - [17 ecosystems are supported](/sbomify-action/sources/). For SPDX output, add `SBOM_FORMAT: spdx`.
 
 On any runtime other than GitHub Actions, the same configuration is passed to the container image as environment variables:
 
@@ -92,7 +94,7 @@ docker run --rm \
 
 ## Adding your own metadata
 
-Enrichment fills in what public registries know. It cannot know who supplies your software, who authored it, or when support ends - that is [augmentation](/guides/sbomify-action/augmentation/), and it needs input from you.
+Enrichment fills in what public registries know. It cannot know who supplies your software, who authored it, or when support ends - that is [augmentation](/sbomify-action/augmentation/), and it needs input from you.
 
 Create `sbomify.json` in your project root:
 
@@ -116,7 +118,7 @@ Then set `AUGMENT: true`. No account needed for this either.
 
 ## Uploading to sbomify
 
-To store SBOMs in sbomify, add a component ID and authenticate. On GitHub Actions, prefer [trusted publishing](/guides/sbomify-action/publishing/#oidc-trusted-publishing) over a long-lived token:
+To store SBOMs in sbomify, add a component ID and authenticate. On GitHub Actions, prefer [trusted publishing](/sbomify-action/publishing/#oidc-trusted-publishing) over a long-lived token:
 
 ```yaml
 permissions:
@@ -128,7 +130,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: sbomify/sbomify-action@v26.8.0
+      - uses: sbomify/sbomify-action@master
         env:
           COMPONENT_ID: your-component-id
           LOCK_FILE: requirements.txt
@@ -136,7 +138,7 @@ jobs:
           ENRICH: true
 ```
 
-This requires a trusted publisher binding on the component first. See [publishing](/guides/sbomify-action/publishing/) for the setup, and for the token-based alternative used on every other runtime.
+This requires a trusted publisher binding on the component first. See [publishing](/sbomify-action/publishing/) for the setup, and for the token-based alternative used on every other runtime.
 
 ## Checking the result
 
@@ -152,13 +154,13 @@ A successful run prints a summary table showing what was changed:
 └─────────────────────┴───────┘
 ```
 
-It also writes `audit_trail.txt` next to your SBOM, listing every individual modification with a UTC timestamp and its source. That file is your evidence of what the pipeline did - see [the audit trail](/guides/sbomify-action/advanced/#audit-trail).
+It also writes `audit_trail.txt` next to your SBOM, listing every individual modification with a UTC timestamp and its source. That file is your evidence of what the pipeline did - see [the audit trail](/sbomify-action/advanced/#audit-trail).
 
-If `Components enriched` is unexpectedly low, the most common cause is GitHub API rate limiting on the license database download. [Setting `GITHUB_TOKEN` fixes it](/guides/sbomify-action/enrichment/#license-database-rate-limits).
+If `Components enriched` is unexpectedly low, the most common cause is GitHub API rate limiting on the license database download. [Setting `GITHUB_TOKEN` fixes it](/sbomify-action/enrichment/#license-database-rate-limits).
 
 ## Next steps
 
-- [How it works](/guides/sbomify-action/how-it-works/) - what happens between input and output
-- [Your runtime](/guides/sbomify-action/runtimes/) - platform-specific setup
-- [Configuration](/guides/sbomify-action/configuration/) - every option
-- [Advanced](/guides/sbomify-action/advanced/) - attestation, caching, troubleshooting
+- [How it works](/sbomify-action/how-it-works/) - what happens between input and output
+- [Your runtime](/sbomify-action/runtimes/) - platform-specific setup
+- [Configuration](/sbomify-action/configuration/) - every option
+- [Advanced](/sbomify-action/advanced/) - attestation, caching, troubleshooting

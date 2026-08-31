@@ -1,6 +1,8 @@
 ---
 
-url: /guides/sbomify-action/
+url: /sbomify-action/
+aliases:
+  - /guides/sbomify-action/
 title: "sbomify Action: Generate Compliance-Grade SBOMs in Any CI Pipeline"
 description: "Complete documentation for the sbomify action - a CLI shipped as a container that generates, augments and enriches SBOMs in GitHub Actions, GitLab CI, Bitbucket, Jenkins and any other pipeline."
 keywords: ["sbomify action", "SBOM CI/CD", "SBOM automation", "CycloneDX", "SPDX", "GitHub Action SBOM", "GitLab SBOM"]
@@ -32,13 +34,13 @@ The problem is that the fields they leave empty are exactly the fields [NTIA](/c
 {{< check-list-item title="Enrich" description="Fills in per-component metadata from PyPI, crates.io, pub.dev, deps.dev, ecosyste.ms, Linux distro license databases and more - plus integrity hashes pulled straight from your lockfile." >}}
 </ul>
 
-The difference is measurable. On the seven fields the NTIA Minimum Elements require, a bare scanner typically populates a small fraction; the same SBOM after augmentation and enrichment populates all of them. See [how it works](/guides/sbomify-action/how-it-works/) for the full pipeline, or our [comparison of SBOM generation tools](/2026/01/26/sbom-generation-tools-comparison/) for a look at the generators themselves.
+The difference is measurable. On the seven fields the NTIA Minimum Elements require, a bare scanner typically populates a small fraction; the same SBOM after augmentation and enrichment populates all of them. See [how it works](/sbomify-action/how-it-works/) for the full pipeline, or our [comparison of SBOM generation tools](/2026/01/26/sbom-generation-tools-comparison/) for a look at the generators themselves.
 
 ## Generated in CI. Never touched again.
 
 This is the part that matters most, and it is worth being precise about.
 
-Everything `sbomify-action` does happens **inside your pipeline, at build time** - the one moment when the full build context actually exists. Every modification it makes is written to an [audit trail](/guides/sbomify-action/advanced/#audit-trail) with UTC timestamps, so you can see exactly what was added and where it came from. You can then sign or attest the result **at origin**, before it goes anywhere.
+Everything `sbomify-action` does happens **inside your pipeline, at build time** - the one moment when the full build context actually exists. Every modification it makes is written to an [audit trail](/sbomify-action/advanced/#audit-trail) with UTC timestamps, so you can see exactly what was added and where it came from. You can then sign or attest the result **at origin**, before it goes anywhere.
 
 **sbomify never modifies an artifact you upload.** The bytes that arrive are the bytes that are stored and later served. No server-side enrichment, no normalisation, no "improvement".
 
@@ -56,19 +58,19 @@ Related: [how to sign an SBOM](/faq/how-do-i-sign-an-sbom/) and [OIDC trusted pu
 
 The core tool behaves identically everywhere. What differs is how you invoke it, how you authenticate, and how much the runtime tells it about your build.
 
-| Runtime                                                           | Integration     | Auth          | VCS auto-detect | Wizard             | Attestation |
-| ----------------------------------------------------------------- | --------------- | ------------- | --------------- | ------------------ | ----------- |
-| [GitHub Actions](/guides/sbomify-action/runtimes/github-actions/) | Native action   | OIDC or token | Yes             | Generates workflow | Yes         |
-| [GitLab CI](/guides/sbomify-action/runtimes/gitlab-ci/)           | Container image | Token         | Yes             | No                 | No          |
-| [Bitbucket](/guides/sbomify-action/runtimes/bitbucket/)           | Container image | Token         | Yes             | No                 | No          |
-| [Jenkins](/guides/sbomify-action/runtimes/jenkins/)               | Container image | Token         | Manual          | No                 | No          |
-| [CircleCI](/guides/sbomify-action/runtimes/circleci/)             | Container image | Token         | Manual          | No                 | No          |
-| [Azure DevOps](/guides/sbomify-action/runtimes/azure-devops/)     | Container image | Token         | Manual          | No                 | No          |
-| [Any container runner](/guides/sbomify-action/runtimes/docker/)   | Container image | Token         | Manual          | No                 | No          |
-| [TeamCity](/guides/sbomify-action/runtimes/teamcity/)             | Container image | Token         | Manual          | No                 | No          |
-| [Local machine](/guides/sbomify-action/runtimes/local/)           | `uvx` or `pipx` | Token         | Manual          | Yes                | No          |
+| Runtime                                                    | Integration     | Auth          | VCS auto-detect | Wizard             | Attestation |
+| ---------------------------------------------------------- | --------------- | ------------- | --------------- | ------------------ | ----------- |
+| [GitHub Actions](/sbomify-action/runtimes/github-actions/) | Native action   | OIDC or token | Yes             | Generates workflow | Yes         |
+| [GitLab CI](/sbomify-action/runtimes/gitlab-ci/)           | Container image | Token         | Yes             | No                 | No          |
+| [Bitbucket](/sbomify-action/runtimes/bitbucket/)           | Container image | Token         | Yes             | No                 | No          |
+| [Jenkins](/sbomify-action/runtimes/jenkins/)               | Container image | Token         | Manual          | No                 | No          |
+| [CircleCI](/sbomify-action/runtimes/circleci/)             | Container image | Token         | Manual          | No                 | No          |
+| [Azure DevOps](/sbomify-action/runtimes/azure-devops/)     | Container image | Token         | Manual          | No                 | No          |
+| [Any container runner](/sbomify-action/runtimes/docker/)   | Container image | Token         | Manual          | No                 | No          |
+| [TeamCity](/sbomify-action/runtimes/teamcity/)             | Container image | Token         | Manual          | No                 | No          |
+| [Local machine](/sbomify-action/runtimes/local/)           | `uvx` or `pipx` | Token         | Manual          | Yes                | No          |
 
-**Manual** means the runtime does not expose enough environment information for automatic detection, so you set `vcs_url`, `vcs_commit_sha` and `vcs_ref` in [`sbomify.json`](/guides/sbomify-action/augmentation/) instead. Everything else works the same.
+**Manual** means the runtime does not expose enough environment information for automatic detection, so you set `vcs_url`, `vcs_commit_sha` and `vcs_ref` in [`sbomify.json`](/sbomify-action/augmentation/) instead. Everything else works the same.
 
 OIDC trusted publishing and build provenance attestation are GitHub-only today because they depend on GitHub-issued identity tokens. Support for other runtimes will follow as those platforms expose equivalent primitives.
 
@@ -76,22 +78,22 @@ OIDC trusted publishing and build provenance attestation are GitHub-only today b
 
 **Start here**
 
-- [Quick start](/guides/sbomify-action/quickstart/) - the setup wizard, and your first pipeline run
-- [Why SBOM quality matters](/guides/sbomify-action/why/) - the long-form case, and how the output maps to NTIA, CISA and CRA
-- [How it works](/guides/sbomify-action/how-it-works/) - the full pipeline, step by step
+- [Quick start](/sbomify-action/quickstart/) - the setup wizard, and your first pipeline run
+- [Why SBOM quality matters](/sbomify-action/why/) - the long-form case, and how the output maps to NTIA, CISA and CRA
+- [How it works](/sbomify-action/how-it-works/) - the full pipeline, step by step
 
 **Reference**
 
-- [Configuration](/guides/sbomify-action/configuration/) - every input, environment variable and CLI flag
-- [Input sources](/guides/sbomify-action/sources/) - lockfiles, container images, Yocto, additional packages
-- [Augmentation](/guides/sbomify-action/augmentation/) - your business metadata via `sbomify.json`
-- [Enrichment](/guides/sbomify-action/enrichment/) - registry metadata, license databases, lifecycle data, hashes
-- [Publishing](/guides/sbomify-action/publishing/) - uploading, releases, Dependency Track
-- [Advanced](/guides/sbomify-action/advanced/) - attestation, audit trail, caching, telemetry, troubleshooting
+- [Configuration](/sbomify-action/configuration/) - every input, environment variable and CLI flag
+- [Input sources](/sbomify-action/sources/) - lockfiles, container images, Yocto, additional packages
+- [Augmentation](/sbomify-action/augmentation/) - your business metadata via `sbomify.json`
+- [Enrichment](/sbomify-action/enrichment/) - registry metadata, license databases, lifecycle data, hashes
+- [Publishing](/sbomify-action/publishing/) - uploading, releases, Dependency Track
+- [Advanced](/sbomify-action/advanced/) - attestation, audit trail, caching, telemetry, troubleshooting
 
 **Per-runtime guides**
 
-- [All runtimes](/guides/sbomify-action/runtimes/) - pick your CI platform
+- [All runtimes](/sbomify-action/runtimes/) - pick your CI platform
 
 ## Where the code lives
 

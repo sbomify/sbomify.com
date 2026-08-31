@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/how-it-works/
+url: /sbomify-action/how-it-works/
+aliases:
+  - /guides/sbomify-action/how-it-works/
 title: "How the sbomify Action Works"
 description: "The full sbomify-action pipeline, step by step: generation, package injection, transitive discovery, hash enrichment, augmentation, enrichment, validation and upload."
 keywords: ["SBOM pipeline", "SBOM generation process", "SBOM enrichment", "transitive dependencies"]
-section: guides
+section: sbomify-action
 tldr: "One invocation runs an eight-stage pipeline: generate, inject, discover transitive dependencies, extract hashes, augment, enrich, validate, upload. Every stage records what it changed in the audit trail."
 ---
 
@@ -52,9 +54,9 @@ Generators are registered with a priority, and the highest-priority generator th
 | 20       | `cdxgen`           | JavaScript, Ruby, Dart, C++, PHP, .NET, Elixir, Clojure, and elsewhere no native tool wins | CycloneDX 1.4-1.7               |
 | 35       | Syft               | Swift, Terraform, Haskell, Erlang, container images, directory scans                       | CycloneDX 1.2-1.6, SPDX 2.2-2.3 |
 
-Native tools rank above generic scanners because they resolve dependencies the way the ecosystem itself does. Several emit SPDX directly rather than deferring to Syft. See [input sources](/guides/sbomify-action/sources/) for the full routing logic.
+Native tools rank above generic scanners because they resolve dependencies the way the ecosystem itself does. Several emit SPDX directly rather than deferring to Syft. See [input sources](/sbomify-action/sources/) for the full routing logic.
 
-The generators are not baked into the image - they are fetched on first use, digest-pinned and cached. See [tool runtimes](/guides/sbomify-action/advanced/#tool-runtimes).
+The generators are not baked into the image - they are fetched on first use, digest-pinned and cached. See [tool runtimes](/sbomify-action/advanced/#tool-runtimes).
 
 > Trivy was removed from the tool set after [compromised releases were published in March 2026](/2026/03/26/trivy-compromise-hardening-sbomify-action/). The remaining generators cover every supported ecosystem.
 
@@ -62,7 +64,7 @@ The generators are not baked into the image - they are fetched on first use, dig
 
 Packages that no lockfile knows about are injected here: vendored code, system libraries, binaries copied in during a Docker build. They come from `additional_packages.txt`, `ADDITIONAL_PACKAGES_FILE` or the inline `ADDITIONAL_PACKAGES` variable, and are merged and deduplicated.
 
-Injected packages flow through every subsequent stage exactly like generated ones - they get augmented, enriched and validated the same way. See [input sources](/guides/sbomify-action/sources/#additional-packages).
+Injected packages flow through every subsequent stage exactly like generated ones - they get augmented, enriched and validated the same way. See [input sources](/sbomify-action/sources/#additional-packages).
 
 ## 1.4. Transitive dependency discovery
 
@@ -105,7 +107,7 @@ Sources are consulted in priority order, and **local values always win**:
 
 By default augmentation only fills empty fields. Set `OVERRIDE_SBOM_METADATA=true` to make it overwrite values the generator already produced.
 
-Full field reference: [augmentation](/guides/sbomify-action/augmentation/).
+Full field reference: [augmentation](/sbomify-action/augmentation/).
 
 ## 3. Enrichment
 
@@ -115,7 +117,7 @@ Sources are tried in priority order per ecosystem, stopping at the first that an
 
 This is the only stage that requires network access, and the only one that makes runs non-deterministic - registry data changes over time, so the same input can produce slightly different output on different days.
 
-Full source list, coverage expectations and limitations: [enrichment](/guides/sbomify-action/enrichment/).
+Full source list, coverage expectations and limitations: [enrichment](/sbomify-action/enrichment/).
 
 ## 4. Finalization
 
@@ -132,7 +134,7 @@ Destinations are set with `UPLOAD_DESTINATIONS` and can be combined:
 - **sbomify** - the default. Requires `COMPONENT_ID` plus either a token or OIDC trusted publishing.
 - **Dependency Track** - configured with `DTRACK_*` variables. CycloneDX only.
 
-See [publishing](/guides/sbomify-action/publishing/).
+See [publishing](/sbomify-action/publishing/).
 
 ## 6. Post-upload
 
@@ -148,6 +150,6 @@ Every stage writes to the audit trail. The summary table at the end of a run sho
 [2026-01-18T12:34:57Z] ENRICHMENT pkg:pypi/requests@2.31.0 description ADDED (source: pypi)
 ```
 
-This is what makes the pipeline auditable: every field that is not straight from the generator is traceable to the stage and source that added it. Once you sign the output, that record is fixed - and because [sbomify never modifies uploaded artifacts](/guides/sbomify-action/why/#the-part-most-platforms-get-wrong), it stays fixed.
+This is what makes the pipeline auditable: every field that is not straight from the generator is traceable to the stage and source that added it. Once you sign the output, that record is fixed - and because [sbomify never modifies uploaded artifacts](/sbomify-action/why/#the-part-most-platforms-get-wrong), it stays fixed.
 
-See [the audit trail](/guides/sbomify-action/advanced/#audit-trail) for the full format.
+See [the audit trail](/sbomify-action/advanced/#audit-trail) for the full format.

@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/sources/
+url: /sbomify-action/sources/
+aliases:
+  - /guides/sbomify-action/sources/
 title: "Input Sources: Lockfiles, Containers, Directories and Yocto"
 description: "Every input the sbomify action accepts - 17 lockfile ecosystems, container images, directory scans, Chainguard SBOM reuse, Yocto builds, git submodules and manually declared packages."
 keywords: ["SBOM lockfile support", "container SBOM", "Chainguard SBOM", "Yocto SBOM", "SOURCE_DIR", "SBOM formats"]
-section: guides
+section: sbomify-action
 tldr: "Point the action at a lockfile, a container image, a directory or an existing SBOM. It routes to the best generator for that ecosystem and falls back automatically. Prefer a lockfile wherever one exists."
 ---
 
@@ -14,25 +16,25 @@ Exactly one input source is required: `LOCK_FILE`, `SBOM_FILE`, `DOCKER_IMAGE` o
 
 Set `LOCK_FILE` to the path of your lockfile. Seventeen ecosystems are supported.
 
-| Language    | Recognised files                                                               |
-| ----------- | ------------------------------------------------------------------------------ |
-| Python      | `requirements.txt`, `poetry.lock`, `Pipfile.lock`, `uv.lock`, `pyproject.toml` |
-| JavaScript  | `package.json`, `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, `bun.lock` |
-| Java        | `pom.xml`, `build.gradle`, `build.gradle.kts`, `gradle.lockfile`               |
-| Go          | `go.mod`, `go.sum`                                                             |
-| Rust        | `Cargo.lock`                                                                   |
-| Ruby        | `Gemfile.lock`                                                                 |
-| PHP         | `composer.json`, `composer.lock`                                               |
-| .NET and C# | `packages.lock.json`                                                           |
-| Swift       | `Package.swift`, `Package.resolved`                                            |
-| Dart        | `pubspec.lock`                                                                 |
-| Elixir      | `mix.lock`                                                                     |
-| Scala       | `build.sbt`                                                                    |
-| C and C++   | `conan.lock`                                                                   |
-| Terraform   | `.terraform.lock.hcl`                                                          |
-| Haskell     | `stack.yaml.lock`, `stack.yaml`, `cabal.project.freeze`                        |
-| Erlang      | `rebar.lock` (rebar3 projects)                                                 |
-| Clojure     | `deps.edn`, `project.clj`                                                      |
+| Language                          | Recognised files                                                               |
+| --------------------------------- | ------------------------------------------------------------------------------ |
+| [Python](/guides/python/)         | `requirements.txt`, `poetry.lock`, `Pipfile.lock`, `uv.lock`, `pyproject.toml` |
+| [JavaScript](/guides/javascript/) | `package.json`, `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, `bun.lock` |
+| [Java](/guides/java/)             | `pom.xml`, `build.gradle`, `build.gradle.kts`, `gradle.lockfile`               |
+| [Go](/guides/go/)                 | `go.mod`, `go.sum`                                                             |
+| [Rust](/guides/rust/)             | `Cargo.lock`                                                                   |
+| [Ruby](/guides/ruby/)             | `Gemfile.lock`                                                                 |
+| [PHP](/guides/php/)               | `composer.json`, `composer.lock`                                               |
+| [.NET and C#](/guides/dotnet/)    | `packages.lock.json`                                                           |
+| [Swift](/guides/swift/)           | `Package.swift`, `Package.resolved`                                            |
+| [Dart](/guides/dart/)             | `pubspec.lock`                                                                 |
+| [Elixir](/guides/elixir/)         | `mix.lock`                                                                     |
+| [Scala](/guides/scala/)           | `build.sbt`                                                                    |
+| [C and C++](/guides/cpp/)         | `conan.lock`                                                                   |
+| [Terraform](/guides/terraform/)   | `.terraform.lock.hcl`                                                          |
+| Haskell                           | `stack.yaml.lock`, `stack.yaml`, `cabal.project.freeze`                        |
+| Erlang                            | `rebar.lock` (rebar3 projects)                                                 |
+| Clojure                           | `deps.edn`, `project.clj`                                                      |
 
 For language-specific walkthroughs, see the [SBOM guides](/guides/).
 
@@ -74,7 +76,7 @@ In practice:
 
 ### Where the generators come from
 
-The generators are not baked into the container image. They are downloaded on first use, verified against a pinned digest, and cached - see [tool runtimes](/guides/sbomify-action/advanced/#tool-runtimes). This is why the image is small and why the same tool selection works identically under `uvx`.
+The generators are not baked into the container image. They are downloaded on first use, verified against a pinned digest, and cached - see [tool runtimes](/sbomify-action/advanced/#tool-runtimes). This is why the image is small and why the same tool selection works identically under `uvx`.
 
 ## Container images
 
@@ -89,6 +91,8 @@ env:
 ```
 
 The image must be pullable from the environment the action runs in. When the input is a container image, the lifecycle phase is automatically recorded as `post-build`.
+
+See the [Docker guide](/guides/docker/) for the wider workflow, including generating an application SBOM and a container SBOM for the same release.
 
 ### Chainguard images
 
@@ -189,7 +193,7 @@ Because the convention file is read at run time, earlier steps can append to it:
 - name: Record the application binary
   run: echo "pkg:golang/github.com/my-org/my-app@1.2.3" >> additional_packages.txt
 
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: go.mod
     # picked up automatically
