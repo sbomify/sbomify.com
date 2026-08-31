@@ -56,7 +56,7 @@ Generators are registered with a priority, and the highest-priority generator th
 
 Native tools rank above generic scanners because they resolve dependencies the way the ecosystem itself does. Several emit SPDX directly rather than deferring to Syft. See [input sources](/sbomify-action/sources/) for the full routing logic.
 
-The generators are not baked into the image - they are fetched on first use, digest-pinned and cached. See [tool runtimes](/sbomify-action/advanced/#tool-runtimes).
+Apart from `cyclonedx-py`, which ships with the CLI, the generators are not baked into the image - they are fetched on first use, digest-pinned and cached. See [tool runtimes](/sbomify-action/advanced/#tool-runtimes).
 
 > Trivy was removed from the tool set after [compromised releases were published in March 2026](/2026/03/26/trivy-compromise-hardening-sbomify-action/). The remaining generators cover every supported ecosystem.
 

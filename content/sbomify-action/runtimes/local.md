@@ -7,7 +7,7 @@ title: "Running the sbomify Action Locally"
 description: "Generate SBOMs on your own machine with uvx, pipx or Docker - for trying things out, debugging a pipeline, or running the setup wizard."
 keywords: ["uvx sbomify", "pipx sbomify", "local SBOM generation", "SBOM CLI"]
 section: sbomify-action
-tldr: "Run it with uvx, pipx or Docker. The generators are downloaded on first use and cached, so there is nothing to install either way."
+tldr: "Run it with uvx, pipx or Docker. Whatever generator your project needs is downloaded on first use and cached, so there is nothing to install either way."
 ---
 
 Running locally is useful for trying the tool out, debugging a pipeline that behaves unexpectedly, generating a one-off SBOM, and running the [setup wizard](/sbomify-action/quickstart/) - which is interactive and deliberately refuses to run in CI.

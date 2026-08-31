@@ -163,7 +163,7 @@ Caching reduces network calls, which also reduces exposure to the [license datab
 
 ## Tool runtimes
 
-The generators are not baked into the container image. Syft, cdxgen, the JVM toolchain, Go, Rust, PHP, .NET, `crane` and `cosign` are downloaded on first use, verified against a digest pinned at build time, and unpacked into a cache directory.
+Only `cyclonedx-py` ships in the image, as a dependency of the CLI itself. Every other generator is fetched: Syft, cdxgen, the JVM toolchain, Go, Rust, PHP, .NET, `crane` and `cosign` are downloaded on first use, verified against a digest pinned at build time, and unpacked into a cache directory.
 
 This is why the image is small, why the same tool selection works identically under `uvx`, and why the tool set cannot change without a release - which matters for something whose output is a provenance document.
 

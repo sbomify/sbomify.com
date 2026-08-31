@@ -174,7 +174,7 @@ jobs:
 
 ## What is in the image
 
-The image is deliberately small: Python, the sbomify CLI, `conan` for C and C++ metadata, and `git`.
+The image is deliberately small: Python, the sbomify CLI (which brings `cyclonedx-py` with it), `conan` for C and C++ metadata, and `git`.
 
 Everything else - Syft, cdxgen, the JVM toolchain, Go, Rust, PHP, .NET, `crane` and `cosign` - is **downloaded on first use**, verified against a digest pinned at build time, and cached. You do not install anything; the tool fetches exactly the versions it was tested against.
 
