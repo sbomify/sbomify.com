@@ -14,25 +14,25 @@ Exactly one input source is required: `LOCK_FILE`, `SBOM_FILE`, `DOCKER_IMAGE` o
 
 Set `LOCK_FILE` to the path of your lockfile. Seventeen ecosystems are supported.
 
-| Language    | Recognised files                                                               |
-| ----------- | ------------------------------------------------------------------------------ |
-| Python      | `requirements.txt`, `poetry.lock`, `Pipfile.lock`, `uv.lock`, `pyproject.toml` |
-| JavaScript  | `package.json`, `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, `bun.lock` |
-| Java        | `pom.xml`, `build.gradle`, `build.gradle.kts`, `gradle.lockfile`               |
-| Go          | `go.mod`, `go.sum`                                                             |
-| Rust        | `Cargo.lock`                                                                   |
-| Ruby        | `Gemfile.lock`                                                                 |
-| PHP         | `composer.json`, `composer.lock`                                               |
-| .NET and C# | `packages.lock.json`                                                           |
-| Swift       | `Package.swift`, `Package.resolved`                                            |
-| Dart        | `pubspec.lock`                                                                 |
-| Elixir      | `mix.lock`                                                                     |
-| Scala       | `build.sbt`                                                                    |
-| C and C++   | `conan.lock`                                                                   |
-| Terraform   | `.terraform.lock.hcl`                                                          |
-| Haskell     | `stack.yaml.lock`, `stack.yaml`, `cabal.project.freeze`                        |
-| Erlang      | `rebar.lock` (rebar3 projects)                                                 |
-| Clojure     | `deps.edn`, `project.clj`                                                      |
+| Language                          | Recognised files                                                               |
+| --------------------------------- | ------------------------------------------------------------------------------ |
+| [Python](/guides/python/)         | `requirements.txt`, `poetry.lock`, `Pipfile.lock`, `uv.lock`, `pyproject.toml` |
+| [JavaScript](/guides/javascript/) | `package.json`, `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, `bun.lock` |
+| [Java](/guides/java/)             | `pom.xml`, `build.gradle`, `build.gradle.kts`, `gradle.lockfile`               |
+| [Go](/guides/go/)                 | `go.mod`, `go.sum`                                                             |
+| [Rust](/guides/rust/)             | `Cargo.lock`                                                                   |
+| [Ruby](/guides/ruby/)             | `Gemfile.lock`                                                                 |
+| [PHP](/guides/php/)               | `composer.json`, `composer.lock`                                               |
+| [.NET and C#](/guides/dotnet/)    | `packages.lock.json`                                                           |
+| [Swift](/guides/swift/)           | `Package.swift`, `Package.resolved`                                            |
+| [Dart](/guides/dart/)             | `pubspec.lock`                                                                 |
+| [Elixir](/guides/elixir/)         | `mix.lock`                                                                     |
+| [Scala](/guides/scala/)           | `build.sbt`                                                                    |
+| [C and C++](/guides/cpp/)         | `conan.lock`                                                                   |
+| [Terraform](/guides/terraform/)   | `.terraform.lock.hcl`                                                          |
+| Haskell                           | `stack.yaml.lock`, `stack.yaml`, `cabal.project.freeze`                        |
+| Erlang                            | `rebar.lock` (rebar3 projects)                                                 |
+| Clojure                           | `deps.edn`, `project.clj`                                                      |
 
 For language-specific walkthroughs, see the [SBOM guides](/guides/).
 
@@ -89,6 +89,8 @@ env:
 ```
 
 The image must be pullable from the environment the action runs in. When the input is a container image, the lifecycle phase is automatically recorded as `post-build`.
+
+See the [Docker guide](/guides/docker/) for the wider workflow, including generating an application SBOM and a container SBOM for the same release.
 
 ### Chainguard images
 

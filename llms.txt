@@ -17,15 +17,18 @@ This website provides:
 - /what-is-sbom/ - Introduction to Software Bill of Materials
 - /features/ - Product features overview
 - /features/trust-center/ - Trust Center for sharing security artifacts
-- /features/integrations/ - CI/CD integrations (GitHub, GitLab, Bitbucket)
+- /features/integrations/ - CI/CD integrations (GitHub, GitLab, Bitbucket, Jenkins, CircleCI, Azure DevOps, TeamCity)
 - /features/sbom-hierarchy/ - Product, Component, Release hierarchy
 - /pricing/ - Pricing plans (Community, Business, Enterprise)
 - /blog/ - Technical articles and announcements
 - /resources/ - SBOM tools directory and lifecycle overview
 - /guides/ - Step-by-step technical guides
 - /guides/sbomify-action/ - sbomify action documentation (generate SBOMs in any CI pipeline)
+- /guides/sbomify-action/quickstart/ - Setup wizard and first run
 - /guides/sbomify-action/why/ - Why scanner output is not a compliance-grade SBOM
+- /guides/sbomify-action/how-it-works/ - The generation, augmentation and enrichment pipeline
 - /guides/sbomify-action/configuration/ - Full configuration reference
+- /guides/sbomify-action/sources/ - Supported lockfiles (17 ecosystems), container images and directory scans
 - /guides/sbomify-action/runtimes/ - Per-platform setup (GitHub, GitLab, Bitbucket, Jenkins, CircleCI, Azure, TeamCity)
 - /case-studies/ - Customer success stories
 
@@ -44,7 +47,7 @@ This website provides:
 ## Technical Details
 
 - SBOM formats supported: CycloneDX, SPDX
-- Integrations: GitHub Actions, GitLab CI, Bitbucket Pipelines
+- Integrations: GitHub Actions, GitLab CI, Bitbucket Pipelines, Jenkins, CircleCI, Azure DevOps, TeamCity, and any container runner
 - Analysis tools: Google OSV, Dependency Track
 - Enrichment: Ecosyste.ms
 

@@ -28,14 +28,14 @@ Generate natively in the format you need. [sbomify-action](https://github.com/sb
 
 ```yaml
 # CycloneDX (default)
-- uses: sbomify/sbomify-action@master
+- uses: sbomify/sbomify-action@v26.8.0
   env:
     LOCK_FILE: requirements.txt
     OUTPUT_FILE: sbom.cdx.json
     ENRICH: true
 
 # SPDX
-- uses: sbomify/sbomify-action@master
+- uses: sbomify/sbomify-action@v26.8.0
   env:
     LOCK_FILE: requirements.txt
     OUTPUT_FILE: sbom.spdx.json

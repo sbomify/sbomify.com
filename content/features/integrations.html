@@ -42,7 +42,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
           <span class="flex items-center gap-4 whitespace-nowrap"><a href="/guides/sbomify-action/runtimes/github-actions/" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors">Documentation →</a><a href="https://github.com/marketplace/actions/sbomify" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on Marketplace →</a></span>
         </div>
         <p class="text-gray-300 mb-6">
-          GitHub is at the core of many organizations. Our <a href="/sbomify-action/" class="text-[#8A7DFF] hover:text-white transition-colors">sbomify Action</a> supports <a href="/faq/how-do-i-set-up-oidc-trusted-publishing/" class="text-[#8A7DFF] hover:text-white transition-colors">OIDC trusted publishing</a>, so no long-lived token secret is needed.
+          GitHub is at the core of many organizations. Our <a href="/guides/sbomify-action/" class="text-[#8A7DFF] hover:text-white transition-colors">sbomify Action</a> supports <a href="/faq/how-do-i-set-up-oidc-trusted-publishing/" class="text-[#8A7DFF] hover:text-white transition-colors">OIDC trusted publishing</a>, so no long-lived token secret is needed.
         </p>
         <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">
 
@@ -51,7 +51,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
 
 steps:
   - name: Upload SBOM
-    uses: sbomify/sbomify-action@master
+    uses: sbomify/sbomify-action@v26.8.0
     env:
       COMPONENT_ID: 'my-component-id'
       LOCK_FILE: 'requirements.txt'
@@ -137,7 +137,7 @@ definitions:
           <a href="https://github.com/sbomify/sbomify-action/pkgs/container/sbomify-action" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on GHCR →</a></span>
         </div>
         <p class="text-gray-300 mb-6">
-          For any other CI/CD system, use our multi-arch (amd64 and arm64) Docker image directly. All generators are pre-installed.
+          For any other CI/CD system, use our multi-arch (amd64 and arm64) Docker image directly. Generators are fetched on first use, digest-pinned and cached &mdash; nothing to install.
         </p>
         <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">
 
@@ -166,7 +166,7 @@ docker run --rm \
           <a href="https://pypi.org/project/sbomify-action/" class="text-sm font-semibold text-[#8A7DFF] hover:text-white transition-colors whitespace-nowrap" target="_blank">View on PyPI →</a>
         </div>
         <p class="text-gray-300 mb-6">
-          Run the CLI on your machine with <code>uvx</code> or <code>pipx</code> for local development, one-off SBOMs and the setup wizard. Requires external generators (Syft or cdxgen) to be installed separately &mdash; the Docker image bundles them.
+          Run the CLI on your machine with <code>uvx</code> or <code>pipx</code> for local development, one-off SBOMs and the setup wizard. Generators are downloaded on first use and cached, exactly as they are in the Docker image, so there is nothing else to install.
           <a href="/guides/sbomify-action/runtimes/local/" class="text-[#8A7DFF] hover:text-white transition-colors">Read the guide &rarr;</a>
         </p>
         <div class="bg-[#141035] rounded-lg p-4 overflow-x-auto text-sm text-gray-300 font-mono border border-[#37306B]">

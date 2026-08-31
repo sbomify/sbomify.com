@@ -160,14 +160,14 @@ SBOM generation is the first step in the [SBOM lifecycle](/features/generate-col
 
 ### Using sbomify GitHub Action (Recommended)
 
-The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step.
+The [sbomify action](/guides/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step. It runs on [any CI platform](/guides/sbomify-action/runtimes/), not just GitHub, and the source is [on GitHub](https://github.com/sbomify/sbomify-action/).
 
-For Swift, sbomify uses **cdxgen** or **Syft** under the hood.
+For Swift, sbomify uses **Syft** under the hood.
 
 **Standalone (no account needed):**
 
 ```yaml
-- uses: sbomify/sbomify-action@master
+- uses: sbomify/sbomify-action@v26.8.0
   env:
     LOCK_FILE: Package.resolved
     OUTPUT_FILE: sbom.cdx.json
@@ -182,7 +182,7 @@ Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as 
 **With sbomify platform (adds augmentation and upload):**
 
 ```yaml
-- uses: sbomify/sbomify-action@master
+- uses: sbomify/sbomify-action@v26.8.0
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
     COMPONENT_ID: my-component-id
@@ -242,7 +242,7 @@ If your project also uses CocoaPods:
 
 ```yaml
 - name: Generate Swift SBOM
-  uses: sbomify/sbomify-action@master
+  uses: sbomify/sbomify-action@v26.8.0
   env:
     LOCK_FILE: 'Package.resolved'
     OUTPUT_FILE: 'swift-sbom.cdx.json'
