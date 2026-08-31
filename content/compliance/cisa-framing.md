@@ -42,7 +42,7 @@ The Framing document is particularly useful as:
 ## Related Frameworks
 
 - [NTIA Minimum Elements](/compliance/ntia-minimum-elements/) - The original baseline guidance
-- [CISA 2025 Minimum Elements](/compliance/cisa-minimum-elements/) - Updated guidance
+- [CISA 2026 Minimum Elements](/compliance/cisa-minimum-elements/) - The current US baseline
 - [Schema Crosswalk](/compliance/schema-crosswalk/) - CycloneDX and SPDX field mappings
 
 ## Official Source

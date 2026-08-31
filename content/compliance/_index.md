@@ -2,8 +2,8 @@
 
 url: /compliance/
 title: "The Ultimate SBOM Compliance Guide (2026)"
-description: "Complete SBOM compliance guide covering NTIA minimum elements, CISA 2025 draft, NIST 800-53, NIST 800-171, EU Cyber Resilience Act (CRA), NIS2 Directive, UK Software Security Code of Practice, FDA medical device requirements, and PCI DSS 4.0. Includes CycloneDX and SPDX schema mappings."
-tldr: "SBOM compliance requirements vary by jurisdiction and industry. In the US, Executive Order 14028 and NTIA minimum elements set the baseline; CISA's 2025 draft adds hash and license fields. In the EU, the Cyber Resilience Act legally requires SBOMs for digital products, while NIS2 mandates supply chain security. The UK's Software Security Code of Practice offers voluntary guidance. Use CycloneDX or SPDX format – both are widely accepted across all frameworks."
+description: "Complete SBOM compliance guide covering the CISA 2026 minimum elements, NIST 800-53, NIST 800-171, EU Cyber Resilience Act (CRA), NIS2 Directive, UK Software Security Code of Practice, FDA medical device requirements, and PCI DSS 4.0. Includes CycloneDX and SPDX schema mappings."
+tldr: "SBOM compliance requirements vary by jurisdiction and industry. In the US, the CISA 2026 minimum elements replaced the NTIA 2021 baseline on 29 July 2026, adding component hashes, licences, and SBOM document metadata. In the EU, the Cyber Resilience Act legally requires SBOMs for digital products, while NIS2 mandates supply chain security. The UK's Software Security Code of Practice offers voluntary guidance. Use CycloneDX or SPDX format – both are widely accepted across all frameworks."
 ---
 
 New to SBOMs? Start with [What is an SBOM?](/what-is-sbom/) to learn the basics, or explore our [SBOM generation guides](/guides/) for language-specific tutorials.
@@ -136,7 +136,7 @@ This table compares SBOM data field expectations across major frameworks. All fr
 - EO 14028 requires SBOM provision in federal procurement but defers field-level requirements to NTIA minimum elements. Note: OMB M-26-05 (January 2026) rescinded the mandatory attestation memos (M-22-18, M-23-16), making vendor attestations optional and shifting to agency-led risk-based assurance. EO 14028's core SBOM and supply chain provisions remain in effect
 - NTIA 2021 and CISA 2025 define "minimum elements" as guidance, not legal requirements
 - NTIA 2021 discusses license information as a key SBOM use case and useful content, but it is not listed among the minimum SBOM data fields
-- CISA 2025 is a public comment draft and explicitly does not create new requirements
+- CISA 2026 is final guidance and explicitly does not create new requirements
 - FDA uses "should" language (recommendations for premarket submissions)
 - CRA is binding law but does not specify individual data fields beyond dependency scope
 - NIS2 does not mandate SBOMs by name, but the implementing regulation (2024/2690) requires "information describing the hardware and software components used" for in-scope entities
@@ -161,7 +161,7 @@ Both [CycloneDX](https://cyclonedx.org/) and [SPDX](https://spdx.dev/) are widel
 
 ### What are the minimum SBOM fields required?
 
-The [NTIA minimum elements](/compliance/ntia-minimum-elements/) define seven baseline fields: Supplier Name, Component Name, Version, Unique Identifiers, Dependency Relationship, SBOM Author, and Timestamp. The [CISA 2025 draft](/compliance/cisa-minimum-elements/) adds Component Hash, License, Tool Name, and Generation Context.
+The [CISA 2026 minimum elements](/compliance/cisa-minimum-elements/) define 23 elements in three groups: nine SBOM Metadata fields, eight Component Data fields, and six Practices and Processes. They replaced the seven fields of the [NTIA 2021 baseline](/compliance/ntia-minimum-elements/) on 29 July 2026, adding ten new elements including Component Hash Value, Component Hash Algorithm, Component License, and SBOM Author Signature.
 
 ### How do I generate an SBOM?
 
@@ -175,7 +175,7 @@ See our comprehensive [SBOM generation guides](/guides/) covering Python, JavaSc
 
 - [Executive Order 14028 – Improving the Nation's Cybersecurity (2021)](https://www.gsa.gov/technology/government-it-initiatives/cybersecurity/executive-order-14028)
 - [NTIA Minimum Elements for a Software Bill of Materials (2021)](https://www.ntia.gov/sites/default/files/publications/sbom_minimum_elements_report_0.pdf)
-- [CISA 2025 Minimum Elements (Public Comment Draft)](https://www.cisa.gov/resources-tools/resources/2025-minimum-elements-software-bill-materials-sbom)
+- [2026 Minimum Elements for a Software Bill of Materials (SBOM)](https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom)
 - [CISA Framing Software Component Transparency (3rd Edition)](https://www.cisa.gov/sites/default/files/2024-10/SBOM%20Framing%20Software%20Component%20Transparency%202024.pdf)
 - [CISA SBOM Sharing Lifecycle Report](https://www.cisa.gov/sites/default/files/2023-04/sbom-sharing-lifecycle-report_508.pdf)
 - [EU Cyber Resilience Act (Regulation 2024/2847)](https://eur-lex.europa.eu/eli/reg/2024/2847/oj)
