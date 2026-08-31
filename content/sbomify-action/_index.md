@@ -67,10 +67,12 @@ The core tool behaves identically everywhere. What differs is how you invoke it,
 | [CircleCI](/sbomify-action/runtimes/circleci/)             | Container image | Token         | Manual          | No                 | No          |
 | [Azure DevOps](/sbomify-action/runtimes/azure-devops/)     | Container image | Token         | Manual          | No                 | No          |
 | [Any container runner](/sbomify-action/runtimes/docker/)   | Container image | Token         | Manual          | No                 | No          |
-| [TeamCity](/sbomify-action/runtimes/teamcity/)             | Container image | Token         | Manual          | No                 | No          |
+| [TeamCity](/sbomify-action/runtimes/teamcity/)             | Container image | Token         | Git roots       | No                 | No          |
 | [Local machine](/sbomify-action/runtimes/local/)           | `uvx` or `pipx` | Token         | Manual          | Yes                | No          |
 
 **Manual** means the runtime does not expose enough environment information for automatic detection, so you set `vcs_url`, `vcs_commit_sha` and `vcs_ref` in [`sbomify.json`](/sbomify-action/augmentation/) instead. Everything else works the same.
+
+**Git roots** means TeamCity, which is VCS-agnostic: detection runs only when the repository URL positively identifies Git, and stays silent otherwise rather than recording a Subversion revision as if it were a commit. See [TeamCity](/sbomify-action/runtimes/teamcity/#vcs-information).
 
 OIDC trusted publishing and build provenance attestation are GitHub-only today because they depend on GitHub-issued identity tokens. Support for other runtimes will follow as those platforms expose equivalent primitives.
 

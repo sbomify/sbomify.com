@@ -37,10 +37,12 @@ If your platform can run a container, it is supported - even if it does not have
 | CircleCI                                       | Container image | Token         | Manual          | No                 | No          |
 | Azure DevOps                                   | Container image | Token         | Manual          | No                 | No          |
 | Any container runner                           | Container image | Token         | Manual          | No                 | No          |
-| [TeamCity](/sbomify-action/runtimes/teamcity/) | Container image | Token         | Manual          | No                 | No          |
+| [TeamCity](/sbomify-action/runtimes/teamcity/) | Container image | Token         | Git roots       | No                 | No          |
 | Local machine                                  | `uvx` or `pipx` | Token         | Manual          | Yes                | No          |
 
 **VCS auto-detect** means the action reads repository URL, commit SHA and branch from the environment without configuration. Where it says _Manual_, the platform does not expose that information in a standard enough form, so you set `vcs_url`, `vcs_commit_sha` and `vcs_ref` in [`sbomify.json`](/sbomify-action/augmentation/#automatic-vcs-detection) instead. It is a few lines, and everything else behaves the same.
+
+_Git roots_ is TeamCity, which is VCS-agnostic and can be backed by Subversion, Perforce or TFVC as easily as Git. Detection runs only when the repository URL positively identifies Git, and emits nothing otherwise rather than recording a changelist number as a commit SHA. See [TeamCity](/sbomify-action/runtimes/teamcity/#vcs-information).
 
 **OIDC trusted publishing** and **attestation** are GitHub-only today because both depend on GitHub-issued identity tokens. Other runtimes authenticate with an API token, and can sign with [cosign](/faq/how-do-i-sign-an-sbom/) rather than GitHub's provenance tooling. Support will expand as platforms expose equivalent primitives.
 
