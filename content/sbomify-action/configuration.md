@@ -128,6 +128,10 @@ The action reports unhandled errors to Sentry unless you opt out. If your policy
 | -------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------- |
 | `SBOMIFY_ENABLE_LICENSE_DB_GENERATION` | `false` | Allow local license database generation when no prebuilt one is available. Slow - Debian and Ubuntu can take hours. |
 | `SBOMIFY_LICENSE_DB_WORKERS`           | `5`     | Parallelism for the `sbomify-license-db` tool.                                                                      |
+| `SBOMIFY_VCS_URL`                      | none    | TeamCity only. Repository URL, trusted as given and taking precedence over detection.                               |
+| `SBOMIFY_VCS_REF`                      | none    | TeamCity only. Branch or tag, used when the build properties file is not readable.                                  |
+
+`SBOMIFY_VCS_URL` and `SBOMIFY_VCS_REF` exist because TeamCity keeps repository details in a properties file rather than the environment, and a containerised step may not be able to read it. The other runtimes need no equivalent. See [TeamCity](/sbomify-action/runtimes/teamcity/#vcs-information).
 
 ## Deprecated
 
@@ -145,6 +149,7 @@ You do not set these. They are read from the environment to detect VCS informati
 - **GitHub Actions** - `GITHUB_REPOSITORY`, `GITHUB_SERVER_URL`, `GITHUB_SHA`, `GITHUB_REF`, `GITHUB_REF_NAME`, `GITHUB_WORKSPACE`, `GITHUB_RUN_ID`, `GITHUB_REPOSITORY_VISIBILITY`, `ACTIONS_ID_TOKEN_REQUEST_URL`, `ACTIONS_ID_TOKEN_REQUEST_TOKEN`
 - **GitLab CI** - `CI_PROJECT_URL`, `CI_PROJECT_PATH`, `CI_SERVER_URL`, `CI_COMMIT_SHA`, `CI_COMMIT_REF_NAME`, `CI_PIPELINE_ID`, `CI_PROJECT_VISIBILITY`
 - **Bitbucket** - `BITBUCKET_WORKSPACE`, `BITBUCKET_REPO_SLUG`, `BITBUCKET_COMMIT`, `BITBUCKET_BRANCH`, `BITBUCKET_TAG`, `BITBUCKET_GIT_HTTP_ORIGIN`
+- **TeamCity** - `TEAMCITY_VERSION`, `BUILD_VCS_NUMBER` (and `BUILD_VCS_NUMBER_<VcsRootId>` on multi-root builds), `TEAMCITY_BUILD_PROPERTIES_FILE`
 
 The two OIDC request variables only exist when the workflow grants `permissions: id-token: write`.
 

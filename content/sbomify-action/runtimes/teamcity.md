@@ -7,7 +7,7 @@ title: "SBOM Generation in TeamCity"
 description: "Run the sbomify action in TeamCity using the Docker Wrapper build feature or a Kotlin DSL configuration, with caching, parameters and manual VCS configuration."
 keywords: ["TeamCity SBOM", "TeamCity CycloneDX", "Docker Wrapper", "SBOM pipeline"]
 section: sbomify-action
-tldr: "Add a Command Line step with the Docker Wrapper build feature pointing at the container image. Set VCS details in sbomify.json, since TeamCity's parameters are not auto-detected."
+tldr: "Add a Command Line step with the Docker Wrapper build feature pointing at the container image. VCS details are detected automatically for Git roots; a containerised step that cannot read the build properties file sets SBOMIFY_VCS_URL instead."
 ---
 
 TeamCity runs the container image through the **Docker Wrapper** build feature, which wraps a Command Line step so it executes inside a container.
@@ -115,14 +115,33 @@ Two things are worth caching here. The [tool runtimes](/sbomify-action/advanced/
 
 ## VCS information
 
-TeamCity does not expose repository details in the form the action auto-detects, so set them in `sbomify.json`. Generate it from build parameters in an earlier Command Line step:
+Repository URL, commit SHA and branch are detected automatically, the same as on GitHub, GitLab and Bitbucket. Detection landed after `v26.8.0`, so it is present on `master` and in any release tagged since - if you pin to an older tag, use the manual fallback below.
+
+TeamCity is not like the other three, and the differences are worth knowing.
+
+**The details are configuration parameters, not environment variables.** TeamCity exposes only `TEAMCITY_VERSION`, `BUILD_VCS_NUMBER` and `TEAMCITY_BUILD_PROPERTIES_FILE` to the build. The repository URL and branch live in the build properties file, which points at a second file holding the rest. The action follows that chain for you - but a **containerised step may not be able to see those files**, and this page recommends running in a container. If the properties file is not reachable, set the values explicitly:
+
+```text
+-e SBOMIFY_VCS_URL=https://git.example.com/team/app.git
+-e SBOMIFY_VCS_REF=%teamcity.build.vcs.branch.MyVcsRootId%
+```
+
+`SBOMIFY_VCS_URL` is always trusted as an operator assertion, and takes precedence over anything detected.
+
+**Only Git roots are recorded.** TeamCity is VCS-agnostic - a root can be Subversion, Perforce, TFVC or Mercurial, and under those `BUILD_VCS_NUMBER` is a revision number or changelist rather than a commit hash. The SBOM's VCS fields are Git-shaped, so recording a Perforce changelist there would put a false claim into a document you may go on to sign. TeamCity exposes no VCS-type parameter, so the action emits nothing unless the URL positively identifies Git: a `.git` suffix, a recognised Git host, or an `ssh://` or `git@host:path` form.
+
+The practical consequence: **a self-hosted Git server whose URL has neither a `.git` suffix nor a known host** - `https://git.example.com/team/app`, say - cannot be detected. Set `SBOMIFY_VCS_URL` and it is recorded as given. For an attestation artifact, omitting provenance is better than asserting a repository that might not be Git.
+
+### Manual fallback
+
+To set everything yourself instead, generate `sbomify.json` from build parameters in an earlier Command Line step:
 
 ```bash
 cat > sbomify.json <<EOF
 {
   "vcs_url": "%vcsroot.url%",
   "vcs_commit_sha": "%build.vcs.number%",
-  "vcs_ref": "%teamcity.build.branch%",
+  "vcs_ref": "%teamcity.build.vcs.branch.MyVcsRootId%",
   "supplier": {"name": "My Company"},
   "lifecycle_phase": "build"
 }
@@ -130,6 +149,8 @@ EOF
 ```
 
 Then set `env.AUGMENT = true`. See [augmentation](/sbomify-action/augmentation/).
+
+> **Do not use `%teamcity.build.branch%` here.** On the default branch it reports the literal string `<default>` when a branch specification is configured ([TW-23699](https://youtrack.jetbrains.com/issue/TW-23699)), and is absent entirely when one is not. Neither gives you the branch name. Use `%teamcity.build.vcs.branch.<VcsRootId>%`, substituting your VCS root's ID.
 
 ## Container images
 

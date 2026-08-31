@@ -101,11 +101,12 @@ By default augmentation only fills fields that are empty. Set `OVERRIDE_SBOM_MET
 
 When running in supported CI environments, repository URL, commit SHA and branch or tag are detected and added automatically. No configuration needed.
 
-| Runtime             | Detected                                  | Notes                               |
-| ------------------- | ----------------------------------------- | ----------------------------------- |
-| GitHub Actions      | Repository URL, commit SHA, branch or tag | Works with GitHub Enterprise Server |
-| GitLab CI           | Project URL, commit SHA, ref name         | Works with self-managed instances   |
-| Bitbucket Pipelines | Repository URL, commit SHA, branch or tag |                                     |
+| Runtime             | Detected                                  | Notes                                                |
+| ------------------- | ----------------------------------------- | ---------------------------------------------------- |
+| GitHub Actions      | Repository URL, commit SHA, branch or tag | Works with GitHub Enterprise Server                  |
+| GitLab CI           | Project URL, commit SHA, ref name         | Works with self-managed instances                    |
+| Bitbucket Pipelines | Repository URL, commit SHA, branch or tag |                                                      |
+| TeamCity            | Repository URL, commit SHA, branch or tag | Git roots only - see [below](#teamcity-is-different) |
 
 What gets written:
 
@@ -113,6 +114,12 @@ What gets written:
 - **SPDX** - `downloadLocation` pinned to the commit, plus `sourceInfo` with build context and a VCS external reference
 
 This is what makes an SBOM traceable back to a specific commit, which in turn is what makes signing meaningful: the document says exactly which source produced it.
+
+### TeamCity is different
+
+TeamCity is VCS-agnostic, and a root can just as easily be Subversion, Perforce or TFVC as Git. Under those, its revision parameter holds a changelist or revision number rather than a commit hash, and the SBOM's VCS fields are Git-shaped - so writing one into the other would put a false claim into a document you may go on to sign.
+
+TeamCity exposes no parameter saying which VCS a root uses. Detection therefore runs only when the repository URL positively identifies Git, and emits nothing otherwise. A self-hosted Git server whose URL has neither a `.git` suffix nor a recognised host cannot be detected; set `SBOMIFY_VCS_URL` (and `SBOMIFY_VCS_REF`) and it is trusted as given. See the [TeamCity runtime guide](/sbomify-action/runtimes/teamcity/#vcs-information).
 
 ### Other runtimes
 
