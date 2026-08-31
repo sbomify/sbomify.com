@@ -27,7 +27,7 @@ The wizard scans your repo for lockfiles, signs you in to sbomify, creates your 
 The [sbomify Action](/sbomify-action/) is a CI/CD tool that generates, augments, enriches, and uploads SBOMs from your lockfiles or Docker images. It works as a GitHub Action, Docker image, or pip package, and includes SBOM generators (Syft, cdxgen, and native ecosystem tools) pre-installed.
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: requirements.txt
     OUTPUT_FILE: sbom.cdx.json

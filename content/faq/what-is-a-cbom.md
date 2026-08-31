@@ -28,7 +28,7 @@ CBOM generation tools are still an emerging space. [cbomkit](https://github.com/
 
 ```yaml
 - name: Upload CBOM
-  uses: sbomify/sbomify-action@v26.8.0
+  uses: sbomify/sbomify-action@master
   env:
     COMPONENT_ID: 'my-component-id'
     SBOM_FILE: 'my-product.cbom.json'

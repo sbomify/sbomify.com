@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: sbomify/sbomify-action@v26.8.0
+      - uses: sbomify/sbomify-action@master
         env:
           LOCK_FILE: Cargo.lock
           OUTPUT_FILE: sbom.cdx.json
@@ -114,7 +114,7 @@ Two caches are worth persisting: the license databases, at roughly 20-50 MB, and
     path: .sbomify-cache
     key: sbomify-${{ runner.os }}
 
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     SBOMIFY_CACHE_DIR: ${{ github.workspace }}/.sbomify-cache
     SYFT_CACHE_DIR: ${{ github.workspace }}/.sbomify-cache/syft
@@ -187,7 +187,7 @@ Bundles published by sbomify also carry a Sigstore attestation, verified with `c
 Use the `working-dir` input to point at a subdirectory:
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   with:
     working-dir: packages/my-app
   env:
@@ -216,7 +216,7 @@ jobs:
             component_id: def456
     steps:
       - uses: actions/checkout@v7
-      - uses: sbomify/sbomify-action@v26.8.0
+      - uses: sbomify/sbomify-action@master
         env:
           TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
           COMPONENT_ID: ${{ matrix.component_id }}

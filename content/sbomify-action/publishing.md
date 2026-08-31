@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: sbomify/sbomify-action@v26.8.0
+      - uses: sbomify/sbomify-action@master
         env:
           COMPONENT_ID: your-component-id
           LOCK_FILE: requirements.txt
@@ -131,7 +131,7 @@ See [how to create a software release](/faq/how-do-i-create-a-software-release/)
 Upload to [OWASP Dependency Track](https://dependencytrack.org/) instead of, or alongside, sbomify.
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: requirements.txt
     OUTPUT_FILE: sbom.cdx.json
@@ -196,7 +196,7 @@ The OIDC audience is derived from that hostname automatically. Override with `OI
 Non-SBOM types are uploaded **verbatim** - augmentation, enrichment, overrides and package injection are all skipped, and Dependency Track and `PRODUCT_RELEASE` are rejected. Only the sbomify destination accepts them.
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   with:
     bom-type: vex
   env:

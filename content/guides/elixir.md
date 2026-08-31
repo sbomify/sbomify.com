@@ -179,7 +179,7 @@ For Elixir, sbomify uses **cdxgen** or **Syft** under the hood.
 **Standalone (no account needed):**
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: mix.lock
     OUTPUT_FILE: sbom.cdx.json
@@ -194,7 +194,7 @@ Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as 
 **With sbomify platform (adds augmentation and upload):**
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
     COMPONENT_ID: my-component-id
@@ -347,7 +347,7 @@ mix hex.audit --format json > audit.json
   run: mix hex.audit
 
 - name: Generate SBOM
-  uses: sbomify/sbomify-action@v26.8.0
+  uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: 'mix.lock'
     OUTPUT_FILE: 'sbom.cdx.json'

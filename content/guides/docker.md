@@ -103,7 +103,7 @@ For container images, sbomify uses **Syft** under the hood with fallback to cdxg
 **Standalone (no account needed):**
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     DOCKER_IMAGE: ghcr.io/myorg/myapp:${{ github.sha }}
     OUTPUT_FILE: sbom.cdx.json
@@ -118,7 +118,7 @@ The `DOCKER_IMAGE` references the image built in a previous step (typically tagg
 **With sbomify platform (adds augmentation and upload):**
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
     COMPONENT_ID: my-component-id
@@ -223,7 +223,7 @@ jobs:
   sbom:
     steps:
       - name: Generate Application SBOM
-        uses: sbomify/sbomify-action@v26.8.0
+        uses: sbomify/sbomify-action@master
         env:
           LOCK_FILE: 'package-lock.json'
           OUTPUT_FILE: 'app-sbom.cdx.json'
@@ -232,7 +232,7 @@ jobs:
         run: docker build -t myapp:latest --push .
 
       - name: Generate Container SBOM
-        uses: sbomify/sbomify-action@v26.8.0
+        uses: sbomify/sbomify-action@master
         env:
           DOCKER_IMAGE: 'myapp:latest'
           OUTPUT_FILE: 'container-sbom.cdx.json'

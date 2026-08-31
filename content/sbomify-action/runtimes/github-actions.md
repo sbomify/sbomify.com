@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: sbomify/sbomify-action@v26.8.0
+      - uses: sbomify/sbomify-action@master
         env:
           LOCK_FILE: package-lock.json
           OUTPUT_FILE: sbom.cdx.json
@@ -57,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: sbomify/sbomify-action@v26.8.0
+      - uses: sbomify/sbomify-action@master
         env:
           COMPONENT_ID: your-component-id
           LOCK_FILE: requirements.txt
@@ -72,7 +72,7 @@ Full details in [publishing](/sbomify-action/publishing/#oidc-trusted-publishing
 ### With a token instead
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
     COMPONENT_ID: your-component-id
@@ -97,7 +97,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: sbomify/sbomify-action@v26.8.0
+      - uses: sbomify/sbomify-action@master
         env:
           LOCK_FILE: Cargo.lock
           OUTPUT_FILE: sbom.cdx.json
@@ -116,7 +116,7 @@ jobs:
 ## Container images
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     DOCKER_IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
     OUTPUT_FILE: container-sbom.cdx.json
@@ -138,7 +138,7 @@ Worth doing - it avoids re-downloading the license database on every run, and re
     path: .sbomify-cache
     key: sbomify-${{ runner.os }}
 
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     SBOMIFY_CACHE_DIR: ${{ github.workspace }}/.sbomify-cache
     SYFT_CACHE_DIR: ${{ github.workspace }}/.sbomify-cache/syft
@@ -155,7 +155,7 @@ Setting `GITHUB_TOKEN` here is strongly recommended even on GitHub Actions - it 
 The workflow-level `working-directory:` setting **does not affect this action**, because it runs in a container. Use the `working-dir` input:
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   with:
     working-dir: packages/my-app
   env:
@@ -170,7 +170,7 @@ For several components, use a matrix - see [advanced usage](/sbomify-action/adva
 ## Tagging releases
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     COMPONENT_ID: your-component-id
     LOCK_FILE: requirements.txt
@@ -191,7 +191,7 @@ Automatic. Repository URL, commit SHA and branch or tag are read from the enviro
 Secrets are not exposed to fork pull requests, so uploads will fail. Verify generation without uploading:
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: requirements.txt
     OUTPUT_FILE: sbom.cdx.json
@@ -201,7 +201,7 @@ Secrets are not exposed to fork pull requests, so uploads will fail. Verify gene
 
 ## Version pinning
 
-`sbomify/sbomify-action@v26.8.0` is readable and fine for most projects. For production, pin to a full 40-character commit SHA - the only reference GitHub treats as immutable. The [setup wizard](/sbomify-action/quickstart/) does this automatically.
+The examples on this page use `@master` so they stay correct as the action moves. Do not ship that. Pin to a release tag for something readable, or to a full 40-character commit SHA - the only reference GitHub treats as immutable - for production. The [setup wizard](/sbomify-action/quickstart/) writes SHA pins automatically, and [version pinning](/sbomify-action/advanced/#version-pinning) covers the trade-offs.
 
 ## Let the wizard write it
 

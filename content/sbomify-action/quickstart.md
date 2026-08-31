@@ -67,7 +67,7 @@ Either way there is nothing else to install - the generators are downloaded on f
 The minimum viable configuration is four environment variables. This generates a CycloneDX SBOM from a lockfile, enriches it from package registries, and writes it to disk without uploading anywhere:
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: requirements.txt
     OUTPUT_FILE: sbom.cdx.json
@@ -130,7 +130,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: sbomify/sbomify-action@v26.8.0
+      - uses: sbomify/sbomify-action@master
         env:
           COMPONENT_ID: your-component-id
           LOCK_FILE: requirements.txt

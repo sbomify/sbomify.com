@@ -129,7 +129,7 @@ For Dart/Flutter, sbomify uses **cdxgen** or **Syft** under the hood.
 **Standalone (no account needed):**
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: pubspec.lock
     OUTPUT_FILE: sbom.cdx.json
@@ -144,7 +144,7 @@ Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as 
 **With sbomify platform (adds augmentation and upload):**
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
     COMPONENT_ID: my-component-id
@@ -315,7 +315,7 @@ Combine dependency checks with SBOM generation in CI:
   run: dart pub outdated --json > outdated.json
 
 - name: Generate SBOM
-  uses: sbomify/sbomify-action@v26.8.0
+  uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: 'pubspec.lock'
     OUTPUT_FILE: 'sbom.cdx.json'

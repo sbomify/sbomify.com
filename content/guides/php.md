@@ -155,7 +155,7 @@ For PHP, sbomify uses **cdxgen** under the hood with fallback to Syft.
 **Standalone (no account needed):**
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: composer.lock
     OUTPUT_FILE: sbom.cdx.json
@@ -170,7 +170,7 @@ Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as 
 **With sbomify platform (adds augmentation and upload):**
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
     COMPONENT_ID: my-component-id

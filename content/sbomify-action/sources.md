@@ -193,7 +193,7 @@ Because the convention file is read at run time, earlier steps can append to it:
 - name: Record the application binary
   run: echo "pkg:golang/github.com/my-org/my-app@1.2.3" >> additional_packages.txt
 
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: go.mod
     # picked up automatically

@@ -164,7 +164,7 @@ While rpi-image-gen generates SBOMs natively, you can use the [sbomify action](/
 **Standalone (enrichment only, no account needed):**
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     SBOM_FILE: output/image.sbom.spdx.json
     OUTPUT_FILE: enriched-sbom.cdx.json
@@ -175,7 +175,7 @@ While rpi-image-gen generates SBOMs natively, you can use the [sbomify action](/
 **With sbomify platform (enrichment + augmentation):**
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
     COMPONENT_ID: my-raspberry-pi-image

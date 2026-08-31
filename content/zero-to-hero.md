@@ -119,7 +119,7 @@ The interactive [setup wizard](/faq/how-do-i-use-the-sbomify-setup-wizard/) scan
 
 ```yaml
 - name: Generate SBOM
-  uses: sbomify/sbomify-action@v26.8.0
+  uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: 'requirements.txt'
     OUTPUT_FILE: 'sbom.cdx.json'

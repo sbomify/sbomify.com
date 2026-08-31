@@ -43,7 +43,7 @@ You can provide augmentation metadata via a `sbomify.json` file in your project 
 Then enable augmentation in your CI pipeline:
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: requirements.txt
     OUTPUT_FILE: sbom.cdx.json
@@ -74,7 +74,7 @@ Once you have a profile, there are two ways to apply it:
 Then in your CI pipeline, simply enable augmentation with a sbomify account:
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
     COMPONENT_ID: your-component-id

@@ -36,7 +36,7 @@ permissions:
 
 steps:
   - name: Upload SBOM
-    uses: sbomify/sbomify-action@v26.8.0
+    uses: sbomify/sbomify-action@master
     env:
       COMPONENT_ID: 'my-component-id'
       LOCK_FILE: 'requirements.txt'

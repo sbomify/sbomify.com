@@ -133,7 +133,7 @@ For Scala, sbomify uses **cyclonedx-sbt** under the hood.
 **Standalone (no account needed):**
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: build.sbt
     OUTPUT_FILE: sbom.cdx.json
@@ -148,7 +148,7 @@ Using `github.ref_name` automatically captures your git tag (e.g., `v1.2.3`) as 
 **With sbomify platform (adds augmentation and upload):**
 
 ```yaml
-- uses: sbomify/sbomify-action@v26.8.0
+- uses: sbomify/sbomify-action@master
   env:
     TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
     COMPONENT_ID: my-component-id
@@ -317,7 +317,7 @@ Combine with SBOM generation:
   run: sbt dependencyCheck
 
 - name: Generate SBOM
-  uses: sbomify/sbomify-action@v26.8.0
+  uses: sbomify/sbomify-action@master
   env:
     LOCK_FILE: 'build.sbt'
     OUTPUT_FILE: 'sbom.cdx.json'

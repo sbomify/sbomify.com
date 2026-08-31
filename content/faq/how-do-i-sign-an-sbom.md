@@ -42,7 +42,7 @@ permissions:
 
 steps:
   - name: Generate SBOM
-    uses: sbomify/sbomify-action@v26.8.0
+    uses: sbomify/sbomify-action@master
     env:
       COMPONENT_ID: 'your-component-id'
       LOCK_FILE: 'requirements.txt'

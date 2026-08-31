@@ -122,7 +122,7 @@ steps:
     run: ./scripts/produce-vex.sh sbom.cdx.json > vex.cdx.json
 
   - name: Upload VEX to sbomify
-    uses: sbomify/sbomify-action@v26.8.0
+    uses: sbomify/sbomify-action@master
     env:
       COMPONENT_ID: ${{ vars.SBOMIFY_COMPONENT_ID }}
       SBOM_FILE: vex.cdx.json
