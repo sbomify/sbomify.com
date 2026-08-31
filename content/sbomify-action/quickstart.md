@@ -32,7 +32,7 @@ If you have [uv](https://docs.astral.sh/uv/) available and would rather not use 
 uvx sbomify-action wizard
 ```
 
-Either way there is nothing else to install - the generators are downloaded on first use and cached. See [running locally](/sbomify-action/runtimes/local/).
+Either way there is nothing else to install - whatever generator your project needs is downloaded on first use and cached. See [running locally](/sbomify-action/runtimes/local/).
 
 ### What it does
 

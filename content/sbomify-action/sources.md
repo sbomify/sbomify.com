@@ -76,7 +76,7 @@ In practice:
 
 ### Where the generators come from
 
-The generators are not baked into the container image. They are downloaded on first use, verified against a pinned digest, and cached - see [tool runtimes](/sbomify-action/advanced/#tool-runtimes). This is why the image is small and why the same tool selection works identically under `uvx`.
+Apart from `cyclonedx-py`, which ships with the CLI, the generators are not baked into the container image. They are downloaded on first use, verified against a pinned digest, and cached - see [tool runtimes](/sbomify-action/advanced/#tool-runtimes). This is why the image is small and why the same tool selection works identically under `uvx`.
 
 ## Container images
 
