@@ -47,7 +47,7 @@ The difference is not cosmetic. Without a license field you cannot run license c
 
 ## What the regulations actually require
 
-The [NTIA Minimum Elements](/compliance/ntia-minimum-elements/) define seven required data fields. [CISA's 2025 guidance](/compliance/cisa-minimum-elements/) extends them. The [EU Cyber Resilience Act](/compliance/eu-cra/) leans on both.
+The [CISA 2026 Minimum Elements](/compliance/cisa-minimum-elements/) define 23 elements across SBOM metadata, component data, and practices, updating and replacing the seven fields in the [NTIA 2021 guidance](/compliance/ntia-minimum-elements/). The [EU Cyber Resilience Act](/compliance/eu-cra/) leans on both.
 
 | Required element            | Where it comes from                           |
 | --------------------------- | --------------------------------------------- |
