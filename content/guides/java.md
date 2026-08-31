@@ -139,7 +139,7 @@ SBOM generation is the first step in the [SBOM lifecycle](/features/generate-col
 
 ### Using sbomify GitHub Action (Recommended)
 
-The [sbomify action](/guides/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step. It runs on [any CI platform](/guides/sbomify-action/runtimes/), not just GitHub, and the source is [on GitHub](https://github.com/sbomify/sbomify-action/).
+The [sbomify action](/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step. It runs on [any CI platform](/sbomify-action/runtimes/), not just GitHub, and the source is [on GitHub](https://github.com/sbomify/sbomify-action/).
 
 For Java, sbomify uses **cyclonedx-maven** for `pom.xml` and **cyclonedx-gradle** for Gradle build scripts, and reads a `gradle.lockfile` directly without running Gradle at all.
 

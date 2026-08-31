@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/publishing/
+url: /sbomify-action/publishing/
+aliases:
+  - /guides/sbomify-action/publishing/
 title: "Publishing SBOMs: Uploading, Releases and Dependency Track"
 description: "How to upload SBOMs from CI to sbomify using OIDC trusted publishing or an API token, tag them against product releases, and send them to Dependency Track."
 keywords: ["OIDC trusted publishing", "SBOM upload", "product release", "Dependency Track", "sbomify token"]
-section: guides
+section: sbomify-action
 tldr: "On GitHub Actions, use OIDC trusted publishing and skip long-lived secrets entirely. Everywhere else, use a scoped API token. Uploads can also go to Dependency Track, or nowhere at all."
 ---
 
@@ -88,7 +90,7 @@ Good practice:
 
 ## Component IDs
 
-`COMPONENT_ID` identifies which sbomify component an SBOM belongs to. Find it in the component's URL or settings page, or let the [setup wizard](/guides/sbomify-action/quickstart/) create components and fill this in for you.
+`COMPONENT_ID` identifies which sbomify component an SBOM belongs to. Find it in the component's URL or settings page, or let the [setup wizard](/sbomify-action/quickstart/) create components and fill this in for you.
 
 A component maps to one buildable thing. A repository containing a frontend and a backend has two components, each with its own ID and its own pipeline step. See [how products, components and releases fit together](/faq/how-do-products-work-in-sbomify/).
 
@@ -143,7 +145,7 @@ Upload to [OWASP Dependency Track](https://dependencytrack.org/) instead of, or 
     ENRICH: true
 ```
 
-The project is identified either by `DTRACK_PROJECT_ID`, or by `COMPONENT_NAME` plus `COMPONENT_VERSION` together. Full variable list in the [configuration reference](/guides/sbomify-action/configuration/#dependency-track).
+The project is identified either by `DTRACK_PROJECT_ID`, or by `COMPONENT_NAME` plus `COMPONENT_VERSION` together. Full variable list in the [configuration reference](/sbomify-action/configuration/#dependency-track).
 
 **Dependency Track accepts CycloneDX only.** Combining `SBOM_FORMAT: spdx` with this destination will not work.
 
@@ -213,4 +215,4 @@ sbomify stores the bytes it received and serves those same bytes back. It does n
 
 Analysis - vulnerability scanning, compliance assessment, attestation verification - reads the artifact and writes findings alongside it, never into it.
 
-The reasoning behind that design, and why it matters more than it might first appear, is in [why SBOM quality matters](/guides/sbomify-action/why/#the-part-most-platforms-get-wrong).
+The reasoning behind that design, and why it matters more than it might first appear, is in [why SBOM quality matters](/sbomify-action/why/#the-part-most-platforms-get-wrong).

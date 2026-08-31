@@ -23,13 +23,13 @@ This website provides:
 - /blog/ - Technical articles and announcements
 - /resources/ - SBOM tools directory and lifecycle overview
 - /guides/ - Step-by-step technical guides
-- /guides/sbomify-action/ - sbomify action documentation (generate SBOMs in any CI pipeline)
-- /guides/sbomify-action/quickstart/ - Setup wizard and first run
-- /guides/sbomify-action/why/ - Why scanner output is not a compliance-grade SBOM
-- /guides/sbomify-action/how-it-works/ - The generation, augmentation and enrichment pipeline
-- /guides/sbomify-action/configuration/ - Full configuration reference
-- /guides/sbomify-action/sources/ - Supported lockfiles (17 ecosystems), container images and directory scans
-- /guides/sbomify-action/runtimes/ - Per-platform setup (GitHub, GitLab, Bitbucket, Jenkins, CircleCI, Azure, TeamCity)
+- /sbomify-action/ - sbomify action documentation (generate SBOMs in any CI pipeline)
+- /sbomify-action/quickstart/ - Setup wizard and first run
+- /sbomify-action/why/ - Why scanner output is not a compliance-grade SBOM
+- /sbomify-action/how-it-works/ - The generation, augmentation and enrichment pipeline
+- /sbomify-action/configuration/ - Full configuration reference
+- /sbomify-action/sources/ - Supported lockfiles (17 ecosystems), container images and directory scans
+- /sbomify-action/runtimes/ - Per-platform setup (GitHub, GitLab, Bitbucket, Jenkins, CircleCI, Azure, TeamCity)
 - /case-studies/ - Customer success stories
 
 ## Content Topics

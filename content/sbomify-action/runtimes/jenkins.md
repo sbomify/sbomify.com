@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/runtimes/jenkins/
+url: /sbomify-action/runtimes/jenkins/
+aliases:
+  - /guides/sbomify-action/runtimes/jenkins/
 title: "SBOM Generation in Jenkins"
 description: "Run the sbomify action in Jenkins declarative and scripted pipelines, with credentials, caching and manual VCS configuration."
 keywords: ["Jenkins SBOM", "Jenkins pipeline SBOM", "CycloneDX Jenkins"]
-section: guides
+section: sbomify-action
 tldr: "Use the container image as a pipeline agent. Jenkins does not expose standard VCS environment variables, so set repository details in sbomify.json."
 ---
 
@@ -128,7 +130,7 @@ stage('Prepare SBOM metadata') {
 }
 ```
 
-`GIT_URL`, `GIT_COMMIT` and `GIT_BRANCH` are set by the Git plugin. Then set `AUGMENT: 'true'`. See [augmentation](/guides/sbomify-action/augmentation/).
+`GIT_URL`, `GIT_COMMIT` and `GIT_BRANCH` are set by the Git plugin. Then set `AUGMENT: 'true'`. See [augmentation](/sbomify-action/augmentation/).
 
 ## Versioning
 
@@ -159,7 +161,7 @@ environment {
 }
 ```
 
-Also set `GITHUB_TOKEN`. License databases come from GitHub Releases whatever CI you use, and unauthenticated requests are limited to 60 per hour per IP. Long-lived Jenkins agents with a stable outbound IP hit that ceiling quickly, and when they do enrichment degrades silently. See [license database rate limits](/guides/sbomify-action/enrichment/#license-database-rate-limits).
+Also set `GITHUB_TOKEN`. License databases come from GitHub Releases whatever CI you use, and unauthenticated requests are limited to 60 per hour per IP. Long-lived Jenkins agents with a stable outbound IP hit that ceiling quickly, and when they do enrichment degrades silently. See [license database rate limits](/sbomify-action/enrichment/#license-database-rate-limits).
 
 ## Container images
 
@@ -200,6 +202,6 @@ Build provenance attestation is GitHub-specific. Use [cosign](/faq/how-do-i-sign
 
 ## Next steps
 
-- [Configuration reference](/guides/sbomify-action/configuration/) - every option
-- [Augmentation](/guides/sbomify-action/augmentation/) - setting VCS details manually
-- [Advanced](/guides/sbomify-action/advanced/) - caching, audit trail, troubleshooting
+- [Configuration reference](/sbomify-action/configuration/) - every option
+- [Augmentation](/sbomify-action/augmentation/) - setting VCS details manually
+- [Advanced](/sbomify-action/advanced/) - caching, audit trail, troubleshooting

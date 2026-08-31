@@ -1,16 +1,18 @@
 ---
 
-url: /guides/sbomify-action/runtimes/local/
+url: /sbomify-action/runtimes/local/
+aliases:
+  - /guides/sbomify-action/runtimes/local/
 title: "Running the sbomify Action Locally"
 description: "Generate SBOMs on your own machine with uvx, pipx or Docker - for trying things out, debugging a pipeline, or running the setup wizard."
 keywords: ["uvx sbomify", "pipx sbomify", "local SBOM generation", "SBOM CLI"]
-section: guides
+section: sbomify-action
 tldr: "Run it with uvx, pipx or Docker. The generators are downloaded on first use and cached, so there is nothing to install either way."
 ---
 
-Running locally is useful for trying the tool out, debugging a pipeline that behaves unexpectedly, generating a one-off SBOM, and running the [setup wizard](/guides/sbomify-action/quickstart/) - which is interactive and deliberately refuses to run in CI.
+Running locally is useful for trying the tool out, debugging a pipeline that behaves unexpectedly, generating a one-off SBOM, and running the [setup wizard](/sbomify-action/quickstart/) - which is interactive and deliberately refuses to run in CI.
 
-For actual SBOM generation in a pipeline, use [your CI platform](/guides/sbomify-action/runtimes/).
+For actual SBOM generation in a pipeline, use [your CI platform](/sbomify-action/runtimes/).
 
 ## Docker
 
@@ -102,7 +104,7 @@ export UPLOAD=false
 uvx sbomify-action
 ```
 
-Flags take precedence over environment variables. See the [configuration reference](/guides/sbomify-action/configuration/#cli-flags).
+Flags take precedence over environment variables. See the [configuration reference](/sbomify-action/configuration/#cli-flags).
 
 ## Uploading from your machine
 
@@ -117,7 +119,7 @@ uvx sbomify-action \
 
 OIDC trusted publishing is not available locally - it depends on a CI-issued identity token - so use an API token.
 
-Be deliberate about uploading from a laptop. An SBOM generated locally reflects your machine rather than a clean build, and it cannot be attested. It is fine for experimenting; for anything you intend to distribute, generate it [in CI](/guides/sbomify-action/why/#build-time-is-the-only-time) where it can be signed at origin.
+Be deliberate about uploading from a laptop. An SBOM generated locally reflects your machine rather than a clean build, and it cannot be attested. It is fine for experimenting; for anything you intend to distribute, generate it [in CI](/sbomify-action/why/#build-time-is-the-only-time) where it can be signed at origin.
 
 ## VCS information
 
@@ -131,7 +133,7 @@ Nothing is auto-detected locally. Set the values in `sbomify.json` if you need t
 }
 ```
 
-See [augmentation](/guides/sbomify-action/augmentation/).
+See [augmentation](/sbomify-action/augmentation/).
 
 ## Debugging a pipeline
 
@@ -151,10 +153,10 @@ docker run --rm \
 
 `VERBOSE=true` shows which generator ran, which enrichment sources answered, and where time went. Check `audit_trail.txt` afterwards for the full list of changes.
 
-Two differences from CI worth keeping in mind: VCS auto-detection will not fire locally, and enrichment coverage may differ if CI is hitting [GitHub API rate limits](/guides/sbomify-action/enrichment/#license-database-rate-limits) that your machine is not.
+Two differences from CI worth keeping in mind: VCS auto-detection will not fire locally, and enrichment coverage may differ if CI is hitting [GitHub API rate limits](/sbomify-action/enrichment/#license-database-rate-limits) that your machine is not.
 
 ## Next steps
 
-- [Quick start](/guides/sbomify-action/quickstart/) - the setup wizard
-- [Configuration reference](/guides/sbomify-action/configuration/) - every option
-- [Your CI platform](/guides/sbomify-action/runtimes/) - moving this into a pipeline
+- [Quick start](/sbomify-action/quickstart/) - the setup wizard
+- [Configuration reference](/sbomify-action/configuration/) - every option
+- [Your CI platform](/sbomify-action/runtimes/) - moving this into a pipeline

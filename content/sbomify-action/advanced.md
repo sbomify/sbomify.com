@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/advanced/
+url: /sbomify-action/advanced/
+aliases:
+  - /guides/sbomify-action/advanced/
 title: "Advanced Usage: Attestation, Audit Trail, Caching and Troubleshooting"
 description: "Attestation and signing, the SBOM audit trail, cache configuration, monorepo layouts, telemetry, version pinning and troubleshooting for the sbomify action."
 keywords: ["SBOM attestation", "build provenance", "SBOM audit trail", "SBOM caching", "action pinning"]
-section: guides
+section: sbomify-action
 tldr: "Sign your SBOM in CI with build provenance attestation, keep the audit trail as evidence of what the pipeline changed, and cache the license database so runs stay fast."
 ---
 
@@ -55,7 +57,7 @@ If your repository falls into one of the unsupported rows, either gate the step 
 
 ### Why sign in CI
 
-Signing at build time binds the SBOM to the pipeline run and the source commit that produced it. Since [sbomify never modifies uploaded artifacts](/guides/sbomify-action/why/#the-part-most-platforms-get-wrong), that signature keeps validating for as long as the document exists - anyone can verify it independently, without trusting sbomify.
+Signing at build time binds the SBOM to the pipeline run and the source commit that produced it. Since [sbomify never modifies uploaded artifacts](/sbomify-action/why/#the-part-most-platforms-get-wrong), that signature keeps validating for as long as the document exists - anyone can verify it independently, without trusting sbomify.
 
 See [how to sign an SBOM](/faq/how-do-i-sign-an-sbom/) and [working with signature files](/faq/how-do-i-use-signature-files/).
 
@@ -157,7 +159,7 @@ docker run --rm \
   ghcr.io/sbomify/sbomify-action
 ```
 
-Caching reduces network calls, which also reduces exposure to the [license database rate limit](/guides/sbomify-action/enrichment/#license-database-rate-limits).
+Caching reduces network calls, which also reduces exposure to the [license database rate limit](/sbomify-action/enrichment/#license-database-rate-limits).
 
 ## Tool runtimes
 
@@ -240,7 +242,7 @@ Three levels, in increasing order of strictness:
 - uses: sbomify/sbomify-action@master
 ```
 
-A full 40-character commit SHA is the only reference GitHub treats as immutable; tags can be moved. If your threat model includes a compromised upstream action, pin to a SHA. The [setup wizard](/guides/sbomify-action/quickstart/) does this automatically for the workflows it generates.
+A full 40-character commit SHA is the only reference GitHub treats as immutable; tags can be moved. If your threat model includes a compromised upstream action, pin to a SHA. The [setup wizard](/sbomify-action/quickstart/) does this automatically for the workflows it generates.
 
 Releases use CalVer, so `v26.8.0` is the eighth release of 2026.
 
@@ -261,7 +263,7 @@ If your organisation restricts outbound connections from build agents, turn this
 
 ## Troubleshooting
 
-**Enrichment added far fewer fields than expected.** Almost always GitHub API rate limiting on the license database download. Set `GITHUB_TOKEN` - see [license database rate limits](/guides/sbomify-action/enrichment/#license-database-rate-limits).
+**Enrichment added far fewer fields than expected.** Almost always GitHub API rate limiting on the license database download. Set `GITHUB_TOKEN` - see [license database rate limits](/sbomify-action/enrichment/#license-database-rate-limits).
 
 **"No transitive dependencies discovered".** Informational, not an error. The stage inspects the installed environment, so it finds nothing in a clean checkout. Install dependencies before generating if you want it to contribute.
 
@@ -281,13 +283,13 @@ If your organisation restricts outbound connections from build agents, turn this
 
 Enrichment queries live registries, so the same input can produce slightly different output on different days. That is a deliberate trade: richer, more current metadata in exchange for byte-level reproducibility.
 
-The audit trail is what makes this manageable. Any given SBOM records exactly what was added and which source provided it, so it remains fully explainable even though a rerun might differ. If you need strict reproducibility, run with `ENRICH: false` and rely on [augmentation](/guides/sbomify-action/augmentation/) plus lockfile hashes, both of which are entirely local.
+The audit trail is what makes this manageable. Any given SBOM records exactly what was added and which source provided it, so it remains fully explainable even though a rerun might differ. If you need strict reproducibility, run with `ENRICH: false` and rely on [augmentation](/sbomify-action/augmentation/) plus lockfile hashes, both of which are entirely local.
 
 ## Security
 
 - Pin to a commit SHA in production.
 - Grant the smallest set of `permissions:` the job needs.
-- Store tokens as CI secrets, and prefer [OIDC trusted publishing](/guides/sbomify-action/publishing/#oidc-trusted-publishing) where it is available.
+- Store tokens as CI secrets, and prefer [OIDC trusted publishing](/sbomify-action/publishing/#oidc-trusted-publishing) where it is available.
 - Review generated SBOMs before publishing them. Internal package names, private registry URLs and hostnames can be more revealing than they look.
 
 Vulnerabilities in the action itself go to <security@sbomify.com>.

@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/runtimes/gitlab-ci/
+url: /sbomify-action/runtimes/gitlab-ci/
+aliases:
+  - /guides/sbomify-action/runtimes/gitlab-ci/
 title: "SBOM Generation in GitLab CI"
 description: "Run the sbomify action in GitLab CI using the container image, with caching, dependency scanning integration and self-managed instance support."
 keywords: ["GitLab CI SBOM", "GitLab dependency scanning", "CycloneDX GitLab", "SBOM pipeline"]
-section: guides
+section: sbomify-action
 tldr: "Use ghcr.io/sbomify/sbomify-action as the job image and run sbomify-action. VCS information is detected automatically, including on self-managed instances."
 ---
 
@@ -93,7 +95,7 @@ generate-sbom:
     - sbomify-action
 ```
 
-**Set `GITHUB_TOKEN` as well.** License databases are downloaded from GitHub Releases regardless of which CI platform you use, and unauthenticated requests are capped at 60 per hour per IP - a limit shared runners routinely hit. When it is exceeded, enrichment degrades silently. Any GitHub token with public read scope will do. See [license database rate limits](/guides/sbomify-action/enrichment/#license-database-rate-limits).
+**Set `GITHUB_TOKEN` as well.** License databases are downloaded from GitHub Releases regardless of which CI platform you use, and unauthenticated requests are capped at 60 per hour per IP - a limit shared runners routinely hit. When it is exceeded, enrichment degrades silently. Any GitHub token with public read scope will do. See [license database rate limits](/sbomify-action/enrichment/#license-database-rate-limits).
 
 ## Container images
 
@@ -145,7 +147,7 @@ release-sbom:
 
 Automatic. Project URL, commit SHA and ref name are read from `CI_PROJECT_URL`, `CI_COMMIT_SHA` and `CI_COMMIT_REF_NAME`, and **self-managed instances are supported** - the server URL is taken from `CI_SERVER_URL` rather than assumed.
 
-To override, for example when your external URL differs from the internal one, set `vcs_url` in [`sbomify.json`](/guides/sbomify-action/augmentation/).
+To override, for example when your external URL differs from the internal one, set `vcs_url` in [`sbomify.json`](/sbomify-action/augmentation/).
 
 ## Monorepos
 
@@ -183,6 +185,6 @@ Build provenance attestation is GitHub-specific. On GitLab, sign with [cosign](/
 
 ## Next steps
 
-- [Configuration reference](/guides/sbomify-action/configuration/) - every option
-- [Publishing](/guides/sbomify-action/publishing/) - tokens, releases, Dependency Track
-- [Advanced](/guides/sbomify-action/advanced/) - caching, audit trail, troubleshooting
+- [Configuration reference](/sbomify-action/configuration/) - every option
+- [Publishing](/sbomify-action/publishing/) - tokens, releases, Dependency Track
+- [Advanced](/sbomify-action/advanced/) - caching, audit trail, troubleshooting

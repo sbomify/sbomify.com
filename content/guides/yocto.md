@@ -237,7 +237,7 @@ The SBOM output format depends on your SPDX version. SPDX 2.2 produces a `.spdx.
 
 You've generated your SBOMs. Now what? Regulations like the [EU Cyber Resilience Act](/compliance/eu-cra/) require manufacturers to tag SBOMs to specific product releases and retain them for up to 5 years. This means you need a system for release management and long-term storage, not just generation.
 
-[sbomify-action](/guides/sbomify-action/) has built-in Yocto support that handles this. It detects the SPDX version automatically, uploads SBOMs, and creates tagged releases. It works in CI/CD pipelines or standalone.
+[sbomify-action](/sbomify-action/) has built-in Yocto support that handles this. It detects the SPDX version automatically, uploads SBOMs, and creates tagged releases. It works in CI/CD pipelines or standalone.
 
 ### SPDX 2.2 (tar.zst archive)
 

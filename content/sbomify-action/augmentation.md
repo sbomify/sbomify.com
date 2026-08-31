@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/augmentation/
+url: /sbomify-action/augmentation/
+aliases:
+  - /guides/sbomify-action/augmentation/
 title: "Augmentation: Adding Your Business Metadata to an SBOM"
 description: "How to add supplier, author, license, lifecycle and security contact information to your SBOM with sbomify.json, plus automatic VCS detection from your CI environment."
 keywords: ["SBOM supplier metadata", "sbomify.json", "SBOM lifecycle phase", "NTIA supplier", "CRA security contact"]
-section: guides
+section: sbomify-action
 tldr: "Augmentation adds the metadata only you know - supplier, authors, licenses, support dates - from a sbomify.json file in your repository. No account needed. Your local values always win."
 ---
 
@@ -20,7 +22,7 @@ Two different problems, two different mechanisms:
 | Account required | No                                         | No                                   |
 | Enable with      | `AUGMENT: true`                            | `ENRICH: true`                       |
 
-Nobody but you knows who supplies your software, when its support window ends, or where to report a vulnerability in it. That is augmentation. What license `requests` uses is public knowledge - that is [enrichment](/guides/sbomify-action/enrichment/).
+Nobody but you knows who supplies your software, when its support window ends, or where to report a vulnerability in it. That is augmentation. What license `requests` uses is public knowledge - that is [enrichment](/sbomify-action/enrichment/).
 
 Most projects want both.
 
@@ -150,4 +152,4 @@ env:
 
 `COMPONENT_VERSION` is the one most projects need, because generators often infer a version from a manifest rather than from the release you are actually shipping. See [how to version SBOMs](/guides/how-to-version-sboms/) for what to put there.
 
-Every override is recorded in the [audit trail](/guides/sbomify-action/advanced/#audit-trail), so the fact that a value was changed - and what it was before - is preserved.
+Every override is recorded in the [audit trail](/sbomify-action/advanced/#audit-trail), so the fact that a value was changed - and what it was before - is preserved.

@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/runtimes/github-actions/
+url: /sbomify-action/runtimes/github-actions/
+aliases:
+  - /guides/sbomify-action/runtimes/github-actions/
 title: "SBOM Generation in GitHub Actions"
 description: "Run the sbomify action in GitHub Actions with OIDC trusted publishing, build provenance attestation, caching and matrix builds."
 keywords: ["GitHub Actions SBOM", "SBOM workflow", "OIDC trusted publishing", "attest build provenance"]
-section: guides
+section: sbomify-action
 tldr: "GitHub Actions is the most fully featured runtime: a native action, tokenless OIDC publishing, build provenance attestation and wizard-generated workflows."
 ---
 
@@ -65,7 +67,7 @@ jobs:
 
 The `id-token: write` permission is what makes this work. If `TOKEN` is also set it takes precedence and OIDC is skipped, so remove it to force tokenless publishing.
 
-Full details in [publishing](/guides/sbomify-action/publishing/#oidc-trusted-publishing).
+Full details in [publishing](/sbomify-action/publishing/#oidc-trusted-publishing).
 
 ### With a token instead
 
@@ -109,7 +111,7 @@ jobs:
           subject-path: sbom.cdx.json
 ```
 
-`actions/attest-build-provenance` is **not available on private or internal repositories on Free, Pro or Team plans, or on GitHub Enterprise Server at all**. Check the [availability table](/guides/sbomify-action/advanced/#where-attestation-is-available) before adding it, or sign with [cosign](/faq/how-do-i-sign-an-sbom/) instead.
+`actions/attest-build-provenance` is **not available on private or internal repositories on Free, Pro or Team plans, or on GitHub Enterprise Server at all**. Check the [availability table](/sbomify-action/advanced/#where-attestation-is-available) before adding it, or sign with [cosign](/faq/how-do-i-sign-an-sbom/) instead.
 
 ## Container images
 
@@ -124,11 +126,11 @@ jobs:
     UPLOAD: false
 ```
 
-The image must be pullable from the runner, so push it or load it into the local daemon first. [Chainguard base images](/guides/sbomify-action/sources/#chainguard-images) are detected automatically and their published SBOM is reused.
+The image must be pullable from the runner, so push it or load it into the local daemon first. [Chainguard base images](/sbomify-action/sources/#chainguard-images) are detected automatically and their published SBOM is reused.
 
 ## Caching
 
-Worth doing - it avoids re-downloading the license database on every run, and reduces exposure to [rate limits](/guides/sbomify-action/enrichment/#license-database-rate-limits).
+Worth doing - it avoids re-downloading the license database on every run, and reduces exposure to [rate limits](/sbomify-action/enrichment/#license-database-rate-limits).
 
 ```yaml
 - uses: actions/cache@v6
@@ -163,7 +165,7 @@ The workflow-level `working-directory:` setting **does not affect this action**,
     UPLOAD: false
 ```
 
-For several components, use a matrix - see [advanced usage](/guides/sbomify-action/advanced/#monorepos).
+For several components, use a matrix - see [advanced usage](/sbomify-action/advanced/#monorepos).
 
 ## Tagging releases
 
@@ -178,7 +180,7 @@ For several components, use a matrix - see [advanced usage](/guides/sbomify-acti
     ENRICH: true
 ```
 
-Run this on tag pushes rather than every commit. See [product releases](/guides/sbomify-action/publishing/#product-releases).
+Run this on tag pushes rather than every commit. See [product releases](/sbomify-action/publishing/#product-releases).
 
 ## VCS detection
 
@@ -199,7 +201,7 @@ Secrets are not exposed to fork pull requests, so uploads will fail. Verify gene
 
 ## Version pinning
 
-`sbomify/sbomify-action@v26.8.0` is readable and fine for most projects. For production, pin to a full 40-character commit SHA - the only reference GitHub treats as immutable. The [setup wizard](/guides/sbomify-action/quickstart/) does this automatically.
+`sbomify/sbomify-action@v26.8.0` is readable and fine for most projects. For production, pin to a full 40-character commit SHA - the only reference GitHub treats as immutable. The [setup wizard](/sbomify-action/quickstart/) does this automatically.
 
 ## Let the wizard write it
 
@@ -213,10 +215,10 @@ docker run --rm -it \
   sbomify-action wizard
 ```
 
-It writes `.github/workflows/sboms.yml` and will never overwrite a workflow you wrote yourself. See the [quick start](/guides/sbomify-action/quickstart/).
+It writes `.github/workflows/sboms.yml` and will never overwrite a workflow you wrote yourself. See the [quick start](/sbomify-action/quickstart/).
 
 ## Next steps
 
-- [Configuration reference](/guides/sbomify-action/configuration/) - every option
-- [Publishing](/guides/sbomify-action/publishing/) - OIDC, releases, Dependency Track
-- [Advanced](/guides/sbomify-action/advanced/) - attestation, audit trail, troubleshooting
+- [Configuration reference](/sbomify-action/configuration/) - every option
+- [Publishing](/sbomify-action/publishing/) - OIDC, releases, Dependency Track
+- [Advanced](/sbomify-action/advanced/) - attestation, audit trail, troubleshooting

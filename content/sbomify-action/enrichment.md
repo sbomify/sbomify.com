@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/enrichment/
+url: /sbomify-action/enrichment/
+aliases:
+  - /guides/sbomify-action/enrichment/
 title: "Enrichment: Filling In Component Metadata"
 description: "How the sbomify action enriches every component with licenses, suppliers, descriptions and hashes from package registries, distro license databases and lifecycle data."
 keywords: ["SBOM enrichment", "SBOM license data", "package metadata", "component hash", "end of life data"]
-section: guides
+section: sbomify-action
 tldr: "Scanners find packages but leave licenses and suppliers empty. Enrichment queries package registries, pre-computed distro license databases and lifecycle data to fill those gaps, and pulls integrity hashes straight from your lockfile."
 ---
 
@@ -175,7 +177,7 @@ Hashes are extracted directly from your lockfile and attached to matching compon
 | Rust       | `Cargo.lock`                                       |
 | Dart       | `pubspec.lock`                                     |
 
-Component hashes are a [CISA 2025](/compliance/cisa-minimum-elements/) expectation, and most generators do not populate them. They are what lets someone verify that the component you documented is the component you shipped - the same property that makes the whole [chain of custody](/guides/sbomify-action/why/#the-part-most-platforms-get-wrong) work at the component level rather than just the document level.
+Component hashes are a [CISA 2025](/compliance/cisa-minimum-elements/) expectation, and most generators do not populate them. They are what lets someone verify that the component you documented is the component you shipped - the same property that makes the whole [chain of custody](/sbomify-action/why/#the-part-most-platforms-get-wrong) work at the component level rather than just the document level.
 
 ## Transitive dependency discovery
 
@@ -195,12 +197,12 @@ That is informational, not an error, and it never fails a build. To get the most
 
 Worth knowing before you rely on it:
 
-- **Network access is required.** Enrichment calls external APIs, so it is not suitable for air-gapped builds. Generation and augmentation still work offline; run with `ENRICH: false`, and set `SBOMIFY_FETCH_RUNTIMES=0` so the [tool runtimes](/guides/sbomify-action/advanced/#tool-runtimes) are not fetched either.
+- **Network access is required.** Enrichment calls external APIs, so it is not suitable for air-gapped builds. Generation and augmentation still work offline; run with `ENRICH: false`, and set `SBOMIFY_FETCH_RUNTIMES=0` so the [tool runtimes](/sbomify-action/advanced/#tool-runtimes) are not fetched either.
 - **Responses are cached** on disk between runs. Disable with `SBOMIFY_ENRICHMENT_CACHE=0`, or change the lifetime with `SBOMIFY_ENRICHMENT_CACHE_TTL`.
 - **Rate limits apply.** Very large dependency trees, in the region of a thousand packages or more, may enrich slowly. Caching and backoff help, but the ceiling is real.
-- **It is best effort.** Private packages, vendored code and obscure libraries are not in any public registry, so nothing will be found for them. Declare what you know about those through [augmentation](/guides/sbomify-action/augmentation/) instead.
-- **Results are not deterministic.** Registry data changes over time, so the same input can produce slightly different output on different days. This is the trade-off for richer data. Every value that was added is recorded in the [audit trail](/guides/sbomify-action/advanced/#audit-trail) along with the source it came from, so any given SBOM remains fully explainable even though it is not reproducible byte-for-byte.
+- **It is best effort.** Private packages, vendored code and obscure libraries are not in any public registry, so nothing will be found for them. Declare what you know about those through [augmentation](/sbomify-action/augmentation/) instead.
+- **Results are not deterministic.** Registry data changes over time, so the same input can produce slightly different output on different days. This is the trade-off for richer data. Every value that was added is recorded in the [audit trail](/sbomify-action/advanced/#audit-trail) along with the source it came from, so any given SBOM remains fully explainable even though it is not reproducible byte-for-byte.
 
 ## Caching
 
-Persisting the cache between runs is worth doing - it avoids re-downloading license databases on every build. See [caching](/guides/sbomify-action/advanced/#caching) for per-runtime recipes.
+Persisting the cache between runs is worth doing - it avoids re-downloading license databases on every build. See [caching](/sbomify-action/advanced/#caching) for per-runtime recipes.

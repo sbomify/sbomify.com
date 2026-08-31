@@ -159,7 +159,7 @@ build-image:
 
 ## Enrichment and Augmentation with sbomify
 
-While rpi-image-gen generates SBOMs natively, you can use the [sbomify action](/guides/sbomify-action/) to enrich and augment them further. The action accepts existing SBOMs via the `SBOM_FILE` input.
+While rpi-image-gen generates SBOMs natively, you can use the [sbomify action](/sbomify-action/) to enrich and augment them further. The action accepts existing SBOMs via the `SBOM_FILE` input.
 
 **Standalone (enrichment only, no account needed):**
 

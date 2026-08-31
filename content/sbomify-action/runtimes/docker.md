@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/runtimes/docker/
+url: /sbomify-action/runtimes/docker/
+aliases:
+  - /guides/sbomify-action/runtimes/docker/
 title: "SBOM Generation on Any Container Runner"
 description: "Run the sbomify action with plain Docker or Podman on any CI platform - Drone, Woodpecker, TeamCity, Buildkite, Concourse - or from a shell script."
 keywords: ["Docker SBOM", "Podman SBOM", "Drone CI SBOM", "Buildkite SBOM", "TeamCity SBOM"]
-section: guides
+section: sbomify-action
 tldr: "If your platform can run a container, it is supported. Mount your repository at /github/workspace, pass configuration as environment variables, and run the image."
 ---
 
@@ -69,7 +71,7 @@ docker run --rm \
   ghcr.io/sbomify/sbomify-action
 ```
 
-`GITHUB_TOKEN` matters on every platform. License databases are downloaded from GitHub Releases, and unauthenticated requests are capped at 60 per hour per IP. When that is exceeded, enrichment degrades silently. See [license database rate limits](/guides/sbomify-action/enrichment/#license-database-rate-limits).
+`GITHUB_TOKEN` matters on every platform. License databases are downloaded from GitHub Releases, and unauthenticated requests are capped at 60 per hour per IP. When that is exceeded, enrichment degrades silently. See [license database rate limits](/sbomify-action/enrichment/#license-database-rate-limits).
 
 ## Container images
 
@@ -103,7 +105,7 @@ Outside GitHub Actions, GitLab CI and Bitbucket, repository details are not auto
 }
 ```
 
-Generate it from whatever variables your platform provides, then set `AUGMENT=true`. See [augmentation](/guides/sbomify-action/augmentation/).
+Generate it from whatever variables your platform provides, then set `AUGMENT=true`. See [augmentation](/sbomify-action/augmentation/).
 
 ## Platform examples
 
@@ -166,7 +168,7 @@ jobs:
             path: sbomify-action
 ```
 
-**TeamCity** has [its own page](/guides/sbomify-action/runtimes/teamcity/).
+**TeamCity** has [its own page](/sbomify-action/runtimes/teamcity/).
 
 **A plain shell script** - the `docker run` invocation at the top of this page works in cron, a Makefile, or a deployment script.
 
@@ -178,13 +180,13 @@ Everything else - Syft, cdxgen, the JVM toolchain, Go, Rust, PHP, .NET, `crane` 
 
 Two practical consequences:
 
-- **Cache the runtimes** or every run re-downloads them. Point `SBOMIFY_TOOL_CACHE` at a volume, as in the caching example above. See [tool runtimes](/guides/sbomify-action/advanced/#tool-runtimes).
+- **Cache the runtimes** or every run re-downloads them. Point `SBOMIFY_TOOL_CACHE` at a volume, as in the caching example above. See [tool runtimes](/sbomify-action/advanced/#tool-runtimes).
 - **Air-gapped runners need `SBOMIFY_FETCH_RUNTIMES=0`**, plus whatever generators you need preinstalled. Without them the run falls back to a lesser generator rather than failing, so check the output.
 
 The container runs as root, because it needs to write to the mounted workspace. Files it creates will be root-owned on the host unless you pass `--user`.
 
 ## Next steps
 
-- [Configuration reference](/guides/sbomify-action/configuration/) - every option
-- [Augmentation](/guides/sbomify-action/augmentation/) - setting VCS details manually
-- [Advanced](/guides/sbomify-action/advanced/) - caching, audit trail, troubleshooting
+- [Configuration reference](/sbomify-action/configuration/) - every option
+- [Augmentation](/sbomify-action/augmentation/) - setting VCS details manually
+- [Advanced](/sbomify-action/advanced/) - caching, audit trail, troubleshooting

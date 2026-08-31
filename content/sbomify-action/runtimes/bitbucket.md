@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/runtimes/bitbucket/
+url: /sbomify-action/runtimes/bitbucket/
+aliases:
+  - /guides/sbomify-action/runtimes/bitbucket/
 title: "SBOM Generation in Bitbucket Pipelines"
 description: "Run the sbomify action in Bitbucket Pipelines using a Docker pipe, with caching, container scanning and automatic VCS detection."
 keywords: ["Bitbucket Pipelines SBOM", "Bitbucket pipe", "CycloneDX Bitbucket"]
-section: guides
+section: sbomify-action
 tldr: "Run the container image as a Docker pipe. VCS information is detected automatically from Bitbucket's environment variables."
 ---
 
@@ -115,7 +117,7 @@ definitions:
     sbomify: .sbomify-cache
 ```
 
-`GITHUB_TOKEN` is worth setting even though you are not on GitHub. License databases are downloaded from GitHub Releases, and unauthenticated requests are capped at 60 per hour per IP - shared runners hit this regularly, and when they do enrichment degrades silently. See [license database rate limits](/guides/sbomify-action/enrichment/#license-database-rate-limits).
+`GITHUB_TOKEN` is worth setting even though you are not on GitHub. License databases are downloaded from GitHub Releases, and unauthenticated requests are capped at 60 per hour per IP - shared runners hit this regularly, and when they do enrichment degrades silently. See [license database rate limits](/sbomify-action/enrichment/#license-database-rate-limits).
 
 ## Container images
 
@@ -158,6 +160,6 @@ Build provenance attestation is GitHub-specific. Sign with [cosign](/faq/how-do-
 
 ## Next steps
 
-- [Configuration reference](/guides/sbomify-action/configuration/) - every option
-- [Publishing](/guides/sbomify-action/publishing/) - tokens, releases, Dependency Track
-- [Advanced](/guides/sbomify-action/advanced/) - caching, audit trail, troubleshooting
+- [Configuration reference](/sbomify-action/configuration/) - every option
+- [Publishing](/sbomify-action/publishing/) - tokens, releases, Dependency Track
+- [Advanced](/sbomify-action/advanced/) - caching, audit trail, troubleshooting

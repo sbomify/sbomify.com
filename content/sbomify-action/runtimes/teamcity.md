@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/runtimes/teamcity/
+url: /sbomify-action/runtimes/teamcity/
+aliases:
+  - /guides/sbomify-action/runtimes/teamcity/
 title: "SBOM Generation in TeamCity"
 description: "Run the sbomify action in TeamCity using the Docker Wrapper build feature or a Kotlin DSL configuration, with caching, parameters and manual VCS configuration."
 keywords: ["TeamCity SBOM", "TeamCity CycloneDX", "Docker Wrapper", "SBOM pipeline"]
-section: guides
+section: sbomify-action
 tldr: "Add a Command Line step with the Docker Wrapper build feature pointing at the container image. Set VCS details in sbomify.json, since TeamCity's parameters are not auto-detected."
 ---
 
@@ -109,7 +111,7 @@ Mount that directory into the container by adding it to the Docker Wrapper's run
 -w /github/workspace -v %system.agent.home.dir%/cache:/cache
 ```
 
-Two things are worth caching here. The [tool runtimes](/guides/sbomify-action/advanced/#tool-runtimes) are downloaded on first use, so without a cache every build re-fetches them. And `GITHUB_TOKEN` matters even though you are not on GitHub: license databases come from GitHub Releases, unauthenticated requests are capped at 60 per hour per IP, and a pool of agents behind one NAT address exhausts that quickly. When it happens, enrichment degrades silently. See [license database rate limits](/guides/sbomify-action/enrichment/#license-database-rate-limits).
+Two things are worth caching here. The [tool runtimes](/sbomify-action/advanced/#tool-runtimes) are downloaded on first use, so without a cache every build re-fetches them. And `GITHUB_TOKEN` matters even though you are not on GitHub: license databases come from GitHub Releases, unauthenticated requests are capped at 60 per hour per IP, and a pool of agents behind one NAT address exhausts that quickly. When it happens, enrichment degrades silently. See [license database rate limits](/sbomify-action/enrichment/#license-database-rate-limits).
 
 ## VCS information
 
@@ -127,7 +129,7 @@ cat > sbomify.json <<EOF
 EOF
 ```
 
-Then set `env.AUGMENT = true`. See [augmentation](/guides/sbomify-action/augmentation/).
+Then set `env.AUGMENT = true`. See [augmentation](/sbomify-action/augmentation/).
 
 ## Container images
 
@@ -161,6 +163,6 @@ Build provenance attestation is GitHub-specific. Sign with [cosign](/faq/how-do-
 
 ## Next steps
 
-- [Configuration reference](/guides/sbomify-action/configuration/) - every option
-- [Augmentation](/guides/sbomify-action/augmentation/) - setting VCS details manually
-- [Advanced](/guides/sbomify-action/advanced/) - tool runtimes, caching, troubleshooting
+- [Configuration reference](/sbomify-action/configuration/) - every option
+- [Augmentation](/sbomify-action/augmentation/) - setting VCS details manually
+- [Advanced](/sbomify-action/advanced/) - tool runtimes, caching, troubleshooting

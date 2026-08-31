@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/why/
+url: /sbomify-action/why/
+aliases:
+  - /guides/sbomify-action/why/
 title: "Why SBOM Quality Matters: Scanners vs. Pipelines"
 description: "Why a raw scanner output is not a compliance-grade SBOM, and why generating and signing in CI - with no server-side modification afterwards - is what makes an SBOM verifiable."
 keywords: ["SBOM quality", "NTIA minimum elements", "CISA SBOM", "SBOM chain of custody", "SBOM signing"]
-section: guides
+section: sbomify-action
 tldr: "A scanner detects packages; it does not produce a compliance-grade SBOM. The missing fields - supplier, license, hashes, lifecycle - are exactly the ones regulators ask for. Generating and signing in CI, then never modifying the artifact, is what makes the result verifiable rather than merely plausible."
 ---
 
@@ -80,7 +82,7 @@ Because there isn't one.
 | JavaScript, Ruby, PHP, .NET        | `cdxgen`                |
 | Container images, Swift, Terraform | Syft                    |
 
-Native tools understand their ecosystem's resolution rules; generic scanners guess from files on disk. `sbomify-action` routes each input to the best available generator and falls back automatically if one fails or does not support the input, so you get the right tool without having to maintain that knowledge yourself. See [input sources](/guides/sbomify-action/sources/) for the full routing table.
+Native tools understand their ecosystem's resolution rules; generic scanners guess from files on disk. `sbomify-action` routes each input to the best available generator and falls back automatically if one fails or does not support the input, so you get the right tool without having to maintain that knowledge yourself. See [input sources](/sbomify-action/sources/) for the full routing table.
 
 There is a second, quieter benefit: abstracting over generators means you are not exposed when one of them has a problem. When [Trivy shipped compromised releases in March 2026](/2026/03/26/trivy-compromise-hardening-sbomify-action/), removing it was a configuration change, not a migration.
 
@@ -111,7 +113,7 @@ That constraint is what makes the guarantee useful:
 - Your signature keeps validating, indefinitely.
 - What an auditor downloads is byte-for-byte what your pipeline produced.
 - Anyone can verify it independently, without trusting sbomify at all.
-- Every change made to the SBOM was made in CI, by you, and is listed in the [audit trail](/guides/sbomify-action/advanced/#audit-trail).
+- Every change made to the SBOM was made in CI, by you, and is listed in the [audit trail](/sbomify-action/advanced/#audit-trail).
 
 ### Analysis without modification
 
@@ -129,6 +131,6 @@ This guarantee covers artifacts you _upload_. sbomify does create new artifacts 
 4. **Sign at origin**, before the artifact leaves your pipeline.
 5. **Upload** to a platform that will not touch it.
 
-Steps 1 to 3 are what [`sbomify-action`](/guides/sbomify-action/) does in a single step. Step 4 is [attestation](/guides/sbomify-action/advanced/#attestation) or [signing](/faq/how-do-i-sign-an-sbom/). Step 5 is a design guarantee, not a feature.
+Steps 1 to 3 are what [`sbomify-action`](/sbomify-action/) does in a single step. Step 4 is [attestation](/sbomify-action/advanced/#attestation) or [signing](/faq/how-do-i-sign-an-sbom/). Step 5 is a design guarantee, not a feature.
 
-Ready to start? Head to the [quick start](/guides/sbomify-action/quickstart/).
+Ready to start? Head to the [quick start](/sbomify-action/quickstart/).

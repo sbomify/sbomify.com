@@ -1,10 +1,12 @@
 ---
 
-url: /guides/sbomify-action/runtimes/azure-devops/
+url: /sbomify-action/runtimes/azure-devops/
+aliases:
+  - /guides/sbomify-action/runtimes/azure-devops/
 title: "SBOM Generation in Azure DevOps"
 description: "Run the sbomify action in Azure Pipelines as a container job or Docker task, with variable groups, caching and manual VCS configuration."
 keywords: ["Azure DevOps SBOM", "Azure Pipelines SBOM", "CycloneDX Azure"]
-section: guides
+section: sbomify-action
 tldr: "Run the container image as a container job, or invoke it with the Docker task. Set VCS details in sbomify.json, since Azure's variables are not auto-detected."
 ---
 
@@ -125,7 +127,7 @@ steps:
       UPLOAD: "false"
 ```
 
-Set `GITHUB_TOKEN` even though you are not on GitHub. License databases are downloaded from GitHub Releases whatever CI platform you use, and unauthenticated requests are capped at 60 per hour per IP - Microsoft-hosted agents share outbound addresses, so this limit is often already spent. When it is, enrichment degrades silently. See [license database rate limits](/guides/sbomify-action/enrichment/#license-database-rate-limits).
+Set `GITHUB_TOKEN` even though you are not on GitHub. License databases are downloaded from GitHub Releases whatever CI platform you use, and unauthenticated requests are capped at 60 per hour per IP - Microsoft-hosted agents share outbound addresses, so this limit is often already spent. When it is, enrichment degrades silently. See [license database rate limits](/sbomify-action/enrichment/#license-database-rate-limits).
 
 ## VCS information
 
@@ -145,7 +147,7 @@ Azure DevOps does not expose repository details in the form the action auto-dete
   displayName: Write SBOM metadata
 ```
 
-Then set `AUGMENT: "true"`. See [augmentation](/guides/sbomify-action/augmentation/).
+Then set `AUGMENT: "true"`. See [augmentation](/sbomify-action/augmentation/).
 
 ## Container images
 
@@ -188,6 +190,6 @@ Build provenance attestation is GitHub-specific. Use [cosign](/faq/how-do-i-sign
 
 ## Next steps
 
-- [Configuration reference](/guides/sbomify-action/configuration/) - every option
-- [Augmentation](/guides/sbomify-action/augmentation/) - setting VCS details manually
-- [Advanced](/guides/sbomify-action/advanced/) - caching, audit trail, troubleshooting
+- [Configuration reference](/sbomify-action/configuration/) - every option
+- [Augmentation](/sbomify-action/augmentation/) - setting VCS details manually
+- [Advanced](/sbomify-action/advanced/) - caching, audit trail, troubleshooting
