@@ -3,7 +3,6 @@
 url: /guides/dotnet/
 title: "SBOM Generation Guide for .NET - NuGet"
 description: "Learn how to generate Software Bill of Materials for .NET and C# projects. Complete guide with packages.lock.json, PackageReference, and Microsoft SBOM Tool examples."
-section: guides
 ---
 
 ## Source vs Build SBOMs

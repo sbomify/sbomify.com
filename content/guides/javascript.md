@@ -3,7 +3,6 @@
 url: /guides/javascript/
 title: "SBOM Generation Guide for JavaScript - npm, yarn, pnpm, Bun"
 description: "Learn how to generate Software Bill of Materials for JavaScript and Node.js projects. Complete guide with package-lock.json, yarn.lock, pnpm-lock.yaml, and bun.lock examples."
-section: guides
 ---
 
 ## Source vs Build SBOMs

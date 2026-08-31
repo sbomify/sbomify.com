@@ -3,7 +3,6 @@
 url: /guides/raspberry-pi/
 title: "SBOM Generation Guide for Raspberry Pi - rpi-image-gen"
 description: "Learn how to generate Software Bill of Materials for Raspberry Pi custom images using rpi-image-gen. Complete guide with SPDX output and quality analysis."
-section: guides
 ---
 
 ## Source vs Build SBOMs

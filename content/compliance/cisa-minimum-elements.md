@@ -3,7 +3,6 @@
 url: /compliance/cisa-minimum-elements/
 title: "CISA Minimum Elements for SBOM (2025 Draft)"
 description: "Guide to the CISA 2025 Minimum Elements for SBOM, the updated US guidance with new fields for component hash, license, and generation context."
-section: compliance
 ---
 
 [← Back to Compliance Overview](/compliance/)

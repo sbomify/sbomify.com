@@ -8,6 +8,7 @@ This file contains the full text of {{ .Site.BaseURL }} in Markdown, intended fo
   (dict "title" "Features" "key" "features")
   (dict "title" "Compliance" "key" "compliance")
   (dict "title" "Guides" "key" "guides")
+  (dict "title" "sbomify Action" "key" "sbomify-action")
   (dict "title" "FAQ" "key" "faq")
   (dict "title" "Case Studies" "key" "case-studies")
   (dict "title" "Blog" "key" "posts")

@@ -3,7 +3,6 @@
 url: /compliance/cisa-framing/
 title: "CISA Framing Software Component Transparency (3rd Edition)"
 description: "Guide to the CISA Framing document, the authoritative source for SBOM baseline attributes and CycloneDX/SPDX schema crosswalk."
-section: compliance
 ---
 
 [← Back to Compliance Overview](/compliance/)

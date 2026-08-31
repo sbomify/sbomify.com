@@ -3,7 +3,6 @@
 url: /compliance/cisa-sharing-lifecycle/
 title: "CISA SBOM Sharing Lifecycle Report (2023)"
 description: "Guide to the CISA SBOM Sharing Lifecycle Report, covering discovery, access, and transport patterns for SBOM distribution across supply chains."
-section: compliance
 ---
 
 [← Back to Compliance Overview](/compliance/)

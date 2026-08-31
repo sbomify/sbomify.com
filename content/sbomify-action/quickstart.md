@@ -6,7 +6,6 @@ aliases:
 title: "sbomify Action Quick Start"
 description: "Get your first SBOM generated in minutes with the interactive setup wizard, or by writing the configuration by hand."
 keywords: ["sbomify quick start", "SBOM setup wizard", "generate SBOM CI"]
-section: sbomify-action
 tldr: "Run the setup wizard from your repository root and it scans for lockfiles, signs you in, and writes a ready-to-commit workflow. If you would rather write the configuration yourself, four environment variables is the whole minimum."
 ---
 

@@ -3,7 +3,6 @@
 url: /guides/java/
 title: "SBOM Generation Guide for Java - Maven, Gradle"
 description: "Learn how to generate Software Bill of Materials for Java projects. Complete guide with pom.xml, build.gradle, and gradle.lockfile examples, CycloneDX and SPDX output."
-section: guides
 ---
 
 ## Source vs Build SBOMs

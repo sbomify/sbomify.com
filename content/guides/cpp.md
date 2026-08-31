@@ -3,7 +3,6 @@
 url: /guides/cpp/
 title: "SBOM Generation Guide for C/C++ - Conan"
 description: "Learn how to generate Software Bill of Materials for C/C++ projects. Complete guide with conan.lock examples, vcpkg, and handling vendored dependencies."
-section: guides
 ---
 
 ## The C/C++ Dependency Challenge

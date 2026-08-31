@@ -3,7 +3,6 @@
 url: /guides/php/
 title: "SBOM Generation Guide for PHP - Composer"
 description: "Learn how to generate Software Bill of Materials for PHP projects. Complete guide with composer.lock examples, dev dependencies, and CycloneDX output."
-section: guides
 ---
 
 ## Source vs Build SBOMs

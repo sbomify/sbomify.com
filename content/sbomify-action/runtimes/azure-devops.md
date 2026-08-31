@@ -6,7 +6,6 @@ aliases:
 title: "SBOM Generation in Azure DevOps"
 description: "Run the sbomify action in Azure Pipelines as a container job or Docker task, with variable groups, caching and manual VCS configuration."
 keywords: ["Azure DevOps SBOM", "Azure Pipelines SBOM", "CycloneDX Azure"]
-section: sbomify-action
 tldr: "Run the container image as a container job, or invoke it with the Docker task. Set VCS details in sbomify.json, since Azure's variables are not auto-detected."
 ---
 

@@ -6,7 +6,6 @@ aliases:
 title: "Why SBOM Quality Matters: Scanners vs. Pipelines"
 description: "Why a raw scanner output is not a compliance-grade SBOM, and why generating and signing in CI - with no server-side modification afterwards - is what makes an SBOM verifiable."
 keywords: ["SBOM quality", "NTIA minimum elements", "CISA SBOM", "SBOM chain of custody", "SBOM signing"]
-section: sbomify-action
 tldr: "A scanner detects packages; it does not produce a compliance-grade SBOM. The missing fields - supplier, license, hashes, lifecycle - are exactly the ones regulators ask for. Generating and signing in CI, then never modifying the artifact, is what makes the result verifiable rather than merely plausible."
 ---
 

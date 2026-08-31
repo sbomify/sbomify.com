@@ -3,7 +3,6 @@
 url: /guides/terraform/
 title: "SBOM Generation Guide for Terraform - Infrastructure as Code"
 description: "Learn how to generate Software Bill of Materials for Terraform projects. Complete guide with .terraform.lock.hcl examples, provider dependencies, and security considerations."
-section: guides
 ---
 
 ## Why SBOMs for Terraform?

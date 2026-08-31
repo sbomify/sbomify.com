@@ -6,7 +6,6 @@ aliases:
 title: "Publishing SBOMs: Uploading, Releases and Dependency Track"
 description: "How to upload SBOMs from CI to sbomify using OIDC trusted publishing or an API token, tag them against product releases, and send them to Dependency Track."
 keywords: ["OIDC trusted publishing", "SBOM upload", "product release", "Dependency Track", "sbomify token"]
-section: sbomify-action
 tldr: "On GitHub Actions, use OIDC trusted publishing and skip long-lived secrets entirely. Everywhere else, use a scoped API token. Uploads can also go to Dependency Track, or nowhere at all."
 ---
 
