@@ -59,9 +59,10 @@ Non-SBOM `BOM_TYPE` values are uploaded verbatim to sbomify: augmentation, enric
 | `COMPONENT_PURL`           | none                      | Add or override the component PURL.                                                                                                                                                                        |
 | `ADDITIONAL_PACKAGES`      | none                      | Inline PURLs to inject, comma or newline separated.                                                                                                                                                        |
 | `ADDITIONAL_PACKAGES_FILE` | `additional_packages.txt` | Path to a file of PURLs, one per line.                                                                                                                                                                     |
-| `DISABLE_VCS_AUGMENTATION` | `false`                   | Disable automatic VCS detection from the CI environment.                                                                                                                                                   |
+| `DISABLE_VCS_AUGMENTATION` | `false`                   | Disable automatic VCS detection, whether it comes from the CI environment or the git checkout.                                                                                                             |
+| `SBOMIFY_LOCAL_VCS`        | `false`                   | Read VCS details from the git checkout on a non-CI run. Detection is automatic on CI and opt-in locally.                                                                                                   |
 | `SUBMODULE_PATH`           | none                      | Treat the component as a git submodule pinned at this path. Resolves the pin to a version and reuses an existing SBOM at that version if there is one. Requires `LOCK_FILE` and the `sbomify` destination. |
-| `WORKING_DIR`              | none                      | Working directory. On GitHub Actions prefer the `working-dir` input.                                                                                                                                       |
+| `WORKING_DIR`              | none                      | Working directory. Relative paths resolve against the current directory, or against the runner workspace on GitHub Actions, where the path must also stay inside it. Prefer the `working-dir` input there. |
 
 ## Uploading
 
@@ -150,6 +151,7 @@ You do not set these. They are read from the environment to detect VCS informati
 - **GitLab CI** - `CI_PROJECT_URL`, `CI_PROJECT_PATH`, `CI_SERVER_URL`, `CI_COMMIT_SHA`, `CI_COMMIT_REF_NAME`, `CI_PIPELINE_ID`, `CI_PROJECT_VISIBILITY`
 - **Bitbucket** - `BITBUCKET_WORKSPACE`, `BITBUCKET_REPO_SLUG`, `BITBUCKET_COMMIT`, `BITBUCKET_BRANCH`, `BITBUCKET_TAG`, `BITBUCKET_GIT_HTTP_ORIGIN`
 - **TeamCity** - `TEAMCITY_VERSION`, `BUILD_VCS_NUMBER` (and `BUILD_VCS_NUMBER_<VcsRootId>` on multi-root builds), `TEAMCITY_BUILD_PROPERTIES_FILE`
+- **Every other CI system** - `CI`, plus the vendor marker it sets: `JENKINS_URL` or `JENKINS_HOME`, `CIRCLECI`, `TF_BUILD`, `BUILDKITE`, `DRONE`, `TRAVIS`, `APPVEYOR`, `CODEBUILD_BUILD_ID`. These only name the platform in logs and telemetry - the repository details come from the git checkout. The matching checkout-path variables (`WORKSPACE`, `CIRCLE_WORKING_DIRECTORY`, `BUILD_REPOSITORY_LOCALPATH`, `SYSTEM_DEFAULTWORKINGDIRECTORY`, `BUILDKITE_BUILD_CHECKOUT_PATH`, `DRONE_WORKSPACE`, `TRAVIS_BUILD_DIR`, `APPVEYOR_BUILD_FOLDER`, `CODEBUILD_SRC_DIR`) are used when they point at a directory that exists inside the container.
 
 The two OIDC request variables only exist when the workflow grants `permissions: id-token: write`.
 

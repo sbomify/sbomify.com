@@ -4,10 +4,10 @@ url: /sbomify-action/runtimes/azure-devops/
 aliases:
   - /guides/sbomify-action/runtimes/azure-devops/
 title: "SBOM Generation in Azure DevOps"
-description: "Run the sbomify action in Azure Pipelines as a container job or Docker task, with variable groups, caching and manual VCS configuration."
+description: "Run the sbomify action in Azure Pipelines as a container job or Docker task, with variable groups, caching and automatic VCS detection."
 keywords: ["Azure DevOps SBOM", "Azure Pipelines SBOM", "CycloneDX Azure"]
 section: sbomify-action
-tldr: "Run the container image as a container job, or invoke it with the Docker task. Set VCS details in sbomify.json, since Azure's variables are not auto-detected."
+tldr: "Run the container image as a container job, or invoke it with the Docker task. Repository details are detected from the git checkout; sbomify.json overrides them."
 ---
 
 Azure Pipelines can run the container image either as a container job, which is cleaner, or through the Docker task.
@@ -51,8 +51,7 @@ steps:
     inputs:
       command: run
       arguments: >
-        -v $(Build.SourcesDirectory):/github/workspace
-        -w /github/workspace
+        -v $(Build.SourcesDirectory):/workspace
         -e LOCK_FILE=requirements.txt
         -e OUTPUT_FILE=sbom.cdx.json
         -e ENRICH=true
@@ -131,7 +130,9 @@ Set `GITHUB_TOKEN` even though you are not on GitHub. License databases are down
 
 ## VCS information
 
-Azure DevOps does not expose repository details in the form the action auto-detects. Set them in `sbomify.json`, generated from the build variables:
+Repository URL, commit SHA and branch are detected automatically, read from the git checkout in `$(Build.SourcesDirectory)`. Nothing to configure: `checkout: self` leaves a full git work tree, and the Docker task example above mounts that directory into the container.
+
+Two cases still want `sbomify.json`. One is a pipeline whose source is not a git repository - a TFVC repository, or artifacts downloaded rather than checked out. The other is an Azure Repos remote whose URL you would rather record differently. Generate the file from the build variables:
 
 ```yaml
 - script: |
@@ -147,7 +148,7 @@ Azure DevOps does not expose repository details in the form the action auto-dete
   displayName: Write SBOM metadata
 ```
 
-Then set `AUGMENT: "true"`. See [augmentation](/sbomify-action/augmentation/).
+Then set `AUGMENT: "true"`; `sbomify.json` takes priority over detection. See [augmentation](/sbomify-action/augmentation/).
 
 ## Container images
 
@@ -165,8 +166,7 @@ steps:
       command: run
       arguments: >
         -v /var/run/docker.sock:/var/run/docker.sock
-        -v $(Build.SourcesDirectory):/github/workspace
-        -w /github/workspace
+        -v $(Build.SourcesDirectory):/workspace
         -e DOCKER_IMAGE=my-app:$(Build.BuildId)
         -e OUTPUT_FILE=container-sbom.cdx.json
         -e ENRICH=true

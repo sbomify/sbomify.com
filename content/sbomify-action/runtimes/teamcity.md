@@ -18,9 +18,7 @@ In the build configuration:
 
 1. Add a **Command Line** build step.
 2. Set **Custom script** to `sbomify-action`.
-3. Add the **Docker Wrapper** build feature to that step, with:
-   - **Docker image**: `ghcr.io/sbomify/sbomify-action`
-   - **Additional docker run arguments**: `-w /github/workspace`
+3. Add the **Docker Wrapper** build feature to that step, with **Docker image** set to `ghcr.io/sbomify/sbomify-action`. No extra run arguments are needed: the wrapper mounts the checkout directory and runs the script inside it.
 4. Add the configuration as environment variables under **Parameters**, prefixed `env.`:
 
 ```text
@@ -54,7 +52,6 @@ object GenerateSbom : BuildType({
             name = "Generate SBOM"
             scriptContent = "sbomify-action"
             dockerImage = "ghcr.io/sbomify/sbomify-action"
-            dockerRunParameters = "-w /github/workspace"
         }
     }
 
@@ -108,7 +105,7 @@ env.GITHUB_TOKEN         = %github.token%
 Mount that directory into the container by adding it to the Docker Wrapper's run arguments:
 
 ```text
--w /github/workspace -v %system.agent.home.dir%/cache:/cache
+-v %system.agent.home.dir%/cache:/cache
 ```
 
 Two things are worth caching here. The [tool runtimes](/sbomify-action/advanced/#tool-runtimes) are downloaded on first use, so without a cache every build re-fetches them. And `GITHUB_TOKEN` matters even though you are not on GitHub: license databases come from GitHub Releases, unauthenticated requests are capped at 60 per hour per IP, and a pool of agents behind one NAT address exhausts that quickly. When it happens, enrichment degrades silently. See [license database rate limits](/sbomify-action/enrichment/#license-database-rate-limits).
@@ -159,7 +156,7 @@ Then set `env.AUGMENT = true`. See [augmentation](/sbomify-action/augmentation/)
 Scanning an image needs access to a Docker daemon. TeamCity agents that already run Docker builds have one; add the socket to the wrapper's run arguments:
 
 ```text
--w /github/workspace -v /var/run/docker.sock:/var/run/docker.sock
+-v /var/run/docker.sock:/var/run/docker.sock
 ```
 
 ```text

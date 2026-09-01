@@ -7,7 +7,7 @@ title: "SBOM Generation on Any Container Runner"
 description: "Run the sbomify action with plain Docker or Podman on any CI platform - Drone, Woodpecker, TeamCity, Buildkite, Concourse - or from a shell script."
 keywords: ["Docker SBOM", "Podman SBOM", "Drone CI SBOM", "Buildkite SBOM", "TeamCity SBOM"]
 section: sbomify-action
-tldr: "If your platform can run a container, it is supported. Mount your repository at /github/workspace, pass configuration as environment variables, and run the image."
+tldr: "If your platform can run a container, it is supported. Mount your repository at /workspace, pass configuration as environment variables, and run the image."
 ---
 
 The container image is the universal integration. Any platform that can run a container can run this, whether or not it has a dedicated page here.
@@ -16,8 +16,7 @@ The container image is the universal integration. Any platform that can run a co
 
 ```bash
 docker run --rm \
-  -v "$(pwd):/github/workspace" \
-  -w /github/workspace \
+  -v "$(pwd):/workspace" \
   -e LOCK_FILE=requirements.txt \
   -e OUTPUT_FILE=sbom.cdx.json \
   -e ENRICH=true \
@@ -25,11 +24,10 @@ docker run --rm \
   ghcr.io/sbomify/sbomify-action
 ```
 
-Three things matter:
+Two things matter:
 
-1. **Mount your repository.** `/github/workspace` is the conventional path, but any path works as long as `-w` matches.
-2. **Set the working directory** with `-w` so relative lockfile paths resolve.
-3. **Pass configuration as environment variables.** The image entrypoint is `sbomify-action`, so no command is needed.
+1. **Mount your repository at `/workspace`.** That is the image's working directory, so no `-w` is needed. Any other mount point works as long as `-w` points at it - including an existing `-v "$(pwd):/github/workspace" -w /github/workspace`, which keeps working unchanged. Keep the mount and the `-w` in step: output paths resolve against the working directory, so a mount without a matching `-w` leaves your SBOM inside the container.
+2. **Pass configuration as environment variables.** The image entrypoint is `sbomify-action`, so no command is needed.
 
 Podman works identically - substitute `podman run`.
 
@@ -37,8 +35,7 @@ Podman works identically - substitute `podman run`.
 
 ```bash
 docker run --rm \
-  -v "$(pwd):/github/workspace" \
-  -w /github/workspace \
+  -v "$(pwd):/workspace" \
   -e TOKEN="$SBOMIFY_TOKEN" \
   -e COMPONENT_ID=your-component-id \
   -e LOCK_FILE=requirements.txt \
@@ -57,9 +54,8 @@ Use a named volume so the license database survives between runs:
 docker volume create sbomify-cache
 
 docker run --rm \
-  -v "$(pwd):/github/workspace" \
+  -v "$(pwd):/workspace" \
   -v sbomify-cache:/cache \
-  -w /github/workspace \
   -e SBOMIFY_CACHE_DIR=/cache/sbomify \
   -e SYFT_CACHE_DIR=/cache/syft \
   -e SBOMIFY_TOOL_CACHE=/cache/runtimes \
@@ -80,8 +76,7 @@ Scanning an image needs access to a Docker daemon:
 ```bash
 docker run --rm \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -v "$(pwd):/github/workspace" \
-  -w /github/workspace \
+  -v "$(pwd):/workspace" \
   -e DOCKER_IMAGE=my-app:latest \
   -e OUTPUT_FILE=container-sbom.cdx.json \
   -e ENRICH=true \
@@ -134,7 +129,7 @@ steps:
     plugins:
       - docker#v5.11.0:
           image: "ghcr.io/sbomify/sbomify-action"
-          workdir: /github/workspace
+          workdir: /workspace
           environment:
             - LOCK_FILE=requirements.txt
             - OUTPUT_FILE=sbom.cdx.json
@@ -172,6 +167,14 @@ jobs:
 
 **A plain shell script** - the `docker run` invocation at the top of this page works in cron, a Makefile, or a deployment script.
 
+## VCS detection
+
+Repository URL, commit SHA and branch are detected from the git checkout you mounted, so a plain `docker run` on any CI system records provenance without configuration. It needs the `.git` directory inside the mount - `-v "$(pwd):/workspace"` from a repository root gives you that - and a remote on the repository.
+
+One thing to know: the action treats a run as CI when the environment sets `CI=true` or a vendor variable it recognises (`JENKINS_URL`, `CIRCLECI`, `TF_BUILD`, `BUILDKITE`, `DRONE`, `TRAVIS`, `APPVEYOR`, `CODEBUILD_BUILD_ID`). Nearly every CI system sets one of those. If yours does not - a cron job or a shell script on a build box, say - pass `-e CI=true`, or `-e SBOMIFY_LOCAL_VCS=true` to get the same detection without claiming to be CI. Otherwise the run counts as local, where reading the checkout is opt-in.
+
+`sbomify.json` overrides whatever is detected. See [augmentation](/sbomify-action/augmentation/#automatic-vcs-detection).
+
 ## What is in the image
 
 The image is deliberately small: Python, the sbomify CLI (which brings `cyclonedx-py` with it), `conan` for C and C++ metadata, and `git`.
@@ -188,5 +191,5 @@ The container runs as root, because it needs to write to the mounted workspace. 
 ## Next steps
 
 - [Configuration reference](/sbomify-action/configuration/) - every option
-- [Augmentation](/sbomify-action/augmentation/) - setting VCS details manually
+- [Augmentation](/sbomify-action/augmentation/) - your business metadata, and overriding detected VCS details
 - [Advanced](/sbomify-action/advanced/) - caching, audit trail, troubleshooting

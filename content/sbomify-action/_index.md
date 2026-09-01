@@ -63,16 +63,18 @@ The core tool behaves identically everywhere. What differs is how you invoke it,
 | [GitHub Actions](/sbomify-action/runtimes/github-actions/) | Native action   | OIDC or token | Yes             | Generates workflow | Yes         |
 | [GitLab CI](/sbomify-action/runtimes/gitlab-ci/)           | Container image | Token         | Yes             | No                 | No          |
 | [Bitbucket](/sbomify-action/runtimes/bitbucket/)           | Container image | Token         | Yes             | No                 | No          |
-| [Jenkins](/sbomify-action/runtimes/jenkins/)               | Container image | Token         | Manual          | No                 | No          |
-| [CircleCI](/sbomify-action/runtimes/circleci/)             | Container image | Token         | Manual          | No                 | No          |
-| [Azure DevOps](/sbomify-action/runtimes/azure-devops/)     | Container image | Token         | Manual          | No                 | No          |
-| [Any container runner](/sbomify-action/runtimes/docker/)   | Container image | Token         | Manual          | No                 | No          |
+| [Jenkins](/sbomify-action/runtimes/jenkins/)               | Container image | Token         | From git        | No                 | No          |
+| [CircleCI](/sbomify-action/runtimes/circleci/)             | Container image | Token         | From git        | No                 | No          |
+| [Azure DevOps](/sbomify-action/runtimes/azure-devops/)     | Container image | Token         | From git        | No                 | No          |
+| [Any container runner](/sbomify-action/runtimes/docker/)   | Container image | Token         | From git        | No                 | No          |
 | [TeamCity](/sbomify-action/runtimes/teamcity/)             | Container image | Token         | Git roots       | No                 | No          |
-| [Local machine](/sbomify-action/runtimes/local/)           | `uvx` or `pipx` | Token         | Manual          | Yes                | No          |
+| [Local machine](/sbomify-action/runtimes/local/)           | `uvx` or `pipx` | Token         | Opt-in          | Yes                | No          |
 
-**Manual** means the runtime does not expose enough environment information for automatic detection, so you set `vcs_url`, `vcs_commit_sha` and `vcs_ref` in [`sbomify.json`](/sbomify-action/augmentation/) instead. Everything else works the same.
+**Yes** means the runtime publishes repository URL, commit SHA and ref as environment variables and they are read from there. **From git** means it does not, so the action reads the checkout it is running in - no configuration either way, as long as the `.git` directory is present and the repository has a remote.
 
 **Git roots** means TeamCity, which is VCS-agnostic: detection runs only when the repository URL positively identifies Git, and stays silent otherwise rather than recording a Subversion revision as if it were a commit. See [TeamCity](/sbomify-action/runtimes/teamcity/#vcs-information).
+
+**Opt-in** means a local run reads the checkout only when you set `SBOMIFY_LOCAL_VCS=true`, so an internal remote does not end up in a document by accident. `vcs_url`, `vcs_commit_sha` and `vcs_ref` in [`sbomify.json`](/sbomify-action/augmentation/) override whatever is detected, on every runtime.
 
 OIDC trusted publishing and build provenance attestation are GitHub-only today because they depend on GitHub-issued identity tokens. Support for other runtimes will follow as those platforms expose equivalent primitives.
 

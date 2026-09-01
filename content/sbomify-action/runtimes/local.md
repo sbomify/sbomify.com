@@ -20,8 +20,7 @@ Closest to what CI does, which makes it the best choice for reproducing a pipeli
 
 ```bash
 docker run --rm \
-  -v "$(pwd):/github/workspace" \
-  -w /github/workspace \
+  -v "$(pwd):/workspace" \
   -e LOCK_FILE=requirements.txt \
   -e OUTPUT_FILE=sbom.cdx.json \
   -e ENRICH=true \
@@ -123,7 +122,17 @@ Be deliberate about uploading from a laptop. An SBOM generated locally reflects 
 
 ## VCS information
 
-Nothing is auto-detected locally. Set the values in `sbomify.json` if you need them:
+Nothing is read from your checkout unless you ask for it. On CI, repository URL, commit SHA and ref are detected automatically; locally that is deliberately off, because the same lock file would otherwise produce a different SBOM depending on whether a remote happened to be configured, and an internal remote would be written into a document that often gets shared.
+
+Opt in when you want it:
+
+```bash
+SBOMIFY_LOCAL_VCS=true uvx sbomify-action --lock-file requirements.txt --enrich
+```
+
+The values come from the checkout in your working directory: `origin` (or the first remote), `HEAD`, and the current branch or the exact tag when HEAD is detached.
+
+Or state them yourself in `sbomify.json`, which takes priority either way:
 
 ```json
 {
@@ -141,8 +150,7 @@ When CI produces something you did not expect, reproduce it locally with the sam
 
 ```bash
 docker run --rm \
-  -v "$(pwd):/github/workspace" \
-  -w /github/workspace \
+  -v "$(pwd):/workspace" \
   -e LOCK_FILE=requirements.txt \
   -e OUTPUT_FILE=sbom.cdx.json \
   -e ENRICH=true \
@@ -153,7 +161,7 @@ docker run --rm \
 
 `VERBOSE=true` shows which generator ran, which enrichment sources answered, and where time went. Check `audit_trail.txt` afterwards for the full list of changes.
 
-Two differences from CI worth keeping in mind: VCS auto-detection will not fire locally, and enrichment coverage may differ if CI is hitting [GitHub API rate limits](/sbomify-action/enrichment/#license-database-rate-limits) that your machine is not.
+Two differences from CI worth keeping in mind: VCS detection is opt-in locally (`SBOMIFY_LOCAL_VCS=true`) where CI does it automatically, and enrichment coverage may differ if CI is hitting [GitHub API rate limits](/sbomify-action/enrichment/#license-database-rate-limits) that your machine is not.
 
 ## Next steps
 

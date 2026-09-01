@@ -4,10 +4,10 @@ url: /sbomify-action/runtimes/circleci/
 aliases:
   - /guides/sbomify-action/runtimes/circleci/
 title: "SBOM Generation in CircleCI"
-description: "Run the sbomify action in CircleCI using the container image as a Docker executor, with caching, contexts and manual VCS configuration."
+description: "Run the sbomify action in CircleCI using the container image as a Docker executor, with caching, contexts and automatic VCS detection."
 keywords: ["CircleCI SBOM", "CircleCI CycloneDX", "SBOM pipeline"]
 section: sbomify-action
-tldr: "Use the container image as the Docker executor and run sbomify-action. Set VCS details in sbomify.json, since CircleCI's variables are not auto-detected."
+tldr: "Use the container image as the Docker executor and run sbomify-action. Repository details are detected from the git checkout; sbomify.json overrides them."
 ---
 
 CircleCI runs the container image as a Docker executor.
@@ -124,7 +124,9 @@ workflows:
 
 ## VCS information
 
-CircleCI does not expose repository details in the form the action auto-detects, so set them in `sbomify.json`:
+Repository URL, commit SHA and branch are detected automatically, read from the git checkout that `checkout` leaves in the working directory. CircleCI's own variables are not used - the checkout is a better source, and it is there on every job that runs `checkout`.
+
+Set the fields in `sbomify.json` when you want something other than the remote recorded, or when a job builds from a workspace attachment rather than a git checkout:
 
 ```json
 {
@@ -134,7 +136,7 @@ CircleCI does not expose repository details in the form the action auto-detects,
 }
 ```
 
-To fill these from the build, write the file in a step first:
+`sbomify.json` wins over detection. To fill it from the build, write the file in a step first:
 
 ```yaml
 - run:

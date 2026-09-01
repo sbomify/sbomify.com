@@ -4,10 +4,10 @@ url: /sbomify-action/runtimes/jenkins/
 aliases:
   - /guides/sbomify-action/runtimes/jenkins/
 title: "SBOM Generation in Jenkins"
-description: "Run the sbomify action in Jenkins declarative and scripted pipelines, with credentials, caching and manual VCS configuration."
+description: "Run the sbomify action in Jenkins declarative and scripted pipelines, with credentials, caching and VCS detection from the checkout."
 keywords: ["Jenkins SBOM", "Jenkins pipeline SBOM", "CycloneDX Jenkins"]
 section: sbomify-action
-tldr: "Use the container image as a pipeline agent. Jenkins does not expose standard VCS environment variables, so set repository details in sbomify.json."
+tldr: "Use the container image as a pipeline agent. Repository details are detected from the git checkout in the workspace; sbomify.json overrides them if you need something else recorded."
 ---
 
 Jenkins runs the container image as a pipeline agent. Both declarative and scripted pipelines work.
@@ -100,7 +100,11 @@ node {
 
 ## VCS information
 
-Jenkins does not expose repository details in a standard enough form to detect reliably - the available variables depend on which SCM plugin and job type you use. Set them explicitly in `sbomify.json`:
+Repository URL, commit SHA and branch are detected automatically, read from the git checkout in the workspace. Jenkins exposes no repository variables worth trusting - which ones exist depends on the SCM plugin and the job type - so the action asks `git` directly instead. Nothing to configure.
+
+Two things have to be true, and a normal `checkout scm` gives you both: the `.git` directory is present in the workspace the container sees, and the repository has a remote (`origin`, or the first one configured). If either is missing, nothing is emitted rather than a partial claim.
+
+Set the fields in `sbomify.json` when you want something other than the remote recorded - an internal mirror rewritten to its public URL, for example:
 
 ```json
 {
@@ -110,7 +114,7 @@ Jenkins does not expose repository details in a standard enough form to detect r
 }
 ```
 
-To populate them from the build, write the file in an earlier stage:
+`sbomify.json` wins over detection. To populate it from the build, write the file in an earlier stage:
 
 ```groovy
 stage('Prepare SBOM metadata') {
