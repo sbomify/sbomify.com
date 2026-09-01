@@ -3,7 +3,6 @@
 url: /compliance/cisa-minimum-elements/
 title: "CISA 2026 SBOM Minimum Elements: All 23 Elements Listed"
 description: "The 2026 Minimum Elements for a Software Bill of Materials, published 29 July 2026 by CISA with 17 partner agencies. Updates and replaces the NTIA 2021 baseline. Covers all 23 elements across SBOM Metadata, Component Data, and Practices and Processes, with the full change log from 2021."
-keywords: [CISA 2026 SBOM minimum elements, SBOM minimum elements, CISA SBOM, SBOM data fields, SBOM metadata, component data, NTIA 2021 replaced, SBOM Author Signature, Component Hash Value, SBOM Generation Context]
 ---
 
 [← Back to Compliance Overview](/compliance/)

@@ -5,7 +5,6 @@ aliases:
   - /2024/09/20/how-to-generate-an-sbom-from-a-container/
 title: "SBOM Generation Guide for Docker and Containers"
 description: "Generate a Software Bill of Materials for Docker images and containers: what image scanning does and does not capture, multi-stage builds, distroless images, signing, and combining container and application SBOMs."
-keywords: [docker sbom, sbom docker, container sbom, sbom container, generate sbom from container image, sbom docker image, docker sbom generation]
 ---
 
 ## Source vs Build SBOMs
