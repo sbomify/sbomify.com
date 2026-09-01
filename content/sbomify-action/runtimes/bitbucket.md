@@ -143,6 +143,8 @@ Enable the Docker service:
 
 Automatic. Repository URL, commit SHA and branch or tag are read from `BITBUCKET_GIT_HTTP_ORIGIN`, `BITBUCKET_COMMIT`, `BITBUCKET_BRANCH` and `BITBUCKET_TAG`. Nothing to configure.
 
+This is Bitbucket Cloud. **Data Center** exposes a different set of variables, so set `vcs_url` in [`sbomify.json`](/sbomify-action/augmentation/) there - and note that its commit URLs live under `/projects/<KEY>/repos/<slug>/commits/<sha>`, which the action will not guess: you get the repository URL and the SHA without a browsable link.
+
 ## Monorepos
 
 ```yaml

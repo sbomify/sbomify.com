@@ -96,7 +96,7 @@ This matters for compliance: component hashes are a [CISA 2025](/compliance/cisa
 
 ## 2. Augmentation
 
-Adds organisational metadata - supplier, authors, licenses, lifecycle phase, security contact, support dates - and VCS information detected from the CI environment.
+Adds organisational metadata - supplier, authors, licenses, lifecycle phase, security contact, support dates - and VCS information detected from the CI environment, or from the git checkout on runtimes that publish none.
 
 Sources are consulted in priority order, and **local values always win**:
 

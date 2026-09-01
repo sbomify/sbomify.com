@@ -99,6 +99,8 @@ Three outputs:
 
 Four categories are tracked: overrides from the CLI or environment, augmentation values and their source, per-component enrichment additions, and sanitization fixes such as PURL normalisation. Timestamps are UTC, ISO 8601.
 
+File paths in the trail are recorded relative to the working directory, and anything outside it is reduced to its file name. The trail is meant to be handed to someone who did not run the build, and the absolute path of your lock file tells them nothing while publishing the build machine's directory layout and username.
+
 Archive `audit_trail.txt` alongside your SBOM. Together they answer "where did every field in this document come from?" - which is the question that actually gets asked in an audit.
 
 ## Caching
@@ -147,9 +149,8 @@ generate-sbom:
 docker volume create sbomify-cache
 
 docker run --rm \
-  -v "$(pwd):/github/workspace" \
+  -v "$(pwd):/workspace" \
   -v sbomify-cache:/cache \
-  -w /github/workspace \
   -e SBOMIFY_CACHE_DIR=/cache/sbomify \
   -e SYFT_CACHE_DIR=/cache/syft \
   -e LOCK_FILE=requirements.txt \

@@ -19,8 +19,7 @@ Run it from the root of your repository:
 
 ```bash
 docker run --rm -it \
-  -v "$(pwd):/github/workspace" \
-  -w /github/workspace \
+  -v "$(pwd):/workspace" \
   ghcr.io/sbomify/sbomify-action \
   sbomify-action wizard
 ```
@@ -53,7 +52,7 @@ Either way there is nothing else to install - whatever generator your project ne
 
 ### Things worth knowing
 
-- The wizard is **interactive**, so the `-it` flags are required, and it refuses to launch in CI (it checks `$CI` and `$GITHUB_ACTIONS`). Run it on your machine and commit the result.
+- The wizard is **interactive**, so the `-it` flags are required, and it refuses to launch on any environment it recognises as CI - `CI=true`, or a vendor marker such as `GITHUB_ACTIONS`, `GITLAB_CI` or `JENKINS_URL`. Run it on your machine and commit the result.
 - The volume mount is what lets it write the generated workflow back into your repository. Without it, the wizard runs but produces nothing you keep.
 - It only manages `.github/workflows/sboms.yml`, and marks files it generated with a header. It will never overwrite a workflow you wrote by hand.
 - It pins the action to a specific commit SHA at generation time, which is the recommended practice.
@@ -82,8 +81,7 @@ On any runtime other than GitHub Actions, the same configuration is passed to th
 
 ```bash
 docker run --rm \
-  -v "$(pwd):/github/workspace" \
-  -w /github/workspace \
+  -v "$(pwd):/workspace" \
   -e LOCK_FILE=requirements.txt \
   -e OUTPUT_FILE=sbom.cdx.json \
   -e ENRICH=true \

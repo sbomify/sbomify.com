@@ -208,8 +208,7 @@ The wizard generates a complete workflow, including SHA pins and matrix entries 
 
 ```bash
 docker run --rm -it \
-  -v "$(pwd):/github/workspace" \
-  -w /github/workspace \
+  -v "$(pwd):/workspace" \
   ghcr.io/sbomify/sbomify-action \
   sbomify-action wizard
 ```
