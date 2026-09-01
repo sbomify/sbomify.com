@@ -6,7 +6,6 @@ aliases:
 title: "sbomify Action Runtimes"
 description: "Platform-specific setup for the sbomify action: GitHub Actions, GitLab CI, Bitbucket, Jenkins, CircleCI, Azure DevOps, plain Docker and local machines."
 keywords: ["SBOM CI integration", "GitLab SBOM", "Jenkins SBOM", "CircleCI SBOM", "Azure DevOps SBOM"]
-section: sbomify-action
 tldr: "One container image runs everywhere. GitHub Actions gets a native action; every other runtime pulls ghcr.io/sbomify/sbomify-action and passes the same environment variables."
 ---
 

@@ -3,7 +3,6 @@
 url: /compliance/cle/
 title: "CLE: Common Lifecycle Enumeration for SBOMs"
 description: "Guide to CLE (ECMA-428), the standard for machine-readable component lifecycle events including end-of-life, end-of-support, and provenance changes."
-section: compliance
 ---
 
 [← Back to Compliance Overview](/compliance/)

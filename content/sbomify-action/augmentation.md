@@ -6,7 +6,6 @@ aliases:
 title: "Augmentation: Adding Your Business Metadata to an SBOM"
 description: "How to add supplier, author, license, lifecycle and security contact information to your SBOM with sbomify.json, plus automatic VCS detection from your CI environment."
 keywords: ["SBOM supplier metadata", "sbomify.json", "SBOM lifecycle phase", "NTIA supplier", "CRA security contact"]
-section: sbomify-action
 tldr: "Augmentation adds the metadata only you know - supplier, authors, licenses, support dates - from a sbomify.json file in your repository. No account needed. Your local values always win."
 ---
 

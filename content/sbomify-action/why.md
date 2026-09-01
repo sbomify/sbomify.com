@@ -6,7 +6,6 @@ aliases:
 title: "Why SBOM Quality Matters: Scanners vs. Pipelines"
 description: "Why a raw scanner output is not a compliance-grade SBOM, and why generating and signing in CI - with no server-side modification afterwards - is what makes an SBOM verifiable."
 keywords: ["SBOM quality", "NTIA minimum elements", "CISA SBOM", "SBOM chain of custody", "SBOM signing"]
-section: sbomify-action
 tldr: "A scanner detects packages; it does not produce a compliance-grade SBOM. The missing fields - supplier, license, hashes, lifecycle - are exactly the ones regulators ask for. Generating and signing in CI, then never modifying the artifact, is what makes the result verifiable rather than merely plausible."
 ---
 
@@ -48,7 +47,7 @@ The difference is not cosmetic. Without a license field you cannot run license c
 
 ## What the regulations actually require
 
-The [NTIA Minimum Elements](/compliance/ntia-minimum-elements/) define seven required data fields. [CISA's 2025 guidance](/compliance/cisa-minimum-elements/) extends them. The [EU Cyber Resilience Act](/compliance/eu-cra/) leans on both.
+The [CISA 2026 Minimum Elements](/compliance/cisa-minimum-elements/) define 23 elements across SBOM metadata, component data, and practices, updating and replacing the seven fields in the [NTIA 2021 guidance](/compliance/ntia-minimum-elements/). The [EU Cyber Resilience Act](/compliance/eu-cra/) leans on both.
 
 | Required element            | Where it comes from                           |
 | --------------------------- | --------------------------------------------- |

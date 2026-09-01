@@ -6,7 +6,6 @@ aliases:
 title: "SBOM Generation in CircleCI"
 description: "Run the sbomify action in CircleCI using the container image as a Docker executor, with caching, contexts and automatic VCS detection."
 keywords: ["CircleCI SBOM", "CircleCI CycloneDX", "SBOM pipeline"]
-section: sbomify-action
 tldr: "Use the container image as the Docker executor and run sbomify-action. Repository details are detected from the git checkout; sbomify.json overrides them."
 ---
 

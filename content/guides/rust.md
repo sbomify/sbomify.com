@@ -3,7 +3,6 @@
 url: /guides/rust/
 title: "SBOM Generation Guide for Rust - Cargo"
 description: "Learn how to generate Software Bill of Materials for Rust projects. Complete guide with Cargo.lock examples, workspace dependencies, and CycloneDX output."
-section: guides
 ---
 
 ## Source vs Build SBOMs

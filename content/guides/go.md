@@ -3,7 +3,6 @@
 url: /guides/go/
 title: "SBOM Generation Guide for Go - Go Modules"
 description: "Learn how to generate Software Bill of Materials for Go projects. Complete guide with go.mod and go.sum examples, CycloneDX and SPDX output."
-section: guides
 ---
 
 ## Source vs Build SBOMs

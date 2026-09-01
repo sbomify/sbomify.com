@@ -69,8 +69,9 @@
   <link rel="canonical" href="{{ $canonical }}">
 
   {{/* Robots meta */}}
-  <meta name="robots" content="index, follow">
-  <meta name="googlebot" content="index, follow">
+  {{- $robots := cond (eq (.Params.noindex | default false) true) "noindex, follow" "index, follow" }}
+  <meta name="robots" content="{{ $robots }}">
+  <meta name="googlebot" content="{{ $robots }}">
 
   {{/* Open Graph Meta Tags */}}
   <meta property="og:title" content="{{ $title | default site.Title }}{{ $pageSuffix }}">

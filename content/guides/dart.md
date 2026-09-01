@@ -3,7 +3,6 @@
 url: /guides/dart/
 title: "SBOM Generation Guide for Dart and Flutter - pub"
 description: "Learn how to generate Software Bill of Materials for Dart and Flutter projects. Complete guide with pubspec.lock examples and CycloneDX output."
-section: guides
 ---
 
 ## Source vs Build SBOMs

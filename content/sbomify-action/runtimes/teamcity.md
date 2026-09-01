@@ -6,7 +6,6 @@ aliases:
 title: "SBOM Generation in TeamCity"
 description: "Run the sbomify action in TeamCity using the Docker Wrapper build feature or a Kotlin DSL configuration, with caching, parameters and manual VCS configuration."
 keywords: ["TeamCity SBOM", "TeamCity CycloneDX", "Docker Wrapper", "SBOM pipeline"]
-section: sbomify-action
 tldr: "Add a Command Line step with the Docker Wrapper build feature pointing at the container image. VCS details are detected automatically for Git roots; a containerised step that cannot read the build properties file sets SBOMIFY_VCS_URL instead."
 ---
 

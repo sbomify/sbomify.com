@@ -3,6 +3,7 @@
 url: /resources/
 title: SBOM Resources
 description: "Discover the full SBOM life cycle: Generation, Distribution, and Analysis. Explore tools, benchmarks, and resources for creating, sharing, and utilizing Software Bills of Materials."
+noindex: true
 ---
 
 New to SBOMs? Start with [What is an SBOM?](/what-is-sbom/) to learn the basics.

@@ -148,7 +148,7 @@ Three things are worth pointing out.
 
 ## Checking an example against the minimum elements
 
-A file that validates against the schema is not automatically a _good_ SBOM. The US baseline is the [NTIA minimum elements](/compliance/ntia-minimum-elements/), published in 2021 and still the operative published baseline, with [CISA's 2025 update](/compliance/cisa-minimum-elements/) currently a public comment draft.
+A file that validates against the schema is not automatically a _good_ SBOM. The US baseline is the [CISA 2026 minimum elements](/compliance/cisa-minimum-elements/), published on 29 July 2026, which updates and replaces the [NTIA 2021 minimum elements](/compliance/ntia-minimum-elements/).
 
 Against that baseline, the component above scores:
 

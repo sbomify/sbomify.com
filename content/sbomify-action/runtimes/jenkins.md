@@ -6,7 +6,6 @@ aliases:
 title: "SBOM Generation in Jenkins"
 description: "Run the sbomify action in Jenkins declarative and scripted pipelines, with credentials, caching and VCS detection from the checkout."
 keywords: ["Jenkins SBOM", "Jenkins pipeline SBOM", "CycloneDX Jenkins"]
-section: sbomify-action
 tldr: "Use the container image as a pipeline agent. Repository details are detected from the git checkout in the workspace; sbomify.json overrides them if you need something else recorded."
 ---
 

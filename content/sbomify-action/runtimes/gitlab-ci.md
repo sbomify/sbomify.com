@@ -6,7 +6,6 @@ aliases:
 title: "SBOM Generation in GitLab CI"
 description: "Run the sbomify action in GitLab CI using the container image, with caching, dependency scanning integration and self-managed instance support."
 keywords: ["GitLab CI SBOM", "GitLab dependency scanning", "CycloneDX GitLab", "SBOM pipeline"]
-section: sbomify-action
 tldr: "Use ghcr.io/sbomify/sbomify-action as the job image and run sbomify-action. VCS information is detected automatically, including on self-managed instances."
 ---
 

@@ -3,7 +3,6 @@
 url: /compliance/pci-dss/
 title: "PCI DSS 4.0 SBOM and Software Inventory Requirements"
 description: "Guide to PCI DSS 4.0 software component inventory requirements, including Requirement 6.3.2 for bespoke software and third-party dependencies."
-section: compliance
 ---
 
 [← Back to Compliance Overview](/compliance/)

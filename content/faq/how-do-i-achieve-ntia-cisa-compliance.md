@@ -10,7 +10,7 @@ url: /faq/how-do-i-achieve-ntia-cisa-compliance/
 
 ## The problem
 
-Most SBOM generation tools produce SBOMs that are missing key fields required by the [NTIA Minimum Elements](/compliance/ntia-minimum-elements/) and [CISA 2025 Minimum Elements](/compliance/cisa-minimum-elements/). Specifically, generated SBOMs typically lack:
+Most SBOM generation tools produce SBOMs that are missing key fields required by the [CISA 2026 Minimum Elements](/compliance/cisa-minimum-elements/), which replaced the [NTIA 2021 Minimum Elements](/compliance/ntia-minimum-elements/) on 29 July 2026. Specifically, generated SBOMs typically lack:
 
 - **Supplier name** - the organization that supplies the component
 - **Authors** - who created the SBOM data
@@ -108,7 +108,7 @@ For the full list of supported augmentation fields, see the [sbomify-action docu
 
 - [Compliance overview](/compliance/) - all frameworks and standards sbomify supports
 - [NTIA Minimum Elements guide](/compliance/ntia-minimum-elements/)
-- [CISA 2025 Minimum Elements guide](/compliance/cisa-minimum-elements/)
+- [CISA 2026 Minimum Elements guide](/compliance/cisa-minimum-elements/)
 - [EU Cyber Resilience Act guide](/compliance/eu-cra/)
 - [Schema Crosswalk](/compliance/schema-crosswalk/) - how fields map across CycloneDX and SPDX
 - [sbomify-action augmentation reference](https://github.com/sbomify/sbomify-action#augmentation-config-file)

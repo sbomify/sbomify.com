@@ -3,7 +3,6 @@
 url: /compliance/uk-software-security-code-of-practice/
 title: "Software Security Code of Practice (UK, May 2025)"
 description: "Guide to the UK Software Security Code of Practice, a voluntary government code for secure software development, supply chain resilience, and customer communication."
-section: compliance
 ---
 
 [← Back to Compliance Overview](/compliance/)

@@ -6,7 +6,7 @@ author:
   display_name: Viktor Petersson
 categories:
   - podcast
-tags: [CRA, compliance, security, sbom]
+tags: [cra, compliance, security, sbom]
 date: 2026-01-06
 slug: cra-explained-cyber-resilience-act-for-device-manufacturers
 ---

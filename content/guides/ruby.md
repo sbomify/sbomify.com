@@ -3,7 +3,6 @@
 url: /guides/ruby/
 title: "SBOM Generation Guide for Ruby - Bundler"
 description: "Learn how to generate Software Bill of Materials for Ruby projects. Complete guide with Gemfile.lock examples, platform-specific gems, and CycloneDX output."
-section: guides
 ---
 
 ## Source vs Build SBOMs
