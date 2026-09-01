@@ -5,7 +5,6 @@ aliases:
   - /compliance/ntia/
 title: "NTIA Minimum Elements for SBOM (2021, Superseded)"
 description: "The NTIA 2021 Minimum Elements for a Software Bill of Materials, the original US SBOM baseline, updated and replaced by the CISA 2026 Minimum Elements on 29 July 2026. Covers the original seven data fields and how each maps to its 2026 successor."
-keywords: [NTIA minimum elements, NTIA SBOM, NTIA 2021 SBOM minimum elements, SBOM minimum elements superseded, NTIA to CISA 2026 mapping]
 ---
 
 [← Back to Compliance Overview](/compliance/)

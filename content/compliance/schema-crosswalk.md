@@ -3,7 +3,6 @@
 url: /compliance/schema-crosswalk/
 title: "SBOM Schema Crosswalk: CycloneDX and SPDX Field Mappings"
 description: "Field mapping reference for the CISA 2026 SBOM Minimum Elements across CycloneDX 1.6/1.7, SPDX 2.3 and SPDX 3.0, plus a general crosswalk for SBOM properties across formats."
-keywords: [SBOM schema crosswalk, CISA 2026 format mappings, CycloneDX SPDX mapping, SBOM field mapping, CycloneDX 1.7 fields, SPDX 3.0 fields]
 ---
 
 [← Back to Compliance Overview](/compliance/)
