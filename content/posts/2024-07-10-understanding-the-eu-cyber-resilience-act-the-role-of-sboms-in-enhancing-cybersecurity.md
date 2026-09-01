@@ -4,7 +4,7 @@ title: "Understanding the EU Cyber Resilience Act: SBOM Requirements and Complia
 description: "What does the EU Cyber Resilience Act require? The CRA mandates SBOMs, vulnerability handling, and security updates for all products with digital elements sold in the EU. Learn the timeline, product categories, and how to prepare."
 categories:
   - compliance
-tags: [CRA, security, sbom, standards, eu]
+tags: [cra, security, sbom, standards, eu]
 tldr: "The EU Cyber Resilience Act (CRA) – adopted in October 2024 and enforceable from September 2027 – requires manufacturers of products with digital elements to provide SBOMs, handle vulnerabilities throughout the product lifecycle, report actively exploited vulnerabilities to ENISA within 24 hours, and deliver security updates for at least five years. It covers everything from consumer IoT devices to enterprise software."
 author:
   display_name: Cowboy Neil
