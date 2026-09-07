@@ -100,16 +100,21 @@ By default augmentation only fills fields that are empty. Set `OVERRIDE_SBOM_MET
 
 Repository URL, commit SHA and branch or tag are detected and added automatically on every CI runtime. No configuration needed.
 
-Where a vendor publishes those details as environment variables, they are read from there. Everywhere else the action reads them from the git checkout it is running in, which is why Jenkins, CircleCI, Azure Pipelines and any other container runner get provenance without you writing it out by hand.
+Where a vendor publishes those details as environment variables, they are read from there. Everywhere else the action reads them from the git checkout it is running in, which is why Azure Pipelines and any other container runner get provenance without you writing it out by hand.
 
-| Runtime                                                                                                | Source                                           | Notes                                                               |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------------------------- |
-| GitHub Actions                                                                                         | Runner environment                               | Works with GitHub Enterprise Server                                 |
-| GitLab CI                                                                                              | Job environment                                  | Works with self-managed instances                                   |
-| Bitbucket Pipelines                                                                                    | Step environment                                 | Bitbucket Cloud; Data Center needs `vcs_url` in `sbomify.json`      |
-| TeamCity                                                                                               | Build properties file                            | Git roots only - see [below](#teamcity-is-different)                |
-| Jenkins, CircleCI, Azure Pipelines, Buildkite, Drone, Travis CI, AppVeyor, AWS CodeBuild, any other CI | The git checkout (`git remote`, `git rev-parse`) | Needs the `.git` directory in the container and a configured remote |
-| Your own machine                                                                                       | The git checkout, opt-in                         | Set `SBOMIFY_LOCAL_VCS=true` - see [below](#local-runs-are-opt-in)  |
+| Runtime                                                                  | Source                                            | Notes                                                                         |
+| ------------------------------------------------------------------------ | ------------------------------------------------- | ----------------------------------------------------------------------------- |
+| GitHub Actions                                                           | Runner environment                                | Works with GitHub Enterprise Server                                           |
+| GitLab CI                                                                | Job environment                                   | Works with self-managed instances                                             |
+| Bitbucket Pipelines                                                      | Step environment                                  | Bitbucket Cloud; Data Center needs `vcs_url` in `sbomify.json`                |
+| TeamCity                                                                 | Build properties file                             | Git roots only - see [below](#teamcity-is-different)                          |
+| Jenkins                                                                  | Job environment, then the checkout                | Git plugin variables; the checkout on a Subversion, Perforce or SCM-less job  |
+| CircleCI                                                                 | Job environment, then the checkout                | The checkout when the job never ran `checkout`                                |
+| Travis CI                                                                | Job environment for the ref, checkout for the URL | Travis publishes no repository URL - see [below](#travis-ci-is-half-and-half) |
+| Azure Pipelines, Buildkite, Drone, AppVeyor, AWS CodeBuild, any other CI | The git checkout (`git remote`, `git rev-parse`)  | Needs the `.git` directory in the container and a configured remote           |
+| Your own machine                                                         | The git checkout, opt-in                          | Set `SBOMIFY_LOCAL_VCS=true` - see [below](#local-runs-are-opt-in)            |
+
+Jenkins, CircleCI and Travis CI got platforms of their own after `v26.8.0`; on older tags all three read the checkout, which is still what each falls back to. The reason is the ref: all three check out a detached HEAD, so the checkout can name a tag that happens to point at the commit and nothing else, while the vendor knows which branch the build was for - and on a pull request, which branch the request came _from_.
 
 Each records repository URL, commit SHA and branch or tag. A browsable commit URL is added as well for github.com, gitlab.com and bitbucket.org, plus self-hosted GitHub and GitLab, whose commit paths match their cloud products. Everything else - Bitbucket Data Center included, since it lays commit URLs out differently from Bitbucket Cloud - gets the repository URL and the SHA without a link, rather than a guessed one that 404s.
 
@@ -126,14 +131,22 @@ TeamCity is VCS-agnostic, and a root can just as easily be Subversion, Perforce 
 
 TeamCity exposes no parameter saying which VCS a root uses. Detection therefore runs only when the repository URL positively identifies Git, and emits nothing otherwise. A self-hosted Git server whose URL has neither a `.git` suffix nor a recognised host cannot be detected; set `SBOMIFY_VCS_URL` (and `SBOMIFY_VCS_REF`) and it is trusted as given. See the [TeamCity runtime guide](/sbomify-action/runtimes/teamcity/#vcs-information).
 
+### Travis CI is half and half
+
+Travis publishes the commit and the branch, but no repository URL - only `TRAVIS_REPO_SLUG`, an `owner/repo` pair with no host attached. Travis serves GitHub, Bitbucket, GitLab and Assembla projects, so turning that pair into a URL means guessing the forge, and a link that lands on the wrong host is worse than no link. The URL therefore comes from the checkout, and the commit and ref from the job. Nothing is constructed from the slug, and CircleCI's `CIRCLE_PROJECT_USERNAME`/`CIRCLE_PROJECT_REPONAME` pair is left alone for the same reason.
+
+Travis jobs run on a VM rather than in a container of your choosing, so a `docker run` has to forward the variables explicitly. See [Travis CI](/sbomify-action/runtimes/travis/#vcs-information).
+
 ### Runtimes read from the checkout
 
-Jenkins, CircleCI, Azure Pipelines and any other container runner have no vendor integration, and none is needed: they check out a git repository and run a command in it, so the action asks `git` directly. Two conditions have to hold, and both are the default:
+Azure Pipelines and any other container runner have no vendor integration, and none is needed: they check out a git repository and run a command in it, so the action asks `git` directly. The same path is what Jenkins, CircleCI and Travis CI fall back to. Two conditions have to hold, and both are the default:
 
 - **The `.git` directory has to be there.** A shallow clone is fine; an exported tarball or a mount of only your lockfile is not.
 - **The repository needs a remote.** `origin` is used if present, otherwise the first remote. A checkout with no remote has no URL worth recording, so nothing is emitted.
 
-A runner is recognised as CI when it sets `CI=true` or a vendor variable of its own (`JENKINS_URL`, `CIRCLECI`, `TF_BUILD`, `BUILDKITE`, `DRONE`, `TRAVIS`, `APPVEYOR`, `CODEBUILD_BUILD_ID`). Almost every runner sets one; a bare `docker run` from a shell script sets neither and is treated as a local run.
+A runner is recognised as CI when it sets `CI=true` or a vendor variable of its own (`CIRCLECI`, `TRAVIS`, `TF_BUILD`, `BUILDKITE`, `DRONE`, `APPVEYOR`, `CODEBUILD_BUILD_ID`, or any of the five Jenkins markers below). Almost every runner sets one; a bare `docker run` from a shell script sets neither and is treated as a local run.
+
+Jenkins is detected on any of `JENKINS_URL`, `JENKINS_HOME`, `HUDSON_HOME`, `JENKINS_NODE_COOKIE` or `JENKINS_SERVER_COOKIE`, rather than `JENKINS_URL` alone. A Docker Pipeline agent - the documented way to run the action on Jenkins - forwards the _build_ environment into the container, which carries `HUDSON_HOME` and both cookies but no `JENKINS_URL`, since Jenkins only exports that once the instance URL has been filled in under system settings. A freestyle build is the other way round.
 
 If any of that does not hold, or the remote URL is not the one you want in the document, set the fields yourself:
 

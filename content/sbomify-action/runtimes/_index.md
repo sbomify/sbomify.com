@@ -4,8 +4,8 @@ url: /sbomify-action/runtimes/
 aliases:
   - /guides/sbomify-action/runtimes/
 title: "sbomify Action Runtimes"
-description: "Platform-specific setup for the sbomify action: GitHub Actions, GitLab CI, Bitbucket, Jenkins, CircleCI, Azure DevOps, plain Docker and local machines."
-keywords: ["SBOM CI integration", "GitLab SBOM", "Jenkins SBOM", "CircleCI SBOM", "Azure DevOps SBOM"]
+description: "Platform-specific setup for the sbomify action: GitHub Actions, GitLab CI, Bitbucket, Jenkins, CircleCI, Travis CI, Azure DevOps, plain Docker and local machines."
+keywords: ["SBOM CI integration", "GitLab SBOM", "Jenkins SBOM", "CircleCI SBOM", "Travis CI SBOM", "Azure DevOps SBOM"]
 tldr: "One container image runs everywhere. GitHub Actions gets a native action; every other runtime pulls ghcr.io/sbomify/sbomify-action and passes the same environment variables."
 ---
 
@@ -18,8 +18,9 @@ If your platform can run a container, it is supported - even if it does not have
 - [**GitHub Actions**](/sbomify-action/runtimes/github-actions/) - native action, OIDC trusted publishing, build provenance attestation
 - [**GitLab CI**](/sbomify-action/runtimes/gitlab-ci/) - container image, automatic VCS detection, self-managed supported
 - [**Bitbucket Pipelines**](/sbomify-action/runtimes/bitbucket/) - container image via a Docker pipe, automatic VCS detection
-- [**Jenkins**](/sbomify-action/runtimes/jenkins/) - declarative and scripted pipelines, VCS detected from the checkout
-- [**CircleCI**](/sbomify-action/runtimes/circleci/) - container executor, VCS detected from the checkout
+- [**Jenkins**](/sbomify-action/runtimes/jenkins/) - declarative and scripted pipelines, VCS from the Git plugin's variables
+- [**CircleCI**](/sbomify-action/runtimes/circleci/) - container executor, VCS from the job environment
+- [**Travis CI**](/sbomify-action/runtimes/travis/) - `docker run` from the job, ref from the job environment
 - [**Azure DevOps**](/sbomify-action/runtimes/azure-devops/) - container job or Docker task, VCS detected from the checkout
 - [**TeamCity**](/sbomify-action/runtimes/teamcity/) - Docker Wrapper build feature or Kotlin DSL
 - [**Any container runner**](/sbomify-action/runtimes/docker/) - Drone, Woodpecker, Buildkite, Concourse, or a plain shell
@@ -32,14 +33,17 @@ If your platform can run a container, it is supported - even if it does not have
 | GitHub Actions                                 | Native action   | OIDC or token | Yes             | Generates workflow | Yes         |
 | GitLab CI                                      | Container image | Token         | Yes             | No                 | No          |
 | Bitbucket                                      | Container image | Token         | Yes             | No                 | No          |
-| Jenkins                                        | Container image | Token         | From git        | No                 | No          |
-| CircleCI                                       | Container image | Token         | From git        | No                 | No          |
+| Jenkins                                        | Container image | Token         | Yes             | No                 | No          |
+| CircleCI                                       | Container image | Token         | Yes             | No                 | No          |
+| Travis CI                                      | Container image | Token         | Vendor + git    | No                 | No          |
 | Azure DevOps                                   | Container image | Token         | From git        | No                 | No          |
 | Any container runner                           | Container image | Token         | From git        | No                 | No          |
 | [TeamCity](/sbomify-action/runtimes/teamcity/) | Container image | Token         | Git roots       | No                 | No          |
 | Local machine                                  | `uvx` or `pipx` | Token         | Opt-in          | Yes                | No          |
 
-**VCS auto-detect** means the action records repository URL, commit SHA and branch without configuration. _Yes_ is read from the platform's own environment variables. _From git_ is read from the checkout the job is running in, which covers every CI system with no vendor integration of its own - it needs the `.git` directory to be present and the repository to have a remote, both of which a normal CI checkout gives you.
+**VCS auto-detect** means the action records repository URL, commit SHA and branch without configuration. _Yes_ is read from the platform's own environment variables, with the checkout as a fallback where the vendor publishes nothing - on [Jenkins](/sbomify-action/runtimes/jenkins/#vcs-information) a job on Subversion or Perforce, on [CircleCI](/sbomify-action/runtimes/circleci/#vcs-information) a job that never ran `checkout`. _From git_ is read from the checkout the job is running in, which covers every CI system with no vendor integration of its own - it needs the `.git` directory to be present and the repository to have a remote, both of which a normal CI checkout gives you.
+
+_Vendor + git_ is [Travis CI](/sbomify-action/runtimes/travis/#vcs-information), which publishes the commit and the branch a build was triggered for but no repository URL - only an `owner/repo` slug with no host attached. The commit and ref come from the job, the URL from the checkout, and nothing is guessed from the slug.
 
 _Git roots_ is TeamCity, which is VCS-agnostic and can be backed by Subversion, Perforce or TFVC as easily as Git. Detection runs only when the repository URL positively identifies Git, and emits nothing otherwise rather than recording a changelist number as a commit SHA. See [TeamCity](/sbomify-action/runtimes/teamcity/#vcs-information).
 

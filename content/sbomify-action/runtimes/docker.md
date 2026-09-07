@@ -87,7 +87,7 @@ Mounting the Docker socket gives the container control of the host daemon. Prefe
 
 ## VCS information
 
-Outside GitHub Actions, GitLab CI and Bitbucket, repository details are not auto-detected. Set them in `sbomify.json`:
+Repository details are auto-detected on every runtime - from the vendor's own variables where it publishes them, and from the git checkout you mounted everywhere else (see [VCS detection](#vcs-detection) below). Set them in `sbomify.json` when you want something else recorded, or when there is no checkout to read:
 
 ```json
 {
@@ -170,7 +170,9 @@ jobs:
 
 Repository URL, commit SHA and branch are detected from the git checkout you mounted, so a plain `docker run` on any CI system records provenance without configuration. It needs the `.git` directory inside the mount - `-v "$(pwd):/workspace"` from a repository root gives you that - and a remote on the repository.
 
-One thing to know: the action treats a run as CI when the environment sets `CI=true` or a vendor variable it recognises (`JENKINS_URL`, `CIRCLECI`, `TF_BUILD`, `BUILDKITE`, `DRONE`, `TRAVIS`, `APPVEYOR`, `CODEBUILD_BUILD_ID`). Nearly every CI system sets one of those. If yours does not - a cron job or a shell script on a build box, say - pass `-e CI=true`, or `-e SBOMIFY_LOCAL_VCS=true` to get the same detection without claiming to be CI. Otherwise the run counts as local, where reading the checkout is opt-in.
+One thing to know: the action treats a run as CI when the environment sets `CI=true` or a vendor variable it recognises (`CIRCLECI`, `TRAVIS`, `TF_BUILD`, `BUILDKITE`, `DRONE`, `APPVEYOR`, `CODEBUILD_BUILD_ID`, or one of the Jenkins markers `JENKINS_URL`, `JENKINS_HOME`, `HUDSON_HOME`, `JENKINS_NODE_COOKIE`, `JENKINS_SERVER_COOKIE`). Nearly every CI system sets one of those. If yours does not - a cron job or a shell script on a build box, say - pass `-e CI=true`, or `-e SBOMIFY_LOCAL_VCS=true` to get the same detection without claiming to be CI. Otherwise the run counts as local, where reading the checkout is opt-in.
+
+A `docker run` passes nothing from the surrounding job into the container unless you ask it to, which matters on platforms that have a dedicated integration of their own: forward the vendor's variables with the bare `-e NAME` form and the action reads them, rather than falling back to the checkout. See [Jenkins](/sbomify-action/runtimes/jenkins/#vcs-information), [CircleCI](/sbomify-action/runtimes/circleci/#vcs-information) and [Travis CI](/sbomify-action/runtimes/travis/#vcs-information).
 
 `sbomify.json` overrides whatever is detected. See [augmentation](/sbomify-action/augmentation/#automatic-vcs-detection).
 

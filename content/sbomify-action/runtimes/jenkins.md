@@ -4,9 +4,9 @@ url: /sbomify-action/runtimes/jenkins/
 aliases:
   - /guides/sbomify-action/runtimes/jenkins/
 title: "SBOM Generation in Jenkins"
-description: "Run the sbomify action in Jenkins declarative and scripted pipelines, with credentials, caching and VCS detection from the checkout."
+description: "Run the sbomify action in Jenkins declarative and scripted pipelines, with credentials, caching and VCS detection from the Git plugin's variables."
 keywords: ["Jenkins SBOM", "Jenkins pipeline SBOM", "CycloneDX Jenkins"]
-tldr: "Use the container image as a pipeline agent. Repository details are detected from the git checkout in the workspace; sbomify.json overrides them if you need something else recorded."
+tldr: "Use the container image as a pipeline agent. Repository, commit and branch are read from the Git plugin's build variables, with the checkout as the fallback; sbomify.json overrides them if you need something else recorded."
 ---
 
 Jenkins runs the container image as a pipeline agent. Both declarative and scripted pipelines work.
@@ -99,11 +99,31 @@ node {
 
 ## VCS information
 
-Repository URL, commit SHA and branch are detected automatically, read from the git checkout in the workspace. Jenkins exposes no repository variables worth trusting - which ones exist depends on the SCM plugin and the job type - so the action asks `git` directly instead. Nothing to configure.
+Repository URL, commit SHA and branch are detected automatically, read from the variables the Git plugin exports into the build. Nothing to configure.
 
-Two things have to be true, and a normal `checkout scm` gives you both: the `.git` directory is present in the workspace the container sees, and the repository has a remote (`origin`, or the first one configured). If either is missing, nothing is emitted rather than a partial claim.
+Detection landed after `v26.8.0`, so it is present on `master` and in any release tagged since. Older tags read the git checkout instead, which is still the fallback described below.
 
-Set the fields in `sbomify.json` when you want something other than the remote recorded - an internal mirror rewritten to its public URL, for example:
+| Field         | Read from                                                                         |
+| ------------- | --------------------------------------------------------------------------------- |
+| Repository    | `GIT_URL`, or `GIT_URL_1` when the job has more than one SCM                      |
+| Commit        | `GIT_COMMIT`                                                                      |
+| Branch or tag | `GIT_LOCAL_BRANCH`, then `TAG_NAME`, `CHANGE_BRANCH`, `BRANCH_NAME`, `GIT_BRANCH` |
+
+The ref list is in that order for a reason. On a multibranch pull request build `BRANCH_NAME` is Jenkins' own `PR-42` - a job name, not a ref anyone can check out - so `CHANGE_BRANCH`, the branch the request came _from_, is preferred. `GIT_BRANCH` is remote-tracking (`origin/main`, or `refs/remotes/origin/main` on older plugin versions), and the remote is stripped before the branch is recorded.
+
+An SSH remote, or one carrying an embedded credential, is normalised to a browsable URL. A commit link is added for github.com, gitlab.com and bitbucket.org, plus self-hosted GitHub and GitLab. An internal Git server gets the repository URL and the SHA without a link rather than a guessed one that 404s.
+
+**Why the environment rather than `git`.** `checkout scm` leaves a detached HEAD, so the checkout can name a tag that happens to point at the commit and nothing else. Jenkins knows which branch the job was triggered for, and on a pull request it knows which branch the request came from. Neither is recoverable from the working directory.
+
+### Falling back to the checkout
+
+Jenkins is VCS-agnostic. A job on Subversion or Perforce, or with no SCM at all, exports none of the `GIT_*` variables, and so does a scripted pipeline whose `checkout` step does not publish them. When `GIT_URL` is missing the action reads the git checkout in the workspace instead - the behaviour Jenkins had before it became a platform of its own.
+
+Two things have to be true for that, and a normal `checkout scm` gives you both: the `.git` directory is present in the workspace the container sees, and the repository has a remote (`origin`, or the first one configured). If neither path yields a repository URL, nothing is emitted rather than a partial claim.
+
+### Overriding
+
+Set the fields in `sbomify.json` when you want something other than what the job reports - an internal mirror rewritten to its public URL, for example:
 
 ```json
 {
@@ -113,27 +133,7 @@ Set the fields in `sbomify.json` when you want something other than the remote r
 }
 ```
 
-`sbomify.json` wins over detection. To populate it from the build, write the file in an earlier stage:
-
-```groovy
-stage('Prepare SBOM metadata') {
-    steps {
-        sh '''
-            cat > sbomify.json <<EOF
-            {
-              "vcs_url": "${GIT_URL}",
-              "vcs_commit_sha": "${GIT_COMMIT}",
-              "vcs_ref": "${GIT_BRANCH}",
-              "supplier": {"name": "My Company"},
-              "lifecycle_phase": "build"
-            }
-            EOF
-        '''
-    }
-}
-```
-
-`GIT_URL`, `GIT_COMMIT` and `GIT_BRANCH` are set by the Git plugin. Then set `AUGMENT: 'true'`. See [augmentation](/sbomify-action/augmentation/).
+`sbomify.json` wins over detection. Writing `GIT_URL`, `GIT_COMMIT` and `GIT_BRANCH` into it from an earlier stage is no longer necessary - those are exactly what the action reads for itself. Set `AUGMENT: 'true'` when you are supplying other metadata alongside it. See [augmentation](/sbomify-action/augmentation/).
 
 ## Versioning
 

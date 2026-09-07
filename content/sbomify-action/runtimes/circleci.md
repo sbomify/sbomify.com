@@ -4,9 +4,9 @@ url: /sbomify-action/runtimes/circleci/
 aliases:
   - /guides/sbomify-action/runtimes/circleci/
 title: "SBOM Generation in CircleCI"
-description: "Run the sbomify action in CircleCI using the container image as a Docker executor, with caching, contexts and automatic VCS detection."
+description: "Run the sbomify action in CircleCI using the container image as a Docker executor, with caching, contexts and automatic VCS detection from the job environment."
 keywords: ["CircleCI SBOM", "CircleCI CycloneDX", "SBOM pipeline"]
-tldr: "Use the container image as the Docker executor and run sbomify-action. Repository details are detected from the git checkout; sbomify.json overrides them."
+tldr: "Use the container image as the Docker executor and run sbomify-action. Repository, commit and branch are read from CircleCI's own job variables, with the checkout as the fallback; sbomify.json overrides them."
 ---
 
 CircleCI runs the container image as a Docker executor.
@@ -123,9 +123,31 @@ workflows:
 
 ## VCS information
 
-Repository URL, commit SHA and branch are detected automatically, read from the git checkout that `checkout` leaves in the working directory. CircleCI's own variables are not used - the checkout is a better source, and it is there on every job that runs `checkout`.
+Repository URL, commit SHA and branch or tag are detected automatically, read from the variables CircleCI sets in the job. Nothing to configure.
 
-Set the fields in `sbomify.json` when you want something other than the remote recorded, or when a job builds from a workspace attachment rather than a git checkout:
+Detection landed after `v26.8.0`, so it is present on `master` and in any release tagged since. Older tags read the git checkout instead, which is still the fallback described below.
+
+| Field         | Read from                                       |
+| ------------- | ----------------------------------------------- |
+| Repository    | `CIRCLE_REPOSITORY_URL`                         |
+| Commit        | `CIRCLE_SHA1`                                   |
+| Branch or tag | `CIRCLE_BRANCH`, or `CIRCLE_TAG` on a tag build |
+
+`CIRCLE_REPOSITORY_URL` is the clone URL, which is SSH for most projects; it is normalised to a browsable URL. A commit link is added for github.com, gitlab.com and bitbucket.org, plus self-hosted GitHub and GitLab. Anything else gets the repository URL and the SHA without a link rather than a guessed one that 404s.
+
+**Why the environment rather than `git`.** `checkout` leaves a detached HEAD, so the checkout can name a tag that happens to point at the commit but never the branch a build was triggered for. `CIRCLE_BRANCH` knows it.
+
+**No URL is guessed from the project slug.** `CIRCLE_PROJECT_USERNAME` and `CIRCLE_PROJECT_REPONAME` name the owner and the repository but not the host, and CircleCI serves GitHub, Bitbucket and GitLab projects alike. A URL built from that pair would look plausible while pointing at the wrong forge, so it is not built.
+
+### Falling back to the checkout
+
+A job that never runs the `checkout` step - one building from a workspace attachment, say - gets no `CIRCLE_REPOSITORY_URL`. The action then reads the git checkout in the working directory, the behaviour CircleCI had before it became a platform of its own. That needs the `.git` directory to be present and the repository to have a remote; if neither path yields a repository URL, nothing is emitted rather than a partial claim.
+
+CircleCI's default `working_directory` is the literal string `~/project`, and that unexpanded string is exactly what `CIRCLE_WORKING_DIRECTORY` contains. The action expands it before using it, so the fallback works on the default configuration rather than silently finding no repository.
+
+### Overriding
+
+Set the fields in `sbomify.json` when you want something other than what the job reports - an internal mirror rewritten to its public URL, for example:
 
 ```json
 {
@@ -135,24 +157,7 @@ Set the fields in `sbomify.json` when you want something other than the remote r
 }
 ```
 
-`sbomify.json` wins over detection. To fill it from the build, write the file in a step first:
-
-```yaml
-- run:
-    name: Write SBOM metadata
-    command: |
-      cat > sbomify.json <<EOF
-      {
-        "vcs_url": "${CIRCLE_REPOSITORY_URL}",
-        "vcs_commit_sha": "${CIRCLE_SHA1}",
-        "vcs_ref": "${CIRCLE_BRANCH:-$CIRCLE_TAG}",
-        "supplier": {"name": "My Company"},
-        "lifecycle_phase": "build"
-      }
-      EOF
-```
-
-Then set `AUGMENT: "true"`. See [augmentation](/sbomify-action/augmentation/).
+`sbomify.json` wins over detection. Writing `CIRCLE_REPOSITORY_URL`, `CIRCLE_SHA1` and `CIRCLE_BRANCH` into it from an earlier step is no longer necessary - those are exactly what the action reads for itself. Set `AUGMENT: "true"` when you are supplying other metadata alongside it. See [augmentation](/sbomify-action/augmentation/).
 
 ## Container images
 

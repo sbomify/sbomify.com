@@ -4,7 +4,7 @@ url: /sbomify-action/
 aliases:
   - /guides/sbomify-action/
 title: "sbomify Action: Generate Compliance-Grade SBOMs in Any CI Pipeline"
-description: "Complete documentation for the sbomify action - a CLI shipped as a container that generates, augments and enriches SBOMs in GitHub Actions, GitLab CI, Bitbucket, Jenkins and any other pipeline."
+description: "Complete documentation for the sbomify action - a CLI shipped as a container that generates, augments and enriches SBOMs in GitHub Actions, GitLab CI, Bitbucket, Jenkins, CircleCI and any other pipeline."
 keywords: ["sbomify action", "SBOM CI/CD", "SBOM automation", "CycloneDX", "SPDX", "GitHub Action SBOM", "GitLab SBOM"]
 tldr: "sbomify-action is a CLI shipped as a container image that turns a lockfile into a compliance-grade SBOM inside your pipeline. It picks the right generator for your ecosystem, adds your business metadata, and enriches every component from package registries. It runs anywhere containers run - GitHub Actions is one runtime among several."
 ---
@@ -63,14 +63,17 @@ The core tool behaves identically everywhere. What differs is how you invoke it,
 | [GitHub Actions](/sbomify-action/runtimes/github-actions/) | Native action   | OIDC or token | Yes             | Generates workflow | Yes         |
 | [GitLab CI](/sbomify-action/runtimes/gitlab-ci/)           | Container image | Token         | Yes             | No                 | No          |
 | [Bitbucket](/sbomify-action/runtimes/bitbucket/)           | Container image | Token         | Yes             | No                 | No          |
-| [Jenkins](/sbomify-action/runtimes/jenkins/)               | Container image | Token         | From git        | No                 | No          |
-| [CircleCI](/sbomify-action/runtimes/circleci/)             | Container image | Token         | From git        | No                 | No          |
+| [Jenkins](/sbomify-action/runtimes/jenkins/)               | Container image | Token         | Yes             | No                 | No          |
+| [CircleCI](/sbomify-action/runtimes/circleci/)             | Container image | Token         | Yes             | No                 | No          |
+| [Travis CI](/sbomify-action/runtimes/travis/)              | Container image | Token         | Vendor + git    | No                 | No          |
 | [Azure DevOps](/sbomify-action/runtimes/azure-devops/)     | Container image | Token         | From git        | No                 | No          |
 | [Any container runner](/sbomify-action/runtimes/docker/)   | Container image | Token         | From git        | No                 | No          |
 | [TeamCity](/sbomify-action/runtimes/teamcity/)             | Container image | Token         | Git roots       | No                 | No          |
 | [Local machine](/sbomify-action/runtimes/local/)           | `uvx` or `pipx` | Token         | Opt-in          | Yes                | No          |
 
-**Yes** means the runtime publishes repository URL, commit SHA and ref as environment variables and they are read from there. **From git** means it does not, so the action reads the checkout it is running in - no configuration either way, as long as the `.git` directory is present and the repository has a remote.
+**Yes** means the runtime publishes repository URL, commit SHA and ref as environment variables and they are read from there. **From git** means it does not, so the action reads the checkout it is running in - no configuration either way, as long as the `.git` directory is present and the repository has a remote. Jenkins and CircleCI do both: the vendor's variables first, the checkout when a job publishes none, which is a job on [Subversion or Perforce](/sbomify-action/runtimes/jenkins/#falling-back-to-the-checkout) or one that [never ran `checkout`](/sbomify-action/runtimes/circleci/#falling-back-to-the-checkout).
+
+**Vendor + git** means Travis CI, which publishes the commit and the branch a build was triggered for but no repository URL - only an `owner/repo` slug with no host attached, and Travis serves several forges. The commit and ref come from the job, the URL from the checkout, and no URL is guessed from the slug. See [Travis CI](/sbomify-action/runtimes/travis/#vcs-information).
 
 **Git roots** means TeamCity, which is VCS-agnostic: detection runs only when the repository URL positively identifies Git, and stays silent otherwise rather than recording a Subversion revision as if it were a commit. See [TeamCity](/sbomify-action/runtimes/teamcity/#vcs-information).
 
