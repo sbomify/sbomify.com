@@ -51,6 +51,7 @@ Pick your runtime:
 - [Bitbucket Pipelines](/sbomify-action/runtimes/bitbucket/) - container image via a Docker pipe
 - [Jenkins](/sbomify-action/runtimes/jenkins/) - declarative and scripted pipelines
 - [CircleCI](/sbomify-action/runtimes/circleci/) - container executor
+- [Travis CI](/sbomify-action/runtimes/travis/) - `docker run` from the job
 - [Azure DevOps](/sbomify-action/runtimes/azure-devops/) - container job or Docker task
 - [TeamCity](/sbomify-action/runtimes/teamcity/) - Docker Wrapper build feature
 - [Any container runner](/sbomify-action/runtimes/docker/) - Drone, Woodpecker, Buildkite, Concourse

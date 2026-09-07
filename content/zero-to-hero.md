@@ -54,7 +54,7 @@ See [Integrations](/features/integrations/) for the full list of enrichment sour
 ### Runs Anywhere - No Vendor Lock-in
 
 - **GitHub Actions** - Native integration
-- **Any CI/CD** - GitLab CI, Bitbucket Pipelines, Jenkins, CircleCI, etc.
+- **Any CI/CD** - GitLab CI, Bitbucket Pipelines, Jenkins, CircleCI, Travis CI, etc.
 - **Python package** - `uvx sbomify-action` for standalone use
 - **Docker** - `ghcr.io/sbomify/sbomify-action` runs anywhere
 

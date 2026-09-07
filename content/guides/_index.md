@@ -39,7 +39,7 @@ The [sbomify action](/sbomify-action/) generates an SBOM from any of the lock fi
 - [Quick start](/sbomify-action/quickstart/) - Setup wizard and your first run
 - [Why SBOM quality matters](/sbomify-action/why/) - scanners versus pipelines, and signing at origin
 - [Configuration reference](/sbomify-action/configuration/) - Every option
-- [Runtimes](/sbomify-action/runtimes/) - GitHub Actions, GitLab CI, Bitbucket, Jenkins, CircleCI, Azure DevOps, TeamCity and more
+- [Runtimes](/sbomify-action/runtimes/) - GitHub Actions, GitLab CI, Bitbucket, Jenkins, CircleCI, Travis CI, Azure DevOps, TeamCity and more
 
 ## General Guides
 
