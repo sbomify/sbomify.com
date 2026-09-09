@@ -3,7 +3,7 @@
 url: /guides/
 title: "How to Generate an SBOM: Tools and Guides (2026)"
 description: "Complete SBOM generation guide: how to generate an SBOM from a lockfile, container image or build system, which SBOM generation tools to use for each ecosystem, and how to automate it in CI/CD. Covers Syft, cdxgen, native ecosystem tools and sbomify-action, in CycloneDX and SPDX."
-tldr: "Generate an SBOM from your lockfile, not your installed environment – the lockfile is what pins exact versions and hashes. Pick a tool that understands your ecosystem: native generators (cyclonedx-py, cyclonedx-maven-plugin) give the richest output, Syft and cdxgen cover the widest range, and sbomify-action selects the right one for you and enriches the result. Run it in CI on every build so the SBOM matches the artefact you shipped. Output CycloneDX or SPDX – both are accepted by every major compliance framework."
+tldr: "Generate an SBOM from your lockfile, not your installed environment – the lockfile is what pins exact versions and hashes. Pick a tool that understands your ecosystem: Syft and cdxgen cover the widest range, native generators like cyclonedx-py handle a single language, and sbomify-action selects the right one for you and enriches the result. Run it in CI on every build so the SBOM matches the artefact you shipped. Output CycloneDX or SPDX – both are accepted by every major compliance framework."
 ---
 
 Step-by-step guides for generating SBOMs across every major programming language and platform. New to SBOMs? Start with [What is an SBOM?](/what-is-sbom/) for the basics, or jump straight to your ecosystem below.
@@ -25,7 +25,7 @@ Every SBOM generation workflow comes down to four decisions.
 
 This is the decision that matters most, and the one most often got wrong.
 
-- **From a lockfile (recommended)** – `uv.lock`, `poetry.lock`, `package-lock.json`, `pnpm-lock.yaml`, `Cargo.lock`, `go.sum`, `pom.xml`, `Gemfile.lock`. A good lockfile already pins exact versions and cryptographic hashes for every transitive dependency, which is precisely what an SBOM needs. In CycloneDX terminology this is a _pre-build_ or _source_ SBOM.
+- **From a lockfile (recommended)** – `uv.lock`, `poetry.lock`, `package-lock.json`, `pnpm-lock.yaml`, `Cargo.lock`, `go.sum`, `gradle.lockfile`, `Gemfile.lock`. A good lockfile already pins exact versions and cryptographic hashes for every transitive dependency, which is precisely what an SBOM needs. In CycloneDX terminology this is a _pre-build_ or _source_ SBOM. Not every ecosystem has one — Maven has no traditional lockfile, since versions in `pom.xml` can be ranges or inherited from parent POMs, which the [Java guide](/guides/java/) covers.
 - **From an installed environment** – reading what the package manager actually installed. Useful when there is no usable lockfile, but the output inherits whatever the environment happens to contain.
 - **From a container image** – scans the image filesystem. Essential for containerised delivery, with an important caveat covered in the [Docker guide](/guides/docker/): image scanning sees packages installed by a package manager, and can miss binaries copied in during a multi-stage build.
 - **From a build system** – Yocto, Buildroot and similar emit their own manifests. See the [Yocto guide](/guides/yocto/).
@@ -36,18 +36,18 @@ The general rule: **the SBOM is only as good as the lockfile.** A `requirements.
 
 There is no single best SBOM tool — the right one depends on your ecosystem.
 
-| Tool                                              | Best for                      | Notes                                                                                                                                                          |
-| ------------------------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Native ecosystem tools**                        | Richest, most accurate output | `cyclonedx-py`, `cyclonedx-maven-plugin`, `cyclonedx-npm` and friends understand their own lockfile format properly. Covered per-language in the guides below. |
-| **[Syft](https://github.com/anchore/syft)**       | Breadth, container images     | Handles many ecosystems and image formats from one binary.                                                                                                     |
-| **[cdxgen](https://github.com/CycloneDX/cdxgen)** | Breadth, monorepos            | Wide language coverage, CycloneDX-native.                                                                                                                      |
-| **[sbomify-action](/sbomify-action/)**            | CI/CD, and not choosing       | Bundles the above, selects the right generator for your ecosystem, then enriches and publishes the result in one step.                                         |
+| Tool                                              | Best for                  | Notes                                                                                                                                                                      |
+| ------------------------------------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Native ecosystem tools**                        | A single language         | `cyclonedx-py`, `cyclonedx-maven-plugin` and similar read their own lockfile format directly. Which tool fits which ecosystem is covered per-language in the guides below. |
+| **[Syft](https://github.com/anchore/syft)**       | Breadth, container images | Handles many ecosystems and image formats from one binary.                                                                                                                 |
+| **[cdxgen](https://github.com/CycloneDX/cdxgen)** | Breadth, monorepos        | Wide language coverage, CycloneDX-native.                                                                                                                                  |
+| **[sbomify-action](/sbomify-action/)**            | CI/CD, and not choosing   | Bundles the above, selects the right generator for your ecosystem, then enriches and publishes the result in one step.                                                     |
 
 A note on tool safety: we [no longer consider Trivy safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/) following two successful supply chain attacks in March 2026, and have removed it from sbomify-action. SBOM tooling sits inside your build pipeline with access to your source and often your registry credentials — it deserves the same scrutiny as any other dependency.
 
 ### 3. Choose a format: CycloneDX or SPDX
 
-Both are mature, both are accepted by every major compliance framework, and you do not need to pick a side permanently — see [converting between CycloneDX and SPDX](/faq/can-i-convert-between-cyclonedx-and-spdx/) and [which formats sbomify supports](/faq/what-sbom-formats-does-sbomify-support/). If you have no existing constraint, CycloneDX has the broader native tool support for generation.
+Both are mature, both are accepted by every major compliance framework, and you do not need to pick a side permanently — see [converting between CycloneDX and SPDX](/faq/can-i-convert-between-cyclonedx-and-spdx/) and [which formats sbomify supports](/faq/what-sbom-formats-does-sbomify-support/). If you have no existing constraint, either is a safe default; the guides below use CycloneDX output in their examples.
 
 ### 4. Automate it in CI
 
@@ -71,11 +71,11 @@ Generation is also the right moment to [sign the SBOM](/faq/how-do-i-sign-an-sbo
 - [Dart/Flutter](/guides/dart/) - pub
 - [Elixir](/guides/elixir/) - Mix
 - [Scala](/guides/scala/) - sbt
-- [C/C++](/guides/cpp/) - Conan, CMake
+- [C/C++](/guides/cpp/) - Conan, vcpkg
 
 ## Platform Guides
 
-- [Docker and containers](/guides/docker/) - image SBOMs, multi-stage build caveats, and running SBOM generation for Kubernetes workloads
+- [Docker and containers](/guides/docker/) - image SBOMs, multi-stage builds, distroless images
 - [Terraform](/guides/terraform/)
 - [Yocto](/guides/yocto/) - Embedded Linux
 - [Raspberry Pi](/guides/raspberry-pi/) - rpi-image-gen
