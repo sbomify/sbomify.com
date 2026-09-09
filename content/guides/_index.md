@@ -23,12 +23,12 @@ Every SBOM generation workflow comes down to four decisions.
 
 ### 1. Choose your source: lockfile, image, or build system
 
-This is the decision that matters most, and the one most often got wrong.
+This is the decision that matters most, and the easiest one to get wrong.
 
-- **From a lockfile (recommended)** – `uv.lock`, `poetry.lock`, `package-lock.json`, `pnpm-lock.yaml`, `Cargo.lock`, `go.sum`, `gradle.lockfile`, `Gemfile.lock`. A good lockfile already pins exact versions and cryptographic hashes for every transitive dependency, which is precisely what an SBOM needs. In CycloneDX terminology this is a _pre-build_ or _source_ SBOM. Not every ecosystem has one — Maven has no traditional lockfile, since versions in `pom.xml` can be ranges or inherited from parent POMs, which the [Java guide](/guides/java/) covers.
+- **From a lockfile (recommended)** – `uv.lock`, `poetry.lock`, `package-lock.json`, `pnpm-lock.yaml`, `Cargo.lock`, `go.sum`, `gradle.lockfile`, `Gemfile.lock`. A good lockfile already pins an exact version for every transitive dependency, and in most ecosystems a cryptographic hash too, which is precisely what an SBOM needs. In CycloneDX terminology this is a _pre-build_ or _source_ SBOM. Not every ecosystem has one — Maven has no traditional lockfile, since versions in `pom.xml` can be ranges or inherited from parent POMs, which the [Java guide](/guides/java/) covers.
 - **From an installed environment** – reading what the package manager actually installed. Useful when there is no usable lockfile, but the output inherits whatever the environment happens to contain.
 - **From a container image** – scans the image filesystem. Essential for containerised delivery, with an important caveat covered in the [Docker guide](/guides/docker/): image scanning sees packages installed by a package manager, and can miss binaries copied in during a multi-stage build.
-- **From a build system** – Yocto, Buildroot and similar emit their own manifests. See the [Yocto guide](/guides/yocto/).
+- **From a build system** – embedded build systems emit their own manifests. See the [Yocto guide](/guides/yocto/).
 
 The general rule: **the SBOM is only as good as the lockfile.** A `requirements.txt` with version ranges and no hashes cannot produce an accurate source SBOM, because the exact version is genuinely unknown until install time. If your SBOM quality is disappointing, fix the lockfile before blaming the tool.
 
