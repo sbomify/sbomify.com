@@ -1,0 +1,115 @@
+{{- if site.Params.posthog_api_key -}}
+{{- /* Consent banner for the analytics cookies loaded by
+     layouts/partials/posthog.html. Ships hidden and is revealed by the script
+     below only when no decision is on record, so it never occupies layout on a
+     first paint and never appears at all for visitors who have already chosen.
+     Position is fixed, so revealing it shifts nothing (no CLS). */ -}}
+<div id="cookie-consent" class="hidden fixed inset-x-0 bottom-0 z-50 px-4 pb-4 sm:px-6 sm:pb-6" role="dialog" aria-modal="false" aria-label="Cookie consent" aria-describedby="cookie-consent-text">
+  <div class="mx-auto max-w-3xl rounded-2xl border border-white/15 bg-secondaryBG/95 p-5 shadow-2xl backdrop-blur-sm sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <p id="cookie-consent-text" class="text-sm leading-relaxed text-tertiaryText">
+      We would like to set analytics cookies to understand how the site is used. They are only set if you accept, and you can change your mind at any time via <span class="whitespace-nowrap">&ldquo;Cookie settings&rdquo;</span> in the footer. Read our <a href="/privacy/" class="text-purple underline underline-offset-2 transition-colors hover:text-white">Privacy Policy</a>.
+    </p>
+    {{- /* Both buttons are the same size and weight: under GDPR, declining has
+         to be as easy as accepting. */ -}}
+    <div class="flex shrink-0 gap-3">
+      <button type="button" data-cookie-consent="rejected" class="rounded-full border border-white/25 bg-white/10 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/20 hover:opacity-100">Reject</button>
+      <button type="button" data-cookie-consent="accepted" class="rounded-full border border-purple bg-purple px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:border-purple-700 hover:bg-purple-700 hover:opacity-100">Accept</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    /* The decision is kept in localStorage rather than a cookie: recording a
+       refusal must not itself require a cookie, and this key is never sent to
+       any server. Bump VERSION when the purposes below change -- an older
+       stored decision then stops counting and the banner asks again. */
+    var STORAGE_KEY = 'sbomify_cookie_consent';
+    var VERSION = 1;
+
+    var banner = document.getElementById('cookie-consent');
+    var settings = document.getElementById('cookie-settings');
+    var settingsWrapper = document.getElementById('cookie-settings-wrapper');
+    var reopened = false;
+    if (!banner) { return; }
+
+    function read() {
+      try {
+        var stored = JSON.parse(window.localStorage.getItem(STORAGE_KEY));
+        if (!stored || stored.version !== VERSION) { return null; }
+        return stored.status === 'accepted' || stored.status === 'rejected' ? stored.status : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function write(status) {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          status: status,
+          version: VERSION,
+          date: new Date().toISOString()
+        }));
+      } catch (e) {}
+    }
+
+    function apply(status, fromClick) {
+      var analytics = window.sbomifyAnalytics;
+      if (!analytics) { return; }
+      if (status === 'accepted') {
+        if (fromClick) { analytics.load(); } else { analytics.loadDeferred(); }
+      } else if (fromClick) {
+        analytics.forget();
+      }
+    }
+
+    function openBanner() {
+      reopened = true;
+      banner.classList.remove('hidden');
+      banner.querySelector('[data-cookie-consent]').focus();
+    }
+
+    function closeBanner() {
+      banner.classList.add('hidden');
+      /* Focus is inside the banner we just hid, so it would fall back to
+         <body>. Returning it to the control that opened the banner only makes
+         sense when there was one -- on the first-visit banner it would yank the
+         reader down to the footer. */
+      if (reopened && settings) { settings.focus(); }
+      reopened = false;
+    }
+
+    var buttons = banner.querySelectorAll('[data-cookie-consent]');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener('click', function () {
+        var status = this.getAttribute('data-cookie-consent');
+        write(status);
+        closeBanner();
+        apply(status, true);
+      });
+    }
+
+    if (settings) {
+      /* Revealed from here so the control is never a dead button in a browser
+         with JavaScript disabled -- where nothing was ever stored to change. */
+      (settingsWrapper || settings).classList.remove('hidden');
+      settings.addEventListener('click', openBanner);
+    }
+
+    document.addEventListener('keydown', function (e) {
+      /* Escape only dismisses a re-opened banner. With no decision on record
+         there is nothing to fall back to, and silently closing would read as
+         consent. */
+      if (e.key === 'Escape' && read() && !banner.classList.contains('hidden')) {
+        closeBanner();
+      }
+    });
+
+    var decision = read();
+    if (decision) {
+      apply(decision, false);
+    } else {
+      banner.classList.remove('hidden');
+    }
+  }());
+</script>
+{{- end -}}

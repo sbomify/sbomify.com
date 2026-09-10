@@ -110,3 +110,13 @@ Three pieces apply it:
 - `layouts/_markup/render-link.html` — render hook for every Markdown link
 - `layouts/partials/nofollow-links.html` — filter over rendered page content, covering hand-written `<a>` tags and `.html` content pages. Applied inside `layouts/partials/content.html`, which every layout already uses to render `.Content`, so no layout changes are needed
 - `layouts/partials/link-attrs.html` — helper for links written in templates/shortcodes: `<a href="{{ $url }}"{{ partial "link-attrs.html" $url }}>`, or pass `(dict "url" $url "rel" "noopener noreferrer" "target" "_blank")` to keep baseline attributes for internal links
+
+## Analytics & Cookie Consent
+
+PostHog is consent-gated. It is analytics, not a strictly necessary cookie, so it may not run before the visitor opts in — until then the SDK is never even requested.
+
+- `layouts/partials/posthog.html` (in `<head>`) loads nothing on its own. It exposes `window.sbomifyAnalytics` with `load()` (immediate), `loadDeferred()` (after window load + 2s, keeping PostHog off the critical path) and `forget()` (opt out and clear `ph_*` / `__ph*` cookies and local storage). It also installs a no-op `window.posthog` stub, because `onclick="posthog.capture(...)"` handlers in the header, nav, pricing page and `cta-ready` shortcode would otherwise throw for anyone who declines.
+- `layouts/partials/cookie-consent.html` (rendered after the footer in `baseof.html`) owns the banner and the decision. The choice lives in `localStorage` under `sbomify_cookie_consent` as `{status, version, date}` — recording a refusal must not itself need a cookie. Bump `VERSION` in that file when the purposes change and every visitor is asked again.
+- The **Cookie settings** button in `layouts/partials/footer.html` re-opens the banner. It ships `hidden` and is revealed by the consent script, so it is not a dead control without JavaScript.
+- `forget()` runs only on an explicit "Reject" click, never on plain page loads: PostHog's cookie is set on `.sbomify.com`, so sweeping it on every page view would keep resetting analytics state for `app.sbomify.com` too.
+- Cookies and choices are documented in `content/privacy.md` under "Your Cookie Choices". Keep the two in step.

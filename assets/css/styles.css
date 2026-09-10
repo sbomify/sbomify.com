@@ -1272,6 +1272,10 @@ a.button:hover {
   flex-shrink: 0;
 }
 
+.shrink-0 {
+  flex-shrink: 0;
+}
+
 .flex-grow {
   flex-grow: 1;
 }
@@ -1509,6 +1513,10 @@ a.button:hover {
   border-radius: 0.5rem;
 }
 
+.rounded-none {
+  border-radius: 0px;
+}
+
 .rounded-xl {
   border-radius: 0.75rem;
 }
@@ -1603,6 +1611,11 @@ a.button:hover {
   border-color: rgb(55 48 107 / var(--tw-border-opacity, 1));
 }
 
+.border-purple {
+  --tw-border-opacity: 1;
+  border-color: rgb(138 125 255 / var(--tw-border-opacity, 1));
+}
+
 .border-purple-100 {
   --tw-border-opacity: 1;
   border-color: rgb(243 232 255 / var(--tw-border-opacity, 1));
@@ -1627,6 +1640,10 @@ a.button:hover {
 
 .border-white\/15 {
   border-color: rgb(255 255 255 / 0.15);
+}
+
+.border-white\/25 {
+  border-color: rgb(255 255 255 / 0.25);
 }
 
 .bg-\[\#141035\] {
@@ -1763,6 +1780,10 @@ a.button:hover {
   background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));
 }
 
+.bg-secondaryBG\/95 {
+  background-color: rgb(26 27 42 / 0.95);
+}
+
 .bg-transparent {
   background-color: transparent;
 }
@@ -1770,6 +1791,10 @@ a.button:hover {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+
+.bg-white\/10 {
+  background-color: rgb(255 255 255 / 0.1);
 }
 
 .bg-white\/5 {
@@ -1891,6 +1916,10 @@ a.button:hover {
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.p-0 {
+  padding: 0px;
 }
 
 .p-10 {
@@ -2020,6 +2049,10 @@ a.button:hover {
   padding-bottom: 4rem;
 }
 
+.pb-4 {
+  padding-bottom: 1rem;
+}
+
 .pl-2 {
   padding-left: 0.5rem;
 }
@@ -2123,6 +2156,10 @@ a.button:hover {
 
 .font-medium {
   font-weight: 500;
+}
+
+.font-normal {
+  font-weight: 400;
 }
 
 .font-semibold {
@@ -2302,6 +2339,10 @@ a.button:hover {
 .text-green-600 {
   --tw-text-opacity: 1;
   color: rgb(22 163 74 / var(--tw-text-opacity, 1));
+}
+
+.text-inherit {
+  color: inherit;
 }
 
 .text-primary-light {
@@ -3367,6 +3408,11 @@ a.button:hover {
   border-color: rgb(138 125 255 / var(--tw-border-opacity, 1));
 }
 
+.hover\:border-purple-700:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(122 109 229 / var(--tw-border-opacity, 1));
+}
+
 .hover\:border-purple\/20:hover {
   border-color: rgb(138 125 255 / 0.2);
 }
@@ -3408,6 +3454,10 @@ a.button:hover {
 
 .hover\:bg-white\/10:hover {
   background-color: rgb(255 255 255 / 0.1);
+}
+
+.hover\:bg-white\/20:hover {
+  background-color: rgb(255 255 255 / 0.2);
 }
 
 .hover\:bg-white\/5:hover {
@@ -3617,8 +3667,24 @@ a.button:hover {
   .sm\:flex-row {
     flex-direction: row;
   }
+  .sm\:items-center {
+    align-items: center;
+  }
+  .sm\:justify-between {
+    justify-content: space-between;
+  }
   .sm\:rounded-2xl {
     border-radius: 1rem;
+  }
+  .sm\:p-6 {
+    padding: 1.5rem;
+  }
+  .sm\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .sm\:pb-6 {
+    padding-bottom: 1.5rem;
   }
 }
 
