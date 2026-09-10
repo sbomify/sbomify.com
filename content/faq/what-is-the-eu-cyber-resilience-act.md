@@ -21,8 +21,10 @@ The CRA explicitly requires manufacturers to:
 - **Produce a machine-readable SBOM** in a commonly used format (e.g., CycloneDX, SPDX) identifying components and dependencies in their products
 - **Cover at least top-level dependencies** of the product
 - **Document vulnerabilities** and provide timely security updates
-- **Report actively exploited vulnerabilities** to ENISA within 24 hours
+- **Report actively exploited vulnerabilities and severe incidents** within 24 hours, through the ENISA [Single Reporting Platform](/compliance/eu-cra/)
 - **Maintain cybersecurity** throughout the product's expected lifetime
+
+Reporting is not sent to ENISA directly: notifications go through the Single Reporting Platform to the CSIRT designated as coordinator in the relevant Member State, and are made available to ENISA at the same time (Article 16(1)).
 
 Germany's BSI has published [TR-03183-2](https://bsi.bund.de/dok/TR-03183-en), which provides concrete technical specifications for CRA-compliant SBOMs, including:
 
@@ -41,8 +43,9 @@ The CRA applies to:
 
 ## Timeline
 
-- **September 2026** - Vulnerability reporting obligations begin
-- **September 2027** - Full compliance required for all products
+- **11 September 2026** - Article 14 reporting obligations begin for manufacturers, filed through the ENISA [Single Reporting Platform](/compliance/eu-cra/)
+- **11 December 2027** - Full application: all essential requirements, including the SBOM obligation, become enforceable
+- **11 December 2027** - Reporting obligations for open-source software stewards begin (Article 24(3))
 
 ## How sbomify helps
 

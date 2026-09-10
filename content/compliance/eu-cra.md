@@ -2,8 +2,8 @@
 
 url: /compliance/eu-cra/
 title: "EU Cyber Resilience Act (CRA) SBOM Requirements"
-description: "Complete guide to CRA SBOM requirements with the BSI TR-03183 family (Parts 1, 2, 3 and H). Covers format requirements, data fields, dependency depth, the September 2026 reporting deadline, harmonised standards status, and a compliance checklist."
-keywords: [EU CRA SBOM, Cyber Resilience Act SBOM, CRA Annex I Part II, BSI TR-03183, CRA reporting obligations, Single Reporting Platform, EN 40000, CRA harmonised standards]
+description: "Complete guide to CRA SBOM requirements with the BSI TR-03183 family (Parts 1, 2, 3 and H). Covers format requirements, data fields, dependency depth, the ENISA Single Reporting Platform and the 11 September 2026 reporting deadline, harmonised standards status, and a compliance checklist."
+keywords: [EU CRA SBOM, Cyber Resilience Act SBOM, CRA Annex I Part II, BSI TR-03183, CRA reporting obligations, CRA Single Reporting Platform, ENISA SRP, CRA SRP registration, CSIRT designated as coordinator, EN 40000, CRA harmonised standards]
 ---
 
 [← Back to Compliance Overview](/compliance/)
@@ -19,18 +19,19 @@ keywords: [EU CRA SBOM, Cyber Resilience Act SBOM, CRA Annex I Part II, BSI TR-0
 
 ## What Changed Recently
 
-This page is current as of **August 2026**. The CRA landscape has moved substantially since the regulation entered into force:
+This page is current as of **September 2026**. The CRA landscape has moved substantially since the regulation entered into force:
 
-| Development                                                                                                                                                                             | Date             | Why it matters for SBOM                                                                                                             |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| [Commission Implementing Regulation (EU) 2025/2392](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202502392) - technical descriptions of important and critical products | 28 November 2025 | Determines your conformity assessment route, and therefore how much scrutiny your technical documentation (including the SBOM) gets |
-| [BSI TR-03183-3](https://bsi.bund.de/dok/TR-03183-en) v1.0.0 - Vulnerability Reports and Notifications                                                                                  | September 2025   | The intake side of vulnerability handling: security.txt, CVD policy, CSAF advisories                                                |
-| [BSI TR-03183-H](https://bsi.bund.de/dok/TR-03183-en) v1.1.0 - Conformity based on full quality assurance (Module H)                                                                    | 30 May 2026      | Lets manufacturers demonstrate CRA conformity through an ISO/IEC 27001 ISMS rather than per-product assessment                      |
-| [Commission CRA guidance](https://digital-strategy.ec.europa.eu/en/library/commission-publishes-new-guidance-support-timely-cyber-resilience-act-implementation) C(2026) 5252           | 27 July 2026     | 84 pages and 67 worked examples on scope, open source, support periods and reporting. Non-binding, but shapes enforcement           |
-| [ENISA Single Reporting Platform](https://www.enisa.europa.eu/topics/product-security-and-certification/single-reporting-platform-srp) step-by-step instructions                        | 31 July 2026     | You need EU Login accounts and named representatives registered before the 24-hour clock can ever start                             |
-| [BSI TR-03183-1](https://bsi.bund.de/dok/TR-03183-en) v1.0.0 - General requirements                                                                                                     | 31 July 2026     | First stable release of BSI's general CRA requirements guideline, after two years in draft                                          |
+| Development                                                                                                                                                                             | Date                | Why it matters for SBOM                                                                                                             |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| [Commission Implementing Regulation (EU) 2025/2392](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202502392) - technical descriptions of important and critical products | 28 November 2025    | Determines your conformity assessment route, and therefore how much scrutiny your technical documentation (including the SBOM) gets |
+| [BSI TR-03183-3](https://bsi.bund.de/dok/TR-03183-en) v1.0.0 - Vulnerability Reports and Notifications                                                                                  | September 2025      | The intake side of vulnerability handling: security.txt, CVD policy, CSAF advisories                                                |
+| [BSI TR-03183-H](https://bsi.bund.de/dok/TR-03183-en) v1.1.0 - Conformity based on full quality assurance (Module H)                                                                    | 30 May 2026         | Lets manufacturers demonstrate CRA conformity through an ISO/IEC 27001 ISMS rather than per-product assessment                      |
+| [Commission CRA guidance](https://digital-strategy.ec.europa.eu/en/library/commission-publishes-new-guidance-support-timely-cyber-resilience-act-implementation) C(2026) 5252           | 27 July 2026        | 84 pages and 67 worked examples on scope, open source, support periods and reporting. Non-binding, but shapes enforcement           |
+| [ENISA Single Reporting Platform](https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp) step-by-step instructions                                          | 31 July 2026        | You need EU Login accounts and named representatives registered before the 24-hour clock can ever start                             |
+| [BSI TR-03183-1](https://bsi.bund.de/dok/TR-03183-en) v1.0.0 - General requirements                                                                                                     | 31 July 2026        | First stable release of BSI's general CRA requirements guideline, after two years in draft                                          |
+| [ENISA CRA SRP FAQ](https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/frequently-asked-questions) updated, and the SRP portal opens                     | 9-11 September 2026 | The operational detail: EU Login, Assigned Representative roles, CSIRT selection, and the fields you type inside a 24-hour window   |
 
-The single most important thing on that list is the one that is not a document: **reporting obligations bind from 11 September 2026**, and the [Single Reporting Platform](#reporting-obligations-from-11-september-2026) requires registration you cannot do retroactively.
+The single most important thing on that list is the one that is not a document: **reporting obligations bind from 11 September 2026**, and the [Single Reporting Platform](#reporting-obligations-from-11-september-2026) is where those notifications have to go.
 
 ---
 
@@ -70,7 +71,9 @@ The nearest deadline is the most consequential for SBOM practice: from **11 Sept
 
 ## Reporting Obligations from 11 September 2026
 
-From 11 September 2026, manufacturers must notify actively exploited vulnerabilities and severe incidents affecting their products with digital elements. Notifications are submitted through the [CRA Single Reporting Platform](https://www.enisa.europa.eu/topics/product-security-and-certification/single-reporting-platform-srp) (SRP), operated by ENISA under Article 16, and are addressed to the CSIRT of the Member State where the manufacturer has its main establishment.
+From 11 September 2026, manufacturers must notify actively exploited vulnerabilities and severe incidents affecting their products with digital elements. Notifications are submitted through the [CRA Single Reporting Platform](https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp) (SRP), operated by ENISA under Article 16(1), and are addressed to the **CSIRT designated as coordinator (CDaC)** of the Member State where the manufacturer has its main establishment. The platform is at [portal.cra-srp.enisa.europa.eu](https://portal.cra-srp.enisa.europa.eu).
+
+A submitted notification is made available to **ENISA simultaneously**, while the receiving CDaC disseminates it without delay to CSIRTs in other Member States where the product is available, and shares information with market surveillance authorities so they can enforce. Only **one notification per event** is required, even where a manufacturer has multiple EU branches or subsidiaries and a parent company outside the EU; coordinating internally so that exactly one goes out is the manufacturer's responsibility.
 
 The deadlines are tight (Article 14):
 
@@ -81,15 +84,65 @@ The deadlines are tight (Article 14):
 | 14 days  | Final vulnerability report, after a corrective measure is available                          |
 | 1 month  | Final report for severe incidents, after the initial notification                            |
 
-### What ENISA published in July 2026
+### What is in scope at launch
 
-ENISA released step-by-step SRP instructions on 31 July 2026. The practical takeaways:
+The platform's launch scope is narrower than the regulation:
 
-- **Register in advance.** Representatives sign in through **EU Login**, and ENISA states that EU Login accounts can be created before the platform goes live. Validation of a representative is carried out by the coordinator CSIRT after first access to the platform, in parallel with the reporting process, so an unregistered manufacturer is not strictly locked out - but a 24-hour window is the wrong moment to be meeting the flow for the first time.
-- **There is no reporting API at launch.** ENISA has stated that no submission API will be provided at this stage. You can automate your internal workflow right up to the point of submission, but a human will be typing into a browser at the end of it. That makes the quality of your internal triage data (which product, which version, which component) the rate-limiting factor.
-- **The 24-hour early warning is deliberately thin.** Only the notification type and level, manufacturer or steward name, product, title, and (for incidents) whether unlawful or malicious acts are suspected. The 72-hour notification expands to the nature of the vulnerability, exploitation details, and corrective measures. The final report is the comprehensive one.
+| Who                             | Legal basis   | Status from 11 September 2026                                                                  |
+| ------------------------------- | ------------- | ---------------------------------------------------------------------------------------------- |
+| Manufacturers                   | Article 14    | **In scope.** Mandatory reporting through the SRP                                              |
+| Open-source software stewards   | Article 24(3) | Not until **11 December 2027**, per Article 71(2)                                              |
+| Anyone, voluntary notifications | Article 15    | **Not implemented at launch.** Planned for a later phase                                       |
+| Non-manufacturers               | -             | Contact the relevant national CSIRT directly; an SRP submission "might be marked as 'invalid'" |
 
-**The SBOM connection:** a 24-hour early-warning window leaves no time for manual component archaeology. When a vulnerability in a widely used library starts being exploited, you need to answer "which of our products and versions contain this component?" in minutes. That requires up-to-date, machine-readable SBOMs for every shipped version, matched continuously against vulnerability intelligence. Manufacturers who wait until December 2027 to build their SBOM pipeline will find the September 2026 reporting obligations hard to meet.
+At launch the platform is available in **English only**. ENISA will progressively translate the factsheet and supporting materials into all EU languages and will review translation of the platform itself in a later phase.
+
+### Registration: EU Login and Assigned Representatives
+
+You do not register a company on the SRP - you register **people**, called Assigned Representatives (ARs).
+
+- ARs sign in with an **EU Login account with multi-factor authentication enabled**. Accounts can be created in advance at [ecas.ec.europa.eu](https://ecas.ec.europa.eu/cas/login). ENISA states there is no additional corporate entity authentication mechanism, and that EU Login accounts are personal - so each AR who will submit needs their own, not a shared mailbox login.
+- There is **one Primary AR per manufacturer and up to 20 Secondary ARs**. The Primary registers directly, selects the CDaC, and creates the manufacturer association; it can then invite Secondary ARs once its own association shows as "Verified". Both roles can submit and update notifications, but the Primary sees all of the manufacturer's notifications while a Secondary sees only its own. A Secondary may claim the Primary role, subject to review and approval by the designated CSIRT.
+- The AR-manufacturer association is validated by the designated CSIRT, and ENISA is upfront that the procedure and processing time **vary between CSIRTs**. Validation runs **in parallel** with reporting, and an AR whose association is not yet verified may submit **up to 20 notifications** before verification becomes mandatory.
+- To limit CSIRT validation workload, ENISA advises manufacturers to register and start validation **only when they need to submit a notification**. Registration takes a few minutes if the EU Login account already exists.
+
+Read together, that suggests splitting the two steps: create the EU Login accounts and name your Primary and Secondary ARs now, because that is the part with an unpredictable tail, and leave the SRP registration itself until you need it.
+
+### Choosing the right CSIRT is your job
+
+The platform does not route notifications for you. ENISA: "If the wrong CDaC is selected, the notification may be invalidated and will need to be resubmitted to the correct CDaC." Article 14(7) gives a cascade, applied in order:
+
+| Order | Test                                                                                                                                                     |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1     | The Member State of your **main establishment** - where decisions about the cybersecurity of your products with digital elements are predominantly taken |
+| 2     | If that cannot be determined: the Member State where your EU establishment has the **highest number of employees**                                       |
+| 3     | No EU establishment: where your **authorised representative** acts for the highest number of your products                                               |
+| 4     | Failing that: where the **importer** places the highest number of your products on the market                                                            |
+| 5     | Failing that: where the **distributor** makes the highest number of your products available                                                              |
+| 6     | Failing all of the above: the Member State with the **highest number of users** of your products                                                         |
+
+Step 1 is not "where we are headquartered" and not "where engineering sits." Make and record the determination once, in advance. ENISA publishes the [list of CSIRTs designated as coordinators](https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/list-of-csirts-designated-as-coordinators) so you can map the answer to an entry in the dropdown.
+
+### What you actually submit
+
+ENISA's [SRP Glossary](https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/cra-srp-glossary2) documents 43 fields with their meaning, expected format, and the reporting stage at which each applies. Fields are marked required, optional, mandatory if the information is available, or carried forward from the previous stage.
+
+**Required at the 24-hour early warning:** notification type and level, title, summary, manufacturer name, **product name**, **product version**, the date and time you became aware, the Member States where the product is available (if known), and - for incidents - whether unlawful or malicious acts are suspected.
+
+**Added at 72 hours:** general information about the vulnerability or the nature of the incident, an initial assessment, considered sensitivity of the information, and corrective or mitigating measures taken plus measures users can take.
+
+**Added in the final report:** detailed severity and impact descriptions, the date a corrective measure became available, the type of threat or root cause, and the malicious actor where that information is available.
+
+Fields that remain optional throughout are the ones an SBOM programme is best placed to fill: **component name**, CVE ID, EUVD ID, and attack vector.
+
+### Operational details that catch teams out
+
+- **There is no reporting API at launch.** ENISA states that no Application Programming Interface will be provided at the initial release; notifications must go through the platform interface, with API functionality possibly considered in a future phase. You can automate your internal workflow right up to submission, but a human types the final form into a browser. That makes the quality of your internal triage data the rate-limiting factor, not your integration work.
+- **The platform's 72-hour counter is not your legal clock.** In the current release the 72-hour counter displays a due date **48 hours after the 24-hour early warning was submitted**, so a notification can be flagged overdue before 72 hours have elapsed since you became aware. ENISA says a future release will calculate it from the "date/time when you became aware" field. There is currently no final-report counter for vulnerabilities at all; for severe incidents it runs one month from the 72-hour notification.
+- **Particularly exceptional circumstances (PEC) are assessed during the 72-hour window.** Under Article 16(2), the receiving CSIRT may delay or withhold dissemination, including at the manufacturer's request; [Commission Delegated Regulation (EU) 2026/881](https://eur-lex.europa.eu/eli/reg_del/2026/881/oj/eng) of 11 December 2025 specifies the conditions. Where PEC is actively marked in the 72-hour notification, ENISA receives only partial information until the receiving CSIRT releases the full notification. Decide in advance who may invoke it and on what grounds.
+- **If the SRP is unavailable, you wait and then submit.** You may contact your designated CSIRT directly if immediate communication is necessary, but the notification must still be submitted through the SRP once it is available again. A phone call does not discharge the obligation.
+
+**The SBOM connection:** a 24-hour early-warning window leaves no time for manual component archaeology, and the fields required at that stage are inventory questions - which product, which version, which Member States. When a vulnerability in a widely used library starts being exploited, you need to answer "which of our products and versions contain this component?" in minutes. That requires up-to-date, machine-readable SBOMs for every shipped version, matched continuously against vulnerability intelligence. Manufacturers who wait until December 2027 to build their SBOM pipeline will find the September 2026 reporting obligations hard to meet.
 
 ### Two clarifications from the Commission's July 2026 guidance
 
@@ -376,27 +429,30 @@ Ideally, SBOMs should be digitally signed so recipients can verify their authent
 
 ## Practical Compliance Checklist
 
-**Before 11 September 2026:**
+**For the reporting obligations (in force from 11 September 2026):**
 
-1. **Get EU Login sorted for the ENISA Single Reporting Platform** - accounts created in advance, Primary and Secondary representatives named. There is no submission API, so make sure the humans who will submit have access.
-2. **Stand up SBOM-driven vulnerability monitoring** so you can answer "which products and versions contain this component?" inside the 24-hour early-warning window.
-3. **Publish a security.txt and CVD policy** per BSI TR-03183-3 and RFC 9116, and be ready to issue CSAF v2.0 advisories.
+1. **Get EU Login sorted for the ENISA Single Reporting Platform** - personal accounts with MFA, created in advance, with your one Primary AR and up to 20 Secondary ARs named. There is no submission API, so make sure the humans who will submit have working access.
+2. **Determine and record your CSIRT designated as coordinator** using the Article 14(7) cascade. Selecting the wrong one can invalidate a notification and force a resubmission inside the 24-hour window.
+3. **Track the 24- and 72-hour clocks internally.** The platform's 72-hour counter currently runs from your early-warning submission rather than from the moment you became aware.
+4. **Decide who may invoke particularly exceptional circumstances**, and on what grounds, before you are inside the 72-hour window.
+5. **Stand up SBOM-driven vulnerability monitoring** so you can answer "which products and versions contain this component?" inside the 24-hour early-warning window.
+6. **Publish a security.txt and CVD policy** per BSI TR-03183-3 and RFC 9116, and be ready to issue CSAF v2.0 advisories.
 
 **Before 11 December 2027:**
 
-4. **Generate an SBOM** for each software version as required by CRA Annex I, Part II(1).
-5. **Use CycloneDX 1.6+ or SPDX 3.0.1+** in JSON or XML format.
-6. **Cover the scope of delivery** plus recursive dependencies to the first external component (at minimum, identify that component) - deeper than the CRA's top-level floor.
-7. **Indicate completeness** of dependency enumeration for each component.
-8. **Include all required component fields**: creator, name, version, filename, dependencies, distribution licences, SHA-512 hash, executable/archive/structured properties.
-9. **Use SPDX licence identifiers** - never use licence text as a substitute.
-10. **Do not embed vulnerability information** - use CSAF/VEX instead.
-11. **Digitally sign** the SBOM so recipients can verify authenticity (recommended).
-12. **File the SBOM in your technical documentation** alongside the CVD policy, vulnerability contact address, and secure update design (Annex VII, point 2(b)).
-13. **Keep it current and keep it for 10 years** - continuously updated during the support period (Article 31(2)), retained for 10 years or the support period, whichever is longer (Article 13(13)).
-14. **Be prepared to provide** the SBOM to market surveillance authorities upon reasoned request (Annex VII, point 8).
-15. **If sharing with users**, document where the SBOM can be accessed (Annex II, Part I, point 9).
-16. **Check your product classification** against Implementing Regulation (EU) 2025/2392 - "important" or "critical" changes your conformity assessment route.
+7. **Generate an SBOM** for each software version as required by CRA Annex I, Part II(1).
+8. **Use CycloneDX 1.6+ or SPDX 3.0.1+** in JSON or XML format.
+9. **Cover the scope of delivery** plus recursive dependencies to the first external component (at minimum, identify that component) - deeper than the CRA's top-level floor.
+10. **Indicate completeness** of dependency enumeration for each component.
+11. **Include all required component fields**: creator, name, version, filename, dependencies, distribution licences, SHA-512 hash, executable/archive/structured properties.
+12. **Use SPDX licence identifiers** - never use licence text as a substitute.
+13. **Do not embed vulnerability information** - use CSAF/VEX instead.
+14. **Digitally sign** the SBOM so recipients can verify authenticity (recommended).
+15. **File the SBOM in your technical documentation** alongside the CVD policy, vulnerability contact address, and secure update design (Annex VII, point 2(b)).
+16. **Keep it current and keep it for 10 years** - continuously updated during the support period (Article 31(2)), retained for 10 years or the support period, whichever is longer (Article 13(13)).
+17. **Be prepared to provide** the SBOM to market surveillance authorities upon reasoned request (Annex VII, point 8).
+18. **If sharing with users**, document where the SBOM can be accessed (Annex II, Part I, point 9).
+19. **Check your product classification** against Implementing Regulation (EU) 2025/2392 - "important" or "critical" changes your conformity assessment route.
 
 ---
 
@@ -427,7 +483,13 @@ BSI maintains a CycloneDX property taxonomy for TR-03183-2 specific fields: [git
 - [European Commission: CRA Implementation factpage](https://digital-strategy.ec.europa.eu/en/factpages/cyber-resilience-act-implementation)
 - [European Commission: CRA Reporting Obligations](https://digital-strategy.ec.europa.eu/en/policies/cra-reporting)
 - [European Commission: CRA Implementation FAQ](https://digital-strategy.ec.europa.eu/en/library/cyber-resilience-act-implementation-frequently-asked-questions)
-- [ENISA: CRA Single Reporting Platform](https://www.enisa.europa.eu/topics/product-security-and-certification/single-reporting-platform-srp)
+- [ENISA: CRA Single Reporting Platform](https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp)
+- [ENISA: CRA SRP Frequently Asked Questions](https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/frequently-asked-questions)
+- [ENISA: CRA Single Reporting Platform Factsheet v1.0](https://www.enisa.europa.eu/sites/default/files/2026-07/ENISA_CRA_SRP_Factsheet_v1.0_0.pdf) (PDF)
+- [ENISA: CRA SRP Glossary](https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/cra-srp-glossary2) - field-by-field reporting guidance
+- [ENISA: List of CSIRTs designated as coordinators](https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/list-of-csirts-designated-as-coordinators)
+- [CRA SRP portal](https://portal.cra-srp.enisa.europa.eu) - live from 11 September 2026
+- [Commission Delegated Regulation (EU) 2026/881](https://eur-lex.europa.eu/eli/reg_del/2026/881/oj/eng) - delaying dissemination of notifications
 - [BSI TR-03183: Cyber Resilience Requirements](https://bsi.bund.de/dok/TR-03183-en) - Parts 1 (v1.0.0), 2 (v2.1.0), 3 (v1.0.0) and H (v1.1.0)
 - [BSI TR-03183-1 OSCAL controls](https://github.com/tr-03183/tr-03183-1)
 
