@@ -68,6 +68,16 @@
             <a href="/privacy/" class="hover:text-white transition-colors">Privacy</a>
             <span>&bull;</span>
             <a href="/terms/" class="hover:text-white transition-colors">Terms</a>
+            {{/* Hidden until layouts/partials/cookie-consent.html reveals it, so
+                 it is not a dead control where there is no stored decision to
+                 change. The bullet separator shares the wrapper so the two are
+                 hidden and shown together. The utilities unwind the global
+                 <button> base style in _assets/css/tailwind.css (blue fill,
+                 18px, padding) -- this one has to read as a footer link. */}}
+            <span id="cookie-settings-wrapper" class="hidden inline-flex gap-2">
+              <span>&bull;</span>
+              <button type="button" id="cookie-settings" class="bg-transparent p-0 rounded-none text-xs font-normal text-inherit hover:text-white hover:opacity-100 transition-colors">Cookie settings</button>
+            </span>
           </div>
           <div class="mt-1">
             <a href="https://studio.viktopia.io"{{ partial "link-attrs.html" "https://studio.viktopia.io" }} class="hover:text-white transition-colors">A Viktopia Studio project</a>
