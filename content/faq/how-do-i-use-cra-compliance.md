@@ -63,7 +63,7 @@ Three tabs, mapping to CRA Annex I Part II:
 
 - **Security checklist**: an OSCAL-driven control list (the [BSI OSCAL profile](/compliance/eu-cra/) by default). Each control accepts a status of _satisfied_, _not satisfied_, or _not applicable_, plus a free-text justification. The state is stored as OSCAL Assessment Results, not free-form prose, so it is machine-readable in the export.
 - **Vulnerability handling**: VDP URL, acknowledgement timeline (default 90 days), incident response plan URL. If your workspace has a [Trust Center](/faq/what-is-a-trust-center/) with `security.txt` configured, sbomify reuses those values rather than asking again.
-- **Incident reporting**: CSIRT contact, ENISA Single Reporting Platform registration status (the [SRP](/compliance/eu-cra/) goes live 2026-09-11; the wizard tracks readiness today).
+- **Incident reporting**: CSIRT contact, ENISA Single Reporting Platform registration status. The [SRP](/compliance/eu-cra/) is live from 2026-09-11, and the wizard tracks whether you have named your Assigned Representatives and identified the CSIRT designated as coordinator you would actually file with.
 
 ### Step 4: User Information
 
