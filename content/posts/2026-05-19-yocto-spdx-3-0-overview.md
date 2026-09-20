@@ -14,7 +14,7 @@ slug: yocto-spdx-3-0-overview
 
 SPDX 3.0 support was added in the Styhead release (Yocto 5.1) and represents a significant architectural leap. The implementation lives in `create-spdx-3.0.bbclass` with supporting libraries in `meta/lib/oe/spdx30.py` (auto-generated SPDX 3.0 bindings) and `meta/lib/oe/sbom30.py` (SBOM construction utilities).
 
-This is part 3 of a 5-part series on how Yocto generates SBOMs. [Part 1](/2026/05/05/yocto-sbom-deep-dive-introduction/) covered the high-level architecture and [Part 2](/2026/05/12/yocto-spdx-2-2-pipeline/) walked through the SPDX 2.2 pipeline.
+This is part 3 of a 6-part series on how Yocto generates SBOMs. [Part 1](/2026/05/05/yocto-sbom-deep-dive-introduction/) covered the high-level architecture and [Part 2](/2026/05/12/yocto-spdx-2-2-pipeline/) walked through the SPDX 2.2 pipeline.
 
 ## What Changed Architecturally
 
@@ -127,3 +127,4 @@ SPDX 2.2 has broader tooling support today, while SPDX 3.0 offers richer data an
 - Part 3: SPDX 3.0 in Yocto: What Changed and Why It Matters _(this post)_
 - Part 4: VEX in the SBOM: How Yocto Embeds Vulnerability Assessments _(coming soon)_
 - Part 5: Yocto SBOM in Production: Configuration, Tooling, and What's Still Missing _(coming soon)_
+- Part 6: You Have an SBOM. Now What? Making Yocto SBOMs Operational for the CRA _(coming soon)_
