@@ -14,7 +14,7 @@ slug: yocto-spdx-2-2-pipeline
 
 The SPDX 2.2 implementation in the Yocto Project has been stable since the Honister release (Yocto 3.4, October 2021). It is the established, widely understood pipeline that most Yocto users have been relying on, and for good reason. It produces standards-compliant SBOMs with rich per-package metadata that you can hand off to most SBOM tooling today.
 
-This post is part 2 of a 5-part series on how Yocto generates SBOMs. If you have not read [Part 1: How Yocto Generates SBOMs Behind the Scenes](/2026/05/05/yocto-sbom-deep-dive-introduction/), it covers why build-time SBOM generation matters and the high-level architecture.
+This post is part 2 of a 6-part series on how Yocto generates SBOMs. If you have not read [Part 1: How Yocto Generates SBOMs Behind the Scenes](/2026/05/05/yocto-sbom-deep-dive-introduction/), it covers why build-time SBOM generation matters and the high-level architecture.
 
 ## Key Variables and Configuration
 
@@ -163,3 +163,4 @@ Each file within the package gets a detailed entry with checksums:
 - Part 3: [SPDX 3.0 in Yocto: What Changed and Why It Matters](/2026/05/19/yocto-spdx-3-0-overview/)
 - Part 4: VEX in the SBOM: How Yocto Embeds Vulnerability Assessments _(coming soon)_
 - Part 5: Yocto SBOM in Production: Configuration, Tooling, and What's Still Missing _(coming soon)_
+- Part 6: You Have an SBOM. Now What? Making Yocto SBOMs Operational for the CRA _(coming soon)_
