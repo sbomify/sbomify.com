@@ -6,7 +6,7 @@ aliases:
 title: "SBOM Generation in CircleCI"
 description: "Run the sbomify action in CircleCI using the container image as a Docker executor, with caching, contexts and automatic VCS detection from the job environment."
 keywords: ["CircleCI SBOM", "CircleCI CycloneDX", "SBOM pipeline"]
-tldr: "Use the container image as the Docker executor and run sbomify-action. Repository, commit and branch are read from CircleCI's own job variables, with the checkout as the fallback; sbomify.json overrides them."
+tldr: "Use the container image as the Docker executor and run sbomify-action. Repository, commit, branch and the release tag are read from CircleCI's own job variables, with the checkout as the fallback; sbomify.json overrides them."
 ---
 
 CircleCI runs the container image as a Docker executor.
@@ -100,13 +100,37 @@ Set `GITHUB_TOKEN` in your context as well. License databases are downloaded fro
 
 ## Versioning
 
+A tag-triggered job can fill the version in for itself:
+
+```yaml
+environment:
+  COMPONENT_NAME: my-app
+  VERSION_FROM_RELEASE_TAG: "true"
+```
+
+The tag comes from `CIRCLE_TAG`, which CircleCI sets only when a tag triggered the build - so a branch build leaves the version as the generator produced it rather than inventing one. This is opt-in because a tag is not always a better version than what the generator already found.
+
+Add `NORMALIZE_VERSION: "true"` to reduce a tag to the version a registry or a CVE feed would match: `curl-8_21_0` becomes `8.21.0`, `release-3.9.5` becomes `3.9.5`. Without it the tag is recorded exactly as the project wrote it.
+
+Setting the version by hand still works, and is what you want when the version is not the tag:
+
 ```yaml
 environment:
   COMPONENT_NAME: my-app
   COMPONENT_VERSION: << pipeline.git.tag >>
 ```
 
-Use `<< pipeline.git.revision >>` for untagged builds. To tag a product release on tagged builds only:
+Use `<< pipeline.git.revision >>` for untagged builds. A `COMPONENT_VERSION` that _is_ the tag is normalised too when `NORMALIZE_VERSION` is set, so the config above and the automatic one reach the same version.
+
+Reading the tag landed after `v26.8.0`, so it is present on `master` and in any release tagged since. On older tags both variables are accepted and do nothing on CircleCI, because only GitHub, GitLab and Bitbucket variables were read.
+
+### Monorepos that tag per package
+
+A tag such as `meta-v1.3.0` names one package inside the repository rather than the repository itself, and stamping it on the whole SBOM would claim a version only that package ever had. The action compares the tag against `CIRCLE_PROJECT_REPONAME` and, when the two disagree, leaves the version alone and says why. Set `COMPONENT_VERSION` explicitly for the component that tag belongs to.
+
+### Tagged builds only
+
+To tag a product release on tagged builds only:
 
 ```yaml
 workflows:
