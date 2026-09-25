@@ -6,9 +6,9 @@
           {{ $logo := resources.Get "images/site/logo.svg" }}
           {{ if $logo }}
           {{ $logo = $logo | fingerprint }}
-          <img src="{{ $logo.RelPermalink }}" alt="sbomify logo" class="h-7" width="133" height="24" />
+          <img src="{{ $logo.RelPermalink }}" alt="sbomify logo" class="h-7" width="128" height="24" />
           {{ else }}
-          <img src="/assets/images/site/logo.svg" alt="sbomify logo" class="h-7" width="133" height="24" />
+          <img src="/assets/images/site/logo.svg" alt="sbomify logo" class="h-7" width="128" height="24" />
           {{ end }}
         </a>
       </div>

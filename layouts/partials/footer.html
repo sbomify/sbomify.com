@@ -8,9 +8,9 @@
           {{ $logo := resources.Get "images/site/logo.svg" }}
           {{ if $logo }}
           {{ $logo = $logo | fingerprint }}
-          <img class="h-8 w-auto" src="{{ $logo.RelPermalink }}" alt="sbomify logo" width="133" height="24" />
+          <img class="h-8 w-auto" src="{{ $logo.RelPermalink }}" alt="sbomify logo" width="128" height="24" />
           {{ else }}
-          <img class="h-8 w-auto" src="/assets/images/site/logo.svg" alt="sbomify logo" width="133" height="24" />
+          <img class="h-8 w-auto" src="/assets/images/site/logo.svg" alt="sbomify logo" width="128" height="24" />
           {{ end }}
         </a>
         <p class="text-tertiaryText text-sm text-center lg:text-left max-w-xs">
