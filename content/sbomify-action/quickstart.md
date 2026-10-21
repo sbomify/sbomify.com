@@ -75,7 +75,7 @@ The minimum viable configuration is four environment variables. This generates a
 
 That is a complete, working setup. No account required.
 
-Swap `requirements.txt` for whichever lockfile your project uses - [17 ecosystems are supported](/sbomify-action/sources/). For SPDX output, add `SBOM_FORMAT: spdx`.
+Swap `requirements.txt` for whichever lockfile your project uses - [18 ecosystems are supported](/sbomify-action/sources/). For SPDX output, add `SBOM_FORMAT: spdx`.
 
 On any runtime other than GitHub Actions, the same configuration is passed to the container image as environment variables:
 
