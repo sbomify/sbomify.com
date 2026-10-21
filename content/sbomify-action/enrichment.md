@@ -176,6 +176,8 @@ Hashes are extracted directly from your lockfile and attached to matching compon
 | Rust       | `Cargo.lock`                                       |
 | Dart       | `pubspec.lock`                                     |
 
+PlatformIO has no lockfile, so hashes for libraries from the PlatformIO registry are fetched instead: the registry publishes the SHA-256 of each release archive, which is the file `pio pkg install` downloads. See the [PlatformIO guide](/guides/platformio/).
+
 Component hashes are a [CISA 2025](/compliance/cisa-minimum-elements/) expectation, and most generators do not populate them. They are what lets someone verify that the component you documented is the component you shipped - the same property that makes the whole [chain of custody](/sbomify-action/why/#the-part-most-platforms-get-wrong) work at the component level rather than just the document level.
 
 ## Transitive dependency discovery

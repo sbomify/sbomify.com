@@ -28,6 +28,7 @@ Step-by-step guides for generating SBOMs across all major programming languages 
 - [Docker/Containers](/guides/docker/)
 - [Terraform](/guides/terraform/)
 - [Yocto](/guides/yocto/) - Embedded Linux
+- [PlatformIO](/guides/platformio/) - Arduino, ESP32 and other microcontroller firmware
 - [Raspberry Pi](/guides/raspberry-pi/) - rpi-image-gen
 - [CI/CD Integration](/guides/ci-cd/) - Why SBOMs belong in your build pipeline
 

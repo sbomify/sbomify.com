@@ -4,7 +4,7 @@ url: /sbomify-action/sources/
 aliases:
   - /guides/sbomify-action/sources/
 title: "Input Sources: Lockfiles, Containers, Directories and Yocto"
-description: "Every input the sbomify action accepts - 17 lockfile ecosystems, container images, directory scans, Chainguard SBOM reuse, Yocto builds, git submodules and manually declared packages."
+description: "Every input the sbomify action accepts - 18 lockfile ecosystems, container images, directory scans, Chainguard SBOM reuse, Yocto builds, git submodules and manually declared packages."
 keywords: ["SBOM lockfile support", "container SBOM", "Chainguard SBOM", "Yocto SBOM", "SOURCE_DIR", "SBOM formats"]
 tldr: "Point the action at a lockfile, a container image, a directory or an existing SBOM. It routes to the best generator for that ecosystem and falls back automatically. Prefer a lockfile wherever one exists."
 ---
@@ -13,7 +13,7 @@ Exactly one input source is required: `LOCK_FILE`, `SBOM_FILE`, `DOCKER_IMAGE` o
 
 ## Lockfiles
 
-Set `LOCK_FILE` to the path of your lockfile. Seventeen ecosystems are supported.
+Set `LOCK_FILE` to the path of your lockfile. Eighteen ecosystems are supported.
 
 | Language                          | Recognised files                                                               |
 | --------------------------------- | ------------------------------------------------------------------------------ |
@@ -34,6 +34,7 @@ Set `LOCK_FILE` to the path of your lockfile. Seventeen ecosystems are supported
 | Haskell                           | `stack.yaml.lock`, `stack.yaml`, `cabal.project.freeze`                        |
 | Erlang                            | `rebar.lock` (rebar3 projects)                                                 |
 | Clojure                           | `deps.edn`, `project.clj`                                                      |
+| [PlatformIO](/guides/platformio/) | `platformio.ini`, after `pio pkg install`                                      |
 
 For language-specific walkthroughs, see the [SBOM guides](/guides/).
 
@@ -56,6 +57,7 @@ Generators are registered with a priority. The highest-priority generator that s
 | 10       | `cyclonedx-gradle` | Java (`build.gradle`, `build.gradle.kts`)                                                                 | CycloneDX 1.4-1.6, SPDX 2.3     |
 | 10       | `cyclonedx-sbt`    | Scala (`build.sbt`)                                                                                       | CycloneDX 1.4-1.6, SPDX 2.3     |
 | 10       | `gradle-lockfile`  | Java (`gradle.lockfile`), read directly with no Gradle run                                                | CycloneDX 1.2-1.7, SPDX 2.2-2.3 |
+| 10       | `platformio`       | PlatformIO (`platformio.ini`), read from what `pio pkg install` installed, with no PlatformIO run         | CycloneDX 1.2-1.7, SPDX 2.2-2.3 |
 | 20       | `cdxgen`           | JavaScript, Ruby, Dart, C++, PHP, .NET, Elixir, Clojure, and Python, Go or Java where no native tool wins | CycloneDX 1.4-1.7               |
 | 35       | Syft               | Swift, Terraform, Haskell, Erlang, container images, and SPDX wherever no native tool emits it            | CycloneDX 1.2-1.6, SPDX 2.2-2.3 |
 
@@ -68,8 +70,9 @@ In practice:
 3. **Go** (`go.mod`, `go.sum`) uses `cyclonedx-gomod`
 4. **Java** uses `cyclonedx-maven` for `pom.xml`, `cyclonedx-gradle` for Gradle build scripts, and reads `gradle.lockfile` directly
 5. **Scala** (`build.sbt`) uses `cyclonedx-sbt`
-6. **Everything else with a lockfile** uses `cdxgen`, then Syft
-7. **Container images** use Syft, then `cdxgen`
+6. **PlatformIO** (`platformio.ini`) is read directly, including the platform and framework packages each environment builds with
+7. **Everything else with a lockfile** uses `cdxgen`, then Syft
+8. **Container images** use Syft, then `cdxgen`
 
 > Trivy was removed from the tool set after [compromised releases were published in March 2026](/2026/03/26/trivy-compromise-hardening-sbomify-action/). The remaining generators cover every supported ecosystem.
 
