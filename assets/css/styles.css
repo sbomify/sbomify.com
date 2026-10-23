@@ -22,13 +22,14 @@
   --color-navy-100: 37 41 63;     /* #25293F  Navy, primary · text · brand */
   --color-navy-80: 81 84 107;     /* #51546B */
   --color-navy-60: 124 127 140;   /* #7C7F8C */
+  --color-navy-55: 110 113 128;   /* #6E7180  derived, shared with the app: the lightest navy that holds 4.5:1 on white (4.9) */
   --color-navy-40: 168 169 178;   /* #A8A9B2 */
   --color-navy-20: 211 212 217;   /* #D3D4D9 */
   --color-navy-10: 233 234 236;   /* #E9EAEC */
   --color-navy-5: 244 244 245;    /* #F4F4F5  derived: Navy at 5% on white */
   --color-white: 255 255 255;     /* #FFFFFF  White, primary · canvas */
   --color-mist: 225 227 234;      /* #E1E3EA  Mist, secondary · surfaces */
-  --color-mist-50: 240 241 245;   /* #F0F1F5  derived: Mist at 50% on white */
+  --color-mist-soft: 238 240 244; /* #EEF0F4  Mist Soft, the app's hover surface (sbomify/sbomify tailwind.src.css) */
 
   /* Signal Orange: reserved for emphasis, one moment per layout. */
   --color-orange-800: 170 61 20;  /* #AA3D14  derived: Orange 700 + 15% Navy, pressed/hover only */
@@ -51,16 +52,16 @@
 
   /* ===== Roles: light surfaces (the default) ===== */
   --color-canvas: var(--color-white);
-  --color-surface: var(--color-mist-50);        /* alternating sections, cards on canvas */
+  --color-surface: var(--color-mist-soft);        /* alternating sections, cards on canvas */
   --color-surface-strong: var(--color-mist);    /* chips, tags, wells */
   --color-line: var(--color-navy-10);           /* hairlines, card borders */
   --color-line-strong: var(--color-navy-20);    /* inputs, emphasised borders */
 
   --color-ink: var(--color-navy-100);           /* headings, primary text */
   --color-ink-muted: var(--color-navy-80);      /* body copy: Navy 80 or darker */
-  /* Navy 60 measures 4.0:1 on white: large type, icons and placeholders only.
-     Small eyebrows, captions and meta use ink-muted so they stay AA. */
-  --color-ink-subtle: var(--color-navy-60);
+  /* Captions, eyebrows, meta and placeholders. Navy 55 is the app's
+     text-muted: as light as navy goes while staying AA for small type. */
+  --color-ink-subtle: var(--color-navy-55);
 
   /* ===== Roles: dark surfaces (white on navy) ===== */
   --color-inverse: var(--color-navy-100);
@@ -544,6 +545,9 @@ video {
 html {
     /* Offset anchors so they clear the sticky pill header */
     scroll-padding-top: 6rem;
+    /* Hold the scrollbar's space on short pages too, so the header and
+       content do not shift sideways between pages (as in the app). */
+    scrollbar-gutter: stable;
   }
 @media (prefers-reduced-motion: no-preference) {
     html {
@@ -670,21 +674,36 @@ button {
     max-width: 1536px;
   }
 }/* Buttons. Orange is the one call to action; secondary is navy outline,
-     and type on orange is always white (Orange 700 fill, 5.2:1). */
+     and type on orange is always white (Orange 700 fill, 5.2:1). *//* Same robustness rules as the app's buttons: a 44px touch target, a label
+     that never wraps and never gives up width in a flex row, and a press
+     state. */
 .btn-primary {
   display: inline-flex;
+  min-height: 2.75rem;
+  flex-shrink: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  white-space: nowrap;
   border-radius: 9999px;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   font-weight: 600;
-  transition-property: background-color,border-color,color,box-shadow;
+  transition-property: background-color,border-color,color,box-shadow,transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
+}
+.btn-primary:active {
+  --tw-scale-x: 0.98;
+  --tw-scale-y: 0.98;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.btn-primary {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-accent-strong) / var(--tw-bg-opacity, 1));
   --tw-text-opacity: 1;
@@ -696,18 +715,31 @@ button {
 }/* Navy fill: section-level actions, so orange stays the page's one moment */
 .btn-navy {
   display: inline-flex;
+  min-height: 2.75rem;
+  flex-shrink: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  white-space: nowrap;
   border-radius: 9999px;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   font-weight: 600;
-  transition-property: background-color,border-color,color,box-shadow;
+  transition-property: background-color,border-color,color,box-shadow,transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
+}
+.btn-navy:active {
+  --tw-scale-x: 0.98;
+  --tw-scale-y: 0.98;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.btn-navy {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-ink) / var(--tw-bg-opacity, 1));
   --tw-text-opacity: 1;
@@ -719,18 +751,31 @@ button {
 }
 .btn-secondary {
   display: inline-flex;
+  min-height: 2.75rem;
+  flex-shrink: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  white-space: nowrap;
   border-radius: 9999px;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   font-weight: 600;
-  transition-property: background-color,border-color,color,box-shadow;
+  transition-property: background-color,border-color,color,box-shadow,transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
+}
+.btn-secondary:active {
+  --tw-scale-x: 0.98;
+  --tw-scale-y: 0.98;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.btn-secondary {
   border-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(var(--color-line-strong) / var(--tw-border-opacity, 1));
@@ -744,6 +789,7 @@ button {
   border-color: rgb(var(--color-ink) / var(--tw-border-opacity, 1));
 }/* For navy surfaces */
 .btn-md {
+  min-height: 2.5rem;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
   padding-top: 0.625rem;
@@ -751,7 +797,13 @@ button {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
+@media not all and (min-width: 640px) {
+  .btn-md {
+    min-height: 2.75rem;
+  }
+}
 .btn-lg {
+  min-height: 3rem;
   padding-left: 2rem;
   padding-right: 2rem;
   padding-top: 1rem;
@@ -799,17 +851,34 @@ button {
   text-transform: uppercase;
   letter-spacing: var(--tracking-eyebrow);
   --tw-text-opacity: 1;
+  color: rgb(var(--color-ink-subtle) / var(--tw-text-opacity, 1));
+}/* On Mist Soft, Navy 55 measures 4.2:1; step up to Navy 80. */
+.bg-surface .eyebrow,
+  .toc .eyebrow {
+  --tw-text-opacity: 1;
   color: rgb(var(--color-ink-muted) / var(--tw-text-opacity, 1));
 }/* Eyebrow chip: the section label above a heading, with the orange dot
      the guide uses in its own running footer. */
 .eyebrow-chip {
-  font-size: 0.75rem;
-  line-height: 1rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-eyebrow);
+    /* Navy 55 drops to 4.2:1 on the Mist Soft fill, so the chip keeps Navy 80. */
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-eyebrow);
+    --tw-text-opacity: 1;
+    color: rgb(var(--color-ink-subtle) / var(--tw-text-opacity, 1));
+  }
+.eyebrow-chip .eyebrow {
   --tw-text-opacity: 1;
   color: rgb(var(--color-ink-muted) / var(--tw-text-opacity, 1));
+}
+.bg-surface .eyebrow-chip,
+  .toc .eyebrow-chip {
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-ink-muted) / var(--tw-text-opacity, 1));
+}
+.eyebrow-chip {
   display: inline-flex;
   width: -moz-fit-content;
   width: fit-content;
@@ -825,6 +894,8 @@ button {
   padding-right: 0.875rem;
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-ink-muted) / var(--tw-text-opacity, 1));
 }
 .eyebrow-chip::before {
     content: "";
@@ -2602,6 +2673,55 @@ button {
 }
 .toc-inline summary::marker {
   color: rgb(var(--color-ink-subtle));
+}/* Code blocks from layouts/_default/_markup/render-codeblock.html: a navy
+   block with a header band for the language and the copy button. */
+.code-block {
+  margin: 2rem 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: rgb(var(--color-code-bg));
+  box-shadow: var(--shadow-card);
+}
+.code-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.5rem;
+  padding: 0.25rem 0.5rem 0.25rem 1.25rem;
+  border-bottom: 1px solid rgb(var(--color-white) / 0.08);
+}
+.code-block-lang {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgb(var(--color-code-muted));
+}/* Unwinds the global <button> base (orange pill, 18px, padding). */
+.code-block-copy {
+  margin-left: auto;
+  padding: 0.375rem 0.75rem;
+  min-height: 2rem;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: rgb(var(--color-code-text));
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  transition: background-color 0.2s ease;
+}
+.code-block-copy:hover {
+  background: rgb(var(--color-white) / 0.1);
+}
+.code-block-copy:focus-visible {
+  outline-color: rgb(var(--color-focus-inverse));
+}
+.code-block .highlight pre,
+.blog-post .code-block pre, .page .code-block pre, .faq-content .code-block pre {
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.hover\:bg-surface:hover .eyebrow {
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-ink-muted) / var(--tw-text-opacity, 1));
 }
 .hover\:-translate-y-0\.5:hover {
   --tw-translate-y: -0.125rem;

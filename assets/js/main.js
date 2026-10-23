@@ -24,5 +24,24 @@
     });
   }
 
+  // Copy buttons on code blocks (layouts/_default/_markup/render-codeblock.html).
+  // They ship hidden so there is no dead control without JavaScript or
+  // without clipboard access.
+  function initCodeCopy () {
+    if (!navigator.clipboard) return;
+    document.querySelectorAll('[data-code-copy]').forEach(function (button) {
+      var code = button.closest('.code-block').querySelector('pre code');
+      if (!code) return;
+      button.hidden = false;
+      button.addEventListener('click', function () {
+        navigator.clipboard.writeText(code.innerText.replace(/\n$/, '')).then(function () {
+          button.textContent = 'Copied';
+          setTimeout(function () { button.textContent = 'Copy'; }, 2000);
+        });
+      });
+    });
+  }
+
   initMobileMenu();
+  initCodeCopy();
 }())

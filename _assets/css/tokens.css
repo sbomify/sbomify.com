@@ -23,13 +23,14 @@
   --color-navy-100: 37 41 63;     /* #25293F  Navy, primary · text · brand */
   --color-navy-80: 81 84 107;     /* #51546B */
   --color-navy-60: 124 127 140;   /* #7C7F8C */
+  --color-navy-55: 110 113 128;   /* #6E7180  derived, shared with the app: the lightest navy that holds 4.5:1 on white (4.9) */
   --color-navy-40: 168 169 178;   /* #A8A9B2 */
   --color-navy-20: 211 212 217;   /* #D3D4D9 */
   --color-navy-10: 233 234 236;   /* #E9EAEC */
   --color-navy-5: 244 244 245;    /* #F4F4F5  derived: Navy at 5% on white */
   --color-white: 255 255 255;     /* #FFFFFF  White, primary · canvas */
   --color-mist: 225 227 234;      /* #E1E3EA  Mist, secondary · surfaces */
-  --color-mist-50: 240 241 245;   /* #F0F1F5  derived: Mist at 50% on white */
+  --color-mist-soft: 238 240 244; /* #EEF0F4  Mist Soft, the app's hover surface (sbomify/sbomify tailwind.src.css) */
 
   /* Signal Orange: reserved for emphasis, one moment per layout. */
   --color-orange-800: 170 61 20;  /* #AA3D14  derived: Orange 700 + 15% Navy, pressed/hover only */
@@ -52,16 +53,16 @@
 
   /* ===== Roles: light surfaces (the default) ===== */
   --color-canvas: var(--color-white);
-  --color-surface: var(--color-mist-50);        /* alternating sections, cards on canvas */
+  --color-surface: var(--color-mist-soft);        /* alternating sections, cards on canvas */
   --color-surface-strong: var(--color-mist);    /* chips, tags, wells */
   --color-line: var(--color-navy-10);           /* hairlines, card borders */
   --color-line-strong: var(--color-navy-20);    /* inputs, emphasised borders */
 
   --color-ink: var(--color-navy-100);           /* headings, primary text */
   --color-ink-muted: var(--color-navy-80);      /* body copy: Navy 80 or darker */
-  /* Navy 60 measures 4.0:1 on white: large type, icons and placeholders only.
-     Small eyebrows, captions and meta use ink-muted so they stay AA. */
-  --color-ink-subtle: var(--color-navy-60);
+  /* Captions, eyebrows, meta and placeholders. Navy 55 is the app's
+     text-muted: as light as navy goes while staying AA for small type. */
+  --color-ink-subtle: var(--color-navy-55);
 
   /* ===== Roles: dark surfaces (white on navy) ===== */
   --color-inverse: var(--color-navy-100);
