@@ -275,6 +275,10 @@ input:focus-visible + .track {
   color: rgb(var(--color-accent));
 }
 @media (max-width: 1200px) {
+  /* Single column: lead with the recommended plan */
+  .pricing-card.featured {
+    order: -1;
+  }
   .pricing-grid {
     grid-template-columns: 1fr;
     max-width: 480px;

@@ -1,0 +1,21 @@
+{{/* "On this page" navigation for long-form pages, from Hugo's
+     .TableOfContents (h2 and h3, see [markup.tableOfContents] in hugo.toml).
+     The layout asks partials/toc-enabled.html first, then renders both
+     copies; CSS shows one per breakpoint. No JavaScript.
+
+     (partial "toc.html" (dict "page" . "mode" "inline"))  collapsible, below xl
+     (partial "toc.html" (dict "page" . "mode" "aside"))   sticky sidebar, xl and up */}}
+{{- $page := .page -}}
+{{- if partial "toc-enabled.html" $page -}}
+{{- if eq .mode "inline" -}}
+<details class="toc toc-inline xl:hidden mb-10 rounded-xl border border-line bg-surface">
+  <summary class="eyebrow cursor-pointer select-none px-5 py-4">On this page</summary>
+  <div class="px-5 pb-5">{{ $page.TableOfContents }}</div>
+</details>
+{{- else if eq .mode "aside" -}}
+<aside class="toc toc-aside hidden xl:block w-64 shrink-0 sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto" aria-label="On this page">
+  <p class="eyebrow mb-4">On this page</p>
+  {{ $page.TableOfContents }}
+</aside>
+{{- end -}}
+{{- end -}}

@@ -99,6 +99,8 @@ Brand rules the tokens encode:
 
 **Meta tags:** Set `description` and `keywords` in page frontmatter. They fall back to site-level values in `hugo.toml`.
 
+**Table of contents:** Pages with at least five h2/h3 headings and 1000 words get an "On this page" list automatically (sticky sidebar at `xl`, collapsible block below). Set `toc: false` in frontmatter to turn it off. Logic is in `layouts/partials/toc-enabled.html` and `layouts/partials/toc.html`.
+
 ## CI/CD
 
 - **Lint workflow** (`.github/workflows/lint.yml`): Triggers on PRs affecting `.md`, `.d2`, `Dockerfile`, `hugo.toml`, `layouts/`, `content/`, or `package.json`. Runs `bun run lint`, Hugo build, and lychee link checker.

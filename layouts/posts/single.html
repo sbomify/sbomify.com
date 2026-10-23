@@ -46,9 +46,11 @@
   </header>
 
   <section class="bg-surface">
-    <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-      <article class="blog-post bg-canvas p-8 md:p-12 rounded-2xl shadow-card border border-line">
+    {{ $toc := partial "toc-enabled.html" . }}
+    <div class="{{ if $toc }}max-w-4xl xl:max-w-6xl xl:flex xl:items-start xl:gap-10{{ else }}max-w-4xl{{ end }} mx-auto px-6 lg:px-8 py-16 lg:py-24">
+      <article class="blog-post bg-canvas p-8 md:p-12 rounded-2xl shadow-card border border-line xl:flex-1 xl:min-w-0">
         {{ partial "tldr.html" . }}
+        {{ partial "toc.html" (dict "page" . "mode" "inline") }}
         {{ partial "content.html" . }}
         <div class="mt-12 pt-8 border-t border-line">
           <p class="text-sm text-ink-muted italic">
@@ -56,6 +58,7 @@
           </p>
         </div>
       </article>
+      {{ partial "toc.html" (dict "page" . "mode" "aside") }}
     </div>
   </section>
 </div>

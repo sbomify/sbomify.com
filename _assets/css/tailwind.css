@@ -215,7 +215,7 @@
   /* Eyebrow chip: the section label above a heading, with the orange dot
      the guide uses in its own running footer. */
   .eyebrow-chip {
-    @apply eyebrow inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface border border-line;
+    @apply eyebrow inline-flex w-fit items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface border border-line;
   }
 
   .eyebrow-chip::before {
@@ -254,6 +254,13 @@
     inset: 0;
     pointer-events: none;
     background: radial-gradient(48rem 32rem at 100% 0%, rgb(var(--color-orange-500) / 0.16), rgb(var(--color-orange-500) / 0) 70%);
+  }
+
+  /* On phones the same haze covers the whole viewport; keep it a corner glow */
+  @media (max-width: 639px) {
+    .hero::before {
+      background: radial-gradient(24rem 18rem at 100% 0%, rgb(var(--color-orange-500) / 0.12), rgb(var(--color-orange-500) / 0) 70%);
+    }
   }
 
   .hero > * {
@@ -764,4 +771,55 @@
   background-color: rgb(var(--color-accent-hover));
   color: rgb(var(--color-on-accent));
   text-decoration: none;
+}
+
+/* "On this page" table of contents (layouts/partials/toc.html) */
+.toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc ul ul {
+  margin-top: 0.5rem;
+  padding-left: 0.875rem;
+  border-left: 1px solid rgb(var(--color-line));
+}
+
+.toc li {
+  margin: 0 0 0.5rem;
+  padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.toc a {
+  color: rgb(var(--color-ink-muted));
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.toc a:hover {
+  color: rgb(var(--color-ink));
+}
+
+/* The inline copy sits inside .page/.blog-post, whose list and link rules
+   would otherwise restyle it as body copy. */
+.page .toc ul, .blog-post .toc ul, .page .toc li, .blog-post .toc li {
+  font-size: 0.9375rem;
+  color: rgb(var(--color-ink-muted));
+  list-style: none;
+}
+
+.page .toc a, .blog-post .toc a {
+  color: rgb(var(--color-ink-muted));
+  text-decoration: none;
+}
+
+.page .toc a:hover, .blog-post .toc a:hover {
+  color: rgb(var(--color-ink));
+}
+
+.toc-inline summary::marker {
+  color: rgb(var(--color-ink-subtle));
 }

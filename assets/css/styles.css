@@ -811,6 +811,8 @@ button {
   --tw-text-opacity: 1;
   color: rgb(var(--color-ink-muted) / var(--tw-text-opacity, 1));
   display: inline-flex;
+  width: -moz-fit-content;
+  width: fit-content;
   align-items: center;
   gap: 0.5rem;
   border-radius: 9999px;
@@ -907,6 +909,11 @@ button {
     inset: 0;
     pointer-events: none;
     background: radial-gradient(48rem 32rem at 100% 0%, rgb(var(--color-orange-500) / 0.16), rgb(var(--color-orange-500) / 0) 70%);
+  }/* On phones the same haze covers the whole viewport; keep it a corner glow */
+@media (max-width: 639px) {
+    .hero::before {
+      background: radial-gradient(24rem 18rem at 100% 0%, rgb(var(--color-orange-500) / 0.12), rgb(var(--color-orange-500) / 0) 70%);
+    }
   }
 .hero > * {
     position: relative;
@@ -957,6 +964,9 @@ button {
 .top-0 {
   top: 0px;
 }
+.top-28 {
+  top: 7rem;
+}
 .z-10 {
   z-index: 10;
 }
@@ -965,6 +975,9 @@ button {
 }
 .z-\[60\] {
   z-index: 60;
+}
+.col-span-2 {
+  grid-column: span 2 / span 2;
 }
 .\!m-0 {
   margin: 0px !important;
@@ -1190,6 +1203,9 @@ button {
 .max-h-12 {
   max-height: 3rem;
 }
+.max-h-\[calc\(100vh-8rem\)\] {
+  max-height: calc(100vh - 8rem);
+}
 .w-1\.5 {
   width: 0.375rem;
 }
@@ -1250,6 +1266,9 @@ button {
 .max-w-4xl {
   max-width: 56rem;
 }
+.max-w-6xl {
+  max-width: 72rem;
+}
 .max-w-7xl {
   max-width: 80rem;
 }
@@ -1270,9 +1289,6 @@ button {
 }
 .flex-1 {
   flex: 1 1 0%;
-}
-.flex-\[2\] {
-  flex: 2;
 }
 .flex-shrink-0 {
   flex-shrink: 0;
@@ -1301,6 +1317,14 @@ button {
 .cursor-not-allowed {
   cursor: not-allowed;
 }
+.cursor-pointer {
+  cursor: pointer;
+}
+.select-none {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
 .list-disc {
   list-style-type: disc;
 }
@@ -1312,6 +1336,9 @@ button {
 }
 .flex-col {
   flex-direction: column;
+}
+.flex-col-reverse {
+  flex-direction: column-reverse;
 }
 .flex-wrap {
   flex-wrap: wrap;
@@ -1343,6 +1370,9 @@ button {
 .gap-10 {
   gap: 2.5rem;
 }
+.gap-12 {
+  gap: 3rem;
+}
 .gap-16 {
   gap: 4rem;
 }
@@ -1364,12 +1394,19 @@ button {
 .gap-\[13px\] {
   gap: 13px;
 }
-.gap-x-6 {
-  -moz-column-gap: 1.5rem;
-       column-gap: 1.5rem;
+.gap-x-2 {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
 }
-.gap-y-3 {
-  row-gap: 0.75rem;
+.gap-x-8 {
+  -moz-column-gap: 2rem;
+       column-gap: 2rem;
+}
+.gap-y-1 {
+  row-gap: 0.25rem;
+}
+.gap-y-10 {
+  row-gap: 2.5rem;
 }
 .gap-y-6 {
   row-gap: 1.5rem;
@@ -1719,6 +1756,12 @@ button {
 .pb-4 {
   padding-bottom: 1rem;
 }
+.pb-5 {
+  padding-bottom: 1.25rem;
+}
+.pb-8 {
+  padding-bottom: 2rem;
+}
 .pl-2 {
   padding-left: 0.5rem;
 }
@@ -1863,6 +1906,10 @@ button {
 .\!text-on-inverse-muted {
   --tw-text-opacity: 1 !important;
   color: rgb(var(--color-on-inverse-muted) / var(--tw-text-opacity, 1)) !important;
+}
+.\!text-on-inverse-subtle {
+  --tw-text-opacity: 1 !important;
+  color: rgb(var(--color-on-inverse-subtle) / var(--tw-text-opacity, 1)) !important;
 }
 .\!text-white {
   --tw-text-opacity: 1 !important;
@@ -2506,6 +2553,46 @@ button {
   background-color: rgb(var(--color-accent-hover));
   color: rgb(var(--color-on-accent));
   text-decoration: none;
+}/* "On this page" table of contents (layouts/partials/toc.html) */
+.toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.toc ul ul {
+  margin-top: 0.5rem;
+  padding-left: 0.875rem;
+  border-left: 1px solid rgb(var(--color-line));
+}
+.toc li {
+  margin: 0 0 0.5rem;
+  padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+.toc a {
+  color: rgb(var(--color-ink-muted));
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.toc a:hover {
+  color: rgb(var(--color-ink));
+}/* The inline copy sits inside .page/.blog-post, whose list and link rules
+   would otherwise restyle it as body copy. */
+.page .toc ul, .blog-post .toc ul, .page .toc li, .blog-post .toc li {
+  font-size: 0.9375rem;
+  color: rgb(var(--color-ink-muted));
+  list-style: none;
+}
+.page .toc a, .blog-post .toc a {
+  color: rgb(var(--color-ink-muted));
+  text-decoration: none;
+}
+.page .toc a:hover, .blog-post .toc a:hover {
+  color: rgb(var(--color-ink));
+}
+.toc-inline summary::marker {
+  color: rgb(var(--color-ink-subtle));
 }
 .hover\:-translate-y-0\.5:hover {
   --tw-translate-y: -0.125rem;
@@ -2652,6 +2739,9 @@ button {
   .sm\:w-auto {
     width: auto;
   }
+  .sm\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
   .sm\:flex-row {
     flex-direction: row;
   }
@@ -2682,6 +2772,12 @@ button {
   }
 }
 @media (min-width: 768px) {
+  .md\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+  .md\:col-span-3 {
+    grid-column: span 3 / span 3;
+  }
   .md\:float-left {
     float: left;
   }
@@ -2712,6 +2808,9 @@ button {
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
   .md\:flex-row {
     flex-direction: row;
   }
@@ -2720,6 +2819,9 @@ button {
   }
   .md\:items-center {
     align-items: center;
+  }
+  .md\:justify-between {
+    justify-content: space-between;
   }
   .md\:gap-12 {
     gap: 3rem;
@@ -2781,32 +2883,26 @@ button {
   .lg\:w-56 {
     width: 14rem;
   }
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .lg\:flex-row {
     flex-direction: row;
   }
-  .lg\:items-start {
-    align-items: flex-start;
-  }
-  .lg\:items-end {
-    align-items: flex-end;
-  }
   .lg\:justify-start {
     justify-content: flex-start;
-  }
-  .lg\:justify-end {
-    justify-content: flex-end;
   }
   .lg\:gap-16 {
     gap: 4rem;
   }
-  .lg\:gap-8 {
-    gap: 2rem;
-  }
   .lg\:p-12 {
     padding: 3rem;
+  }
+  .lg\:p-14 {
+    padding: 3.5rem;
   }
   .lg\:px-24 {
     padding-left: 6rem;
@@ -2815,10 +2911,6 @@ button {
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
-  }
-  .lg\:py-16 {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
   }
   .lg\:py-20 {
     padding-top: 5rem;
@@ -2831,14 +2923,14 @@ button {
   .lg\:pb-20 {
     padding-bottom: 5rem;
   }
+  .lg\:pt-16 {
+    padding-top: 4rem;
+  }
   .lg\:pt-24 {
     padding-top: 6rem;
   }
   .lg\:text-left {
     text-align: left;
-  }
-  .lg\:text-right {
-    text-align: right;
   }
   .lg\:text-2xl {
     font-size: 1.5rem;
@@ -2878,7 +2970,31 @@ button {
   }
 }
 @media (min-width: 1280px) {
+  .xl\:block {
+    display: block;
+  }
+  .xl\:flex {
+    display: flex;
+  }
+  .xl\:hidden {
+    display: none;
+  }
+  .xl\:min-w-0 {
+    min-width: 0px;
+  }
+  .xl\:max-w-6xl {
+    max-width: 72rem;
+  }
+  .xl\:flex-1 {
+    flex: 1 1 0%;
+  }
   .xl\:grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .xl\:items-start {
+    align-items: flex-start;
+  }
+  .xl\:gap-10 {
+    gap: 2.5rem;
   }
 }

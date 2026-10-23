@@ -5,6 +5,9 @@
   href="{{ $post.RelPermalink }}"
   class="group flex flex-col justify-between rounded-2xl p-8 h-full motion-safe:hover:-translate-y-1 hover:shadow-raised transition-[box-shadow,transform,border-color] duration-300 {{ if $dark }}bg-inverse-raised border border-white/10 hover:border-white/25{{ else }}bg-canvas border border-line hover:border-line-strong{{ end }}">
   <div class="flex-grow">
+    {{ with $post.GetTerms "categories" }}
+    <p class="eyebrow mb-3 {{ if $dark }}!text-on-inverse-subtle{{ end }}">{{ (index . 0).LinkTitle }}</p>
+    {{ end }}
     {{ if eq $headingLevel "h2" }}
     <h2 class="text-2xl font-semibold leading-tight mb-4 transition-colors duration-200 {{ if $dark }}text-white group-hover:text-accent{{ else }}text-ink group-hover:text-accent-strong{{ end }}">
       {{ $post.Title | truncate 180 }}

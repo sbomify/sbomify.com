@@ -21,10 +21,6 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                         <svg aria-hidden="true" class="w-4 h-4 motion-safe:group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                     </a>
                     <a href="https://app.sbomify.com/enterprise-contact/" class="btn-secondary btn-lg w-full sm:w-auto">Contact Us</a>
-                    <a href="https://sbomify.com/slack" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-lg w-full sm:w-auto" onclick="posthog.capture('cta_click', { location: 'hero', label: 'Chat on Slack', destination: 'https://sbomify.com/slack' })">
-                        {{< icon "slack" "w-5 h-5" >}}
-                        Chat on Slack
-                    </a>
                 </div>
             </div>
 
@@ -97,7 +93,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
     <div class="bg-surface">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
             {{< comment >}}Persona routing{{< /comment >}}
-            <div class="max-w-4xl mx-auto mb-20">
+            <div class="max-w-6xl mx-auto mb-20">
                 <p class="text-center text-ink-muted text-sm font-semibold uppercase tracking-eyebrow mb-8">Find Your Path</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <a href="/features/integrations/" class="group bg-canvas rounded-2xl p-6 border border-line hover:border-line-strong hover:shadow-raised motion-safe:hover:-translate-y-0.5 transition-[transform,border-color,box-shadow] duration-200">
@@ -121,10 +117,10 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 </div>
             </div>
 
-            <section class="max-w-4xl mx-auto mb-20 bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card">
+            <section class="max-w-6xl mx-auto mb-20 bg-canvas rounded-3xl p-10 lg:p-14 border border-line shadow-card">
                 <div class="eyebrow-chip mb-5">SBOM Lifecycle Tool</div>
                 <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink">Zero to SBOM Hero</h2>
-                <p class="mb-8 text-lg text-ink-muted leading-relaxed">
+                <p class="mb-8 max-w-3xl text-lg text-ink-muted leading-relaxed">
                 Build high-quality SBOMs directly in your CI pipeline with our <a href="/features/integrations/" class="link">open source action</a>. Once generated, SBOMs are automatically uploaded to sbomify where you can manage releases (including <a href="/features/sbom-hierarchy/" class="link">complex hierarchies</a>) and share the latest software versions with stakeholders – publicly or privately via your <a href="/features/trust-center/" class="link">Trust Center</a>. No more manual SBOM distribution or version confusion.
                 </p>
 
@@ -135,28 +131,31 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 <a class="btn-navy" href="/zero-to-hero/">Get Started</a>
             </section>
 
-            <section class="max-w-4xl mx-auto mb-20 bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card">
-                <div class="eyebrow-chip mb-5">Trust Center</div>
-                <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink">Transparency That Builds Trust</h2>
-                <p class="mb-4 text-lg text-ink leading-relaxed font-semibold">
-                Send a link instead of scheduling a call, and cut security questionnaire response times from weeks to minutes.
-                </p>
-                <p class="mb-6 text-lg text-ink-muted leading-relaxed">
-                Share SBOMs, VEX, CBOMs, compliance documents, and security artifacts with stakeholders in a standardized way. Your <a href="/features/trust-center/" class="link">trust center</a> can be hosted on your own domain and supports web portal access, standardized SBOM formats, and the Transparency Exchange API (TEA) for automated consumption. Compliance documents are expressed programmatically alongside your SBOMs.
-                </p>
-
-                <div class="my-12">
-                    {{< trust-center-artifacts >}}
+            <section class="max-w-6xl mx-auto mb-20 bg-canvas rounded-3xl p-10 lg:p-14 border border-line shadow-card">
+                <div class="grid lg:grid-cols-2 gap-12 items-center mb-10">
+                    <div>
+                    <div class="eyebrow-chip mb-5">Trust Center</div>
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink">Transparency That Builds Trust</h2>
+                    <p class="mb-4 text-lg text-ink leading-relaxed font-semibold">
+                    Send a link instead of scheduling a call, and cut security questionnaire response times from weeks to minutes.
+                    </p>
+                    <p class="mb-6 text-lg text-ink-muted leading-relaxed">
+                    Share SBOMs, VEX, CBOMs, compliance documents, and security artifacts with stakeholders in a standardized way. Your <a href="/features/trust-center/" class="link">trust center</a> can be hosted on your own domain and supports web portal access, standardized SBOM formats, and the Transparency Exchange API (TEA) for automated consumption. Compliance documents are expressed programmatically alongside your SBOMs.
+                    </p>
+                        <div class="mt-8"><a class="btn-navy" href="/features/trust-center/">Explore the Trust Center</a></div>
+                    </div>
+                    <div>
+                        {{< trust-center-artifacts >}}
+                    </div>
                 </div>
 
                 {{< trust-center-pillars-grid >}}
-                <a class="btn-navy" href="/features/trust-center/">Explore the Trust Center</a>
             </section>
 
-            <section class="max-w-4xl mx-auto mb-20 bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card">
+            <section class="max-w-6xl mx-auto mb-20 bg-canvas rounded-3xl p-10 lg:p-14 border border-line shadow-card">
                 <div class="eyebrow-chip mb-5">Security Artifact Hub</div>
                 <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink">Store, Analyze & Enrich</h2>
-                <p class="mb-8 text-lg text-ink-muted leading-relaxed">
+                <p class="mb-8 max-w-3xl text-lg text-ink-muted leading-relaxed">
                 sbomify is designed not only to hold your security artifacts but also to send them off for analysis. We integrate with CI/CD pipelines (GitHub, GitLab, Bitbucket), analysis tools like <a href="/features/integrations/" class="link">Google OSV</a> and <a href="/features/integrations/" class="link">Dependency Track</a>, and enrichment platforms such as <a href="/features/integrations/" class="link">Ecosyste.ms</a>. Your security artifacts flow seamlessly from generation through analysis and enrichment, giving you actionable insights without manual work. Scan results are <a href="/faq/how-do-i-use-vex/" class="link">VEX-aware</a>, so your not-affected decisions suppress noise in OSV and Dependency Track findings, and cryptographic assets are inventoried as <a href="/faq/what-is-a-cbom/" class="link">CBOMs</a> with a post-quantum readiness view.
                 </p>
 
@@ -168,7 +167,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
             </section>
 
             {{< comment >}}Trusted By section{{< /comment >}}
-            <div class="max-w-4xl mx-auto mb-20 bg-inverse rounded-3xl px-8 py-10 overflow-hidden">
+            <div class="max-w-6xl mx-auto mb-20 bg-inverse rounded-3xl px-8 py-10 overflow-hidden">
                 <span class="text-on-inverse-subtle text-sm font-semibold uppercase tracking-eyebrow mb-8 block text-center">Trusted By</span>
                 <figure class="max-w-2xl mx-auto mb-10 text-center">
                     <blockquote class="text-lg lg:text-xl text-white leading-relaxed">
@@ -190,22 +189,23 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 </div>
             </div>
 
-            <section class="max-w-4xl mx-auto mb-20 bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card">
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8">
+            <section class="flex flex-col bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card">
                 <div class="eyebrow-chip mb-5">Why Now?</div>
-                <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink">CRA is Coming. Ready or Not.</h2>
+                <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-ink">CRA is Coming. Ready or Not.</h2>
                 <p class="mb-6 text-lg text-ink-muted leading-relaxed">
                 The EU's Cyber Resilience Act (CRA) is now in force, with <strong>mandatory reporting starting September 11, 2026</strong>. Non-compliance can carry administrative fines of up to <a href="/compliance/eu-cra/#penalties-article-64" class="link"><strong>&euro;15 million or 2.5% of global annual turnover</strong></a>, whichever is higher. Whether you sell to European customers or not, CRA compliance is becoming a baseline expectation for B2B software.
                 </p>
                 <p class="mb-8 text-lg text-ink-muted leading-relaxed">
                 In the US, <a href="/compliance/eo-14028/" class="link">Executive Order 14028</a> kicked off federal SBOM adoption and remains in effect, and OMB's latest guidance encourages agencies to require SBOMs in contracts. Cryptography is next: under EO 14144's post-quantum provisions, <a href="https://www.cisa.gov/resources-tools/resources/product-categories-technologies-use-post-quantum-cryptography-standards" class="link">CISA now maintains a list of product categories</a> where post-quantum support is expected, and agencies must support TLS 1.3 by January 2030. You can't migrate cryptography you haven't inventoried, which is exactly what a <a href="/faq/what-is-a-cbom/" class="link">CBOM</a> gives you. sbomify covers both: automated SBOM generation and CBOM ingestion with a post-quantum readiness view.
                 </p>
-                <a class="btn-navy" href="/features/why-now/">Learn More About CRA</a>
+                <div class="mt-auto"><a class="btn-navy" href="/features/why-now/">Learn More About CRA</a></div>
             </section>
 
-            <section class="max-w-4xl mx-auto bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card">
+            <section class="flex flex-col bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card">
                 <div class="eyebrow-chip mb-5">Your Choice, Your Control</div>
                 <div class="flex items-center justify-between flex-wrap gap-4 mb-6">
-                    <h2 class="text-4xl lg:text-5xl font-bold text-ink">Self-Host or Cloud</h2>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-ink">Self-Host or Cloud</h2>
                     <div class="flex items-center gap-3">
                         <div id="gh-star-cta" class="hidden"></div>
                         <div id="gh-latest-version" class="hidden"></div>
@@ -217,11 +217,12 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 <p class="mb-8 text-lg text-ink-muted leading-relaxed">
                 Either way, you get the same powerful SBOM and compliance document management, support for CycloneDX and SPDX formats, and seamless integrations with your existing tools. No vendor lock-in, no compromises.
                 </p>
-                <div class="flex gap-4">
+                <div class="mt-auto flex flex-wrap gap-4">
                     <a class="btn-navy" href="https://app.sbomify.com">Try Cloud Free</a>
                     <a class="btn-secondary" href="https://github.com/sbomify/sbomify">Self-Host</a>
                 </div>
             </section>
+            </div>
         </div>
     </div>
     <div class="bg-inverse">
