@@ -1574,10 +1574,6 @@ button {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-canvas) / var(--tw-bg-opacity, 1));
 }
-.bg-code-bg {
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-code-bg) / var(--tw-bg-opacity, 1));
-}
 .bg-info {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-info-full) / var(--tw-bg-opacity, 1));
@@ -1942,18 +1938,6 @@ button {
 .text-accent-strong {
   --tw-text-opacity: 1;
   color: rgb(var(--color-accent-strong) / var(--tw-text-opacity, 1));
-}
-.text-code-muted {
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-code-muted) / var(--tw-text-opacity, 1));
-}
-.text-code-string {
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-code-string) / var(--tw-text-opacity, 1));
-}
-.text-code-text {
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-code-text) / var(--tw-text-opacity, 1));
 }
 .text-info {
   --tw-text-opacity: 1;
@@ -2761,6 +2745,9 @@ button {
   }
 }
 @media (min-width: 640px) {
+  .sm\:inline {
+    display: inline;
+  }
   .sm\:w-auto {
     width: auto;
   }
@@ -2784,6 +2771,9 @@ button {
   }
   .sm\:rounded-2xl {
     border-radius: 1rem;
+  }
+  .sm\:p-10 {
+    padding: 2.5rem;
   }
   .sm\:p-6 {
     padding: 1.5rem;
