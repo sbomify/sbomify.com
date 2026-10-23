@@ -1,5 +1,8 @@
+{{ $page := . }}
 <nav class="hidden lg:flex gap-1" aria-label="Main navigation">
   {{ range site.Data.main.nav }}
-    <a href="{{ .link }}" class="px-4 py-2 rounded-full text-sm font-medium text-ink-muted hover:text-ink hover:bg-surface transition-colors duration-200">{{ .name }}</a>
+    {{/* Blog posts live under /YYYY/MM/DD/, not /blog/ */}}
+    {{ $active := or (hasPrefix $page.RelPermalink .link) (and (eq .link "/blog/") (eq $page.Section "posts")) }}
+    <a href="{{ .link }}"{{ if $active }} aria-current="page"{{ end }} class="px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 {{ if $active }}text-ink bg-surface-strong{{ else }}text-ink-muted hover:text-ink hover:bg-surface{{ end }}">{{ .name }}</a>
   {{ end }}
 </nav>

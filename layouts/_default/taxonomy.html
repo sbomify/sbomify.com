@@ -7,7 +7,8 @@
       </h1>
     </div>
   </div>
-  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+  <section class="bg-surface">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-20">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {{ range .Pages }}
       <a href="{{ .RelPermalink }}" class="group flex flex-col justify-between rounded-2xl p-8 hover:shadow-raised transition-[box-shadow,border-color] duration-300 h-full bg-canvas border border-line hover:border-line-strong">
@@ -22,6 +23,7 @@
       </a>
       {{ end }}
     </div>
-  </div>
+    </div>
+  </section>
 </div>
 {{ end }}

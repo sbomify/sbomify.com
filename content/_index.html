@@ -15,13 +15,13 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                     Your Security Artifact Hub
                 </h1>
                 <p class="text-xl lg:text-2xl leading-relaxed text-ink-muted max-w-3xl mx-auto text-pretty">From zero to SBOM hero. Generate, manage, and share <a href="/what-is-sbom/" class="link">SBOMs</a> and compliance documents with your stakeholders.</p>
-                <div class="mt-10 flex flex-wrap gap-4 justify-center">
-                    <a href="https://app.sbomify.com" class="group btn-primary btn-lg">
+                <div class="mt-10 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 justify-center">
+                    <a href="https://app.sbomify.com" class="group btn-primary btn-lg w-full sm:w-auto">
                         Get Started Free
                         <svg aria-hidden="true" class="w-4 h-4 motion-safe:group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                     </a>
-                    <a href="https://app.sbomify.com/enterprise-contact/" class="inline-flex items-center justify-center px-8 py-4 bg-canvas border border-line-strong hover:border-ink text-ink rounded-full font-semibold text-lg motion-safe:hover:-translate-y-0.5 transition-[background-color,border-color,transform] duration-200">Contact Us</a>
-                    <a href="https://sbomify.com/slack" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-canvas border border-line-strong hover:border-ink text-ink rounded-full font-semibold text-lg motion-safe:hover:-translate-y-0.5 transition-[background-color,border-color,transform] duration-200" onclick="posthog.capture('cta_click', { location: 'hero', label: 'Chat on Slack', destination: 'https://sbomify.com/slack' })">
+                    <a href="https://app.sbomify.com/enterprise-contact/" class="btn-secondary btn-lg w-full sm:w-auto">Contact Us</a>
+                    <a href="https://sbomify.com/slack" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-lg w-full sm:w-auto" onclick="posthog.capture('cta_click', { location: 'hero', label: 'Chat on Slack', destination: 'https://sbomify.com/slack' })">
                         {{< icon "slack" "w-5 h-5" >}}
                         Chat on Slack
                     </a>
@@ -46,13 +46,13 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                         <a href="/features/integrations/#docker" class="flex items-center gap-2 text-ink font-semibold hover:text-accent-strong transition-colors">
                             <span class="text-ink">{{< icon "docker" "w-6 h-6" >}}</span> Docker
                         </a>
-                        <a href="/features/integrations/" class="hover:opacity-80 transition-opacity">
+                        <a href="/features/integrations/" class="grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-[filter,opacity]">
                             <img class="h-[30px] w-auto object-contain" src="/assets/images/site/osv-navy.svg" alt="Google OSV" width="150" height="30" />
                         </a>
-                        <a href="/features/integrations/" class="hover:opacity-80 transition-opacity">
+                        <a href="/features/integrations/" class="grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-[filter,opacity]">
                             <img class="h-[30px] w-auto object-contain" src="/assets/images/site/dependency-track-navy.svg" alt="Dependency Track" width="140" height="30" />
                         </a>
-                        <a href="/features/integrations/" class="hover:opacity-80 transition-opacity">
+                        <a href="/features/integrations/" class="grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-[filter,opacity]">
                             <img class="h-[30px] w-auto object-contain" src="/assets/images/site/ecosystems.svg" alt="Ecosyste.ms" width="148" height="30" />
                         </a>
                     </div>
@@ -121,7 +121,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 </div>
             </div>
 
-            <section class="max-w-4xl mx-auto mb-20 bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card hover:shadow-raised hover:border-line-strong motion-safe:hover:-translate-y-1 transition-[box-shadow,transform,border-color] duration-300">
+            <section class="max-w-4xl mx-auto mb-20 bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card">
                 <div class="eyebrow-chip mb-5">SBOM Lifecycle Tool</div>
                 <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink">Zero to SBOM Hero</h2>
                 <p class="mb-8 text-lg text-ink-muted leading-relaxed">
@@ -135,7 +135,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 <a class="btn-navy" href="/zero-to-hero/">Get Started</a>
             </section>
 
-            <section class="max-w-4xl mx-auto mb-20 bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card hover:shadow-raised hover:border-line-strong motion-safe:hover:-translate-y-1 transition-[box-shadow,transform,border-color] duration-300">
+            <section class="max-w-4xl mx-auto mb-20 bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card">
                 <div class="eyebrow-chip mb-5">Trust Center</div>
                 <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink">Transparency That Builds Trust</h2>
                 <p class="mb-4 text-lg text-ink leading-relaxed font-semibold">
@@ -153,7 +153,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 <a class="btn-navy" href="/features/trust-center/">Explore the Trust Center</a>
             </section>
 
-            <section class="max-w-4xl mx-auto mb-20 bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card hover:shadow-raised hover:border-line-strong motion-safe:hover:-translate-y-1 transition-[box-shadow,transform,border-color] duration-300">
+            <section class="max-w-4xl mx-auto mb-20 bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card">
                 <div class="eyebrow-chip mb-5">Security Artifact Hub</div>
                 <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink">Store, Analyze & Enrich</h2>
                 <p class="mb-8 text-lg text-ink-muted leading-relaxed">
@@ -190,7 +190,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 </div>
             </div>
 
-            <section class="max-w-4xl mx-auto mb-20 bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card hover:shadow-raised hover:border-line-strong motion-safe:hover:-translate-y-1 transition-[box-shadow,transform,border-color] duration-300">
+            <section class="max-w-4xl mx-auto mb-20 bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card">
                 <div class="eyebrow-chip mb-5">Why Now?</div>
                 <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink">CRA is Coming. Ready or Not.</h2>
                 <p class="mb-6 text-lg text-ink-muted leading-relaxed">
@@ -202,7 +202,7 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 <a class="btn-navy" href="/features/why-now/">Learn More About CRA</a>
             </section>
 
-            <section class="max-w-4xl mx-auto bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card hover:shadow-raised hover:border-line-strong motion-safe:hover:-translate-y-1 transition-[box-shadow,transform,border-color] duration-300">
+            <section class="max-w-4xl mx-auto bg-canvas rounded-3xl p-10 lg:p-12 border border-line shadow-card">
                 <div class="eyebrow-chip mb-5">Your Choice, Your Control</div>
                 <div class="flex items-center justify-between flex-wrap gap-4 mb-6">
                     <h2 class="text-4xl lg:text-5xl font-bold text-ink">Self-Host or Cloud</h2>

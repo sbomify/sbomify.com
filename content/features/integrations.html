@@ -33,7 +33,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {{< comment >}}GitHub{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card hover:border-line-strong transition-all" id="github">
+      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card" id="github">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <div class="flex flex-wrap items-center gap-3">
             <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "github" "w-8 h-8" >}}</span> GitHub</span>
@@ -65,7 +65,7 @@ steps:
       </div>
 
       {{< comment >}}GitLab{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card hover:border-line-strong transition-all" id="gitlab">
+      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card" id="gitlab">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "gitlab" "w-8 h-8" >}}</span> GitLab</span>
           <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/gitlab-ci/" class="link text-sm font-semibold whitespace-nowrap">Documentation →</a>
@@ -96,7 +96,7 @@ steps:
       </div>
 
       {{< comment >}}Bitbucket{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card hover:border-line-strong transition-all" id="bitbucket">
+      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card" id="bitbucket">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "bitbucket" "w-8 h-8" >}}</span> Bitbucket</span>
           <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/bitbucket/" class="link text-sm font-semibold whitespace-nowrap">Documentation →</a>
@@ -130,7 +130,7 @@ definitions:
       </div>
 
       {{< comment >}}Docker{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card hover:border-line-strong transition-all" id="docker">
+      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card" id="docker">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "docker" "w-8 h-8" >}}</span> Docker</span>
           <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/docker/" class="link text-sm font-semibold whitespace-nowrap">Documentation →</a>
@@ -160,7 +160,7 @@ docker run --rm \
       </div>
 
       {{< comment >}}pip / CLI{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card hover:border-line-strong transition-all" id="pip">
+      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card" id="pip">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "python" "w-8 h-8" >}}</span> Local CLI</span>
           <a href="https://pypi.org/project/sbomify-action/" class="link text-sm font-semibold whitespace-nowrap" target="_blank">View on PyPI →</a>
@@ -431,7 +431,7 @@ uvx sbomify-action</code></pre>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {{< comment >}}OSV{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card hover:border-line-strong transition-all flex flex-col">
+      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card flex flex-col">
         <img src="/assets/images/site/osv-navy.svg" class="h-8 w-auto mb-6 self-start" alt="Google OSV" width="160" height="32">
         <h3 id="osv" class="text-xl font-bold text-ink mb-3">Google OSV</h3>
         <p class="text-ink-muted flex-grow">
@@ -440,7 +440,7 @@ uvx sbomify-action</code></pre>
       </div>
 
       {{< comment >}}Dependency Track{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card hover:border-line-strong transition-all flex flex-col">
+      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card flex flex-col">
         <img src="/assets/images/site/dependency-track-navy.svg" class="h-8 w-auto mb-6 self-start" alt="Dependency Track" width="149" height="32">
         <h3 id="dependency-track" class="text-xl font-bold text-ink mb-3">Dependency Track</h3>
         <p class="text-ink-muted mb-4 flex-grow">

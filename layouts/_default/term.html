@@ -10,8 +10,10 @@
       </p>
     </div>
   </div>
-  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+  <section class="bg-surface">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-20">
     {{ partial "posts.html" (dict "paginate" true "context" . "pages" .Pages) }}
-  </div>
+    </div>
+  </section>
 </div>
 {{ end }}

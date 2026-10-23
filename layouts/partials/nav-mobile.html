@@ -26,9 +26,11 @@
           Home
         </a>
       </div>
+      {{ $page := . }}
       {{ range site.Data.main.nav }}
+        {{ $active := or (hasPrefix $page.RelPermalink .link) (and (eq .link "/blog/") (eq $page.Section "posts")) }}
         <div class="mb-6">
-          <a href="{{ .link }}" class="text-white uppercase leading-[27px] text-lg font-semibold tracking-eyebrow hover:text-accent transition-colors">
+          <a href="{{ .link }}"{{ if $active }} aria-current="page"{{ end }} class="uppercase leading-[27px] text-lg font-semibold tracking-eyebrow hover:text-accent transition-colors {{ if $active }}text-accent{{ else }}text-white{{ end }}">
             {{ .name }}
           </a>
         </div>
