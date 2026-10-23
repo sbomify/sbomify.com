@@ -25,6 +25,7 @@ module.exports = {
         100: token('navy-100'),
         80: token('navy-80'),
         60: token('navy-60'),
+        55: token('navy-55'),
         40: token('navy-40'),
         20: token('navy-20'),
         10: token('navy-10'),
@@ -32,7 +33,7 @@ module.exports = {
       },
       mist: {
         DEFAULT: token('mist'),
-        50: token('mist-50'),
+        soft: token('mist-soft'),
       },
       orange: {
         DEFAULT: token('orange-500'),

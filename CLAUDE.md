@@ -66,7 +66,8 @@ Brand rules the tokens encode:
 - Layouts are predominantly white with navy type. Dark sections use `bg-inverse` (white on navy).
 - Signal Orange gets one moment per layout, normally the primary call to action (`btn-primary`). Section-level actions use `btn-navy` or `btn-secondary`.
 - Type on orange is always white, on an Orange 700 fill (`bg-accent-strong`); orange text on white is `text-accent-strong`, never `text-accent`.
-- Body text is `text-ink-muted` (Navy 80) or darker. `text-ink-subtle` (Navy 60) is for large type and icons only.
+- Body text is `text-ink-muted` (Navy 80) or darker. `text-ink-subtle` (Navy 55, the app's `text-muted`) is for captions, eyebrows and meta on white; it is 4.2:1 on Mist Soft, so on `bg-surface` use `text-ink-muted` (the `.eyebrow` component does this automatically).
+- Tokens shared with the app (sbomify/sbomify `tailwind.src.css`, `:root.light`) keep the app's values: Navy 55 `#6E7180`, Mist Soft `#EEF0F4`. Copy follows the app's rules too: "sbomify" is always lowercase, and the auth verbs are "Sign in" / "Sign up".
 - Success/danger/warning/info signal status only, never decoration: full colour for the dot or border, `-tint` for the fill, navy type.
 - Shared components in `tailwind.css`: `btn-primary`, `btn-navy`, `btn-secondary` (sizes `btn-md`, `btn-lg`), `link`, `eyebrow`, `eyebrow-chip`, `tag`, `card`, `hero`.
 
@@ -90,6 +91,8 @@ Brand rules the tokens encode:
 ## Content Authoring
 
 **Blog posts** go in `content/posts/` with the naming convention `YYYY-MM-DD-slug.md`. Required frontmatter: `title`, `description`, `keywords`, `author` (must match a key in `data/authors.yml`). Optional: `tldr` (for TL;DR blocks), `image` (social preview).
+
+**Code blocks:** Fenced code renders through `layouts/_default/_markup/render-codeblock.html` with a header band (language plus a Copy button revealed by `assets/js/main.js`). Always give fences a language.
 
 **WebP images:** Use `{{</* picture "/assets/images/blog/photo.jpg" alt="description" */>}}` in Markdown. Hugo automatically generates WebP versions. Original images go in `assets/images/`.
 
