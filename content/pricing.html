@@ -15,7 +15,7 @@ faq:
     answer: "Yes! Sbomify is open source and available for self-hosting. Check out our GitHub repository for installation instructions and documentation."
 ---
 
-<div class="bg-primaryBG py-12 md:py-16 lg:py-24">
+<div class="hero py-12 md:py-16 lg:py-24">
 <div class="pricing-page">
   <div class="pricing-header">
     <h1>Pricing Plans</h1>
@@ -108,8 +108,8 @@ faq:
       </div>
       <div class="card-footer">
         <a href="https://app.sbomify.com" class="cta-button" onclick="posthog.capture('cta_click', { location: 'pricing', label: 'Business Plan Signup' })">Start 14-day free trial</a>
-        <a href="https://app.sbomify.com/enterprise-contact/" class="block mt-3 text-sm text-gray-300 hover:text-white underline underline-offset-4 decoration-gray-500 hover:decoration-white transition-colors" onclick="posthog.capture('cta_click', { location: 'pricing', label: 'Business Plan Talk to Sales' })">Or talk to sales &rarr;</a>
-        <a href="https://sbomify.com/slack" target="_blank" rel="noopener noreferrer" class="block mt-2 text-sm text-gray-300 hover:text-white underline underline-offset-4 decoration-gray-500 hover:decoration-white transition-colors" onclick="posthog.capture('cta_click', { location: 'pricing', label: 'Business Plan Chat on Slack', destination: 'https://sbomify.com/slack' })">Or chat with us on Slack &rarr;</a>
+        <a href="https://app.sbomify.com/enterprise-contact/" class="block mt-3 text-sm text-navy-20 hover:text-white underline underline-offset-4 decoration-navy-60 hover:decoration-white transition-colors" onclick="posthog.capture('cta_click', { location: 'pricing', label: 'Business Plan Talk to Sales' })">Or talk to sales &rarr;</a>
+        <a href="https://sbomify.com/slack" target="_blank" rel="noopener noreferrer" class="block mt-2 text-sm text-navy-20 hover:text-white underline underline-offset-4 decoration-navy-60 hover:decoration-white transition-colors" onclick="posthog.capture('cta_click', { location: 'pricing', label: 'Business Plan Chat on Slack', destination: 'https://sbomify.com/slack' })">Or chat with us on Slack &rarr;</a>
       </div>
     </div>
 
@@ -117,7 +117,8 @@ faq:
       <div class="card-header">
         <h2>Enterprise</h2>
         <div class="price">
-          <span class="amount custom">Custom Quote</span>
+          <span class="amount custom">Custom</span>
+          <span class="suffix">quote</span>
         </div>
       </div>
 
@@ -146,7 +147,7 @@ faq:
       </div>
       <div class="card-footer">
         <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" onclick="posthog.capture('cta_click', { location: 'pricing', label: 'Enterprise Plan Contact' })">Contact Us</a>
-        <a href="https://sbomify.com/slack" target="_blank" rel="noopener noreferrer" class="block mt-3 text-sm text-gray-300 hover:text-white underline underline-offset-4 decoration-gray-500 hover:decoration-white transition-colors" onclick="posthog.capture('cta_click', { location: 'pricing', label: 'Enterprise Plan Chat on Slack', destination: 'https://sbomify.com/slack' })">Or chat with us on Slack &rarr;</a>
+        <a href="https://sbomify.com/slack" target="_blank" rel="noopener noreferrer" class="block mt-3 text-sm text-ink-muted hover:text-ink underline underline-offset-4 decoration-line-strong hover:decoration-ink transition-colors" onclick="posthog.capture('cta_click', { location: 'pricing', label: 'Enterprise Plan Chat on Slack', destination: 'https://sbomify.com/slack' })">Or chat with us on Slack &rarr;</a>
       </div>
     </div>
 
@@ -154,32 +155,32 @@ faq:
 
 {{< comment >}}FAQ Section{{< /comment >}}
 <div class="mt-16 md:mt-24">
-    <h2 class="text-white text-2xl md:text-3xl font-medium mb-8 md:mb-12 text-center">Frequently Asked Questions</h2>
+    <h2 class="text-ink text-2xl md:text-3xl font-semibold mb-8 md:mb-12 text-center">Frequently Asked Questions</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-6 md:p-8">
-        <h3 class="text-[#8A7DFF] text-lg font-semibold mb-4">What's included in the free tier?</h3>
-        <p class="text-gray-300 leading-relaxed">The Community tier is perfect for open source projects and includes public SBOM hosting, 1 product with 5 components, and community support.</p>
+      <div class="card p-6 md:p-8">
+        <h3 class="text-ink text-lg font-semibold mb-4">What's included in the free tier?</h3>
+        <p class="text-ink-muted leading-relaxed">The Community tier is perfect for open source projects and includes public SBOM hosting, 1 product with 5 components, and community support.</p>
       </div>
 
-      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-6 md:p-8">
-        <h3 class="text-[#8A7DFF] text-lg font-semibold mb-4">Can I upgrade or downgrade at any time?</h3>
-        <p class="text-gray-300 leading-relaxed">Yes, you can change your plan at any time. Your billing will be prorated accordingly.</p>
+      <div class="card p-6 md:p-8">
+        <h3 class="text-ink text-lg font-semibold mb-4">Can I upgrade or downgrade at any time?</h3>
+        <p class="text-ink-muted leading-relaxed">Yes, you can change your plan at any time. Your billing will be prorated accordingly.</p>
       </div>
 
-      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-6 md:p-8">
-        <h3 class="text-[#8A7DFF] text-lg font-semibold mb-4">What payment methods do you accept?</h3>
-        <p class="text-gray-300 leading-relaxed">We accept all major credit cards and can arrange alternative payment methods for enterprise customers.</p>
+      <div class="card p-6 md:p-8">
+        <h3 class="text-ink text-lg font-semibold mb-4">What payment methods do you accept?</h3>
+        <p class="text-ink-muted leading-relaxed">We accept all major credit cards and can arrange alternative payment methods for enterprise customers.</p>
       </div>
 
-      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-6 md:p-8">
-        <h3 class="text-[#8A7DFF] text-lg font-semibold mb-4">Do you offer custom solutions?</h3>
-        <p class="text-gray-300 leading-relaxed">Yes, our enterprise tier can be customized to meet your specific needs. Contact our sales team to learn more.</p>
+      <div class="card p-6 md:p-8">
+        <h3 class="text-ink text-lg font-semibold mb-4">Do you offer custom solutions?</h3>
+        <p class="text-ink-muted leading-relaxed">Yes, our enterprise tier can be customized to meet your specific needs. Contact our sales team to learn more.</p>
       </div>
 
-      <div class="bg-[#201B4C] border border-[#37306B] rounded-lg p-6 md:p-8">
-        <h3 class="text-[#8A7DFF] text-lg font-semibold mb-4">Can I self-host Sbomify?</h3>
-        <p class="text-gray-300 leading-relaxed">Yes! Sbomify is open source and available for self-hosting. Check out our <a href="https://github.com/sbomify/sbomify" class="text-[#8A7DFF] hover:text-[#9A8DFF] underline">GitHub repository</a> for installation instructions and documentation.</p>
+      <div class="card p-6 md:p-8">
+        <h3 class="text-ink text-lg font-semibold mb-4">Can I self-host Sbomify?</h3>
+        <p class="text-ink-muted leading-relaxed">Yes! Sbomify is open source and available for self-hosting. Check out our <a href="https://github.com/sbomify/sbomify" class="link">GitHub repository</a> for installation instructions and documentation.</p>
       </div>
     </div>
 

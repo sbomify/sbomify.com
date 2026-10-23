@@ -59,6 +59,17 @@ bun run lint:d2            # Format D2 diagram files
 
 **Styling:** Tailwind CSS 3.4 compiled via PostCSS. All styles (including former SCSS) are in `_assets/css/tailwind.css`. Output goes to `assets/css/styles.css`.
 
+**Design tokens:** The brand (sbomify Brand Guidelines v2.0: Navy, White, Mist, Signal Orange, the semantic palette, Figtree and the system mono stack) lives in `_assets/css/tokens.css`, imported at the top of `tailwind.css` via `postcss-import`. It has two tiers: primitives (`--color-navy-80`, `--color-orange-700`, ...) and roles (`--color-ink`, `--color-canvas`, `--color-accent-strong`, ...). `tailwind.config.js` replaces Tailwind's default palette with these tokens, so `indigo-500`-style classes no longer exist; use the role names (`text-ink`, `text-ink-muted`, `bg-surface`, `border-line`, `bg-inverse`, `bg-accent-strong`) or a primitive scale (`navy-*`, `orange-*`). Never hard-code a hex in templates or CSS; component styles use `rgb(var(--color-*))`. `_d2/theme.d2` and `assets/css/native.css` (code highlighting) mirror the tokens, since D2 cannot read CSS variables.
+
+Brand rules the tokens encode:
+
+- Layouts are predominantly white with navy type. Dark sections use `bg-inverse` (white on navy).
+- Signal Orange gets one moment per layout, normally the primary call to action (`btn-primary`). Section-level actions use `btn-navy` or `btn-secondary`.
+- Type on orange is always white, on an Orange 700 fill (`bg-accent-strong`); orange text on white is `text-accent-strong`, never `text-accent`.
+- Body text is `text-ink-muted` (Navy 80) or darker. `text-ink-subtle` (Navy 60) is for large type and icons only.
+- Success/danger/warning/info signal status only, never decoration: full colour for the dot or border, `-tint` for the fill, navy type.
+- Shared components in `tailwind.css`: `btn-primary`, `btn-navy`, `btn-secondary` (sizes `btn-md`, `btn-lg`), `link`, `eyebrow`, `eyebrow-chip`, `tag`, `card`, `hero`.
+
 **Diagrams:** D2 source files in `_d2/` compile to SVG in both `assets/images/d2/` (image refs) and `layouts/partials/d2/` (inline SVG). All diagrams share a theme from `_d2/theme.d2`.
 
 **Hugo features replacing former Jekyll plugins:**
@@ -87,6 +98,8 @@ bun run lint:d2            # Format D2 diagram files
 **D2 diagrams:** Preferred inline: `{{</* d2 "filename" */>}}` wrapped in a styled div. Alternative: `![alt](/assets/images/d2/filename.svg)`.
 
 **Meta tags:** Set `description` and `keywords` in page frontmatter. They fall back to site-level values in `hugo.toml`.
+
+**Table of contents:** Pages with at least five h2/h3 headings and 1000 words get an "On this page" list automatically (sticky sidebar at `xl`, collapsible block below). Set `toc: false` in frontmatter to turn it off. Logic is in `layouts/partials/toc-enabled.html` and `layouts/partials/toc.html`.
 
 ## CI/CD
 

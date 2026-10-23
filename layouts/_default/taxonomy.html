@@ -1,28 +1,29 @@
 {{ define "main" }}
 <div>
-  <div class="bg-primaryBG relative overflow-hidden">
-    {{ partial "aurora.html" . }}
+  <div class="hero">
     <div class="relative px-5 py-16 lg:py-24 lg:px-24 max-w-7xl mx-auto">
-      <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
-        <span class="text-gradient">{{ .Title }}</span>
+      <h1 class="text-ink text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+        {{ .Title }}
       </h1>
     </div>
   </div>
-  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+  <section class="bg-surface">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-20">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {{ range .Pages }}
-      <a href="{{ .RelPermalink }}" class="group flex flex-col justify-between rounded-2xl p-8 hover:shadow-xl transition-[box-shadow,border-color] duration-300 h-full bg-white border border-gray-200 hover:border-purple">
+      <a href="{{ .RelPermalink }}" class="group flex flex-col justify-between rounded-2xl p-8 hover:shadow-raised transition-[box-shadow,border-color] duration-300 h-full bg-canvas border border-line hover:border-line-strong">
         <div>
-          <h2 class="text-2xl font-semibold leading-tight mb-4 group-hover:text-purple transition-colors duration-200 text-primaryText capitalize">
+          <h2 class="text-2xl font-semibold leading-tight mb-4 group-hover:text-accent-strong transition-colors duration-200 text-ink capitalize">
             {{ .LinkTitle }}
           </h2>
         </div>
-        <div class="flex items-center justify-end pt-6 mt-6 border-t border-gray-100">
-          <span class="text-purple text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200">View &rarr;</span>
+        <div class="flex items-center justify-end pt-6 mt-6 border-t border-line">
+          <span class="text-accent-strong text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200">View &rarr;</span>
         </div>
       </a>
       {{ end }}
     </div>
-  </div>
+    </div>
+  </section>
 </div>
 {{ end }}

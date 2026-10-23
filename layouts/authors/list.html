@@ -1,20 +1,20 @@
 {{ define "main" }}
 {{ if not .Params.author_key }}
   {{/* Section index page – not an individual author */}}
-  <div class="bg-primaryBG relative overflow-hidden px-5 py-16 lg:py-24 lg:px-24">
+  <div class="hero px-5 py-16 lg:py-24 lg:px-24">
     <div class="relative max-w-4xl mx-auto text-center">
-      <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
-        <span class="text-gradient">Authors</span>
+      <h1 class="text-ink text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+        Authors
       </h1>
     </div>
   </div>
-  <div class="bg-[#F6F9FA]">
+  <div class="bg-surface">
     <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
       <div class="flex flex-col gap-8">
         {{ range .Pages }}
           {{ $author := index site.Data.authors .Params.author_key }}
           {{ if $author }}
-          <a href="{{ .RelPermalink }}" class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 flex flex-col md:flex-row items-center gap-8 md:gap-12 transition-all duration-300 hover:border-[#8A7DFF] hover:shadow-md no-underline">
+          <a href="{{ .RelPermalink }}" class="bg-canvas p-8 md:p-10 rounded-2xl shadow-card border border-line flex flex-col md:flex-row items-center gap-8 md:gap-12 transition-all duration-300 hover:border-line-strong hover:shadow-raised no-underline">
             <div class="flex-shrink-0">
               {{ $imgPath := strings.TrimPrefix "/assets/" $author.image }}
               {{ $img := resources.Get $imgPath }}
@@ -27,8 +27,8 @@
               {{ end }}
             </div>
             <div class="text-center md:text-left flex-grow">
-              <h2 class="text-2xl font-bold text-primaryText !mt-0 !mb-2">{{ $author.display_name }}</h2>
-              <p class="text-secondaryText leading-relaxed mb-0 text-lg">{{ $author.bio | truncate 200 }}</p>
+              <h2 class="text-2xl font-bold text-ink !mt-0 !mb-2">{{ $author.display_name }}</h2>
+              <p class="text-ink-muted leading-relaxed mb-0 text-lg">{{ $author.bio | truncate 200 }}</p>
             </div>
           </a>
           {{ end }}
@@ -71,7 +71,7 @@
 
   {{ $authorPosts := where (where site.RegularPages "Section" "posts") ".Params.author.display_name" $author.display_name }}
   {{ if gt (len $authorPosts) 0 }}
-  <div class="bg-[#F6F9FA]">
+  <div class="bg-surface">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
       {{ partial "posts.html" (dict
         "context" .

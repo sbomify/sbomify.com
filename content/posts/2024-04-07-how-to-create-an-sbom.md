@@ -16,16 +16,16 @@ comments: []
 slug: how-to-create-an-sbom
 ---
 
-<div class="bg-blue-50 border-l-4 border-blue-500 p-6 my-8 rounded-r-lg">
+<div class="bg-info-tint border-l-4 border-info p-6 my-8 rounded-r-lg">
   <div class="flex items-start">
     <div class="flex-shrink-0">
-      <svg class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor">
+      <svg class="h-6 w-6 text-info" fill="none" viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     </div>
     <div class="ml-4">
-      <h3 class="text-lg font-semibold text-blue-800 mt-0">📘 Updated Guides Available</h3>
-      <p class="text-blue-700 mt-2 mb-0">This article provides a general overview, but we now have more comprehensive and up-to-date guides available. Check out our <a href="/guides/" class="font-semibold underline hover:text-blue-900">SBOM Generation Guides</a> for language-specific instructions covering Python, JavaScript, Go, Rust, Java, Docker, and many more.</p>
+      <h3 class="text-lg font-semibold text-ink mt-0">📘 Updated Guides Available</h3>
+      <p class="text-ink mt-2 mb-0">This article provides a general overview, but we now have more comprehensive and up-to-date guides available. Check out our <a href="/guides/" class="font-semibold underline hover:text-accent-strong">SBOM Generation Guides</a> for language-specific instructions covering Python, JavaScript, Go, Rust, Java, Docker, and many more.</p>
     </div>
   </div>
 </div>

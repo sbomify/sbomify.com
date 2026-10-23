@@ -33,7 +33,7 @@
 
   {{ $authorPosts := where (where site.RegularPages "Section" "posts") ".Params.author.display_name" $author.display_name }}
   {{ if gt (len $authorPosts) 0 }}
-  <div class="bg-[#F6F9FA]">
+  <div class="bg-surface">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
       {{ partial "posts.html" (dict
         "context" .

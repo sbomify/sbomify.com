@@ -1,45 +1,57 @@
-<div class="relative w-full max-w-md mx-auto">
-    {{/* Decorative blob */}}
-    <div class="absolute -top-20 -right-20 w-64 h-64 bg-purple-100 rounded-full blur-3xl opacity-50"></div>
-
-    <div class="relative z-10 bg-gradient-to-br from-[#F6F9FA] to-white p-8 rounded-[40px] border border-gray-100 shadow-lg space-y-6">
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-6 transform transition-transform hover:scale-[1.02] duration-300">
-            <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-red-500 flex-shrink-0">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M5 8v-3a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-5" /><path d="M3 14a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M4.5 17l-1.5 5l3 -1.5l3 1.5l-1.5 -5" /></svg>
+{{/* Illustrative trust center panel: one product surface with divided
+     document rows rather than stacked floating cards. Decorative, so it is
+     hidden from assistive tech; the surrounding copy carries the meaning. */}}
+<div class="w-full max-w-md mx-auto" aria-hidden="true">
+    <div class="bg-canvas rounded-2xl border border-line shadow-raised overflow-hidden text-left">
+        {{/* Header: whose trust center this is */}}
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-line">
+            <div class="w-9 h-9 rounded-lg bg-inverse text-on-inverse flex items-center justify-center text-sm font-bold flex-shrink-0">A</div>
+            <div class="min-w-0 flex-1">
+                <div class="text-sm font-semibold text-ink leading-tight">Acme Trust Center</div>
+                <div class="font-mono text-[11px] text-ink-muted truncate">trust.acme.example</div>
             </div>
-            <div>
-                <div class="font-bold text-[#201B4C] text-lg mb-1">SOC 2 Type II Report</div>
-                <div class="flex items-center gap-2">
-                    <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100">Verified</span>
-                    <span class="text-xs text-gray-400">Updated 2 days ago</span>
-                </div>
-            </div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-medium text-ink px-2 py-0.5 rounded-full border border-line">
+                <span class="w-1.5 h-1.5 rounded-full bg-success"></span>Public
+            </span>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-6 transform transition-transform hover:scale-[1.02] duration-300">
-            <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-500 flex-shrink-0">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M10 13l-1 2l1 2" /><path d="M14 13l1 2l-1 2" /></svg>
-            </div>
-            <div>
-                <div class="font-bold text-[#201B4C] text-lg mb-1">Widget Service v1.8 SBOM</div>
-                <div class="flex items-center gap-2">
-                    <span class="text-xs font-medium text-[#8A7DFF] bg-purple-50 px-2 py-0.5 rounded-full border border-purple-100">Automated</span>
-                    <span class="text-xs text-gray-400">via GitHub Actions</span>
-                </div>
-            </div>
-        </div>
+        <div class="px-5 pt-4 pb-2 eyebrow">Security documents</div>
 
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-6 transform transition-transform hover:scale-[1.02] duration-300">
-            <div class="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center text-gray-600 flex-shrink-0">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 17h6" /><path d="M9 13h6" /></svg>
-            </div>
-            <div>
-                <div class="font-bold text-[#201B4C] text-lg mb-1">Pentest Summary</div>
-                <div class="flex items-center gap-2">
-                    <span class="text-xs font-medium text-gray-600 bg-gray-100 px-2 py-0.5 rounded-full border border-gray-200">Public</span>
-                    <span class="text-xs text-gray-400">Latest report</span>
+        <ul class="divide-y divide-line">
+            <li class="flex items-center gap-3 px-5 py-3.5">
+                <div class="w-9 h-9 rounded-lg bg-surface flex items-center justify-center text-ink flex-shrink-0">
+                    <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M10 13l-1 2l1 2" /><path d="M14 13l1 2l-1 2" /></svg>
                 </div>
-            </div>
-        </div>
+                <div class="min-w-0 flex-1">
+                    <div class="text-sm font-semibold text-ink truncate">Widget Service SBOM</div>
+                    <div class="font-mono text-[11px] text-ink-muted truncate">v1.8.0 · sbom.cdx.json</div>
+                </div>
+                <span class="inline-flex items-center gap-1.5 text-xs font-medium text-ink flex-shrink-0">
+                    <span class="w-1.5 h-1.5 rounded-full bg-info"></span>Synced
+                </span>
+            </li>
+            <li class="flex items-center gap-3 px-5 py-3.5">
+                <div class="w-9 h-9 rounded-lg bg-surface flex items-center justify-center text-ink flex-shrink-0">
+                    <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" /><path d="M9 12l2 2l4 -4" /></svg>
+                </div>
+                <div class="min-w-0 flex-1">
+                    <div class="text-sm font-semibold text-ink truncate">SOC 2 Type II Report</div>
+                    <div class="font-mono text-[11px] text-ink-muted truncate">2026 · soc2-type2.pdf</div>
+                </div>
+                <span class="inline-flex items-center gap-1.5 text-xs font-medium text-ink flex-shrink-0">
+                    <span class="w-1.5 h-1.5 rounded-full bg-success"></span>Verified
+                </span>
+            </li>
+            <li class="flex items-center gap-3 px-5 py-3.5">
+                <div class="w-9 h-9 rounded-lg bg-surface flex items-center justify-center text-ink flex-shrink-0">
+                    <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" /><path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" /><path d="M8 11v-4a4 4 0 1 1 8 0v4" /></svg>
+                </div>
+                <div class="min-w-0 flex-1">
+                    <div class="text-sm font-semibold text-ink truncate">Pentest Summary</div>
+                    <div class="font-mono text-[11px] text-ink-muted truncate">Q3 2026 · pentest.pdf</div>
+                </div>
+                <span class="inline-flex items-center text-xs font-semibold text-ink px-2.5 py-1 rounded-full border border-line-strong flex-shrink-0">Request<span class="hidden sm:inline">&nbsp;access</span></span>
+            </li>
+        </ul>
     </div>
 </div>

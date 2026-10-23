@@ -1,14 +1,13 @@
 {{ define "main" }}
 <div>
-  <header class="bg-primaryBG relative overflow-hidden px-5 py-16 lg:py-24 lg:px-24">
-    {{ partial "aurora.html" . }}
+  <header class="hero px-5 py-16 lg:py-24 lg:px-24">
 
     <div class="relative max-w-4xl mx-auto text-center">
-      <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
-        <span class="text-gradient">{{ .Title }}</span>
+      <h1 class="text-ink text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+        {{ .Title }}
       </h1>
 
-      <div class="flex flex-wrap items-center justify-center gap-3 text-gray-300 text-lg lg:text-xl mb-6">
+      <div class="flex flex-wrap items-center justify-center gap-3 text-ink-muted text-lg lg:text-xl mb-6">
         {{ with .Params.author }}{{ with .display_name }}
         {{- $authorName := . -}}
         {{- $authorFound := false -}}
@@ -21,17 +20,17 @@
           {{- end -}}
         {{- end -}}
         <span class="font-medium">
-          By {{ if $authorFound }}<a href="/authors/{{ $authorSlug }}/" class="text-gray-300 hover:text-white transition-colors underline underline-offset-2">{{ $authorName }}</a>{{ else }}<span class="capitalize">{{ $authorName }}</span>{{ end }}
+          By {{ if $authorFound }}<a href="/authors/{{ $authorSlug }}/" class="text-ink-muted hover:text-ink transition-colors underline underline-offset-2">{{ $authorName }}</a>{{ else }}<span class="capitalize">{{ $authorName }}</span>{{ end }}
         </span>
-        <span class="text-gray-500">&bull;</span>
+        <span class="text-navy-60">&bull;</span>
         {{ end }}{{ end }}
         <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
           {{ .Date.Format "January 2, 2006" }}
         </time>
         {{ with .GetTerms "categories" }}
         {{ range . }}
-        <span class="text-gray-500">&bull;</span>
-        <a href="{{ .RelPermalink }}" class="capitalize text-gray-300 hover:text-white transition-colors underline underline-offset-2">{{ .LinkTitle }}</a>
+        <span class="text-navy-60">&bull;</span>
+        <a href="{{ .RelPermalink }}" class="capitalize text-ink-muted hover:text-ink transition-colors underline underline-offset-2">{{ .LinkTitle }}</a>
         {{ end }}
       {{ end }}
       </div>
@@ -39,29 +38,32 @@
       {{ with .GetTerms "tags" }}
       <div class="flex flex-wrap items-center justify-center gap-2">
         {{ range . }}
-        <a href="{{ .RelPermalink }}" class="px-3 py-1 text-sm bg-purple/20 text-purple hover:bg-purple/30 rounded-full no-underline transition-colors">{{ .LinkTitle }}</a>
+        <a href="{{ .RelPermalink }}" class="tag no-underline hover:text-accent-strong transition-colors">{{ .LinkTitle }}</a>
         {{ end }}
       </div>
       {{ end }}
     </div>
   </header>
 
-  <section class="bg-[#F6F9FA]">
-    <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-      <article class="blog-post bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100">
+  <section class="bg-surface">
+    {{ $toc := partial "toc-enabled.html" . }}
+    <div class="{{ if $toc }}max-w-4xl xl:max-w-6xl xl:flex xl:items-start xl:gap-10{{ else }}max-w-4xl{{ end }} mx-auto px-6 lg:px-8 py-16 lg:py-24">
+      <article class="blog-post bg-canvas p-8 md:p-12 rounded-2xl shadow-card border border-line xl:flex-1 xl:min-w-0">
         {{ partial "tldr.html" . }}
+        {{ partial "toc.html" (dict "page" . "mode" "inline") }}
         {{ partial "content.html" . }}
-        <div class="mt-12 pt-8 border-t border-gray-200">
-          <p class="text-sm text-gray-500 italic">
-            Found an error or typo? File a PR against <a href="https://github.com/sbomify/sbomify.com/tree/master/{{ .File.Path }}"{{ partial "link-attrs.html" (printf "https://github.com/sbomify/sbomify.com/tree/master/%s" .File.Path) }} class="text-purple hover:text-purple-700 no-underline">the source of this post on GitHub</a>.
+        <div class="mt-12 pt-8 border-t border-line">
+          <p class="text-sm text-ink-muted italic">
+            Found an error or typo? File a PR against <a href="https://github.com/sbomify/sbomify.com/tree/master/{{ .File.Path }}"{{ partial "link-attrs.html" (printf "https://github.com/sbomify/sbomify.com/tree/master/%s" .File.Path) }} class="text-ink hover:text-accent-strong no-underline">the source of this post on GitHub</a>.
           </p>
         </div>
       </article>
+      {{ partial "toc.html" (dict "page" . "mode" "aside") }}
     </div>
   </section>
 </div>
 
-<aside class=" bg-primaryBG">
+<aside class=" bg-inverse">
   <div class="max-container text-white px-5 md:px-12 lg:px-24 py-12 lg:py-24">
     <div class="uppercase text-sm mb-4">
       &gt; Blog

@@ -1,6 +1,7 @@
 {{ define "main" }}
 
 <style>
+/* Colours and type come from the tokens in _assets/css/tokens.css. */
 .pricing-page {
   max-width: 1280px;
   margin: 0 auto;
@@ -12,13 +13,14 @@
 }
 .pricing-header h1 {
   font-size: 3.5rem;
-  font-weight: 700;
-  color: #FFFFFF;
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: var(--tracking-display);
+  color: rgb(var(--color-ink));
   margin-bottom: 1rem;
 }
 .pricing-header p {
   font-size: 1.125rem;
-  color: #D1D5DB;
+  color: rgb(var(--color-ink-muted));
 }
 .billing-toggle {
   display: flex;
@@ -27,7 +29,8 @@
   gap: 1rem;
   margin-bottom: 3rem;
   font-size: 1rem;
-  color: #FFFFFF;
+  font-weight: var(--font-weight-medium);
+  color: rgb(var(--color-ink));
 }
 .toggle {
   position: relative;
@@ -47,7 +50,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #37306B;
+  background-color: rgb(var(--color-navy-40));
   transition: .3s;
   border-radius: 2rem;
 }
@@ -58,22 +61,28 @@
   width: 1.5rem;
   left: 0.25rem;
   bottom: 0.25rem;
-  background-color: white;
+  background-color: rgb(var(--color-white));
   transition: .3s;
   border-radius: 50%;
 }
 input:checked + .track {
-  background-color: #8A7DFF;
+  background-color: rgb(var(--color-ink));
 }
 input:checked + .track:before {
   transform: translateX(1.5rem);
 }
+input:focus-visible + .track {
+  outline: 2px solid rgb(var(--color-focus));
+  outline-offset: 2px;
+}
 .save-tag {
-  background-color: #22C55E;
-  color: white;
+  background-color: rgb(var(--color-success-tint));
+  color: rgb(var(--color-ink));
+  border: 1px solid rgb(var(--color-success-full) / 0.35);
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
   font-size: 0.875rem;
+  font-weight: var(--font-weight-semibold);
   margin-left: 0.5rem;
 }
 .pricing-grid {
@@ -83,15 +92,20 @@ input:checked + .track:before {
   margin: 0 auto;
 }
 .pricing-card {
-  background: #201B4C;
-  border: 1px solid #37306B;
-  border-radius: 12px;
+  background: rgb(var(--color-canvas));
+  border: 1px solid rgb(var(--color-line));
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
   padding: 40px;
   display: flex;
   flex-direction: column;
 }
+/* The featured plan is the one white-on-navy card, with the page's single
+   orange moment: its call to action. */
 .pricing-card.featured {
-  border: 2px solid #8A7DFF;
+  background: rgb(var(--color-inverse));
+  border-color: rgb(var(--color-inverse));
+  box-shadow: var(--shadow-raised);
   position: relative;
 }
 .pricing-card.featured::before {
@@ -100,16 +114,16 @@ input:checked + .track:before {
   top: -0.875rem;
   left: 50%;
   transform: translateX(-50%);
-  background: #8A7DFF;
-  color: #FFFFFF;
+  background: rgb(var(--color-canvas));
+  color: rgb(var(--color-ink));
+  border: 1px solid rgb(var(--color-line-strong));
   font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
   padding: 0.25rem 0.875rem;
-  border-radius: 9999px;
+  border-radius: var(--radius-pill);
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(138, 125, 255, 0.35);
 }
 .card-header {
   min-height: 200px;
@@ -119,27 +133,29 @@ input:checked + .track:before {
 }
 .trial-badge {
   display: inline-block;
-  background: rgba(34, 197, 94, 0.1);
-  color: #16A34A;
+  background: rgb(var(--color-success-tint));
+  color: rgb(var(--color-ink));
   padding: 4px 12px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   font-size: 14px;
-  border: 1px solid rgba(34, 197, 94, 0.2);
+  border: 1px solid rgb(var(--color-success-full) / 0.35);
   vertical-align: middle;
   margin-left: 12px;
-  font-weight: normal;
+  font-weight: var(--font-weight-medium);
 }
 .pricing-card h2 {
   font-size: 32px;
-  font-weight: 700;
-  color: #FFFFFF;
+  font-weight: var(--font-weight-bold);
+  color: rgb(var(--color-ink));
   margin-bottom: 24px;
 }
 .pricing-card h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #8A7DFF;
-  margin-bottom: 24px;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: rgb(var(--color-ink-muted));
+  margin-bottom: 20px;
 }
 .price {
   display: flex;
@@ -150,8 +166,9 @@ input:checked + .track:before {
 }
 .price .amount {
   font-size: 48px;
-  font-weight: 600;
-  color: #FFFFFF;
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: var(--tracking-display);
+  color: rgb(var(--color-ink));
   line-height: 1;
 }
 .price .amount.custom {
@@ -159,13 +176,28 @@ input:checked + .track:before {
 }
 .price .suffix {
   font-size: 24px;
-  color: #D1D5DB;
-  font-weight: 400;
+  color: rgb(var(--color-ink-muted));
+  font-weight: var(--font-weight-regular);
 }
 .price .billing {
   font-size: 16px;
-  color: #D1D5DB;
-  font-weight: 400;
+  color: rgb(var(--color-ink-muted));
+  font-weight: var(--font-weight-regular);
+}
+.pricing-card.featured h2,
+.pricing-card.featured .price .amount {
+  color: rgb(var(--color-on-inverse));
+}
+.pricing-card.featured h3,
+.pricing-card.featured .price .suffix,
+.pricing-card.featured .price .billing,
+.pricing-card.featured .section li {
+  color: rgb(var(--color-on-inverse-muted));
+}
+.pricing-card.featured .trial-badge {
+  background: rgb(var(--color-white) / 0.1);
+  color: rgb(var(--color-on-inverse));
+  border-color: rgb(var(--color-white) / 0.2);
 }
 .card-body {
   display: flex;
@@ -183,23 +215,28 @@ input:checked + .track:before {
 .cta-button {
   display: inline-block;
   width: 100%;
-  background: #F6F9FA;
-  color: #141035;
+  background: rgb(var(--color-canvas));
+  color: rgb(var(--color-ink));
+  border: 1px solid rgb(var(--color-line-strong));
   font-size: 16px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   padding: 16px 32px;
-  border-radius: 4px;
+  border-radius: var(--radius-pill);
   text-decoration: none;
-  transition: opacity 0.3s;
-  border: none;
+  transition: background-color 0.2s, border-color 0.2s;
   cursor: pointer;
 }
 .cta-button:hover {
-  opacity: 0.8;
+  border-color: rgb(var(--color-ink));
 }
 .pricing-card.featured .cta-button {
-  background: #8A7DFF;
-  color: #FFFFFF;
+  background: rgb(var(--color-accent-strong));
+  border-color: rgb(var(--color-accent-strong));
+  color: rgb(var(--color-on-accent));
+}
+.pricing-card.featured .cta-button:hover {
+  background: rgb(var(--color-accent-hover));
+  border-color: rgb(var(--color-accent-hover));
 }
 .section {
   display: block;
@@ -215,7 +252,7 @@ input:checked + .track:before {
 .section li {
   position: relative;
   padding-left: 28px;
-  color: #D1D5DB;
+  color: rgb(var(--color-ink-muted));
   font-size: 14px;
   line-height: 1.5;
 }
@@ -223,8 +260,8 @@ input:checked + .track:before {
   content: "\2713";
   position: absolute;
   left: 0;
-  color: #8A7DFF;
-  font-weight: 600;
+  color: rgb(var(--color-success-full));
+  font-weight: var(--font-weight-semibold);
 }
 .section li a {
   color: inherit;
@@ -232,9 +269,16 @@ input:checked + .track:before {
   border-bottom: 1px dashed currentColor;
 }
 .section li a:hover {
-  opacity: 0.8;
+  color: rgb(var(--color-accent-strong));
+}
+.pricing-card.featured .section li a:hover {
+  color: rgb(var(--color-accent));
 }
 @media (max-width: 1200px) {
+  /* Single column: lead with the recommended plan */
+  .pricing-card.featured {
+    order: -1;
+  }
   .pricing-grid {
     grid-template-columns: 1fr;
     max-width: 480px;

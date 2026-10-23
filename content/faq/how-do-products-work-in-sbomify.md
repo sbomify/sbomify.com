@@ -16,7 +16,7 @@ sbomify uses a tree-like structure to organize your SBOMs in a way that reflects
 
 Unlike tools that flatten everything into a single SBOM file (losing critical context like where an affected component lives), sbomify leverages CycloneDX and SPDX to link multiple SBOMs into a nested structure.
 
-<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
     {{< d2 "sbom-hierarchy" >}}
 </div>
 
@@ -36,7 +36,7 @@ A product can have releases. A release is a versioned snapshot that points to sp
 
 Because sbomify uses linkage rather than copying, multiple products (or versions of a product) can reuse the same component SBOMs without duplication.
 
-<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
     {{< d2 "sbom-releases" >}}
 </div>
 

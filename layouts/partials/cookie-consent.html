@@ -5,15 +5,15 @@
      first paint and never appears at all for visitors who have already chosen.
      Position is fixed, so revealing it shifts nothing (no CLS). */ -}}
 <div id="cookie-consent" class="hidden fixed inset-x-0 bottom-0 z-50 px-4 pb-4 sm:px-6 sm:pb-6" role="dialog" aria-modal="false" aria-label="Cookie consent" aria-describedby="cookie-consent-text">
-  <div class="mx-auto max-w-3xl rounded-2xl border border-white/15 bg-secondaryBG/95 p-5 shadow-2xl backdrop-blur-sm sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-    <p id="cookie-consent-text" class="text-sm leading-relaxed text-tertiaryText">
-      We would like to set analytics cookies to understand how the site is used. They are only set if you accept, and you can change your mind at any time via <span class="whitespace-nowrap">&ldquo;Cookie settings&rdquo;</span> in the footer. Read our <a href="/privacy/" class="text-purple underline underline-offset-2 transition-colors hover:text-white">Privacy Policy</a>.
+  <div class="mx-auto max-w-3xl rounded-2xl border border-white/15 bg-inverse/95 p-5 shadow-raised backdrop-blur-sm sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <p id="cookie-consent-text" class="text-sm leading-relaxed text-on-inverse-muted">
+      We would like to set analytics cookies to understand how the site is used. They are only set if you accept, and you can change your mind at any time via <span class="whitespace-nowrap">&ldquo;Cookie settings&rdquo;</span> in the footer. Read our <a href="/privacy/" class="text-white underline decoration-accent underline-offset-2 transition-colors hover:text-accent">Privacy Policy</a>.
     </p>
     {{- /* Both buttons are the same size and weight: under GDPR, declining has
          to be as easy as accepting. */ -}}
     <div class="flex shrink-0 gap-3">
       <button type="button" data-cookie-consent="rejected" class="rounded-full border border-white/25 bg-white/10 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/20 hover:opacity-100">Reject</button>
-      <button type="button" data-cookie-consent="accepted" class="rounded-full border border-purple bg-purple px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:border-purple-700 hover:bg-purple-700 hover:opacity-100">Accept</button>
+      <button type="button" data-cookie-consent="accepted" class="btn-primary btn-md">Accept</button>
     </div>
   </div>
 </div>
