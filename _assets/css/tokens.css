@@ -1,0 +1,124 @@
+/*
+ * sbomify design tokens, from the sbomify Brand Guidelines v2.0 (2026).
+ *
+ * Two tiers:
+ *   1. Primitives: the palette exactly as the guide publishes it. Nothing
+ *      outside this file should name a hex value.
+ *   2. Roles: what a colour is for (ink, canvas, accent, ...). Templates and
+ *      component CSS use these, through the Tailwind theme in
+ *      tailwind.config.js or as rgb(var(--color-*)) in CSS.
+ *
+ * Colours are stored as space-separated RGB channels so Tailwind's opacity
+ * modifiers (bg-navy/80, border-white/10) keep working.
+ *
+ * Off-guide values are marked "derived". They extend a published scale in the
+ * same way the guide builds it, never introduce a new hue.
+ *
+ * D2 diagrams cannot read CSS variables; _d2/theme.d2 copies the hex values
+ * and must be kept in step with this file.
+ */
+
+:root {
+  /* ===== Primitives: primary palette ===== */
+  --color-navy-100: 37 41 63;     /* #25293F  Navy, primary · text · brand */
+  --color-navy-80: 81 84 107;     /* #51546B */
+  --color-navy-60: 124 127 140;   /* #7C7F8C */
+  --color-navy-40: 168 169 178;   /* #A8A9B2 */
+  --color-navy-20: 211 212 217;   /* #D3D4D9 */
+  --color-navy-10: 233 234 236;   /* #E9EAEC */
+  --color-navy-5: 244 244 245;    /* #F4F4F5  derived: Navy at 5% on white */
+  --color-white: 255 255 255;     /* #FFFFFF  White, primary · canvas */
+  --color-mist: 225 227 234;      /* #E1E3EA  Mist, secondary · surfaces */
+  --color-mist-50: 240 241 245;   /* #F0F1F5  derived: Mist at 50% on white */
+
+  /* Signal Orange: reserved for emphasis, one moment per layout. */
+  --color-orange-800: 170 61 20;  /* #AA3D14  derived: Orange 700 + 15% Navy, pressed/hover only */
+  --color-orange-700: 194 65 12;  /* #C2410C  orange text on white, fills behind buttons and small text */
+  --color-orange-600: 232 90 12;  /* #E85A0C */
+  --color-orange-500: 255 106 19; /* #FF6A13  Signal Orange: large shapes and the logo */
+  --color-orange-300: 255 166 113; /* #FFA671 strings in code blocks */
+  --color-orange-100: 255 210 184; /* #FFD2B8 */
+  --color-orange-50: 255 243 236;  /* #FFF3EC */
+
+  /* ===== Primitives: semantic palette (status only, never decoration) ===== */
+  --color-success-full: 31 169 113;  /* #1FA971 */
+  --color-success-tint: 231 246 239; /* #E7F6EF */
+  --color-danger-full: 229 72 77;    /* #E5484D */
+  --color-danger-tint: 252 234 235;  /* #FCEAEB */
+  --color-warning-full: 244 164 37;  /* #F4A425 */
+  --color-warning-tint: 253 243 225; /* #FDF3E1 */
+  --color-info-full: 66 99 235;      /* #4263EB */
+  --color-info-tint: 234 238 253;    /* #EAEEFD */
+
+  /* ===== Roles: light surfaces (the default) ===== */
+  --color-canvas: var(--color-white);
+  --color-surface: var(--color-mist-50);        /* alternating sections, cards on canvas */
+  --color-surface-strong: var(--color-mist);    /* chips, tags, wells */
+  --color-line: var(--color-navy-10);           /* hairlines, card borders */
+  --color-line-strong: var(--color-navy-20);    /* inputs, emphasised borders */
+
+  --color-ink: var(--color-navy-100);           /* headings, primary text */
+  --color-ink-muted: var(--color-navy-80);      /* body copy: Navy 80 or darker */
+  /* Navy 60 measures 4.0:1 on white: large type, icons and placeholders only.
+     Small eyebrows, captions and meta use ink-muted so they stay AA. */
+  --color-ink-subtle: var(--color-navy-60);
+
+  /* ===== Roles: dark surfaces (white on navy) ===== */
+  --color-inverse: var(--color-navy-100);
+  --color-inverse-raised: 48 52 73;             /* #303449  derived: Navy 100 + 5% white, cards on navy */
+  --color-on-inverse: var(--color-white);
+  --color-on-inverse-muted: var(--color-navy-20);
+  --color-on-inverse-subtle: var(--color-navy-40);
+
+  /* ===== Roles: accent ===== */
+  --color-accent: var(--color-orange-500);       /* large shapes, dots, chart highlight */
+  --color-accent-strong: var(--color-orange-700); /* buttons, small orange text on white */
+  --color-accent-hover: var(--color-orange-800);
+  --color-accent-soft: var(--color-orange-50);   /* faint wash behind an accent moment */
+  --color-on-accent: var(--color-white);         /* type on orange is always white */
+
+  /* Focus ring, 3:1 or better against its surface: Orange 700 on white
+     (5.2:1), Signal Orange on navy (5.1:1). */
+  --color-focus: var(--color-orange-700);
+  --color-focus-inverse: var(--color-orange-500);
+
+  /* ===== Roles: code ===== */
+  --color-code-bg: var(--color-navy-100);
+  --color-code-text: var(--color-navy-10);
+  --color-code-string: var(--color-orange-300);
+  --color-code-muted: var(--color-navy-40);
+  --color-code-inline-bg: var(--color-navy-5);
+
+  /* ===== Typography ===== */
+  /* Figtree everywhere; system sans fallback per the guide. */
+  --font-sans: "Figtree Variable", "Figtree", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* Same stack as the product: SF Mono on Apple, Consolas on Windows. */
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  /* Mono runs large: set it at about 90% of the Figtree beside it. */
+  --font-mono-scale: 0.9em;
+
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  --leading-display: 1.05;
+  --leading-heading: 1.2;
+  --leading-body: 1.6;
+
+  --tracking-display: -0.03em;   /* display headings: tight */
+  --tracking-heading: -0.015em;  /* section headings: slightly tight */
+  --tracking-eyebrow: 0.12em;    /* eyebrows, captions, meta: wide, caps */
+
+  /* ===== Shape and depth ===== */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-pill: 9999px;
+
+  --shadow-card: 0 1px 2px 0 rgb(var(--color-navy-100) / 0.04), 0 1px 3px 0 rgb(var(--color-navy-100) / 0.06);
+  --shadow-raised: 0 10px 30px -12px rgb(var(--color-navy-100) / 0.18);
+}

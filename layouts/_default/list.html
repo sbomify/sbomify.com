@@ -1,14 +1,13 @@
 {{ define "main" }}
 <div>
-  <div class="bg-primaryBG relative overflow-hidden">
-    {{ partial "aurora.html" . }}
+  <div class="hero">
 
     <div class="relative px-5 py-16 lg:py-24 lg:px-24 max-w-7xl mx-auto">
-      <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
-        <span class="text-gradient">{{ .Title }}</span>
+      <h1 class="text-ink text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+        {{ .Title }}
       </h1>
       {{ with .Params.description }}
-      <p class="text-gray-300 text-lg lg:text-xl max-w-4xl leading-relaxed">
+      <p class="text-ink-muted text-lg lg:text-xl max-w-4xl leading-relaxed">
         {{ . }}
       </p>
       {{ end }}
@@ -17,7 +16,7 @@
 
   <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
     {{ if .Content }}
-    <article class="page bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100">
+    <article class="page bg-canvas p-8 md:p-12 rounded-2xl shadow-card border border-line">
       {{ partial "tldr.html" . }}
       {{ partial "content.html" . }}
     </article>

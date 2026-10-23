@@ -22,6 +22,6 @@ Beyond static hierarchies, sbomify supports full **release management** for your
 - **Accurate History**: When you create a new release, your old SBOMs remain unchanged and accurate for that point in time.
 - **Efficient Reuse**: Because we leverage linkage, multiple products (or versions of a product) can reuse the same component SBOMs. You simply create a composition that points to the relevant artifacts for a given release, avoiding duplication and keeping your data clean.
 
-<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
     {{< d2 "sbom-releases" >}}
 </div>

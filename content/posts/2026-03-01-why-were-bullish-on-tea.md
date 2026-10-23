@@ -29,7 +29,7 @@ At the heart of TEA is the **Transparency Exchange Identifier (TEI)**, a URN sch
 
 Here's the elegant part: given a TEI, a TEA client can automatically resolve it through DNS, discover the API endpoint via the IETF `.well-known` namespace, and retrieve all transparency artifacts for that product, all without any manual intervention.
 
-<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
     {{< d2 "tea-flow" >}}
 </div>
 

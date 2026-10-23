@@ -8,7 +8,7 @@ description: "Centralize SBOM management and share software transparency artifac
 
 sbomify is a central hub for managing and sharing SBOMs and compliance artifacts. Suppliers upload SBOMs automatically through CI/CD integrations, while stakeholders (customers, auditors, and internal teams) access them through the [Trust Center](/features/trust-center/) or direct exports.
 
-<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
     {{< d2 "sbom-sharing" >}}
 </div>
 
@@ -24,7 +24,7 @@ Both CycloneDX and SPDX formats are fully supported.
 
 Most real-world products are composed of multiple backend services, frontend components, and infrastructure, each with its own SBOM. sbomify organizes these by grouping **Components** directly under **Products**, reflecting how your software is actually structured.
 
-<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
     {{< d2 "sbom-hierarchy" >}}
 </div>
 

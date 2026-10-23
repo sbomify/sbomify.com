@@ -6,7 +6,7 @@
   "author": "Devan Thakur <devanthakur89@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build:fonts": "mkdir -p assets/fonts && FONT_DIR=$([ -d /usr/local/bun-deps/node_modules/@fontsource-variable ] && echo /usr/local/bun-deps/node_modules || echo node_modules) && cp $FONT_DIR/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2 assets/fonts/ && cp $FONT_DIR/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2 assets/fonts/",
+    "build:fonts": "mkdir -p assets/fonts && FONT_DIR=$([ -d /usr/local/bun-deps/node_modules/@fontsource-variable ] && echo /usr/local/bun-deps/node_modules || echo node_modules) && cp $FONT_DIR/@fontsource-variable/figtree/files/figtree-latin-wght-normal.woff2 assets/fonts/ && cp $FONT_DIR/@fontsource-variable/figtree/files/figtree-latin-ext-wght-normal.woff2 assets/fonts/",
     "build:css": "bun run build:fonts && postcss _assets/css/tailwind.css -o assets/css/styles.css",
     "build:d2": "bun scripts/watch-d2.ts",
     "build:hugo": "hugo --minify --environment production",
@@ -18,7 +18,7 @@
     "lint:markdown:fix": "dprint fmt \"**/*.md\""
   },
   "dependencies": {
-    "@fontsource-variable/inter": "^5.2.8",
+    "@fontsource-variable/figtree": "^5.3.0",
     "@fortawesome/fontawesome-free": "^7.1.0",
     "@tabler/icons": "^3.36.1",
     "autoprefixer": "^10.4.24",
@@ -27,6 +27,7 @@
     "caniuse-lite": "^1.0.30001769",
     "postcss": "^8.5.6",
     "postcss-cli": "^11.0.1",
+    "postcss-import": "^17.0.1",
     "tailwindcss": "^3.4.18",
     "update-browserslist-db": "^1.1.4"
   },

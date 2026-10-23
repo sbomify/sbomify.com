@@ -1,5 +1,5 @@
-<footer class="bg-primaryBG relative">
-  <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary-600 to-transparent"></div>
+<footer class="bg-inverse relative">
+  <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
   <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
     <div class="flex flex-col lg:flex-row justify-between items-center gap-8">
       {{/* Logo Section */}}
@@ -13,22 +13,22 @@
           <img class="h-8 w-auto" src="/assets/images/site/logo.svg" alt="sbomify logo" width="128" height="24" />
           {{ end }}
         </a>
-        <p class="text-tertiaryText text-sm text-center lg:text-left max-w-xs">
+        <p class="text-on-inverse-muted text-sm text-center lg:text-left max-w-xs">
           Your Security Artifact Hub. Generate trust centers and share security artifacts with confidence.
         </p>
       </div>
 
       {{/* Links Section */}}
-      <nav class="flex flex-wrap gap-x-6 gap-y-3 lg:gap-8 text-sm text-tertiaryText flex-[2] justify-center" aria-label="Footer navigation">
-        <a href="/blog/" class="hover:text-purple transition-colors whitespace-nowrap">Blog</a>
-        <a href="/guides/" class="hover:text-purple transition-colors whitespace-nowrap">Guides</a>
-        <a href="/faq/" class="hover:text-purple transition-colors whitespace-nowrap">FAQ</a>
-        <a href="/case-studies/" class="hover:text-purple transition-colors whitespace-nowrap">Case Studies</a>
-        <a href="/resources/" class="hover:text-purple transition-colors whitespace-nowrap">Resources</a>
-        <a href="/compliance/" class="hover:text-purple transition-colors whitespace-nowrap">Compliance</a>
-        <a href="/pricing/" class="hover:text-purple transition-colors whitespace-nowrap">Pricing</a>
-        <a href="https://trust.sbomify.com/" class="hover:text-purple transition-colors whitespace-nowrap" target="_blank" rel="noopener noreferrer">Trust Center</a>
-        <a href="https://app.sbomify.com" class="hover:text-purple transition-colors whitespace-nowrap">Login</a>
+      <nav class="flex flex-wrap gap-x-6 gap-y-3 lg:gap-8 text-sm text-on-inverse-muted flex-[2] justify-center" aria-label="Footer navigation">
+        <a href="/blog/" class="hover:text-accent transition-colors whitespace-nowrap">Blog</a>
+        <a href="/guides/" class="hover:text-accent transition-colors whitespace-nowrap">Guides</a>
+        <a href="/faq/" class="hover:text-accent transition-colors whitespace-nowrap">FAQ</a>
+        <a href="/case-studies/" class="hover:text-accent transition-colors whitespace-nowrap">Case Studies</a>
+        <a href="/resources/" class="hover:text-accent transition-colors whitespace-nowrap">Resources</a>
+        <a href="/compliance/" class="hover:text-accent transition-colors whitespace-nowrap">Compliance</a>
+        <a href="/pricing/" class="hover:text-accent transition-colors whitespace-nowrap">Pricing</a>
+        <a href="https://trust.sbomify.com/" class="hover:text-accent transition-colors whitespace-nowrap" target="_blank" rel="noopener noreferrer">Trust Center</a>
+        <a href="https://app.sbomify.com" class="hover:text-accent transition-colors whitespace-nowrap">Login</a>
       </nav>
 
       {{/* Social & Legal Section */}}
@@ -62,7 +62,7 @@
             {{ end }}
           </a>
         </div>
-        <div class="text-xs text-tertiaryText/60 text-center lg:text-right flex flex-col gap-1">
+        <div class="text-xs text-on-inverse-subtle text-center lg:text-right flex flex-col gap-1">
           <div>&copy; 2024 - {{ now.Format "2006" }} sbomify ltd. All rights reserved.</div>
           <div class="flex gap-2 justify-center lg:justify-end">
             <a href="/privacy/" class="hover:text-white transition-colors">Privacy</a>

@@ -54,15 +54,15 @@ Whilst working together on SBOM quality and visibility, opportunities have
 arisen to take on broader issues in the SBOM arena, such as the difficulty
 in generating SBOMs for C based projects.
 
-<div class="quote-container bg-gray-100 p-6 my-8 rounded-lg border-l-4 border-blue-500">
-    <p class="italic text-gray-700">
+<div class="quote-container bg-surface p-6 my-8 rounded-lg border-l-4 border-ink">
+    <p class="italic text-navy-80">
         "Working with Viktor and the team at sbomify has been a pleasure.
         Using sbomify has hugely accelerated our work on NTIA compliance. Viktor
         has also been leading a group that's creating standards for making SBOMs.
         This gives us confidence that sbomify will become a platform that follows
         industry practices as they emerge."
     </p>
-    <p class="mt-4 font-semibold text-gray-800"> – Chris Swan</p>
+    <p class="mt-4 font-semibold text-navy"> – Chris Swan</p>
 </div>
 
 ## The Results

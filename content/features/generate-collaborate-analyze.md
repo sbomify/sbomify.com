@@ -6,7 +6,7 @@ description: "Streamline your Software Bill of Materials (SBOM) workflow with ou
 
 The Software Bill of Materials (SBOM) lifecycle comprises three key stages: **Authoring**, **Distribution**, and **Analysis**.
 
-<div class="mb-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="mb-12 bg-canvas rounded-xl p-6 border border-line">
     {{< d2 "lifecycle" >}}
 </div>
 
@@ -22,7 +22,7 @@ While this _might_ suffice for internal SBOM needs when starting out, the realit
 
 To produce an SBOM that complies with standards like the NTIA Minimum Elements, it's helpful to view the process in four phases.
 
-<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
     {{< d2 "generation" >}}
 </div>
 
@@ -71,7 +71,7 @@ This is where sbomify transforms the landscape. sbomify automates the distributi
 
 A frequently overlooked but essential step in the SBOM lifecycle is the creation of a consolidated [SBOM hierarchy](/features/sbom-hierarchy/), which is especially valuable in complex software architectures. Take a basic SaaS product, for instance: with an API service running in a Docker container and a JavaScript-based frontend, you’ll quickly accumulate multiple SBOMs – for the backend, the Docker environment, and the JavaScript libraries.
 
-<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
     {{< d2 "sbom-hierarchy" >}}
 </div>
 
@@ -92,7 +92,7 @@ The final phase in the SBOM lifecycle is the analysis phase. Generally, teams ha
 
 There are many tools available that focus on different problem spaces (many are listed [here](/resources/#analysis)). Two popular open-source tools for SBOM analysis are [Dependency Track](https://dependencytrack.org/) and [guac](https://github.com/guacsec/guac).
 
-<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
     {{< d2 "store-analyze-enrich" >}}
 </div>
 
