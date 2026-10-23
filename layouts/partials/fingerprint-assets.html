@@ -1,0 +1,13 @@
+{{- /* Rewrites src="/assets/images/..." in rendered content to the
+       fingerprinted URL of the same file, so a changed image (for example a
+       regenerated D2 diagram) gets a new URL instead of being served from
+       browser and CDN caches under the old one for hours. Images that are not
+       found under assets/ are left as written. */ -}}
+{{- $html := . -}}
+{{- range findRESubmatch `src="/assets/(images/[^"?#]+)"` $html -}}
+  {{- $attr := index . 0 -}}
+  {{- with resources.Get (index . 1) -}}
+    {{- $html = replace $html $attr (printf `src="%s"` (. | fingerprint).RelPermalink) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $html -}}

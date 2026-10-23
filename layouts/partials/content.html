@@ -19,9 +19,14 @@
         the comment shortcode -- an HTML comment anywhere else now reaches the
         built page.
 
+     3. fingerprint-assets.html points src="/assets/images/..." at the
+        fingerprinted copy of the file, so an updated image is not served
+        stale from caches (the pages are cached for hours).
+
      Every layout renders page content through this partial, so anything that
      has to apply site-wide to rendered content belongs here rather than in
      each layout. */ -}}
 {{- partial "nofollow-links.html" .Content
+  | partial "fingerprint-assets.html"
   | replaceRE `(?s)(<figure class="code-block">.*?</figure>)` `<!--email_off-->${1}<!--email_on-->`
   | safeHTML -}}
