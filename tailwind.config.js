@@ -84,6 +84,12 @@ module.exports = {
         DEFAULT: token('focus'),
         inverse: token('focus-inverse'),
       },
+      code: {
+        bg: token('code-bg'),
+        text: token('code-text'),
+        string: token('code-string'),
+        muted: token('code-muted'),
+      },
     },
     extend: {
       // Default for a bare `border` / `divide-*`, which Tailwind otherwise

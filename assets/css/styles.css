@@ -949,12 +949,6 @@ button {
   left: 0px;
   right: 0px;
 }
-.-right-20 {
-  right: -5rem;
-}
-.-top-20 {
-  top: -5rem;
-}
 .bottom-0 {
   bottom: 0px;
 }
@@ -1179,14 +1173,17 @@ button {
 .h-6 {
   height: 1.5rem;
 }
-.h-64 {
-  height: 16rem;
-}
 .h-7 {
   height: 1.75rem;
 }
 .h-8 {
   height: 2rem;
+}
+.h-9 {
+  height: 2.25rem;
+}
+.h-\[18px\] {
+  height: 18px;
 }
 .h-\[30px\] {
   height: 30px;
@@ -1247,6 +1244,12 @@ button {
 }
 .w-8 {
   width: 2rem;
+}
+.w-9 {
+  width: 2.25rem;
+}
+.w-\[18px\] {
+  width: 18px;
 }
 .w-auto {
   width: auto;
@@ -1436,6 +1439,15 @@ button {
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
+.divide-y > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-y-reverse: 0;
+  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
+}
+.divide-line > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(var(--color-line) / var(--tw-divide-opacity, 1));
+}
 .self-start {
   align-self: flex-start;
 }
@@ -1519,9 +1531,6 @@ button {
   --tw-border-opacity: 1;
   border-color: rgb(var(--color-info-full) / var(--tw-border-opacity, 1));
 }
-.border-info\/30 {
-  border-color: rgb(var(--color-info-full) / 0.3);
-}
 .border-ink {
   --tw-border-opacity: 1;
   border-color: rgb(var(--color-ink) / var(--tw-border-opacity, 1));
@@ -1537,9 +1546,6 @@ button {
 .border-navy-5 {
   --tw-border-opacity: 1;
   border-color: rgb(var(--color-navy-5) / var(--tw-border-opacity, 1));
-}
-.border-success\/30 {
-  border-color: rgb(var(--color-success-full) / 0.3);
 }
 .border-white\/10 {
   border-color: rgb(var(--color-white) / 0.1);
@@ -1560,10 +1566,6 @@ button {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-accent) / var(--tw-bg-opacity, 1));
 }
-.bg-accent-soft {
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-accent-soft) / var(--tw-bg-opacity, 1));
-}
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
@@ -1571,6 +1573,14 @@ button {
 .bg-canvas {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-canvas) / var(--tw-bg-opacity, 1));
+}
+.bg-code-bg {
+  --tw-bg-opacity: 1;
+  background-color: rgb(var(--color-code-bg) / var(--tw-bg-opacity, 1));
+}
+.bg-info {
+  --tw-bg-opacity: 1;
+  background-color: rgb(var(--color-info-full) / var(--tw-bg-opacity, 1));
 }
 .bg-info-tint {
   --tw-bg-opacity: 1;
@@ -1590,10 +1600,6 @@ button {
 .bg-navy {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-navy-100) / var(--tw-bg-opacity, 1));
-}
-.bg-navy-10 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-navy-10) / var(--tw-bg-opacity, 1));
 }
 .bg-navy-5 {
   --tw-bg-opacity: 1;
@@ -1738,6 +1744,10 @@ button {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
+.py-3\.5 {
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+}
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -1752,6 +1762,9 @@ button {
 }
 .pb-16 {
   padding-bottom: 4rem;
+}
+.pb-2 {
+  padding-bottom: 0.5rem;
 }
 .pb-4 {
   padding-bottom: 1rem;
@@ -1813,6 +1826,9 @@ button {
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
+}
+.text-\[11px\] {
+  font-size: 11px;
 }
 .text-\[40px\] {
   font-size: 40px;
@@ -1927,6 +1943,18 @@ button {
   --tw-text-opacity: 1;
   color: rgb(var(--color-accent-strong) / var(--tw-text-opacity, 1));
 }
+.text-code-muted {
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-code-muted) / var(--tw-text-opacity, 1));
+}
+.text-code-string {
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-code-string) / var(--tw-text-opacity, 1));
+}
+.text-code-text {
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-code-text) / var(--tw-text-opacity, 1));
+}
 .text-info {
   --tw-text-opacity: 1;
   color: rgb(var(--color-info-full) / var(--tw-text-opacity, 1));
@@ -1969,6 +1997,10 @@ button {
 .text-navy-80 {
   --tw-text-opacity: 1;
   color: rgb(var(--color-navy-80) / var(--tw-text-opacity, 1));
+}
+.text-on-inverse {
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-on-inverse) / var(--tw-text-opacity, 1));
 }
 .text-on-inverse-muted {
   --tw-text-opacity: 1;
@@ -2029,9 +2061,6 @@ button {
 .opacity-0 {
   opacity: 0;
 }
-.opacity-50 {
-  opacity: 0.5;
-}
 .opacity-70 {
   opacity: 0.7;
 }
@@ -2067,10 +2096,6 @@ button {
 .ring-line {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(var(--color-line) / var(--tw-ring-opacity, 1));
-}
-.blur-3xl {
-  --tw-blur: blur(64px);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .grayscale {
   --tw-grayscale: grayscale(100%);
