@@ -17,7 +17,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
     <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-accent shadow-card mb-8" id="wizard">
       <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
         <span class="text-2xl font-bold text-ink">New: Interactive Setup Wizard</span>
-        <a href="/faq/how-do-i-use-the-sbomify-setup-wizard/" class="text-sm font-semibold text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors whitespace-nowrap">Read the FAQ →</a>
+        <a href="/faq/how-do-i-use-the-sbomify-setup-wizard/" class="link text-sm font-semibold whitespace-nowrap">Read the FAQ →</a>
       </div>
       <p class="text-ink-muted mb-6">
         The fastest way to get started. Run the wizard from the root of your repository and it scans your lockfiles, creates your products and components, registers OIDC trusted publishing, and writes a ready-to-commit <code class="text-ink">.github/workflows/sboms.yml</code>. No tokens to copy, no YAML to hand-write.
@@ -39,10 +39,10 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
             <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "github" "w-8 h-8" >}}</span> GitHub</span>
             <div id="gh-latest-release" class="hidden"></div>
           </div>
-          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/github-actions/" class="text-sm font-semibold text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors">Documentation →</a><a href="https://github.com/marketplace/actions/sbomify" class="text-sm font-semibold text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors whitespace-nowrap" target="_blank">View on Marketplace →</a></span>
+          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/github-actions/" class="link text-sm font-semibold">Documentation →</a><a href="https://github.com/marketplace/actions/sbomify" class="link text-sm font-semibold whitespace-nowrap" target="_blank">View on Marketplace →</a></span>
         </div>
         <p class="text-ink-muted mb-6">
-          GitHub is at the core of many organizations. Our <a href="/sbomify-action/" class="text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors">sbomify Action</a> supports <a href="/faq/how-do-i-set-up-oidc-trusted-publishing/" class="text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors">OIDC trusted publishing</a>, so no long-lived token secret is needed.
+          GitHub is at the core of many organizations. Our <a href="/sbomify-action/" class="link">sbomify Action</a> supports <a href="/faq/how-do-i-set-up-oidc-trusted-publishing/" class="link">OIDC trusted publishing</a>, so no long-lived token secret is needed.
         </p>
         <div class="bg-inverse rounded-lg p-4 overflow-x-auto text-sm text-navy-10 font-mono">
 
@@ -68,11 +68,11 @@ steps:
       <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card hover:border-line-strong transition-all" id="gitlab">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "gitlab" "w-8 h-8" >}}</span> GitLab</span>
-          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/gitlab-ci/" class="text-sm font-semibold text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors whitespace-nowrap">Documentation →</a>
-          <a href="https://github.com/sbomify/sbomify-action" class="text-sm font-semibold text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors whitespace-nowrap" target="_blank">View on GitHub →</a></span>
+          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/gitlab-ci/" class="link text-sm font-semibold whitespace-nowrap">Documentation →</a>
+          <a href="https://github.com/sbomify/sbomify-action" class="link text-sm font-semibold whitespace-nowrap" target="_blank">View on GitHub →</a></span>
         </div>
         <p class="text-ink-muted mb-6">
-          Use our <a href="https://github.com/sbomify/sbomify-action/pkgs/container/sbomify-action" class="text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors">Docker image</a> directly in GitLab CI with built-in caching support.
+          Use our <a href="https://github.com/sbomify/sbomify-action/pkgs/container/sbomify-action" class="link">Docker image</a> directly in GitLab CI with built-in caching support.
         </p>
         <div class="bg-inverse rounded-lg p-4 overflow-x-auto text-sm text-navy-10 font-mono">
 
@@ -99,8 +99,8 @@ steps:
       <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card hover:border-line-strong transition-all" id="bitbucket">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "bitbucket" "w-8 h-8" >}}</span> Bitbucket</span>
-          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/bitbucket/" class="text-sm font-semibold text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors whitespace-nowrap">Documentation →</a>
-          <a href="https://github.com/sbomify/sbomify-action" class="text-sm font-semibold text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors whitespace-nowrap" target="_blank">View on GitHub →</a></span>
+          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/bitbucket/" class="link text-sm font-semibold whitespace-nowrap">Documentation →</a>
+          <a href="https://github.com/sbomify/sbomify-action" class="link text-sm font-semibold whitespace-nowrap" target="_blank">View on GitHub →</a></span>
         </div>
         <p class="text-ink-muted mb-6">
           Seamlessly integrate with Bitbucket Pipelines using our Docker image with built-in caching.
@@ -133,8 +133,8 @@ definitions:
       <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card hover:border-line-strong transition-all" id="docker">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "docker" "w-8 h-8" >}}</span> Docker</span>
-          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/docker/" class="text-sm font-semibold text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors whitespace-nowrap">Documentation →</a>
-          <a href="https://github.com/sbomify/sbomify-action/pkgs/container/sbomify-action" class="text-sm font-semibold text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors whitespace-nowrap" target="_blank">View on GHCR →</a></span>
+          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/docker/" class="link text-sm font-semibold whitespace-nowrap">Documentation →</a>
+          <a href="https://github.com/sbomify/sbomify-action/pkgs/container/sbomify-action" class="link text-sm font-semibold whitespace-nowrap" target="_blank">View on GHCR →</a></span>
         </div>
         <p class="text-ink-muted mb-6">
           For any other CI/CD system, use our multi-arch (amd64 and arm64) Docker image directly. Generators are fetched on first use, digest-pinned and cached &mdash; nothing to install.
@@ -163,11 +163,11 @@ docker run --rm \
       <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card hover:border-line-strong transition-all" id="pip">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "python" "w-8 h-8" >}}</span> Local CLI</span>
-          <a href="https://pypi.org/project/sbomify-action/" class="text-sm font-semibold text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors whitespace-nowrap" target="_blank">View on PyPI →</a>
+          <a href="https://pypi.org/project/sbomify-action/" class="link text-sm font-semibold whitespace-nowrap" target="_blank">View on PyPI →</a>
         </div>
         <p class="text-ink-muted mb-6">
           Run the CLI on your machine with <code>uvx</code> or <code>pipx</code> for local development, one-off SBOMs and the setup wizard. Generators are downloaded on first use and cached, exactly as they are in the Docker image, so there is nothing else to install.
-          <a href="/sbomify-action/runtimes/local/" class="text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors">Read the guide &rarr;</a>
+          <a href="/sbomify-action/runtimes/local/" class="link">Read the guide &rarr;</a>
         </p>
         <div class="bg-inverse rounded-lg p-4 overflow-x-auto text-sm text-navy-10 font-mono">
 
@@ -417,7 +417,7 @@ uvx sbomify-action</code></pre>
     {{< comment >}}Beyond SBOMs{{< /comment >}}
     <div class="bg-surface rounded-2xl p-6 border border-line mt-6">
       <h4 class="text-lg font-bold text-ink mb-2">Beyond SBOMs</h4>
-      <p class="text-ink-muted text-sm">The same pipeline can upload pre-authored <a href="/faq/what-vex-formats-does-sbomify-support/" class="text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors">VEX</a>, <a href="/faq/what-is-a-cbom/" class="text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors">CBOM</a>, and HBOM documents verbatim with <code class="text-ink">BOM_TYPE=vex</code>, <code class="text-ink">cbom</code>, or <code class="text-ink">hbom</code>.</p>
+      <p class="text-ink-muted text-sm">The same pipeline can upload pre-authored <a href="/faq/what-vex-formats-does-sbomify-support/" class="link">VEX</a>, <a href="/faq/what-is-a-cbom/" class="link">CBOM</a>, and HBOM documents verbatim with <code class="text-ink">BOM_TYPE=vex</code>, <code class="text-ink">cbom</code>, or <code class="text-ink">hbom</code>.</p>
     </div>
 
 </section>
@@ -580,7 +580,7 @@ uvx sbomify-action</code></pre>
     <div class="bg-surface rounded-2xl p-6 border border-line">
       <p class="text-ink-muted mb-3">
         <span class="font-semibold text-ink">How it works:</span>
-        Enrichment happens automatically when using our <a href="https://github.com/sbomify/sbomify-action" class="text-ink underline decoration-accent underline-offset-4 hover:text-accent-strong transition-colors">GitHub Action</a> or CLI with the enrich flag.
+        Enrichment happens automatically when using our <a href="https://github.com/sbomify/sbomify-action" class="link">GitHub Action</a> or CLI with the enrich flag.
       </p>
       <code class="bg-inverse px-3 py-2 rounded text-orange-300 font-mono inline-block">ENRICH=true</code>
       <span class="text-ink-muted mx-2">or</span>

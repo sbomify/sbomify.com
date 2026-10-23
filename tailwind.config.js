@@ -86,6 +86,12 @@ module.exports = {
       },
     },
     extend: {
+      // Default for a bare `border` / `divide-*`, which Tailwind otherwise
+      // takes from the gray palette removed above. The bare `ring` default
+      // is set in _assets/css/tailwind.css.
+      borderColor: {
+        DEFAULT: token('line'),
+      },
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],

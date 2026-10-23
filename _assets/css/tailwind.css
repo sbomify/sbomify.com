@@ -23,6 +23,12 @@
 @tailwind base;
 
 @layer base {
+  /* Tailwind cannot resolve a CSS-variable ringColor.DEFAULT at build time
+     and falls back to blue; point the bare `ring` utility at the focus token. */
+  *, ::before, ::after, ::backdrop {
+    --tw-ring-color: rgb(var(--color-focus) / 0.5);
+  }
+
   html {
     /* Offset anchors so they clear the sticky pill header */
     scroll-padding-top: 6rem;
@@ -62,8 +68,9 @@
   }
 
   /* Orange 700 drops below 3:1 on navy; dark surfaces use Signal Orange. */
-  .bg-inverse :focus-visible,
-  .bg-inverse-raised :focus-visible {
+  [class*="bg-inverse"] :focus-visible,
+  .pricing-card.featured :focus-visible,
+  .cta-box :focus-visible {
     outline-color: rgb(var(--color-focus-inverse));
   }
 
@@ -143,7 +150,8 @@
     transition: background-color 0.2s;
   }
 
-  button:hover {
+  /* Zero specificity, so a button's own bg-* utility still wins on hover */
+  :where(button:hover) {
     background-color: rgb(var(--color-accent-hover));
   }
 }
@@ -171,12 +179,12 @@
   }
 
   /* For navy surfaces */
-  .btn-inverse {
-    @apply btn bg-white/10 text-on-inverse border border-white/15 hover:bg-white/15 hover:border-white/25;
-  }
-
   .btn-md {
     @apply px-5 py-2.5 text-sm;
+  }
+
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
   }
 
   .btn-icon {

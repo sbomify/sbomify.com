@@ -68,7 +68,7 @@ Brand rules the tokens encode:
 - Type on orange is always white, on an Orange 700 fill (`bg-accent-strong`); orange text on white is `text-accent-strong`, never `text-accent`.
 - Body text is `text-ink-muted` (Navy 80) or darker. `text-ink-subtle` (Navy 60) is for large type and icons only.
 - Success/danger/warning/info signal status only, never decoration: full colour for the dot or border, `-tint` for the fill, navy type.
-- Shared components in `tailwind.css`: `btn-primary`, `btn-navy`, `btn-secondary`, `btn-inverse`, `link`, `eyebrow`, `eyebrow-chip`, `tag`, `card`, `hero`.
+- Shared components in `tailwind.css`: `btn-primary`, `btn-navy`, `btn-secondary` (sizes `btn-md`, `btn-lg`), `link`, `eyebrow`, `eyebrow-chip`, `tag`, `card`, `hero`.
 
 **Diagrams:** D2 source files in `_d2/` compile to SVG in both `assets/images/d2/` (image refs) and `layouts/partials/d2/` (inline SVG). All diagrams share a theme from `_d2/theme.d2`.
 

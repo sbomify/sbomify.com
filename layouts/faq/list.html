@@ -38,7 +38,7 @@
       {{/* No results message */}}
       <div id="faq-no-results" class="hidden text-center py-12">
         <p class="text-ink-muted text-lg">No questions match your search.</p>
-        <button type="button" onclick="document.getElementById('faq-search').value='';document.getElementById('faq-search').dispatchEvent(new Event('input'));" class="mt-4 text-ink hover:text-accent-strong font-semibold text-sm transition-colors">
+        <button type="button" onclick="document.getElementById('faq-search').value='';document.getElementById('faq-search').dispatchEvent(new Event('input'));" class="mt-4 bg-transparent p-0 rounded-none text-ink hover:text-accent-strong font-semibold text-sm transition-colors">
           Clear search
         </button>
       </div>
@@ -77,7 +77,7 @@
         <h3 class="text-2xl font-bold text-ink mb-4">Still have questions?</h3>
         <p class="text-navy-80 mb-8">Our team is here to help you get started with SBOMs and supply chain security.</p>
         <div class="flex gap-4 justify-center flex-wrap">
-          <a href="https://app.sbomify.com" class="px-6 py-3 bg-accent-strong hover:bg-accent-hover text-on-accent rounded-full font-semibold transition-colors duration-200 text-base no-underline">
+          <a href="https://app.sbomify.com" class="btn-primary no-underline">
             Try sbomify Free
           </a>
           <a href="/blog/" class="px-6 py-3 bg-canvas border border-line hover:border-ink text-ink rounded-full font-semibold transition-colors duration-200 text-base no-underline">

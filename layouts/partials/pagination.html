@@ -10,7 +10,7 @@
   <span class="px-6 py-3 text-navy-80 font-medium">Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
 
   {{ if $paginator.HasNext }}
-    <a href="{{ $paginator.Next.URL }}" class="px-8 py-3 bg-accent-strong hover:bg-accent-hover text-white rounded-full font-medium transition-all duration-200">Next &rarr;</a>
+    <a href="{{ $paginator.Next.URL }}" class="btn-primary px-8">Next &rarr;</a>
   {{ else }}
     <span class="px-8 py-3 bg-surface border border-line text-ink-muted rounded-full font-medium cursor-not-allowed">Next &rarr;</span>
   {{ end }}

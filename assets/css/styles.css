@@ -252,7 +252,7 @@
   box-sizing: border-box; /* 1 */
   border-width: 0; /* 2 */
   border-style: solid; /* 2 */
-  border-color: currentColor; /* 2 */
+  border-color: rgb(var(--color-line) / 1); /* 2 */
 }
 ::before,
 ::after {
@@ -536,7 +536,11 @@ video {
 }/* Make elements with the HTML hidden attribute stay hidden by default */
 [hidden]:where(:not([hidden="until-found"])) {
   display: none;
-}
+}/* Tailwind cannot resolve a CSS-variable ringColor.DEFAULT at build time
+     and falls back to blue; point the bare `ring` utility at the focus token. */
+*, ::before, ::after, ::backdrop {
+    --tw-ring-color: rgb(var(--color-focus) / 0.5);
+  }
 html {
     /* Offset anchors so they clear the sticky pill header */
     scroll-padding-top: 6rem;
@@ -568,8 +572,9 @@ body {
     outline-offset: 3px;
     border-radius: 2px;
   }/* Orange 700 drops below 3:1 on navy; dark surfaces use Signal Orange. */
-.bg-inverse :focus-visible,
-  .bg-inverse-raised :focus-visible {
+[class*="bg-inverse"] :focus-visible,
+  .pricing-card.featured :focus-visible,
+  .cta-box :focus-visible {
     outline-color: rgb(var(--color-focus-inverse));
   }/* Avoid double rings on already-rounded targets */
 a:focus-visible,
@@ -633,8 +638,8 @@ button {
     padding: 14px 16px 12px;
     text-align: center;
     transition: background-color 0.2s;
-  }
-button:hover {
+  }/* Zero specificity, so a button's own bg-* utility still wins on hover */
+:where(button:hover) {
     background-color: rgb(var(--color-accent-hover));
   }
 .container {
@@ -746,6 +751,14 @@ button:hover {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
+.btn-lg {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
 .btn-icon {
     border: none;
     background: none;
@@ -846,9 +859,6 @@ button:hover {
   --tw-shadow-colored: var(--shadow-card);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
-.feature-card :focus-visible {
-    outline-color: rgb(var(--color-focus-inverse));
-  }
 .feature-card .link {
   --tw-text-opacity: 1;
   color: rgb(var(--color-on-inverse) / var(--tw-text-opacity, 1));
@@ -1520,10 +1530,6 @@ button:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-accent-soft) / var(--tw-bg-opacity, 1));
 }
-.bg-accent-strong {
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-accent-strong) / var(--tw-bg-opacity, 1));
-}
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
@@ -1531,9 +1537,6 @@ button:hover {
 .bg-canvas {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-canvas) / var(--tw-bg-opacity, 1));
-}
-.bg-canvas\/85 {
-  background-color: rgb(var(--color-canvas) / 0.85);
 }
 .bg-info-tint {
   --tw-bg-opacity: 1;
@@ -1919,10 +1922,6 @@ button:hover {
   --tw-text-opacity: 1;
   color: rgb(var(--color-navy-80) / var(--tw-text-opacity, 1));
 }
-.text-on-accent {
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-on-accent) / var(--tw-text-opacity, 1));
-}
 .text-on-inverse-muted {
   --tw-text-opacity: 1;
   color: rgb(var(--color-on-inverse-muted) / var(--tw-text-opacity, 1));
@@ -2029,10 +2028,6 @@ button:hover {
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
-.backdrop-blur-md {
-  --tw-backdrop-blur: blur(12px);
-  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-}
 .backdrop-blur-sm {
   --tw-backdrop-blur: blur(4px);
   backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
@@ -2044,11 +2039,6 @@ button:hover {
 }
 .transition-\[background-color\2c border-color\2c transform\] {
   transition-property: background-color,border-color,transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-.transition-\[background-color\2c box-shadow\2c transform\] {
-  transition-property: background-color,box-shadow,transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -2521,10 +2511,6 @@ button:hover {
   --tw-scale-y: 1.02;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-.hover\:border-accent:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(var(--color-accent) / var(--tw-border-opacity, 1));
-}
 .hover\:border-ink:hover {
   --tw-border-opacity: 1;
   border-color: rgb(var(--color-ink) / var(--tw-border-opacity, 1));
@@ -2540,10 +2526,6 @@ button:hover {
 .hover\:border-white\/25:hover {
   border-color: rgb(var(--color-white) / 0.25);
 }
-.hover\:bg-accent-hover:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-accent-hover) / var(--tw-bg-opacity, 1));
-}
 .hover\:bg-mist:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-mist) / var(--tw-bg-opacity, 1));
@@ -2555,6 +2537,10 @@ button:hover {
 .hover\:bg-surface:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-surface) / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-surface-strong:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(var(--color-surface-strong) / var(--tw-bg-opacity, 1));
 }
 .hover\:bg-white\/20:hover {
   background-color: rgb(var(--color-white) / 0.2);
