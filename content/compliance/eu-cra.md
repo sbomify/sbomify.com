@@ -19,7 +19,7 @@ keywords: [EU CRA SBOM, Cyber Resilience Act SBOM, CRA Annex I Part II, BSI TR-0
 
 ## What Changed Recently
 
-This page is current as of **September 2026**. The CRA landscape has moved substantially since the regulation entered into force:
+This page is current as of **October 2026**. The CRA landscape has moved substantially since the regulation entered into force:
 
 | Development                                                                                                                                                                             | Date                | Why it matters for SBOM                                                                                                             |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
@@ -53,17 +53,19 @@ This page covers:
 
 The CRA applies in stages (Article 71):
 
-| Date              | Milestone                                                                                                                            | Status   |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------- |
-| 10 December 2024  | CRA entered into force                                                                                                               | Done     |
-| 21 December 2025  | Implementing Regulation (EU) 2025/2392 (technical descriptions of important and critical products) entered into force                | Done     |
-| 11 June 2026      | Rules on notified bodies and conformity assessment (Chapter IV, Articles 35-51) began to apply                                       | Done     |
-| 27 July 2026      | Commission published its first set of CRA application guidance (C(2026) 5252)                                                        | Done     |
-| 11 September 2026 | Reporting obligations for actively exploited vulnerabilities and severe incidents begin (Article 14)                                 | Upcoming |
-| 31 October 2026   | Proposed deadline for the horizontal (Type A) and vulnerability-management (Type B) harmonised standards under mandate M/606         | Proposed |
-| 11 December 2026  | Member States to "strive to ensure" a sufficient number of notified bodies in the Union (Article 35(2))                              | Upcoming |
-| 31 December 2026  | Proposed deadline for product-specific (Type C) harmonised standards                                                                 | Proposed |
-| 11 December 2027  | Full application: all essential requirements, including the SBOM obligation, become enforceable for products placed on the EU market | Upcoming |
+| Date              | Milestone                                                                                                                                                  | Status   |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| 10 December 2024  | CRA entered into force                                                                                                                                     | Done     |
+| 21 December 2025  | Implementing Regulation (EU) 2025/2392 (technical descriptions of important and critical products) entered into force                                      | Done     |
+| 11 June 2026      | Rules on notified bodies and conformity assessment (Chapter IV, Articles 35-51) began to apply                                                             | Done     |
+| 27 July 2026      | Commission published its first set of CRA application guidance (C(2026) 5252)                                                                              | Done     |
+| 30 August 2026    | Original deadline for the first horizontal standard (item 1) and the vulnerability-handling standard (item 15) under mandate M/606; missed                 | Passed   |
+| 11 September 2026 | Reporting obligations for actively exploited vulnerabilities and severe incidents begin (Article 14)                                                       | In force |
+| 30 October 2026   | Deadline for the product-specific harmonised standards (items 16-41) under mandate M/606. Still the binding date: the amendment below has not been adopted | Binding  |
+| 30 November 2026  | Proposed new deadline for items 1 and 15 (draft amendment of 23 September 2026)                                                                            | Proposed |
+| 11 December 2026  | Member States to "strive to ensure" a sufficient number of notified bodies in the Union (Article 35(2))                                                    | Upcoming |
+| 31 January 2027   | Proposed new deadline for the product-specific harmonised standards (items 16-41) (draft amendment of 23 September 2026)                                   | Proposed |
+| 11 December 2027  | Full application: all essential requirements, including the SBOM obligation, become enforceable for products placed on the EU market                       | Upcoming |
 
 The nearest deadline is the most consequential for SBOM practice: from **11 September 2026**, manufacturers must report actively exploited vulnerabilities and severe incidents. Meeting the reporting clock in practice depends on knowing what is in your products, which is exactly what an SBOM provides.
 
@@ -244,7 +246,7 @@ CEN, CENELEC and ETSI [accepted the Commission's CRA standardisation request (M/
 Drafts are not public documents, so the status column above is drawn from CEN/CENELEC communications and public standardisation trackers rather than from the Official Journal. Treat it as directional. Two things follow from it that matter more than the standard numbers:
 
 1. **No CRA harmonised standard has been cited in the Official Journal yet.** Until one is, the Article 27 presumption of conformity is not available to anyone. Everybody is currently demonstrating conformity by describing the solutions they adopted.
-2. **The deadlines slipped.** In early July 2026 the Commission issued a draft amendment to M/606 pushing delivery back two months: Type A and Type B (vulnerability management) from 30 August 2026 to 31 October 2026, and Type C (product-specific) from 30 October 2026 to 31 December 2026. The implementing decision had not been published at the time of writing, so those dates remain proposed rather than binding.
+2. **The deadlines are slipping, but have not moved yet.** Annex I to [Implementing Decision C(2025)618](https://ec.europa.eu/transparency/documents-register/detail?ref=C(2025)618&lang=en) sets the binding delivery dates: 30 August 2026 for the first horizontal standard (item 1) and the vulnerability-handling standard (item 15), 30 October 2026 for the product-specific standards (items 16-41), and 30 October 2027 for the remaining horizontal standards (items 2-14). The 30 August deadline passed without delivery. An early-July 2026 draft amendment proposed a two-month extension; the Commission then circulated a [revised draft dated 23 September 2026](https://ec.europa.eu/transparency/comitology-register/screen/documents/118113/1) (written consultation CMTD(2026)1607 of the Committee on Standards, closed 13 October 2026), which would move items 1 and 15 to **30 November 2026** and the product-specific items 16-41 to **31 January 2027**, leaving items 2-14 at 30 October 2027. The Commission has not adopted it, and even once adopted it lapses if CEN, Cenelec or ETSI reject it within a month. Until then, the dates in C(2025)618 stand.
 
 BSI states plainly that TR-03183 "will be gradually developed further and replaced by the corresponding harmonised European standards as soon as they become available." Treat TR-03183 as the best available bridge, not the destination.
 
