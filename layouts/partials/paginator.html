@@ -1,6 +1,6 @@
 {{- /* Returns the page's paginator for paginated list pages, or "" otherwise.
      Mirrors the .Paginate calls in posts.html (via posts/list.html and
-     authors/list.html) and term.html: Hugo errors if .Paginate is invoked
+     authors/list.html) and _default/taxonomy.html (term pages): Hugo errors if .Paginate is invoked
      with different arguments for the same page, so keep these in sync. */ -}}
 {{- $paginator := "" -}}
 {{- if eq .Kind "term" -}}

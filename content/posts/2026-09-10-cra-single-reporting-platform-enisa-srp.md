@@ -1,6 +1,7 @@
 ---
 
 title: "The CRA Single Reporting Platform Opens Tomorrow: What ENISA Actually Requires"
+seo_title: "CRA Single Reporting Platform: ENISA Requirements"
 description: "ENISA's CRA Single Reporting Platform goes live on 11 September 2026 with Article 14 reporting obligations. Registration, Assigned Representative roles, the 24/72-hour clocks, CSIRT selection, and the fields you will be typing."
 keywords: "CRA Single Reporting Platform, ENISA SRP, CRA SRP registration, CRA reporting obligations, CRA Article 14, actively exploited vulnerability reporting, CRA severe incident, CSIRT designated as coordinator, EU Login SRP, CRA 11 September 2026"
 categories:

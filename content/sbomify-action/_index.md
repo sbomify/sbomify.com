@@ -4,6 +4,7 @@ url: /sbomify-action/
 aliases:
   - /guides/sbomify-action/
 title: "sbomify Action: Generate Compliance-Grade SBOMs in Any CI Pipeline"
+seo_title: "sbomify Action: SBOMs in Any CI Pipeline"
 description: "Complete documentation for the sbomify action - a CLI shipped as a container that generates, augments and enriches SBOMs in GitHub Actions, GitLab CI, Bitbucket, Jenkins, CircleCI and any other pipeline."
 keywords: ["sbomify action", "SBOM CI/CD", "SBOM automation", "CycloneDX", "SPDX", "GitHub Action SBOM", "GitLab SBOM"]
 tldr: "sbomify-action is a CLI shipped as a container image that turns a lockfile into a compliance-grade SBOM inside your pipeline. It picks the right generator for your ecosystem, adds your business metadata, and enriches every component from package registries. It runs anywhere containers run - GitHub Actions is one runtime among several."

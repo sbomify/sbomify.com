@@ -17,7 +17,7 @@ sbomify is excited to announce that Chris Swan has joined its advisory board. Ch
 
 Chris currently serves as an Engineer at [Atsign](https://atsign.com/), working on the atPlatform, a privacy-focused open-source networking platform. He previously held leadership roles at DXC Technology, UBS, Cohesive Networks, and Credit Suisse, focusing on cloud, security, and infrastructure innovation. Chris is also known for his insightful writing as an [editor at InfoQ](https://www.infoq.com/profile/Chris-Swan/#allActivity) and as co-host of the [_Tech Debt Burndown_](https://techdebtburndown.com/) podcast.
 
-Chris's involvement with sbomify began during his work at Atsign, where he successfully integrated sbomify into their CI/CD pipeline to automate SBOM generation. This collaboration, detailed in the [Atsign case study](https://sbomify.com/case-studies/atsign), demonstrates Chris's practical approach to integrating security seamlessly into developer workflows.
+Chris's involvement with sbomify began during his work at Atsign, where he successfully integrated sbomify into their CI/CD pipeline to automate SBOM generation. This collaboration, detailed in the [Atsign case study](/case-studies/atsign/), demonstrates Chris's practical approach to integrating security seamlessly into developer workflows.
 
 Chris's perspective aligns perfectly with sbomify’s mission of developer-friendly, frictionless SBOM management.
 
