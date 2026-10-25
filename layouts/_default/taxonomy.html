@@ -1,4 +1,28 @@
+{{- /* Renders both the taxonomy indexes (/tags/, /categories/) and the term
+     pages (/tags/sbom/). Current Hugo resolves term pages to
+     _default/taxonomy.html ahead of _default/term.html, so a separate
+     term.html was silently ignored and term pages rendered as a bare grid of
+     titles without the post cards. */ -}}
 {{ define "main" }}
+{{ if eq .Kind "term" }}
+<div>
+  <div class="hero">
+    <div class="relative px-5 py-16 lg:py-24 lg:px-24 max-w-7xl mx-auto">
+      <h1 class="text-ink text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+        <span class="capitalize">{{ .Title }}</span>
+      </h1>
+      <p class="text-ink-muted text-lg lg:text-xl max-w-4xl leading-relaxed">
+        {{ .Data.Singular | title }} &middot; <a href="{{ .Parent.RelPermalink }}" class="link">All {{ .Data.Plural }}</a> &middot; <a href="/blog/" class="link">Blog</a>
+      </p>
+    </div>
+  </div>
+  <section class="bg-surface">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-20">
+    {{ partial "posts.html" (dict "paginate" true "context" . "pages" .Pages) }}
+    </div>
+  </section>
+</div>
+{{ else }}
 <div>
   <div class="hero">
     <div class="relative px-5 py-16 lg:py-24 lg:px-24 max-w-7xl mx-auto">
@@ -26,4 +50,5 @@
     </div>
   </section>
 </div>
+{{ end }}
 {{ end }}
