@@ -989,6 +989,17 @@ button {
 .hero > * {
     position: relative;
   }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
 .pointer-events-none {
   pointer-events: none;
 }
@@ -2871,6 +2882,9 @@ button {
   .sm\:w-auto {
     width: auto;
   }
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .sm\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -3060,6 +3074,9 @@ button {
   }
   .lg\:pb-20 {
     padding-bottom: 5rem;
+  }
+  .lg\:pb-24 {
+    padding-bottom: 6rem;
   }
   .lg\:pt-16 {
     padding-top: 4rem;

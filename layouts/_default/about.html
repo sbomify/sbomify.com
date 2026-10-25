@@ -73,6 +73,7 @@
                   {{ with $advisor.linkedin }}
                     <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center text-[#0077b5] hover:text-[#006097] transition-colors" title="{{ $advisor.name }} on LinkedIn">
                       {{ partial "icon.html" (dict "name" "linkedin" "class" "w-5 h-5") }}
+                      <span class="sr-only">{{ $advisor.name }} on LinkedIn</span>
                     </a>
                   {{ end }}
                 </div>
