@@ -55,7 +55,7 @@ For more details on using the GitHub Action and other CI/CD integrations, see ou
 
 What’s great about this is that it removes the need to trust sbomify directly. You can verify the SBOM independently as follows:
 
-- Download the latest SBOM from the GitHub Action [sbomify public page](https://app.sbomify.com/component/Gu9wem8mkX)
+- Download the latest SBOM from the GitHub Action [sbomify public page](https://trust.sbomify.com/component/Gu9wem8mkX/)
 - Install the GitHub CLI if you don't already have it
 
 With this done, you can verify the file against GitHub:
