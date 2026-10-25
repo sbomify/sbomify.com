@@ -24,6 +24,20 @@
       </article>
       {{ partial "toc.html" (dict "page" . "mode" "aside") }}
     </div>
+    {{/* Cross-links between compliance frameworks. Most frameworks were
+         only linked from the /compliance/ index. */}}
+    {{ if eq .Section "compliance" }}
+    {{ with where .CurrentSection.RegularPages "RelPermalink" "ne" .RelPermalink }}
+    <nav class="max-w-4xl mx-auto px-6 lg:px-8 pb-16 lg:pb-24" aria-labelledby="compliance-more-heading">
+      <h2 id="compliance-more-heading" class="text-xl font-bold text-ink mb-4">More compliance frameworks</h2>
+      <ul class="grid gap-3 sm:grid-cols-2">
+        {{ range .ByTitle }}
+        <li><a href="{{ .RelPermalink }}" class="link">{{ .LinkTitle }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+    {{ end }}
+    {{ end }}
   </section>
 </div>
 {{ end }}
