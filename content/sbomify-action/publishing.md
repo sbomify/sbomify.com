@@ -114,7 +114,8 @@ PRODUCT_RELEASE: '["product_one:v1.0.0", "product_two:v2.0.0"]'
 Behaviour worth knowing:
 
 - **Get or create.** Existing releases are reused; missing ones are created.
-- **Partial failures warn rather than fail.** If some releases tag and others do not, the run logs a warning and continues - the SBOM is already stored, so failing the build would not help.
+- **Any failed release fails the run.** If some releases tag and others do not, the run exits non-zero. The SBOM is already stored, but a release that silently misses it is worse than a red build.
+- **With OIDC, the component must be in every product listed.** A trusted-publishing token can only tag into releases of products that contain its component; any other product returns 403. An API token can tag into any product in the same workspace.
 - Requires credentials and `COMPONENT_ID`, since it talks to the sbomify API.
 
 A common pattern is to tag releases only on tagged builds:
