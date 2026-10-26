@@ -124,6 +124,24 @@ A common pattern is to tag releases only on tagged builds:
 PRODUCT_RELEASE: ${{ startsWith(github.ref, 'refs/tags/') && format('["your-product-id:{0}"]', github.ref_name) || '' }}
 ```
 
+### Including another product's release
+
+`PRODUCT_RELEASE` puts this component's SBOM into a release. When the release also ships with another product, such as a toolchain it downloads at run time, include that product's release instead of tagging your SBOMs into it:
+
+```yaml
+env:
+  COMPONENT_ID: your-component-id
+  LOCK_FILE: requirements.txt
+  PRODUCT_RELEASE: '["your-product-id:v2.0.0"]'
+  RELEASE_INCLUDES: '["toolchain-product-id:tools-1.4.0"]'
+```
+
+Each release in `PRODUCT_RELEASE` links every release in `RELEASE_INCLUDES`, in the same `product_id:version` format. The included release is left untouched: v2.0.0 lists the toolchain, and the toolchain's release does not list your product. The linked release shows on your release page, and its SBOMs are part of your release's combined SBOM.
+
+- **Requires `PRODUCT_RELEASE`.** It says which releases do the including.
+- **The included release must already exist** in the same workspace. A missing one fails the run; a link that already exists does not.
+- **Works with OIDC.** The token needs its component in the including product only, not in the product it includes.
+
 See [how to create a software release](/faq/how-do-i-create-a-software-release/) and [versioning SBOMs](/guides/how-to-version-sboms/).
 
 ## Dependency Track
