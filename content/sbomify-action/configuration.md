@@ -75,6 +75,7 @@ Non-SBOM `BOM_TYPE` values are uploaded verbatim to sbomify: augmentation, enric
 | `SBOMIFY_TOKEN`          | none                      | sbomify API token. **Takes precedence over `TOKEN`.**                           |
 | `COMPONENT_ID`           | none                      | sbomify component ID. Required for upload and for sbomify-sourced augmentation. |
 | `PRODUCT_RELEASE`        | none                      | JSON array of product and version strings.                                      |
+| `RELEASE_INCLUDES`       | none                      | JSON array of releases of other products that each product release includes.    |
 | `API_BASE_URL`           | `https://app.sbomify.com` | Override for self-hosted instances.                                             |
 | `OIDC_AUDIENCE`          | `sbomify.com`             | Audience for trusted publishing. Derived from `API_BASE_URL` when self-hosted.  |
 | `SBOMIFY_UPLOAD_TIMEOUT` | `120`                     | Upload timeout in seconds. Raise for very large SBOMs.                          |
@@ -183,6 +184,7 @@ sbomify-action --lock-file requirements.txt --enrich --no-upload -o sbom.cdx.jso
 | `--token`, `--component-id`                                    | `TOKEN`, `COMPONENT_ID`            |
 | `--component-name`, `--component-version`, `--component-purl`  | matching variables                 |
 | `--product-release`                                            | `PRODUCT_RELEASE`                  |
+| `--release-includes`                                           | `RELEASE_INCLUDES`                 |
 | `--api-base-url`, `--oidc-audience`                            | matching variables                 |
 | `--working-dir`                                                | `WORKING_DIR`                      |
 | `--telemetry`, `--no-telemetry`                                | `TELEMETRY`                        |
