@@ -1,5 +1,5 @@
 baseURL = "https://sbomify.com"
-title = "Sbomify"
+title = "sbomify"
 languageCode = "en-us"
 
 # Enable .GitInfo (replaces _plugins/git_dates.rb)
