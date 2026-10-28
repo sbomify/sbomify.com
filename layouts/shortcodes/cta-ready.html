@@ -9,16 +9,16 @@
 <div class="text-center bg-inverse p-12 rounded-[40px]">
     <h2 class="text-4xl font-bold text-white mb-8">{{ $title }}</h2>
     <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a href="{{ $primary_url }}" class="btn-primary btn-lg !text-on-accent !no-underline" onclick="posthog.capture('cta_click', { location: 'cta_component', label: '{{ $primary_text }}', destination: '{{ $primary_url }}' })">{{ $primary_text }}</a>
-        <a href="{{ $secondary_url }}" class="px-8 py-4 bg-transparent border-2 border-white/40 hover:border-white !text-white rounded-full font-bold transition-all hover:-translate-y-0.5 text-lg !no-underline" onclick="posthog.capture('cta_click', { location: 'cta_component', label: '{{ $secondary_text }}', destination: '{{ $secondary_url }}' })">{{ $secondary_text }}</a>
+        <a href="{{ $primary_url }}" class="btn-primary btn-lg !text-on-accent !no-underline" data-cta-location="cta_component" data-cta-label="{{ $primary_text }}">{{ $primary_text }}</a>
+        <a href="{{ $secondary_url }}" class="px-8 py-4 bg-transparent border-2 border-white/40 hover:border-white !text-white rounded-full font-bold transition-all hover:-translate-y-0.5 text-lg !no-underline" data-cta-location="cta_component" data-cta-label="{{ $secondary_text }}">{{ $secondary_text }}</a>
     </div>
 </div>
 {{ else }}
 <div class="text-center bg-canvas p-8 sm:p-12 rounded-[40px] border border-line shadow-card">
     <h2 class="text-4xl font-bold text-ink mb-8">{{ $title }}</h2>
     <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a href="{{ $primary_url }}" class="btn-primary btn-lg !text-on-accent !no-underline" onclick="posthog.capture('cta_click', { location: 'cta_component', label: '{{ $primary_text }}', destination: '{{ $primary_url }}' })">{{ $primary_text }}</a>
-        <a href="{{ $secondary_url }}" class="px-8 py-4 bg-canvas border-2 border-line-strong hover:border-ink !text-ink rounded-full font-bold transition-all hover:-translate-y-0.5 text-lg !no-underline" onclick="posthog.capture('cta_click', { location: 'cta_component', label: '{{ $secondary_text }}', destination: '{{ $secondary_url }}' })">{{ $secondary_text }}</a>
+        <a href="{{ $primary_url }}" class="btn-primary btn-lg !text-on-accent !no-underline" data-cta-location="cta_component" data-cta-label="{{ $primary_text }}">{{ $primary_text }}</a>
+        <a href="{{ $secondary_url }}" class="px-8 py-4 bg-canvas border-2 border-line-strong hover:border-ink !text-ink rounded-full font-bold transition-all hover:-translate-y-0.5 text-lg !no-underline" data-cta-location="cta_component" data-cta-label="{{ $secondary_text }}">{{ $secondary_text }}</a>
     </div>
 </div>
 {{ end }}

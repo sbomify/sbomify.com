@@ -9,11 +9,10 @@
   window.sbomifyAnalytics = (function () {
     var loaded = false;
 
-    /* Inline onclick="posthog.capture(...)" handlers sit in the header, the
-       mobile nav, the pricing page and the cta-ready shortcode. Without a
-       stand-in they throw a ReferenceError on every click made while the SDK is
-       absent, which is every click for a visitor who declines. The loader
-       snippet below overwrites these stubs with its own queueing versions. */
+    /* Page scripts (the pricing toggle, the CTA tracker below) call
+       posthog.capture directly. Without a stand-in they would throw a
+       ReferenceError for every visitor who declines. The loader snippet below
+       overwrites these stubs with its own queueing versions. */
     if (!window.posthog) {
       window.posthog = { capture: function () {}, identify: function () {}, register: function () {} };
     }
@@ -72,6 +71,47 @@
     }
 
     return { load: load, loadDeferred: loadDeferred, forget: forget };
+  }());
+  /* One delegated listener records every click towards a conversion as
+     `cta_click`, so a sign-up or demo link added to a template or a Markdown
+     page is counted without anyone remembering an onclick. `intent` is what
+     funnels filter on: sign-up and sign-in share a URL, so sign-in links carry
+     data-cta-intent="signin". data-cta-location / data-cta-label name the
+     placement; links without them (prose links in posts, FAQs and guides)
+     fall back to the page region they sit in and their own text. Pages with a
+     tracked link that is not an app link (Slack on /pricing/) opt in through
+     data-cta-location. */
+  (function () {
+    var section = '{{ with $.Section }}{{ . }}{{ else }}{{ if $.IsHome }}home{{ else }}page{{ end }}{{ end }}';
+
+    function intentFor(a) {
+      if (a.dataset.ctaIntent) { return a.dataset.ctaIntent; }
+      if (a.hostname !== 'app.sbomify.com') { return a.dataset.ctaLocation ? 'other' : null; }
+      if (a.pathname.indexOf('/enterprise-contact') === 0) { return 'demo'; }
+      if (a.pathname === '/' || a.pathname === '') { return 'signup'; }
+      return a.dataset.ctaLocation ? 'other' : null;
+    }
+
+    function regionOf(a) {
+      if (a.closest('#mobile-menu')) { return 'mobile_menu'; }
+      if (a.closest('footer')) { return 'footer'; }
+      if (a.closest('header')) { return 'header'; }
+      return 'in_content';
+    }
+
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a) { return; }
+      var intent = intentFor(a);
+      if (!intent || !window.posthog.__loaded) { return; }
+      window.posthog.capture('cta_click', {
+        intent: intent,
+        location: a.dataset.ctaLocation || regionOf(a),
+        label: a.dataset.ctaLabel || a.textContent.trim().replace(/\s+/g, ' ').slice(0, 80),
+        destination: a.href,
+        site_section: section
+      }, { send_instantly: true, transport: 'sendBeacon' });
+    }, true);
   }());
 </script>
 {{- end -}}
