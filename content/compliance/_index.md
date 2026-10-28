@@ -11,8 +11,8 @@ New to SBOMs? Start with [What is an SBOM?](/what-is-sbom/) to learn the basics,
 Software Bill of Materials (SBOM) compliance requirements are rapidly evolving across the United States and European Union. Whether you're navigating the **NTIA minimum elements**, preparing for the **EU Cyber Resilience Act (CRA)**, meeting **NIS2 Directive** obligations, or submitting medical devices to the **FDA**, this guide provides a comprehensive reference for SBOM requirements across all major frameworks.
 
 <div class="cta-box">
-  <p><strong>Feeling overwhelmed?</strong> If all these frameworks, acronyms, and requirements look like gibberish, you're not alone. SBOM compliance can be complex, but you don't have to figure it out on your own.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get Help With Compliance</a>
+  <p><strong>Feeling overwhelmed?</strong> If all these frameworks, acronyms, and requirements look like gibberish, you're not alone. Book a demo and we'll show you which of them apply to your products, and how sbomify covers the SBOM and vulnerability-handling parts.</p>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" onclick="posthog.capture('cta_click', { location: 'compliance_index', label: 'Book a demo' })">Book a demo</a>
 </div>
 
 **Disclaimer:** This page represents our interpretation of the referenced frameworks and standards. While we strive for accuracy, we may have made errors or omissions. This content is provided for informational purposes only and does not constitute legal advice. For compliance decisions, consult the official source documents and seek qualified legal counsel.

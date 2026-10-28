@@ -52,6 +52,7 @@
         {{ partial "tldr.html" . }}
         {{ partial "toc.html" (dict "page" . "mode" "inline") }}
         {{ partial "content.html" . }}
+        {{ partial "article-cta.html" . }}
         <div class="mt-12 pt-8 border-t border-line">
           <p class="text-sm text-ink-muted italic">
             Found an error or typo? File a PR against <a href="https://github.com/sbomify/sbomify.com/tree/master/{{ .File.Path }}"{{ partial "link-attrs.html" (printf "https://github.com/sbomify/sbomify.com/tree/master/%s" .File.Path) }} class="text-ink hover:text-accent-strong no-underline">the source of this post on GitHub</a>.

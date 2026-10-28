@@ -62,7 +62,13 @@
   {{- end -}}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ if eq .RelPermalink "/" }}{{ $title | default site.Title }}{{ else }}{{ $title }}{{ $pageSuffix }} | {{ site.Title }}{{ end }}</title>
+  {{- /* The " | sbomify" brand suffix is only added when the whole title
+       still fits in ~60 characters. Search results truncate past that, and
+       a cut-off headline costs more clicks than a missing brand name. */ -}}
+  {{- $fullTitle := printf "%s%s" $title $pageSuffix -}}
+  {{- $branded := printf "%s | %s" $fullTitle site.Title -}}
+  {{- if le (strings.RuneCount $branded) 60 }}{{ $fullTitle = $branded }}{{ end }}
+  <title>{{ if eq .RelPermalink "/" }}{{ $title | default site.Title }}{{ else }}{{ $fullTitle }}{{ end }}</title>
   <meta name="description" content="{{ $desc }}">
 
   {{/* Canonical URL */}}

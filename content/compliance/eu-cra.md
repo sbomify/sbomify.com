@@ -2,7 +2,10 @@
 
 url: /compliance/eu-cra/
 title: "EU Cyber Resilience Act (CRA) SBOM Requirements"
-description: "Complete guide to CRA SBOM requirements with the BSI TR-03183 family (Parts 1, 2, 3 and H). Covers format requirements, data fields, dependency depth, the ENISA Single Reporting Platform and the 11 September 2026 reporting deadline, harmonised standards status, and a compliance checklist."
+seo_title: "CRA SBOM Requirements (2026): EU Cyber Resilience Act Guide"
+description: "What the CRA requires of your SBOM: format, fields and dependency depth under BSI TR-03183, the 11 September 2026 reporting deadline, and a checklist."
+aliases:
+  - /2024/07/10/understanding-the-eu-cyber-resilience-act-the-role-of-sboms-in-enhancing-cybersecurity/
 keywords: [EU CRA SBOM, Cyber Resilience Act SBOM, CRA Annex I Part II, BSI TR-03183, CRA reporting obligations, CRA Single Reporting Platform, ENISA SRP, CRA SRP registration, CSIRT designated as coordinator, EN 40000, CRA harmonised standards]
 ---
 
@@ -11,8 +14,8 @@ keywords: [EU CRA SBOM, Cyber Resilience Act SBOM, CRA Annex I Part II, BSI TR-0
 **Who it affects:** Manufacturers (and, depending on role, importers/distributors) placing "products with digital elements" on the EU market, plus their software/component supply chains.
 
 <div class="cta-box">
-  <p><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get in Touch</a>
+  <p><strong>CRA reporting obligations have applied since 11 September 2026.</strong> See how sbomify handles SBOMs, vulnerability monitoring, VEX and advisories for every release you support.</p>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" onclick="posthog.capture('cta_click', { location: 'compliance_top', label: 'Book a demo' })">Book a demo</a>
 </div>
 
 ---

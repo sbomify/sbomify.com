@@ -10,8 +10,8 @@ description: "Guide to FDA cybersecurity guidance for medical devices, including
 **Who it affects:** Medical device manufacturers preparing FDA premarket submissions (and their software suppliers) who must document cybersecurity, including SBOM expectations, for devices marketed in the US.
 
 <div class="cta-box">
-  <p><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get in Touch</a>
+  <p><strong>Turn these requirements into a working process.</strong> See how sbomify handles SBOMs, vulnerability monitoring, VEX and advisories for every release you support.</p>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" onclick="posthog.capture('cta_click', { location: 'compliance_top', label: 'Book a demo' })">Book a demo</a>
 </div>
 
 ---

@@ -1,9 +1,9 @@
 {{ $dark := .Get "dark" }}
-{{ $title := .Get "title" | default "Ready to build trust?" }}
-{{ $primary_url := .Get "primary_url" | default "https://app.sbomify.com" }}
-{{ $primary_text := .Get "primary_text" | default "Start Your Trust Center" }}
-{{ $secondary_url := .Get "secondary_url" | default "/features/integrations/" }}
-{{ $secondary_text := .Get "secondary_text" | default "View Integrations" }}
+{{ $title := .Get "title" | default "From SBOM to security disclosure" }}
+{{ $primary_url := .Get "primary_url" | default site.Params.signupURL }}
+{{ $primary_text := .Get "primary_text" | default "Start free" }}
+{{ $secondary_url := .Get "secondary_url" | default site.Params.demoURL }}
+{{ $secondary_text := .Get "secondary_text" | default "Book a demo" }}
 
 {{ if $dark }}
 <div class="text-center bg-inverse p-12 rounded-[40px]">

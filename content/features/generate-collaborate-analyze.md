@@ -96,4 +96,4 @@ There are many tools available that focus on different problem spaces (many are 
     {{< d2 "store-analyze-enrich" >}}
 </div>
 
-sbomify aims to be the [SBOM Hub](/features/trust-center/) that not only simplifies sharing SBOMs with stakeholders but also integrates with your existing toolset. For instance, sbomify integrates with [Dependency Track](/features/integrations/#dependency-track) and [OSV](/features/integrations/#osv) for analysis, enabling you to export SBOMs directly to your analysis tools.
+sbomify connects your SBOMs to vulnerability monitoring, triage and disclosure in your [Trust Center](/features/trust-center/), and integrates with your existing toolset. For instance, sbomify integrates with [Dependency Track](/features/integrations/#dependency-track) and [OSV](/features/integrations/#osv) for analysis, enabling you to export SBOMs directly to your analysis tools.

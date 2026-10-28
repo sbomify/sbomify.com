@@ -33,7 +33,7 @@ Most SBOM generation tools produce incomplete SBOMs that:
 
 ### The sbomify Difference
 
-The [sbomify action](https://github.com/sbomify/sbomify-action) is **fully open source** and the only tool that produces compliance-ready SBOMs out of the box by automatically:
+The [sbomify action](https://github.com/sbomify/sbomify-action) is **fully open source** and produces SBOMs that meet NTIA, CISA and BSI TR-03183 field requirements out of the box by automatically:
 
 - Augmenting with supplier/author/manufacturer metadata
   - Data comes from your [sbomify profile](https://app.sbomify.com/) or a `sbomify.json` file in your repo
@@ -219,8 +219,8 @@ Regulators and buyers are no longer asking "do you have security?" - they're ask
 ---
 
 <div class="cta-box">
-  <p><strong>Ready to become an SBOM Hero?</strong></p>
-  <p>Start generating compliance-ready SBOMs in minutes with sbomify.</p>
-  <a href="https://app.sbomify.com/" class="cta-button">Get Started Free</a>
+  <p><strong>Generate your first SBOM, then keep it monitored</strong></p>
+  <p>A free sbomify workspace stores the SBOM for every release, rescans it for new vulnerabilities and shares it with your customers.</p>
+  <a href="https://app.sbomify.com/" class="cta-button" onclick="posthog.capture('cta_click', { location: 'zero_to_hero_end', label: 'Start free' })">Start free</a>
   <p class="mt-4 text-sm text-navy-80">Or <a href="/guides/">explore our guides</a> to learn more.</p>
 </div>

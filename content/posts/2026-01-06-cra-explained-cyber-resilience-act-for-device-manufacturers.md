@@ -73,4 +73,4 @@ The CRA deadline is approaching fast. [sbomify]() gives you the infrastructure t
 
 - [EU Cyber Resilience Act - Official EU page](https://digital-strategy.ec.europa.eu/en/policies/cyber-resilience-act)
 - [Why Now? CRA is Coming](/features/why-now/)
-- [Understanding the EU Cyber Resilience Act: The Role of SBOMs](/2024/07/10/understanding-the-eu-cyber-resilience-act-the-role-of-sboms-in-enhancing-cybersecurity/)
+- [EU Cyber Resilience Act (CRA) SBOM Requirements](/compliance/eu-cra/)

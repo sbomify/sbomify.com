@@ -29,6 +29,7 @@
       <article class="faq-content bg-canvas p-8 md:p-12 rounded-2xl shadow-card border border-line">
         {{ partial "tldr.html" . }}
         {{ partial "content.html" . }}
+        {{ partial "article-cta.html" . }}
       </article>
 
       {{/* Related questions: the closest matches by keywords, plus the
@@ -49,12 +50,9 @@
       {{ end }}
 
       {{/* Bottom navigation */}}
-      <div class="mt-12 flex flex-wrap items-center justify-between gap-4">
+      <div class="mt-12">
         <a href="/faq/" class="text-ink hover:text-accent-strong font-semibold transition-colors no-underline">
           &larr; All FAQ
-        </a>
-        <a href="https://app.sbomify.com" class="btn-primary no-underline">
-          Try sbomify Free
         </a>
       </div>
     </div>

@@ -21,6 +21,7 @@
         {{ partial "tldr.html" . }}
         {{ partial "toc.html" (dict "page" . "mode" "inline") }}
         {{ partial "content.html" . }}
+        {{ partial "article-cta.html" . }}
       </article>
       {{ partial "toc.html" (dict "page" . "mode" "aside") }}
     </div>
