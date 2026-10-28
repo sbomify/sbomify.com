@@ -1,8 +1,8 @@
 ---
 
-title: Zero to SBOM Hero | Secure Artifact Hub for Teams
-description: From generation to distribution. Generate, manage, and share SBOMs and compliance documents. Integrate with GitHub, GitLab, and more. CRA & NTIA compliant.
-keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compliant, SBOM management, supply chain security
+title: Product Security for the Cyber Resilience Act | From SBOM to Security Disclosure
+description: Manage product security across every supported release. Generate SBOMs, monitor vulnerabilities, triage with VEX and publish advisories through your Trust Center. Built for the EU Cyber Resilience Act.
+keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SBOM management, VEX, CSAF security advisories, trust center, vulnerability management, support period
 ---
 
 <div>
@@ -11,16 +11,17 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
         <div class="relative max-w-7xl mx-auto px-6 lg:px-8 pt-16 lg:pt-24 pb-16 lg:pb-20">
             {{< comment >}}Hero Section{{< /comment >}}
             <div class="text-ink mb-16 lg:mb-20 text-center">
-                <h1 class="text-5xl lg:text-7xl font-extrabold leading-display tracking-display mb-8">
-                    Your Security Artifact Hub
+                <div class="eyebrow-chip mb-6">Built for the EU Cyber Resilience Act</div>
+                <h1 class="text-5xl lg:text-7xl font-extrabold leading-display tracking-display mb-8 text-balance">
+                    From SBOM to security disclosure
                 </h1>
-                <p class="text-xl lg:text-2xl leading-relaxed text-ink-muted max-w-3xl mx-auto text-pretty">From zero to SBOM hero. Generate, manage, and share <a href="/what-is-sbom/" class="link">SBOMs</a> and compliance documents with your stakeholders.</p>
+                <p class="text-xl lg:text-2xl leading-relaxed text-ink-muted max-w-3xl mx-auto text-pretty">Manage product security for every release you support. Generate <a href="/what-is-sbom/" class="link">SBOMs</a>, monitor vulnerabilities, record what you decided and why, and tell your customers. All in one platform you can run in our cloud or on your own infrastructure.</p>
                 <div class="mt-10 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 justify-center">
                     <a href="https://app.sbomify.com" class="group btn-primary btn-lg w-full sm:w-auto">
                         Get Started Free
                         <svg aria-hidden="true" class="w-4 h-4 motion-safe:group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                     </a>
-                    <a href="https://app.sbomify.com/enterprise-contact/" class="btn-secondary btn-lg w-full sm:w-auto">Contact Us</a>
+                    <a href="#how-it-works" class="btn-secondary btn-lg w-full sm:w-auto">See How It Works</a>
                 </div>
             </div>
 
@@ -77,72 +78,167 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
         </div>
     </div>
 
-    {{< comment >}}Mission Statement Section{{< /comment >}}
-    <div class="bg-canvas py-16 lg:py-20 border-b border-line">
-        <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-            <h2 class="text-3xl lg:text-4xl font-bold text-ink mb-6">Our Mission</h2>
-            <p class="text-xl lg:text-2xl text-ink-muted leading-relaxed mb-8">
-                We're building the infrastructure for a more transparent software world. From SBOMs to AI BOMs, Bills of Materials are becoming the backbone of all compliance – and we make security artifacts easy to create, manage, and share, so trust flows seamlessly from vendor to buyer to auditor.
-            </p>
-            <p class="text-sm text-ink-muted leading-relaxed">
-                Built on the blueprint of the CISA working group on SBOM generation &mdash; co-led by sbomify founder <a href="/about/" class="link">Viktor Petersson</a>, also an invited expert to ECMA TC54 on security artifacts and the Transparency Exchange API.
-            </p>
+    {{< comment >}}Problem Section{{< /comment >}}
+    <div class="bg-canvas py-16 lg:py-24 border-b border-line">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8">
+            <div class="eyebrow-chip mb-5">Why this matters now</div>
+            <h2 class="text-3xl lg:text-5xl font-bold text-ink mb-8 text-balance">The CRA doesn't stop when you ship. Neither should your security process.</h2>
+            <div class="space-y-5 text-lg lg:text-xl text-ink-muted leading-relaxed">
+                <p>Generating an SBOM is a good first step. But what happens after the software ships? New vulnerabilities are found. Dependencies change. Customers stay on older versions. Security fixes have to be built, shipped and explained.</p>
+                <p>The <a href="/compliance/eu-cra/" class="link">Cyber Resilience Act</a> makes handling vulnerabilities for the whole support period of a product a legal obligation for manufacturers. Reporting obligations have applied since <strong class="text-ink">11 September 2026</strong>, and the main obligations apply from <strong class="text-ink">11 December 2027</strong>, with fines of up to <a href="/compliance/eu-cra/#penalties-article-64" class="link">&euro;15 million or 2.5% of global annual turnover</a>.</p>
+                <p>sbomify gives you the tools for that ongoing work, without stitching together spreadsheets, scanners, release notes and email threads.</p>
+            </div>
+            <p class="mt-8 text-xl lg:text-2xl font-semibold text-ink">One connected workflow, from software composition to customer disclosure.</p>
         </div>
     </div>
 
     <div class="bg-surface">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-            {{< comment >}}Persona routing{{< /comment >}}
-            <div class="max-w-6xl mx-auto mb-20">
-                <p class="text-center text-ink-muted text-sm font-semibold uppercase tracking-eyebrow mb-8">Find Your Path</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <a href="/features/integrations/" class="group bg-canvas rounded-2xl p-6 border border-line hover:border-line-strong hover:shadow-raised motion-safe:hover:-translate-y-0.5 transition-[transform,border-color,box-shadow] duration-200">
-                        <div class="text-ink-muted text-xs font-semibold uppercase tracking-eyebrow mb-2">For Engineers</div>
-                        <p class="text-ink font-semibold mb-1">Generate in CI, ship with every release</p>
-                        <p class="text-sm text-ink-muted">18 ecosystems, tokenless OIDC publishing, guided setup wizard, open-source action.</p>
-                        <span class="inline-block mt-3 text-sm text-ink group-hover:text-accent-strong font-medium">Integrations &rarr;</span>
-                    </a>
-                    <a href="/features/trust-center/" class="group bg-canvas rounded-2xl p-6 border border-line hover:border-line-strong hover:shadow-raised motion-safe:hover:-translate-y-0.5 transition-[transform,border-color,box-shadow] duration-200">
-                        <div class="text-ink-muted text-xs font-semibold uppercase tracking-eyebrow mb-2">For Security</div>
-                        <p class="text-ink font-semibold mb-1">Stop answering questionnaires by hand</p>
-                        <p class="text-sm text-ink-muted">Branded trust center hosting SOC 2, ISO 27001 and SBOMs side by side.</p>
-                        <span class="inline-block mt-3 text-sm text-ink group-hover:text-accent-strong font-medium">Trust Center &rarr;</span>
-                    </a>
-                    <a href="/features/why-now/" class="group bg-canvas rounded-2xl p-6 border border-line hover:border-line-strong hover:shadow-raised motion-safe:hover:-translate-y-0.5 transition-[transform,border-color,box-shadow] duration-200">
-                        <div class="text-ink-muted text-xs font-semibold uppercase tracking-eyebrow mb-2">For Compliance</div>
-                        <p class="text-ink font-semibold mb-1">CRA, EO 14028, NTIA &mdash; covered</p>
-                        <p class="text-sm text-ink-muted">Programmatic compliance docs, audit-ready evidence alongside SBOMs.</p>
-                        <span class="inline-block mt-3 text-sm text-ink group-hover:text-accent-strong font-medium">Why now &rarr;</span>
-                    </a>
+
+            {{< comment >}}How it works{{< /comment >}}
+            <section id="how-it-works" class="max-w-6xl mx-auto mb-20 scroll-mt-24">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <div class="eyebrow-chip mb-5">How it works</div>
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink text-balance">Know what's in your software, and which releases are affected</h2>
+                    <p class="text-lg text-ink-muted leading-relaxed">Four steps that stay connected for as long as you support a product.</p>
                 </div>
-            </div>
-
-            <section class="max-w-6xl mx-auto mb-20 bg-canvas rounded-3xl p-6 sm:p-10 lg:p-14 border border-line shadow-card">
-                <div class="eyebrow-chip mb-5">SBOM Lifecycle Tool</div>
-                <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink">Zero to SBOM Hero</h2>
-                <p class="mb-8 max-w-3xl text-lg text-ink-muted leading-relaxed">
-                Build high-quality SBOMs directly in your CI pipeline with our <a href="/features/integrations/" class="link">open source action</a>. Once generated, SBOMs are automatically uploaded to sbomify where you can manage releases (including <a href="/features/sbom-hierarchy/" class="link">complex hierarchies</a>) and share the latest software versions with stakeholders – publicly or privately via your <a href="/features/trust-center/" class="link">Trust Center</a>. No more manual SBOM distribution or version confusion.
-                </p>
-
-                <div class="mb-8">
-                    <img src="/assets/images/d2/zero-to-hero.svg" alt="Zero to SBOM Hero Process" class="w-full h-auto" width="1140" height="316" loading="lazy">
-                </div>
-
-                <a class="btn-navy" href="/zero-to-hero/">Get Started</a>
+                <ol class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <li class="card p-8 flex flex-col">
+                        <span class="text-sm font-semibold text-accent-strong mb-3">01</span>
+                        <h3 class="text-2xl font-bold text-ink mb-3">Generate and manage SBOMs</h3>
+                        <p class="text-ink-muted leading-relaxed mb-4">Create CycloneDX and SPDX SBOMs in your pipelines with our <a href="/features/integrations/" class="link">open-source GitHub Action</a>, or upload your own. sbomify validates them against the official schemas, checks them against NTIA, CISA and BSI TR-03183 requirements, and keeps every version. Nothing you upload is ever changed.</p>
+                        <a href="/features/generate-collaborate-analyze/" class="mt-auto text-sm font-medium text-ink hover:text-accent-strong">SBOM lifecycle &rarr;</a>
+                    </li>
+                    <li class="card p-8 flex flex-col">
+                        <span class="text-sm font-semibold text-accent-strong mb-3">02</span>
+                        <h3 class="text-2xl font-bold text-ink mb-3">Track every supported release</h3>
+                        <p class="text-ink-muted leading-relaxed mb-4">Your latest version isn't your only supported version. Pin component SBOMs to product releases, get a merged SBOM for each release, and record release, end-of-support and end-of-life dates using the ECMA-428 Common Lifecycle Enumeration.</p>
+                        <a href="/faq/how-do-i-create-a-software-release/" class="mt-auto text-sm font-medium text-ink hover:text-accent-strong">Releases &rarr;</a>
+                    </li>
+                    <li class="card p-8 flex flex-col">
+                        <span class="text-sm font-semibold text-accent-strong mb-3">03</span>
+                        <h3 class="text-2xl font-bold text-ink mb-3">Monitor and triage vulnerabilities</h3>
+                        <p class="text-ink-muted leading-relaxed mb-4">Released SBOMs are rescanned on a schedule with <a href="/features/integrations/" class="link">Google OSV</a> and <a href="/features/integrations/" class="link">Dependency-Track</a>, with CISA KEV and EUVD flags. Search a CVE across every product and release, then record your decision with <a href="/faq/how-do-i-use-vex/" class="link">VEX</a>: not affected and why, accepted risk, or fixed.</p>
+                        <a href="/faq/how-do-i-enable-vulnerability-scanning/" class="mt-auto text-sm font-medium text-ink hover:text-accent-strong">Vulnerability scanning &rarr;</a>
+                    </li>
+                    <li class="card p-8 flex flex-col">
+                        <span class="text-sm font-semibold text-accent-strong mb-3">04</span>
+                        <h3 class="text-2xl font-bold text-ink mb-3">Tell your customers</h3>
+                        <p class="text-ink-muted leading-relaxed mb-4">Publish SBOMs, VEX, security advisories and compliance documents through a branded <a href="/features/trust-center/" class="link">Trust Center</a> on your own domain. Advisories are also published as CSAF 2.0, and the <a href="/faq/how-do-i-enable-tea-in-sbomify/" class="link">Transparency Exchange API</a> lets customers' tools fetch everything automatically.</p>
+                        <a href="/features/trust-center/" class="mt-auto text-sm font-medium text-ink hover:text-accent-strong">Trust Center &rarr;</a>
+                    </li>
+                </ol>
             </section>
+
+            {{< comment >}}CVE scenario{{< /comment >}}
+            <section class="max-w-6xl mx-auto mb-20 bg-canvas rounded-3xl p-6 sm:p-10 lg:p-14 border border-line shadow-card">
+                <div class="grid lg:grid-cols-5 gap-10 lg:gap-12 items-center">
+                    <div class="lg:col-span-2">
+                        <div class="eyebrow-chip mb-5">Vulnerability handling</div>
+                        <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-ink">A new CVE just dropped. Now what?</h2>
+                        <p class="mb-4 text-lg text-ink-muted leading-relaxed">Knowing a dependency has a vulnerability is only the beginning. Which of your supported releases contain it? Are you actually affected? Does it need a patch? What do you tell your customers?</p>
+                        <p class="mb-6 text-lg text-ink-muted leading-relaxed">sbomify links the finding to the products and releases that ship it, so your team goes from an alert to a recorded decision, a tracked fix and a published advisory.</p>
+                        <p class="text-lg font-semibold text-ink">Less time reconstructing your software history. More time fixing what matters.</p>
+                    </div>
+                    <figure class="lg:col-span-3">
+                        <div class="rounded-2xl border border-line overflow-hidden">
+                            <div class="bg-surface px-5 py-4 border-b border-line flex flex-wrap items-center gap-x-3 gap-y-2">
+                                <span class="inline-flex items-center gap-2 rounded-full bg-danger-tint px-3 py-1 text-xs font-semibold text-ink"><span class="h-2 w-2 rounded-full bg-danger" aria-hidden="true"></span>Critical</span>
+                                <span class="font-mono text-sm font-semibold text-ink">CVE-2026-XXXXX</span>
+                                <span class="text-sm text-ink-muted">in <span class="font-mono">acme-parser 2.4.0</span></span>
+                            </div>
+                            <table class="w-full text-left text-sm">
+                                <caption class="sr-only">Supported releases of an example product and their status for one vulnerability</caption>
+                                <thead class="text-ink-muted">
+                                    <tr class="border-b border-line">
+                                        <th scope="col" class="px-5 py-3 font-semibold">Release</th>
+                                        <th scope="col" class="hidden sm:table-cell px-5 py-3 font-semibold">Support</th>
+                                        <th scope="col" class="px-5 py-3 font-semibold">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-line">
+                                    <tr>
+                                        <td class="px-5 py-4 font-mono font-semibold text-ink">v2.1<span class="block sm:hidden font-sans font-normal text-xs text-ink-muted mt-1">Until 2031</span></td>
+                                        <td class="hidden sm:table-cell px-5 py-4 text-ink-muted">Until 2031</td>
+                                        <td class="px-5 py-4"><span class="inline-flex items-center gap-2 rounded-xl bg-danger-tint px-3 py-1 text-xs font-semibold text-ink"><span class="h-2 w-2 shrink-0 rounded-full bg-danger" aria-hidden="true"></span>Affected &middot; fix in progress</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-4 font-mono font-semibold text-ink">v2.0<span class="block sm:hidden font-sans font-normal text-xs text-ink-muted mt-1">Until 2030</span></td>
+                                        <td class="hidden sm:table-cell px-5 py-4 text-ink-muted">Until 2030</td>
+                                        <td class="px-5 py-4"><span class="inline-flex items-center gap-2 rounded-xl bg-success-tint px-3 py-1 text-xs font-semibold text-ink"><span class="h-2 w-2 shrink-0 rounded-full bg-success" aria-hidden="true"></span>Fixed in 2.0.4 &middot; advisory published</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-4 font-mono font-semibold text-ink">v1.2.1<span class="block sm:hidden font-sans font-normal text-xs text-ink-muted mt-1">Until 2028</span></td>
+                                        <td class="hidden sm:table-cell px-5 py-4 text-ink-muted">Until 2028</td>
+                                        <td class="px-5 py-4"><span class="inline-flex items-center gap-2 rounded-xl bg-info-tint px-3 py-1 text-xs font-semibold text-ink"><span class="h-2 w-2 shrink-0 rounded-full bg-info" aria-hidden="true"></span>Not affected &middot; VEX: code not reachable</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-5 py-4 font-mono font-semibold text-ink-muted">v1.0<span class="block sm:hidden font-sans font-normal text-xs text-ink-muted mt-1">Ended 2026</span></td>
+                                        <td class="hidden sm:table-cell px-5 py-4 text-ink-muted">Ended 2026</td>
+                                        <td class="px-5 py-4 text-ink-muted text-xs font-semibold">End of life &middot; customers notified</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <figcaption class="mt-3 text-sm text-ink-muted">Illustrative example: one vulnerability across four releases of the same product.</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            {{< comment >}}AI section{{< /comment >}}
+            <section class="max-w-6xl mx-auto mb-20 bg-inverse rounded-3xl p-6 sm:p-10 lg:p-14">
+                <div class="grid lg:grid-cols-2 gap-10 lg:gap-14">
+                    <div>
+                        <div class="text-on-inverse-subtle text-sm font-semibold uppercase tracking-eyebrow mb-5">AI-enabled, not AI-powered</div>
+                        <h2 class="text-3xl lg:text-5xl font-bold mb-6 text-white text-balance">Your agents. Your data. Your decisions.</h2>
+                        <p class="mb-4 text-lg text-on-inverse-muted leading-relaxed">Your AI agents already know your codebase. Why send it to another vendor's model?</p>
+                        <p class="mb-4 text-lg text-on-inverse-muted leading-relaxed">sbomify doesn't bundle an AI model, and none of its core security functions depend on one. Instead it gives your own agents structured security data and an API built for them, with a dedicated agent token that can read your workspace and propose work, but never approve it.</p>
+                        <p class="text-lg text-on-inverse-muted leading-relaxed">You choose which agents and model providers to use, so you decide where your data goes.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-5">Use your agents to:</h3>
+                        <ul class="space-y-4 text-on-inverse-muted text-lg">
+                            <li class="flex gap-3"><span class="text-white" aria-hidden="true">&rarr;</span><span>Investigate a CVE in the context of your own code, using the triage and fix prompts sbomify generates</span></li>
+                            <li class="flex gap-3"><span class="text-white" aria-hidden="true">&rarr;</span><span>Propose VEX statements that explain why a release is or isn't affected</span></li>
+                            <li class="flex gap-3"><span class="text-white" aria-hidden="true">&rarr;</span><span>Draft security advisories and propose updates to published ones</span></li>
+                        </ul>
+                        <p class="mt-8 rounded-2xl border border-white/20 p-5 text-on-inverse-muted leading-relaxed"><strong class="text-white">A person signs off.</strong> VEX statements from an agent wait in a review queue, and its changes to published advisories are shown to your team as a diff. Nothing takes effect until a person approves it, and an agent can't approve its own work.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="max-w-6xl mx-auto mb-20 grid lg:grid-cols-2 gap-8">
+                {{< comment >}}Audit trail{{< /comment >}}
+                <section class="flex flex-col bg-canvas rounded-3xl p-6 sm:p-10 lg:p-12 border border-line shadow-card">
+                    <div class="eyebrow-chip mb-5">Evidence</div>
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-ink">An audit trail you build by doing the work</h2>
+                    <p class="mb-4 text-lg text-ink-muted leading-relaxed">The hard part of compliance isn't producing a document. It's showing what happened, when and why.</p>
+                    <p class="mb-8 text-lg text-ink-muted leading-relaxed">sbomify keeps SBOMs tied to the releases they describe and never alters them. Every triage decision is a new VEX version. Each finding records when it was first seen and when it was resolved, and advisories keep a timeline of every change. When customers, auditors or market surveillance authorities ask, you have the record.</p>
+                    <div class="mt-auto"><a class="btn-navy" href="/faq/how-do-i-use-vex/">How VEX works in sbomify</a></div>
+                </section>
+
+                {{< comment >}}CRA coverage{{< /comment >}}
+                <section class="flex flex-col bg-canvas rounded-3xl p-6 sm:p-10 lg:p-12 border border-line shadow-card">
+                    <div class="eyebrow-chip mb-5">CRA coverage</div>
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-ink">What sbomify covers in the CRA, and what it doesn't</h2>
+                    <p class="mb-4 text-lg text-ink-muted leading-relaxed">No tool makes you CRA compliant on its own. Secure design, risk assessment and conformity assessment are still your work.</p>
+                    <p class="mb-8 text-lg text-ink-muted leading-relaxed">sbomify supports most of the vulnerability-handling requirements in Annex I Part II, tracks support periods, and drafts the documents you need: the EU declaration of conformity, vulnerability disclosure policy, <code>security.txt</code> and Article 14 notification templates. Our CRA page maps each obligation to what sbomify does.</p>
+                    <div class="mt-auto"><a class="btn-navy" href="/cra/">How sbomify helps with the CRA</a></div>
+                </section>
+            </div>
 
             <section class="max-w-6xl mx-auto mb-20 bg-canvas rounded-3xl p-6 sm:p-10 lg:p-14 border border-line shadow-card">
                 <div class="grid lg:grid-cols-2 gap-12 items-center mb-10">
                     <div>
                     <div class="eyebrow-chip mb-5">Trust Center</div>
-                    <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink">Transparency That Builds Trust</h2>
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink">Disclosure your customers can actually use</h2>
                     <p class="mb-4 text-lg text-ink leading-relaxed font-semibold">
                     Send a link instead of scheduling a call, and cut security questionnaire response times from weeks to minutes.
                     </p>
                     <p class="mb-6 text-lg text-ink-muted leading-relaxed">
-                    Share SBOMs, VEX, CBOMs, compliance documents, and security artifacts with stakeholders in a standardized way. Your <a href="/features/trust-center/" class="link">trust center</a> can be hosted on your own domain and supports web portal access, standardized SBOM formats, and the Transparency Exchange API (TEA) for automated consumption. Compliance documents are expressed programmatically alongside your SBOMs.
+                    Share SBOMs, VEX, security advisories, CBOMs and compliance documents such as SOC 2 and ISO 27001 from one branded <a href="/features/trust-center/" class="link">Trust Center</a> on your own domain. Make each item public, private or gated behind an access request and NDA. People get a web portal; their tools get CSAF feeds and the Transparency Exchange API (TEA).
                     </p>
-                        <div class="mt-8"><a class="btn-navy" href="/features/trust-center/">Explore the Trust Center</a></div>
+                        <div class="mt-8 flex flex-wrap gap-4"><a class="btn-navy" href="/features/trust-center/">Explore the Trust Center</a><a class="btn-secondary" href="https://trust.sbomify.com/">See a live Trust Center</a></div>
                     </div>
                     <div>
                         {{< trust-center-artifacts >}}
@@ -150,20 +246,6 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 </div>
 
                 {{< trust-center-pillars-grid >}}
-            </section>
-
-            <section class="max-w-6xl mx-auto mb-20 bg-canvas rounded-3xl p-6 sm:p-10 lg:p-14 border border-line shadow-card">
-                <div class="eyebrow-chip mb-5">Security Artifact Hub</div>
-                <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink">Store, Analyze & Enrich</h2>
-                <p class="mb-8 max-w-3xl text-lg text-ink-muted leading-relaxed">
-                sbomify is designed not only to hold your security artifacts but also to send them off for analysis. We integrate with CI/CD pipelines (GitHub, GitLab, Bitbucket), analysis tools like <a href="/features/integrations/" class="link">Google OSV</a> and <a href="/features/integrations/" class="link">Dependency Track</a>, and enrichment platforms such as <a href="/features/integrations/" class="link">Ecosyste.ms</a>. Your security artifacts flow seamlessly from generation through analysis and enrichment, giving you actionable insights without manual work. Scan results are <a href="/faq/how-do-i-use-vex/" class="link">VEX-aware</a>, so your not-affected decisions suppress noise in OSV and Dependency Track findings, and cryptographic assets are inventoried as <a href="/faq/what-is-a-cbom/" class="link">CBOMs</a> with a post-quantum readiness view.
-                </p>
-
-                <div class="mb-8">
-                    <img src="/assets/images/d2/store-analyze-enrich.svg" alt="Store, Analyze & Enrich Process" class="w-full h-auto" width="1323" height="407" loading="lazy">
-                </div>
-
-                <a class="btn-navy" href="/features/integrations/">View All Integrations</a>
             </section>
 
             {{< comment >}}Trusted By section{{< /comment >}}
@@ -189,40 +271,38 @@ keywords: trust center, SBOM, Security Artifact Hub, CRA compliance, NTIA compli
                 </div>
             </div>
 
-            <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8">
-            <section class="flex flex-col bg-canvas rounded-3xl p-6 sm:p-10 lg:p-12 border border-line shadow-card">
-                <div class="eyebrow-chip mb-5">Why Now?</div>
-                <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-ink">CRA is Coming. Ready or Not.</h2>
-                <p class="mb-6 text-lg text-ink-muted leading-relaxed">
-                The EU's Cyber Resilience Act (CRA) is now in force, with <strong>mandatory reporting starting September 11, 2026</strong>. Non-compliance can carry administrative fines of up to <a href="/compliance/eu-cra/#penalties-article-64" class="link"><strong>&euro;15 million or 2.5% of global annual turnover</strong></a>, whichever is higher. Whether you sell to European customers or not, CRA compliance is becoming a baseline expectation for B2B software.
-                </p>
-                <p class="mb-8 text-lg text-ink-muted leading-relaxed">
-                In the US, <a href="/compliance/eo-14028/" class="link">Executive Order 14028</a> kicked off federal SBOM adoption and remains in effect, and OMB's latest guidance encourages agencies to require SBOMs in contracts. Cryptography is next: under EO 14144's post-quantum provisions, <a href="https://www.cisa.gov/resources-tools/resources/product-categories-technologies-use-post-quantum-cryptography-standards" class="link">CISA now maintains a list of product categories</a> where post-quantum support is expected, and agencies must support TLS 1.3 by January 2030. You can't migrate cryptography you haven't inventoried, which is exactly what a <a href="/faq/what-is-a-cbom/" class="link">CBOM</a> gives you. sbomify covers both: automated SBOM generation and CBOM ingestion with a post-quantum readiness view.
-                </p>
-                <div class="mt-auto"><a class="btn-navy" href="/features/why-now/">Learn More About CRA</a></div>
-            </section>
-
-            <section class="flex flex-col bg-canvas rounded-3xl p-6 sm:p-10 lg:p-12 border border-line shadow-card">
-                <div class="eyebrow-chip mb-5">Your Choice, Your Control</div>
-                <div class="flex items-center justify-between flex-wrap gap-4 mb-6">
-                    <h2 class="text-3xl lg:text-4xl font-bold text-ink">Self-Host or Cloud</h2>
-                    <div class="flex items-center gap-3">
-                        <div id="gh-star-cta" class="hidden"></div>
-                        <div id="gh-latest-version" class="hidden"></div>
+            {{< comment >}}Open standards / self-host{{< /comment >}}
+            <section class="max-w-6xl mx-auto mb-20 bg-canvas rounded-3xl p-6 sm:p-10 lg:p-14 border border-line shadow-card">
+                <div class="grid lg:grid-cols-2 gap-10 lg:gap-14">
+                    <div>
+                        <div class="eyebrow-chip mb-5">No lock-in</div>
+                        <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-ink">Open standards. Your infrastructure or ours.</h2>
+                        <p class="mb-4 text-lg text-ink-muted leading-relaxed">Your supply-chain security shouldn't depend on one vendor's data format. sbomify works in CycloneDX, SPDX, OpenVEX, CSAF and the Transparency Exchange API, with an API for everything else.</p>
+                        <p class="mb-8 text-lg text-ink-muted leading-relaxed">Use our hosted cloud, or <a href="https://github.com/sbomify/sbomify" class="link">get the source on GitHub</a> and self-host it for complete control over your data and infrastructure.</p>
+                        <div class="flex flex-wrap items-center gap-4">
+                            <a class="btn-navy" href="https://app.sbomify.com">Try Cloud Free</a>
+                            <a class="btn-secondary" href="https://github.com/sbomify/sbomify">Self-Host</a>
+                            <div id="gh-star-cta" class="hidden"></div>
+                            <div id="gh-latest-version" class="hidden"></div>
+                        </div>
+                    </div>
+                    <div class="lg:border-l lg:border-line lg:pl-14">
+                        <h3 class="text-lg font-semibold text-ink mb-5">Built by people who write the standards</h3>
+                        <p class="mb-4 text-ink-muted leading-relaxed">sbomify follows the blueprint of the CISA working group on SBOM generation, co-led by sbomify founder <a href="/about/" class="link">Viktor Petersson</a>, who is also an invited expert to ECMA TC54 on security artifacts and the Transparency Exchange API.</p>
+                        <p class="text-ink-muted leading-relaxed">When the standards move, sbomify moves with them.</p>
                     </div>
                 </div>
-                <p class="mb-6 text-lg text-ink-muted leading-relaxed">
-                sbomify gives you the flexibility to run it yourself or let us run it for you. <a href="https://github.com/sbomify/sbomify" class="link">Find us on GitHub</a> to self-host for complete control over your data and infrastructure, or use our managed cloud service for zero-maintenance convenience.
-                </p>
-                <p class="mb-8 text-lg text-ink-muted leading-relaxed">
-                Either way, you get the same powerful SBOM and compliance document management, support for CycloneDX and SPDX formats, and seamless integrations with your existing tools. No vendor lock-in, no compromises.
-                </p>
-                <div class="mt-auto flex flex-wrap gap-4">
-                    <a class="btn-navy" href="https://app.sbomify.com">Try Cloud Free</a>
-                    <a class="btn-secondary" href="https://github.com/sbomify/sbomify">Self-Host</a>
+            </section>
+
+            {{< comment >}}Final CTA{{< /comment >}}
+            <section class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl lg:text-5xl font-bold text-ink mb-6 text-balance">Your CRA vulnerability-handling workflow starts here</h2>
+                <p class="text-lg lg:text-xl text-ink-muted leading-relaxed mb-10 max-w-2xl mx-auto">Stop managing SBOMs, releases, vulnerabilities and security disclosures in separate systems. Bring them together with sbomify.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a class="btn-navy btn-lg" href="https://app.sbomify.com">Get Started Free</a>
+                    <a class="btn-secondary btn-lg" href="https://app.sbomify.com/enterprise-contact/">Talk to Us</a>
                 </div>
             </section>
-            </div>
         </div>
     </div>
     <div class="bg-inverse">

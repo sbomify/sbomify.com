@@ -2,7 +2,7 @@
 
 > {{ .Site.Params.description }}
 
-sbomify is a platform for generating, managing, and sharing Software Bill of Materials (SBOMs) and compliance documents. We help organizations achieve CRA compliance and seamlessly integrate with existing tools.
+sbomify is a product security platform built for the EU Cyber Resilience Act (CRA). It connects SBOMs, product releases and their support periods, continuous vulnerability monitoring, VEX triage, security advisories (CSAF 2.0) and a customer-facing Trust Center, so manufacturers can handle vulnerabilities for every supported release and disclose them to customers. sbomify supports the CRA vulnerability-handling requirements but does not on its own make a product CRA compliant; see https://sbomify.com/cra/ for what it covers and what it does not.
 
 Key facts:
 

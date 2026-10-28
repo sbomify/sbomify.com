@@ -1,0 +1,144 @@
+---
+
+title: How sbomify Helps with the CRA
+url: /cra/
+layout: integrations
+description: "What sbomify does for each Cyber Resilience Act obligation, from SBOMs and vulnerability handling to support periods and Article 14 reporting, and what stays your responsibility."
+keywords: [CRA compliance, Cyber Resilience Act, CRA vulnerability handling, Annex I Part II, CRA Article 14 reporting, CRA support period, EU declaration of conformity, CRA technical documentation, sbomify CRA]
+---
+
+<div class="max-w-4xl mx-auto mb-16 text-lg text-ink-muted leading-relaxed space-y-5">
+    <p>The <a href="/compliance/eu-cra/" class="link">Cyber Resilience Act</a> asks manufacturers to design secure products, assess their conformity, and then handle vulnerabilities for as long as each product is supported. sbomify is built for the second half of that: knowing what is in every release, finding and deciding on vulnerabilities, and telling customers and authorities about them.</p>
+    <p><strong class="text-ink">sbomify will not make you CRA compliant on its own, and no tool can.</strong> The table below maps each obligation to what sbomify does, so you can see where it fits in your own process.</p>
+    <ul class="flex flex-wrap gap-3 text-sm !mt-8" aria-label="Legend">
+        <li class="inline-flex items-center gap-2 rounded-full bg-success-tint px-3 py-1 font-semibold text-ink"><span class="h-2 w-2 rounded-full bg-success" aria-hidden="true"></span>Built in: sbomify does this</li>
+        <li class="inline-flex items-center gap-2 rounded-full bg-info-tint px-3 py-1 font-semibold text-ink"><span class="h-2 w-2 rounded-full bg-info" aria-hidden="true"></span>Supports: sbomify gives you the data or the draft; you complete it</li>
+        <li class="inline-flex items-center gap-2 rounded-full bg-surface-strong px-3 py-1 font-semibold text-ink"><span class="h-2 w-2 rounded-full bg-navy-55" aria-hidden="true"></span>Yours: outside sbomify's scope</li>
+    </ul>
+</div>
+
+<div class="max-w-6xl mx-auto mb-16">
+    <h2 class="text-3xl font-bold text-ink mb-3">Vulnerability handling (Annex I, Part II)</h2>
+    <p class="text-ink-muted mb-8 max-w-3xl">These requirements apply for the whole support period of a product. This is where sbomify does most of its work.</p>
+    <div class="overflow-x-auto rounded-2xl border border-line bg-canvas">
+        <table class="w-full text-left text-sm lg:text-base">
+            <thead class="bg-surface text-ink">
+                <tr>
+                    <th scope="col" class="px-5 py-4 font-semibold w-1/3">Obligation</th>
+                    <th scope="col" class="px-5 py-4 font-semibold w-36">sbomify</th>
+                    <th scope="col" class="px-5 py-4 font-semibold">What sbomify does</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-line text-ink-muted">
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">(1) Identify and document components, including an SBOM</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-success-tint px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-success" aria-hidden="true"></span>Built in</span></td>
+                    <td class="px-5 py-4 align-top">Generates CycloneDX and SPDX SBOMs in CI, validates them against the official schemas and checks them against <a href="/compliance/bsi-tr-03183/" class="link">BSI TR-03183-2</a>. Component SBOMs are pinned to product releases and merged into one SBOM per release. Stored SBOMs are never modified.</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">(2) Address and remediate vulnerabilities without delay</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-info-tint px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-info" aria-hidden="true"></span>Supports</span></td>
+                    <td class="px-5 py-4 align-top">Rescans released SBOMs on a schedule with Google OSV and Dependency-Track, flags CISA KEV and EUVD entries, and shows which products and releases contain each vulnerability. Triage decisions are recorded as <a href="/faq/how-do-i-use-vex/" class="link">VEX</a>, remediation status and fix deadlines are tracked, and fix prompts can be handed to your coding agents. Writing and shipping the fix is your work.</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">(3) Regular security tests and reviews</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-surface-strong px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-navy-55" aria-hidden="true"></span>Yours</span></td>
+                    <td class="px-5 py-4 align-top">Penetration tests, code review and security testing happen outside sbomify. You can store the resulting reports alongside your SBOMs and share them through your Trust Center.</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">(4) Publicly disclose fixed vulnerabilities</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-success-tint px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-success" aria-hidden="true"></span>Built in</span></td>
+                    <td class="px-5 py-4 align-top">Write security advisories that list affected products and releases, severity and remediation, then publish them in your <a href="/features/trust-center/" class="link">Trust Center</a> and as a CSAF 2.0 feed with <code>provider-metadata.json</code> and a ROLIE feed. Every change to an advisory is kept on its timeline.</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">(5) Coordinated vulnerability disclosure policy</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-info-tint px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-info" aria-hidden="true"></span>Supports</span></td>
+                    <td class="px-5 py-4 align-top">The <a href="/faq/how-do-i-use-cra-compliance/" class="link">CRA Compliance Wizard</a> drafts a vulnerability disclosure policy from your product details. Running the process it describes is up to you.</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">(6) Contact address for reporting vulnerabilities</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-info-tint px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-info" aria-hidden="true"></span>Supports</span></td>
+                    <td class="px-5 py-4 align-top">Generates a <code>security.txt</code> file pointing researchers to your contact address, policy and advisories. You own the inbox and the response.</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">(7) Securely distribute updates</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-surface-strong px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-navy-55" aria-hidden="true"></span>Yours</span></td>
+                    <td class="px-5 py-4 align-top">Signing and delivering software updates is part of your release infrastructure, not sbomify.</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">(8) Disseminate security updates with advisory messages</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-info-tint px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-info" aria-hidden="true"></span>Supports</span></td>
+                    <td class="px-5 py-4 align-top">sbomify publishes the advisory that goes with each update, to people through the Trust Center and to machines through CSAF and the <a href="/faq/how-do-i-enable-tea-in-sbomify/" class="link">Transparency Exchange API</a>. Shipping the update itself is yours.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="max-w-6xl mx-auto mb-16">
+    <h2 class="text-3xl font-bold text-ink mb-3">Other manufacturer obligations</h2>
+    <p class="text-ink-muted mb-8 max-w-3xl">Obligations around the product as a whole. sbomify supplies data and drafts for several of them; the decisions and signatures are yours.</p>
+    <div class="overflow-x-auto rounded-2xl border border-line bg-canvas">
+        <table class="w-full text-left text-sm lg:text-base">
+            <thead class="bg-surface text-ink">
+                <tr>
+                    <th scope="col" class="px-5 py-4 font-semibold w-1/3">Obligation</th>
+                    <th scope="col" class="px-5 py-4 font-semibold w-36">sbomify</th>
+                    <th scope="col" class="px-5 py-4 font-semibold">What sbomify does</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-line text-ink-muted">
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">Support period (Article 13(8))</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-success-tint px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-success" aria-hidden="true"></span>Built in</span></td>
+                    <td class="px-5 py-4 align-top">Records release, end-of-support and end-of-life dates for products, components and releases using the ECMA-428 Common Lifecycle Enumeration, and helps you publish an end-of-life notice when support ends. Choosing the support period is your decision.</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">Reporting actively exploited vulnerabilities and severe incidents (Article 14)</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-info-tint px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-info" aria-hidden="true"></span>Supports</span></td>
+                    <td class="px-5 py-4 align-top">Drafts the 24-hour early warning, the 72-hour notification and the final report from the data you already hold, and flags known-exploited vulnerabilities. sbomify does <strong class="text-ink">not</strong> submit reports for you: they go through the <a href="/compliance/eu-cra/#reporting-obligations-from-11-september-2026" class="link">ENISA Single Reporting Platform</a>.</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">Technical documentation (Article 31, Annex VII)</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-info-tint px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-info" aria-hidden="true"></span>Supports</span></td>
+                    <td class="px-5 py-4 align-top">The CRA Compliance Wizard exports one bundle with your SBOMs, an OSCAL assessment, the generated documents and a SHA-256 manifest, ready for you to sign. The parts about product design and testing come from you.</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">Cybersecurity risk assessment (Article 13(2))</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-info-tint px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-info" aria-hidden="true"></span>Supports</span></td>
+                    <td class="px-5 py-4 align-top">Provides a risk assessment template as part of the wizard. The assessment itself has to reflect your product and your threat model.</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">Information and instructions for users (Annex II)</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-info-tint px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-info" aria-hidden="true"></span>Supports</span></td>
+                    <td class="px-5 py-4 align-top">Drafts user instructions and a secure decommissioning guide, and lets you share them, along with the SBOM, through your Trust Center.</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">EU declaration of conformity and CE marking (Articles 28 to 30)</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-info-tint px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-info" aria-hidden="true"></span>Supports</span></td>
+                    <td class="px-5 py-4 align-top">Drafts the declaration of conformity from your product profile. Signing it, and affixing the CE marking, is a legal act by the manufacturer.</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">Essential cybersecurity requirements for the product (Annex I, Part I)</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-surface-strong px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-navy-55" aria-hidden="true"></span>Yours</span></td>
+                    <td class="px-5 py-4 align-top">Secure by design and by default, access control, data protection, attack surface reduction and logging are properties of your product. sbomify doesn't build or test them.</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="px-5 py-4 font-semibold text-ink align-top">Conformity assessment (Article 32)</th>
+                    <td class="px-5 py-4 align-top"><span class="inline-flex items-center gap-2 rounded-full bg-surface-strong px-3 py-1 text-xs font-semibold text-ink whitespace-nowrap"><span class="h-2 w-2 rounded-full bg-navy-55" aria-hidden="true"></span>Yours</span></td>
+                    <td class="px-5 py-4 align-top">Self-assessment or assessment by a notified body, depending on your product's class. sbomify's export bundle is evidence for that process, not a substitute for it.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="max-w-4xl mx-auto mb-16 text-lg text-ink-muted leading-relaxed space-y-5">
+    <h2 class="text-3xl font-bold text-ink">Plan availability</h2>
+    <p>The free Community plan includes SBOM management, OSV scanning with weekly rescans and a public Trust Center. Paid plans add private documents, a Trust Center on your own domain, daily rescans and Dependency-Track. The CRA Compliance Wizard, with its generated documents and export bundle, is on Business and Enterprise. See <a href="/pricing/" class="link">pricing</a> for details.</p>
+    <p>For the legal detail behind each obligation, deadlines and penalties, read our <a href="/compliance/eu-cra/" class="link">EU CRA guide</a>.</p>
+</div>
+
+<div class="max-w-6xl mx-auto">
+{{< cta-ready title="Start handling CRA vulnerabilities in one place" primary_text="Get Started Free" secondary_url="https://app.sbomify.com/enterprise-contact/" secondary_text="Talk to Us" >}}
+</div>

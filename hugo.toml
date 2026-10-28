@@ -83,8 +83,8 @@ ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfi
 
 # Custom params
 [params]
-  description = "Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools."
-  keywords = ["SBOM", "Supply Chain Security", "CRA Compliance", "NTIA Compliant", "Software Bill of Materials", "SBOM Management", "Security Artifact Hub"]
+  description = "From SBOM to security disclosure. Manage product security for every release you support: generate SBOMs, monitor vulnerabilities, triage with VEX and publish advisories through your Trust Center. Built for the EU Cyber Resilience Act."
+  keywords = ["SBOM", "Product Security", "CRA Vulnerability Handling", "Supply Chain Security", "CRA Compliance", "NTIA Compliant", "Software Bill of Materials", "SBOM Management", "Security Artifact Hub"]
   posthog_api_key = "phc_kWvZ17AgVDC3CAEHYG2oQBYEg5lUnyK3brPqJ6P4nPH"
 
   # Outbound link policy, applied by layouts/_markup/render-link.html and the
