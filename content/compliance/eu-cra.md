@@ -11,8 +11,8 @@ keywords: [EU CRA SBOM, Cyber Resilience Act SBOM, CRA Annex I Part II, BSI TR-0
 **Who it affects:** Manufacturers (and, depending on role, importers/distributors) placing "products with digital elements" on the EU market, plus their software/component supply chains.
 
 <div class="cta-box">
-  <p><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get in Touch</a>
+  <p><strong>CRA reporting obligations have applied since 11 September 2026.</strong> See how sbomify handles SBOMs, vulnerability monitoring, VEX and advisories for every release you support.</p>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" onclick="posthog.capture('cta_click', { location: 'compliance_top', label: 'Book a demo' })">Book a demo</a>
 </div>
 
 ---

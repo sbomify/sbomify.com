@@ -1,6 +1,7 @@
 ---
 
 title: The Growing Importance of SBOMs in Cybersecurity Compliance
+cta_lead: demo
 description: "Why SBOMs matter now: Executive Order 14028, the EU Cyber Resilience Act, PCI DSS 4.0, and the FDA are turning SBOMs into a baseline compliance requirement across industries."
 ---
 

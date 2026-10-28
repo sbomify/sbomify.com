@@ -14,8 +14,8 @@ description: "The NTIA 2021 Minimum Elements for a Software Bill of Materials, t
 **Who it affects:** Software producers and suppliers (and their customers) who need a baseline SBOM structure, especially when selling into US federal or regulated/critical-infrastructure supply chains. Other frameworks like [FDA medical device guidance](/compliance/fda-medical-device/) and [CISA Framing](/compliance/cisa-framing/) reference these minimum elements as the baseline for SBOM content.
 
 <div class="cta-box">
-  <p><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get in Touch</a>
+  <p><strong>Turn these requirements into a working process.</strong> See how sbomify handles SBOMs, vulnerability monitoring, VEX and advisories for every release you support.</p>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" onclick="posthog.capture('cta_click', { location: 'compliance_top', label: 'Book a demo' })">Book a demo</a>
 </div>
 
 ---

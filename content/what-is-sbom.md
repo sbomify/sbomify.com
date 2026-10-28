@@ -1,5 +1,6 @@
 ---
 url: /what-is-sbom/
+cta: true
 title: What is an SBOM?
 description: "A Software Bill of Materials (SBOM) is a machine-readable inventory of every component in a piece of software. What goes in one, what the fields mean, how CycloneDX and SPDX differ, and what an SBOM cannot tell you."
 tldr: "A Software Bill of Materials (SBOM) is a machine-readable inventory of every component, library, and dependency in your software. Think of it as an ingredients list for code. SBOMs are increasingly required by regulations like the EU Cyber Resilience Act and US Executive Order 14028, and are essential for vulnerability management, license compliance, and supply chain security."

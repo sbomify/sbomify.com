@@ -1,18 +1,14 @@
 nav:
   - name: CRA
     link: /cra/
-  - name: Zero to Hero
-    link: /zero-to-hero/
-  - name: What is an SBOM?
-    link: /what-is-sbom/
-  - name: About
-    link: /about/
-  - name: Blog
-    link: /blog/
-  - name: Case Studies
-    link: /case-studies/
+  - name: Trust Center
+    link: /features/trust-center/
   - name: Pricing
     link: /pricing/
+  - name: Case Studies
+    link: /case-studies/
+  - name: Blog
+    link: /blog/
 
 social:
   x: https://x.com/sbomify

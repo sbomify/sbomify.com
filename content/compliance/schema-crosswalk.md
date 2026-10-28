@@ -10,8 +10,8 @@ description: "Field mapping reference for the CISA 2026 SBOM Minimum Elements ac
 This page maps the [CISA 2026 Minimum Elements](/compliance/cisa-minimum-elements/), and SBOM properties generally, to their specific field paths in CycloneDX, SPDX 2.3, and SPDX 3.0.
 
 <div class="cta-box">
-  <p><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get in Touch</a>
+  <p><strong>Turn these requirements into a working process.</strong> See how sbomify handles SBOMs, vulnerability monitoring, VEX and advisories for every release you support.</p>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" onclick="posthog.capture('cta_click', { location: 'compliance_top', label: 'Book a demo' })">Book a demo</a>
 </div>
 
 **Note:** The CISA Framing document's published crosswalk table references CycloneDX v1.6. This page uses CycloneDX 1.7 schema paths, which are largely compatible but include some updates (e.g., tools object structure).

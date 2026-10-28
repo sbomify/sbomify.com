@@ -10,8 +10,8 @@ description: "Guide to CLE (ECMA-428), the standard for machine-readable compone
 [CLE (ECMA-428)](https://ecma-international.org/publications-and-standards/standards/ecma-428/) is a standard for machine-readable component lifecycle events, including end-of-life (EOL), end-of-support (EOS), aliasing, and provenance changes.
 
 <div class="cta-box">
-  <p><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get in Touch</a>
+  <p><strong>Turn these requirements into a working process.</strong> See how sbomify handles SBOMs, vulnerability monitoring, VEX and advisories for every release you support.</p>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" onclick="posthog.capture('cta_click', { location: 'compliance_top', label: 'Book a demo' })">Book a demo</a>
 </div>
 
 ---

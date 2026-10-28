@@ -85,6 +85,11 @@ ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfi
 [params]
   description = "From SBOM to security disclosure. Manage product security for every release you support: generate SBOMs, monitor vulnerabilities, triage with VEX and publish advisories through your Trust Center. Built for the EU Cyber Resilience Act."
   keywords = ["SBOM", "Product Security", "CRA Vulnerability Handling", "Supply Chain Security", "CRA Compliance", "NTIA Compliant", "Software Bill of Materials", "SBOM Management", "Security Artifact Hub"]
+  # Conversion endpoints. Every sign-up, sign-in and demo button reads these, so
+  # pointing "Book a demo" at a scheduling page is a one-line change here.
+  signupURL = "https://app.sbomify.com"
+  signinURL = "https://app.sbomify.com"
+  demoURL = "https://app.sbomify.com/enterprise-contact/"
   posthog_api_key = "phc_kWvZ17AgVDC3CAEHYG2oQBYEg5lUnyK3brPqJ6P4nPH"
 
   # Outbound link policy, applied by layouts/_markup/render-link.html and the

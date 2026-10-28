@@ -1,0 +1,65 @@
+{{/* End-of-article call to action for the content sections (blog, guides,
+     FAQ, compliance, sbomify-action). Copy is chosen per section so the ask
+     follows from what the reader just read: compliance readers are closest
+     to a buying decision and are offered a demo first, everyone else a free
+     workspace. Set `cta: false` in a page's front matter to drop it. */}}
+{{- $page := . -}}
+{{- if ne $page.Params.cta false -}}
+{{- $copy := dict
+  "posts" (dict
+    "eyebrow" "sbomify"
+    "title" "From SBOM to security disclosure"
+    "body" "sbomify tracks every release you support, rescans it for new vulnerabilities, records your VEX decisions and publishes advisories to your customers. Built for the EU Cyber Resilience Act."
+    "lead" "signup")
+  "guides" (dict
+    "eyebrow" "Put it into practice"
+    "title" "Send your SBOMs somewhere useful"
+    "body" "Upload the SBOMs you generate to sbomify and get release tracking, scheduled vulnerability scans, VEX triage and a Trust Center for your customers. Free for one product."
+    "lead" "signup")
+  "sbomify-action" (dict
+    "eyebrow" "Next step"
+    "title" "Upload straight from CI to sbomify"
+    "body" "Point the action at a free sbomify workspace and every release gets a stored SBOM, scheduled vulnerability scans and a place to share it with customers."
+    "lead" "signup")
+  "faq" (dict
+    "eyebrow" "Try it yourself"
+    "title" "See it in your own workspace"
+    "body" "Start free with one product, or book a demo and we'll walk you through SBOMs, vulnerability handling and the Trust Center on your own setup."
+    "lead" "signup")
+  "features" (dict
+    "eyebrow" "See it working"
+    "title" "Try it on your own software"
+    "body" "Start free with one product and see your SBOMs, vulnerabilities and Trust Center in one place. Or book a demo and we'll walk you through it."
+    "lead" "signup")
+  "page" (dict
+    "eyebrow" "sbomify"
+    "title" "An SBOM is step one"
+    "body" "The CRA expects you to keep monitoring what you ship, decide which vulnerabilities matter and tell your customers. sbomify does that for every release you support. Free to start."
+    "lead" "signup")
+  "compliance" (dict
+    "eyebrow" "From requirement to evidence"
+    "title" "Show how you meet it, not just that you read it"
+    "body" "sbomify turns these requirements into a working process: SBOMs per release, continuous vulnerability monitoring, recorded VEX decisions and published advisories. Book a demo and we'll map it to your products."
+    "lead" "demo")
+-}}
+{{- $key := $page.Section -}}
+{{- if eq $page.Params.cta true }}{{ $key = "page" }}{{ end -}}
+{{- with index $copy $key -}}
+{{- $lead := .lead -}}
+{{/* CRA readers are the closest to buying, wherever the page lives. */}}
+{{- if or (findRE `\bCRA\b|Cyber Resilience` $page.Title) (eq $page.Params.cta_lead "demo") }}{{ $lead = "demo" }}{{ end -}}
+{{- $loc := printf "article_end_%s" $key -}}
+<aside class="mt-16 rounded-3xl bg-inverse p-8 sm:p-10 not-prose" aria-label="Get started with sbomify">
+  <p class="!text-on-inverse-subtle !text-sm font-semibold uppercase tracking-eyebrow !mt-0 !mb-3">{{ .eyebrow }}</p>
+  <p class="!text-2xl lg:!text-3xl !leading-tight font-bold !text-white !mt-0 !mb-4">{{ .title }}</p>
+  <p class="!text-on-inverse-muted !text-lg leading-relaxed !mt-0 !mb-8 max-w-2xl">{{ .body }}</p>
+  {{- $solid := "btn-primary btn-md justify-center !no-underline !text-on-accent" -}}
+  {{- $ghost := "inline-flex items-center justify-center px-5 py-2.5 min-h-10 max-sm:min-h-11 text-sm rounded-full border-2 border-white/40 hover:border-white !text-white font-semibold !no-underline transition-colors" -}}
+  {{- $demoFirst := eq $lead "demo" -}}
+  <div class="flex gap-3 {{ if $demoFirst }}flex-col-reverse sm:flex-row-reverse sm:justify-end{{ else }}flex-col sm:flex-row{{ end }}">
+    <a href="{{ site.Params.signupURL }}" class="{{ cond $demoFirst $ghost $solid }}" onclick="posthog.capture('cta_click', { location: '{{ $loc }}', label: 'Start free' })">Start free</a>
+    <a href="{{ site.Params.demoURL }}" class="{{ cond $demoFirst $solid $ghost }}" onclick="posthog.capture('cta_click', { location: '{{ $loc }}', label: 'Book a demo' })">Book a demo</a>
+  </div>
+</aside>
+{{- end -}}
+{{- end -}}
