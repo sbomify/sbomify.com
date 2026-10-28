@@ -218,7 +218,7 @@ Getting ahead of these requirements isn't just about regulatory compliance – i
 
 ### Related Compliance Frameworks
 
-- [Understanding the EU Cyber Resilience Act](/2024/07/10/understanding-the-eu-cyber-resilience-act-the-role-of-sboms-in-enhancing-cybersecurity/)
+- [EU Cyber Resilience Act (CRA) SBOM Requirements](/compliance/eu-cra/)
 - [How SBOMs Help with PCI DSS 4.0 Compliance](/2025/01/07/how-sboms-can-help-you-achieve-pci-dss-4-compliance/)
 - [CRA Explained: What the Cyber Resilience Act Means for Device Manufacturers](/2026/01/06/cra-explained-cyber-resilience-act-for-device-manufacturers/)
 

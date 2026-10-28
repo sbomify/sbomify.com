@@ -1,5 +1,6 @@
 ---
 title: "How do I use VEX with sbomify?"
+seo_title: "What Is VEX? How to Use VEX with Your SBOMs"
 description: "Learn how Vulnerability Exploitability eXchange (VEX) lets you communicate which vulnerabilities actually affect your product, and how to upload, triage, and distribute VEX documents through sbomify."
 answer: "A VEX document tells consumers which vulnerabilities in your SBOM are actually exploitable in your product and which are not. sbomify ingests CycloneDX VEX, OpenVEX, and CSAF 2.0 VEX, applies your statements to OSV and Dependency Track findings so noise is suppressed, and publishes the VEX alongside your SBOMs in your Trust Center. You can also triage vulnerabilities directly in sbomify, generate a VEX from your decisions, and have sbomify flag statements that have gone stale or High and Critical findings that no statement covers."
 tldr: "VEX is the companion to your SBOM that says \"this CVE is in our dependency tree but it does not actually affect our product, here is why.\" sbomify accepts VEX in CycloneDX, OpenVEX, and CSAF 2.0 formats, suppresses VEX'd findings in your vulnerability results, flags CISA KEV entries, shares VEX next to SBOMs in the Trust Center, and runs scheduled drift detection so stale statements and uncovered High/Critical findings do not go unnoticed."
