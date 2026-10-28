@@ -95,9 +95,9 @@ sbomify can verify attestations automatically when you upload signed SBOMs. The 
 
 A single check now covers both sbomify-stored signatures and GitHub-published Sigstore attestations. These were [originally handled by two separate plugins](/2026/01/23/announcing-sbomify-v0-25-the-one-with-attestations/); the GitHub Attestation plugin has since been folded into SBOM Verification, so there is only one plugin to enable.
 
-Enable it from the **Plugins** page in your workspace sidebar:
+Enable it from **Plugins** in the sidebar. Plugins are grouped into compliance, security, and attestation. Tick **SBOM Verification**, then click **Save changes**. Changes apply to new uploads, and results you already have are kept.
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/plugin_enablement_sbom-verification.webm" title="Enabling the SBOM Verification plugin in sbomify" description="Step-by-step screencast showing how to enable the SBOM Verification plugin in sbomify for digest, signature, and provenance checks." upload_date="2026-04-24T10:16:53Z" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/plugin_enablement_sbom-verification.webm" title="Enabling the SBOM Verification plugin in sbomify" description="Narrated screencast: turn on the SBOM Verification plugin in sbomify to check the file digest, Sigstore signatures, and attestations published on GitHub." upload_date="2026-10-28T00:00:00Z" >}}
 
 This closes the loop: your CI pipeline signs the SBOM, sbomify verifies the signature on ingestion, and your customers can independently verify the same signature when they download the SBOM from your Trust Center.
 

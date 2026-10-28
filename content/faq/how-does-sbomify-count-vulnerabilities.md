@@ -40,4 +40,5 @@ That release posture is what your customers see on the public [Trust Center](/fe
 
 - [How do I enable vulnerability scanning?](/faq/how-do-i-enable-vulnerability-scanning/) - where the findings come from
 - [How do I use VEX with sbomify?](/faq/how-do-i-use-vex/) - suppressing findings that do not affect you
+- [How do I triage vulnerabilities?](/faq/how-do-i-triage-vulnerabilities/) - working through the open list
 - [How do I create a software release?](/faq/how-do-i-create-a-software-release/) - how artifacts get pinned to a release

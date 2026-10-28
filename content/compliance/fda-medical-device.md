@@ -52,9 +52,9 @@ For technical guidance on representing support level and end-of-support date in 
 
 ## Score uploaded SBOMs against the FDA checklist
 
-sbomify ships an **FDA Medical Device (2025)** plugin that grades each uploaded SBOM against the FDA baseline attributes plus the support-level and end-of-support lifecycle properties. Enable it from the **Plugins** page in your workspace sidebar:
+sbomify ships an **FDA Medical Device Cybersecurity (2025)** plugin that grades each uploaded SBOM against the FDA baseline attributes plus the support-level and end-of-support lifecycle properties. To enable it, open **Plugins** in the sidebar, tick **FDA Medical Device Cybersecurity (2025)**, and click **Save changes**. Every new SBOM upload then gets a compliance result:
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/plugin_enablement_fda-medical-device-2025.webm" title="Enabling the FDA Medical Device plugin in sbomify" description="Step-by-step screencast showing how to enable the FDA Medical Device (2025) compliance plugin in sbomify." upload_date="2026-04-24T10:16:53Z" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/plugin_enablement_fda-medical-device-2025.webm" title="Enabling the FDA Medical Device Cybersecurity plugin in sbomify" description="Narrated screencast: turn on the FDA Medical Device Cybersecurity (2025) check in sbomify so every new SBOM upload gets a compliance result." upload_date="2026-10-28T00:00:00Z" >}}
 
 ## Additional Resources
 
