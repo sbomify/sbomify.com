@@ -15,7 +15,7 @@ keywords: [EU CRA SBOM, Cyber Resilience Act SBOM, CRA Annex I Part II, BSI TR-0
 
 <div class="cta-box">
   <p><strong>CRA reporting obligations have applied since 11 September 2026.</strong> See how sbomify handles SBOMs, vulnerability monitoring, VEX and advisories for every release you support.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" onclick="posthog.capture('cta_click', { location: 'compliance_top', label: 'Book a demo' })">Book a demo</a>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" data-cta-location="compliance_top" data-cta-label="Book a demo">Book a demo</a>
 </div>
 
 ---

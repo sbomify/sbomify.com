@@ -34,10 +34,10 @@
         <h3 class="text-2xl font-bold text-ink mb-4">Want the same for your products?</h3>
         <p class="text-navy-80 mb-8">Book a demo and we'll walk you through it on your own software, or start free today.</p>
         <div class="flex gap-4 justify-center flex-wrap">
-          <a href="{{ site.Params.demoURL }}" class="btn-primary no-underline" onclick="posthog.capture('cta_click', { location: 'case_study_end', label: 'Book a demo' })">
+          <a href="{{ site.Params.demoURL }}" class="btn-primary no-underline" data-cta-location="case_study_end" data-cta-label="Book a demo">
             Book a demo
           </a>
-          <a href="{{ site.Params.signupURL }}" class="px-6 py-3 bg-canvas border border-line hover:border-ink text-ink rounded-full font-semibold transition-colors duration-200 text-base no-underline" onclick="posthog.capture('cta_click', { location: 'case_study_end', label: 'Start free' })">
+          <a href="{{ site.Params.signupURL }}" class="px-6 py-3 bg-canvas border border-line hover:border-ink text-ink rounded-full font-semibold transition-colors duration-200 text-base no-underline" data-cta-location="case_study_end" data-cta-label="Start free">
             Start free
           </a>
         </div>

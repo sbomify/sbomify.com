@@ -57,8 +57,8 @@
   {{- $ghost := "inline-flex items-center justify-center px-5 py-2.5 min-h-10 max-sm:min-h-11 text-sm rounded-full border-2 border-white/40 hover:border-white !text-white font-semibold !no-underline transition-colors" -}}
   {{- $demoFirst := eq $lead "demo" -}}
   <div class="flex gap-3 {{ if $demoFirst }}flex-col-reverse sm:flex-row-reverse sm:justify-end{{ else }}flex-col sm:flex-row{{ end }}">
-    <a href="{{ site.Params.signupURL }}" class="{{ cond $demoFirst $ghost $solid }}" onclick="posthog.capture('cta_click', { location: '{{ $loc }}', label: 'Start free' })">Start free</a>
-    <a href="{{ site.Params.demoURL }}" class="{{ cond $demoFirst $solid $ghost }}" onclick="posthog.capture('cta_click', { location: '{{ $loc }}', label: 'Book a demo' })">Book a demo</a>
+    <a href="{{ site.Params.signupURL }}" class="{{ cond $demoFirst $ghost $solid }}" data-cta-location="{{ $loc }}" data-cta-label="Start free">Start free</a>
+    <a href="{{ site.Params.demoURL }}" class="{{ cond $demoFirst $solid $ghost }}" data-cta-location="{{ $loc }}" data-cta-label="Book a demo">Book a demo</a>
   </div>
 </aside>
 {{- end -}}

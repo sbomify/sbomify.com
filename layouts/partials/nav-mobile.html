@@ -38,9 +38,9 @@
     </nav>
     <hr class="mt-4 mb-10 bg-white/20 h-px border-0" />
     <div class="flex flex-col items-stretch gap-4 max-w-sm mx-auto">
-      <a href="{{ site.Params.signupURL }}" class="btn-primary justify-center" onclick="posthog.capture('cta_click', { location: 'mobile_menu', label: 'Start free' })">Start free</a>
-      <a href="{{ site.Params.demoURL }}" class="justify-center inline-flex items-center px-6 py-3 rounded-full border-2 border-white/40 hover:border-white text-white font-semibold transition-colors" onclick="posthog.capture('cta_click', { location: 'mobile_menu', label: 'Book a demo' })">Book a demo</a>
-      <a href="{{ site.Params.signinURL }}" class="text-center text-on-inverse-muted hover:text-white" onclick="posthog.capture('cta_click', { location: 'mobile_menu', label: 'Sign in' })">Sign in</a>
+      <a href="{{ site.Params.signupURL }}" class="btn-primary justify-center" data-cta-location="mobile_menu" data-cta-label="Start free">Start free</a>
+      <a href="{{ site.Params.demoURL }}" class="justify-center inline-flex items-center px-6 py-3 rounded-full border-2 border-white/40 hover:border-white text-white font-semibold transition-colors" data-cta-location="mobile_menu" data-cta-label="Book a demo">Book a demo</a>
+      <a href="{{ site.Params.signinURL }}" class="text-center text-on-inverse-muted hover:text-white" data-cta-location="mobile_menu" data-cta-label="Sign in" data-cta-intent="signin">Sign in</a>
     </div>
   </div>
 </div>
