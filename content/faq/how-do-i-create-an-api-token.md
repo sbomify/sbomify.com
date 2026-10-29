@@ -10,7 +10,7 @@ url: /faq/how-do-i-create-an-api-token/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/api_tokens.webm" title="How to create and revoke an API token in sbomify" description="Narrated screencast: generate a Publish only API token with a 30-day expiry, copy it, see where it goes in a component's CI/CD integration, and delete it." upload_date="2026-10-28T00:00:00Z" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/api_tokens.webm" title="How to create an API token for an AI agent in sbomify" description="Narrated screencast: compare the token scopes, create a token with the AI agent scope and read what it can and cannot do, copy it, and delete it." upload_date="2026-10-29T00:00:00Z" >}}
 
 ## Creating a token
 

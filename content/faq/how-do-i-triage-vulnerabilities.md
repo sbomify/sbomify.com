@@ -10,7 +10,7 @@ url: /faq/how-do-i-triage-vulnerabilities/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/vulnerability_triage.webm" title="How to triage vulnerabilities in sbomify" description="Narrated screencast: filter the workspace Vulnerabilities page, generate a fix prompt for a coding agent, record a Not affected decision that sbomify writes into VEX, and approve AI agent rulings on the Review tab." upload_date="2026-10-28T00:00:00Z" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/vulnerability_triage.webm" title="How to triage vulnerabilities with an AI agent in sbomify" description="Narrated screencast: hand a vulnerability to a coding agent with the fix and triage prompts, see sbomify refuse to let the agent apply its own ruling, then approve one ruling and reject another on the Review tab." upload_date="2026-10-29T00:00:00Z" >}}
 
 ## The Vulnerabilities page
 

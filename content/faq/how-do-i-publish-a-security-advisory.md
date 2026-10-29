@@ -10,7 +10,7 @@ url: /faq/how-do-i-publish-a-security-advisory/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/security_advisories.webm" title="How to publish a security advisory in sbomify" description="Narrated screencast: create a security advisory, pick the affected releases, post a timeline update, publish it with a tracking ID, and see it on the public Trust Center advisories page." upload_date="2026-10-28T00:00:00Z" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/security_advisories.webm" title="How to publish a security advisory drafted by an AI agent" description="Narrated screencast: an AI agent drafts an advisory and is refused when it tries to publish, a person reviews and publishes it, then approves one of the agent's later changes and rejects another, ending on the public Trust Center." upload_date="2026-10-29T00:00:00Z" >}}
 
 ## Creating an advisory
 
