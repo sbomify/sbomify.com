@@ -40,6 +40,7 @@ Back in **Settings**, your tokens are listed under **Your tokens**, with when ea
 
 ## Further reading
 
+- [How do AI agents work in sbomify?](/faq/how-do-ai-agents-work-in-sbomify/)
 - [How do I set up OIDC trusted publishing?](/faq/how-do-i-set-up-oidc-trusted-publishing/) - uploads from GitHub Actions with no stored token
 - [How do I use the sbomify setup wizard?](/faq/how-do-i-use-the-sbomify-setup-wizard/) - generates the CI workflow for you
 - [How do I generate an SBOM?](/faq/how-do-i-generate-an-sbom/) - the pipeline your token uploads from

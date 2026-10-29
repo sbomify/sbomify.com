@@ -43,6 +43,7 @@ The advisory now has a permanent tracking ID, and the tracking ID and disclosure
 
 ## Further reading
 
+- [How do AI agents work in sbomify?](/faq/how-do-ai-agents-work-in-sbomify/)
 - [How do I triage vulnerabilities?](/faq/how-do-i-triage-vulnerabilities/) - decide which findings affect you before you disclose
 - [How do I set up a Trust Center?](/faq/how-do-i-set-up-a-trust-center/) - where published advisories appear
 - [How do I manage Trust Center access requests?](/faq/how-do-i-manage-trust-center-access-requests/) - how readers get access to gated content

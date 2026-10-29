@@ -51,6 +51,7 @@ If the finding is real and your customers need to know, publish a [security advi
 
 ## Further reading
 
+- [How do AI agents work in sbomify?](/faq/how-do-ai-agents-work-in-sbomify/)
 - [How do I enable vulnerability scanning?](/faq/how-do-i-enable-vulnerability-scanning/) - turn on the scanners that feed this page
 - [How do I use VEX with sbomify?](/faq/how-do-i-use-vex/) - how decisions and uploaded VEX suppress findings
 - [How does sbomify count vulnerabilities?](/faq/how-does-sbomify-count-vulnerabilities/) - what the numbers on the page mean
