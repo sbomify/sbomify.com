@@ -17,11 +17,11 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
                 </h1>
                 <p class="text-xl lg:text-2xl leading-relaxed text-ink-muted max-w-3xl mx-auto text-pretty">Manage product security for every release you support. Generate <a href="/what-is-sbom/" class="link">SBOMs</a>, monitor vulnerabilities, record what you decided and why, and tell your customers. All in one platform you can run in our cloud or on your own infrastructure.</p>
                 <div class="mt-10 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 justify-center">
-                    <a href="https://app.sbomify.com" class="group btn-primary btn-lg w-full sm:w-auto" onclick="posthog.capture('cta_click', { location: 'home_hero', label: 'Start free' })">
+                    <a href="https://app.sbomify.com" class="group btn-primary btn-lg w-full sm:w-auto" data-cta-location="home_hero" data-cta-label="Start free">
                         Start free
                         <svg aria-hidden="true" class="w-4 h-4 motion-safe:group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                     </a>
-                    <a href="https://app.sbomify.com/enterprise-contact/" class="btn-secondary btn-lg w-full sm:w-auto" onclick="posthog.capture('cta_click', { location: 'home_hero', label: 'Book a demo' })">Book a demo</a>
+                    <a href="https://app.sbomify.com/enterprise-contact/" class="btn-secondary btn-lg w-full sm:w-auto" data-cta-location="home_hero" data-cta-label="Book a demo">Book a demo</a>
                 </div>
             </div>
 
@@ -280,7 +280,7 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
                         <p class="mb-4 text-lg text-ink-muted leading-relaxed">Your supply-chain security shouldn't depend on one vendor's data format. sbomify works in CycloneDX, SPDX, OpenVEX, CSAF and the Transparency Exchange API, with an API for everything else.</p>
                         <p class="mb-8 text-lg text-ink-muted leading-relaxed">Use our hosted cloud, or <a href="https://github.com/sbomify/sbomify" class="link">get the source on GitHub</a> and self-host it for complete control over your data and infrastructure.</p>
                         <div class="flex flex-wrap items-center gap-4">
-                            <a class="btn-navy" href="https://app.sbomify.com">Try Cloud Free</a>
+                            <a class="btn-navy" href="https://app.sbomify.com" data-cta-location="home_self_host" data-cta-label="Start free">Start free in the cloud</a>
                             <a class="btn-secondary" href="https://github.com/sbomify/sbomify">Self-Host</a>
                             <div id="gh-star-cta" class="hidden"></div>
                             <div id="gh-latest-version" class="hidden"></div>
@@ -299,8 +299,8 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
                 <h2 class="text-3xl lg:text-5xl font-bold text-ink mb-6 text-balance">Your CRA vulnerability-handling workflow starts here</h2>
                 <p class="text-lg lg:text-xl text-ink-muted leading-relaxed mb-10 max-w-2xl mx-auto">Stop managing SBOMs, releases, vulnerabilities and security disclosures in separate systems. Bring them together with sbomify.</p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a class="btn-navy btn-lg" href="https://app.sbomify.com/enterprise-contact/" onclick="posthog.capture('cta_click', { location: 'home_final', label: 'Book a demo' })">Book a demo</a>
-                    <a class="btn-secondary btn-lg" href="https://app.sbomify.com" onclick="posthog.capture('cta_click', { location: 'home_final', label: 'Start free' })">Start free</a>
+                    <a class="btn-navy btn-lg" href="https://app.sbomify.com/enterprise-contact/" data-cta-location="home_final" data-cta-label="Book a demo">Book a demo</a>
+                    <a class="btn-secondary btn-lg" href="https://app.sbomify.com" data-cta-location="home_final" data-cta-label="Start free">Start free</a>
                 </div>
             </section>
         </div>

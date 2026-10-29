@@ -18,9 +18,9 @@
           {{ partial "nav.html" . }}
         </div>
         <div class="hidden lg:flex items-center gap-2 ml-2">
-          <a href="{{ site.Params.signinURL }}" class="px-3 py-2 text-sm font-medium text-ink-muted hover:text-ink transition-colors" onclick="posthog.capture('cta_click', { location: 'header', label: 'Sign in' })">Sign in</a>
-          <a href="{{ site.Params.demoURL }}" class="btn-secondary btn-md" onclick="posthog.capture('cta_click', { location: 'header', label: 'Book a demo' })">Book a demo</a>
-          <a href="{{ site.Params.signupURL }}" class="btn-primary btn-md" onclick="posthog.capture('cta_click', { location: 'header', label: 'Start free' })">Start free</a>
+          <a href="{{ site.Params.signinURL }}" class="px-3 py-2 text-sm font-medium text-ink-muted hover:text-ink transition-colors" data-cta-location="header" data-cta-label="Sign in" data-cta-intent="signin">Sign in</a>
+          <a href="{{ site.Params.demoURL }}" class="btn-secondary btn-md" data-cta-location="header" data-cta-label="Book a demo">Book a demo</a>
+          <a href="{{ site.Params.signupURL }}" class="btn-primary btn-md" data-cta-location="header" data-cta-label="Start free">Start free</a>
         </div>
         {{ partial "nav-mobile.html" . }}
       </div>

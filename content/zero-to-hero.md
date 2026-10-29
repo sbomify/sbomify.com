@@ -221,6 +221,6 @@ Regulators and buyers are no longer asking "do you have security?" - they're ask
 <div class="cta-box">
   <p><strong>Generate your first SBOM, then keep it monitored</strong></p>
   <p>A free sbomify workspace stores the SBOM for every release, rescans it for new vulnerabilities and shares it with your customers.</p>
-  <a href="https://app.sbomify.com/" class="cta-button" onclick="posthog.capture('cta_click', { location: 'zero_to_hero_end', label: 'Start free' })">Start free</a>
-  <p class="mt-4 text-sm text-navy-80">Or <a href="/guides/">explore our guides</a> to learn more.</p>
+  <a href="https://app.sbomify.com/" class="cta-button" data-cta-location="zero_to_hero_end" data-cta-label="Start free">Start free</a>
+  <p class="mt-4 text-sm text-navy-80">Rolling it out across a product line? <a href="https://app.sbomify.com/enterprise-contact/" data-cta-location="zero_to_hero_end" data-cta-label="Book a demo">Book a demo</a>, or <a href="/guides/">explore our guides</a>.</p>
 </div>
