@@ -43,8 +43,19 @@ Key features:
 
 1. [Sign up for sbomify](https://app.sbomify.com) on a Business or Enterprise plan
 2. Upload your SBOMs
-3. Configure your Trust Center settings
-4. Optionally map it to your own domain
+3. Turn on your Trust Center and choose what to share (see [How do I set up a Trust Center?](/faq/how-do-i-set-up-a-trust-center/))
+4. Optionally map it to your own domain and [add your branding](/faq/how-do-i-brand-my-trust-center/)
 5. Share the URL with customers
 
 No additional hosting is required - sbomify handles everything.
+
+This short clip from the sbomify product tour shows the disclosure side: a security advisory, the Trust Center on a custom domain, product-by-product visibility, and the page your customers see.
+
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/walkthrough_chapters_trust_center.webm" title="Disclosing to customers with the sbomify Trust Center" description="Narrated clip from the sbomify product tour: an AI agent drafts a security advisory, a person publishes it, then the Trust Center goes live on a custom domain and shows it to customers." upload_date="2026-10-29T00:00:00Z" >}}
+
+## Further reading
+
+- [How do I set up a Trust Center?](/faq/how-do-i-set-up-a-trust-center/)
+- [How do I brand my Trust Center?](/faq/how-do-i-brand-my-trust-center/)
+- [How do I manage Trust Center access requests?](/faq/how-do-i-manage-trust-center-access-requests/)
+- [How do I publish a security advisory?](/faq/how-do-i-publish-a-security-advisory/)

@@ -19,8 +19,20 @@ That question is becoming urgent. Migrating to post-quantum cryptography starts 
 - **Auto-detection, whatever produced it.** Upload a CycloneDX document containing cryptographic assets and sbomify automatically classifies it as a CBOM, no special flag needed. Every CBOM lineage is ingested, and assets are normalized against the CycloneDX 1.7 cryptographic registry, so output from different generators lands in the same shape instead of depending on which tool you happened to use. You can also be explicit with `BOM_TYPE: cbom` in [sbomify-action](https://github.com/sbomify/sbomify-action), which uploads the document verbatim.
 - **Crypto-asset inventory.** The document detail page renders an inventory of the cryptographic assets found: algorithms, key sizes, certificates, and protocols.
 - **Post-quantum readiness.** The PQC readiness assessment plugin classifies each asset against NIST guidance and gives your component a post-quantum posture view, so you can see at a glance which algorithms are quantum-vulnerable and where.
-- **Workspace-level crypto posture.** Your workspace dashboard summarizes crypto posture alongside your other artifacts, so post-quantum readiness is visible across the estate rather than one component at a time.
+- **Workspace-level crypto posture.** The **Cryptography** page in the sidebar grades every component for quantum readiness, so post-quantum readiness is visible across the estate rather than one component at a time.
 - **Trust Center distribution.** CBOMs appear on your public release pages next to SBOMs and VEX, with the same access controls, and are exposed through the [Transparency Exchange API](/faq/how-do-i-enable-tea-in-sbomify/) as a supported artifact type.
+
+## The Cryptography page
+
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/cryptography_cbom.webm" title="Quantum readiness on the sbomify Cryptography page" description="Narrated screencast: the Cryptography page grades every component for quantum readiness, lists what to migrate first, and drills into a CBOM's assets, certificates and protocols." upload_date="2026-10-28T00:00:00Z" >}}
+
+Open **Cryptography** in the sidebar. It grades every component for quantum readiness, from the CBOMs you upload or the crypto found in your SBOMs:
+
+- **At a glance:** which components are at risk, which need review, and which are already ready.
+- **Migrate first** lists the quantum-vulnerable algorithms used across the most components.
+- **Each component** shows its readiness, its algorithm counts, and its certificates.
+
+Open a component to see its CBOM's cryptographic assets, worst first. Expand an asset to see why it was graded that way, and what to move to. The **Certificates** tab shows each certificate's issuer and how long it has left. The **Protocols** tab lists the cipher suites in use, flags weak ones, and exports them as CSV.
 
 ## How do I generate a CBOM?
 

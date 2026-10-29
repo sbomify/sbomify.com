@@ -1,8 +1,8 @@
 ---
 title: "How do I create a software release in sbomify?"
 description: "Step-by-step guide to creating a product release in sbomify by linking existing component SBOMs to a versioned release."
-answer: "Upload your component SBOMs first, then create a product release that points to specific SBOMs. Each SBOM can have its own version and be shared across multiple releases."
-tldr: "Upload your component SBOMs first, then create a product release that points to specific SBOMs. Each SBOM can have its own version and be shared across multiple releases."
+answer: "Upload your component SBOMs first. Then open the product, choose Create release from the Product actions menu, and add the artifacts that shipped in that version. Each SBOM keeps its own version and can be shared across multiple releases."
+tldr: "Upload your component SBOMs first. Then open the product, choose Create release from the Product actions menu, and add the artifacts that shipped in that version. Each SBOM keeps its own version and can be shared across multiple releases."
 weight: 77
 keywords: [product release, software release, sbomify release, create release, SBOM versioning, release management]
 url: /faq/how-do-i-create-a-software-release/
@@ -10,7 +10,7 @@ url: /faq/how-do-i-create-a-software-release/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/release_creation.webm" title="How to create a software release in sbomify" description="Step-by-step screencast showing how to create a product release in sbomify by linking component SBOMs." upload_date="2026-02-26T19:24:17Z" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/release_creation.webm" title="How to create a software release in sbomify" description="Narrated screencast: create a release from the product actions menu and add the SBOM of every component that shipped in that version." upload_date="2026-10-28T00:00:00Z" >}}
 
 ## Creating a product release
 
@@ -23,18 +23,18 @@ Before creating a release, you need:
 - A **product** set up in sbomify (see [How do products work?](/faq/how-do-products-work-in-sbomify/))
 - One or more **components** with uploaded SBOMs
 
-### The "Latest" release
+### The "latest" release
 
-The first time an SBOM is uploaded against a product, sbomify automatically creates a `Latest` release that always points to the most recent SBOM version of each component. You don't need to manage it - it's there as a stable URL for "whatever is current".
+Every product has a `latest` release. sbomify keeps it current with the newest artifact of each component. You don't need to manage it - it's there as a stable URL for "whatever is current".
 
 Named releases (e.g. `v2.1.0`) are immutable snapshots and are what you should share with customers and auditors.
 
 ### Steps
 
-1. Navigate to your **Product** and scroll to the **Releases** section
-2. Click **Create Release** and fill in the modal: **Name** (e.g. `Middle-Out Rewrite`), **Version** (e.g. `v2.1.0`), and an optional **Description**, then click **Create**
-3. Click into the new release
-4. Click **Add Artifact**, use **Select All Visible** (or pick individual SBOMs and documents) in the artifact picker, then click **Add to Release**
+1. Open **Products** and click your product
+2. Open the **Product actions** menu at the top of the page and choose **Create release**
+3. The product is already picked. Fill in a **Name** (e.g. `Middle-Out Rewrite`), a **Version** (e.g. `v2.1.0`), and an optional **Description**, then click **Create release**
+4. The release starts empty. Click **Add Artifact**, search or filter the list, or use **Select All Visible** to pick every SBOM at once, then click **Add to Release**
 
 ### How versioning works
 

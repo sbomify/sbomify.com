@@ -55,6 +55,12 @@ sbomify provides tooling to help you prepare for CRA compliance:
 - Track vulnerability status with automated scanning
 - Share compliance artifacts through your [Trust Center](https://trust.sbomify.com/)
 - CRA compliance plugin to assess your SBOM against CRA requirements
+- A [CRA Compliance Wizard](/faq/how-do-i-use-cra-compliance/) that turns that evidence into a conformity assessment, one product at a time
+- [Security advisories](/faq/how-do-i-publish-a-security-advisory/) to disclose vulnerabilities that do affect you
+
+This short clip shows the CRA assessment: scope screening, SBOM coverage, the Annex I checklist, and user information roll up into one summary, and sbomify writes the documents the CRA asks for, from the disclosure policy to the Declaration of Conformity.
+
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/walkthrough_chapters_compliance.webm" title="Proving CRA compliance in sbomify" description="Narrated clip from the sbomify product tour: the CRA assessment summary, the generated documents from the disclosure policy to the Declaration of Conformity, and marking the assessment complete." upload_date="2026-10-28T00:00:00Z" >}}
 
 For the complete breakdown of CRA requirements and field mappings, see our detailed [EU CRA Compliance Guide](/compliance/eu-cra/).
 

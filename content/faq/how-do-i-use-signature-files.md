@@ -78,12 +78,14 @@ The endpoint accepts the in-toto JSON or the DSSE envelope and returns `201 Crea
 
 ## Where the badges show up
 
-Once attached, two badges render on the SBOM detail page (Components → component → click the SBOM filename):
+Once attached, two badges render on the SBOM detail page. To find it, open **Components**, open the component, then click the version you signed:
 
 - **Signed** (green padlock), the SBOM has a stored `signature_blob_key`.
 - **Provenance** (blue shield), the SBOM has a stored `provenance_blob_key`.
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/document_signatures.webm" title="Signed and Provenance badges on a sbomify SBOM detail page" description="Step-by-step screencast walking from Components into the SBOM detail page where the Signed and Provenance badges render once a signature and a provenance attestation are attached via the API." upload_date="2026-05-04T13:57:54+05:00" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/document_signatures.webm" title="Attaching a signature and provenance to an SBOM in sbomify" description="Narrated screencast: a pipeline signs an SBOM with cosign, posts the signature bundle and a SLSA provenance attestation to the API, and the SBOM detail page shows the Signed and Provenance badges and a passing SBOM Verification assessment." upload_date="2026-10-28T00:00:00Z" >}}
+
+On the same page, the **SBOM Verification** assessment shows whether every check passed. Expand the met requirements to see each one: the digest, the signature, and the provenance.
 
 The badges are visible to authenticated users in the workspace. The same fields (`signature_blob_key`, `signature_type`, `provenance_blob_key`) are exposed in `SBOMResponseSchema` so external pipelines querying the API can tell at a glance whether either artefact is present.
 

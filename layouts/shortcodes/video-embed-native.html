@@ -1,3 +1,33 @@
+{{- $video := .Get "video_url" -}}
+{{- /* Our own screencasts are narrated, and the recorder publishes the narration
+     as WebVTT next to each video (same name, .vtt). Fetch it at build time and
+     render it as a transcript: the voice-over becomes readable for anyone who
+     cannot play sound, and indexable for search. A <track> would need CORS on
+     the asset bucket; a build-time fetch does not. A missing file (the video
+     predates narration, or has not been re-recorded yet) renders nothing. */ -}}
+{{- $transcriptURL := .Get "transcript_url" -}}
+{{- if and (not $transcriptURL) (hasPrefix $video "https://marketing-assets.sbomify.com/screencasts/") -}}
+  {{- $transcriptURL = replaceRE `\.webm$` ".vtt" $video -}}
+{{- end -}}
+{{- $transcript := slice -}}
+{{- with $transcriptURL -}}
+  {{- with try (resources.GetRemote .) -}}
+    {{- with .Err -}}
+      {{- warnf "video-embed-native: transcript %s: %s" $transcriptURL . -}}
+    {{- else with .Value -}}
+      {{- range split (replace .Content "\r\n" "\n") "\n\n" -}}
+        {{- $lines := split (trim . "\n") "\n" -}}
+        {{- $cue := slice -}}
+        {{- $text := false -}}
+        {{- range $lines -}}
+          {{- if $text -}}{{- $cue = $cue | append . -}}{{- end -}}
+          {{- if in . "-->" -}}{{- $text = true -}}{{- end -}}
+        {{- end -}}
+        {{- with $cue -}}{{- $transcript = $transcript | append (delimit . " ") -}}{{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 <div class="video-embed-wrapper my-8 w-full max-w-3xl mx-auto">
     <div class="relative w-full overflow-hidden rounded-xl sm:rounded-2xl shadow-raised" style="padding-bottom: 56.25%;">
         <video
@@ -6,10 +36,16 @@
             preload="metadata"
             {{ with .Get "poster" }}poster="{{ . }}"{{ end }}
             title="{{ .Get "title" | default "Video player" }}">
-            <source src="{{ .Get "video_url" }}" type="video/webm">
+            <source src="{{ $video }}" type="video/webm">
             Your browser does not support the video tag.
         </video>
     </div>
+    {{- with $transcript }}
+    <details class="mt-3 text-sm text-ink-muted">
+        <summary class="cursor-pointer select-none font-medium text-ink">Transcript</summary>
+        <p class="mt-2">{{ delimit . " " }}</p>
+    </details>
+    {{- end }}
 </div>
 
 <script type="application/ld+json">
@@ -24,6 +60,9 @@
        emitting an invalid entity. */}}
   "thumbnailUrl": "{{ with .Get "poster" }}{{ . | absURL }}{{ else }}{{ (.Page.Params.image | default site.Params.social.image) | absURL }}{{ end }}",
   "uploadDate": "{{ with .Get "upload_date" }}{{ . }}{{ else }}{{ .Page.Date.Format "2006-01-02T15:04:05Z07:00" }}{{ end }}",
-  "contentUrl": "{{ .Get "video_url" }}"
+  {{- with $transcript }}
+  "transcript": "{{ delimit . " " }}",
+  {{- end }}
+  "contentUrl": "{{ $video }}"
 }
 </script>

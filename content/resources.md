@@ -28,6 +28,12 @@ For step-by-step guides on generating SBOMs for specific languages and platforms
 
 ## Video Resources
 
+### Product tour: from SBOM to security disclosure
+
+A narrated, four-minute tour of sbomify: products and components, versioned SBOMs and releases, vulnerability triage with VEX, CRA compliance, and disclosure through security advisories and the Trust Center. For step-by-step videos of each feature, see the [FAQ](/faq/).
+
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/marketplace_walkthrough.webm" title="sbomify product tour: AI agents do the legwork, you make the call" description="Narrated four-minute tour of sbomify: know what you ship, keep every SBOM versioned, let an AI agent propose a VEX ruling and draft an advisory, approve them as a person, prove CRA compliance, and disclose it on your Trust Center." upload_date="2026-10-29T00:00:00Z" >}}
+
 ### CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation
 
 {{< video-embed-native video_url="https://video.fosdem.org/2026/ud2208/UYTGWA-sbom-generation.av1.webm" title="CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation" description="A four-phase SBOM generation model addressing the EU's Cyber Resilience Act requirements, covering authoring, augmenting, enriching, and signing SBOMs to exceed minimal compliance standards." upload_date="2026-02-03T18:53:55Z" >}}

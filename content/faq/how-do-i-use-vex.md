@@ -11,13 +11,13 @@ url: /faq/how-do-i-use-vex/
 
 ## Walkthrough
 
-The full lifecycle - a scanner finding, a VEX that marks it `not_affected`, the finding dropping out of the component's severity counts, and a re-issued VEX superseding the previous one:
+The full lifecycle: a scanner finding, a VEX that marks it `not_affected`, the finding dropping out of the open list and the Trust Center, and a re-issued VEX superseding the previous one:
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/vex_lifecycle.webm" title="The VEX lifecycle in sbomify: generate, upload, suppress, publish" description="Screencast walking the full VEX journey - uploading a CycloneDX VEX that marks a critical finding not_affected, watching it drop from the component's severity counts and the Trust Center, then re-issuing a second VEX that supersedes the first." upload_date="2026-07-13T14:27:55+05:00" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/vex_lifecycle.webm" title="The VEX lifecycle in sbomify: upload, suppress, publish, supersede" description="Narrated screencast: upload a CycloneDX VEX that marks a critical finding not affected, watch it leave the open list and show as suppressed on the Trust Center, then re-issue a version 2 VEX that replaces the first." upload_date="2026-10-28T00:00:00Z" >}}
 
-And how a VEX artifact renders next to its SBOM once uploaded:
+And the upload itself, step by step, from the component's actions menu:
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/vex_upload.webm" title="How VEX appears alongside an SBOM in sbomify" description="Screencast showing a CycloneDX VEX artifact rendered next to its SBOM on a sbomify component, with the colour-coded VEX and SBOM badges in the BOMs table." upload_date="2026-04-29T14:14:17+05:00" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/vex_upload.webm" title="How to upload a VEX document in sbomify" description="Narrated screencast: choose Upload VEX in the component actions menu, check the preview of what the VEX would suppress, apply it, and find the closed finding with its reason attached." upload_date="2026-10-28T00:00:00Z" >}}
 
 ## The problem VEX solves
 
@@ -86,7 +86,16 @@ sbomify's CRA Compliance plugin checks for the SBOM/VEX split and flags SBOMs th
 
 ## Uploading VEX to sbomify
 
-sbomify treats a VEX document as a separate artifact attached to the same component as its SBOM. There is no separate "VEX component" - the relationship is artifact-to-component, the same as SBOMs. You can upload VEX in any supported format through the upload panel on the component page, via the API, or from CI.
+sbomify treats a VEX document as a separate artifact attached to the same component as its SBOM. There is no separate "VEX component" - the relationship is artifact-to-component, the same as SBOMs. You can upload VEX in any supported format from the component page, via the API, or from CI.
+
+### From the component page
+
+1. Open the component, open the **Component actions** menu, and choose **Upload VEX**
+2. Drop in a CycloneDX VEX, an OpenVEX file, or a CSAF document
+3. Nothing is stored yet. A preview (**Preview: nothing stored yet**) shows which open vulnerabilities the VEX would suppress
+4. If it looks right, click **Apply this VEX**
+
+The suppressed findings leave the open list, and the latest version on the component lists its VEX. Nothing is deleted: set the status filter to **Closed by a decision** to see them, with the reason attached. When you upload a newer VEX for the same component, sbomify applies the newest one, so version 2 replaces version 1.
 
 ### Via the API
 
@@ -135,9 +144,9 @@ If your CI platform does not support OIDC, set `TOKEN: ${{ secrets.SBOMIFY_TOKEN
 
 ## Triaging vulnerabilities in sbomify
 
-You do not have to author VEX by hand or in an external tool. sbomify has an in-app triage workflow:
+You do not have to author VEX by hand or in an external tool. sbomify has an in-app triage workflow (see [How do I triage vulnerabilities?](/faq/how-do-i-triage-vulnerabilities/) for a walkthrough):
 
-- **In-app triage.** Review scanner findings on the vulnerability dashboard, record `not_affected` decisions with justifications, apply bulk decisions across CVEs, and preview the effect with a dry run before committing.
+- **In-app triage.** Review scanner findings on the workspace **Vulnerabilities** page, record decisions such as **Not affected** with a justification, and sbomify writes them into a VEX for the component. Rulings from an AI agent, or uploads sent for approval, wait on the **Review** tab until someone signs off.
 - **CISA KEV flags.** Findings that appear in the CISA Known Exploited Vulnerabilities catalog are flagged so you triage the vulnerabilities that attackers actually use first.
 - **Self-VEX generation.** sbomify generates a CycloneDX VEX from your triage decisions, complete with CISA tracking fields (serial number and statement timestamps), so your published VEX always matches your ledger.
 - **Dependency Track sync.** If Dependency Track is your triage system of record, opt in and sbomify syncs your DT analysis decisions in as VEX, pinning them to the matching releases so you do not triage the same finding twice.
@@ -174,6 +183,7 @@ A VEX is a security-relevant claim about your product. Sign it with the same mac
 - [What is the EU Cyber Resilience Act?](/faq/what-is-the-eu-cyber-resilience-act/) - the higher-level FAQ
 - [How do I sign an SBOM?](/faq/how-do-i-sign-an-sbom/) - sign your VEX the same way
 - [How do I enable vulnerability scanning?](/faq/how-do-i-enable-vulnerability-scanning/) - the scanner output your VEX is responsive to
+- [How do I triage vulnerabilities?](/faq/how-do-i-triage-vulnerabilities/) - record decisions in the app and let sbomify write the VEX
 - [Schema crosswalk](/compliance/schema-crosswalk/) - how vulnerability data maps across CycloneDX, SPDX, CSAF, and VEX
 - [CycloneDX VEX use case](https://cyclonedx.org/use-cases/#vulnerability-exploitability) - the upstream spec
 - [OpenVEX](https://github.com/openvex/spec) - a lightweight VEX format, natively supported by sbomify

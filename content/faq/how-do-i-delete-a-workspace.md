@@ -1,8 +1,8 @@
 ---
 title: "How do I delete a workspace?"
 description: "Step-by-step guide to deleting a workspace in sbomify, including what happens to your data."
-answer: "You can delete a workspace from the workspace settings page. This permanently removes the workspace and all its data, including components, SBOMs, and documents."
-tldr: "You can delete a workspace from the workspace settings page. This permanently removes the workspace and all its data, including components, SBOMs, and documents."
+answer: "Open Settings, stay on the General tab, expand the Danger zone at the bottom and click Delete workspace. Type 'delete' to confirm. Only the workspace owner can do this, and it permanently removes every product, component and artifact in the workspace."
+tldr: "Open Settings, stay on the General tab, expand the Danger zone at the bottom and click Delete workspace. Type 'delete' to confirm. Only the workspace owner can do this, and it permanently removes every product, component and artifact in the workspace."
 weight: 80
 keywords: [delete workspace, remove workspace, sbomify workspace, workspace settings]
 url: /faq/how-do-i-delete-a-workspace/
@@ -10,15 +10,21 @@ url: /faq/how-do-i-delete-a-workspace/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/workspace_deletion.webm" title="How to delete a workspace in sbomify" description="Step-by-step screencast showing how to delete a workspace in sbomify." upload_date="2026-02-26T13:02:46Z" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/workspace_deletion.webm" title="How to delete a workspace in sbomify" description="Narrated screencast: open the General tab in Settings, expand the Danger zone, and confirm the workspace deletion." upload_date="2026-10-28T00:00:00Z" >}}
 
 ## Deleting a workspace
 
-To delete a workspace in sbomify:
+Only the workspace owner can delete a workspace. To delete one:
 
-1. Navigate to your workspace **Settings**
-2. Stay on the **General** tab and scroll to the **Danger Zone** section
-3. Expand the Danger Zone and click **Delete Workspace**
-4. In the confirmation modal, type `delete` and click **Delete Workspace**
+1. Open **Settings** for the workspace you want to delete
+2. Stay on the **General** tab and scroll to the bottom
+3. Expand the **Danger zone** and click **Delete workspace**
+4. In the confirmation dialog, type `delete` and click **Delete workspace**
 
-This action is **permanent** and cannot be undone. All data associated with the workspace will be deleted, including products, components, SBOMs, and documents.
+You land back on the dashboard of your default workspace.
+
+You cannot delete your default workspace. Set another workspace as your default first, then delete this one.
+
+This action is **permanent** and cannot be undone. Everything in the workspace is deleted, including products, components, SBOMs, and documents.
+
+To remove a person from a workspace rather than delete it, see [How do I invite team members?](/faq/how-do-i-invite-team-members/).
