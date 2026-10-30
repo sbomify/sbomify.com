@@ -5,7 +5,7 @@ description: "SBOM news for 24 to 30 October 2026: PHP2Shell added to CISA KEV a
 keywords: "This Week in SBOMs, SBOM news, PHP2Shell, CVE-2026-109618, CVE-2026-109619, CVE-2026-46300, Brotli CVE-2026-111497, CVE-2026-97229, Alpine Linux GitLab, CISA KEV, NIST IR 8547, CBOM, CISA 2030, FASCSA, CRA news, NIS2, EN 40000, SPDX 3, CycloneDX 2.0, PURL ECMA-427, Dependency-Track 5.2.1"
 categories:
   - news
-tags: [sbom, this-week-in-sboms, php2shell, supply-chain, kev, cra, nis2, cisa, nist, cbom, spdx, cyclonedx, purl, vex]
+tags: [sbom, this-week-in-sboms, php2shell, fosdem, trust-center, supply-chain, kev, cra, nis2, cisa, nist, cbom, spdx, cyclonedx, purl, vex]
 tldr: "PHP2Shell went from patched to exploited: CISA added both PHP CVEs to KEV on 26 October and a chained Linux kernel bug on 28 October, and Palo Alto confirmed attacks on the PHP inside its firewall management interfaces. CISA also added the Brotli decoder flaw, and PHP rebuilt its Windows packages without changing the PHP version number. Alpine Linux disclosed an attempted exploit of its GitLab server, where upgrading GitLab did not fix a bug that lives in Ruby. The CRA and NIS2 had a quiet week. NIST finalised IR 8547 on the post-quantum transition, and CISA published its 2030 strategy. Standards work was incremental: SPDX, CycloneDX and PURL merged fixes but shipped no releases."
 author:
   display_name: Cowboy Neil
@@ -17,7 +17,7 @@ slug: this-week-in-sboms-2026-10-30
 
 Welcome to the second edition of **This Week in SBOMs**, and the first that covers a normal seven-day window: **Saturday 24 October to Friday 30 October 2026**. [Last week's edition](/2026/10/23/this-week-in-sboms-2026-10-23/) covered a whole month.
 
-The short version: last week's vulnerabilities became this week's incidents. PHP2Shell and the Brotli flaw both landed in CISA's Known Exploited Vulnerabilities (KEV) catalogue, and in both cases the hard part is finding the copies of the component that nobody lists. Regulators, by contrast, mostly had a week off.
+The short version: last week's vulnerabilities became this week's incidents. PHP2Shell and the Brotli flaw both landed in CISA's Known Exploited Vulnerabilities (KEV) catalogue, and in both cases the hard part is finding the copies of the component that nobody lists. Regulators, by contrast, mostly had a week off. A short, labelled section of our own news closes this edition.
 
 ## The big one: PHP2Shell is now exploited
 
@@ -101,6 +101,23 @@ A quiet week. We found nothing new on SBOM, CBOM, VEX or AIBOM requirements from
 - **GitHub Dependabot reachability (28 October):** [public preview](https://github.blog/changelog/2026-10-28-prioritize-dependabot-alerts-with-reachability-analysis) for JavaScript and TypeScript, labelling alerts by whether the vulnerable code is reachable. These labels are close to VEX justifications, though GitHub does not mention exporting them as VEX.
 - **OpenSSF:** no new posts in the window; the new SBOM & VEX Working Group is still at the sandbox stage.
 - **Research:** Jukka Ruohonen's ["The Policies of Programming Language Ecosystems"](https://arxiv.org/abs/2610.34187) (submitted 25 October) compares policies across eight package ecosystems and finds more divergence than convergence.
+
+**No SBOM devroom at FOSDEM 2027.** FOSDEM [announced its accepted developer rooms](https://fosdem.org/2027/news/accepted-developer-rooms/) on 21 October: 77 of 128 proposals made it, and for the first time in several years there is no dedicated SBOM room (2026 had [SBOMs and Supply Chains](https://fosdem.org/2026/schedule/track/sboms-and-supply-chains/)). Adjacent rooms did make the cut, including "Beyond the CRA - Building Secure and Resilient Open Source", Package Management, Security, and Open Source & EU Policy. Expect the dedicated SBOM conversations to move to the fringe events around FOSDEM week instead. _Why it matters:_ if you were planning to submit an SBOM talk for 30–31 January, aim for those adjacent rooms or the fringe.
+
+## From the sbomify desk
+
+This column normally leaves out vendor news, ours included. This section is the exception, and it is labelled as such.
+
+**After the SBOM.** Viktor Petersson spoke at DevSecOps London about what happens once the SBOM exists: sharing it, attaching VEX to it, publishing advisories against it, and keeping it tied to the artifact it describes. Generating an SBOM is now the easy part. This week's PHP and Brotli stories are a reminder that the hard part is answering questions with it.
+
+**A pet peeve: SBOMs altered after CI.** A growing category of products takes the SBOM your build produced and "improves" it afterwards: rewriting components, adding guessed versions, dropping what it does not recognise. Call them unicorn fart products. Whatever comes out is no longer a record of what was built. It is no longer bound to the artifact by hash, and nobody can reproduce it from the source. Last week's ENISA advisory recommends build-time generation and binding each SBOM to its artifact by hash or immutable digest. Enrichment is fine when it happens in the pipeline, is recorded and is signed with everything else. Silent edits downstream are not.
+
+**Trust centers are becoming the distribution channel.** Customers increasingly expect one place to fetch SBOMs, VEX, security advisories and compliance documents, rather than an email thread per request. With CRA vulnerability reporting live and advisories like Palo Alto's setting expectations, a [trust center](/faq/what-is-a-trust-center/) that publishes [security advisories](/faq/what-is-a-security-advisory/) alongside SBOMs is quickly becoming the baseline.
+
+**Releases since last week:**
+
+- **[sbomify v26.10.0](https://github.com/sbomify/sbomify/releases/tag/v26.10.0) (24 October):** a deduplicated Vulnerabilities page, a VEX approval queue where AI agents propose rulings and a person approves them, a read-only Operator role, editable per-product advisory statuses, and CycloneDX VEX scoped to a CPE. Self-hosters should read the upgrade notes first: the token-hashing migration cannot be rolled back.
+- **[sbomify-action v26.10.0 to v26.10.3](https://github.com/sbomify/sbomify-action/releases) (22–29 October):** SBOM generation for PlatformIO projects, build tooling bumped to drop trust in the compromised emSign (eMudhra) CA, sanitised log output, and a fix so SPDX overrides are written to the described root package rather than the first package in the list.
 
 ## What to watch next week
 
