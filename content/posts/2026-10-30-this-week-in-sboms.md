@@ -91,7 +91,7 @@ A quiet week. We detected no new information on SBOM, CBOM, VEX or AIBOM mandate
 
 **PURL and VERS.** No releases occurred. ECMA-427 adopted editorial clarifications prior to the December General Assembly, and the purl-spec [included the case-sensitivity clarification](https://github.com/package-url/purl-spec/pull/1047) on 26 October. Two functional updates took place: the `$id` fields within the type definitions [were shifted from `types/` to `purl-types/`](https://github.com/package-url/purl-spec/pull/1049), and the `vcpkg` type [acquired a `vcs_url` qualifier](https://github.com/package-url/purl-spec/pull/1044). Tools validating against PURL type schemas should check the updated paths.
 
-**TEA.** Quiet.
+**TEA.** Quiet on the surface, by design. The [Transparency Exchange API](https://github.com/CycloneDX/transparency-exchange-api) is in a code freeze while it waits to go through Ecma standardisation, so the API itself is not changing. The work now is documentation: through October, the reference repository's text has been moved into the [Ecma document draft](https://github.com/Ecma-TC54/ECMA-xxx-TEA), with the last merges on 21 October. (Disclosure: sbomify takes part in the TEA work; we explained why in [why we're bullish on TEA](/2026/03/01/why-were-bullish-on-tea/).) _Why it matters:_ a frozen API is a stable target, so if you plan to publish or consume SBOMs and VEX over TEA, now is a reasonable time to start building against it.
 
 ## The wider landscape
 
