@@ -116,7 +116,7 @@ This column typically omits vendor news, our own included. This section serves a
 
 **Releases since last week:**
 
-- **[sbomify v26.10.0](https://github.com/sbomify/sbomify/releases/tag/v26.10.0) (24 October):** features include a deduplicated Vulnerabilities page, a VEX approval queue where AI agents suggest rulings for human validation, a read-only Operator role, editable per-product advisory statuses, and CycloneDX VEX scoped to a CPE. Self-hosters must consult upgrade notes first: the token-hashing migration is irreversible.
+- **[sbomify v26.10.0](https://github.com/sbomify/sbomify/releases/tag/v26.10.0) (24 October):** bring your own agents, with a human in the loop. A dedicated AI-agent role lets the agents you already use triage vulnerabilities from a new deduplicated Vulnerabilities page and propose VEX rulings, but every ruling lands in an approval queue and only takes effect once a person approves it. Agents can also draft updates to security advisories; a human still has to approve them before they are published, and every change records who made it. The release also adds a read-only Operator role and CycloneDX VEX scoped to a CPE. Self-hosters should read the upgrade notes first: the token-hashing migration is irreversible.
 - **[sbomify-action v26.10.0 to v26.10.3](https://github.com/sbomify/sbomify-action/releases) (22–29 October):** adds SBOM generation for PlatformIO projects, updates build tooling to cease trusting the compromised emSign (eMudhra) CA, provides sanitised log output, and corrects an issue where SPDX overrides were written to the initial package in the list rather than the described root package.
 
 ## What to watch next week
