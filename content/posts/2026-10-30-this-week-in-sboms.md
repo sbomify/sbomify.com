@@ -1,0 +1,137 @@
+---
+
+title: "This Week in SBOMs: PHP2Shell Goes Live, Brotli Hides Behind Version Numbers, and Alpine's GitLab Scare"
+description: "SBOM news for 24 to 30 October 2026: PHP2Shell added to CISA KEV and exploited in firewalls, the Brotli CVE-2026-111497 KEV entry and PHP's rebuilt Windows packages, the attempted GitLab exploit at Alpine Linux, a quiet week for the CRA and NIS2, NIST IR 8547 final, CISA 2030, and steady work on SPDX, CycloneDX and PURL."
+keywords: "This Week in SBOMs, SBOM news, PHP2Shell, CVE-2026-109618, CVE-2026-109619, CVE-2026-46300, Brotli CVE-2026-111497, CVE-2026-97229, Alpine Linux GitLab, CISA KEV, NIST IR 8547, CBOM, CISA 2030, FASCSA, CRA news, NIS2, EN 40000, SPDX 3, CycloneDX 2.0, PURL ECMA-427, Dependency-Track 5.2.1"
+categories:
+  - news
+tags: [sbom, this-week-in-sboms, php2shell, fosdem, trust-center, supply-chain, kev, cra, nis2, cisa, nist, cbom, spdx, cyclonedx, purl, vex]
+tldr: "PHP2Shell went from patched to exploited: CISA added both PHP CVEs to KEV on 26 October and a chained Linux kernel bug on 28 October, and Palo Alto confirmed attacks on the PHP inside its firewall management interfaces. CISA also added the Brotli decoder flaw, and PHP rebuilt its Windows packages without changing the PHP version number. Alpine Linux disclosed an attempted exploit of its GitLab server, where upgrading GitLab did not fix a bug that lives in Ruby. The CRA and NIS2 had a quiet week. NIST finalized IR 8547 on the post-quantum transition, and CISA published its 2030 strategy. Standards work was incremental: SPDX, CycloneDX and PURL merged fixes but shipped no releases."
+author:
+  display_name: Cowboy Neil
+  login: Cowboy Neil
+  url: https://sbomify.com
+date: 2026-10-30
+slug: this-week-in-sboms-2026-10-30
+---
+
+Welcome to the second issue of **This Week in SBOMs**, marking the first time we cover a standard seven-day period: **Saturday 24 October to Friday 30 October 2026**. [Last week's edition](/2026/10/23/this-week-in-sboms-2026-10-23/) encompassed an entire month.
+
+In brief, last week's vulnerabilities evolved into this week's active incidents. Both PHP2Shell and the Brotli flaw were added to CISA's Known Exploited Vulnerabilities (KEV) list; in each instance, the primary challenge is locating instances of the component that remain unlisted by others. Conversely, regulators largely enjoyed a break during the week. Our own news summary concludes with a brief, labeled section.
+
+## The big one: PHP2Shell is now exploited
+
+**CISA listed [CVE-2026-109618](https://insights.sbomify.com/CVE-2026-109618/) and [CVE-2026-109619](https://insights.sbomify.com/CVE-2026-109619/) in KEV on 26 October**, setting a federal remediation deadline of 29 October. Both are marked in the [KEV feed](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) as impacting "an open-source component, third-party library, protocol, or proprietary implementation that could be used by different products". This is CISA's way of indicating the issue extends beyond servers known to run PHP. ([THN](https://thehackernews.com/2026/10/cisa-confirms-active-exploitation-of.html))
+
+Three developments occurred throughout the week:
+
+- **A kernel bug was added to the mix (28 October).** CISA placed the Linux kernel flaw [CVE-2026-46300](https://insights.sbomify.com/CVE-2026-46300/) into KEV with a deadline of 31 October. Its entry notes it "can be chained with CVE-2026-109618 and CVE-2026-109619 to implant PHP webshells and run commands as root". ([BleepingComputer](https://www.bleepingcomputer.com/news/security/cisa-warns-of-fragnesia-linux-flaw-chained-in-php2shell-attacks/))
+- **Reports of exploitation emerged.** GreyNoise informed [The Record](https://therecord.media/php2shell-successful-exploitation-reports-emerge) that it had witnessed at least six successful exploits. Dream issued a report describing a China-linked campaign that breached US government-affiliated servers by combining PHP2Shell with an exploit for an unnamed vendor's firewall software. Dream's claims are as reported; we have not observed independent verification. ([THN](https://thehackernews.com/2026/10/php2shell-attack-roots-25-servers.html), [HN discussion](https://news.ycombinator.com/item?id=50286987))
+- **Palo Alto verified attacks against its own devices.** The vendor's [advisory regarding the PHP flaws](https://security.paloaltonetworks.com/CVE-2026-109618), originally posted on 21 October and revised on 29 October, now indicates that "active exploitation has been observed targeting the Palo Alto Networks management interface exposed to the internet". It enumerates impacted and patched PAN-OS builds and releases the advisory via CSAF. ([THN](https://thehackernews.com/2026/10/attackers-exploit-php2shell-flaws-in.html))
+
+**Relevance for SBOM/VEX professionals:** last week, the query was "where does our PHP exist?". This week, that question became pressing, revealing the most exposed instances resided within network appliances rather than on web servers. If your vendors cannot confirm whether their products incorporate PHP or specify the version, request this information immediately. The Palo Alto advisory, featuring a machine-readable CSAF file and a per-product table of affected/unaffected items, exemplifies an effective supplier response. A [VEX statement](/2026/07/30/announcing-sbomify-v26-7-1-the-one-that-says-not-affected/) for every product that is _not_ affected completes the picture.
+
+## Security news that mattered
+
+**Brotli enters KEV; PHP rebuilds without a version increment (26–27 October).** CISA added the Brotli decoder flaw [CVE-2026-111497](https://insights.sbomify.com/CVE-2026-111497/) to KEV on 27 October, with a deadline of 10 November, again noted as an open-source component used across different products. The patch is available in [Brotli 1.2.1](https://github.com/google/brotli/releases/tag/v1.2.1). On 26 October, the PHP team [rebuilt its Windows packages](https://www.php.net/archive/2026.php) as versions 8.5.12-1, 8.4.27-1, 8.3.36-1 and 8.2.35-1 to distribute Brotli 1.2.1. PHP states the vulnerable decoder is accessible via the cURL extension when automatic response decompression is active. The runtime version remains unchanged; only the `-1` package suffix varies. On that same day, an [oss-security post](https://www.openwall.com/lists/oss-security/2026/10/26/16) highlighted that git's HTTPS transport is also vulnerable when libcurl is compiled with Brotli support, which applies to most distributions. ([THN](https://thehackernews.com/2026/10/php-issues-second-windows-security.html))
+
+_Why it matters:_ `php -v` provides no information here. Only an SBOM that logs the bundled Brotli version, or the package digest, distinguishes a fixed Windows build from a vulnerable one. This applies equally to every product linking libcurl with Brotli. We were caught by this too: see [SBOMIFY-SA-2026-0004](https://trust.sbomify.com/advisories/yqQe50J1x1T4/) and [SBOMIFY-SA-2026-0005](https://trust.sbomify.com/advisories/Urp44v4WXWUh/), and the sbomify desk section below.
+
+**Alpine Linux's GitLab: upgraded, still vulnerable (28 October).** Alpine [disclosed](https://alpinelinux.org/posts/GitLab-security-incident-CVE-2026-97229.html) that an adversary attempted to leverage [CVE-2026-97229](https://insights.sbomify.com/CVE-2026-97229/) against its GitLab environment between 20 and 21 October, resuming efforts on 25–26 October. The weakness resides in Onigmo, the regex library embedded within Ruby. Since GitLab's remediation is a patch to the Ruby it bundles in its own packages, Alpine's move to GitLab 19.3.6—relying on standard Ruby—failed to secure the server. Self-built deployments need Ruby 3.3.13, 3.4.12 or 4.0.9. Alpine found no proof of a successful breach but could not rule one out, so it rebuilt the instance and reset all credentials. It says aports, packages and the 21 October releases (versions 3.21.9, 3.22.7, 3.23.7 and 3.24.3) were cross-checked against records held outside GitLab, and that its signing keys have never resided on the GitLab server. CISA listed CVE-2026-97229 on KEV on 29 October. ([THN](https://thehackernews.com/2026/10/attacker-tried-to-exploit-alpine-linuxs.html), [HN discussion](https://news.ycombinator.com/item?id=50282544))
+
+_Why it matters:_ stating "GitLab 19.3.6" in an SBOM provides a misleading sense of security if the underlying runtime contains the vulnerability. Runtime elements require inclusion in the inventory, and any VEX statement regarding this CVE must specify the Ruby version evaluated.
+
+**testmetest: npm malware and 42 armed GitHub repositories (26 October).** JFrog [reported](https://research.jfrog.com/post/beyond-testmetest-42-hijacked-github-repos/) that the testmetest campaign within npm, featuring packages masquerading as native addons, extends to 42 armed repositories belonging to 11 legitimate GitHub owners. As of 26 October, JFrog's inventory lists 25 package identifiers, some serving as harmless decoys. _Why it matters:_ review your lockfiles and SBOMs for packages with names concluding in `-testmetest`, acknowledging that malware can operate without an install script.
+
+**eMudhra, continued: CA bundles are components (28 October).** A researcher [reported](https://emudhra.we-have-a-problem.com/apple.html) that the macOS patch issued on 26 October safeguarded Safari and applications relying on Apple's networking stack, yet left the certificate authority bundle used by CLI utilities like git, curl and python3 still trusting the compromised eMudhra intermediates. We have not independently verified Apple's current standing. ([HN discussion](https://news.ycombinator.com/item?id=50271640)) In addition, Dependency-Track 5.2.1, released on 25 October, excised eMudhra from the CA certificates within its container image. _Why it matters:_ each runtime and image maintains its own trust store, which can only be identified through a comprehensive component inventory.
+
+**Also worth a look:**
+
+- **EDK II [CVE-2026-97631](https://insights.sbomify.com/CVE-2026-97631/):** a [pre-boot RCE](https://www.openwall.com/lists/oss-security/2026/10/28/4) located in the PXE network-boot driver of the open-source UEFI code forming the basis for most firmware (28 October). Firmware SBOMs, where you can get them, are the only way to know which EDK II you ship. ([THN](https://thehackernews.com/2026/10/critical-16-year-old-uefi-flaw-can-run.html))
+- **Linux [CVE-2026-98432](https://insights.sbomify.com/CVE-2026-98432/):** a TCP vulnerability rated 9.8 by the kernel CVE team. Anthropic stated on 27 October that its AI model generated an exploit for this issue. ([THN](https://thehackernews.com/2026/10/linux-kernel-tcp-flaw-with-98-cvss.html))
+- **GoAhead:** the embedded web server loaded certificate revocation lists but failed to activate revocation checking in its OpenSSL backend (27 October). ([THN](https://thehackernews.com/2026/10/goahead-tls-flaws-allow-revoked-client.html))
+- **Malicious AI models:** Pluto Security identified 31 malicious Hugging Face repositories abusing `trust_remote_code` for crypto-mining (29 October, as reported by [BleepingComputer](https://www.bleepingcomputer.com/news/security/hugging-face-malware-campaign-returns-to-hijack-gpus-for-crypto-mining/)). Models count as dependencies too.
+
+The other KEV entries added within the period included Adobe Commerce/Magento ([CVE-2026-48356](https://insights.sbomify.com/CVE-2026-48356/)), VMware ESX ([CVE-2026-41709](https://insights.sbomify.com/CVE-2026-41709/)) and Cisco ASA/FTD ([CVE-2026-76418](https://insights.sbomify.com/CVE-2026-76418/)).
+
+## CRA: a quiet week
+
+We detected no new Commission act, ENISA publication or national CRA law dated in the window. For the record, the status:
+
+- **Single Reporting Platform.** The [SRP](/2026/09/10/cra-single-reporting-platform-enisa-srp/) remains at version 1.2.1, while the [FAQ](https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/frequently-asked-questions) retains a date of 15 October and verifies that an API is not yet available. It also highlights a specific defect: the 72-hour timer derives from the initial 24-hour alert, meaning notifications may incorrectly display as overdue initially. Monitor your own deadlines based on the moment you gained awareness, rather than relying on the portal's countdown.
+- **Harmonized standards.** CEN-CENELEC has issued no updates to date. Ratification of EN 40000-1-1 and EN 40000-1-2 is reportedly due around 2 November. The SBOM-relevant part, prEN 40000-1-3 on vulnerability handling, shows no public progress.
+- **Germany.** The [CRA-Durchführungsgesetz](https://www.bsi.bund.de/DE/Service-Navi/Presse/Pressemitteilungen/Presse2026/261020_CRA-Durchf%C3%BChrungsgesetz.html) awaits approval from the Bundesrat, with its next plenary session reportedly scheduled for 20 November.
+- **Open-source stewards.** The Eclipse ORC Cyber Resilience SIG's [26 October agenda](https://github.com/orcwg/orcwg/blob/main/cyber-resilience-sig/minutes/2026-10-26-mom-cyber-resilience-sig.md) features last week's ENISA Technical Advisory regarding SBOMs; however, minutes have not yet been published.
+
+Refer to our [CRA compliance guide](/compliance/eu-cra/) for the complete schedule.
+
+## NIS2: also quiet
+
+No updates in this area. France's NIS2 legislation remains absent from the Assemblée nationale agenda, Ireland has yet to present its bill, and the European Parliament has not adopted a stance on the Digital Omnibus cyber-reporting amendments agreed by the Council on 21 October. No voting date has been established for the Cybersecurity Act revision in the ITRE committee. Our [NIS2 page](/compliance/eu-nis2/) provides context.
+
+## CISA and US regulators
+
+**NIST completes IR 8547 regarding the post-quantum shift (27 October).** [NIST IR 8547](https://csrc.nist.gov/pubs/ir/8547/final), initially released as a draft in November 2024, details the deprecation of quantum-vulnerable public-key methods like RSA and elliptic-curve schemes after 2030 and their prohibition after 2035. NIST advises organizations to begin with cryptographic inventories. ([NIST news](https://www.nist.gov/news-events/news/2026/10/nist-report-provides-guidelines-transition-post-quantum-cryptography)) _Relevance:_ this aligns with the federal migration mandates required by OMB M-26-15. Although the report avoids using "CBOM", a [cryptographic bill of materials](/faq/what-is-a-cbom/) serves as the logical method to fulfill the requested inventory.
+
+**CISA releases "CISA 2030: Defend, Harden, Prevail" (26 October).** The [new strategy](https://www.cisa.gov/news-events/news/cisa-unveils-new-strategy-strengthen-national-cyber-defense-and-critical-infrastructure-security) aims to "position software security as a strategic advantage" and to produce guidance on "software security and supply chain transparency". It does not explicitly name SBOM or VEX. An implementation roadmap is due within 180 days; any specific SBOM efforts would surface there.
+
+**DHS directs Acronis products removal from federal civilian networks (30 October).** A [Federal Register notice](https://www.federalregister.gov/documents/2026/10/30/2026-22215/notice-of-order-regarding-exclusion-and-removal-of-acronis-products-from-federal-civilian-executive) issued an order under the Federal Acquisition Supply Chain Security Act (FASCSA) barring Acronis products from federal civilian acquisitions and mandating their extraction from agency systems. _Relevance:_ such removal orders apply to products supplied "directly or indirectly". Locating an embedded or OEM component within a wider estate is an inventory challenge, which supplier SBOMs resolve.
+
+**FCC.** The proposed rule mandating signed software and hardware bills of materials indicating country of origin is still not final. It does not seem scheduled for the 19 November open-meeting agenda.
+
+## Other regulators
+
+A quiet week. We detected no new information on SBOM, CBOM, VEX or AIBOM mandates from BSI, the UK NCSC, Japan's METI, CERT-In, the ASD, Canada's CCCS, Singapore's CSA or the G7.
+
+## Standards
+
+**SPDX.** No releases occurred this week; 3.1 remains at RC1. The SPDX 3 model [added a `followsProcess` relationship](https://github.com/spdx/spdx-3-model/pull/1457) on 27 October to link a manufacturing action with the process it adheres to, representing further hardware-provenance work. On 29 October, documentation corrections amended the constraint text for VEX relationship classes in the Security profile. Note this if you validate SPDX VEX.
+
+**CycloneDX and Ecma TC54.** There has still been no 2.0 release candidate. The most recent version remains 1.7.2, while the [2.0 umbrella PR](https://github.com/CycloneDX/specification/pull/652) stays open. Development on the 2.0 branch progressed during this period. On 29 October, the cryptography registry employed for CBOMs [received EAX](https://github.com/CycloneDX/specification/pull/1099), alongside additional corrections. No minutes or agendas from TC54 were published for the relevant window, leaving the result of the 15 October gathering undisclosed.
+
+**PURL and VERS.** No releases occurred. ECMA-427 adopted editorial clarifications prior to the December General Assembly, and the purl-spec [included the case-sensitivity clarification](https://github.com/package-url/purl-spec/pull/1047) on 26 October. Two functional updates took place: the `$id` fields within the type definitions [were shifted from `types/` to `purl-types/`](https://github.com/package-url/purl-spec/pull/1049), and the `vcpkg` type [acquired a `vcs_url` qualifier](https://github.com/package-url/purl-spec/pull/1044). Tools validating against PURL type schemas should check the updated paths.
+
+**TEA.** Quiet on the surface, by design. The [Transparency Exchange API](https://github.com/CycloneDX/transparency-exchange-api) is in a code freeze while it waits to go through Ecma standardization, so the API itself is not changing. The work now is documentation: through October, the reference repository's text has been moved into the [Ecma document draft](https://github.com/Ecma-TC54/ECMA-xxx-TEA), with the last merges on 21 October. (Disclosure: sbomify takes part in the TEA work; we explained why in [why we're bullish on TEA](/2026/03/01/why-were-bullish-on-tea/).) _Why it matters:_ a frozen API is a stable target, so if you plan to publish or consume SBOMs and VEX over TEA, now is a reasonable time to start building against it.
+
+## The wider landscape
+
+- **[Dependency-Track 5.2.1 and 4.14.6](https://github.com/DependencyTrack/dependency-track/releases/tag/5.2.1) (25 October):** these were bug-fix releases, addressing an ineffective access-control verification on the findings analysis endpoint and correcting BOM validation for XML containing CDATA. Upgrade for the access-control fix.
+- **[cyclonedx-core-java 13.4.0](https://github.com/CycloneDX/cyclonedx-core-java/releases/tag/cyclonedx-core-java-13.4.0) (24 October):** it removed its reliance on packageurl-java, a breaking change for any system depending on it transitively.
+- **[cyclonedx-python 7.6.0](https://github.com/CycloneDX/cyclonedx-python/releases/tag/v7.6.0) (28 October):** introduced an option to disregard the parent environment's PYTHON\* variables, resulting in more reproducible generated SBOMs.
+- **GitHub Dependabot reachability (28 October):** a [public preview](https://github.blog/changelog/2026-10-28-prioritize-dependabot-alerts-with-reachability-analysis) for JavaScript and TypeScript, categorizing alerts based on whether vulnerable code is reachable. These labels approach VEX justifications, although GitHub does not mention exporting them as VEX.
+- **OpenSSF:** there were no new posts in the window; the SBOM & VEX Working Group remains in the sandbox phase.
+- **Research:** Jukka Ruohonen's ["The Policies of Programming Language Ecosystems"](https://arxiv.org/abs/2610.34187) (submitted 25 October) examines policies across eight package ecosystems, identifying greater divergence than convergence.
+
+**No SBOM devroom at FOSDEM 2027.** FOSDEM [published its accepted developer rooms](https://fosdem.org/2027/news/accepted-developer-rooms/) on 21 October: 77 of 128 proposals were approved, and for the first time in several years, no dedicated SBOM room was included (2026 featured [SBOMs and Supply Chains](https://fosdem.org/2026/schedule/track/sboms-and-supply-chains/)). Adjacent rooms did make it, including "Beyond the CRA - Building Secure and Resilient Open Source", Package Management, Security, and Open Source & EU Policy. Anticipate that dedicated SBOM discussions will migrate to fringe events surrounding FOSDEM week instead. The obvious home is [FOSSapalooza](https://fossapalooza.eu/) on 29 January 2027, the day before FOSDEM in Brussels. It is a one-day conference covering the whole software supply chain, co-organized by OWASP and the Eclipse Open Regulatory Compliance (ORC) Working Group, with OpenChain as a partner. Community tickets are free, and its call for papers closes on 30 November. The same week, ORC runs Code & Compliance on 28 January. _Why it matters:_ if you intended to submit an SBOM talk for FOSDEM week, FOSSapalooza's CFP is the one to watch, with the adjacent FOSDEM rooms as a fallback.
+
+## From the sbomify desk
+
+This column typically omits vendor news, our own included. This section serves as the exception and is so labeled.
+
+**After the SBOM: our talk at DevSecOps London.** On 28 October sbomify founder Viktor Petersson gave our talk "You've Generated Your SBOM. Now What?" at the [DevSecOps London Gathering](https://www.meetup.com/devsecops-london-gathering/events/316267481/) ([slides](https://vpetersson.com/presentations/2026/DevSecOps-London-2026.pdf)). It is the sbomify view of the SBOM lifecycle, and the deck uses [sbomify-action](https://github.com/sbomify/sbomify-action) for the generation examples. The opening section addressed proper generation: not merely pointing one tool at `requirements.txt`, but establishing a pipeline of creation, augmentation, enrichment and signing, keeping transitive dependencies separate from primary ones. The closing section covered subsequent steps. This implies modeling products as collections of their constituent components, linking SBOMs to releases, monitoring for new CVEs, communicating security posture via a trust center, and employing agents to assist with triage. The CRA framework is straightforward: generate an SBOM for every product, archive one per release, monitor for vulnerabilities, and report those actively exploited. This week's PHP and Brotli narratives illustrate why the second half proves difficult.
+
+**A pet peeve: SBOMs altered post-CI.** An expanding class of tools takes the SBOM your build produced, sprinkles some unicorn dust on it after the fact (rewriting components, inserting guessed versions, quietly dropping what it does not recognize) and hands it back with a "trust me bro" attitude. What comes out is no longer a record of what was built: it is not bound to the artifact by hash, and nobody can reproduce it from source. Last week's ENISA advisory advises generating SBOMs at build time and binding each one to its artifact using a hash or immutable digest. Enrichment is acceptable provided it occurs within the pipeline prior to signing and is logged alongside other details. Unrecorded changes downstream are unacceptable.
+
+**We were affected too: Brotli.** CVE-2026-111497 hit two of our products in two different ways, which is the point of this week's lead stories in miniature. We published both advisories on the [sbomify trust center](https://trust.sbomify.com/):
+
+- **[SBOMIFY-SA-2026-0004](https://trust.sbomify.com/advisories/yqQe50J1x1T4/) (24 October):** sbomify v26.2.0 to v26.9.0 bundled the PyPI `brotli` 1.2.0 package as a transitive dependency (weasyprint, then fonttools, then brotli). With it installed, outbound HTTP calls accept Brotli-compressed responses, so a malicious or intercepted server could reach the vulnerable decoder. Fixed in sbomify v26.10.0 with brotli 1.2.1. The hosted service at app.sbomify.com has been fixed since the 24 October deploy.
+- **[SBOMIFY-SA-2026-0005](https://trust.sbomify.com/advisories/Urp44v4WXWUh/) (25 October):** the sbomify Action container images 26.7.0 to 26.10.1 shipped Debian's `libbrotli1`, which git's HTTPS transport loads through libcurl. That is the same path the oss-security post above describes. Fixed in sbomify Action v26.10.2, which picks up Debian's security update; no code change was needed.
+
+Neither copy shows up if you only look at our direct dependencies. One is a Python package three levels down, the other a system library behind git; an SBOM is what makes them visible. The [eMudhra CA compromise](https://trust.sbomify.com/advisories/bjE1CSW5oYKi/) (SBOMIFY-SA-2026-0003, 23 October) followed the same pattern: several separate trust stores, each needing its own fix.
+
+**Trust centers are evolving into distribution channels.** Clients now increasingly expect a single location to retrieve SBOMs, VEX, security advisories, and compliance documentation, rather than relying on email threads for each request. With CRA vulnerability reporting active and advisories such as Palo Alto's shaping expectations, a [trust center](/faq/what-is-a-trust-center/) that disseminates [security advisories](/faq/what-is-a-security-advisory/) alongside SBOMs is rapidly becoming the standard.
+
+**Releases since last week:**
+
+- **[sbomify v26.10.0](https://github.com/sbomify/sbomify/releases/tag/v26.10.0) (24 October):** bring your own agents, with a human in the loop. A dedicated AI-agent role lets the agents you already use triage vulnerabilities from a new deduplicated Vulnerabilities page and propose VEX rulings, but every ruling lands in an approval queue and only takes effect once a person approves it. Agents can also draft updates to security advisories; a human still has to approve them before they are published, and every change records who made it. The release also adds a read-only Operator role and CycloneDX VEX scoped to a CPE, and fixes the Brotli and eMudhra issues above. Self-hosters should read the upgrade notes first: the token-hashing migration is irreversible.
+- **[sbomify-action v26.10.0 to v26.10.3](https://github.com/sbomify/sbomify-action/releases) (22–29 October):** adds SBOM generation for PlatformIO projects, updates build tooling to cease trusting the compromised emSign (eMudhra) CA, ships the Brotli fix in the v26.10.2 image, provides sanitized log output, and corrects an issue where SPDX overrides were written to the initial package in the list rather than the described root package.
+
+## What to watch next week
+
+- Whether CEN-CENELEC confirms ratification of EN 40000-1-1 and 1-2, reportedly scheduled for 2 November.
+- Further vendor advisories regarding embedded PHP and Brotli, and whether these include CSAF or VEX.
+- Whether Apple updates the macOS command-line CA bundle.
+- Minutes from the TC54 meeting on 15 October, and any CycloneDX 2.0 release candidate.
+- The draft Bundesrat agenda for 20 November, and whether the German CRA act is included.
+
+_This Week in SBOMs covers regulation, standards and the open-source landscape. It deliberately excludes vendor product and marketing news, but reports on vendors' own security incidents. Noticed something we missed? Let us know._
