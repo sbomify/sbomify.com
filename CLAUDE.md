@@ -82,7 +82,7 @@ Brand rules the tokens encode:
 
 **Layouts** in `layouts/`: `_default/baseof.html` (base), `_default/single.html` (pages), `posts/single.html` (blog posts), `_default/about.html`, `_default/pricing.html`, `_default/integrations.html`, `authors/single.html`, `case-studies/single.html`.
 
-**Shortcodes** in `layouts/shortcodes/`: `picture`, `video-embed`, `video-embed-native`, `d2`, `cta-ready`, `feature-card`, `artifact-card`, `check-list-item`, `impact-card`, `sbomified-badge`, `trust-center-pillars`, `trust-center-pillars-grid`, `trust-center-artifacts`, `compliance-block`.
+**Shortcodes** in `layouts/shortcodes/` (Markdown variants: see "Markdown Copies for AI Agents"): `picture`, `video-embed`, `video-embed-native`, `d2`, `cta-ready`, `feature-card`, `artifact-card`, `check-list-item`, `impact-card`, `sbomified-badge`, `trust-center-pillars`, `trust-center-pillars-grid`, `trust-center-artifacts`, `compliance-block`.
 
 **Data files** in `data/`: `authors.yml`, `advisors.yml`, `main.yml` (navigation/social links).
 
@@ -116,6 +116,18 @@ Brand rules the tokens encode:
 - Hugo config lives in `hugo.toml` (main) and `config/development/hugo.toml` (dev overrides)
 - Hugo live-reloads automatically when content or templates change
 - Output directory is `public/` (not `_site/`)
+
+## Markdown Copies for AI Agents
+
+Every page is also built as clean Markdown at `index.md` next to its `index.html` (`/cra/` → `/cra/index.md`, home → `/index.md`), for AI agents and the page tools. `/llms.txt` lists every page with a link to its Markdown, and `/llms-full.txt` is all of them in one file.
+
+- `hugo.toml` adds the `markdown` output format to every page kind. A page that sets its own `outputs` in front matter (like `content/faq/_index.md`) must list `markdown` too.
+- `layouts/partials/markdown/page.html` builds the whole copy (title, description, author and dates, TL;DR, content, and on list pages links to everything listed). `layouts/_default/single.markdown.md`, `list.markdown.md` and `layouts/home.markdown.md` only call it.
+- `layouts/partials/markdown/body.html` is the content alone, also used by `llms-full.txt`. Markdown files keep their source with shortcodes rendered; raw HTML inside them goes through `markdown/inline-html.html` (fenced code is left alone). Pages written as `.html` go through `markdown/from-html.html`, which keeps headings, links, lists and tables and drops SVG icons, buttons and scripts. Root-relative links are made absolute.
+- Shortcodes render their Markdown from `layouts/partials/markdown/shortcode.html`, through one-line `<name>.md` (index.md) and `<name>.txt` (llms-full.txt) templates. A D2 diagram becomes the SVG link plus its nodes and edges from `_d2/`. **A new shortcode used in Markdown content needs both files and a branch in that partial**; without them its HTML ends up in the Markdown.
+- `<head>` links the copy with `<link rel="alternate" type="text/markdown">`. Articles (blog, guides, FAQ, compliance and the section pages) show `layouts/partials/agent-tools.html` above the TL;DR: Copy as Markdown, View as Markdown, Ask Claude, Ask ChatGPT. The copy button ships hidden and `assets/js/main.js` reveals it; clicks send `agent_tool_click` with `tool`.
+- The copies repeat their page, so they must not compete with it in search. GitHub Pages cannot set headers, so Cloudflare does: a Transform Rule (modify response header) on `ends_with(http.request.uri.path, ".md")` sets `X-Robots-Tag: noindex`. They are not in the sitemap.
+- Lychee skips `index.md` like `llms.txt`: code examples in them carry placeholder URLs.
 
 ## Outbound Links (rel="nofollow")
 

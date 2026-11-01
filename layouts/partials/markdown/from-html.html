@@ -1,0 +1,41 @@
+{{- /* Rendered HTML to readable Markdown, for pages authored as raw HTML
+     (home, pricing, CRA, trust center, ...). Not a general converter: it knows
+     the tags these pages use, drops decoration (SVG icons, buttons, scripts)
+     and keeps the copy, headings, links, lists and tables. Returns a string. */ -}}
+{{- $h := partial "markdown/inline-html.html" . -}}
+
+{{- /* Price cards (pricing.html) show one price and keep both in data attributes. */ -}}
+{{- $h = $h | replaceRE `(?s)<div class="price" data-monthly="([^"]+)" data-annual="([^"]+)">.*?</div>` "<p>$$${1} / Month billed monthly, or $$${2} / Month billed annually</p>" -}}
+
+{{- /* Tables: first row is the header. */ -}}
+{{- range findRE `(?s)<table\b.*?</table>` $h -}}
+  {{- $rows := slice -}}
+  {{- range findRE `(?s)<tr\b.*?</tr>` . -}}
+    {{- $cells := slice -}}
+    {{- range findRESubmatch `(?s)<t[hd]\b[^>]*>(.*?)</t[hd]>` . -}}
+      {{- $cells = $cells | append (index . 1 | replaceRE `<[^>]+>` " " | htmlUnescape | replaceRE `\s+` " " | replaceRE ` ([.,;:])` "$1" | strings.TrimSpace | replaceRE `\|` `\|`) -}}
+    {{- end -}}
+    {{- $rows = $rows | append (printf "| %s |" (delimit $cells " | ")) -}}
+    {{- if eq (len $rows) 1 -}}
+      {{- $sep := slice -}}{{- range $cells }}{{ $sep = $sep | append "---" }}{{ end -}}
+      {{- $rows = $rows | append (printf "| %s |" (delimit $sep " | ")) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $h = replace $h . (printf "\n\n%s\n\n" (delimit $rows "\n")) -}}
+{{- end -}}
+
+{{- $h = $h | replaceRE `(?s)<code\b[^>]*>(.*?)</code>` "`$1`" -}}
+{{- $h = $h | replaceRE `<li\b[^>]*>` "\n- " | replaceRE `</li>` "\n" -}}
+{{- $h = $h | replaceRE `<br\s*/?>` "\n" -}}
+{{- $h = $h | replaceRE `</?(?:p|section|header|footer|article|aside|main|nav|ul|ol|blockquote|figure|figcaption|dl)\b[^>]*>` "\n\n" -}}
+{{- $h = $h | replaceRE `</?(?:div|dt|dd)\b[^>]*>` "\n" -}}
+{{- $h = $h | replaceRE `<[^>]+>` "" | htmlUnescape -}}
+
+{{- /* Whitespace: trim lines, join list markers to their text, one blank line between blocks. */ -}}
+{{- $h = $h | replaceRE `(?m)^[ \t]+|[ \t]+$` "" -}}
+{{- $h = $h | replaceRE `(?m)^- *\n+` "- " | replaceRE `(?m)^- [→✓✔]\s*` "- " -}}
+{{- $h = $h | replaceRE `\)\[` ") [" -}}
+{{- $h = $h | replaceRE `(?m)^(- .*)\n\n+(- )` "$1\n$2" -}}
+{{- $h = $h | replaceRE `(?m)^(- .*)\n\n+(- )` "$1\n$2" -}}
+{{- $h = $h | replaceRE `\n{3,}` "\n\n" -}}
+{{- return strings.TrimSpace $h -}}

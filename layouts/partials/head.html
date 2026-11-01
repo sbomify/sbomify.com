@@ -73,6 +73,8 @@
 
   {{/* Canonical URL */}}
   <link rel="canonical" href="{{ $canonical }}">
+  {{- /* The page's Markdown copy (index.md next to index.html), for AI agents. */}}
+  {{ with .OutputFormats.Get "markdown" }}<link rel="alternate" type="text/markdown" href="{{ .Permalink }}" title="Markdown">{{ end }}
 
   {{/* Robots meta */}}
   {{- $robots := cond (eq (.Params.noindex | default false) true) "noindex, follow" "index, follow" }}
