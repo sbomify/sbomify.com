@@ -1,0 +1,18 @@
+{{/* Page tools for people and their AI agents: copy or open the page's
+     Markdown copy (index.md, built next to the page), or hand it to an
+     assistant. Static links; only "Copy as Markdown" needs JavaScript, so it
+     ships hidden and assets/js/main.js reveals it when the clipboard is
+     available. Shown at the top of articles (blog, guides, FAQ, compliance). */}}
+{{- with .OutputFormats.Get "markdown" -}}
+{{- $md := .Permalink -}}
+{{- $ask := printf "Read %s and explain it in plain terms. Then help me apply it to the software I build and ship." $md -}}
+{{- $claude := printf "https://claude.ai/new?q=%s" ($ask | urlquery) -}}
+{{- $chatgpt := printf "https://chatgpt.com/?q=%s" ($ask | urlquery) -}}
+<div class="agent-tools" role="toolbar" aria-label="Page tools">
+  <button type="button" class="agent-tool" data-copy-markdown="{{ .RelPermalink }}" data-agent-tool="copy_markdown" hidden><span aria-hidden="true">{{ partial "icon.html" (dict "name" "copy") }}</span><span data-label>Copy as Markdown</span></button>
+  <a class="agent-tool" href="{{ .RelPermalink }}" type="text/markdown" data-agent-tool="view_markdown"><span aria-hidden="true">{{ partial "icon.html" (dict "name" "markdown") }}</span>View as Markdown</a>
+  <a class="agent-tool" href="{{ $claude }}"{{ partial "link-attrs.html" (dict "url" $claude "target" "_blank") }} data-agent-tool="ask_claude"><span aria-hidden="true">{{ partial "icon.html" (dict "name" "sparkles") }}</span>Ask Claude</a>
+  <a class="agent-tool" href="{{ $chatgpt }}"{{ partial "link-attrs.html" (dict "url" $chatgpt "target" "_blank") }} data-agent-tool="ask_chatgpt"><span aria-hidden="true">{{ partial "icon.html" (dict "name" "sparkles") }}</span>Ask ChatGPT</a>
+  <span class="sr-only" aria-live="polite" data-agent-status></span>
+</div>
+{{- end -}}

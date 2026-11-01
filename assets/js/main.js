@@ -42,6 +42,38 @@
     });
   }
 
+  // Page tools (layouts/partials/agent-tools.html). "Copy as Markdown" fetches
+  // the page's index.md; handing ClipboardItem a promise keeps the click's user
+  // activation in Safari while the file loads. The button ships hidden.
+  function initAgentTools () {
+    // Which tools get used, through the posthog stub until consent.
+    document.addEventListener('click', function (e) {
+      var tool = e.target.closest && e.target.closest('[data-agent-tool]');
+      if (tool && window.posthog) window.posthog.capture('agent_tool_click', { tool: tool.dataset.agentTool });
+    });
+    if (!navigator.clipboard) return;
+    var status = document.querySelector('[data-agent-status]');
+    document.querySelectorAll('[data-copy-markdown]').forEach(function (button) {
+      var label = button.querySelector('[data-label]');
+      button.hidden = false;
+      button.addEventListener('click', function () {
+        var text = fetch(button.dataset.copyMarkdown).then(function (r) {
+          if (!r.ok) throw new Error(r.status);
+          return r.text();
+        });
+        var copied = window.ClipboardItem && navigator.clipboard.write
+          ? navigator.clipboard.write([new ClipboardItem({ 'text/plain': text.then(function (t) { return new Blob([t], { type: 'text/plain' }); }) })])
+          : text.then(function (t) { return navigator.clipboard.writeText(t); });
+        copied.then(function () { return 'Copied'; }, function () { return 'Could not copy'; }).then(function (message) {
+          label.textContent = message;
+          if (status) status.textContent = message;
+          setTimeout(function () { label.textContent = 'Copy as Markdown'; }, 2000);
+        });
+      });
+    });
+  }
+
   initMobileMenu();
   initCodeCopy();
+  initAgentTools();
 }())

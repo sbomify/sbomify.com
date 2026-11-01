@@ -1,0 +1,29 @@
+{{- /* Markdown for the shortcodes used in content, called with the shortcode's
+     own context from its .md (index.md) and .txt (llms-full.txt) templates.
+     Shortcodes not listed here render their HTML, which from-html cleans up.
+     Returns a string. */ -}}
+{{- $s := "" -}}
+{{- if eq .Name "d2" -}}
+  {{- /* The rendered SVG, then the diagram's nodes and edges from its D2
+       source without the styling, so an agent can read what it shows. */ -}}
+  {{- $name := .Get 0 -}}
+  {{- $src := readFile (printf "_d2/%s.d2" $name) -}}
+  {{- $src = $src | replaceRE `(?m)^\s*(class|icon|style(\.[a-z-]+)?|width|height|shape|near|grid-[a-z]+|vars|direction)\s*:.*\n` "" -}}
+  {{- $src = $src | replaceRE `(?m)^\s*(\.\.\.@|#).*\n` "" | replaceRE `[ \t]*\{\s*\}` "" | replaceRE `(?m):[ \t]*$` "" | replaceRE `\n{2,}` "\n" | strings.TrimSpace -}}
+  {{- $s = printf "![Diagram: %s](%s)" (replace $name "-" " ") (printf "assets/images/d2/%s.svg" $name | absURL) -}}
+  {{- with $src }}{{ $s = printf "%s\n\n```d2\n%s\n```" $s . }}{{ end -}}
+{{- else if eq .Name "video-embed" -}}
+  {{- $s = printf "Video: [%s](https://www.youtube.com/watch?v=%s)" (.Get "title" | default "YouTube video") (.Get "video_id") -}}
+  {{- with .Get "description" }}{{ $s = printf "%s. %s" $s . }}{{ end -}}
+{{- else if eq .Name "video-embed-native" -}}
+  {{- $s = printf "Video: [%s](%s)" (.Get "title" | default "Video") (.Get "video_url") -}}
+  {{- with .Get "description" }}{{ $s = printf "%s. %s" $s . }}{{ end -}}
+{{- else if eq .Name "cta-ready" -}}
+  {{- $s = printf "**%s** [%s](%s) or [%s](%s)."
+    (.Get "title" | default "From SBOM to security disclosure")
+    (.Get "primary_text" | default "Start free") (.Get "primary_url" | default site.Params.signupURL)
+    (.Get "secondary_text" | default "Book a demo") (.Get "secondary_url" | default site.Params.demoURL) -}}
+{{- else if eq .Name "check-list-item" -}}
+  {{- $s = printf "- **%s**: %s" (.Get "title") (.Get "description") -}}
+{{- end -}}
+{{- return $s -}}

@@ -1,0 +1,29 @@
+{{- /* The HTML elements that read the same in any Markdown: drops scripts,
+     styles and SVG icons, and turns links, headings, images and emphasis into
+     Markdown. Used on its own for raw HTML inside Markdown content, and as the
+     first step of from-html. Leaves block structure and whitespace alone.
+     Returns a string. */ -}}
+{{- $h := string . -}}
+{{- $h = $h | replaceRE `(?s)<!--.*?-->` "" | replaceRE `<\?xml[^>]*\?>` "" -}}
+{{- range slice "script" "style" "svg" "template" "button" "noscript" "label" -}}
+  {{- $h = $h | replaceRE (printf `(?s)<%s\b.*?</%s>` . .) "" -}}
+{{- end -}}
+{{- $h = $h | replaceRE `<input\b[^>]*>` "" -}}
+
+{{- /* Link and heading text on one line; a logo link keeps its image's alt text. */ -}}
+{{- range findRESubmatch `(?s)<a\s[^>]*?href="([^"]*)"[^>]*>(.*?)</a>` $h -}}
+  {{- $text := index . 2 | replaceRE `<img[^>]*?alt="([^"]*)"[^>]*>` " $1 " | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace -}}
+  {{- $h = replace $h (index . 0) (cond (eq $text "") "" (printf "[%s](%s)" $text (index . 1))) -}}
+{{- end -}}
+{{- range findRESubmatch `(?s)<h([1-6])\b[^>]*>(.*?)</h[1-6]>` $h -}}
+  {{- $text := index . 2 | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace -}}
+  {{- $h = replace $h (index . 0) (printf "\n\n%s %s\n\n" (strings.Repeat (int (index . 1)) "#") $text) -}}
+{{- end -}}
+
+{{- $h = $h | replaceRE `<img[^>]*?src="data:[^"]*"[^>]*?alt="([^"]*)"[^>]*>` "$1" -}}
+{{- $h = $h | replaceRE `<img[^>]*?src="([^"]+)"[^>]*?alt="([^"]*)"[^>]*>` "![$2]($1)" -}}
+{{- $h = $h | replaceRE `<img[^>]*?alt="([^"]*)"[^>]*?src="([^"]+)"[^>]*>` "![$1]($2)" -}}
+{{- $h = $h | replaceRE `<img\b[^>]*>` "" -}}
+{{- $h = $h | replaceRE `(?s)<(?:strong|b)\b[^>]*>\s*(.*?)\s*</(?:strong|b)>` "**$1**" -}}
+{{- $h = $h | replaceRE `(?s)<em\b[^>]*>\s*(.*?)\s*</em>` "_${1}_" -}}
+{{- return $h -}}

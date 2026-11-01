@@ -1,0 +1,30 @@
+{{- /* A page's content as Markdown. Markdown files keep their source, with
+     shortcodes rendered through markdown/shortcode.html (D2 diagrams,
+     videos, calls to action); raw-HTML pages go through from-html. Links are
+     made absolute so the copy works wherever it is pasted. Returns a string. */ -}}
+{{- $md := "" -}}
+{{- if and .File (eq .File.Ext "md") -}}
+  {{- $md = .RenderShortcodes | string -}}
+  {{- /* Layout wrappers around shortcodes; their indentation would turn the
+       Markdown inside into code blocks. */ -}}
+  {{- $md = $md | replaceRE `(?m)^[ \t]*</?(?:div|ul)\b[^>]*>[ \t]*\n` "" -}}
+  {{- /* Hugo indents a multi-line shortcode's output to match the call. */ -}}
+  {{- range findRESubmatch "(?ms)^([ \t]+)(!\\[Diagram: .*?^[ \t]*```)$" $md -}}
+    {{- $md = replace $md (index . 0) (index . 0 | replaceRE (printf "(?m)^%s" (index . 1)) "") -}}
+  {{- end -}}
+  {{- $md = $md | replaceRE `(?m)^[ \t]+(!\[|- \*\*|Video: )` "$1" -}}
+  {{- /* Raw HTML written into the Markdown (callouts, edit links, countdowns).
+       Fenced code is set aside first: XML and HTML examples stay as written. */ -}}
+  {{- $fences := findRE "(?ms)^[ \t]*(```|~~~).*?^[ \t]*(```|~~~)[ \t]*$" $md -}}
+  {{- range $i, $f := $fences }}{{ $md = replace $md $f (printf "@@FENCE%d@@" $i) }}{{ end -}}
+  {{- $md = partial "markdown/inline-html.html" $md -}}
+  {{- $md = $md | replaceRE `(?m)^[ \t]*</?(?:p|div|span|ul)\b[^>]*>[ \t]*\n?` "" | replaceRE `</?(?:p|div|span)\b[^>]*>` "" -}}
+  {{- $md = $md | replaceRE `(?m)^[ \t]+(\[|!\[)` "$1" | replaceRE `\n{3,}` "\n\n" -}}
+  {{- range $i, $f := $fences }}{{ $md = replace $md (printf "@@FENCE%d@@" $i) $f }}{{ end -}}
+{{- else -}}
+  {{- $md = partial "markdown/from-html.html" .Content -}}
+{{- end -}}
+{{- $base := strings.TrimSuffix "/" site.BaseURL -}}
+{{- $md = $md | replaceRE `\]\(/([^/])` (printf "](%s/$1" $base) -}}
+{{- $md = $md | replaceRE `\]\(#` (printf "](%s#" .Permalink) -}}
+{{- return strings.TrimSpace $md -}}

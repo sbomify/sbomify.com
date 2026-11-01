@@ -63,8 +63,11 @@ ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfi
   isPlainText = true
 
 [outputs]
-  home = ["HTML", "RSS", "llms", "llmsfull"]
-  section = ["HTML"]
+  home = ["HTML", "RSS", "llms", "llmsfull", "markdown"]
+  section = ["HTML", "markdown"]
+  page = ["HTML", "markdown"]
+  taxonomy = ["HTML", "RSS", "markdown"]
+  term = ["HTML", "RSS", "markdown"]
 
 # Sitemap (replaces jekyll-sitemap)
 [sitemap]

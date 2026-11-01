@@ -32,7 +32,11 @@ Key facts:
 - Open source license compliance
 - CI/CD pipeline integration
 
-A full-content version of this file is available at {{ "llms-full.txt" | absURL }}
+## Markdown versions
+
+Every page on this site is also published as clean Markdown: append `index.md` to its URL, for example {{ "what-is-sbom/index.md" | absURL }} for {{ "what-is-sbom/" | absURL }}. The home page is {{ "index.md" | absURL }}. HTML pages point to their copy with `<link rel="alternate" type="text/markdown">`. The links below go straight to the Markdown.
+
+A full-content version of this file, every page in one document, is available at {{ "llms-full.txt" | absURL }}
 {{- $sections := slice
   (dict "title" "Key Pages" "pages" (where .Site.RegularPages "Section" ""))
   (dict "title" "Features" "pages" (where .Site.RegularPages "Section" "features"))
@@ -48,7 +52,8 @@ A full-content version of this file is available at {{ "llms-full.txt" | absURL 
 
 ## {{ .title }}
 {{ range .pages }}
-- [{{ .Title }}]({{ .Permalink }}){{ with .Description }}: {{ . }}{{ else }}{{ with .Params.tldr }}: {{ . }}{{ end }}{{ end }}
+{{- $url := .Permalink }}{{ with .OutputFormats.Get "markdown" }}{{ $url = .Permalink }}{{ end }}
+- [{{ .Title }}]({{ $url }}){{ with .Description }}: {{ . }}{{ else }}{{ with .Params.tldr }}: {{ . }}{{ end }}{{ end }}
 {{- end }}
 {{- end }}
 {{- end }}
