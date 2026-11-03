@@ -1,0 +1,94 @@
+direction: right
+
+users: Users and CI {
+  class: secondary
+  icon: node_modules/@tabler/icons/icons/outline/users.svg
+}
+
+app: App instance {
+  class: group
+
+  caddy: Caddy\nTLS and routing {
+    class: primary
+    icon: node_modules/@tabler/icons/icons/outline/lock.svg
+  }
+
+  web: Web\ngunicorn + uvicorn {
+    class: highlight
+    style.multiple: true
+    icon: node_modules/@tabler/icons/icons/outline/world.svg
+  }
+
+  worker: Workers\nDramatiq {
+    class: highlight
+    style.multiple: true
+    icon: node_modules/@tabler/icons/icons/outline/settings-cog.svg
+  }
+
+  scheduler: Scheduler {
+    class: accent
+    icon: node_modules/@tabler/icons/icons/outline/clock.svg
+  }
+}
+
+data: Data tier, separate instances {
+  class: group
+
+  postgres: PostgreSQL 17 or 18 {
+    class: primary
+    icon: node_modules/@tabler/icons/icons/outline/database.svg
+  }
+
+  redis: Redis 8 or Valkey 8 {
+    class: primary
+    icon: node_modules/@tabler/icons/icons/outline/bolt.svg
+  }
+
+  s3: S3 storage\nmedia + SBOM buckets {
+    class: primary
+    icon: node_modules/@tabler/icons/icons/outline/bucket.svg
+  }
+}
+
+keycloak: Keycloak\nOIDC sign-in {
+  class: primary
+  icon: node_modules/@tabler/icons/icons/outline/key.svg
+}
+
+external: External services {
+  class: group
+
+  smtp: SMTP relay {
+    class: secondary
+    icon: node_modules/@tabler/icons/icons/outline/mail.svg
+  }
+
+  osv: OSV API {
+    class: secondary
+    icon: node_modules/@tabler/icons/icons/outline/shield-search.svg
+  }
+}
+
+users -> app.caddy: HTTPS {
+  class: flow
+}
+
+users -> keycloak: HTTPS sign-in {
+  class: flow
+}
+
+keycloak <-> app.web: OIDC {
+  class: flow
+}
+
+app.caddy -> app.web: {
+  class: flow
+}
+
+app -> data: {
+  class: flow
+}
+
+app -> external: {
+  class: flow
+}
