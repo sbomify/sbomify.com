@@ -9,7 +9,7 @@ faq:
   - question: "Can I self-host sbomify?"
     answer: "Yes. sbomify is open source under the Apache 2.0 licence with the Commons Clause, so you can run it for your own organisation but not sell it as a hosted service. Run it with Docker Compose on a single VM or with the Helm chart on Kubernetes. Support packages for self-hosted installations are available on the Enterprise plan."
   - question: "What does sbomify need to run?"
-    answer: "The sbomify container image, PostgreSQL 17, Redis 8 or Valkey 8, S3-compatible object storage with two buckets, a Keycloak realm for sign-in, and an SMTP relay for email. Vulnerability scanning with OSV needs outbound internet access."
+    answer: "The sbomify container image, PostgreSQL 17 or 18, Redis 8 or Valkey 8, S3-compatible object storage with two buckets, a Keycloak realm for sign-in, and an SMTP relay for email. Vulnerability scanning with OSV needs outbound internet access."
   - question: "How do I turn off billing in a self-hosted sbomify?"
     answer: "Set BILLING=False. The Docker Compose file and the Helm chart already default to it. Billing pages, plan selection and product and component limits are switched off. Workspaces still start on the Community plan, so set them to Enterprise in Django admin to lift the member limit."
   - question: "How big a server does sbomify need?"
@@ -37,10 +37,10 @@ In front of them sits **Caddy**, which terminates TLS, issues certificates for T
 
 They depend on:
 
-- **PostgreSQL 17**: all metadata, results and settings.
+- **PostgreSQL 17 or 18**: all metadata, results and settings.
 - **Redis 8 or Valkey 8**: cache, job queue and WebSocket fan-out. Both work; our benchmarks below ran on Valkey 8.
 - **S3-compatible object storage**: two buckets, one public-read for media such as logos, one private for SBOMs and documents. AWS S3, Google Cloud Storage (S3 interoperability), MinIO, SeaweedFS, Cloudflare R2 and Tigris all work.
-- **Keycloak**: sign-in over OpenID Connect. sbomify has no local password login for regular users.
+- **Keycloak**: sign-in over OpenID Connect. sbomify has no local password login for regular users. Keycloak is user-facing: browsers are redirected to it to sign in, so it needs its own public HTTPS hostname, and the app also calls it to exchange tokens.
 - **An SMTP relay**: invitations, access requests and onboarding mail.
 - **Outbound HTTPS** to `api.osv.dev` for vulnerability scanning, and optionally to the GitHub API for attestation checks.
 
@@ -59,10 +59,10 @@ The bundled PostgreSQL and Redis containers in `docker-compose.yml` are fine for
 Have these ready:
 
 1. **A domain** for sbomify, for example `sbomify.example.com`, with DNS pointing at the app instance or load balancer.
-2. **PostgreSQL 17** with an empty database and a user that owns it.
+2. **PostgreSQL 17 or 18** with an empty database and a user that owns it.
 3. **Redis 8 or Valkey 8**. Do not put a database number in the URL: sbomify uses databases 0, 1 and 2 itself.
 4. **Two S3 buckets**: `sbomify-media` with public read, and `sbomify-sboms` private. Create an access key for each, or one key with access to both.
-5. **A Keycloak realm** named `sbomify` with a confidential OpenID Connect client:
+5. **A Keycloak realm** named `sbomify` with a confidential OpenID Connect client. Users sign in on Keycloak's own pages, so give it a public HTTPS hostname such as `sso.example.com`:
    - Client ID: `sbomify`, client authentication on.
    - Valid redirect URI: `https://sbomify.example.com/*`. Web origin: `https://sbomify.example.com`.
    - Copy the client secret from **Clients → sbomify → Credentials**.
@@ -446,7 +446,7 @@ For the data tier in production:
 
 | Service         | Production                                                 | Large                                                                                                        |
 | --------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| PostgreSQL 17   | 2 vCPU / 8 GB: RDS `db.m7g.large`, Cloud SQL 2 vCPU / 8 GB | 4 vCPU / 16 GB with a standby: RDS `db.m7g.xlarge` Multi-AZ, Cloud SQL 4 vCPU / 16 GB with high availability |
+| PostgreSQL      | 2 vCPU / 8 GB: RDS `db.m7g.large`, Cloud SQL 2 vCPU / 8 GB | 4 vCPU / 16 GB with a standby: RDS `db.m7g.xlarge` Multi-AZ, Cloud SQL 4 vCPU / 16 GB with high availability |
 | Redis or Valkey | ElastiCache `cache.t4g.small`, Memorystore 1 GB            | ElastiCache `cache.m7g.large` with a replica, Memorystore Standard 5 GB                                      |
 | Object storage  | S3 or Cloud Storage                                        | Same, with versioning and lifecycle rules                                                                    |
 

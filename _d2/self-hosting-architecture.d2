@@ -34,7 +34,7 @@ app: App instance {
 data: Data tier, separate instances {
   class: group
 
-  postgres: PostgreSQL 17 {
+  postgres: PostgreSQL 17 or 18 {
     class: primary
     icon: node_modules/@tabler/icons/icons/outline/database.svg
   }
@@ -50,13 +50,13 @@ data: Data tier, separate instances {
   }
 }
 
+keycloak: Keycloak\nOIDC sign-in {
+  class: primary
+  icon: node_modules/@tabler/icons/icons/outline/key.svg
+}
+
 external: External services {
   class: group
-
-  keycloak: Keycloak\nOIDC sign-in {
-    class: secondary
-    icon: node_modules/@tabler/icons/icons/outline/key.svg
-  }
 
   smtp: SMTP relay {
     class: secondary
@@ -70,6 +70,14 @@ external: External services {
 }
 
 users -> app.caddy: HTTPS {
+  class: flow
+}
+
+users -> keycloak: HTTPS sign-in {
+  class: flow
+}
+
+keycloak <-> app.web: OIDC {
   class: flow
 }
 
