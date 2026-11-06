@@ -57,6 +57,14 @@ _Why it matters:_ zlib and Expat are the classic vendored libraries, copied into
 
 **KEV.** CISA added two entries in the window. WordPress Core [CVE-2026-119977](https://www.cve.org/CVERecord?id=CVE-2026-119977), a race condition during core upgrades, went in on 3 November with a due date of 6 November. Apple's CVE-2024-27834 went in on 4 November. Neither carries the open-source component flag that the PHP and Brotli entries had last week. ([THN on WordPress](https://thehackernews.com/2026/11/cisa-confirms-hackers-exploiting.html))
 
+**Last week's watch list.** [Last week](/2026/10/30/this-week-in-sboms-2026-10-30/) we said we would look out for five things. Here is where each stands:
+
+- **Vendor advisories for embedded PHP and Brotli, and whether they come with CSAF or VEX.** Palo Alto updated its [Brotli portfolio advisory](https://security.paloaltonetworks.com/CVE-2026-111497) on 31 October. It lists affected and fixed builds for PAN-OS 12.2, 12.1 and 11.2 and marks 11.1 and 10.2 as unaffected. It notes that Brotli encoding is disabled by default from PAN-OS 11.2.4 and ships the advisory as CSAF. It is a VEX statement in all but format. Its PHP2Shell advisory has not changed since 29 October. We found no other new vendor advisories for PHP2Shell in the window. On the tooling side, cdxgen 13.6.0 now finds Brotli decoders hidden inside runtimes and binaries (see below).
+- **Whether Apple fixes the macOS command-line CA bundle.** Not yet, as far as we can see. Apple's [security releases page](https://support.apple.com/en-us/100100) lists no macOS update after 26 October, and the researcher's [page](https://emudhra.we-have-a-problem.com/apple.html), still dated 28 October, says git, curl and python3 trust the compromised eMudhra intermediates. If you run macOS CI runners, the manual workaround is still the only fix.
+- **CEN-CENELEC ratification of EN 40000-1-1 and 1-2.** No primary confirmation (see CRA below).
+- **TC54's 15 October minutes and a CycloneDX 2.0 release candidate.** Neither has appeared (see Standards).
+- **The German CRA act on the Bundesrat agenda for 20 November.** Yes: it is item 6 on the draft agenda (see CRA).
+
 ## CRA
 
 **The Single Reporting Platform is now v1.3 (4 November).** ENISA's [SRP page](https://www.enisa.europa.eu/topics/product-security/vulnerability-services/eu-incident-response-and-cyber-crisis-management/single-reporting-platform-srp) says that "on 4 November 2026, the CRA SRP was upgraded to version 1.3" and that the documentation "is currently being updated". There are no release notes, so we cannot say what changed. The FAQ is still dated 15 October and still says there is no API. If you have [SRP](/2026/09/10/cra-single-reporting-platform-enisa-srp/) runbooks, recheck the form fields before you need them.
@@ -117,5 +125,6 @@ We found nothing new on SBOM, CBOM, VEX or AIBOM from BSI, CERT-In or Singapore'
 - The French NIS2 debate from 9 November, and the final Bundesrat agenda for 20 November.
 - ENISA's updated SRP documentation for v1.3, and any primary confirmation of EN 40000-1-1 and 1-2.
 - The Brotli KEV deadline on 10 November.
+- Whether Apple ships a fix for the macOS command-line CA bundle, and whether TC54 publishes its October minutes.
 
 _This Week in SBOMs covers regulation, standards and the open-source landscape. It deliberately excludes vendor product and marketing news, but reports on vendors' own security incidents. Noticed something we missed? Let us know._
