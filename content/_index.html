@@ -387,11 +387,22 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
                     <span class="kicker">CRA coverage</span>
                     <h3>What sbomify covers in the CRA, and what it doesn't</h3>
                     <p>No tool makes you CRA compliant on its own. Of the eight vulnerability-handling requirements in Annex I Part II:</p>
-                    <ul class="cover">
-                        <li data-k="built"><span class="cover-k">Built in</span><span class="cover-items">SBOMs, public disclosure of fixed vulnerabilities</span><b>2</b></li>
-                        <li data-k="supports"><span class="cover-k">Supported</span><span class="cover-items">Remediation, disclosure policy, contact address, security advisories</span><b>4</b></li>
-                        <li data-k="yours"><span class="cover-k">Yours</span><span class="cover-items">Security testing, delivering updates</span><b>2</b></li>
-                    </ul>
+                    <figure class="venn">
+                        <figcaption class="sr-only">Who covers the eight vulnerability-handling requirements: sbomify alone covers 2, sbomify and you share 4, and 2 are yours.</figcaption>
+                        <div class="venn-shape" aria-hidden="true"><i class="venn-a"></i><i class="venn-b"></i></div>
+                        <div class="venn-zone venn-left">
+                            <b>sbomify <span>2</span></b>
+                            <span>SBOMs</span><span>Disclosure of fixes</span>
+                        </div>
+                        <div class="venn-zone venn-mid">
+                            <b>Shared <span>4</span></b>
+                            <span>Remediation</span><span>Disclosure policy</span><span>Contact address</span><span>Advisories</span>
+                        </div>
+                        <div class="venn-zone venn-right">
+                            <b>You <span>2</span></b>
+                            <span>Security testing</span><span>Delivering updates</span>
+                        </div>
+                    </figure>
                     <a class="bento-link" href="/cra/">How sbomify helps with the CRA&nbsp;<span aria-hidden="true">&rarr;</span></a>
                 </article>
 

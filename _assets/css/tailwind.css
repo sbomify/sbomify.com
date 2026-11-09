@@ -3425,75 +3425,87 @@
   font-weight: var(--font-weight-semibold);
 }
 
-/* CRA coverage: three rows, built in, supported and yours, each naming
-   its obligations, with the count on the right. Same rhythm as the
-   documents card beside it. */
-.ins .cover {
-  margin-top: 8px;
+/* CRA coverage: a Venn diagram of responsibility. Two ovals, sbomify and
+   you; what sbomify does alone, what it supports (the overlap) and what is
+   yours. Sized by its own width (a container), so it scales with the card
+   down to a phone. */
+.ins .venn {
+  container-type: inline-size;
+  position: relative;
+  aspect-ratio: 2.15;
+  margin: 10px 0 4px;
 }
 
-.ins .cover li {
-  display: grid;
-  grid-template-columns: 6.5rem minmax(0, 1fr) auto;
-  align-items: baseline;
-  gap: 12px;
-  padding: 12px 0;
-  border-top: 1px solid rgb(var(--color-navy-10));
-  font-size: 0.92rem;
-  line-height: 1.35;
+.ins .venn-shape,
+.ins .venn-shape i {
+  position: absolute;
 }
 
-.ins .cover li:last-child {
-  border-bottom: 1px solid rgb(var(--color-navy-10));
+.ins .venn-shape {
+  inset: 0;
 }
 
-.ins .cover [data-k="built"] { --k: rgb(var(--color-success-full)); }
-.ins .cover [data-k="supports"] { --k: rgb(var(--color-info-full)); }
-.ins .cover [data-k="yours"] { --k: rgb(var(--color-navy-20)); }
+.ins .venn-shape i {
+  top: 0;
+  bottom: 0;
+  width: 64%;
+  border-radius: 50%;
+}
 
-.ins .cover-k {
+/* sbomify in the info blue, you in navy grey; the overlap mixes the two. */
+.ins .venn-a {
+  left: 0;
+  background: rgb(var(--color-info-full) / 0.1);
+  box-shadow: inset 0 0 0 1.5px rgb(var(--color-info-full) / 0.45);
+}
+
+.ins .venn-b {
+  right: 0;
+  background: rgb(var(--color-navy-100) / 0.06);
+  box-shadow: inset 0 0 0 1.5px rgb(var(--color-navy-40) / 0.7);
+}
+
+.ins .venn-zone {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15em;
+  transform: translateY(-50%);
+  font-size: clamp(9px, 2.6cqw, 13px);
+  line-height: 1.3;
+  text-align: center;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .venn-left { left: 5%; width: 29%; }
+.ins .venn-mid { left: 36.5%; width: 27%; }
+.ins .venn-right { right: 5%; width: 29%; }
+
+.ins .venn-zone b {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-weight: var(--font-weight-medium);
-  color: rgb(var(--color-navy-100));
-  white-space: nowrap;
-}
-
-.ins .cover-k::before {
-  content: "";
-  flex: none;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--k);
-  transform: translateY(-1px);
-}
-
-.ins .cover-items {
-  font-size: 0.85rem;
-  color: rgb(var(--color-navy-60));
-}
-
-.ins .cover li > b {
-  font-size: 1.1rem;
+  gap: 0.4em;
+  margin-bottom: 0.25em;
+  font-size: 1.08em;
   font-weight: var(--font-weight-bold);
-  font-variant-numeric: tabular-nums;
   color: rgb(var(--color-navy-100));
 }
 
-@media (max-width: 480px) {
-  .ins .cover li {
-    grid-template-columns: minmax(0, 1fr) auto;
-    row-gap: 2px;
-  }
-
-  .ins .cover-items {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    padding-left: 16px;
-  }
+.ins .venn-zone b span {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.6em;
+  height: 1.6em;
+  border-radius: 999px;
+  background: rgb(var(--color-white));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-20));
+  font-size: 0.82em;
+  font-variant-numeric: tabular-nums;
 }
+
+.ins .venn-left b span { color: rgb(var(--color-info-ink)); box-shadow: inset 0 0 0 1px rgb(var(--color-info-full) / 0.45); }
 
 /* Documents: four rows, each name with a short note on what it is for. */
 .ins .drafts-list {
