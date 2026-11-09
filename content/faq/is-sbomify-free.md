@@ -48,7 +48,7 @@ Visit our [Pricing page](/pricing/) for the full feature comparison, or [sign up
 
 ## Self-hosting
 
-sbomify is also available as a self-hosted solution. If you prefer to run sbomify on your own infrastructure, you can deploy it using Docker. Visit our [GitHub repository](https://github.com/sbomify/sbomify) for setup instructions.
+sbomify is also available as a self-hosted solution. If you prefer to run sbomify on your own infrastructure, you can deploy it with Docker Compose or Helm. The [self-hosting guide](/self-hosting/) covers installation, configuration and server sizing.
 
 ## No credit card required
 
