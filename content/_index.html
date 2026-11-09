@@ -342,42 +342,78 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
         </div>
     </section>
 
-    <section class="section">
-        <div class="wrap pair">
-            {{< comment >}}Audit trail{{< /comment >}}
-            <div class="topic">
-                <span class="kicker">Evidence</span>
-                <h2>An audit trail you build by doing the work</h2>
-                <p>The hard part of compliance isn't producing a document. It's showing what happened, when and why.</p>
-                <p>sbomify keeps SBOMs tied to the releases they describe and never alters them. Every triage decision is a new VEX version. Each finding records when it was first seen and when it was resolved, and advisories keep a timeline of every change. When customers, auditors or market surveillance authorities ask, you have the record.</p>
-                <div class="topic-actions"><a class="btn-secondary" href="/faq/how-do-i-use-vex/">How VEX works in sbomify</a></div>
+    {{< comment >}}Evidence, CRA coverage and Trust Center, as one bento{{< /comment >}}
+    <section class="section" id="prove">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Evidence &middot; Compliance &middot; Disclosure</span>
+                    <h2 class="sec-title">Prove it. <span class="soft">To auditors, regulators and customers.</span></h2>
+                </div>
+                <p class="sec-lede">The work you do in sbomify becomes the record you show: an audit trail, a map of your CRA obligations and a Trust Center your customers can actually use.</p>
             </div>
 
-            {{< comment >}}CRA coverage{{< /comment >}}
-            <div class="topic">
-                <span class="kicker">CRA coverage</span>
-                <h2>What sbomify covers in the CRA, and what it doesn't</h2>
-                <p>No tool makes you CRA compliant on its own. Secure design, risk assessment and conformity assessment are still your work.</p>
-                <p>sbomify supports most of the vulnerability-handling requirements in Annex I Part II, tracks support periods, and drafts the documents you need: the EU declaration of conformity, vulnerability disclosure policy, <code>security.txt</code> and Article 14 notification templates. Our CRA page maps each obligation to what sbomify does.</p>
-                <div class="topic-actions"><a class="btn-secondary" href="/cra/">How sbomify helps with the CRA</a></div>
-            </div>
-        </div>
-    </section>
+            <div class="bento" data-reveal>
 
-    {{< comment >}}Trust Center{{< /comment >}}
-    <section class="section">
-        <div class="wrap split">
-            <div class="topic">
-                <span class="kicker">Trust Center</span>
-                <h2>Disclosure your customers can actually use</h2>
-                <p class="summary">Send a link instead of scheduling a call, and cut security questionnaire response times from weeks to minutes.</p>
-                <p>Share SBOMs, VEX, security advisories, CBOMs and compliance documents such as SOC 2 and ISO 27001 from one branded <a href="/features/trust-center/">Trust Center</a> on your own domain. Make each item public, private or gated behind an access request and NDA. People get a web portal; their tools get CSAF feeds and the Transparency Exchange API (TEA).</p>
-                <div class="topic-actions"><a class="btn-navy" href="/features/trust-center/">Explore the Trust Center</a><a class="btn-secondary" href="https://trust.sbomify.com/">See a live Trust Center</a></div>
-                <div class="mt-8">{{< trust-center-pillars-grid >}}</div>
+                {{< comment >}}Trust Center: the big card{{< /comment >}}
+                <article class="bento-card bento-tc">
+                    <div class="bento-copy">
+                        <span class="kicker">Trust Center</span>
+                        <h3>Disclosure your customers can actually use</h3>
+                        <p>Send a link instead of scheduling a call, and cut security questionnaire response times from weeks to minutes.</p>
+                        <p class="bento-small">SBOMs, VEX, security advisories, CBOMs and documents such as SOC 2 and ISO 27001, on your own domain. Each item public, private or gated behind an access request and NDA. People get a web portal; their tools get CSAF feeds and the Transparency Exchange API (TEA).</p>
+                        <div class="bento-actions"><a class="btn-navy" href="/features/trust-center/">Explore the Trust Center</a><a class="btn-secondary" href="https://trust.sbomify.com/">See a live Trust Center</a></div>
+                    </div>
+                    <div class="bento-visual">
+                        {{< trust-center-artifacts >}}
+                        <div class="bento-chips">{{< trust-center-pillars-grid >}}</div>
+                    </div>
+                </article>
+
+                {{< comment >}}Evidence: an audit trail of real events{{< /comment >}}
+                <article class="bento-card bento-ev">
+                    <span class="kicker">Evidence</span>
+                    <h3>An audit trail you build by doing the work</h3>
+                    <p>The hard part of compliance isn't producing a document. It's showing what happened, when and why.</p>
+                    <ol class="trail" aria-label="An example audit trail for one vulnerability">
+                        <li style="--i: 0"><time>9 Nov, 09:12</time><span>Finding first seen in <b>v2.1</b></span></li>
+                        <li style="--i: 1"><time>9 Nov, 11:40</time><span><b>VEX v2</b>: v1.2.1 not affected, approved by Sam</span></li>
+                        <li style="--i: 2"><time>10 Nov, 16:05</time><span>Fix released in <b>v2.0.4</b></span></li>
+                        <li style="--i: 3"><time>10 Nov, 16:30</time><span>Advisory <b>ACME-SA-2026-01</b> published</span></li>
+                        <li style="--i: 4"><time>12 Nov, 10:02</time><span>Advisory updated, change kept as a diff</span></li>
+                    </ol>
+                    <p class="bento-small">SBOMs stay tied to the releases they describe and are never altered. When customers, auditors or market surveillance authorities ask, you have the record.</p>
+                    <a class="bento-link" href="/faq/how-do-i-use-vex/">How VEX works in sbomify&nbsp;<span aria-hidden="true">&rarr;</span></a>
+                </article>
+
+                {{< comment >}}CRA coverage: the Annex I Part II obligations, as on /cra/{{< /comment >}}
+                <article class="bento-card bento-cra">
+                    <span class="kicker">CRA coverage</span>
+                    <h3>What sbomify covers in the CRA, and what it doesn't</h3>
+                    <p>No tool makes you CRA compliant on its own. Secure design, risk assessment and conformity assessment are still your work.</p>
+                    <div class="cover" role="img" aria-label="Annex I Part II, eight vulnerability-handling requirements: 2 built in, 4 supported, 2 yours">
+                        <div class="cover-bar" aria-hidden="true">
+                            <i data-k="built" style="--i: 0"></i><i data-k="supports" style="--i: 1"></i><i data-k="yours" style="--i: 2"></i><i data-k="built" style="--i: 3"></i><i data-k="supports" style="--i: 4"></i><i data-k="supports" style="--i: 5"></i><i data-k="yours" style="--i: 6"></i><i data-k="supports" style="--i: 7"></i>
+                        </div>
+                        <p class="cover-key" aria-hidden="true"><span data-k="built"><b>2</b> built in</span><span data-k="supports"><b>4</b> supported</span><span data-k="yours"><b>2</b> yours</span></p>
+                        <p class="bento-small">Annex I Part II: the eight vulnerability-handling requirements.</p>
+                    </div>
+                    <a class="bento-link" href="/cra/">How sbomify helps with the CRA&nbsp;<span aria-hidden="true">&rarr;</span></a>
+                </article>
+
+                {{< comment >}}Documents sbomify drafts{{< /comment >}}
+                <article class="bento-card bento-docs">
+                    <span class="kicker">Drafted for you</span>
+                    <h3>The documents the CRA asks for</h3>
+                    <p>sbomify tracks support periods and drafts what you need to publish and keep.</p>
+                    <ul class="docs">
+                        <li><span class="doc-ico" aria-hidden="true"></span>EU declaration of conformity</li>
+                        <li><span class="doc-ico" aria-hidden="true"></span>Vulnerability disclosure policy</li>
+                        <li><span class="doc-ico" aria-hidden="true"></span><code>security.txt</code></li>
+                        <li><span class="doc-ico" aria-hidden="true"></span>Article 14 notification templates</li>
+                    </ul>
+                </article>
             </div>
-            <aside>
-                {{< trust-center-artifacts >}}
-            </aside>
         </div>
     </section>
 

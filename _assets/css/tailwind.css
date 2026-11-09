@@ -3259,6 +3259,330 @@
   }
 }
 
+/* ---------- bento: Evidence, CRA coverage and Trust Center ---------- */
+
+/* Six columns. Trust Center leads (four wide, two tall), Evidence stands
+   beside it, CRA coverage and the documents share the bottom row. */
+.ins .bento {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-auto-rows: auto;
+  gap: 16px;
+}
+
+.ins .bento-tc { grid-column: 1 / 5; grid-row: 1 / 3; }
+.ins .bento-ev { grid-column: 5 / 7; grid-row: 1 / 3; }
+.ins .bento-cra { grid-column: 1 / 4; }
+.ins .bento-docs { grid-column: 4 / 7; }
+
+@media (max-width: 1060px) {
+  .ins .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ins .bento-tc,
+  .ins .bento-docs { grid-column: 1 / -1; grid-row: auto; }
+  .ins .bento-ev,
+  .ins .bento-cra { grid-column: auto; grid-row: auto; }
+}
+
+@media (max-width: 680px) {
+  .ins .bento { grid-template-columns: minmax(0, 1fr); }
+  .ins .bento > * { grid-column: 1 / -1; }
+}
+
+.ins .bento-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: clamp(22px, 2.6vw, 30px);
+  border-radius: 20px;
+  background: rgb(var(--color-white));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10)), 0 1px 2px rgb(var(--color-navy-100) / 0.04);
+}
+
+.ins .bento-card .kicker {
+  margin-bottom: 0;
+}
+
+.ins .bento-card h3 {
+  font-size: clamp(1.2rem, 1.6vw, 1.4rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.ins .bento-card p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .bento-card .bento-small {
+  font-size: 0.86rem;
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .bento-link {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 0.92rem;
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+}
+
+/* Trust Center: copy beside the picture; the hero's nebula in the corner. */
+.ins .bento-tc {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+  /* A soft Signal Orange glow behind the picture, the hero's palette. */
+  background:
+    radial-gradient(42% 55% at 82% 30%, rgb(var(--color-orange-300) / 0.28), transparent 70%),
+    radial-gradient(35% 45% at 95% 85%, rgb(var(--color-orange-100) / 0.5), transparent 70%),
+    rgb(var(--color-white));
+}
+
+.ins .bento-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ins .bento-tc h3 {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.ins .bento-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.ins .bento-visual {
+  display: grid;
+  gap: 16px;
+}
+
+.ins .bento-visual > div:first-child > div {
+  background: rgb(var(--color-white));
+  box-shadow: 0 24px 48px -28px rgb(var(--color-navy-100) / 0.35), inset 0 0 0 1px rgb(var(--color-navy-10));
+}
+
+.ins .bento-chips > div {
+  gap: 6px 14px;
+}
+
+@media (max-width: 760px) {
+  .ins .bento-tc {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Evidence: an audit trail down a hairline. */
+.ins .trail {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  margin: 8px 0 6px;
+  padding-left: 20px;
+}
+
+.ins .trail::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: rgb(var(--color-navy-20));
+  transform-origin: top center;
+}
+
+.ins .trail li {
+  position: relative;
+  display: grid;
+  gap: 1px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .trail li::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 5px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgb(var(--color-white));
+  box-shadow: inset 0 0 0 2px rgb(var(--color-navy-100));
+}
+
+.ins .trail li:last-child::before {
+  background: rgb(var(--color-navy-100));
+}
+
+.ins .trail time {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .trail b {
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+}
+
+/* CRA coverage: eight segments, one per requirement. */
+.ins .cover {
+  margin-top: 6px;
+}
+
+.ins .cover-bar {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.ins .cover-bar i {
+  height: 14px;
+  border-radius: 4px;
+  background: rgb(var(--color-navy-20));
+  transform-origin: left center;
+}
+
+.ins .cover [data-k="built"] { --k: rgb(var(--color-success-full)); }
+.ins .cover [data-k="supports"] { --k: rgb(var(--color-info-full)); }
+.ins .cover [data-k="yours"] { --k: rgb(var(--color-navy-20)); }
+
+.ins .cover-bar i {
+  background: var(--k);
+}
+
+.ins .cover-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 12px 0 4px;
+}
+
+.ins .cover-key span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.88rem;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .cover-key span::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  background: var(--k);
+}
+
+.ins .cover-key b {
+  font-weight: var(--font-weight-bold);
+  color: rgb(var(--color-navy-100));
+}
+
+/* Documents: four file chips. */
+.ins .docs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.ins .docs li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  background: rgb(var(--color-panel));
+  font-size: 0.88rem;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .docs code {
+  font-size: 0.85em;
+}
+
+/* A page with a folded corner. */
+.ins .doc-ico {
+  position: relative;
+  flex: none;
+  width: 14px;
+  height: 17px;
+  border-radius: 2px 5px 2px 2px;
+  box-shadow: inset 0 0 0 1.5px rgb(var(--color-navy-60));
+}
+
+.ins .doc-ico::after {
+  content: "";
+  position: absolute;
+  left: 3.5px;
+  right: 3.5px;
+  top: 6px;
+  height: 5px;
+  border-top: 1.5px solid rgb(var(--color-navy-40));
+  border-bottom: 1.5px solid rgb(var(--color-navy-40));
+}
+
+@media (max-width: 420px) {
+  .ins .docs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Reveal: cards rise in turn; the trail draws and steps in; the coverage
+   bar fills segment by segment. */
+.ins .bento.reveal-ready .bento-card {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.ins .bento.reveal-ready .bento-ev { transition-delay: 0.1s; }
+.ins .bento.reveal-ready .bento-cra { transition-delay: 0.2s; }
+.ins .bento.reveal-ready .bento-docs { transition-delay: 0.3s; }
+
+.ins .bento.reveal-ready .trail::before {
+  transform: scaleY(0);
+  transition: transform 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.4s;
+}
+
+.ins .bento.reveal-ready .trail li {
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition-delay: calc(0.5s + var(--i, 0) * 0.16s);
+}
+
+.ins .bento.reveal-ready .cover-bar i {
+  transform: scaleX(0);
+  transition: transform 0.35s ease-out;
+  transition-delay: calc(0.6s + var(--i, 0) * 0.08s);
+}
+
+.ins .bento.reveal-ready.is-in .bento-card,
+.ins .bento.reveal-ready.is-in .trail li {
+  opacity: 1;
+  transform: none;
+}
+
+.ins .bento.reveal-ready.is-in .trail::before,
+.ins .bento.reveal-ready.is-in .cover-bar i {
+  transform: none;
+}
+
 /* ---------- dark band: a full-width navy section ---------- */
 
 /* Edge to edge, navy, embers from assets/js/nebula.js (variant "band").
