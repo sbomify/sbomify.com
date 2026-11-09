@@ -4939,21 +4939,73 @@ button {
   line-height: 1.4;
   color: rgb(var(--color-navy-80));
   max-width: 24ch;
+}/* Under the number: the eight obligations named, grouped by who covers
+   them. Each chip's marker repeats the status: full, half or empty. */
+.ins .cov {
+  display: grid;
+  gap: 10px;
+  margin: 6px 0 4px;
 }
-.ins .bento-card .pips {
+.ins .cov > div {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 10px;
+}
+.ins .cov dt {
+  font-size: 0.78rem;
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-60));
+}
+.ins .cov dd {
   display: flex;
-  gap: 5px;
-  margin-top: 10px;
+  flex-wrap: wrap;
+  gap: 6px;
 }
-.ins .pips i {
-  width: 12px;
-  height: 12px;
+.ins .cov dd span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px 4px 7px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.ins .cov dd span::before {
+  content: "";
+  flex: none;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  box-shadow: inset 0 0 0 1.5px rgb(var(--color-navy-100));
+  box-shadow: inset 0 0 0 1.5px currentColor;
 }
-.ins .pips [data-k="full"] { background: rgb(var(--color-navy-100)); }
-.ins .pips [data-k="half"] { background: linear-gradient(90deg, rgb(var(--color-navy-100)) 50%, transparent 50%); }
-.ins .pips [data-k="none"] { box-shadow: inset 0 0 0 1.5px rgb(var(--color-navy-20)); }
+.ins .cov [data-k="full"] dd span {
+  background: rgb(var(--color-navy-100));
+  color: rgb(var(--color-white));
+}
+.ins .cov [data-k="full"] dd span::before {
+  background: currentColor;
+}
+.ins .cov [data-k="half"] dd span {
+  background: rgb(var(--color-panel));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10));
+  color: rgb(var(--color-navy-100));
+}
+.ins .cov [data-k="half"] dd span::before {
+  background: linear-gradient(90deg, currentColor 50%, transparent 50%);
+}
+.ins .cov [data-k="none"] dd span {
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-20));
+  color: rgb(var(--color-navy-60));
+}
+@media (max-width: 480px) {
+  .ins .cov > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+}
 @media (max-width: 420px) {
   .ins .bignum {
     flex-direction: column;
