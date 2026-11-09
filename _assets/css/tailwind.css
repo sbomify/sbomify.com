@@ -3479,9 +3479,9 @@
   color: rgb(var(--color-navy-100));
 }
 
-/* Documents: the four names beside a page that drafts itself. The list's
-   active item and its page follow data-cycle (assets/js/main.js); without
-   JavaScript the first page shows. */
+/* Documents: the four names beside a page preview. Hovering a name shows
+   its page (data-cycle="hover", assets/js/main.js); otherwise the first
+   page shows. */
 .ins .drafts {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
@@ -3516,11 +3516,7 @@
   box-shadow: inset 0 0 0 1.5px rgb(var(--color-navy-100));
 }
 
-.ins .drafts-list code {
-  font-size: 0.85em;
-}
-
-/* The page: white paper on a second sheet, pages crossfade in one cell. */
+/* The page: one sheet of white paper; pages crossfade in one cell. */
 .ins .paper {
   position: relative;
   display: grid;
@@ -3529,15 +3525,6 @@
   margin-inline: auto;
   width: 100%;
   max-width: 210px;
-}
-
-.ins .paper::before {
-  content: "";
-  position: absolute;
-  inset: 8px -8px -8px 8px;
-  border-radius: 8px;
-  background: rgb(var(--color-panel));
-  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10));
 }
 
 .ins .paper-page {
@@ -3549,9 +3536,9 @@
   padding: 16px 16px 14px;
   border-radius: 8px;
   background: rgb(var(--color-white));
-  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10)), 0 16px 30px -18px rgb(var(--color-navy-100) / 0.35);
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10)), 0 12px 24px -18px rgb(var(--color-navy-100) / 0.3);
   opacity: 0;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.25s ease;
 }
 
 .ins .paper-page.is-active {
@@ -3559,8 +3546,7 @@
 }
 
 .ins .paper-kicker {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.66rem;
   color: rgb(var(--color-navy-60));
   white-space: nowrap;
   overflow: hidden;
@@ -3583,56 +3569,6 @@
   border-radius: 3px;
   background: rgb(var(--color-navy-10));
   transform-origin: left center;
-}
-
-.ins .paper-page code {
-  font-size: 0.56rem;
-  line-height: 1.4;
-  color: rgb(var(--color-navy-80));
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.ins .paper-stamp {
-  align-self: flex-start;
-  margin-top: auto;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: rgb(var(--color-success-full) / 0.12);
-  box-shadow: inset 0 0 0 1px rgb(var(--color-success-full) / 0.3);
-  font-size: 0.62rem;
-  font-weight: var(--font-weight-semibold);
-  color: rgb(var(--color-success-ink));
-}
-
-.ins .drafts.is-cycling .paper-page.is-active i {
-  animation: paper-line 0.5s ease-out both;
-  animation-delay: calc(0.15s + var(--i, 0) * 0.14s);
-}
-
-.ins .drafts.is-cycling .paper-page.is-active code {
-  animation: paper-type 0.5s steps(16) both;
-  animation-delay: calc(0.15s + var(--i, 0) * 0.14s);
-}
-
-.ins .drafts.is-cycling .paper-page.is-active .paper-stamp {
-  animation: paper-stamp 0.35s ease-out 0.85s both;
-}
-
-@keyframes paper-line {
-  from { transform: scaleX(0); }
-  to { transform: none; }
-}
-
-@keyframes paper-type {
-  from { clip-path: inset(0 100% 0 0); }
-  to { clip-path: inset(0 0 0 0); }
-}
-
-@keyframes paper-stamp {
-  from { opacity: 0; transform: scale(0.85); }
-  to { opacity: 1; transform: none; }
 }
 
 @media (max-width: 420px) {

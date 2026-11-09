@@ -295,7 +295,8 @@
       var items = root.querySelectorAll('[data-cycle-item]');
       var panels = root.querySelectorAll('[data-cycle-panel]');
       if (!items.length || items.length !== panels.length) return;
-      var every = parseInt(root.getAttribute('data-cycle'), 10) || 3500;
+      // data-cycle="hover": no timer, hovering an item is the only change.
+      var every = root.getAttribute('data-cycle') === 'hover' ? 0 : (parseInt(root.getAttribute('data-cycle'), 10) || 3500);
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var current = 0, timer = null, visible = false, held = false;
 
@@ -309,7 +310,7 @@
 
       function schedule () {
         clearTimeout(timer);
-        if (reduce || held || !visible) return;
+        if (!every || reduce || held || !visible) return;
         timer = setTimeout(function () { show((current + 1) % items.length); schedule(); }, every);
       }
 
@@ -318,7 +319,6 @@
       });
       root.addEventListener('mouseleave', function () { held = false; schedule(); });
 
-      if (!reduce) root.classList.add('is-cycling');
       if ('IntersectionObserver' in window) {
         new IntersectionObserver(function (entries) {
           visible = entries[0].isIntersecting;
