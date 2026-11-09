@@ -3425,58 +3425,74 @@
   font-weight: var(--font-weight-semibold);
 }
 
-/* CRA coverage: eight segments, one per requirement. */
+/* CRA coverage: three rows, built in, supported and yours, each naming
+   its obligations, with the count on the right. Same rhythm as the
+   documents card beside it. */
 .ins .cover {
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
-.ins .cover-bar {
+.ins .cover li {
   display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-  gap: 4px;
+  grid-template-columns: 6.5rem minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid rgb(var(--color-navy-10));
+  font-size: 0.92rem;
+  line-height: 1.35;
 }
 
-.ins .cover-bar i {
-  height: 14px;
-  border-radius: 4px;
-  background: rgb(var(--color-navy-20));
-  transform-origin: left center;
+.ins .cover li:last-child {
+  border-bottom: 1px solid rgb(var(--color-navy-10));
 }
 
 .ins .cover [data-k="built"] { --k: rgb(var(--color-success-full)); }
 .ins .cover [data-k="supports"] { --k: rgb(var(--color-info-full)); }
 .ins .cover [data-k="yours"] { --k: rgb(var(--color-navy-20)); }
 
-.ins .cover-bar i {
-  background: var(--k);
-}
-
-.ins .cover-key {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 18px;
-  margin: 12px 0 4px;
-}
-
-.ins .cover-key span {
+.ins .cover-k {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  font-size: 0.88rem;
-  color: rgb(var(--color-navy-80));
-}
-
-.ins .cover-key span::before {
-  content: "";
-  width: 9px;
-  height: 9px;
-  border-radius: 3px;
-  background: var(--k);
-}
-
-.ins .cover-key b {
-  font-weight: var(--font-weight-bold);
+  gap: 8px;
+  font-weight: var(--font-weight-medium);
   color: rgb(var(--color-navy-100));
+  white-space: nowrap;
+}
+
+.ins .cover-k::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--k);
+  transform: translateY(-1px);
+}
+
+.ins .cover-items {
+  font-size: 0.85rem;
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .cover li > b {
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+  color: rgb(var(--color-navy-100));
+}
+
+@media (max-width: 480px) {
+  .ins .cover li {
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 2px;
+  }
+
+  .ins .cover-items {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    padding-left: 16px;
+  }
 }
 
 /* Documents: four rows, each name with a short note on what it is for. */
@@ -3549,7 +3565,7 @@
   }
 }
 
-/* Reveal: cards rise in turn; the coverage bar fills segment by segment. */
+/* Reveal: the cards rise in turn. */
 .ins .bento.reveal-ready .bento-card {
   opacity: 0;
   transform: translateY(12px);
@@ -3560,18 +3576,8 @@
 .ins .bento.reveal-ready .bento-cra { transition-delay: 0.2s; }
 .ins .bento.reveal-ready .bento-docs { transition-delay: 0.3s; }
 
-.ins .bento.reveal-ready .cover-bar i {
-  transform: scaleX(0);
-  transition: transform 0.35s ease-out;
-  transition-delay: calc(0.6s + var(--i, 0) * 0.08s);
-}
-
 .ins .bento.reveal-ready.is-in .bento-card {
   opacity: 1;
-  transform: none;
-}
-
-.ins .bento.reveal-ready.is-in .cover-bar i {
   transform: none;
 }
 
