@@ -1,68 +1,67 @@
-<footer class="bg-inverse relative">
-  <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-  <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-12 lg:pt-16 pb-8">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-10">
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-rule grid grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-x-8 gap-y-10 py-12 lg:py-16">
       {{/* Brand */}}
       <div class="col-span-2 md:col-span-1 flex flex-col gap-4">
-        <a href="/">
-          {{ $logo := resources.Get "images/site/logo.svg" }}
+        <a href="/" class="w-fit">
+          {{ $logo := resources.Get "images/site/logo-navy.svg" }}
           {{ if $logo }}
           {{ $logo = $logo | fingerprint }}
-          <img class="h-8 w-auto" src="{{ $logo.RelPermalink }}" alt="sbomify logo" width="128" height="24" />
+          <img class="h-6 w-auto" src="{{ $logo.RelPermalink }}" alt="sbomify logo" width="128" height="24" />
           {{ else }}
-          <img class="h-8 w-auto" src="/assets/images/site/logo.svg" alt="sbomify logo" width="128" height="24" />
+          <img class="h-6 w-auto" src="/assets/images/site/logo-navy.svg" alt="sbomify logo" width="128" height="24" />
           {{ end }}
         </a>
-        <p class="text-on-inverse-muted text-sm max-w-xs">
+        <p class="text-ink-muted text-[0.9375rem] max-w-xs">
           From SBOM to security disclosure. Product security for every release you support, built for the EU Cyber Resilience Act.
         </p>
       </div>
 
       {{/* Link columns */}}
-      <nav class="col-span-2 md:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-10 text-sm text-on-inverse-muted" aria-label="Footer navigation">
+      <nav class="contents" aria-label="Footer navigation">
         <div>
-          <h2 class="eyebrow !text-on-inverse-subtle mb-4">Product</h2>
-          <ul class="space-y-3">
-            <li><a href="/cra/" class="hover:text-white transition-colors">How sbomify helps with the CRA</a></li>
-            <li><a href="/zero-to-hero/" class="hover:text-white transition-colors">Zero to Hero</a></li>
-            <li><a href="/features/trust-center/" class="hover:text-white transition-colors">Trust Center</a></li>
-            <li><a href="/features/integrations/" class="hover:text-white transition-colors">Integrations</a></li>
-            <li><a href="/pricing/" class="hover:text-white transition-colors">Pricing</a></li>
-            <li><a href="{{ site.Params.demoURL }}" class="hover:text-white transition-colors" data-cta-location="footer" data-cta-label="Book a demo">Book a demo</a></li>
-            <li><a href="{{ site.Params.signinURL }}" class="hover:text-white transition-colors" data-cta-location="footer" data-cta-label="Sign in" data-cta-intent="signin">Sign in</a></li>
+          <h2 class="eyebrow mb-4">Product</h2>
+          <ul class="space-y-2.5 text-[0.9375rem]">
+            <li><a href="/cra/">How sbomify helps with the CRA</a></li>
+            <li><a href="/zero-to-hero/">Zero to Hero</a></li>
+            <li><a href="/features/trust-center/">Trust Center</a></li>
+            <li><a href="/features/integrations/">Integrations</a></li>
+            <li><a href="/pricing/">Pricing</a></li>
+            <li><a href="{{ site.Params.demoURL }}" data-cta-location="footer" data-cta-label="Book a demo">Book a demo</a></li>
+            <li><a href="{{ site.Params.signinURL }}" data-cta-location="footer" data-cta-label="Sign in" data-cta-intent="signin">Sign in</a></li>
           </ul>
         </div>
         <div>
-          <h2 class="eyebrow !text-on-inverse-subtle mb-4">Resources</h2>
-          <ul class="space-y-3">
-            <li><a href="/blog/" class="hover:text-white transition-colors">Blog</a></li>
-            <li><a href="/guides/" class="hover:text-white transition-colors">Guides</a></li>
-            <li><a href="/compliance/" class="hover:text-white transition-colors">Compliance</a></li>
-            <li><a href="/what-is-sbom/" class="hover:text-white transition-colors">What is an SBOM?</a></li>
-            <li><a href="/faq/" class="hover:text-white transition-colors">FAQ</a></li>
-            <li><a href="/resources/" class="hover:text-white transition-colors">Resources</a></li>
+          <h2 class="eyebrow mb-4">Resources</h2>
+          <ul class="space-y-2.5 text-[0.9375rem]">
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/compliance/">Compliance</a></li>
+            <li><a href="/what-is-sbom/">What is an SBOM?</a></li>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="/resources/">Resources</a></li>
           </ul>
         </div>
         <div>
-          <h2 class="eyebrow !text-on-inverse-subtle mb-4">Company</h2>
-          <ul class="space-y-3">
-            <li><a href="/about/" class="hover:text-white transition-colors">About</a></li>
-            <li><a href="/case-studies/" class="hover:text-white transition-colors">Case Studies</a></li>
-            <li><a href="https://trust.sbomify.com/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Public Trust Center</a></li>
-            <li><a href="{{ site.Data.main.social.slack }}"{{ partial "link-attrs.html" (dict "url" site.Data.main.social.slack "rel" "noopener noreferrer" "target" "_blank") }} class="hover:text-white transition-colors">Slack community</a></li>
+          <h2 class="eyebrow mb-4">Company</h2>
+          <ul class="space-y-2.5 text-[0.9375rem]">
+            <li><a href="/about/">About</a></li>
+            <li><a href="/case-studies/">Case Studies</a></li>
+            <li><a href="https://trust.sbomify.com/" target="_blank" rel="noopener noreferrer">Public Trust Center</a></li>
+            <li><a href="{{ site.Data.main.social.slack }}"{{ partial "link-attrs.html" (dict "url" site.Data.main.social.slack "rel" "noopener noreferrer" "target" "_blank") }}>Slack community</a></li>
           </ul>
         </div>
       </nav>
     </div>
 
     {{/* Legal and social */}}
-    <div class="mt-12 pt-6 border-t border-white/10 flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-4">
-      <div class="text-xs text-on-inverse-subtle flex flex-wrap items-center gap-x-2 gap-y-1">
+    <div class="footer-rule footer-bottom py-5 flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-4">
+      <div class="text-[0.8125rem] flex flex-wrap items-center gap-x-2 gap-y-1">
         <span>&copy; 2024 - {{ now.Format "2006" }} sbomify ltd.</span>
         <span>&bull;</span>
-        <a href="/privacy/" class="hover:text-white transition-colors">Privacy</a>
+        <a href="/privacy/">Privacy</a>
         <span>&bull;</span>
-        <a href="/terms/" class="hover:text-white transition-colors">Terms</a>
+        <a href="/terms/">Terms</a>
         {{/* Hidden until layouts/partials/cookie-consent.html reveals it, so
              it is not a dead control where there is no stored decision to
              change. The bullet separator shares the wrapper so the two are
@@ -71,42 +70,33 @@
              18px, padding) -- this one has to read as a footer link. */}}
         <span id="cookie-settings-wrapper" class="hidden inline-flex gap-2">
           <span>&bull;</span>
-          <button type="button" id="cookie-settings" class="bg-transparent p-0 rounded-none text-xs font-normal text-inherit hover:text-white hover:opacity-100 transition-colors">Cookie settings</button>
+          <button type="button" id="cookie-settings" class="bg-transparent hover:bg-transparent p-0 rounded-none text-[0.8125rem] font-normal">Cookie settings</button>
         </span>
         <span>&bull;</span>
-        <a href="https://studio.viktopia.io"{{ partial "link-attrs.html" "https://studio.viktopia.io" }} class="hover:text-white transition-colors">A Viktopia Studio project</a>
+        <a href="https://studio.viktopia.io"{{ partial "link-attrs.html" "https://studio.viktopia.io" }}>A Viktopia Studio project</a>
       </div>
-      <div class="flex gap-1">
-        <a href="{{ site.Data.main.social.github }}"{{ partial "link-attrs.html" (dict "url" site.Data.main.social.github "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center justify-center w-10 h-10 rounded-full opacity-80 hover:opacity-100 hover:bg-white/10 transition-[opacity,background-color]">
-          {{ $ghIcon := resources.Get "images/site/github-white.svg" }}
-          {{ if $ghIcon }}
-          {{ $ghIcon = $ghIcon | fingerprint }}
-          <img src="{{ $ghIcon.RelPermalink }}" alt="" aria-hidden="true" class="h-5 w-5" width="20" height="20" loading="lazy" />
-          {{ else }}
-          <img src="/assets/images/site/github-white.svg" alt="" aria-hidden="true" class="h-5 w-5" width="20" height="20" loading="lazy" />
-          {{ end }}
-          <span class="sr-only">sbomify on GitHub</span>
-        </a>
-        <a href="{{ site.Data.main.social.linkedIn }}"{{ partial "link-attrs.html" (dict "url" site.Data.main.social.linkedIn "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center justify-center w-10 h-10 rounded-full opacity-80 hover:opacity-100 hover:bg-white/10 transition-[opacity,background-color]">
-          {{ $liIcon := resources.Get "images/site/linkedin-white.svg" }}
-          {{ if $liIcon }}
-          {{ $liIcon = $liIcon | fingerprint }}
-          <img src="{{ $liIcon.RelPermalink }}" alt="" aria-hidden="true" class="h-5 w-5" width="20" height="20" loading="lazy" />
-          {{ else }}
-          <img src="/assets/images/site/linkedin-white.svg" alt="" aria-hidden="true" class="h-5 w-5" width="20" height="20" loading="lazy" />
-          {{ end }}
-          <span class="sr-only">sbomify on LinkedIn</span>
-        </a>
-        <a href="{{ site.Data.main.social.slack }}"{{ partial "link-attrs.html" (dict "url" site.Data.main.social.slack "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center justify-center w-10 h-10 rounded-full opacity-80 hover:opacity-100 hover:bg-white/10 transition-[opacity,background-color]">
-          {{ $slIcon := resources.Get "images/site/slack-white.svg" }}
-          {{ if $slIcon }}
-          {{ $slIcon = $slIcon | fingerprint }}
-          <img src="{{ $slIcon.RelPermalink }}" alt="" aria-hidden="true" class="h-5 w-5" width="20" height="20" loading="lazy" />
-          {{ else }}
-          <img src="/assets/images/site/slack-white.svg" alt="" aria-hidden="true" class="h-5 w-5" width="20" height="20" loading="lazy" />
-          {{ end }}
-          <span class="sr-only">Join the sbomify Slack community</span>
-        </a>
+      <div class="flex gap-1 -ml-2.5 md:ml-0 md:-mr-2.5">
+        {{ range slice
+          (dict "url" site.Data.main.social.github "icon" "github" "label" "sbomify on GitHub")
+          (dict "url" site.Data.main.social.linkedIn "icon" "linkedin" "label" "sbomify on LinkedIn")
+          (dict "url" site.Data.main.social.slack "icon" "slack" "label" "Join the sbomify Slack community") }}
+          <a href="{{ .url }}"{{ partial "link-attrs.html" (dict "url" .url "rel" "noopener noreferrer" "target" "_blank") }} class="social-icon">
+            {{ partial "icon.html" (dict "name" .icon "class" "w-[18px] h-[18px]") }}
+            <span class="sr-only">{{ .label }}</span>
+          </a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+
+  {{/* The wordmark, full width along the bottom edge. Decorative: the logo
+       above already names the brand. */}}
+  {{ $mark := resources.Get "images/site/wordmark-navy.svg" | fingerprint }}
+  <div class="footer-stage" aria-hidden="true">
+    <div class="wrap">
+      <div class="footer-mark">
+        <div class="footer-mark-fill" style="--mark: url('{{ $mark.RelPermalink }}')"></div>
+        {{ $mark.Content | replaceRE `<\?xml[^>]*>` "" | replaceRE `<svg ` `<svg focusable="false" ` | safeHTML }}
       </div>
     </div>
   </div>

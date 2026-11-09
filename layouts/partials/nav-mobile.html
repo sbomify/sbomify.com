@@ -1,46 +1,24 @@
-<div class="relative overflow-hidden lg:hidden">
-  <button class="btn-icon open-menu" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
-    {{ $hamburger := resources.Get "images/site/hamburger-menu.svg" }}
-    {{ if $hamburger }}
-    {{ $hamburger = $hamburger | fingerprint }}
-    <img src="{{ $hamburger.RelPermalink }}" alt="" aria-hidden="true" width="28" height="28" />
-    {{ else }}
-    <img src="/assets/images/site/hamburger-menu.svg" alt="" aria-hidden="true" width="28" height="28" />
-    {{ end }}
-  </button>
-  <div id="mobile-menu" class="mobile-menu hidden fixed inset-0 w-full h-full bg-inverse z-[60] px-6 overflow-y-auto" role="dialog" aria-modal="true" aria-label="Navigation menu">
-    <div class="text-right py-[18px] mb-10">
-      <button class="btn-icon close-menu" aria-label="Close navigation menu">
-        {{ $close := resources.Get "images/site/close.svg" }}
-        {{ if $close }}
-        {{ $close = $close | fingerprint }}
-        <img src="{{ $close.RelPermalink }}" alt="" aria-hidden="true" width="33" height="33" />
-        {{ else }}
-        <img src="/assets/images/site/close.svg" alt="" aria-hidden="true" width="33" height="33" />
-        {{ end }}
-      </button>
-    </div>
+{{/* Phone menu: a white sheet under the header bar. The toggle's bars fold
+     into a cross while it is open (assets/js/main.js). */}}
+<button type="button" class="menu-toggle open-menu lg:hidden" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+  <span class="menu-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+</button>
+<div id="mobile-menu" class="mobile-menu hidden lg:hidden" aria-label="Navigation menu">
+  <div class="wrap pt-2 pb-10">
     <nav aria-label="Mobile navigation">
-      <div class="mb-6">
-        <a href="/" class="text-white uppercase leading-[27px] text-lg font-semibold tracking-eyebrow hover:text-accent transition-colors">
-          Home
-        </a>
-      </div>
-      {{ $page := . }}
-      {{ range site.Data.main.nav }}
-        {{ $active := or (hasPrefix $page.RelPermalink .link) (and (eq .link "/blog/") (eq $page.Section "posts")) }}
-        <div class="mb-6">
-          <a href="{{ .link }}"{{ if $active }} aria-current="page"{{ end }} class="uppercase leading-[27px] text-lg font-semibold tracking-eyebrow hover:text-accent transition-colors {{ if $active }}text-accent{{ else }}text-white{{ end }}">
-            {{ .name }}
-          </a>
-        </div>
-      {{ end }}
+      <ul class="mobile-primary">
+        <li><a href="/">Home</a></li>
+        {{ $page := . }}
+        {{ range site.Data.main.nav }}
+          {{ $active := or (hasPrefix $page.RelPermalink .link) (and (eq .link "/blog/") (eq $page.Section "posts")) }}
+          <li><a href="{{ .link }}"{{ if $active }} aria-current="page"{{ end }}>{{ .name }}</a></li>
+        {{ end }}
+      </ul>
     </nav>
-    <hr class="mt-4 mb-10 bg-white/20 h-px border-0" />
-    <div class="flex flex-col items-stretch gap-4 max-w-sm mx-auto">
-      <a href="{{ site.Params.signupURL }}" class="btn-primary justify-center" data-cta-location="mobile_menu" data-cta-label="Start free">Start free</a>
-      <a href="{{ site.Params.demoURL }}" class="justify-center inline-flex items-center px-6 py-3 rounded-full border-2 border-white/40 hover:border-white text-white font-semibold transition-colors" data-cta-location="mobile_menu" data-cta-label="Book a demo">Book a demo</a>
-      <a href="{{ site.Params.signinURL }}" class="text-center text-on-inverse-muted hover:text-white" data-cta-location="mobile_menu" data-cta-label="Sign in" data-cta-intent="signin">Sign in</a>
+    <div class="mt-8 flex flex-col items-stretch gap-3">
+      <a href="{{ site.Params.signupURL }}" class="btn-primary btn-lg" data-cta-location="mobile_menu" data-cta-label="Start free">Start free</a>
+      <a href="{{ site.Params.demoURL }}" class="btn-secondary btn-lg" data-cta-location="mobile_menu" data-cta-label="Book a demo">Book a demo</a>
+      <a href="{{ site.Params.signinURL }}" class="mt-2 text-center font-medium text-ink-muted hover:text-ink" data-cta-location="mobile_menu" data-cta-label="Sign in" data-cta-intent="signin">Sign in</a>
     </div>
   </div>
 </div>

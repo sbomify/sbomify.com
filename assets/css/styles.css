@@ -104,12 +104,12 @@
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
 
-  --leading-display: 1.05;
+  --leading-display: 1.02;
   --leading-heading: 1.2;
   --leading-body: 1.6;
 
   --tracking-display: -0.03em;   /* display headings: tight */
-  --tracking-heading: -0.015em;  /* section headings: slightly tight */
+  --tracking-heading: -0.02em;   /* section headings: slightly tight */
   --tracking-eyebrow: 0.12em;    /* eyebrows, captions, meta: wide, caps */
 
   /* ===== Shape and depth ===== */
@@ -542,9 +542,17 @@ video {
 *, ::before, ::after, ::backdrop {
     --tw-ring-color: rgb(var(--color-focus) / 0.5);
   }
+:root {
+    --header-h: 4.5rem;
+  }
+@media (max-width: 1023px) {
+    :root {
+      --header-h: 4rem;
+    }
+  }
 html {
-    /* Offset anchors so they clear the sticky pill header */
-    scroll-padding-top: 6rem;
+    /* Offset anchors so they clear the sticky header */
+    scroll-padding-top: calc(var(--header-h) + 1.5rem);
     /* Hold the scrollbar's space on short pages too, so the header and
        content do not shift sideways between pages (as in the app). */
     scrollbar-gutter: stable;
@@ -596,12 +604,12 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     font-size: 4.25rem; /* 68px */
     font-weight: var(--font-weight-extrabold);
-    line-height: var(--leading-display);
-    letter-spacing: var(--tracking-display);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
   }
 h2 {
     font-size: 2rem; /* 32px */
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-bold);
     line-height: var(--leading-heading);
     letter-spacing: var(--tracking-heading);
   }
@@ -673,176 +681,311 @@ button {
   .container {
     max-width: 1536px;
   }
-}/* Buttons. Orange is the one call to action; secondary is navy outline,
-     and type on orange is always white (Orange 700 fill, 5.2:1). *//* Same robustness rules as the app's buttons: a 44px touch target, a label
-     that never wraps and never gives up width in a flex row, and a press
-     state. */
+}/* ---------- layout ---------- *//* One content width for the whole site (header, sections, footer), with a
+     gutter that grows with the window. Reading pages narrow it with .read. */
+.wrap {
+    width: 100%;
+    max-width: 72rem; /* 1152px */
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 2.5rem);
+  }
+.read {
+    max-width: 47.5rem; /* 760px */
+  }/* Sections stack with generous air and no boxes; a hairline marks a change
+     of subject where white meets white. */
+.section {
+    padding-block: clamp(3rem, 7vw, 5.5rem);
+  }
+.section-rule {
+    border-top: 1px solid rgb(var(--color-line));
+  }/* A heading row: title left, a quiet link right, baseline aligned. */
+.section-title {
+    font-size: clamp(1.875rem, 3.6vw, 2.75rem);
+    font-weight: var(--font-weight-extrabold);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+.lede {
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-ink-muted) / var(--tw-text-opacity, 1));
+    font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+    line-height: 1.6;
+}/* ---------- buttons ---------- *//* A solid face, a faint top sheen, a light edge above and a shade edge
+     below; no drop shadow. Hover lays a thin tint over the face (::after),
+     so every variant reacts the same way. Variants only swap the variables.
+       .btn-primary    Orange 700: the page's one call to action
+       .btn-navy       navy: the main action in a section
+       .btn-secondary  mist tile: secondary actions
+     On navy (.bg-inverse, .on-dark) navy turns white and mist turns to glass. */
 .btn-primary {
-  display: inline-flex;
-  min-height: 2.75rem;
-  flex-shrink: 0;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  white-space: nowrap;
-  border-radius: 9999px;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  font-weight: 600;
-  transition-property: background-color,border-color,color,box-shadow,transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
-}
+    --btn-face: rgb(var(--color-navy-100));
+    --btn-ink: rgb(var(--color-white));
+    --btn-sheen: rgb(var(--color-white) / 0.06);
+    --btn-edge-hi: rgb(var(--color-white) / 0.16);
+    --btn-edge-lo: rgb(0 0 0 / 0.3);
+    --btn-tint: rgb(var(--color-white) / 0.08);
+    --btn-press: rgb(0 0 0 / 0.1);
+
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem; /* 44px touch target */
+    padding: 0 1.125rem;
+    border: 0;
+    border-radius: 0.625rem;
+    flex-shrink: 0;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+    color: var(--btn-ink);
+    background: linear-gradient(180deg, var(--btn-sheen), transparent 60%), var(--btn-face);
+    box-shadow: inset 0 1px 0 var(--btn-edge-hi), inset 0 -1px 0 var(--btn-edge-lo);
+    transition: box-shadow 0.15s ease, color 0.15s ease;
+  }
+.btn-primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--btn-tint);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+.btn-primary:hover::after {
+    opacity: 1;
+  }
+.btn-primary:active::after {
+    opacity: 1;
+    background: var(--btn-press);
+  }
 .btn-primary:active {
-  --tw-scale-x: 0.98;
-  --tw-scale-y: 0.98;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
+    box-shadow: inset 0 1px 0 var(--btn-edge-lo);
+  }
+.btn-primary svg {
+    width: 1rem;
+    height: 1rem;
+    flex: none;
+  }
+@media (prefers-reduced-motion: reduce) {
+    .btn-primary,.btn-primary::after {
+      transition: none;
+    }
+  }
 .btn-primary {
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-accent-strong) / var(--tw-bg-opacity, 1));
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-on-accent) / var(--tw-text-opacity, 1));
-}
-.btn-primary:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-accent-hover) / var(--tw-bg-opacity, 1));
-}/* Navy fill: section-level actions, so orange stays the page's one moment */
+    --btn-face: rgb(var(--color-orange-700));
+    --btn-sheen: rgb(var(--color-white) / 0.08);
+    --btn-edge-hi: rgb(var(--color-white) / 0.24);
+    --btn-edge-lo: rgb(90 25 0 / 0.35);
+    --btn-tint: rgb(110 30 0 / 0.14);
+    --btn-press: rgb(90 25 0 / 0.24);
+  }
 .btn-navy {
-  display: inline-flex;
-  min-height: 2.75rem;
-  flex-shrink: 0;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  white-space: nowrap;
-  border-radius: 9999px;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  font-weight: 600;
-  transition-property: background-color,border-color,color,box-shadow,transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
-}
+    --btn-face: rgb(var(--color-navy-100));
+    --btn-ink: rgb(var(--color-white));
+    --btn-sheen: rgb(var(--color-white) / 0.06);
+    --btn-edge-hi: rgb(var(--color-white) / 0.16);
+    --btn-edge-lo: rgb(0 0 0 / 0.3);
+    --btn-tint: rgb(var(--color-white) / 0.08);
+    --btn-press: rgb(0 0 0 / 0.1);
+
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem; /* 44px touch target */
+    padding: 0 1.125rem;
+    border: 0;
+    border-radius: 0.625rem;
+    flex-shrink: 0;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+    color: var(--btn-ink);
+    background: linear-gradient(180deg, var(--btn-sheen), transparent 60%), var(--btn-face);
+    box-shadow: inset 0 1px 0 var(--btn-edge-hi), inset 0 -1px 0 var(--btn-edge-lo);
+    transition: box-shadow 0.15s ease, color 0.15s ease;
+  }
+.btn-navy::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--btn-tint);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+.btn-navy:hover::after {
+    opacity: 1;
+  }
+.btn-navy:active::after {
+    opacity: 1;
+    background: var(--btn-press);
+  }
 .btn-navy:active {
-  --tw-scale-x: 0.98;
-  --tw-scale-y: 0.98;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-.btn-navy {
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-ink) / var(--tw-bg-opacity, 1));
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-on-inverse) / var(--tw-text-opacity, 1));
-}
-.btn-navy:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-navy-80) / var(--tw-bg-opacity, 1));
-}
+    box-shadow: inset 0 1px 0 var(--btn-edge-lo);
+  }
+.btn-navy svg {
+    width: 1rem;
+    height: 1rem;
+    flex: none;
+  }
+@media (prefers-reduced-motion: reduce) {
+    .btn-navy,.btn-navy::after {
+      transition: none;
+    }
+  }
 .btn-secondary {
-  display: inline-flex;
-  min-height: 2.75rem;
-  flex-shrink: 0;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  white-space: nowrap;
-  border-radius: 9999px;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  font-weight: 600;
-  transition-property: background-color,border-color,color,box-shadow,transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
-}
+    --btn-face: rgb(var(--color-navy-100));
+    --btn-ink: rgb(var(--color-white));
+    --btn-sheen: rgb(var(--color-white) / 0.06);
+    --btn-edge-hi: rgb(var(--color-white) / 0.16);
+    --btn-edge-lo: rgb(0 0 0 / 0.3);
+    --btn-tint: rgb(var(--color-white) / 0.08);
+    --btn-press: rgb(0 0 0 / 0.1);
+
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem; /* 44px touch target */
+    padding: 0 1.125rem;
+    border: 0;
+    border-radius: 0.625rem;
+    flex-shrink: 0;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+    color: var(--btn-ink);
+    background: linear-gradient(180deg, var(--btn-sheen), transparent 60%), var(--btn-face);
+    box-shadow: inset 0 1px 0 var(--btn-edge-hi), inset 0 -1px 0 var(--btn-edge-lo);
+    transition: box-shadow 0.15s ease, color 0.15s ease;
+  }
+.btn-secondary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--btn-tint);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+.btn-secondary:hover::after {
+    opacity: 1;
+  }
+.btn-secondary:active::after {
+    opacity: 1;
+    background: var(--btn-press);
+  }
 .btn-secondary:active {
-  --tw-scale-x: 0.98;
-  --tw-scale-y: 0.98;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
+    box-shadow: inset 0 1px 0 var(--btn-edge-lo);
+  }
+.btn-secondary svg {
+    width: 1rem;
+    height: 1rem;
+    flex: none;
+  }
+@media (prefers-reduced-motion: reduce) {
+    .btn-secondary,.btn-secondary::after {
+      transition: none;
+    }
+  }
 .btn-secondary {
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(var(--color-line-strong) / var(--tw-border-opacity, 1));
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-canvas) / var(--tw-bg-opacity, 1));
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-ink) / var(--tw-text-opacity, 1));
-}
-.btn-secondary:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(var(--color-ink) / var(--tw-border-opacity, 1));
-}/* For navy surfaces */
+    --btn-face: rgb(var(--color-navy-5));
+    --btn-ink: rgb(var(--color-navy-100));
+    --btn-sheen: rgb(var(--color-white) / 0.6);
+    --btn-edge-hi: rgb(var(--color-white));
+    --btn-edge-lo: rgb(var(--color-navy-100) / 0.16);
+    --btn-tint: rgb(var(--color-navy-100) / 0.05);
+    --btn-press: rgb(var(--color-navy-100) / 0.09);
+  }
+:is(.bg-inverse, .bg-inverse-raised, .on-dark) .btn-navy {
+    --btn-face: rgb(var(--color-white));
+    --btn-ink: rgb(var(--color-navy-100));
+    --btn-sheen: transparent;
+    --btn-edge-hi: rgb(var(--color-white));
+    --btn-edge-lo: rgb(var(--color-navy-100) / 0.22);
+    --btn-tint: rgb(var(--color-navy-100) / 0.05);
+    --btn-press: rgb(var(--color-navy-100) / 0.1);
+  }
+:is(.bg-inverse, .bg-inverse-raised, .on-dark) .btn-secondary {
+    --btn-face: rgb(var(--color-white) / 0.09);
+    --btn-ink: rgb(var(--color-white));
+    --btn-sheen: rgb(var(--color-white) / 0.03);
+    --btn-edge-hi: rgb(var(--color-white) / 0.16);
+    --btn-edge-lo: rgb(0 0 0 / 0.35);
+    --btn-tint: rgb(var(--color-white) / 0.07);
+    --btn-press: rgb(0 0 0 / 0.12);
+  }
 .btn-md {
-  min-height: 2.5rem;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-@media not all and (min-width: 640px) {
-  .btn-md {
-    min-height: 2.75rem;
+    min-height: 2.5rem;
+    padding: 0 1rem;
+    font-size: 0.875rem;
+    border-radius: 0.5625rem;
   }
-}
+@media (max-width: 639px) {
+    .btn-md {
+      min-height: 2.75rem;
+    }
+  }
 .btn-lg {
-  min-height: 3rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-.btn-icon {
-    border: none;
-    background: none;
-    padding: 0;
-  }
-.btn-icon:hover {
-    background: none;
-  }/* Inline text link: navy type, orange underline, the accent stays small. */
+    min-height: 3rem;
+    padding: 0 1.375rem;
+    font-size: 1rem;
+    border-radius: 0.75rem;
+  }/* Inline text link: navy type, a quiet underline that firms up on hover. */
 .link {
   --tw-text-opacity: 1;
   color: rgb(var(--color-ink) / var(--tw-text-opacity, 1));
   text-decoration-line: underline;
-  text-decoration-color: rgb(var(--color-accent) / 1);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
+  text-decoration-color: rgb(var(--color-navy-40) / 1);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
 .link:hover {
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-accent-strong) / var(--tw-text-opacity, 1));
+  text-decoration-color: currentColor;
 }
 .bg-inverse .link,
-  .bg-inverse-raised .link {
+  .bg-inverse-raised .link,
+  .on-dark .link {
   --tw-text-opacity: 1;
   color: rgb(var(--color-on-inverse) / var(--tw-text-opacity, 1));
+  text-decoration-color: rgb(var(--color-white) / 0.4);
 }
 .bg-inverse .link:hover,
-  .bg-inverse-raised .link:hover {
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-accent) / var(--tw-text-opacity, 1));
+  .bg-inverse-raised .link:hover,
+  .on-dark .link:hover {
+  text-decoration-color: currentColor;
 }/* Eyebrow, caption and meta: 600, wide track, caps. */
 .eyebrow {
   font-size: 0.75rem;
@@ -857,21 +1000,16 @@ button {
   .toc .eyebrow {
   --tw-text-opacity: 1;
   color: rgb(var(--color-ink-muted) / var(--tw-text-opacity, 1));
-}/* Eyebrow chip: the section label above a heading, with the orange dot
-     the guide uses in its own running footer. */
+}/* Section label above a heading: plain caps with a small orange marker,
+     no pill. */
 .eyebrow-chip {
-    /* Navy 55 drops to 4.2:1 on the Mist Soft fill, so the chip keeps Navy 80. */
-    font-size: 0.75rem;
-    line-height: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-eyebrow);
-    --tw-text-opacity: 1;
-    color: rgb(var(--color-ink-subtle) / var(--tw-text-opacity, 1));
-  }
-.eyebrow-chip .eyebrow {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
   --tw-text-opacity: 1;
-  color: rgb(var(--color-ink-muted) / var(--tw-text-opacity, 1));
+  color: rgb(var(--color-ink-subtle) / var(--tw-text-opacity, 1));
 }
 .bg-surface .eyebrow-chip,
   .toc .eyebrow-chip {
@@ -883,44 +1021,42 @@ button {
   width: -moz-fit-content;
   width: fit-content;
   align-items: center;
-  gap: 0.5rem;
-  border-radius: 9999px;
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(var(--color-line) / var(--tw-border-opacity, 1));
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-surface) / var(--tw-bg-opacity, 1));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.375rem;
-  padding-bottom: 0.375rem;
+  gap: 0.625rem;
   --tw-text-opacity: 1;
   color: rgb(var(--color-ink-muted) / var(--tw-text-opacity, 1));
 }
 .eyebrow-chip::before {
     content: "";
-    height: 0.375rem;
-    width: 0.375rem;
+    height: 0.5rem;
+    width: 0.5rem;
     border-radius: 9999px;
     --tw-bg-opacity: 1;
     background-color: rgb(var(--color-accent) / var(--tw-bg-opacity, 1));
-  }/* Neutral tag / badge. Orange is a brand accent, not a status, so it is
+  }
+.bg-inverse .eyebrow-chip,
+  .on-dark .eyebrow-chip {
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-on-inverse-muted) / var(--tw-text-opacity, 1));
+}/* Neutral tag / badge. Orange is a brand accent, not a status, so it is
      kept out of badges; status badges use the semantic palette. */
 .tag {
   display: inline-block;
-  border-radius: 9999px;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(var(--color-line) / var(--tw-border-opacity, 1));
   --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-surface-strong) / var(--tw-bg-opacity, 1));
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  background-color: rgb(var(--color-navy-5) / var(--tw-bg-opacity, 1));
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 500;
   --tw-text-opacity: 1;
-  color: rgb(var(--color-ink) / var(--tw-text-opacity, 1));
-}/* Cards */
+  color: rgb(var(--color-ink-muted) / var(--tw-text-opacity, 1));
+}/* Cards: flat. A hairline and a soft corner, no shadow. */
 .card {
   border-radius: 1rem;
   border-width: 1px;
@@ -928,17 +1064,6 @@ button {
   border-color: rgb(var(--color-line) / var(--tw-border-opacity, 1));
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-canvas) / var(--tw-bg-opacity, 1));
-  --tw-shadow: var(--shadow-card);
-  --tw-shadow-colored: var(--shadow-card);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.feature-card .link {
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-on-inverse) / var(--tw-text-opacity, 1));
-}
-.feature-card .link:hover {
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-accent) / var(--tw-text-opacity, 1));
 }
 .feature-card {
   display: flex;
@@ -946,12 +1071,11 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   border-width: 1px;
   border-style: solid;
   border-color: rgb(var(--color-white) / 0.1);
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-inverse-raised) / var(--tw-bg-opacity, 1));
+  background-color: rgb(var(--color-white) / 0.05);
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 1rem;
@@ -966,28 +1090,427 @@ button {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
   }
-}/* Page hero: white canvas with the soft Signal Orange haze from the
-     guide's cover. Static, so it costs no compositor layer. */
+}/* Hairline rows: lists of things read as rows, not boxes. */
+.rows {
+    border-top: 1px solid rgb(var(--color-line));
+  }
+.rows > * {
+    border-bottom: 1px solid rgb(var(--color-line));
+  }
+.bg-inverse .rows,
+  .on-dark .rows,
+  .bg-inverse .rows > *,
+  .on-dark .rows > * {
+    border-color: rgb(var(--color-white) / 0.12);
+  }/* A step number in a row: small, mono, muted. */
+.step-no {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-ink-subtle) / var(--tw-text-opacity, 1));
+}/* ---------- nebula ---------- *//* Soft Signal Orange cloud from the brand guide's cover, drawn with
+     gradients only: no image request, no script. Two layers drift very slowly
+     (transform only, so it stays on the compositor) and stop for reduced
+     motion. Put it on a positioned container; content above it needs
+     position: relative (the .hero rule below does this). */
+:is(.nebula, .hero, .cta-band, .panel-dark) {
+    position: relative;
+    isolation: isolate;
+  }
+:is(.nebula, .hero, .cta-band, .panel-dark)::before,
+  :is(.nebula, .hero, .cta-band, .panel-dark)::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+  }
+:is(.nebula, .hero, .cta-band, .panel-dark)::before {
+    inset: -20% -15% auto auto;
+    width: min(70rem, 110vw);
+    aspect-ratio: 1.3;
+    background:
+      radial-gradient(38% 30% at 62% 34%, rgb(var(--color-orange-500) / 0.42), transparent 70%),
+      radial-gradient(30% 26% at 40% 22%, rgb(var(--color-orange-300) / 0.5), transparent 72%),
+      radial-gradient(26% 34% at 78% 58%, rgb(var(--color-orange-100) / 0.55), transparent 70%),
+      radial-gradient(44% 40% at 55% 46%, rgb(var(--color-orange-50) / 0.9), transparent 75%);
+    animation: nebula-drift 38s ease-in-out infinite alternate;
+  }
+:is(.nebula, .hero, .cta-band, .panel-dark)::after {
+    inset: -10% -25% auto auto;
+    width: min(56rem, 90vw);
+    aspect-ratio: 1.1;
+    background:
+      radial-gradient(30% 24% at 30% 60%, rgb(var(--color-orange-300) / 0.22), transparent 70%),
+      radial-gradient(22% 30% at 70% 30%, rgb(var(--color-orange-500) / 0.16), transparent 72%);
+    animation: nebula-drift-2 52s ease-in-out infinite alternate;
+  }/* On navy: ember glows low on the right. */
+:is(.nebula-navy, .cta-band, .panel-dark)::before {
+    inset: auto -20% -60% auto;
+    width: min(60rem, 120vw);
+    aspect-ratio: 1.4;
+    background:
+      radial-gradient(34% 28% at 62% 40%, rgb(var(--color-orange-500) / 0.42), transparent 70%),
+      radial-gradient(26% 22% at 40% 30%, rgb(var(--color-orange-700) / 0.45), transparent 72%),
+      radial-gradient(40% 36% at 55% 50%, rgb(var(--color-orange-300) / 0.14), transparent 75%);
+  }
+:is(.nebula-navy, .cta-band, .panel-dark)::after {
+    inset: -50% auto auto -25%;
+    width: min(44rem, 90vw);
+    aspect-ratio: 1.2;
+    background: radial-gradient(40% 34% at 50% 50%, rgb(var(--color-white) / 0.06), transparent 72%);
+  }
+@keyframes nebula-drift {
+    from { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    to { transform: translate3d(-4%, 3%, 0) rotate(-6deg) scale(1.06); }
+  }
+@keyframes nebula-drift-2 {
+    from { transform: translate3d(0, 0, 0) rotate(0deg); }
+    to { transform: translate3d(5%, -3%, 0) rotate(8deg); }
+  }
+@media (prefers-reduced-motion: reduce) {
+    :is(.nebula, .hero, .cta-band, .panel-dark)::before,
+    :is(.nebula, .hero, .cta-band, .panel-dark)::after {
+      animation: none;
+    }
+  }/* Page hero: white canvas with the nebula in the top right corner. It
+     starts under the transparent header, so the cloud runs up behind it. */
 .hero {
   position: relative;
   overflow: hidden;
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-canvas) / var(--tw-bg-opacity, 1));
+    margin-top: calc(-1 * var(--header-h));
+    padding-top: var(--header-h);
 }
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(48rem 32rem at 100% 0%, rgb(var(--color-orange-500) / 0.16), rgb(var(--color-orange-500) / 0) 70%);
-  }/* On phones the same haze covers the whole viewport; keep it a corner glow */
 @media (max-width: 639px) {
     .hero::before {
-      background: radial-gradient(24rem 18rem at 100% 0%, rgb(var(--color-orange-500) / 0.12), rgb(var(--color-orange-500) / 0) 70%);
+      inset: -12% -55% auto auto;
+      width: 150vw;
+      opacity: 0.75;
+    }
+
+    .hero::after {
+      display: none;
     }
   }
 .hero > * {
     position: relative;
+  }
+.hero h1,
+  .display {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: var(--font-weight-extrabold);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }/* ---------- call to action band ---------- *//* Navy, rounded, the nebula's embers on the right, one orange button. */
+:is(.cta-band, .bg-inverse-raised, .on-dark) .btn-navy {
+    --btn-face: rgb(var(--color-white));
+    --btn-ink: rgb(var(--color-navy-100));
+    --btn-sheen: transparent;
+    --btn-edge-hi: rgb(var(--color-white));
+    --btn-edge-lo: rgb(var(--color-navy-100) / 0.22);
+    --btn-tint: rgb(var(--color-navy-100) / 0.05);
+    --btn-press: rgb(var(--color-navy-100) / 0.1);
+  }
+:is(.cta-band, .bg-inverse-raised, .on-dark) .btn-secondary {
+    --btn-face: rgb(var(--color-white) / 0.09);
+    --btn-ink: rgb(var(--color-white));
+    --btn-sheen: rgb(var(--color-white) / 0.03);
+    --btn-edge-hi: rgb(var(--color-white) / 0.16);
+    --btn-edge-lo: rgb(0 0 0 / 0.35);
+    --btn-tint: rgb(var(--color-white) / 0.07);
+    --btn-press: rgb(0 0 0 / 0.12);
+  }
+.cta-band .link {
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-on-inverse) / var(--tw-text-opacity, 1));
+  text-decoration-color: rgb(var(--color-white) / 0.4);
+}
+.cta-band .link:hover {
+  text-decoration-color: currentColor;
+}
+.cta-band .eyebrow-chip {
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-on-inverse-muted) / var(--tw-text-opacity, 1));
+}
+.cta-band .rows,.cta-band .rows > * {
+    border-color: rgb(var(--color-white) / 0.12);
+  }
+.cta-band {
+  overflow: hidden;
+  border-radius: 1.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(var(--color-inverse) / var(--tw-bg-opacity, 1));
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-on-inverse) / var(--tw-text-opacity, 1));
+    padding: clamp(1.75rem, 4.5vw, 3.5rem) clamp(1.5rem, 4.5vw, 3.5rem);
+}
+.cta-band > * {
+    position: relative;
+  }/* A navy panel inside a page: the same embers, quieter. */
+:is(.panel-dark, .bg-inverse-raised, .on-dark) .btn-navy {
+    --btn-face: rgb(var(--color-white));
+    --btn-ink: rgb(var(--color-navy-100));
+    --btn-sheen: transparent;
+    --btn-edge-hi: rgb(var(--color-white));
+    --btn-edge-lo: rgb(var(--color-navy-100) / 0.22);
+    --btn-tint: rgb(var(--color-navy-100) / 0.05);
+    --btn-press: rgb(var(--color-navy-100) / 0.1);
+  }
+:is(.panel-dark, .bg-inverse-raised, .on-dark) .btn-secondary {
+    --btn-face: rgb(var(--color-white) / 0.09);
+    --btn-ink: rgb(var(--color-white));
+    --btn-sheen: rgb(var(--color-white) / 0.03);
+    --btn-edge-hi: rgb(var(--color-white) / 0.16);
+    --btn-edge-lo: rgb(0 0 0 / 0.35);
+    --btn-tint: rgb(var(--color-white) / 0.07);
+    --btn-press: rgb(0 0 0 / 0.12);
+  }
+.panel-dark .link {
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-on-inverse) / var(--tw-text-opacity, 1));
+  text-decoration-color: rgb(var(--color-white) / 0.4);
+}
+.panel-dark .link:hover {
+  text-decoration-color: currentColor;
+}
+.panel-dark .eyebrow-chip {
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-on-inverse-muted) / var(--tw-text-opacity, 1));
+}
+.panel-dark .rows,.panel-dark .rows > * {
+    border-color: rgb(var(--color-white) / 0.12);
+  }
+.panel-dark {
+  overflow: hidden;
+  border-radius: 1.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(var(--color-inverse) / var(--tw-bg-opacity, 1));
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-on-inverse) / var(--tw-text-opacity, 1));
+}
+.panel-dark > * {
+    position: relative;
+  }/* The pale panel for the rare grouped block. */
+.panel {
+  border-radius: 1.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(var(--color-navy-5) / var(--tw-bg-opacity, 1));
+}/* ---------- header ---------- *//* Sticky. Clear at the top of the page, so the hero's nebula runs under
+     it, then frosted with a hairline once the page scrolls (.is-scrolled,
+     set by assets/js/main.js). */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+.site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 -1.25rem;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgb(var(--color-white) / 0.75), rgb(var(--color-white) / 0.6) 45%, rgb(var(--color-white) / 0));
+    transition: opacity 0.2s ease;
+  }
+.site-header.is-scrolled::before,
+  .site-header.menu-open::before {
+    opacity: 0;
+  }
+.site-header.is-scrolled {
+    background: rgb(var(--color-white) / 0.84);
+    backdrop-filter: saturate(1.4) blur(12px);
+    box-shadow: 0 1px 0 rgb(var(--color-line));
+  }
+.site-header.menu-open {
+    background: rgb(var(--color-white));
+    box-shadow: 0 1px 0 rgb(var(--color-line));
+  }
+.site-header > .wrap {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    height: var(--header-h);
+  }
+.site-nav a {
+    position: relative;
+    padding: 0.375rem 0;
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-medium);
+    color: rgb(var(--color-ink-muted));
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+  }
+.site-nav a:hover,
+  .site-nav a[aria-current="page"] {
+    color: rgb(var(--color-ink));
+  }/* The current page: a short rounded bar, the emblem's shape. */
+.site-nav a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.125rem;
+    height: 2px;
+    border-radius: 2px;
+    background: rgb(var(--color-ink));
+  }/* Three staggered bars, the emblem's shape; they fold into a cross. */
+.menu-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-right: -0.625rem;
+    padding: 0;
+    border-radius: 0.625rem;
+    background: transparent;
+    color: rgb(var(--color-ink));
+  }
+:where(.menu-toggle:hover) {
+    background: rgb(var(--color-navy-5));
+  }
+.menu-bars {
+    position: relative;
+    display: block;
+    width: 1.375rem;
+    height: 0.875rem;
+  }
+.menu-bars i {
+    position: absolute;
+    left: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 0.2s ease, width 0.2s ease, top 0.2s ease, opacity 0.2s ease;
+  }
+.menu-bars i:nth-child(1) { top: 0; width: 100%; }
+.menu-bars i:nth-child(2) { top: 6px; width: 70%; left: 30%; }
+.menu-bars i:nth-child(3) { top: 12px; width: 85%; }
+[aria-expanded="true"] .menu-bars i:nth-child(1) { top: 6px; width: 100%; transform: rotate(45deg); }
+[aria-expanded="true"] .menu-bars i:nth-child(2) { opacity: 0; }
+[aria-expanded="true"] .menu-bars i:nth-child(3) { top: 6px; width: 100%; transform: rotate(-45deg); }
+@media (prefers-reduced-motion: reduce) {
+    .site-header,
+    .site-header::before,
+    .menu-bars i {
+      transition: none;
+    }
+  }/* The phone menu: a white sheet under the header bar. */
+.mobile-menu {
+    position: fixed;
+    inset: var(--header-h) 0 0;
+    z-index: 49;
+    overflow-y: auto;
+    background: rgb(var(--color-white));
+  }
+.mobile-menu .mobile-primary a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgb(var(--color-line));
+    font-size: 1.375rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.02em;
+    color: rgb(var(--color-ink));
+    text-decoration: none;
+  }
+.mobile-menu .mobile-primary a[aria-current="page"] {
+    color: rgb(var(--color-accent-strong));
+  }/* ---------- footer ---------- */
+.site-footer {
+    margin-top: clamp(1rem, 3vw, 2rem);
+    overflow: hidden;
+    font-size: 0.875rem;
+    color: rgb(var(--color-ink-subtle));
+  }
+.footer-rule {
+    border-top: 1px solid rgb(var(--color-line));
+  }
+.site-footer nav a,
+  .footer-bottom a,
+  .footer-bottom button {
+    color: rgb(var(--color-ink-muted));
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+.site-footer nav a:hover,
+  .footer-bottom a:hover,
+  .footer-bottom button:hover {
+    color: rgb(var(--color-ink));
+  }/* Social icons: Font Awesome brand marks in the text colour. */
+.social-icon {
+  display: inline-flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.625rem;
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-ink-muted) / var(--tw-text-opacity, 1));
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.social-icon:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(var(--color-navy-5) / var(--tw-bg-opacity, 1));
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-ink) / var(--tw-text-opacity, 1));
+}/* The wordmark across the full width at the very bottom, its baseline on
+     the page edge. Filled with a pale cloud and outlined with a hairline, so
+     it reads as texture, not as a second logo. Decorative. */
+.footer-stage {
+    position: relative;
+    isolation: isolate;
+    padding-top: 2.5rem;
+  }
+.footer-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(40% 70% at 18% 100%, rgb(var(--color-navy-20) / 0.55), transparent 70%),
+      radial-gradient(34% 60% at 82% 100%, rgb(var(--color-orange-100) / 0.5), transparent 70%),
+      linear-gradient(180deg, rgb(var(--color-white)) 10%, rgb(var(--color-navy-5)) 100%);
+  }
+.footer-mark {
+    position: relative;
+    width: 95%;
+    margin-inline: auto;
+    aspect-ratio: 377.72 / 98.83;
+    /* Pull the box down by the descender so the letters sit on the bottom
+       edge and the footer clips the tail of the y. */
+    margin-bottom: calc(-0.95 * 19.94 / 377.72 * 100% + clamp(6px, 1vw, 12px));
+  }
+.footer-mark-fill {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(30% 80% at 72% 70%, rgb(var(--color-orange-300) / 0.45), transparent 70%),
+      radial-gradient(36% 90% at 26% 80%, rgb(var(--color-navy-40) / 0.55), transparent 70%),
+      linear-gradient(180deg, rgb(var(--color-white)), rgb(var(--color-mist)));
+    -webkit-mask: var(--mark) center / contain no-repeat;
+    mask: var(--mark) center / contain no-repeat;
+  }
+.footer-mark svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+.footer-mark svg path {
+    fill: none;
+    stroke: rgb(var(--color-navy-40));
+    stroke-opacity: 0.55;
+    stroke-width: 1px;
+    vector-effect: non-scaling-stroke;
   }
 .sr-only {
   position: absolute;
@@ -999,9 +1522,6 @@ button {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
-}
-.pointer-events-none {
-  pointer-events: none;
 }
 .visible {
   visibility: visible;
@@ -1024,9 +1544,6 @@ button {
 .sticky {
   position: sticky;
 }
-.inset-0 {
-  inset: 0px;
-}
 .inset-x-0 {
   left: 0px;
   right: 0px;
@@ -1048,9 +1565,6 @@ button {
 }
 .z-50 {
   z-index: 50;
-}
-.z-\[60\] {
-  z-index: 60;
 }
 .col-span-2 {
   grid-column: span 2 / span 2;
@@ -1102,6 +1616,9 @@ button {
 .\!mt-8 {
   margin-top: 2rem !important;
 }
+.-ml-2\.5 {
+  margin-left: -0.625rem;
+}
 .mb-0 {
   margin-bottom: 0px;
 }
@@ -1119,9 +1636,6 @@ button {
 }
 .mb-2 {
   margin-bottom: 0.5rem;
-}
-.mb-20 {
-  margin-bottom: 5rem;
 }
 .mb-24 {
   margin-bottom: 6rem;
@@ -1150,6 +1664,9 @@ button {
 .ml-4 {
   margin-left: 1rem;
 }
+.mr-auto {
+  margin-right: auto;
+}
 .mt-0 {
   margin-top: 0px;
 }
@@ -1164,6 +1681,9 @@ button {
 }
 .mt-12 {
   margin-top: 3rem;
+}
+.mt-14 {
+  margin-top: 3.5rem;
 }
 .mt-16 {
   margin-top: 4rem;
@@ -1183,11 +1703,17 @@ button {
 .mt-4 {
   margin-top: 1rem;
 }
+.mt-5 {
+  margin-top: 1.25rem;
+}
 .mt-6 {
   margin-top: 1.5rem;
 }
 .mt-8 {
   margin-top: 2rem;
+}
+.mt-9 {
+  margin-top: 2.25rem;
 }
 .mt-auto {
   margin-top: auto;
@@ -1276,17 +1802,17 @@ button {
 .h-\[18px\] {
   height: 18px;
 }
-.h-\[30px\] {
-  height: 30px;
+.h-\[22px\] {
+  height: 22px;
+}
+.h-\[26px\] {
+  height: 26px;
 }
 .h-auto {
   height: auto;
 }
 .h-full {
   height: 100%;
-}
-.h-px {
-  height: 1px;
 }
 .max-h-12 {
   max-height: 3rem;
@@ -1354,6 +1880,10 @@ button {
 .w-auto {
   width: auto;
 }
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
 .w-full {
   width: 100%;
 }
@@ -1375,6 +1905,9 @@ button {
 .max-w-7xl {
   max-width: 80rem;
 }
+.max-w-\[14ch\] {
+  max-width: 14ch;
+}
 .max-w-\[150px\] {
   max-width: 150px;
 }
@@ -1386,9 +1919,6 @@ button {
 }
 .max-w-md {
   max-width: 28rem;
-}
-.max-w-sm {
-  max-width: 24rem;
 }
 .max-w-xs {
   max-width: 20rem;
@@ -1430,6 +1960,9 @@ button {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+}
+.resize {
+  resize: both;
 }
 .scroll-mt-24 {
   scroll-margin-top: 6rem;
@@ -1491,20 +2024,41 @@ button {
 .gap-2 {
   gap: 0.5rem;
 }
+.gap-2\.5 {
+  gap: 0.625rem;
+}
 .gap-3 {
   gap: 0.75rem;
 }
 .gap-4 {
   gap: 1rem;
 }
+.gap-5 {
+  gap: 1.25rem;
+}
 .gap-6 {
   gap: 1.5rem;
+}
+.gap-7 {
+  gap: 1.75rem;
 }
 .gap-8 {
   gap: 2rem;
 }
 .gap-\[13px\] {
   gap: 13px;
+}
+.gap-x-10 {
+  -moz-column-gap: 2.5rem;
+       column-gap: 2.5rem;
+}
+.gap-x-12 {
+  -moz-column-gap: 3rem;
+       column-gap: 3rem;
+}
+.gap-x-16 {
+  -moz-column-gap: 4rem;
+       column-gap: 4rem;
 }
 .gap-x-2 {
   -moz-column-gap: 0.5rem;
@@ -1513,6 +2067,10 @@ button {
 .gap-x-3 {
   -moz-column-gap: 0.75rem;
        column-gap: 0.75rem;
+}
+.gap-x-6 {
+  -moz-column-gap: 1.5rem;
+       column-gap: 1.5rem;
 }
 .gap-x-8 {
   -moz-column-gap: 2rem;
@@ -1524,16 +2082,24 @@ button {
 .gap-y-10 {
   row-gap: 2.5rem;
 }
+.gap-y-14 {
+  row-gap: 3.5rem;
+}
 .gap-y-2 {
   row-gap: 0.5rem;
 }
-.gap-y-6 {
-  row-gap: 1.5rem;
+.gap-y-5 {
+  row-gap: 1.25rem;
 }
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+.space-y-2\.5 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.625rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.625rem * var(--tw-space-y-reverse));
 }
 .space-y-24 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
@@ -1592,9 +2158,6 @@ button {
 .text-balance {
   text-wrap: balance;
 }
-.text-pretty {
-  text-wrap: pretty;
-}
 .break-all {
   word-break: break-all;
 }
@@ -1610,6 +2173,9 @@ button {
 .rounded-3xl {
   border-radius: 1.5rem;
 }
+.rounded-\[1\.25rem\] {
+  border-radius: 1.25rem;
+}
 .rounded-\[40px\] {
   border-radius: 40px;
 }
@@ -1618,6 +2184,9 @@ button {
 }
 .rounded-lg {
   border-radius: 0.5rem;
+}
+.rounded-md {
+  border-radius: 0.375rem;
 }
 .rounded-none {
   border-radius: 0px;
@@ -1762,23 +2331,8 @@ button {
 .bg-white\/10 {
   background-color: rgb(var(--color-white) / 0.1);
 }
-.bg-white\/20 {
-  background-color: rgb(var(--color-white) / 0.2);
-}
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-.from-transparent {
-  --tw-gradient-from: transparent var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.via-white\/10 {
-  --tw-gradient-to: rgb(var(--color-white) / 0)  var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), rgb(var(--color-white) / 0.1) var(--tw-gradient-via-position), var(--tw-gradient-to);
-}
-.to-transparent {
-  --tw-gradient-to: transparent var(--tw-gradient-to-position);
+.bg-white\/5 {
+  background-color: rgb(var(--color-white) / 0.05);
 }
 .fill-current {
   fill: currentColor;
@@ -1799,9 +2353,6 @@ button {
 }
 .p-12 {
   padding: 3rem;
-}
-.p-3 {
-  padding: 0.75rem;
 }
 .p-4 {
   padding: 1rem;
@@ -1887,13 +2438,23 @@ button {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+.py-7 {
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+}
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
-.py-\[18px\] {
-  padding-top: 18px;
-  padding-bottom: 18px;
+.pb-10 {
+  padding-bottom: 2.5rem;
+}
+.pb-14 {
+  padding-bottom: 3.5rem;
 }
 .pb-16 {
   padding-bottom: 4rem;
@@ -1907,20 +2468,20 @@ button {
 .pb-5 {
   padding-bottom: 1.25rem;
 }
-.pb-8 {
-  padding-bottom: 2rem;
-}
 .pl-2 {
   padding-left: 0.5rem;
 }
 .pl-5 {
   padding-left: 1.25rem;
 }
+.pt-10 {
+  padding-top: 2.5rem;
+}
 .pt-12 {
   padding-top: 3rem;
 }
-.pt-16 {
-  padding-top: 4rem;
+.pt-2 {
+  padding-top: 0.5rem;
 }
 .pt-4 {
   padding-top: 1rem;
@@ -1937,9 +2498,6 @@ button {
 .text-center {
   text-align: center;
 }
-.text-right {
-  text-align: right;
-}
 .align-top {
   vertical-align: top;
 }
@@ -1955,6 +2513,10 @@ button {
 .\!text-2xl {
   font-size: 1.5rem !important;
   line-height: 2rem !important;
+}
+.\!text-3xl {
+  font-size: 1.875rem !important;
+  line-height: 2.25rem !important;
 }
 .\!text-lg {
   font-size: 1.125rem !important;
@@ -1976,9 +2538,11 @@ button {
   font-size: 2.25rem;
   line-height: 2.5rem;
 }
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
+.text-\[0\.8125rem\] {
+  font-size: 0.8125rem;
+}
+.text-\[0\.9375rem\] {
+  font-size: 0.9375rem;
 }
 .text-\[11px\] {
   font-size: 11px;
@@ -2036,11 +2600,11 @@ button {
 .italic {
   font-style: italic;
 }
+.\!leading-\[inherit\] {
+  line-height: inherit !important;
+}
 .\!leading-tight {
   line-height: 1.25 !important;
-}
-.leading-\[27px\] {
-  line-height: 27px;
 }
 .leading-\[44px\] {
   line-height: 44px;
@@ -2048,11 +2612,11 @@ button {
 .leading-\[48px\] {
   line-height: 48px;
 }
-.leading-display {
-  line-height: var(--leading-display);
-}
 .leading-relaxed {
   line-height: 1.625;
+}
+.leading-snug {
+  line-height: 1.375;
 }
 .leading-tight {
   line-height: 1.25;
@@ -2062,6 +2626,12 @@ button {
 }
 .tracking-eyebrow {
   letter-spacing: var(--tracking-eyebrow);
+}
+.tracking-heading {
+  letter-spacing: var(--tracking-heading);
+}
+.\!text-\[inherit\] {
+  color: inherit !important;
 }
 .\!text-ink {
   --tw-text-opacity: 1 !important;
@@ -2102,9 +2672,6 @@ button {
 .text-info {
   --tw-text-opacity: 1;
   color: rgb(var(--color-info-full) / var(--tw-text-opacity, 1));
-}
-.text-inherit {
-  color: inherit;
 }
 .text-ink {
   --tw-text-opacity: 1;
@@ -2185,14 +2752,26 @@ button {
 .decoration-line-strong {
   text-decoration-color: rgb(var(--color-line-strong) / 1);
 }
+.decoration-navy-40 {
+  text-decoration-color: rgb(var(--color-navy-40) / 1);
+}
 .decoration-navy-60 {
   text-decoration-color: rgb(var(--color-navy-60) / 1);
+}
+.decoration-transparent {
+  text-decoration-color: transparent;
+}
+.decoration-1 {
+  text-decoration-thickness: 1px;
 }
 .underline-offset-2 {
   text-underline-offset: 2px;
 }
 .underline-offset-4 {
   text-underline-offset: 4px;
+}
+.underline-offset-\[3px\] {
+  text-underline-offset: 3px;
 }
 .placeholder-navy-40::-moz-placeholder {
   --tw-placeholder-opacity: 1;
@@ -2205,14 +2784,17 @@ button {
 .opacity-0 {
   opacity: 0;
 }
+.opacity-60 {
+  opacity: 0.6;
+}
 .opacity-70 {
   opacity: 0.7;
 }
 .opacity-75 {
   opacity: 0.75;
 }
-.opacity-80 {
-  opacity: 0.8;
+.opacity-90 {
+  opacity: 0.9;
 }
 .\!shadow-none {
   --tw-shadow: 0 0 #0000 !important;
@@ -2267,11 +2849,6 @@ button {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
-.transition-\[box-shadow\2c transform\2c border-color\] {
-  transition-property: box-shadow,transform,border-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
 .transition-\[filter\2c opacity\] {
   transition-property: filter,opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -2279,11 +2856,6 @@ button {
 }
 .transition-\[filter\] {
   transition-property: filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-.transition-\[opacity\2c background-color\] {
-  transition-property: opacity,background-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -2844,10 +3416,6 @@ button {
   border-radius: 0;
   box-shadow: none;
 }
-.hover\:bg-surface:hover .eyebrow {
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-ink-muted) / var(--tw-text-opacity, 1));
-}
 .hover\:-translate-y-0\.5:hover {
   --tw-translate-y: -0.125rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -2864,9 +3432,6 @@ button {
   --tw-border-opacity: 1;
   border-color: rgb(var(--color-white) / var(--tw-border-opacity, 1));
 }
-.hover\:border-white\/25:hover {
-  border-color: rgb(var(--color-white) / 0.25);
-}
 .hover\:bg-mist:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-mist) / var(--tw-bg-opacity, 1));
@@ -2875,16 +3440,12 @@ button {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-navy-80) / var(--tw-bg-opacity, 1));
 }
-.hover\:bg-surface:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-surface) / var(--tw-bg-opacity, 1));
-}
 .hover\:bg-surface-strong:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-surface-strong) / var(--tw-bg-opacity, 1));
 }
-.hover\:bg-white\/10:hover {
-  background-color: rgb(var(--color-white) / 0.1);
+.hover\:bg-transparent:hover {
+  background-color: transparent;
 }
 .hover\:bg-white\/20:hover {
   background-color: rgb(var(--color-white) / 0.2);
@@ -2915,6 +3476,9 @@ button {
 }
 .hover\:underline:hover {
   text-decoration-line: underline;
+}
+.hover\:decoration-current:hover {
+  text-decoration-color: currentColor;
 }
 .hover\:decoration-ink:hover {
   text-decoration-color: rgb(var(--color-ink) / 1);
@@ -2960,10 +3524,6 @@ button {
   --tw-translate-x: 0.25rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-.group:hover .group-hover\:text-accent {
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-accent) / var(--tw-text-opacity, 1));
-}
 .group:hover .group-hover\:text-accent-strong {
   --tw-text-opacity: 1;
   color: rgb(var(--color-accent-strong) / var(--tw-text-opacity, 1));
@@ -2972,16 +3532,18 @@ button {
   --tw-text-opacity: 1;
   color: rgb(var(--color-white) / var(--tw-text-opacity, 1));
 }
+.group:hover .group-hover\:decoration-navy-40 {
+  text-decoration-color: rgb(var(--color-navy-40) / 1);
+}
+.group:hover .group-hover\:decoration-white\/50 {
+  text-decoration-color: rgb(var(--color-white) / 0.5);
+}
 .group:hover .group-hover\:opacity-100 {
   opacity: 1;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .motion-safe\:hover\:-translate-y-1:hover {
-    --tw-translate-y: -0.25rem;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  }
-  .group:hover .motion-safe\:group-hover\:translate-x-1 {
-    --tw-translate-x: 0.25rem;
+  .group:hover .motion-safe\:group-hover\:translate-x-0\.5 {
+    --tw-translate-x: 0.125rem;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   }
 }
@@ -3006,9 +3568,6 @@ button {
   .sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .sm\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
   .sm\:flex-row {
     flex-direction: row;
   }
@@ -3027,9 +3586,6 @@ button {
   .sm\:justify-between {
     justify-content: space-between;
   }
-  .sm\:gap-4 {
-    gap: 1rem;
-  }
   .sm\:rounded-2xl {
     border-radius: 1rem;
   }
@@ -3041,6 +3597,10 @@ button {
   }
   .sm\:p-6 {
     padding: 1.5rem;
+  }
+  .sm\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
   .sm\:px-6 {
     padding-left: 1.5rem;
@@ -3054,14 +3614,17 @@ button {
   .md\:col-span-1 {
     grid-column: span 1 / span 1;
   }
-  .md\:col-span-3 {
-    grid-column: span 3 / span 3;
-  }
   .md\:float-left {
     float: left;
   }
+  .md\:-mr-2\.5 {
+    margin-right: -0.625rem;
+  }
   .md\:mb-12 {
     margin-bottom: 3rem;
+  }
+  .md\:ml-0 {
+    margin-left: 0px;
   }
   .md\:mr-10 {
     margin-right: 2.5rem;
@@ -3087,8 +3650,8 @@ button {
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  .md\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .md\:grid-cols-\[1\.6fr_1fr_1fr_1fr\] {
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
   }
   .md\:flex-row {
     flex-direction: row;
@@ -3102,14 +3665,14 @@ button {
   .md\:justify-between {
     justify-content: space-between;
   }
+  .md\:gap-10 {
+    gap: 2.5rem;
+  }
   .md\:gap-12 {
     gap: 3rem;
   }
   .md\:gap-4 {
     gap: 1rem;
-  }
-  .md\:gap-y-8 {
-    row-gap: 2rem;
   }
   .md\:p-10 {
     padding: 2.5rem;
@@ -3146,12 +3709,18 @@ button {
   .lg\:col-span-3 {
     grid-column: span 3 / span 3;
   }
+  .lg\:col-span-5 {
+    grid-column: span 5 / span 5;
+  }
+  .lg\:col-span-7 {
+    grid-column: span 7 / span 7;
+  }
   .lg\:mx-0 {
     margin-left: 0px;
     margin-right: 0px;
   }
-  .lg\:mb-20 {
-    margin-bottom: 5rem;
+  .lg\:mt-20 {
+    margin-top: 5rem;
   }
   .lg\:flex {
     display: flex;
@@ -3165,6 +3734,9 @@ button {
   .lg\:w-56 {
     width: 14rem;
   }
+  .lg\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -3173,6 +3745,9 @@ button {
   }
   .lg\:grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .lg\:grid-cols-\[1fr_auto\] {
+    grid-template-columns: 1fr auto;
   }
   .lg\:flex-row {
     flex-direction: row;
@@ -3189,15 +3764,15 @@ button {
   .lg\:gap-16 {
     gap: 4rem;
   }
+  .lg\:border-b-0 {
+    border-bottom-width: 0px;
+  }
   .lg\:border-l {
     border-left-width: 1px;
   }
   .lg\:border-line {
     --tw-border-opacity: 1;
     border-color: rgb(var(--color-line) / var(--tw-border-opacity, 1));
-  }
-  .lg\:p-12 {
-    padding: 3rem;
   }
   .lg\:p-14 {
     padding: 3.5rem;
@@ -3209,6 +3784,10 @@ button {
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+  .lg\:py-16 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
   .lg\:py-20 {
     padding-top: 5rem;
@@ -3224,14 +3803,17 @@ button {
   .lg\:pb-24 {
     padding-bottom: 6rem;
   }
-  .lg\:pl-14 {
-    padding-left: 3.5rem;
+  .lg\:pl-16 {
+    padding-left: 4rem;
+  }
+  .lg\:pt-10 {
+    padding-top: 2.5rem;
+  }
+  .lg\:pt-12 {
+    padding-top: 3rem;
   }
   .lg\:pt-16 {
     padding-top: 4rem;
-  }
-  .lg\:pt-24 {
-    padding-top: 6rem;
   }
   .lg\:text-left {
     text-align: left;
@@ -3239,6 +3821,10 @@ button {
   .lg\:\!text-3xl {
     font-size: 1.875rem !important;
     line-height: 2.25rem !important;
+  }
+  .lg\:\!text-4xl {
+    font-size: 2.25rem !important;
+    line-height: 2.5rem !important;
   }
   .lg\:text-2xl {
     font-size: 1.5rem;
@@ -3250,10 +3836,6 @@ button {
   }
   .lg\:text-5xl {
     font-size: 3rem;
-    line-height: 1;
-  }
-  .lg\:text-7xl {
-    font-size: 4.5rem;
     line-height: 1;
   }
   .lg\:text-\[64px\] {

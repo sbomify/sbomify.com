@@ -1,26 +1,45 @@
 (function() {
-  function initMobileMenu () {
-    var openBtn = document.querySelector('.open-menu');
-    var closeBtn = document.querySelector('.close-menu');
-    var menu = document.querySelector('.mobile-menu');
-    if (!openBtn || !closeBtn || !menu) return;
-
-    function open() {
-      menu.classList.remove('hidden');
-      openBtn.setAttribute('aria-expanded', 'true');
-      document.documentElement.style.overflow = 'hidden';
+  // Header: frosted once the page scrolls; the phone menu is a sheet under
+  // the bar, opened and closed by one toggle (layouts/partials/nav-mobile.html).
+  function initHeader () {
+    var header = document.querySelector('[data-header]');
+    if (!header) return;
+    var ticking = false;
+    function onScroll () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        header.classList.toggle('is-scrolled', window.scrollY > 8);
+        ticking = false;
+      });
     }
-    function close() {
-      menu.classList.add('hidden');
-      openBtn.setAttribute('aria-expanded', 'false');
-      document.documentElement.style.overflow = '';
-      openBtn.focus();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    var toggle = header.querySelector('.open-menu');
+    var menu = document.getElementById('mobile-menu');
+    if (!toggle || !menu) return;
+
+    function setOpen (open) {
+      menu.classList.toggle('hidden', !open);
+      header.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      document.documentElement.style.overflow = open ? 'hidden' : '';
     }
 
-    openBtn.addEventListener('click', open);
-    closeBtn.addEventListener('click', close);
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && !menu.classList.contains('hidden')) close();
+    toggle.addEventListener('click', function () {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    // Back to the desktop layout with the sheet open: close it.
+    window.matchMedia('(min-width: 1024px)').addEventListener('change', function (e) {
+      if (e.matches) setOpen(false);
     });
   }
 
@@ -73,7 +92,7 @@
     });
   }
 
-  initMobileMenu();
+  initHeader();
   initCodeCopy();
   initAgentTools();
 }())

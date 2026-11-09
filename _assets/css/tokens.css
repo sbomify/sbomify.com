@@ -105,12 +105,12 @@
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
 
-  --leading-display: 1.05;
+  --leading-display: 1.02;
   --leading-heading: 1.2;
   --leading-body: 1.6;
 
   --tracking-display: -0.03em;   /* display headings: tight */
-  --tracking-heading: -0.015em;  /* section headings: slightly tight */
+  --tracking-heading: -0.02em;   /* section headings: slightly tight */
   --tracking-eyebrow: 0.12em;    /* eyebrows, captions, meta: wide, caps */
 
   /* ===== Shape and depth ===== */

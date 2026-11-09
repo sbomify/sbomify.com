@@ -29,9 +29,19 @@
     --tw-ring-color: rgb(var(--color-focus) / 0.5);
   }
 
+  :root {
+    --header-h: 4.5rem;
+  }
+
+  @media (max-width: 1023px) {
+    :root {
+      --header-h: 4rem;
+    }
+  }
+
   html {
-    /* Offset anchors so they clear the sticky pill header */
-    scroll-padding-top: 6rem;
+    /* Offset anchors so they clear the sticky header */
+    scroll-padding-top: calc(var(--header-h) + 1.5rem);
     /* Hold the scrollbar's space on short pages too, so the header and
        content do not shift sideways between pages (as in the app). */
     scrollbar-gutter: stable;
@@ -96,13 +106,13 @@
   h1 {
     font-size: 4.25rem; /* 68px */
     font-weight: var(--font-weight-extrabold);
-    line-height: var(--leading-display);
-    letter-spacing: var(--tracking-display);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
   }
 
   h2 {
     font-size: 2rem; /* 32px */
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-bold);
     line-height: var(--leading-heading);
     letter-spacing: var(--tracking-heading);
   }
@@ -162,35 +172,191 @@
 @tailwind components;
 
 @layer components {
-  /* Buttons. Orange is the one call to action; secondary is navy outline,
-     and type on orange is always white (Orange 700 fill, 5.2:1). */
-  /* Same robustness rules as the app's buttons: a 44px touch target, a label
-     that never wraps and never gives up width in a flex row, and a press
-     state. */
+  /* ---------- layout ---------- */
+
+  /* One content width for the whole site (header, sections, footer), with a
+     gutter that grows with the window. Reading pages narrow it with .read. */
+  .wrap {
+    width: 100%;
+    max-width: 72rem; /* 1152px */
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 2.5rem);
+  }
+
+  .read {
+    max-width: 47.5rem; /* 760px */
+  }
+
+  /* Sections stack with generous air and no boxes; a hairline marks a change
+     of subject where white meets white. */
+  .section {
+    padding-block: clamp(3rem, 7vw, 5.5rem);
+  }
+
+  .section-rule {
+    border-top: 1px solid rgb(var(--color-line));
+  }
+
+  /* A heading row: title left, a quiet link right, baseline aligned. */
+  .section-head {
+    @apply flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2;
+  }
+
+  .section-title {
+    font-size: clamp(1.875rem, 3.6vw, 2.75rem);
+    font-weight: var(--font-weight-extrabold);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+
+  .lede {
+    @apply text-ink-muted;
+    font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+    line-height: 1.6;
+  }
+
+  /* ---------- buttons ---------- */
+
+  /* A solid face, a faint top sheen, a light edge above and a shade edge
+     below; no drop shadow. Hover lays a thin tint over the face (::after),
+     so every variant reacts the same way. Variants only swap the variables.
+       .btn-primary    Orange 700: the page's one call to action
+       .btn-navy       navy: the main action in a section
+       .btn-secondary  mist tile: secondary actions
+     On navy (.bg-inverse, .on-dark) navy turns white and mist turns to glass. */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 min-h-11 rounded-full font-semibold whitespace-nowrap shrink-0 select-none transition-[background-color,border-color,color,box-shadow,transform] duration-200 active:scale-[0.98];
+    --btn-face: rgb(var(--color-navy-100));
+    --btn-ink: rgb(var(--color-white));
+    --btn-sheen: rgb(var(--color-white) / 0.06);
+    --btn-edge-hi: rgb(var(--color-white) / 0.16);
+    --btn-edge-lo: rgb(0 0 0 / 0.3);
+    --btn-tint: rgb(var(--color-white) / 0.08);
+    --btn-press: rgb(0 0 0 / 0.1);
+
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem; /* 44px touch target */
+    padding: 0 1.125rem;
+    border: 0;
+    border-radius: 0.625rem;
+    flex-shrink: 0;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    user-select: none;
+    color: var(--btn-ink);
+    background: linear-gradient(180deg, var(--btn-sheen), transparent 60%), var(--btn-face);
+    box-shadow: inset 0 1px 0 var(--btn-edge-hi), inset 0 -1px 0 var(--btn-edge-lo);
+    transition: box-shadow 0.15s ease, color 0.15s ease;
+  }
+
+  .btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--btn-tint);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .btn:hover::after {
+    opacity: 1;
+  }
+
+  .btn:active::after {
+    opacity: 1;
+    background: var(--btn-press);
+  }
+
+  .btn:active {
+    box-shadow: inset 0 1px 0 var(--btn-edge-lo);
+  }
+
+  .btn svg {
+    width: 1rem;
+    height: 1rem;
+    flex: none;
   }
 
   .btn-primary {
-    @apply btn bg-accent-strong hover:bg-accent-hover text-on-accent;
+    @apply btn;
+    --btn-face: rgb(var(--color-orange-700));
+    --btn-sheen: rgb(var(--color-white) / 0.08);
+    --btn-edge-hi: rgb(var(--color-white) / 0.24);
+    --btn-edge-lo: rgb(90 25 0 / 0.35);
+    --btn-tint: rgb(110 30 0 / 0.14);
+    --btn-press: rgb(90 25 0 / 0.24);
   }
 
-  /* Navy fill: section-level actions, so orange stays the page's one moment */
   .btn-navy {
-    @apply btn bg-ink text-on-inverse hover:bg-navy-80;
+    @apply btn;
   }
 
   .btn-secondary {
-    @apply btn bg-canvas text-ink border border-line-strong hover:border-ink;
+    @apply btn;
+    --btn-face: rgb(var(--color-navy-5));
+    --btn-ink: rgb(var(--color-navy-100));
+    --btn-sheen: rgb(var(--color-white) / 0.6);
+    --btn-edge-hi: rgb(var(--color-white));
+    --btn-edge-lo: rgb(var(--color-navy-100) / 0.16);
+    --btn-tint: rgb(var(--color-navy-100) / 0.05);
+    --btn-press: rgb(var(--color-navy-100) / 0.09);
   }
 
-  /* For navy surfaces */
+  :is(.bg-inverse, .bg-inverse-raised, .on-dark) .btn-navy {
+    --btn-face: rgb(var(--color-white));
+    --btn-ink: rgb(var(--color-navy-100));
+    --btn-sheen: transparent;
+    --btn-edge-hi: rgb(var(--color-white));
+    --btn-edge-lo: rgb(var(--color-navy-100) / 0.22);
+    --btn-tint: rgb(var(--color-navy-100) / 0.05);
+    --btn-press: rgb(var(--color-navy-100) / 0.1);
+  }
+
+  :is(.bg-inverse, .bg-inverse-raised, .on-dark) .btn-secondary {
+    --btn-face: rgb(var(--color-white) / 0.09);
+    --btn-ink: rgb(var(--color-white));
+    --btn-sheen: rgb(var(--color-white) / 0.03);
+    --btn-edge-hi: rgb(var(--color-white) / 0.16);
+    --btn-edge-lo: rgb(0 0 0 / 0.35);
+    --btn-tint: rgb(var(--color-white) / 0.07);
+    --btn-press: rgb(0 0 0 / 0.12);
+  }
+
   .btn-md {
-    @apply px-5 py-2.5 min-h-10 max-sm:min-h-11 text-sm;
+    min-height: 2.5rem;
+    padding: 0 1rem;
+    font-size: 0.875rem;
+    border-radius: 0.5625rem;
+  }
+
+  @media (max-width: 639px) {
+    .btn-md {
+      min-height: 2.75rem;
+    }
   }
 
   .btn-lg {
-    @apply px-8 py-4 min-h-12 text-lg;
+    min-height: 3rem;
+    padding: 0 1.375rem;
+    font-size: 1rem;
+    border-radius: 0.75rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn::after {
+      transition: none;
+    }
   }
 
   .btn-icon {
@@ -203,14 +369,15 @@
     background: none;
   }
 
-  /* Inline text link: navy type, orange underline, the accent stays small. */
+  /* Inline text link: navy type, a quiet underline that firms up on hover. */
   .link {
-    @apply text-ink underline underline-offset-4 decoration-accent decoration-2 hover:text-accent-strong transition-colors;
+    @apply text-ink underline underline-offset-[3px] decoration-navy-40 decoration-1 hover:decoration-current transition-colors;
   }
 
   .bg-inverse .link,
-  .bg-inverse-raised .link {
-    @apply text-on-inverse hover:text-accent;
+  .bg-inverse-raised .link,
+  .on-dark .link {
+    @apply text-on-inverse decoration-white/40 hover:decoration-current;
   }
 
   /* Eyebrow, caption and meta: 600, wide track, caps. */
@@ -224,60 +391,434 @@
     @apply text-ink-muted;
   }
 
-  /* Eyebrow chip: the section label above a heading, with the orange dot
-     the guide uses in its own running footer. */
+  /* Section label above a heading: plain caps with a small orange marker,
+     no pill. */
   .eyebrow-chip {
-    /* Navy 55 drops to 4.2:1 on the Mist Soft fill, so the chip keeps Navy 80. */
-    @apply eyebrow inline-flex w-fit items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface border border-line text-ink-muted;
+    @apply eyebrow inline-flex w-fit items-center gap-2.5 text-ink-muted;
   }
 
   .eyebrow-chip::before {
     content: "";
-    @apply w-1.5 h-1.5 rounded-full bg-accent;
+    @apply w-2 h-2 rounded-full bg-accent;
+  }
+
+  .bg-inverse .eyebrow-chip,
+  .on-dark .eyebrow-chip {
+    @apply text-on-inverse-muted;
   }
 
   /* Neutral tag / badge. Orange is a brand accent, not a status, so it is
      kept out of badges; status badges use the semantic palette. */
   .tag {
-    @apply inline-block px-3 py-1 rounded-full text-sm font-medium bg-surface-strong text-ink;
+    @apply inline-block px-2.5 py-0.5 rounded-md text-sm font-medium bg-navy-5 text-ink-muted border border-line;
   }
 
-  /* Cards */
+  /* Cards: flat. A hairline and a soft corner, no shadow. */
   .card {
-    @apply bg-canvas border border-line rounded-2xl shadow-card;
+    @apply bg-canvas border border-line rounded-2xl;
   }
 
   .feature-card {
-    @apply flex flex-col h-auto justify-center items-center border px-6 lg:px-10 py-4 rounded-lg border-solid border-white/10 bg-inverse-raised;
+    @apply flex flex-col h-auto justify-center items-center border px-6 lg:px-10 py-4 rounded-xl border-solid border-white/10 bg-white/5;
   }
 
   .feature-card-header {
     @apply text-accent mb-4;
   }
 
-  /* Page hero: white canvas with the soft Signal Orange haze from the
-     guide's cover. Static, so it costs no compositor layer. */
-  .hero {
-    @apply relative overflow-hidden bg-canvas;
+  /* Hairline rows: lists of things read as rows, not boxes. */
+  .rows {
+    border-top: 1px solid rgb(var(--color-line));
   }
 
-  .hero::before {
+  .rows > * {
+    border-bottom: 1px solid rgb(var(--color-line));
+  }
+
+  .bg-inverse .rows,
+  .on-dark .rows,
+  .bg-inverse .rows > *,
+  .on-dark .rows > * {
+    border-color: rgb(var(--color-white) / 0.12);
+  }
+
+  /* A step number in a row: small, mono, muted. */
+  .step-no {
+    @apply font-mono text-sm text-ink-subtle;
+  }
+
+  /* ---------- nebula ---------- */
+
+  /* Soft Signal Orange cloud from the brand guide's cover, drawn with
+     gradients only: no image request, no script. Two layers drift very slowly
+     (transform only, so it stays on the compositor) and stop for reduced
+     motion. Put it on a positioned container; content above it needs
+     position: relative (the .hero rule below does this). */
+  :is(.nebula, .hero, .cta-band, .panel-dark) {
+    position: relative;
+    isolation: isolate;
+  }
+
+  :is(.nebula, .hero, .cta-band, .panel-dark)::before,
+  :is(.nebula, .hero, .cta-band, .panel-dark)::after {
     content: "";
     position: absolute;
-    inset: 0;
+    z-index: -1;
     pointer-events: none;
-    background: radial-gradient(48rem 32rem at 100% 0%, rgb(var(--color-orange-500) / 0.16), rgb(var(--color-orange-500) / 0) 70%);
   }
 
-  /* On phones the same haze covers the whole viewport; keep it a corner glow */
+  :is(.nebula, .hero, .cta-band, .panel-dark)::before {
+    inset: -20% -15% auto auto;
+    width: min(70rem, 110vw);
+    aspect-ratio: 1.3;
+    background:
+      radial-gradient(38% 30% at 62% 34%, rgb(var(--color-orange-500) / 0.42), transparent 70%),
+      radial-gradient(30% 26% at 40% 22%, rgb(var(--color-orange-300) / 0.5), transparent 72%),
+      radial-gradient(26% 34% at 78% 58%, rgb(var(--color-orange-100) / 0.55), transparent 70%),
+      radial-gradient(44% 40% at 55% 46%, rgb(var(--color-orange-50) / 0.9), transparent 75%);
+    animation: nebula-drift 38s ease-in-out infinite alternate;
+  }
+
+  :is(.nebula, .hero, .cta-band, .panel-dark)::after {
+    inset: -10% -25% auto auto;
+    width: min(56rem, 90vw);
+    aspect-ratio: 1.1;
+    background:
+      radial-gradient(30% 24% at 30% 60%, rgb(var(--color-orange-300) / 0.22), transparent 70%),
+      radial-gradient(22% 30% at 70% 30%, rgb(var(--color-orange-500) / 0.16), transparent 72%);
+    animation: nebula-drift-2 52s ease-in-out infinite alternate;
+  }
+
+  /* On navy: ember glows low on the right. */
+  :is(.nebula-navy, .cta-band, .panel-dark)::before {
+    inset: auto -20% -60% auto;
+    width: min(60rem, 120vw);
+    aspect-ratio: 1.4;
+    background:
+      radial-gradient(34% 28% at 62% 40%, rgb(var(--color-orange-500) / 0.42), transparent 70%),
+      radial-gradient(26% 22% at 40% 30%, rgb(var(--color-orange-700) / 0.45), transparent 72%),
+      radial-gradient(40% 36% at 55% 50%, rgb(var(--color-orange-300) / 0.14), transparent 75%);
+  }
+
+  :is(.nebula-navy, .cta-band, .panel-dark)::after {
+    inset: -50% auto auto -25%;
+    width: min(44rem, 90vw);
+    aspect-ratio: 1.2;
+    background: radial-gradient(40% 34% at 50% 50%, rgb(var(--color-white) / 0.06), transparent 72%);
+  }
+
+  @keyframes nebula-drift {
+    from { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    to { transform: translate3d(-4%, 3%, 0) rotate(-6deg) scale(1.06); }
+  }
+
+  @keyframes nebula-drift-2 {
+    from { transform: translate3d(0, 0, 0) rotate(0deg); }
+    to { transform: translate3d(5%, -3%, 0) rotate(8deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :is(.nebula, .hero, .cta-band, .panel-dark)::before,
+    :is(.nebula, .hero, .cta-band, .panel-dark)::after {
+      animation: none;
+    }
+  }
+
+  /* Page hero: white canvas with the nebula in the top right corner. It
+     starts under the transparent header, so the cloud runs up behind it. */
+  .hero {
+    @apply relative overflow-hidden bg-canvas;
+    margin-top: calc(-1 * var(--header-h));
+    padding-top: var(--header-h);
+  }
+
   @media (max-width: 639px) {
     .hero::before {
-      background: radial-gradient(24rem 18rem at 100% 0%, rgb(var(--color-orange-500) / 0.12), rgb(var(--color-orange-500) / 0) 70%);
+      inset: -12% -55% auto auto;
+      width: 150vw;
+      opacity: 0.75;
+    }
+
+    .hero::after {
+      display: none;
     }
   }
 
   .hero > * {
     position: relative;
+  }
+
+  .hero h1,
+  .display {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: var(--font-weight-extrabold);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+
+  /* ---------- call to action band ---------- */
+
+  /* Navy, rounded, the nebula's embers on the right, one orange button. */
+  .cta-band {
+    @apply overflow-hidden rounded-[1.25rem] bg-inverse text-on-inverse;
+    padding: clamp(1.75rem, 4.5vw, 3.5rem) clamp(1.5rem, 4.5vw, 3.5rem);
+  }
+
+  .cta-band > * {
+    position: relative;
+  }
+
+  /* A navy panel inside a page: the same embers, quieter. */
+  .panel-dark {
+    @apply overflow-hidden rounded-[1.25rem] bg-inverse text-on-inverse;
+  }
+
+  .panel-dark > * {
+    position: relative;
+  }
+
+  /* The pale panel for the rare grouped block. */
+  .panel {
+    @apply rounded-[1.25rem] bg-navy-5;
+  }
+
+  /* ---------- header ---------- */
+
+  /* Sticky. Clear at the top of the page, so the hero's nebula runs under
+     it, then frosted with a hairline once the page scrolls (.is-scrolled,
+     set by assets/js/main.js). */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 -1.25rem;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgb(var(--color-white) / 0.75), rgb(var(--color-white) / 0.6) 45%, rgb(var(--color-white) / 0));
+    transition: opacity 0.2s ease;
+  }
+
+  .site-header.is-scrolled::before,
+  .site-header.menu-open::before {
+    opacity: 0;
+  }
+
+  .site-header.is-scrolled {
+    background: rgb(var(--color-white) / 0.84);
+    -webkit-backdrop-filter: saturate(1.4) blur(12px);
+    backdrop-filter: saturate(1.4) blur(12px);
+    box-shadow: 0 1px 0 rgb(var(--color-line));
+  }
+
+  .site-header.menu-open {
+    background: rgb(var(--color-white));
+    box-shadow: 0 1px 0 rgb(var(--color-line));
+  }
+
+  .site-header > .wrap {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    height: var(--header-h);
+  }
+
+  .site-nav a {
+    position: relative;
+    padding: 0.375rem 0;
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-medium);
+    color: rgb(var(--color-ink-muted));
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+  }
+
+  .site-nav a:hover,
+  .site-nav a[aria-current="page"] {
+    color: rgb(var(--color-ink));
+  }
+
+  /* The current page: a short rounded bar, the emblem's shape. */
+  .site-nav a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.125rem;
+    height: 2px;
+    border-radius: 2px;
+    background: rgb(var(--color-ink));
+  }
+
+  /* Three staggered bars, the emblem's shape; they fold into a cross. */
+  .menu-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-right: -0.625rem;
+    padding: 0;
+    border-radius: 0.625rem;
+    background: transparent;
+    color: rgb(var(--color-ink));
+  }
+
+  :where(.menu-toggle:hover) {
+    background: rgb(var(--color-navy-5));
+  }
+
+  .menu-bars {
+    position: relative;
+    display: block;
+    width: 1.375rem;
+    height: 0.875rem;
+  }
+
+  .menu-bars i {
+    position: absolute;
+    left: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 0.2s ease, width 0.2s ease, top 0.2s ease, opacity 0.2s ease;
+  }
+
+  .menu-bars i:nth-child(1) { top: 0; width: 100%; }
+  .menu-bars i:nth-child(2) { top: 6px; width: 70%; left: 30%; }
+  .menu-bars i:nth-child(3) { top: 12px; width: 85%; }
+
+  [aria-expanded="true"] .menu-bars i:nth-child(1) { top: 6px; width: 100%; transform: rotate(45deg); }
+  [aria-expanded="true"] .menu-bars i:nth-child(2) { opacity: 0; }
+  [aria-expanded="true"] .menu-bars i:nth-child(3) { top: 6px; width: 100%; transform: rotate(-45deg); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header,
+    .site-header::before,
+    .menu-bars i {
+      transition: none;
+    }
+  }
+
+  /* The phone menu: a white sheet under the header bar. */
+  .mobile-menu {
+    position: fixed;
+    inset: var(--header-h) 0 0;
+    z-index: 49;
+    overflow-y: auto;
+    background: rgb(var(--color-white));
+  }
+
+  .mobile-menu .mobile-primary a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgb(var(--color-line));
+    font-size: 1.375rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.02em;
+    color: rgb(var(--color-ink));
+    text-decoration: none;
+  }
+
+  .mobile-menu .mobile-primary a[aria-current="page"] {
+    color: rgb(var(--color-accent-strong));
+  }
+
+  /* ---------- footer ---------- */
+
+  .site-footer {
+    margin-top: clamp(1rem, 3vw, 2rem);
+    overflow: hidden;
+    font-size: 0.875rem;
+    color: rgb(var(--color-ink-subtle));
+  }
+
+  .footer-rule {
+    border-top: 1px solid rgb(var(--color-line));
+  }
+
+  .site-footer nav a,
+  .footer-bottom a,
+  .footer-bottom button {
+    color: rgb(var(--color-ink-muted));
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .site-footer nav a:hover,
+  .footer-bottom a:hover,
+  .footer-bottom button:hover {
+    color: rgb(var(--color-ink));
+  }
+
+  /* Social icons: Font Awesome brand marks in the text colour. */
+  .social-icon {
+    @apply inline-flex items-center justify-center w-10 h-10 rounded-[0.625rem] text-ink-muted hover:text-ink hover:bg-navy-5 transition-colors;
+  }
+
+  /* The wordmark across the full width at the very bottom, its baseline on
+     the page edge. Filled with a pale cloud and outlined with a hairline, so
+     it reads as texture, not as a second logo. Decorative. */
+  .footer-stage {
+    position: relative;
+    isolation: isolate;
+    padding-top: 2.5rem;
+  }
+
+  .footer-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(40% 70% at 18% 100%, rgb(var(--color-navy-20) / 0.55), transparent 70%),
+      radial-gradient(34% 60% at 82% 100%, rgb(var(--color-orange-100) / 0.5), transparent 70%),
+      linear-gradient(180deg, rgb(var(--color-white)) 10%, rgb(var(--color-navy-5)) 100%);
+  }
+
+  .footer-mark {
+    position: relative;
+    width: 95%;
+    margin-inline: auto;
+    aspect-ratio: 377.72 / 98.83;
+    /* Pull the box down by the descender so the letters sit on the bottom
+       edge and the footer clips the tail of the y. */
+    margin-bottom: calc(-0.95 * 19.94 / 377.72 * 100% + clamp(6px, 1vw, 12px));
+  }
+
+  .footer-mark-fill {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(30% 80% at 72% 70%, rgb(var(--color-orange-300) / 0.45), transparent 70%),
+      radial-gradient(36% 90% at 26% 80%, rgb(var(--color-navy-40) / 0.55), transparent 70%),
+      linear-gradient(180deg, rgb(var(--color-white)), rgb(var(--color-mist)));
+    -webkit-mask: var(--mark) center / contain no-repeat;
+    mask: var(--mark) center / contain no-repeat;
+  }
+
+  .footer-mark svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .footer-mark svg path {
+    fill: none;
+    stroke: rgb(var(--color-navy-40));
+    stroke-opacity: 0.55;
+    stroke-width: 1px;
+    vector-effect: non-scaling-stroke;
   }
 }
 
