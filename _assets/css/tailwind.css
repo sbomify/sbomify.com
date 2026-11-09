@@ -2628,16 +2628,15 @@
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* The tick is a mask drawn on the disc's own 20px grid, centred in it. */
 .ins .triage-check::after {
   content: "";
   position: absolute;
-  left: 6px;
-  top: 5px;
-  width: 8px;
-  height: 5px;
-  border-left: 2px solid rgb(var(--color-white));
-  border-bottom: 2px solid rgb(var(--color-white));
-  transform: rotate(-45deg) scale(0.4);
+  inset: 0;
+  background: rgb(var(--color-white));
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.75 10.25l2.75 2.75 5.75-5.75' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.75 10.25l2.75 2.75 5.75-5.75' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  transform: scale(0.4);
   opacity: 0;
   transition: opacity 0.2s ease, transform 0.25s ease;
 }
@@ -2650,7 +2649,7 @@
 
 .ins .triage .triage-check::after {
   opacity: 1;
-  transform: rotate(-45deg);
+  transform: none;
 }
 
 /* Not answered yet: a quiet question, no answer, an empty ring. */
@@ -2682,7 +2681,7 @@
 .ins .triage[data-stage="2"] :is([data-q="3"], [data-q="4"]) .triage-check::after,
 .ins .triage[data-stage="3"] [data-q="4"] .triage-check::after {
   opacity: 0;
-  transform: rotate(-45deg) scale(0.4);
+  transform: scale(0.4);
 }
 
 /* The question being answered right now. */
