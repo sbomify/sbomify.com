@@ -6125,7 +6125,7 @@ button {
 .ins .dawn {
   /* The horizon sits this far above the section's bottom edge, under the
      copy whatever its height. */
-  --horizon: clamp(150px, 20vw, 250px);
+  --horizon: clamp(190px, 24vw, 320px);
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -6147,7 +6147,7 @@ button {
   aspect-ratio: 2;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  background: radial-gradient(closest-side, rgb(var(--color-white)) 0%, rgb(var(--color-orange-50) / 0.95) 10%, rgb(var(--color-warning-full) / 0.6) 30%, rgb(var(--color-orange-500) / 0.28) 58%, rgb(var(--color-orange-500) / 0) 100%);
+  background: radial-gradient(closest-side, rgb(var(--color-white) / 0.45) 0%, rgb(var(--color-orange-50) / 0.5) 10%, rgb(var(--color-warning-full) / 0.6) 30%, rgb(var(--color-orange-500) / 0.28) 58%, rgb(var(--color-orange-500) / 0) 100%);
 }/* The horizon: a vast circle whose top edge is the skyline, its rim lit gold
    and its face a pale morning white that runs on into the footer. */
 .ins .dawn-horizon {

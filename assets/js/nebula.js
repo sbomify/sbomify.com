@@ -80,7 +80,7 @@
     ground: {
       base: rgb(255, 255, 255),
       low: rgb(238, 240, 244), mid: rgb(211, 212, 217), high: rgb(168, 169, 178),
-      mask: [0.5, 1.05, 0.95, 0.9], fade: [0.0, 0.85], gain: 1.05, scale: 0.5, seed: [12.4, 3.9], speed: 0.7
+      mask: [0.5, 1.05, 1.0, 1.35], fade: [-0.3, 0.7], gain: 1.15, scale: 0.5, seed: [12.4, 3.9], speed: 0.7
     },
     footer: {
       base: rgb(255, 255, 255),
