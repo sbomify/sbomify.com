@@ -3425,88 +3425,59 @@
   font-weight: var(--font-weight-semibold);
 }
 
-/* CRA coverage: a tile per obligation, in the order of Annex I Part II.
-   Solid navy is covered by sbomify, half-filled is shared, an outline is
-   yours. A small square in each tile repeats it as a shape (full, half,
-   empty), and the key below names the three. Four across, two on a narrow
-   card (a container query on the figure). */
-.ins .tiles {
-  container-type: inline-size;
-  margin: 8px 0 4px;
-}
-
-.ins .tiles ul {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-}
-
-@container (max-width: 380px) {
-  .ins .tiles ul {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-.ins .tiles li {
+/* CRA coverage: one big number, 6 of 8, with a caption, and eight small
+   pips as the only graphic (2 done by sbomify, 4 drafted for you, 2 yours). */
+.ins .bignum {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 14px;
-  min-height: 88px;
-  padding: 11px 12px 12px;
-  border-radius: 12px;
-  font-size: 0.82rem;
-  font-weight: var(--font-weight-semibold);
-  line-height: 1.25;
-}
-
-/* The corner mark: full, half and empty squares. */
-.ins .tiles i {
-  display: block;
-  width: 10px;
-  height: 10px;
-  border-radius: 2.5px;
-}
-
-.ins .tiles [data-k="built"] i { background: currentColor; }
-.ins .tiles [data-k="shared"] i { background: linear-gradient(90deg, currentColor 50%, transparent 50%); box-shadow: inset 0 0 0 1.5px currentColor; }
-.ins .tiles [data-k="yours"] i { box-shadow: inset 0 0 0 1.5px currentColor; }
-
-.ins .tiles li[data-k="built"] {
-  background: rgb(var(--color-navy-100));
-  color: rgb(var(--color-white));
-}
-
-/* Half-filled: navy tint on the left half of the tile. */
-.ins .tiles li[data-k="shared"] {
-  background: linear-gradient(90deg, rgb(var(--color-navy-100) / 0.12) 50%, rgb(var(--color-panel)) 50%);
-  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-100) / 0.14);
-  color: rgb(var(--color-navy-100));
-}
-
-.ins .tiles li[data-k="yours"] {
-  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-20));
-  color: rgb(var(--color-navy-60));
-}
-
-.ins .tiles-key {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 18px;
-  margin-top: 12px;
-  font-size: 0.85rem;
-  color: rgb(var(--color-navy-80));
-}
-
-.ins .tiles-key span {
-  display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 18px;
+  margin: 14px 0 6px;
+}
+
+.ins .bento-card .bignum-n {
+  flex: none;
+  font-size: clamp(3.5rem, 6vw, 4.75rem);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
   color: rgb(var(--color-navy-100));
 }
 
-.ins .tiles-key [data-k="yours"] {
-  color: rgb(var(--color-navy-60));
+.ins .bignum-n span {
+  color: rgb(var(--color-navy-40));
+}
+
+.ins .bento-card .bignum-c {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: rgb(var(--color-navy-80));
+  max-width: 24ch;
+}
+
+.ins .bento-card .pips {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.ins .pips i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px rgb(var(--color-navy-100));
+}
+
+.ins .pips [data-k="full"] { background: rgb(var(--color-navy-100)); }
+.ins .pips [data-k="half"] { background: linear-gradient(90deg, rgb(var(--color-navy-100)) 50%, transparent 50%); }
+.ins .pips [data-k="none"] { box-shadow: inset 0 0 0 1.5px rgb(var(--color-navy-20)); }
+
+@media (max-width: 420px) {
+  .ins .bignum {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }
 
 /* Documents: four files in a 2x2 grid, as a file browser's icon view
