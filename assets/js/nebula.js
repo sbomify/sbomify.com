@@ -13,6 +13,7 @@
  *
  * Variants (data-nebula="..."):
  *   light   Signal Orange smoke on white, top right (page heroes)
+ *   light-center  the same along the top, for a centred hero
  *   navy    embers on navy, right side (call-to-action band)
  *   footer  pale navy smoke rising from the bottom edge
  *   mark    navy smoke filling the footer wordmark
@@ -29,6 +30,13 @@
       low: rgb(255, 214, 192), mid: rgb(255, 170, 120), high: rgb(255, 128, 52),
       // Mask: centre (x, y from the bottom) and radii, in element units.
       mask: [0.78, 0.82, 0.55, 1.0], narrow: [1.05, 1.0, 0.75, 0.45], fade: [0.05, 0.5], gain: 1.55, scale: 0.42, seed: [3.1, 7.4], speed: 1
+    },
+    // Centred heroes: the cloud runs along the top, behind the header, and
+    // has faded before the headline's middle.
+    'light-center': {
+      base: rgb(255, 255, 255),
+      low: rgb(255, 214, 192), mid: rgb(255, 170, 120), high: rgb(255, 128, 52),
+      mask: [0.56, 1.08, 0.78, 0.6], narrow: [0.75, 1.06, 0.9, 0.42], fade: [0.25, 0.75], gain: 1.6, scale: 0.42, seed: [3.1, 7.4], speed: 1
     },
     navy: {
       base: rgb(37, 41, 63),
