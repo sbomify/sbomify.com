@@ -17,6 +17,7 @@
  *   navy    embers on navy, right side (call-to-action band)
  *   band    fainter embers, low right, for full-width navy sections
  *   vivid   a full, saturated orange cloud low in a light section
+ *   grey    a quiet grey drift inside a light card
  *   footer  pale navy smoke rising from the bottom edge
  *   mark    navy smoke filling the footer wordmark
  */
@@ -57,6 +58,12 @@
       base: rgb(255, 255, 255),
       low: rgb(255, 196, 160), mid: rgb(255, 138, 64), high: rgb(232, 90, 12),
       mask: [0.62, 0.05, 0.85, 0.8], narrow: [0.6, 0.0, 1.1, 0.7], fade: [-1, 0], gain: 2.3, scale: 0.5, seed: [9.4, 21.7], speed: 1
+    },
+    // A quiet grey drift inside a light card (Trust Center).
+    grey: {
+      base: rgb(255, 255, 255),
+      low: rgb(238, 240, 244), mid: rgb(211, 212, 217), high: rgb(168, 169, 178),
+      mask: [0.62, 0.45, 0.75, 0.95], narrow: [0.6, 0.3, 0.9, 0.6], fade: [-1, 0], gain: 1.5, scale: 0.55, seed: [2.6, 15.3], speed: 0.8
     },
     footer: {
       base: rgb(255, 255, 255),

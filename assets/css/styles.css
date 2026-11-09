@@ -4841,11 +4841,21 @@ button {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 28px;
   align-items: center;
-  /* A soft Signal Orange glow behind the picture, the hero's palette. */
-  background:
-    radial-gradient(42% 55% at 82% 30%, rgb(var(--color-orange-300) / 0.28), transparent 70%),
-    radial-gradient(35% 45% at 95% 85%, rgb(var(--color-orange-100) / 0.5), transparent 70%),
-    rgb(var(--color-white));
+  overflow: hidden;
+  /* The grey nebula (assets/js/nebula.js) drifts behind the picture; its
+     still is the background until then. */
+  background-color: rgb(var(--color-white));
+  background-size: cover;
+  background-position: center;
+}
+.ins .bento-tc > :not(canvas) {
+  position: relative;
+}/* The hairline as an outline, which paints above the nebula canvas (an
+   inset shadow would sit under it). */
+.ins .bento-tc {
+  box-shadow: 0 1px 2px rgb(var(--color-navy-100) / 0.04);
+  outline: 1px solid rgb(var(--color-navy-10));
+  outline-offset: -1px;
 }
 .ins .bento-copy {
   display: flex;
@@ -4878,54 +4888,32 @@ button {
   .ins .bento-tc {
     grid-template-columns: minmax(0, 1fr);
   }
-}/* Evidence: an audit trail down a hairline. */
-.ins .trail {
-  position: relative;
+}/* Evidence: three versions of one VEX statement, newest on top, the
+   older ones stepping back. */
+.ins .versions {
   display: grid;
-  gap: 14px;
-  margin: 8px 0 6px;
-  padding-left: 20px;
+  margin: 10px 0 6px;
 }
-.ins .trail::before {
-  content: "";
-  position: absolute;
-  left: 4px;
-  top: 6px;
-  bottom: 6px;
-  width: 1px;
-  background: rgb(var(--color-navy-20));
-  transform-origin: top center;
-}
-.ins .trail li {
-  position: relative;
-  display: grid;
-  gap: 1px;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: rgb(var(--color-navy-80));
-}
-.ins .trail li::before {
-  content: "";
-  position: absolute;
-  left: -20px;
-  top: 5px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
+.ins .versions li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
   background: rgb(var(--color-white));
-  box-shadow: inset 0 0 0 2px rgb(var(--color-navy-100));
-}
-.ins .trail li:last-child::before {
-  background: rgb(var(--color-navy-100));
-}
-.ins .trail time {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: rgb(var(--color-navy-60));
-}
-.ins .trail b {
-  font-weight: var(--font-weight-semibold);
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10)), 0 6px 16px -10px rgb(var(--color-navy-100) / 0.25);
+  font-size: 0.88rem;
   color: rgb(var(--color-navy-100));
+}
+.ins .versions li + li {
+  margin-top: -6px;
+}
+.ins .versions li:nth-child(1) { position: relative; z-index: 3; }
+.ins .versions li:nth-child(2) { position: relative; z-index: 2; margin-inline: 10px; opacity: 0.6; }
+.ins .versions li:nth-child(3) { position: relative; z-index: 1; margin-inline: 20px; opacity: 0.35; }
+.ins .versions .mono {
+  font-weight: var(--font-weight-semibold);
 }/* CRA coverage: eight segments, one per requirement. */
 .ins .cover {
   margin-top: 6px;
@@ -5014,8 +5002,7 @@ button {
   .ins .docs {
     grid-template-columns: minmax(0, 1fr);
   }
-}/* Reveal: cards rise in turn; the trail draws and steps in; the coverage
-   bar fills segment by segment. */
+}/* Reveal: cards rise in turn; the coverage bar fills segment by segment. */
 .ins .bento.reveal-ready .bento-card {
   opacity: 0;
   transform: translateY(12px);
@@ -5024,27 +5011,15 @@ button {
 .ins .bento.reveal-ready .bento-ev { transition-delay: 0.1s; }
 .ins .bento.reveal-ready .bento-cra { transition-delay: 0.2s; }
 .ins .bento.reveal-ready .bento-docs { transition-delay: 0.3s; }
-.ins .bento.reveal-ready .trail::before {
-  transform: scaleY(0);
-  transition: transform 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.4s;
-}
-.ins .bento.reveal-ready .trail li {
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  transition-delay: calc(0.5s + var(--i, 0) * 0.16s);
-}
 .ins .bento.reveal-ready .cover-bar i {
   transform: scaleX(0);
   transition: transform 0.35s ease-out;
   transition-delay: calc(0.6s + var(--i, 0) * 0.08s);
 }
-.ins .bento.reveal-ready.is-in .bento-card,
-.ins .bento.reveal-ready.is-in .trail li {
+.ins .bento.reveal-ready.is-in .bento-card {
   opacity: 1;
   transform: none;
 }
-.ins .bento.reveal-ready.is-in .trail::before,
 .ins .bento.reveal-ready.is-in .cover-bar i {
   transform: none;
 }/* ---------- dark band: a full-width navy section ---------- *//* Edge to edge, navy, embers from assets/js/nebula.js (variant "band").
