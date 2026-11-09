@@ -99,6 +99,58 @@
     });
   }
 
+  // Final CTA test: ?cta=prompt swaps the classic call to action for the
+  // agent prompt. Remove once one of the two is chosen.
+  function initCtaVariant () {
+    if (new URLSearchParams(location.search).get('cta') !== 'prompt') return;
+    document.querySelectorAll('[data-cta-variant]').forEach(function (el) {
+      el.hidden = el.dataset.ctaVariant !== 'prompt';
+    });
+  }
+
+  // Copy a prepared prompt from a <template>. The button ships hidden. Where
+  // the async clipboard is missing (plain http), copy through a hidden
+  // textarea instead.
+  function copyText (text) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    return new Promise(function (resolve, reject) {
+      var area = document.createElement('textarea');
+      area.value = text;
+      area.setAttribute('readonly', '');
+      area.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none';
+      document.body.appendChild(area);
+      area.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      area.remove();
+      if (ok) { resolve(); } else { reject(new Error('copy failed')); }
+    });
+  }
+
+  function initPromptCopy () {
+    document.querySelectorAll('[data-copy-prompt]').forEach(function (button) {
+      var source = document.getElementById(button.dataset.copyPrompt);
+      var label = button.querySelector('[data-label]');
+      if (!source || !label) return;
+      button.hidden = false;
+      button.addEventListener('click', function () {
+        copyText(source.content.textContent.trim()).then(function () {
+          return 'Copied';
+        }, function () {
+          return 'Could not copy';
+        }).then(function (message) {
+          label.textContent = message;
+          button.classList.add('is-copied');
+          setTimeout(function () {
+            label.textContent = 'Copy prompt';
+            button.classList.remove('is-copied');
+          }, 2000);
+        });
+        if (window.posthog) window.posthog.capture('cta_click', { intent: 'agent_prompt', location: 'home_final_prompt', label: 'Copy prompt' });
+      });
+    });
+  }
+
   // Reveal: [data-reveal] blocks animate in once when they scroll into view.
   // The class that hides them is added here, so without JavaScript (or with
   // reduced motion) they are simply shown.
@@ -293,4 +345,6 @@
   initAgent();
   initCodeCopy();
   initAgentTools();
+  initCtaVariant();
+  initPromptCopy();
 }())

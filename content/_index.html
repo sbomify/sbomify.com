@@ -508,7 +508,7 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
         <div class="dawn-sun" aria-hidden="true"></div>
         <div class="dawn-horizon" aria-hidden="true"></div>
         <div class="dawn-ground" aria-hidden="true" data-nebula="ground" style="background-image: url('{{< nebula-still "ground" >}}')"></div>
-        <div class="wrap dawn-copy">
+        <div class="wrap dawn-copy" data-cta-variant="classic">
             <span class="kicker">Ready when you are</span>
             <h2>Your CRA vulnerability-handling workflow starts here</h2>
             <p>Stop managing SBOMs, releases, vulnerabilities and security disclosures in separate systems. Bring them together with sbomify.</p>
@@ -521,6 +521,42 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
                 <li>{{< ph "check" >}}Open source</li>
                 <li>{{< ph "check" >}}Cloud or self-hosted</li>
             </ul>
+        </div>
+        {{< comment >}}Test variant, shown at /?cta=prompt (assets/js/main.js): the app's own
+        repository-setup prompt (sbomify/sbomify repository-setup.ts), with the token line
+        pointing at where a new account creates one. The steps live in app.sbomify.com/setup.md.{{< /comment >}}
+        <div class="wrap dawn-copy dawn-prompt" data-cta-variant="prompt" hidden>
+            <span class="kicker">Ready when you are</span>
+            <h2>Set up sbomify with one prompt</h2>
+            <p>Paste it into your coding agent. It surveys your repository, proposes the setup and waits for your go-ahead.</p>
+            <figure class="prompt-card">
+                <figcaption class="prompt-bar">
+                    <span>{{< ph "sparkle" "fill" >}}Prompt</span>
+                    <button type="button" class="btn-navy btn-md" data-copy-prompt="setup-prompt" hidden>{{< ph "copy" >}}<span data-label>Copy prompt</span></button>
+                </figcaption>
+                <div class="prompt-body">
+                    <p class="prompt-lead">Set up sbomify for this repository.</p>
+                    <p>Read <a href="https://app.sbomify.com/setup.md">https://app.sbomify.com/setup.md</a> and follow it exactly.</p>
+                    <dl>
+                        <div><dt>API</dt><dd>https://app.sbomify.com/api/v1</dd></div>
+                        <div><dt>Auth</dt><dd>Authorization: Bearer &lt;setup token&gt;</dd></div>
+                        <div><dt>Token</dt><dd>Ask me for it. I'll create one at https://app.sbomify.com/getting-started/</dd></div>
+                    </dl>
+                    <p>Create everything as private.</p>
+                    <p>Review the proposed changes with me before applying them.</p>
+                </div>
+            </figure>
+            <template id="setup-prompt"><pre>Set up sbomify for this repository.
+
+Read https://app.sbomify.com/setup.md and follow it exactly.
+
+API     https://app.sbomify.com/api/v1
+Auth    Authorization: Bearer &lt;setup token&gt;
+Token   Ask me for it. I'll create one at https://app.sbomify.com/getting-started/
+Create everything as private.
+
+Review the proposed changes with me before applying them.</pre></template>
+            <p class="prompt-alt">Rather click through? <a href="https://app.sbomify.com" data-cta-location="home_final_prompt" data-cta-label="Start free">Start free</a> or <a href="https://app.sbomify.com/enterprise-contact/" data-cta-location="home_final_prompt" data-cta-label="Book a demo">book a demo</a>.</p>
         </div>
     </section>
 
