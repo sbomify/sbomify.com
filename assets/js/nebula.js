@@ -16,6 +16,7 @@
  *   light-center  the same along the top, for a centred hero
  *   navy    embers on navy, right side (call-to-action band)
  *   band    fainter embers, low right, for full-width navy sections
+ *   vivid   a full, saturated orange cloud low in a light section
  *   footer  pale navy smoke rising from the bottom edge
  *   mark    navy smoke filling the footer wordmark
  */
@@ -49,6 +50,13 @@
       base: rgb(37, 41, 63),
       low: rgb(70, 36, 34), mid: rgb(150, 56, 22), high: rgb(232, 90, 12),
       mask: [0.9, 0.1, 0.42, 0.75], narrow: [0.95, 0.05, 0.6, 0.35], fade: [-1, 0], gain: 0.85, scale: 0.6, seed: [17.9, 4.6], speed: 1
+    },
+    // A whole light section: fuller and more saturated, low in the section,
+    // under a white-to-clear wash (the section's own CSS).
+    vivid: {
+      base: rgb(255, 255, 255),
+      low: rgb(255, 196, 160), mid: rgb(255, 138, 64), high: rgb(232, 90, 12),
+      mask: [0.62, 0.05, 0.85, 0.8], narrow: [0.6, 0.0, 1.1, 0.7], fade: [-1, 0], gain: 2.3, scale: 0.5, seed: [9.4, 21.7], speed: 1
     },
     footer: {
       base: rgb(255, 255, 255),

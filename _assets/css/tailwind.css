@@ -2827,47 +2827,35 @@
   }
 }
 
-/* ---------- agents: a full-width band in the app's deepest navy ---------- */
+/* ---------- agents: a full-width band on a vivid nebula ---------- */
 
-/* A different room from the orange-ember navy bands: the app's darkest
-   background, a faint dot grid that fades towards the edges, and a glow in
-   the app's periwinkle accent. */
+/* White at the top, the nebula (assets/js/nebula.js, variant "vivid")
+   rising from the bottom: a white-to-clear wash over the cloud, under the
+   content. The dark app cards sit on it unchanged. */
 .ins .band-agent {
   position: relative;
   isolation: isolate;
   overflow: hidden;
   padding-block: clamp(64px, 9vw, 120px);
-  background: rgb(var(--color-app-bg));
-  color: rgb(var(--color-white));
+  background-color: rgb(var(--color-white));
+  background-position: bottom center;
+  color: rgb(var(--color-navy-100));
 }
 
-.ins .band-agent::before,
+/* The wash: after the nebula canvas in paint order, before the content. */
 .ins .band-agent::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-}
-
-.ins .band-agent::before {
-  background-image: radial-gradient(rgb(var(--color-white) / 0.07) 1px, transparent 1.2px);
-  background-size: 22px 22px;
-  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 60% 45%, #000 30%, transparent 80%);
-  mask-image: radial-gradient(ellipse 70% 70% at 60% 45%, #000 30%, transparent 80%);
-}
-
-.ins .band-agent::after {
-  background:
-    radial-gradient(40% 45% at 78% 42%, rgb(var(--color-app-primary) / 0.16), transparent 70%),
-    radial-gradient(30% 35% at 12% 0%, rgb(var(--color-app-primary) / 0.08), transparent 70%);
+  background: linear-gradient(180deg, rgb(var(--color-white)) 0%, rgb(var(--color-white)) 22%, rgb(var(--color-white) / 0.7) 48%, rgb(var(--color-white) / 0) 82%);
 }
 
 .ins .band-agent .kicker {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: rgb(var(--color-app-primary));
 }
 
 /* A small spark: the "AI" marker, in the app's accent. */
@@ -2877,25 +2865,12 @@
   background: rgb(var(--color-app-primary));
   transform: rotate(45deg);
   border-radius: 1.5px;
-  box-shadow: 0 0 12px rgb(var(--color-app-primary) / 0.8);
-}
-
-.ins .band-agent .sec-title .soft {
-  color: rgb(var(--color-white) / 0.55);
-}
-
-.ins .band-agent .sec-lede,
-.ins .band-agent .sec-close {
-  color: rgb(var(--color-white) / 0.72);
+  box-shadow: 0 0 10px rgb(var(--color-app-primary) / 0.7);
 }
 
 .ins .band-agent .sec-close b {
-  color: rgb(var(--color-white));
+  color: rgb(var(--color-navy-100));
   font-weight: var(--font-weight-semibold);
-}
-
-.ins .band-agent a {
-  text-decoration-color: rgb(var(--color-white) / 0.35);
 }
 
 /* The picture: the session on the left, the review queue on the right. */
@@ -2915,8 +2890,8 @@
 /* The terminal. */
 .ins .term {
   border-radius: 14px;
-  background: rgb(var(--color-app-surface) / 0.9);
-  box-shadow: 0 0 0 1px rgb(var(--color-app-border)), 0 40px 80px -30px rgb(0 0 0 / 0.7);
+  background: rgb(var(--color-app-surface));
+  box-shadow: 0 0 0 1px rgb(var(--color-app-border)), 0 40px 80px -30px rgb(var(--color-navy-100) / 0.55);
   overflow: hidden;
 }
 
@@ -3022,8 +2997,8 @@
 .ins .rq {
   padding: 18px;
   border-radius: 14px;
-  background: rgb(var(--color-app-surface) / 0.9);
-  box-shadow: 0 0 0 1px rgb(var(--color-app-border)), 0 40px 80px -30px rgb(0 0 0 / 0.7);
+  background: rgb(var(--color-app-surface));
+  box-shadow: 0 0 0 1px rgb(var(--color-app-border)), 0 40px 80px -30px rgb(var(--color-navy-100) / 0.55);
   font-size: 0.85rem;
   color: rgb(var(--color-navy-20));
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -3144,16 +3119,16 @@
 
 .ins .agent-can li {
   padding-top: 16px;
-  border-top: 1px solid rgb(var(--color-white) / 0.12);
+  border-top: 1px solid rgb(var(--color-navy-100) / 0.14);
   font-size: 0.95rem;
-  color: rgb(var(--color-white) / 0.65);
+  color: rgb(var(--color-navy-80));
 }
 
 .ins .agent-can b {
   display: block;
   margin-bottom: 2px;
   font-weight: var(--font-weight-semibold);
-  color: rgb(var(--color-white));
+  color: rgb(var(--color-navy-100));
 }
 
 @media (max-width: 760px) {
@@ -3216,7 +3191,7 @@
 
 /* The queue waits dimmed until the proposal arrives. */
 .ins .agent.is-playing .rq:not(.on) {
-  opacity: 0.35;
+  opacity: 0.55;
   transform: translateY(8px);
 }
 
