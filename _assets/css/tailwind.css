@@ -2978,17 +2978,20 @@
 .ins .app-badge,
 .ins .app-sev {
   --tone: var(--app-muted);
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 9px;
+  /* inline-block, not inline-flex: text-box trimming applies to block
+     containers, not flex ones. */
+  display: inline-block;
+  padding: 6.25px 9px 5.75px; /* measured: optically centred */
   border-radius: 999px;
   border: 1px solid color-mix(in oklab, var(--tone) 22%, transparent);
   background: color-mix(in oklab, var(--tone) 13%, transparent);
   font-size: 0.68rem;
   font-weight: var(--font-weight-semibold);
-  line-height: 1.5;
+  line-height: 1;
   color: var(--tone);
   white-space: nowrap;
+  /* Centre on the capitals, not the font's ascender. */
+  text-box: trim-both cap alphabetic;
 }
 
 .ins .app-badge[data-tone="success"] { --tone: rgb(var(--color-app-success)); }
@@ -2997,10 +3000,22 @@
 
 .ins .app-sev {
   border-radius: 5px;
-  padding: 1px 6px;
+  padding: 5.4px 6px 4.6px;
   font-size: 0.6rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+/* Without text-box trimming the line box is taller and the text sits high:
+   the font's ascender is taller than its descender. Pad to compensate. */
+@supports not (text-box: trim-both cap alphabetic) {
+  .ins .app-badge {
+    padding: 4px 9px 3px;
+  }
+
+  .ins .app-sev {
+    padding: 3px 6px 2px;
+  }
 }
 
 .ins .app-sev[data-level="critical"] { --tone: rgb(var(--color-app-critical)); }
@@ -3232,13 +3247,20 @@
 
 /* Filled pills, for the head of an item. */
 .ins .pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 12px;
+  display: inline-block;
+  padding: 7px 12px;
   border-radius: 999px;
   font-size: 0.82rem;
   font-weight: var(--font-weight-semibold);
+  line-height: 1;
   white-space: nowrap;
+  text-box: trim-both cap alphabetic;
+}
+
+@supports not (text-box: trim-both cap alphabetic) {
+  .ins .pill {
+    padding: 5px 12px 4px;
+  }
 }
 
 .ins .pill[data-sev="critical"] {
