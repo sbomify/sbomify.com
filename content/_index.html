@@ -206,56 +206,87 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
         </div>
     </section>
 
-    {{< comment >}}CVE scenario{{< /comment >}}
-    <section class="section">
-        <div class="wrap pair">
-            <div class="topic">
-                <span class="kicker">Vulnerability handling</span>
-                <h2>A new CVE just dropped. Now what?</h2>
-                <p>Knowing a dependency has a vulnerability is only the beginning. Which of your supported releases contain it? Are you actually affected? Does it need a patch? What do you tell your customers?</p>
-                <p>sbomify links the finding to the products and releases that ship it, so your team goes from an alert to a recorded decision, a tracked fix and a published advisory.</p>
-                <p class="emph">Less time reconstructing your software history. More time fixing what matters.</p>
-            </div>
-            <figure class="example">
-                <div class="example-head">
-                    <span class="example-id">CVE-2026-XXXXX</span>
-                    <span class="pill" data-sev="critical">Critical</span>
-                    <span class="in">in <span class="mono">acme-parser 2.4.0</span></span>
+    {{< comment >}}CVE scenario: a worked triage that answers itself (stages 0-4; 4 is the finished state){{< /comment >}}
+    <section class="section" id="cve-example">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Vulnerability handling</span>
+                    <h2 class="sec-title">A new CVE just dropped. <span class="soft">Now what?</span></h2>
                 </div>
-                <table>
-                    <caption class="sr-only">Supported releases of an example product and their status for one vulnerability</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">Release</th>
-                            <th scope="col">Support</th>
-                            <th scope="col">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="release">v2.1</td>
-                            <td>Until 2031</td>
-                            <td><span class="sev" data-sev="affected">Affected &middot; fix in progress</span></td>
-                        </tr>
-                        <tr>
-                            <td class="release">v2.0</td>
-                            <td>Until 2030</td>
-                            <td><span class="sev" data-sev="fixed">Fixed in 2.0.4 &middot; advisory published</span></td>
-                        </tr>
-                        <tr>
-                            <td class="release">v1.2.1</td>
-                            <td>Until 2028</td>
-                            <td><span class="sev" data-sev="not-affected">Not affected &middot; VEX: code not reachable</span></td>
-                        </tr>
-                        <tr>
-                            <td class="release muted">v1.0</td>
-                            <td class="muted">Ended 2026</td>
-                            <td><span class="sev">End of life &middot; customers notified</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <figcaption class="note">Illustrative example: one vulnerability across four releases of the same product.</figcaption>
-            </figure>
+                <p class="sec-lede">sbomify links the finding to the products and releases that ship it, so your team goes from an alert to a recorded decision, a tracked fix and a published advisory.</p>
+            </div>
+
+            <div class="triage" data-stages="4" data-stage="4">
+                <ol class="triage-qs">
+                    <li data-q="1"><span class="triage-check" aria-hidden="true"></span><span><b>Which of your supported releases contain it?</b><span class="triage-a">Three of four, straight from their SBOMs</span></span></li>
+                    <li data-q="2"><span class="triage-check" aria-hidden="true"></span><span><b>Are you actually affected?</b><span class="triage-a">v2.0 and v2.1 are; v1.2.1 is not, recorded with VEX</span></span></li>
+                    <li data-q="3"><span class="triage-check" aria-hidden="true"></span><span><b>Does it need a patch?</b><span class="triage-a">Fixed in 2.0.4, in progress for 2.1</span></span></li>
+                    <li data-q="4"><span class="triage-check" aria-hidden="true"></span><span><b>What do you tell your customers?</b><span class="triage-a">An advisory, on your Trust Center and as CSAF</span></span></li>
+                </ol>
+
+                <figure class="triage-case">
+                    <div class="example-head">
+                        <span class="example-id">CVE-2026-XXXXX</span>
+                        <span class="pill" data-sev="critical">Critical</span>
+                        <span class="in">in <span class="mono">acme-parser 2.4.0</span></span>
+                    </div>
+                    <table>
+                        <caption class="sr-only">Supported releases of an example product and their status for one vulnerability</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Release</th>
+                                <th scope="col">Support</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-changes="1 2 3">
+                                <td class="release">v2.1</td>
+                                <td>Until 2031</td>
+                                <td><div class="st-stack">
+                                    <span class="sev st" data-show="0" data-sev="pending" data-label="Checking" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="1" data-label="Ships acme-parser 2.4.0" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="2" data-sev="affected" data-label="Affected" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="3 4" data-sev="affected">Affected &middot; fix in progress</span>
+                                </div></td>
+                            </tr>
+                            <tr data-changes="1 2 3 4">
+                                <td class="release">v2.0</td>
+                                <td>Until 2030</td>
+                                <td><div class="st-stack">
+                                    <span class="sev st" data-show="0" data-sev="pending" data-label="Checking" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="1" data-label="Ships acme-parser 2.4.0" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="2" data-sev="affected" data-label="Affected" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="3" data-sev="fixed" data-label="Fixed in 2.0.4" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="4" data-sev="fixed">Fixed in 2.0.4 &middot; advisory published</span>
+                                </div></td>
+                            </tr>
+                            <tr data-changes="1 2">
+                                <td class="release">v1.2.1</td>
+                                <td>Until 2028</td>
+                                <td><div class="st-stack">
+                                    <span class="sev st" data-show="0" data-sev="pending" data-label="Checking" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="1" data-label="Ships acme-parser 2.4.0" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="2 3 4" data-sev="not-affected">Not affected &middot; VEX: code not reachable</span>
+                                </div></td>
+                            </tr>
+                            <tr data-changes="1 4">
+                                <td class="release muted">v1.0</td>
+                                <td class="muted">Ended 2026</td>
+                                <td><div class="st-stack">
+                                    <span class="sev st" data-show="0" data-sev="pending" data-label="Checking" aria-hidden="true"></span>
+                                    <span class="sev st muted" data-show="1 2 3" data-label="End of life" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="4">End of life &middot; customers notified</span>
+                                </div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <figcaption class="note">Illustrative example: one vulnerability across four releases of the same product.</figcaption>
+                </figure>
+            </div>
+
+            <p class="sec-close">Less time reconstructing your software history. More time fixing what matters. <a href="/faq/how-do-i-enable-vulnerability-scanning/">Vulnerability scanning&nbsp;<span aria-hidden="true">&rarr;</span></a></p>
         </div>
     </section>
 

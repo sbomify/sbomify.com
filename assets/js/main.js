@@ -202,9 +202,52 @@
     });
   }
 
+  // Stages (home page, CVE example): [data-stages] counts data-stage up
+  // from 0 to its last stage once it scrolls into view, holds the finished
+  // state, then plays again while it stays on screen. The HTML ships the
+  // finished state, which is all that shows without JavaScript or with
+  // reduced motion.
+  function initStages () {
+    if (!('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('[data-stages]').forEach(function (root) {
+      var last = parseInt(root.getAttribute('data-stages'), 10) || 1;
+      var STEP = 1600, HOLD = 6000;
+      var timer = null, visible = false, stage = last;
+
+      function set (n) {
+        stage = n;
+        root.setAttribute('data-stage', String(n));
+      }
+
+      // Below the fold at load: start from the beginning, so the first
+      // thing a visitor sees here is the triage starting, not resetting.
+      if (root.getBoundingClientRect().top > window.innerHeight) set(0);
+
+      function tick () {
+        if (!visible) return;
+        if (stage >= last) {
+          set(0);
+          timer = setTimeout(tick, 900);
+        } else {
+          set(stage + 1);
+          timer = setTimeout(tick, stage >= last ? HOLD : STEP);
+        }
+      }
+
+      new IntersectionObserver(function (entries) {
+        var was = visible;
+        visible = entries[0].isIntersecting;
+        clearTimeout(timer);
+        if (visible && !was) timer = setTimeout(tick, 400);
+      }, { threshold: 0.45 }).observe(root);
+    });
+  }
+
   initHeader();
   initReveal();
   initSteps();
+  initStages();
   initCodeCopy();
   initAgentTools();
 }())

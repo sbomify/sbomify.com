@@ -4224,6 +4224,159 @@ button {
   .ins .lifecycle.reveal-ready .lc-track::before {
     transform: scaleY(0);
   }
+}/* ---------- triage: a worked example that answers itself ---------- *//* Questions on the left, the case on the right. The container's data-stage
+   (0 to 4, from assets/js/main.js) says how far the triage has got: each
+   question ticks off with its answer, and each release's status moves on.
+   Stage 4, the finished state, is what ships in the HTML, so without
+   JavaScript or with reduced motion that is what shows. */
+.ins .triage {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 40px 64px;
+  align-items: start;
+}
+@media (max-width: 960px) {
+  .ins .triage {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.ins .triage-qs li {
+  display: flex;
+  gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid rgb(var(--color-navy-10));
+}
+.ins .triage-qs li:last-child {
+  border-bottom: 1px solid rgb(var(--color-navy-10));
+}
+.ins .triage-qs b {
+  display: block;
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+  transition: color 0.3s ease;
+}
+.ins .triage-a {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.92rem;
+  color: rgb(var(--color-navy-80));
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}/* The check: an empty ring until answered, then a filled navy disc. */
+.ins .triage-check {
+  position: relative;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px rgb(var(--color-navy-20));
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.ins .triage-check::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 5px;
+  width: 8px;
+  height: 5px;
+  border-left: 2px solid rgb(var(--color-white));
+  border-bottom: 2px solid rgb(var(--color-white));
+  transform: rotate(-45deg) scale(0.4);
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.25s ease;
+}/* Answered (the default): a filled navy disc with a tick. */
+.ins .triage .triage-check {
+  background: rgb(var(--color-navy-100));
+  box-shadow: none;
+}
+.ins .triage .triage-check::after {
+  opacity: 1;
+  transform: rotate(-45deg);
+}/* Not answered yet: a quiet question, no answer, an empty ring. */
+.ins .triage[data-stage="0"] [data-q] b,
+.ins .triage[data-stage="1"] :is([data-q="2"], [data-q="3"], [data-q="4"]) b,
+.ins .triage[data-stage="2"] :is([data-q="3"], [data-q="4"]) b,
+.ins .triage[data-stage="3"] [data-q="4"] b {
+  color: rgb(var(--color-navy-60));
+}
+.ins .triage[data-stage="0"] [data-q] .triage-a,
+.ins .triage[data-stage="1"] :is([data-q="2"], [data-q="3"], [data-q="4"]) .triage-a,
+.ins .triage[data-stage="2"] :is([data-q="3"], [data-q="4"]) .triage-a,
+.ins .triage[data-stage="3"] [data-q="4"] .triage-a {
+  opacity: 0;
+  transform: translateY(-3px);
+}
+.ins .triage[data-stage="0"] [data-q] .triage-check,
+.ins .triage[data-stage="1"] :is([data-q="2"], [data-q="3"], [data-q="4"]) .triage-check,
+.ins .triage[data-stage="2"] :is([data-q="3"], [data-q="4"]) .triage-check,
+.ins .triage[data-stage="3"] [data-q="4"] .triage-check {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px rgb(var(--color-navy-20));
+}
+.ins .triage[data-stage="0"] [data-q] .triage-check::after,
+.ins .triage[data-stage="1"] :is([data-q="2"], [data-q="3"], [data-q="4"]) .triage-check::after,
+.ins .triage[data-stage="2"] :is([data-q="3"], [data-q="4"]) .triage-check::after,
+.ins .triage[data-stage="3"] [data-q="4"] .triage-check::after {
+  opacity: 0;
+  transform: rotate(-45deg) scale(0.4);
+}/* The question being answered right now. */
+.ins .triage[data-stage="1"] [data-q="1"] b,
+.ins .triage[data-stage="2"] [data-q="2"] b,
+.ins .triage[data-stage="3"] [data-q="3"] b {
+  color: rgb(var(--color-navy-100));
+}/* Status cells: every state stacked in one grid cell, so the table never
+   changes size; only the current one is shown. Intermediate states draw
+   their label from data-label and are hidden from assistive tech; the
+   final state is real text and stays readable to it throughout. */
+.ins .triage .st-stack {
+  display: grid;
+}
+.ins .triage .st {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.ins .triage .st[data-label]::after {
+  content: attr(data-label);
+}
+.ins .triage .sev[data-sev="pending"]::before {
+  background: rgb(var(--color-navy-20));
+  animation: triage-pulse 1s ease-in-out infinite alternate;
+}
+.ins .triage .sev[data-sev="pending"] {
+  color: rgb(var(--color-navy-60));
+}
+@keyframes triage-pulse {
+  from { opacity: 0.35; }
+  to { opacity: 1; }
+}
+.ins .triage[data-stage="0"] .st[data-show~="0"],
+.ins .triage[data-stage="1"] .st[data-show~="1"],
+.ins .triage[data-stage="2"] .st[data-show~="2"],
+.ins .triage[data-stage="3"] .st[data-show~="3"],
+.ins .triage[data-stage="4"] .st[data-show~="4"] {
+  opacity: 1;
+}/* A row whose status just changed glows briefly. */
+.ins .triage[data-stage="1"] tr[data-changes~="1"] td,
+.ins .triage[data-stage="2"] tr[data-changes~="2"] td,
+.ins .triage[data-stage="3"] tr[data-changes~="3"] td,
+.ins .triage[data-stage="4"] tr[data-changes~="4"] td {
+  animation: triage-flash 1.4s ease-out;
+}
+@keyframes triage-flash {
+  0% { background-color: rgb(var(--color-panel)); }
+  100% { background-color: transparent; }
+}
+.ins .triage-case table {
+  margin-top: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ins .triage *,
+  .ins .triage *::before,
+  .ins .triage *::after {
+    transition: none !important;
+    animation: none !important;
+  }
 }/* ---------- dark band: a full-width navy section ---------- *//* Edge to edge, navy, embers from assets/js/nebula.js (variant "band").
    The section pattern inside it switches to white type. */
 .ins .band-dark {
