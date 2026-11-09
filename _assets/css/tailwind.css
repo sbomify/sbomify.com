@@ -2754,7 +2754,51 @@
 }
 
 .ins .triage-case table {
-  margin-top: 4px;
+  margin-top: 8px;
+}
+
+/* More air than the plain table: taller rows, wider gutters, and the
+   first two columns sized to their content so Status gets the room. */
+.ins .triage-case th {
+  padding: 12px 28px 12px 0;
+}
+
+.ins .triage-case td {
+  padding: 16px 28px 16px 0;
+  vertical-align: middle;
+}
+
+.ins .triage-case :is(th, td):first-child {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.ins .triage-case :is(th, td):nth-child(2) {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.ins .triage-case :is(th, td):last-child {
+  padding-right: 0;
+}
+
+@media (max-width: 600px) {
+  .ins .triage-case th {
+    padding: 10px 14px 10px 0;
+  }
+
+  .ins .triage-case td {
+    padding: 14px 14px 14px 0;
+  }
+}
+
+/* A status that wraps keeps its dot on the first line. */
+.ins .triage-case .sev {
+  align-items: flex-start;
+}
+
+.ins .triage-case .sev::before {
+  margin-top: 0.42em;
 }
 
 @media (prefers-reduced-motion: reduce) {
