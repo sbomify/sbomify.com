@@ -147,6 +147,9 @@
           panels[n].hidden = false;
           panels[n].setAttribute('aria-hidden', on ? 'false' : 'true');
         });
+        // The app picture's sidebar follows the step.
+        var win = root.querySelector('[data-step]');
+        if (win) win.setAttribute('data-step', String(i + 1));
         if (focus) tabs[i].focus();
         schedule();
       }

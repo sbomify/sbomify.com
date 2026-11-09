@@ -2623,8 +2623,8 @@
 .ins .steps {
   --dwell: 6s;
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: 32px 56px;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  gap: 32px 48px;
   align-items: center;
 }
 
@@ -2735,18 +2735,284 @@
   to { opacity: 1; transform: none; }
 }
 
-/* The window: glass on navy, a mono path in its bar, then rows. */
-.ins .steps-window {
-  position: relative;
+/* The window: a simplified screen of the sbomify app in its own dark theme
+   (tokens --color-app-*). A sidebar with the app's real navigation, whose
+   active item follows the step (data-step, set by assets/js/main.js), a top
+   bar, then the page: a title and a table in the app's style. */
+.ins .app-window {
+  --app-text: rgb(var(--color-white));
+  --app-text-2: rgb(var(--color-navy-20));
+  --app-muted: rgb(var(--color-navy-40));
   display: grid;
-  border-radius: 18px;
-  background: rgb(var(--color-white) / 0.05);
-  box-shadow: inset 0 0 0 1px rgb(var(--color-white) / 0.1), 0 30px 60px -30px rgb(0 0 0 / 0.5);
+  grid-template-columns: 172px minmax(0, 1fr);
+  border-radius: 14px;
+  background: rgb(var(--color-app-bg));
+  box-shadow: 0 0 0 1px rgb(var(--color-app-border)), 0 40px 80px -30px rgb(0 0 0 / 0.6);
   overflow: hidden;
+  font-size: 0.8rem;
+  color: var(--app-text-2);
 }
 
-/* All screens share one grid cell, so the window keeps the height of the
-   tallest and the switch is a crossfade. */
+.ins .app-side {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 10px;
+  background: rgb(var(--color-app-surface));
+  border-right: 1px solid rgb(var(--color-app-border));
+}
+
+.ins .app-logo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 2px 8px 12px;
+  color: var(--app-text);
+}
+
+.ins .app-logo svg {
+  width: 18px;
+  height: auto;
+}
+
+.ins .app-logo b {
+  font-size: 0.95rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+}
+
+.ins .app-ws {
+  margin: 0 0 6px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px rgb(var(--color-app-border));
+  color: var(--app-text);
+}
+
+.ins .app-group {
+  padding: 10px 8px 3px;
+  font-size: 0.6rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--app-muted);
+}
+
+.ins .app-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+/* The app draws a small icon per item; here a quiet square stands in. */
+.ins .app-nav::before {
+  content: "";
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1.5px var(--app-muted);
+}
+
+/* The active item, as in the app: a tint and an inset ring. */
+.ins .app-window[data-step="1"] [data-nav="1"],
+.ins .app-window[data-step="2"] [data-nav="2"],
+.ins .app-window[data-step="3"] [data-nav="3"],
+.ins .app-window[data-step="4"] [data-nav="4"] {
+  background: rgb(var(--color-app-hover));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-app-border));
+  color: var(--app-text);
+}
+
+.ins .app-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ins .app-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 18px;
+  background: rgb(var(--color-app-surface));
+  border-bottom: 1px solid rgb(var(--color-app-border));
+}
+
+.ins .app-search {
+  flex: 0 1 200px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgb(var(--color-app-bg));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-app-border));
+  color: var(--app-muted);
+}
+
+.ins .app-avatar {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgb(var(--color-app-primary) / 0.25);
+  font-size: 0.6rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--app-text);
+}
+
+/* All pages share one grid cell, so the window keeps the tallest height
+   and a switch is a crossfade. */
+.ins .app-panels {
+  display: grid;
+  flex: 1;
+  padding: 18px 18px 20px;
+}
+
+.ins .app-title {
+  font-size: 1.15rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.015em;
+  color: var(--app-text);
+}
+
+.ins .app-title span {
+  margin-left: 10px;
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0;
+  color: rgb(var(--color-app-primary));
+}
+
+.ins .app-badges,
+.ins .app-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.ins .app-stats span {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgb(var(--color-app-surface));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-app-border));
+  color: var(--app-muted);
+}
+
+.ins .app-stats b {
+  font-size: 1rem;
+  color: var(--app-text);
+}
+
+/* The table: an upper-case header band, compact rows, hairlines. */
+.ins .app-table {
+  width: 100%;
+  margin-top: 14px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 1px rgb(var(--color-app-border));
+  background: rgb(var(--color-app-surface));
+  font-size: 0.8rem;
+}
+
+.ins .app-table th {
+  padding: 8px 12px;
+  border-bottom: 1px solid rgb(var(--color-app-border));
+  font-size: 0.62rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--app-muted);
+}
+
+.ins .app-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid rgb(var(--color-app-border));
+  vertical-align: middle;
+  color: var(--app-text-2);
+  white-space: nowrap;
+}
+
+.ins .app-table tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Overrides the plain tables' flush last column. */
+.ins .app-table td:last-child,
+.ins .app-table th:last-child {
+  padding-right: 12px;
+}
+
+.ins .app-table .end {
+  text-align: right;
+}
+
+.ins .app-table td b {
+  display: block;
+  font-weight: var(--font-weight-semibold);
+  color: var(--app-text);
+}
+
+.ins .app-table td b.mono {
+  font-size: 0.78rem;
+}
+
+.ins .app-table td small {
+  display: block;
+  margin-top: 1px;
+  font-size: 0.7rem;
+  color: var(--app-muted);
+}
+
+/* Badges, as the app draws them: a 12% tint, a 20% edge, coloured text. */
+.ins .app-badge,
+.ins .app-sev {
+  --tone: var(--app-muted);
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--tone) 22%, transparent);
+  background: color-mix(in oklab, var(--tone) 13%, transparent);
+  font-size: 0.68rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.5;
+  color: var(--tone);
+  white-space: nowrap;
+}
+
+.ins .app-badge[data-tone="success"] { --tone: rgb(var(--color-app-success)); }
+.ins .app-badge[data-tone="info"] { --tone: rgb(var(--color-app-info)); }
+.ins .app-badge[data-tone="primary"] { --tone: rgb(var(--color-app-primary)); }
+
+.ins .app-sev {
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ins .app-sev[data-level="critical"] { --tone: rgb(var(--color-app-critical)); }
+.ins .app-sev[data-level="high"] { --tone: rgb(var(--color-app-high)); }
+.ins .app-sev[data-level="medium"] { --tone: rgb(var(--color-app-medium)); }
+
+.ins .app-note {
+  margin-top: 12px;
+  font-size: 0.75rem;
+  color: var(--app-muted);
+}
+
 .ins .steps.is-ready .steps-panel {
   grid-area: 1 / 1;
   opacity: 0;
@@ -2762,131 +3028,8 @@
   transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s;
 }
 
-/* Each screen a column, its footer on the bottom edge. */
-.ins .steps-panel {
-  display: flex;
-  flex-direction: column;
-}
-
-.ins .steps-panel .win-foot {
-  margin-top: auto;
-}
-
 .ins .steps:not(.is-ready) .steps-panel + .steps-panel {
-  border-top: 1px solid rgb(var(--color-white) / 0.1);
-}
-
-.ins .win-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 20px;
-  border-bottom: 1px solid rgb(var(--color-white) / 0.08);
-  font-size: 0.8rem;
-  color: rgb(var(--color-white) / 0.55);
-}
-
-.ins .win-bar::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgb(var(--color-accent));
-}
-
-.ins .win-rows {
-  padding: 6px 20px;
-}
-
-.ins .win-rows li {
-  display: grid;
-  /* A fixed status column, so the middle column lines up row to row. */
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) 8.5rem;
-  align-items: center;
-  gap: 16px;
-  padding: 14px 0;
-  font-size: 0.9rem;
-  color: rgb(var(--color-white) / 0.9);
-}
-
-.ins .win-rows li + li {
-  border-top: 1px solid rgb(var(--color-white) / 0.07);
-}
-
-.ins .win-rows li > * {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.ins .win-rows li.is-dim {
-  color: rgb(var(--color-white) / 0.45);
-}
-
-.ins .win-meta {
-  font-size: 0.82rem;
-  color: rgb(var(--color-white) / 0.55);
-}
-
-.ins .win-ok,
-.ins .win-tag {
-  display: inline-flex;
-  align-items: center;
-  justify-self: end;
-  gap: 7px;
-  font-size: 0.82rem;
-  color: rgb(var(--color-white) / 0.85);
-}
-
-.ins .win-ok::before,
-.ins .win-tag::before {
-  content: "";
-  flex: none;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: rgb(var(--color-success-full));
-}
-
-.ins .win-tag::before { background: rgb(var(--color-white) / 0.35); }
-.ins .win-tag[data-tone="danger"]::before { background: rgb(var(--color-danger-full)); }
-.ins .win-tag[data-tone="info"]::before { background: rgb(var(--color-info-full)); }
-.ins .win-tag[data-tone="success"]::before { background: rgb(var(--color-success-full)); }
-
-.ins .win-kev {
-  padding: 1px 6px;
-  border-radius: 999px;
-  background: rgb(var(--color-danger-full));
-  font-size: 0.7rem;
-  font-weight: var(--font-weight-semibold);
-  color: rgb(var(--color-white));
-}
-
-.ins .win-foot {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 16px;
-  padding: 14px 20px 18px;
-  border-top: 1px solid rgb(var(--color-white) / 0.08);
-  font-size: 0.8rem;
-  color: rgb(var(--color-white) / 0.55);
-}
-
-.ins .win-check {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.ins .win-check::before {
-  content: "";
-  width: 10px;
-  height: 6px;
-  margin-top: -3px;
-  border-left: 2px solid rgb(var(--color-success-full));
-  border-bottom: 2px solid rgb(var(--color-success-full));
-  transform: rotate(-45deg);
+  margin-top: 24px;
 }
 
 /* Narrow: the steps over the window. */
@@ -2896,12 +3039,21 @@
   }
 }
 
-@media (max-width: 560px) {
-  .ins .win-rows li {
-    grid-template-columns: minmax(0, 1fr) 7.5rem;
+/* The app collapses its sidebar on small screens; so does the picture.
+   The middle column goes too, so nothing has to scroll. */
+@media (max-width: 1100px) and (min-width: 901px), (max-width: 640px) {
+  .ins .app-window {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .ins .win-rows .win-meta {
+  .ins .app-side {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .ins .app-table th:nth-child(2),
+  .ins .app-table td:nth-child(2) {
     display: none;
   }
 }

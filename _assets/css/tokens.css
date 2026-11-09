@@ -59,6 +59,19 @@
   --color-info-ink: 47 73 184;       /* #2F49B8  derived */
   --color-success-ink: 19 122 81;    /* #137A51  derived: success text on white */
 
+  /* The sbomify app's dark theme (sbomify/sbomify tailwind.src.css), for
+     product illustrations that should look like the real app. */
+  --color-app-bg: 21 23 36;            /* #151724 */
+  --color-app-surface: 30 33 50;       /* #1E2132 */
+  --color-app-hover: 46 50 74;         /* #2E324A */
+  --color-app-border: 56 60 86;        /* #383C56 */
+  --color-app-primary: 124 140 255;    /* #7C8CFF periwinkle */
+  --color-app-success: 54 197 143;     /* #36C58F */
+  --color-app-info: 108 183 240;       /* #6CB7F0 */
+  --color-app-critical: 239 122 133;   /* #EF7A85 */
+  --color-app-high: 253 126 20;        /* #FD7E14 */
+  --color-app-medium: 255 193 7;       /* #FFC107 */
+
   /* ===== Roles: light surfaces (the default) ===== */
   --color-canvas: var(--color-white);
   --color-surface: var(--color-mist-soft);        /* alternating sections, cards on canvas */

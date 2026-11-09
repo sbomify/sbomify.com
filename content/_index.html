@@ -132,44 +132,72 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
                     </li>
                 </ol>
 
-                {{< comment >}}Illustrative product screens, one per step{{< /comment >}}
-                <div class="steps-window">
-                    <div class="steps-panel" role="tabpanel" id="step-panel-1" aria-labelledby="step-tab-1">
-                        <div class="win-bar"><span class="mono">acme / widget-service / sboms</span></div>
-                        <ul class="win-rows">
-                            <li><span class="mono">sbom.cdx.json</span><span class="win-meta">CycloneDX 1.6 &middot; 412 components</span><span class="win-ok">Valid</span></li>
-                            <li><span class="mono">sbom.spdx.json</span><span class="win-meta">SPDX 2.3 &middot; 409 components</span><span class="win-ok">Valid</span></li>
-                            <li><span class="mono">vendor-lib.cdx.json</span><span class="win-meta">Uploaded &middot; 58 components</span><span class="win-ok">Valid</span></li>
-                        </ul>
-                        <div class="win-foot"><span class="win-check">NTIA</span><span class="win-check">CISA</span><span class="win-check">BSI TR-03183</span></div>
+                {{< comment >}}Illustrative product screens in the app's own dark theme, one per step{{< /comment >}}
+                <div class="app-window" data-step="1">
+                    <div class="app-side" aria-hidden="true">
+                        <span class="app-logo"><svg viewBox="0 0 130 105" fill="currentColor" aria-hidden="true"><path d="M.92,9.93C-.31,7.83-.31,5.12.92,3.02,2.05,1.08,4.04-.03,6.39,0h27.87c2.35-.02,4.35,1.06,5.48,3.01,1.23,2.1,1.23,4.82,0,6.92-1.12,1.92-3.08,3.01-5.38,3.01H6.39c-2.35.02-4.34-1.07-5.47-3.02Z"/><path d="M47.71,9.93c-1.22-2.1-1.22-4.81,0-6.91C48.85,1.07,50.84-.04,53.19,0h.68s69.45,0,69.45,0c3.56,0,6.46,2.91,6.46,6.48s-2.9,6.46-6.46,6.46H53.09c-2.3,0-4.26-1.09-5.38-3.01Z"/><path d="M1.02,28.36c-1.23-2.09-1.23-4.81,0-6.91,1.14-1.95,3.14-3.07,5.47-3.03h50.96c1.73,0,3.35.68,4.57,1.9,1.22,1.23,1.89,2.86,1.88,4.59,0,3.55-2.9,6.45-6.45,6.45H6.4c-2.3,0-4.26-1.09-5.38-3.01Z"/><path d="M1.02,46.75c-1.22-2.09-1.22-4.79,0-6.89,1.14-1.95,3.14-3.06,5.48-3.02h.68s69.77,0,69.77,0c3.56,0,6.46,2.9,6.46,6.46s-2.9,6.46-6.46,6.46H6.41c-2.31,0-4.27-1.09-5.39-3.01Z"/><path d="M46.36,61.69c0-3.56,2.9-6.46,6.46-6.46h70.49c2.35-.02,4.34,1.07,5.47,3.01,1.22,2.09,1.22,4.79,0,6.89-1.12,1.92-3.08,3.02-5.38,3.02h-.76s-69.8,0-69.8,0c-3.56,0-6.46-2.9-6.46-6.45Z"/><path d="M67.76,84.67c-1.22-1.23-1.89-2.86-1.89-4.59,0-3.55,2.9-6.45,6.46-6.45h50.97c2.34-.03,4.33,1.06,5.47,3.01,1.23,2.09,1.23,4.81,0,6.91-1.12,1.93-3.08,3.03-5.39,3.03h-51.05c-1.73,0-3.35-.68-4.57-1.9Z"/><path d="M82.06,95.07c1.22,2.1,1.22,4.81,0,6.91-1.12,1.93-3.08,3.02-5.38,3.02H6.46C2.9,104.99,0,102.09,0,98.52s2.89-6.45,6.44-6.47h70.15c2.35-.02,4.33,1.07,5.46,3.01Z"/><path d="M128.86,101.98c-1.13,1.95-3.12,3.06-5.47,3.02h-27.97c-2.3,0-4.26-1.09-5.38-3.01-1.23-2.1-1.23-4.82,0-6.92,1.14-1.95,3.14-3.03,5.48-3.01h27.87c2.35-.03,4.34,1.07,5.47,3.02,1.22,2.09,1.22,4.8,0,6.9Z"/></svg><b>sbomify</b></span>
+                        <span class="app-ws">Acme</span>
+                        <span class="app-group">Monitor</span>
+                        <span class="app-nav">Overview</span>
+                        <span class="app-nav" data-nav="3">Vulnerabilities</span>
+                        <span class="app-group">Ship</span>
+                        <span class="app-nav" data-nav="2">Products</span>
+                        <span class="app-nav" data-nav="1">Components</span>
+                        <span class="app-group">Prove</span>
+                        <span class="app-nav">Compliance</span>
+                        <span class="app-nav" data-nav="4">Security advisories</span>
                     </div>
-                    <div class="steps-panel" role="tabpanel" id="step-panel-2" aria-labelledby="step-tab-2">
-                        <div class="win-bar"><span class="mono">acme / widget-service / releases</span></div>
-                        <ul class="win-rows">
-                            <li><span class="mono">v2.1</span><span class="win-meta">Merged SBOM &middot; 3 components</span><span class="win-ok">Until 2031</span></li>
-                            <li><span class="mono">v2.0</span><span class="win-meta">Merged SBOM &middot; 3 components</span><span class="win-ok">Until 2030</span></li>
-                            <li><span class="mono">v1.2.1</span><span class="win-meta">Merged SBOM &middot; 2 components</span><span class="win-ok">Until 2028</span></li>
-                            <li class="is-dim"><span class="mono">v1.0</span><span class="win-meta">End of life</span><span class="win-tag">Ended 2026</span></li>
-                        </ul>
-                        <div class="win-foot"><span>Lifecycle dates as ECMA-428 CLE</span></div>
-                    </div>
-                    <div class="steps-panel" role="tabpanel" id="step-panel-3" aria-labelledby="step-tab-3">
-                        <div class="win-bar"><span class="mono">acme / widget-service / vulnerabilities</span></div>
-                        <ul class="win-rows">
-                            <li><span class="mono">CVE-2026-XXXXX</span><span class="win-meta">acme-parser &middot; <span class="win-kev">KEV</span></span><span class="win-tag" data-tone="danger">Triage</span></li>
-                            <li><span class="mono">CVE-2026-YYYYY</span><span class="win-meta">libxml2 &middot; VEX: not reachable</span><span class="win-tag" data-tone="info">Not affected</span></li>
-                            <li><span class="mono">GHSA-xxxx-yyyy</span><span class="win-meta">lodash &middot; in 2.0.4</span><span class="win-tag" data-tone="success">Fixed</span></li>
-                        </ul>
-                        <div class="win-foot"><span>Rescanned daily &middot; OSV &middot; Dependency-Track &middot; EUVD</span></div>
-                    </div>
-                    <div class="steps-panel" role="tabpanel" id="step-panel-4" aria-labelledby="step-tab-4">
-                        <div class="win-bar"><span class="mono">trust.acme.example</span></div>
-                        <ul class="win-rows">
-                            <li><span>Widget Service SBOM</span><span class="win-meta mono">v2.1 &middot; sbom.cdx.json</span><span class="win-ok">Public</span></li>
-                            <li><span>Security advisory</span><span class="win-meta mono">SA-2026-01 &middot; CSAF 2.0</span><span class="win-ok">Published</span></li>
-                            <li><span>SOC 2 Type II</span><span class="win-meta mono">2026 &middot; soc2.pdf</span><span class="win-tag">Request access</span></li>
-                        </ul>
-                        <div class="win-foot"><span>Also served over the Transparency Exchange API</span></div>
+                    <div class="app-main">
+                        <div class="app-top" aria-hidden="true"><span class="app-search">Search</span><span class="app-avatar">AC</span></div>
+                        <div class="app-panels">
+                            <div class="steps-panel" role="tabpanel" id="step-panel-1" aria-labelledby="step-tab-1">
+                                <p class="app-title">Components</p>
+                                <p class="app-badges"><span class="app-badge" data-tone="success">NTIA</span><span class="app-badge" data-tone="success">CISA</span><span class="app-badge" data-tone="success">BSI TR-03183</span></p>
+                                <table class="app-table">
+                                    <thead><tr><th>SBOM</th><th>Format</th><th class="end">Status</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><b>widget-service</b><small>412 components</small></td><td>CycloneDX 1.6</td><td class="end"><span class="app-badge" data-tone="success">Valid</span></td></tr>
+                                        <tr><td><b>widget-service</b><small>409 components</small></td><td>SPDX 2.3</td><td class="end"><span class="app-badge" data-tone="success">Valid</span></td></tr>
+                                        <tr><td><b>vendor-lib</b><small>Uploaded &middot; 58 components</small></td><td>CycloneDX 1.5</td><td class="end"><span class="app-badge" data-tone="success">Valid</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="steps-panel" role="tabpanel" id="step-panel-2" aria-labelledby="step-tab-2">
+                                <p class="app-title">Widget Service <span>Releases</span></p>
+                                <table class="app-table">
+                                    <thead><tr><th>Release</th><th>SBOM</th><th class="end">Support</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><b>v2.1</b><small>Released 2026</small></td><td>Merged &middot; 3 components</td><td class="end"><span class="app-badge" data-tone="success">Until 2031</span></td></tr>
+                                        <tr><td><b>v2.0</b><small>Released 2025</small></td><td>Merged &middot; 3 components</td><td class="end"><span class="app-badge" data-tone="success">Until 2030</span></td></tr>
+                                        <tr><td><b>v1.2.1</b><small>Released 2023</small></td><td>Merged &middot; 2 components</td><td class="end"><span class="app-badge" data-tone="success">Until 2028</span></td></tr>
+                                        <tr><td><b>v1.0</b><small>Released 2021</small></td><td>Merged &middot; 2 components</td><td class="end"><span class="app-badge">End of life</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="steps-panel" role="tabpanel" id="step-panel-3" aria-labelledby="step-tab-3">
+                                <p class="app-title">Vulnerabilities</p>
+                                <p class="app-stats"><span><b>1</b>Critical</span><span><b>3</b>High</span><span><b>1</b>KEV</span></p>
+                                <table class="app-table">
+                                    <thead><tr><th>Vulnerability</th><th>Severity</th><th class="end">Status</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><b class="mono">CVE-2026-XXXXX</b><small>acme-parser &middot; KEV</small></td><td><span class="app-sev" data-level="critical">Critical</span></td><td class="end"><span class="app-badge" data-tone="primary">Triage</span></td></tr>
+                                        <tr><td><b class="mono">CVE-2026-YYYYY</b><small>libxml2 &middot; VEX</small></td><td><span class="app-sev" data-level="high">High</span></td><td class="end"><span class="app-badge" data-tone="info">Not affected</span></td></tr>
+                                        <tr><td><b class="mono">GHSA-xxxx-yyyy</b><small>lodash</small></td><td><span class="app-sev" data-level="medium">Medium</span></td><td class="end"><span class="app-badge" data-tone="success">Fixed</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="steps-panel" role="tabpanel" id="step-panel-4" aria-labelledby="step-tab-4">
+                                <p class="app-title">Security advisories</p>
+                                <table class="app-table">
+                                    <thead><tr><th>Advisory</th><th>Format</th><th class="end">Status</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><b class="mono">ACME-SA-2026-01</b><small>Widget Service &middot; v2.0, v2.1</small></td><td>CSAF 2.0</td><td class="end"><span class="app-badge" data-tone="success">Published</span></td></tr>
+                                        <tr><td><b class="mono">ACME-SA-2026-02</b><small>Widget Service &middot; v2.1</small></td><td>CSAF 2.0</td><td class="end"><span class="app-badge">Draft</span></td></tr>
+                                    </tbody>
+                                </table>
+                                <p class="app-note">Published to <span class="mono">trust.acme.example</span> and over TEA</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
