@@ -5239,6 +5239,219 @@ button {
 }
 .ins .cases a:hover .ph-go {
   transform: translateX(2px);
+}/* ---------- no lock-in: standards strip, two ways to run, a credit ---------- *//* The standards as one ruled strip: name large, what it carries small. */
+.ins .stds {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 18px;
+  overflow: hidden;
+  border: 1px solid rgb(var(--color-navy-10));
+  border-radius: 16px;
+  background: rgb(var(--color-navy-10));
+}/* The gap shows the tinted background through as 1px rules, so the lines
+   stay right at any column count. */
+.ins .stds li {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: 22px 22px 20px;
+  background: rgb(var(--color-white));
+}/* Logos where the standard publishes one, in navy; the name as a wordmark
+   where it doesn't. All sit on the same 30px line. */
+.ins .stds .std-logo,
+.ins .stds strong {
+  height: 30px;
+  margin-bottom: 10px;
+  color: rgb(var(--color-navy-100));
+}
+.ins .stds .std-logo {
+  display: block;
+  width: auto;
+  max-width: 100%;
+}
+.ins .stds .std-cyclonedx {
+  height: 24px;
+  margin-block: 3px 13px;
+}
+.ins .stds .std-csaf {
+  height: 34px;
+  margin-block: -2px 8px;
+}
+.ins .stds strong {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.ins .stds span {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: rgb(var(--color-navy-60));
+}
+.ins .stds.reveal-ready li > * {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: calc(var(--i) * 70ms);
+}
+.ins .stds.reveal-ready.is-in li > * {
+  opacity: 1;
+  transform: none;
+}
+@media (max-width: 900px) {
+  .ins .stds {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ins .stds li:last-child {
+    grid-column: 1 / -1;
+  }
+}/* Two ways to run it, side by side. */
+.ins .deploy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.ins .deploy article {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto auto;
+  gap: 8px;
+  padding: 26px;
+  border-radius: 16px;
+  background: rgb(var(--color-panel));
+}
+.ins .deploy-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.ins .deploy-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.ins .deploy-meta .chip {
+  height: 30px;
+  padding: 0 10px;
+  font-size: 0.8rem;
+}/* Where it runs: an address for the cloud, the command for self-hosting. */
+.ins .deploy-where {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-self: start;
+  max-width: 100%;
+  margin-top: 14px;
+  padding: 9px 14px;
+  border-radius: 10px;
+  background: rgb(var(--color-white));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10));
+  font-size: 0.86rem;
+  color: rgb(var(--color-navy-80));
+  white-space: nowrap;
+}
+.ins code.deploy-where {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+.ins .deploy-where > span {
+  color: rgb(var(--color-navy-60));
+}
+.ins .deploy-where .ph-ico {
+  margin-left: 0;
+  color: rgb(var(--color-success-ink));
+}
+.ins .deploy-ico {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgb(var(--color-white));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10));
+  color: rgb(var(--color-navy-100));
+  font-size: 1.2rem;
+}
+.ins .deploy h3 {
+  font-size: 1.2rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.015em;
+  color: rgb(var(--color-navy-100));
+}
+.ins .deploy p {
+  max-width: 42ch;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgb(var(--color-navy-80));
+}
+.ins .deploy-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+  margin-top: 18px;
+}
+.ins .link-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+  text-decoration: none;
+}
+.ins .deploy-ico .ph-ico,
+.ins .link-go .ph-ico {
+  margin-left: 0;
+}
+.ins .link-go .ph-ico {
+  font-size: 1.1em;
+}
+.ins .link-go:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ins .deploy .chip {
+  background: rgb(var(--color-white));
+}
+@media (max-width: 720px) {
+  .ins .deploy {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}/* The credit: a face and one line, quietly under the cards. */
+.ins .credit {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 820px;
+  margin-top: 28px;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: rgb(var(--color-navy-80));
+}
+.ins .credit b {
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+}
+.ins .credit a {
+  color: rgb(var(--color-navy-100));
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--color-navy-20));
+  text-underline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ins .stds.reveal-ready li > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }/* ---------- dark band: a full-width navy section ---------- *//* Edge to edge, navy, embers from assets/js/nebula.js (variant "band").
    The section pattern inside it switches to white type. */
 .ins .band-dark {
@@ -5905,34 +6118,130 @@ button {
 }
 .ins .chip:hover {
   color: rgb(var(--color-navy-100));
-}/* ---------- call to action ---------- *//* Navy, rounded, the nebula's embers through it; the page's one orange
-   button. */
-.ins .cta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px 32px;
-  padding: clamp(24px, 4vw, 36px) clamp(24px, 4vw, 40px);
-  border-radius: 20px;
+}/* ---------- final call to action: dawn ---------- *//* Full width and bright: a sunrise (assets/js/nebula.js, variant "dawn")
+   rising behind a curved horizon a third of the way up, the headline in the
+   light above it. White at the top, so it opens out of the section above,
+   and pale at the bottom, so it settles into the footer. */
+.ins .dawn {
+  /* The horizon sits this far above the section's bottom edge, under the
+     copy whatever its height. */
+  --horizon: clamp(150px, 20vw, 250px);
+  position: relative;
+  isolation: isolate;
   overflow: hidden;
-  background-color: rgb(var(--color-navy-100));
-  background-position: center right;
-  color: rgb(var(--color-white));
+  padding-top: clamp(80px, 10vw, 130px);
+  padding-bottom: calc(var(--horizon) + clamp(56px, 7vw, 96px));
+  background-color: rgb(var(--color-white));
+  background-position: bottom center;
+  text-align: center;
+  color: rgb(var(--color-navy-100));
+}/* Paint order, all behind the copy: the nebula canvas (inserted first by
+   nebula.js), the sun, the horizon over the sun's lower half, then the top
+   wash. */
+.ins .dawn-sun {
+  position: absolute;
+  left: 50%;
+  top: calc(100% - var(--horizon));
+  z-index: -1;
+  width: min(1200px, 160vw);
+  aspect-ratio: 2;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgb(var(--color-white)) 0%, rgb(var(--color-orange-50) / 0.95) 10%, rgb(var(--color-warning-full) / 0.6) 30%, rgb(var(--color-orange-500) / 0.28) 58%, rgb(var(--color-orange-500) / 0) 100%);
+}/* The horizon: a vast circle whose top edge is the skyline, its rim lit gold
+   and its face a pale morning white that runs on into the footer. */
+.ins .dawn-horizon {
+  position: absolute;
+  left: 50%;
+  top: calc(100% - var(--horizon));
+  z-index: -1;
+  width: max(3600px, 420vw);
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgb(var(--color-orange-50)) 0, rgb(var(--color-white)) 160px);
+  box-shadow:
+    0 0 0 1.5px rgb(var(--color-white)),
+    0 -3px 14px rgb(var(--color-warning-full) / 0.75),
+    0 -20px 80px rgb(var(--color-orange-500) / 0.4);
+  pointer-events: none;
+}/* The ground: a faint grey nebula (variant "ground") filling the horizon's
+   face, clipped to the same circle, fading to white by the bottom edge. */
+.ins .dawn-ground {
+  --r: max(1800px, 210vw); /* half the horizon's width */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% - var(--horizon));
+  bottom: 0;
+  z-index: -1;
+  background-color: rgb(var(--color-white));
+  background-position: top center;
+  clip-path: circle(var(--r) at 50% var(--r));
+  pointer-events: none;
 }
-.ins .cta h2 {
-  font-size: 1.3rem;
+.ins .dawn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgb(var(--color-white)) 0%, rgb(var(--color-white) / 0.85) 18%, rgb(var(--color-white) / 0) 52%);
+}
+.ins .dawn-copy {
+  position: relative;
+  display: grid;
+  justify-items: center;
+}
+.ins .dawn h2 {
+  max-width: 15ch;
+  margin-top: 14px;
+  font-size: clamp(2.5rem, 6.4vw, 5rem);
   font-weight: var(--font-weight-bold);
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  text-wrap: balance;
 }
-.ins .cta p {
-  margin-top: 4px;
-  color: rgb(var(--color-white) / 0.75);
-  max-width: 52ch;
+.ins .dawn p {
+  max-width: 54ch;
+  margin-top: 22px;
+  font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+  line-height: 1.6;
+  color: rgb(var(--color-navy-100)); /* full navy: it can sit on Signal Orange */
+  text-wrap: pretty;
 }
-.ins .cta-actions {
+.ins .dawn-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 34px;
+}
+.ins .dawn .btn-secondary {
+  --btn-face: rgb(var(--color-white));
+  --btn-sheen: transparent;
+}
+.ins .dawn-notes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 22px;
+  margin-top: 22px;
+  font-size: 0.9rem;
+  font-weight: var(--font-weight-medium);
+  color: rgb(var(--color-navy-100));
+}
+.ins .dawn-notes li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.ins .dawn-notes .ph-ico {
+  margin-left: 0;
+  color: rgb(var(--color-navy-100));
+}/* The footer follows straight on from the horizon's pale face. */
+.ins .dawn + * {
+  margin-top: 0;
 }/* ---------- footer ---------- */
 .ins-footer {
   margin-top: clamp(40px, 6vw, 72px);

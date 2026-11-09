@@ -4873,39 +4873,149 @@
   color: rgb(var(--color-navy-100));
 }
 
-/* ---------- call to action ---------- */
+/* ---------- final call to action: dawn ---------- */
 
-/* Navy, rounded, the nebula's embers through it; the page's one orange
-   button. */
-.ins .cta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px 32px;
-  padding: clamp(24px, 4vw, 36px) clamp(24px, 4vw, 40px);
-  border-radius: 20px;
+/* Full width and bright: a sunrise (assets/js/nebula.js, variant "dawn")
+   rising behind a curved horizon a third of the way up, the headline in the
+   light above it. White at the top, so it opens out of the section above,
+   and pale at the bottom, so it settles into the footer. */
+.ins .dawn {
+  /* The horizon sits this far above the section's bottom edge, under the
+     copy whatever its height. */
+  --horizon: clamp(150px, 20vw, 250px);
+  position: relative;
+  isolation: isolate;
   overflow: hidden;
-  background-color: rgb(var(--color-navy-100));
-  background-position: center right;
-  color: rgb(var(--color-white));
+  padding-top: clamp(80px, 10vw, 130px);
+  padding-bottom: calc(var(--horizon) + clamp(56px, 7vw, 96px));
+  background-color: rgb(var(--color-white));
+  background-position: bottom center;
+  text-align: center;
+  color: rgb(var(--color-navy-100));
 }
 
-.ins .cta h2 {
-  font-size: 1.3rem;
+/* Paint order, all behind the copy: the nebula canvas (inserted first by
+   nebula.js), the sun, the horizon over the sun's lower half, then the top
+   wash. */
+.ins .dawn-sun {
+  position: absolute;
+  left: 50%;
+  top: calc(100% - var(--horizon));
+  z-index: -1;
+  width: min(1200px, 160vw);
+  aspect-ratio: 2;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgb(var(--color-white)) 0%, rgb(var(--color-orange-50) / 0.95) 10%, rgb(var(--color-warning-full) / 0.6) 30%, rgb(var(--color-orange-500) / 0.28) 58%, rgb(var(--color-orange-500) / 0) 100%);
+}
+
+/* The horizon: a vast circle whose top edge is the skyline, its rim lit gold
+   and its face a pale morning white that runs on into the footer. */
+.ins .dawn-horizon {
+  position: absolute;
+  left: 50%;
+  top: calc(100% - var(--horizon));
+  z-index: -1;
+  width: max(3600px, 420vw);
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgb(var(--color-orange-50)) 0, rgb(var(--color-white)) 160px);
+  box-shadow:
+    0 0 0 1.5px rgb(var(--color-white)),
+    0 -3px 14px rgb(var(--color-warning-full) / 0.75),
+    0 -20px 80px rgb(var(--color-orange-500) / 0.4);
+  pointer-events: none;
+}
+
+/* The ground: a faint grey nebula (variant "ground") filling the horizon's
+   face, clipped to the same circle, fading to white by the bottom edge. */
+.ins .dawn-ground {
+  --r: max(1800px, 210vw); /* half the horizon's width */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% - var(--horizon));
+  bottom: 0;
+  z-index: -1;
+  background-color: rgb(var(--color-white));
+  background-position: top center;
+  clip-path: circle(var(--r) at 50% var(--r));
+  pointer-events: none;
+}
+
+.ins .dawn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgb(var(--color-white)) 0%, rgb(var(--color-white) / 0.85) 18%, rgb(var(--color-white) / 0) 52%);
+}
+
+.ins .dawn-copy {
+  position: relative;
+  display: grid;
+  justify-items: center;
+}
+
+.ins .dawn h2 {
+  max-width: 15ch;
+  margin-top: 14px;
+  font-size: clamp(2.5rem, 6.4vw, 5rem);
   font-weight: var(--font-weight-bold);
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  text-wrap: balance;
 }
 
-.ins .cta p {
-  margin-top: 4px;
-  color: rgb(var(--color-white) / 0.75);
-  max-width: 52ch;
+.ins .dawn p {
+  max-width: 54ch;
+  margin-top: 22px;
+  font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+  line-height: 1.6;
+  color: rgb(var(--color-navy-100)); /* full navy: it can sit on Signal Orange */
+  text-wrap: pretty;
 }
 
-.ins .cta-actions {
+.ins .dawn-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.ins .dawn .btn-secondary {
+  --btn-face: rgb(var(--color-white));
+  --btn-sheen: transparent;
+}
+
+.ins .dawn-notes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 22px;
+  margin-top: 22px;
+  font-size: 0.9rem;
+  font-weight: var(--font-weight-medium);
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .dawn-notes li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ins .dawn-notes .ph-ico {
+  margin-left: 0;
+  color: rgb(var(--color-navy-100));
+}
+
+/* The footer follows straight on from the horizon's pale face. */
+.ins .dawn + * {
+  margin-top: 0;
 }
 
 /* ---------- footer ---------- */

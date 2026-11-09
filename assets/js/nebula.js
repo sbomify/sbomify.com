@@ -18,6 +18,8 @@
  *   band    fainter embers, low right, for full-width navy sections
  *   vivid   a full, saturated orange cloud low in a light section
  *   grey    a quiet grey drift inside a light card
+ *   dawn    a bright sunrise: orange to gold, low and centred (final CTA)
+ *   ground  a faint grey drift under the dawn horizon, gone by the bottom
  *   footer  pale navy smoke rising from the bottom edge
  *   mark    navy smoke filling the footer wordmark
  */
@@ -64,6 +66,21 @@
       base: rgb(255, 255, 255),
       low: rgb(238, 240, 244), mid: rgb(211, 212, 217), high: rgb(168, 169, 178),
       mask: [0.62, 0.45, 0.75, 0.95], narrow: [0.6, 0.3, 0.9, 0.6], fade: [-1, 0], gain: 1.5, scale: 0.55, seed: [2.6, 15.3], speed: 0.8
+    },
+    // The final call to action: a sunrise behind a horizon a third of the way
+    // up, Orange 100 at the edges through Signal Orange to Warning gold where
+    // it is thickest.
+    dawn: {
+      base: rgb(255, 255, 255),
+      low: rgb(255, 210, 184), mid: rgb(255, 106, 19), high: rgb(244, 164, 37),
+      mask: [0.5, 0.3, 0.95, 0.5], narrow: [0.5, 0.3, 1.3, 0.35], fade: [-1, 0], gain: 2.6, scale: 0.45, seed: [6.2, 18.8], speed: 0.9
+    },
+    // The ground under the dawn horizon: Mist Soft to Navy 40, strongest
+    // along the curve and faded to white by the bottom edge.
+    ground: {
+      base: rgb(255, 255, 255),
+      low: rgb(238, 240, 244), mid: rgb(211, 212, 217), high: rgb(168, 169, 178),
+      mask: [0.5, 1.05, 0.95, 0.9], fade: [0.0, 0.85], gain: 1.05, scale: 0.5, seed: [12.4, 3.9], speed: 0.7
     },
     footer: {
       base: rgb(255, 255, 255),
