@@ -5154,6 +5154,91 @@ button {
 .ins .bento.reveal-ready.is-in .bento-card {
   opacity: 1;
   transform: none;
+}/* ---------- trusted by: a pull quote and two case studies ---------- */
+.ins .trust {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 32px 56px;
+  align-items: center;
+  margin-top: 18px;
+}
+@media (max-width: 900px) {
+  .ins .trust {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}/* The quote: large, navy, tight, with a big quotation mark hung in the
+   margin above it. */
+.ins .pull blockquote {
+  position: relative;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.022em;
+  line-height: 1.3;
+  color: rgb(var(--color-navy-100));
+  text-wrap: pretty;
+}
+.ins .pull figcaption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 26px;
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+.ins .pull figcaption > span {
+  display: grid;
+}
+.ins .pull figcaption b {
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+}
+.ins .pull figcaption > span > span {
+  color: rgb(var(--color-navy-60));
+}
+.ins .avatar {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  box-shadow: 0 0 0 1px rgb(var(--color-navy-10));
+}/* The customers: two cards, logo, one line, a link. */
+.ins .cases {
+  display: grid;
+  gap: 12px;
+}
+.ins .cases a {
+  display: grid;
+  gap: 10px;
+  padding: 20px 22px;
+  border-radius: 16px;
+  background: rgb(var(--color-white));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10));
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.ins .cases a:hover {
+  background: rgb(var(--color-panel));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-20));
+}
+.ins .cases img {
+  height: 26px;
+  width: auto;
+  justify-self: start;
+}
+.ins .cases span {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: rgb(var(--color-navy-80));
+}
+.ins .cases b {
+  font-size: 0.88rem;
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+}
+.ins .cases a:hover .ph-go {
+  transform: translateX(2px);
 }/* ---------- dark band: a full-width navy section ---------- *//* Edge to edge, navy, embers from assets/js/nebula.js (variant "band").
    The section pattern inside it switches to white type. */
 .ins .band-dark {

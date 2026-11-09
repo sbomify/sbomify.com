@@ -1,0 +1,6 @@
+{{- /* {{< avatar src="images/chris.png" name="Chris Swan" >}}: a small round
+       photo, resized to 96px WebP. Decorative when a name sits beside it. */ -}}
+{{- with resources.Get (.Get "src") -}}
+  {{- $img := .Process "fill 96x96 Center webp q80" -}}
+  <img class="avatar" src="{{ $img.RelPermalink }}" alt="" width="48" height="48" loading="lazy" decoding="async">
+{{- end -}}
