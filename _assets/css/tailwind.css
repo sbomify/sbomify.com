@@ -3811,20 +3811,22 @@
 .ins .stds {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
   margin-top: 18px;
+  overflow: hidden;
+  border: 1px solid rgb(var(--color-navy-10));
   border-radius: 16px;
-  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10));
+  background: rgb(var(--color-navy-10));
 }
 
+/* The gap shows the tinted background through as 1px rules, so the lines
+   stay right at any column count. */
 .ins .stds li {
   display: grid;
   align-content: start;
   gap: 4px;
   padding: 22px 22px 20px;
-}
-
-.ins .stds li + li {
-  box-shadow: inset 1px 0 0 rgb(var(--color-navy-10));
+  background: rgb(var(--color-white));
 }
 
 /* Logos where the standard publishes one, in navy; the name as a wordmark
@@ -3867,14 +3869,14 @@
   color: rgb(var(--color-navy-60));
 }
 
-.ins .stds.reveal-ready li {
+.ins .stds.reveal-ready li > * {
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 0.5s ease, transform 0.5s ease;
   transition-delay: calc(var(--i) * 70ms);
 }
 
-.ins .stds.reveal-ready.is-in li {
+.ins .stds.reveal-ready.is-in li > * {
   opacity: 1;
   transform: none;
 }
@@ -3882,26 +3884,6 @@
 @media (max-width: 900px) {
   .ins .stds {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .ins .stds li + li {
-    box-shadow: none;
-  }
-
-  .ins .stds li {
-    box-shadow: inset 0 1px 0 rgb(var(--color-navy-10));
-  }
-
-  .ins .stds li:nth-child(-n + 2) {
-    box-shadow: none;
-  }
-
-  .ins .stds li:nth-child(even) {
-    box-shadow: inset 1px 0 0 rgb(var(--color-navy-10)), inset 0 1px 0 rgb(var(--color-navy-10));
-  }
-
-  .ins .stds li:nth-child(2) {
-    box-shadow: inset 1px 0 0 rgb(var(--color-navy-10));
   }
 
   .ins .stds li:last-child {
@@ -4071,7 +4053,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ins .stds.reveal-ready li {
+  .ins .stds.reveal-ready li > * {
     opacity: 1;
     transform: none;
     transition: none;
