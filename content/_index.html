@@ -96,58 +96,82 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
                 <p class="sec-lede">Four steps that stay connected for as long as you support a product.</p>
             </div>
 
-            <div class="flow" data-reveal>
-                <span class="flow-path" aria-hidden="true"><span class="flow-comet"></span></span>
-                <ol class="flow-steps">
-                    <li style="--i: 0">
-                        <span class="flow-dot" aria-hidden="true"></span>
-                        <span class="flow-no">01</span>
-                        <h3>Generate and manage SBOMs</h3>
-                        <p>CycloneDX and SPDX from your pipelines or uploads, validated and never altered.</p>
-                        <div class="flow-snap" aria-hidden="true">
-                            <span class="snap-row"><span class="mono">sbom.cdx.json</span><span class="snap-ok">Valid</span></span>
-                            <span class="snap-row"><span class="mono">sbom.spdx.json</span><span class="snap-ok">Valid</span></span>
-                            <span class="snap-note">NTIA &middot; CISA &middot; BSI TR-03183</span>
+            <div class="steps" data-steps>
+                <ol class="steps-list" role="tablist" aria-label="How sbomify works, step by step">
+                    <li>
+                        <button class="steps-tab" type="button" role="tab" id="step-tab-1" aria-controls="step-panel-1" aria-selected="true"><span class="steps-no">01</span><span class="steps-title">Generate and manage SBOMs</span></button>
+                        <div class="steps-body">
+                            <p>CycloneDX and SPDX from your pipelines or uploads, validated and never altered.</p>
+                            <a href="/features/generate-collaborate-analyze/">SBOM lifecycle&nbsp;<span aria-hidden="true">&rarr;</span></a>
                         </div>
-                        <a href="/features/generate-collaborate-analyze/">SBOM lifecycle&nbsp;<span aria-hidden="true">&rarr;</span></a>
+                        <span class="steps-progress" aria-hidden="true"></span>
                     </li>
-                    <li style="--i: 1">
-                        <span class="flow-dot" aria-hidden="true"></span>
-                        <span class="flow-no">02</span>
-                        <h3>Track every supported release</h3>
-                        <p>Pin SBOMs to releases, with release, end-of-support and end-of-life dates.</p>
-                        <div class="flow-snap" aria-hidden="true">
-                            <span class="snap-row"><span class="mono">v2.1</span><span>Until 2031</span></span>
-                            <span class="snap-row"><span class="mono">v2.0</span><span>Until 2030</span></span>
-                            <span class="snap-row is-dim"><span class="mono">v1.0</span><span>Ended 2026</span></span>
+                    <li>
+                        <button class="steps-tab" type="button" role="tab" id="step-tab-2" aria-controls="step-panel-2" aria-selected="false"><span class="steps-no">02</span><span class="steps-title">Track every supported release</span></button>
+                        <div class="steps-body">
+                            <p>Pin SBOMs to releases, with release, end-of-support and end-of-life dates.</p>
+                            <a href="/faq/how-do-i-create-a-software-release/">Releases&nbsp;<span aria-hidden="true">&rarr;</span></a>
                         </div>
-                        <a href="/faq/how-do-i-create-a-software-release/">Releases&nbsp;<span aria-hidden="true">&rarr;</span></a>
+                        <span class="steps-progress" aria-hidden="true"></span>
                     </li>
-                    <li style="--i: 2">
-                        <span class="flow-dot" aria-hidden="true"></span>
-                        <span class="flow-no">03</span>
-                        <h3>Monitor and triage vulnerabilities</h3>
-                        <p>Rescanned with Google OSV and Dependency-Track. Record each decision with VEX.</p>
-                        <div class="flow-snap" aria-hidden="true">
-                            <span class="snap-row"><span class="mono">CVE-2026-XXXXX</span><span class="snap-sev">KEV</span></span>
-                            <span class="snap-row"><span class="mono">v2.1</span><span class="snap-tag" data-tone="danger">Affected</span></span>
-                            <span class="snap-row"><span class="mono">v1.2.1</span><span class="snap-tag" data-tone="info">Not affected</span></span>
+                    <li>
+                        <button class="steps-tab" type="button" role="tab" id="step-tab-3" aria-controls="step-panel-3" aria-selected="false"><span class="steps-no">03</span><span class="steps-title">Monitor and triage vulnerabilities</span></button>
+                        <div class="steps-body">
+                            <p>Rescanned with Google OSV and Dependency-Track. Record each decision with VEX.</p>
+                            <a href="/faq/how-do-i-enable-vulnerability-scanning/">Vulnerability scanning&nbsp;<span aria-hidden="true">&rarr;</span></a>
                         </div>
-                        <a href="/faq/how-do-i-enable-vulnerability-scanning/">Vulnerability scanning&nbsp;<span aria-hidden="true">&rarr;</span></a>
+                        <span class="steps-progress" aria-hidden="true"></span>
                     </li>
-                    <li style="--i: 3">
-                        <span class="flow-dot" aria-hidden="true"></span>
-                        <span class="flow-no">04</span>
-                        <h3>Tell your customers</h3>
-                        <p>Publish SBOMs, VEX and advisories on your own Trust Center, as CSAF and over TEA.</p>
-                        <div class="flow-snap" aria-hidden="true">
-                            <span class="snap-row"><span class="mono">trust.acme.example</span><span class="snap-ok">Live</span></span>
-                            <span class="snap-row"><span class="mono">ACME-SA-2026-01</span><span class="snap-ok">Published</span></span>
-                            <span class="snap-note">CSAF 2.0 &middot; TEA</span>
+                    <li>
+                        <button class="steps-tab" type="button" role="tab" id="step-tab-4" aria-controls="step-panel-4" aria-selected="false"><span class="steps-no">04</span><span class="steps-title">Tell your customers</span></button>
+                        <div class="steps-body">
+                            <p>Publish SBOMs, VEX and advisories on your own Trust Center, as CSAF and over TEA.</p>
+                            <a href="/features/trust-center/">Trust Center&nbsp;<span aria-hidden="true">&rarr;</span></a>
                         </div>
-                        <a href="/features/trust-center/">Trust Center&nbsp;<span aria-hidden="true">&rarr;</span></a>
+                        <span class="steps-progress" aria-hidden="true"></span>
                     </li>
                 </ol>
+
+                {{< comment >}}Illustrative product screens, one per step{{< /comment >}}
+                <div class="steps-window">
+                    <div class="steps-panel" role="tabpanel" id="step-panel-1" aria-labelledby="step-tab-1">
+                        <div class="win-bar"><span class="mono">acme / widget-service / sboms</span></div>
+                        <ul class="win-rows">
+                            <li><span class="mono">sbom.cdx.json</span><span class="win-meta">CycloneDX 1.6 &middot; 412 components</span><span class="win-ok">Valid</span></li>
+                            <li><span class="mono">sbom.spdx.json</span><span class="win-meta">SPDX 2.3 &middot; 409 components</span><span class="win-ok">Valid</span></li>
+                            <li><span class="mono">vendor-lib.cdx.json</span><span class="win-meta">Uploaded &middot; 58 components</span><span class="win-ok">Valid</span></li>
+                        </ul>
+                        <div class="win-foot"><span class="win-check">NTIA</span><span class="win-check">CISA</span><span class="win-check">BSI TR-03183</span></div>
+                    </div>
+                    <div class="steps-panel" role="tabpanel" id="step-panel-2" aria-labelledby="step-tab-2">
+                        <div class="win-bar"><span class="mono">acme / widget-service / releases</span></div>
+                        <ul class="win-rows">
+                            <li><span class="mono">v2.1</span><span class="win-meta">Merged SBOM &middot; 3 components</span><span class="win-ok">Until 2031</span></li>
+                            <li><span class="mono">v2.0</span><span class="win-meta">Merged SBOM &middot; 3 components</span><span class="win-ok">Until 2030</span></li>
+                            <li><span class="mono">v1.2.1</span><span class="win-meta">Merged SBOM &middot; 2 components</span><span class="win-ok">Until 2028</span></li>
+                            <li class="is-dim"><span class="mono">v1.0</span><span class="win-meta">End of life</span><span class="win-tag">Ended 2026</span></li>
+                        </ul>
+                        <div class="win-foot"><span>Lifecycle dates as ECMA-428 CLE</span></div>
+                    </div>
+                    <div class="steps-panel" role="tabpanel" id="step-panel-3" aria-labelledby="step-tab-3">
+                        <div class="win-bar"><span class="mono">acme / widget-service / vulnerabilities</span></div>
+                        <ul class="win-rows">
+                            <li><span class="mono">CVE-2026-XXXXX</span><span class="win-meta">acme-parser &middot; <span class="win-kev">KEV</span></span><span class="win-tag" data-tone="danger">Triage</span></li>
+                            <li><span class="mono">CVE-2026-YYYYY</span><span class="win-meta">libxml2 &middot; VEX: not reachable</span><span class="win-tag" data-tone="info">Not affected</span></li>
+                            <li><span class="mono">GHSA-xxxx-yyyy</span><span class="win-meta">lodash &middot; in 2.0.4</span><span class="win-tag" data-tone="success">Fixed</span></li>
+                        </ul>
+                        <div class="win-foot"><span>Rescanned daily &middot; OSV &middot; Dependency-Track &middot; EUVD</span></div>
+                    </div>
+                    <div class="steps-panel" role="tabpanel" id="step-panel-4" aria-labelledby="step-tab-4">
+                        <div class="win-bar"><span class="mono">trust.acme.example</span></div>
+                        <ul class="win-rows">
+                            <li><span>Widget Service SBOM</span><span class="win-meta mono">v2.1 &middot; sbom.cdx.json</span><span class="win-ok">Public</span></li>
+                            <li><span>Security advisory</span><span class="win-meta mono">SA-2026-01 &middot; CSAF 2.0</span><span class="win-ok">Published</span></li>
+                            <li><span>SOC 2 Type II</span><span class="win-meta mono">2026 &middot; soc2.pdf</span><span class="win-tag">Request access</span></li>
+                        </ul>
+                        <div class="win-foot"><span>Also served over the Transparency Exchange API</span></div>
+                    </div>
+                </div>
             </div>
 
             <p class="sec-close">Every step keeps its history, so your audit trail builds itself as you work. <a href="/cra/">How sbomify helps with the CRA&nbsp;<span aria-hidden="true">&rarr;</span></a></p>

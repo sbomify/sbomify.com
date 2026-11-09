@@ -123,8 +123,85 @@
     });
   }
 
+  // Steps (home page, How it works): tabs beside a product window. Advances
+  // on its own every --dwell while on screen; pauses on hover or focus;
+  // stops for good once someone picks a step; never auto-plays for reduced
+  // motion. Without this script every step and screen is shown.
+  function initSteps () {
+    document.querySelectorAll('[data-steps]').forEach(function (root) {
+      var tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+      var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
+      if (!tabs.length || panels.indexOf(null) !== -1) return;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var dwell = parseFloat(getComputedStyle(root).getPropertyValue('--dwell')) * 1000 || 6000;
+      var current = 0, timer = null, visible = false, hovered = false, manual = reduce;
+
+      function show (i, focus) {
+        current = i;
+        tabs.forEach(function (t, n) {
+          var on = n === i;
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+          t.tabIndex = on ? 0 : -1;
+          t.parentElement.classList.toggle('is-active', on);
+          panels[n].classList.toggle('is-active', on);
+          panels[n].hidden = false;
+          panels[n].setAttribute('aria-hidden', on ? 'false' : 'true');
+        });
+        if (focus) tabs[i].focus();
+        schedule();
+      }
+
+      function schedule () {
+        clearTimeout(timer);
+        var paused = hovered || !visible;
+        root.classList.toggle('is-paused', paused && !manual);
+        root.classList.toggle('is-manual', manual);
+        if (manual || paused) return;
+        // Restart the progress bar from empty for this step.
+        var bar = tabs[current].parentElement.querySelector('.steps-progress');
+        if (bar) { bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = ''; }
+        timer = setTimeout(function () { show((current + 1) % tabs.length); }, dwell);
+      }
+
+      tabs.forEach(function (t, i) {
+        t.addEventListener('click', function () { manual = true; show(i); });
+        t.addEventListener('keydown', function (e) {
+          var k = e.key, n = null;
+          if (k === 'ArrowDown' || k === 'ArrowRight') n = (i + 1) % tabs.length;
+          else if (k === 'ArrowUp' || k === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+          else if (k === 'Home') n = 0;
+          else if (k === 'End') n = tabs.length - 1;
+          if (n === null) return;
+          e.preventDefault();
+          manual = true;
+          show(n, true);
+        });
+      });
+
+      root.addEventListener('mouseenter', function () { hovered = true; schedule(); });
+      root.addEventListener('mouseleave', function () { hovered = false; schedule(); });
+      root.addEventListener('focusin', function () { hovered = true; schedule(); });
+      root.addEventListener('focusout', function (e) {
+        if (!root.contains(e.relatedTarget)) { hovered = false; schedule(); }
+      });
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          visible = entries[0].isIntersecting;
+          schedule();
+        }, { threshold: 0.4 }).observe(root);
+      } else {
+        visible = true;
+      }
+
+      root.classList.add('is-ready');
+      show(0);
+    });
+  }
+
   initHeader();
   initReveal();
+  initSteps();
   initCodeCopy();
   initAgentTools();
 }())
