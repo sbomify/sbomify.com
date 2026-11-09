@@ -5013,9 +5013,199 @@
   color: rgb(var(--color-navy-100));
 }
 
-/* The footer follows straight on from the horizon's pale face. */
-.ins .dawn + * {
-  margin-top: 0;
+/* ---------- blog: on the dawn's ground ---------- */
+
+/* Pulled up over the bottom of the dawn so the ground's grey drift runs
+   beneath the cards, without a white gap between the two sections. */
+.ins .blog-ground {
+  position: relative;
+  margin-top: calc(clamp(190px, 24vw, 320px) * -0.78);
+}
+
+.ins .blog-ground .sec-head > .link-go {
+  justify-self: end;
+}
+
+@media (max-width: 860px) {
+  .ins .blog-ground .sec-head > .link-go {
+    justify-self: start;
+  }
+}
+
+/* The latest roundup large on the left, two posts stacked on the right. */
+.ins .posts {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+}
+
+.ins .post {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+  padding: 22px 24px;
+  border-radius: 16px;
+  background: rgb(var(--color-white));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10)), 0 1px 2px rgb(var(--color-navy-100) / 0.04);
+  text-decoration: none;
+  color: rgb(var(--color-navy-100));
+  transition: box-shadow 0.2s ease;
+}
+
+.ins .post:hover {
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-20)), 0 8px 24px -12px rgb(var(--color-navy-100) / 0.18);
+}
+
+.ins .post-feature {
+  grid-row: 1 / -1;
+  grid-template-rows: auto auto 1fr auto;
+  padding: clamp(24px, 3vw, 34px);
+}
+
+.ins .post-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  font-size: 0.82rem;
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .post-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 7px;
+  background: rgb(var(--color-panel));
+  font-size: 0.78rem;
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-80));
+  text-transform: capitalize;
+}
+
+.ins .post-series {
+  text-transform: none;
+}
+
+.ins .post-tag .ph-ico {
+  margin-left: 0;
+}
+
+.ins .post h3 {
+  font-size: 1.12rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.ins .post-feature h3 {
+  margin-top: 6px;
+  font-size: clamp(1.4rem, 2.3vw, 1.85rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.ins .post p {
+  max-width: 60ch;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .post-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+  font-size: 0.86rem;
+}
+
+.ins .post-foot b {
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+.ins .post:hover .ph-go {
+  transform: translateX(2px);
+}
+
+.ins .post-by {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .post-by img,
+.ins .post-initial {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.ins .post-by img {
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgb(var(--color-navy-10));
+}
+
+/* An initial for authors without a photo, centred on its cap height. */
+.ins .post-initial {
+  display: inline-block;
+  background: rgb(var(--color-navy-100));
+  color: rgb(var(--color-white));
+  font-size: 0.7rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 24px;
+  text-align: center;
+}
+
+@supports (text-box: trim-both cap alphabetic) {
+  .ins .post-initial > span {
+    display: inline-block;
+    text-box: trim-both cap alphabetic;
+    vertical-align: middle;
+  }
+}
+
+@media (max-width: 860px) {
+  .ins .posts {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+  }
+
+  .ins .post-feature {
+    grid-row: auto;
+  }
+}
+
+.ins .posts.reveal-ready .post {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s ease;
+}
+
+.ins .posts.reveal-ready .post:nth-child(2) { transition-delay: 80ms, 80ms, 0s; }
+.ins .posts.reveal-ready .post:nth-child(3) { transition-delay: 160ms, 160ms, 0s; }
+
+.ins .posts.reveal-ready.is-in .post {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ins .posts.reveal-ready .post {
+    opacity: 1;
+    transform: none;
+    transition: box-shadow 0.2s ease;
+  }
 }
 
 /* ---------- footer ---------- */

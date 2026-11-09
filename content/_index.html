@@ -503,14 +503,6 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
         </div>
     </section>
 
-    {{< comment >}}Blog{{< /comment >}}
-    <section class="section">
-        <div class="wrap">
-            <span class="kicker">Blog</span>
-            {{< posts limit="3" title="Latest blog posts" style="rows" >}}
-        </div>
-    </section>
-
     {{< comment >}}Final CTA: a sunrise over a horizon, the page's one big orange moment{{< /comment >}}
     <section class="dawn" id="start" data-nebula="dawn" style="background-image: url('{{< nebula-still "dawn" >}}')">
         <div class="dawn-sun" aria-hidden="true"></div>
@@ -529,6 +521,20 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
                 <li>{{< ph "check" >}}Open source</li>
                 <li>{{< ph "check" >}}Cloud or self-hosted</li>
             </ul>
+        </div>
+    </section>
+
+    {{< comment >}}Blog: pulled up onto the dawn's ground, so the grey drift runs beneath it{{< /comment >}}
+    <section class="section blog-ground" id="blog">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Blog</span>
+                    <h2 class="sec-title">Latest blog posts. <span class="soft">News, guides and releases.</span></h2>
+                </div>
+                <a class="link-go" href="/blog/">View all posts{{< ph "arrow-right" "bold" "ph-go" >}}</a>
+            </div>
+            {{< home-posts >}}
         </div>
     </section>
 </div>
