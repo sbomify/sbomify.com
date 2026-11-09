@@ -99,7 +99,32 @@
     });
   }
 
+  // Reveal: [data-reveal] blocks animate in once when they scroll into view.
+  // The class that hides them is added here, so without JavaScript (or with
+  // reduced motion) they are simply shown.
+  function initReveal () {
+    var els = document.querySelectorAll('[data-reveal]');
+    if (!els.length || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.35 });
+    els.forEach(function (el) {
+      // Already on screen at load: show it as is.
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) return;
+      el.classList.add('reveal-ready');
+      io.observe(el);
+    });
+  }
+
   initHeader();
+  initReveal();
   initCodeCopy();
   initAgentTools();
 }())

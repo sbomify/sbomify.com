@@ -49,17 +49,36 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
         </div>
     </section>
 
-    {{< comment >}}Why this matters now{{< /comment >}}
-    <section class="section">
+    {{< comment >}}Why this matters now: sets the section pattern (head, visual, stats, close){{< /comment >}}
+    <section class="section" id="why-now">
         <div class="wrap">
-            <div class="topic read">
-                <span class="kicker">Why this matters now</span>
-                <h2>The CRA doesn't stop when you ship. Neither should your security process.</h2>
-                <p class="summary">Generating an SBOM is a good first step. But what happens after the software ships? New vulnerabilities are found. Dependencies change. Customers stay on older versions. Security fixes have to be built, shipped and explained.</p>
-                <p>The <a href="/compliance/eu-cra/">Cyber Resilience Act</a> makes handling vulnerabilities for the whole support period of a product a legal obligation for manufacturers. Reporting obligations have applied since <strong>11 September 2026</strong>, and the main obligations apply from <strong>11 December 2027</strong>, with fines of up to <a href="/compliance/eu-cra/#penalties-article-64">&euro;15 million or 2.5% of global annual turnover</a>.</p>
-                <p>sbomify gives you the tools for that ongoing work, without stitching together spreadsheets, scanners, release notes and email threads.</p>
-                <p class="emph">One connected workflow, from software composition to customer disclosure.</p>
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Why this matters now</span>
+                    <h2 class="sec-title">The CRA doesn't stop when you ship. <span class="soft">Neither should your security process.</span></h2>
+                </div>
+                <p class="sec-lede">Under the <a href="/compliance/eu-cra/">Cyber Resilience Act</a>, handling vulnerabilities is a legal obligation for the whole support period of a product. An SBOM at release is only the start.</p>
             </div>
+
+            <figure class="lifecycle" data-reveal>
+                <figcaption class="sr-only">An illustrative product lifecycle under the CRA, from release to end of support.</figcaption>
+                <div class="lc-span" aria-hidden="true"><span><strong>Support period</strong> &middot; at least 5 years</span></div>
+                <ol class="lc-track">
+                    <li style="--i: 0"><span class="lc-dot"></span><span class="lc-tag">v2.0</span><strong>You ship</strong><span>SBOM generated, release recorded</span></li>
+                    <li style="--i: 1" data-tone="danger"><span class="lc-dot"></span><span class="lc-tag">CVE-2026-XXXXX</span><strong>A dependency is hit</strong><span>In a release you still support</span></li>
+                    <li style="--i: 2" data-tone="warning"><span class="lc-dot"></span><span class="lc-tag">24 h</span><strong>Report if exploited</strong><span>Early warning through ENISA&rsquo;s platform</span></li>
+                    <li style="--i: 3" data-tone="success"><span class="lc-dot"></span><span class="lc-tag">v2.0.4</span><strong>Fix and disclose</strong><span>Patch shipped, advisory published</span></li>
+                    <li style="--i: 4" data-tone="end"><span class="lc-dot"></span><span class="lc-tag">EOL</span><strong>End of support</strong><span>Customers told, records kept 10 years</span></li>
+                </ol>
+            </figure>
+
+            <dl class="stats">
+                <div><dt>to send an early warning of an actively exploited vulnerability</dt><dd>24&nbsp;h</dd></div>
+                <div><dt>minimum support period, unless the product is expected to be used for less</dt><dd>5+&nbsp;years</dd></div>
+                <div><dt>maximum fine, or 2.5% of global annual turnover if that is higher</dt><dd>&euro;15M</dd></div>
+            </dl>
+
+            <p class="sec-close">sbomify gives you one connected workflow for all of it, from software composition to customer disclosure. <a href="#how-it-works">See how it works&nbsp;<span aria-hidden="true">&rarr;</span></a></p>
         </div>
     </section>
 

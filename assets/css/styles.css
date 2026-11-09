@@ -3879,6 +3879,239 @@ button {
     grid-row: 2;
     white-space: normal;
   }
+}/* ---------- section pattern: head, visual, stats, close ---------- *//* The head: a kicker and a large two-tone headline on the left, a short
+   lede on the right, bottoms aligned. One column on narrow screens. */
+.ins .sec-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 20px 64px;
+  margin-bottom: clamp(32px, 4.5vw, 52px);
+}
+@media (max-width: 860px) {
+  .ins .sec-head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.ins .sec-title {
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.035em;
+  line-height: 1.04;
+  text-wrap: balance;
+}/* The second half of a headline, in a lighter navy (Navy 60: about 4:1 on
+   white, above the 3:1 needed for large type). */
+.ins .sec-title .soft {
+  color: rgb(var(--color-navy-60));
+}
+.ins .sec-lede {
+  font-size: clamp(1.05rem, 1.3vw, 1.15rem);
+  line-height: 1.55;
+  color: rgb(var(--color-navy-80));
+  max-width: 42ch;
+}
+.ins .sec-close {
+  margin-top: clamp(28px, 3.5vw, 40px);
+  font-size: 1.05rem;
+  color: rgb(var(--color-navy-80));
+  max-width: 62ch;
+}
+.ins .sec-close a {
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+  white-space: nowrap;
+}/* Stats: big numbers over short captions, hairline between them. */
+.ins .stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: clamp(28px, 3.5vw, 40px);
+  border-top: 1px solid rgb(var(--color-navy-10));
+}
+.ins .stats > div {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 22px 24px 4px;
+  border-left: 1px solid rgb(var(--color-navy-10));
+}
+.ins .stats > div:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+.ins .stats dd {
+  font-size: clamp(2rem, 3.6vw, 2.75rem);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.035em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.ins .stats dt {
+  font-size: 0.92rem;
+  color: rgb(var(--color-navy-60));
+  max-width: 30ch;
+}
+@media (max-width: 720px) {
+  .ins .stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ins .stats > div {
+    padding: 18px 0;
+    border-left: 0;
+    border-bottom: 1px solid rgb(var(--color-navy-10));
+  }
+}/* ---------- lifecycle: one product across its support period ---------- *//* A pale panel. A bracket names the support period; under it a track of
+   five steps, each a dot on the line, a mono tag, a title and a line. */
+.ins .lifecycle {
+  padding: clamp(24px, 3.5vw, 40px) clamp(20px, 3.5vw, 40px) clamp(26px, 3.5vw, 36px);
+  border-radius: 20px;
+  background: rgb(var(--color-panel));
+}
+.ins .lc-span {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: 22px;
+  margin: 0 calc(10% - 6px) 22px;
+  border: 1px solid rgb(var(--color-navy-20));
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+}
+.ins .lc-span span {
+  position: relative;
+  top: -0.8em;
+  padding: 0 12px;
+  background: rgb(var(--color-panel));
+  font-size: 0.85rem;
+  color: rgb(var(--color-navy-60));
+  white-space: nowrap;
+}
+.ins .lc-span strong {
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+}
+.ins .lc-track {
+  --dot: 12px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0 16px;
+}/* The line through the dots, drawn from the first dot to the last. */
+.ins .lc-track::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--dot) / 2 - 1px);
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  border-radius: 2px;
+  background: rgb(var(--color-navy-20));
+  transform-origin: left center;
+}
+.ins .lc-track li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  --tone: rgb(var(--color-navy-100));
+}
+.ins .lc-track li[data-tone="danger"] { --tone: rgb(var(--color-danger-full)); }
+.ins .lc-track li[data-tone="warning"] { --tone: rgb(var(--color-warning-full)); }
+.ins .lc-track li[data-tone="success"] { --tone: rgb(var(--color-success-full)); }
+.ins .lc-track li[data-tone="end"] { --tone: rgb(var(--color-navy-40)); }
+.ins .lc-dot {
+  position: relative;
+  width: var(--dot);
+  height: var(--dot);
+  border-radius: 50%;
+  background: var(--tone);
+  box-shadow: 0 0 0 4px rgb(var(--color-panel)), 0 0 0 5px rgb(var(--color-navy-10));
+  margin-bottom: 18px;
+}
+.ins .lc-tag {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: rgb(var(--color-navy-60));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.ins .lc-track strong {
+  margin-top: 4px;
+  font-size: 1rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.01em;
+}
+.ins .lc-track strong + span {
+  margin-top: 2px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: rgb(var(--color-navy-80));
+  max-width: 22ch;
+}/* Phones: the track runs down the left edge instead. */
+@media (max-width: 760px) {
+  .ins .lc-span {
+    display: none;
+  }
+
+  .ins .lc-track {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+    padding-left: 30px;
+  }
+
+  .ins .lc-track::before {
+    top: 6px;
+    bottom: 6px;
+    left: 5px;
+    right: auto;
+    width: 2px;
+    height: auto;
+    transform-origin: center top;
+  }
+
+  .ins .lc-track li {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .ins .lc-dot {
+    position: absolute;
+    left: -30px;
+    top: 4px;
+    margin: 0;
+  }
+
+  .ins .lc-track strong + span {
+    max-width: none;
+  }
+}/* Reveal, once, when scrolled into view (assets/js/main.js sets
+   .reveal-ready, then .is-in). Without JavaScript or with reduced motion,
+   everything is simply shown. */
+.ins .lifecycle.reveal-ready .lc-track::before {
+  transform: scaleX(0);
+  transition: transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s;
+}
+.ins .lifecycle.reveal-ready .lc-track li {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: calc(0.15s + var(--i, 0) * 0.18s);
+}
+.ins .lifecycle.reveal-ready.is-in .lc-track::before {
+  transform: none;
+}
+.ins .lifecycle.reveal-ready.is-in .lc-track li {
+  opacity: 1;
+  transform: none;
+}
+@media (max-width: 760px) {
+  .ins .lifecycle.reveal-ready .lc-track::before {
+    transform: scaleY(0);
+  }
 }/* ---------- topics: a heading and a few paragraphs ---------- */
 .ins .topic h2 {
   font-size: 1.25rem;
