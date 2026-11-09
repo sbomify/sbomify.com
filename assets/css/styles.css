@@ -4914,76 +4914,76 @@ button {
 .ins .versions li:nth-child(3) { position: relative; z-index: 1; margin-inline: 20px; opacity: 0.35; }
 .ins .versions .mono {
   font-weight: var(--font-weight-semibold);
-}/* CRA coverage: a Venn diagram of responsibility. Two ovals, sbomify and
-   you; what sbomify does alone, what it supports (the overlap) and what is
-   yours. Sized by its own width (a container), so it scales with the card
-   down to a phone. */
-.ins .venn {
+}/* CRA coverage: a tile per obligation, in the order of Annex I Part II.
+   Solid navy is covered by sbomify, half-filled is shared, an outline is
+   yours. A small square in each tile repeats it as a shape (full, half,
+   empty), and the key below names the three. Four across, two on a narrow
+   card (a container query on the figure). */
+.ins .tiles {
   container-type: inline-size;
-  position: relative;
-  aspect-ratio: 2.15;
-  margin: 10px 0 4px;
+  margin: 8px 0 4px;
 }
-.ins .venn-shape,
-.ins .venn-shape i {
-  position: absolute;
+.ins .tiles ul {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
 }
-.ins .venn-shape {
-  inset: 0;
+@container (max-width: 380px) {
+  .ins .tiles ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
-.ins .venn-shape i {
-  top: 0;
-  bottom: 0;
-  width: 64%;
-  border-radius: 50%;
-}/* sbomify in the info blue, you in navy grey; the overlap mixes the two. */
-.ins .venn-a {
-  left: 0;
-  background: rgb(var(--color-info-full) / 0.1);
-  box-shadow: inset 0 0 0 1.5px rgb(var(--color-info-full) / 0.45);
-}
-.ins .venn-b {
-  right: 0;
-  background: rgb(var(--color-navy-100) / 0.06);
-  box-shadow: inset 0 0 0 1.5px rgb(var(--color-navy-40) / 0.7);
-}
-.ins .venn-zone {
-  position: absolute;
-  top: 50%;
+.ins .tiles li {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.15em;
-  transform: translateY(-50%);
-  font-size: clamp(9px, 2.6cqw, 13px);
-  line-height: 1.3;
-  text-align: center;
-  color: rgb(var(--color-navy-80));
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 88px;
+  padding: 11px 12px 12px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.25;
+}/* The corner mark: full, half and empty squares. */
+.ins .tiles i {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2.5px;
 }
-.ins .venn-left { left: 5%; width: 29%; }
-.ins .venn-mid { left: 36.5%; width: 27%; }
-.ins .venn-right { right: 5%; width: 29%; }
-.ins .venn-zone b {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4em;
-  margin-bottom: 0.25em;
-  font-size: 1.08em;
-  font-weight: var(--font-weight-bold);
+.ins .tiles [data-k="built"] i { background: currentColor; }
+.ins .tiles [data-k="shared"] i { background: linear-gradient(90deg, currentColor 50%, transparent 50%); box-shadow: inset 0 0 0 1.5px currentColor; }
+.ins .tiles [data-k="yours"] i { box-shadow: inset 0 0 0 1.5px currentColor; }
+.ins .tiles li[data-k="built"] {
+  background: rgb(var(--color-navy-100));
+  color: rgb(var(--color-white));
+}/* Half-filled: navy tint on the left half of the tile. */
+.ins .tiles li[data-k="shared"] {
+  background: linear-gradient(90deg, rgb(var(--color-navy-100) / 0.12) 50%, rgb(var(--color-panel)) 50%);
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-100) / 0.14);
   color: rgb(var(--color-navy-100));
 }
-.ins .venn-zone b span {
-  display: inline-grid;
-  place-items: center;
-  min-width: 1.6em;
-  height: 1.6em;
-  border-radius: 999px;
-  background: rgb(var(--color-white));
+.ins .tiles li[data-k="yours"] {
   box-shadow: inset 0 0 0 1px rgb(var(--color-navy-20));
-  font-size: 0.82em;
-  font-variant-numeric: tabular-nums;
+  color: rgb(var(--color-navy-60));
 }
-.ins .venn-left b span { color: rgb(var(--color-info-ink)); box-shadow: inset 0 0 0 1px rgb(var(--color-info-full) / 0.45); }/* Documents: four rows, each name with a short note on what it is for. */
+.ins .tiles-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: rgb(var(--color-navy-80));
+}
+.ins .tiles-key span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: rgb(var(--color-navy-100));
+}
+.ins .tiles-key [data-k="yours"] {
+  color: rgb(var(--color-navy-60));
+}/* Documents: four rows, each name with a short note on what it is for. */
 .ins .drafts-list {
   margin-top: 8px;
 }

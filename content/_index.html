@@ -387,21 +387,18 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
                     <span class="kicker">CRA coverage</span>
                     <h3>What sbomify covers in the CRA, and what it doesn't</h3>
                     <p>No tool makes you CRA compliant on its own. Of the eight vulnerability-handling requirements in Annex I Part II:</p>
-                    <figure class="venn">
-                        <figcaption class="sr-only">Who covers the eight vulnerability-handling requirements: sbomify alone covers 2, sbomify and you share 4, and 2 are yours.</figcaption>
-                        <div class="venn-shape" aria-hidden="true"><i class="venn-a"></i><i class="venn-b"></i></div>
-                        <div class="venn-zone venn-left">
-                            <b>sbomify <span>2</span></b>
-                            <span>SBOMs</span><span>Disclosure of fixes</span>
-                        </div>
-                        <div class="venn-zone venn-mid">
-                            <b>Shared <span>4</span></b>
-                            <span>Remediation</span><span>Disclosure policy</span><span>Contact address</span><span>Advisories</span>
-                        </div>
-                        <div class="venn-zone venn-right">
-                            <b>You <span>2</span></b>
-                            <span>Security testing</span><span>Delivering updates</span>
-                        </div>
+                    <figure class="tiles">
+                        <ul aria-label="The eight vulnerability-handling requirements and who covers them">
+                            <li data-k="built"><i aria-hidden="true"></i>SBOMs<span class="sr-only"> (sbomify)</span></li>
+                            <li data-k="shared"><i aria-hidden="true"></i>Remediation<span class="sr-only"> (shared)</span></li>
+                            <li data-k="yours"><i aria-hidden="true"></i>Security testing<span class="sr-only"> (yours)</span></li>
+                            <li data-k="built"><i aria-hidden="true"></i>Public disclosure<span class="sr-only"> (sbomify)</span></li>
+                            <li data-k="shared"><i aria-hidden="true"></i>Disclosure policy<span class="sr-only"> (shared)</span></li>
+                            <li data-k="shared"><i aria-hidden="true"></i>Contact address<span class="sr-only"> (shared)</span></li>
+                            <li data-k="yours"><i aria-hidden="true"></i>Delivering updates<span class="sr-only"> (yours)</span></li>
+                            <li data-k="shared"><i aria-hidden="true"></i>Advisories<span class="sr-only"> (shared)</span></li>
+                        </ul>
+                        <figcaption class="tiles-key" aria-hidden="true"><span data-k="built"><i></i>sbomify</span><span data-k="shared"><i></i>Shared</span><span data-k="yours"><i></i>Yours</span></figcaption>
                     </figure>
                     <a class="bento-link" href="/cra/">How sbomify helps with the CRA&nbsp;<span aria-hidden="true">&rarr;</span></a>
                 </article>
