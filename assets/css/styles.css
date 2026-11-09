@@ -4648,16 +4648,34 @@ button {
   font-size: 0.8rem;
   font-weight: var(--font-weight-semibold);
   color: rgb(var(--color-app-success));
+}/* Initials centred on the capitals, not the font's line box: trim the text
+   box to cap height and pad the rest evenly. */
+.ins .rq-avatar,
+.ins .app-avatar {
+  --size: 20px;
+  display: inline-block;
+  box-sizing: border-box;
+  width: var(--size);
+  flex: none;
+  padding-block: calc((var(--size) - 1cap) / 2);
+  border-radius: 50%;
+  font-size: 0.6rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  text-align: center;
+  color: rgb(var(--color-white));
+  text-box: trim-both cap alphabetic;
+}
+@supports not (text-box: trim-both cap alphabetic) {
+  .ins .rq-avatar,
+  .ins .app-avatar {
+    height: var(--size);
+    padding-block: 0;
+    line-height: var(--size);
+  }
 }
 .ins .rq-avatar {
-  display: grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
   background: rgb(var(--color-app-success) / 0.25);
-  font-size: 0.6rem;
-  color: rgb(var(--color-white));
 }
 .ins .rq-note {
   margin-top: 12px;
@@ -4737,10 +4755,15 @@ button {
 .ins .agent:not(.is-playing) .rq-actions,
 .ins .agent .rq-item:has(.rq-done.on) .rq-actions {
   display: none;
+}/* The count: "All reviewed" while the queue is empty and after approval;
+   "1 pending" only between the proposal arriving and its approval. */
+.ins .agent .rq-pending {
+  display: none;
 }
-.ins .agent.is-playing .rq:not(:has(.rq-done.on)) .rq-clear,
-.ins .agent:not(.is-playing) .rq-pending,
-.ins .agent .rq:has(.rq-done.on) .rq-pending {
+.ins .agent.is-playing .rq.on:not(:has(.rq-done.on)) .rq-pending {
+  display: inline-block;
+}
+.ins .agent.is-playing .rq.on:not(:has(.rq-done.on)) .rq-clear {
   display: none;
 }/* The approve button is pressed a moment before the approval lands. */
 .ins .agent .rq-actions.on .is-primary {
@@ -4984,15 +5007,8 @@ button {
   color: var(--app-muted);
 }
 .ins .app-avatar {
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+  --size: 24px;
   background: rgb(var(--color-app-primary) / 0.25);
-  font-size: 0.6rem;
-  font-weight: var(--font-weight-semibold);
-  color: var(--app-text);
 }/* All pages share one grid cell, so the window keeps the tallest height
    and a switch is a crossfade. */
 .ins .app-panels {

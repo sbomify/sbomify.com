@@ -3092,15 +3092,36 @@
   color: rgb(var(--color-app-success));
 }
 
-.ins .rq-avatar {
-  display: grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
+/* Initials centred on the capitals, not the font's line box: trim the text
+   box to cap height and pad the rest evenly. */
+.ins .rq-avatar,
+.ins .app-avatar {
+  --size: 20px;
+  display: inline-block;
+  box-sizing: border-box;
+  width: var(--size);
+  flex: none;
+  padding-block: calc((var(--size) - 1cap) / 2);
   border-radius: 50%;
-  background: rgb(var(--color-app-success) / 0.25);
   font-size: 0.6rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  text-align: center;
   color: rgb(var(--color-white));
+  text-box: trim-both cap alphabetic;
+}
+
+@supports not (text-box: trim-both cap alphabetic) {
+  .ins .rq-avatar,
+  .ins .app-avatar {
+    height: var(--size);
+    padding-block: 0;
+    line-height: var(--size);
+  }
+}
+
+.ins .rq-avatar {
+  background: rgb(var(--color-app-success) / 0.25);
 }
 
 .ins .rq-note {
@@ -3206,9 +3227,17 @@
   display: none;
 }
 
-.ins .agent.is-playing .rq:not(:has(.rq-done.on)) .rq-clear,
-.ins .agent:not(.is-playing) .rq-pending,
-.ins .agent .rq:has(.rq-done.on) .rq-pending {
+/* The count: "All reviewed" while the queue is empty and after approval;
+   "1 pending" only between the proposal arriving and its approval. */
+.ins .agent .rq-pending {
+  display: none;
+}
+
+.ins .agent.is-playing .rq.on:not(:has(.rq-done.on)) .rq-pending {
+  display: inline-block;
+}
+
+.ins .agent.is-playing .rq.on:not(:has(.rq-done.on)) .rq-clear {
   display: none;
 }
 
@@ -3506,15 +3535,8 @@
 }
 
 .ins .app-avatar {
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+  --size: 24px;
   background: rgb(var(--color-app-primary) / 0.25);
-  font-size: 0.6rem;
-  font-weight: var(--font-weight-semibold);
-  color: var(--app-text);
 }
 
 /* All pages share one grid cell, so the window keeps the tallest height
