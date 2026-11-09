@@ -448,27 +448,58 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
     </section>
 
     {{< comment >}}Open standards / self-host{{< /comment >}}
-    <section class="section">
-        <div class="wrap split">
-            <div class="topic">
-                <span class="kicker">No lock-in</span>
-                <h2>Open standards. Your infrastructure or ours.</h2>
-                <p>Your supply-chain security shouldn't depend on one vendor's data format. sbomify works in CycloneDX, SPDX, OpenVEX, CSAF and the Transparency Exchange API, with an API for everything else.</p>
-                <p>Use our hosted cloud, or <a href="https://github.com/sbomify/sbomify">get the source on GitHub</a> and self-host it for complete control over your data and infrastructure.</p>
-                <div class="topic-actions">
-                    <a class="btn-navy" href="https://app.sbomify.com" data-cta-location="home_self_host" data-cta-label="Start free">Start free in the cloud</a>
-                    <a class="btn-secondary" href="https://github.com/sbomify/sbomify">Self-Host</a>
-                    <div id="gh-star-cta" class="hidden"></div>
-                    <div id="gh-latest-version" class="hidden"></div>
+    <section class="section" id="no-lock-in">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">No lock-in</span>
+                    <h2 class="sec-title">Open standards. <span class="soft">Your infrastructure or ours.</span></h2>
                 </div>
+                <p class="sec-lede">Your supply-chain security shouldn't depend on one vendor's data format. sbomify works in the open standards, with an API for everything else.</p>
             </div>
-            <aside>
-                <div class="side-card">
-                    <h3>Built by people who write the standards</h3>
-                    <p>sbomify follows the blueprint of the CISA working group on SBOM generation, co-led by sbomify founder <a href="/about/">Viktor Petersson</a>, who is also an invited expert to ECMA TC54 on security artifacts and the Transparency Exchange API.</p>
-                    <p>When the standards move, sbomify moves with them.</p>
-                </div>
-            </aside>
+
+            <ul class="stds" data-reveal aria-label="Standards sbomify works in">
+                <li style="--i: 0"><strong>CycloneDX</strong><span>SBOM</span></li>
+                <li style="--i: 1"><strong>SPDX</strong><span>SBOM</span></li>
+                <li style="--i: 2"><strong>OpenVEX</strong><span>VEX</span></li>
+                <li style="--i: 3"><strong>CSAF</strong><span>Advisories</span></li>
+                <li style="--i: 4"><strong>TEA</strong><span>Transparency Exchange API</span></li>
+            </ul>
+
+            <div class="deploy">
+                <article>
+                    <div class="deploy-head">
+                        <span class="deploy-ico">{{< ph "cloud" >}}</span>
+                    </div>
+                    <h3>sbomify Cloud</h3>
+                    <p>Hosted and kept up to date by us. Sign up and start in minutes.</p>
+                    <span class="deploy-where">{{< ph "lock-simple" >}}app.sbomify.com</span>
+                    <div class="deploy-actions">
+                        <a class="btn-navy" href="https://app.sbomify.com" data-cta-location="home_self_host" data-cta-label="Start free">Start free in the cloud</a>
+                    </div>
+                </article>
+                <article>
+                    <div class="deploy-head">
+                        <span class="deploy-ico">{{< ph "hard-drives" >}}</span>
+                        <div class="deploy-meta">
+                            <div id="gh-latest-version" class="hidden"></div>
+                            <div id="gh-star-cta" class="hidden"></div>
+                        </div>
+                    </div>
+                    <h3>Self-hosted</h3>
+                    <p>The same app on your own servers, with Docker Compose or Helm. Complete control over your data.</p>
+                    <code class="deploy-where"><span aria-hidden="true">$</span> docker compose up -d</code>
+                    <div class="deploy-actions">
+                        <a class="btn-secondary" href="/self-hosting/">Self-hosting guide</a>
+                        <a class="link-go" href="https://github.com/sbomify/sbomify">{{< ph "github-logo" >}}Source on GitHub</a>
+                    </div>
+                </article>
+            </div>
+
+            <p class="credit">
+                {{< avatar src="images/viktor.png" >}}
+                <span><b>Built by people who write the standards.</b> Founder <a href="/about/">Viktor Petersson</a> co-led the CISA working group on SBOM generation and is an invited expert to ECMA TC54. When the standards move, sbomify moves with them.</span>
+            </p>
         </div>
     </section>
 
