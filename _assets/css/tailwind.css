@@ -2827,6 +2827,434 @@
   }
 }
 
+/* ---------- agents: a full-width band in the app's deepest navy ---------- */
+
+/* A different room from the orange-ember navy bands: the app's darkest
+   background, a faint dot grid that fades towards the edges, and a glow in
+   the app's periwinkle accent. */
+.ins .band-agent {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(64px, 9vw, 120px);
+  background: rgb(var(--color-app-bg));
+  color: rgb(var(--color-white));
+}
+
+.ins .band-agent::before,
+.ins .band-agent::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.ins .band-agent::before {
+  background-image: radial-gradient(rgb(var(--color-white) / 0.07) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 60% 45%, #000 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 70% 70% at 60% 45%, #000 30%, transparent 80%);
+}
+
+.ins .band-agent::after {
+  background:
+    radial-gradient(40% 45% at 78% 42%, rgb(var(--color-app-primary) / 0.16), transparent 70%),
+    radial-gradient(30% 35% at 12% 0%, rgb(var(--color-app-primary) / 0.08), transparent 70%);
+}
+
+.ins .band-agent .kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: rgb(var(--color-app-primary));
+}
+
+/* A small spark: the "AI" marker, in the app's accent. */
+.ins .agent-spark {
+  width: 8px;
+  height: 8px;
+  background: rgb(var(--color-app-primary));
+  transform: rotate(45deg);
+  border-radius: 1.5px;
+  box-shadow: 0 0 12px rgb(var(--color-app-primary) / 0.8);
+}
+
+.ins .band-agent .sec-title .soft {
+  color: rgb(var(--color-white) / 0.55);
+}
+
+.ins .band-agent .sec-lede,
+.ins .band-agent .sec-close {
+  color: rgb(var(--color-white) / 0.72);
+}
+
+.ins .band-agent .sec-close b {
+  color: rgb(var(--color-white));
+  font-weight: var(--font-weight-semibold);
+}
+
+.ins .band-agent a {
+  text-decoration-color: rgb(var(--color-white) / 0.35);
+}
+
+/* The picture: the session on the left, the review queue on the right. */
+.ins .agent {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .ins .agent {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* The terminal. */
+.ins .term {
+  border-radius: 14px;
+  background: rgb(var(--color-app-surface) / 0.9);
+  box-shadow: 0 0 0 1px rgb(var(--color-app-border)), 0 40px 80px -30px rgb(0 0 0 / 0.7);
+  overflow: hidden;
+}
+
+.ins .term-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgb(var(--color-app-border));
+}
+
+.ins .term-bar i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgb(var(--color-app-border));
+}
+
+.ins .term-bar span {
+  margin-left: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgb(var(--color-white) / 0.45);
+}
+
+.ins .term-body {
+  display: grid;
+  gap: 6px;
+  min-height: 300px;
+  padding: 18px 20px 22px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.ins .tl {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  color: rgb(var(--color-white) / 0.78);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ins .tl-you {
+  margin-bottom: 6px;
+  color: rgb(var(--color-white));
+}
+
+.ins .tl-p {
+  color: rgb(var(--color-app-primary));
+}
+
+/* A tool call: the tool's name in a small chip, then what it does. */
+.ins .tl-tool {
+  flex: none;
+  padding: 0 7px;
+  border-radius: 5px;
+  background: rgb(var(--color-app-primary) / 0.14);
+  box-shadow: inset 0 0 0 1px rgb(var(--color-app-primary) / 0.25);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: rgb(var(--color-app-primary));
+}
+
+.ins .tl-out {
+  padding-left: 22px;
+  color: rgb(var(--color-white) / 0.5);
+}
+
+.ins .tl-out::before {
+  content: "\2514";
+  margin-left: -16px;
+  margin-right: 6px;
+  color: rgb(var(--color-white) / 0.25);
+}
+
+.ins .tl-wait {
+  margin-top: 6px;
+  color: rgb(var(--color-white) / 0.6);
+}
+
+.ins .tl-done {
+  color: rgb(var(--color-app-success));
+}
+
+.ins .tl-done .tl-p {
+  color: inherit;
+}
+
+@media (max-width: 600px) {
+  .ins .term-body {
+    min-height: 0;
+    font-size: 0.74rem;
+  }
+
+  .ins .tl {
+    white-space: normal;
+  }
+}
+
+/* The review queue, in the app's own card style. */
+.ins .rq {
+  padding: 18px;
+  border-radius: 14px;
+  background: rgb(var(--color-app-surface) / 0.9);
+  box-shadow: 0 0 0 1px rgb(var(--color-app-border)), 0 40px 80px -30px rgb(0 0 0 / 0.7);
+  font-size: 0.85rem;
+  color: rgb(var(--color-navy-20));
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.ins .rq-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-white));
+}
+
+.ins .rq-pending[data-label]::after {
+  content: attr(data-label);
+}
+
+.ins .rq-item {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 10px;
+  background: rgb(var(--color-app-bg));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-app-border));
+}
+
+.ins .rq-kind {
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-white));
+}
+
+.ins .rq-kind span {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: var(--font-weight-regular);
+  color: rgb(var(--color-navy-40));
+}
+
+.ins .rq-kind b,
+.ins .rq-what b {
+  font-weight: var(--font-weight-medium);
+  color: rgb(var(--color-navy-20));
+}
+
+.ins .rq-vex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: rgb(var(--color-navy-40));
+}
+
+.ins .rq-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.ins .rq-btn {
+  flex: 1;
+  padding: 7px 10px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px rgb(var(--color-app-border));
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+  color: rgb(var(--color-navy-20));
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ins .rq-btn.is-primary {
+  background: rgb(var(--color-info-full));
+  box-shadow: none;
+  color: rgb(var(--color-white));
+}
+
+.ins .rq-done {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgb(var(--color-app-success) / 0.12);
+  box-shadow: inset 0 0 0 1px rgb(var(--color-app-success) / 0.25);
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-app-success));
+}
+
+.ins .rq-avatar {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgb(var(--color-app-success) / 0.25);
+  font-size: 0.6rem;
+  color: rgb(var(--color-white));
+}
+
+.ins .rq-note {
+  margin-top: 12px;
+  font-size: 0.75rem;
+  color: rgb(var(--color-navy-40));
+}
+
+/* What agents can do: three short lines under the picture. */
+.ins .agent-can {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 32px;
+  margin-top: clamp(32px, 4vw, 48px);
+}
+
+.ins .agent-can li {
+  padding-top: 16px;
+  border-top: 1px solid rgb(var(--color-white) / 0.12);
+  font-size: 0.95rem;
+  color: rgb(var(--color-white) / 0.65);
+}
+
+.ins .agent-can b {
+  display: block;
+  margin-bottom: 2px;
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-white));
+}
+
+@media (max-width: 760px) {
+  .ins .agent-can {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+}
+
+/* ---- the session playing (assets/js/main.js adds .is-playing and marks
+   each [data-t] element .on at its time). The finished state is the
+   default, so that is what shows without JavaScript or with reduced
+   motion. ---- */
+
+/* Lines appear as they are reached; typed ones reveal character by
+   character (monospace, so --n steps land on letters). */
+.ins .agent.is-playing .tl:not(.on) {
+  visibility: hidden;
+}
+
+.ins .agent.is-playing .tl.on:is(.tl-you, .tl-call) {
+  animation: tl-type calc(var(--n, 30) * 24ms) steps(var(--n, 30)) both;
+}
+
+.ins .agent.is-playing .tl.on:is(.tl-out, .tl-wait, .tl-done) {
+  animation: tl-fade 0.35s ease both;
+}
+
+/* Wrapped lines (phones) can't be typed left to right: fade them in. */
+@media (max-width: 600px) {
+  .ins .agent.is-playing .tl.on:is(.tl-you, .tl-call) {
+    animation: tl-fade 0.35s ease both;
+  }
+}
+
+@keyframes tl-type {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes tl-fade {
+  from { opacity: 0; transform: translateY(2px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* A caret after the newest line. */
+.ins .agent.is-playing .tl.on:not(:has(~ .tl.on))::after {
+  content: "";
+  width: 7px;
+  height: 1.1em;
+  margin-left: 2px;
+  background: rgb(var(--color-app-primary));
+  animation: tl-caret 1s steps(1) infinite;
+  align-self: center;
+}
+
+@keyframes tl-caret {
+  50% { opacity: 0; }
+}
+
+/* The queue waits dimmed until the proposal arrives. */
+.ins .agent.is-playing .rq:not(.on) {
+  opacity: 0.35;
+  transform: translateY(8px);
+}
+
+.ins .agent.is-playing .rq:not(.on) .rq-item {
+  visibility: hidden;
+}
+
+/* Pending until approved; approved is the finished state. */
+.ins .agent.is-playing .rq-done:not(.on),
+.ins .agent:not(.is-playing) .rq-actions,
+.ins .agent .rq-item:has(.rq-done.on) .rq-actions {
+  display: none;
+}
+
+.ins .agent.is-playing .rq:not(:has(.rq-done.on)) .rq-clear,
+.ins .agent:not(.is-playing) .rq-pending,
+.ins .agent .rq:has(.rq-done.on) .rq-pending {
+  display: none;
+}
+
+/* The approve button is pressed a moment before the approval lands. */
+.ins .agent .rq-actions.on .is-primary {
+  transform: scale(0.96);
+  box-shadow: 0 0 0 4px rgb(var(--color-info-full) / 0.3);
+}
+
+.ins .agent.is-playing .rq-done.on {
+  animation: tl-fade 0.35s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ins .agent *,
+  .ins .agent *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 /* ---------- dark band: a full-width navy section ---------- */
 
 /* Edge to edge, navy, embers from assets/js/nebula.js (variant "band").

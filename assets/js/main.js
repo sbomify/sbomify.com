@@ -244,10 +244,53 @@
     });
   }
 
+  // Agent session (home page): each [data-t] element inside [data-agent] is
+  // marked .on at its time in ms once the picture is on screen; the
+  // finished state holds, then it plays again. Leaving the screen resets to
+  // the finished state, which is also what shows without JavaScript or with
+  // reduced motion.
+  function initAgent () {
+    if (!('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('[data-agent]').forEach(function (root) {
+      var items = Array.prototype.slice.call(root.querySelectorAll('[data-t]'));
+      var end = items.reduce(function (m, el) { return Math.max(m, +el.getAttribute('data-t')); }, 0);
+      var HOLD = 6000;
+      var timers = [];
+
+      function clear () {
+        timers.forEach(clearTimeout);
+        timers = [];
+      }
+
+      function play () {
+        clear();
+        items.forEach(function (el) { el.classList.remove('on'); });
+        root.classList.add('is-playing');
+        items.forEach(function (el) {
+          timers.push(setTimeout(function () { el.classList.add('on'); }, +el.getAttribute('data-t') + 300));
+        });
+        timers.push(setTimeout(play, end + 300 + HOLD));
+      }
+
+      function stop () {
+        clear();
+        root.classList.remove('is-playing');
+        items.forEach(function (el) { el.classList.add('on'); });
+      }
+
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { if (!timers.length) play(); }
+        else stop();
+      }, { threshold: 0.35 }).observe(root);
+    });
+  }
+
   initHeader();
   initReveal();
   initSteps();
   initStages();
+  initAgent();
   initCodeCopy();
   initAgentTools();
 }())
