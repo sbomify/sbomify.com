@@ -2348,6 +2348,7 @@
 
 .ins .lc-track li {
   position: relative;
+  z-index: 2; /* over the travelling marker */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2431,6 +2432,119 @@
 
   .ins .lc-track strong + span {
     max-width: none;
+  }
+}
+
+/* The loop: a marker travels the line from release to end of support,
+   trailing a soft glow, and each dot rings out in its own colour as the
+   marker reaches it; a short pause, then again. Transform and opacity only.
+   One cycle is 5.5s: 4s of travel (1s between dots), 1.5s of rest. */
+.ins .lc-rail {
+  --loop: 5.5s;
+  --start: 1.4s;
+  position: relative;
+}
+
+.ins .lc-path {
+  position: absolute;
+  z-index: 1;
+  top: calc(12px / 2 - 2px);
+  left: 10%;
+  right: 10%;
+  height: 4px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* As wide as the line, a trail fading in towards its right end, where the
+   head sits. Slid from fully before the line to its end. */
+.ins .lc-comet {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgb(var(--color-navy-100) / 0) 72%, rgb(var(--color-navy-100) / 0.55));
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.ins .lc-comet::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgb(var(--color-navy-100));
+}
+
+@keyframes lc-travel {
+  0% { transform: translateX(-100%); opacity: 1; }
+  72.7% { transform: translateX(0); opacity: 1; }
+  80%, 100% { transform: translateX(0); opacity: 0; }
+}
+
+@keyframes lc-travel-down {
+  0% { transform: translateY(-100%); opacity: 1; }
+  72.7% { transform: translateY(0); opacity: 1; }
+  80%, 100% { transform: translateY(0); opacity: 0; }
+}
+
+.ins .lc-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--tone);
+  opacity: 0;
+}
+
+@keyframes lc-ring {
+  0% { transform: scale(1); opacity: 0.7; }
+  18% { transform: scale(2.6); opacity: 0; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* Runs once the block is shown: straight away without the reveal, after
+   it otherwise. */
+.ins .lifecycle:is(:not(.reveal-ready), .is-in) .lc-comet {
+  animation: lc-travel var(--loop) linear var(--start) infinite;
+}
+
+.ins .lifecycle:is(:not(.reveal-ready), .is-in) .lc-dot::after {
+  animation: lc-ring var(--loop) ease-out calc(var(--start) + var(--i, 0) * 1s) infinite;
+}
+
+@media (max-width: 760px) {
+  .ins .lc-path {
+    top: 6px;
+    bottom: 6px;
+    left: 3px;
+    right: auto;
+    width: 6px;
+    height: auto;
+  }
+
+  .ins .lc-comet {
+    background: linear-gradient(180deg, rgb(var(--color-navy-100) / 0) 72%, rgb(var(--color-navy-100) / 0.55));
+    transform: translateY(-100%);
+  }
+
+  .ins .lc-comet::after {
+    right: 1px;
+    top: auto;
+    bottom: 0;
+  }
+
+  .ins .lifecycle:is(:not(.reveal-ready), .is-in) .lc-comet {
+    animation-name: lc-travel-down;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ins .lifecycle .lc-comet,
+  .ins .lifecycle .lc-dot::after {
+    animation: none;
   }
 }
 
