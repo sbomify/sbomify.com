@@ -4958,94 +4958,42 @@ button {
 .ins .cover-key b {
   font-weight: var(--font-weight-bold);
   color: rgb(var(--color-navy-100));
-}/* Documents: the four names beside a page preview. Hovering a name shows
-   its page (data-cycle="hover", assets/js/main.js); otherwise the first
-   page shows. */
-.ins .drafts {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
-  gap: 20px;
-  align-items: center;
+}/* Documents: four rows, each name with a short note on what it is for. */
+.ins .drafts-list {
   margin-top: 8px;
 }
 .ins .drafts-list li {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 0;
+  gap: 12px;
+  padding: 12px 0;
   border-top: 1px solid rgb(var(--color-navy-10));
-  font-size: 0.9rem;
+  font-size: 0.92rem;
+  font-weight: var(--font-weight-medium);
   line-height: 1.3;
-  color: rgb(var(--color-navy-60));
-  cursor: default;
-  transition: color 0.25s ease;
+  color: rgb(var(--color-navy-100));
 }
 .ins .drafts-list li:last-child {
   border-bottom: 1px solid rgb(var(--color-navy-10));
 }
-.ins .drafts-list li.is-active {
-  color: rgb(var(--color-navy-100));
-  font-weight: var(--font-weight-medium);
-}
-.ins .drafts-list li.is-active .doc-ico {
-  box-shadow: inset 0 0 0 1.5px rgb(var(--color-navy-100));
-}/* The page: one sheet of white paper; pages crossfade in one cell. */
-.ins .paper {
-  position: relative;
-  display: grid;
-  aspect-ratio: 0.82;
-  max-height: 240px;
-  margin-inline: auto;
-  width: 100%;
-  max-width: 210px;
-}
-.ins .paper-page {
-  position: relative;
-  grid-area: 1 / 1;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  padding: 16px 16px 14px;
-  border-radius: 8px;
-  background: rgb(var(--color-white));
-  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10)), 0 12px 24px -18px rgb(var(--color-navy-100) / 0.3);
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-.ins .paper-page.is-active {
-  opacity: 1;
-}
-.ins .paper-kicker {
-  font-size: 0.66rem;
-  color: rgb(var(--color-navy-60));
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.ins .paper-page b {
-  margin-bottom: 4px;
+.ins .drafts-list small {
+  margin-left: auto;
+  padding-left: 12px;
   font-size: 0.82rem;
-  font-weight: var(--font-weight-bold);
-  line-height: 1.25;
-  color: rgb(var(--color-navy-100));
-}/* Text lines, drawn left to right when the page comes up. */
-.ins .paper-page i {
-  display: block;
-  width: var(--w);
-  height: 5px;
-  border-radius: 3px;
-  background: rgb(var(--color-navy-10));
-  transform-origin: left center;
+  font-weight: var(--font-weight-regular);
+  text-align: right;
+  color: rgb(var(--color-navy-60));
 }
-@media (max-width: 420px) {
-  .ins .drafts {
-    grid-template-columns: minmax(0, 1fr);
+@media (max-width: 480px) {
+  .ins .drafts-list li {
+    flex-wrap: wrap;
   }
-}
-@media (prefers-reduced-motion: reduce) {
-  .ins .drafts * {
-    animation: none !important;
-    transition: none !important;
+
+  .ins .drafts-list small {
+    flex-basis: 100%;
+    margin-left: calc(14px + 12px);
+    padding-left: 0;
+    text-align: left;
   }
 }/* A page with a folded corner. */
 .ins .doc-ico {

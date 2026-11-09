@@ -286,51 +286,8 @@
     });
   }
 
-  // Cycle (home page, documents card): [data-cycle] moves .is-active along
-  // its [data-cycle-item]s and the matching [data-cycle-panel]s every
-  // data-cycle ms while on screen; hovering an item shows its panel and
-  // holds it. No auto-play for reduced motion.
-  function initCycle () {
-    document.querySelectorAll('[data-cycle]').forEach(function (root) {
-      var items = root.querySelectorAll('[data-cycle-item]');
-      var panels = root.querySelectorAll('[data-cycle-panel]');
-      if (!items.length || items.length !== panels.length) return;
-      // data-cycle="hover": no timer, hovering an item is the only change.
-      var every = root.getAttribute('data-cycle') === 'hover' ? 0 : (parseInt(root.getAttribute('data-cycle'), 10) || 3500);
-      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var current = 0, timer = null, visible = false, held = false;
-
-      function show (i) {
-        current = i;
-        for (var n = 0; n < items.length; n++) {
-          items[n].classList.toggle('is-active', n === i);
-          panels[n].classList.toggle('is-active', n === i);
-        }
-      }
-
-      function schedule () {
-        clearTimeout(timer);
-        if (!every || reduce || held || !visible) return;
-        timer = setTimeout(function () { show((current + 1) % items.length); schedule(); }, every);
-      }
-
-      Array.prototype.forEach.call(items, function (item, i) {
-        item.addEventListener('mouseenter', function () { held = true; show(i); schedule(); });
-      });
-      root.addEventListener('mouseleave', function () { held = false; schedule(); });
-
-      if ('IntersectionObserver' in window) {
-        new IntersectionObserver(function (entries) {
-          visible = entries[0].isIntersecting;
-          schedule();
-        }, { threshold: 0.5 }).observe(root);
-      }
-    });
-  }
-
   initHeader();
   initReveal();
-  initCycle();
   initSteps();
   initStages();
   initAgent();
