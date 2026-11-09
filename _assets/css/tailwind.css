@@ -2013,6 +2013,57 @@
   margin-top: 28px;
 }
 
+/* Press: a small-caps label and three logos on one centred line, each
+   logo sized so the wordmarks read at the same height, all in one quiet
+   grey that takes its colour on hover. */
+.ins .featured {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px 32px;
+  margin-top: 44px;
+}
+
+.ins .featured .kicker {
+  margin: 0;
+}
+
+.ins .featured-logos {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.ins .featured-logos a {
+  display: block;
+  line-height: 0;
+}
+
+.ins .featured-logos img {
+  width: auto;
+  filter: grayscale(1);
+  opacity: 0.55;
+  transition: opacity 0.15s ease, filter 0.15s ease;
+}
+
+.ins .featured-logos a:hover img,
+.ins .featured-logos a:focus-visible img {
+  filter: none;
+  opacity: 1;
+}
+
+.ins .featured-logos .is-infoq { height: 22px; }
+.ins .featured-logos .is-eetimes { height: 18px; }
+/* Stacked mark (eye over the wordmark): taller, so its wordmark matches. */
+.ins .featured-logos .is-techtarget { height: 36px; }
+
+@media (max-width: 600px) {
+  .ins .featured .kicker {
+    flex-basis: 100%;
+  }
+}
+
 /* A short line of small links under the hero's action: "Try …" on Insights,
    integrations and press here. */
 .ins .try {
