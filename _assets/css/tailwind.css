@@ -5207,7 +5207,7 @@
   }
 }
 
-/* ---------- CRA page: coverage tally, obligation cards, plans ---------- */
+/* ---------- CRA obligations guide: coverage tally, obligation cards, plans ---------- */
 
 /* The coverage marker, as in the home bento's CRA card: a filled disc for
    built in, a half disc for supports, an empty ring for yours. Set by the
@@ -5523,6 +5523,518 @@
 .ins :is(.obls, .cra-plans).reveal-ready.is-in > * {
   opacity: 1;
   transform: none;
+}
+
+/* ---------- CRA page: timeline, splits, report clock, features, bundle, FAQ ---------- */
+
+/* The timeline: three dates on one rule, a disc on the rule for each.
+   Passed dates filled, today's ringed, the next one empty. Stacks on
+   narrow screens with the rule running down the left. */
+.ins .cra-dates {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  padding-top: 30px;
+}
+
+.ins .cra-dates::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 7px;
+  height: 2px;
+  background: linear-gradient(90deg, rgb(var(--color-navy-100)) 0 50%, rgb(var(--color-navy-10)) 50% 100%);
+}
+
+.ins .cra-dates li {
+  position: relative;
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+}
+
+.ins .cra-dates li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -30px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgb(var(--color-white));
+  box-shadow: inset 0 0 0 2px rgb(var(--color-navy-20));
+}
+
+.ins .cra-dates [data-state="done"]::before { background: rgb(var(--color-navy-100)); box-shadow: none; }
+.ins .cra-dates [data-state="now"]::before {
+  background: rgb(var(--color-navy-100));
+  box-shadow: 0 0 0 5px rgb(var(--color-navy-10));
+}
+
+.ins .cra-date-when {
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.ins .cra-dates [data-state="next"] .cra-date-when {
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .cra-date-tag {
+  order: -1;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-20));
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .cra-dates [data-state="now"] .cra-date-tag {
+  background: rgb(var(--color-navy-100));
+  box-shadow: none;
+  color: rgb(var(--color-white));
+}
+
+.ins .cra-dates b {
+  margin-top: 4px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.ins .cra-date-what {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgb(var(--color-navy-80));
+  max-width: 32ch;
+}
+
+@media (max-width: 760px) {
+  .ins .cra-dates {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    padding: 0 0 0 34px;
+  }
+
+  .ins .cra-dates::before {
+    left: 7px;
+    right: auto;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(180deg, rgb(var(--color-navy-100)) 0 50%, rgb(var(--color-navy-10)) 50% 100%);
+  }
+
+  .ins .cra-dates li::before {
+    left: -34px;
+    top: 2px;
+  }
+}
+
+/* A split: copy on one side, a product picture on the other. */
+.ins .cra-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 88px);
+}
+
+.ins .cra-split.is-flip > figure {
+  order: -1;
+}
+
+.ins .cra-split-copy .sec-title {
+  margin-bottom: 18px;
+  font-size: clamp(2rem, 3.6vw, 2.9rem);
+}
+
+.ins .cra-points {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.ins .cra-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .cra-points b {
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .cra-points .ph-ico {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0.15em 0 0;
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .cra-small {
+  margin-top: 22px;
+  font-size: 0.9rem;
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .cra-small a {
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+}
+
+@media (max-width: 900px) {
+  .ins .cra-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ins .cra-split.is-flip > figure {
+    order: 0;
+  }
+}
+
+/* The shared product card: white, a hairline, a long soft shadow. */
+.ins :is(.clock, .bundle) {
+  padding: clamp(20px, 2.6vw, 30px);
+  border-radius: 20px;
+  background: rgb(var(--color-white));
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--color-navy-10)),
+    0 1px 2px rgb(var(--color-navy-100) / 0.04),
+    0 32px 64px -40px rgb(var(--color-navy-100) / 0.35);
+}
+
+/* The report clock: one exploited CVE and its three Article 14 reports. */
+.ins .clock-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.ins .clock .example-id {
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+}
+
+.ins .clock-in {
+  margin-top: 8px;
+  font-size: 0.92rem;
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .clock-in b {
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .clock-steps {
+  display: grid;
+  margin-top: 20px;
+  border-top: 1px solid rgb(var(--color-navy-10));
+}
+
+.ins .clock-steps li {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgb(var(--color-navy-10));
+}
+
+.ins .clock-due {
+  display: grid;
+  place-items: center;
+  height: 40px;
+  border-radius: 10px;
+  background: rgb(var(--color-navy-100));
+  font-size: 0.92rem;
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+  color: rgb(var(--color-white));
+}
+
+.ins .clock-name {
+  display: grid;
+  line-height: 1.35;
+}
+
+.ins .clock-name b {
+  font-weight: var(--font-weight-semibold);
+}
+
+.ins .clock-name span {
+  font-size: 0.86rem;
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .clock-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+.ins .clock-status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgb(var(--color-success-full));
+}
+
+.ins .clock [data-state="wait"] .clock-due {
+  background: rgb(var(--color-panel));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10));
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .clock [data-state="wait"] .clock-status {
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .clock [data-state="wait"] .clock-status::before {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px rgb(var(--color-navy-40));
+}
+
+@media (max-width: 440px) {
+  .ins .clock-steps li {
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+
+  .ins .clock-status {
+    grid-column: 2;
+  }
+}
+
+/* Features: four cards on the dark band, frosted. */
+.ins .cra-feats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ins .cra-feats article {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 26px 24px 28px;
+  border-radius: 18px;
+  background: rgb(var(--color-white) / 0.06);
+  box-shadow: inset 0 0 0 1px rgb(var(--color-white) / 0.12);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.ins .cra-feat-ico {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+  border-radius: 11px;
+  background: rgb(var(--color-white));
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .cra-feat-ico .ph-ico {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+
+.ins .cra-feats h3 {
+  font-size: 1.12rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.015em;
+}
+
+.ins .cra-feats p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgb(var(--color-white) / 0.75);
+}
+
+.ins .cra-feats code {
+  font-size: 0.85em;
+  color: rgb(var(--color-white));
+}
+
+@media (max-width: 1060px) {
+  .ins .cra-feats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .ins .cra-feats { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* The export bundle: one archive and the files inside it. */
+.ins .bundle-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgb(var(--color-navy-10));
+}
+
+.ins .bundle-ico {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgb(var(--color-navy-100));
+  color: rgb(var(--color-white));
+}
+
+.ins .bundle-ico .ph-ico {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+}
+
+.ins .bundle-head > span:last-child {
+  display: grid;
+  line-height: 1.3;
+}
+
+.ins .bundle-head b {
+  font-weight: var(--font-weight-semibold);
+}
+
+.ins .bundle-head > span:last-child > span {
+  font-size: 0.88rem;
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .bundle-files li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px dashed rgb(var(--color-navy-10));
+  font-size: 0.94rem;
+}
+
+.ins .bundle-files li > span:last-child {
+  flex: none;
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-medium);
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .bundle-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 0.9rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.ins .bundle-foot .ph-ico {
+  margin: 0;
+}
+
+/* Coverage on the CRA page: the guide's tally, left-aligned in the section. */
+.ins .cra-tally {
+  max-width: none;
+  margin-top: 0;
+}
+
+.ins .tally-note a {
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+}
+
+/* FAQ: heading left, native disclosure rows right. */
+.ins .cra-faq-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
+  gap: 24px clamp(32px, 6vw, 88px);
+  align-items: start;
+}
+
+.ins .cra-faq {
+  border-top: 1px solid rgb(var(--color-navy-10));
+}
+
+.ins .cra-faq details {
+  border-bottom: 1px solid rgb(var(--color-navy-10));
+}
+
+.ins .cra-faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0;
+  font-size: 1.08rem;
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  list-style: none;
+}
+
+.ins .cra-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.ins .cra-faq summary .ph-ico {
+  flex: none;
+  margin: 0;
+  color: rgb(var(--color-navy-60));
+  transition: transform 0.2s ease;
+}
+
+.ins .cra-faq details[open] summary .ph-ico {
+  transform: rotate(45deg);
+}
+
+.ins .cra-faq details p {
+  padding: 0 40px 22px 0;
+  line-height: 1.65;
+  color: rgb(var(--color-navy-80));
+}
+
+@media (max-width: 860px) {
+  .ins .cra-faq-wrap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Reveal: dates, pictures and cards rise in. */
+.ins :is(.cra-dates, .cra-feats).reveal-ready > *,
+.ins :is(.clock, .bundle).reveal-ready {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.ins :is(.cra-dates, .cra-feats).reveal-ready > :nth-child(2) { transition-delay: 0.08s; }
+.ins :is(.cra-dates, .cra-feats).reveal-ready > :nth-child(3) { transition-delay: 0.16s; }
+.ins .cra-feats.reveal-ready > :nth-child(4) { transition-delay: 0.24s; }
+
+.ins :is(.cra-dates, .cra-feats).reveal-ready.is-in > *,
+.ins :is(.clock, .bundle).reveal-ready.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ins .cra-faq summary .ph-ico { transition: none; }
 }
 
 /* ---------- footer ---------- */
