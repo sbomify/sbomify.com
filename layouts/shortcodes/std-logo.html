@@ -1,0 +1,7 @@
+{{- /* {{< std-logo "cyclonedx" "CycloneDX" >}}: a standard's logo from
+       assets/images/standards, inlined so it takes the text colour. */ -}}
+{{- $name := .Get 0 -}}
+{{- $label := .Get 1 -}}
+{{- with resources.Get (printf "images/standards/%s.svg" $name) -}}
+  {{- replace .Content "<svg " (printf "<svg class=\"std-logo std-%s\" role=\"img\" aria-label=\"%s\" " $name $label) | safeHTML -}}
+{{- end -}}

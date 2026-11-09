@@ -3827,11 +3827,38 @@
   box-shadow: inset 1px 0 0 rgb(var(--color-navy-10));
 }
 
+/* Logos where the standard publishes one, in navy; the name as a wordmark
+   where it doesn't. All sit on the same 30px line. */
+.ins .stds .std-logo,
 .ins .stds strong {
-  font-size: clamp(1.15rem, 1.9vw, 1.45rem);
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: -0.02em;
+  height: 30px;
+  margin-bottom: 10px;
   color: rgb(var(--color-navy-100));
+}
+
+.ins .stds .std-logo {
+  display: block;
+  width: auto;
+  max-width: 100%;
+}
+
+.ins .stds .std-cyclonedx {
+  height: 24px;
+  margin-block: 3px 13px;
+}
+
+.ins .stds .std-csaf {
+  height: 34px;
+  margin-block: -2px 8px;
+}
+
+.ins .stds strong {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.03em;
+  line-height: 1;
 }
 
 .ins .stds span {
