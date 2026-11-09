@@ -4,17 +4,17 @@ title: Integrations
 description: "Seamlessly integrate SBOM generation, analysis, and enrichment into your existing workflow."
 ---
 
-<div class="space-y-24">
+<div>
 
 {{< comment >}}CI/CD Section{{< /comment >}}
-<section>
-    <div class="mb-10 text-center max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold text-ink mb-4">CI/CD & Generation</h2>
-      <p class="text-lg text-ink-muted">Generate SBOMs automatically in your pipelines. We support all major CI/CD providers.</p>
+<section class="section section-rule">
+    <div class="mb-10 max-w-3xl">
+      <h2 class="section-title mb-4">CI/CD & Generation</h2>
+      <p class="lede">Generate SBOMs automatically in your pipelines. We support all major CI/CD providers.</p>
     </div>
 
     {{< comment >}}Setup Wizard{{< /comment >}}
-    <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-accent shadow-card mb-8" id="wizard">
+    <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line-strong mb-8" id="wizard">
       <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
         <span class="text-2xl font-bold text-ink">New: Interactive Setup Wizard</span>
         <a href="/faq/how-do-i-use-the-sbomify-setup-wizard/" class="link text-sm font-semibold whitespace-nowrap">Read the FAQ →</a>
@@ -22,7 +22,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
       <p class="text-ink-muted mb-6">
         The fastest way to get started. Run the wizard from the root of your repository and it scans your lockfiles, creates your products and components, registers OIDC trusted publishing, and writes a ready-to-commit <code class="text-ink">.github/workflows/sboms.yml</code>. No tokens to copy, no YAML to hand-write.
       </p>
-      <div class="bg-inverse rounded-lg p-4 overflow-x-auto text-sm text-navy-10 font-mono">
+      <div class="bg-inverse rounded-xl p-5 overflow-x-auto text-sm text-navy-10 font-mono">
 <pre><code>docker run --rm -it \
   -v "$(pwd):/github/workspace" \
   -w /github/workspace \
@@ -33,7 +33,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {{< comment >}}GitHub{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card" id="github">
+      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line" id="github">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <div class="flex flex-wrap items-center gap-3">
             <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "github" "w-8 h-8" >}}</span> GitHub</span>
@@ -44,7 +44,7 @@ description: "Seamlessly integrate SBOM generation, analysis, and enrichment int
         <p class="text-ink-muted mb-6">
           GitHub is at the core of many organizations. Our <a href="/sbomify-action/" class="link">sbomify Action</a> supports <a href="/faq/how-do-i-set-up-oidc-trusted-publishing/" class="link">OIDC trusted publishing</a>, so no long-lived token secret is needed.
         </p>
-        <div class="bg-inverse rounded-lg p-4 overflow-x-auto text-sm text-navy-10 font-mono">
+        <div class="bg-inverse rounded-xl p-5 overflow-x-auto text-sm text-navy-10 font-mono">
 
 <pre><code>permissions:
   id-token: write  # OIDC trusted publishing, no token needed
@@ -65,7 +65,7 @@ steps:
       </div>
 
       {{< comment >}}GitLab{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card" id="gitlab">
+      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line" id="gitlab">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "gitlab" "w-8 h-8" >}}</span> GitLab</span>
           <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/gitlab-ci/" class="link text-sm font-semibold whitespace-nowrap">Documentation →</a>
@@ -74,7 +74,7 @@ steps:
         <p class="text-ink-muted mb-6">
           Use our <a href="https://github.com/sbomify/sbomify-action/pkgs/container/sbomify-action" class="link">Docker image</a> directly in GitLab CI with built-in caching support.
         </p>
-        <div class="bg-inverse rounded-lg p-4 overflow-x-auto text-sm text-navy-10 font-mono">
+        <div class="bg-inverse rounded-xl p-5 overflow-x-auto text-sm text-navy-10 font-mono">
 
 <pre><code>generate-sbom:
   image: ghcr.io/sbomify/sbomify-action
@@ -96,7 +96,7 @@ steps:
       </div>
 
       {{< comment >}}Bitbucket{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card" id="bitbucket">
+      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line" id="bitbucket">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "bitbucket" "w-8 h-8" >}}</span> Bitbucket</span>
           <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/bitbucket/" class="link text-sm font-semibold whitespace-nowrap">Documentation →</a>
@@ -105,7 +105,7 @@ steps:
         <p class="text-ink-muted mb-6">
           Seamlessly integrate with Bitbucket Pipelines using our Docker image with built-in caching.
         </p>
-        <div class="bg-inverse rounded-lg p-4 overflow-x-auto text-sm text-navy-10 font-mono">
+        <div class="bg-inverse rounded-xl p-5 overflow-x-auto text-sm text-navy-10 font-mono">
 
 <pre><code>pipelines:
   default:
@@ -130,7 +130,7 @@ definitions:
       </div>
 
       {{< comment >}}Docker{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card" id="docker">
+      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line" id="docker">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "docker" "w-8 h-8" >}}</span> Docker</span>
           <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/docker/" class="link text-sm font-semibold whitespace-nowrap">Documentation →</a>
@@ -139,7 +139,7 @@ definitions:
         <p class="text-ink-muted mb-6">
           For any other CI/CD system, use our multi-arch (amd64 and arm64) Docker image directly. Generators are fetched on first use, digest-pinned and cached &mdash; nothing to install.
         </p>
-        <div class="bg-inverse rounded-lg p-4 overflow-x-auto text-sm text-navy-10 font-mono">
+        <div class="bg-inverse rounded-xl p-5 overflow-x-auto text-sm text-navy-10 font-mono">
 
 <pre><code># Create persistent cache volume
 docker volume create sbomify-cache
@@ -160,7 +160,7 @@ docker run --rm \
       </div>
 
       {{< comment >}}pip / CLI{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card" id="pip">
+      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line" id="pip">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "python" "w-8 h-8" >}}</span> Local CLI</span>
           <a href="https://pypi.org/project/sbomify-action/" class="link text-sm font-semibold whitespace-nowrap" target="_blank">View on PyPI →</a>
@@ -169,7 +169,7 @@ docker run --rm \
           Run the CLI on your machine with <code>uvx</code> or <code>pipx</code> for local development, one-off SBOMs and the setup wizard. Generators are downloaded on first use and cached, exactly as they are in the Docker image, so there is nothing else to install.
           <a href="/sbomify-action/runtimes/local/" class="link">Read the guide &rarr;</a>
         </p>
-        <div class="bg-inverse rounded-lg p-4 overflow-x-auto text-sm text-navy-10 font-mono">
+        <div class="bg-inverse rounded-xl p-5 overflow-x-auto text-sm text-navy-10 font-mono">
 
 <pre><code># Run without installing anything
 uvx sbomify-action --lock-file requirements.txt \
@@ -192,146 +192,146 @@ uvx sbomify-action</code></pre>
 </section>
 
 {{< comment >}}Supported Ecosystems Section{{< /comment >}}
-<section>
-    <div class="mb-10 text-center max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold text-ink mb-4">Supported Ecosystems</h2>
-      <p class="text-lg text-ink-muted">Generate SBOMs from lockfiles across 18 ecosystems, plus container images, directory scans and Yocto/OpenEmbedded builds.</p>
+<section class="section section-rule">
+    <div class="mb-10 max-w-3xl">
+      <h2 class="section-title mb-4">Supported Ecosystems</h2>
+      <p class="lede">Generate SBOMs from lockfiles across 18 ecosystems, plus container images, directory scans and Yocto/OpenEmbedded builds.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 mb-8">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "python" "w-5 h-5" >}}</span> Python</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">requirements.txt</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">poetry.lock</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Pipfile.lock</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">uv.lock</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">pyproject.toml</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">requirements.txt</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">poetry.lock</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Pipfile.lock</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">uv.lock</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pyproject.toml</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "javascript" "w-5 h-5" >}}</span> JavaScript</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">package.json</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">package-lock.json</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">yarn.lock</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">pnpm-lock.yaml</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">bun.lock</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">package.json</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">package-lock.json</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">yarn.lock</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pnpm-lock.yaml</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">bun.lock</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "java" "w-5 h-5" >}}</span> Java</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">pom.xml</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">build.gradle</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">build.gradle.kts</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">gradle.lockfile</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pom.xml</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">build.gradle</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">build.gradle.kts</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">gradle.lockfile</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "golang" "w-5 h-5" >}}</span> Go</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">go.mod</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">go.sum</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">go.mod</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">go.sum</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "rust" "w-5 h-5" >}}</span> Rust</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Cargo.lock</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Cargo.lock</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="text-lg font-bold text-ink mb-2">Ruby</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Gemfile.lock</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Gemfile.lock</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "php" "w-5 h-5" >}}</span> PHP</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">composer.json</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">composer.lock</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">composer.json</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">composer.lock</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="text-lg font-bold text-ink mb-2">.NET / C#</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">packages.lock.json</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">packages.lock.json</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "swift" "w-5 h-5" >}}</span> Swift</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Package.swift</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Package.resolved</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Package.swift</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Package.resolved</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "dart" "w-5 h-5" >}}</span> Dart</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">pubspec.lock</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pubspec.lock</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="text-lg font-bold text-ink mb-2">Elixir</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">mix.lock</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">mix.lock</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="text-lg font-bold text-ink mb-2">Scala</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">build.sbt</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">build.sbt</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "cpp" "w-5 h-5" >}}</span> C++</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">conan.lock</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">conan.lock</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "terraform" "w-5 h-5" >}}</span> Terraform</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">.terraform.lock.hcl</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">.terraform.lock.hcl</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="text-lg font-bold text-ink mb-2">Haskell</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">stack.yaml.lock</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">stack.yaml</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">cabal.project.freeze</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">stack.yaml.lock</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">stack.yaml</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">cabal.project.freeze</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="text-lg font-bold text-ink mb-2">Erlang</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">rebar.lock</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">rebar.lock</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="text-lg font-bold text-ink mb-2">Clojure</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">deps.edn</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">project.clj</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">deps.edn</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">project.clj</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-5 border border-line">
+      <div class="border-t border-line pt-5 pb-6">
         <h4 class="text-lg font-bold text-ink mb-2">PlatformIO</h4>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">platformio.ini</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">platformio.ini</span>
         </div>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-canvas rounded-2xl p-6 border border-line">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+      <div class="border-t border-line pt-6 pb-7">
         <h4 class="text-lg font-bold text-ink mb-2">Container Images</h4>
         <p class="text-ink-muted text-sm">Generate SBOMs directly from container images using <code class="text-ink">DOCKER_IMAGE</code> instead of a lockfile. Scans all layers and installed packages.</p>
       </div>
-      <div class="bg-canvas rounded-2xl p-6 border border-line">
+      <div class="border-t border-line pt-6 pb-7">
         <h4 class="text-lg font-bold text-ink mb-2">Yocto / OpenEmbedded</h4>
         <p class="text-ink-muted text-sm">Batch process SPDX SBOMs from Yocto builds. Extracts <code class="text-ink">.spdx.tar.zst</code> archives, uploads package SBOMs, and tags them with a product release.</p>
       </div>
@@ -340,82 +340,82 @@ uvx sbomify-action</code></pre>
 </section>
 
 {{< comment >}}SBOM Generators Section{{< /comment >}}
-<section>
-    <div class="mb-10 text-center max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold text-ink mb-4">SBOM Generators</h2>
-      <p class="text-lg text-ink-muted">Four generators with automatic fallback. The best tool for each ecosystem is selected automatically.</p>
+<section class="section section-rule">
+    <div class="mb-10 max-w-3xl">
+      <h2 class="section-title mb-4">SBOM Generators</h2>
+      <p class="lede">Four generators with automatic fallback. The best tool for each ecosystem is selected automatically.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-      <div class="bg-canvas rounded-2xl p-6 border border-line">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 mb-8">
+      <div class="border-t border-line pt-6 pb-7">
         <div class="flex items-center justify-between mb-3">
           <h4 class="text-lg font-bold text-ink">cyclonedx-py</h4>
           <span class="text-xs bg-surface-strong text-ink px-2 py-1 rounded font-mono">Priority 10</span>
         </div>
         <p class="text-ink-muted text-sm mb-3">Native Python generator. Most accurate for Python ecosystems.</p>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Python</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Python</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-6 border border-line">
+      <div class="border-t border-line pt-6 pb-7">
         <div class="flex items-center justify-between mb-3">
           <h4 class="text-lg font-bold text-ink">cargo-cyclonedx</h4>
           <span class="text-xs bg-surface-strong text-ink px-2 py-1 rounded font-mono">Priority 10</span>
         </div>
         <p class="text-ink-muted text-sm mb-3">Native Rust generator. Most accurate for Rust ecosystems.</p>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Rust</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Rust</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-6 border border-line">
+      <div class="border-t border-line pt-6 pb-7">
         <div class="flex items-center justify-between mb-3">
           <h4 class="text-lg font-bold text-ink">cdxgen</h4>
           <span class="text-xs bg-surface-strong text-ink px-2 py-1 rounded font-mono">Priority 20</span>
         </div>
         <p class="text-ink-muted text-sm mb-3">Broadest ecosystem support. Best choice for Java/Gradle and multi-language projects.</p>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Python</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">JS</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Java</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Go</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Rust</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Ruby</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">+8 more</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Python</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">JS</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Java</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Go</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Rust</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Ruby</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">+8 more</span>
         </div>
       </div>
-      <div class="bg-canvas rounded-2xl p-6 border border-line">
+      <div class="border-t border-line pt-6 pb-7">
         <div class="flex items-center justify-between mb-3">
           <h4 class="text-lg font-bold text-ink">Syft</h4>
           <span class="text-xs bg-surface-strong text-ink px-2 py-1 rounded font-mono">Priority 35</span>
         </div>
         <p class="text-ink-muted text-sm mb-3">Comprehensive scanner by Anchore. Supports CycloneDX and SPDX output including Terraform.</p>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Python</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">JS</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Go</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Terraform</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Docker</span>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">+7 more</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Python</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">JS</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Go</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Terraform</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Docker</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">+7 more</span>
         </div>
       </div>
     </div>
 
     {{< comment >}}SBOM Formats{{< /comment >}}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-surface rounded-2xl p-6 border border-line">
+      <div class="panel p-6 sm:p-8">
         <h4 class="text-lg font-bold text-ink mb-2">CycloneDX</h4>
         <p class="text-ink-muted text-sm mb-3">Default format. Versions 1.3 through 1.7 supported depending on generator.</p>
-        <code class="bg-inverse px-3 py-2 rounded text-orange-300 font-mono inline-block text-sm">SBOM_FORMAT=cyclonedx</code>
+        <code class="bg-inverse px-3 py-2 rounded-lg text-orange-300 font-mono inline-block text-sm">SBOM_FORMAT=cyclonedx</code>
       </div>
-      <div class="bg-surface rounded-2xl p-6 border border-line">
+      <div class="panel p-6 sm:p-8">
         <h4 class="text-lg font-bold text-ink mb-2">SPDX</h4>
         <p class="text-ink-muted text-sm mb-3">Versions 2.2, 2.3, and 3.0.1 supported, validated against official schemas.</p>
-        <code class="bg-inverse px-3 py-2 rounded text-orange-300 font-mono inline-block text-sm">SBOM_FORMAT=spdx</code>
+        <code class="bg-inverse px-3 py-2 rounded-lg text-orange-300 font-mono inline-block text-sm">SBOM_FORMAT=spdx</code>
       </div>
     </div>
 
     {{< comment >}}Beyond SBOMs{{< /comment >}}
-    <div class="bg-surface rounded-2xl p-6 border border-line mt-6">
+    <div class="panel p-6 sm:p-8 mt-6">
       <h4 class="text-lg font-bold text-ink mb-2">Beyond SBOMs</h4>
       <p class="text-ink-muted text-sm">The same pipeline can upload pre-authored <a href="/faq/what-vex-formats-does-sbomify-support/" class="link">VEX</a>, <a href="/faq/what-is-a-cbom/" class="link">CBOM</a>, and HBOM documents verbatim with <code class="text-ink">BOM_TYPE=vex</code>, <code class="text-ink">cbom</code>, or <code class="text-ink">hbom</code>.</p>
     </div>
@@ -423,15 +423,15 @@ uvx sbomify-action</code></pre>
 </section>
 
 {{< comment >}}Vulnerability Analysis Section{{< /comment >}}
-<section>
-    <div class="mb-10 text-center max-w-3xl mx-auto">
-      <h2 id="vulnerability-analysis" class="text-3xl font-bold text-ink mb-4">Vulnerability Analysis</h2>
-      <p class="text-lg text-ink-muted">Comprehensive scanning powered by industry-leading databases.</p>
+<section class="section section-rule">
+    <div class="mb-10 max-w-3xl">
+      <h2 id="vulnerability-analysis" class="section-title mb-4">Vulnerability Analysis</h2>
+      <p class="lede">Comprehensive scanning powered by industry-leading databases.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {{< comment >}}OSV{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card flex flex-col">
+      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line flex flex-col">
         <img src="/assets/images/site/osv-navy.svg" class="h-8 w-auto mb-6 self-start" alt="Google OSV" width="160" height="32">
         <h3 id="osv" class="text-xl font-bold text-ink mb-3">Google OSV</h3>
         <p class="text-ink-muted flex-grow">
@@ -440,7 +440,7 @@ uvx sbomify-action</code></pre>
       </div>
 
       {{< comment >}}Dependency Track{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line shadow-card flex flex-col">
+      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line flex flex-col">
         <img src="/assets/images/site/dependency-track-navy.svg" class="h-8 w-auto mb-6 self-start" alt="Dependency Track" width="149" height="32">
         <h3 id="dependency-track" class="text-xl font-bold text-ink mb-3">Dependency Track</h3>
         <p class="text-ink-muted mb-4 flex-grow">
@@ -448,13 +448,13 @@ uvx sbomify-action</code></pre>
         </p>
         <div class="mt-4 pt-4 border-t border-line space-y-3">
           <div class="flex items-start gap-2">
-            <span class="bg-surface-strong text-ink text-xs font-semibold px-2 py-1 rounded uppercase tracking-eyebrow">CI/CD</span>
+            <span class="bg-navy-5 text-ink-muted text-xs font-semibold px-2 py-0.5 rounded-md uppercase tracking-eyebrow">CI/CD</span>
             <p class="text-sm text-ink-muted">
               <strong>Direct Upload:</strong> sbomify-action can upload SBOMs directly to your Dependency Track instance from any CI pipeline.
             </p>
           </div>
           <div class="flex items-start gap-2">
-            <span class="bg-surface-strong text-ink text-xs font-semibold px-2 py-1 rounded uppercase tracking-eyebrow">Enterprise</span>
+            <span class="bg-navy-5 text-ink-muted text-xs font-semibold px-2 py-0.5 rounded-md uppercase tracking-eyebrow">Enterprise</span>
             <p class="text-sm text-ink-muted">
               <strong>Bring Your Own:</strong> Enterprise customers can connect their existing Dependency Track instance for unified visibility.
             </p>
@@ -466,37 +466,37 @@ uvx sbomify-action</code></pre>
 </section>
 
 {{< comment >}}Enrichment Section{{< /comment >}}
-<section>
-    <div class="mb-10 text-center max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold text-ink mb-4">Enrichment Data Sources</h2>
-      <p class="text-lg text-ink-muted">We integrate with 12 data sources to add metadata to your SBOM components: descriptions, licenses, supplier information, and more.</p>
+<section class="section section-rule">
+    <div class="mb-10 max-w-3xl">
+      <h2 class="section-title mb-4">Enrichment Data Sources</h2>
+      <p class="lede">We integrate with 12 data sources to add metadata to your SBOM components: descriptions, licenses, supplier information, and more.</p>
     </div>
 
     {{< comment >}}Pre-computed Databases{{< /comment >}}
     <div class="mb-8">
       <h3 class="text-xl font-bold text-ink mb-4">Pre-computed Databases (Fastest)</h3>
       <p class="text-ink-muted mb-4">Local data with zero network latency. Checked first for maximum performance.</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-canvas rounded-2xl p-6 border border-line">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+        <div class="border-t border-line pt-6 pb-7">
           <h4 class="text-lg font-bold text-ink mb-2">LicenseDB</h4>
           <p class="text-ink-muted text-sm mb-3">Pre-computed license database covering 28 Linux distro versions. Provides authoritative license data for APK, DEB, and RPM packages.</p>
           <div class="flex flex-wrap gap-2">
-            <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">pkg:apk/*</span>
-            <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">pkg:deb/*</span>
-            <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">pkg:rpm/*</span>
+            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:apk/*</span>
+            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:deb/*</span>
+            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:rpm/*</span>
           </div>
         </div>
-        <div class="bg-canvas rounded-2xl p-6 border border-line">
+        <div class="border-t border-line pt-6 pb-7">
           <h4 class="text-lg font-bold text-ink mb-2">Lifecycle Database</h4>
           <p class="text-ink-muted text-sm mb-3">CLE lifecycle dates (release, end-of-support, end-of-life) for major runtimes and frameworks following ECMA-428.</p>
           <div class="flex flex-wrap gap-2">
-            <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Python</span>
-            <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">PHP</span>
-            <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Go</span>
-            <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Rust</span>
-            <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Django</span>
-            <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">Rails</span>
-            <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">+more</span>
+            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Python</span>
+            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">PHP</span>
+            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Go</span>
+            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Rust</span>
+            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Django</span>
+            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Rails</span>
+            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">+more</span>
           </div>
         </div>
       </div>
@@ -506,31 +506,31 @@ uvx sbomify-action</code></pre>
     <div class="mb-8">
       <h3 class="text-xl font-bold text-ink mb-4">Native Package Registries</h3>
       <p class="text-ink-muted mb-4">Authoritative data direct from the ecosystem's official source.</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-        <div class="bg-canvas rounded-2xl p-6 border border-line">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-8">
+        <div class="border-t border-line pt-6 pb-7">
           <h4 class="text-lg font-bold text-ink mb-2">PyPI</h4>
           <p class="text-ink-muted text-sm mb-3">Python Package Index</p>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">pkg:pypi/*</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:pypi/*</span>
         </div>
-        <div class="bg-canvas rounded-2xl p-6 border border-line">
+        <div class="border-t border-line pt-6 pb-7">
           <h4 class="text-lg font-bold text-ink mb-2">crates.io</h4>
           <p class="text-ink-muted text-sm mb-3">Rust Package Registry</p>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">pkg:cargo/*</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:cargo/*</span>
         </div>
-        <div class="bg-canvas rounded-2xl p-6 border border-line">
+        <div class="border-t border-line pt-6 pb-7">
           <h4 class="text-lg font-bold text-ink mb-2">pub.dev</h4>
           <p class="text-ink-muted text-sm mb-3">Dart/Flutter Packages</p>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">pkg:pub/*</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:pub/*</span>
         </div>
-        <div class="bg-canvas rounded-2xl p-6 border border-line">
+        <div class="border-t border-line pt-6 pb-7">
           <h4 class="text-lg font-bold text-ink mb-2">Debian Sources</h4>
           <p class="text-ink-muted text-sm mb-3">Debian Package Archive</p>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">pkg:deb/debian/*</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:deb/debian/*</span>
         </div>
-        <div class="bg-canvas rounded-2xl p-6 border border-line">
+        <div class="border-t border-line pt-6 pb-7">
           <h4 class="text-lg font-bold text-ink mb-2">Conan Center</h4>
           <p class="text-ink-muted text-sm mb-3">C/C++ (Conan)</p>
-          <span class="text-xs bg-surface text-ink-muted px-2 py-1 rounded border border-line">pkg:conan/*</span>
+          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:conan/*</span>
         </div>
       </div>
     </div>
@@ -539,15 +539,15 @@ uvx sbomify-action</code></pre>
     <div class="mb-8">
       <h3 class="text-xl font-bold text-ink mb-4">Package Aggregators</h3>
       <p class="text-ink-muted mb-4">Multi-ecosystem services providing broad coverage.</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-canvas rounded-2xl p-6 border border-line">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+        <div class="border-t border-line pt-6 pb-7">
           <div class="flex items-center gap-3 mb-3">
             <h4 class="text-lg font-bold text-ink">deps.dev</h4>
             <span class="text-xs bg-surface-strong text-ink px-2 py-1 rounded">Google</span>
           </div>
           <p class="text-ink-muted text-sm">Open source dependency insights from Google. Covers most major ecosystems.</p>
         </div>
-        <div class="bg-canvas rounded-2xl p-6 border border-line">
+        <div class="border-t border-line pt-6 pb-7">
           <div class="flex items-center gap-3 mb-3">
             <img src="/assets/images/site/ecosystems.svg" class="h-6 w-auto" alt="Ecosyste.ms" width="118" height="24">
           </div>
@@ -560,16 +560,16 @@ uvx sbomify-action</code></pre>
     <div class="mb-8">
       <h3 class="text-xl font-bold text-ink mb-4">Fallback Sources</h3>
       <p class="text-ink-muted mb-4">Additional coverage when primary sources do not have data.</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-canvas rounded-2xl p-6 border border-line">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-8">
+        <div class="border-t border-line pt-6 pb-7">
           <h4 class="text-lg font-bold text-ink mb-2">PURL Extraction</h4>
           <p class="text-ink-muted text-sm">Local extraction from package URLs. Maps namespaces to suppliers without API calls.</p>
         </div>
-        <div class="bg-canvas rounded-2xl p-6 border border-line">
+        <div class="border-t border-line pt-6 pb-7">
           <h4 class="text-lg font-bold text-ink mb-2">ClearlyDefined</h4>
           <p class="text-ink-muted text-sm">Community-curated license and metadata for open source components.</p>
         </div>
-        <div class="bg-canvas rounded-2xl p-6 border border-line">
+        <div class="border-t border-line pt-6 pb-7">
           <h4 class="text-lg font-bold text-ink mb-2">Repology</h4>
           <p class="text-ink-muted text-sm">Cross-distribution package tracking for Linux packages.</p>
         </div>
@@ -577,60 +577,60 @@ uvx sbomify-action</code></pre>
     </div>
 
     {{< comment >}}How to enable{{< /comment >}}
-    <div class="bg-surface rounded-2xl p-6 border border-line">
+    <div class="panel p-6 sm:p-8">
       <p class="text-ink-muted mb-3">
         <span class="font-semibold text-ink">How it works:</span>
         Enrichment happens automatically when using our <a href="https://github.com/sbomify/sbomify-action" class="link">GitHub Action</a> or CLI with the enrich flag.
       </p>
-      <code class="bg-inverse px-3 py-2 rounded text-orange-300 font-mono inline-block">ENRICH=true</code>
+      <code class="bg-inverse px-3 py-2 rounded-lg text-orange-300 font-mono inline-block">ENRICH=true</code>
       <span class="text-ink-muted mx-2">or</span>
-      <code class="bg-inverse px-3 py-2 rounded text-orange-300 font-mono inline-block">--enrich</code>
+      <code class="bg-inverse px-3 py-2 rounded-lg text-orange-300 font-mono inline-block">--enrich</code>
     </div>
 
 </section>
 
 {{< comment >}}Augmentation Section{{< /comment >}}
-<section>
-    <div class="mb-10 text-center max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold text-ink mb-4">Augmentation Providers</h2>
-      <p class="text-lg text-ink-muted">Add organizational metadata to your SBOM: supplier info, manufacturer details, VCS context, and more.</p>
+<section class="section section-rule">
+    <div class="mb-10 max-w-3xl">
+      <h2 class="section-title mb-4">Augmentation Providers</h2>
+      <p class="lede">Add organizational metadata to your SBOM: supplier info, manufacturer details, VCS context, and more.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-      <div class="bg-canvas rounded-2xl p-6 border border-line">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 mb-8">
+      <div class="border-t border-line pt-6 pb-7">
         <h4 class="text-lg font-bold text-ink mb-2">sbomify API</h4>
         <p class="text-ink-muted text-sm mb-3">Pull organizational metadata from your sbomify workspace: supplier, manufacturer, authors, and declared license.</p>
       </div>
-      <div class="bg-canvas rounded-2xl p-6 border border-line">
+      <div class="border-t border-line pt-6 pb-7">
         <h4 class="text-lg font-bold text-ink mb-2">Local Config</h4>
         <p class="text-ink-muted text-sm mb-3">Override metadata via <code class="text-ink">sbomify.json</code> in your repository for supplier, authors, license, and VCS info.</p>
       </div>
-      <div class="bg-canvas rounded-2xl p-6 border border-line">
+      <div class="border-t border-line pt-6 pb-7">
         <h4 class="text-lg font-bold text-ink mb-2">CI/CD Auto-Detection</h4>
         <p class="text-ink-muted text-sm mb-3">Automatically detects VCS URL, commit SHA, and branch from GitHub Actions, GitLab CI, and Bitbucket Pipelines environment variables.</p>
       </div>
-      <div class="bg-canvas rounded-2xl p-6 border border-line">
+      <div class="border-t border-line pt-6 pb-7">
         <h4 class="text-lg font-bold text-ink mb-2">Fields Added</h4>
         <p class="text-ink-muted text-sm">Supplier, manufacturer, authors, license, lifecycle phase, repository URL, commit SHA, branch/ref.</p>
       </div>
     </div>
 
     {{< comment >}}How to enable{{< /comment >}}
-    <div class="bg-surface rounded-2xl p-6 border border-line">
+    <div class="panel p-6 sm:p-8">
       <p class="text-ink-muted mb-3">
         <span class="font-semibold text-ink">How it works:</span>
         Augmentation pulls metadata from sbomify and your CI environment.
       </p>
-      <code class="bg-inverse px-3 py-2 rounded text-orange-300 font-mono inline-block">AUGMENT=true</code>
+      <code class="bg-inverse px-3 py-2 rounded-lg text-orange-300 font-mono inline-block">AUGMENT=true</code>
       <span class="text-ink-muted mx-2">or</span>
-      <code class="bg-inverse px-3 py-2 rounded text-orange-300 font-mono inline-block">--augment</code>
+      <code class="bg-inverse px-3 py-2 rounded-lg text-orange-300 font-mono inline-block">--augment</code>
     </div>
 
 </section>
 
 </div>
 
-<div class="mt-16">
+<div>
 {{< cta-ready title="Connect your pipeline in minutes" primary_text="Start free" >}}
 </div>
 
@@ -640,12 +640,12 @@ uvx sbomify-action</code></pre>
     .then(data => {
       if (data.tag_name) {
         const releaseBadge = `
-          <a href="${data.html_url}" target="_blank" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-strong border border-line hover:bg-mist transition-colors group">
+          <a href="${data.html_url}" target="_blank" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navy-5 border border-line hover:border-line-strong transition-colors group">
             <span class="relative flex h-2 w-2">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
             </span>
-            <span class="text-xs font-medium text-ink group-hover:text-accent-strong">Release ${data.tag_name}</span>
+            <span class="text-xs font-medium text-ink group-hover:text-ink">Release ${data.tag_name}</span>
           </a>
         `;
 

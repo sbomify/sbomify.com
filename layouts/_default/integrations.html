@@ -1,24 +1,21 @@
 {{ define "main" }}
 <div>
-  <div class="hero px-5 py-16 lg:py-24 lg:px-24">
-
-    {{/* Content */}}
-    <div class="relative max-w-7xl mx-auto text-center">
-      <h1 class="text-ink text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+  <div class="hero">
+      <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap pt-10 lg:pt-16 pb-12 lg:pb-16">
+      <h1 class="text-ink mb-6 max-w-[18ch]">
         {{ .Title }}
       </h1>
       {{ with .Params.description }}
-      <p class="text-ink-muted text-lg lg:text-xl max-w-4xl mx-auto leading-relaxed">
+      <p class="lede max-w-3xl">
         {{ . }}
       </p>
       {{ end }}
     </div>
   </div>
 
-  <div class="bg-surface">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-      {{ partial "content.html" . }}
-    </div>
+  <div class="wrap pb-10 lg:pb-16">
+    {{ partial "content.html" . }}
   </div>
 </div>
 {{ end }}

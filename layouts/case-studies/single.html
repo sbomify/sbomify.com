@@ -1,48 +1,47 @@
 {{ define "main" }}
 <div>
-  <div class="hero px-5 py-16 lg:py-24 lg:px-24">
-
-    {{/* Content */}}
-    <div class="relative max-w-4xl mx-auto text-center">
+  <div class="hero">
+      <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap pt-10 lg:pt-16 pb-12 lg:pb-16">
       {{ with .Params.logo }}
-      <div class="mb-10 flex justify-center">
-        <div class="bg-canvas rounded-xl p-6 border border-line shadow-raised inline-block">
-          <img src="{{ . }}" alt="{{ $.Title }} logo" class="h-12 w-auto object-contain" width="120" height="48">
-        </div>
+      <div class="mb-8">
+        <img src="{{ . }}" alt="{{ $.Title }} logo" class="h-10 w-auto object-contain" width="120" height="48">
       </div>
       {{ end }}
 
-      <h1 class="text-ink text-3xl lg:text-5xl font-bold leading-tight mb-6">
+      <h1 class="text-ink !text-[clamp(2.25rem,4.6vw,3.5rem)] mb-6 max-w-4xl">
         {{ .Title }}
       </h1>
       {{ with .Params.description }}
-      <p class="text-ink-muted text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto">
+      <p class="lede max-w-3xl">
         {{ . }}
       </p>
       {{ end }}
     </div>
   </div>
 
-  <div class="bg-surface">
-    <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-      <article class="case-study-content bg-canvas p-8 md:p-12 rounded-2xl shadow-card border border-line">
+  <div class="wrap">
+    <div class="section-rule pt-12 lg:pt-16">
+      <article class="case-study-content read">
         {{ partial "content.html" . }}
       </article>
 
       {{/* CTA Section */}}
-      <div class="mt-16 text-center border-t border-line pt-12">
-        <h3 class="text-2xl font-bold text-ink mb-4">Want the same for your products?</h3>
-        <p class="text-navy-80 mb-8">Book a demo and we'll walk you through it on your own software, or start free today.</p>
-        <div class="flex gap-4 justify-center flex-wrap">
-          <a href="{{ site.Params.demoURL }}" class="btn-primary no-underline" data-cta-location="case_study_end" data-cta-label="Book a demo">
+      <div class="cta-band mt-16 grid lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 items-center">
+        <div>
+          <h3 class="text-3xl lg:text-4xl font-extrabold tracking-display text-white mb-3 text-balance">Want the same for your products?</h3>
+          <p class="text-lg text-on-inverse-muted max-w-2xl">Book a demo and we'll walk you through it on your own software, or start free today.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="{{ site.Params.demoURL }}" class="btn-primary btn-lg no-underline" data-cta-location="case_study_end" data-cta-label="Book a demo">
             Book a demo
           </a>
-          <a href="{{ site.Params.signupURL }}" class="px-6 py-3 bg-canvas border border-line hover:border-ink text-ink rounded-full font-semibold transition-colors duration-200 text-base no-underline" data-cta-location="case_study_end" data-cta-label="Start free">
+          <a href="{{ site.Params.signupURL }}" class="btn-secondary btn-lg no-underline" data-cta-location="case_study_end" data-cta-label="Start free">
             Start free
           </a>
         </div>
-        <p class="mt-6"><a href="/case-studies/" class="text-ink hover:text-accent-strong font-semibold no-underline">&larr; All case studies</a></p>
       </div>
+      <p class="mt-8"><a href="/case-studies/" class="text-sm text-ink-muted hover:text-ink font-semibold no-underline">&larr; All case studies</a></p>
     </div>
   </div>
 </div>
@@ -55,9 +54,10 @@
   }
   .case-study-content h2 {
     color: rgb(var(--color-ink));
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -0.02em;
     margin-top: 3rem;
     margin-bottom: 1.5rem;
   }
@@ -98,14 +98,14 @@
   .case-study-content a {
     color: rgb(var(--color-ink));
     text-decoration: underline;
-    text-decoration-color: rgb(var(--color-accent));
+    text-decoration-color: rgb(var(--color-navy-40));
     text-underline-offset: 3px;
   }
   .case-study-content a:hover {
-    color: rgb(var(--color-accent-strong));
+    text-decoration-color: currentColor;
   }
   .case-study-content blockquote {
-    border-left: 4px solid rgb(var(--color-ink));
+    border-left: 2px solid rgb(var(--color-ink));
     padding-left: 1.5rem;
     font-style: italic;
     color: rgb(var(--color-ink));
@@ -116,12 +116,11 @@
     margin: 2rem auto;
   }
   .case-study-content .quote-container {
-    background-color: rgb(var(--color-surface));
-    padding: 1.5rem;
+    background-color: rgb(var(--color-navy-5));
+    padding: 1.75rem;
     margin: 2rem 0;
-    border-radius: 0.5rem;
-    border-left-width: 4px;
-    border-color: rgb(var(--color-accent));
+    border-radius: 1.25rem;
+    border-left-width: 0;
   }
 </style>
 {{ end }}

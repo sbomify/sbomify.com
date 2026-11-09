@@ -1,41 +1,38 @@
 {{ define "main" }}
 
 <style>
-/* Colours and type come from the tokens in _assets/css/tokens.css. */
+/* Colours and type come from the tokens in _assets/css/tokens.css. The
+   plans sit on the hero's nebula; the featured plan is the one navy card,
+   holding the page's single orange moment. */
 .pricing-page {
-  max-width: 1280px;
+  max-width: 72rem;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: clamp(2.5rem, 4vw, 4rem) clamp(1rem, 4vw, 2.5rem) 0;
 }
 .pricing-header {
-  text-align: center;
-  margin-bottom: 3rem;
+  max-width: 44rem;
+  margin-bottom: 2.25rem;
 }
 .pricing-header h1 {
-  font-size: 3.5rem;
-  font-weight: var(--font-weight-extrabold);
-  letter-spacing: var(--tracking-display);
-  color: rgb(var(--color-ink));
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 .pricing-header p {
-  font-size: 1.125rem;
+  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
   color: rgb(var(--color-ink-muted));
 }
 .billing-toggle {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 3rem;
-  font-size: 1rem;
-  font-weight: var(--font-weight-medium);
+  gap: 0.875rem;
+  margin-bottom: 2.5rem;
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-semibold);
   color: rgb(var(--color-ink));
 }
 .toggle {
   position: relative;
-  width: 3.5rem;
-  height: 2rem;
+  width: 3rem;
+  height: 1.75rem;
   display: inline-block;
 }
 .toggle input {
@@ -46,30 +43,27 @@
 .track {
   position: absolute;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background-color: rgb(var(--color-navy-40));
-  transition: .3s;
+  transition: .2s;
   border-radius: 2rem;
 }
 .track:before {
   position: absolute;
   content: "";
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 1.25rem;
+  width: 1.25rem;
   left: 0.25rem;
   bottom: 0.25rem;
   background-color: rgb(var(--color-white));
-  transition: .3s;
+  transition: .2s;
   border-radius: 50%;
 }
 input:checked + .track {
   background-color: rgb(var(--color-ink));
 }
 input:checked + .track:before {
-  transform: translateX(1.5rem);
+  transform: translateX(1.25rem);
 }
 input:focus-visible + .track {
   outline: 2px solid rgb(var(--color-focus));
@@ -78,111 +72,112 @@ input:focus-visible + .track {
 .save-tag {
   background-color: rgb(var(--color-success-tint));
   color: rgb(var(--color-ink));
-  border: 1px solid rgb(var(--color-success-full) / 0.35);
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  font-size: 0.875rem;
+  padding: 0.1875rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
   font-weight: var(--font-weight-semibold);
-  margin-left: 0.5rem;
+  margin-left: 0.375rem;
 }
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(360px, 1fr));
-  gap: 2rem;
-  margin: 0 auto;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
 }
 .pricing-card {
-  background: rgb(var(--color-canvas));
+  position: relative;
+  background: rgb(var(--color-white) / 0.92);
   border: 1px solid rgb(var(--color-line));
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-card);
-  padding: 40px;
+  border-radius: 1.25rem;
+  padding: clamp(1.75rem, 3vw, 2.5rem);
   display: flex;
   flex-direction: column;
 }
-/* The featured plan is the one white-on-navy card, with the page's single
-   orange moment: its call to action. */
 .pricing-card.featured {
-  background: rgb(var(--color-inverse));
+  isolation: isolate;
+  background:
+    radial-gradient(60% 40% at 100% 100%, rgb(var(--color-orange-500) / 0.32), transparent 70%),
+    radial-gradient(40% 30% at 85% 95%, rgb(var(--color-orange-700) / 0.4), transparent 72%),
+    rgb(var(--color-inverse));
   border-color: rgb(var(--color-inverse));
-  box-shadow: var(--shadow-raised);
-  position: relative;
+  overflow: visible;
 }
 .pricing-card.featured::before {
   content: "Most Popular";
   position: absolute;
-  top: -0.875rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgb(var(--color-canvas));
+  top: -0.75rem;
+  left: clamp(1.75rem, 3vw, 2.5rem);
+  background: rgb(var(--color-white));
   color: rgb(var(--color-ink));
   border: 1px solid rgb(var(--color-line-strong));
-  font-size: 0.75rem;
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.625rem;
+  font-size: 0.6875rem;
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  padding: 0.25rem 0.875rem;
-  border-radius: var(--radius-pill);
   white-space: nowrap;
 }
 .card-header {
-  min-height: 200px;
+  min-height: 168px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 32px;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid rgb(var(--color-line));
+}
+.pricing-card.featured .card-header {
+  border-bottom-color: rgb(var(--color-white) / 0.12);
 }
 .trial-badge {
   display: inline-block;
   background: rgb(var(--color-success-tint));
   color: rgb(var(--color-ink));
-  padding: 4px 12px;
+  padding: 0.1875rem 0.5rem;
   border-radius: var(--radius-sm);
-  font-size: 14px;
-  border: 1px solid rgb(var(--color-success-full) / 0.35);
+  font-size: 0.8125rem;
   vertical-align: middle;
-  margin-left: 12px;
-  font-weight: var(--font-weight-medium);
+  margin-left: 0.375rem;
+  letter-spacing: 0;
+  font-weight: var(--font-weight-semibold);
 }
 .pricing-card h2 {
-  font-size: 32px;
+  font-size: 1.5rem;
   font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-heading);
   color: rgb(var(--color-ink));
-  margin-bottom: 24px;
+  margin-bottom: 1.25rem;
 }
 .pricing-card h3 {
   font-size: 0.75rem;
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  color: rgb(var(--color-ink-muted));
-  margin-bottom: 20px;
+  color: rgb(var(--color-ink-subtle));
+  margin-bottom: 0.875rem;
 }
 .price {
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 24px;
+  gap: 0.5rem;
+  margin-top: auto;
 }
 .price .amount {
-  font-size: 48px;
+  font-size: 3rem;
   font-weight: var(--font-weight-extrabold);
-  letter-spacing: var(--tracking-display);
+  letter-spacing: -0.035em;
   color: rgb(var(--color-ink));
   line-height: 1;
 }
-.price .amount.custom {
-  font-size: 48px;
-}
 .price .suffix {
-  font-size: 24px;
+  font-size: 1.125rem;
   color: rgb(var(--color-ink-muted));
-  font-weight: var(--font-weight-regular);
 }
 .price .billing {
-  font-size: 16px;
-  color: rgb(var(--color-ink-muted));
-  font-weight: var(--font-weight-regular);
+  flex-basis: 100%;
+  font-size: 0.875rem;
+  color: rgb(var(--color-ink-subtle));
 }
 .pricing-card.featured h2,
 .pricing-card.featured .price .amount {
@@ -191,98 +186,77 @@ input:focus-visible + .track {
 .pricing-card.featured h3,
 .pricing-card.featured .price .suffix,
 .pricing-card.featured .price .billing,
-.pricing-card.featured .section li {
+.pricing-card.featured .plan-section li {
   color: rgb(var(--color-on-inverse-muted));
 }
 .pricing-card.featured .trial-badge {
   background: rgb(var(--color-white) / 0.1);
   color: rgb(var(--color-on-inverse));
-  border-color: rgb(var(--color-white) / 0.2);
 }
 .card-body {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
-.section + .section {
-  margin-top: 32px;
+.plan-section + .plan-section {
+  margin-top: 1.75rem;
 }
 .card-footer {
-  margin-top: 32px;
+  margin-top: 2rem;
   text-align: center;
-  padding: 0;
 }
-.cta-button {
-  display: inline-block;
-  width: 100%;
-  background: rgb(var(--color-canvas));
-  color: rgb(var(--color-ink));
-  border: 1px solid rgb(var(--color-line-strong));
-  font-size: 16px;
-  font-weight: var(--font-weight-semibold);
-  padding: 16px 32px;
-  border-radius: var(--radius-pill);
-  text-decoration: none;
-  transition: background-color 0.2s, border-color 0.2s;
-  cursor: pointer;
-}
-.cta-button:hover {
-  border-color: rgb(var(--color-ink));
-}
-.pricing-card.featured .cta-button {
-  background: rgb(var(--color-accent-strong));
-  border-color: rgb(var(--color-accent-strong));
-  color: rgb(var(--color-on-accent));
-}
-.pricing-card.featured .cta-button:hover {
-  background: rgb(var(--color-accent-hover));
-  border-color: rgb(var(--color-accent-hover));
-}
-.section {
-  display: block;
-  min-height: initial;
-}
-.section ul {
+.plan-section ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 16px;
+  gap: 0.625rem;
 }
-.section li {
+.plan-section li {
   position: relative;
-  padding-left: 28px;
+  padding-left: 1.625rem;
   color: rgb(var(--color-ink-muted));
-  font-size: 14px;
+  font-size: 0.9375rem;
   line-height: 1.5;
 }
-.section li:before {
-  content: "\2713";
+.plan-section li:before {
+  content: "";
   position: absolute;
-  left: 0;
-  color: rgb(var(--color-success-full));
-  font-weight: var(--font-weight-semibold);
+  left: 0.125rem;
+  top: 0.3125rem;
+  width: 0.875rem;
+  height: 0.875rem;
+  background: rgb(var(--color-success-full));
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5l10 -10'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5l10 -10'/%3E%3C/svg%3E") center / contain no-repeat;
 }
-.section li a {
+.plan-section li a {
   color: inherit;
-  text-decoration: none;
-  border-bottom: 1px dashed currentColor;
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--color-navy-40));
+  text-underline-offset: 3px;
 }
-.section li a:hover {
-  color: rgb(var(--color-accent-strong));
+.plan-section li a:hover {
+  color: rgb(var(--color-ink));
+  text-decoration-color: currentColor;
 }
-.pricing-card.featured .section li a:hover {
-  color: rgb(var(--color-accent));
+.pricing-card.featured .plan-section li a {
+  text-decoration-color: rgb(var(--color-white) / 0.35);
 }
-@media (max-width: 1200px) {
+.pricing-card.featured .plan-section li a:hover {
+  color: rgb(var(--color-on-inverse));
+}
+@media (max-width: 1023px) {
   /* Single column: lead with the recommended plan */
   .pricing-card.featured {
     order: -1;
   }
   .pricing-grid {
     grid-template-columns: 1fr;
-    max-width: 480px;
-    margin: 0 auto;
+    max-width: 32rem;
+  }
+  .card-header {
+    min-height: 0;
   }
 }
 </style>

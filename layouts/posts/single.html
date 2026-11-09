@@ -1,13 +1,14 @@
 {{ define "main" }}
 <div>
-  <header class="hero px-5 py-16 lg:py-24 lg:px-24">
-
-    <div class="relative max-w-4xl mx-auto text-center">
-      <h1 class="text-ink text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+  <header class="hero">
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap pt-10 lg:pt-16 pb-10 lg:pb-14">
+    <div class="max-w-4xl">
+      <h1 class="text-ink !text-[clamp(2.25rem,4.8vw,3.75rem)] mb-6">
         {{ .Title }}
       </h1>
 
-      <div class="flex flex-wrap items-center justify-center gap-3 text-ink-muted text-lg lg:text-xl mb-6">
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-ink-muted text-[0.9375rem] mb-5">
         {{ with .Params.author }}{{ with .display_name }}
         {{- $authorName := . -}}
         {{- $authorFound := false -}}
@@ -20,43 +21,44 @@
           {{- end -}}
         {{- end -}}
         <span class="font-medium">
-          By {{ if $authorFound }}<a href="/authors/{{ $authorSlug }}/" class="text-ink-muted hover:text-ink transition-colors underline underline-offset-2">{{ $authorName }}</a>{{ else }}<span class="capitalize">{{ $authorName }}</span>{{ end }}
+          By {{ if $authorFound }}<a href="/authors/{{ $authorSlug }}/" class="text-ink font-semibold no-underline hover:underline underline-offset-[3px] decoration-navy-40">{{ $authorName }}</a>{{ else }}<span class="capitalize">{{ $authorName }}</span>{{ end }}
         </span>
-        <span class="text-navy-60">&bull;</span>
+        <span class="text-navy-40">&bull;</span>
         {{ end }}{{ end }}
         <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
           {{ .Date.Format "January 2, 2006" }}
         </time>
         {{ with .GetTerms "categories" }}
         {{ range . }}
-        <span class="text-navy-60">&bull;</span>
-        <a href="{{ .RelPermalink }}" class="capitalize text-ink-muted hover:text-ink transition-colors underline underline-offset-2">{{ .LinkTitle }}</a>
+        <span class="text-navy-40">&bull;</span>
+        <a href="{{ .RelPermalink }}" class="capitalize text-ink-muted hover:text-ink transition-colors underline underline-offset-[3px] decoration-navy-40">{{ .LinkTitle }}</a>
         {{ end }}
       {{ end }}
       </div>
 
       {{ with .GetTerms "tags" }}
-      <div class="flex flex-wrap items-center justify-center gap-2">
+      <div class="flex flex-wrap items-center gap-2">
         {{ range . }}
-        <a href="{{ .RelPermalink }}" class="tag no-underline hover:text-accent-strong transition-colors">{{ .LinkTitle }}</a>
+        <a href="{{ .RelPermalink }}" class="tag no-underline hover:text-ink hover:border-line-strong transition-colors">{{ .LinkTitle }}</a>
         {{ end }}
       </div>
       {{ end }}
     </div>
+    </div>
   </header>
 
-  <section class="bg-surface">
+  <section class="wrap">
     {{ $toc := partial "toc-enabled.html" . }}
-    <div class="{{ if $toc }}max-w-4xl xl:max-w-6xl xl:flex xl:items-start xl:gap-10{{ else }}max-w-4xl{{ end }} mx-auto px-6 lg:px-8 py-16 lg:py-24">
-      <article class="blog-post bg-canvas p-8 md:p-12 rounded-2xl shadow-card border border-line xl:flex-1 xl:min-w-0">
+    <div class="section-rule pt-10 lg:pt-14 pb-16 lg:pb-24 {{ if $toc }}xl:flex xl:items-start xl:justify-between xl:gap-16{{ end }}">
+      <article class="blog-post read xl:flex-1 xl:min-w-0">
         {{ partial "agent-tools.html" . }}
         {{ partial "tldr.html" . }}
         {{ partial "toc.html" (dict "page" . "mode" "inline") }}
         {{ partial "content.html" . }}
         {{ partial "article-cta.html" . }}
-        <div class="mt-12 pt-8 border-t border-line">
-          <p class="text-sm text-ink-muted italic">
-            Found an error or typo? File a PR against <a href="https://github.com/sbomify/sbomify.com/tree/master/{{ .File.Path }}"{{ partial "link-attrs.html" (printf "https://github.com/sbomify/sbomify.com/tree/master/%s" .File.Path) }} class="text-ink hover:text-accent-strong no-underline">the source of this post on GitHub</a>.
+        <div class="mt-12 pt-6 border-t border-line">
+          <p class="!text-sm !text-ink-subtle !mb-0">
+            Found an error or typo? File a PR against <a href="https://github.com/sbomify/sbomify.com/tree/master/{{ .File.Path }}"{{ partial "link-attrs.html" (printf "https://github.com/sbomify/sbomify.com/tree/master/%s" .File.Path) }} class="!text-ink-muted">the source of this post on GitHub</a>.
           </p>
         </div>
       </article>
@@ -65,12 +67,12 @@
   </section>
 </div>
 
-<aside class=" bg-inverse">
-  <div class="max-container text-white px-5 md:px-12 lg:px-24 py-12 lg:py-24">
-    <div class="uppercase text-sm mb-4">
+<aside class="wrap">
+  <div class="section-rule pt-12 lg:pt-16 pb-6">
+    <div class="eyebrow mb-4">
       &gt; Blog
     </div>
-    {{ partial "posts.html" (dict "limit" 3 "dark" true "hideViewAll" true "title" "Recent Posts" "context" .) }}
+    {{ partial "posts.html" (dict "limit" 3 "hideViewAll" true "title" "Recent Posts" "context" .) }}
   </div>
 </aside>
 {{ end }}

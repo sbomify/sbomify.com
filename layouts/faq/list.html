@@ -1,24 +1,26 @@
 {{ define "main" }}
 <div>
-  <div class="hero px-5 py-16 lg:py-24 lg:px-24">
-
-    {{/* Content */}}
-    <div class="relative max-w-7xl mx-auto text-center">
-      <h1 class="text-ink text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
-        {{ .Title }}
-      </h1>
-      {{ with .Params.description }}
-      <p class="text-ink-muted text-lg lg:text-xl max-w-4xl mx-auto leading-relaxed">
-        {{ . }}
-      </p>
-      {{ end }}
+  <div class="hero">
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap pt-10 lg:pt-16 pb-10 lg:pb-14">
+      <div class="max-w-4xl">
+        <h1 class="text-ink mb-5">
+          {{ .Title }}
+        </h1>
+        {{ with .Params.description }}
+        <p class="lede max-w-3xl">
+          {{ . }}
+        </p>
+        {{ end }}
+      </div>
     </div>
   </div>
 
-  <div class="bg-surface">
-    <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+  <div class="wrap">
+    <div class="section-rule pt-10 lg:pt-14 pb-16 lg:pb-24">
+      <div class="read">
       {{ with .Content }}
-      <div class="mb-12 text-navy-80 text-lg leading-relaxed">
+      <div class="mb-10 text-ink-muted text-lg leading-relaxed">
         {{ partial "content.html" $ }}
       </div>
       {{ end }}
@@ -30,35 +32,35 @@
           id="faq-search"
           placeholder="Search questions..."
           autocomplete="off"
-          class="w-full px-5 py-3 rounded-full border border-line bg-canvas text-ink placeholder-navy-40 focus:outline-none focus:border-ink focus:ring-2 focus:ring-focus/20 transition-[border-color,box-shadow] text-base"
+          class="w-full h-14 px-5 rounded-[0.875rem] border-[1.5px] border-line-strong bg-canvas text-ink placeholder-navy-60 focus:outline-none focus:border-ink transition-[border-color,box-shadow] text-base"
         />
-        <p id="faq-count" class="text-sm text-ink-muted mt-3 ml-2 hidden"></p>
+        <p id="faq-count" class="text-sm text-ink-subtle mt-3 hidden"></p>
       </div>
 
       {{/* No results message */}}
-      <div id="faq-no-results" class="hidden text-center py-12">
+      <div id="faq-no-results" class="hidden py-12 border-t border-line">
         <p class="text-ink-muted text-lg">No questions match your search.</p>
-        <button type="button" onclick="document.getElementById('faq-search').value='';document.getElementById('faq-search').dispatchEvent(new Event('input'));" class="mt-4 bg-transparent p-0 rounded-none text-ink hover:text-accent-strong font-semibold text-sm transition-colors">
+        <button type="button" onclick="document.getElementById('faq-search').value='';document.getElementById('faq-search').dispatchEvent(new Event('input'));" class="mt-4 bg-transparent hover:bg-transparent p-0 rounded-none text-ink underline underline-offset-[3px] decoration-navy-40 hover:decoration-current font-semibold text-sm">
           Clear search
         </button>
       </div>
 
       {{/* FAQ entries */}}
-      <div id="faq-list" class="space-y-6">
+      <div id="faq-list" class="rows">
         {{ range .Pages.ByWeight }}
-        <div class="faq-card bg-canvas rounded-2xl shadow-card border border-line p-8" data-title="{{ .Title | lower }}" data-answer="{{ with .Params.answer }}{{ . | lower }}{{ end }}">
-          <h2 class="text-xl lg:text-2xl font-bold text-ink mb-3">
-            <a href="{{ .RelPermalink }}" class="hover:text-accent-strong transition-colors no-underline">
+        <div class="faq-card py-7" data-title="{{ .Title | lower }}" data-answer="{{ with .Params.answer }}{{ . | lower }}{{ end }}">
+          <h2 class="!text-xl lg:!text-[1.375rem] font-bold tracking-heading !leading-snug text-ink mb-2">
+            <a href="{{ .RelPermalink }}" class="underline decoration-transparent underline-offset-4 decoration-1 hover:decoration-navy-40 transition-colors">
               {{ .Title }}
             </a>
             {{ with .Params.plan }}
-            <span class="inline-block align-middle ml-2 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-surface-strong text-ink">{{ . }}</span>
+            <span class="tag !text-xs align-middle ml-2">{{ . }}</span>
             {{ end }}
           </h2>
           {{ with .Params.answer }}
-          <p class="text-navy-80 leading-relaxed mb-4">{{ . }}</p>
+          <p class="text-ink-muted !text-base leading-relaxed mb-3">{{ . }}</p>
           {{ end }}
-          <a href="{{ .RelPermalink }}" class="text-ink hover:text-accent-strong font-semibold text-sm transition-colors no-underline">
+          <a href="{{ .RelPermalink }}" class="text-ink font-semibold text-sm underline underline-offset-[3px] decoration-navy-40 hover:decoration-current">
             Read full answer &rarr;
           </a>
         </div>
@@ -66,24 +68,25 @@
       </div>
 
       {{/* Show more button */}}
-      <div id="faq-show-more" class="text-center mt-8 hidden">
-        <button type="button" id="faq-show-more-btn" class="px-8 py-3 bg-canvas border border-line hover:border-ink text-ink rounded-full font-semibold transition-colors duration-200 text-base">
+      <div id="faq-show-more" class="mt-8 hidden">
+        <button type="button" id="faq-show-more-btn" class="btn-secondary">
           Show more questions
         </button>
       </div>
 
       {{/* CTA Section */}}
-      <div class="mt-16 text-center border-t border-line pt-12">
-        <h3 class="text-2xl font-bold text-ink mb-4">Still have questions?</h3>
-        <p class="text-navy-80 mb-8">Book a demo and we'll answer them on a call, using your own products. Or start free and try it yourself.</p>
-        <div class="flex gap-4 justify-center flex-wrap">
-          <a href="{{ site.Params.demoURL }}" class="btn-primary no-underline" data-cta-location="faq_index" data-cta-label="Book a demo">
+      <div class="mt-16 cta-band">
+        <h3 class="text-2xl font-bold text-white mb-3">Still have questions?</h3>
+        <p class="text-on-inverse-muted !text-base mb-8 max-w-xl">Book a demo and we'll answer them on a call, using your own products. Or start free and try it yourself.</p>
+        <div class="flex gap-3 flex-wrap">
+          <a href="{{ site.Params.demoURL }}" class="btn-primary" data-cta-location="faq_index" data-cta-label="Book a demo">
             Book a demo
           </a>
-          <a href="{{ site.Params.signupURL }}" class="px-6 py-3 bg-canvas border border-line hover:border-ink text-ink rounded-full font-semibold transition-colors duration-200 text-base no-underline" data-cta-location="faq_index" data-cta-label="Start free">
+          <a href="{{ site.Params.signupURL }}" class="btn-secondary" data-cta-location="faq_index" data-cta-label="Start free">
             Start free
           </a>
         </div>
+      </div>
       </div>
     </div>
   </div>

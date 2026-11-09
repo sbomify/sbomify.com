@@ -7,14 +7,14 @@ description: "Write, publish and distribute security advisories from the same pl
 keywords: [security advisories, security advisory page, publish security advisories, PSIRT, CSAF 2.0, CSAF provider, vulnerability disclosure, security bulletin, CRA vulnerability handling, trust center]
 ---
 
-<div class="text-xl leading-relaxed text-ink-muted mb-12 text-center max-w-3xl mx-auto font-medium">
+<div class="section-rule pt-12 lg:pt-14 pb-14 lg:pb-16 lede max-w-3xl font-medium">
 Every new CVE turns into the same customer question: <span class="text-ink font-bold">are we affected?</span> Answer it once, in a proper advisory, where your customers and their tools already look.
 </div>
 
-<div class="mb-24">
-    <h2 class="text-3xl font-bold text-ink mb-4 text-center">A Security Advisory Page Your PSIRT Will Actually Use</h2>
-    <p class="text-ink-muted text-center mb-12 max-w-2xl mx-auto">Advisories live next to the SBOMs, findings and VEX they are about, so writing one takes minutes, not a scramble across five tools</p>
-    <div class="grid lg:grid-cols-3 gap-8">
+<div class="section section-rule">
+    <h2 class="section-title mb-5 max-w-3xl">A Security Advisory Page Your PSIRT Will Actually Use</h2>
+    <p class="lede mb-12 max-w-3xl">Advisories live next to the SBOMs, findings and VEX they are about, so writing one takes minutes, not a scramble across five tools</p>
+    <div class="grid lg:grid-cols-3 gap-x-12 gap-y-4">
         {{< feature-card icon_bg_class="bg-surface-strong" icon_text_class="text-ink" title="Write It Properly" description="Summary, CVSS score and vector, CVE and OSV references, and affected and fixed version ranges for every product the issue touches." >}}
         <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M9 9l1 0" /><path d="M9 13l6 0" /><path d="M9 17l6 0" /></svg>
         {{< /feature-card >}}
@@ -29,27 +29,27 @@ Every new CVE turns into the same customer question: <span class="text-ink font-
     </div>
 </div>
 
-<div class="mb-24">
-    <div class="flex flex-col lg:flex-row gap-16 items-start">
+<div class="section section-rule">
+    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
         <div class="flex-1">
-            <div class="eyebrow-chip mb-6">Embargoes</div>
-            <h2 class="text-4xl font-bold text-ink mb-6">Gated Advisories That Are Actually Gated</h2>
+            <div class="eyebrow-chip mb-5">Embargoes</div>
+            <h2 class="section-title mb-6">Gated Advisories That Are Actually Gated</h2>
             <p class="text-lg text-ink-muted mb-6 leading-relaxed">
                 Some advisories are for everyone. Some are only for the customers running the affected product, under NDA, until the fix ships. Each advisory has one of three visibility states:
             </p>
-            <ul class="space-y-6">
+            <ul class="space-y-4">
                 {{< check-list-item title="Public" description="Readable by anyone once it leaves draft, indexed by search engines, and included in your CSAF feed." >}}
                 {{< check-list-item title="Gated" description="Readable only by people with approved access who can already see at least one affected product. A customer of one product never learns about an embargoed issue in another." >}}
                 {{< check-list-item title="Private" description="Never leaves your workspace, whatever its status." >}}
             </ul>
         </div>
         <div class="flex-1">
-            <div class="eyebrow-chip mb-6">Discretion</div>
-            <h2 class="text-4xl font-bold text-ink mb-6">Built Not to Leak</h2>
+            <div class="eyebrow-chip mb-5">Discretion</div>
+            <h2 class="section-title mb-6">Built Not to Leak</h2>
             <p class="text-lg text-ink-muted mb-6 leading-relaxed">
                 For an embargoed vulnerability, the fact that an advisory exists is itself sensitive. sbomify treats it that way.
             </p>
-            <ul class="space-y-6">
+            <ul class="space-y-4">
                 {{< check-list-item title="404, not 403" description="A reader who may not see a gated advisory gets &quot;not found&quot;, not &quot;forbidden&quot;, so its existence is not confirmed." >}}
                 {{< check-list-item title="Products counted, not named" description="When an advisory spans several products, readers only see the names of the products they are entitled to." >}}
                 {{< check-list-item title="Kept out of search" description="Gated pages are noindex, nofollow, and never appear in the public CSAF distribution." >}}
@@ -58,15 +58,15 @@ Every new CVE turns into the same customer question: <span class="text-ink font-
     </div>
 </div>
 
-<div class="mb-24">
-    <div class="flex flex-col lg:flex-row gap-16 items-center">
+<div class="section section-rule">
+    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
         <div class="flex-1">
-            <div class="eyebrow-chip mb-6">Machine-Readable</div>
-            <h2 class="text-4xl font-bold text-ink mb-6">CSAF 2.0 Out of the Box</h2>
+            <div class="eyebrow-chip mb-5">Machine-Readable</div>
+            <h2 class="section-title mb-6">CSAF 2.0 Out of the Box</h2>
             <p class="text-lg text-ink-muted mb-6 leading-relaxed">
                 Enterprise customers don't read advisories one by one. Their vulnerability management tools pull them in automatically and match them against their inventory. sbomify publishes every public advisory as a <a href="/faq/what-is-a-security-advisory/" class="link">CSAF 2.0</a> document, ready to be pulled in.
             </p>
-            <ul class="space-y-6">
+            <ul class="space-y-4">
                 {{< check-list-item title="CSAF provider metadata" description="Served at /.well-known/csaf/provider-metadata.json on your Trust Center domain, the entry point CSAF aggregators look for." >}}
                 {{< check-list-item title="ROLIE feed" description="A TLP:WHITE feed listing every public advisory, so new ones are picked up without anyone sending an email." >}}
                 {{< check-list-item title="security.txt with a CSAF pointer" description="Your RFC 9116 security.txt links to the CSAF provider automatically, laid out as BSI TR-03183-3 expects." >}}
@@ -74,7 +74,7 @@ Every new CVE turns into the same customer question: <span class="text-ink font-
             </ul>
         </div>
         <div class="flex-1 w-full">
-            <div class="card p-6">
+            <div class="panel p-6 sm:p-8">
                 <div class="eyebrow mb-4">Your Trust Center domain</div>
                 <ul class="space-y-3 font-mono text-sm text-ink break-all">
                     <li>/.well-known/security.txt</li>
@@ -87,13 +87,13 @@ Every new CVE turns into the same customer question: <span class="text-ink font-
     </div>
 </div>
 
-<div class="mb-24">
-    <div class="text-center mb-12">
-        <div class="eyebrow-chip mb-6">Cyber Resilience Act</div>
-        <h2 class="text-4xl font-bold text-ink mb-4">Vulnerability Handling the CRA Can Audit</h2>
-        <p class="text-ink-muted max-w-3xl mx-auto">The <a href="/compliance/eu-cra/" class="link">EU Cyber Resilience Act</a> makes disclosure an obligation. Annex I Part II asks manufacturers to publish information about fixed vulnerabilities, run a coordinated disclosure policy and give researchers a contact. Article 14 adds reporting of actively exploited vulnerabilities from 11 September 2026.</p>
+<div class="section section-rule">
+    <div class="mb-12 max-w-3xl">
+        <div class="eyebrow-chip mb-5">Cyber Resilience Act</div>
+        <h2 class="section-title mb-4">Vulnerability Handling the CRA Can Audit</h2>
+        <p class="lede max-w-3xl">The <a href="/compliance/eu-cra/" class="link">EU Cyber Resilience Act</a> makes disclosure an obligation. Annex I Part II asks manufacturers to publish information about fixed vulnerabilities, run a coordinated disclosure policy and give researchers a contact. Article 14 adds reporting of actively exploited vulnerabilities from 11 September 2026.</p>
     </div>
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-3 gap-x-12 gap-y-4">
         {{< impact-card icon_bg_class="bg-surface-strong" icon_text_class="text-ink" title="Disclose Fixed Vulnerabilities" description="Advisories carry the description, affected products, severity and remediation the CRA lists, published where users can find them." link_text="Annex I, Part II" >}}
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M9 12l2 2l4 -4" /></svg>
         {{< /impact-card >}}
@@ -108,18 +108,18 @@ Every new CVE turns into the same customer question: <span class="text-ink font-
     </div>
 </div>
 
-<div class="mb-24">
-    <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold text-ink mb-4">Learn More</h2>
-        <p class="text-ink-muted max-w-2xl mx-auto">Guides to the processes behind a good security advisory page</p>
+<div class="section section-rule">
+    <div class="mb-12 max-w-3xl">
+        <h2 class="section-title mb-4">Learn More</h2>
+        <p class="lede max-w-2xl">Guides to the processes behind a good security advisory page</p>
     </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <a href="/faq/what-is-a-security-advisory/" class="card p-6 !no-underline block"><div class="font-bold text-ink mb-2">What is a security advisory?</div><div class="text-ink-muted text-sm">Contents, formats and examples</div></a>
-        <a href="/faq/what-is-a-psirt/" class="card p-6 !no-underline block"><div class="font-bold text-ink mb-2">What is a PSIRT?</div><div class="text-ink-muted text-sm">Product security incident response, explained</div></a>
-        <a href="/faq/what-is-a-vulnerability-disclosure-program/" class="card p-6 !no-underline block"><div class="font-bold text-ink mb-2">What is a vulnerability disclosure program?</div><div class="text-ink-muted text-sm">Policies, CVD and the CRA</div></a>
-        <a href="/faq/what-is-security-txt/" class="card p-6 !no-underline block"><div class="font-bold text-ink mb-2">What is security.txt?</div><div class="text-ink-muted text-sm">RFC 9116 fields, with an example</div></a>
-        <a href="/faq/how-do-i-become-a-cve-numbering-authority/" class="card p-6 !no-underline block"><div class="font-bold text-ink mb-2">How do I become a CNA?</div><div class="text-ink-muted text-sm">Assign CVE IDs for your own products</div></a>
-        <a href="/faq/how-do-i-use-vex/" class="card p-6 !no-underline block"><div class="font-bold text-ink mb-2">How do I use VEX?</div><div class="text-ink-muted text-sm">Say &quot;not affected&quot; once, in a format tools read</div></a>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8">
+        <a href="/faq/what-is-a-security-advisory/" class="group block border-t border-line py-5 !no-underline"><div class="font-bold text-ink mb-1 underline decoration-transparent underline-offset-4 group-hover:decoration-navy-40">What is a security advisory?</div><div class="text-ink-muted text-sm">Contents, formats and examples</div></a>
+        <a href="/faq/what-is-a-psirt/" class="group block border-t border-line py-5 !no-underline"><div class="font-bold text-ink mb-1 underline decoration-transparent underline-offset-4 group-hover:decoration-navy-40">What is a PSIRT?</div><div class="text-ink-muted text-sm">Product security incident response, explained</div></a>
+        <a href="/faq/what-is-a-vulnerability-disclosure-program/" class="group block border-t border-line py-5 !no-underline"><div class="font-bold text-ink mb-1 underline decoration-transparent underline-offset-4 group-hover:decoration-navy-40">What is a vulnerability disclosure program?</div><div class="text-ink-muted text-sm">Policies, CVD and the CRA</div></a>
+        <a href="/faq/what-is-security-txt/" class="group block border-t border-line py-5 !no-underline"><div class="font-bold text-ink mb-1 underline decoration-transparent underline-offset-4 group-hover:decoration-navy-40">What is security.txt?</div><div class="text-ink-muted text-sm">RFC 9116 fields, with an example</div></a>
+        <a href="/faq/how-do-i-become-a-cve-numbering-authority/" class="group block border-t border-line py-5 !no-underline"><div class="font-bold text-ink mb-1 underline decoration-transparent underline-offset-4 group-hover:decoration-navy-40">How do I become a CNA?</div><div class="text-ink-muted text-sm">Assign CVE IDs for your own products</div></a>
+        <a href="/faq/how-do-i-use-vex/" class="group block border-t border-line py-5 !no-underline"><div class="font-bold text-ink mb-1 underline decoration-transparent underline-offset-4 group-hover:decoration-navy-40">How do I use VEX?</div><div class="text-ink-muted text-sm">Say &quot;not affected&quot; once, in a format tools read</div></a>
     </div>
 </div>
 

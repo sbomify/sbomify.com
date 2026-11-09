@@ -16,7 +16,8 @@ faq:
     answer: "Yes! sbomify is open source and available for self-hosting. Read our self-hosting guide for installation, configuration and sizing. Support packages for self-hosted installations, as well as single-tenant installations, are available on the Enterprise plan."
 ---
 
-<div class="hero py-12 md:py-16 lg:py-24">
+<div class="hero">
+    <div class="hero-fade" aria-hidden="true"></div>
 <div class="pricing-page">
   <div class="pricing-header">
     <h1>Pricing for CRA product security</h1>
@@ -43,7 +44,7 @@ faq:
       </div>
 
       <div class="card-body">
-        <div class="section">
+        <div class="plan-section">
           <h3>Ideal For</h3>
           <ul>
             <li>OSS maintainers / hobby projects</li>
@@ -51,7 +52,7 @@ faq:
           </ul>
         </div>
 
-        <div class="section">
+        <div class="plan-section">
           <h3>Features</h3>
           <ul>
             <li><a href="/features/sbom-hierarchy/">1 Product</a></li>
@@ -67,7 +68,7 @@ faq:
         </div>
       </div>
       <div class="card-footer">
-        <a href="https://app.sbomify.com" class="cta-button" data-cta-location="pricing" data-cta-label="Community Plan Signup">Start free</a>
+        <a href="https://app.sbomify.com" class="cta-button btn-secondary btn-lg w-full" data-cta-location="pricing" data-cta-label="Community Plan Signup">Start free</a>
       </div>
     </div>
 
@@ -82,14 +83,14 @@ faq:
       </div>
 
       <div class="card-body">
-        <div class="section">
+        <div class="plan-section">
           <h3>Ideal For</h3>
           <ul>
             <li>Mid-size teams needing private SBOMs, compliance documents & integrations</li>
           </ul>
         </div>
 
-        <div class="section">
+        <div class="plan-section">
           <h3>Features</h3>
           <ul>
             <li><a href="/features/sbom-hierarchy/">5 Products</a></li>
@@ -108,8 +109,8 @@ faq:
         </div>
       </div>
       <div class="card-footer">
-        <a href="https://app.sbomify.com" class="cta-button" data-cta-location="pricing" data-cta-label="Business Plan Signup">Start 14-day free trial</a>
-        <a href="https://app.sbomify.com/enterprise-contact/" class="block mt-3 text-sm text-navy-20 hover:text-white underline underline-offset-4 decoration-navy-60 hover:decoration-white transition-colors" data-cta-location="pricing" data-cta-label="Business Plan Book a demo">Or book a demo &rarr;</a>
+        <a href="https://app.sbomify.com" class="cta-button btn-primary btn-lg w-full" data-cta-location="pricing" data-cta-label="Business Plan Signup">Start 14-day free trial</a>
+        <a href="https://app.sbomify.com/enterprise-contact/" class="block mt-4 text-sm text-navy-20 hover:text-white underline underline-offset-[3px] decoration-white/40 hover:decoration-white transition-colors" data-cta-location="pricing" data-cta-label="Business Plan Book a demo">Or book a demo &rarr;</a>
       </div>
     </div>
 
@@ -123,14 +124,14 @@ faq:
       </div>
 
       <div class="card-body">
-        <div class="section">
+        <div class="plan-section">
           <h3>Ideal For</h3>
           <ul>
             <li>Large orgs with advanced security & compliance needs</li>
           </ul>
         </div>
 
-        <div class="section">
+        <div class="plan-section">
           <h3>Features</h3>
           <ul>
             <li><a href="/features/sbom-hierarchy/">Unlimited Products</a></li>
@@ -148,40 +149,40 @@ faq:
         </div>
       </div>
       <div class="card-footer">
-        <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" data-cta-location="pricing" data-cta-label="Enterprise Plan Book a demo">Book a demo</a>
-        <a href="https://join.slack.com/t/sbomify/shared_invite/zt-3na54pa1f-MXrFWhotmZr0YxXc8sABTw" target="_blank" rel="noopener noreferrer" class="block mt-3 text-sm text-ink-muted hover:text-ink underline underline-offset-4 decoration-line-strong hover:decoration-ink transition-colors" data-cta-location="pricing" data-cta-label="Enterprise Plan Chat on Slack">Or chat with us on Slack &rarr;</a>
+        <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button btn-secondary btn-lg w-full" data-cta-location="pricing" data-cta-label="Enterprise Plan Book a demo">Book a demo</a>
+        <a href="https://join.slack.com/t/sbomify/shared_invite/zt-3na54pa1f-MXrFWhotmZr0YxXc8sABTw" target="_blank" rel="noopener noreferrer" class="block mt-4 text-sm text-ink-muted hover:text-ink underline underline-offset-[3px] decoration-navy-40 hover:decoration-ink transition-colors" data-cta-location="pricing" data-cta-label="Enterprise Plan Chat on Slack">Or chat with us on Slack &rarr;</a>
       </div>
     </div>
 
 </div>
 
 {{< comment >}}FAQ Section{{< /comment >}}
-<div class="mt-16 md:mt-24">
-    <h2 class="text-ink text-2xl md:text-3xl font-semibold mb-8 md:mb-12 text-center">Frequently Asked Questions</h2>
+<div class="mt-16 md:mt-24 pt-14 md:pt-20 border-t border-line">
+    <h2 class="section-title mb-8 md:mb-12">Frequently Asked Questions</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="card p-6 md:p-8">
-        <h3 class="text-ink text-lg font-semibold mb-4">What's included in the free tier?</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12">
+      <div class="border-t border-line py-7">
+        <h3 class="text-ink text-lg font-bold tracking-heading mb-3">What's included in the free tier?</h3>
         <p class="text-ink-muted leading-relaxed">The Community tier is perfect for open source projects and includes public SBOM hosting, 1 product with 5 components, and community support.</p>
       </div>
 
-      <div class="card p-6 md:p-8">
-        <h3 class="text-ink text-lg font-semibold mb-4">Can I upgrade or downgrade at any time?</h3>
+      <div class="border-t border-line py-7">
+        <h3 class="text-ink text-lg font-bold tracking-heading mb-3">Can I upgrade or downgrade at any time?</h3>
         <p class="text-ink-muted leading-relaxed">Yes, you can change your plan at any time. Your billing will be prorated accordingly.</p>
       </div>
 
-      <div class="card p-6 md:p-8">
-        <h3 class="text-ink text-lg font-semibold mb-4">What payment methods do you accept?</h3>
+      <div class="border-t border-line py-7">
+        <h3 class="text-ink text-lg font-bold tracking-heading mb-3">What payment methods do you accept?</h3>
         <p class="text-ink-muted leading-relaxed">We accept all major credit cards and can arrange alternative payment methods for enterprise customers.</p>
       </div>
 
-      <div class="card p-6 md:p-8">
-        <h3 class="text-ink text-lg font-semibold mb-4">Do you offer custom solutions?</h3>
+      <div class="border-t border-line py-7">
+        <h3 class="text-ink text-lg font-bold tracking-heading mb-3">Do you offer custom solutions?</h3>
         <p class="text-ink-muted leading-relaxed">Yes, our enterprise tier can be customized to meet your specific needs. Contact our sales team to learn more.</p>
       </div>
 
-      <div class="card p-6 md:p-8">
-        <h3 class="text-ink text-lg font-semibold mb-4">Can I self-host sbomify?</h3>
+      <div class="border-t border-line py-7">
+        <h3 class="text-ink text-lg font-bold tracking-heading mb-3">Can I self-host sbomify?</h3>
         <p class="text-ink-muted leading-relaxed">Yes! sbomify is open source and available for self-hosting. Read our <a href="/self-hosting/" class="link">self-hosting guide</a> for installation, configuration and sizing. Support packages for self-hosted installations, as well as single-tenant installations, are available on the Enterprise plan.</p>
       </div>
     </div>

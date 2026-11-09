@@ -1,25 +1,28 @@
 {{ define "main" }}
 <div>
-  {{/* Same hero and reading measure as _default/single.html: these section
+  {{/* Same head and reading measure as _default/single.html: these section
        pages (guides, compliance, sbomify-action, ...) are long-form prose. */}}
-  <header class="hero px-5 py-16 lg:py-24 lg:px-24">
-    <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-ink text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
-        {{ .Title }}
-      </h1>
-      {{ with .Params.description }}
-      <p class="text-ink-muted text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
-        {{ . }}
-      </p>
-      {{ end }}
+  <header class="hero">
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap pt-10 lg:pt-16 pb-10 lg:pb-14">
+      <div class="max-w-4xl">
+        <h1 class="text-ink !text-[clamp(2.375rem,5.2vw,4rem)] mb-5">
+          {{ .Title }}
+        </h1>
+        {{ with .Params.description }}
+        <p class="lede max-w-3xl">
+          {{ . }}
+        </p>
+        {{ end }}
+      </div>
     </div>
   </header>
 
   {{ if .Content }}
-  <section class="bg-surface">
+  <section class="wrap">
     {{ $toc := partial "toc-enabled.html" . }}
-    <div class="{{ if $toc }}max-w-4xl xl:max-w-6xl xl:flex xl:items-start xl:gap-10{{ else }}max-w-4xl{{ end }} mx-auto px-6 lg:px-8 py-16 lg:py-24">
-      <article class="page bg-canvas p-8 md:p-12 rounded-2xl shadow-card border border-line xl:flex-1 xl:min-w-0">
+    <div class="section-rule pt-10 lg:pt-14 pb-16 lg:pb-24 {{ if $toc }}xl:flex xl:items-start xl:justify-between xl:gap-16{{ end }}">
+      <article class="page read xl:flex-1 xl:min-w-0">
         {{ partial "agent-tools.html" . }}
         {{ partial "tldr.html" . }}
         {{ partial "toc.html" (dict "page" . "mode" "inline") }}
