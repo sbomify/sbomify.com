@@ -2601,7 +2601,7 @@
 .ins .triage-qs li {
   display: flex;
   gap: 14px;
-  padding: 16px 0;
+  padding: 16px 16px 16px 16px;
   border-top: 1px solid rgb(var(--color-navy-10));
 }
 
@@ -2779,7 +2779,12 @@
 }
 
 .ins .triage-case :is(th, td):last-child {
-  padding-right: 0;
+  padding-right: 16px;
+}
+
+/* Inset from the hairlines' left end, matching the questions list. */
+.ins .triage-case :is(th, td):first-child {
+  padding-left: 16px;
 }
 
 @media (max-width: 600px) {
@@ -2789,6 +2794,18 @@
 
   .ins .triage-case td {
     padding: 14px 14px 14px 0;
+  }
+
+  .ins .triage-qs li {
+    padding-inline: 12px;
+  }
+
+  .ins .triage-case :is(th, td):first-child {
+    padding-left: 12px;
+  }
+
+  .ins .triage-case :is(th, td):last-child {
+    padding-right: 12px;
   }
 }
 
