@@ -31,6 +31,7 @@ module.exports = {
         10: token('navy-10'),
         5: token('navy-5'),
       },
+      panel: token('panel'),
       mist: {
         DEFAULT: token('mist'),
         soft: token('mist-soft'),

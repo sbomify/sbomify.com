@@ -1,8 +1,0 @@
-{{ $page := . }}
-<nav class="site-nav hidden lg:flex gap-7" aria-label="Main navigation">
-  {{ range site.Data.main.nav }}
-    {{/* Blog posts live under /YYYY/MM/DD/, not /blog/ */}}
-    {{ $active := or (hasPrefix $page.RelPermalink .link) (and (eq .link "/blog/") (eq $page.Section "posts")) }}
-    <a href="{{ .link }}"{{ if $active }} aria-current="page"{{ end }}>{{ .name }}</a>
-  {{ end }}
-</nav>

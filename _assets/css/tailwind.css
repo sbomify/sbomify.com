@@ -33,7 +33,7 @@
     --header-h: 4.5rem;
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 900px) {
     :root {
       --header-h: 4rem;
     }
@@ -178,7 +178,7 @@
      gutter that grows with the window. Reading pages narrow it with .read. */
   .wrap {
     width: 100%;
-    max-width: 72rem; /* 1152px */
+    max-width: 70rem; /* 1120px, as sbomify Insights */
     margin-inline: auto;
     padding-inline: clamp(1rem, 4vw, 2.5rem);
   }
@@ -239,13 +239,13 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    min-height: 2.75rem; /* 44px touch target */
-    padding: 0 1.125rem;
+    min-height: 2.5rem; /* 40px */
+    padding: 0 1rem;
     border: 0;
     border-radius: 0.625rem;
     flex-shrink: 0;
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
+    font-size: 0.92rem;
     font-weight: var(--font-weight-semibold);
     line-height: 1;
     white-space: nowrap;
@@ -303,11 +303,11 @@
 
   .btn-secondary {
     @apply btn;
-    --btn-face: rgb(var(--color-navy-5));
+    --btn-face: rgb(var(--color-panel));
     --btn-ink: rgb(var(--color-navy-100));
     --btn-sheen: rgb(var(--color-white) / 0.6);
     --btn-edge-hi: rgb(var(--color-white));
-    --btn-edge-lo: rgb(var(--color-navy-100) / 0.16);
+    --btn-edge-lo: rgb(var(--color-navy-100) / 0.14);
     --btn-tint: rgb(var(--color-navy-100) / 0.05);
     --btn-press: rgb(var(--color-navy-100) / 0.09);
   }
@@ -333,16 +333,10 @@
   }
 
   .btn-md {
-    min-height: 2.5rem;
-    padding: 0 1rem;
+    min-height: 2.25rem; /* 36px */
+    padding: 0 0.875rem;
     font-size: 0.875rem;
     border-radius: 0.5625rem;
-  }
-
-  @media (max-width: 639px) {
-    .btn-md {
-      min-height: 2.75rem;
-    }
   }
 
   .btn-lg {
@@ -1524,3 +1518,1128 @@
   box-shadow: none;
 }
 
+
+/* ==========================================================================
+   Insights UI: the sbomify Insights look (insights.sbomify.com), used by the
+   home page, the header and the footer. Plain CSS after the utilities, so it
+   is never purged and wins over Tailwind's base type at equal specificity.
+   Everything is scoped to an `.ins` root; resets use :where() so component
+   classes below always win over them.
+   ========================================================================== */
+
+:where(.ins) {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgb(var(--color-navy-100));
+}
+
+/* Element-level specificity (0,0,1): beats Tailwind's base h1/h2/p rules,
+   which come earlier, and still loses to utilities and component classes. */
+:where(.ins) :is(h1, h2, h3, h4, p, figure, blockquote, ul, ol, dl, dd) {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  text-wrap: wrap;
+}
+
+:where(.ins) :is(h1, h2, h3, h4) {
+  font-weight: var(--font-weight-bold);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+:where(.ins) :is(ul, ol) {
+  padding: 0;
+  list-style: none;
+}
+
+:where(.ins) a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgb(var(--color-navy-40));
+}
+
+:where(.ins) a:hover {
+  text-decoration-color: currentColor;
+}
+
+:where(.ins) code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.ins .muted {
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .mono {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+/* ---------- nebula: a still image, then a slow shader where supported ---------- */
+
+/* Any [data-nebula] element: the still is its background, and
+   assets/js/nebula.js adds a canvas behind the content that fades in once
+   the first frame is drawn. */
+[data-nebula] {
+  position: relative;
+  isolation: isolate;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top right;
+}
+
+[data-nebula] > canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+}
+
+[data-nebula] > canvas.on {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-nebula] > canvas {
+    transition: none;
+  }
+}
+
+/* ---------- header ---------- */
+
+/* Sticky; clear at the top so the hero's nebula runs under it, frosted with a
+   hairline once the page scrolls (.is-scrolled, from assets/js/main.js). */
+.ins-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ins-header::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -20px;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgb(var(--color-white) / 0.7) 0%, rgb(var(--color-white) / 0.6) 45%, rgb(var(--color-white) / 0) 100%);
+  transition: opacity 0.2s ease;
+}
+
+.ins-header.is-scrolled::before,
+.ins-header.menu-open::before {
+  opacity: 0;
+}
+
+.ins-header.is-scrolled {
+  background: rgb(var(--color-white) / 0.82);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  backdrop-filter: saturate(1.4) blur(12px);
+  box-shadow: 0 1px 0 rgb(var(--color-navy-10));
+}
+
+.ins-header.menu-open {
+  background: rgb(var(--color-white));
+  box-shadow: 0 1px 0 rgb(var(--color-navy-10));
+}
+
+.ins-header > .wrap {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  height: var(--header-h);
+}
+
+.ins-header .brand {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+  text-decoration: none;
+}
+
+.ins-header .brand img {
+  height: 22px;
+  width: auto;
+}
+
+.ins-header .nav {
+  display: flex;
+  gap: 26px;
+}
+
+.ins-header .nav a,
+.ins-header .signin-link {
+  position: relative;
+  padding: 6px 0;
+  font-size: 0.95rem;
+  font-weight: var(--font-weight-medium);
+  color: rgb(var(--color-navy-80));
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ins-header .nav a:hover,
+.ins-header .nav a[aria-current="page"],
+.ins-header .signin-link:hover {
+  color: rgb(var(--color-navy-100));
+}
+
+/* The current page: a short rounded bar, the emblem's shape. */
+.ins-header .nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  border-radius: 2px;
+  background: rgb(var(--color-navy-100));
+}
+
+.ins-header .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ins-header .signin-link {
+  margin-right: 6px;
+}
+
+.ins-header .menu-toggle {
+  display: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-right: -8px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: rgb(var(--color-navy-100));
+  cursor: pointer;
+}
+
+.ins-header .menu-toggle:hover {
+  background: rgb(var(--color-panel));
+}
+
+/* Three staggered bars, the emblem's shape; they fold into a cross. */
+.ins-header .menu-bars {
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 16px;
+}
+
+.ins-header .menu-bars i {
+  position: absolute;
+  left: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: top 0.25s ease, left 0.25s ease, width 0.25s ease, transform 0.25s ease, opacity 0.2s ease;
+}
+
+.ins-header .menu-bars i:nth-child(1) { top: 1px; width: 70%; }
+.ins-header .menu-bars i:nth-child(2) { top: 7px; width: 100%; }
+.ins-header .menu-bars i:nth-child(3) { top: 13px; left: 45%; width: 55%; }
+
+.ins-header .menu-toggle[aria-expanded="true"] .menu-bars i:nth-child(1) { top: 7px; width: 100%; transform: rotate(45deg); }
+.ins-header .menu-toggle[aria-expanded="true"] .menu-bars i:nth-child(2) { opacity: 0; }
+.ins-header .menu-toggle[aria-expanded="true"] .menu-bars i:nth-child(3) { top: 7px; left: 0; width: 100%; transform: rotate(-45deg); }
+
+/* The phone menu: a full-height white sheet under the header bar. */
+.ins-header .mobile-menu {
+  position: fixed;
+  inset: var(--header-h) 0 0;
+  overflow-y: auto;
+  background: rgb(var(--color-white));
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.ins-header .mobile-menu.is-open {
+  opacity: 1;
+  transform: none;
+}
+
+.ins-header .mobile-menu[hidden] {
+  display: none;
+}
+
+.ins-header .mobile-menu > .wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding-block: 8px 28px;
+}
+
+.ins-header .mobile-primary a {
+  display: block;
+  padding: 16px 0;
+  border-bottom: 1px solid rgb(var(--color-navy-10));
+  font-size: 1.35rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.015em;
+  text-decoration: none;
+}
+
+.ins-header .mobile-primary a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+.ins-header .mobile-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 32px;
+}
+
+.ins-header .mobile-signin {
+  justify-self: center;
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: rgb(var(--color-navy-60));
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .ins-header .nav,
+  .ins-header .header-actions > :not(.menu-toggle) {
+    display: none;
+  }
+
+  .ins-header .menu-toggle {
+    display: grid;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ins-header,
+  .ins-header::before,
+  .ins-header .menu-bars i,
+  .ins-header .mobile-menu {
+    transition: none;
+  }
+}
+
+/* ---------- sections ---------- */
+
+.ins .section {
+  padding-block: clamp(40px, 6vw, 72px);
+}
+
+.ins .section + .section {
+  padding-top: 0;
+}
+
+/* A heading row: title left, a quiet link right, baseline aligned. */
+.ins .section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  margin-bottom: 16px;
+}
+
+.ins .section-head h2 {
+  font-size: 1.35rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.ins .section-head > a {
+  font-size: 0.92rem;
+  font-weight: var(--font-weight-medium);
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .section-head .sub {
+  flex-basis: 100%;
+  color: rgb(var(--color-navy-80));
+}
+
+/* Small caps label: footer headings, side cards, a section's kicker. */
+.ins .kicker {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--color-navy-60));
+}
+
+/* ---------- home hero ---------- */
+
+.ins .home-hero {
+  margin-top: calc(-1 * var(--header-h));
+  padding-top: var(--header-h);
+}
+
+.ins .home-hero > .wrap {
+  padding-block: clamp(20px, 3vw, 44px) clamp(40px, 5vw, 72px);
+}
+
+.ins .hero-stat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  margin-bottom: 22px;
+  font-size: 0.92rem;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .hero-stat strong {
+  font-weight: var(--font-weight-bold);
+  color: rgb(var(--color-navy-100));
+}
+
+/* A small live marker. */
+.ins .live {
+  position: relative;
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgb(var(--color-accent));
+}
+
+.ins .live::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid rgb(var(--color-accent));
+  opacity: 0;
+  animation: ins-live 2.4s ease-out infinite;
+}
+
+@keyframes ins-live {
+  0% { transform: scale(0.4); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ins .live::after {
+    animation: none;
+  }
+}
+
+.ins .home-hero h1 {
+  font-size: clamp(2.4rem, 5.6vw, 4.25rem);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  max-width: 13ch;
+}
+
+.ins .lede {
+  margin-top: 18px;
+  font-size: 1.15rem;
+  color: rgb(var(--color-navy-80));
+  max-width: 44ch;
+}
+
+.ins .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 32px;
+}
+
+.ins .btn svg.go {
+  transition: transform 0.2s ease;
+}
+
+.ins .btn:hover svg.go {
+  transform: translateX(2px);
+}
+
+/* A short line of small links under the hero's action: "Try …" on Insights,
+   integrations and press here. */
+.ins .try {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin-top: 14px;
+  font-size: 0.92rem;
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .try + .try {
+  margin-top: 6px;
+}
+
+.ins .try a {
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .try img {
+  display: inline-block;
+  height: 18px;
+  width: auto;
+  filter: grayscale(1);
+  opacity: 0.7;
+  transition: opacity 0.15s ease, filter 0.15s ease;
+}
+
+.ins .try a:hover img {
+  filter: none;
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .ins .hero-actions .btn {
+    flex: 1 1 100%;
+  }
+}
+
+/* ---------- rows: a list of things, one hairline per row ---------- */
+
+.ins .rows > li > a,
+.ins .rows > li > .row {
+  display: grid;
+  grid-template-columns: 10.5rem minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 4px 20px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgb(var(--color-navy-10));
+  text-decoration: none;
+}
+
+.ins .rows li:first-child > a,
+.ins .rows li:first-child > .row {
+  border-top: 1px solid rgb(var(--color-navy-10));
+}
+
+.ins .rows > li > a:hover .row-title {
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--color-navy-40));
+}
+
+.ins .row-id {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: rgb(var(--color-navy-60));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ins .row-title {
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: 0;
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ins .row-meta {
+  display: flex;
+  gap: 14px;
+  justify-content: flex-end;
+  font-size: 0.85rem;
+  color: rgb(var(--color-navy-80));
+  white-space: nowrap;
+}
+
+/* A row with a sentence under its title. */
+.ins .rows .row-text {
+  min-width: 0;
+}
+
+.ins .rows .row-text .row-title {
+  white-space: normal;
+}
+
+.ins .rows .row-desc {
+  margin-top: 4px;
+  font-size: 0.95rem;
+  color: rgb(var(--color-navy-80));
+  max-width: 68ch;
+}
+
+.ins .rows .row-desc a {
+  color: rgb(var(--color-navy-100));
+}
+
+@media (max-width: 680px) {
+  .ins .rows > li > a,
+  .ins .rows > li > .row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .ins .rows .row-title,
+  .ins .rows .row-text {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    white-space: normal;
+  }
+}
+
+/* ---------- topics: a heading and a few paragraphs ---------- */
+
+.ins .topic h2 {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 12px;
+}
+
+.ins .topic p {
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .topic p + p {
+  margin-top: 12px;
+}
+
+.ins .topic strong {
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .topic .emph {
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .topic .summary {
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .topic .topic-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* An article column and a sidebar, as on a vulnerability page. */
+.ins .split {
+  display: grid;
+  grid-template-columns: minmax(0, 47.5rem) 272px;
+  justify-content: space-between;
+  gap: 32px 56px;
+}
+
+@media (max-width: 1060px) {
+  .ins .split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Two topics side by side. */
+.ins .pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px 56px;
+}
+
+@media (max-width: 760px) {
+  .ins .pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.ins .side-card {
+  padding: 18px 18px 16px;
+  border-radius: 12px;
+  background: rgb(var(--color-panel));
+}
+
+.ins .side-card h2,
+.ins .side-card h3 {
+  margin-bottom: 10px;
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .side-card p {
+  font-size: 0.92rem;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .side-card p + p {
+  margin-top: 10px;
+}
+
+.ins .side-card + .side-card {
+  margin-top: 16px;
+}
+
+/* A list in a side card: hairline rows, an arrow per item. */
+.ins .side-list li {
+  display: flex;
+  gap: 10px;
+  padding: 9px 0;
+  border-top: 1px solid rgb(var(--color-navy-10));
+  font-size: 0.92rem;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .side-list li:first-child {
+  border-top: 0;
+  padding-top: 2px;
+}
+
+.ins .side-list li > span:first-child {
+  color: rgb(var(--color-navy-40));
+}
+
+/* ---------- facts, tables and status ---------- */
+
+.ins table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.ins th {
+  text-align: left;
+  font-weight: var(--font-weight-medium);
+  color: rgb(var(--color-navy-60));
+  padding: 8px 16px 8px 0;
+  border-bottom: 1px solid rgb(var(--color-navy-20));
+}
+
+.ins td {
+  padding: 10px 16px 10px 0;
+  border-bottom: 1px solid rgb(var(--color-navy-10));
+  vertical-align: top;
+}
+
+.ins td:last-child,
+.ins th:last-child {
+  padding-right: 0;
+}
+
+/* In lists: a coloured dot and a word, no fill. */
+.ins .sev {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.85rem;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .sev::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgb(var(--color-navy-20));
+}
+
+.ins .sev[data-sev="critical"]::before,
+.ins .sev[data-sev="affected"]::before { background: rgb(var(--color-danger-full)); }
+.ins .sev[data-sev="fixed"]::before { background: rgb(var(--color-success-full)); }
+.ins .sev[data-sev="not-affected"]::before { background: rgb(var(--color-info-full)); }
+
+/* Filled pills, for the head of an item. */
+.ins .pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+.ins .pill[data-sev="critical"] {
+  background: rgb(var(--color-danger-full));
+  color: rgb(var(--color-white));
+}
+
+/* A worked example: a small vulnerability head over a table. */
+.ins .example {
+  padding-top: 4px;
+}
+
+.ins .example-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 18px;
+}
+
+.ins .example-id {
+  font-family: var(--font-mono);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.ins .example-head .in {
+  font-size: 0.92rem;
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .example td.release {
+  font-family: var(--font-mono);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+.ins .note {
+  margin-top: 14px;
+  font-size: 0.92rem;
+  color: rgb(var(--color-navy-60));
+}
+
+/* ---------- browse: columns of short lists ---------- */
+
+.ins .browse {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+@media (max-width: 760px) {
+  .ins .browse {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ins .browse h3 {
+  font-size: 1rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 6px;
+}
+
+.ins .browse li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgb(var(--color-navy-10));
+  font-weight: var(--font-weight-medium);
+}
+
+.ins .browse li svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  color: rgb(var(--color-success-ink));
+}
+
+/* ---------- quote ---------- */
+
+.ins .quote blockquote {
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  max-width: 40ch;
+}
+
+.ins .quote figcaption {
+  margin-top: 14px;
+  font-size: 0.92rem;
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 40px;
+  margin-top: 28px;
+}
+
+.ins .logos img {
+  height: 28px;
+  width: auto;
+  filter: grayscale(1);
+  opacity: 0.75;
+  transition: opacity 0.15s ease, filter 0.15s ease;
+}
+
+.ins .logos a:hover img {
+  filter: none;
+  opacity: 1;
+}
+
+/* GitHub release and star chips, added by the home page script. */
+.ins .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 9px;
+  background: rgb(var(--color-panel));
+  font-size: 0.85rem;
+  font-weight: var(--font-weight-medium);
+  color: rgb(var(--color-navy-80));
+  text-decoration: none;
+}
+
+.ins .chip:hover {
+  color: rgb(var(--color-navy-100));
+}
+
+/* ---------- call to action ---------- */
+
+/* Navy, rounded, the nebula's embers through it; the page's one orange
+   button. */
+.ins .cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 32px;
+  padding: clamp(24px, 4vw, 36px) clamp(24px, 4vw, 40px);
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: rgb(var(--color-navy-100));
+  background-position: center right;
+  color: rgb(var(--color-white));
+}
+
+.ins .cta h2 {
+  font-size: 1.3rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.ins .cta p {
+  margin-top: 4px;
+  color: rgb(var(--color-white) / 0.75);
+  max-width: 52ch;
+}
+
+.ins .cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ---------- footer ---------- */
+
+.ins-footer {
+  margin-top: clamp(40px, 6vw, 72px);
+  font-size: 0.88rem;
+  color: rgb(var(--color-navy-60));
+  overflow: hidden;
+}
+
+.ins-footer .footer-top {
+  display: grid;
+  grid-template-columns: 1.6fr repeat(3, 1fr);
+  gap: 32px;
+  padding-block: clamp(40px, 6vw, 64px);
+}
+
+/* Dividers sit inside the content width, like the rest of the footer. */
+.ins-footer .footer-top,
+.ins-footer .footer-bottom {
+  background: linear-gradient(rgb(var(--color-navy-10)), rgb(var(--color-navy-10))) top / calc(100% - 2 * clamp(16px, 4vw, 40px)) 1px no-repeat;
+}
+
+@media (max-width: 860px) {
+  .ins-footer .footer-top {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ins-footer .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+.ins-footer .footer-brand img {
+  height: 24px;
+  width: auto;
+  margin-bottom: 14px;
+}
+
+.ins-footer .footer-brand p {
+  font-size: 0.95rem;
+  color: rgb(var(--color-navy-80));
+  max-width: 34ch;
+}
+
+.ins-footer .social {
+  display: flex;
+  gap: 4px;
+  margin: 14px 0 0 -8px;
+}
+
+.ins-footer .social a {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  color: rgb(var(--color-navy-60));
+}
+
+.ins-footer .social a:hover {
+  background: rgb(var(--color-panel));
+  color: rgb(var(--color-navy-100));
+}
+
+.ins-footer h2 {
+  margin-bottom: 14px;
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--color-navy-60));
+}
+
+.ins-footer nav ul {
+  display: grid;
+  gap: 10px;
+}
+
+.ins-footer nav a {
+  font-size: 0.92rem;
+  color: rgb(var(--color-navy-80));
+  text-decoration: none;
+}
+
+.ins-footer nav a:hover {
+  color: rgb(var(--color-navy-100));
+}
+
+.ins-footer .footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 32px;
+  padding-block: 20px;
+  font-size: 0.8rem;
+}
+
+.ins-footer .footer-bottom .legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+  max-width: 80ch;
+}
+
+.ins-footer .footer-bottom a,
+.ins-footer .footer-bottom button {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font: inherit;
+  color: rgb(var(--color-navy-80));
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.ins-footer .footer-bottom a:hover,
+.ins-footer .footer-bottom button:hover {
+  background: none;
+  color: rgb(var(--color-navy-100));
+}
+
+/* Behind the wordmark: the footer nebula, under a white overlay that is
+   solid at the top and clear at the bottom, so the colour only rises from
+   the bottom edge. */
+.ins-footer .footer-stage {
+  position: relative;
+  isolation: isolate;
+  padding-top: 40px;
+}
+
+.ins-footer .footer-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-position: bottom center;
+}
+
+.ins-footer .footer-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgb(var(--color-white)) 0%, rgb(var(--color-white)) 10%, rgb(var(--color-white) / 0) 60%);
+}
+
+/* The big wordmark: the nebula canvas fills the box and the wordmark masks
+   it, so smoke drifts through the letters. A hairline outline, drawn over the
+   fill, keeps the word legible where the smoke is thin. */
+.ins-footer .footer-mark {
+  --size: 0.95;
+  --lift: clamp(6px, 1vw, 12px);
+  position: relative;
+  width: calc(var(--size) * 100%);
+  aspect-ratio: 377.72 / 98.83;
+  margin: 0 auto calc(var(--size) * -19.94 / 377.72 * 100% + var(--lift));
+}
+
+.ins-footer .footer-mark-fill {
+  position: absolute;
+  inset: 0;
+  background-color: rgb(var(--color-panel));
+  -webkit-mask: var(--mark) center / contain no-repeat;
+  mask: var(--mark) center / contain no-repeat;
+}
+
+.ins-footer .footer-mark svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.ins-footer .footer-mark svg path {
+  fill: none;
+  stroke: rgb(var(--color-navy-40));
+  stroke-opacity: 0.5;
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Skip link: hidden above the page until it has focus. */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -48px;
+  z-index: 60;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: rgb(var(--color-navy-100));
+  color: rgb(var(--color-white));
+  font-size: 0.92rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.skip-link:focus {
+  top: 12px;
+}

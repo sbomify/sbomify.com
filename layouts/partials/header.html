@@ -1,26 +1,50 @@
-{{/* Sticky header: clear over the hero, frosted once the page scrolls
-     (assets/js/main.js sets .is-scrolled). Navy "Start free" here, so the
-     page's own call to action keeps the one orange moment. */}}
-<header class="site-header" data-header>
+{{/* Header, as on sbomify Insights: sticky, clear over the hero so the
+     nebula runs under it, frosted once the page scrolls (assets/js/main.js
+     sets .is-scrolled). The navy "Start free" leaves the page's one orange
+     moment to the page itself. */}}
+{{ $page := . }}
+{{ $logo := resources.Get "images/site/logo-navy.svg" | fingerprint }}
+<header class="ins ins-header" data-header>
   <div class="wrap">
-    <a href="/" class="mr-auto shrink-0 hover:opacity-80 transition-opacity">
-      {{/* Navy on white: the default colourway */}}
-      {{ $logo := resources.Get "images/site/logo-navy.svg" }}
-      {{ if $logo }}
-      {{ $logo = $logo | fingerprint }}
-      <img src="{{ $logo.RelPermalink }}" alt="sbomify logo" class="h-[22px] w-auto" width="128" height="24" />
-      {{ else }}
-      <img src="/assets/images/site/logo-navy.svg" alt="sbomify logo" class="h-[22px] w-auto" width="128" height="24" />
-      {{ end }}
+    <a class="brand" href="/">
+      <img src="{{ $logo.RelPermalink }}" alt="sbomify logo" width="117" height="22">
     </a>
-    {{ partial "nav.html" . }}
-    <div class="flex items-center gap-2.5">
-      <div class="hidden lg:flex items-center gap-2.5">
-        <a href="{{ site.Params.signinURL }}" class="px-2 py-2 text-[0.9375rem] font-medium text-ink-muted hover:text-ink transition-colors" data-cta-location="header" data-cta-label="Sign in" data-cta-intent="signin">Sign in</a>
-        <a href="{{ site.Params.demoURL }}" class="btn-secondary btn-md" data-cta-location="header" data-cta-label="Book a demo">Book a demo</a>
-        <a href="{{ site.Params.signupURL }}" class="btn-navy btn-md" data-cta-location="header" data-cta-label="Start free">Start free</a>
+
+    <nav class="nav" aria-label="Main navigation">
+      {{ range site.Data.main.nav }}
+        {{/* Blog posts live under /YYYY/MM/DD/, not /blog/ */}}
+        {{ $active := or (hasPrefix $page.RelPermalink .link) (and (eq .link "/blog/") (eq $page.Section "posts")) }}
+        <a href="{{ .link }}"{{ if $active }} aria-current="page"{{ end }}>{{ .name }}</a>
+      {{ end }}
+    </nav>
+
+    <div class="header-actions">
+      <a class="signin-link" href="{{ site.Params.signinURL }}" data-cta-location="header" data-cta-label="Sign in" data-cta-intent="signin">Sign in</a>
+      <a class="btn-secondary btn-md" href="{{ site.Params.demoURL }}" data-cta-location="header" data-cta-label="Book a demo">Book a demo</a>
+      <a class="btn-navy btn-md" href="{{ site.Params.signupURL }}" data-cta-location="header" data-cta-label="Start free">Start free</a>
+      {{/* Three staggered bars, the emblem's shape; they fold into a cross when open. */}}
+      <button class="menu-toggle open-menu" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="menu-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <div class="wrap">
+      <nav aria-label="Mobile navigation">
+        <ul class="mobile-primary">
+          <li><a href="/">Home</a></li>
+          {{ range site.Data.main.nav }}
+            {{ $active := or (hasPrefix $page.RelPermalink .link) (and (eq .link "/blog/") (eq $page.Section "posts")) }}
+            <li><a href="{{ .link }}"{{ if $active }} aria-current="page"{{ end }}>{{ .name }}</a></li>
+          {{ end }}
+        </ul>
+      </nav>
+      <div class="mobile-actions">
+        <a class="btn-navy btn-lg" href="{{ site.Params.signupURL }}" data-cta-location="mobile_menu" data-cta-label="Start free">Start free</a>
+        <a class="btn-secondary btn-lg" href="{{ site.Params.demoURL }}" data-cta-location="mobile_menu" data-cta-label="Book a demo">Book a demo</a>
+        <a class="mobile-signin" href="{{ site.Params.signinURL }}" data-cta-location="mobile_menu" data-cta-label="Sign in" data-cta-intent="signin">Sign in</a>
       </div>
-      {{ partial "nav-mobile.html" . }}
     </div>
   </div>
 </header>

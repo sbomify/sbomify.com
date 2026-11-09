@@ -1,0 +1,4 @@
+{{- /* The URL of a nebula still (assets/images/nebula/nebula-<variant>.webp),
+       the first frame of assets/js/nebula.js, for an element's background:
+       style="background-image: url('{{< nebula-still "light" >}}')". */ -}}
+{{- with resources.Get (printf "images/nebula/nebula-%s.webp" (.Get 0)) -}}{{- (. | fingerprint).RelPermalink -}}{{- end -}}

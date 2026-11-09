@@ -1,101 +1,88 @@
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="footer-rule grid grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-x-8 gap-y-10 py-12 lg:py-16">
-      {{/* Brand */}}
-      <div class="col-span-2 md:col-span-1 flex flex-col gap-4">
-        <a href="/" class="w-fit">
-          {{ $logo := resources.Get "images/site/logo-navy.svg" }}
-          {{ if $logo }}
-          {{ $logo = $logo | fingerprint }}
-          <img class="h-6 w-auto" src="{{ $logo.RelPermalink }}" alt="sbomify logo" width="128" height="24" />
-          {{ else }}
-          <img class="h-6 w-auto" src="/assets/images/site/logo-navy.svg" alt="sbomify logo" width="128" height="24" />
-          {{ end }}
-        </a>
-        <p class="text-ink-muted text-[0.9375rem] max-w-xs">
-          From SBOM to security disclosure. Product security for every release you support, built for the EU Cyber Resilience Act.
-        </p>
-      </div>
-
-      {{/* Link columns */}}
-      <nav class="contents" aria-label="Footer navigation">
-        <div>
-          <h2 class="eyebrow mb-4">Product</h2>
-          <ul class="space-y-2.5 text-[0.9375rem]">
-            <li><a href="/cra/">How sbomify helps with the CRA</a></li>
-            <li><a href="/zero-to-hero/">Zero to Hero</a></li>
-            <li><a href="/features/trust-center/">Trust Center</a></li>
-            <li><a href="/features/integrations/">Integrations</a></li>
-            <li><a href="/pricing/">Pricing</a></li>
-            <li><a href="{{ site.Params.demoURL }}" data-cta-location="footer" data-cta-label="Book a demo">Book a demo</a></li>
-            <li><a href="{{ site.Params.signinURL }}" data-cta-location="footer" data-cta-label="Sign in" data-cta-intent="signin">Sign in</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="eyebrow mb-4">Resources</h2>
-          <ul class="space-y-2.5 text-[0.9375rem]">
-            <li><a href="/blog/">Blog</a></li>
-            <li><a href="/guides/">Guides</a></li>
-            <li><a href="/compliance/">Compliance</a></li>
-            <li><a href="/what-is-sbom/">What is an SBOM?</a></li>
-            <li><a href="/faq/">FAQ</a></li>
-            <li><a href="/resources/">Resources</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="eyebrow mb-4">Company</h2>
-          <ul class="space-y-2.5 text-[0.9375rem]">
-            <li><a href="/about/">About</a></li>
-            <li><a href="/case-studies/">Case Studies</a></li>
-            <li><a href="https://trust.sbomify.com/" target="_blank" rel="noopener noreferrer">Public Trust Center</a></li>
-            <li><a href="{{ site.Data.main.social.slack }}"{{ partial "link-attrs.html" (dict "url" site.Data.main.social.slack "rel" "noopener noreferrer" "target" "_blank") }}>Slack community</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-
-    {{/* Legal and social */}}
-    <div class="footer-rule footer-bottom py-5 flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-4">
-      <div class="text-[0.8125rem] flex flex-wrap items-center gap-x-2 gap-y-1">
-        <span>&copy; 2024 - {{ now.Format "2006" }} sbomify ltd.</span>
-        <span>&bull;</span>
-        <a href="/privacy/">Privacy</a>
-        <span>&bull;</span>
-        <a href="/terms/">Terms</a>
-        {{/* Hidden until layouts/partials/cookie-consent.html reveals it, so
-             it is not a dead control where there is no stored decision to
-             change. The bullet separator shares the wrapper so the two are
-             hidden and shown together. The utilities unwind the global
-             <button> base style in _assets/css/tailwind.css (orange fill,
-             18px, padding) -- this one has to read as a footer link. */}}
-        <span id="cookie-settings-wrapper" class="hidden inline-flex gap-2">
-          <span>&bull;</span>
-          <button type="button" id="cookie-settings" class="bg-transparent hover:bg-transparent p-0 rounded-none text-[0.8125rem] font-normal">Cookie settings</button>
-        </span>
-        <span>&bull;</span>
-        <a href="https://studio.viktopia.io"{{ partial "link-attrs.html" "https://studio.viktopia.io" }}>A Viktopia Studio project</a>
-      </div>
-      <div class="flex gap-1 -ml-2.5 md:ml-0 md:-mr-2.5">
+{{/* Footer, as on sbomify Insights: brand and link columns, a bottom row,
+     then the wordmark full width along the bottom edge with the nebula
+     drifting through it (assets/js/nebula.js). */}}
+{{ $logo := resources.Get "images/site/logo-navy.svg" | fingerprint }}
+{{ $mark := resources.Get "images/site/wordmark-navy.svg" | fingerprint }}
+{{ $glow := (resources.Get "images/nebula/nebula-footer.webp") | fingerprint }}
+<footer class="ins ins-footer">
+  <div class="wrap footer-top">
+    <div class="footer-brand">
+      <a href="/"><img src="{{ $logo.RelPermalink }}" alt="sbomify logo" width="128" height="24"></a>
+      <p>From SBOM to security disclosure. Product security for every release you support, built for the EU Cyber Resilience Act.</p>
+      <div class="social">
         {{ range slice
           (dict "url" site.Data.main.social.github "icon" "github" "label" "sbomify on GitHub")
           (dict "url" site.Data.main.social.linkedIn "icon" "linkedin" "label" "sbomify on LinkedIn")
           (dict "url" site.Data.main.social.slack "icon" "slack" "label" "Join the sbomify Slack community") }}
-          <a href="{{ .url }}"{{ partial "link-attrs.html" (dict "url" .url "rel" "noopener noreferrer" "target" "_blank") }} class="social-icon">
+          <a href="{{ .url }}"{{ partial "link-attrs.html" (dict "url" .url "rel" "noopener noreferrer" "target" "_blank") }}>
             {{ partial "icon.html" (dict "name" .icon "class" "w-[18px] h-[18px]") }}
             <span class="sr-only">{{ .label }}</span>
           </a>
         {{ end }}
       </div>
     </div>
+
+    <nav aria-label="Product">
+      <h2>Product</h2>
+      <ul>
+        <li><a href="/cra/">How sbomify helps with the CRA</a></li>
+        <li><a href="/zero-to-hero/">Zero to Hero</a></li>
+        <li><a href="/features/trust-center/">Trust Center</a></li>
+        <li><a href="/features/integrations/">Integrations</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="{{ site.Params.demoURL }}" data-cta-location="footer" data-cta-label="Book a demo">Book a demo</a></li>
+        <li><a href="{{ site.Params.signinURL }}" data-cta-location="footer" data-cta-label="Sign in" data-cta-intent="signin">Sign in</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Resources">
+      <h2>Resources</h2>
+      <ul>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="/compliance/">Compliance</a></li>
+        <li><a href="/what-is-sbom/">What is an SBOM?</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/resources/">Resources</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Company">
+      <h2>Company</h2>
+      <ul>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/case-studies/">Case Studies</a></li>
+        <li><a href="https://trust.sbomify.com/" target="_blank" rel="noopener noreferrer">Public Trust Center</a></li>
+        <li><a href="{{ site.Data.main.social.slack }}"{{ partial "link-attrs.html" (dict "url" site.Data.main.social.slack "rel" "noopener noreferrer" "target" "_blank") }}>Slack community</a></li>
+      </ul>
+    </nav>
   </div>
 
-  {{/* The wordmark, full width along the bottom edge. Decorative: the logo
-       above already names the brand. */}}
-  {{ $mark := resources.Get "images/site/wordmark-navy.svg" | fingerprint }}
+  <div class="wrap footer-bottom">
+    <p class="legal">
+      <span>&copy; 2024 - {{ now.Format "2006" }} sbomify ltd.</span>
+      <span aria-hidden="true">&bull;</span>
+      <a href="/privacy/">Privacy</a>
+      <span aria-hidden="true">&bull;</span>
+      <a href="/terms/">Terms</a>
+      {{/* Hidden until layouts/partials/cookie-consent.html reveals it, so it
+           is not a dead control where there is no stored decision to change.
+           The bullet shares the wrapper so the two show together. */}}
+      <span id="cookie-settings-wrapper" class="hidden inline-flex gap-2">
+        <span aria-hidden="true">&bull;</span>
+        <button type="button" id="cookie-settings">Cookie settings</button>
+      </span>
+      <span aria-hidden="true">&bull;</span>
+      <a href="https://studio.viktopia.io"{{ partial "link-attrs.html" "https://studio.viktopia.io" }}>A Viktopia Studio project</a>
+    </p>
+    <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+  </div>
+
+  {{/* The wordmark over a full-bleed nebula that a white overlay hides except
+       along the bottom. Decorative: the logo above already names the brand. */}}
   <div class="footer-stage" aria-hidden="true">
+    <div class="footer-glow" data-nebula="footer" style="background-image: url('{{ $glow.RelPermalink }}')"></div>
     <div class="wrap">
       <div class="footer-mark">
-        <div class="footer-mark-fill" style="--mark: url('{{ $mark.RelPermalink }}')"></div>
+        <div class="footer-mark-fill" data-nebula="mark" style="--mark: url('{{ $mark.RelPermalink }}')"></div>
         {{ $mark.Content | replaceRE `<\?xml[^>]*>` "" | replaceRE `<svg ` `<svg focusable="false" ` | safeHTML }}
       </div>
     </div>

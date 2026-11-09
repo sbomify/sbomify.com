@@ -51,6 +51,14 @@
   --color-info-full: 66 99 235;      /* #4263EB */
   --color-info-tint: 234 238 253;    /* #EAEEFD */
 
+  /* Derived inks and fills for status text, shared with sbomify Insights. */
+  --color-panel: 244 245 248;        /* #F4F5F8  derived: the pale panel behind side cards and ghost buttons */
+  --color-danger-soft: 240 138 141;  /* #F08A8D  derived: High severity dot */
+  --color-danger-ink: 176 38 44;     /* #B0262C  derived: danger text on white */
+  --color-warning-ink: 138 83 0;     /* #8A5300  derived */
+  --color-info-ink: 47 73 184;       /* #2F49B8  derived */
+  --color-success-ink: 19 122 81;    /* #137A51  derived: success text on white */
+
   /* ===== Roles: light surfaces (the default) ===== */
   --color-canvas: var(--color-white);
   --color-surface: var(--color-mist-soft);        /* alternating sections, cards on canvas */

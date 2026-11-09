@@ -1,6 +1,6 @@
 (function() {
   // Header: frosted once the page scrolls; the phone menu is a sheet under
-  // the bar, opened and closed by one toggle (layouts/partials/nav-mobile.html).
+  // the bar, opened and closed by one toggle (layouts/partials/header.html).
   function initHeader () {
     var header = document.querySelector('[data-header]');
     if (!header) return;
@@ -21,7 +21,14 @@
     if (!toggle || !menu) return;
 
     function setOpen (open) {
-      menu.classList.toggle('hidden', !open);
+      // Unhide first, then fade in on the next frame so the transition runs.
+      if (open) {
+        menu.hidden = false;
+        requestAnimationFrame(function () { menu.classList.add('is-open'); });
+      } else {
+        menu.classList.remove('is-open');
+        menu.hidden = true;
+      }
       header.classList.toggle('menu-open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
@@ -38,7 +45,7 @@
       }
     });
     // Back to the desktop layout with the sheet open: close it.
-    window.matchMedia('(min-width: 1024px)').addEventListener('change', function (e) {
+    window.matchMedia('(min-width: 901px)').addEventListener('change', function (e) {
       if (e.matches) setOpen(false);
     });
   }
