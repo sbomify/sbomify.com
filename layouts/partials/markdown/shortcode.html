@@ -23,6 +23,8 @@
     (.Get "title" | default "From SBOM to security disclosure")
     (.Get "primary_text" | default "Start free") (.Get "primary_url" | default site.Params.signupURL)
     (.Get "secondary_text" | default "Book a demo") (.Get "secondary_url" | default site.Params.demoURL) -}}
+{{- else if eq .Name "dawn-cta" -}}
+  {{- $s = printf "**%s** %s [Book a demo](https://app.sbomify.com/enterprise-contact/) or [start free](https://app.sbomify.com)." (.Get "title") (.Get "text" | default "") -}}
 {{- else if eq .Name "check-list-item" -}}
   {{- $s = printf "- **%s**: %s" (.Get "title") (.Get "description") -}}
 {{- end -}}
