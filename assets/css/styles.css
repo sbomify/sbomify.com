@@ -4967,24 +4967,33 @@ button {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   margin-top: 10px;
-}
+}/* Slim tiles: the icon on the left, the name over its kind line. */
 .ins .files li {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  /* A fixed icon column, so names line up whatever the icon. */
+  grid-template-columns: 30px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  justify-items: start;
   align-items: center;
-  gap: 4px;
-  padding: 18px 12px 14px;
+  -moz-column-gap: 12px;
+       column-gap: 12px;
+  row-gap: 1px;
+  padding: 12px 14px;
   border-radius: 12px;
   background: rgb(var(--color-panel));
-  text-align: center;
+  text-align: left;
   transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.ins .files li > :first-child {
+  grid-row: 1 / 3;
+  justify-self: center;
 }/* Hover reads as a file browser's selection. */
 .ins .files li:hover {
   background: rgb(var(--color-info-full) / 0.08);
   box-shadow: inset 0 0 0 1px rgb(var(--color-info-full) / 0.3);
 }
 .ins .files b {
-  margin-top: 8px;
+  align-self: end;
   font-size: 0.82rem;
   font-weight: var(--font-weight-medium);
   line-height: 1.3;
@@ -4992,15 +5001,21 @@ button {
   overflow-wrap: anywhere;
 }
 .ins .files small {
+  align-self: start;
   font-size: 0.74rem;
   color: rgb(var(--color-navy-60));
+}/* Narrow cards: one file per row, as a file browser's list view. */
+@media (max-width: 480px) {
+  .ins .files {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }/* A document: a sheet with a folded top-right corner and its type on a
    small tab across the bottom. */
 .ins .file-ico {
   position: relative;
-  width: 36px;
-  height: 44px;
-  border-radius: 4px;
+  width: 26px;
+  height: 32px;
+  border-radius: 3px;
   background: rgb(var(--color-white));
   box-shadow: inset 0 0 0 1.5px rgb(var(--color-navy-40));
   clip-path: polygon(0 0, 70% 0, 100% 24%, 100% 100%, 0 100%);
@@ -5018,11 +5033,11 @@ button {
   content: attr(data-ext);
   position: absolute;
   left: -1px;
-  bottom: 6px;
-  padding: 1px 4px;
+  bottom: 4px;
+  padding: 0 3px;
   border-radius: 3px;
   background: rgb(var(--color-navy-100));
-  font-size: 0.55rem;
+  font-size: 0.45rem;
   font-weight: var(--font-weight-bold);
   letter-spacing: 0.04em;
   line-height: 1.4;
@@ -5030,27 +5045,27 @@ button {
 }/* A folder: a body with a tab. */
 .ins .folder-ico {
   position: relative;
-  width: 46px;
-  height: 36px;
-  margin-top: 8px;
-  border-radius: 3px 6px 6px 6px;
+  width: 30px;
+  height: 23px;
+  margin-top: 5px;
+  border-radius: 2px 4px 4px 4px;
   background: rgb(var(--color-navy-20));
 }
 .ins .folder-ico::before {
   content: "";
   position: absolute;
   left: 0;
-  top: -6px;
-  width: 18px;
-  height: 8px;
+  top: -4px;
+  width: 12px;
+  height: 6px;
   border-radius: 3px 4px 0 0;
   background: rgb(var(--color-navy-20));
 }
 .ins .folder-ico::after {
   content: "";
   position: absolute;
-  inset: 5px 0 0;
-  border-radius: 4px 6px 6px 6px;
+  inset: 4px 0 0;
+  border-radius: 3px 4px 4px 4px;
   background: rgb(var(--color-navy-40));
 }/* A page with a folded corner. */
 .ins .doc-ico {
