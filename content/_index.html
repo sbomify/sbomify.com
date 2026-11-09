@@ -85,48 +85,72 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
         </div>
     </section>
 
-    {{< comment >}}How it works{{< /comment >}}
-    <section id="how-it-works" class="section">
+    {{< comment >}}How it works: a full-width navy band, same section pattern{{< /comment >}}
+    <section class="band-dark" id="how-it-works" data-nebula="band" style="background-image: url('{{< nebula-still "band" >}}')">
         <div class="wrap">
-            <span class="kicker">How it works</span>
-            <div class="section-head">
-                <h2>Know what's in your software, and which releases are affected</h2>
-                <p class="sub">Four steps that stay connected for as long as you support a product.</p>
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">How it works</span>
+                    <h2 class="sec-title">Know what's in your software. <span class="soft">And which releases are affected.</span></h2>
+                </div>
+                <p class="sec-lede">Four steps that stay connected for as long as you support a product.</p>
             </div>
-            <ol class="rows">
-                <li><div class="row">
-                    <span class="row-id">01</span>
-                    <span class="row-text">
-                        <h3 class="row-title">Generate and manage SBOMs</h3>
-                        <span class="row-desc block">Create CycloneDX and SPDX SBOMs in your pipelines with our <a href="/features/integrations/">open-source GitHub Action</a>, or upload your own. sbomify validates them against the official schemas, checks them against NTIA, CISA and BSI TR-03183 requirements, and keeps every version. Nothing you upload is ever changed.</span>
-                    </span>
-                    <span class="row-meta"><a href="/features/generate-collaborate-analyze/">SBOM lifecycle &rarr;</a></span>
-                </div></li>
-                <li><div class="row">
-                    <span class="row-id">02</span>
-                    <span class="row-text">
-                        <h3 class="row-title">Track every supported release</h3>
-                        <span class="row-desc block">Your latest version isn't your only supported version. Pin component SBOMs to product releases, get a merged SBOM for each release, and record release, end-of-support and end-of-life dates using the ECMA-428 Common Lifecycle Enumeration.</span>
-                    </span>
-                    <span class="row-meta"><a href="/faq/how-do-i-create-a-software-release/">Releases &rarr;</a></span>
-                </div></li>
-                <li><div class="row">
-                    <span class="row-id">03</span>
-                    <span class="row-text">
-                        <h3 class="row-title">Monitor and triage vulnerabilities</h3>
-                        <span class="row-desc block">Released SBOMs are rescanned on a schedule with <a href="/features/integrations/">Google OSV</a> and <a href="/features/integrations/">Dependency-Track</a>, with CISA KEV and EUVD flags. Search a CVE across every product and release, then record your decision with <a href="/faq/how-do-i-use-vex/">VEX</a>: not affected and why, accepted risk, or fixed.</span>
-                    </span>
-                    <span class="row-meta"><a href="/faq/how-do-i-enable-vulnerability-scanning/">Vulnerability scanning &rarr;</a></span>
-                </div></li>
-                <li><div class="row">
-                    <span class="row-id">04</span>
-                    <span class="row-text">
-                        <h3 class="row-title">Tell your customers</h3>
-                        <span class="row-desc block">Publish SBOMs, VEX, security advisories and compliance documents through a branded <a href="/features/trust-center/">Trust Center</a> on your own domain. Advisories are also published as CSAF 2.0, and the <a href="/faq/how-do-i-enable-tea-in-sbomify/">Transparency Exchange API</a> lets customers' tools fetch everything automatically.</span>
-                    </span>
-                    <span class="row-meta"><a href="/features/trust-center/">Trust Center &rarr;</a></span>
-                </div></li>
-            </ol>
+
+            <div class="flow" data-reveal>
+                <span class="flow-path" aria-hidden="true"><span class="flow-comet"></span></span>
+                <ol class="flow-steps">
+                    <li style="--i: 0">
+                        <span class="flow-dot" aria-hidden="true"></span>
+                        <span class="flow-no">01</span>
+                        <h3>Generate and manage SBOMs</h3>
+                        <p>CycloneDX and SPDX from your pipelines or uploads, validated and never altered.</p>
+                        <div class="flow-snap" aria-hidden="true">
+                            <span class="snap-row"><span class="mono">sbom.cdx.json</span><span class="snap-ok">Valid</span></span>
+                            <span class="snap-row"><span class="mono">sbom.spdx.json</span><span class="snap-ok">Valid</span></span>
+                            <span class="snap-note">NTIA &middot; CISA &middot; BSI TR-03183</span>
+                        </div>
+                        <a href="/features/generate-collaborate-analyze/">SBOM lifecycle&nbsp;<span aria-hidden="true">&rarr;</span></a>
+                    </li>
+                    <li style="--i: 1">
+                        <span class="flow-dot" aria-hidden="true"></span>
+                        <span class="flow-no">02</span>
+                        <h3>Track every supported release</h3>
+                        <p>Pin SBOMs to releases, with release, end-of-support and end-of-life dates.</p>
+                        <div class="flow-snap" aria-hidden="true">
+                            <span class="snap-row"><span class="mono">v2.1</span><span>Until 2031</span></span>
+                            <span class="snap-row"><span class="mono">v2.0</span><span>Until 2030</span></span>
+                            <span class="snap-row is-dim"><span class="mono">v1.0</span><span>Ended 2026</span></span>
+                        </div>
+                        <a href="/faq/how-do-i-create-a-software-release/">Releases&nbsp;<span aria-hidden="true">&rarr;</span></a>
+                    </li>
+                    <li style="--i: 2">
+                        <span class="flow-dot" aria-hidden="true"></span>
+                        <span class="flow-no">03</span>
+                        <h3>Monitor and triage vulnerabilities</h3>
+                        <p>Rescanned with Google OSV and Dependency-Track. Record each decision with VEX.</p>
+                        <div class="flow-snap" aria-hidden="true">
+                            <span class="snap-row"><span class="mono">CVE-2026-XXXXX</span><span class="snap-sev">KEV</span></span>
+                            <span class="snap-row"><span class="mono">v2.1</span><span class="snap-tag" data-tone="danger">Affected</span></span>
+                            <span class="snap-row"><span class="mono">v1.2.1</span><span class="snap-tag" data-tone="info">Not affected</span></span>
+                        </div>
+                        <a href="/faq/how-do-i-enable-vulnerability-scanning/">Vulnerability scanning&nbsp;<span aria-hidden="true">&rarr;</span></a>
+                    </li>
+                    <li style="--i: 3">
+                        <span class="flow-dot" aria-hidden="true"></span>
+                        <span class="flow-no">04</span>
+                        <h3>Tell your customers</h3>
+                        <p>Publish SBOMs, VEX and advisories on your own Trust Center, as CSAF and over TEA.</p>
+                        <div class="flow-snap" aria-hidden="true">
+                            <span class="snap-row"><span class="mono">trust.acme.example</span><span class="snap-ok">Live</span></span>
+                            <span class="snap-row"><span class="mono">ACME-SA-2026-01</span><span class="snap-ok">Published</span></span>
+                            <span class="snap-note">CSAF 2.0 &middot; TEA</span>
+                        </div>
+                        <a href="/features/trust-center/">Trust Center&nbsp;<span aria-hidden="true">&rarr;</span></a>
+                    </li>
+                </ol>
+            </div>
+
+            <p class="sec-close">Every step keeps its history, so your audit trail builds itself as you work. <a href="/cra/">How sbomify helps with the CRA&nbsp;<span aria-hidden="true">&rarr;</span></a></p>
         </div>
     </section>
 

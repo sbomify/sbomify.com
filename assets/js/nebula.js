@@ -15,6 +15,7 @@
  *   light   Signal Orange smoke on white, top right (page heroes)
  *   light-center  the same along the top, for a centred hero
  *   navy    embers on navy, right side (call-to-action band)
+ *   band    fainter embers, low right, for full-width navy sections
  *   footer  pale navy smoke rising from the bottom edge
  *   mark    navy smoke filling the footer wordmark
  */
@@ -42,6 +43,12 @@
       base: rgb(37, 41, 63),
       low: rgb(90, 38, 26), mid: rgb(170, 61, 20), high: rgb(232, 90, 12),
       mask: [0.96, 0.35, 0.42, 1.5], fade: [-1, 0], gain: 1.05, scale: 0.75, seed: [11.3, 2.2], speed: 1.2
+    },
+    // Full-width navy bands: embers low on the right, faint.
+    band: {
+      base: rgb(37, 41, 63),
+      low: rgb(70, 36, 34), mid: rgb(150, 56, 22), high: rgb(232, 90, 12),
+      mask: [0.9, 0.1, 0.42, 0.75], narrow: [0.95, 0.05, 0.6, 0.35], fade: [-1, 0], gain: 0.85, scale: 0.6, seed: [17.9, 4.6], speed: 1
     },
     footer: {
       base: rgb(255, 255, 255),
