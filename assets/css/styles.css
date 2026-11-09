@@ -819,16 +819,18 @@ button {
   color: var(--btn-ink);
   text-decoration: none;
 }
-.ins .btn-primary svg.go {
-  transition: transform 0.2s ease;
-}
-.ins .btn-primary:hover svg.go {
-  transform: translateX(2px);
-}
 @media (max-width: 600px) {
   .ins .hero-actions .btn-primary {
     flex: 1 1 100%;
   }
+}
+.btn-primary:hover .ph-go {
+  transform: translateX(2px);
+}
+.btn-primary .ph-ico {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0;
 }
 .btn-primary {
     --btn-face: rgb(var(--color-orange-700));
@@ -906,16 +908,18 @@ button {
   color: var(--btn-ink);
   text-decoration: none;
 }
-.ins .btn-navy svg.go {
-  transition: transform 0.2s ease;
-}
-.ins .btn-navy:hover svg.go {
-  transform: translateX(2px);
-}
 @media (max-width: 600px) {
   .ins .hero-actions .btn-navy {
     flex: 1 1 100%;
   }
+}
+.btn-navy:hover .ph-go {
+  transform: translateX(2px);
+}
+.btn-navy .ph-ico {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0;
 }
 .btn-secondary {
     --btn-face: rgb(var(--color-navy-100));
@@ -985,16 +989,18 @@ button {
   color: var(--btn-ink);
   text-decoration: none;
 }
-.ins .btn-secondary svg.go {
-  transition: transform 0.2s ease;
-}
-.ins .btn-secondary:hover svg.go {
-  transform: translateX(2px);
-}
 @media (max-width: 600px) {
   .ins .hero-actions .btn-secondary {
     flex: 1 1 100%;
   }
+}
+.btn-secondary:hover .ph-go {
+  transform: translateX(2px);
+}
+.btn-secondary .ph-ico {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0;
 }
 .btn-secondary {
     --btn-face: rgb(var(--color-panel));
@@ -3707,12 +3713,6 @@ button {
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 32px;
-}
-.ins .btn svg.go {
-  transition: transform 0.2s ease;
-}
-.ins .btn:hover svg.go {
-  transform: translateX(2px);
 }/* The centred hero: one column down the middle, the headline large. */
 .ins .home-hero.centered > .wrap {
   display: flex;
@@ -5967,6 +5967,42 @@ button {
 }
 .skip-link:focus {
   top: 12px;
+}/* Phosphor icons (layouts/partials/ph.html): sized to the text, sat on its
+   baseline. An arrow after a label nudges right on hover. */
+.ph-ico {
+  display: inline-block;
+  flex: none;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.3em;
+  vertical-align: -0.14em;
+  transition: transform 0.2s ease;
+}
+.ph-ico.ph-back {
+  margin-left: 0;
+  margin-right: 0.3em;
+}
+a:hover > .ph-go,
+a:focus-visible > .ph-go,
+.btn:hover .ph-go {
+  transform: translateX(2px);
+}
+a:hover > .ph-back,
+a:focus-visible > .ph-back {
+  transform: translateX(-2px);
+}
+a:hover > .ph-up {
+  transform: translateY(-2px);
+}
+.btn .ph-ico {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ph-ico {
+    transition: none;
+  }
 }
 .hover\:border-line-strong:hover {
   --tw-border-opacity: 1;

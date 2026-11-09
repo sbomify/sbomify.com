@@ -32,7 +32,7 @@
       </span>
     </div>
     <span class="{{ if $dark }}text-white{{ else }}text-ink{{ end }} text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-      Read more &rarr;
+      Read more{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}
     </span>
   </div>
 </a>

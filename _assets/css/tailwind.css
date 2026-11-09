@@ -1963,14 +1963,6 @@
   margin-top: 32px;
 }
 
-.ins .btn svg.go {
-  transition: transform 0.2s ease;
-}
-
-.ins .btn:hover svg.go {
-  transform: translateX(2px);
-}
-
 /* The centred hero: one column down the middle, the headline large. */
 .ins .home-hero.centered > .wrap {
   display: flex;
@@ -4697,4 +4689,48 @@
 
 .skip-link:focus {
   top: 12px;
+}
+
+/* Phosphor icons (layouts/partials/ph.html): sized to the text, sat on its
+   baseline. An arrow after a label nudges right on hover. */
+.ph-ico {
+  display: inline-block;
+  flex: none;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.3em;
+  vertical-align: -0.14em;
+  transition: transform 0.2s ease;
+}
+
+.ph-ico.ph-back {
+  margin-left: 0;
+  margin-right: 0.3em;
+}
+
+a:hover > .ph-go,
+a:focus-visible > .ph-go,
+.btn:hover .ph-go {
+  transform: translateX(2px);
+}
+
+a:hover > .ph-back,
+a:focus-visible > .ph-back {
+  transform: translateX(-2px);
+}
+
+a:hover > .ph-up {
+  transform: translateY(-2px);
+}
+
+.btn .ph-ico {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ph-ico {
+    transition: none;
+  }
 }

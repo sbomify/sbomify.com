@@ -38,7 +38,7 @@
         <h2 class="!text-lg font-semibold !leading-snug tracking-heading text-ink capitalize underline decoration-transparent underline-offset-4 decoration-1 group-hover:decoration-navy-40">
           {{ .LinkTitle }}
         </h2>
-        <span class="text-ink text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0">View &rarr;</span>
+        <span class="text-ink text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0">View{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}</span>
       </a>
       {{ end }}
     </div>

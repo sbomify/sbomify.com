@@ -1,0 +1,18 @@
+{{- /*
+  A Phosphor icon (@phosphor-icons/core, MIT), inlined.
+  (dict "name" "arrow-right" "weight" "bold" "class" "...") or just "arrow-right".
+  Weight defaults to bold, which matches our semibold link and button labels.
+  Decorative: the label beside it carries the meaning.
+*/ -}}
+{{- $name := . -}}
+{{- $weight := "bold" -}}
+{{- $class := "" -}}
+{{- if reflect.IsMap . -}}
+  {{- $name = .name -}}
+  {{- with .weight }}{{ $weight = . }}{{ end -}}
+  {{- with .class }}{{ $class = . }}{{ end -}}
+{{- end -}}
+{{- $file := cond (eq $weight "regular") (printf "%s.svg" $name) (printf "%s-%s.svg" $name $weight) -}}
+{{- $svg := readFile (printf "node_modules/@phosphor-icons/core/assets/%s/%s" $weight $file) -}}
+{{- $svg = replace $svg "<svg " (printf "<svg class=\"ph-ico %s\" aria-hidden=\"true\" focusable=\"false\" " $class) -}}
+{{- $svg | safeHTML -}}

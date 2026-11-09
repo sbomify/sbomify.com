@@ -61,7 +61,7 @@
           <p class="text-ink-muted !text-base leading-relaxed mb-3">{{ . }}</p>
           {{ end }}
           <a href="{{ .RelPermalink }}" class="text-ink font-semibold text-sm underline underline-offset-[3px] decoration-navy-40 hover:decoration-current">
-            Read full answer &rarr;
+            Read full answer{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}
           </a>
         </div>
         {{ end }}
