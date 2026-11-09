@@ -2,9 +2,9 @@
 url: /self-hosting/
 title: "Self-Hosting sbomify"
 seo_title: "Self-Hosting sbomify: Install, Configure and Size Your Deployment"
-description: "Run sbomify on your own infrastructure with Docker Compose or Helm. A reference architecture, every setting that matters (email, billing, storage, sign-in), and benchmarked sizing on AWS and Google Cloud."
+description: "Run sbomify on your own infrastructure with Docker Compose or Helm. A reference architecture, every setting that matters (email, billing, storage, sign-in), and conservative sizing on AWS and Google Cloud."
 keywords: ["self-hosted SBOM management", "sbomify self-hosting", "sbomify docker compose", "sbomify helm chart", "on-premises SBOM platform", "SBOM server sizing"]
-tldr: "sbomify is open source and runs anywhere Docker or Kubernetes runs. Put PostgreSQL and Redis or Valkey on their own instances, keep artifacts in S3-compatible storage, sign users in through Keycloak, and size the app instance from the benchmarks below: in our tests one 4 vCPU / 8 GB app instance processed over 20,000 typical SBOMs an hour and served about 50 page views a second. Plan for half that."
+tldr: "sbomify is open source and runs anywhere Docker or Kubernetes runs. Put PostgreSQL and Redis or Valkey on their own instances, keep artifacts in S3-compatible storage, sign users in through Keycloak, and start from the conservative sizes below: one 4 vCPU / 8 GB app instance comfortably handles 100 users and 2,000 SBOM uploads an hour."
 faq:
   - question: "Can I self-host sbomify?"
     answer: "Yes. sbomify is open source under the Apache 2.0 licence with the Commons Clause, so you can run it for your own organisation but not sell it as a hosted service. Run it with Docker Compose on a single VM or with the Helm chart on Kubernetes. Support packages for self-hosted installations are available on the Enterprise plan."
@@ -13,7 +13,7 @@ faq:
   - question: "How do I turn off billing in a self-hosted sbomify?"
     answer: "Set BILLING=False. The Docker Compose file and the Helm chart already default to it. Billing pages, plan selection and product and component limits are switched off. Workspaces still start on the Community plan, so set them to Enterprise in Django admin to lift the member limit."
   - question: "How big a server does sbomify need?"
-    answer: "For an evaluation, one 2 vCPU / 4 GB VM runs everything. For production, we recommend a 4 vCPU / 8 GB app instance with PostgreSQL (2 vCPU / 8 GB) and Redis or Valkey on separate managed instances. In our benchmarks that processed over 20,000 typical SBOMs an hour and served about 50 page views a second. Plan for half of that to leave headroom."
+    answer: "For an evaluation, one 2 vCPU / 4 GB VM runs everything. For production, we recommend a 4 vCPU / 8 GB app instance with PostgreSQL (2 vCPU / 8 GB) and Redis or Valkey on separate managed instances. As a conservative estimate, that handles 100 users, 100,000 stored SBOMs and 2,000 uploads an hour at peak."
 ---
 
 sbomify is [open source](https://github.com/sbomify/sbomify), and the same code that runs [app.sbomify.com](https://app.sbomify.com) runs on your own infrastructure. This guide takes you from an empty VM or Kubernetes cluster to a production deployment: what to run, how to configure it, and how big it needs to be.
@@ -38,7 +38,7 @@ In front of them sits **Caddy**, which terminates TLS, issues certificates for T
 They depend on:
 
 - **PostgreSQL 17 or 18**: all metadata, results and settings.
-- **Redis 8 or Valkey 8**: cache, job queue and WebSocket fan-out. Both work; our benchmarks below ran on Valkey 8.
+- **Redis 8 or Valkey 8**: cache, job queue and WebSocket fan-out. Both work; we tested on Valkey 8.
 - **S3-compatible object storage**: two buckets, one public-read for media such as logos, one private for SBOMs and documents. AWS S3, Google Cloud Storage (S3 interoperability), MinIO, SeaweedFS, Cloudflare R2 and Tigris all work.
 - **Keycloak**: sign-in over OpenID Connect. sbomify has no local password login for regular users. Keycloak is user-facing: browsers are redirected to it to sign in, so it needs its own public HTTPS hostname, and the app also calls it to exchange tokens.
 - **An SMTP relay**: invitations, access requests and onboarding mail.
@@ -389,101 +389,54 @@ Customers can also use their own domain for a [Trust Center](/features/trust-cen
 
 Vulnerability scanners other than OSV, such as a Dependency-Track server, are added in Django admin rather than through environment variables.
 
-## Sizing and benchmarks
+## Sizing
 
-We benchmarked sbomify to give real numbers rather than guesses. The method and its limits are under [how we tested](#how-we-tested).
+The figures below are deliberately conservative estimates, not benchmark results. They come from short load tests on emulated instance sizes and a small dataset (see [where the estimates come from](#where-the-estimates-come-from)), cut to about a tenth of what we measured. A deployment sized this way should have plenty of headroom. If you need tighter numbers, test with your own SBOMs.
 
-### What we measured
+### Recommended sizes
 
-- **Ingestion**: SBOMs uploaded through the API by 8 parallel clients (4 for the large ones), then processed by the workers with four plugins enabled: NTIA minimum elements, CISA minimum elements 2025, BSI TR-03183 and OSV vulnerability scanning. We report how many SBOMs an hour make it all the way through, upload to final result.
-- **Browsing**: signed-in users opening the dashboard, product and component pages and the API, plus anonymous visitors on a public Trust Center, with no pause between requests. We report sustained page views a second and the 95th percentile response time.
-- **Memory**: the peak memory of everything on the app instance during the run.
+| Deployment                   | Up to                                                                                                  | App instance                                                      | AWS                                     | Google Cloud                                       |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- | --------------------------------------- | -------------------------------------------------- |
+| **Evaluation or small team** | 10 users, 25 products, 250 components, 10,000 stored SBOMs, 1,000 uploads a day. Everything on one VM. | 2 vCPU / 4 GB                                                     | `t3.medium`                             | `e2-medium`                                        |
+| **Production**               | 100 users, 100 products, 1,000 components, 100,000 stored SBOMs, 2,000 uploads an hour at peak         | 4 vCPU / 8 GB, 6 web processes, 3 workers                         | `c7i.xlarge`                            | `c4-highcpu-4`                                     |
+| **Large**                    | 500 users, 500 products, 5,000 components, 500,000 stored SBOMs, 5,000 uploads an hour at peak         | 2 or more 4 vCPU / 8 GB instances, or Kubernetes with autoscaling | `c7i.xlarge` × 2+ behind an ALB, or EKS | `c4-highcpu-4` × 2+ behind a load balancer, or GKE |
 
-SBOMs were CycloneDX 1.6 with real npm and PyPI packages, so OSV lookups hit real advisories: a typical one with 200 components (71 KB), and a large one with 3,000 components (1 MB).
+The upload figures assume typical SBOMs of about 200 components with four plugins enabled (NTIA, CISA 2025, BSI TR-03183 and OSV). Count an SBOM with 3,000 components as five typical ones. Beyond the large tier, add app instances and test before you commit.
 
-#### Reference architecture: app instance with separate PostgreSQL and Valkey
+For the data tier:
 
-PostgreSQL ran on its own 2 vCPU / 8 GB instance and Valkey on its own 1 vCPU instance. The numbers are for the app instance, which runs Caddy's upstreams: web, workers and the scheduler.
+| Service         | Production                                                                 | Large                                                                                                         |
+| --------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| PostgreSQL      | 2 vCPU / 8 GB, 100 GB storage: RDS `db.m7g.large`, Cloud SQL 2 vCPU / 8 GB | 4 vCPU / 16 GB with a standby, 250 GB storage: RDS `db.m7g.xlarge` Multi-AZ, Cloud SQL 4 vCPU / 16 GB with HA |
+| Redis or Valkey | ElastiCache `cache.t4g.small`, Memorystore 1 GB                            | ElastiCache `cache.m7g.large` with a replica, Memorystore Standard 5 GB                                       |
+| Object storage  | S3 or Cloud Storage                                                        | Same, with versioning and lifecycle rules                                                                     |
 
-| App instance  | Web / worker processes | SBOMs per hour, 200 components | SBOMs per hour, 3,000 components | Page views per second | p95 at 10 / 25 users | Peak memory |
-| ------------- | ---------------------- | ------------------------------ | -------------------------------- | --------------------- | -------------------- | ----------- |
-| 2 vCPU / 4 GB | 2 / 1 × 4 threads      | 10,900                         | 4,300                            | 27                    | 0.7 s / 2.4 s        | 1.7 GB      |
-| 4 vCPU / 8 GB | 6 / 3 × 4 threads      | 23,100                         | 8,600                            | 51                    | 0.6 s / 1.0 s        | 3.2 GB      |
+The published image is built for x86-64 (`linux/amd64`), so the app instances above are Intel or AMD types. Managed PostgreSQL and Redis are not affected, so Graviton database and cache instances are fine. A 4 vCPU / 16 GB general purpose type (`m7i.xlarge`, `n2-standard-4`) works too if you prefer one instance family.
 
-Under the heaviest load, PostgreSQL averaged about one CPU core and under 500 MB of memory, and Valkey used a few percent of one core and 20 MB. The data tier is not the bottleneck until you run several app instances.
+### What drives the size
 
-#### Everything on one VM
+- **CPU, not memory.** Rendering pages and running compliance checks and scans is CPU work. Memory stayed well below the limits above in every test.
+- **Workers set ingestion speed.** Uploads return as soon as the file is stored; checks and scans run in the background. If results arrive late, add workers before you add web capacity.
+- **Products per workspace set page speed.** The dashboard and the Trust Center landing page summarise every product in a workspace, so they slow down as a workspace grows. If one workspace will hold hundreds of products, size up the app instance or add a second one.
+- **Don't run more web processes than about 1.5 per vCPU.** Extra processes compete for the same cores and make pages slower, not faster.
+- **A separate data tier helps straight away.** With PostgreSQL and Redis or Valkey off the app instance, the app's CPU goes to sbomify alone.
 
-PostgreSQL, Redis and object storage on the same VM as the app, as with the bundled `docker-compose.yml`.
+### Storage
 
-| VM             | Web / worker processes | SBOMs per hour, 200 components | SBOMs per hour, 3,000 components | Page views per second | p95 at 10 / 25 users | Peak memory |
-| -------------- | ---------------------- | ------------------------------ | -------------------------------- | --------------------- | -------------------- | ----------- |
-| 2 vCPU / 4 GB  | 2 / 1                  | 10,100                         | 4,100                            | 20                    | 1.3 s / 2.5 s        | 2.4 GB      |
-| 2 vCPU / 8 GB  | 4 / 2                  | 14,900                         | 7,100                            | 17                    | 1.3 s / 3.3 s        | 3.3 GB      |
-| 4 vCPU / 16 GB | 6 / 3                  | 28,200                         | 10,500                           | 36                    | 0.7 s / 1.5 s        | 4.0 GB      |
-| 8 vCPU / 32 GB | 10 / 4                 | 38,200                         | 12,600                           | 65                    | 0.4 s / 0.8 s        | 5.4 GB      |
+Storage grows with every SBOM you keep. Conservative estimates per SBOM, with four plugins:
 
-What the numbers say:
+| SBOM size        | PostgreSQL | Object storage |
+| ---------------- | ---------- | -------------- |
+| 200 components   | 150 KB     | 150 KB         |
+| 3,000 components | 600 KB     | 2.5 MB         |
 
-- **Memory is not the constraint, CPU is.** No run came close to its memory limit, and nothing was killed for running out of memory. Rendering pages and running compliance checks is CPU work.
-- **Separating the data tier pays off immediately.** With the same 2 vCPUs for the app, moving PostgreSQL and Valkey off the VM raised page throughput by a third and halved the 95th percentile response time.
-- **More web processes than cores hurts.** The 2 vCPU / 8 GB VM with four web processes served fewer pages than the 2 vCPU / 4 GB VM with two. Run about 1.5 web processes per vCPU on the app instance.
-- **Workers scale ingestion almost linearly.** Each worker container (one process, four threads) adds roughly 5,000 typical SBOMs an hour until the CPU is saturated.
-- **Uploads are cheap, processing is not.** The API accepted 12 to 33 uploads a second on every size. The upload returns as soon as the file is stored; checks and scans finish in the background.
-- **A page view here is a full server-rendered page or API call with no think time.** A person reading pages makes one request every few seconds, so 25 page views a second serves well over a hundred people working at the same time.
+That is about 15 GB in PostgreSQL and 15 GB in object storage per 100,000 typical SBOMs. Leave room for indexes, WAL and backups: start PostgreSQL at the storage sizes above and turn on storage autoscaling.
 
-### Recommendations
+### Where the estimates come from
 
-We plan with half the measured capacity, because a cloud vCPU is slower than the cores we tested on (see [how we tested](#how-we-tested)).
+We ran short load tests of sbomify from `master` (November 2026) on one 8-core Arm64 machine, with each instance size emulated by capping CPU and memory, on a workspace of up to 100 products and 1,000 SBOMs. That is enough to show where the bottlenecks are, but not enough to publish as throughput figures: emulated cores are not cloud vCPUs, the runs were minutes long and the database was small. So we divided the measured throughput by ten and doubled the measured storage per SBOM.
 
-| Deployment                   | Up to                                                     | App instance                                                      | AWS                                     | Google Cloud                                       |
-| ---------------------------- | --------------------------------------------------------- | ----------------------------------------------------------------- | --------------------------------------- | -------------------------------------------------- |
-| **Evaluation or small team** | 20 users, 1,000 SBOM uploads a day, everything on one VM  | 2 vCPU / 4 GB                                                     | `t3.medium`                             | `e2-medium`                                        |
-| **Production**               | 150 users, 10,000 SBOMs an hour at peak                   | 4 vCPU / 8 GB, 6 web, 3 workers                                   | `c7i.xlarge`                            | `c4-highcpu-4`                                     |
-| **Large**                    | 500+ users, CI uploading on every build across many teams | 2 or more 4 vCPU / 8 GB instances, or Kubernetes with autoscaling | `c7i.xlarge` × 2+ behind an ALB, or EKS | `c4-highcpu-4` × 2+ behind a load balancer, or GKE |
-
-For the data tier in production:
-
-| Service         | Production                                                 | Large                                                                                                        |
-| --------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| PostgreSQL      | 2 vCPU / 8 GB: RDS `db.m7g.large`, Cloud SQL 2 vCPU / 8 GB | 4 vCPU / 16 GB with a standby: RDS `db.m7g.xlarge` Multi-AZ, Cloud SQL 4 vCPU / 16 GB with high availability |
-| Redis or Valkey | ElastiCache `cache.t4g.small`, Memorystore 1 GB            | ElastiCache `cache.m7g.large` with a replica, Memorystore Standard 5 GB                                      |
-| Object storage  | S3 or Cloud Storage                                        | Same, with versioning and lifecycle rules                                                                    |
-
-The published image is built for x86-64 (`linux/amd64`), so the app instances above are Intel or AMD types. Managed PostgreSQL and Redis are not affected, so Graviton database and cache instances are fine. A 4 vCPU / 16 GB general purpose type (`m7i.xlarge`, `n2-standard-4`) works too if you prefer one instance family; the extra memory goes unused.
-
-### Data volume and storage
-
-Instance size sets throughput. The amount of data you keep sets storage, and how many products a workspace holds affects some pages.
-
-We grew one workspace on the production layout (4 vCPU / 8 GB app instance) from 20 products and 200 components to 100 products and 1,000 components, with 1,000 more SBOMs, and repeated the browsing test at 25 users:
-
-| Workspace                                   | Page views per second | p95, all pages | p95, dashboard | p95, public Trust Center |
-| ------------------------------------------- | --------------------- | -------------- | -------------- | ------------------------ |
-| 20 products, 200 components, 330 SBOMs      | 51                    | 1.0 s          | 0.6 s          | 0.8 s                    |
-| 100 products, 1,000 components, 1,000 SBOMs | 39                    | 1.7 s          | 1.7 s          | 2.5 s                    |
-
-Product and component pages stayed flat. The dashboard and the Trust Center landing page summarise every product in the workspace, so they slow down as a workspace grows. If one workspace will hold hundreds of products, size up the app instance or add a second one.
-
-Storage grows with every SBOM you keep:
-
-| Per SBOM, with four plugins | PostgreSQL   | Object storage (the SBOM file) |
-| --------------------------- | ------------ | ------------------------------ |
-| 100 components              | about 45 KB  | 36 KB                          |
-| 200 components              | about 70 KB  | 71 KB                          |
-| 3,000 components            | about 270 KB | 1.1 MB                         |
-
-Object storage also holds scan output and, over time, older assessment results that sbomify moves out of PostgreSQL. As a rule of thumb, 100,000 typical SBOMs need 5 to 10 GB in PostgreSQL and 10 GB or more in object storage. Leave room for indexes, WAL and backups: start PostgreSQL with 50 GB of storage and turn on storage autoscaling.
-
-### How we tested
-
-- **Software:** sbomify from `master` on 3 November 2026 (release 26.11.0 plus the following week's changes), started with the production command (gunicorn with uvicorn workers), `DEBUG` off and `BILLING=False`. PostgreSQL 17, Valkey 8 (Redis 8 for the single-VM runs) and SeaweedFS as the S3 service.
-- **Hardware:** one 8-core Arm64 host. We did not rent cloud instances. Each instance size was a Linux cgroup that capped CPU and memory for every container of that instance, so the web, workers, database and cache competed for the same budget, as on a real VM. In the reference runs PostgreSQL and Valkey had their own cgroups on their own cores. The load generator ran on a core none of them could use.
-- **Why we halve the numbers:** the cores we tested on are faster than a typical cloud vCPU, and an x86 vCPU is one hyperthread rather than a full core. A managed database also adds a millisecond or so of network latency per query. Halving the measured throughput covers all three with room to spare.
-- **Data:** each run started from an empty database with one workspace of 20 products and 200 components, then uploaded 300 typical and 30 large SBOMs before the browsing test. The data-volume test below grew one workspace to 1,000 components and several thousand SBOMs.
-- **Plugins:** NTIA minimum elements, CISA minimum elements 2025, BSI TR-03183 and OSV, which calls the public OSV API. OSV dominates: its scans averaged 0.8 seconds for a 100-component SBOM, while each compliance check took a few hundredths of a second. Extra compliance plugins add little worker time.
-
-Run your own numbers before you commit to a size: upload a week's worth of your real SBOMs to a test instance and watch how long results take to appear.
+Before you commit to a size, upload a week's worth of your real SBOMs to a test instance and watch how long results take to appear.
 
 ## Best practices
 
