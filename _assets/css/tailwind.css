@@ -2221,13 +2221,22 @@
 /* CRA card: a small window showing the CRA Compliance Wizard part way
    through, on the grey nebula. */
 .ins-header .mega-card.is-cra {
-  gap: 8px;
+  gap: 6px;
+  padding: 18px;
   border: 1px solid rgb(var(--color-navy-10));
+}
+
+.ins-header .mega-card.is-cra .mega-card-title {
+  font-size: 1.05rem;
+}
+
+.ins-header .mega-card.is-cra .mega-card-go {
+  padding-top: 4px;
 }
 
 .ins-header .mega-wiz {
   display: block;
-  margin-top: 10px;
+  margin-top: 6px;
   border: 1px solid rgb(var(--color-white) / 0.9);
   border-radius: 12px;
   background: rgb(var(--color-white) / 0.82);
@@ -2241,7 +2250,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-bottom: 1px solid rgb(var(--color-navy-10));
   background: rgb(var(--color-white) / 0.7);
 }
@@ -2262,17 +2271,17 @@
 
 .ins-header .mega-wiz-steps {
   display: grid;
-  gap: 2px;
-  padding: 8px;
+  gap: 1px;
+  padding: 5px 6px;
 }
 
 .ins-header .mega-wiz-step {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 5px 6px;
-  border-radius: 8px;
-  font-size: 0.78rem;
+  gap: 8px;
+  padding: 3px 6px;
+  border-radius: 7px;
+  font-size: 0.75rem;
   font-weight: var(--font-weight-medium);
   color: rgb(var(--color-navy-80));
 }
@@ -2281,10 +2290,10 @@
   display: grid;
   place-items: center;
   flex: none;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-style: normal;
   font-weight: var(--font-weight-bold);
 }
@@ -2332,7 +2341,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 14px 10px;
+  padding: 6px 12px 7px;
   border-top: 1px solid rgb(var(--color-navy-10));
 }
 
