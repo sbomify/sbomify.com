@@ -2043,6 +2043,12 @@
   height: 20px;
 }
 
+/* The shared .ph-ico margin is for icons after text; these sit alone. */
+.ins-header :is(.mega-ico, .mega-card-ico, .m-links, .mega-quote) .ph-ico {
+  margin: 0;
+  vertical-align: middle;
+}
+
 .ins-header .mega-link:hover .mega-ico {
   border-color: rgb(var(--color-navy-20));
   color: rgb(var(--color-navy-100));
