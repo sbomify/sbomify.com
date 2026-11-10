@@ -1,9 +1,41 @@
 {{/* Header, as on sbomify Insights: sticky, clear over the hero so the
      nebula runs under it, frosted once the page scrolls (assets/js/main.js
      sets .is-scrolled). The navy "Start free" leaves the page's one orange
-     moment to the page itself. */}}
+     moment to the page itself.
+
+     Navigation comes from data/main.yml. An entry with an "id" opens a
+     megamenu: link columns plus a feature card (layouts/partials/mega/).
+     Without JavaScript the menus open on hover and keyboard focus; main.js
+     adds .mega-ready and takes over (click, hover intent, Escape). */}}
 {{ $page := . }}
+{{ $here := $page.RelPermalink }}
 {{ $logo := resources.Get "images/site/logo-navy.svg" | fingerprint }}
+
+{{/* Which top-level entry holds this page: an exact link match first (so
+     /features/security-advisories/ lights Product, its first home), then
+     the longest path prefix; blog posts belong to Resources. */}}
+{{ $current := "" }}
+{{ range site.Data.main.nav }}
+  {{ $n := . }}
+  {{ if and (not $current) (eq .link $here) }}{{ $current = $n.name }}{{ end }}
+  {{ range .columns }}{{ range .items }}
+    {{ if and (not $current) (eq .link $here) }}{{ $current = $n.name }}{{ end }}
+  {{ end }}{{ end }}
+{{ end }}
+{{ if not $current }}
+  {{ $best := 0 }}
+  {{ range site.Data.main.nav }}
+    {{ $n := . }}
+    {{ $links := slice }}
+    {{ with .link }}{{ $links = $links | append . }}{{ end }}
+    {{ range .columns }}{{ range .items }}{{ $links = $links | append .link }}{{ end }}{{ end }}
+    {{ range $links }}
+      {{ if and (hasPrefix . "/") (gt (len .) $best) (hasPrefix $here .) }}{{ $best = len . }}{{ $current = $n.name }}{{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if and (not $current) (eq $page.Section "posts") }}{{ $current = "Resources" }}{{ end }}
+{{ end }}
+
 <header class="ins ins-header" data-header>
   <div class="wrap">
     <a class="brand" href="/">
@@ -11,11 +43,43 @@
     </a>
 
     <nav class="nav" aria-label="Main navigation">
-      {{ range site.Data.main.nav }}
-        {{/* Blog posts live under /YYYY/MM/DD/, not /blog/ */}}
-        {{ $active := or (hasPrefix $page.RelPermalink .link) (and (eq .link "/blog/") (eq $page.Section "posts")) }}
-        <a href="{{ .link }}"{{ if $active }} aria-current="page"{{ end }}>{{ .name }}</a>
-      {{ end }}
+      <ul class="nav-list">
+        {{ range site.Data.main.nav }}
+        {{ $n := . }}
+        {{ $active := eq .name $current }}
+        {{ if .id }}
+        <li class="nav-item" data-mega>
+          <button class="nav-trigger{{ if $active }} is-current{{ end }}" type="button" aria-expanded="false" aria-controls="mega-{{ .id }}">
+            {{ .name }}{{ partial "ph.html" (dict "name" "caret-down" "class" "nav-caret") }}
+          </button>
+          <div class="mega" id="mega-{{ .id }}" data-mega-id="{{ .id }}">
+            <div class="mega-body">
+              {{ if and .feature .feature_first }}<div class="mega-feature">{{ partial (printf "mega/feature-%s.html" .feature) $page }}</div>{{ end }}
+              {{ $i := 0 }}
+              {{ range .columns }}
+              <div class="mega-col{{ if .wide }} is-wide{{ end }}">
+                <p class="mega-heading">{{ .heading }}</p>
+                <div class="mega-links">
+                  {{ range .items }}{{ partial "mega/link.html" (dict "item" . "i" $i) }}{{ $i = add $i 1 }}{{ end }}
+                </div>
+              </div>
+              {{ end }}
+              {{ if and .feature (not .feature_first) }}<div class="mega-feature">{{ partial (printf "mega/feature-%s.html" .feature) $page }}</div>{{ end }}
+            </div>
+            {{ with .foot }}
+            {{ $href := partial "mega/href.html" .link }}
+            <div class="mega-foot">
+              <p>{{ .text }}</p>
+              <a href="{{ $href }}"{{ partial "link-attrs.html" $href }}{{ if eq .link "demo" }} data-cta-location="mega_menu" data-cta-label="{{ .label }}"{{ end }}>{{ .label }}{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}</a>
+            </div>
+            {{ end }}
+          </div>
+        </li>
+        {{ else }}
+        <li class="nav-item"><a class="nav-trigger" href="{{ .link }}"{{ if $active }} aria-current="page"{{ end }}>{{ .name }}</a></li>
+        {{ end }}
+        {{ end }}
+      </ul>
     </nav>
 
     <div class="header-actions">
@@ -29,14 +93,39 @@
     </div>
   </div>
 
+  {{/* Dims and softens the page under an open megamenu; a click closes it. */}}
+  <div class="mega-scrim" aria-hidden="true"></div>
+
+  {{/* The phone menu: each megamenu becomes a native disclosure; the one that
+       holds this page starts open. */}}
   <div class="mobile-menu" id="mobile-menu" hidden>
     <div class="wrap">
       <nav aria-label="Mobile navigation">
         <ul class="mobile-primary">
-          <li><a href="/">Home</a></li>
           {{ range site.Data.main.nav }}
-            {{ $active := or (hasPrefix $page.RelPermalink .link) (and (eq .link "/blog/") (eq $page.Section "posts")) }}
-            <li><a href="{{ .link }}"{{ if $active }} aria-current="page"{{ end }}>{{ .name }}</a></li>
+          {{ $active := eq .name $current }}
+          {{ if .id }}
+          <li>
+            <details class="m-group"{{ if $active }} open{{ end }}>
+              <summary>{{ .name }}{{ partial "ph.html" (dict "name" "caret-down" "class" "nav-caret") }}</summary>
+              <ul class="m-links">
+                {{ if eq .id "cra" }}<li><a href="/cra/"{{ if eq $here "/cra/" }} aria-current="page"{{ end }}>{{ partial "ph.html" (dict "name" "shield-star" "weight" "duotone") }}sbomify for the CRA</a></li>{{ end }}
+                {{ if eq .id "customers" }}
+                  {{ range (where site.RegularPages "Section" "case-studies").ByDate.Reverse }}
+                  <li><a href="{{ .RelPermalink }}"{{ if eq $here .RelPermalink }} aria-current="page"{{ end }}>{{ partial "ph.html" (dict "name" "identification-card" "weight" "duotone") }}{{ .Params.company | default .Title }}</a></li>
+                  {{ end }}
+                  <li><a href="/case-studies/"{{ if eq $here "/case-studies/" }} aria-current="page"{{ end }}>{{ partial "ph.html" (dict "name" "arrow-right" "weight" "duotone") }}All case studies</a></li>
+                {{ end }}
+                {{ range .columns }}{{ range .items }}
+                {{ $href := partial "mega/href.html" .link }}
+                <li><a href="{{ $href }}"{{ partial "link-attrs.html" $href }}{{ if eq $here .link }} aria-current="page"{{ end }}>{{ partial "ph.html" (dict "name" .icon "weight" "duotone") }}{{ .name }}</a></li>
+                {{ end }}{{ end }}
+              </ul>
+            </details>
+          </li>
+          {{ else }}
+          <li><a class="m-plain" href="{{ .link }}"{{ if $active }} aria-current="page"{{ end }}>{{ .name }}</a></li>
+          {{ end }}
           {{ end }}
         </ul>
       </nav>

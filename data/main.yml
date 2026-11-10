@@ -1,14 +1,157 @@
+# Main navigation (layouts/partials/header.html). An entry with "columns"
+# opens a megamenu; "feature" picks the card beside the columns (a partial
+# in layouts/partials/mega/), "foot" the strip along the bottom. Items with
+# "desc" render as large rows, without as a compact list.
 nav:
+  - name: Product
+    id: product
+    columns:
+      - heading: Platform
+        wide: true
+        items:
+          - name: SBOM management
+            desc: Products, projects and components in one hierarchy
+            link: /features/sbom-hierarchy/
+            icon: tree-structure
+          - name: Trust Center
+            desc: A public or private home for your security documents
+            link: /features/trust-center/
+            icon: shield-check
+          - name: Security Advisories
+            desc: Write, gate and publish CSAF advisories
+            link: /features/security-advisories/
+            icon: siren
+          - name: Integrations
+            desc: CI pipelines, registries and vulnerability scanners
+            link: /features/integrations/
+            icon: plugs-connected
+          - name: Share and collaborate
+            desc: Give customers and auditors the files they ask for
+            link: /share-and-collaborate/
+            icon: share-network
+          - name: Self-hosting
+            desc: Run sbomify on your own infrastructure
+            link: /self-hosting/
+            icon: hard-drives
+      - heading: Get started
+        items:
+          - name: Zero to SBOM Hero
+            link: /zero-to-hero/
+            icon: rocket-launch
+          - name: sbomify Action docs
+            link: /sbomify-action/
+            icon: github-logo
+          - name: SBOM examples
+            link: /sbom-examples/
+            icon: file-code
+          - name: Is sbomify free?
+            link: /faq/is-sbomify-free/
+            icon: question
+    feature: trust
+    foot:
+      text: Start on the free Community plan, upgrade when you need to.
+      label: Compare plans
+      link: /pricing/
   - name: CRA
-    link: /cra/
-  - name: Trust Center
-    link: /features/trust-center/
+    id: cra
+    feature: cra
+    feature_first: true
+    columns:
+      - heading: Guides
+        items:
+          - name: CRA obligations map
+            desc: Every obligation, and what sbomify covers
+            link: /guides/cra-obligations/
+            icon: map-trifold
+          - name: CRA SBOM requirements
+            desc: Format, fields and dependency depth
+            link: /compliance/eu-cra/
+            icon: list-checks
+          - name: The CRA Compliance Wizard
+            desc: Assess a product and export the bundle
+            link: /faq/how-do-i-use-cra-compliance/
+            icon: compass
+          - name: What is the CRA?
+            desc: The regulation in plain terms
+            link: /faq/what-is-the-eu-cyber-resilience-act/
+            icon: scales
+      - heading: Reporting and disclosure
+        items:
+          - name: Security Advisories
+            link: /features/security-advisories/
+            icon: siren
+          - name: ENISA reporting platform
+            link: /2026/09/10/cra-single-reporting-platform-enisa-srp/
+            icon: bell-ringing
+          - name: What is a PSIRT?
+            link: /faq/what-is-a-psirt/
+            icon: users-three
+          - name: Vulnerability disclosure
+            link: /faq/what-is-a-vulnerability-disclosure-program/
+            icon: flag
+          - name: CRA for device makers
+            link: /2026/01/06/cra-explained-cyber-resilience-act-for-device-manufacturers/
+            icon: article
+    foot:
+      text: Not sure where your product stands? We'll walk it through the CRA with you.
+      label: Book a demo
+      link: demo
+  - name: Resources
+    id: resources
+    columns:
+      - heading: Learn
+        wide: true
+        items:
+          - name: What is an SBOM?
+            desc: The software bill of materials, explained
+            link: /what-is-sbom/
+            icon: book-open
+          - name: SBOM generation guides
+            desc: Step by step for every language and build
+            link: /guides/
+            icon: graduation-cap
+          - name: Compliance
+            desc: CISA, NIST, BSI, FDA, NIS2 and more
+            link: /compliance/
+            icon: seal-check
+          - name: FAQ
+            desc: Short answers about SBOMs and sbomify
+            link: /faq/
+            icon: question
+          - name: Blog
+            desc: Releases, deep dives and weekly news
+            link: /blog/
+            icon: newspaper
+          - name: Resources
+            desc: Tools, benchmarks and further reading
+            link: /resources/
+            icon: book-bookmark
+      - heading: Company
+        items:
+          - name: About
+            link: /about/
+            icon: buildings
+          - name: Case studies
+            link: /case-studies/
+            icon: identification-card
+          - name: Slack community
+            link: slack
+            icon: chat-circle-dots
+    feature: latest-post
+    foot:
+      text: Questions about SBOMs or the CRA? Ask the community.
+      label: Join us on Slack
+      link: slack
+  - name: Customers
+    id: customers
+    link: /case-studies/
+    feature: stories
+    foot:
+      text: Teams ship SBOMs their customers trust with sbomify.
+      label: All case studies
+      link: /case-studies/
   - name: Pricing
     link: /pricing/
-  - name: Case Studies
-    link: /case-studies/
-  - name: Blog
-    link: /blog/
 
 social:
   x: https://x.com/sbomify

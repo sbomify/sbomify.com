@@ -1,0 +1,18 @@
+{{- /* Resources menu card: the newest blog post, then the two before it. */ -}}
+{{ $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+<div class="mega-posts">
+  <p class="mega-heading">From the blog</p>
+  {{ range first 1 $posts }}
+  <a class="mega-card is-post" href="{{ .RelPermalink }}">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+    <b class="mega-card-title">{{ .Title }}</b>
+    <span class="mega-card-text">{{ .Summary | plainify | truncate 110 }}</span>
+    <span class="mega-card-go">Read the post{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}</span>
+  </a>
+  {{ end }}
+  <ul>
+    {{ range first 2 (after 1 $posts) }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{ end }}
+  </ul>
+</div>

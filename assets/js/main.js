@@ -45,8 +45,92 @@
       }
     });
     // Back to the desktop layout with the sheet open: close it.
-    window.matchMedia('(min-width: 901px)').addEventListener('change', function (e) {
+    window.matchMedia('(min-width: 1061px)').addEventListener('change', function (e) {
       if (e.matches) setOpen(false);
+    });
+  }
+
+  // Megamenus (layouts/partials/header.html). Without this the panels open
+  // on CSS hover and focus; here they become disclosure buttons: a click
+  // toggles, a mouse opens them with a short hover intent and closes them
+  // shortly after leaving, Escape or a click outside closes. Moving from
+  // one open menu to the next swaps panels at once (.mega-instant).
+  function initMega () {
+    var header = document.querySelector('[data-header]');
+    if (!header) return;
+    var items = header.querySelectorAll('.nav-item[data-mega]');
+    if (!items.length) return;
+    header.classList.add('mega-ready');
+    var current = null;
+    var openTimer, closeTimer, openedAt = 0;
+
+    function set (item, on) {
+      item.classList.toggle('is-open', on);
+      item.querySelector('.nav-trigger').setAttribute('aria-expanded', on ? 'true' : 'false');
+    }
+    function open (item) {
+      clearTimeout(closeTimer);
+      if (current === item) return;
+      header.classList.toggle('mega-instant', !!current);
+      if (current) set(current, false);
+      set(item, true);
+      current = item;
+      openedAt = Date.now();
+      header.classList.add('mega-open');
+    }
+    function close () {
+      clearTimeout(openTimer);
+      if (!current) return;
+      set(current, false);
+      current = null;
+      header.classList.remove('mega-open', 'mega-instant');
+    }
+
+    items.forEach(function (item) {
+      var trigger = item.querySelector('.nav-trigger');
+      trigger.addEventListener('click', function () {
+        // A hover just opened it: the click that follows keeps it open.
+        if (current === item && Date.now() - openedAt > 400) close();
+        else open(item);
+      });
+      item.addEventListener('pointerenter', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        clearTimeout(closeTimer);
+        clearTimeout(openTimer);
+        openTimer = setTimeout(function () { open(item); }, current ? 0 : 90);
+      });
+      item.addEventListener('pointerleave', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        clearTimeout(openTimer);
+        // Only close the menu this pointer left, not one opened since.
+        closeTimer = setTimeout(function () { if (current === item) close(); }, 220);
+      });
+      // Tabbing out of an open menu closes it.
+      item.addEventListener('focusout', function (e) {
+        if (current === item && !item.contains(e.relatedTarget)) close();
+      });
+    });
+
+    // Plain links in the bar (Pricing) close an open menu on hover.
+    header.querySelectorAll('.nav-item:not([data-mega])').forEach(function (item) {
+      item.addEventListener('pointerenter', function (e) {
+        if (e.pointerType === 'mouse' && current) { clearTimeout(closeTimer); closeTimer = setTimeout(close, 120); }
+      });
+    });
+
+    header.querySelector('.mega-scrim').addEventListener('click', close);
+    document.addEventListener('click', function (e) {
+      if (current && !current.contains(e.target)) close();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && current) {
+        var trigger = current.querySelector('.nav-trigger');
+        close();
+        trigger.focus();
+      }
+    });
+    window.matchMedia('(max-width: 1060px)').addEventListener('change', function (e) {
+      if (e.matches) close();
     });
   }
 
@@ -287,6 +371,7 @@
   }
 
   initHeader();
+  initMega();
   initReveal();
   initSteps();
   initStages();

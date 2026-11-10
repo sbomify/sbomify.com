@@ -3248,7 +3248,8 @@ button {
   transition: opacity 0.2s ease;
 }
 .ins-header.is-scrolled::before,
-.ins-header.menu-open::before {
+.ins-header.menu-open::before,
+.ins-header.mega-open::before {
   opacity: 0;
 }
 .ins-header.is-scrolled {
@@ -3256,7 +3257,8 @@ button {
   backdrop-filter: saturate(1.4) blur(12px);
   box-shadow: 0 1px 0 rgb(var(--color-navy-10));
 }
-.ins-header.menu-open {
+.ins-header.menu-open,
+.ins-header.mega-open {
   background: rgb(var(--color-white));
   box-shadow: 0 1px 0 rgb(var(--color-navy-10));
 }
@@ -3276,34 +3278,71 @@ button {
   height: 22px;
   width: auto;
 }
-.ins-header .nav {
-  display: flex;
-  gap: 26px;
+.ins-header > .wrap {
+  position: relative;
 }
-.ins-header .nav a,
+.ins-header .nav-list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ins-header .nav-trigger,
 .ins-header .signin-link {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   padding: 6px 0;
+  border: 0;
+  background: none;
+  font: inherit;
   font-size: 0.95rem;
   font-weight: var(--font-weight-medium);
   color: rgb(var(--color-navy-80));
   text-decoration: none;
   white-space: nowrap;
+  cursor: pointer;
 }
-.ins-header .nav a:hover,
-.ins-header .nav a[aria-current="page"],
+.ins-header .nav-trigger {
+  padding: 8px 12px;
+  border-radius: 999px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.ins-header .nav-trigger:hover,
+.ins-header .nav-trigger[aria-current="page"],
+.ins-header .nav-trigger.is-current,
+.ins-header .nav-trigger[aria-expanded="true"],
 .ins-header .signin-link:hover {
   color: rgb(var(--color-navy-100));
-}/* The current page: a short rounded bar, the emblem's shape. */
-.ins-header .nav a[aria-current="page"]::after {
+}
+.ins-header .nav-trigger:hover,
+.ins-header .nav-trigger[aria-expanded="true"] {
+  background: rgb(var(--color-navy-100) / 0.05);
+}/* The current section: a short rounded bar, the emblem's shape. */
+.ins-header .nav-trigger:is([aria-current="page"], .is-current)::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -2px;
+  left: 12px;
+  right: 12px;
+  bottom: 1px;
   height: 2px;
   border-radius: 2px;
   background: rgb(var(--color-navy-100));
+}
+.ins-header .nav-trigger.is-current::after {
+  right: 29px;
+}
+.ins-header .nav-caret {
+  width: 12px;
+  height: 12px;
+  color: rgb(var(--color-navy-55));
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.ins-header .nav-trigger[aria-expanded="true"] .nav-caret {
+  transform: rotate(180deg);
 }
 .ins-header .header-actions {
   display: flex;
@@ -3371,19 +3410,584 @@ button {
   min-height: 100%;
   padding-block: 8px 28px;
 }
-.ins-header .mobile-primary a {
-  display: block;
+.ins-header .mobile-primary {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ins-header .mobile-primary .m-plain,
+.ins-header .m-group > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 16px 0;
   border-bottom: 1px solid rgb(var(--color-navy-10));
   font-size: 1.35rem;
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.015em;
+  color: rgb(var(--color-navy-100));
   text-decoration: none;
+  cursor: pointer;
+  list-style: none;
 }
-.ins-header .mobile-primary a[aria-current="page"] {
+.ins-header .m-group > summary::-webkit-details-marker {
+  display: none;
+}
+.ins-header .m-group .nav-caret {
+  width: 16px;
+  height: 16px;
+}
+.ins-header .m-group[open] > summary .nav-caret {
+  transform: rotate(180deg);
+}
+.ins-header .mobile-primary .m-plain[aria-current="page"] {
+  color: rgb(var(--color-navy-100));
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 6px;
+}
+.ins-header .m-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0 16px;
+  margin: 0;
+  padding: 10px 0 16px;
+  border-bottom: 1px solid rgb(var(--color-navy-10));
+  list-style: none;
+}
+.ins-header .mobile-primary .m-links a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 9px 0;
+  border: 0;
+  font-size: 0.98rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0;
+  color: rgb(var(--color-navy-80));
+  text-decoration: none;
+}
+.ins-header .mobile-primary .m-links a[aria-current="page"] {
+  color: rgb(var(--color-navy-100));
+  font-weight: var(--font-weight-semibold);
+}
+.ins-header .m-links .ph-ico {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  color: rgb(var(--color-navy-60));
+}/* ---------- megamenu ---------- *//* One panel per top-level entry, all anchored under the bar across the
+   wrap. Closed panels are hidden from the accessibility tree too
+   (visibility), so tabbing skips them. Opening fades and drops the panel
+   in and staggers its rows (--i); switching between open menus is instant
+   (.mega-instant) so moving along the bar never flickers. */
+.ins-header .mega {
+  --mega-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: absolute;
+  top: calc(100% - 6px);
+  left: clamp(0.5rem, 3vw, 2rem);
+  right: clamp(0.5rem, 3vw, 2rem);
+  border: 1px solid rgb(var(--color-navy-10));
+  border-radius: 22px;
+  background: rgb(var(--color-white));
+  box-shadow:
+    0 1px 0 rgb(var(--color-white)) inset,
+    0 2px 6px rgb(var(--color-navy-100) / 0.05),
+    0 24px 60px -12px rgb(var(--color-navy-100) / 0.22);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.985);
+  transform-origin: 50% 0;
+  transition: opacity 0.18s ease, transform 0.28s var(--mega-ease), visibility 0s linear 0.28s;
+}/* A bridge over the gap between the bar and the panel, so the pointer can
+   travel down without the menu closing. */
+.ins-header .mega::before {
+  content: "";
+  position: absolute;
+  inset: -14px 0 auto;
+  height: 14px;
+}
+.ins-header .nav-item.is-open > .mega,
+.ins-header:not(.mega-ready) .nav-item:is(:hover, :focus-within) > .mega {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 0.2s ease, transform 0.32s var(--mega-ease), visibility 0s;
+}
+.ins-header.mega-instant .mega {
+  transition: none;
+}
+.ins-header .mega-body {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.15fr;
+  gap: 8px 28px;
+  padding: 26px 28px 24px;
+}
+.ins-header [data-mega-id="cra"] .mega-body {
+  grid-template-columns: 1.1fr 1.25fr 1fr;
+}
+.ins-header [data-mega-id="resources"] .mega-body {
+  grid-template-columns: 2fr 0.95fr 1.15fr;
+}
+.ins-header [data-mega-id="customers"] .mega-body {
+  grid-template-columns: 1fr 1fr 1.1fr;
+  gap: 20px;
+}
+.ins-header .mega-heading {
+  margin: 0 0 8px;
+  padding-left: 10px;
+  font-size: 0.7rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--color-navy-55));
+}
+.ins-header .mega-links {
+  display: grid;
+  gap: 2px;
+}
+.ins-header .mega-col.is-wide .mega-links {
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 8px;
+}
+.ins-header .mega-col + .mega-col:not(.is-wide) {
+  padding-left: 24px;
+  border-left: 1px solid rgb(var(--color-navy-10));
+}
+.ins-header .mega-feature + .mega-col {
+  padding-left: 0;
+  border-left: 0;
+}
+.ins-header .mega-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 14px;
+  color: rgb(var(--color-navy-100));
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+.ins-header .mega-link:hover,
+.ins-header .mega-link:focus-visible {
+  background: rgb(var(--color-panel));
+}
+.ins-header .mega-ico {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgb(var(--color-navy-10));
+  border-radius: 11px;
+  background: linear-gradient(180deg, rgb(var(--color-white)), rgb(var(--color-navy-5)));
+  box-shadow: 0 1px 2px rgb(var(--color-navy-100) / 0.06);
+  color: rgb(var(--color-navy-80));
+  transition: color 0.15s ease, border-color 0.15s ease, transform 0.25s var(--mega-ease);
+}
+.ins-header .mega-ico .ph-ico {
+  width: 20px;
+  height: 20px;
+}
+.ins-header .mega-link:hover .mega-ico {
+  border-color: rgb(var(--color-navy-20));
+  color: rgb(var(--color-navy-100));
+  transform: translateY(-1px);
+}
+.ins-header .mega-text {
+  display: grid;
+  gap: 2px;
+  padding-top: 1px;
+}
+.ins-header .mega-text b {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.93rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.3;
+}
+.ins-header .mega-text > span {
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: rgb(var(--color-navy-60));
+}
+.ins-header .mega-out {
+  width: 12px;
+  height: 12px;
+  color: rgb(var(--color-navy-55));
+}
+.ins-header .mega-link.is-compact {
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+}
+.ins-header .mega-link.is-compact .mega-ico {
+  width: auto;
+  height: auto;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  color: rgb(var(--color-navy-60));
+}
+.ins-header .mega-link.is-compact b {
+  font-weight: var(--font-weight-medium);
+  color: rgb(var(--color-navy-80));
+}
+.ins-header .mega-link.is-compact:hover b {
+  color: rgb(var(--color-navy-100));
+}/* Rows rise in, one after another, when a menu opens from closed. */
+@keyframes mega-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.ins-header:not(.mega-instant) .nav-item.is-open :is(.mega-link, .mega-story, .mega-card, .mega-quote) {
+  animation: mega-in 0.4s var(--mega-ease) both;
+  animation-delay: calc(40ms + var(--i, 0) * 22ms);
+}/* Feature cards. */
+.ins-header .mega-feature {
+  display: flex;
+  min-width: 0;
+}/* Customers has no link columns: its cards sit in the grid directly. */
+.ins-header [data-mega-id="customers"] .mega-feature {
+  display: contents;
+}
+.ins-header .mega-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding: 22px;
+  border-radius: 16px;
+  background-color: rgb(var(--color-panel));
+  background-size: cover;
+  background-position: center;
+  color: rgb(var(--color-navy-100));
+  text-decoration: none;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.3s var(--mega-ease), box-shadow 0.3s ease;
+}
+.ins-header .mega-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -14px rgb(var(--color-navy-100) / 0.35);
+}
+.ins-header .mega-card .kicker {
+  margin: 0;
+}
+.ins-header .mega-card-title {
+  font-size: 1.15rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.ins-header .mega-card-text {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgb(var(--color-navy-60));
+}
+.ins-header .mega-card-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 0.88rem;
+  font-weight: var(--font-weight-semibold);
+}
+.ins-header .mega-card-go .ph-go,
+.ins-header .mega-foot .ph-go {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+.ins-header :is(.mega-card, .mega-story, .mega-foot a):hover .ph-go {
+  transform: translateX(3px);
+}
+.ins-header .mega-card.is-dark {
+  background-color: rgb(var(--color-navy-100));
+  color: rgb(var(--color-white));
+}
+.ins-header .mega-card.is-dark .kicker,
+.ins-header .mega-card.is-dark .mega-card-text {
+  color: rgb(var(--color-white) / 0.7);
+}
+.ins-header .mega-card-ico {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 18px;
+  border: 1px solid rgb(var(--color-white) / 0.2);
+  border-radius: 13px;
+  background: rgb(var(--color-white) / 0.1);
+  backdrop-filter: blur(8px);
+}
+.ins-header .mega-card-ico .ph-ico {
+  width: 24px;
+  height: 24px;
+}/* CRA card: the dates on a small timeline. */
+.ins-header .mega-card.is-cra {
+  border: 1px solid rgb(var(--color-navy-10));
+}
+.ins-header .mega-dates {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  margin: 10px 0 0;
+  padding: 14px 14px 14px 34px;
+  border: 1px solid rgb(var(--color-white) / 0.8);
+  border-radius: 12px;
+  background: rgb(var(--color-white) / 0.6);
+  backdrop-filter: blur(10px);
+  list-style: none;
+}
+.ins-header .mega-dates::before {
+  content: "";
+  position: absolute;
+  top: 22px;
+  bottom: 22px;
+  left: 18px;
+  width: 1px;
+  background: rgb(var(--color-navy-20));
+}
+.ins-header .mega-dates li {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+.ins-header .mega-dates li > i {
+  position: absolute;
+  top: 4px;
+  left: -20px;
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid rgb(var(--color-navy-40));
+  border-radius: 50%;
+  background: rgb(var(--color-white));
+}
+.ins-header .mega-dates li[data-state="done"] > i {
+  border-color: rgb(var(--color-navy-60));
+  background: rgb(var(--color-navy-60));
+}
+.ins-header .mega-dates li[data-state="now"] > i {
+  border-color: rgb(var(--color-navy-100));
+  background: rgb(var(--color-navy-100));
+  box-shadow: 0 0 0 3px rgb(var(--color-navy-100) / 0.12);
+}
+.ins-header .mega-dates li > span {
+  grid-column: 1 / -1;
+  color: rgb(var(--color-navy-60));
+  font-variant-numeric: tabular-nums;
+}
+.ins-header .mega-dates li > b {
+  font-weight: var(--font-weight-semibold);
+}
+.ins-header .mega-dates li > em {
+  align-self: center;
+  justify-self: start;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: rgb(var(--color-navy-100));
+  color: rgb(var(--color-white));
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: var(--font-weight-semibold);
+}
+.ins-header .mega-dates li[data-state="done"] {
+  color: rgb(var(--color-navy-60));
+}/* Resources: the latest post, then two more. */
+.ins-header .mega-posts {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+.ins-header .mega-card.is-post {
+  flex: 1;
+  gap: 6px;
+  padding: 18px;
+  border: 1px solid rgb(var(--color-navy-10));
+}
+.ins-header .mega-card.is-post time {
+  font-size: 0.75rem;
+  color: rgb(var(--color-navy-55));
+}
+.ins-header .mega-card.is-post .mega-card-title {
+  font-size: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ins-header .mega-posts ul {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ins-header .mega-posts li a {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.35;
+  color: rgb(var(--color-navy-80));
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ins-header .mega-posts li a:hover {
+  background: rgb(var(--color-panel));
+  color: rgb(var(--color-navy-100));
+}/* Customers: a card per story and the quote. */
+.ins-header .mega-story {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px;
+  border: 1px solid rgb(var(--color-navy-10));
+  border-radius: 16px;
+  color: rgb(var(--color-navy-100));
+  text-decoration: none;
+  transition: transform 0.3s var(--mega-ease), box-shadow 0.3s ease, border-color 0.2s ease;
+}
+.ins-header .mega-story:hover {
+  border-color: rgb(var(--color-navy-20));
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -16px rgb(var(--color-navy-100) / 0.3);
+}
+.ins-header .mega-story img {
+  width: auto;
+  height: 26px;
+  margin-bottom: 10px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: left center;
+     object-position: left center;
+}
+.ins-header .mega-story > b {
+  font-size: 1.05rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.ins-header .mega-story > span:not(.mega-card-go) {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: rgb(var(--color-navy-60));
+}
+.ins-header .mega-quote {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 22px;
+  border-radius: 16px;
+  background: rgb(var(--color-navy-100));
+  color: rgb(var(--color-white));
+}
+.ins-header .mega-quote-mark {
+  width: 26px;
+  height: 26px;
+  margin-bottom: 10px;
+  color: rgb(var(--color-white) / 0.35);
+}
+.ins-header .mega-quote blockquote {
+  margin: 0;
+}
+.ins-header .mega-quote p {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+.ins-header .mega-quote figcaption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: 0.8rem;
+}
+.ins-header .mega-quote figcaption img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+.ins-header .mega-quote figcaption > span {
+  display: grid;
+}
+.ins-header .mega-quote figcaption span span {
+  color: rgb(var(--color-white) / 0.65);
+}/* The strip along the bottom of every panel. */
+.ins-header .mega-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 28px;
+  border-top: 1px solid rgb(var(--color-navy-10));
+  background: rgb(var(--color-panel));
+}
+.ins-header .mega-foot p {
+  margin: 0;
+  font-size: 0.86rem;
+  color: rgb(var(--color-navy-60));
+}
+.ins-header .mega-foot a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+  text-decoration: none;
+  white-space: nowrap;
+}/* The page under an open menu dims and softens. */
+.ins-header .mega-scrim {
+  position: fixed;
+  inset: var(--header-h) 0 0;
+  z-index: -2;
+  background: rgb(var(--color-navy-100) / 0.14);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.ins-header.mega-open .mega-scrim {
+  opacity: 1;
+  pointer-events: auto;
+}/* A narrower desktop: the cards drop out and the columns close up. */
+@media (max-width: 1140px) {
+  .ins-header .mega-body,
+  .ins-header [data-mega-id] .mega-body {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .ins-header [data-mega-id="cra"] .mega-body {
+    grid-template-columns: 1fr 1.2fr 1fr;
+  }
+
+  .ins-header [data-mega-id="customers"] .mega-body {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .ins-header :is([data-mega-id="product"], [data-mega-id="resources"]) .mega-feature {
+    display: none;
+  }
 }
 .ins-header .mobile-actions {
   display: grid;
@@ -3398,7 +4002,7 @@ button {
   color: rgb(var(--color-navy-60));
   text-decoration: none;
 }
-@media (max-width: 900px) {
+@media (max-width: 1060px) {
   .ins-header .nav,
   .ins-header .header-actions > :not(.menu-toggle) {
     display: none;
@@ -3412,8 +4016,15 @@ button {
   .ins-header,
   .ins-header::before,
   .ins-header .menu-bars i,
-  .ins-header .mobile-menu {
+  .ins-header .mobile-menu,
+  .ins-header .mega,
+  .ins-header .mega-scrim,
+  .ins-header .nav-caret {
     transition: none;
+  }
+
+  .ins-header .nav-item.is-open :is(.mega-link, .mega-story, .mega-card, .mega-quote) {
+    animation: none;
   }
 }/* ---------- sections ---------- */
 .ins .section {

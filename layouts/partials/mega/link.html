@@ -1,0 +1,12 @@
+{{- /* One megamenu row: (dict "item" . "i" 0). Large with an icon tile when
+       the item has "desc", compact otherwise. "i" staggers the entrance. */ -}}
+{{- $it := .item -}}
+{{- $href := partial "mega/href.html" $it.link -}}
+{{- $ext := partial "is-external-link.html" $href -}}
+<a class="mega-link{{ if not $it.desc }} is-compact{{ end }}" href="{{ $href }}" style="--i: {{ .i }}"{{ if $ext }}{{ partial "link-attrs.html" (dict "url" $href "rel" "noopener noreferrer" "target" "_blank") }}{{ end }}{{ if eq $it.link "demo" }} data-cta-location="mega_menu" data-cta-label="{{ $it.name }}"{{ end }}>
+  <span class="mega-ico">{{ partial "ph.html" (dict "name" $it.icon "weight" "duotone") }}</span>
+  <span class="mega-text">
+    <b>{{ $it.name }}{{ if $ext }}{{ partial "ph.html" (dict "name" "arrow-up-right" "class" "mega-out") }}{{ end }}</b>
+    {{ with $it.desc }}<span>{{ . }}</span>{{ end }}
+  </span>
+</a>

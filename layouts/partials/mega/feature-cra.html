@@ -1,0 +1,24 @@
+{{- /* CRA menu card: the /cra/ page, with the dates that matter. A date that
+       has passed is "done", the latest passed one is "now"; worked out at
+       build time, as the site rebuilds on every deploy. */ -}}
+{{ $bg := resources.Get "images/nebula/nebula-dawn.webp" | fingerprint }}
+{{ $dates := slice
+  (dict "when" "2026-06-11" "label" "Notified bodies")
+  (dict "when" "2026-09-11" "label" "Article 14 reporting")
+  (dict "when" "2027-12-11" "label" "Full application") }}
+<a class="mega-card is-cra" href="/cra/" style="background-image: url('{{ $bg.RelPermalink }}')">
+  <span class="kicker">sbomify for the CRA</span>
+  <b class="mega-card-title">Stay CRA ready for every release you support</b>
+  <ol class="mega-dates">
+    {{ range $i, $d := $dates }}
+    {{ $t := time $d.when }}
+    {{ $state := "next" }}
+    {{ if le $t now }}
+      {{ $state = "now" }}
+      {{ with index $dates (add $i 1) }}{{ if le (time .when) now }}{{ $state = "done" }}{{ end }}{{ end }}
+    {{ end }}
+    <li data-state="{{ $state }}"><i aria-hidden="true"></i><span>{{ $t.Format "2 Jan 2006" }}</span><b>{{ $d.label }}</b>{{ if eq $state "now" }}<em>In force</em>{{ end }}</li>
+    {{ end }}
+  </ol>
+  <span class="mega-card-go">How sbomify helps{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}</span>
+</a>
