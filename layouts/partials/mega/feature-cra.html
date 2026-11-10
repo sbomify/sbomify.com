@@ -1,24 +1,34 @@
-{{- /* CRA menu card: the /cra/ page, with the dates that matter. A date that
-       has passed is "done", the latest passed one is "now"; worked out at
-       build time, as the site rebuilds on every deploy. */ -}}
-{{ $bg := resources.Get "images/nebula/nebula-dawn.webp" | fingerprint }}
+{{- /* CRA menu card: the /cra/ page, with the rollout as a track filled up to
+       today and the months left until full application. Worked out at build
+       time, as the site rebuilds on every deploy. */ -}}
+{{ $start := time "2026-06-11" }}
+{{ $end := time "2027-12-11" }}
+{{ $span := sub $end.Unix $start.Unix }}
 {{ $dates := slice
   (dict "when" "2026-06-11" "label" "Notified bodies")
-  (dict "when" "2026-09-11" "label" "Article 14 reporting")
+  (dict "when" "2026-09-11" "label" "Reporting")
   (dict "when" "2027-12-11" "label" "Full application") }}
-<a class="mega-card is-cra" href="/cra/" style="background-image: url('{{ $bg.RelPermalink }}')">
-  <span class="kicker">sbomify for the CRA</span>
+{{ $pct := math.Round (mul 100.0 (div (float (sub now.Unix $start.Unix)) $span)) }}
+{{ $pct = math.Max 0 (math.Min 100 $pct) }}
+{{ $months := math.Ceil (div (float (sub $end.Unix now.Unix)) 2629800) }}
+<a class="mega-card is-cra" href="/cra/">
+  <span class="mega-cra-top">
+    <span class="mega-cra-ico">{{ partial "ph.html" (dict "name" "shield-star" "weight" "duotone") }}</span>
+    <span class="kicker">sbomify for the CRA</span>
+  </span>
   <b class="mega-card-title">Stay CRA ready for every release you support</b>
-  <ol class="mega-dates">
-    {{ range $i, $d := $dates }}
-    {{ $t := time $d.when }}
-    {{ $state := "next" }}
-    {{ if le $t now }}
-      {{ $state = "now" }}
-      {{ with index $dates (add $i 1) }}{{ if le (time .when) now }}{{ $state = "done" }}{{ end }}{{ end }}
+  {{ if gt $months 0 }}
+  <span class="mega-cra-stat"><b>{{ $months }}</b><span>months until the CRA<br>applies in full</span></span>
+  {{ else }}
+  <span class="mega-cra-stat"><span>The CRA now applies in full</span></span>
+  {{ end }}
+  <span class="mega-track" style="--p: {{ $pct }}" role="img" aria-label="CRA rollout: {{ range $i, $d := $dates }}{{ if $i }}, {{ end }}{{ $d.label }} {{ (time $d.when).Format "January 2006" }}{{ end }}">
+    <span class="mega-track-bar"><i></i></span>
+    {{ range $dates }}
+    {{ $t := time .when }}
+    {{ $at := math.Round (mul 100.0 (div (float (sub $t.Unix $start.Unix)) $span)) }}
+    <span class="mega-track-node{{ if le $t now }} is-past{{ end }}" style="--at: {{ $at }}"><i></i><b>{{ .label }}</b><span>{{ $t.Format "Jan 2006" }}</span></span>
     {{ end }}
-    <li data-state="{{ $state }}"><i aria-hidden="true"></i><span>{{ $t.Format "2 Jan 2006" }}</span><b>{{ $d.label }}</b>{{ if eq $state "now" }}<em>In force</em>{{ end }}</li>
-    {{ end }}
-  </ol>
+  </span>
   <span class="mega-card-go">How sbomify helps{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}</span>
 </a>
