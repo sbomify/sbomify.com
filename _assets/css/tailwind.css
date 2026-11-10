@@ -7575,6 +7575,331 @@
   transform: none;
 }
 
+
+/* ---------- Case studies ---------- */
+
+/* Index: the quote, then one card per study. */
+.ins .story-index-quote {
+  max-width: 52rem;
+  margin: 0 auto clamp(40px, 6vw, 72px);
+  text-align: center;
+}
+
+.ins .story-index-quote figcaption {
+  justify-content: center;
+  text-align: left;
+}
+
+.ins .story-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ins .story-cards a {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding: clamp(24px, 3vw, 36px);
+  border-radius: 22px;
+  background: rgb(var(--color-white));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10));
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.ins .story-cards a:hover {
+  background: rgb(var(--color-panel));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-20));
+}
+
+.ins .story-cards img {
+  align-self: flex-start;
+  width: auto;
+  height: 34px;
+  margin-bottom: 14px;
+}
+
+.ins .story-cards h2 {
+  font-size: clamp(1.4rem, 2.4vw, 1.75rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.ins .story-cards p {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .story-uses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.ins .story-uses span {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgb(var(--color-navy-5));
+  font-size: 0.8rem;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .story-cards b {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 14px;
+  font-size: 0.92rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.ins .story-cards a:hover .ph-go {
+  transform: translateX(2px);
+}
+
+@media (max-width: 760px) {
+  .ins .story-cards { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* One study: a left-aligned hero with the logo. */
+.ins .story-hero {
+  margin-top: calc(-1 * var(--header-h));
+  padding-top: var(--header-h);
+}
+
+.ins .story-hero > .wrap {
+  padding-block: clamp(28px, 4vw, 56px) clamp(40px, 5vw, 64px);
+}
+
+.ins .story-hero .hero-stat a {
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--color-navy-20));
+  text-underline-offset: 3px;
+}
+
+.ins .story-logo {
+  width: auto;
+  height: 40px;
+  margin-bottom: 26px;
+}
+
+.ins .story-hero h1 {
+  max-width: 22ch;
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.ins .story-hero .lede {
+  max-width: 60ch;
+}
+
+/* The story beside its aside. */
+.ins .story {
+  padding-top: clamp(16px, 3vw, 32px);
+}
+
+.ins .story-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: clamp(32px, 6vw, 88px);
+  align-items: start;
+}
+
+.ins .story-body {
+  max-width: 68ch;
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .story-body h2 {
+  margin: 2.6em 0 0.7em;
+  font-size: clamp(1.45rem, 2.4vw, 1.8rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .story-body h2:first-child {
+  margin-top: 0;
+}
+
+.ins .story-body p,
+.ins .story-body ul,
+.ins .story-body ol {
+  margin-bottom: 1.2em;
+}
+
+.ins .story-body ul {
+  padding-left: 1.3em;
+  list-style: disc;
+}
+
+.ins .story-body ol {
+  padding-left: 1.3em;
+  list-style: decimal;
+}
+
+.ins .story-body li {
+  margin-bottom: 0.5em;
+}
+
+.ins .story-body li::marker {
+  color: rgb(var(--color-navy-40));
+}
+
+.ins .story-body strong {
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .story-body a {
+  color: rgb(var(--color-navy-100));
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--color-navy-20));
+  text-underline-offset: 3px;
+}
+
+.ins .story-body a:hover {
+  text-decoration-color: currentColor;
+}
+
+.ins .story-body img {
+  margin: 1.6em auto 0.6em;
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10));
+}
+
+.ins .story-body em {
+  display: block;
+  margin-bottom: 1.6em;
+  font-size: 0.88rem;
+  text-align: center;
+  color: rgb(var(--color-navy-60));
+}
+
+/* A quote inside the story: the home page's pull quote, smaller. */
+.ins .story-body .quote-container {
+  margin: 2.2em 0;
+  padding: clamp(22px, 3vw, 32px);
+  border-radius: 20px;
+  background: rgb(var(--color-panel));
+}
+
+.ins .story-body .quote-container p:first-child {
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.015em;
+  line-height: 1.4;
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .story-body .quote-container p:last-child {
+  margin: 14px 0 0;
+  font-size: 0.95rem;
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-80));
+}
+
+/* The aside: sticky beside the story on wide screens. */
+.ins .story-aside {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  display: grid;
+  gap: 16px;
+}
+
+.ins .story-card {
+  padding: 24px;
+  border-radius: 20px;
+  background: rgb(var(--color-white));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10));
+}
+
+.ins .story-card .kicker {
+  margin-bottom: 12px;
+}
+
+.ins .story-used {
+  display: grid;
+  gap: 10px;
+}
+
+.ins .story-used li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 0.94rem;
+  line-height: 1.4;
+}
+
+.ins .story-used .ph-ico {
+  flex: none;
+  margin: 2px 0 0;
+  color: rgb(var(--color-success-ink));
+}
+
+.ins .story-used a {
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--color-navy-20));
+  text-underline-offset: 3px;
+}
+
+.ins .story-cta {
+  display: grid;
+  gap: 10px;
+  background: rgb(var(--color-panel));
+  box-shadow: none;
+}
+
+.ins .story-cta-title {
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.ins .story-cta p:not(.story-cta-title) {
+  margin-bottom: 4px;
+  font-size: 0.92rem;
+  color: rgb(var(--color-navy-80));
+}
+
+@media (max-width: 960px) {
+  .ins .story-grid { grid-template-columns: minmax(0, 1fr); }
+  .ins .story-aside { position: static; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+}
+
+/* More stories: the home page's case cards, in a row. */
+.ins .story-more-list {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+}
+
+/* Reveal. */
+.ins .story-cards.reveal-ready > li {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.ins .story-cards.reveal-ready > li:nth-child(2) { transition-delay: 0.08s; }
+
+.ins .story-cards.reveal-ready.is-in > li {
+  opacity: 1;
+  transform: none;
+}
+
 /* ---------- footer ---------- */
 
 .ins-footer {

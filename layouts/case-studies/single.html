@@ -1,126 +1,75 @@
+{{- /* One case study, in the .ins look: a hero with the logo and headline,
+       the story beside a sticky aside (what they used, a call to action),
+       the other studies, then the dawn call to action. Front matter:
+       company, logo (+ logo_width/height), headline, summary, uses, quote. */ -}}
 {{ define "main" }}
-<div>
-  <div class="hero">
-      <div class="hero-fade" aria-hidden="true"></div>
-    <div class="wrap pt-10 lg:pt-16 pb-12 lg:pb-16">
-      {{ with .Params.logo }}
-      <div class="mb-8">
-        <img src="{{ . }}" alt="{{ $.Title }} logo" class="h-10 w-auto object-contain" width="120" height="48">
-      </div>
-      {{ end }}
+<div class="ins">
 
-      <h1 class="text-ink !text-[clamp(2.25rem,4.6vw,3.5rem)] mb-6 max-w-4xl">
-        {{ .Title }}
-      </h1>
-      {{ with .Params.description }}
-      <p class="lede max-w-3xl">
-        {{ . }}
-      </p>
-      {{ end }}
-    </div>
-  </div>
-
-  <div class="wrap">
-    <div class="section-rule pt-12 lg:pt-16">
-      <article class="case-study-content read">
-        {{ partial "content.html" . }}
-      </article>
-
-      {{/* CTA Section */}}
-      <div class="cta-band mt-16 grid lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 items-center">
-        <div>
-          <h3 class="text-3xl lg:text-4xl font-extrabold tracking-display text-white mb-3 text-balance">Want the same for your products?</h3>
-          <p class="text-lg text-on-inverse-muted max-w-2xl">Book a demo and we'll walk you through it on your own software, or start free today.</p>
+    <section class="story-hero" data-nebula="light-center" style="background-image: url('{{ with resources.Get "images/nebula/nebula-light-center.webp" }}{{ (. | fingerprint).RelPermalink }}{{ end }}')">
+        <div class="wrap">
+            <p class="hero-stat"><a href="/case-studies/">Case studies</a><span class="muted" aria-hidden="true">/</span><span>{{ .Params.company | default .Title }}</span></p>
+            {{ with .Params.logo }}<img class="story-logo" src="{{ . }}" alt="{{ $.Params.company }} logo" width="{{ $.Params.logo_width | default 150 }}" height="{{ $.Params.logo_height | default 40 }}">{{ end }}
+            <h1>{{ .Params.headline | default .Title }}</h1>
+            {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
         </div>
-        <div class="flex flex-col sm:flex-row gap-3">
-          <a href="{{ site.Params.demoURL }}" class="btn-primary btn-lg no-underline" data-cta-location="case_study_end" data-cta-label="Book a demo">
-            Book a demo
-          </a>
-          <a href="{{ site.Params.signupURL }}" class="btn-secondary btn-lg no-underline" data-cta-location="case_study_end" data-cta-label="Start free">
-            Start free
-          </a>
+    </section>
+
+    <section class="section story">
+        <div class="wrap story-grid">
+            <article class="story-body">
+                {{ partial "content.html" . }}
+            </article>
+
+            <aside class="story-aside">
+                {{ with .Params.uses }}
+                <div class="story-card">
+                    <p class="kicker">What they used</p>
+                    <ul class="story-used">
+                        {{ range . }}
+                        {{ $u := . }}
+                        <li>{{ partial "ph.html" (dict "name" "check" "weight" "bold") }}{{ with $u.url }}<a href="{{ . }}">{{ $u.name }}</a>{{ else }}<span>{{ $u.name }}</span>{{ end }}</li>
+                        {{ end }}
+                    </ul>
+                </div>
+                {{ end }}
+                <div class="story-card story-cta">
+                    <p class="story-cta-title">Want the same for your products?</p>
+                    <p>We'll walk you through it on your own software, or start free today.</p>
+                    <a href="{{ site.Params.demoURL }}" class="btn-navy btn-md" data-cta-location="case_study_aside" data-cta-label="Book a demo">Book a demo</a>
+                    <a href="{{ site.Params.signupURL }}" class="btn-secondary btn-md" data-cta-location="case_study_aside" data-cta-label="Start free">Start free</a>
+                </div>
+            </aside>
         </div>
-      </div>
-      <p class="mt-8"><a href="/case-studies/" class="text-sm text-ink-muted hover:text-ink font-semibold no-underline">{{ partial "ph.html" (dict "name" "arrow-left" "class" "ph-back") }}All case studies</a></p>
-    </div>
-  </div>
+    </section>
+
+    {{ $others := where (where site.RegularPages "Section" "case-studies") "Permalink" "!=" .Permalink }}
+    {{ with $others }}
+    <section class="section story-more">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">More customer stories</span>
+                    <h2 class="sec-title">Read another. <span class="soft">From a team like yours.</span></h2>
+                </div>
+            </div>
+            <ul class="cases story-more-list">
+                {{ range . }}
+                {{ $p := . }}
+                <li>
+                    <a href="{{ .RelPermalink }}">
+                        {{ with .Params.logo }}<img src="{{ . }}" alt="{{ $p.Params.company }} logo" width="{{ $p.Params.logo_width | default 150 }}" height="{{ $p.Params.logo_height | default 40 }}" loading="lazy" decoding="async">{{ end }}
+                        <span>{{ .Params.summary | default .Description }}</span>
+                        <b>Read the case study{{ partial "ph.html" (dict "name" "arrow-right" "weight" "bold" "class" "ph-go") }}</b>
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+            <p class="sec-close"><a href="/case-studies/">All case studies{{ partial "ph.html" (dict "name" "arrow-right" "weight" "bold" "class" "ph-go") }}</a></p>
+        </div>
+    </section>
+    {{ end }}
+
+    {{ partial "dawn-cta.html" (dict "kicker" "Your story next" "title" "Start your own story" "text" "Generate SBOMs in CI, track vulnerabilities for every release and share it all with your customers, from one platform." "location" "case_study_end") }}
+
 </div>
-
-<style>
-  .case-study-content {
-    color: rgb(var(--color-ink-muted));
-    font-size: 1.125rem;
-    line-height: 1.75;
-  }
-  .case-study-content h2 {
-    color: rgb(var(--color-ink));
-    font-size: 1.75rem;
-    line-height: 1.2;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    margin-top: 3rem;
-    margin-bottom: 1.5rem;
-  }
-  .case-study-content h2:first-child {
-    margin-top: 0;
-  }
-  .case-study-content h3 {
-    color: rgb(var(--color-ink));
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 600;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
-  .case-study-content p {
-    margin-bottom: 1.5rem;
-  }
-  .case-study-content ul {
-    list-style-type: disc;
-    padding-left: 1.625rem;
-    margin-bottom: 1.5rem;
-  }
-  .case-study-content ol {
-    list-style-type: decimal;
-    padding-left: 1.625rem;
-    margin-bottom: 1.5rem;
-  }
-  .case-study-content li {
-    margin-bottom: 0.5rem;
-  }
-  .case-study-content li::marker {
-    color: rgb(var(--color-ink-subtle));
-  }
-  .case-study-content strong {
-    color: rgb(var(--color-ink));
-    font-weight: 600;
-  }
-  .case-study-content a {
-    color: rgb(var(--color-ink));
-    text-decoration: underline;
-    text-decoration-color: rgb(var(--color-navy-40));
-    text-underline-offset: 3px;
-  }
-  .case-study-content a:hover {
-    text-decoration-color: currentColor;
-  }
-  .case-study-content blockquote {
-    border-left: 2px solid rgb(var(--color-ink));
-    padding-left: 1.5rem;
-    font-style: italic;
-    color: rgb(var(--color-ink));
-    margin: 2rem 0;
-  }
-  .case-study-content img {
-    border-radius: 0.5rem;
-    margin: 2rem auto;
-  }
-  .case-study-content .quote-container {
-    background-color: rgb(var(--color-navy-5));
-    padding: 1.75rem;
-    margin: 2rem 0;
-    border-radius: 1.25rem;
-    border-left-width: 0;
-  }
-</style>
 {{ end }}
