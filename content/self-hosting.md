@@ -13,7 +13,7 @@ faq:
   - question: "How do I turn off billing in a self-hosted sbomify?"
     answer: "Set BILLING=False. The Docker Compose file and the Helm chart already default to it. Billing pages, plan selection and product and component limits are switched off. Workspaces still start on the Community plan, which allows only the owner as a member, so set them to Enterprise in Django admin."
   - question: "How big a server does sbomify need?"
-    answer: "For an evaluation, one 2 vCPU / 4 GB VM runs everything. For production, we recommend a 4 vCPU / 8 GB app instance with PostgreSQL (2 vCPU / 8 GB) and Redis or Valkey on separate managed instances. As a conservative estimate, that handles 100 users, 1,000 uploads an hour at peak, and 100,000 stored SBOMs of which 20,000 belong to releases and are rescanned daily. Each further 4 vCPU / 8 GB app instance adds about 1,000 uploads an hour and 20,000 rescanned SBOMs."
+    answer: "For an evaluation, one 2 vCPU / 4 GB VM runs everything. For production, we recommend a 4 vCPU / 8 GB app instance with PostgreSQL (2 vCPU / 8 GB) and Redis or Valkey on separate managed instances. As a conservative estimate, that handles 100 users, 1,000 uploads an hour at peak, and 100,000 stored SBOMs of which 20,000 belong to releases and are rescanned daily. Adding app instances helps, but not linearly, because they all share one database and one queue."
 ---
 
 sbomify is [open source](https://github.com/sbomify/sbomify), and the same code that runs [app.sbomify.com](https://app.sbomify.com) runs on your own infrastructure. This guide takes you from an empty VM or Kubernetes cluster to a production deployment: what to run, how to configure it, and how big it needs to be.
@@ -401,13 +401,19 @@ The sizes below are conservative estimates, not benchmark results. They are buil
 
 ### Recommended sizes
 
-| Deployment                   | Users | Uploads at peak | SBOMs in releases (rescanned daily) | SBOMs stored | App instances                                                    | AWS                                    | Google Cloud                                      |
-| ---------------------------- | ----- | --------------- | ----------------------------------- | ------------ | ---------------------------------------------------------------- | -------------------------------------- | ------------------------------------------------- |
-| **Evaluation or small team** | 10    | 200 an hour     | 2,000                               | 10,000       | One 2 vCPU / 4 GB VM, with PostgreSQL and Valkey on it           | `t3.medium`                            | `e2-medium`                                       |
-| **Production**               | 100   | 1,000 an hour   | 20,000                              | 100,000      | One 4 vCPU / 8 GB: 3 web containers (6 web processes), 3 workers | `c7i.xlarge`                           | `c4-highcpu-4`                                    |
-| **Large**                    | 500   | 3,000 an hour   | 60,000                              | 500,000      | Three 4 vCPU / 8 GB behind a load balancer, or Kubernetes        | `c7i.xlarge` × 3 behind an ALB, or EKS | `c4-highcpu-4` × 3 behind a load balancer, or GKE |
+| Deployment                   | Users | Products per workspace | Uploads at peak | SBOMs in releases (rescanned daily) | SBOMs stored | App instances                                                    | AWS                                    | Google Cloud                                      |
+| ---------------------------- | ----- | ---------------------- | --------------- | ----------------------------------- | ------------ | ---------------------------------------------------------------- | -------------------------------------- | ------------------------------------------------- |
+| **Evaluation or small team** | 10    | 25                     | 200 an hour     | 2,000                               | 10,000       | One 2 vCPU / 4 GB VM, with PostgreSQL and Valkey on it           | `t3.medium`                            | `e2-medium`                                       |
+| **Production**               | 100   | 100                    | 1,000 an hour   | 20,000                              | 100,000      | One 4 vCPU / 8 GB: 3 web containers (6 web processes), 3 workers | `c7i.xlarge`                           | `c4-highcpu-4`                                    |
+| **Large**                    | 300   | 100                    | 2,000 an hour   | 40,000                              | 250,000      | Three 4 vCPU / 8 GB behind a load balancer, or Kubernetes        | `c7i.xlarge` × 3 behind an ALB, or EKS | `c4-highcpu-4` × 3 behind a load balancer, or GKE |
 
-Each extra 4 vCPU / 8 GB app instance adds about 1,000 uploads an hour and 20,000 SBOMs rescanned daily. Beyond the large tier, keep adding instances and size PostgreSQL with them (see the data tier below).
+**Don't expect capacity to grow linearly.** Every app instance shares one PostgreSQL, one Redis or Valkey and one job queue, and pages get slower as workspaces grow, however many instances serve them. Our tests showed both effects:
+
+- Going from 4 to 8 cores on one machine raised ingestion by only 20 to 35%, and page throughput by about 70%.
+- On 2 cores, four web processes served fewer pages than two.
+- Past about 25 concurrent users on 2 cores, throughput stopped rising, and p95 page time went from about 1 second to 9 to 15 seconds.
+
+So the large tier is three production instances, but it claims only twice the production tier's uploads and rescans: the second and third instances count for half each. It also keeps the production limit of 100 products per workspace, the most we tested. More workspaces are fine. For bigger workspaces, or anything beyond the large tier, don't extrapolate from this table. Add one instance at a time and measure results latency, PostgreSQL CPU and page times before you add the next.
 
 The figures assume a typical SBOM of about 200 components with four plugins enabled (NTIA, CISA 2025, BSI TR-03183 and OSV). Count an SBOM with 3,000 components as five typical ones. "Uploads at peak" is the rate you can keep up for an hour with results still arriving within minutes; short bursts above it only queue.
 
@@ -421,7 +427,7 @@ For the data tier:
 | Redis or Valkey | ElastiCache `cache.t4g.small`, Memorystore 1 GB                            | ElastiCache `cache.m7g.large` with a replica, Memorystore Standard 5 GB                                        |
 | Object storage  | S3 or Cloud Storage                                                        | Same, with versioning and lifecycle rules                                                                      |
 
-Give PostgreSQL about half as many vCPUs as all app instances together. In our tests it used well under that, at about 0.4 cores for every core the app used.
+Start PostgreSQL at about half as many vCPUs as all app instances together. In our tests it used about 0.4 cores for every core the app used, but only on a small database. PostgreSQL is the one part you cannot scale out by adding instances, so it is usually the first limit a large deployment hits. Watch its CPU and slow queries, and size it up before you add app instances.
 
 The published image is built for x86-64 (`linux/amd64`), so the app instances above are Intel or AMD types. Managed PostgreSQL and Redis are not affected, so Graviton database and cache instances are fine. A 4 vCPU / 16 GB general purpose type (`m7i.xlarge`, `n2-standard-4`) works too, and is the better choice if you upload very large SBOMs, such as Yocto images.
 
@@ -469,8 +475,11 @@ Then each instance's CPU is shared out. On a 4 vCPU instance, 2 vCPUs go to work
 - **Uploads:** 2 vCPUs × 3,600 seconds ÷ 5 vCPU-seconds is about 1,440 an hour. The table says 1,000.
 - **Rescans:** 20,000 SBOMs × 2 vCPU-seconds ÷ 2 vCPUs is about 5.5 hours, so the nightly run finishes by morning. With 12 worker threads and up to 8 seconds' wait per scan, the queue drains at least as fast.
 - **Pages:** 100 users with a quarter of them active, each opening two pages a minute, is under 1 page a second, or under 1 vCPU.
+- **Large tier:** three instances, with the second and third counted at half because of the shared data tier: 2,000 uploads an hour and 40,000 rescans. 300 users with a quarter active is 2.5 pages a second, within the 3 web vCPUs across the three instances.
 
-Measured throughput per instance was more than 20 times the figures in the table. Before you commit to a size, upload a week's worth of your real SBOMs to a test instance and watch how long results take to appear.
+The budgets hold the cost per unit fixed, and that is the weakest assumption. It only holds near what we tested: up to 100 products per workspace and a few thousand SBOMs. The 2x margin for a larger database covers the production tier's 100,000 SBOMs. That is why the tiers stop where they do.
+
+On a single instance, measured throughput was more than 20 times the figures in the table. That margin is for a single instance and does not carry over to several. Before you commit to a size, upload a week's worth of your real SBOMs to a test instance and watch how long results take to appear.
 
 ## Best practices
 
