@@ -2370,60 +2370,52 @@
   color: rgb(var(--color-navy-60));
 }
 
-/* Resources: the latest post, then two more. */
-.ins-header .mega-posts {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-width: 0;
-}
-
-.ins-header .mega-card.is-post {
-  flex: 1;
-  gap: 6px;
-  padding: 18px;
+/* Resources: straight into the generation guide for a stack. */
+.ins-header .mega-card.is-guides {
   border: 1px solid rgb(var(--color-navy-10));
+  background: linear-gradient(180deg, rgb(var(--color-white)), rgb(var(--color-panel)));
 }
 
-.ins-header .mega-card.is-post time {
-  font-size: 0.75rem;
-  color: rgb(var(--color-navy-55));
+.ins-header .mega-card.is-guides:hover {
+  transform: none;
+  box-shadow: none;
 }
 
-.ins-header .mega-card.is-post .mega-card-title {
-  font-size: 1rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.ins-header .mega-card.is-guides .mega-card-title {
+  margin: 0 0 6px;
 }
 
-.ins-header .mega-posts ul {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 2px;
-  margin: 8px 0 0;
+.ins-header .mega-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.ins-header .mega-posts li a {
+.ins-header .mega-chips a {
   display: block;
-  padding: 7px 10px;
-  border-radius: 10px;
-  font-size: 0.82rem;
+  padding: 5px 11px;
+  border: 1px solid rgb(var(--color-navy-10));
+  border-radius: 999px;
+  background: rgb(var(--color-white));
+  font-size: 0.8rem;
   font-weight: var(--font-weight-medium);
-  line-height: 1.35;
   color: rgb(var(--color-navy-80));
   text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
-.ins-header .mega-posts li a:hover {
-  background: rgb(var(--color-panel));
+.ins-header .mega-chips a:hover {
+  border-color: rgb(var(--color-navy-100));
+  background: rgb(var(--color-navy-100));
+  color: rgb(var(--color-white));
+}
+
+.ins-header .mega-card.is-guides .mega-card-go {
   color: rgb(var(--color-navy-100));
+  text-decoration: none;
 }
 
 /* Customers: a card per story and the quote. */
