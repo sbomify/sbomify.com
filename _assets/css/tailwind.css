@@ -2005,6 +2005,78 @@
   margin-top: 28px;
 }
 
+/* Integrations: a small-caps label and one line of logo chips with thin
+   borders. Each logo is its SVG used as a mask, so all of them share one
+   quiet navy that deepens on hover. Wraps to centred rows on narrow screens. */
+.ins .integrations {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px 20px;
+  margin-top: 36px;
+}
+
+.ins .integrations .kicker {
+  margin: 0;
+}
+
+.ins .integration-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ins .integration-logos a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgb(var(--color-navy-10));
+  border-radius: 999px;
+  background: rgb(var(--color-white) / 0.6);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.ins .integration-logos a:hover,
+.ins .integration-logos a:focus-visible {
+  border-color: rgb(var(--color-navy-20));
+  background: rgb(var(--color-white));
+}
+
+.ins .integration-mark {
+  display: block;
+  height: var(--h);
+  aspect-ratio: var(--ratio);
+  background: rgb(var(--color-navy-60));
+  -webkit-mask: var(--mark) center / contain no-repeat;
+  mask: var(--mark) center / contain no-repeat;
+  transition: background-color 0.15s ease;
+}
+
+.ins .integration-logos a:hover .integration-mark,
+.ins .integration-logos a:focus-visible .integration-mark {
+  background: rgb(var(--color-navy-100));
+}
+
+@media (max-width: 600px) {
+  .ins .integrations .kicker {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  .ins .integration-logos a {
+    height: 38px;
+    padding: 0 12px;
+  }
+
+  .ins .integration-mark {
+    height: calc(var(--h) * 0.85);
+  }
+}
+
 /* Press: a small-caps label and three logos on one centred line, each
    logo sized so the wordmarks read at the same height, all in one quiet
    grey that takes its colour on hover. */
