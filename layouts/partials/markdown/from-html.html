@@ -7,6 +7,10 @@
 {{- /* Price cards (pricing.html) show one price and keep both in data attributes. */ -}}
 {{- $h = $h | replaceRE `(?s)<div class="price" data-monthly="([^"]+)" data-annual="([^"]+)">.*?</div>` "<p>$$${1} / Month billed monthly, or $$${2} / Month billed annually</p>" -}}
 
+{{- /* Illustrations marked data-md-skip (mock screens) become their caption. */ -}}
+{{- $h = $h | replaceRE `(?s)<figure\b[^>]*\bdata-md-skip\b[^>]*>.*?<figcaption\b[^>]*>(.*?)</figcaption>\s*</figure>` "<p>$1</p>" -}}
+{{- $h = $h | replaceRE `(?s)<figure\b[^>]*\bdata-md-skip\b[^>]*>.*?</figure>` "" -}}
+
 {{- /* Tables: first row is the header. */ -}}
 {{- range findRE `(?s)<table\b.*?</table>` $h -}}
   {{- $rows := slice -}}

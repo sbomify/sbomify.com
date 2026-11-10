@@ -2,7 +2,7 @@
 
 title: Trust Center
 seo_title: "Trust Center Software for SBOMs, VEX and Security Advisories"
-layout: integrations
+layout: ins
 description: "Trust center software for product security: publish SBOMs, VEX, security advisories, compliance documents and security.txt on a branded trust portal on your own domain."
 keywords: [trust center, trust center software, security trust center, trust portal, customer trust portal, product security trust center, SBOM sharing, security advisories, VEX, security.txt]
 aliases:
@@ -10,155 +10,284 @@ aliases:
   - /features/public-sbom-portal/
 ---
 
-<div class="section-rule pt-12 lg:pt-14 pb-14 lg:pb-16 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-<div class="lede lg:col-span-7 font-medium">
-Turn transparency into a competitive advantage. Showcase your security posture with a branded, automated <span class="text-ink font-bold">Trust Center</span>.
-</div>
+<div class="ins">
 
-<div class="lg:col-span-5">
-    <a href="https://trust.sbomify.com/" target="_blank" rel="noopener noreferrer" class="group block !no-underline">
-        <div class="bg-canvas border border-line rounded-2xl p-8 hover:border-line-strong transition-colors">
-            <div class="flex flex-col items-center gap-6">
-                <img src="/assets/images/logo/badge.svg" alt="sbomified" class="w-48 md:w-60 h-auto" width="288" height="59" />
-                <div class="text-lg font-bold text-ink">View Live Trust Center</div>
-                <div class="flex items-center gap-2 text-ink-muted group-hover:text-ink font-semibold transition-colors">
-                    <span>Explore Demo</span>
-                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></svg>
-                </div>
-            </div>
-        </div>
-    </a>
-</div>
-</div>
-
-<div class="section section-rule">
-    <h2 class="section-title mb-5 max-w-3xl">Trust Center Software Built for Product Security</h2>
-    <p class="lede mb-12 max-w-3xl">Most trust centers stop at SOC 2 badges and a questionnaire library. Yours also answers what is inside your product, and whether the latest CVE affects it. New to the idea? Read <a href="/faq/what-is-a-trust-center/" class="link">what a trust center is</a>.</p>
-    <div class="grid lg:grid-cols-3 gap-x-12 gap-y-4">
-        {{< feature-card icon_bg_class="bg-surface-strong" icon_text_class="text-ink" title="Branded Portal" description="Your trust center, your brand. Use your own domain and logo to present a unified professional image to customers." >}}
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l18 0" /><path d="M9 8l1 0" /><path d="M9 12l1 0" /><path d="M9 16l1 0" /><path d="M14 8l1 0" /><path d="M14 12l1 0" /><path d="M14 16l1 0" /><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" /></svg>
-        {{< /feature-card >}}
-
-        {{< feature-card icon_bg_class="bg-surface-strong" icon_text_class="text-ink" title="Automated Publishing" description="Stop manual uploads. Your trust center stays in sync with your CI/CD pipeline, automatically publishing new SBOMs for every software release. <a href='/features/generate-collaborate-analyze/' class='link'>Manage complex hierarchies</a> with ease." >}}
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
-        {{< /feature-card >}}
-
-        {{< feature-card icon_bg_class="bg-surface-strong" icon_text_class="text-ink" title="Flexible Access Control" description="Choose your audience. Make your Trust Center <strong>public</strong> for broad transparency, or <strong>private</strong> for invited internal and external stakeholders only." >}}
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6" /><path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" /><path d="M8 11v-4a4 4 0 1 1 8 0v4" /></svg>
-        {{< /feature-card >}}
-    </div>
-
-</div>
-
-<div class="section section-rule">
-    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
-        <div class="flex-1">
-            <div class="eyebrow-chip mb-5">Why Now</div>
-            <h2 class="section-title mb-6">The New Standard for Transparency</h2>
-            <p class="text-lg text-ink-muted mb-6 leading-relaxed">
-                Trust Centers are becoming essential. Buyers now expect vendors to provide near real-time data about security posture and compliance status.
+    {{< comment >}}Hero, with an illustrative Trust Center in a browser frame{{< /comment >}}
+    <section class="home-hero centered" data-nebula="light-center" style="background-image: url('{{< nebula-still "light-center" >}}')">
+        <div class="wrap">
+            <p class="hero-stat">
+                <span class="live" aria-hidden="true"></span>
+                <span><strong>See one live</strong></span>
+                <a class="muted" href="https://trust.sbomify.com/">trust.sbomify.com</a>
             </p>
-            <div class="mb-8">
-                <div class="flex items-start gap-3 py-4 border-t border-line">
-                    <svg class="w-6 h-6 text-ink flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11" /></svg>
-                    <div>
-                        <div class="font-semibold text-ink">EU Cyber Resilience Act (CRA)</div>
-                        <div class="text-sm text-ink-muted">SBOMs are now expected as part of Trust Centers for stakeholders</div>
+            <h1>One link for every security question about your product</h1>
+            <p class="lede">Publish SBOMs, VEX, security advisories and certifications on a Trust Center that updates itself with every release, on your own domain. Customers serve themselves, and questionnaires take minutes instead of weeks.</p>
+            <div class="hero-actions">
+                <a href="https://app.sbomify.com" class="btn-navy btn-lg" data-cta-location="trust_center_hero" data-cta-label="Start free">
+                    Start free
+                    {{< ph "arrow-right" "bold" "ph-go" >}}
+                </a>
+                <a href="https://trust.sbomify.com/" class="btn-secondary btn-lg" data-cta-location="trust_center_hero" data-cta-label="See a live Trust Center">See a live Trust Center</a>
+            </div>
+
+            <figure class="tc-browser" data-reveal data-md-skip>
+                <div class="tc-bar" aria-hidden="true">
+                    <span class="tc-dots"><i></i><i></i><i></i></span>
+                    <span class="tc-url">{{< ph "lock-simple" >}}trust.acme.example</span>
+                </div>
+                <div class="tc-page" aria-hidden="true">
+                    <div class="tc-org">
+                        <span class="tc-org-logo" aria-hidden="true">A</span>
+                        <span><b>Acme Trust Center</b><span>Security and compliance for Acme products</span></span>
+                        <span class="tc-certs"><span>SOC 2 Type II</span><span>ISO 27001</span></span>
+                    </div>
+                    <div class="tc-cols">
+                        <div>
+                            <p class="tc-label">Products</p>
+                            <ul class="tc-rows">
+                                <li>
+                                    <span><b>Acme Router</b><span class="mono">v2.1</span></span>
+                                    <span class="tc-docs"><span>SBOM</span><span>VEX</span><span>CBOM</span></span>
+                                    <span class="tc-state" data-v="public">Public</span>
+                                </li>
+                                <li>
+                                    <span><b>Acme Cloud</b><span class="mono">v5.3</span></span>
+                                    <span class="tc-docs"><span>SBOM</span><span>VEX</span></span>
+                                    <span class="tc-state" data-v="gated">{{< ph "lock-simple" >}}Request access</span>
+                                </li>
+                                <li>
+                                    <span><b>Acme Mobile SDK</b><span class="mono">v1.8</span></span>
+                                    <span class="tc-docs"><span>SBOM</span><span>VEX</span></span>
+                                    <span class="tc-state" data-v="public">Public</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="tc-label">Security advisories</p>
+                            <ul class="tc-rows tc-advisories">
+                                <li><span><b class="mono">ACME-SA-2026-02</b><span>Acme Router &middot; fixed in v2.1.1</span></span><span class="sev" data-sev="fixed">Fixed</span></li>
+                                <li><span><b class="mono">ACME-SA-2026-01</b><span>Acme Cloud &middot; not affected</span></span><span class="sev" data-sev="not-affected">Not affected</span></li>
+                            </ul>
+                            <p class="tc-label">Documents</p>
+                            <ul class="tc-rows tc-files">
+                                <li><span>Vulnerability disclosure policy</span><span class="tc-state" data-v="public">Public</span></li>
+                                <li><span>Penetration test summary</span><span class="tc-state" data-v="gated">{{< ph "lock-simple" >}}NDA</span></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="flex items-start gap-3 py-4 border-t border-line">
-                    <svg class="w-6 h-6 text-ink flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" /><path d="M15 19l2 2l4 -4" /></svg>
-                    <div>
-                        <div class="font-semibold text-ink">PCI DSS 4.0</div>
-                        <div class="text-sm text-ink-muted">First major framework adopting SBOMs as security posture requirement</div>
-                    </div>
+                <figcaption class="note">An illustrative Trust Center for a fictional company.</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    {{< comment >}}Self-service: the questions customers ask, and where they find the answer{{< /comment >}}
+    <section class="section" id="questions">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Self-service</span>
+                    <h2 class="sec-title">Send a link, not a call. <span class="soft">Every answer in one place.</span></h2>
                 </div>
+                <p class="sec-lede">Most trust centers stop at SOC 2 badges. Yours also answers what is inside your product, and whether the latest CVE affects it.</p>
             </div>
-        </div>
-        <div class="flex-1 w-full flex justify-center">
-            <div class="w-full max-w-lg">
-                {{< d2 "sbom-hub" >}}
+
+            <div class="tc-asks" data-reveal>
+                <article>
+                    <p class="tc-q">&ldquo;Do you have a SOC 2 report?&rdquo;</p>
+                    <p class="tc-a">{{< ph "seal-check" >}}<span>Certifications and audit reports, public or behind your NDA</span></p>
+                </article>
+                <article>
+                    <p class="tc-q">&ldquo;What is inside your product?&rdquo;</p>
+                    <p class="tc-a">{{< ph "package" >}}<span>An <a href="/what-is-sbom/">SBOM</a> for every release, in CycloneDX or SPDX</span></p>
+                </article>
+                <article>
+                    <p class="tc-q">&ldquo;Are we affected by CVE-2026-XXXXX?&rdquo;</p>
+                    <p class="tc-a">{{< ph "shield-check" >}}<span><a href="/faq/how-do-i-use-vex/">VEX</a> statements and <a href="/features/security-advisories/">security advisories</a>, per product and version</span></p>
+                </article>
+                <article>
+                    <p class="tc-q">&ldquo;How do we report a vulnerability?&rdquo;</p>
+                    <p class="tc-a">{{< ph "envelope-simple" >}}<span>A <a href="/faq/what-is-a-vulnerability-disclosure-program/">disclosure policy</a> and an RFC 9116 <a href="/faq/what-is-security-txt/">security.txt</a></span></p>
+                </article>
             </div>
-        </div>
-    </div>
-</div>
 
-{{< trust-center-pillars >}}
-
-<div class="section section-rule">
-    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
-        <div class="flex-1">
-            <div class="eyebrow-chip mb-5">Security Advisories</div>
-            <h2 class="section-title mb-6">A Security Trust Center for the CVE Era</h2>
-            <p class="text-lg text-ink-muted mb-6 leading-relaxed">
-                Every new CVE brings the same question from customers: are we affected? Publish the answer on your trust portal as a proper <a href="/features/security-advisories/" class="link">security advisory</a>, with affected and fixed versions per product, a dated timeline, and a CSAF 2.0 feed their tools can pull from automatically.
-            </p>
-            <ul class="space-y-4">
-                {{< check-list-item title="Advisory Index" description="A filterable list of your advisories by product and severity, on every Trust Center page" >}}
-                {{< check-list-item title="Per-Product Gating" description="Embargoed advisories reach only the customers entitled to the affected product" >}}
-                {{< check-list-item title="CSAF 2.0 and security.txt" description="Machine-readable advisories, discoverable from your RFC 9116 security.txt" >}}
-            </ul>
+            <p class="sec-close">New to the idea? <a href="/faq/what-is-a-trust-center/">What a trust center is, and what goes in one{{< ph "arrow-right" "bold" "ph-go" >}}</a></p>
         </div>
-        <div class="flex-1 w-full">
-            <div class="panel p-8 sm:p-10">
-                <div class="eyebrow mb-4">What customers can find on your Trust Center</div>
-                <ul class="rows rows-roomy text-ink-muted">
-                    <li><a href="/faq/what-is-an-sbom/" class="link">SBOMs</a> for every release</li>
-                    <li><a href="/faq/how-do-i-use-vex/" class="link">VEX</a> statements and vulnerability posture</li>
-                    <li><a href="/faq/what-is-a-security-advisory/" class="link">Security advisories</a>, also as CSAF 2.0</li>
-                    <li>A <a href="/faq/what-is-a-vulnerability-disclosure-program/" class="link">vulnerability disclosure policy</a> and <a href="/faq/what-is-security-txt/" class="link">security.txt</a></li>
-                    <li>SOC 2, ISO 27001 and other certifications</li>
-                    <li>CRA Declaration of Conformity and compliance evidence</li>
+    </section>
+
+    {{< comment >}}Automated publishing, four cards on the dark band{{< /comment >}}
+    <section class="band-dark" id="always-current" data-nebula="band" style="background-image: url('{{< nebula-still "band" >}}')">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Automated publishing</span>
+                    <h2 class="sec-title">Published from your pipeline. <span class="soft">Never out of date.</span></h2>
+                </div>
+                <p class="sec-lede">Questionnaire answers go stale. A Trust Center fed by the same pipeline that builds your software does not.</p>
+            </div>
+
+            <div class="cra-feats" data-reveal>
+                <article>
+                    <span class="cra-feat-ico">{{< ph "arrows-clockwise" >}}</span>
+                    <h3>Synced with every release</h3>
+                    <p>New SBOMs from CI appear the moment they are uploaded. No manual uploads, and <a href="/features/generate-collaborate-analyze/">complex product hierarchies</a> stay in order.</p>
+                </article>
+                <article>
+                    <span class="cra-feat-ico">{{< ph "shield-check" >}}</span>
+                    <h3>Posture with VEX applied</h3>
+                    <p>Release-level VEX and CBOM downloads sit next to every SBOM, with a vulnerability posture card that reflects your decisions.</p>
+                </article>
+                <article>
+                    <span class="cra-feat-ico">{{< ph "seal-check" >}}</span>
+                    <h3>Signed and verifiable</h3>
+                    <p>Signature and provenance badges let readers check that what they downloaded is what you published.</p>
+                </article>
+                <article>
+                    <span class="cra-feat-ico">{{< ph "megaphone" >}}</span>
+                    <h3>Advisories when it matters</h3>
+                    <p>A filterable index of your <a href="/features/security-advisories/">security advisories</a> by product and severity, with affected and fixed versions and a dated timeline.</p>
+                </article>
+            </div>
+
+            <p class="sec-close">sbomify publishes its own, from its own pipeline. <a href="https://trust.sbomify.com/">Visit trust.sbomify.com{{< ph "arrow-right" "bold" "ph-go" >}}</a></p>
+        </div>
+    </section>
+
+    {{< comment >}}Access control: visibility per component, and an access request{{< /comment >}}
+    <section class="section" id="access">
+        <div class="wrap cra-split is-flip">
+            <div class="cra-split-copy">
+                <span class="kicker">Access control</span>
+                <h2 class="sec-title">Public, gated or private. <span class="soft">Per product.</span></h2>
+                <p class="sec-lede">Not every document belongs on the open web. Choose what visitors can see, component by component.</p>
+                <ul class="cra-points">
+                    <li>{{< ph "globe" >}}<span><b>Public:</b> listed and downloadable by anyone who visits.</span></li>
+                    <li>{{< ph "lock-key" >}}<span><b>Gated:</b> listed, but visitors request access and accept your NDA first. You approve each request from your dashboard.</span></li>
+                    <li>{{< ph "eye-slash" >}}<span><b>Private:</b> hidden from the Trust Center entirely.</span></li>
                 </ul>
+                <p class="cra-small">Gated advisories go further: a reader who may not see one gets &ldquo;not found&rdquo;, so an embargo stays an embargo. <a href="/features/security-advisories/">How advisories are gated</a></p>
+            </div>
+
+            <figure class="bundle tc-access" data-reveal data-md-skip>
+                <div class="bundle-head" aria-hidden="true">
+                    <span class="bundle-ico">{{< ph "lock-key" >}}</span>
+                    <span><b>Visibility</b><span>Acme &middot; 4 components</span></span>
+                </div>
+                <ul class="tc-vis" aria-hidden="true">
+                    <li><span>Acme Router</span><span class="tc-seg" data-v="public"><span>Public</span><span>Gated</span><span>Private</span></span></li>
+                    <li><span>Acme Cloud</span><span class="tc-seg" data-v="gated"><span>Public</span><span>Gated</span><span>Private</span></span></li>
+                    <li><span>Pentest summary</span><span class="tc-seg" data-v="gated"><span>Public</span><span>Gated</span><span>Private</span></span></li>
+                    <li><span>Internal build tools</span><span class="tc-seg" data-v="private"><span>Public</span><span>Gated</span><span>Private</span></span></li>
+                </ul>
+                <div class="tc-request" aria-hidden="true">
+                    <span class="tc-avatar" aria-hidden="true">SL</span>
+                    <span><b>Sam Lee, Example Ltd</b> requested the penetration test summary<span class="tc-request-meta">{{< ph "check" >}}NDA accepted</span></span>
+                    <span class="tc-request-actions"><span class="tc-approve">Approve</span><span>Deny</span></span>
+                </div>
+                <figcaption class="note">Illustrative visibility settings and an access request.</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    {{< comment >}}Machine-readable: CSAF, TEA and security.txt on the customer's domain{{< /comment >}}
+    <section class="section" id="machine-readable">
+        <div class="wrap cra-split">
+            <div class="cra-split-copy">
+                <span class="kicker">Machine-readable</span>
+                <h2 class="sec-title">For people. <span class="soft">And for their tools.</span></h2>
+                <p class="sec-lede">Your customers' scanners and CSAF aggregators can pick up what you publish without anyone sending an email.</p>
+                <ul class="cra-points">
+                    <li>{{< ph "file-code" >}}<span><b>CSAF 2.0 advisories,</b> with provider metadata and a ROLIE feed that aggregators find on their own.</span></li>
+                    <li>{{< ph "plugs-connected" >}}<span><b>The <a href="/faq/how-do-i-enable-tea-in-sbomify/">Transparency Exchange API</a>,</b> the ECMA TC54 standard for discovering SBOMs and VEX for any release.</span></li>
+                    <li>{{< ph "envelope-simple" >}}<span><b>An RFC 9116 security.txt,</b> so researchers know where to report a vulnerability.</span></li>
+                </ul>
+                <p class="cra-small">TEA and your own domain come with the Business and Enterprise plans.</p>
+            </div>
+
+            <figure class="bundle tc-endpoints" data-reveal>
+                <div class="bundle-head">
+                    <span class="bundle-ico">{{< ph "globe" >}}</span>
+                    <span><b>trust.acme.example</b><span>Served from your own domain</span></span>
+                </div>
+                <ul class="bundle-files">
+                    <li><span class="mono">/.well-known/security.txt</span><span>RFC 9116</span></li>
+                    <li><span class="mono">/.well-known/csaf/provider-metadata.json</span><span>CSAF 2.0</span></li>
+                    <li><span>ROLIE feed of public advisories</span><span>TLP:WHITE</span></li>
+                    <li><span>TEA discovery for every release</span><span>ECMA TC54</span></li>
+                    <li><span>SBOM, VEX and CBOM downloads</span><span>Per release</span></li>
+                </ul>
+                <p class="bundle-foot">{{< ph "arrows-clockwise" >}}Updated with every release</p>
+            </figure>
+        </div>
+    </section>
+
+    {{< comment >}}Plans, as in content/pricing.html{{< /comment >}}
+    <section class="section" id="plans">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Plans</span>
+                    <h2 class="sec-title">Start free. <span class="soft">Add your domain later.</span></h2>
+                </div>
+                <p class="sec-lede">A public Trust Center is on the free Community plan. Business and Enterprise put it on your domain and keep sensitive documents private.</p>
+            </div>
+
+            <div class="cra-plans" data-reveal>
+                <article>
+                    <p class="cra-plan-head"><span>Community</span><span class="cra-plan-price">Free</span></p>
+                    <ul>
+                        <li>{{< ph "check" >}}A public Trust Center</li>
+                        <li>{{< ph "check" >}}SBOM management</li>
+                        <li>{{< ph "check" >}}OSV scanning, rescanned weekly</li>
+                    </ul>
+                </article>
+                <article>
+                    <p class="cra-plan-head"><span>Business and Enterprise</span><span class="cra-plan-price">Everything in Community, plus</span></p>
+                    <ul>
+                        <li>{{< ph "check" >}}A Trust Center on your own domain</li>
+                        <li>{{< ph "check" >}}Private documents and components</li>
+                        <li>{{< ph "check" >}}The Transparency Exchange API</li>
+                        <li>{{< ph "check" >}}Daily rescans and Dependency-Track</li>
+                    </ul>
+                </article>
+            </div>
+
+            <p class="sec-close">See <a href="/pricing/">pricing</a> for the details, or <a href="/faq/how-do-i-set-up-a-trust-center/">how to set up a Trust Center{{< ph "arrow-right" "bold" "ph-go" >}}</a></p>
+        </div>
+    </section>
+
+    {{< comment >}}FAQ: native details, no script{{< /comment >}}
+    <section class="section" id="faq">
+        <div class="wrap cra-faq-wrap">
+            <div>
+                <span class="kicker">Questions</span>
+                <h2 class="sec-title">Before you start</h2>
+            </div>
+            <div class="cra-faq">
+                <details>
+                    <summary>How is this different from a compliance trust center?{{< ph "plus" >}}</summary>
+                    <p>Compliance trust centers from GRC platforms hold SOC 2 reports and policies: they show the company is run securely. sbomify's is a product security trust center. It holds those documents too, and also answers what is in each release and whether a vulnerability affects it. <a href="/faq/what-is-a-trust-center/">Compare the two</a></p>
+                </details>
+                <details>
+                    <summary>Can we use our own domain?{{< ph "plus" >}}</summary>
+                    <p>Yes, on Business and Enterprise. Set a domain such as trust.yourcompany.com, add a CNAME record with your DNS provider and wait for it to validate. <a href="/faq/how-do-i-set-up-a-trust-center/">Setup guide</a></p>
+                </details>
+                <details>
+                    <summary>Can we share penetration test reports without making them public?{{< ph "plus" >}}</summary>
+                    <p>Yes. Mark them as gated: they stay listed, visitors request access and accept your Company NDA if you uploaded one, and you approve or deny each request from your dashboard.</p>
+                </details>
+                <details>
+                    <summary>Do we have to upload SBOMs by hand?{{< ph "plus" >}}</summary>
+                    <p>No. Send them from CI with the <a href="/features/integrations/">sbomify GitHub Action or your pipeline of choice</a>, and the Trust Center reflects each new release as soon as it is uploaded.</p>
+                </details>
+                <details>
+                    <summary>Can we run sbomify on our own infrastructure?{{< ph "plus" >}}</summary>
+                    <p>Yes. sbomify is open source and runs with Docker Compose. Read the <a href="/self-hosting/">self-hosting guide</a>, or use our cloud at app.sbomify.com.</p>
+                </details>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 
-<div class="section section-rule">
-    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
-        <div class="flex-1">
-            <div class="eyebrow-chip mb-5">Comprehensive Coverage</div>
-            <h2 class="section-title mb-6">Share More Than Just SBOMs</h2>
-            <p class="text-lg text-ink-muted mb-8 leading-relaxed">
-                A complete trust center goes beyond dependencies. Provide a comprehensive view of your security posture by hosting all critical artifacts in one searchable library. Everything is also consumable programmatically via the Transparency Exchange API (TEA), and your security contact details can be published as an RFC 9116 security.txt.
-            </p>
-            <ul class="space-y-4">
-                {{< check-list-item title="VEX and CBOM Artifacts" description="Release-level VEX and CBOM downloads next to every SBOM, with a VEX-applied vulnerability posture card" >}}
-                {{< check-list-item title="Signed Artifacts" description="Signature and provenance badges so consumers can verify authenticity" >}}
-                {{< check-list-item title="Security Certifications" description="SOC 2, ISO 27001, and other audits" >}}
-                {{< check-list-item title="Penetration Test Reports" description="Share summaries or full reports securely" >}}
-                {{< check-list-item title="Compliance Attestations" description="Proof of regulatory adherence" >}}
-                {{< check-list-item title="Programmatic Compliance" description="Express compliance documents programmatically alongside your SBOMs" >}}
-            </ul>
-        </div>
-        <div class="flex-1 w-full flex justify-center nebula rounded-[1.25rem] overflow-hidden px-4 py-10 sm:p-12">
-            {{< trust-center-artifacts >}}
-        </div>
-    </div>
-</div>
-
-{{< compliance-block >}}
-
-<div class="section section-rule">
-    <div class="mb-12">
-        <h2 class="section-title mb-4">Real-World Impact</h2>
-        <p class="lede max-w-2xl">See how Trust Centers transform the way you do business</p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-x-12 gap-y-4">
-        {{< impact-card icon_bg_class="bg-surface-strong" icon_text_class="text-ink" title="Accelerate Sales" description="\"Do you have a SOC 2?\" Send a link instead of scheduling a call. Reduce questionnaire response times from weeks to minutes." link_text="Sales Enablement" >}}
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3" /><path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" /><path d="M14 9a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
-        {{< /impact-card >}}
-
-        {{< impact-card icon_bg_class="bg-surface-strong" icon_text_class="text-ink" title="Build Trust" description="Show, don't just tell. Proactive transparency proves your commitment to security before a prospect even asks." link_text="Brand Reputation" >}}
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" /></svg>
-        {{< /impact-card >}}
-
-        {{< impact-card icon_bg_class="bg-surface-strong" icon_text_class="text-ink" title="Streamline Ops" description="Eliminate ad-hoc email requests. Give customers self-service access to the documents they need, 24/7." link_text="Operational Efficiency" >}}
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11" /></svg>
-        {{< /impact-card >}}
-    </div>
+    {{< dawn-cta title="Give your customers one link for product security" text="Publish SBOMs, VEX, advisories and certifications on a Trust Center that updates itself with every release." location="trust_center_final" >}}
 
 </div>
-
-{{< cta-ready secondary_url="/features/integrations/" >}}
