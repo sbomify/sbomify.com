@@ -9,7 +9,7 @@
   (dict "name" "Security & Vulnerability" "state" "done")
   (dict "name" "User Information" "state" "now")
   (dict "name" "Review & Export" "state" "next") }}
-<a class="mega-card is-cra" href="/cra/" style="background-image: url('{{ $bg.RelPermalink }}')">
+<a class="mega-card is-cra" href="/cra/" aria-label="sbomify for the CRA: stay CRA ready for every release you support" style="background-image: url('{{ $bg.RelPermalink }}')">
   <span class="kicker">sbomify for the CRA</span>
   <b class="mega-card-title">Stay CRA ready for every release you support</b>
   <span class="mega-wiz" aria-hidden="true">
@@ -23,7 +23,6 @@
       </span>
       {{ end }}
     </span>
-    <span class="mega-wiz-meter"><i style="--p: 70"></i><span>3 of 5 steps</span></span>
   </span>
-  <span class="mega-card-go">How sbomify helps{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}</span>
+  <span class="mega-cra-go">{{ partial "ph.html" (dict "name" "arrow-right") }}</span>
 </a>

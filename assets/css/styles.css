@@ -3734,24 +3734,54 @@ button {
 .ins-header .mega-card-ico .ph-ico {
   width: 24px;
   height: 24px;
-}/* CRA card: a small window showing the CRA Compliance Wizard part way
-   through, on the grey nebula. */
+}/* CRA card: the headline, then a window showing the CRA Compliance Wizard
+   part way through, bleeding off the card's bottom right like a product
+   screenshot; an arrow in the corner stands in for a "learn more" line. */
 .ins-header .mega-card.is-cra {
-  gap: 6px;
-  padding: 18px;
+  gap: 8px;
+  padding-bottom: 0;
+  padding-right: 0;
   border: 1px solid rgb(var(--color-navy-10));
 }
-.ins-header .mega-card.is-cra .mega-card-title {
-  font-size: 1.05rem;
+.ins-header .mega-card.is-cra > :is(.kicker, .mega-card-title) {
+  padding-right: 56px;
 }
-.ins-header .mega-card.is-cra .mega-card-go {
-  padding-top: 4px;
+.ins-header .mega-card.is-cra .mega-card-title {
+  margin-bottom: 14px;
+}
+.ins-header .mega-cra-go {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgb(var(--color-navy-10));
+  border-radius: 50%;
+  background: rgb(var(--color-white));
+  color: rgb(var(--color-navy-100));
+  box-shadow: 0 2px 6px rgb(var(--color-navy-100) / 0.08);
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.3s var(--mega-ease);
+}
+.ins-header .mega-cra-go .ph-ico {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+}
+.ins-header .mega-card.is-cra:hover .mega-cra-go {
+  background: rgb(var(--color-navy-100));
+  color: rgb(var(--color-white));
+  transform: translateX(2px);
 }
 .ins-header .mega-wiz {
   display: block;
-  margin-top: 6px;
+  margin-top: auto;
+  margin-left: 6px;
   border: 1px solid rgb(var(--color-white) / 0.9);
-  border-radius: 12px;
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: 12px 0 0 0;
   background: rgb(var(--color-white) / 0.82);
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 24px -12px rgb(var(--color-navy-100) / 0.3);
@@ -3761,7 +3791,7 @@ button {
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-bottom: 1px solid rgb(var(--color-navy-10));
   background: rgb(var(--color-white) / 0.7);
 }
@@ -3779,16 +3809,16 @@ button {
 }
 .ins-header .mega-wiz-steps {
   display: grid;
-  gap: 1px;
-  padding: 5px 6px;
+  gap: 2px;
+  padding: 8px;
 }
 .ins-header .mega-wiz-step {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 3px 6px;
-  border-radius: 7px;
-  font-size: 0.75rem;
+  gap: 9px;
+  padding: 5px 6px;
+  border-radius: 8px;
+  font-size: 0.78rem;
   font-weight: var(--font-weight-medium);
   color: rgb(var(--color-navy-80));
 }
@@ -3796,10 +3826,10 @@ button {
   display: grid;
   place-items: center;
   flex: none;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  font-size: 0.6rem;
+  font-size: 0.62rem;
   font-style: normal;
   font-weight: var(--font-weight-bold);
 }
@@ -3834,34 +3864,6 @@ button {
   font-style: normal;
   font-weight: var(--font-weight-semibold);
   color: rgb(var(--color-navy-60));
-}
-.ins-header .mega-wiz-meter {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 12px 7px;
-  border-top: 1px solid rgb(var(--color-navy-10));
-}
-.ins-header .mega-wiz-meter i {
-  position: relative;
-  flex: 1;
-  height: 4px;
-  border-radius: 4px;
-  background: rgb(var(--color-navy-10));
-  overflow: hidden;
-}
-.ins-header .mega-wiz-meter i::after {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: calc(var(--p) * 1%);
-  border-radius: 4px;
-  background: rgb(var(--color-navy-100));
-}
-.ins-header .mega-wiz-meter span {
-  font-size: 0.65rem;
-  color: rgb(var(--color-navy-60));
-  white-space: nowrap;
 }/* Resources: the latest post, then two more. */
 .ins-header .mega-posts {
   display: flex;
