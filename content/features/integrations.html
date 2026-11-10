@@ -1,52 +1,81 @@
 ---
-layout: integrations
+layout: ins
 title: Integrations
+seo_title: "Integrations: SBOM Generation in CI, Vulnerability Scanning and Enrichment"
 description: "Seamlessly integrate SBOM generation, analysis, and enrichment into your existing workflow."
+keywords: [SBOM integrations, SBOM GitHub Action, GitLab CI SBOM, Bitbucket Pipelines SBOM, SBOM Docker image, SBOM CLI, Google OSV, Dependency-Track, SBOM enrichment, cdxgen, Syft]
 ---
 
-<div>
+<div class="ins">
 
-{{< comment >}}CI/CD Section{{< /comment >}}
-<section class="section section-rule">
-    <div class="mb-10 max-w-3xl">
-      <h2 class="section-title mb-4">CI/CD & Generation</h2>
-      <p class="lede">Generate SBOMs automatically in your pipelines. We support all major CI/CD providers.</p>
-    </div>
+    {{< comment >}}Hero{{< /comment >}}
+    <section class="home-hero centered" data-nebula="light-center" style="background-image: url('{{< nebula-still "light-center" >}}')">
+        <div class="wrap">
+            <p class="hero-stat">
+                <span class="live" aria-hidden="true"></span>
+                <span><strong>18 ecosystems</strong></span>
+                <span class="muted">4 generators &middot; 12 enrichment sources</span>
+            </p>
+            <h1>Plug sbomify into the pipeline you already run</h1>
+            <p class="lede">Generate SBOMs in CI, scan them with Google OSV and Dependency-Track, and fill in licences and supplier details for every component. One action, on every major CI system.</p>
+            <div class="hero-actions">
+                <a href="https://app.sbomify.com" class="btn-navy btn-lg" data-cta-location="integrations_hero" data-cta-label="Start free">
+                    Start free
+                    {{< ph "arrow-right" "bold" "ph-go" >}}
+                </a>
+                <a href="/sbomify-action/" class="btn-secondary btn-lg">Read the docs</a>
+            </div>
+            {{< integration-logos label="Works with" >}}
+        </div>
+    </section>
 
-    {{< comment >}}Setup Wizard{{< /comment >}}
-    <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line-strong mb-8" id="wizard">
-      <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
-        <span class="text-2xl font-bold text-ink">New: Interactive Setup Wizard</span>
-        <a href="/faq/how-do-i-use-the-sbomify-setup-wizard/" class="link text-sm font-semibold whitespace-nowrap">Read the FAQ{{< ph "arrow-right" "bold" "ph-go" >}}</a>
-      </div>
-      <p class="text-ink-muted mb-6">
-        The fastest way to get started. Run the wizard from the root of your repository and it scans your lockfiles, creates your products and components, registers OIDC trusted publishing, and writes a ready-to-commit <code class="text-ink">.github/workflows/sboms.yml</code>. No tokens to copy, no YAML to hand-write.
-      </p>
-      <div class="bg-inverse rounded-xl p-5 overflow-x-auto text-sm text-navy-10 font-mono">
-<pre><code>docker run --rm -it \
+    {{< comment >}}Setup wizard: one command{{< /comment >}}
+    <section class="section" id="wizard">
+        <div class="wrap cra-split">
+            <div class="cra-split-copy">
+                <span class="kicker">Setup wizard</span>
+                <h2 class="sec-title">Set up in one command. <span class="soft">No YAML to hand-write.</span></h2>
+                <p class="sec-lede">Run the wizard from the root of your repository. No tokens to copy.</p>
+                <ul class="cra-points">
+                    <li>{{< ph "magnifying-glass" >}}<span><b>Scans your lockfiles</b> and creates your products and components.</span></li>
+                    <li>{{< ph "key" >}}<span><b>Registers OIDC trusted publishing,</b> so CI uploads without a long-lived secret.</span></li>
+                    <li>{{< ph "file-code" >}}<span><b>Writes a ready-to-commit workflow</b> at <code>.github/workflows/sboms.yml</code>.</span></li>
+                </ul>
+                <p class="cra-small"><a href="/faq/how-do-i-use-the-sbomify-setup-wizard/">How the setup wizard works</a></p>
+            </div>
+
+            <figure class="term" data-reveal>
+                <div class="term-bar"><span class="tc-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="term-title">Terminal</span></div>
+<pre data-lang="bash"><code>docker run --rm -it \
   -v "$(pwd):/github/workspace" \
   -w /github/workspace \
   ghcr.io/sbomify/sbomify-action \
   sbomify-action wizard</code></pre>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {{< comment >}}GitHub{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line" id="github">
-        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-          <div class="flex flex-wrap items-center gap-3">
-            <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "github" "w-8 h-8" >}}</span> GitHub</span>
-            <div id="gh-latest-release" class="hidden"></div>
-          </div>
-          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/github-actions/" class="link text-sm font-semibold">Documentation{{< ph "arrow-right" "bold" "ph-go" >}}</a><a href="https://github.com/marketplace/actions/sbomify" class="link text-sm font-semibold whitespace-nowrap" target="_blank">View on Marketplace{{< ph "arrow-right" "bold" "ph-go" >}}</a></span>
+            </figure>
         </div>
-        <p class="text-ink-muted mb-6">
-          GitHub is at the core of many organizations. Our <a href="/sbomify-action/" class="link">sbomify Action</a> supports <a href="/faq/how-do-i-set-up-oidc-trusted-publishing/" class="link">OIDC trusted publishing</a>, so no long-lived token secret is needed.
-        </p>
-        <div class="bg-inverse rounded-xl p-5 overflow-x-auto text-sm text-navy-10 font-mono">
+    </section>
 
-<pre><code>permissions:
+    {{< comment >}}CI/CD: one card per runtime, ids kept for inbound links{{< /comment >}}
+    <section class="section" id="ci">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">CI/CD and generation</span>
+                    <h2 class="sec-title">Every major CI system. <span class="soft">The same action.</span></h2>
+                </div>
+                <p class="sec-lede">Generate an SBOM on every build. Use the GitHub Action, the multi-arch Docker image anywhere else, or the CLI on your own machine.</p>
+            </div>
+
+            <div class="ci-grid">
+                <article class="ci-card is-wide" id="github">
+                    <div class="ci-head">
+                        <span class="ci-name">{{< icon "github" "ci-ico" >}}GitHub Actions</span>
+                        <span class="ci-links"><a href="/sbomify-action/runtimes/github-actions/">Docs</a><a href="https://github.com/marketplace/actions/sbomify">Marketplace</a></span>
+                    </div>
+                    <p>The <a href="/sbomify-action/">sbomify Action</a> supports <a href="/faq/how-do-i-set-up-oidc-trusted-publishing/">OIDC trusted publishing</a>, so no long-lived token secret is needed.</p>
+                    <figure class="term">
+                        <div class="term-bar"><span class="tc-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="term-title">.github/workflows/sbom.yml</span></div>
+<pre data-lang="yaml"><code>permissions:
   id-token: write  # OIDC trusted publishing, no token needed
 
 steps:
@@ -59,24 +88,19 @@ steps:
       COMPONENT_VERSION: ${{ github.ref_name }}
       AUGMENT: true
       ENRICH: true</code></pre>
+                    </figure>
+                    <p class="ci-note">Prefer token auth, or using another CI system? Set <code>TOKEN: ${SBOMIFY_TOKEN}</code> instead.</p>
+                </article>
 
-        </div>
-        <p class="text-sm text-ink-muted mt-4">Prefer token auth, or using another CI system? Set <code class="text-ink">TOKEN: ${SBOMIFY_TOKEN}</code> instead.</p>
-      </div>
-
-      {{< comment >}}GitLab{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line" id="gitlab">
-        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-          <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "gitlab" "w-8 h-8" >}}</span> GitLab</span>
-          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/gitlab-ci/" class="link text-sm font-semibold whitespace-nowrap">Documentation{{< ph "arrow-right" "bold" "ph-go" >}}</a>
-          <a href="https://github.com/sbomify/sbomify-action" class="link text-sm font-semibold whitespace-nowrap" target="_blank">View on GitHub{{< ph "arrow-right" "bold" "ph-go" >}}</a></span>
-        </div>
-        <p class="text-ink-muted mb-6">
-          Use our <a href="https://github.com/sbomify/sbomify-action/pkgs/container/sbomify-action" class="link">Docker image</a> directly in GitLab CI with built-in caching support.
-        </p>
-        <div class="bg-inverse rounded-xl p-5 overflow-x-auto text-sm text-navy-10 font-mono">
-
-<pre><code>generate-sbom:
+                <article class="ci-card" id="gitlab">
+                    <div class="ci-head">
+                        <span class="ci-name">{{< icon "gitlab" "ci-ico" >}}GitLab CI</span>
+                        <span class="ci-links"><a href="/sbomify-action/runtimes/gitlab-ci/">Docs</a><a href="https://github.com/sbomify/sbomify-action">GitHub</a></span>
+                    </div>
+                    <p>Use the <a href="https://github.com/sbomify/sbomify-action/pkgs/container/sbomify-action">Docker image</a> directly, with built-in caching.</p>
+                    <figure class="term">
+                        <div class="term-bar"><span class="tc-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="term-title">.gitlab-ci.yml</span></div>
+<pre data-lang="yaml"><code>generate-sbom:
   image: ghcr.io/sbomify/sbomify-action
   cache:
     key: sbomify-cache
@@ -91,23 +115,18 @@ steps:
     ENRICH: "true"
   script:
     - sbomify-action</code></pre>
+                    </figure>
+                </article>
 
-        </div>
-      </div>
-
-      {{< comment >}}Bitbucket{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line" id="bitbucket">
-        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-          <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "bitbucket" "w-8 h-8" >}}</span> Bitbucket</span>
-          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/bitbucket/" class="link text-sm font-semibold whitespace-nowrap">Documentation{{< ph "arrow-right" "bold" "ph-go" >}}</a>
-          <a href="https://github.com/sbomify/sbomify-action" class="link text-sm font-semibold whitespace-nowrap" target="_blank">View on GitHub{{< ph "arrow-right" "bold" "ph-go" >}}</a></span>
-        </div>
-        <p class="text-ink-muted mb-6">
-          Seamlessly integrate with Bitbucket Pipelines using our Docker image with built-in caching.
-        </p>
-        <div class="bg-inverse rounded-xl p-5 overflow-x-auto text-sm text-navy-10 font-mono">
-
-<pre><code>pipelines:
+                <article class="ci-card" id="bitbucket">
+                    <div class="ci-head">
+                        <span class="ci-name">{{< icon "bitbucket" "ci-ico" >}}Bitbucket Pipelines</span>
+                        <span class="ci-links"><a href="/sbomify-action/runtimes/bitbucket/">Docs</a><a href="https://github.com/sbomify/sbomify-action">GitHub</a></span>
+                    </div>
+                    <p>Run the Docker image as a pipe, with built-in caching.</p>
+                    <figure class="term">
+                        <div class="term-bar"><span class="tc-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="term-title">bitbucket-pipelines.yml</span></div>
+<pre data-lang="yaml"><code>pipelines:
   default:
     - step:
         caches:
@@ -125,23 +144,18 @@ steps:
 definitions:
   caches:
     sbomify: .sbomify-cache</code></pre>
+                    </figure>
+                </article>
 
-        </div>
-      </div>
-
-      {{< comment >}}Docker{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line" id="docker">
-        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-          <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "docker" "w-8 h-8" >}}</span> Docker</span>
-          <span class="flex items-center gap-4 whitespace-nowrap"><a href="/sbomify-action/runtimes/docker/" class="link text-sm font-semibold whitespace-nowrap">Documentation{{< ph "arrow-right" "bold" "ph-go" >}}</a>
-          <a href="https://github.com/sbomify/sbomify-action/pkgs/container/sbomify-action" class="link text-sm font-semibold whitespace-nowrap" target="_blank">View on GHCR{{< ph "arrow-right" "bold" "ph-go" >}}</a></span>
-        </div>
-        <p class="text-ink-muted mb-6">
-          For any other CI/CD system, use our multi-arch (amd64 and arm64) Docker image directly. Generators are fetched on first use, digest-pinned and cached &mdash; nothing to install.
-        </p>
-        <div class="bg-inverse rounded-xl p-5 overflow-x-auto text-sm text-navy-10 font-mono">
-
-<pre><code># Create persistent cache volume
+                <article class="ci-card" id="docker">
+                    <div class="ci-head">
+                        <span class="ci-name">{{< icon "docker" "ci-ico" >}}Docker</span>
+                        <span class="ci-links"><a href="/sbomify-action/runtimes/docker/">Docs</a><a href="https://github.com/sbomify/sbomify-action/pkgs/container/sbomify-action">GHCR</a></span>
+                    </div>
+                    <p>For any other CI system: a multi-arch (amd64 and arm64) image. Generators are fetched on first use, digest-pinned and cached, so there is nothing to install.</p>
+                    <figure class="term">
+                        <div class="term-bar"><span class="tc-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="term-title">Terminal</span></div>
+<pre data-lang="bash"><code># Create persistent cache volume
 docker volume create sbomify-cache
 
 docker run --rm \
@@ -155,23 +169,18 @@ docker run --rm \
   -e UPLOAD=false \
   -e ENRICH=true \
   ghcr.io/sbomify/sbomify-action</code></pre>
+                    </figure>
+                </article>
 
-        </div>
-      </div>
-
-      {{< comment >}}pip / CLI{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line" id="pip">
-        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-          <span class="flex items-center gap-2 text-2xl font-bold text-ink"><span class="text-ink">{{< icon "python" "w-8 h-8" >}}</span> Local CLI</span>
-          <a href="https://pypi.org/project/sbomify-action/" class="link text-sm font-semibold whitespace-nowrap" target="_blank">View on PyPI{{< ph "arrow-right" "bold" "ph-go" >}}</a>
-        </div>
-        <p class="text-ink-muted mb-6">
-          Run the CLI on your machine with <code>uvx</code> or <code>pipx</code> for local development, one-off SBOMs and the setup wizard. Generators are downloaded on first use and cached, exactly as they are in the Docker image, so there is nothing else to install.
-          <a href="/sbomify-action/runtimes/local/" class="link">Read the guide{{< ph "arrow-right" "bold" "ph-go" >}}</a>
-        </p>
-        <div class="bg-inverse rounded-xl p-5 overflow-x-auto text-sm text-navy-10 font-mono">
-
-<pre><code># Run without installing anything
+                <article class="ci-card" id="pip">
+                    <div class="ci-head">
+                        <span class="ci-name">{{< icon "python" "ci-ico" >}}Local CLI</span>
+                        <span class="ci-links"><a href="/sbomify-action/runtimes/local/">Docs</a><a href="https://pypi.org/project/sbomify-action/">PyPI</a></span>
+                    </div>
+                    <p>Run it with <code>uvx</code> or <code>pipx</code> for local development, one-off SBOMs and the setup wizard. Generators are downloaded on first use and cached, as in the Docker image.</p>
+                    <figure class="term">
+                        <div class="term-bar"><span class="tc-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="term-title">Terminal</span></div>
+<pre data-lang="bash"><code># Run without installing anything
 uvx sbomify-action --lock-file requirements.txt \
   --enrich --no-upload -o sbom.cdx.json
 
@@ -184,477 +193,219 @@ export LOCK_FILE=requirements.txt
 export ENRICH=true
 export UPLOAD=false
 uvx sbomify-action</code></pre>
+                    </figure>
+                </article>
+            </div>
+        </div>
+    </section>
 
-        </div>
-      </div>
-    </div>
+    {{< comment >}}Ecosystems: lockfiles per language, then containers and Yocto{{< /comment >}}
+    <section class="section" id="ecosystems">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Supported ecosystems</span>
+                    <h2 class="sec-title">18 ecosystems. <span class="soft">Plus containers and Yocto.</span></h2>
+                </div>
+                <p class="sec-lede">Point the action at a lockfile, a container image or a directory, and it picks the right generator.</p>
+            </div>
 
-</section>
+            <ul class="eco-grid" data-reveal>
+                <li><b>{{< icon "python" "eco-ico" >}}Python</b><span><code>requirements.txt</code><code>poetry.lock</code><code>Pipfile.lock</code><code>uv.lock</code><code>pyproject.toml</code></span></li>
+                <li><b>{{< icon "javascript" "eco-ico" >}}JavaScript</b><span><code>package.json</code><code>package-lock.json</code><code>yarn.lock</code><code>pnpm-lock.yaml</code><code>bun.lock</code></span></li>
+                <li><b>{{< icon "java" "eco-ico" >}}Java</b><span><code>pom.xml</code><code>build.gradle</code><code>build.gradle.kts</code><code>gradle.lockfile</code></span></li>
+                <li><b>{{< icon "golang" "eco-ico" >}}Go</b><span><code>go.mod</code><code>go.sum</code></span></li>
+                <li><b>{{< icon "rust" "eco-ico" >}}Rust</b><span><code>Cargo.lock</code></span></li>
+                <li><b>Ruby</b><span><code>Gemfile.lock</code></span></li>
+                <li><b>{{< icon "php" "eco-ico" >}}PHP</b><span><code>composer.json</code><code>composer.lock</code></span></li>
+                <li><b>.NET / C#</b><span><code>packages.lock.json</code></span></li>
+                <li><b>{{< icon "swift" "eco-ico" >}}Swift</b><span><code>Package.swift</code><code>Package.resolved</code></span></li>
+                <li><b>{{< icon "dart" "eco-ico" >}}Dart</b><span><code>pubspec.lock</code></span></li>
+                <li><b>Elixir</b><span><code>mix.lock</code></span></li>
+                <li><b>Scala</b><span><code>build.sbt</code></span></li>
+                <li><b>{{< icon "cpp" "eco-ico" >}}C++</b><span><code>conan.lock</code></span></li>
+                <li><b>{{< icon "terraform" "eco-ico" >}}Terraform</b><span><code>.terraform.lock.hcl</code></span></li>
+                <li><b>Haskell</b><span><code>stack.yaml.lock</code><code>stack.yaml</code><code>cabal.project.freeze</code></span></li>
+                <li><b>Erlang</b><span><code>rebar.lock</code></span></li>
+                <li><b>Clojure</b><span><code>deps.edn</code><code>project.clj</code></span></li>
+                <li><b>PlatformIO</b><span><code>platformio.ini</code></span></li>
+                <li class="is-wide"><b>{{< ph "cube" >}}Container images</b><span class="eco-text">Generate SBOMs straight from an image with <code>DOCKER_IMAGE</code> instead of a lockfile. Scans every layer and installed package.</span></li>
+                <li class="is-wide"><b>{{< ph "cpu" >}}Yocto / OpenEmbedded</b><span class="eco-text">Batch-process SPDX SBOMs from Yocto builds: extracts <code>.spdx.tar.zst</code> archives, uploads the package SBOMs and tags them with a product release.</span></li>
+            </ul>
+        </div>
+    </section>
 
-{{< comment >}}Supported Ecosystems Section{{< /comment >}}
-<section class="section section-rule">
-    <div class="mb-10 max-w-3xl">
-      <h2 class="section-title mb-4">Supported Ecosystems</h2>
-      <p class="lede">Generate SBOMs from lockfiles across 18 ecosystems, plus container images, directory scans and Yocto/OpenEmbedded builds.</p>
-    </div>
+    {{< comment >}}Generators and formats, on the dark band{{< /comment >}}
+    <section class="band-dark" id="generators" data-nebula="band" style="background-image: url('{{< nebula-still "band" >}}')">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">SBOM generators</span>
+                    <h2 class="sec-title">Four generators. <span class="soft">The best one picked for you.</span></h2>
+                </div>
+                <p class="sec-lede">Each ecosystem gets the most accurate tool first, with automatic fallback to the next. The lower the priority number, the sooner it is tried.</p>
+            </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 mb-8">
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "python" "w-5 h-5" >}}</span> Python</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">requirements.txt</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">poetry.lock</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Pipfile.lock</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">uv.lock</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pyproject.toml</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "javascript" "w-5 h-5" >}}</span> JavaScript</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">package.json</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">package-lock.json</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">yarn.lock</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pnpm-lock.yaml</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">bun.lock</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "java" "w-5 h-5" >}}</span> Java</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pom.xml</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">build.gradle</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">build.gradle.kts</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">gradle.lockfile</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "golang" "w-5 h-5" >}}</span> Go</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">go.mod</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">go.sum</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "rust" "w-5 h-5" >}}</span> Rust</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Cargo.lock</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="text-lg font-bold text-ink mb-2">Ruby</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Gemfile.lock</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "php" "w-5 h-5" >}}</span> PHP</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">composer.json</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">composer.lock</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="text-lg font-bold text-ink mb-2">.NET / C#</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">packages.lock.json</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "swift" "w-5 h-5" >}}</span> Swift</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Package.swift</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Package.resolved</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "dart" "w-5 h-5" >}}</span> Dart</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pubspec.lock</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="text-lg font-bold text-ink mb-2">Elixir</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">mix.lock</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="text-lg font-bold text-ink mb-2">Scala</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">build.sbt</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "cpp" "w-5 h-5" >}}</span> C++</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">conan.lock</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="flex items-center gap-2 text-lg font-bold text-ink mb-2"><span class="text-ink">{{< icon "terraform" "w-5 h-5" >}}</span> Terraform</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">.terraform.lock.hcl</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="text-lg font-bold text-ink mb-2">Haskell</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">stack.yaml.lock</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">stack.yaml</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">cabal.project.freeze</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="text-lg font-bold text-ink mb-2">Erlang</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">rebar.lock</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="text-lg font-bold text-ink mb-2">Clojure</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">deps.edn</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">project.clj</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-5 pb-6">
-        <h4 class="text-lg font-bold text-ink mb-2">PlatformIO</h4>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">platformio.ini</span>
-        </div>
-      </div>
-    </div>
+            <div class="cra-feats gen-feats" data-reveal>
+                <article>
+                    <span class="gen-prio">Priority 10</span>
+                    <h3>cyclonedx-py</h3>
+                    <p>The native Python generator, and the most accurate for Python.</p>
+                    <p class="gen-eco">Python</p>
+                </article>
+                <article>
+                    <span class="gen-prio">Priority 10</span>
+                    <h3>cargo-cyclonedx</h3>
+                    <p>The native Rust generator, and the most accurate for Rust.</p>
+                    <p class="gen-eco">Rust</p>
+                </article>
+                <article>
+                    <span class="gen-prio">Priority 20</span>
+                    <h3>cdxgen</h3>
+                    <p>The broadest ecosystem support. The best choice for Java, Gradle and multi-language projects.</p>
+                    <p class="gen-eco">Python, JS, Java, Go, Rust, Ruby and 8 more</p>
+                </article>
+                <article>
+                    <span class="gen-prio">Priority 35</span>
+                    <h3>Syft</h3>
+                    <p>Anchore's comprehensive scanner, with CycloneDX and SPDX output, Terraform included.</p>
+                    <p class="gen-eco">Python, JS, Go, Terraform, Docker and 7 more</p>
+                </article>
+            </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-      <div class="border-t border-line pt-6 pb-7">
-        <h4 class="text-lg font-bold text-ink mb-2">Container Images</h4>
-        <p class="text-ink-muted text-sm">Generate SBOMs directly from container images using <code class="text-ink">DOCKER_IMAGE</code> instead of a lockfile. Scans all layers and installed packages.</p>
-      </div>
-      <div class="border-t border-line pt-6 pb-7">
-        <h4 class="text-lg font-bold text-ink mb-2">Yocto / OpenEmbedded</h4>
-        <p class="text-ink-muted text-sm">Batch process SPDX SBOMs from Yocto builds. Extracts <code class="text-ink">.spdx.tar.zst</code> archives, uploads package SBOMs, and tags them with a product release.</p>
-      </div>
-    </div>
+            <dl class="gen-formats">
+                <div><dt>CycloneDX</dt><dd>The default. Versions 1.3 to 1.7, depending on the generator.</dd><dd><code>SBOM_FORMAT=cyclonedx</code></dd></div>
+                <div><dt>SPDX</dt><dd>Versions 2.2, 2.3 and 3.0.1, validated against the official schemas.</dd><dd><code>SBOM_FORMAT=spdx</code></dd></div>
+            </dl>
 
-</section>
+            <p class="sec-close">Beyond SBOMs, the same pipeline uploads pre-authored <a href="/faq/what-vex-formats-does-sbomify-support/">VEX</a>, <a href="/faq/what-is-a-cbom/">CBOM</a> and HBOM documents as they are, with <code>BOM_TYPE=vex</code>, <code>cbom</code> or <code>hbom</code>.</p>
+        </div>
+    </section>
 
-{{< comment >}}SBOM Generators Section{{< /comment >}}
-<section class="section section-rule">
-    <div class="mb-10 max-w-3xl">
-      <h2 class="section-title mb-4">SBOM Generators</h2>
-      <p class="lede">Four generators with automatic fallback. The best tool for each ecosystem is selected automatically.</p>
-    </div>
+    {{< comment >}}Vulnerability analysis: OSV and Dependency-Track{{< /comment >}}
+    <section class="section" id="vulnerability-analysis">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Vulnerability analysis</span>
+                    <h2 class="sec-title">Scanned on every release. <span class="soft">For the whole support period.</span></h2>
+                </div>
+                <p class="sec-lede">Released SBOMs are checked against two of the most widely used vulnerability sources, for the whole support period, not just at build time.</p>
+            </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 mb-8">
-      <div class="border-t border-line pt-6 pb-7">
-        <div class="flex items-center justify-between mb-3">
-          <h4 class="text-lg font-bold text-ink">cyclonedx-py</h4>
-          <span class="text-xs bg-surface-strong text-ink px-2 py-1 rounded font-mono">Priority 10</span>
+            <div class="vuln-grid" data-reveal>
+                <article id="osv">
+                    <img src="/assets/images/site/osv-navy.svg" alt="" width="160" height="32" loading="lazy" decoding="async">
+                    <h3>Google OSV</h3>
+                    <p>Precise, distributed vulnerability data from the Open Source Vulnerabilities database, across a wide range of ecosystems.</p>
+                    <p class="vuln-plan">{{< ph "check" >}}Every plan: weekly rescans on Community, daily on Business and Enterprise</p>
+                </article>
+                <article id="dependency-track">
+                    <img src="/assets/images/site/dependency-track-navy.svg" alt="" width="149" height="32" loading="lazy" decoding="async">
+                    <h3>Dependency-Track</h3>
+                    <p>OWASP Dependency-Track for continuous component analysis.</p>
+                    <ul class="vuln-notes">
+                        <li><b>Direct upload from CI.</b> The action sends SBOMs straight to your Dependency-Track instance with <code>UPLOAD_DESTINATIONS=dependency-track</code>.</li>
+                        <li><b>Bring your own.</b> Enterprise customers can connect their existing instance for one view of everything.</li>
+                    </ul>
+                </article>
+            </div>
         </div>
-        <p class="text-ink-muted text-sm mb-3">Native Python generator. Most accurate for Python ecosystems.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Python</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-6 pb-7">
-        <div class="flex items-center justify-between mb-3">
-          <h4 class="text-lg font-bold text-ink">cargo-cyclonedx</h4>
-          <span class="text-xs bg-surface-strong text-ink px-2 py-1 rounded font-mono">Priority 10</span>
-        </div>
-        <p class="text-ink-muted text-sm mb-3">Native Rust generator. Most accurate for Rust ecosystems.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Rust</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-6 pb-7">
-        <div class="flex items-center justify-between mb-3">
-          <h4 class="text-lg font-bold text-ink">cdxgen</h4>
-          <span class="text-xs bg-surface-strong text-ink px-2 py-1 rounded font-mono">Priority 20</span>
-        </div>
-        <p class="text-ink-muted text-sm mb-3">Broadest ecosystem support. Best choice for Java/Gradle and multi-language projects.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Python</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">JS</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Java</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Go</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Rust</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Ruby</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">+8 more</span>
-        </div>
-      </div>
-      <div class="border-t border-line pt-6 pb-7">
-        <div class="flex items-center justify-between mb-3">
-          <h4 class="text-lg font-bold text-ink">Syft</h4>
-          <span class="text-xs bg-surface-strong text-ink px-2 py-1 rounded font-mono">Priority 35</span>
-        </div>
-        <p class="text-ink-muted text-sm mb-3">Comprehensive scanner by Anchore. Supports CycloneDX and SPDX output including Terraform.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Python</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">JS</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Go</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Terraform</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Docker</span>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">+7 more</span>
-        </div>
-      </div>
-    </div>
+    </section>
 
-    {{< comment >}}SBOM Formats{{< /comment >}}
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="panel p-6 sm:p-8">
-        <h4 class="text-lg font-bold text-ink mb-2">CycloneDX</h4>
-        <p class="text-ink-muted text-sm mb-3">Default format. Versions 1.3 through 1.7 supported depending on generator.</p>
-        <code class="bg-inverse px-3 py-2 rounded-lg text-orange-300 font-mono inline-block text-sm">SBOM_FORMAT=cyclonedx</code>
-      </div>
-      <div class="panel p-6 sm:p-8">
-        <h4 class="text-lg font-bold text-ink mb-2">SPDX</h4>
-        <p class="text-ink-muted text-sm mb-3">Versions 2.2, 2.3, and 3.0.1 supported, validated against official schemas.</p>
-        <code class="bg-inverse px-3 py-2 rounded-lg text-orange-300 font-mono inline-block text-sm">SBOM_FORMAT=spdx</code>
-      </div>
-    </div>
+    {{< comment >}}Enrichment: 12 sources, in the order they are tried{{< /comment >}}
+    <section class="section" id="enrichment">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Enrichment</span>
+                    <h2 class="sec-title">12 data sources. <span class="soft">Licences and suppliers, filled in.</span></h2>
+                </div>
+                <p class="sec-lede">Enrichment adds descriptions, licences, supplier details and lifecycle dates to your components, trying the fastest and most authoritative sources first.</p>
+            </div>
 
-    {{< comment >}}Beyond SBOMs{{< /comment >}}
-    <div class="panel p-6 sm:p-8 mt-6">
-      <h4 class="text-lg font-bold text-ink mb-2">Beyond SBOMs</h4>
-      <p class="text-ink-muted text-sm">The same pipeline can upload pre-authored <a href="/faq/what-vex-formats-does-sbomify-support/" class="link">VEX</a>, <a href="/faq/what-is-a-cbom/" class="link">CBOM</a>, and HBOM documents verbatim with <code class="text-ink">BOM_TYPE=vex</code>, <code class="text-ink">cbom</code>, or <code class="text-ink">hbom</code>.</p>
-    </div>
+            <ol class="enrich-flow" data-reveal>
+                <li>
+                    <span class="enrich-step">1</span>
+                    <h3>Pre-computed databases</h3>
+                    <p class="enrich-why">Local, with no network calls. Checked first.</p>
+                    <dl>
+                        <div><dt>LicenseDB</dt><dd>Licences for APK, DEB and RPM packages across 28 Linux distribution versions.</dd></div>
+                        <div><dt>Lifecycle Database</dt><dd>Release, end-of-support and end-of-life dates (ECMA-428 CLE) for major runtimes and frameworks, from Python and Go to Django and Rails.</dd></div>
+                    </dl>
+                </li>
+                <li>
+                    <span class="enrich-step">2</span>
+                    <h3>Native registries</h3>
+                    <p class="enrich-why">Authoritative data from each ecosystem's official source.</p>
+                    <dl>
+                        <div><dt>PyPI</dt><dd><code>pkg:pypi</code></dd></div>
+                        <div><dt>crates.io</dt><dd><code>pkg:cargo</code></dd></div>
+                        <div><dt>pub.dev</dt><dd><code>pkg:pub</code></dd></div>
+                        <div><dt>Debian Sources</dt><dd><code>pkg:deb/debian</code></dd></div>
+                        <div><dt>Conan Center</dt><dd><code>pkg:conan</code></dd></div>
+                    </dl>
+                </li>
+                <li>
+                    <span class="enrich-step">3</span>
+                    <h3>Aggregators</h3>
+                    <p class="enrich-why">Broad coverage across ecosystems.</p>
+                    <dl>
+                        <div><dt>deps.dev</dt><dd>Google's open source dependency insights, covering most major ecosystems.</dd></div>
+                        <div><dt>Ecosyste.ms</dt><dd>Community-driven package metadata and project health.</dd></div>
+                    </dl>
+                </li>
+                <li>
+                    <span class="enrich-step">4</span>
+                    <h3>Fallbacks</h3>
+                    <p class="enrich-why">When the others have no data.</p>
+                    <dl>
+                        <div><dt>PURL extraction</dt><dd>Maps package URL namespaces to suppliers, locally.</dd></div>
+                        <div><dt>ClearlyDefined</dt><dd>Community-curated licence and metadata.</dd></div>
+                        <div><dt>Repology</dt><dd>Package tracking across Linux distributions.</dd></div>
+                    </dl>
+                </li>
+            </ol>
 
-</section>
-
-{{< comment >}}Vulnerability Analysis Section{{< /comment >}}
-<section class="section section-rule">
-    <div class="mb-10 max-w-3xl">
-      <h2 id="vulnerability-analysis" class="section-title mb-4">Vulnerability Analysis</h2>
-      <p class="lede">Comprehensive scanning powered by industry-leading databases.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {{< comment >}}OSV{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line flex flex-col">
-        <img src="/assets/images/site/osv-navy.svg" class="h-8 w-auto mb-6 self-start" alt="Google OSV" width="160" height="32">
-        <h3 id="osv" class="text-xl font-bold text-ink mb-3">Google OSV</h3>
-        <p class="text-ink-muted flex-grow">
-          We integrate with the Open Source Vulnerability (OSV) database to provide precise, distributed vulnerability intelligence across a wide range of ecosystems.
-        </p>
-      </div>
-
-      {{< comment >}}Dependency Track{{< /comment >}}
-      <div class="bg-canvas rounded-2xl p-6 md:p-8 border border-line flex flex-col">
-        <img src="/assets/images/site/dependency-track-navy.svg" class="h-8 w-auto mb-6 self-start" alt="Dependency Track" width="149" height="32">
-        <h3 id="dependency-track" class="text-xl font-bold text-ink mb-3">Dependency Track</h3>
-        <p class="text-ink-muted mb-4 flex-grow">
-          Leverage the power of OWASP Dependency-Track for continuous component analysis. Upload SBOMs directly from CI/CD with <code class="text-ink">UPLOAD_DESTINATIONS=dependency-track</code>.
-        </p>
-        <div class="mt-4 pt-4 border-t border-line space-y-3">
-          <div class="flex items-start gap-2">
-            <span class="bg-navy-5 text-ink-muted text-xs font-semibold px-2 py-0.5 rounded-md uppercase tracking-eyebrow">CI/CD</span>
-            <p class="text-sm text-ink-muted">
-              <strong>Direct Upload:</strong> sbomify-action can upload SBOMs directly to your Dependency Track instance from any CI pipeline.
-            </p>
-          </div>
-          <div class="flex items-start gap-2">
-            <span class="bg-navy-5 text-ink-muted text-xs font-semibold px-2 py-0.5 rounded-md uppercase tracking-eyebrow">Enterprise</span>
-            <p class="text-sm text-ink-muted">
-              <strong>Bring Your Own:</strong> Enterprise customers can connect their existing Dependency Track instance for unified visibility.
-            </p>
-          </div>
+            <p class="sec-close">Turn it on in the action or the CLI with <code>ENRICH=true</code> or <code>--enrich</code>.</p>
         </div>
-      </div>
-    </div>
+    </section>
 
-</section>
+    {{< comment >}}Augmentation: organisational metadata{{< /comment >}}
+    <section class="section" id="augmentation">
+        <div class="wrap cra-split is-flip">
+            <div class="cra-split-copy">
+                <span class="kicker">Augmentation</span>
+                <h2 class="sec-title">Your details on every SBOM. <span class="soft">Without editing JSON.</span></h2>
+                <p class="sec-lede">Augmentation adds who made the software and where it came from, from three places.</p>
+                <ul class="cra-points">
+                    <li>{{< ph "buildings" >}}<span><b>Your sbomify workspace:</b> supplier, manufacturer, authors and declared licence.</span></li>
+                    <li>{{< ph "file-code" >}}<span><b>A local config:</b> override the supplier, authors, licence and VCS details with an <code>sbomify.json</code> in your repository.</span></li>
+                    <li>{{< ph "git-branch" >}}<span><b>Your CI environment:</b> the repository URL, commit SHA and branch, detected in GitHub Actions, GitLab CI and Bitbucket Pipelines.</span></li>
+                </ul>
+                <p class="cra-small">Turn it on with <code>AUGMENT=true</code> or <code>--augment</code>.</p>
+            </div>
 
-{{< comment >}}Enrichment Section{{< /comment >}}
-<section class="section section-rule">
-    <div class="mb-10 max-w-3xl">
-      <h2 class="section-title mb-4">Enrichment Data Sources</h2>
-      <p class="lede">We integrate with 12 data sources to add metadata to your SBOM components: descriptions, licenses, supplier information, and more.</p>
-    </div>
+            <figure class="bundle" data-reveal>
+                <div class="bundle-head">
+                    <span class="bundle-ico">{{< ph "plus-circle" >}}</span>
+                    <span><b>Fields added</b><span>From your workspace and your CI</span></span>
+                </div>
+                <ul class="bundle-files">
+                    <li><span>Supplier</span><span>Workspace</span></li>
+                    <li><span>Manufacturer</span><span>Workspace</span></li>
+                    <li><span>Authors</span><span>Workspace</span></li>
+                    <li><span>Licence</span><span>Workspace</span></li>
+                    <li><span>Lifecycle phase</span><span></span></li>
+                    <li><span>Repository URL</span><span>CI</span></li>
+                    <li><span>Commit SHA</span><span>CI</span></li>
+                    <li><span>Branch or ref</span><span>CI</span></li>
+                </ul>
+                <p class="bundle-foot">{{< ph "file-code" >}}Supplier, authors, licence and VCS details can also come from <code>sbomify.json</code></p>
+            </figure>
+        </div>
+    </section>
 
-    {{< comment >}}Pre-computed Databases{{< /comment >}}
-    <div class="mb-8">
-      <h3 class="text-xl font-bold text-ink mb-4">Pre-computed Databases (Fastest)</h3>
-      <p class="text-ink-muted mb-4">Local data with zero network latency. Checked first for maximum performance.</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-        <div class="border-t border-line pt-6 pb-7">
-          <h4 class="text-lg font-bold text-ink mb-2">LicenseDB</h4>
-          <p class="text-ink-muted text-sm mb-3">Pre-computed license database covering 28 Linux distro versions. Provides authoritative license data for APK, DEB, and RPM packages.</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:apk/*</span>
-            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:deb/*</span>
-            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:rpm/*</span>
-          </div>
-        </div>
-        <div class="border-t border-line pt-6 pb-7">
-          <h4 class="text-lg font-bold text-ink mb-2">Lifecycle Database</h4>
-          <p class="text-ink-muted text-sm mb-3">CLE lifecycle dates (release, end-of-support, end-of-life) for major runtimes and frameworks following ECMA-428.</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Python</span>
-            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">PHP</span>
-            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Go</span>
-            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Rust</span>
-            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Django</span>
-            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">Rails</span>
-            <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">+more</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {{< comment >}}Native Sources{{< /comment >}}
-    <div class="mb-8">
-      <h3 class="text-xl font-bold text-ink mb-4">Native Package Registries</h3>
-      <p class="text-ink-muted mb-4">Authoritative data direct from the ecosystem's official source.</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-8">
-        <div class="border-t border-line pt-6 pb-7">
-          <h4 class="text-lg font-bold text-ink mb-2">PyPI</h4>
-          <p class="text-ink-muted text-sm mb-3">Python Package Index</p>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:pypi/*</span>
-        </div>
-        <div class="border-t border-line pt-6 pb-7">
-          <h4 class="text-lg font-bold text-ink mb-2">crates.io</h4>
-          <p class="text-ink-muted text-sm mb-3">Rust Package Registry</p>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:cargo/*</span>
-        </div>
-        <div class="border-t border-line pt-6 pb-7">
-          <h4 class="text-lg font-bold text-ink mb-2">pub.dev</h4>
-          <p class="text-ink-muted text-sm mb-3">Dart/Flutter Packages</p>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:pub/*</span>
-        </div>
-        <div class="border-t border-line pt-6 pb-7">
-          <h4 class="text-lg font-bold text-ink mb-2">Debian Sources</h4>
-          <p class="text-ink-muted text-sm mb-3">Debian Package Archive</p>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:deb/debian/*</span>
-        </div>
-        <div class="border-t border-line pt-6 pb-7">
-          <h4 class="text-lg font-bold text-ink mb-2">Conan Center</h4>
-          <p class="text-ink-muted text-sm mb-3">C/C++ (Conan)</p>
-          <span class="text-xs bg-navy-5 text-ink-muted px-2 py-0.5 rounded-md border border-line">pkg:conan/*</span>
-        </div>
-      </div>
-    </div>
-
-    {{< comment >}}Aggregators{{< /comment >}}
-    <div class="mb-8">
-      <h3 class="text-xl font-bold text-ink mb-4">Package Aggregators</h3>
-      <p class="text-ink-muted mb-4">Multi-ecosystem services providing broad coverage.</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-        <div class="border-t border-line pt-6 pb-7">
-          <div class="flex items-center gap-3 mb-3">
-            <h4 class="text-lg font-bold text-ink">deps.dev</h4>
-            <span class="text-xs bg-surface-strong text-ink px-2 py-1 rounded">Google</span>
-          </div>
-          <p class="text-ink-muted text-sm">Open source dependency insights from Google. Covers most major ecosystems.</p>
-        </div>
-        <div class="border-t border-line pt-6 pb-7">
-          <div class="flex items-center gap-3 mb-3">
-            <img src="/assets/images/site/ecosystems.svg" class="h-6 w-auto" alt="Ecosyste.ms" width="118" height="24">
-          </div>
-          <p class="text-ink-muted text-sm">Community-driven package metadata and project health metrics across ecosystems.</p>
-        </div>
-      </div>
-    </div>
-
-    {{< comment >}}Fallback Sources{{< /comment >}}
-    <div class="mb-8">
-      <h3 class="text-xl font-bold text-ink mb-4">Fallback Sources</h3>
-      <p class="text-ink-muted mb-4">Additional coverage when primary sources do not have data.</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-8">
-        <div class="border-t border-line pt-6 pb-7">
-          <h4 class="text-lg font-bold text-ink mb-2">PURL Extraction</h4>
-          <p class="text-ink-muted text-sm">Local extraction from package URLs. Maps namespaces to suppliers without API calls.</p>
-        </div>
-        <div class="border-t border-line pt-6 pb-7">
-          <h4 class="text-lg font-bold text-ink mb-2">ClearlyDefined</h4>
-          <p class="text-ink-muted text-sm">Community-curated license and metadata for open source components.</p>
-        </div>
-        <div class="border-t border-line pt-6 pb-7">
-          <h4 class="text-lg font-bold text-ink mb-2">Repology</h4>
-          <p class="text-ink-muted text-sm">Cross-distribution package tracking for Linux packages.</p>
-        </div>
-      </div>
-    </div>
-
-    {{< comment >}}How to enable{{< /comment >}}
-    <div class="panel p-6 sm:p-8">
-      <p class="text-ink-muted mb-3">
-        <span class="font-semibold text-ink">How it works:</span>
-        Enrichment happens automatically when using our <a href="https://github.com/sbomify/sbomify-action" class="link">GitHub Action</a> or CLI with the enrich flag.
-      </p>
-      <code class="bg-inverse px-3 py-2 rounded-lg text-orange-300 font-mono inline-block">ENRICH=true</code>
-      <span class="text-ink-muted mx-2">or</span>
-      <code class="bg-inverse px-3 py-2 rounded-lg text-orange-300 font-mono inline-block">--enrich</code>
-    </div>
-
-</section>
-
-{{< comment >}}Augmentation Section{{< /comment >}}
-<section class="section section-rule">
-    <div class="mb-10 max-w-3xl">
-      <h2 class="section-title mb-4">Augmentation Providers</h2>
-      <p class="lede">Add organizational metadata to your SBOM: supplier info, manufacturer details, VCS context, and more.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 mb-8">
-      <div class="border-t border-line pt-6 pb-7">
-        <h4 class="text-lg font-bold text-ink mb-2">sbomify API</h4>
-        <p class="text-ink-muted text-sm mb-3">Pull organizational metadata from your sbomify workspace: supplier, manufacturer, authors, and declared license.</p>
-      </div>
-      <div class="border-t border-line pt-6 pb-7">
-        <h4 class="text-lg font-bold text-ink mb-2">Local Config</h4>
-        <p class="text-ink-muted text-sm mb-3">Override metadata via <code class="text-ink">sbomify.json</code> in your repository for supplier, authors, license, and VCS info.</p>
-      </div>
-      <div class="border-t border-line pt-6 pb-7">
-        <h4 class="text-lg font-bold text-ink mb-2">CI/CD Auto-Detection</h4>
-        <p class="text-ink-muted text-sm mb-3">Automatically detects VCS URL, commit SHA, and branch from GitHub Actions, GitLab CI, and Bitbucket Pipelines environment variables.</p>
-      </div>
-      <div class="border-t border-line pt-6 pb-7">
-        <h4 class="text-lg font-bold text-ink mb-2">Fields Added</h4>
-        <p class="text-ink-muted text-sm">Supplier, manufacturer, authors, license, lifecycle phase, repository URL, commit SHA, branch/ref.</p>
-      </div>
-    </div>
-
-    {{< comment >}}How to enable{{< /comment >}}
-    <div class="panel p-6 sm:p-8">
-      <p class="text-ink-muted mb-3">
-        <span class="font-semibold text-ink">How it works:</span>
-        Augmentation pulls metadata from sbomify and your CI environment.
-      </p>
-      <code class="bg-inverse px-3 py-2 rounded-lg text-orange-300 font-mono inline-block">AUGMENT=true</code>
-      <span class="text-ink-muted mx-2">or</span>
-      <code class="bg-inverse px-3 py-2 rounded-lg text-orange-300 font-mono inline-block">--augment</code>
-    </div>
-
-</section>
+    {{< dawn-cta title="Connect your pipeline in minutes" text="Run the setup wizard, commit the workflow, and every build uploads an enriched SBOM that is scanned for as long as you support the release." location="integrations_final" >}}
 
 </div>
-
-<div>
-{{< cta-ready title="Connect your pipeline in minutes" primary_text="Start free" >}}
-</div>
-
-<script>
-  fetch('https://api.github.com/repos/sbomify/sbomify-action/releases/latest')
-    .then(response => response.json())
-    .then(data => {
-      if (data.tag_name) {
-        const releaseBadge = `
-          <a href="${data.html_url}" target="_blank" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navy-5 border border-line hover:border-line-strong transition-colors group">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
-            </span>
-            <span class="text-xs font-medium text-ink group-hover:text-ink">Release ${data.tag_name}</span>
-          </a>
-        `;
-
-        const container = document.getElementById('gh-latest-release');
-        if (container) {
-          container.innerHTML = releaseBadge;
-          container.classList.remove('hidden');
-        }
-      }
-    })
-    .catch(e => console.log('Error fetching release:', e));
-</script>

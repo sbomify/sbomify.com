@@ -6789,6 +6789,437 @@
   .ins .adv-guides { grid-template-columns: minmax(0, 1fr); }
 }
 
+
+/* ---------- Integrations page ---------- */
+
+/* Inline code in .ins copy: a small mono chip, lighter on the dark band. */
+.ins :where(:not(pre)) > code:where(:not([class])) {
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: rgb(var(--color-navy-5));
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  overflow-wrap: anywhere;
+}
+
+.ins .band-dark :where(:not(pre)) > code:where(:not([class])) {
+  background: rgb(var(--color-white) / 0.1);
+  color: rgb(var(--color-white));
+}
+
+/* A terminal or file: navy, a bar with the file name, the code below. */
+.ins .term {
+  overflow: hidden;
+  border-radius: 16px;
+  background: rgb(var(--color-navy-100));
+  box-shadow: 0 32px 64px -40px rgb(var(--color-navy-100) / 0.5);
+  text-align: left;
+}
+
+.ins .term-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 16px;
+  border-bottom: 1px solid rgb(var(--color-white) / 0.08);
+}
+
+.ins .term .tc-dots i {
+  background: rgb(var(--color-white) / 0.18);
+}
+
+.ins .term-title {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: rgb(var(--color-white) / 0.6);
+}
+
+.ins .term pre {
+  margin: 0;
+  padding: 18px 20px 20px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: rgb(var(--color-navy-10));
+  background: none;
+}
+
+/* CI: GitHub across the top, the other four in pairs. */
+.ins .ci-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ins .ci-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  padding: clamp(20px, 2.6vw, 28px);
+  border-radius: 20px;
+  background: rgb(var(--color-white));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10));
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+.ins .ci-card.is-wide {
+  grid-column: 1 / -1;
+}
+
+.ins .ci-card > p {
+  font-size: 0.95rem;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .ci-card > p a {
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--color-navy-20));
+  text-underline-offset: 3px;
+}
+
+.ins .ci-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.ins .ci-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.15rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.015em;
+}
+
+.ins .ci-ico {
+  width: 24px;
+  height: 24px;
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .ci-links {
+  display: flex;
+  gap: 16px;
+  font-size: 0.88rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.ins .ci-links a {
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--color-navy-20));
+  text-underline-offset: 3px;
+}
+
+.ins .ci-links a:hover {
+  text-decoration-color: rgb(var(--color-navy-100));
+}
+
+.ins .ci-card .term {
+  box-shadow: none;
+}
+
+.ins .ci-note {
+  font-size: 0.88rem;
+  color: rgb(var(--color-navy-60));
+}
+
+@media (max-width: 860px) {
+  .ins .ci-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Ecosystems: a hairline grid, the name over its lockfiles. */
+.ins .eco-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  padding: 1px;
+  border-radius: 20px;
+  background: rgb(var(--color-navy-10));
+}
+
+.ins .eco-grid li {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 20px 22px;
+  background: rgb(var(--color-white));
+}
+
+.ins .eco-grid li.is-wide {
+  grid-column: span 3;
+}
+
+.ins .eco-grid li:nth-last-child(2).is-wide {
+  grid-column: span 2;
+}
+
+.ins .eco-grid li:last-child.is-wide {
+  grid-column: span 1;
+}
+
+.ins .eco-grid b {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.ins .eco-grid b :is(.eco-ico, .ph-ico) {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .eco-grid li > span:not(.eco-text) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ins .eco-grid li > span code {
+  font-size: 0.78rem;
+}
+
+.ins .eco-text {
+  font-size: 0.9rem;
+  color: rgb(var(--color-navy-80));
+}
+
+@media (max-width: 900px) {
+  .ins .eco-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ins .eco-grid li.is-wide,
+  .ins .eco-grid li:nth-last-child(2).is-wide,
+  .ins .eco-grid li:last-child.is-wide { grid-column: span 2; }
+}
+
+@media (max-width: 520px) {
+  .ins .eco-grid { grid-template-columns: minmax(0, 1fr); }
+  .ins .eco-grid li.is-wide,
+  .ins .eco-grid li:nth-last-child(2).is-wide,
+  .ins .eco-grid li:last-child.is-wide { grid-column: auto; }
+}
+
+/* Generators: the priority where the other cards have an icon. */
+.ins .gen-prio {
+  align-self: start;
+  margin-bottom: 8px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgb(var(--color-white));
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .gen-feats h3 {
+  font-family: var(--font-mono);
+  letter-spacing: -0.02em;
+}
+
+.ins .gen-feats p.gen-eco {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgb(var(--color-white) / 0.12);
+  font-size: 0.85rem;
+  color: rgb(var(--color-white) / 0.9);
+}
+
+.ins .gen-formats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.ins .gen-formats > div {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px 18px;
+  padding: 18px 22px;
+  border-radius: 18px;
+  box-shadow: inset 0 0 0 1px rgb(var(--color-white) / 0.12);
+}
+
+.ins .gen-formats dt {
+  font-weight: var(--font-weight-bold);
+}
+
+.ins .gen-formats dd {
+  font-size: 0.9rem;
+  color: rgb(var(--color-white) / 0.75);
+}
+
+@media (max-width: 1060px) {
+  .ins .gen-formats { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .ins .gen-formats > div { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Vulnerability analysis: two cards, the logo first. */
+.ins .vuln-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ins .vuln-grid article {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(22px, 2.8vw, 32px);
+  border-radius: 20px;
+  background: rgb(var(--color-white));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10));
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+.ins .vuln-grid img {
+  align-self: flex-start;
+  width: auto;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.ins .vuln-grid h3 {
+  font-size: 1.2rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.015em;
+}
+
+.ins .vuln-grid p,
+.ins .vuln-notes li {
+  font-size: 0.95rem;
+  color: rgb(var(--color-navy-80));
+}
+
+.ins .vuln-grid b {
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-100));
+}
+
+.ins .vuln-plan {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgb(var(--color-navy-10));
+}
+
+.ins .vuln-plan .ph-ico {
+  flex: none;
+  margin: 3px 0 0;
+  color: rgb(var(--color-success-ink));
+}
+
+.ins .vuln-notes {
+  display: grid;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgb(var(--color-navy-10));
+}
+
+@media (max-width: 760px) {
+  .ins .vuln-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Enrichment: four columns in the order the sources are tried. */
+.ins .enrich-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ins .enrich-flow > li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px 22px;
+  border-radius: 20px;
+  background: rgb(var(--color-white));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10));
+}
+
+.ins .enrich-step {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 6px;
+  border-radius: 50%;
+  background: rgb(var(--color-navy-100));
+  font-size: 0.85rem;
+  font-weight: var(--font-weight-bold);
+  color: rgb(var(--color-white));
+}
+
+.ins .enrich-flow h3 {
+  font-size: 1.05rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.015em;
+}
+
+.ins .enrich-why {
+  font-size: 0.88rem;
+  color: rgb(var(--color-navy-60));
+}
+
+.ins .enrich-flow dl {
+  display: grid;
+  margin-top: 8px;
+}
+
+.ins .enrich-flow dl > div {
+  display: grid;
+  gap: 2px;
+  padding: 10px 0;
+  border-top: 1px dashed rgb(var(--color-navy-10));
+}
+
+.ins .enrich-flow dt {
+  font-size: 0.92rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.ins .enrich-flow dd {
+  font-size: 0.85rem;
+  color: rgb(var(--color-navy-80));
+}
+
+@media (max-width: 1060px) {
+  .ins .enrich-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .ins .enrich-flow { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Reveal. */
+.ins :is(.term, .eco-grid, .vuln-grid, .enrich-flow).reveal-ready {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.ins :is(.term, .eco-grid, .vuln-grid, .enrich-flow).reveal-ready.is-in {
+  opacity: 1;
+  transform: none;
+}
+
 /* ---------- footer ---------- */
 
 .ins-footer {

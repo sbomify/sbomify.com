@@ -7,6 +7,18 @@
 {{- /* Price cards (pricing.html) show one price and keep both in data attributes. */ -}}
 {{- $h = $h | replaceRE `(?s)<div class="price" data-monthly="([^"]+)" data-annual="([^"]+)">.*?</div>` "<p>$$${1} / Month billed monthly, or $$${2} / Month billed annually</p>" -}}
 
+{{- /* Code blocks: set aside as fenced Markdown (language from data-lang on
+     the <pre>) so the whitespace clean-up below keeps their indentation,
+     then put back at the end. */ -}}
+{{- $pres := slice -}}
+{{- range $i, $m := findRESubmatch `(?s)<pre\b([^>]*)>\s*<code\b[^>]*>(.*?)</code>\s*</pre>` $h -}}
+  {{- $lang := "" -}}
+  {{- with findRESubmatch `data-lang="([^"]+)"` (index $m 1) }}{{ $lang = index (index . 0) 1 }}{{ end -}}
+  {{- $code := index $m 2 | replaceRE `<[^>]+>` "" | htmlUnescape | strings.TrimRight "\n" -}}
+  {{- $pres = $pres | append (printf "```%s\n%s\n```" $lang $code) -}}
+  {{- $h = replace $h (index $m 0) (printf "\n\nMDPRE%dMDPRE\n\n" $i) -}}
+{{- end -}}
+
 {{- /* Illustrations marked data-md-skip (mock screens) become their caption. */ -}}
 {{- $h = $h | replaceRE `(?s)<figure\b[^>]*\bdata-md-skip\b[^>]*>.*?<figcaption\b[^>]*>(.*?)</figcaption>\s*</figure>` "<p>$1</p>" -}}
 {{- $h = $h | replaceRE `(?s)<figure\b[^>]*\bdata-md-skip\b[^>]*>.*?</figure>` "" -}}
@@ -42,4 +54,5 @@
 {{- $h = $h | replaceRE `(?m)^(- .*)\n\n+(- )` "$1\n$2" -}}
 {{- $h = $h | replaceRE `(?m)^(- .*)\n\n+(- )` "$1\n$2" -}}
 {{- $h = $h | replaceRE `\n{3,}` "\n\n" -}}
+{{- range $i, $p := $pres }}{{ $h = replace $h (printf "MDPRE%dMDPRE" $i) $p }}{{ end -}}
 {{- return strings.TrimSpace $h -}}
