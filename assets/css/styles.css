@@ -1577,9 +1577,6 @@ button {
 .top-\[calc\(var\(--header-h\)\+2rem\)\] {
   top: calc(var(--header-h) + 2rem);
 }
-.isolate {
-  isolation: isolate;
-}
 .z-50 {
   z-index: 50;
 }
@@ -2296,9 +2293,6 @@ button {
 .pt-12 {
   padding-top: 3rem;
 }
-.pt-14 {
-  padding-top: 3.5rem;
-}
 .pt-4 {
   padding-top: 1rem;
 }
@@ -2513,10 +2507,6 @@ button {
 .text-navy {
   --tw-text-opacity: 1;
   color: rgb(var(--color-navy-100) / var(--tw-text-opacity, 1));
-}
-.text-navy-20 {
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-navy-20) / var(--tw-text-opacity, 1));
 }
 .text-navy-40 {
   --tw-text-opacity: 1;
@@ -7930,6 +7920,307 @@ button {
 .ins :is(.term, .eco-grid, .vuln-grid, .enrich-flow).reveal-ready.is-in {
   opacity: 1;
   transform: none;
+}/* ---------- Pricing page ---------- *//* The billing switch: two radios as a segmented control. With :has(), the
+   choice shows one set of prices; without it, annual prices show. */
+.ins .billing {
+  display: inline-flex;
+  margin: 32px auto 0;
+  padding: 4px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(var(--color-white) / 0.8);
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10));
+}
+.ins .billing input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.ins .billing label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-navy-80));
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.ins .billing input:checked + label {
+  background: rgb(var(--color-navy-100));
+  color: rgb(var(--color-white));
+}
+.ins .billing input:focus-visible + label {
+  outline: 2px solid rgb(var(--color-focus));
+  outline-offset: 2px;
+}
+.ins .billing-save {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgb(var(--color-success-tint));
+  font-size: 0.78rem;
+  color: rgb(var(--color-success-ink));
+}
+.ins .p-monthly { display: none; }
+.ins:has(#bill-monthly:checked) .p-monthly { display: inline; }
+.ins:has(#bill-monthly:checked) .p-annual { display: none; }/* The plans: three cards, Business in navy with the page's orange moment. */
+.ins .plans {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+  margin-top: 32px;
+  text-align: left;
+}
+.ins .plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  grid-row: span 6;
+  padding: clamp(24px, 2.8vw, 34px);
+  border-radius: 22px;
+  background: rgb(var(--color-white) / 0.92);
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--color-navy-10)),
+    0 32px 64px -48px rgb(var(--color-navy-100) / 0.35);
+}
+.ins .plan.is-featured {
+  background:
+    radial-gradient(60% 40% at 100% 100%, rgb(var(--color-orange-500) / 0.3), transparent 70%),
+    radial-gradient(40% 30% at 85% 95%, rgb(var(--color-orange-700) / 0.38), transparent 72%),
+    rgb(var(--color-navy-100));
+  box-shadow: 0 40px 80px -40px rgb(var(--color-navy-100) / 0.6);
+  color: rgb(var(--color-white));
+}
+.ins .plan-tag {
+  position: absolute;
+  top: -12px;
+  left: clamp(24px, 2.8vw, 34px);
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgb(var(--color-white));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-20));
+  font-size: 0.7rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--color-navy-100));
+}
+.ins .plan-name {
+  font-size: 1.45rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+}
+.ins .plan-for {
+  min-height: 3em;
+  margin-top: 8px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgb(var(--color-navy-80));
+}
+.ins .plan .price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  min-height: 92px;
+  margin-top: 22px;
+}
+.ins .plan .amount {
+  font-size: clamp(2.6rem, 4vw, 3.2rem);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.ins .plan .suffix {
+  font-size: 1.05rem;
+  color: rgb(var(--color-navy-60));
+}
+.ins .billing-note {
+  flex-basis: 100%;
+  font-size: 0.85rem;
+  color: rgb(var(--color-navy-60));
+}
+.ins .plan-cta {
+  justify-content: center;
+  width: 100%;
+  margin-top: 18px;
+}
+.ins .plan-alt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 12px;
+  font-size: 0.88rem;
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--color-navy-20));
+  text-underline-offset: 3px;
+}
+.ins .plan-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgb(var(--color-navy-10));
+}
+.ins .plan-list li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 0.93rem;
+  line-height: 1.5;
+  color: rgb(var(--color-navy-80));
+}
+.ins .plan-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 15px;
+  height: 15px;
+  background: rgb(var(--color-success-full));
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5l10 -10'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5l10 -10'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.ins .plan-list a {
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--color-navy-20));
+  text-underline-offset: 3px;
+}
+.ins .plan.is-featured :is(.plan-for, .plan-list li, .suffix, .billing-note) {
+  color: rgb(var(--color-white) / 0.75);
+}
+.ins .plan.is-featured :is(.plan-list, .plan-list li) {
+  border-color: rgb(var(--color-white) / 0.12);
+}
+.ins .plan.is-featured :is(.plan-list a, .plan-alt) {
+  color: rgb(var(--color-white));
+  text-decoration-color: rgb(var(--color-white) / 0.35);
+}
+@media (max-width: 1023px) {
+  .ins .plans {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 34rem;
+    margin-inline: auto;
+  }
+  .ins .plan.is-featured { order: -1; margin-top: 12px; }
+  .ins .plan-for,
+  .ins .plan .price { min-height: 0; }
+}/* Where subgrid works, the six parts of each card share rows, so names,
+   prices, buttons and lists line up across the three. */
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 1024px) {
+    .ins .plan {
+      display: grid;
+      grid-template-rows: subgrid;
+      align-content: start;
+    }
+    .ins .plan-for,
+    .ins .plan .price { min-height: 0; }
+    .ins .plan .price { align-content: start; }
+    .ins .plan-list { align-content: start; }
+    .ins .plan-alt { justify-self: center; align-self: start; }
+  }
+}/* Compare: one table, the Business column tinted. */
+.ins .compare-wrap {
+  overflow-x: auto;
+  border-radius: 20px;
+  background: rgb(var(--color-white));
+  box-shadow: inset 0 0 0 1px rgb(var(--color-navy-10));
+}
+.ins .compare {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.ins .compare :is(th, td) {
+  padding: 14px 20px;
+  border-bottom: 1px solid rgb(var(--color-navy-10));
+  text-align: left;
+  vertical-align: top;
+}
+.ins .compare th {
+  color: rgb(var(--color-navy-100));
+}
+.ins .compare thead th {
+  padding-block: 20px;
+  font-size: 1.05rem;
+  font-weight: var(--font-weight-bold);
+}
+.ins .compare tbody th[scope="row"] {
+  width: 26%;
+  font-weight: var(--font-weight-semibold);
+}
+.ins .compare tbody th[scope="row"] a {
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--color-navy-20));
+  text-underline-offset: 3px;
+}
+.ins .compare td {
+  width: 24.66%;
+  color: rgb(var(--color-navy-80));
+}
+.ins .compare .is-featured {
+  background: rgb(var(--color-navy-5));
+}
+.ins .compare-group th {
+  padding-top: 26px;
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--color-navy-60));
+}
+.ins .compare tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+.ins .compare .yes,
+.ins .compare .no {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ins .compare .yes::before,
+.ins .compare .no::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  background: rgb(var(--color-success-full));
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5l10 -10'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5l10 -10'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.ins .compare .no {
+  color: rgb(var(--color-navy-60));
+}
+.ins .compare .no::before {
+  background: rgb(var(--color-navy-20));
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M6 12h12'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M6 12h12'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+@media (max-width: 760px) {
+  .ins .compare { min-width: 600px; font-size: 0.85rem; }
+  .ins .compare :is(th, td) { padding: 12px 14px; }
+  .ins .compare :is(thead th:first-child, tbody th[scope="row"]) {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    width: 116px;
+    background: rgb(var(--color-white));
+    box-shadow: 1px 0 0 rgb(var(--color-navy-10));
+  }
+  .ins .compare-group th { position: sticky; left: 0; }
+}/* Reveal. */
+.ins :is(.plans, .compare-wrap).reveal-ready {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.ins :is(.plans, .compare-wrap).reveal-ready.is-in {
+  opacity: 1;
+  transform: none;
 }/* ---------- footer ---------- */
 .ins-footer {
   margin-top: clamp(40px, 6vw, 72px);
@@ -8161,18 +8452,11 @@ a:hover > .ph-up {
   --tw-text-opacity: 1;
   color: rgb(var(--color-ink-muted) / var(--tw-text-opacity, 1));
 }
-.hover\:text-white:hover {
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-white) / var(--tw-text-opacity, 1));
-}
 .hover\:underline:hover {
   text-decoration-line: underline;
 }
 .hover\:decoration-current:hover {
   text-decoration-color: currentColor;
-}
-.hover\:decoration-ink:hover {
-  text-decoration-color: rgb(var(--color-ink) / 1);
 }
 .hover\:decoration-navy-40:hover {
   text-decoration-color: rgb(var(--color-navy-40) / 1);
@@ -8260,14 +8544,8 @@ a:hover > .ph-up {
   .md\:float-left {
     float: left;
   }
-  .md\:mb-12 {
-    margin-bottom: 3rem;
-  }
   .md\:mr-10 {
     margin-right: 2.5rem;
-  }
-  .md\:mt-24 {
-    margin-top: 6rem;
   }
   .md\:block {
     display: block;
@@ -8292,9 +8570,6 @@ a:hover > .ph-up {
   }
   .md\:gap-4 {
     gap: 1rem;
-  }
-  .md\:pt-20 {
-    padding-top: 5rem;
   }
   .md\:\!text-lg {
     font-size: 1.125rem !important;
