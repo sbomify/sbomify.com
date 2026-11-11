@@ -1119,6 +1119,12 @@ button {
   color: rgb(var(--color-on-inverse-muted) / var(--tw-text-opacity, 1));
 }/* Neutral tag / badge. Orange is a brand accent, not a status, so it is
      kept out of badges; status badges use the semantic palette. */
+.bg-canvas.rounded-xl.tag {
+    background-image: var(--nebula-grey);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 120% auto;
+  }
 .tag {
   display: inline-block;
   border-radius: 0.375rem;
@@ -1137,6 +1143,18 @@ button {
   --tw-text-opacity: 1;
   color: rgb(var(--color-ink-muted) / var(--tw-text-opacity, 1));
 }/* Cards: flat. A hairline and a soft corner, no shadow. */
+.card.rounded-xl.border-line {
+    background-image: var(--nebula-grey);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 120% auto;
+  }
+.bg-canvas.rounded-xl.card {
+    background-image: var(--nebula-grey);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 120% auto;
+  }
 .card {
   border-radius: 1rem;
   border-width: 1px;
@@ -1189,36 +1207,27 @@ button {
     inset: -20% -15% auto auto;
     width: min(70rem, 110vw);
     aspect-ratio: 1.3;
-    background:
-      radial-gradient(38% 30% at 62% 34%, rgb(var(--color-orange-500) / 0.42), transparent 70%),
-      radial-gradient(30% 26% at 40% 22%, rgb(var(--color-orange-300) / 0.5), transparent 72%),
-      radial-gradient(26% 34% at 78% 58%, rgb(var(--color-orange-100) / 0.55), transparent 70%),
-      radial-gradient(44% 40% at 55% 46%, rgb(var(--color-orange-50) / 0.9), transparent 75%);
+    background: var(--nebula-light) right top / contain no-repeat;
     animation: nebula-drift 38s ease-in-out infinite alternate;
   }
 :is(.nebula, .hero, .cta-band, .panel-dark)::after {
-    inset: -10% -25% auto auto;
-    width: min(56rem, 90vw);
-    aspect-ratio: 1.1;
-    background:
-      radial-gradient(30% 24% at 30% 60%, rgb(var(--color-orange-300) / 0.22), transparent 70%),
-      radial-gradient(22% 30% at 70% 30%, rgb(var(--color-orange-500) / 0.16), transparent 72%);
-    animation: nebula-drift-2 52s ease-in-out infinite alternate;
-  }/* On navy: ember glows low on the right. */
-:is(.nebula-navy, .cta-band, .panel-dark)::before {
-    inset: auto -20% -60% auto;
-    width: min(60rem, 120vw);
-    aspect-ratio: 1.4;
-    background:
-      radial-gradient(34% 28% at 62% 40%, rgb(var(--color-orange-500) / 0.42), transparent 70%),
-      radial-gradient(26% 22% at 40% 30%, rgb(var(--color-orange-700) / 0.45), transparent 72%),
-      radial-gradient(40% 36% at 55% 50%, rgb(var(--color-orange-300) / 0.14), transparent 75%);
+    display: none;
+  }/* On navy: the navy still, its embers low on the right. */
+:is(.nebula-navy, .cta-band, .panel-dark) {
+    background-image: var(--nebula-navy);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 200% auto;
   }
-:is(.nebula-navy, .cta-band, .panel-dark)::after {
-    inset: -50% auto auto -25%;
-    width: min(44rem, 90vw);
-    aspect-ratio: 1.2;
-    background: radial-gradient(40% 34% at 50% 50%, rgb(var(--color-white) / 0.06), transparent 72%);
+:is(.nebula-navy, .cta-band, .panel-dark)::before {
+    display: none;
+  }/* Diagram frames: the grey still low behind the drawing. */
+.bg-canvas.rounded-xl.border-line,
+  :is(.blog-post, .page) img[src*="/d2/"] {
+    background-image: var(--nebula-grey);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 120% auto;
   }
 @keyframes nebula-drift {
     from { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
@@ -1235,6 +1244,12 @@ button {
     }
   }/* Page hero: white canvas with the nebula in the top right corner. It
      starts under the transparent header, so the cloud runs up behind it. */
+.hero.rounded-xl.border-line {
+    background-image: var(--nebula-grey);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 120% auto;
+  }
 .hero {
   position: relative;
   overflow: hidden;

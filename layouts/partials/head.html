@@ -131,6 +131,14 @@
   <link rel="preload" href="/assets/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   {{ $css := resources.Get "css/styles.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+  {{- /* The nebula stills as CSS variables, so stylesheet rules can use the
+         fingerprinted images (the legacy .hero / .cta-band / .panel-dark
+         clouds and the diagram frames). Cards never fake a nebula with
+         gradients. */ -}}
+  {{- $nl := resources.Get "images/nebula/nebula-light.webp" | fingerprint -}}
+  {{- $ng := resources.Get "images/nebula/nebula-grey.webp" | fingerprint -}}
+  {{- $nn := resources.Get "images/nebula/nebula-navy.webp" | fingerprint -}}
+  <style>:root{--nebula-light:url("{{ $nl.RelPermalink }}");--nebula-grey:url("{{ $ng.RelPermalink }}");--nebula-navy:url("{{ $nn.RelPermalink }}")}</style>
   {{ $nativeCss := resources.Get "css/native.css" | minify | fingerprint }}
   <link rel="preload" href="{{ $nativeCss.RelPermalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="{{ $nativeCss.RelPermalink }}"></noscript>
