@@ -5,314 +5,511 @@ description: SBOM management and vulnerability monitoring for every release you 
 keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SBOM management, VEX, CSAF security advisories, trust center, vulnerability management, support period
 ---
 
-<div>
-    <div class="hero">
+<div class="ins">
 
-        <div class="relative max-w-7xl mx-auto px-6 lg:px-8 pt-16 lg:pt-24 pb-16 lg:pb-20">
-            {{< comment >}}Hero Section{{< /comment >}}
-            <div class="text-ink mb-16 lg:mb-20 text-center">
-                <div class="eyebrow-chip mb-6">Built for the EU Cyber Resilience Act</div>
-                <h1 class="text-5xl lg:text-7xl font-extrabold leading-display tracking-display mb-8 text-balance">
-                    From SBOM to security disclosure
-                </h1>
-                <p class="text-xl lg:text-2xl leading-relaxed text-ink-muted max-w-3xl mx-auto text-pretty">Manage product security for every release you support. Generate <a href="/what-is-sbom/" class="link">SBOMs</a>, monitor vulnerabilities, record what you decided and why, and tell your customers. All in one platform you can run in our cloud or on your own infrastructure.</p>
-                <div class="mt-10 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 justify-center">
-                    <a href="https://app.sbomify.com" class="group btn-primary btn-lg w-full sm:w-auto" data-cta-location="home_hero" data-cta-label="Start free">
-                        Start free
-                        <svg aria-hidden="true" class="w-4 h-4 motion-safe:group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="https://app.sbomify.com/enterprise-contact/" class="btn-secondary btn-lg w-full sm:w-auto" data-cta-location="home_hero" data-cta-label="Book a demo">Book a demo</a>
-                </div>
+    {{< comment >}}Hero{{< /comment >}}
+    <section class="home-hero centered" data-nebula="light-center" style="background-image: url('{{< nebula-still "light-center" >}}')">
+        <div class="wrap">
+            <p class="hero-stat">
+                <span class="live" aria-hidden="true"></span>
+                <span><strong>CRA reporting obligations apply now</strong></span>
+                <span class="muted">Main obligations from 11 December 2027</span>
+            </p>
+            <h1>Get CRA ready, from SBOM to security disclosure</h1>
+            <p class="lede">Manage product security for every release you support. Generate <a href="/what-is-sbom/">SBOMs</a>, monitor vulnerabilities, record what you decided and why, and tell your customers. All in one platform you can run in our cloud or on your own infrastructure.</p>
+
+            <div class="hero-actions">
+                <a href="https://app.sbomify.com" class="btn-navy btn-lg" data-cta-location="home_hero" data-cta-label="Start free">
+                    Start free
+                    {{< ph "arrow-right" "bold" "ph-go" >}}
+                </a>
+                <a href="https://app.sbomify.com/enterprise-contact/" class="btn-secondary btn-lg" data-cta-location="home_hero" data-cta-label="Book a demo">Book a demo</a>
             </div>
 
-            {{< comment >}}Integration Sections{{< /comment >}}
-            <div class="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
-                {{< comment >}}Integrates With section{{< /comment >}}
-                <div class="card px-8 py-8">
-                    <span class="eyebrow text-sm mb-6 block text-center">Integrates With</span>
-                    <div class="flex flex-wrap items-center justify-center gap-6 md:gap-12 gap-y-6 md:gap-y-8">
-                        <a href="/features/integrations/#github" class="flex items-center gap-2 text-ink font-semibold hover:text-accent-strong transition-colors">
-                            <span class="text-ink">{{< icon "github" "w-6 h-6" >}}</span> GitHub
-                        </a>
-                        <a href="/features/integrations/#gitlab" class="flex items-center gap-2 text-ink font-semibold hover:text-accent-strong transition-colors">
-                            <span class="text-ink">{{< icon "gitlab" "w-6 h-6" >}}</span> GitLab
-                        </a>
-                        <a href="/features/integrations/#bitbucket" class="flex items-center gap-2 text-ink font-semibold hover:text-accent-strong transition-colors">
-                            <span class="text-ink">{{< icon "bitbucket" "w-6 h-6" >}}</span> Bitbucket
-                        </a>
-                        <a href="/features/integrations/#docker" class="flex items-center gap-2 text-ink font-semibold hover:text-accent-strong transition-colors">
-                            <span class="text-ink">{{< icon "docker" "w-6 h-6" >}}</span> Docker
-                        </a>
-                        <a href="/features/integrations/" class="grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-[filter,opacity]">
-                            <img class="h-[30px] w-auto object-contain" src="/assets/images/site/osv-navy.svg" alt="Google OSV" width="150" height="30" />
-                        </a>
-                        <a href="/features/integrations/" class="grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-[filter,opacity]">
-                            <img class="h-[30px] w-auto object-contain" src="/assets/images/site/dependency-track-navy.svg" alt="Dependency Track" width="140" height="30" />
-                        </a>
-                        <a href="/features/integrations/" class="grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-[filter,opacity]">
-                            <img class="h-[30px] w-auto object-contain" src="/assets/images/site/ecosystems.svg" alt="Ecosyste.ms" width="148" height="30" />
-                        </a>
-                    </div>
-                </div>
+            {{< integration-logos >}}
+
+            {{< comment >}}Press coverage{{< /comment >}}
+            <div class="featured">
+                <span class="kicker">As featured in</span>
+                <ul class="featured-logos">
+                    <li><a href="https://www.infoq.com/news/2026/03/sbom-viktor-petersson/" target="_blank" rel="noopener"><img class="is-infoq" loading="lazy" decoding="async" width="92" height="28" src="data:image/svg+xml,%3csvg height='28' viewBox='0 0 92 28' width='92' xmlns='http://www.w3.org/2000/svg'%3e %3cg fill='none' fill-rule='evenodd'%3e %3cpath d='m.196.582h6.159v25.047h-6.159z' fill='%23296cae'/%3e %3cg fill-rule='nonzero'%3e %3cpath d='m10.399 25.629v-18.621h5.633v1.732c.725-.727 1.543-1.27 2.454-1.628.912-.358 1.936-.537 3.071-.537 2.029 0 3.538.641 4.528 1.923.991 1.281 1.486 3.245 1.486 5.889v11.242h-5.634v-10.965c0-1.258-.221-2.182-.665-2.771s-1.145-.884-2.105-.884c-1.13 0-1.935.275-2.415.823-.48.549-.72 1.493-.72 2.832v10.965zm21.292 0v-14.758h-2.862v-3.413h2.862c-.036-.381-.057-.658-.063-.831-.007-.174-.009-.329-.009-.468 0-1.974.481-3.398 1.443-4.27.962-.871 2.538-1.307 4.728-1.307.48 0 .971.028 1.47.086s1.019.15 1.561.277v3.898h-.942c-1.039 0-1.724.127-2.056.381-.333.254-.498.762-.498 1.524v.71h3.496v3.413h-3.496v14.758zm15.016-9.302c0 1.698.39 3.046 1.169 4.045s1.82 1.498 3.125 1.498c1.304 0 2.348-.502 3.133-1.507s1.177-2.35 1.177-4.036c0-1.698-.389-3.049-1.168-4.053-.779-1.005-1.827-1.507-3.142-1.507-1.293 0-2.331.508-3.116 1.524s-1.178 2.362-1.178 4.036m4.294 9.908c-3.02 0-5.45-.906-7.292-2.72-1.841-1.812-2.762-4.209-2.762-7.188 0-2.968.924-5.364 2.772-7.189 1.847-1.824 4.274-2.736 7.282-2.736 3.042 0 5.485.909 7.326 2.728 1.842 1.819 2.763 4.217 2.763 7.197 0 2.968-.927 5.361-2.781 7.18-1.853 1.819-4.29 2.728-7.308 2.728' fill='%23296cae'/%3e %3cpath d='m76.028 20.986c1.996 0 3.553-.689 4.672-2.069 1.118-1.38 1.677-3.306 1.677-5.777s-.562-4.403-1.687-5.794c-1.125-1.392-2.678-2.088-4.662-2.088-1.971 0-3.522.702-4.652 2.105-1.131 1.403-1.696 3.329-1.696 5.777s.562 4.368 1.686 5.759c1.125 1.392 2.679 2.087 4.662 2.087m6.657 3.69c-.931.508-1.958.895-3.082 1.161-1.124.265-2.315.398-3.572.398-3.856 0-6.941-1.189-9.256-3.568-2.314-2.379-3.472-5.555-3.472-9.527 0-2.171.353-4.114 1.061-5.829.707-1.715 1.761-3.179 3.163-4.391 1.124-.97 2.396-1.698 3.816-2.183s2.981-.727 4.685-.727c3.843 0 6.925 1.195 9.245 3.586 2.32 2.39 3.48 5.571 3.48 9.544 0 1.663-.193 3.167-.579 4.512-.387 1.346-.984 2.561-1.794 3.646.725.635 1.516 1.141 2.373 1.516.858.375 1.776.615 2.754.719l-1.884 4.469c-1.425-.139-2.72-.488-3.885-1.048-1.166-.561-2.183-1.32-3.053-2.278' fill='%231e8d44'/%3e %3cpath d='m86.38 21.298c.809-1.085 1.407-2.301 1.794-3.646.185-.643.322-1.325.418-2.041-2.205.111-4.373.218-6.51.32-.272 1.18-.729 2.179-1.383 2.986-1.118 1.38-2.676 2.069-4.671 2.069-1.983 0-3.537-.695-4.662-2.087-.554-.685-.969-1.499-1.25-2.44-2.172.086-4.317.165-6.445.236.504 2.357 1.53 4.353 3.104 5.972 2.315 2.379 5.4 3.568 9.256 3.568 1.257 0 2.448-.133 3.572-.399 1.124-.265 2.151-.652 3.082-1.16.87.958 1.887 1.717 3.053 2.278 1.164.56 2.46.909 3.885 1.048l1.883-4.469c-.977-.104-1.895-.344-2.753-.719-.857-.375-1.648-.881-2.373-1.516' fill='%23198643'/%3e %3cpath d='m54.134 20.363c-.785 1.005-1.829 1.507-3.133 1.507-1.305 0-2.346-.499-3.125-1.499-.658-.844-1.035-1.94-1.137-3.283-1.92.022-3.84.035-5.76.039.153 2.609 1.058 4.742 2.73 6.388 1.842 1.814 4.273 2.72 7.292 2.72 3.018 0 5.455-.909 7.308-2.728 1.757-1.724 2.671-3.971 2.763-6.728-1.938.059-3.864.113-5.779.158-.085 1.404-.471 2.546-1.159 3.426m-22.443 5.266h5.634v-8.505c-1.871-.007-3.747-.023-5.634-.049zm-21.292 0h5.633v-8.992c-1.857-.078-3.733-.164-5.633-.262zm11.538 0h5.634v-8.627c-1.865-.04-3.74-.087-5.634-.147zm-21.741 0h6.159v-9.477c-2.024-.119-4.073-.247-6.159-.389z' fill='%232066a9'/%3e %3c/g%3e %3c/g%3e %3c/svg%3e" alt="InfoQ logo"></a></li>
+                    <li><a href="https://www.eetimes.eu/cybersecurity-legislation-driving-sboms/" target="_blank" rel="noopener"><img class="is-eetimes" loading="lazy" decoding="async" src="/assets/images/site/eetimes.png" alt="EE Times logo" width="127" height="28"></a></li>
+                    <li><a href="https://www.techtarget.com/searchitoperations/feature/366611692/US-Army-Lockheed-Martin-detail-SBOM-progress" target="_blank" rel="noopener"><img class="is-techtarget" loading="lazy" decoding="async" src="/assets/images/site/techtarget.png" alt="TechTarget logo" width="55" height="28"></a></li>
+                </ul>
             </div>
         </div>
-    </div>
+    </section>
 
-    {{< comment >}}Press Coverage Section{{< /comment >}}
-    <div class="bg-canvas border-b border-line">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-10">
-            <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
-                <span class="text-ink-muted font-semibold uppercase tracking-eyebrow text-sm whitespace-nowrap">As featured in</span>
-                <div class="flex items-center gap-8 md:gap-12 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-                    <a href="https://www.infoq.com/news/2026/03/sbom-viktor-petersson/" target="_blank" rel="noopener">
-                        <img loading="lazy" decoding="async" class="h-8 w-auto object-contain" width="92" height="28" src="data:image/svg+xml,%3csvg height='28' viewBox='0 0 92 28' width='92' xmlns='http://www.w3.org/2000/svg'%3e %3cg fill='none' fill-rule='evenodd'%3e %3cpath d='m.196.582h6.159v25.047h-6.159z' fill='%23296cae'/%3e %3cg fill-rule='nonzero'%3e %3cpath d='m10.399 25.629v-18.621h5.633v1.732c.725-.727 1.543-1.27 2.454-1.628.912-.358 1.936-.537 3.071-.537 2.029 0 3.538.641 4.528 1.923.991 1.281 1.486 3.245 1.486 5.889v11.242h-5.634v-10.965c0-1.258-.221-2.182-.665-2.771s-1.145-.884-2.105-.884c-1.13 0-1.935.275-2.415.823-.48.549-.72 1.493-.72 2.832v10.965zm21.292 0v-14.758h-2.862v-3.413h2.862c-.036-.381-.057-.658-.063-.831-.007-.174-.009-.329-.009-.468 0-1.974.481-3.398 1.443-4.27.962-.871 2.538-1.307 4.728-1.307.48 0 .971.028 1.47.086s1.019.15 1.561.277v3.898h-.942c-1.039 0-1.724.127-2.056.381-.333.254-.498.762-.498 1.524v.71h3.496v3.413h-3.496v14.758zm15.016-9.302c0 1.698.39 3.046 1.169 4.045s1.82 1.498 3.125 1.498c1.304 0 2.348-.502 3.133-1.507s1.177-2.35 1.177-4.036c0-1.698-.389-3.049-1.168-4.053-.779-1.005-1.827-1.507-3.142-1.507-1.293 0-2.331.508-3.116 1.524s-1.178 2.362-1.178 4.036m4.294 9.908c-3.02 0-5.45-.906-7.292-2.72-1.841-1.812-2.762-4.209-2.762-7.188 0-2.968.924-5.364 2.772-7.189 1.847-1.824 4.274-2.736 7.282-2.736 3.042 0 5.485.909 7.326 2.728 1.842 1.819 2.763 4.217 2.763 7.197 0 2.968-.927 5.361-2.781 7.18-1.853 1.819-4.29 2.728-7.308 2.728' fill='%23296cae'/%3e %3cpath d='m76.028 20.986c1.996 0 3.553-.689 4.672-2.069 1.118-1.38 1.677-3.306 1.677-5.777s-.562-4.403-1.687-5.794c-1.125-1.392-2.678-2.088-4.662-2.088-1.971 0-3.522.702-4.652 2.105-1.131 1.403-1.696 3.329-1.696 5.777s.562 4.368 1.686 5.759c1.125 1.392 2.679 2.087 4.662 2.087m6.657 3.69c-.931.508-1.958.895-3.082 1.161-1.124.265-2.315.398-3.572.398-3.856 0-6.941-1.189-9.256-3.568-2.314-2.379-3.472-5.555-3.472-9.527 0-2.171.353-4.114 1.061-5.829.707-1.715 1.761-3.179 3.163-4.391 1.124-.97 2.396-1.698 3.816-2.183s2.981-.727 4.685-.727c3.843 0 6.925 1.195 9.245 3.586 2.32 2.39 3.48 5.571 3.48 9.544 0 1.663-.193 3.167-.579 4.512-.387 1.346-.984 2.561-1.794 3.646.725.635 1.516 1.141 2.373 1.516.858.375 1.776.615 2.754.719l-1.884 4.469c-1.425-.139-2.72-.488-3.885-1.048-1.166-.561-2.183-1.32-3.053-2.278' fill='%231e8d44'/%3e %3cpath d='m86.38 21.298c.809-1.085 1.407-2.301 1.794-3.646.185-.643.322-1.325.418-2.041-2.205.111-4.373.218-6.51.32-.272 1.18-.729 2.179-1.383 2.986-1.118 1.38-2.676 2.069-4.671 2.069-1.983 0-3.537-.695-4.662-2.087-.554-.685-.969-1.499-1.25-2.44-2.172.086-4.317.165-6.445.236.504 2.357 1.53 4.353 3.104 5.972 2.315 2.379 5.4 3.568 9.256 3.568 1.257 0 2.448-.133 3.572-.399 1.124-.265 2.151-.652 3.082-1.16.87.958 1.887 1.717 3.053 2.278 1.164.56 2.46.909 3.885 1.048l1.883-4.469c-.977-.104-1.895-.344-2.753-.719-.857-.375-1.648-.881-2.373-1.516' fill='%23198643'/%3e %3cpath d='m54.134 20.363c-.785 1.005-1.829 1.507-3.133 1.507-1.305 0-2.346-.499-3.125-1.499-.658-.844-1.035-1.94-1.137-3.283-1.92.022-3.84.035-5.76.039.153 2.609 1.058 4.742 2.73 6.388 1.842 1.814 4.273 2.72 7.292 2.72 3.018 0 5.455-.909 7.308-2.728 1.757-1.724 2.671-3.971 2.763-6.728-1.938.059-3.864.113-5.779.158-.085 1.404-.471 2.546-1.159 3.426m-22.443 5.266h5.634v-8.505c-1.871-.007-3.747-.023-5.634-.049zm-21.292 0h5.633v-8.992c-1.857-.078-3.733-.164-5.633-.262zm11.538 0h5.634v-8.627c-1.865-.04-3.74-.087-5.634-.147zm-21.741 0h6.159v-9.477c-2.024-.119-4.073-.247-6.159-.389z' fill='%232066a9'/%3e %3c/g%3e %3c/g%3e %3c/svg%3e" alt="InfoQ logo">
-                    </a>
-                    <a href="https://www.eetimes.eu/cybersecurity-legislation-driving-sboms/" target="_blank" rel="noopener">
-                        <img loading="lazy" decoding="async" class="h-7 w-auto object-contain" src="/assets/images/site/eetimes.png" alt="EE Times logo" width="127" height="28">
-                    </a>
-                    <a href="https://www.techtarget.com/searchitoperations/feature/366611692/US-Army-Lockheed-Martin-detail-SBOM-progress" target="_blank" rel="noopener">
-                        <img loading="lazy" decoding="async" class="h-7 w-auto object-contain" src="/assets/images/site/techtarget.png" alt="TechTarget logo" width="55" height="28">
-                    </a>
+    {{< comment >}}Why this matters now: sets the section pattern (head, visual, stats, close){{< /comment >}}
+    <section class="section" id="why-now">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Why this matters now</span>
+                    <h2 class="sec-title">The CRA doesn't stop when you ship. <span class="soft">Neither should your security process.</span></h2>
                 </div>
+                <p class="sec-lede">Under the <a href="/compliance/eu-cra/">Cyber Resilience Act</a>, handling vulnerabilities is a legal obligation for the whole support period of a product. An SBOM at release is only the start.</p>
             </div>
-        </div>
-    </div>
 
-    {{< comment >}}Problem Section{{< /comment >}}
-    <div class="bg-canvas py-16 lg:py-24 border-b border-line">
-        <div class="max-w-4xl mx-auto px-6 lg:px-8">
-            <div class="eyebrow-chip mb-5">Why this matters now</div>
-            <h2 class="text-3xl lg:text-5xl font-bold text-ink mb-8 text-balance">The CRA doesn't stop when you ship. Neither should your security process.</h2>
-            <div class="space-y-5 text-lg lg:text-xl text-ink-muted leading-relaxed">
-                <p>Generating an SBOM is a good first step. But what happens after the software ships? New vulnerabilities are found. Dependencies change. Customers stay on older versions. Security fixes have to be built, shipped and explained.</p>
-                <p>The <a href="/compliance/eu-cra/" class="link">Cyber Resilience Act</a> makes handling vulnerabilities for the whole support period of a product a legal obligation for manufacturers. Reporting obligations have applied since <strong class="text-ink">11 September 2026</strong>, and the main obligations apply from <strong class="text-ink">11 December 2027</strong>, with fines of up to <a href="/compliance/eu-cra/#penalties-article-64" class="link">&euro;15 million or 2.5% of global annual turnover</a>.</p>
-                <p>sbomify gives you the tools for that ongoing work, without stitching together spreadsheets, scanners, release notes and email threads.</p>
-            </div>
-            <p class="mt-8 text-xl lg:text-2xl font-semibold text-ink">One connected workflow, from software composition to customer disclosure.</p>
-        </div>
-    </div>
-
-    <div class="bg-surface">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-
-            {{< comment >}}How it works{{< /comment >}}
-            <section id="how-it-works" class="max-w-6xl mx-auto mb-20 scroll-mt-24">
-                <div class="text-center max-w-3xl mx-auto mb-12">
-                    <div class="eyebrow-chip mb-5">How it works</div>
-                    <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink text-balance">Know what's in your software, and which releases are affected</h2>
-                    <p class="text-lg text-ink-muted leading-relaxed">Four steps that stay connected for as long as you support a product.</p>
+            <figure class="lifecycle" data-reveal>
+                <figcaption class="sr-only">An illustrative product lifecycle under the CRA, from release to end of support.</figcaption>
+                <div class="lc-span" aria-hidden="true"><span><strong>Support period</strong> &middot; at least 5 years</span></div>
+                <div class="lc-rail">
+                <span class="lc-path" aria-hidden="true"><span class="lc-comet"></span></span>
+                <ol class="lc-track">
+                    <li style="--i: 0"><span class="lc-dot"></span><span class="lc-tag">v2.0</span><strong>You ship</strong><span>SBOM generated, release recorded</span></li>
+                    <li style="--i: 1" data-tone="danger"><span class="lc-dot"></span><span class="lc-tag">CVE-2026-XXXXX</span><strong>A dependency is hit</strong><span>In a release you still support</span></li>
+                    <li style="--i: 2" data-tone="warning"><span class="lc-dot"></span><span class="lc-tag">24 h</span><strong>Report if exploited</strong><span>Early warning through ENISA&rsquo;s platform</span></li>
+                    <li style="--i: 3" data-tone="success"><span class="lc-dot"></span><span class="lc-tag">v2.0.4</span><strong>Fix and disclose</strong><span>Patch shipped, advisory published</span></li>
+                    <li style="--i: 4" data-tone="end"><span class="lc-dot"></span><span class="lc-tag">EOL</span><strong>End of support</strong><span>Customers told, records kept 10 years</span></li>
+                </ol>
                 </div>
-                <ol class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <li class="card p-8 flex flex-col">
-                        <span class="text-sm font-semibold text-accent-strong mb-3">01</span>
-                        <h3 class="text-2xl font-bold text-ink mb-3">Generate and manage SBOMs</h3>
-                        <p class="text-ink-muted leading-relaxed mb-4">Create CycloneDX and SPDX SBOMs in your pipelines with our <a href="/features/integrations/" class="link">open-source GitHub Action</a>, or upload your own. sbomify validates them against the official schemas, checks them against NTIA, CISA and BSI TR-03183 requirements, and keeps every version. Nothing you upload is ever changed.</p>
-                        <a href="/features/generate-collaborate-analyze/" class="mt-auto text-sm font-medium text-ink hover:text-accent-strong">SBOM lifecycle &rarr;</a>
+            </figure>
+
+            <dl class="stats">
+                <div><dt>to send an early warning of an actively exploited vulnerability</dt><dd>24&nbsp;h</dd></div>
+                <div><dt>minimum support period, unless the product is expected to be used for less</dt><dd>5+&nbsp;years</dd></div>
+                <div><dt>maximum fine, or 2.5% of global annual turnover if that is higher</dt><dd>&euro;15M</dd></div>
+            </dl>
+
+            <p class="sec-close">sbomify gives you one connected workflow for all of it, from software composition to customer disclosure. <a href="#how-it-works">See how it works{{< ph "arrow-right" "bold" "ph-go" >}}</a></p>
+        </div>
+    </section>
+
+    {{< comment >}}How it works: a full-width navy band, same section pattern{{< /comment >}}
+    <section class="band-dark" id="how-it-works" data-nebula="band" style="background-image: url('{{< nebula-still "band" >}}')">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">How it works</span>
+                    <h2 class="sec-title">Know what's in your software. <span class="soft">And which releases are affected.</span></h2>
+                </div>
+                <p class="sec-lede">Four steps that stay connected for as long as you support a product.</p>
+            </div>
+
+            <div class="steps" data-steps>
+                <ol class="steps-list" role="tablist" aria-label="How sbomify works, step by step">
+                    <li>
+                        <button class="steps-tab" type="button" role="tab" id="step-tab-1" aria-controls="step-panel-1" aria-selected="true"><span class="steps-no">01</span><span class="steps-title">Generate and manage SBOMs</span></button>
+                        <div class="steps-body">
+                            <p>CycloneDX and SPDX from your pipelines or uploads, validated and never altered.</p>
+                            <a href="/features/generate-collaborate-analyze/">SBOM lifecycle{{< ph "arrow-right" "bold" "ph-go" >}}</a>
+                        </div>
+                        <span class="steps-progress" aria-hidden="true"></span>
                     </li>
-                    <li class="card p-8 flex flex-col">
-                        <span class="text-sm font-semibold text-accent-strong mb-3">02</span>
-                        <h3 class="text-2xl font-bold text-ink mb-3">Track every supported release</h3>
-                        <p class="text-ink-muted leading-relaxed mb-4">Your latest version isn't your only supported version. Pin component SBOMs to product releases, get a merged SBOM for each release, and record release, end-of-support and end-of-life dates using the ECMA-428 Common Lifecycle Enumeration.</p>
-                        <a href="/faq/how-do-i-create-a-software-release/" class="mt-auto text-sm font-medium text-ink hover:text-accent-strong">Releases &rarr;</a>
+                    <li>
+                        <button class="steps-tab" type="button" role="tab" id="step-tab-2" aria-controls="step-panel-2" aria-selected="false"><span class="steps-no">02</span><span class="steps-title">Track every supported release</span></button>
+                        <div class="steps-body">
+                            <p>Pin SBOMs to releases, with release, end-of-support and end-of-life dates.</p>
+                            <a href="/faq/how-do-i-create-a-software-release/">Releases{{< ph "arrow-right" "bold" "ph-go" >}}</a>
+                        </div>
+                        <span class="steps-progress" aria-hidden="true"></span>
                     </li>
-                    <li class="card p-8 flex flex-col">
-                        <span class="text-sm font-semibold text-accent-strong mb-3">03</span>
-                        <h3 class="text-2xl font-bold text-ink mb-3">Monitor and triage vulnerabilities</h3>
-                        <p class="text-ink-muted leading-relaxed mb-4">Released SBOMs are rescanned on a schedule with <a href="/features/integrations/" class="link">Google OSV</a> and <a href="/features/integrations/" class="link">Dependency-Track</a>, with CISA KEV and EUVD flags. Search a CVE across every product and release, then record your decision with <a href="/faq/how-do-i-use-vex/" class="link">VEX</a>: not affected and why, accepted risk, or fixed.</p>
-                        <a href="/faq/how-do-i-enable-vulnerability-scanning/" class="mt-auto text-sm font-medium text-ink hover:text-accent-strong">Vulnerability scanning &rarr;</a>
+                    <li>
+                        <button class="steps-tab" type="button" role="tab" id="step-tab-3" aria-controls="step-panel-3" aria-selected="false"><span class="steps-no">03</span><span class="steps-title">Monitor and triage vulnerabilities</span></button>
+                        <div class="steps-body">
+                            <p>Rescanned with Google OSV and Dependency-Track. Record each decision with VEX.</p>
+                            <a href="/faq/how-do-i-enable-vulnerability-scanning/">Vulnerability scanning{{< ph "arrow-right" "bold" "ph-go" >}}</a>
+                        </div>
+                        <span class="steps-progress" aria-hidden="true"></span>
                     </li>
-                    <li class="card p-8 flex flex-col">
-                        <span class="text-sm font-semibold text-accent-strong mb-3">04</span>
-                        <h3 class="text-2xl font-bold text-ink mb-3">Tell your customers</h3>
-                        <p class="text-ink-muted leading-relaxed mb-4">Publish SBOMs, VEX, security advisories and compliance documents through a branded <a href="/features/trust-center/" class="link">Trust Center</a> on your own domain. Advisories are also published as CSAF 2.0, and the <a href="/faq/how-do-i-enable-tea-in-sbomify/" class="link">Transparency Exchange API</a> lets customers' tools fetch everything automatically.</p>
-                        <a href="/features/trust-center/" class="mt-auto text-sm font-medium text-ink hover:text-accent-strong">Trust Center &rarr;</a>
+                    <li>
+                        <button class="steps-tab" type="button" role="tab" id="step-tab-4" aria-controls="step-panel-4" aria-selected="false"><span class="steps-no">04</span><span class="steps-title">Tell your customers</span></button>
+                        <div class="steps-body">
+                            <p>Publish SBOMs, VEX and advisories on your own Trust Center, as CSAF and over TEA.</p>
+                            <a href="/features/trust-center/">Trust Center{{< ph "arrow-right" "bold" "ph-go" >}}</a>
+                        </div>
+                        <span class="steps-progress" aria-hidden="true"></span>
                     </li>
                 </ol>
-            </section>
 
-            {{< comment >}}CVE scenario{{< /comment >}}
-            <section class="max-w-6xl mx-auto mb-20 bg-canvas rounded-3xl p-6 sm:p-10 lg:p-14 border border-line shadow-card">
-                <div class="grid lg:grid-cols-5 gap-10 lg:gap-12 items-center">
-                    <div class="lg:col-span-2">
-                        <div class="eyebrow-chip mb-5">Vulnerability handling</div>
-                        <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-ink">A new CVE just dropped. Now what?</h2>
-                        <p class="mb-4 text-lg text-ink-muted leading-relaxed">Knowing a dependency has a vulnerability is only the beginning. Which of your supported releases contain it? Are you actually affected? Does it need a patch? What do you tell your customers?</p>
-                        <p class="mb-6 text-lg text-ink-muted leading-relaxed">sbomify links the finding to the products and releases that ship it, so your team goes from an alert to a recorded decision, a tracked fix and a published advisory.</p>
-                        <p class="text-lg font-semibold text-ink">Less time reconstructing your software history. More time fixing what matters.</p>
+                {{< comment >}}Illustrative product screens in the app's own dark theme, one per step{{< /comment >}}
+                <div class="app-window" data-step="1">
+                    <div class="app-side" aria-hidden="true">
+                        <span class="app-logo"><svg viewBox="0 0 130 105" fill="currentColor" aria-hidden="true"><path d="M.92,9.93C-.31,7.83-.31,5.12.92,3.02,2.05,1.08,4.04-.03,6.39,0h27.87c2.35-.02,4.35,1.06,5.48,3.01,1.23,2.1,1.23,4.82,0,6.92-1.12,1.92-3.08,3.01-5.38,3.01H6.39c-2.35.02-4.34-1.07-5.47-3.02Z"/><path d="M47.71,9.93c-1.22-2.1-1.22-4.81,0-6.91C48.85,1.07,50.84-.04,53.19,0h.68s69.45,0,69.45,0c3.56,0,6.46,2.91,6.46,6.48s-2.9,6.46-6.46,6.46H53.09c-2.3,0-4.26-1.09-5.38-3.01Z"/><path d="M1.02,28.36c-1.23-2.09-1.23-4.81,0-6.91,1.14-1.95,3.14-3.07,5.47-3.03h50.96c1.73,0,3.35.68,4.57,1.9,1.22,1.23,1.89,2.86,1.88,4.59,0,3.55-2.9,6.45-6.45,6.45H6.4c-2.3,0-4.26-1.09-5.38-3.01Z"/><path d="M1.02,46.75c-1.22-2.09-1.22-4.79,0-6.89,1.14-1.95,3.14-3.06,5.48-3.02h.68s69.77,0,69.77,0c3.56,0,6.46,2.9,6.46,6.46s-2.9,6.46-6.46,6.46H6.41c-2.31,0-4.27-1.09-5.39-3.01Z"/><path d="M46.36,61.69c0-3.56,2.9-6.46,6.46-6.46h70.49c2.35-.02,4.34,1.07,5.47,3.01,1.22,2.09,1.22,4.79,0,6.89-1.12,1.92-3.08,3.02-5.38,3.02h-.76s-69.8,0-69.8,0c-3.56,0-6.46-2.9-6.46-6.45Z"/><path d="M67.76,84.67c-1.22-1.23-1.89-2.86-1.89-4.59,0-3.55,2.9-6.45,6.46-6.45h50.97c2.34-.03,4.33,1.06,5.47,3.01,1.23,2.09,1.23,4.81,0,6.91-1.12,1.93-3.08,3.03-5.39,3.03h-51.05c-1.73,0-3.35-.68-4.57-1.9Z"/><path d="M82.06,95.07c1.22,2.1,1.22,4.81,0,6.91-1.12,1.93-3.08,3.02-5.38,3.02H6.46C2.9,104.99,0,102.09,0,98.52s2.89-6.45,6.44-6.47h70.15c2.35-.02,4.33,1.07,5.46,3.01Z"/><path d="M128.86,101.98c-1.13,1.95-3.12,3.06-5.47,3.02h-27.97c-2.3,0-4.26-1.09-5.38-3.01-1.23-2.1-1.23-4.82,0-6.92,1.14-1.95,3.14-3.03,5.48-3.01h27.87c2.35-.03,4.34,1.07,5.47,3.02,1.22,2.09,1.22,4.8,0,6.9Z"/></svg><b>sbomify</b></span>
+                        <span class="app-ws">Acme</span>
+                        <span class="app-group">Monitor</span>
+                        <span class="app-nav">Overview</span>
+                        <span class="app-nav" data-nav="3">Vulnerabilities</span>
+                        <span class="app-group">Ship</span>
+                        <span class="app-nav" data-nav="2">Products</span>
+                        <span class="app-nav" data-nav="1">Components</span>
+                        <span class="app-group">Prove</span>
+                        <span class="app-nav">Compliance</span>
+                        <span class="app-nav" data-nav="4">Security advisories</span>
                     </div>
-                    <figure class="lg:col-span-3">
-                        <div class="rounded-2xl border border-line overflow-hidden">
-                            <div class="bg-surface px-5 py-4 border-b border-line flex flex-wrap items-center gap-x-3 gap-y-2">
-                                <span class="inline-flex items-center gap-2 rounded-full bg-danger-tint px-3 py-1 text-xs font-semibold text-ink"><span class="h-2 w-2 rounded-full bg-danger" aria-hidden="true"></span>Critical</span>
-                                <span class="font-mono text-sm font-semibold text-ink">CVE-2026-XXXXX</span>
-                                <span class="text-sm text-ink-muted">in <span class="font-mono">acme-parser 2.4.0</span></span>
+                    <div class="app-main">
+                        <div class="app-top" aria-hidden="true"><span class="app-search">Search</span><span class="app-avatar">AC</span></div>
+                        <div class="app-panels">
+                            <div class="steps-panel" role="tabpanel" id="step-panel-1" aria-labelledby="step-tab-1">
+                                <p class="app-title">Components</p>
+                                <p class="app-badges"><span class="app-badge" data-tone="success">NTIA</span><span class="app-badge" data-tone="success">CISA</span><span class="app-badge" data-tone="success">BSI TR-03183</span></p>
+                                <table class="app-table">
+                                    <thead><tr><th>SBOM</th><th>Format</th><th class="end">Status</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><b>widget-service</b><small>412 components</small></td><td>CycloneDX 1.6</td><td class="end"><span class="app-badge" data-tone="success">Valid</span></td></tr>
+                                        <tr><td><b>widget-service</b><small>409 components</small></td><td>SPDX 2.3</td><td class="end"><span class="app-badge" data-tone="success">Valid</span></td></tr>
+                                        <tr><td><b>vendor-lib</b><small>Uploaded &middot; 58 components</small></td><td>CycloneDX 1.5</td><td class="end"><span class="app-badge" data-tone="success">Valid</span></td></tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <table class="w-full text-left text-sm">
-                                <caption class="sr-only">Supported releases of an example product and their status for one vulnerability</caption>
-                                <thead class="text-ink-muted">
-                                    <tr class="border-b border-line">
-                                        <th scope="col" class="px-5 py-3 font-semibold">Release</th>
-                                        <th scope="col" class="hidden sm:table-cell px-5 py-3 font-semibold">Support</th>
-                                        <th scope="col" class="px-5 py-3 font-semibold">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-line">
-                                    <tr>
-                                        <td class="px-5 py-4 font-mono font-semibold text-ink">v2.1<span class="block sm:hidden font-sans font-normal text-xs text-ink-muted mt-1">Until 2031</span></td>
-                                        <td class="hidden sm:table-cell px-5 py-4 text-ink-muted">Until 2031</td>
-                                        <td class="px-5 py-4"><span class="inline-flex items-center gap-2 rounded-xl bg-danger-tint px-3 py-1 text-xs font-semibold text-ink"><span class="h-2 w-2 shrink-0 rounded-full bg-danger" aria-hidden="true"></span>Affected &middot; fix in progress</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-5 py-4 font-mono font-semibold text-ink">v2.0<span class="block sm:hidden font-sans font-normal text-xs text-ink-muted mt-1">Until 2030</span></td>
-                                        <td class="hidden sm:table-cell px-5 py-4 text-ink-muted">Until 2030</td>
-                                        <td class="px-5 py-4"><span class="inline-flex items-center gap-2 rounded-xl bg-success-tint px-3 py-1 text-xs font-semibold text-ink"><span class="h-2 w-2 shrink-0 rounded-full bg-success" aria-hidden="true"></span>Fixed in 2.0.4 &middot; advisory published</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-5 py-4 font-mono font-semibold text-ink">v1.2.1<span class="block sm:hidden font-sans font-normal text-xs text-ink-muted mt-1">Until 2028</span></td>
-                                        <td class="hidden sm:table-cell px-5 py-4 text-ink-muted">Until 2028</td>
-                                        <td class="px-5 py-4"><span class="inline-flex items-center gap-2 rounded-xl bg-info-tint px-3 py-1 text-xs font-semibold text-ink"><span class="h-2 w-2 shrink-0 rounded-full bg-info" aria-hidden="true"></span>Not affected &middot; VEX: code not reachable</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-5 py-4 font-mono font-semibold text-ink-muted">v1.0<span class="block sm:hidden font-sans font-normal text-xs text-ink-muted mt-1">Ended 2026</span></td>
-                                        <td class="hidden sm:table-cell px-5 py-4 text-ink-muted">Ended 2026</td>
-                                        <td class="px-5 py-4 text-ink-muted text-xs font-semibold">End of life &middot; customers notified</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="steps-panel" role="tabpanel" id="step-panel-2" aria-labelledby="step-tab-2">
+                                <p class="app-title">Widget Service <span>Releases</span></p>
+                                <table class="app-table">
+                                    <thead><tr><th>Release</th><th>SBOM</th><th class="end">Support</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><b>v2.1</b><small>Released 2026</small></td><td>Merged &middot; 3 components</td><td class="end"><span class="app-badge" data-tone="success">Until 2031</span></td></tr>
+                                        <tr><td><b>v2.0</b><small>Released 2025</small></td><td>Merged &middot; 3 components</td><td class="end"><span class="app-badge" data-tone="success">Until 2030</span></td></tr>
+                                        <tr><td><b>v1.2.1</b><small>Released 2023</small></td><td>Merged &middot; 2 components</td><td class="end"><span class="app-badge" data-tone="success">Until 2028</span></td></tr>
+                                        <tr><td><b>v1.0</b><small>Released 2021</small></td><td>Merged &middot; 2 components</td><td class="end"><span class="app-badge">End of life</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="steps-panel" role="tabpanel" id="step-panel-3" aria-labelledby="step-tab-3">
+                                <p class="app-title">Vulnerabilities</p>
+                                <p class="app-stats"><span><b>1</b>Critical</span><span><b>3</b>High</span><span><b>1</b>KEV</span></p>
+                                <table class="app-table">
+                                    <thead><tr><th>Vulnerability</th><th>Severity</th><th class="end">Status</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><b class="mono">CVE-2026-XXXXX</b><small>acme-parser &middot; KEV</small></td><td><span class="app-sev" data-level="critical">Critical</span></td><td class="end"><span class="app-badge" data-tone="primary">Triage</span></td></tr>
+                                        <tr><td><b class="mono">CVE-2026-YYYYY</b><small>libxml2 &middot; VEX</small></td><td><span class="app-sev" data-level="high">High</span></td><td class="end"><span class="app-badge" data-tone="info">Not affected</span></td></tr>
+                                        <tr><td><b class="mono">GHSA-xxxx-yyyy</b><small>lodash</small></td><td><span class="app-sev" data-level="medium">Medium</span></td><td class="end"><span class="app-badge" data-tone="success">Fixed</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="steps-panel" role="tabpanel" id="step-panel-4" aria-labelledby="step-tab-4">
+                                <p class="app-title">Security advisories</p>
+                                <table class="app-table">
+                                    <thead><tr><th>Advisory</th><th>Format</th><th class="end">Status</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><b class="mono">ACME-SA-2026-01</b><small>Widget Service &middot; v2.0, v2.1</small></td><td>CSAF 2.0</td><td class="end"><span class="app-badge" data-tone="success">Published</span></td></tr>
+                                        <tr><td><b class="mono">ACME-SA-2026-02</b><small>Widget Service &middot; v2.1</small></td><td>CSAF 2.0</td><td class="end"><span class="app-badge">Draft</span></td></tr>
+                                    </tbody>
+                                </table>
+                                <p class="app-note">Published to <span class="mono">trust.acme.example</span> and over TEA</p>
+                            </div>
                         </div>
-                        <figcaption class="mt-3 text-sm text-ink-muted">Illustrative example: one vulnerability across four releases of the same product.</figcaption>
-                    </figure>
-                </div>
-            </section>
-
-            {{< comment >}}AI section{{< /comment >}}
-            <section class="max-w-6xl mx-auto mb-20 bg-inverse rounded-3xl p-6 sm:p-10 lg:p-14">
-                <div class="grid lg:grid-cols-2 gap-10 lg:gap-14">
-                    <div>
-                        <div class="text-on-inverse-subtle text-sm font-semibold uppercase tracking-eyebrow mb-5">AI-enabled, not AI-powered</div>
-                        <h2 class="text-3xl lg:text-5xl font-bold mb-6 text-white text-balance">Your agents. Your data. Your decisions.</h2>
-                        <p class="mb-4 text-lg text-on-inverse-muted leading-relaxed">Your AI agents already know your codebase. Why send it to another vendor's model?</p>
-                        <p class="mb-4 text-lg text-on-inverse-muted leading-relaxed">sbomify doesn't bundle an AI model, and none of its core security functions depend on one. Instead it gives your own agents structured security data and an API built for them, with a dedicated agent token that can read your workspace and propose work, but never approve it.</p>
-                        <p class="text-lg text-on-inverse-muted leading-relaxed">You choose which agents and model providers to use, so you decide where your data goes.</p>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-white mb-5">Use your agents to:</h3>
-                        <ul class="space-y-4 text-on-inverse-muted text-lg">
-                            <li class="flex gap-3"><span class="text-white" aria-hidden="true">&rarr;</span><span>Investigate a CVE in the context of your own code, using the triage and fix prompts sbomify generates</span></li>
-                            <li class="flex gap-3"><span class="text-white" aria-hidden="true">&rarr;</span><span>Propose VEX statements that explain why a release is or isn't affected</span></li>
-                            <li class="flex gap-3"><span class="text-white" aria-hidden="true">&rarr;</span><span>Draft security advisories and propose updates to published ones</span></li>
-                        </ul>
-                        <p class="mt-8 rounded-2xl border border-white/20 p-5 text-on-inverse-muted leading-relaxed"><strong class="text-white">A person signs off.</strong> VEX statements from an agent wait in a review queue, and its changes to published advisories are shown to your team as a diff. Nothing takes effect until a person approves it, and an agent can't approve its own work.</p>
                     </div>
                 </div>
-            </section>
-
-            <div class="max-w-6xl mx-auto mb-20 grid lg:grid-cols-2 gap-8">
-                {{< comment >}}Audit trail{{< /comment >}}
-                <section class="flex flex-col bg-canvas rounded-3xl p-6 sm:p-10 lg:p-12 border border-line shadow-card">
-                    <div class="eyebrow-chip mb-5">Evidence</div>
-                    <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-ink">An audit trail you build by doing the work</h2>
-                    <p class="mb-4 text-lg text-ink-muted leading-relaxed">The hard part of compliance isn't producing a document. It's showing what happened, when and why.</p>
-                    <p class="mb-8 text-lg text-ink-muted leading-relaxed">sbomify keeps SBOMs tied to the releases they describe and never alters them. Every triage decision is a new VEX version. Each finding records when it was first seen and when it was resolved, and advisories keep a timeline of every change. When customers, auditors or market surveillance authorities ask, you have the record.</p>
-                    <div class="mt-auto"><a class="btn-navy" href="/faq/how-do-i-use-vex/">How VEX works in sbomify</a></div>
-                </section>
-
-                {{< comment >}}CRA coverage{{< /comment >}}
-                <section class="flex flex-col bg-canvas rounded-3xl p-6 sm:p-10 lg:p-12 border border-line shadow-card">
-                    <div class="eyebrow-chip mb-5">CRA coverage</div>
-                    <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-ink">What sbomify covers in the CRA, and what it doesn't</h2>
-                    <p class="mb-4 text-lg text-ink-muted leading-relaxed">No tool makes you CRA compliant on its own. Secure design, risk assessment and conformity assessment are still your work.</p>
-                    <p class="mb-8 text-lg text-ink-muted leading-relaxed">sbomify supports most of the vulnerability-handling requirements in Annex I Part II, tracks support periods, and drafts the documents you need: the EU declaration of conformity, vulnerability disclosure policy, <code>security.txt</code> and Article 14 notification templates. Our CRA page maps each obligation to what sbomify does.</p>
-                    <div class="mt-auto"><a class="btn-navy" href="/cra/">How sbomify helps with the CRA</a></div>
-                </section>
             </div>
 
-            <section class="max-w-6xl mx-auto mb-20 bg-canvas rounded-3xl p-6 sm:p-10 lg:p-14 border border-line shadow-card">
-                <div class="grid lg:grid-cols-2 gap-12 items-center mb-10">
-                    <div>
-                    <div class="eyebrow-chip mb-5">Trust Center</div>
-                    <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-ink">Disclosure your customers can actually use</h2>
-                    <p class="mb-4 text-lg text-ink leading-relaxed font-semibold">
-                    Send a link instead of scheduling a call, and cut security questionnaire response times from weeks to minutes.
-                    </p>
-                    <p class="mb-6 text-lg text-ink-muted leading-relaxed">
-                    Share SBOMs, VEX, security advisories, CBOMs and compliance documents such as SOC 2 and ISO 27001 from one branded <a href="/features/trust-center/" class="link">Trust Center</a> on your own domain. Make each item public, private or gated behind an access request and NDA. People get a web portal; their tools get CSAF feeds and the Transparency Exchange API (TEA).
-                    </p>
-                        <div class="mt-8 flex flex-wrap gap-4"><a class="btn-navy" href="/features/trust-center/">Explore the Trust Center</a><a class="btn-secondary" href="https://trust.sbomify.com/">See a live Trust Center</a></div>
+            <p class="sec-close">Every step keeps its history, so your audit trail builds itself as you work. <a href="/cra/">How sbomify helps with the CRA{{< ph "arrow-right" "bold" "ph-go" >}}</a></p>
+        </div>
+    </section>
+
+    {{< comment >}}CVE scenario: a worked triage that answers itself (stages 0-4; 4 is the finished state){{< /comment >}}
+    <section class="section" id="cve-example">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Vulnerability handling</span>
+                    <h2 class="sec-title">A new CVE just dropped. <span class="soft">Now what?</span></h2>
+                </div>
+                <p class="sec-lede">sbomify links the finding to the products and releases that ship it, so your team goes from an alert to a recorded decision, a tracked fix and a published advisory.</p>
+            </div>
+
+            <div class="triage" data-stages="4" data-stage="4">
+                <ol class="triage-qs">
+                    <li data-q="1"><span class="triage-check" aria-hidden="true"></span><span><b>Which of your supported releases contain it?</b><span class="triage-a">Three of four, straight from their SBOMs</span></span></li>
+                    <li data-q="2"><span class="triage-check" aria-hidden="true"></span><span><b>Are you actually affected?</b><span class="triage-a">v2.0 and v2.1 are; v1.2.1 is not, recorded with VEX</span></span></li>
+                    <li data-q="3"><span class="triage-check" aria-hidden="true"></span><span><b>Does it need a patch?</b><span class="triage-a">Fixed in 2.0.4, in progress for 2.1</span></span></li>
+                    <li data-q="4"><span class="triage-check" aria-hidden="true"></span><span><b>What do you tell your customers?</b><span class="triage-a">An advisory, on your Trust Center and as CSAF</span></span></li>
+                </ol>
+
+                <figure class="triage-case">
+                    <div class="example-head">
+                        <span class="example-id">CVE-2026-XXXXX</span>
+                        <span class="pill" data-sev="critical">Critical</span>
+                        <span class="in">in <span class="mono">acme-parser 2.4.0</span></span>
                     </div>
-                    <div>
+                    <table>
+                        <caption class="sr-only">Supported releases of an example product and their status for one vulnerability</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Release</th>
+                                <th scope="col">Support</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-changes="1 2 3">
+                                <td class="release">v2.1</td>
+                                <td>Until 2031</td>
+                                <td><div class="st-stack">
+                                    <span class="sev st" data-show="0" data-sev="pending" data-label="Checking" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="1" data-label="Ships acme-parser 2.4.0" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="2" data-sev="affected" data-label="Affected" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="3 4" data-sev="affected">Affected &middot; fix in progress</span>
+                                </div></td>
+                            </tr>
+                            <tr data-changes="1 2 3 4">
+                                <td class="release">v2.0</td>
+                                <td>Until 2030</td>
+                                <td><div class="st-stack">
+                                    <span class="sev st" data-show="0" data-sev="pending" data-label="Checking" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="1" data-label="Ships acme-parser 2.4.0" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="2" data-sev="affected" data-label="Affected" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="3" data-sev="fixed" data-label="Fixed in 2.0.4" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="4" data-sev="fixed">Fixed in 2.0.4 &middot; advisory published</span>
+                                </div></td>
+                            </tr>
+                            <tr data-changes="1 2">
+                                <td class="release">v1.2.1</td>
+                                <td>Until 2028</td>
+                                <td><div class="st-stack">
+                                    <span class="sev st" data-show="0" data-sev="pending" data-label="Checking" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="1" data-label="Ships acme-parser 2.4.0" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="2 3 4" data-sev="not-affected">Not affected &middot; VEX: code not reachable</span>
+                                </div></td>
+                            </tr>
+                            <tr data-changes="1 4">
+                                <td class="release muted">v1.0</td>
+                                <td class="muted">Ended 2026</td>
+                                <td><div class="st-stack">
+                                    <span class="sev st" data-show="0" data-sev="pending" data-label="Checking" aria-hidden="true"></span>
+                                    <span class="sev st muted" data-show="1 2 3" data-label="End of life" aria-hidden="true"></span>
+                                    <span class="sev st" data-show="4">End of life &middot; customers notified</span>
+                                </div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <figcaption class="note">Illustrative example: one vulnerability across four releases of the same product.</figcaption>
+                </figure>
+            </div>
+
+            <p class="sec-close">Less time reconstructing your software history. More time fixing what matters. <a href="/faq/how-do-i-enable-vulnerability-scanning/">Vulnerability scanning{{< ph "arrow-right" "bold" "ph-go" >}}</a></p>
+        </div>
+    </section>
+
+    {{< comment >}}Agents: full-width, a vivid nebula rising from the bottom under a white-to-clear wash. An illustrative agent session types itself out and a person approves its proposal.{{< /comment >}}
+    <section class="band-agent" id="agents" data-nebula="vivid" style="background-image: url('{{< nebula-still "vivid" >}}')">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker"><span class="agent-spark" aria-hidden="true"></span>AI-enabled, not AI-powered</span>
+                    <h2 class="sec-title">Your agents. Your data. <span class="soft">Your decisions.</span></h2>
+                </div>
+                <p class="sec-lede">Your AI agents already know your codebase. sbomify gives them structured security data and an API built for them, with a token that can propose work but never approve it.</p>
+            </div>
+
+            <figure class="agent" data-agent>
+                <figcaption class="sr-only">An illustrative agent session: the agent triages a critical vulnerability with sbomify and proposes a VEX statement, which a person approves in the review queue.</figcaption>
+
+                <div class="term">
+                    <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>agent session</span></div>
+                    <ol class="term-body">
+                        <li class="tl tl-you" data-t="0" style="--n: 46"><span class="tl-p" aria-hidden="true">&gt;</span>Triage the new critical in widget-service</li>
+                        <li class="tl tl-call" data-t="1700" style="--n: 30"><span class="tl-tool">sbomify</span>list findings &middot; critical</li>
+                        <li class="tl tl-out" data-t="2700" style="--n: 52">CVE-2026-XXXXX &middot; acme-parser 2.4.0 &middot; KEV &middot; v2.1, v2.0, v1.2.1</li>
+                        <li class="tl tl-call" data-t="3700" style="--n: 36"><span class="tl-tool">sbomify</span>get triage prompt</li>
+                        <li class="tl tl-call" data-t="4700" style="--n: 44"><span class="tl-tool">code</span>search parse_header &middot; v1.2.1</li>
+                        <li class="tl tl-out" data-t="5800" style="--n: 40">Never called: vulnerable code not reachable</li>
+                        <li class="tl tl-call" data-t="6800" style="--n: 40"><span class="tl-tool">sbomify</span>propose VEX &middot; v1.2.1 &middot; not affected</li>
+                        <li class="tl tl-wait" data-t="7900" style="--n: 40"><span class="tl-p" aria-hidden="true">&hellip;</span>Proposed. Waiting for a person to approve.</li>
+                        <li class="tl tl-done" data-t="10800" style="--n: 40"><span class="tl-p" aria-hidden="true">&check;</span>Approved by Sam. VEX published.</li>
+                    </ol>
+                </div>
+
+                <div class="rq" data-t="7400">
+                    <div class="rq-head"><span>Review queue</span><span class="app-badge rq-pending" data-tone="primary" data-label="1 pending" aria-hidden="true"></span><span class="app-badge rq-clear" data-tone="success">All reviewed</span></div>
+                    <div class="rq-item">
+                        <p class="rq-kind">VEX proposal <span>from agent token <b class="mono">triage-bot</b></span></p>
+                        <p class="rq-what"><b class="mono">CVE-2026-XXXXX</b> in <b class="mono">v1.2.1</b></p>
+                        <p class="rq-vex"><span class="app-badge" data-tone="info">Not affected</span><span>Code not reachable</span></p>
+                        <div class="rq-actions" data-t="9000"><span class="rq-btn">Reject</span><span class="rq-btn is-primary">Approve</span></div>
+                        <p class="rq-done" data-t="10400"><span class="rq-avatar" aria-hidden="true">S</span>Approved by Sam &middot; VEX published</p>
+                    </div>
+                    <p class="rq-note">An agent can't approve its own work.</p>
+                </div>
+            </figure>
+
+            <ul class="agent-can">
+                <li><b>Investigate a CVE</b><span>in the context of your own code, using the triage and fix prompts sbomify generates</span></li>
+                <li><b>Propose VEX statements</b><span>that explain why a release is or isn't affected</span></li>
+                <li><b>Draft security advisories</b><span>and propose updates to published ones</span></li>
+            </ul>
+
+            <p class="sec-close"><b>A person signs off.</b> VEX statements from an agent wait in a review queue, and its changes to published advisories are shown to your team as a diff. sbomify doesn't bundle an AI model, so you choose which agents and model providers to use, and where your data goes.</p>
+        </div>
+    </section>
+
+    {{< comment >}}Evidence, CRA coverage and Trust Center, as one bento{{< /comment >}}
+    <section class="section" id="prove">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Evidence &middot; Compliance &middot; Disclosure</span>
+                    <h2 class="sec-title">Prove it. <span class="soft">To auditors, regulators and customers.</span></h2>
+                </div>
+                <p class="sec-lede">The work you do in sbomify becomes the record you show.</p>
+            </div>
+
+            <div class="bento" data-reveal>
+
+                {{< comment >}}Trust Center: the big card{{< /comment >}}
+                <article class="bento-card bento-tc" data-nebula="grey" style="background-image: url('{{< nebula-still "grey" >}}')">
+                    <div class="bento-copy">
+                        <span class="kicker">Trust Center</span>
+                        <h3>Disclosure your customers can actually use</h3>
+                        <p>Send a link, not a call. Security questionnaires in minutes, not weeks.</p>
+                        <div class="bento-actions"><a class="btn-navy" href="/features/trust-center/">Explore the Trust Center</a><a class="btn-secondary" href="https://trust.sbomify.com/">See a live Trust Center</a></div>
+                    </div>
+                    <div class="bento-visual">
                         {{< trust-center-artifacts >}}
                     </div>
-                </div>
+                </article>
 
-                {{< trust-center-pillars-grid >}}
-            </section>
+                {{< comment >}}Evidence: an audit trail of real events{{< /comment >}}
+                <article class="bento-card bento-ev">
+                    <span class="kicker">Evidence</span>
+                    <h3>An audit trail you build by doing the work</h3>
+                    <p>Every decision is a new version. Nothing is overwritten.</p>
+                    <ol class="versions" aria-label="Example: three versions of one VEX statement, newest first">
+                        <li><span class="mono">VEX v3</span><span>Not affected</span></li>
+                        <li><span class="mono">VEX v2</span><span>Under investigation</span></li>
+                        <li><span class="mono">VEX v1</span><span>Affected</span></li>
+                    </ol>
+                    <a class="bento-link" href="/faq/how-do-i-use-vex/">How VEX works in sbomify{{< ph "arrow-right" "bold" "ph-go" >}}</a>
+                </article>
 
-            {{< comment >}}Trusted By section{{< /comment >}}
-            <div class="max-w-6xl mx-auto mb-20 bg-inverse rounded-3xl px-8 py-10 overflow-hidden">
-                <span class="text-on-inverse-subtle text-sm font-semibold uppercase tracking-eyebrow mb-8 block text-center">Trusted By</span>
-                <figure class="max-w-2xl mx-auto mb-10 text-center">
-                    <blockquote class="text-lg lg:text-xl text-white leading-relaxed">
+                {{< comment >}}CRA coverage: the Annex I Part II obligations, as on /cra/{{< /comment >}}
+                <article class="bento-card bento-cra">
+                    <span class="kicker">CRA coverage</span>
+                    <h3>What sbomify covers in the CRA</h3>
+                    <div class="bignum">
+                        <p class="bignum-n">6<span>/8</span></p>
+                        <p class="bignum-c">vulnerability-handling requirements covered or drafted for you</p>
+                    </div>
+                    <dl class="cov">
+                        <div data-k="full"><dt>Built in</dt><dd><span>SBOMs</span><span>Disclosure of fixes</span></dd></div>
+                        <div data-k="half"><dt>Drafted for you</dt><dd><span>Remediation</span><span>Disclosure policy</span><span>Contact address</span><span>Advisories</span></dd></div>
+                        <div data-k="none"><dt>Yours</dt><dd><span>Security testing</span><span>Shipping updates</span></dd></div>
+                    </dl>
+                    <a class="bento-link" href="/guides/cra-obligations/">Every CRA obligation, mapped{{< ph "arrow-right" "bold" "ph-go" >}}</a>
+                </article>
+
+                {{< comment >}}Documents sbomify drafts{{< /comment >}}
+                <article class="bento-card bento-docs">
+                    <span class="kicker">Drafted for you</span>
+                    <h3>The documents the CRA asks for</h3>
+                    <ul class="files" aria-label="Documents sbomify drafts">
+                        <li><span class="file-ico" data-ext="PDF" aria-hidden="true"></span><b>EU declaration of conformity.pdf</b><small>PDF &middot; CRA Annex V</small></li>
+                        <li><span class="file-ico" data-ext="MD" aria-hidden="true"></span><b>Vulnerability disclosure policy.md</b><small>Markdown &middot; Published</small></li>
+                        <li><span class="file-ico" data-ext="TXT" aria-hidden="true"></span><b>security.txt</b><small>Text &middot; /.well-known/</small></li>
+                        <li><span class="folder-ico" aria-hidden="true"></span><b>Article 14 notifications</b><small>Folder &middot; 3 templates</small></li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    {{< comment >}}Trusted By: one editorial pull quote, the two customers as case-study cards{{< /comment >}}
+    <section class="section" id="trusted-by">
+        <div class="wrap">
+            <span class="kicker">Trusted By</span>
+            <div class="trust">
+                <figure class="pull">
+                    <blockquote>
                         <p>&ldquo;Using sbomify has hugely accelerated our work on NTIA compliance. Viktor has also been leading a group that&rsquo;s creating standards for making SBOMs &mdash; this gives us confidence that sbomify will become a platform that follows industry practices as they emerge.&rdquo;</p>
                     </blockquote>
-                    <figcaption class="mt-4 text-sm text-on-inverse-muted">
-                        &mdash; Chris Swan, <a href="/case-studies/atsign/" class="link">Atsign</a>
+                    <figcaption>
+                        {{< avatar src="images/chris.png" >}}
+                        <span><b>Chris Swan</b><span>Engineer, <a href="/case-studies/atsign/">Atsign</a></span></span>
                     </figcaption>
                 </figure>
-                <div class="relative">
-                    <div class="flex items-center justify-center gap-6 md:gap-12 lg:gap-16 h-16">
-                        <a href="/case-studies/atsign/" class="hover:opacity-80 transition-opacity flex items-center flex-shrink-0">
-                            <img class="max-w-[150px] max-h-12 object-contain" src="/assets/images/site/atsign.svg" alt="atsign logo" width="150" height="48" />
+
+                <ul class="cases">
+                    <li>
+                        <a href="/case-studies/atsign/">
+                            <img src="/assets/images/site/atsign-logo-horizontal-color2022.svg" alt="atsign logo" width="150" height="48">
+                            <span>From lock-file SBOMs to NTIA-compliant ones for its secure communications platform.</span>
+                            <b>Read the case study{{< ph "arrow-right" "bold" "ph-go" >}}</b>
                         </a>
-                        <a href="/case-studies/screenly/" class="hover:opacity-80 transition-opacity flex items-center flex-shrink-0">
-                            <img class="max-w-[150px] max-h-12 object-contain" src="/assets/images/site/screenly.svg" alt="Screenly logo" width="135" height="32" />
+                    </li>
+                    <li>
+                        <a href="/case-studies/screenly/">
+                            <img src="/assets/images/site/screenly_dark.svg" alt="Screenly logo" width="135" height="32">
+                            <span>Dozens of SBOMs across a digital signage product line, generated, grouped and shared.</span>
+                            <b>Read the case study{{< ph "arrow-right" "bold" "ph-go" >}}</b>
                         </a>
-                    </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    {{< comment >}}Open standards / self-host{{< /comment >}}
+    <section class="section" id="no-lock-in">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">No lock-in</span>
+                    <h2 class="sec-title">Open standards. <span class="soft">Your infrastructure or ours.</span></h2>
                 </div>
+                <p class="sec-lede">Your supply-chain security shouldn't depend on one vendor's data format. sbomify works in the open standards, with an API for everything else.</p>
             </div>
 
-            {{< comment >}}Open standards / self-host{{< /comment >}}
-            <section class="max-w-6xl mx-auto mb-20 bg-canvas rounded-3xl p-6 sm:p-10 lg:p-14 border border-line shadow-card">
-                <div class="grid lg:grid-cols-2 gap-10 lg:gap-14">
-                    <div>
-                        <div class="eyebrow-chip mb-5">No lock-in</div>
-                        <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-ink">Open standards. Your infrastructure or ours.</h2>
-                        <p class="mb-4 text-lg text-ink-muted leading-relaxed">Your supply-chain security shouldn't depend on one vendor's data format. sbomify works in CycloneDX, SPDX, OpenVEX, CSAF and the Transparency Exchange API, with an API for everything else.</p>
-                        <p class="mb-8 text-lg text-ink-muted leading-relaxed">Use our hosted cloud, or <a href="https://github.com/sbomify/sbomify" class="link">get the source on GitHub</a> and self-host it for complete control over your data and infrastructure.</p>
-                        <div class="flex flex-wrap items-center gap-4">
-                            <a class="btn-navy" href="https://app.sbomify.com" data-cta-location="home_self_host" data-cta-label="Start free">Start free in the cloud</a>
-                            <a class="btn-secondary" href="https://github.com/sbomify/sbomify">Self-Host</a>
-                            <div id="gh-star-cta" class="hidden"></div>
+            <ul class="stds" data-reveal aria-label="Standards sbomify works in">
+                <li style="--i: 0">{{< std-logo "cyclonedx" "CycloneDX" >}}<span>SBOM</span></li>
+                <li style="--i: 1">{{< std-logo "spdx" "SPDX" >}}<span>SBOM</span></li>
+                <li style="--i: 2"><strong>OpenVEX</strong><span>VEX</span></li>
+                <li style="--i: 3">{{< std-logo "csaf" "CSAF" >}}<span>Advisories</span></li>
+                <li style="--i: 4"><strong>TEA</strong><span>Transparency Exchange API</span></li>
+            </ul>
+
+            <div class="deploy">
+                <article>
+                    <div class="deploy-head">
+                        <span class="deploy-ico">{{< ph "cloud" >}}</span>
+                    </div>
+                    <h3>sbomify Cloud</h3>
+                    <p>Hosted and kept up to date by us. Sign up and start in minutes.</p>
+                    <span class="deploy-where">{{< ph "lock-simple" >}}app.sbomify.com</span>
+                    <div class="deploy-actions">
+                        <a class="btn-navy" href="https://app.sbomify.com" data-cta-location="home_self_host" data-cta-label="Start free">Start free in the cloud</a>
+                    </div>
+                </article>
+                <article>
+                    <div class="deploy-head">
+                        <span class="deploy-ico">{{< ph "hard-drives" >}}</span>
+                        <div class="deploy-meta">
                             <div id="gh-latest-version" class="hidden"></div>
+                            <div id="gh-star-cta" class="hidden"></div>
                         </div>
                     </div>
-                    <div class="lg:border-l lg:border-line lg:pl-14">
-                        <h3 class="text-lg font-semibold text-ink mb-5">Built by people who write the standards</h3>
-                        <p class="mb-4 text-ink-muted leading-relaxed">sbomify follows the blueprint of the CISA working group on SBOM generation, co-led by sbomify founder <a href="/about/" class="link">Viktor Petersson</a>, who is also an invited expert to ECMA TC54 on security artifacts and the Transparency Exchange API.</p>
-                        <p class="text-ink-muted leading-relaxed">When the standards move, sbomify moves with them.</p>
+                    <h3>Self-hosted</h3>
+                    <p>The same app on your own servers, with Docker Compose or Helm. Complete control over your data.</p>
+                    <code class="deploy-where"><span aria-hidden="true">$</span> docker compose up -d</code>
+                    <div class="deploy-actions">
+                        <a class="btn-secondary" href="/self-hosting/">Self-hosting guide</a>
+                        <a class="link-go" href="https://github.com/sbomify/sbomify">{{< ph "github-logo" >}}Source on GitHub</a>
                     </div>
-                </div>
-            </section>
-
-            {{< comment >}}Final CTA{{< /comment >}}
-            <section class="max-w-4xl mx-auto text-center">
-                <h2 class="text-3xl lg:text-5xl font-bold text-ink mb-6 text-balance">Your CRA vulnerability-handling workflow starts here</h2>
-                <p class="text-lg lg:text-xl text-ink-muted leading-relaxed mb-10 max-w-2xl mx-auto">Stop managing SBOMs, releases, vulnerabilities and security disclosures in separate systems. Bring them together with sbomify.</p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a class="btn-navy btn-lg" href="https://app.sbomify.com/enterprise-contact/" data-cta-location="home_final" data-cta-label="Book a demo">Book a demo</a>
-                    <a class="btn-secondary btn-lg" href="https://app.sbomify.com" data-cta-location="home_final" data-cta-label="Start free">Start free</a>
-                </div>
-            </section>
-        </div>
-    </div>
-    <div class="bg-inverse">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-            <div class="text-sm font-semibold uppercase tracking-eyebrow mb-12 text-on-inverse-subtle">
-                Blog
+                </article>
             </div>
-            {{< posts limit="3" dark="true" title="Latest blog posts" >}}
+
+            <p class="credit">
+                {{< avatar src="images/viktor.png" >}}
+                <span><b>Built by people who write the standards.</b> Founder <a href="/about/">Viktor Petersson</a> co-led the CISA working group on SBOM generation and is an invited expert to ECMA TC54. When the standards move, sbomify moves with them.</span>
+            </p>
         </div>
-    </div>
+    </section>
+
+    {{< comment >}}Final CTA: a sunrise over a horizon, the page's one big orange moment{{< /comment >}}
+    {{< dawn-cta title="Your CRA vulnerability-handling workflow starts here" text="Stop managing SBOMs, releases, vulnerabilities and security disclosures in separate systems. Bring them together with sbomify." location="home_final" >}}
+
+    {{< comment >}}Blog: pulled up onto the dawn's ground, so the grey drift runs beneath it{{< /comment >}}
+    <section class="section blog-ground" id="blog">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Blog</span>
+                    <h2 class="sec-title">Latest blog posts. <span class="soft">News, guides and releases.</span></h2>
+                </div>
+                <a class="link-go" href="/blog/">View all posts{{< ph "arrow-right" "bold" "ph-go" >}}</a>
+            </div>
+            {{< home-posts >}}
+        </div>
+    </section>
 </div>
 
 <script>
@@ -354,7 +551,7 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
       if (!href) return;
 
       var a = makeEl('a',
-        'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-line hover:border-line-strong transition-colors group no-underline',
+        'chip group',
         { href: href, target: '_blank', rel: 'noopener noreferrer' });
 
       var dot = makeEl('span', 'relative flex h-2 w-2', { 'aria-hidden': 'true' });
@@ -362,7 +559,7 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
       dot.appendChild(makeEl('span', 'relative inline-flex rounded-full h-2 w-2 bg-success'));
       a.appendChild(dot);
 
-      var label = makeEl('span', 'text-xs font-medium text-ink group-hover:text-accent-strong');
+      var label = makeEl('span', '');
       label.textContent = 'Release ' + data.tag_name;
       a.appendChild(label);
 
@@ -375,7 +572,7 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
       if (!slot || !data || data.stargazers_count === undefined) return;
 
       var a = makeEl('a',
-        'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy text-white hover:bg-navy-80 transition-colors no-underline group',
+        'chip group',
         { href: 'https://github.com/sbomify/sbomify', target: '_blank', rel: 'noopener noreferrer' });
 
       var svgNS = 'http://www.w3.org/2000/svg';
@@ -389,11 +586,11 @@ keywords: CRA vulnerability handling, Cyber Resilience Act, product security, SB
       svg.appendChild(path);
       a.appendChild(svg);
 
-      var label = makeEl('span', 'text-xs font-medium');
+      var label = makeEl('span', '');
       label.textContent = 'Star us';
       a.appendChild(label);
 
-      var count = makeEl('span', 'text-xs font-medium text-on-inverse-subtle border-l border-white/20 pl-2 ml-1 group-hover:text-white transition-colors');
+      var count = makeEl('span', 'muted');
       count.textContent = data.stargazers_count.toLocaleString();
       a.appendChild(count);
 

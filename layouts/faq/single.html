@@ -1,32 +1,33 @@
 {{ define "main" }}
 <div>
-  <div class="hero px-5 py-16 lg:py-24 lg:px-24">
-
-    {{/* Content */}}
-    <div class="relative max-w-4xl mx-auto text-center">
-      <h1 class="text-ink text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
-        {{ .Title }}
-      </h1>
-      {{ with .Params.plan }}
-      <span class="inline-block px-4 py-1.5 rounded-full text-sm font-semibold bg-surface-strong text-ink border border-line">{{ . }} plan</span>
-      {{ end }}
+  <div class="hero">
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap pt-10 lg:pt-16 pb-10 lg:pb-14">
+      <div class="max-w-4xl">
+        {{/* Breadcrumb */}}
+        <nav class="mb-6 text-sm text-ink-subtle" aria-label="Breadcrumb">
+          <ol class="flex flex-wrap items-center gap-2">
+            <li><a href="/" class="hover:text-ink transition-colors">Home</a></li>
+            <li class="text-navy-40">/</li>
+            <li><a href="/faq/" class="hover:text-ink transition-colors">FAQ</a></li>
+            <li class="text-navy-40">/</li>
+            <li class="text-ink-muted">{{ .Title }}</li>
+          </ol>
+        </nav>
+        <h1 class="text-ink !text-[clamp(2.25rem,4.8vw,3.75rem)] mb-5">
+          {{ .Title }}
+        </h1>
+        {{ with .Params.plan }}
+        <span class="tag">{{ . }} plan</span>
+        {{ end }}
+      </div>
     </div>
   </div>
 
-  <div class="bg-surface">
-    <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-      {{/* Breadcrumb */}}
-      <nav class="mb-8 text-sm text-ink-muted" aria-label="Breadcrumb">
-        <ol class="flex items-center gap-2">
-          <li><a href="/" class="hover:text-accent-strong transition-colors">Home</a></li>
-          <li class="text-navy-40">/</li>
-          <li><a href="/faq/" class="hover:text-accent-strong transition-colors">FAQ</a></li>
-          <li class="text-navy-40">/</li>
-          <li class="text-navy-80">{{ .Title }}</li>
-        </ol>
-      </nav>
-
-      <article class="faq-content bg-canvas p-8 md:p-12 rounded-2xl shadow-card border border-line">
+  <div class="wrap">
+    <div class="section-rule pt-10 lg:pt-14 pb-16 lg:pb-24">
+      <div class="read">
+      <article class="faq-content">
         {{ partial "agent-tools.html" . }}
         {{ partial "tldr.html" . }}
         {{ partial "content.html" . }}
@@ -40,21 +41,22 @@
       {{ with .PrevInSection }}{{ $related = $related | union (slice .) }}{{ end }}
       {{ with .NextInSection }}{{ $related = $related | union (slice .) }}{{ end }}
       {{ with $related }}
-      <nav class="mt-12" aria-labelledby="faq-related-heading">
-        <h2 id="faq-related-heading" class="text-xl font-bold text-ink mb-4">Related questions</h2>
-        <ul class="space-y-3">
+      <nav class="mt-14" aria-labelledby="faq-related-heading">
+        <h2 id="faq-related-heading" class="eyebrow mb-4">Related questions</h2>
+        <ul class="rows">
           {{ range . }}
-          <li><a href="{{ .RelPermalink }}" class="link">{{ .Title }}</a></li>
+          <li><a href="{{ .RelPermalink }}" class="block py-3.5 font-medium text-ink hover:text-ink-muted transition-colors">{{ .Title }}</a></li>
           {{ end }}
         </ul>
       </nav>
       {{ end }}
 
       {{/* Bottom navigation */}}
-      <div class="mt-12">
-        <a href="/faq/" class="text-ink hover:text-accent-strong font-semibold transition-colors no-underline">
-          &larr; All FAQ
+      <div class="mt-10">
+        <a href="/faq/" class="btn-secondary btn-md">
+          {{ partial "ph.html" (dict "name" "arrow-left" "class" "ph-back") }}All FAQ
         </a>
+      </div>
       </div>
     </div>
   </div>

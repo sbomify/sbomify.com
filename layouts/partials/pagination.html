@@ -1,17 +1,17 @@
 {{ $paginator := .Paginator }}
 
-<nav class="flex justify-center items-center gap-4" aria-label="Pagination">
+<nav class="flex flex-wrap items-center gap-3 border-t border-line pt-8" aria-label="Pagination">
   {{ if $paginator.HasPrev }}
-    <a href="{{ $paginator.Prev.URL }}" class="px-8 py-3 bg-canvas border border-line hover:border-ink text-ink hover:text-accent-strong rounded-full font-medium transition-all duration-200">&larr; Previous</a>
+    <a href="{{ $paginator.Prev.URL }}" class="btn-secondary">{{ partial "ph.html" (dict "name" "arrow-left" "class" "ph-back") }}Previous</a>
   {{ else }}
-    <span class="px-8 py-3 bg-surface border border-line text-ink-muted rounded-full font-medium cursor-not-allowed">&larr; Previous</span>
+    <span class="btn-secondary opacity-45 cursor-not-allowed" aria-disabled="true">{{ partial "ph.html" (dict "name" "arrow-left" "class" "ph-back") }}Previous</span>
   {{ end }}
 
-  <span class="px-6 py-3 text-navy-80 font-medium">Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
+  <span class="px-3 text-ink-subtle text-sm font-medium tabular-nums">Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
 
   {{ if $paginator.HasNext }}
-    <a href="{{ $paginator.Next.URL }}" class="btn-primary px-8">Next &rarr;</a>
+    <a href="{{ $paginator.Next.URL }}" class="btn-navy">Next{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}</a>
   {{ else }}
-    <span class="px-8 py-3 bg-surface border border-line text-ink-muted rounded-full font-medium cursor-not-allowed">Next &rarr;</span>
+    <span class="btn-secondary opacity-45 cursor-not-allowed" aria-disabled="true">Next{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}</span>
   {{ end }}
 </nav>

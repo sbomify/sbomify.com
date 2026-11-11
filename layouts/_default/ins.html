@@ -1,0 +1,6 @@
+{{- /* A page built entirely from the .ins component layer: the content brings
+       its own <div class="ins"> root, hero and sections (as the home page
+       does), so the layout adds nothing around it. */ -}}
+{{ define "main" }}
+{{ partial "content.html" . }}
+{{ end }}

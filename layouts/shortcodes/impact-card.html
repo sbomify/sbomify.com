@@ -1,12 +1,10 @@
-<div class="bg-canvas p-8 rounded-3xl border border-line shadow-card group flex flex-col h-full">
-    <div class="w-12 h-12 {{ .Get "icon_bg_class" | default "bg-surface-strong" }} rounded-2xl flex items-center justify-center {{ .Get "icon_text_class" | default "text-ink" }} mb-6">
+<div class="group border-t border-line pt-7 pb-2 flex flex-col h-full">
+    <div class="icon-tile {{ .Get "icon_bg_class" | default "bg-surface-strong" }} {{ .Get "icon_text_class" | default "text-ink" }} mb-5">
         {{ if .Get "svg" }}{{ .Get "svg" | safeHTML }}{{ else }}{{ .Inner | safeHTML }}{{ end }}
     </div>
-    <h3 class="text-2xl font-bold text-ink mb-4">{{ .Get "title" }}</h3>
-    <p class="text-ink-muted leading-relaxed mb-8 flex-grow">
+    <h3 class="text-xl font-bold tracking-heading text-ink mb-3">{{ .Get "title" }}</h3>
+    <p class="text-ink-muted leading-relaxed mb-6 flex-grow">
         {{ .Get "description" | safeHTML }}
     </p>
-    <div class="pt-6 border-t border-navy-5">
-        <span class="inline-block bg-surface text-ink text-xs font-semibold px-3 py-1.5 rounded-lg uppercase tracking-eyebrow border border-line text-center">{{ .Get "link_text" }}</span>
-    </div>
+    <div class="eyebrow">{{ .Get "link_text" }}</div>
 </div>

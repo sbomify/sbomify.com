@@ -5,7 +5,7 @@ title: From Zero to SBOM Hero
 description: "Generate your first compliance-ready SBOM in under 5 minutes. A quick-start guide to SBOM generation, quality, and distribution."
 ---
 
-<div class="mb-12 bg-canvas rounded-xl p-6 border border-line">
+<div class="card mb-12 p-4 sm:p-8 overflow-hidden">
     {{< d2 "zero-to-hero" >}}
 </div>
 
@@ -27,7 +27,7 @@ Most SBOM generation tools produce incomplete SBOMs that:
 - **License compliance**: Missing license data means legal blind spots
 - **Compliance failures**: [NTIA minimum elements](/compliance/ntia-minimum-elements/), [CISA requirements](/compliance/cisa-minimum-elements/), and [EU CRA](/compliance/eu-cra/) all set quality bars that raw generation tools don't meet
 
-<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
+<div class="card my-12 p-4 sm:p-8 overflow-hidden">
     {{< d2 "quality-gap" >}}
 </div>
 
@@ -47,7 +47,7 @@ The [sbomify action](https://github.com/sbomify/sbomify-action) is **fully open 
 
 See [Integrations](/features/integrations/) for the full list of enrichment sources.
 
-<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
+<div class="card my-12 p-4 sm:p-8 overflow-hidden">
     {{< d2 "sbomify-action-flow" >}}
 </div>
 
@@ -73,7 +73,7 @@ Your SBOMs, your infrastructure, your choice. Use the action standalone or with 
 
 A Software Bill of Materials (SBOM) is like the ingredients list on a food package - but for software. It documents every component, library, and dependency in your application.
 
-<div class="my-8 bg-canvas rounded-xl p-6 border border-line">
+<div class="card my-8 p-4 sm:p-8 overflow-hidden">
     {{< d2 "what-is-sbom" >}}
 </div>
 
@@ -139,7 +139,7 @@ All options handle generation + augmentation + enrichment automatically. The Doc
 
 SBOMs generated outside CI/CD (or without signing) could be altered post-generation. No cryptographic proof means no way to verify authenticity or integrity.
 
-<div class="my-8 bg-canvas rounded-xl p-6 border border-line">
+<div class="card my-8 p-4 sm:p-8 overflow-hidden">
     {{< d2 "trust-chain" >}}
 </div>
 
@@ -157,7 +157,7 @@ The sbomify action supports attestation via GitHub Actions (Sigstore) and other 
 
 For those who want to understand what's happening under the hood:
 
-<div class="my-8 bg-canvas rounded-xl p-6 border border-line">
+<div class="card my-8 p-4 sm:p-8 overflow-hidden">
     {{< d2 "generation" >}}
 </div>
 
@@ -176,7 +176,7 @@ When you're generating one SBOM, management is easy. When you have dozens or hun
 
 [Learn about SBOM Hierarchy →](/features/sbom-hierarchy/)
 
-<div class="my-8 bg-canvas rounded-xl p-6 border border-line">
+<div class="card my-8 p-4 sm:p-8 overflow-hidden">
     {{< d2 "store-analyze-enrich" >}}
 </div>
 

@@ -3,23 +3,23 @@
 {{- $headingLevel := .headingLevel | default "h3" -}}
 <a
   href="{{ $post.RelPermalink }}"
-  class="group flex flex-col justify-between rounded-2xl p-8 h-full motion-safe:hover:-translate-y-1 hover:shadow-raised transition-[box-shadow,transform,border-color] duration-300 {{ if $dark }}bg-inverse-raised border border-white/10 hover:border-white/25{{ else }}bg-canvas border border-line hover:border-line-strong{{ end }}">
+  class="group flex flex-col justify-between h-full py-7 border-t {{ if $dark }}border-white/15{{ else }}border-line{{ end }}">
   <div class="flex-grow">
     {{ with $post.GetTerms "categories" }}
     <p class="eyebrow mb-3 {{ if $dark }}!text-on-inverse-subtle{{ end }}">{{ (index . 0).LinkTitle }}</p>
     {{ end }}
     {{ if eq $headingLevel "h2" }}
-    <h2 class="text-2xl font-semibold leading-tight mb-4 transition-colors duration-200 {{ if $dark }}text-white group-hover:text-accent{{ else }}text-ink group-hover:text-accent-strong{{ end }}">
+    <h2 class="text-xl font-bold tracking-heading leading-snug mb-3 underline decoration-transparent underline-offset-4 decoration-1 transition-colors duration-200 {{ if $dark }}text-white group-hover:decoration-white/50{{ else }}text-ink group-hover:decoration-navy-40{{ end }}">
       {{ $post.Title | truncate 180 }}
     </h2>
     {{ else }}
-    <h3 class="text-2xl font-semibold leading-tight mb-4 transition-colors duration-200 {{ if $dark }}text-white group-hover:text-accent{{ else }}text-ink group-hover:text-accent-strong{{ end }}">
+    <h3 class="text-xl font-bold tracking-heading leading-snug mb-3 underline decoration-transparent underline-offset-4 decoration-1 transition-colors duration-200 {{ if $dark }}text-white group-hover:decoration-white/50{{ else }}text-ink group-hover:decoration-navy-40{{ end }}">
       {{ $post.Title | truncate 180 }}
     </h3>
     {{ end }}
-    <p class="text-base leading-relaxed line-clamp-3 {{ if $dark }}text-on-inverse-muted{{ else }}text-ink-muted{{ end }}">{{ $post.Summary | plainify | truncate 140 "..." }}</p>
+    <p class="text-[0.9375rem] leading-relaxed line-clamp-3 {{ if $dark }}text-on-inverse-muted{{ else }}text-ink-muted{{ end }}">{{ $post.Summary | plainify | truncate 140 "..." }}</p>
   </div>
-  <div class="flex items-center justify-between pt-6 mt-6 {{ if $dark }}border-t border-white/10{{ else }}border-t border-line{{ end }}">
+  <div class="flex items-center justify-between mt-5">
     <div class="text-sm {{ if $dark }}text-on-inverse-subtle{{ else }}text-ink-muted{{ end }}">
       {{ with $post.Params.author }}{{ with .display_name }}
       <span class="font-medium {{ if $dark }}text-on-inverse-muted{{ else }}text-ink{{ end }}">
@@ -31,8 +31,8 @@
         {{ $post.Date.Format "Jan 2. 2006" }}
       </span>
     </div>
-    <span class="{{ if $dark }}text-white{{ else }}text-accent-strong{{ end }} text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-      Read more &rarr;
+    <span class="{{ if $dark }}text-white{{ else }}text-ink{{ end }} text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+      Read more{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}
     </span>
   </div>
 </a>

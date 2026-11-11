@@ -1,24 +1,53 @@
+{{- /* Case studies index, in the .ins look: a hero, the quote from any study
+       that has one (front matter "quote"), one card per study built from its
+       front matter (company, logo, headline, summary, uses), then the dawn
+       call to action. The page's own content, if any, sits under the hero. */ -}}
 {{ define "main" }}
-<div>
-  <div class="hero px-5 py-16 lg:py-24 lg:px-24">
+<div class="ins">
 
-    {{/* Content */}}
-    <div class="relative max-w-7xl mx-auto text-center">
-      <h1 class="text-ink text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
-        {{ .Title }}
-      </h1>
-      {{ with .Params.description }}
-      <p class="text-ink-muted text-lg lg:text-xl max-w-4xl mx-auto leading-relaxed">
-        {{ . }}
-      </p>
-      {{ end }}
-    </div>
-  </div>
+    <section class="home-hero centered" data-nebula="light-center" style="background-image: url('{{ with resources.Get "images/nebula/nebula-light-center.webp" }}{{ (. | fingerprint).RelPermalink }}{{ end }}')">
+        <div class="wrap">
+            <p class="hero-stat"><span><strong>Customer stories</strong></span></p>
+            <h1>{{ .Params.headline | default .Title }}</h1>
+            {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+        </div>
+    </section>
 
-  <div class="bg-surface">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-      {{ partial "content.html" . }}
-    </div>
-  </div>
+    {{ with .Content }}<div class="wrap">{{ partial "content.html" $ }}</div>{{ end }}
+
+    <section class="section" id="stories">
+        <div class="wrap">
+            {{ range where .Pages "Params.quote" "!=" nil | first 1 }}
+            {{ $q := .Params.quote }}
+            <figure class="pull story-index-quote">
+                <blockquote><p>&ldquo;{{ $q.text }}&rdquo;</p></blockquote>
+                <figcaption>
+                    {{ with $q.avatar }}{{ with resources.Get . }}{{ $img := .Process "fill 96x96 Center webp q80" }}<img class="avatar" src="{{ $img.RelPermalink }}" alt="" width="48" height="48" loading="lazy" decoding="async">{{ end }}{{ end }}
+                    <span><b>{{ $q.name }}</b><span>{{ $q.role }}</span></span>
+                </figcaption>
+            </figure>
+            {{ end }}
+
+            <ul class="story-cards" data-reveal>
+                {{ range .Pages.ByDate.Reverse }}
+                {{ $p := . }}
+                <li>
+                    <a href="{{ .RelPermalink }}">
+                        {{ with .Params.logo }}<img src="{{ . }}" alt="{{ $p.Params.company }}" width="{{ $p.Params.logo_width | default 150 }}" height="{{ $p.Params.logo_height | default 40 }}" loading="lazy" decoding="async">{{ end }}
+                        <h2>{{ .Params.headline | default .Title }}</h2>
+                        <p>{{ .Params.summary | default .Description }}</p>
+                        {{ with .Params.uses }}
+                        <span class="story-uses">{{ range . }}<span>{{ .name }}</span>{{ end }}</span>
+                        {{ end }}
+                        <b>Read the case study{{ partial "ph.html" (dict "name" "arrow-right" "weight" "bold" "class" "ph-go") }}</b>
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+    </section>
+
+    {{ partial "dawn-cta.html" (dict "kicker" "Your story next" "title" "Ready to start your story?" "text" "Join these teams in securing your software supply chain, from the first SBOM to the advisory your customers read." "location" "case_studies_index") }}
+
 </div>
 {{ end }}

@@ -51,6 +51,27 @@
   --color-info-full: 66 99 235;      /* #4263EB */
   --color-info-tint: 234 238 253;    /* #EAEEFD */
 
+  /* Derived inks and fills for status text, shared with sbomify Insights. */
+  --color-panel: 244 245 248;        /* #F4F5F8  derived: the pale panel behind side cards and ghost buttons */
+  --color-danger-soft: 240 138 141;  /* #F08A8D  derived: High severity dot */
+  --color-danger-ink: 176 38 44;     /* #B0262C  derived: danger text on white */
+  --color-warning-ink: 138 83 0;     /* #8A5300  derived */
+  --color-info-ink: 47 73 184;       /* #2F49B8  derived */
+  --color-success-ink: 19 122 81;    /* #137A51  derived: success text on white */
+
+  /* The sbomify app's dark theme (sbomify/sbomify tailwind.src.css), for
+     product illustrations that should look like the real app. */
+  --color-app-bg: 21 23 36;            /* #151724 */
+  --color-app-surface: 30 33 50;       /* #1E2132 */
+  --color-app-hover: 46 50 74;         /* #2E324A */
+  --color-app-border: 56 60 86;        /* #383C56 */
+  --color-app-primary: 124 140 255;    /* #7C8CFF periwinkle */
+  --color-app-success: 54 197 143;     /* #36C58F */
+  --color-app-info: 108 183 240;       /* #6CB7F0 */
+  --color-app-critical: 239 122 133;   /* #EF7A85 */
+  --color-app-high: 253 126 20;        /* #FD7E14 */
+  --color-app-medium: 255 193 7;       /* #FFC107 */
+
   /* ===== Roles: light surfaces (the default) ===== */
   --color-canvas: var(--color-white);
   --color-surface: var(--color-mist-soft);        /* alternating sections, cards on canvas */
@@ -105,12 +126,12 @@
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
 
-  --leading-display: 1.05;
+  --leading-display: 1.02;
   --leading-heading: 1.2;
   --leading-body: 1.6;
 
   --tracking-display: -0.03em;   /* display headings: tight */
-  --tracking-heading: -0.015em;  /* section headings: slightly tight */
+  --tracking-heading: -0.02em;   /* section headings: slightly tight */
   --tracking-eyebrow: 0.12em;    /* eyebrows, captions, meta: wide, caps */
 
   /* ===== Shape and depth ===== */

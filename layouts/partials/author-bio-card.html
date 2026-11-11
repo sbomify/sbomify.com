@@ -2,9 +2,10 @@
 {{- $hasSocial := or $author.linkedin $author.twitter $author.mastodon $author.github $author.website $author.podcast -}}
 
 <div class="hero">
+  <div class="hero-fade" aria-hidden="true"></div>
 
-  <div class="relative max-w-7xl mx-auto px-6 py-16 lg:py-24">
-    <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+  <div class="wrap pt-10 lg:pt-16 pb-12 lg:pb-16">
+    <div class="flex flex-col md:flex-row md:items-center gap-8 lg:gap-14">
 
       <div class="flex-shrink-0">
         {{ $imgPath := strings.TrimPrefix "/assets/" $author.image }}
@@ -13,59 +14,59 @@
           {{ $webp := $img.Process "fit 448x448 webp q85" }}
           <picture>
             <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
-            <img src="{{ $img.RelPermalink }}" alt="{{ $author.display_name }}" class="w-40 h-40 lg:w-56 lg:h-56 object-cover rounded-full ring-1 ring-line shadow-raised !m-0" width="224" height="224" loading="eager" fetchpriority="high">
+            <img src="{{ $img.RelPermalink }}" alt="{{ $author.display_name }}" class="w-40 h-40 lg:w-56 lg:h-56 object-cover rounded-[1.25rem] !m-0" width="224" height="224" loading="eager" fetchpriority="high">
           </picture>
         {{ else if $author.image }}
-          <img src="{{ $author.image }}" alt="{{ $author.display_name }}" class="w-40 h-40 lg:w-56 lg:h-56 object-cover rounded-full ring-1 ring-line shadow-raised !m-0" width="224" height="224" loading="eager" fetchpriority="high">
+          <img src="{{ $author.image }}" alt="{{ $author.display_name }}" class="w-40 h-40 lg:w-56 lg:h-56 object-cover rounded-[1.25rem] !m-0" width="224" height="224" loading="eager" fetchpriority="high">
         {{ end }}
       </div>
 
-      <div class="flex-1 min-w-0 text-center lg:text-left">
-        <div class="max-w-2xl mx-auto lg:mx-0">
-        <p class="eyebrow mb-4">Author</p>
+      <div class="flex-1 min-w-0">
+        <div class="max-w-2xl">
+        <p class="eyebrow-chip mb-5">Author</p>
 
-        <h1 class="text-ink text-[40px] lg:text-[64px] leading-[44px] lg:leading-[68px] mb-6">
+        <h1 class="text-ink mb-5">
           {{ $author.display_name }}
         </h1>
 
-        <p class="text-ink-muted text-base lg:text-lg leading-relaxed mb-8">
+        <p class="lede mb-8">
           {{ $author.bio }}
         </p>
 
         {{ if $hasSocial }}
-        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
+        <div class="flex flex-wrap items-center gap-1 -ml-2.5">
           {{ with $author.linkedin }}
-          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-surface border border-line text-ink-muted hover:text-ink hover:bg-surface-strong hover:border-ink transition-all duration-200" title="{{ $author.display_name }} on LinkedIn">
+          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="social-icon" title="{{ $author.display_name }} on LinkedIn">
             {{ partial "icon.html" (dict "name" "linkedin" "class" "w-4 h-4") }}
             <span class="sr-only">{{ $author.display_name }} on LinkedIn</span>
           </a>
           {{ end }}
           {{ with $author.twitter }}
-          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-surface border border-line text-ink-muted hover:text-ink hover:bg-surface-strong hover:border-ink transition-all duration-200" title="{{ $author.display_name }} on X">
+          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="social-icon" title="{{ $author.display_name }} on X">
             {{ partial "icon.html" (dict "name" "x-twitter" "class" "w-4 h-4") }}
             <span class="sr-only">{{ $author.display_name }} on X</span>
           </a>
           {{ end }}
           {{ with $author.mastodon }}
-          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "me noopener noreferrer" "target" "_blank") }} class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-surface border border-line text-ink-muted hover:text-ink hover:bg-surface-strong hover:border-ink transition-all duration-200" title="{{ $author.display_name }} on Mastodon">
+          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "me noopener noreferrer" "target" "_blank") }} class="social-icon" title="{{ $author.display_name }} on Mastodon">
             {{ partial "icon.html" (dict "name" "mastodon" "class" "w-4 h-4") }}
             <span class="sr-only">{{ $author.display_name }} on Mastodon</span>
           </a>
           {{ end }}
           {{ with $author.github }}
-          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-surface border border-line text-ink-muted hover:text-ink hover:bg-surface-strong hover:border-ink transition-all duration-200" title="{{ $author.display_name }} on GitHub">
+          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="social-icon" title="{{ $author.display_name }} on GitHub">
             {{ partial "icon.html" (dict "name" "github" "class" "w-4 h-4") }}
             <span class="sr-only">{{ $author.display_name }} on GitHub</span>
           </a>
           {{ end }}
           {{ with $author.website }}
-          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-surface border border-line text-ink-muted hover:text-ink hover:bg-surface-strong hover:border-ink transition-all duration-200" title="{{ $author.display_name }}'s website">
+          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="social-icon" title="{{ $author.display_name }}'s website">
             {{ partial "icon.html" (dict "name" "globe" "class" "w-4 h-4") }}
             <span class="sr-only">{{ $author.display_name }}'s website</span>
           </a>
           {{ end }}
           {{ with $author.podcast }}
-          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-surface border border-line text-ink-muted hover:text-ink hover:bg-surface-strong hover:border-ink transition-all duration-200" title="{{ $author.display_name }}'s podcast">
+          <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="social-icon" title="{{ $author.display_name }}'s podcast">
             {{ partial "icon.html" (dict "name" "podcast" "class" "w-4 h-4") }}
             <span class="sr-only">{{ $author.display_name }}'s podcast</span>
           </a>

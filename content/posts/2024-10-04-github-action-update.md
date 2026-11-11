@@ -15,7 +15,7 @@ In the last few weeks, we've worked hard on overhauling the [sbomify GitHub Acti
 
 As a refresher, the SBOM lifecycle looks like this:
 
-<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
+<div class="my-10 bg-navy-5 rounded-[1.25rem] p-6">
     {{< d2 "lifecycle" >}}
 </div>
 

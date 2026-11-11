@@ -1,3 +1,29 @@
+{{- if eq .style "rows" -}}
+{{/* Rows, as on sbomify Insights (the home page): date, title and summary,
+     then category and author. Used inside an .ins root. */}}
+{{- $limit := .limit | default 0 -}}
+{{- $pages := .pages | default (where site.RegularPages "Section" "posts") -}}
+{{- $list := cond (gt $limit 0) (first $limit $pages) $pages -}}
+<div class="section-head">
+  {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+  {{ if and (not .hideViewAll) (gt $limit 0) (gt (len $pages) $limit) }}<a href="/blog/">View All Posts</a>{{ end }}
+</div>
+<ul class="rows">
+  {{ range $list }}
+  <li><a href="{{ .RelPermalink }}">
+    <span class="row-id">{{ .Date.Format "Jan 2. 2006" }}</span>
+    <span class="row-text">
+      <span class="row-title">{{ .Title | truncate 180 }}</span>
+      <span class="row-desc block">{{ .Summary | plainify | truncate 140 "..." }}</span>
+    </span>
+    <span class="row-meta">
+      {{ with .GetTerms "categories" }}<span>{{ (index . 0).LinkTitle }}</span>{{ end }}
+      {{ with .Params.author }}{{ with .display_name }}<span class="muted">{{ . }}</span>{{ end }}{{ end }}
+    </span>
+  </a></li>
+  {{ end }}
+</ul>
+{{- else -}}
 {{- $limit := .limit | default 0 -}}
 {{- $paginate := .paginate -}}
 {{- $dark := .dark -}}
@@ -7,10 +33,10 @@
 {{- $pages := .pages | default (where site.RegularPages "Section" "posts") -}}
 {{- $cardHeading := "h2" -}}
 {{ with $title }}
-<h2 class="text-3xl lg:text-4xl font-semibold mb-12 {{ if $dark }}text-white{{ else }}text-ink{{ end }}">{{ . }}</h2>
+<h2 class="section-title mb-10 {{ if $dark }}text-white{{ else }}text-ink{{ end }}">{{ . }}</h2>
 {{- $cardHeading = "h3" -}}
 {{ end }}
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10">
   {{ if $paginate }}
     {{ $paginator := $context.Paginate $pages }}
     {{ range $paginator.Pages }}
@@ -29,8 +55,8 @@
   {{ end }}
 </div>
 {{ if and (not $hideViewAll) (gt $limit 0) (gt (len $pages) $limit) }}
-<div class="mt-12 flex justify-center">
-  <a href="/blog/" class="btn-primary px-8">
+<div class="mt-10">
+  <a href="/blog/" class="btn-secondary">
     View All Posts
   </a>
 </div>
@@ -40,3 +66,4 @@
   {{ partial "pagination.html" $context }}
 </div>
 {{ end }}
+{{- end -}}

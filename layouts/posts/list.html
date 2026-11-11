@@ -1,22 +1,20 @@
 {{ define "main" }}
 <div>
   <div class="hero">
-
-    <div class="relative px-5 py-16 lg:py-24 lg:px-24 max-w-7xl mx-auto">
-      <h1 class="text-ink text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap pt-10 lg:pt-16 pb-10 lg:pb-14">
+      <h1 class="text-ink mb-5">
         The sbomify <span class="font-light text-ink-subtle">Blog</span>
       </h1>
-      <p class="text-ink-muted text-lg lg:text-xl max-w-4xl leading-relaxed">Content for software, product, and digital security experts</p>
+      <p class="lede max-w-3xl">Content for software, product, and digital security experts</p>
       {{/* Links the taxonomy indexes, which nothing else links to. Without
            them a tag used by a single post has only one internal link. */}}
-      <p class="text-ink-muted mt-4">Browse by <a href="/categories/" class="link">category</a> or <a href="/tags/" class="link">topic</a>.</p>
+      <p class="text-ink-muted mt-4 !text-base">Browse by <a href="/categories/" class="link">category</a> or <a href="/tags/" class="link">topic</a>.</p>
     </div>
   </div>
 
-  <section class="bg-surface">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-20">
+  <section class="wrap pb-16 lg:pb-24">
     {{ partial "posts.html" (dict "paginate" true "context" .) }}
-    </div>
   </section>
 </div>
 {{ end }}

@@ -84,7 +84,7 @@ Brand rules the tokens encode:
 
 **Shortcodes** in `layouts/shortcodes/` (Markdown variants: see "Markdown Copies for AI Agents"): `picture`, `video-embed`, `video-embed-native`, `d2`, `cta-ready`, `feature-card`, `artifact-card`, `check-list-item`, `impact-card`, `sbomified-badge`, `trust-center-pillars`, `trust-center-pillars-grid`, `trust-center-artifacts`, `compliance-block`.
 
-**Data files** in `data/`: `authors.yml`, `advisors.yml`, `main.yml` (navigation/social links).
+**Data files** in `data/`: `authors.yml`, `advisors.yml`, `main.yml` (navigation/social links). Header megamenus are built from `main.yml` `nav` (an entry with an `id` opens a megamenu; its `feature` card is `layouts/partials/mega/feature-<name>.html`).
 
 **Deployment:** GitHub Actions builds with Hugo + Bun, deploys to GitHub Pages. A nightly cron job rebuilds the site to publish future-dated posts. The deploy pipeline also generates an SBOM for JavaScript dependencies via the sbomify GitHub Action.
 

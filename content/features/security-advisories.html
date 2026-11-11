@@ -2,125 +2,227 @@
 
 title: Security Advisories
 seo_title: "Security Advisory Publishing for Product Security Teams"
-layout: integrations
+layout: ins
 description: "Write, publish and distribute security advisories from the same place as your SBOMs and VEX. Per-product gating, CSAF 2.0 feeds, security.txt and CRA-ready disclosure, on your own Trust Center."
 keywords: [security advisories, security advisory page, publish security advisories, PSIRT, CSAF 2.0, CSAF provider, vulnerability disclosure, security bulletin, CRA vulnerability handling, trust center]
 ---
 
-<div class="text-xl leading-relaxed text-ink-muted mb-12 text-center max-w-3xl mx-auto font-medium">
-Every new CVE turns into the same customer question: <span class="text-ink font-bold">are we affected?</span> Answer it once, in a proper advisory, where your customers and their tools already look.
-</div>
+<div class="ins">
 
-<div class="mb-24">
-    <h2 class="text-3xl font-bold text-ink mb-4 text-center">A Security Advisory Page Your PSIRT Will Actually Use</h2>
-    <p class="text-ink-muted text-center mb-12 max-w-2xl mx-auto">Advisories live next to the SBOMs, findings and VEX they are about, so writing one takes minutes, not a scramble across five tools</p>
-    <div class="grid lg:grid-cols-3 gap-8">
-        {{< feature-card icon_bg_class="bg-surface-strong" icon_text_class="text-ink" title="Write It Properly" description="Summary, CVSS score and vector, CVE and OSV references, and affected and fixed version ranges for every product the issue touches." >}}
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M9 9l1 0" /><path d="M9 13l6 0" /><path d="M9 17l6 0" /></svg>
-        {{< /feature-card >}}
-
-        {{< feature-card icon_bg_class="bg-surface-strong" icon_text_class="text-ink" title="An Honest Timeline" description="Every update is dated and shows the gap since the last one. That gap is what customers judge your incident handling on." >}}
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 7v5l3 3" /></svg>
-        {{< /feature-card >}}
-
-        {{< feature-card icon_bg_class="bg-surface-strong" icon_text_class="text-ink" title="Published to Your Trust Center" description="One click puts it on your branded <a href='/features/trust-center/' class='link'>Trust Center</a>, on your own domain, with a filterable advisory index customers can search by product and severity." >}}
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" /><path d="M9 12l2 2l4 -4" /></svg>
-        {{< /feature-card >}}
-    </div>
-</div>
-
-<div class="mb-24">
-    <div class="flex flex-col lg:flex-row gap-16 items-start">
-        <div class="flex-1">
-            <div class="eyebrow-chip mb-6">Embargoes</div>
-            <h2 class="text-4xl font-bold text-ink mb-6">Gated Advisories That Are Actually Gated</h2>
-            <p class="text-lg text-ink-muted mb-6 leading-relaxed">
-                Some advisories are for everyone. Some are only for the customers running the affected product, under NDA, until the fix ships. Each advisory has one of three visibility states:
+    {{< comment >}}Hero, with an illustrative advisory as customers read it on a Trust Center{{< /comment >}}
+    <section class="home-hero centered" data-nebula="light-center" style="background-image: url('{{< nebula-still "light-center" >}}')">
+        <div class="wrap">
+            <p class="hero-stat">
+                <span class="live" aria-hidden="true"></span>
+                <span><strong>Every public advisory is also CSAF 2.0</strong></span>
+                <span class="muted">On your own Trust Center</span>
             </p>
-            <ul class="space-y-6">
-                {{< check-list-item title="Public" description="Readable by anyone once it leaves draft, indexed by search engines, and included in your CSAF feed." >}}
-                {{< check-list-item title="Gated" description="Readable only by people with approved access who can already see at least one affected product. A customer of one product never learns about an embargoed issue in another." >}}
-                {{< check-list-item title="Private" description="Never leaves your workspace, whatever its status." >}}
-            </ul>
-        </div>
-        <div class="flex-1">
-            <div class="eyebrow-chip mb-6">Discretion</div>
-            <h2 class="text-4xl font-bold text-ink mb-6">Built Not to Leak</h2>
-            <p class="text-lg text-ink-muted mb-6 leading-relaxed">
-                For an embargoed vulnerability, the fact that an advisory exists is itself sensitive. sbomify treats it that way.
-            </p>
-            <ul class="space-y-6">
-                {{< check-list-item title="404, not 403" description="A reader who may not see a gated advisory gets &quot;not found&quot;, not &quot;forbidden&quot;, so its existence is not confirmed." >}}
-                {{< check-list-item title="Products counted, not named" description="When an advisory spans several products, readers only see the names of the products they are entitled to." >}}
-                {{< check-list-item title="Kept out of search" description="Gated pages are noindex, nofollow, and never appear in the public CSAF distribution." >}}
-            </ul>
-        </div>
-    </div>
-</div>
+            <h1>Answer &ldquo;are we affected?&rdquo; once, where customers look</h1>
+            <p class="lede">Every new CVE turns into the same customer question. Write the answer as a proper advisory, next to the SBOMs and VEX it is about, and publish it for people and their tools in one step.</p>
+            <div class="hero-actions">
+                <a href="https://app.sbomify.com" class="btn-navy btn-lg" data-cta-location="advisories_hero" data-cta-label="Start free">
+                    Start free
+                    {{< ph "arrow-right" "bold" "ph-go" >}}
+                </a>
+                <a href="https://app.sbomify.com/enterprise-contact/" class="btn-secondary btn-lg" data-cta-location="advisories_hero" data-cta-label="Book a demo">Book a demo</a>
+            </div>
 
-<div class="mb-24">
-    <div class="flex flex-col lg:flex-row gap-16 items-center">
-        <div class="flex-1">
-            <div class="eyebrow-chip mb-6">Machine-Readable</div>
-            <h2 class="text-4xl font-bold text-ink mb-6">CSAF 2.0 Out of the Box</h2>
-            <p class="text-lg text-ink-muted mb-6 leading-relaxed">
-                Enterprise customers don't read advisories one by one. Their vulnerability management tools pull them in automatically and match them against their inventory. sbomify publishes every public advisory as a <a href="/faq/what-is-a-security-advisory/" class="link">CSAF 2.0</a> document, ready to be pulled in.
-            </p>
-            <ul class="space-y-6">
-                {{< check-list-item title="CSAF provider metadata" description="Served at /.well-known/csaf/provider-metadata.json on your Trust Center domain, the entry point CSAF aggregators look for." >}}
-                {{< check-list-item title="ROLIE feed" description="A TLP:WHITE feed listing every public advisory, so new ones are picked up without anyone sending an email." >}}
-                {{< check-list-item title="security.txt with a CSAF pointer" description="Your RFC 9116 security.txt links to the CSAF provider automatically, laid out as BSI TR-03183-3 expects." >}}
-                {{< check-list-item title="VEX vocabulary, mapped" description="Product status uses the CISA VEX-to-CSAF crosswalk, so not affected, under investigation and fixed mean the same thing in every format." >}}
-            </ul>
+            <figure class="tc-browser" data-reveal data-md-skip>
+                <div class="tc-bar" aria-hidden="true">
+                    <span class="tc-dots"><i></i><i></i><i></i></span>
+                    <span class="tc-url">{{< ph "lock-simple" >}}trust.acme.example/advisories</span>
+                </div>
+                <div class="tc-page adv" aria-hidden="true">
+                    <div class="adv-head">
+                        <span class="adv-id">ACME-SA-2026-02</span>
+                        <span class="pill" data-sev="critical">Critical &middot; CVSS 9.1</span>
+                    </div>
+                    <p class="adv-title">Authentication bypass in the Acme Router web interface</p>
+                    <p class="adv-meta"><span class="mono">CVE-2026-XXXXX</span><span>Published 3 Nov 2026</span><span>Updated 7 Nov 2026</span></p>
+                    <table class="adv-table">
+                        <thead><tr><th>Product</th><th>Affected</th><th>Fixed</th></tr></thead>
+                        <tbody>
+                            <tr><td><b>Acme Router</b></td><td class="mono">&gt;= 2.0.0, &lt; 2.1.1</td><td class="mono">&gt;= 2.1.1</td></tr>
+                            <tr><td><b>Acme Mobile SDK</b></td><td class="mono">None</td><td class="mono">All</td></tr>
+                            <tr class="adv-hidden"><td colspan="3">{{< ph "lock-simple" >}}1 more product you do not have access to</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="adv-fix">{{< ph "arrow-circle-up" >}}<span><b>Remediation:</b> upgrade Acme Router to 2.1.1 or later.</span></p>
+                </div>
+                <figcaption class="note">An illustrative advisory for a fictional company, as a customer with access to two of its three products sees it.</figcaption>
+            </figure>
         </div>
-        <div class="flex-1 w-full">
-            <div class="card p-6">
-                <div class="eyebrow mb-4">Your Trust Center domain</div>
-                <ul class="space-y-3 font-mono text-sm text-ink break-all">
-                    <li>/.well-known/security.txt</li>
-                    <li>/.well-known/csaf/provider-metadata.json</li>
-                    <li>/.well-known/csaf/white/feed-tlp-white.json</li>
-                    <li>/.well-known/csaf/white/&lt;year&gt;/&lt;advisory&gt;.json</li>
+    </section>
+
+    {{< comment >}}Writing: the fields, and the timeline with its gaps{{< /comment >}}
+    <section class="section" id="write">
+        <div class="wrap cra-split">
+            <div class="cra-split-copy">
+                <span class="kicker">Authoring</span>
+                <h2 class="sec-title">Write it properly. <span class="soft">In minutes, not a scramble.</span></h2>
+                <p class="sec-lede">Advisories live next to the SBOMs, findings and VEX they are about, so the facts are already there when you start writing.</p>
+                <ul class="cra-points">
+                    <li>{{< ph "file-text" >}}<span><b>Everything an advisory needs:</b> a summary, CVSS score and vector, CVE and OSV references, and remediation.</span></li>
+                    <li>{{< ph "git-diff" >}}<span><b>Version ranges as comparisons,</b> affected and fixed for every product, so readers can tell at a glance whether they are on an affected version.</span></li>
+                    <li>{{< ph "clock-countdown" >}}<span><b>An honest timeline.</b> Every update is dated and shows the gap since the last one, the number customers judge your incident handling on.</span></li>
                 </ul>
             </div>
+
+            <figure class="bundle adv-timeline" data-reveal>
+                <div class="bundle-head">
+                    <span class="bundle-ico">{{< ph "clock-countdown" >}}</span>
+                    <span><b>Timeline</b><span>ACME-SA-2026-02</span></span>
+                </div>
+                <ol class="adv-steps">
+                    <li data-sev="pending">
+                        <span class="adv-when">3 Nov 2026, 09:12</span>
+                        <b>Under investigation</b>
+                        <span>Reported through our disclosure policy. We are assessing which versions are affected.</span>
+                    </li>
+                    <li data-sev="affected">
+                        <span class="adv-when">4 Nov 2026, 16:40<span class="adv-gap">1 day later</span></span>
+                        <b>Affected</b>
+                        <span>Confirmed in Acme Router 2.0.0 to 2.1.0. Restrict access to the web interface until you can upgrade.</span>
+                    </li>
+                    <li data-sev="fixed">
+                        <span class="adv-when">7 Nov 2026, 11:05<span class="adv-gap">3 days later</span></span>
+                        <b>Fixed</b>
+                        <span>Fixed in Acme Router 2.1.1.</span>
+                    </li>
+                </ol>
+                <figcaption class="note">Illustrative timeline for the advisory above.</figcaption>
+            </figure>
         </div>
-    </div>
+    </section>
+
+    {{< comment >}}Gating: four cards on the dark band{{< /comment >}}
+    <section class="band-dark" id="gated" data-nebula="band" style="background-image: url('{{< nebula-still "band" >}}')">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Embargoes</span>
+                    <h2 class="sec-title">Gated advisories. <span class="soft">That are actually gated.</span></h2>
+                </div>
+                <p class="sec-lede">Some advisories are for everyone. Some are only for the customers running the affected product, under NDA, until the fix ships. For those, even the fact that an advisory exists is sensitive.</p>
+            </div>
+
+            <div class="cra-feats" data-reveal>
+                <article>
+                    <span class="cra-feat-ico">{{< ph "lock-key" >}}</span>
+                    <h3>Gated per advisory</h3>
+                    <p>A reader needs approved access, with your NDA signed, and access to at least one affected product. A customer of one product never learns about an embargo in another.</p>
+                </article>
+                <article>
+                    <span class="cra-feat-ico">{{< ph "prohibit" >}}</span>
+                    <h3>404, not 403</h3>
+                    <p>A reader who may not see a gated advisory gets &ldquo;not found&rdquo;, not &ldquo;forbidden&rdquo;, so its existence is never confirmed.</p>
+                </article>
+                <article>
+                    <span class="cra-feat-ico">{{< ph "list-numbers" >}}</span>
+                    <h3>Products counted, not named</h3>
+                    <p>When an advisory spans several products, readers only see the names of the ones they are entitled to know about.</p>
+                </article>
+                <article>
+                    <span class="cra-feat-ico">{{< ph "magnifying-glass-minus" >}}</span>
+                    <h3>Kept out of search</h3>
+                    <p>Gated pages are noindex and nofollow, and never appear in your public CSAF distribution. Private advisories never leave your workspace.</p>
+                </article>
+            </div>
+
+            <p class="sec-close">Advisories publish to your Trust Center, with a filterable index by product and severity. <a href="/features/trust-center/">Explore the Trust Center{{< ph "arrow-right" "bold" "ph-go" >}}</a></p>
+        </div>
+    </section>
+
+    {{< comment >}}CSAF: the endpoints on the Trust Center domain{{< /comment >}}
+    <section class="section" id="csaf">
+        <div class="wrap cra-split is-flip">
+            <div class="cra-split-copy">
+                <span class="kicker">Machine-readable</span>
+                <h2 class="sec-title">CSAF 2.0 out of the box. <span class="soft">For the tools that read it.</span></h2>
+                <p class="sec-lede">Enterprise customers don't read advisories one by one. Their vulnerability management tools pull them in and match them against their inventory.</p>
+                <ul class="cra-points">
+                    <li>{{< ph "file-code" >}}<span><b>Provider metadata and a ROLIE feed,</b> the entry points CSAF aggregators look for, so new advisories are picked up without anyone sending an email.</span></li>
+                    <li>{{< ph "envelope-simple" >}}<span><b>A security.txt that points to them,</b> laid out as BSI TR-03183-3 expects.</span></li>
+                    <li>{{< ph "shield-check" >}}<span><b>VEX vocabulary, mapped</b> with the CISA VEX-to-CSAF crosswalk, so not affected, under investigation and fixed mean the same in every format.</span></li>
+                </ul>
+                <p class="cra-small">New to the format? <a href="/faq/what-is-a-security-advisory/">What a security advisory is, and how CSAF works</a></p>
+            </div>
+
+            <figure class="bundle tc-endpoints" data-reveal>
+                <div class="bundle-head">
+                    <span class="bundle-ico">{{< ph "globe" >}}</span>
+                    <span><b>trust.acme.example</b><span>Your Trust Center domain</span></span>
+                </div>
+                <ul class="bundle-files">
+                    <li><span class="mono">/.well-known/security.txt</span><span>RFC 9116</span></li>
+                    <li><span class="mono">/.well-known/csaf/provider-metadata.json</span><span>Provider</span></li>
+                    <li><span class="mono">/.well-known/csaf/white/feed-tlp-white.json</span><span>ROLIE feed</span></li>
+                    <li><span class="mono">/.well-known/csaf/white/&lt;year&gt;/&lt;advisory&gt;.json</span><span>Advisory</span></li>
+                </ul>
+                <p class="bundle-foot">{{< ph "arrows-clockwise" >}}Updated as you publish</p>
+            </figure>
+        </div>
+    </section>
+
+    {{< comment >}}CRA: disclosure, patch SLA and the KPIs, end of life{{< /comment >}}
+    <section class="section" id="cra">
+        <div class="wrap cra-split">
+            <div class="cra-split-copy">
+                <span class="kicker">Cyber Resilience Act</span>
+                <h2 class="sec-title">Disclosure the CRA can audit. <span class="soft">With the numbers to prove it.</span></h2>
+                <p class="sec-lede">The <a href="/compliance/eu-cra/">CRA</a> makes disclosure an obligation. Annex I, Part II asks you to publish information about fixed vulnerabilities, run a coordinated disclosure policy and give researchers a contact.</p>
+                <ul class="cra-points">
+                    <li>{{< ph "megaphone" >}}<span><b>Disclose fixed vulnerabilities</b> with the description, affected products, severity and remediation the CRA lists.</span></li>
+                    <li>{{< ph "timer" >}}<span><b>Measure your patch SLA.</b> Set a fix target per severity and the CRA KPIs follow, the numbers an auditor will ask for.</span></li>
+                    <li>{{< ph "calendar-x" >}}<span><b>Announce end of life</b> through the same channel. sbomify drafts the notice and pins the final SBOM and VEX; a person publishes it.</span></li>
+                </ul>
+                <p class="cra-small">Reporting actively exploited vulnerabilities under Article 14 is separate: that goes to ENISA, not your customers. <a href="/cra/#reporting">How sbomify helps</a></p>
+            </div>
+
+            <figure class="bundle adv-sla" data-reveal>
+                <div class="bundle-head">
+                    <span class="bundle-ico">{{< ph "timer" >}}</span>
+                    <span><b>Patch SLA</b><span>The defaults, until you set your own</span></span>
+                </div>
+                <dl class="adv-targets">
+                    <div data-sev="critical"><dt>Critical</dt><dd>7 days</dd></div>
+                    <div data-sev="high"><dt>High</dt><dd>30 days</dd></div>
+                    <div data-sev="medium"><dt>Medium</dt><dd>90 days</dd></div>
+                </dl>
+                <p class="tc-label">The CRA KPIs it makes measurable</p>
+                <ul class="bundle-files">
+                    <li><span>Mean time to triage</span></li>
+                    <li><span>Mean time to remediate</span></li>
+                    <li><span>Open criticals, with the KEV split</span></li>
+                    <li><span>Patch SLA compliance</span></li>
+                    <li><span>VEX publication latency</span></li>
+                </ul>
+            </figure>
+        </div>
+    </section>
+
+    {{< comment >}}Guides behind a good advisory page{{< /comment >}}
+    <section class="section" id="learn">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Learn more</span>
+                    <h2 class="sec-title">The processes behind it. <span class="soft">Explained.</span></h2>
+                </div>
+                <p class="sec-lede">Guides to running product security disclosure well, whichever tool you use.</p>
+            </div>
+
+            <ul class="adv-guides">
+                <li><a href="/faq/what-is-a-security-advisory/"><b>What is a security advisory?</b><span>Contents, formats and examples</span></a></li>
+                <li><a href="/faq/what-is-a-psirt/"><b>What is a PSIRT?</b><span>Product security incident response, explained</span></a></li>
+                <li><a href="/faq/what-is-a-vulnerability-disclosure-program/"><b>What is a vulnerability disclosure program?</b><span>Policies, CVD and the CRA</span></a></li>
+                <li><a href="/faq/what-is-security-txt/"><b>What is security.txt?</b><span>RFC 9116 fields, with an example</span></a></li>
+                <li><a href="/faq/how-do-i-become-a-cve-numbering-authority/"><b>How do I become a CNA?</b><span>Assign CVE IDs for your own products</span></a></li>
+                <li><a href="/faq/how-do-i-use-vex/"><b>How do I use VEX?</b><span>Say &ldquo;not affected&rdquo; once, in a format tools read</span></a></li>
+            </ul>
+        </div>
+    </section>
+
+    {{< dawn-cta title="Tell your customers before they ask" text="Write advisories next to the SBOMs and VEX they are about, and publish them on your Trust Center and as CSAF in one step." location="advisories_final" >}}
+
 </div>
-
-<div class="mb-24">
-    <div class="text-center mb-12">
-        <div class="eyebrow-chip mb-6">Cyber Resilience Act</div>
-        <h2 class="text-4xl font-bold text-ink mb-4">Vulnerability Handling the CRA Can Audit</h2>
-        <p class="text-ink-muted max-w-3xl mx-auto">The <a href="/compliance/eu-cra/" class="link">EU Cyber Resilience Act</a> makes disclosure an obligation. Annex I Part II asks manufacturers to publish information about fixed vulnerabilities, run a coordinated disclosure policy and give researchers a contact. Article 14 adds reporting of actively exploited vulnerabilities from 11 September 2026.</p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-8">
-        {{< impact-card icon_bg_class="bg-surface-strong" icon_text_class="text-ink" title="Disclose Fixed Vulnerabilities" description="Advisories carry the description, affected products, severity and remediation the CRA lists, published where users can find them." link_text="Annex I, Part II" >}}
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M9 12l2 2l4 -4" /></svg>
-        {{< /impact-card >}}
-
-        {{< impact-card icon_bg_class="bg-surface-strong" icon_text_class="text-ink" title="Measure Your Patch SLA" description="Set fix targets per severity and track time to triage, time to remediate and SLA compliance, the KPIs an auditor will ask for." link_text="CRA KPIs" >}}
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18" /><path d="M7 15l4 -4l3 3l5 -5" /></svg>
-        {{< /impact-card >}}
-
-        {{< impact-card icon_bg_class="bg-surface-strong" icon_text_class="text-ink" title="Announce End of Life" description="When support ends, sbomify drafts the end-of-life notice for the same advisory channel and pins the final SBOM and VEX." link_text="Support Period" >}}
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16" /><path d="M10 11v6" /><path d="M14 11v6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
-        {{< /impact-card >}}
-    </div>
-</div>
-
-<div class="mb-24">
-    <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold text-ink mb-4">Learn More</h2>
-        <p class="text-ink-muted max-w-2xl mx-auto">Guides to the processes behind a good security advisory page</p>
-    </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <a href="/faq/what-is-a-security-advisory/" class="card p-6 !no-underline block"><div class="font-bold text-ink mb-2">What is a security advisory?</div><div class="text-ink-muted text-sm">Contents, formats and examples</div></a>
-        <a href="/faq/what-is-a-psirt/" class="card p-6 !no-underline block"><div class="font-bold text-ink mb-2">What is a PSIRT?</div><div class="text-ink-muted text-sm">Product security incident response, explained</div></a>
-        <a href="/faq/what-is-a-vulnerability-disclosure-program/" class="card p-6 !no-underline block"><div class="font-bold text-ink mb-2">What is a vulnerability disclosure program?</div><div class="text-ink-muted text-sm">Policies, CVD and the CRA</div></a>
-        <a href="/faq/what-is-security-txt/" class="card p-6 !no-underline block"><div class="font-bold text-ink mb-2">What is security.txt?</div><div class="text-ink-muted text-sm">RFC 9116 fields, with an example</div></a>
-        <a href="/faq/how-do-i-become-a-cve-numbering-authority/" class="card p-6 !no-underline block"><div class="font-bold text-ink mb-2">How do I become a CNA?</div><div class="text-ink-muted text-sm">Assign CVE IDs for your own products</div></a>
-        <a href="/faq/how-do-i-use-vex/" class="card p-6 !no-underline block"><div class="font-bold text-ink mb-2">How do I use VEX?</div><div class="text-ink-muted text-sm">Say &quot;not affected&quot; once, in a format tools read</div></a>
-    </div>
-</div>
-
-{{< cta-ready secondary_url="/features/trust-center/" secondary_text="Explore the Trust Center" >}}

@@ -1,0 +1,28 @@
+{{- /* CRA menu card: the /cra/ page, previewed through a small mock of the
+       CRA Compliance Wizard (step names as in
+       content/faq/how-do-i-use-cra-compliance.md). Decorative: the mock is
+       hidden from assistive tech, the card's text carries the link. */ -}}
+{{ $bg := resources.Get "images/nebula/nebula-grey.webp" | fingerprint }}
+{{ $steps := slice
+  (dict "name" "Product Profile" "state" "done")
+  (dict "name" "SBOM Compliance" "state" "done")
+  (dict "name" "Security & Vulnerability" "state" "done")
+  (dict "name" "User Information" "state" "now")
+  (dict "name" "Review & Export" "state" "next") }}
+<a class="mega-card is-cra" href="/cra/" aria-label="sbomify for the CRA: stay CRA ready for every release you support" style="background-image: url('{{ $bg.RelPermalink }}')">
+  <span class="kicker">sbomify for the CRA</span>
+  <b class="mega-card-title">Stay CRA ready for every release you support</b>
+  <span class="mega-wiz" aria-hidden="true">
+    <span class="mega-wiz-bar"><i></i><i></i><i></i><span>CRA Compliance Wizard</span></span>
+    <span class="mega-wiz-steps">
+      {{ range $i, $s := $steps }}
+      <span class="mega-wiz-step" data-state="{{ $s.state }}">
+        <i>{{ if eq $s.state "done" }}{{ partial "ph.html" (dict "name" "check" "weight" "bold") }}{{ else }}{{ add $i 1 }}{{ end }}</i>
+        <span>{{ $s.name }}</span>
+        {{ if eq $s.state "now" }}<em>In progress</em>{{ end }}
+      </span>
+      {{ end }}
+    </span>
+  </span>
+  <span class="mega-cra-go">{{ partial "ph.html" (dict "name" "arrow-right") }}</span>
+</a>

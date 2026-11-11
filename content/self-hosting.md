@@ -46,7 +46,7 @@ They depend on:
 
 ## Reference architecture
 
-<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
+<div class="card my-12 p-4 sm:p-8 overflow-hidden">
     {{< d2 "self-hosting-architecture" >}}
 </div>
 

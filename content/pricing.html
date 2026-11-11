@@ -16,176 +16,165 @@ faq:
     answer: "Yes! sbomify is open source and available for self-hosting. Read our self-hosting guide for installation, configuration and sizing. Support packages for self-hosted installations, as well as single-tenant installations, are available on the Enterprise plan."
 ---
 
-<div class="hero py-12 md:py-16 lg:py-24">
-<div class="pricing-page">
-  <div class="pricing-header">
-    <h1>Pricing for CRA product security</h1>
-    <p>Start free. Upgrade when you need private SBOMs, daily vulnerability scans and a Trust Center on your own domain.</p>
-  </div>
+<div class="ins">
 
-<div class="billing-toggle">
-    <span id="billing-monthly-label">Monthly</span>
-    <label class="toggle">
-      <input type="checkbox" id="billing-toggle" role="switch" checked aria-labelledby="billing-monthly-label billing-annual-label" aria-describedby="billing-savings">
-      <span class="track"></span>
-    </label>
-    <span id="billing-annual-label">Annual <span class="save-tag" id="billing-savings">Save 20%</span></span>
-  </div>
+    {{< comment >}}Hero: the switch and the three plans, on the nebula{{< /comment >}}
+    <section class="home-hero centered pricing-hero" data-nebula="light-center" style="background-image: url('{{< nebula-still "light-center" >}}')">
+        <div class="wrap">
+            <p class="hero-stat">
+                <span><strong>Business comes with a 14-day free trial</strong></span>
+            </p>
+            <h1>Pricing for CRA product security</h1>
+            <p class="lede">Start free. Upgrade when you need private SBOMs, daily vulnerability scans and a Trust Center on your own domain.</p>
 
-<div class="pricing-grid">
-    <div class="pricing-card">
-      <div class="card-header">
-        <h2>Community</h2>
-        <div class="price">
-          <span class="amount">$0</span>
-          <span class="suffix">/ Month</span>
+            <fieldset class="billing">
+                <legend class="sr-only">Billing period</legend>
+                <input type="radio" name="billing" id="bill-monthly" value="Monthly">
+                <label for="bill-monthly">Monthly</label>
+                <input type="radio" name="billing" id="bill-annual" value="Annual" checked>
+                <label for="bill-annual">Annual <span class="billing-save">Save 20%</span></label>
+            </fieldset>
+
+            <div class="plans" data-reveal>
+                <article class="plan" style="background-image: url('{{< nebula-still "grey" >}}')">
+                    <h2 class="plan-name">Community</h2>
+                    <p class="plan-for">For open source maintainers, hobby projects and trying sbomify out.</p>
+                    <div class="price"><span class="amount">$0</span><span class="suffix">/ month</span></div>
+                    <a href="https://app.sbomify.com" class="btn-secondary btn-lg plan-cta" data-cta-location="pricing" data-cta-label="Community Plan Signup">Start free</a>
+                    <a href="/self-hosting/" class="plan-alt">Or run it yourself{{< ph "arrow-right" "bold" "ph-go" >}}</a>
+                    <ul class="plan-list">
+                        <li><a href="/features/sbom-hierarchy/">1 product</a> with <a href="/features/sbom-hierarchy/">5 components</a></li>
+                        <li>Unlimited SBOMs and compliance documents</li>
+                        <li>Public documents only</li>
+                        <li>A <a href="/features/trust-center/">public Trust Center</a></li>
+                        <li>OSV vulnerability scanning, rescanned weekly</li>
+                        <li>Manual exports and basic compliance reporting</li>
+                        <li>A single user, with community support</li>
+                    </ul>
+                </article>
+
+                <article class="plan is-featured" style="background-image: url('{{< nebula-still "navy" >}}')">
+                    <p class="plan-tag">Most popular</p>
+                    <h2 class="plan-name">Business</h2>
+                    <p class="plan-for">For teams that need private SBOMs, compliance documents and integrations.</p>
+                    <div class="price" data-monthly="199" data-annual="159"><span class="amount"><span class="p-annual">$159</span><span class="p-monthly">$199</span></span><span class="suffix">/ month</span><span class="billing-note"><span class="p-annual">billed annually</span><span class="p-monthly">billed monthly</span></span></div>
+                    <a href="https://app.sbomify.com" class="btn-primary btn-lg plan-cta" data-cta-location="pricing" data-cta-label="Business Plan Signup">Start 14-day free trial</a>
+                    <a href="https://app.sbomify.com/enterprise-contact/" class="plan-alt" data-cta-location="pricing" data-cta-label="Business Plan Book a demo">Or book a demo{{< ph "arrow-right" "bold" "ph-go" >}}</a>
+                    <ul class="plan-list">
+                        <li><a href="/features/sbom-hierarchy/">5 products</a> with <a href="/features/sbom-hierarchy/">200 components</a></li>
+                        <li>Unlimited SBOMs and compliance documents</li>
+                        <li>Private documents, with optional public sharing</li>
+                        <li>A <a href="/features/trust-center/">Trust Center on your own domain</a></li>
+                        <li>The <a href="/faq/how-do-i-enable-tea-in-sbomify/">Transparency Exchange API</a></li>
+                        <li>The <a href="/faq/how-do-i-use-cra-compliance/">CRA Compliance Wizard</a></li>
+                        <li><a href="/faq/how-do-i-enable-vulnerability-scanning/">Dependency-Track</a> and daily rescans</li>
+                        <li>Automated reports and vulnerability insights</li>
+                        <li>Standard integrations</li>
+                        <li>Team and role-based access</li>
+                        <li>Priority email support</li>
+                    </ul>
+                </article>
+
+                <article class="plan" style="background-image: url('{{< nebula-still "grey" >}}')">
+                    <h2 class="plan-name">Enterprise</h2>
+                    <p class="plan-for">For large organisations with advanced security and compliance needs.</p>
+                    <div class="price"><span class="amount">Custom</span><span class="suffix">quote</span></div>
+                    <a href="https://app.sbomify.com/enterprise-contact/" class="btn-secondary btn-lg plan-cta" data-cta-location="pricing" data-cta-label="Enterprise Plan Book a demo">Book a demo</a>
+                    <a href="https://join.slack.com/t/sbomify/shared_invite/zt-3na54pa1f-MXrFWhotmZr0YxXc8sABTw" class="plan-alt" data-cta-location="pricing" data-cta-label="Enterprise Plan Chat on Slack">Or chat with us on Slack{{< ph "arrow-right" "bold" "ph-go" >}}</a>
+                    <ul class="plan-list">
+                        <li><a href="/features/sbom-hierarchy/">Unlimited products and components</a></li>
+                        <li>Unlimited SBOMs and compliance documents</li>
+                        <li>A <a href="/features/trust-center/">Trust Center on your own domain</a></li>
+                        <li>Enterprise-grade controls, including RBAC and audits</li>
+                        <li>Org-wide roles, SSO and SCIM</li>
+                        <li>Advanced and bespoke integrations, built for your toolchain</li>
+                        <li>Advanced dashboards and compliance modules</li>
+                        <li>Single-tenant installation</li>
+                        <li>Support packages for self-hosted installations</li>
+                        <li>A dedicated account manager and SLA-backed support</li>
+                    </ul>
+                </article>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="card-body">
-        <div class="section">
-          <h3>Ideal For</h3>
-          <ul>
-            <li>OSS maintainers / hobby projects</li>
-            <li>Test-drive sbomify</li>
-          </ul>
+    {{< comment >}}Compare: the same facts as the cards, side by side{{< /comment >}}
+    <section class="section" id="compare">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Compare plans</span>
+                    <h2 class="sec-title">Everything side by side. <span class="soft">Pick what fits.</span></h2>
+                </div>
+                <p class="sec-lede">Every plan has unlimited SBOMs and compliance documents. The differences are in scale, privacy and how much sbomify does for you.</p>
+            </div>
+
+            <div class="compare-wrap" data-reveal>
+                <table class="compare">
+                    <thead>
+                        <tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col">Community</th><th scope="col" class="is-featured">Business</th><th scope="col">Enterprise</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="compare-group"><th scope="rowgroup" colspan="4">Usage</th></tr>
+                        <tr><th scope="row">Products</th><td>1</td><td class="is-featured">5</td><td>Unlimited</td></tr>
+                        <tr><th scope="row">Components</th><td>5</td><td class="is-featured">200</td><td>Unlimited</td></tr>
+                        <tr><th scope="row">SBOMs and compliance documents</th><td>Unlimited</td><td class="is-featured">Unlimited</td><td>Unlimited</td></tr>
+                        <tr><th scope="row">Users</th><td>One</td><td class="is-featured">Team, with roles</td><td>Org-wide roles, SSO and SCIM</td></tr>
+
+                        <tr class="compare-group"><th scope="rowgroup" colspan="4">Sharing</th></tr>
+                        <tr><th scope="row">Documents</th><td>Public only</td><td class="is-featured">Private, with optional public sharing</td><td>Private, with optional public sharing</td></tr>
+                        <tr><th scope="row"><a href="/features/trust-center/">Trust Center</a></th><td>Public</td><td class="is-featured">On your own domain</td><td>On your own domain</td></tr>
+                        <tr><th scope="row"><a href="/faq/how-do-i-enable-tea-in-sbomify/">Transparency Exchange API</a></th><td><span class="no">Not included</span></td><td class="is-featured"><span class="yes">Included</span></td><td><span class="yes">Included</span></td></tr>
+
+                        <tr class="compare-group"><th scope="rowgroup" colspan="4">Security and compliance</th></tr>
+                        <tr><th scope="row">Vulnerability scanning</th><td>OSV, rescanned weekly</td><td class="is-featured">OSV and Dependency-Track, rescanned daily</td><td>OSV and Dependency-Track, rescanned daily, or bring your own instance</td></tr>
+                        <tr><th scope="row"><a href="/faq/how-do-i-use-cra-compliance/">CRA Compliance Wizard</a></th><td><span class="no">Not included</span></td><td class="is-featured"><span class="yes">Included</span></td><td><span class="yes">Included</span></td></tr>
+                        <tr><th scope="row">Reporting</th><td>Manual exports, basic compliance reporting</td><td class="is-featured">Automated reports and vulnerability insights</td><td>Advanced dashboards and compliance modules</td></tr>
+                        <tr><th scope="row">Controls</th><td><span class="no">Not included</span></td><td class="is-featured">Role-based access</td><td>Enterprise-grade, including RBAC and audits</td></tr>
+
+                        <tr class="compare-group"><th scope="rowgroup" colspan="4">Deployment and support</th></tr>
+                        <tr><th scope="row">Hosting</th><td>Our cloud</td><td class="is-featured">Our cloud</td><td>Our cloud, single-tenant, or self-hosted with a support package</td></tr>
+                        <tr><th scope="row">Support</th><td>Community</td><td class="is-featured">Priority email</td><td>Dedicated account manager, SLA-backed</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="sec-close">sbomify is open source, so you can also <a href="/self-hosting/">run it yourself{{< ph "arrow-right" "bold" "ph-go" >}}</a></p>
         </div>
+    </section>
 
-        <div class="section">
-          <h3>Features</h3>
-          <ul>
-            <li><a href="/features/sbom-hierarchy/">1 Product</a></li>
-            <li><a href="/features/sbom-hierarchy/">5 Components</a></li>
-            <li>Unlimited SBOMs & compliance documents</li>
-            <li>Public documents only</li>
-            <li><a href="/features/trust-center/">Public trust center</a></li>
-            <li>OSV vulnerability scanning (weekly re-scans)</li>
-            <li>Manual exports only</li>
-            <li>Basic compliance reporting</li>
-            <li>Single user with community support</li>
-          </ul>
+    {{< comment >}}FAQ: the same questions as the front matter (FAQPage schema), with links{{< /comment >}}
+    <section class="section" id="faq">
+        <div class="wrap cra-faq-wrap">
+            <div>
+                <span class="kicker">Questions</span>
+                <h2 class="sec-title">Frequently asked</h2>
+            </div>
+            <div class="cra-faq">
+                <details>
+                    <summary>What's included in the free tier?{{< ph "plus" >}}</summary>
+                    <p>The Community tier is perfect for open source projects and includes public SBOM hosting, 1 product with 5 components, and community support.</p>
+                </details>
+                <details>
+                    <summary>Can I upgrade or downgrade at any time?{{< ph "plus" >}}</summary>
+                    <p>Yes, you can change your plan at any time. Your billing will be prorated accordingly.</p>
+                </details>
+                <details>
+                    <summary>What payment methods do you accept?{{< ph "plus" >}}</summary>
+                    <p>We accept all major credit cards and can arrange alternative payment methods for enterprise customers.</p>
+                </details>
+                <details>
+                    <summary>Do you offer custom solutions?{{< ph "plus" >}}</summary>
+                    <p>Yes, our enterprise tier can be customized to meet your specific needs. <a href="https://app.sbomify.com/enterprise-contact/" data-cta-location="pricing_faq" data-cta-label="Contact sales">Contact our sales team</a> to learn more.</p>
+                </details>
+                <details>
+                    <summary>Can I self-host sbomify?{{< ph "plus" >}}</summary>
+                    <p>Yes! sbomify is open source and available for self-hosting. Read our <a href="/self-hosting/">self-hosting guide</a> for installation, configuration and sizing. Support packages for self-hosted installations, as well as single-tenant installations, are available on the Enterprise plan.</p>
+                </details>
+            </div>
         </div>
-      </div>
-      <div class="card-footer">
-        <a href="https://app.sbomify.com" class="cta-button" data-cta-location="pricing" data-cta-label="Community Plan Signup">Start free</a>
-      </div>
-    </div>
+    </section>
 
-    <div class="pricing-card featured">
-      <div class="card-header">
-        <h2>Business <span class="trial-badge">14-day free trial</span></h2>
-        <div class="price" data-monthly="199" data-annual="159">
-          <span class="amount">$159</span>
-          <span class="suffix">/ Month</span>
-          <span class="billing">billed annually</span>
-        </div>
-      </div>
+    {{< dawn-cta title="Start free. Upgrade when you need to." text="Community costs nothing, and Business comes with a 14-day free trial." location="pricing_final" >}}
 
-      <div class="card-body">
-        <div class="section">
-          <h3>Ideal For</h3>
-          <ul>
-            <li>Mid-size teams needing private SBOMs, compliance documents & integrations</li>
-          </ul>
-        </div>
-
-        <div class="section">
-          <h3>Features</h3>
-          <ul>
-            <li><a href="/features/sbom-hierarchy/">5 Products</a></li>
-            <li><a href="/features/sbom-hierarchy/">200 Components</a></li>
-            <li>Unlimited SBOMs & compliance documents</li>
-            <li>Private documents with optional public sharing</li>
-            <li><a href="/features/trust-center/">Custom trust center on your domain</a></li>
-            <li><a href="/faq/how-do-i-enable-tea-in-sbomify/">Transparency Exchange API (TEA)</a></li>
-            <li><a href="/faq/how-do-i-use-cra-compliance/">CRA Compliance Wizard</a></li>
-            <li><a href="/faq/how-do-i-enable-vulnerability-scanning/">Dependency Track integration</a></li>
-            <li>Standard Integrations</li>
-            <li>Automated reports & vulnerability insights (daily re-scans)</li>
-            <li>Team/role-based access</li>
-            <li>Priority email support</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card-footer">
-        <a href="https://app.sbomify.com" class="cta-button" data-cta-location="pricing" data-cta-label="Business Plan Signup">Start 14-day free trial</a>
-        <a href="https://app.sbomify.com/enterprise-contact/" class="block mt-3 text-sm text-navy-20 hover:text-white underline underline-offset-4 decoration-navy-60 hover:decoration-white transition-colors" data-cta-location="pricing" data-cta-label="Business Plan Book a demo">Or book a demo &rarr;</a>
-      </div>
-    </div>
-
-    <div class="pricing-card">
-      <div class="card-header">
-        <h2>Enterprise</h2>
-        <div class="price">
-          <span class="amount custom">Custom</span>
-          <span class="suffix">quote</span>
-        </div>
-      </div>
-
-      <div class="card-body">
-        <div class="section">
-          <h3>Ideal For</h3>
-          <ul>
-            <li>Large orgs with advanced security & compliance needs</li>
-          </ul>
-        </div>
-
-        <div class="section">
-          <h3>Features</h3>
-          <ul>
-            <li><a href="/features/sbom-hierarchy/">Unlimited Products</a></li>
-            <li><a href="/features/sbom-hierarchy/">Unlimited Components</a></li>
-            <li>Unlimited SBOMs & compliance documents</li>
-            <li><a href="/features/trust-center/">Custom trust center on your domain</a></li>
-            <li>Enterprise-grade controls (RBAC, audits, etc.)</li>
-            <li>Advanced & bespoke integrations, built for your toolchain</li>
-            <li>Single-tenant installation</li>
-            <li>Support packages for self-hosted installations</li>
-            <li>Advanced dashboards & compliance modules</li>
-            <li>Org-wide roles, SSO/SCIM</li>
-            <li>Dedicated account manager & SLA-backed support</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card-footer">
-        <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" data-cta-location="pricing" data-cta-label="Enterprise Plan Book a demo">Book a demo</a>
-        <a href="https://join.slack.com/t/sbomify/shared_invite/zt-3na54pa1f-MXrFWhotmZr0YxXc8sABTw" target="_blank" rel="noopener noreferrer" class="block mt-3 text-sm text-ink-muted hover:text-ink underline underline-offset-4 decoration-line-strong hover:decoration-ink transition-colors" data-cta-location="pricing" data-cta-label="Enterprise Plan Chat on Slack">Or chat with us on Slack &rarr;</a>
-      </div>
-    </div>
-
-</div>
-
-{{< comment >}}FAQ Section{{< /comment >}}
-<div class="mt-16 md:mt-24">
-    <h2 class="text-ink text-2xl md:text-3xl font-semibold mb-8 md:mb-12 text-center">Frequently Asked Questions</h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="card p-6 md:p-8">
-        <h3 class="text-ink text-lg font-semibold mb-4">What's included in the free tier?</h3>
-        <p class="text-ink-muted leading-relaxed">The Community tier is perfect for open source projects and includes public SBOM hosting, 1 product with 5 components, and community support.</p>
-      </div>
-
-      <div class="card p-6 md:p-8">
-        <h3 class="text-ink text-lg font-semibold mb-4">Can I upgrade or downgrade at any time?</h3>
-        <p class="text-ink-muted leading-relaxed">Yes, you can change your plan at any time. Your billing will be prorated accordingly.</p>
-      </div>
-
-      <div class="card p-6 md:p-8">
-        <h3 class="text-ink text-lg font-semibold mb-4">What payment methods do you accept?</h3>
-        <p class="text-ink-muted leading-relaxed">We accept all major credit cards and can arrange alternative payment methods for enterprise customers.</p>
-      </div>
-
-      <div class="card p-6 md:p-8">
-        <h3 class="text-ink text-lg font-semibold mb-4">Do you offer custom solutions?</h3>
-        <p class="text-ink-muted leading-relaxed">Yes, our enterprise tier can be customized to meet your specific needs. Contact our sales team to learn more.</p>
-      </div>
-
-      <div class="card p-6 md:p-8">
-        <h3 class="text-ink text-lg font-semibold mb-4">Can I self-host sbomify?</h3>
-        <p class="text-ink-muted leading-relaxed">Yes! sbomify is open source and available for self-hosting. Read our <a href="/self-hosting/" class="link">self-hosting guide</a> for installation, configuration and sizing. Support packages for self-hosted installations, as well as single-tenant installations, are available on the Enterprise plan.</p>
-      </div>
-    </div>
-
-</div>
-  </div>
 </div>

@@ -16,7 +16,7 @@ comments: []
 slug: how-to-create-an-sbom
 ---
 
-<div class="bg-info-tint border-l-4 border-info p-6 my-8 rounded-r-lg">
+<div class="bg-info-tint p-6 my-8 rounded-[1.25rem]">
   <div class="flex items-start">
     <div class="flex-shrink-0">
       <svg class="h-6 w-6 text-info" fill="none" viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor">
