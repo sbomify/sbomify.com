@@ -11,7 +11,8 @@
 {{ end }}
 {{ range first 1 (where $studies "Params.quote" "!=" nil) }}
 {{ $q := .Params.quote }}
-<figure class="mega-quote">
+{{ $neb := resources.Get "images/nebula/nebula-navy.webp" | fingerprint }}
+<figure class="mega-quote" style="background-image: url('{{ $neb.RelPermalink }}')">
   {{ partial "ph.html" (dict "name" "quotes" "weight" "fill" "class" "mega-quote-mark") }}
   <blockquote><p>{{ $q.text }}</p></blockquote>
   <figcaption>
