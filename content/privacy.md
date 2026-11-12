@@ -144,7 +144,7 @@ The Company may use Personal Data for the following purposes:
 
 We may share Your personal information in the following situations:
 
-- **With Service Providers:** We may share Your personal information with Service Providers to monitor and analyze the use of our Service, to contact You.
+- **With Service Providers:** We may share Your personal information with Service Providers to monitor and analyze the use of our Service, to contact You. The Service Providers that process personal data on Our behalf are listed on our [Sub-processors](/legal/sub-processors/) page.
 - **For business transfers:** We may share or transfer Your personal information in connection with, or during negotiations of, any merger, sale of Company assets, financing, or acquisition of all or a portion of Our business to another company.
 - **With Affiliates:** We may share Your information with Our affiliates, in which case we will require those affiliates to honor this Privacy Policy. Affiliates include Our parent company and any other subsidiaries, joint venture partners or other companies that We control or that are under common control with Us.
 - **With business partners:** We may share Your information with Our business partners to offer You certain products, services or promotions.
