@@ -46,4 +46,4 @@ Data at rest in our database is held in Finland, and SBOM files and uploaded doc
 
 Before we add or replace a sub-processor that will receive customer data, we review it and update this page first. Customers with a data processing agreement that requires advance notice of changes are notified in line with that agreement.
 
-Questions about our sub-processors, or a request for more detail as part of a security review, can go to <privacy@sbomify.com>.
+Questions about our sub-processors, or a request for more detail as part of a security review, can go to <hello@sbomify.com>.

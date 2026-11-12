@@ -12,7 +12,7 @@ We use Your Personal data to provide and improve the Service. By using the Servi
 
 ## Data Controller Information
 
-sbomify ltd (Company Registration Number: 16181507) is the Data Controller for personal data collected through our Services. Our registered office is at 17-18 Berkeley Square, Clifton, Bristol, BS8 1HB, England. For data protection matters, you can contact our Data Protection Officer at <privacy@sbomify.com>.
+sbomify ltd (Company Registration Number: 16181507) is the Data Controller for personal data collected through our Services. Our registered office is at 17-18 Berkeley Square, Clifton, Bristol, BS8 1HB, England. For data protection matters, you can contact our Data Protection Officer at <hello@sbomify.com>.
 
 ## Your Data Protection Rights
 
