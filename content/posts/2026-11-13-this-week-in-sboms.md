@@ -1,0 +1,108 @@
+---
+
+title: "This Week in SBOMs: 4,837 Hijacked GitHub Accounts, SSHole Joins KEV, and the CRA Standards Slip"
+description: "SBOM news for 7 to 13 November 2026: a CI secret stealer pushed through 4,837 stolen GitHub accounts, a trojanized bee-js npm release with valid SLSA provenance, OpenSSH CVE-2026-123158 added to CISA KEV, PHP2Shell exploited in Check Point gateways, Go, Node.js, Git and Apache httpd security releases, the Commission's three-month extension to the CRA standardisation request, TC54 minutes for CycloneDX 2.0, and a UK government standard that requires an AIBOM."
+keywords: "This Week in SBOMs, SBOM news, GitHub Actions credential stealer, wfx, bee-js, SLSA provenance, CVE-2026-123158, SSHole, CISA KEV, PHP2Shell, CVE-2026-109618, Apache httpd CVE-2026-119618, Go 1.27.4, Node.js security release, Git 2.56.1, CRA standardisation request M/606, EN 40000, Bundesrat CRA, France NIS2, ENISA, CycloneDX 2.0, refId, Ecma TC54, PURL 1.1.1, ECMA-427, VERS, TEA, SPDX 3.1, AIBOM, DWP SS-040, cdxgen 13.7.0"
+categories:
+  - news
+tags: [sbom, this-week-in-sboms, supply-chain, github-actions, npm, slsa, openssh, kev, php, go, nodejs, git, cra, nis2, enisa, cisa, aibom, spdx, cyclonedx, purl, vex]
+tldr: "Attackers used 4,837 stolen GitHub accounts to push a CI secret stealer into tens of thousands of repositories, and some of it reached Packagist and Go packages. A trojanized bee-js release went out on npm with valid SLSA provenance. CISA added OpenSSH's musl bug to KEV, and Check Point confirmed PHP2Shell exploitation on its gateways. Go, Node.js, Git and Apache httpd all shipped security releases. The Commission gave CRA standards writers three more months for all vertical and some horizontal standards. Ecma TC54 published minutes that list the first CycloneDX 2.0 features, including a breaking rename of bom-ref to refId. A UK government department now requires an AI Bill of Materials."
+author:
+  display_name: Cowboy Neil
+  login: Cowboy Neil
+  url: https://sbomify.com
+date: 2026-11-13
+slug: this-week-in-sboms-2026-11-13
+---
+
+This is the fourth issue of **This Week in SBOMs**, covering **Saturday 7 to Friday 13 November 2026**. [Last week](/2026/11/06/this-week-in-sboms-2026-11-06/) the lesson was that a version string did not settle exposure; the build did. This week the build system itself was the target, twice, and one of the attacks came with valid provenance attached.
+
+Regulators mostly moved dates. Standards bodies published a lot of paperwork, some of which will break your parsers.
+
+## The big one: stolen GitHub accounts push a CI secret stealer
+
+Starting on **10 November at 12:45 UTC**, 4,837 compromised GitHub accounts opened probe pull requests titled `docs: dependency audit notes` in 61,764 repositories, according to [Aikido](https://www.aikido.dev/blog/compromised-github-accounts-push-ci-secret-stealer-to-tens-of-thousands-of-repositories). Where the account had collaborator or organisation access, it pushed a workflow that runs a credential stealer. Aikido counts at least 1,806 repositories where the payload ran, and warns that this "may understate impact" because the attacker deletes the run logs. [SafeDep](https://safedep.io/blog/github-actions-wfx-credential-stealer) counted 8,093 repositories with malicious commits between 10 November and 12 November: 7,309 workflow injections and 771 npm `postinstall` hooks, which also run on developer machines.
+
+The payload takes Actions secrets, `GITHUB_TOKEN`, OIDC tokens, cloud credential files and AI-provider keys. It swaps OIDC tokens for AWS, GCP and Azure sessions and then sets up persistence that survives a key rotation: AWS role trust policies are rewritten to `"Principal": {"AWS": "*"}`, and `wfx-ci-*` federated credentials are added to Entra apps. Then it reverts its commit and deletes the workflow run.
+
+Most of the damage is to credentials, but some reached packages. Aikido and SafeDep name Packagist `digitalelvis/neuronai-studio` 3.14.3, Go `github.com/onuragtas/docker-env` v1.0.278 and v1.0.280, and a `github.com/vkuznet/gocurl` pseudo-version. SafeDep also lists docker-env v1.0.282 and `github.com/onuragtas/redock`. The accounts overlap with October's GhostAction wave, but Aikido says "we don't attribute November to the same actor at this stage". How the accounts were compromised has not been disclosed. ([THN](https://thehackernews.com/2026/11/4837-hijacked-github-accounts-ran-ci.html), [BleepingComputer](https://www.bleepingcomputer.com/news/security/hackers-compromise-4-800-github-accounts-to-steal-cloud-credentials/))
+
+**Why this matters for SBOM/VEX practitioners:** your SBOM records which version of a dependency you used. It does not record whether the maintainer's CI was clean the day that version was built. For the named packages, the exact version is enough to tell good from bad, so query your SBOMs for those versions now. Go pseudo-versions are a reminder of why the full version string matters, not just the module path. For your own pipelines, check cloud trust policies and federated credentials, because rotating secrets does not remove a trust relationship.
+
+## Security news that mattered
+
+**Ethersphere bee-js: a malicious release with valid provenance (9 November).** [Socket](https://socket.dev/blog/bee-js-compromise) reports that `@ethersphere/bee-js` 13.3.0 "was published by Ethersphere's legitimate trusted-publishing workflow with valid SLSA provenance", with a `postinstall` loader. npm pulled it after about 75 minutes. Swarm Desktop 0.56.2, signed and notarized, went out through the auto-updater. The clean release is [0.56.3](https://github.com/ethersphere/swarm-desktop/releases/tag/v0.56.3), and the maintainer says 0.56.2 "was published by an attacker using stolen CI credentials". ([GHSA-hh7j-5m3j-23pf](https://github.com/advisories/GHSA-hh7j-5m3j-23pf), [THN](https://thehackernews.com/2026/11/hackers-compromise-etherspheres-bee-js.html)) _Why it matters:_ provenance tells you which pipeline built an artifact, not whether that pipeline was in the right hands. Treat it as one piece of evidence, not as approval.
+
+**SSHole is in KEV and being exploited (9 November).** CISA [added](https://www.cisa.gov/news-events/alerts/2026/11/09/cisa-adds-four-known-exploited-vulnerabilities-catalog) OpenSSH [CVE-2026-123158](https://www.cve.org/CVERecord?id=CVE-2026-123158), last week's musl password bypass, with a due date of 12 November. THN cites GreyNoise seeing the first attempt on 7 November. On oss-security, Medcrypt [reproduced it](https://www.openwall.com/lists/oss-security/2026/11/09/27) "on a stock Yocto image, no unusual configuration", and musl's maintainer [said](https://www.openwall.com/lists/oss-security/2026/11/09/28) `crypt()` "will possibly be changed (to always return null for failure) in the next release cycle". OE-core backported 10.6p2 to scarthgap on 10 November ([commit](https://github.com/openembedded/openembedded-core/commit/fc4316861becc9f0d41857b49f6438929ab4c291)); we found no Buildroot backport to its 2026.08.x or 2025.02.x branches as of 13 November. ([THN](https://thehackernews.com/2026/11/cisa-warns-of-active-exploitation-of.html), [BleepingComputer](https://www.bleepingcomputer.com/news/security/hackers-exploit-sshole-openssh-flaw-to-breach-linux-systems/), [Schneier](https://www.schneier.com/blog/archives/2026/11/new-openssh-vulnerability.html)) _Why it matters:_ embedded Linux builds are where musl and no-PAM setups are common and where SBOMs are thinnest. If you ship Yocto or Buildroot images, the SBOM is how you answer customers.
+
+**PHP2Shell reaches Check Point gateways, and a post-mortem on why scanners missed it (10 to 12 November).** [Check Point Research](https://research.checkpoint.com/2026/php2shell-exploitation-on-check-point-gateway/) reports exploitation since 30 October against Mobile Access portals, "consistent with PHP2Shell, associated with CVE-2026-109618 and CVE-2026-109619", chained with a Gaia privilege escalation, CVE-2026-123039. The [GVIP project's write-up](https://www.gvip-project.org/blog/2026/php2shell/) is the SBOM story: official Docker images compile PHP into `/usr/local`, so "No dpkg, apk or rpm entry owns it", and "Trivy did catch it in an image that shipped an SBOM naming its PHP runtime." ([THN](https://thehackernews.com/2026/11/hackers-exploit-php2shell-flaws-in.html)) _Why it matters:_ this confirms [what we wrote two weeks ago](/2026/10/30/this-week-in-sboms-2026-10-30/). A runtime built from source shows up in an SBOM only if someone writes it down.
+
+**Toolchain and runtime releases:**
+
+- **Go 1.27.4 and 1.26.11 (10 November)** fix 12 CVEs ([announcement](https://www.openwall.com/lists/oss-security/2026/11/10/28)). Eleven, CVE-2026-97033 to CVE-2026-97043, are in cmd/go, cgo, the compiler and the linker, where "building a malicious package that uses cgo could cause arbitrary code execution at build time". _Why it matters:_ a dependency can run code when you build it, not only when you run it. Record the Go toolchain version in build provenance.
+- **Node.js 22.23.5, 24.22.3 and 26.13.1 (11 November)** fix 16 CVEs ([advisory](https://nodejs.org/en/blog/vulnerability/november-2026-security-releases)). One, CVE-2026-123864, can leak "TLS private keys and other users' requests". 20.x and 25.x are end-of-life and get no fixes.
+- **Git 2.56.1 (10 November)**, backported to 2.50.2 through 2.55.1, fixes six CVEs ([oss-security](https://www.openwall.com/lists/oss-security/2026/11/11/10), [GitHub](https://github.blog/open-source/git/git-security-vulnerabilities-announced-7/)). The worst, CVE-2026-111760, allows code execution on `git clone --recurse-submodules`. "All Git versions back to v2.27.0 are affected." CI images and products that bundle Git need checking, not just laptops.
+- **Apache httpd 2.4.71 (11 November)** fixes a critical mod_http2 bug, [CVE-2026-119618](https://httpd.apache.org/security/vulnerabilities_24.html#CVE-2026-119618), in 2.4.55 through 2.4.70 and standalone mod_h2 2.0.8 through 2.0.42. The standalone module is archived and has no fixed release. THN reports no known exploitation. ([THN](https://thehackernews.com/2026/11/critical-apache-http2-flaw-could-let.html), [HN](https://news.ycombinator.com/item?id=50462177))
+- **Also on oss-security:** PostgreSQL 18.7 and back-branches fix 52 CVEs, and 14 is now end-of-life ([release](https://www.postgresql.org/about/news/postgresql-187-1712-1616-1520-1425-and-19-rc-2-released-3442/)). MIT krb5 1.22.3 fixes 21 ([post](https://www.openwall.com/lists/oss-security/2026/11/09/38)). OpenSSL merged five low-severity fixes and scheduled releases for 1 December ([post](https://www.openwall.com/lists/oss-security/2026/11/10/12)).
+
+**KEV.** Ten additions in the window, all on 9 and 10 November. CISA flags three as affecting an open-source component: OpenSSH CVE-2026-123158, GPUStack CVE-2026-102895 and FreeSWITCH CVE-2026-116779, all due 12 November. Chromium CVE-2026-125350, a use-after-free in "the XML component", is due 24 November. Reports that it sits in libxml2 are unconfirmed. See our [KEV explainer](/2025/12/30/what-is-kev-cisa-known-exploited-vulnerabilities/).
+
+**Last week's watch list.** Apple [published a note](https://support.apple.com/en-us/149555) on 9 November saying that "starting in macOS 27.2.1" the command-line tools stop trusting the compromised eMudhra certificates, with the same protection in macOS 26.7.3 and 15.8.3. Go and Node.js shipped as announced. The Brotli KEV deadline passed on 10 November with no change to the entry. Docker Hardened Images published an advisory on 10 November with a VEX status of `under_investigation` for its OpenSSH images. That is the first image-vendor VEX statement on SSHole we found.
+
+## CRA
+
+**The Commission amends the standardisation request (10 November).** The Commission's [CRA standardisation page](https://digital-strategy.ec.europa.eu/en/policies/cra-standardisation) says the request "was amended ... to extend the deadline for the delivery of all vertical standards and some horizontal standards by 3 months", by decision C(2026)7861. It does not say which horizontal standards are covered or give new dates, and we could not open the decision itself. _Why it matters:_ the harmonised standards that will turn the CRA's SBOM and vulnerability-handling duties into concrete practice are later than planned, but the application dates in the regulation have not changed. For now, plan against the [regulation text](/compliance/eu-cra/) and the ENISA SBOM advisory, not against a standard that is not out yet.
+
+**EN 40000-1-1 and 1-2.** There is still no primary confirmation that either was ratified. CEN-CENELEC has published nothing, and neither appears in the Official Journal.
+
+**Germany: the CRA act is now item 7.** The Bundesrat's [agenda for 20 November](https://www.bundesrat.de/SharedDocs/TO/1070/tagesordnung-1070.html), dated 13 November, lists the implementation act (Drucksache 621/26) as item 7, not 6. The act names the BSI as market surveillance authority, which makes it the body that will be checking SBOMs and vulnerability handling in Germany.
+
+**ENISA.** The [SRP page](https://www.enisa.europa.eu/topics/product-security/vulnerability-services/eu-incident-response-and-cyber-crisis-management/single-reporting-platform-srp) still says the v1.3 documentation "is currently being updated". ENISA's [State of Cybersecurity in the Union report](https://www.enisa.europa.eu/news/enisa-reveals-the-state-of-cybersecurity-in-the-union) (10 November) says the number of countries with a national coordinated vulnerability disclosure policy rose "from 7 to 17" since 2024. Coordinated disclosure is the step VEX workflows depend on.
+
+**Eclipse ORC.** The FAQ task force's [10 November minutes](https://github.com/orcwg/orcwg/commits/main) record the CRA FAQ growing from 72 to 129 entries, with steward questions largely triaged and manufacturer questions next. ORC's [monthly post](https://orcwg.org/blog/orc-monthly-oct-2026/) notes that ENISA's consultation on security.txt, CVD policies and security advisories closes on 15 November. If you have opinions on [security.txt](/faq/what-is-security-txt/), this weekend is the deadline.
+
+## NIS2
+
+**France: debate done, vote on 17 November.** The Assemblée nationale [says](https://www.assemblee-nationale.fr/dyn/actualites-accueil-hub/examen-du-projet-de-loi-relatif-a-la-resilience-des-infrastructures-critiques-et-au-renforcement-de-la-cybersecurite) it examined the bill transposing NIS2, CER and DORA on 9 and 10 November. The formal vote is set for "mardi 17 novembre après les Questions au Gouvernement". The Senate adopted its version in March 2025, so a joint committee may still follow.
+
+Otherwise quiet: no infringement decisions, and nothing new on the Digital Omnibus or the Cybersecurity Act revision. The Council press room did not load for us. Background is on our [NIS2 page](/compliance/eu-nis2/).
+
+## CISA and US regulators
+
+A quiet week. CISA's only press release was a revised [incident reporting form](https://www.cisa.gov/news-events/news/cisa-announces-enhanced-reporting-form-cyber-incidents) mapped to MITRE ATT&CK. It does not mention SBOMs. Federal Register searches for "software bill of materials", SBOM, "cryptographic inventory", "post-quantum" and FASCSA returned nothing in the window. We found nothing new on the [CISA 2026 Minimum Elements](/compliance/cisa-minimum-elements/), the SSDF revision or the FCC bills-of-materials proposal.
+
+## Other regulators
+
+**UK: a government department requires an AIBOM (10 November).** The Department for Work and Pensions [published](https://www.gov.uk/government/publications/dwp-procurement-security-policies-and-standards) Security Standard SS-040 on AI and machine learning. The [PDF](https://assets.publishing.service.gov.uk/media/6af5d060cc0dbfec767a50bd/standard-artificial-intelligence-and-machine-learning-version-1.pdf) is dated 29 October. Clause 11.7.2 says: "System owners must maintain an up-to-date AI Bill of Materials (AIBOM), Machine Learning Bill of Materials (ML-BOM), or equivalent formally governed assurance asset record." The minimum contents include models, datasets, prompt templates, tool connectors, MCP servers, licences, provenance and hashes. Another clause requires license-policy pipelines to "fail closed" before merging into protected branches. _Relevance:_ this is procurement policy, so it applies to DWP suppliers, and the field list goes well beyond what most AI-BOM tooling produces today.
+
+**UK Bill.** The Cyber Security and Resilience Bill's next step is Commons consideration of Lords amendments, listed for 24 November ([Parliament](https://bills.parliament.uk/bills/4035)). It has not had Royal Assent.
+
+Nothing new from BSI on TR-03183, METI, CERT-In or Singapore's CSA. MAS's quantum-safe consultation, with its proposed [CBOM](/faq/what-is-a-cbom/)-style inventory, closes on 23 November. Australia's ASD site did not load for us.
+
+## Standards
+
+**Ecma TC54 publishes four sets of minutes (12 November).** The [15 October minutes](https://github.com/Ecma-TC54/meetings/pull/15) record consensus on a first batch of CycloneDX 2.0 changes. These include pre-defined perspectives (the examples are CISA minimum elements, BSI minimum elements and the CRA SBOM expert group), EPSS, risk alignment and a rename of `bom-ref` to `refId`. The minutes call the rename "one of the few breaking changes from CycloneDX 1.7". They justify EPSS on the grounds that "CycloneDX is now an API format instead of a file format". Earlier minutes, merged the same day, record that TEA, the second edition of PURL (ECMA-427) and VERS were approved for submission to the December Ecma General Assembly. CycloneDX 2.0 was expected to be released through OWASP in November and submitted to Ecma in June 2027. The 12 November agenda added "Concerns raised at JTC 1 plenary", including "Normative referencing SPDX". _Why it matters:_ anything that parses `bom-ref` will need changing for 2.0. Separately, PURL, VERS and TEA are a month away from becoming Ecma standards.
+
+**CycloneDX.** Still 1.7.2, with no 2.0 release candidate. Thirteen PRs landed on `2.0-dev`, including [#1090](https://github.com/CycloneDX/specification/pull/1090), which removes `metadata.supplier` in favour of `metadata.component.supplier`. [cdxgen 13.7.0](https://github.com/cdxgen/cdxgen/releases/tag/v13.7.0) can already write 2.0 "against the pinned draft schema" with `--spec-version 2.0`, and adds a validation rule set for the CISA 2026 minimum elements.
+
+**PURL.** [purl-spec v1.1.1](https://github.com/package-url/purl-spec/releases/tag/v1.1.1) (10 November) contains "changes required to complete the review cycle for ECMA-427 2nd Edition". It also pins down PyPI name normalisation: lowercase, and collapse runs of `.`, `_` and `-` into a single hyphen. If your tool produced `pkg:pypi/Foo_Bar`, the same package will not deduplicate against tools that follow the spec. The Go casing PR [#1054](https://github.com/package-url/purl-spec/pull/1054) is still open.
+
+**SPDX.** Still 3.1 RC1, but RC2 content is landing in [spdx-3-model](https://github.com/spdx/spdx-3-model): AI agent support (#1257), a hardware model number (#1441) and project fields (#1461). On 7 November the same author proposed recording evidence for dependency edges in both SPDX ([#1483](https://github.com/spdx/spdx-3-model/issues/1483)) and CycloneDX ([#1197](https://github.com/CycloneDX/specification/issues/1197)).
+
+## The wider landscape
+
+- **OpenSSF:** the Supply Chain Integrity working group charter vote passed the 55% threshold on 10 November with 5 of 9 votes ([#682](https://github.com/ossf/tac/issues/682)). The issue is still open. ORT's maintainer has [asked](https://github.com/ossf/tac/issues/686) the TAC to consider moving the OSS Review Toolkit from the Linux Foundation's ACT umbrella to OpenSSF, calling ACT "pretty much dead".
+- **CycloneDX tooling:** [cyclonedx-node-npm 7.0.0](https://github.com/CycloneDX/cyclonedx-node-npm/releases/tag/v7.0.0) now defaults to spec 1.7 and no longer installs the dependencies needed for validation and XML output. cargo-cyclonedx 0.5.10 can now produce CycloneDX 1.6 and 1.7 from Rust projects. cdxgen 12.9.2 backports two security fixes.
+- **Dependency-Track:** no release, but [#7942](https://github.com/DependencyTrack/dependency-track/pull/7942) fixes pre-1.7 CycloneDX exports that failed schema validation when components had license expressions.
+- **Research:** we found no arXiv papers on SBOMs or VEX submitted in the window. Submissions from 12 and 13 November may not be indexed yet.
+
+## What to watch next week
+
+- Further packages named in the GitHub account campaign, and whether GitHub says how the accounts were taken.
+- The French NIS2 vote on 17 November and the Bundesrat on 20 November.
+- Which horizontal CRA standards the M/606 extension covers, and any confirmation of EN 40000-1-1 and 1-2.
+- A CycloneDX 2.0 release through OWASP, if the November target holds.
+- ENISA's SRP v1.3 documentation, and the security.txt and CVD consultation closing on 15 November.
+- The UK Bill in the Commons on 24 November.
+
+_This Week in SBOMs covers regulation, standards and the open-source landscape. It deliberately excludes vendor product and marketing news, but reports on vendors' own security incidents. Noticed something we missed? Let us know._
