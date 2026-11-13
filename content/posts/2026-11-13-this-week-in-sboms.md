@@ -2,11 +2,11 @@
 
 title: "This Week in SBOMs: 4,837 Hijacked GitHub Accounts, SSHole Joins KEV, and the CRA Standards Slip"
 description: "SBOM news for 7 to 13 November 2026: a CI secret stealer pushed through 4,837 stolen GitHub accounts, a trojanized bee-js npm release with valid SLSA provenance, OpenSSH CVE-2026-123158 added to CISA KEV, PHP2Shell exploited in Check Point gateways, Go, Node.js, Git and Apache httpd security releases, the Commission's three-month extension to the CRA standardisation request, TC54 minutes for CycloneDX 2.0, and a UK government standard that requires an AIBOM."
-keywords: "This Week in SBOMs, SBOM news, GitHub Actions credential stealer, wfx, bee-js, SLSA provenance, CVE-2026-123158, SSHole, CISA KEV, PHP2Shell, CVE-2026-109618, Apache httpd CVE-2026-119618, Go 1.27.4, Node.js security release, Git 2.56.1, CRA standardisation request M/606, EN 40000, Bundesrat CRA, France NIS2, ENISA, CycloneDX 2.0, refId, Ecma TC54, PURL 1.1.1, ECMA-427, VERS, TEA, SPDX 3.1, AIBOM, DWP SS-040, cdxgen 13.7.0"
+keywords: "This Week in SBOMs, SBOM news, sbomify Insights, GitHub Actions credential stealer, wfx, bee-js, SLSA provenance, CVE-2026-123158, SSHole, CISA KEV, PHP2Shell, CVE-2026-109618, Apache httpd CVE-2026-119618, Go 1.27.4, Node.js security release, Git 2.56.1, CRA standardisation request M/606, EN 40000, Bundesrat CRA, France NIS2, ENISA, CycloneDX 2.0, refId, Ecma TC54, PURL 1.1.1, ECMA-427, VERS, TEA, SPDX 3.1, AIBOM, DWP SS-040, cdxgen 13.7.0"
 categories:
   - news
 tags: [sbom, this-week-in-sboms, supply-chain, github-actions, npm, slsa, openssh, kev, php, go, nodejs, git, cra, nis2, enisa, cisa, aibom, spdx, cyclonedx, purl, vex]
-tldr: "Attackers used 4,837 stolen GitHub accounts to push a CI secret stealer into tens of thousands of repositories, and some of it reached Packagist and Go packages. A trojanized bee-js release went out on npm with valid SLSA provenance. CISA added OpenSSH's musl bug to KEV, and Check Point confirmed PHP2Shell exploitation on its gateways. Go, Node.js, Git and Apache httpd all shipped security releases. The Commission gave CRA standards writers three more months for all vertical and some horizontal standards. Ecma TC54 published minutes that list the first CycloneDX 2.0 features, including a breaking rename of bom-ref to refId. A UK government department now requires an AI Bill of Materials."
+tldr: "Attackers used 4,837 stolen GitHub accounts to push a CI secret stealer into tens of thousands of repositories, and some of it reached Packagist and Go packages. A trojanized bee-js release went out on npm with valid SLSA provenance. CISA added OpenSSH's musl bug to KEV, and Check Point confirmed PHP2Shell exploitation on its gateways. Go, Node.js, Git and Apache httpd all shipped security releases. The Commission gave CRA standards writers three more months for all vertical and some horizontal standards. Ecma TC54 published minutes that list the first CycloneDX 2.0 features, including a breaking rename of bom-ref to refId. A UK government department now requires an AI Bill of Materials. And in house news, we launched sbomify Insights, a public site with a plain-English page for every known vulnerability."
 author:
   display_name: Cowboy Neil
   login: Cowboy Neil
@@ -96,6 +96,12 @@ Nothing new from BSI on TR-03183, METI, CERT-In or Singapore's CSA. MAS's quantu
 - **Dependency-Track:** No new release occurred; however, PR [#7942](https://github.com/DependencyTrack/dependency-track/pull/7942) rectifies pre-1.7 CycloneDX exports that previously failed schema validation when components contained license expressions.
 - **Research:** Our search found no arXiv papers regarding SBOMs or VEX submitted during the reporting window. Submissions dated 12 and 13 November may yet be pending indexing.
 
+## House news: sbomify Insights is live
+
+This column leaves vendor announcements out, so this one is flagged as ours. We have launched [sbomify Insights](https://insights.sbomify.com/), a public site with a page for every known vulnerability, written in plain English. It matches up CVEs, GitHub advisories and malicious packages into one record per vulnerability. Each page then says what the flaw is, who is affected, whether it is being exploited and how to fix it.
+
+If you have been following the CVE links in recent issues, you have already used it. This week's lead CVEs are there too: [SSHole](https://insights.sbomify.com/CVE-2026-123158/), [PHP2Shell](https://insights.sbomify.com/CVE-2026-109618/) and the [httpd mod_http2 bug](https://insights.sbomify.com/CVE-2026-119618/).
+
 ## What to watch next week
 
 - Additional packages named in the GitHub account campaign, alongside any explanation from GitHub regarding how those accounts were compromised.
@@ -105,4 +111,4 @@ Nothing new from BSI on TR-03183, METI, CERT-In or Singapore's CSA. MAS's quantu
 - Documentation for ENISA's SRP v1.3, along with the closing date for the security.txt and CVD consultations on 15 November.
 - The UK Bill progressing in the Commons on 24 November.
 
-_This Week in SBOMs focuses on regulation, standards and the open-source ecosystem. It intentionally omits vendor product updates and marketing announcements, yet reports on vendors' own security incidents. Spotting something we overlooked? Contact us._
+_This Week in SBOMs focuses on regulation, standards and the open-source ecosystem. It intentionally omits vendor product updates and marketing announcements, yet reports on vendors' own security incidents. Our own launches, when we mention them, are labelled as house news. Spotting something we overlooked? Contact us._
