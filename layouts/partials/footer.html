@@ -20,6 +20,15 @@
           </a>
         {{ end }}
       </div>
+      {{/* Live status badge. Ships as a plain "System status" link; after the
+           page has loaded and the footer comes near the screen, main.js
+           (initStatus) reads api/summary.json and swaps in the current
+           state. Without JavaScript, or if the page is unreachable, it stays
+           the plain link. */}}
+      <a class="status-badge" href="{{ site.Params.statusURL }}" data-status-badge data-status="unknown" data-status-src="{{ site.Params.statusURL }}api/summary.json">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="status-text">System status</span>
+      </a>
     </div>
 
     <nav aria-label="Product">
@@ -51,6 +60,7 @@
         <li><a href="/about/">About</a></li>
         <li><a href="/case-studies/">Case Studies</a></li>
         <li><a href="https://trust.sbomify.com/" target="_blank" rel="noopener noreferrer">Public Trust Center</a></li>
+        <li><a href="{{ site.Params.statusURL }}">System status</a></li>
         <li><a href="{{ site.Data.main.social.slack }}"{{ partial "link-attrs.html" (dict "url" site.Data.main.social.slack "rel" "noopener noreferrer" "target" "_blank") }}>Slack community</a></li>
       </ul>
     </nav>

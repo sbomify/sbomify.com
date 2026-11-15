@@ -93,6 +93,9 @@ ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfi
   signupURL = "https://app.sbomify.com"
   signinURL = "https://app.sbomify.com"
   demoURL = "https://app.sbomify.com/enterprise-contact/"
+  # Public status page (sbomify/status). The footer links to it, and
+  # assets/js/main.js reads statusURL + "api/summary.json" for the live badge.
+  statusURL = "https://status.sbomify.com/"
   posthog_api_key = "phc_kWvZ17AgVDC3CAEHYG2oQBYEg5lUnyK3brPqJ6P4nPH"
 
   # Outbound link policy, applied by layouts/_markup/render-link.html and the

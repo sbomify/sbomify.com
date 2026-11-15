@@ -1561,6 +1561,9 @@ button {
 .invisible {
   visibility: hidden;
 }
+.collapse {
+  visibility: collapse;
+}
 .static {
   position: static;
 }
@@ -9249,6 +9252,50 @@ button {
 .ins-footer .footer-bottom button:hover {
   background: none;
   color: rgb(var(--color-navy-100));
+}/* Live status badge under the social icons: a hairline pill with a status
+   dot, filled in by initStatus in assets/js/main.js. Status colour is only
+   on the dot (brand rule); the label stays navy. Until the payload arrives,
+   or without JavaScript, the dot is a neutral grey. */
+.ins-footer .status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 5px 12px 5px 10px;
+  border: 1px solid rgb(var(--color-line));
+  border-radius: 999px;
+  font-size: 0.82rem;
+  color: rgb(var(--color-navy-80));
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.ins-footer .status-badge:hover {
+  border-color: rgb(var(--color-line-strong));
+  color: rgb(var(--color-navy-100));
+}
+.ins-footer .status-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgb(var(--color-navy-40));
+}
+.ins-footer .status-badge[data-status="operational"] .status-dot {
+  background: rgb(var(--color-success-full));
+  box-shadow: 0 0 0 3px rgb(var(--color-success-tint));
+}
+.ins-footer .status-badge[data-status="partial"] .status-dot {
+  background: rgb(var(--color-warning-full));
+  box-shadow: 0 0 0 3px rgb(var(--color-warning-tint));
+}
+.ins-footer .status-badge[data-status="major"] .status-dot {
+  background: rgb(var(--color-danger-full));
+  box-shadow: 0 0 0 3px rgb(var(--color-danger-tint));
+}
+@media (prefers-reduced-motion: reduce) {
+  .ins-footer .status-badge {
+    transition: none;
+  }
 }/* Behind the wordmark: the footer nebula, under a white overlay that is
    solid at the top and clear at the bottom, so the colour only rises from
    the bottom edge. */

@@ -370,6 +370,57 @@
     });
   }
 
+  // Footer status badge (layouts/partials/footer.html). Kept off the
+  // critical path: nothing happens until the load event, then an idle
+  // callback, and the request is only sent once the footer is within a
+  // screen of the viewport, so a visit that never scrolls down (or a
+  // page-speed lab) never makes it. The text comes from this map, not the
+  // payload, so an unexpected response cannot put arbitrary copy on the page.
+  function initStatus () {
+    var badge = document.querySelector('[data-status-badge]');
+    if (!badge || !window.fetch) return;
+    var LABELS = {
+      operational: 'All systems operational',
+      partial: 'Partial outage',
+      major: 'Major outage'
+    };
+
+    function load () {
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var timer = ctrl && setTimeout(function () { ctrl.abort(); }, 5000);
+      fetch(badge.getAttribute('data-status-src'), {
+        credentials: 'omit',
+        signal: ctrl ? ctrl.signal : undefined
+      })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (s) {
+          var label = s && LABELS[s.status];
+          if (!label) return; // "unknown" or anything new: keep "System status"
+          badge.setAttribute('data-status', s.status);
+          badge.querySelector('.status-text').textContent = label;
+        })
+        .catch(function () {})
+        .then(function () { if (timer) clearTimeout(timer); });
+    }
+
+    function watch () {
+      if (!('IntersectionObserver' in window)) { load(); return; }
+      var io = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        load();
+      }, { rootMargin: '100% 0px' });
+      io.observe(badge);
+    }
+
+    function arm () {
+      (window.requestIdleCallback || function (cb) { setTimeout(cb, 200); })(watch, { timeout: 3000 });
+    }
+
+    if (document.readyState === 'complete') arm();
+    else window.addEventListener('load', arm, { once: true });
+  }
+
   initHeader();
   initMega();
   initReveal();
@@ -378,4 +429,5 @@
   initAgent();
   initCodeCopy();
   initAgentTools();
+  initStatus();
 }())
