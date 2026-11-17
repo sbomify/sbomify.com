@@ -20,6 +20,8 @@ keywords: [EU CRA SBOM, Cyber Resilience Act SBOM, CRA Annex I Part II, BSI TR-0
 
 ---
 
+**Check your SBOM:** the free [SBOM checker](/tools/sbom-checker/) scores a CycloneDX or SPDX file against BSI TR-03183-2, the technical guideline for CRA SBOMs, in your browser, and links every gap to the fix.
+
 ## What Changed Recently
 
 This page is current as of **October 2026**. The CRA landscape has moved substantially since the regulation entered into force:

@@ -9963,6 +9963,69 @@ a:hover > .ph-up {
   width: 2rem;
   height: 2rem;
   color: rgb(var(--color-white));
+}/* Links under a finding: the action step that fixes it, the requirement in
+   our guide, and where the field goes. A label column keeps them aligned. */
+.checker-links {
+  display: grid;
+  gap: 4px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+.checker-links li {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 12px;
+  align-items: baseline;
+  color: rgb(var(--color-ink-muted));
+}
+.checker-link-kind {
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--color-ink-subtle));
+}
+@media (max-width: 639px) {
+  .checker-links li {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .checker-links li + li {
+    margin-top: 6px;
+  }
+}
+.checker-cta-steps {
+  display: grid;
+  gap: 8px;
+  margin: 2px 0 6px;
+  color: rgb(var(--color-on-inverse-muted));
+  line-height: 1.55;
+}
+.checker-cta-steps li {
+  position: relative;
+  padding-left: 16px;
+}
+.checker-cta-steps li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgb(var(--color-white) / 0.5);
+}
+.checker-cta-steps a {
+  color: rgb(var(--color-white));
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgb(var(--color-white) / 0.4);
+}
+.checker-cta-steps code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: rgb(var(--color-white));
 }
 .hover\:border-line-strong:hover {
   --tw-border-opacity: 1;

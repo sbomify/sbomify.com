@@ -20,6 +20,8 @@ description: "The NTIA 2021 Minimum Elements for a Software Bill of Materials, t
 
 ---
 
+**Check your SBOM:** the free [SBOM checker](/tools/sbom-checker/) scores a CycloneDX or SPDX file against the NTIA 2021 elements (and the CISA 2026 elements that replaced them) in your browser, and links every gap to the fix.
+
 ## Overview
 
 The [NTIA Minimum Elements for a Software Bill of Materials](https://www.ntia.gov/sites/default/files/publications/sbom_minimum_elements_report_0.pdf) is the foundational baseline for SBOM guidance in the United States. Published in July 2021, it defines seven core data fields that every SBOM should contain, plus implementation practices for SBOM generation and sharing.

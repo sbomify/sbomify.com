@@ -16,6 +16,8 @@ description: "Understanding NIS2 Directive cybersecurity requirements and how SB
 
 ---
 
+**Check your SBOM:** NIS2 does not define SBOM fields; the free [SBOM checker](/tools/sbom-checker/) scores a CycloneDX or SPDX file against the NTIA and CISA 2026 elements recommended as the baseline, in your browser.
+
 ## Overview
 
 The [NIS2 Directive](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX%3A32022L2555) is the EU's baseline cybersecurity law for "essential" and "important" entities. Unlike the CRA, **NIS2 does not explicitly mandate SBOMs by name or define SBOM field-level requirements**. Instead, it mandates cybersecurity risk-management outcomes (supply chain security, secure acquisition/development, vulnerability handling, and asset management) that SBOMs are commonly used to evidence.

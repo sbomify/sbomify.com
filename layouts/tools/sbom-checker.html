@@ -64,6 +64,18 @@
         {{ partial "content.html" . }}
       </article>
     </div>
+    {{/* Every compliance framework we document, so a reader checking one
+         can get to the others (the same list as the compliance pages). */}}
+    {{ with site.GetPage "/compliance" }}
+    <nav class="section-rule pt-10 pb-16 lg:pb-24" aria-labelledby="checker-frameworks-heading">
+      <h2 id="checker-frameworks-heading" class="eyebrow mb-5">All compliance frameworks</h2>
+      <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10">
+        {{ range .RegularPages.ByTitle }}
+        <li class="border-t border-line"><a href="{{ .RelPermalink }}" class="flex items-center justify-between gap-4 py-3.5 font-medium text-ink hover:text-ink-muted transition-colors">{{ .LinkTitle }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+    {{ end }}
   </section>
 </div>
 
@@ -83,7 +95,11 @@
       <div class="checker-cta-item">
         <span class="checker-cta-icon">{{ partial "ph.html" (dict "name" "github-logo" "weight" "duotone") }}</span>
         <h3>Improve the SBOM: sbomify GitHub Action</h3>
-        <p>Generate CycloneDX or SPDX from your lockfiles or container images, then augment and enrich it with supplier, licence, hash and identifier data from package registries. Free and open source, and it works without an sbomify account.</p>
+        <p>Generates CycloneDX or SPDX from your lockfiles or container images, then fills the gaps in two steps. Free and open source, and it works without an sbomify account.</p>
+        <ul class="checker-cta-steps" role="list">
+          <li><a href="/sbomify-action/augmentation/"><strong>Augmentation</strong></a> adds what only you know: supplier, authors, licence and lifecycle phase of your own software, from a <code>sbomify.json</code> in your repository.</li>
+          <li><a href="/sbomify-action/enrichment/"><strong>Enrichment</strong></a> adds what is public: suppliers, licences, hashes and URLs for every dependency, from package registries and your lockfile.</li>
+        </ul>
         <a href="/sbomify-action/" class="btn btn-primary btn-md">Set up the action {{ partial "ph.html" "arrow-right" }}</a>
       </div>
       <div class="checker-cta-item">

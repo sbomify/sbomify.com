@@ -55,7 +55,7 @@ Accurate, and nearly useless for compliance. After enrichment:
 | Download URL          | High                              |
 | Issue tracker         | Medium                            |
 
-Coverage varies by ecosystem. Popular packages on PyPI, npm and crates.io have excellent metadata. Obscure or private packages may gain nothing.
+Coverage varies by ecosystem. Popular packages on PyPI, npm and crates.io have excellent metadata. Obscure or private packages may gain nothing. To see what is still missing afterwards, run the result through the free [SBOM checker](/tools/sbom-checker/), which scores it against the CISA, NTIA and BSI TR-03183-2 elements.
 
 ## Data sources
 

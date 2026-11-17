@@ -8,6 +8,7 @@
  * attribute setters, never innerHTML.
  */
 import type { Analysis } from "./analyse";
+import { fixSummary, linksFor } from "./links";
 import { checkRefs, type ExternalRef, type RefCheck } from "./refs";
 import type { Finding, FrameworkResult } from "./types";
 import { MAX_ISSUES, type SchemaResult } from "./validate";
@@ -336,23 +337,27 @@ function renderFramework(id: string, f: FrameworkResult): HTMLElement {
     { class: "checker-meta" },
     `${f.name}, version ${f.version}. `,
     h("a", { class: "link", href: f.guideUrl }, "Read our guide"),
+    f.id.startsWith("bsi") ? " · " : null,
+    f.id.startsWith("bsi") ? h("a", { class: "link", href: "/compliance/eu-cra/" }, "EU CRA guide") : null,
+    " · ",
+    h("a", { class: "link", href: "/compliance/schema-crosswalk/" }, "Field mappings"),
     " · ",
     h("a", { class: "link", href: f.url, rel: "nofollow noopener noreferrer", target: "_blank" }, "Official source"),
   );
   const list = h("ul", { class: "checker-findings", role: "list" });
-  for (const fd of open) list.append(renderFinding(fd));
+  for (const fd of open) list.append(renderFinding(fd, f.id));
   const body: Child[] = [links];
   if (open.length) body.push(list);
   else body.push(h("p", { class: "checker-p" }, "Every element this framework asks for is present."));
   if (passed.length) {
     const pl = h("ul", { class: "checker-findings", role: "list" });
-    for (const fd of passed) pl.append(renderFinding(fd));
+    for (const fd of passed) pl.append(renderFinding(fd, f.id));
     body.push(h("details", { class: "checker-passed", open: open.length === 0 }, h("summary", {}, `${passed.length} element${passed.length === 1 ? "" : "s"} met`), pl));
   }
   return section(id, cardTitle(f), v, ...body);
 }
 
-function renderFinding(f: Finding): HTMLElement {
+function renderFinding(f: Finding, frameworkId: string): HTMLElement {
   const li = h("li", { class: `checker-finding is-${f.status}` }, h("div", { class: "checker-finding-head" }, pill(f.status), h("h4", {}, f.title)), h("p", { class: "checker-p" }, f.description));
   if (f.affected?.length) {
     const total = f.affectedCount ?? f.affected.length;
@@ -361,6 +366,14 @@ function renderFinding(f: Finding): HTMLElement {
     li.append(h("details", { class: "checker-affected-wrap" }, h("summary", {}, `${total} affected component${total === 1 ? "" : "s"}`), ul, total > f.affected.length ? h("p", { class: "checker-hint" }, `…and ${total - f.affected.length} more.`) : null));
   }
   if (f.remediation && f.status !== "pass") li.append(h("p", { class: "checker-fix" }, h("strong", {}, "How to fix: "), f.remediation));
+  if (f.status !== "pass") {
+    const links = linksFor(frameworkId, f);
+    const items: Child[] = [];
+    if (links.fix) items.push(h("li", { class: "is-fix" }, h("span", { class: "checker-link-kind" }, "sbomify action"), h("a", { class: "link", href: links.fix.href }, links.fix.label)));
+    if (links.guide) items.push(h("li", {}, h("span", { class: "checker-link-kind" }, "Requirement"), h("a", { class: "link", href: links.guide.href }, links.guide.label)));
+    if (links.crosswalk) items.push(h("li", {}, h("span", { class: "checker-link-kind" }, "Field mapping"), h("a", { class: "link", href: links.crosswalk.href }, links.crosswalk.label)));
+    if (items.length) li.append(h("ul", { class: "checker-links", role: "list" }, ...items));
+  }
   return li;
 }
 
@@ -491,7 +504,15 @@ function renderCta(a: Extract<Analysis, { ok: true }> | null): HTMLElement {
     if (failing || schemaBad) {
       const frameworks = a.frameworks.filter((f) => f.summary.fail > 0).length;
       const parts = [failing ? `${failing} failed check${failing === 1 ? "" : "s"} across ${frameworks} framework${frameworks === 1 ? "" : "s"}` : "", schemaBad ? "schema errors" : ""].filter(Boolean);
-      lead.textContent = `This SBOM has ${parts.join(" and ")}. Most gaps (supplier, licences, hashes, identifiers, author and tool metadata) are filled automatically when the SBOM is generated and enriched in CI.`;
+      const by = fixSummary(a.frameworks);
+      const steps = [
+        by.enrichment ? `${by.enrichment} by enrichment (suppliers, licences, hashes, URLs)` : "",
+        by.augmentation ? `${by.augmentation} by augmentation (authors, lifecycle phase)` : "",
+        by.generation ? `${by.generation} at generation (tool, timestamp, identifiers)` : "",
+        by.attestation ? `${by.attestation} by signing in CI` : "",
+      ].filter(Boolean);
+      const list = steps.length > 1 ? `${steps.slice(0, -1).join(", ")} and ${steps[steps.length - 1]}` : steps[0];
+      lead.textContent = `This SBOM has ${parts.join(" and ")}.` + (list ? ` Of those, the sbomify GitHub Action addresses ${list}.` : "");
     } else {
       lead.textContent = "This SBOM meets every element checked here. Keep it that way for every release: generate it in CI and manage each version in one place.";
     }
