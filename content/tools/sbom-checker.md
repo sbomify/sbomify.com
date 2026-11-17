@@ -1,17 +1,41 @@
 ---
 
-title: "SBOM Checker"
-seo_title: "Free SBOM Checker: Validate CycloneDX & SPDX for CISA, NTIA and the CRA | sbomify"
+title: "SBOM Checker and Validator"
+seo_title: "Free SBOM Checker and Validator (CycloneDX, SPDX)"
 layout: sbom-checker
-lede: "Check a CycloneDX or SPDX SBOM against its official schema, the CISA 2026 and NTIA minimum elements, and BSI TR-03183-2 for the EU Cyber Resilience Act. See what is missing and how to fix it."
-description: "Free SBOM checker that runs in your browser. Validates CycloneDX and SPDX SBOMs against the official schema, CISA 2026 and NTIA minimum elements and BSI TR-03183-2 (EU CRA), checks external references, and explains how to fix every gap."
-keywords: [SBOM checker, SBOM validator, CycloneDX validator, SPDX validator, NTIA minimum elements checker, CISA minimum elements, CRA SBOM check, BSI TR-03183-2, SBOM compliance]
+lede: "Validate a CycloneDX or SPDX SBOM against its official schema, then check it against the CISA 2026 and NTIA minimum elements and BSI TR-03183-2 for the EU Cyber Resilience Act. See what is missing and how to fix it."
+description: "Free SBOM validator for CycloneDX and SPDX. Checks the schema, CISA 2026 and NTIA minimum elements and the EU CRA (BSI TR-03183-2), all in your browser."
+keywords: [SBOM checker, SBOM validator, validate SBOM, CycloneDX validator, SPDX validator, SBOM quality, NTIA minimum elements checker, CISA minimum elements, CRA SBOM check, BSI TR-03183-2, SBOM compliance]
 cta: false
+# Structured data: WebApplication (layouts/partials/head.html).
+app:
+  name: "sbomify SBOM Checker"
+  category: "DeveloperApplication"
+  features:
+    - "CycloneDX 1.2 to 1.7 and SPDX 2.2, 2.3 and 3.0 JSON schema validation"
+    - "CISA 2026 and 2025 draft Minimum Elements checks"
+    - "NTIA 2021 Minimum Elements checks"
+    - "BSI TR-03183-2 (EU Cyber Resilience Act) checks"
+    - "External reference and referenced SBOM checks with hash verification"
+    - "Runs entirely in the browser; the SBOM is never uploaded"
+# Structured data: FAQPage. Same questions and answers as the FAQ section in
+# the body; keep the two in step.
+faq:
+  - question: "How do I validate an SBOM?"
+    answer: "Drop a CycloneDX or SPDX JSON file onto the SBOM checker. It validates the document against the official schema for the version it declares, then checks it against the CISA 2026 and NTIA minimum elements and BSI TR-03183-2, and lists every gap with how to fix it."
+  - question: "Is my SBOM uploaded anywhere?"
+    answer: "No. The checker is a script that runs in your browser. The SBOM is read from your disk into the page and never sent to sbomify or anyone else. The only network requests are the reference checks you start yourself, which go to the URLs the SBOM lists."
+  - question: "Which formats are supported?"
+    answer: "JSON: CycloneDX 1.2 to 1.7, SPDX 2.2 and 2.3, and SPDX 3.0.0 and 3.0.1 (JSON-LD). Gzipped files are decompressed in the browser. For XML or SPDX tag-value, convert to JSON first with the CycloneDX CLI or the SPDX tools."
+  - question: "Why does a valid SBOM fail the CRA check?"
+    answer: "BSI TR-03183-2 asks for more than any minimum-elements list: CycloneDX 1.6 or later (or SPDX 3.0.1 or later), an email or URL for the SBOM creator and each component creator, a SHA-512 hash of each deployable component, and properties such as whether a component is executable or an archive. Most generators do not emit these on their own."
+  - question: "Is passing every check the same as being compliant?"
+    answer: "No. These checks score the SBOM document. Frameworks such as the CRA also ask about process: how often SBOMs are produced, how they are delivered and how vulnerabilities in what they list are handled. A complete SBOM is the start of that, not the whole of it."
 ---
 
 ## What the checker does
 
-The checker reads an SBOM in your browser and runs three kinds of checks. Nothing is uploaded: the file is read, validated and scored on your machine.
+The checker is an SBOM validator and compliance checker in one: it reads a CycloneDX or SPDX SBOM in your browser and runs three kinds of checks. Nothing is uploaded: the file is read, validated and scored on your machine.
 
 ### Is it a valid SBOM?
 
@@ -55,6 +79,10 @@ Most failures come from how the SBOM was generated, not from the software. Gener
 Augmentation covers what only you know about your own software; enrichment covers what is public about your dependencies. [The augmentation guide](/sbomify-action/augmentation/#augmentation-vs-enrichment) explains the split. The BSI component properties (filename, executable, archive, structured) are not filled automatically; the [schema crosswalk](/compliance/schema-crosswalk/#bsi-tr-03183-2-component-properties) shows where they go. See the [generation guides](/guides/) for your language or build system.
 
 ## Frequently asked questions
+
+### How do I validate an SBOM?
+
+Drop a CycloneDX or SPDX JSON file onto the checker above. It validates the document against the official schema for the version it declares, then checks it against the CISA 2026 and NTIA minimum elements and BSI TR-03183-2, and lists every gap with how to fix it. For validation in CI, the [sbomify GitHub Action](/sbomify-action/how-it-works/#4-finalization) validates every SBOM it writes against the same schemas.
 
 ### Is my SBOM uploaded anywhere?
 

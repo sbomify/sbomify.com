@@ -9096,10 +9096,12 @@ a:hover > .ph-up {
   .checker-spinner { animation-duration: 2.4s; }
 }
 
-/* Example and paste controls do nothing without the script. */
+/* Example and paste controls do nothing without the script. They keep
+   their space while hidden, so revealing them does not shift the page
+   (CLS). */
 .checker:not(.is-ready) .checker-alt,
 .checker:not(.is-ready) .checker-paste {
-  display: none;
+  visibility: hidden;
 }
 
 .checker-alt {
