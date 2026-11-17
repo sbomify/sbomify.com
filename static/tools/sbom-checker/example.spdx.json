@@ -1,0 +1,89 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "example-cli-1.8.0",
+  "documentNamespace": "https://example.com/spdxdocs/example-cli-1.8.0-6f1c2b9e",
+  "creationInfo": {
+    "created": "2026-11-02T09:30:00Z",
+    "creators": [
+      "Organization: Example Corp (sbom@example.com)",
+      "Tool: syft-1.18.0"
+    ]
+  },
+  "documentDescribes": [
+    "SPDXRef-Package-example-cli"
+  ],
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package-example-cli",
+      "name": "example-cli",
+      "versionInfo": "1.8.0",
+      "supplier": "Organization: Example Corp (security@example.com)",
+      "downloadLocation": "https://github.com/sbomify/sbomify-action",
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3d28f085af907d589c5504a4972d2f2a4fa1e5a686dfae97d6b4455b482d19c2"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:pypi/example-cli@1.8.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-requests",
+      "name": "requests",
+      "versionInfo": "2.32.3",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "https://pypi.org/project/requests/2.32.3/",
+      "homepage": "https://requests.readthedocs.io",
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:pypi/requests@2.32.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-urllib3",
+      "name": "urllib3",
+      "versionInfo": "2.2.3",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-Package-example-cli"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-example-cli",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-requests"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-requests",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-urllib3"
+    }
+  ]
+}

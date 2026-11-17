@@ -378,6 +378,36 @@
   </script>
   {{ end }}
 
+  {{ with .Params.app }}
+  {{/* Schema.org structured data: WebApplication, for free tools that run in
+       the browser (content/tools/). Set `app` in front matter. */}}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": {{ .name | jsonify | safeJS }},
+    "url": "{{ $.Permalink }}",
+    "description": {{ ($.Params.description | default site.Params.description) | jsonify | safeJS }},
+    "applicationCategory": {{ (.category | default "DeveloperApplication") | jsonify | safeJS }},
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript and a modern web browser.",
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    {{ with .features }}"featureList": {{ . | jsonify | safeJS }},
+    {{ end }}"image": "{{ $ogImage | absURL }}",
+    "publisher": {
+      "@type": "Organization",
+      "name": "sbomify",
+      "url": "{{ site.BaseURL }}"
+    }
+  }
+  </script>
+  {{ end }}
+
   {{/* Schema.org structured data: WebSite */}}
   <script type="application/ld+json">
   {
@@ -666,7 +696,7 @@
        every page in them without breadcrumbs. One generic block covers them all
        rather than four near-identical copies. Any new top-level section must be
        added here or its pages ship without breadcrumb schema. */}}
-  {{ $crumbSections := dict "compliance" "Compliance" "features" "Features" "guides" "Guides" "sbomify-action" "sbomify Action" }}
+  {{ $crumbSections := dict "compliance" "Compliance" "features" "Features" "guides" "Guides" "sbomify-action" "sbomify Action" "tools" "Tools" }}
   {{ $crumbLabel := index $crumbSections .Section }}
   {{ if $crumbLabel }}
   {{/* Schema.org structured data: BreadcrumbList (Section) */}}

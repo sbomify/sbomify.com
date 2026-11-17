@@ -1,0 +1,118 @@
+{{- /*
+  The SBOM checker (content/tools/sbom-checker.md). The upload form is plain
+  HTML so the page paints without waiting for script; the checker itself is
+  built from _tools/sbom-checker/ into static/js/sbom-checker/ (bun run
+  build:tools), and data/sbom_checker.json names the hashed entry files.
+  Nothing is loaded until the page is interactive, and the schema
+  validators are fetched only for the version of the uploaded SBOM.
+*/ -}}
+{{ define "main" }}
+{{- $build := site.Data.sbom_checker -}}
+<div>
+  <header class="hero">
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap pt-10 lg:pt-16 pb-8 lg:pb-10">
+      <div class="max-w-4xl">
+        <p class="eyebrow-chip mb-4"><a href="/tools/">Free tools</a></p>
+        <h1 class="text-ink !text-[clamp(2.375rem,5.2vw,4rem)] mb-5">{{ .Title }}</h1>
+        {{ with .Params.lede }}<p class="lede max-w-3xl">{{ . }}</p>{{ end }}
+        <ul class="checker-promises" role="list">
+          <li>{{ partial "ph.html" "lock-simple" }}Runs in your browser. Your SBOM is never uploaded.</li>
+          <li>{{ partial "ph.html" "file-code" }}CycloneDX 1.2–1.7, SPDX 2.2, 2.3 and 3.0 (JSON)</li>
+          <li>{{ partial "ph.html" "seal-check" }}The same checks as the sbomify platform</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <section class="wrap pb-12 lg:pb-16">
+    <div id="sbom-checker" class="checker"{{ with $build }} data-worker="{{ .worker }}"{{ end }}>
+      <form class="checker-drop" data-checker-form data-checker-drop>
+        <label for="checker-file" class="checker-drop-label">
+          <span class="checker-drop-icon">{{ partial "ph.html" (dict "name" "file-arrow-up" "weight" "duotone") }}</span>
+          <span class="checker-drop-title">Drop an SBOM here</span>
+          <span class="checker-drop-sub">or <span class="link">choose a file</span> (.json or .json.gz)</span>
+        </label>
+        <input id="checker-file" class="sr-only" type="file" accept=".json,.gz,.cdx,.spdx,application/json" data-checker-file>
+        <p class="checker-busy" aria-hidden="true"><span class="checker-spinner"></span>Checking…</p>
+      </form>
+
+      <div class="checker-alt">
+        <span class="checker-alt-label">No SBOM to hand?</span>
+        <button type="button" class="btn btn-secondary btn-md" data-checker-example="/tools/sbom-checker/example.cdx.json" data-checker-example-name="example.cdx.json">Try a CycloneDX example</button>
+        <button type="button" class="btn btn-secondary btn-md" data-checker-example="/tools/sbom-checker/example.spdx.json" data-checker-example-name="example.spdx.json">Try an SPDX example</button>
+      </div>
+
+      <details class="checker-paste">
+        <summary>Paste JSON instead</summary>
+        <label for="checker-paste" class="sr-only">SBOM JSON</label>
+        <textarea id="checker-paste" rows="8" spellcheck="false" autocomplete="off" placeholder='{"bomFormat": "CycloneDX", "specVersion": "1.6", ...}' data-checker-paste></textarea>
+        <button type="button" class="btn btn-navy btn-md" data-checker-paste-run>Check pasted SBOM</button>
+      </details>
+
+      <p class="checker-status" role="status" aria-live="polite" data-checker-status></p>
+      <noscript><p class="checker-noscript">The checker runs in your browser and needs JavaScript. Nothing you check is sent to sbomify.</p></noscript>
+      {{ if not $build }}<p class="checker-noscript">The checker has not been built. Run <code>bun run build:tools</code>.</p>{{ end }}
+
+      <div class="checker-results" data-checker-results hidden></div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-rule pt-10 lg:pt-14 pb-16 lg:pb-24">
+      <article class="page read">
+        {{ partial "content.html" . }}
+      </article>
+    </div>
+    {{/* Every compliance framework we document, so a reader checking one
+         can get to the others (the same list as the compliance pages). */}}
+    {{ with site.GetPage "/compliance" }}
+    <nav class="section-rule pt-10 pb-16 lg:pb-24" aria-labelledby="checker-frameworks-heading">
+      <h2 id="checker-frameworks-heading" class="eyebrow mb-5">All compliance frameworks</h2>
+      <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10">
+        {{ range .RegularPages.ByTitle }}
+        <li class="border-t border-line"><a href="{{ .RelPermalink }}" class="flex items-center justify-between gap-4 py-3.5 font-medium text-ink hover:text-ink-muted transition-colors">{{ .LinkTitle }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+    {{ end }}
+  </section>
+</div>
+
+{{/* Icons and the closing call to action, cloned by the checker script. */}}
+<template id="checker-icon-pass">{{ partial "ph.html" (dict "name" "check-circle" "weight" "fill") }}</template>
+<template id="checker-icon-fail">{{ partial "ph.html" (dict "name" "x-circle" "weight" "fill") }}</template>
+<template id="checker-icon-warning">{{ partial "ph.html" (dict "name" "warning-circle" "weight" "fill") }}</template>
+<template id="checker-icon-error">{{ partial "ph.html" (dict "name" "x-circle" "weight" "fill") }}</template>
+<template id="checker-icon-info">{{ partial "ph.html" (dict "name" "info" "weight" "fill") }}</template>
+<template id="checker-icon-download">{{ partial "ph.html" "download-simple" }}</template>
+<template id="checker-cta">
+  <aside class="cta-band checker-cta" aria-labelledby="checker-cta-title">
+    <p class="eyebrow-chip !mb-4">Next step</p>
+    <h2 id="checker-cta-title" class="checker-cta-title">Fix the gaps once, for every release</h2>
+    <p class="checker-cta-lead" data-cta-lead>Most gaps (supplier, licences, hashes, identifiers, author and tool metadata) are filled automatically when the SBOM is generated and enriched in CI.</p>
+    <div class="checker-cta-grid">
+      <div class="checker-cta-item">
+        <span class="checker-cta-icon">{{ partial "ph.html" (dict "name" "github-logo" "weight" "duotone") }}</span>
+        <h3>Improve the SBOM: sbomify GitHub Action</h3>
+        <p>Generates CycloneDX or SPDX from your lockfiles or container images, then fills the gaps in two steps. Free and open source, and it works without an sbomify account.</p>
+        <ul class="checker-cta-steps" role="list">
+          <li><a href="/sbomify-action/augmentation/" data-cta-location="sbom_checker_results" data-cta-label="Augmentation"><strong>Augmentation</strong></a> adds what only you know: supplier, authors, licence and lifecycle phase of your own software, from a <code>sbomify.json</code> in your repository.</li>
+          <li><a href="/sbomify-action/enrichment/" data-cta-location="sbom_checker_results" data-cta-label="Enrichment"><strong>Enrichment</strong></a> adds what is public: suppliers, licences, hashes and URLs for every dependency, from package registries and your lockfile.</li>
+        </ul>
+        <a href="/sbomify-action/" class="btn btn-primary btn-md" data-cta-location="sbom_checker_results" data-cta-label="Set up the action">Set up the action {{ partial "ph.html" "arrow-right" }}</a>
+      </div>
+      <div class="checker-cta-item">
+        <span class="checker-cta-icon">{{ partial "ph.html" (dict "name" "stack" "weight" "duotone") }}</span>
+        <h3>Manage the lifecycle: sbomify</h3>
+        <p>Store an SBOM for every release you support, run these compliance checks automatically on each one, monitor for new vulnerabilities and share SBOMs with customers through your Trust Center.</p>
+        <a href="{{ site.Params.signupURL }}" class="btn btn-secondary btn-md" data-cta-location="sbom_checker_results" data-cta-label="Start free">Start free</a>
+      </div>
+    </div>
+  </aside>
+</template>
+
+{{ with $build }}
+<script type="module" src="{{ .main }}"></script>
+{{ end }}
+{{ end }}

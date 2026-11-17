@@ -129,6 +129,15 @@ Every page is also built as clean Markdown at `index.md` next to its `index.html
 - The copies repeat their page, so they must not compete with it in search. GitHub Pages cannot set headers, so Cloudflare does: a Transform Rule (modify response header) on `ends_with(http.request.uri.path, ".md")` sets `X-Robots-Tag: noindex`. They are not in the sitemap.
 - Lychee skips `index.md` like `llms.txt`: code examples in them carry placeholder URLs.
 
+## Tools (`/tools/`)
+
+Free browser-side tools. The SBOM checker (`/tools/sbom-checker/`, `content/tools/sbom-checker.md`, layout `layouts/tools/sbom-checker.html`) is a TypeScript package in `_tools/sbom-checker/` with its own `package.json` and `bun.lock`; see its README.
+
+- `bun run build:tools` compiles the schemas and bundles into `static/js/sbom-checker/` (content-hashed) and writes `data/sbom_checker.json`, which the layout reads for the script URLs. All three outputs are gitignored and built in CI before Hugo; without them the page renders a "not built" note.
+- The script loads only on that page, as a module, and the upload form is plain HTML, so the page paints without it. Schema validators are separate chunks fetched for the uploaded version only.
+- Its framework checks are ports of the sbomify platform's assessment plugins and must stay in step with them. `bun run test:tools` runs the type check and tests (the Lint workflow runs it on PRs).
+- The report's classes (`checker-*`) live at the end of `_assets/css/tailwind.css`; `tailwind.config.js` scans `_tools/sbom-checker/src/**/*.ts` for utilities.
+
 ## Outbound Links (rel="nofollow")
 
 Links to anything outside our own domains automatically get `rel="nofollow noopener noreferrer"`. Do not add it by hand. The policy lives in `[params.links]` in `hugo.toml` (`internalHosts`, `externalRel`, `externalTarget`); `sbomify.com` and its subdomains are internal.
@@ -149,3 +158,4 @@ PostHog is consent-gated. It is analytics, not a strictly necessary cookie, so i
 - The **Cookie settings** button in `layouts/partials/footer.html` re-opens the banner. It ships `hidden` and is revealed by the consent script, so it is not a dead control without JavaScript.
 - `forget()` runs only on an explicit "Reject" click, never on plain page loads: PostHog's cookie is set on `.sbomify.com`, so sweeping it on every page view would keep resetting analytics state for `app.sbomify.com` too.
 - Cookies and choices are documented in `content/privacy.md` under "Your Cookie Choices". Keep the two in step.
+- The SBOM checker sends its own events through `_tools/sbom-checker/src/analytics.ts` (`track()`, a no-op until consent): `sbom_checker_input`, `_result` (format, version, schema status, per-framework `<id>_status`/`_pass`/`_fail`, `failed_elements`, `fixable_by_<step>`), `_refs_checked`, `_report_download`, `_link_click` (`kind` fix/guide/crosswalk/framework links, with `framework`, `element`, `step`), `_expand` and `_tile_click`, all with `tool: sbom_checker` and `site_section: tools`. They carry shape only, never file names, component names or URLs from the uploaded SBOM; `test/analytics.test.ts` enforces that. Its closing call to action uses `data-cta-location="sbom_checker_results"`, so those clicks are ordinary `cta_click` events.

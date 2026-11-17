@@ -71,6 +71,9 @@ jobs:
       - name: Build CSS
         run: bun run build:css
 
+      - name: Build SBOM checker
+        run: bun run build:tools
+
       - name: Build Hugo site
         run: hugo --minify --environment production
 

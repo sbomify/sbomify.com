@@ -8,6 +8,8 @@ module.exports = {
   content: [
     './layouts/**/*.html',
     './content/**/*.{html,md}',
+    // The SBOM checker builds its report in script.
+    './_tools/sbom-checker/src/**/*.ts',
   ],
   theme: {
     // Replace, not extend, the default palette: the brand palette is the

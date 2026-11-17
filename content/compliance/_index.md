@@ -19,6 +19,8 @@ Software Bill of Materials (SBOM) compliance requirements are rapidly evolving a
 
 ---
 
+**Check your SBOM:** the free [SBOM compliance checker](/tools/sbom-checker/) scores a CycloneDX or SPDX file against the CISA 2026 and NTIA minimum elements and BSI TR-03183-2 (EU CRA) in your browser, and links every gap to the fix.
+
 ## Compliance Frameworks
 
 ### US Frameworks

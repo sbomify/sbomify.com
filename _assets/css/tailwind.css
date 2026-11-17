@@ -8990,3 +8990,656 @@ a:hover > .ph-up {
     transition: none;
   }
 }
+
+/* ---------- SBOM checker (/tools/sbom-checker/) ----------
+   The form is server-rendered; the report is built by
+   _tools/sbom-checker/src/main.ts, which uses these classes. Status colour
+   follows the brand rule: full colour for the dot or edge, -tint for the
+   fill, navy for the type. */
+
+.checker-promises {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: 22px;
+  font-size: 0.95rem;
+  color: rgb(var(--color-ink-muted));
+}
+
+/* Icon on the first line of the text, not centred on a wrapped item. */
+.checker-promises li {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.checker-promises svg {
+  flex: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: calc((1.5em - 1.1rem) / 2);
+  color: rgb(var(--color-ink));
+}
+
+.checker-drop {
+  position: relative;
+  border: 2px dashed rgb(var(--color-line-strong));
+  border-radius: var(--radius-xl);
+  background: rgb(var(--color-surface));
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.checker-drop.is-over,
+.checker-drop:focus-within {
+  border-color: rgb(var(--color-ink));
+  background: rgb(var(--color-navy-5));
+}
+
+.checker-drop-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: clamp(28px, 5vw, 52px) 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.checker-drop-icon svg {
+  width: 2.75rem;
+  height: 2.75rem;
+  color: rgb(var(--color-ink));
+}
+
+.checker-drop-title {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
+  color: rgb(var(--color-ink));
+}
+
+.checker-drop-sub {
+  color: rgb(var(--color-ink-muted));
+}
+
+.checker-busy {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: inherit;
+  background: rgb(var(--color-canvas) / 0.9);
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-ink));
+}
+
+.checker.is-busy .checker-busy {
+  display: flex;
+}
+
+.checker-spinner {
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  border: 2px solid rgb(var(--color-line-strong));
+  border-top-color: rgb(var(--color-ink));
+  animation: checker-spin 0.8s linear infinite;
+}
+
+@keyframes checker-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .checker-spinner { animation-duration: 2.4s; }
+}
+
+/* Example and paste controls do nothing without the script. They keep
+   their space while hidden, so revealing them does not shift the page
+   (CLS). */
+.checker:not(.is-ready) .checker-alt,
+.checker:not(.is-ready) .checker-paste {
+  visibility: hidden;
+}
+
+.checker-alt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+  margin-top: 16px;
+}
+
+.checker-alt-label {
+  color: rgb(var(--color-ink-muted));
+  font-size: 0.95rem;
+}
+
+/* On a phone the label takes its own line and the two buttons share the
+   next, instead of one button wrapping under the label. */
+@media (max-width: 639px) {
+  .checker-alt-label { flex-basis: 100%; }
+  .checker-alt .btn { flex: 1 1 0; padding-inline: 12px; }
+}
+
+.checker-paste {
+  margin-top: 14px;
+}
+
+.checker-paste summary {
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+  color: rgb(var(--color-ink-muted));
+}
+
+.checker-paste textarea {
+  display: block;
+  width: 100%;
+  margin: 10px 0 12px;
+  padding: 12px 14px;
+  border: 1px solid rgb(var(--color-line-strong));
+  border-radius: var(--radius-lg);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: rgb(var(--color-ink));
+  background: rgb(var(--color-canvas));
+}
+
+.checker-status:empty {
+  display: none;
+}
+
+.checker-status {
+  margin-top: 14px;
+  font-size: 0.95rem;
+  color: rgb(var(--color-ink-muted));
+}
+
+.checker-noscript {
+  margin-top: 14px;
+  color: rgb(var(--color-ink-muted));
+}
+
+.checker-results {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 36px;
+  scroll-margin-top: calc(var(--header-h, 64px) + 16px);
+}
+
+.checker-report {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.checker-card {
+  border: 1px solid rgb(var(--color-line));
+  border-left-width: 4px;
+  border-left-color: rgb(var(--color-line-strong));
+  border-radius: var(--radius-xl);
+  background: rgb(var(--color-canvas));
+  padding: clamp(18px, 2.6vw, 28px);
+  scroll-margin-top: calc(var(--header-h, 64px) + 16px);
+}
+
+.checker-card.is-pass { border-left-color: rgb(var(--color-success-full)); }
+.checker-card.is-fail,
+.checker-card.is-error { border-left-color: rgb(var(--color-danger-full)); }
+.checker-card.is-warning { border-left-color: rgb(var(--color-warning-full)); }
+.checker-card.is-info { border-left-color: rgb(var(--color-info-full)); }
+.checker-overview { border-left-color: rgb(var(--color-ink)); }
+
+/* Title left, status right. The pill keeps its size and sits on the first
+   line of a title that wraps; the download button lines up with the
+   file name, not with the eyebrow above it. */
+.checker-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.checker-card-head > .checker-h3 {
+  min-width: 0;
+  line-height: 1.4;
+}
+
+.checker-card-head > .checker-pill {
+  flex: none;
+  margin-top: calc((1.2rem * 1.4 - 1.65rem) / 2);
+}
+
+.checker-overview-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 16px;
+}
+
+.checker-h2 {
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.02em;
+  color: rgb(var(--color-ink));
+  word-break: break-word;
+}
+
+.checker-h2:focus { outline: none; }
+
+.checker-h3 {
+  font-size: 1.2rem;
+  font-weight: var(--font-weight-bold);
+  color: rgb(var(--color-ink));
+}
+
+.checker-p {
+  margin-top: 8px;
+  color: rgb(var(--color-ink-muted));
+  line-height: 1.6;
+}
+
+.checker-hint {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: rgb(var(--color-ink-subtle));
+}
+
+.checker-meta {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: rgb(var(--color-ink-subtle));
+}
+
+.checker-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  margin-top: 14px;
+}
+
+.checker-facts dt {
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--color-ink-subtle));
+}
+
+.checker-facts dd {
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-ink));
+}
+
+.checker-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.25rem, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Values sit on a common line at the bottom, even when one tile's label
+   wraps to two lines. */
+.checker-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+  height: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgb(var(--color-line));
+  border-radius: var(--radius-lg);
+  background: rgb(var(--color-surface));
+  transition: border-color 0.15s;
+}
+
+.checker-tile:hover,
+.checker-tile:focus-visible {
+  border-color: rgb(var(--color-ink));
+}
+
+.checker-tile-label {
+  font-size: 0.85rem;
+  color: rgb(var(--color-ink-muted));
+}
+
+.checker-tile-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: var(--font-weight-bold);
+  color: rgb(var(--color-ink));
+}
+
+.checker-tile-value svg,
+.checker-pill svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+}
+
+.is-pass > .checker-tile-value svg, .checker-pill.is-pass svg { color: rgb(var(--color-success-full)); }
+.is-fail > .checker-tile-value svg, .checker-pill.is-fail svg,
+.is-error > .checker-tile-value svg, .checker-pill.is-error svg { color: rgb(var(--color-danger-full)); }
+.is-warning > .checker-tile-value svg, .checker-pill.is-warning svg { color: rgb(var(--color-warning-full)); }
+.is-info > .checker-tile-value svg, .checker-pill.is-info svg { color: rgb(var(--color-info-full)); }
+
+.checker-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 1.65rem;
+  line-height: 1;
+  gap: 5px;
+  padding: 2px 10px 2px 7px;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+  color: rgb(var(--color-ink));
+  background: rgb(var(--color-navy-5));
+}
+
+.checker-pill.is-pass { background: rgb(var(--color-success-tint)); }
+.checker-pill.is-fail,
+.checker-pill.is-error { background: rgb(var(--color-danger-tint)); }
+.checker-pill.is-warning { background: rgb(var(--color-warning-tint)); }
+.checker-pill.is-info { background: rgb(var(--color-info-tint)); }
+
+.checker-findings {
+  margin-top: 14px;
+  border-top: 1px solid rgb(var(--color-line));
+}
+
+.checker-finding {
+  padding: 14px 0;
+  border-bottom: 1px solid rgb(var(--color-line));
+}
+
+.checker-finding:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Pill and title on one row; a long title wraps beside the pill, with the
+   pill on its first line. */
+.checker-finding-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.checker-finding-head > .checker-pill {
+  flex: none;
+}
+
+.checker-finding-head h4 {
+  min-width: 0;
+  padding-top: calc((1.65rem - 1.5em) / 2);
+  line-height: 1.5;
+  font-weight: var(--font-weight-bold);
+  color: rgb(var(--color-ink));
+  overflow-wrap: anywhere;
+}
+
+.checker-fix {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: rgb(var(--color-surface));
+  color: rgb(var(--color-ink));
+  line-height: 1.55;
+}
+
+.checker-affected-wrap,
+.checker-passed,
+.checker-nested {
+  margin-top: 10px;
+}
+
+.checker-affected-wrap summary,
+.checker-passed summary,
+.checker-nested summary {
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  color: rgb(var(--color-ink-muted));
+}
+
+.checker-passed {
+  margin-top: 16px;
+}
+
+.checker-affected {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.checker-affected li {
+  padding: 1px 8px;
+  border: 1px solid rgb(var(--color-line));
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: rgb(var(--color-ink-muted));
+  background: rgb(var(--color-navy-5));
+  word-break: break-all;
+}
+
+.checker-issues {
+  margin-top: 14px;
+  border-top: 1px solid rgb(var(--color-line));
+}
+
+.checker-issues li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgb(var(--color-line));
+  color: rgb(var(--color-ink-muted));
+}
+
+.checker-loc {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: rgb(var(--color-ink));
+  word-break: break-all;
+}
+
+/* Reference sources are long ("component "name@version""): on a phone the
+   source goes under the pill at full width rather than into a narrow column
+   beside it. */
+@media (max-width: 639px) {
+  .checker-finding-head.is-stacking {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .checker-finding-head.is-stacking h4 {
+    padding-top: 0;
+  }
+}
+
+.checker-url {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  min-width: 0;
+}
+
+.checker-url > a,
+.checker-url > code {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.checker-reftype {
+  flex: none;
+  padding: 1px 7px;
+  border: 1px solid rgb(var(--color-line));
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgb(var(--color-ink-muted));
+  background: rgb(var(--color-navy-5));
+}
+
+.checker-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 14px;
+}
+
+.checker-actions .checker-hint {
+  margin-top: 0;
+}
+
+.checker-nested {
+  padding-left: 14px;
+  border-left: 2px solid rgb(var(--color-line));
+}
+
+.checker-nested .checker-report {
+  margin-top: 12px;
+}
+
+.checker-cta {
+  margin-top: 16px;
+}
+
+.checker-cta-title {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: rgb(var(--color-white));
+}
+
+.checker-cta-lead {
+  max-width: 48rem;
+  margin-top: 12px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgb(var(--color-on-inverse-muted));
+}
+
+.checker-cta-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+@media (min-width: 768px) {
+  .checker-cta-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.checker-cta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 22px;
+  border: 1px solid rgb(var(--color-white) / 0.12);
+  border-radius: var(--radius-xl);
+  background: rgb(var(--color-white) / 0.04);
+}
+
+.checker-cta-item h3 {
+  font-size: 1.15rem;
+  font-weight: var(--font-weight-bold);
+  color: rgb(var(--color-white));
+}
+
+.checker-cta-item p {
+  flex: 1;
+  color: rgb(var(--color-on-inverse-muted));
+  line-height: 1.6;
+}
+
+.checker-cta-icon svg {
+  width: 2rem;
+  height: 2rem;
+  color: rgb(var(--color-white));
+}
+
+/* Links under a finding: the action step that fixes it, the requirement in
+   our guide, and where the field goes. A label column keeps them aligned. */
+.checker-links {
+  display: grid;
+  gap: 4px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.checker-links li {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 12px;
+  align-items: baseline;
+  color: rgb(var(--color-ink-muted));
+}
+
+.checker-link-kind {
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--color-ink-subtle));
+}
+
+@media (max-width: 639px) {
+  .checker-links li {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .checker-links li + li {
+    margin-top: 6px;
+  }
+}
+
+.checker-cta-steps {
+  display: grid;
+  gap: 8px;
+  margin: 2px 0 6px;
+  color: rgb(var(--color-on-inverse-muted));
+  line-height: 1.55;
+}
+
+.checker-cta-steps li {
+  position: relative;
+  padding-left: 16px;
+}
+
+.checker-cta-steps li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgb(var(--color-white) / 0.5);
+}
+
+.checker-cta-steps a {
+  color: rgb(var(--color-white));
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgb(var(--color-white) / 0.4);
+}
+
+.checker-cta-steps code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: rgb(var(--color-white));
+}

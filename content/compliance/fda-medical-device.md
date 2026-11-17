@@ -16,6 +16,8 @@ description: "Guide to FDA cybersecurity guidance for medical devices, including
 
 ---
 
+**Check your SBOM:** the free [SBOM minimum elements checker](/tools/sbom-checker/) scores a CycloneDX or SPDX file against the NTIA and CISA 2026 elements the FDA guidance references, in your browser.
+
 ## Overview
 
 The [FDA Cybersecurity in Medical Devices guidance](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-system-considerations-and-content-premarket-submissions) (June 2025) adds sector-specific SBOM expectations for medical device manufacturers. The guidance recommends providing a machine-readable SBOM consistent with the [minimum elements](/compliance/ntia-minimum-elements/) (also referred to as baseline attributes) identified in NTIA's _Framing Software Component Transparency_ (October 2021), plus additional lifecycle properties.
