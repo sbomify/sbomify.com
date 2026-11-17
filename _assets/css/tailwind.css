@@ -9006,15 +9006,19 @@ a:hover > .ph-up {
   color: rgb(var(--color-ink-muted));
 }
 
+/* Icon on the first line of the text, not centred on a wrapped item. */
 .checker-promises li {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
+  line-height: 1.5;
 }
 
 .checker-promises svg {
+  flex: none;
   width: 1.1rem;
   height: 1.1rem;
+  margin-top: calc((1.5em - 1.1rem) / 2);
   color: rgb(var(--color-ink));
 }
 
@@ -9111,6 +9115,13 @@ a:hover > .ph-up {
   font-size: 0.95rem;
 }
 
+/* On a phone the label takes its own line and the two buttons share the
+   next, instead of one button wrapping under the label. */
+@media (max-width: 639px) {
+  .checker-alt-label { flex-basis: 100%; }
+  .checker-alt .btn { flex: 1 1 0; padding-inline: 12px; }
+}
+
 .checker-paste {
   margin-top: 14px;
 }
@@ -9180,13 +9191,32 @@ a:hover > .ph-up {
 .checker-card.is-info { border-left-color: rgb(var(--color-info-full)); }
 .checker-overview { border-left-color: rgb(var(--color-ink)); }
 
-.checker-card-head,
+/* Title left, status right. The pill keeps its size and sits on the first
+   line of a title that wraps; the download button lines up with the
+   file name, not with the eyebrow above it. */
+.checker-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.checker-card-head > .checker-h3 {
+  min-width: 0;
+  line-height: 1.4;
+}
+
+.checker-card-head > .checker-pill {
+  flex: none;
+  margin-top: calc((1.2rem * 1.4 - 1.65rem) / 2);
+}
+
 .checker-overview-head {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  gap: 8px 16px;
+  gap: 12px 16px;
 }
 
 .checker-h2 {
@@ -9250,10 +9280,13 @@ a:hover > .ph-up {
   margin-top: 20px;
 }
 
+/* Values sit on a common line at the bottom, even when one tile's label
+   wraps to two lines. */
 .checker-tile {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  justify-content: space-between;
+  gap: 6px;
   height: 100%;
   padding: 12px 14px;
   border: 1px solid rgb(var(--color-line));
@@ -9296,6 +9329,8 @@ a:hover > .ph-up {
 .checker-pill {
   display: inline-flex;
   align-items: center;
+  height: 1.65rem;
+  line-height: 1;
   gap: 5px;
   padding: 2px 10px 2px 7px;
   border-radius: var(--radius-pill);
@@ -9327,17 +9362,25 @@ a:hover > .ph-up {
   padding-bottom: 0;
 }
 
+/* Pill and title on one row; a long title wraps beside the pill, with the
+   pill on its first line. */
 .checker-finding-head {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px 12px;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.checker-finding-head > .checker-pill {
+  flex: none;
 }
 
 .checker-finding-head h4 {
+  min-width: 0;
+  padding-top: calc((1.65rem - 1.5em) / 2);
+  line-height: 1.5;
   font-weight: var(--font-weight-bold);
   color: rgb(var(--color-ink));
-  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .checker-fix {
@@ -9406,10 +9449,44 @@ a:hover > .ph-up {
   word-break: break-all;
 }
 
+/* Reference sources are long ("component "name@version""): on a phone the
+   source goes under the pill at full width rather than into a narrow column
+   beside it. */
+@media (max-width: 639px) {
+  .checker-finding-head.is-stacking {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .checker-finding-head.is-stacking h4 {
+    padding-top: 0;
+  }
+}
+
 .checker-url {
-  margin-top: 6px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 8px;
   font-size: 0.9rem;
-  word-break: break-all;
+  min-width: 0;
+}
+
+.checker-url > a,
+.checker-url > code {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.checker-reftype {
+  flex: none;
+  padding: 1px 7px;
+  border: 1px solid rgb(var(--color-line));
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgb(var(--color-ink-muted));
+  background: rgb(var(--color-navy-5));
 }
 
 .checker-actions {

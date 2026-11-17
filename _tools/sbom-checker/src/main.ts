@@ -253,7 +253,17 @@ function shortName(f: FrameworkResult): string {
     "cisa-2025": "CISA 2025 draft",
     "cisa-2026": "CISA 2026",
   };
-  return known[f.id] ?? (f.id.startsWith("bsi") ? "EU CRA (BSI TR-03183-2)" : f.name);
+  return known[f.id] ?? (f.id.startsWith("bsi") ? "EU CRA" : f.name);
+}
+
+/** Section heading: short enough to sit on one line beside the status pill. */
+function cardTitle(f: FrameworkResult): string {
+  const known: Record<string, string> = {
+    "ntia-2021": "NTIA Minimum Elements (2021)",
+    "cisa-2025": "CISA Minimum Elements (2025 draft)",
+    "cisa-2026": "CISA Minimum Elements (2026)",
+  };
+  return known[f.id] ?? (f.id.startsWith("bsi") ? "EU CRA: BSI TR-03183-2" : f.name);
 }
 
 type Verdict = { status: Finding["status"] | "info"; text: string };
@@ -324,7 +334,7 @@ function renderFramework(id: string, f: FrameworkResult): HTMLElement {
   const links = h(
     "p",
     { class: "checker-meta" },
-    `Version ${f.version}. `,
+    `${f.name}, version ${f.version}. `,
     h("a", { class: "link", href: f.guideUrl }, "Read our guide"),
     " · ",
     h("a", { class: "link", href: f.url, rel: "nofollow noopener noreferrer", target: "_blank" }, "Official source"),
@@ -339,7 +349,7 @@ function renderFramework(id: string, f: FrameworkResult): HTMLElement {
     for (const fd of passed) pl.append(renderFinding(fd));
     body.push(h("details", { class: "checker-passed", open: open.length === 0 }, h("summary", {}, `${passed.length} element${passed.length === 1 ? "" : "s"} met`), pl));
   }
-  return section(id, f.name, v, ...body);
+  return section(id, cardTitle(f), v, ...body);
 }
 
 function renderFinding(f: Finding): HTMLElement {
@@ -417,8 +427,13 @@ async function renderRefResults(checks: RefCheck[], ctx: RenderCtx): Promise<HTM
     const li = h(
       "li",
       { class: `checker-finding is-${st.status}` },
-      h("div", { class: "checker-finding-head" }, pill(st.status, st.label), h("h4", {}, h("span", { class: "tag" }, c.ref.type), " ", c.ref.source)),
-      h("p", { class: "checker-url" }, /^https?:/i.test(c.ref.url) ? h("a", { class: "link", href: c.ref.url, rel: "nofollow noopener noreferrer", target: "_blank" }, c.ref.url) : h("code", {}, c.ref.url)),
+      h("div", { class: "checker-finding-head is-stacking" }, pill(st.status, st.label), h("h4", {}, c.ref.source)),
+      h(
+        "p",
+        { class: "checker-url" },
+        h("span", { class: "checker-reftype" }, c.ref.type),
+        /^https?:/i.test(c.ref.url) ? h("a", { class: "link", href: c.ref.url, rel: "nofollow noopener noreferrer", target: "_blank" }, c.ref.url) : h("code", {}, c.ref.url),
+      ),
       h("p", { class: "checker-p" }, c.detail),
     );
     if (c.hash) li.append(h("p", { class: `checker-p is-hash-${c.hash.status}` }, h("strong", {}, c.hash.status === "match" ? "Hash verified. " : c.hash.status === "mismatch" ? "Hash mismatch. " : "Hash not verified. "), c.hash.detail));
