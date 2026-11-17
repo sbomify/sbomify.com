@@ -15,7 +15,7 @@ export interface Inventory {
 }
 
 export type Analysis =
-  | { ok: false; name: string; error: string; hint?: string }
+  | { ok: false; name: string; error: string; hint?: string; errorKind?: string }
   | {
       ok: true;
       name: string;
@@ -30,7 +30,7 @@ export type Analysis =
 
 export async function analyse(text: string, name: string): Promise<Analysis> {
   const parsed = parseSbom(text);
-  if (!parsed.ok) return { ok: false, name, error: parsed.error, hint: parsed.hint };
+  if (!parsed.ok) return { ok: false, name, error: parsed.error, hint: parsed.hint, errorKind: parsed.kind };
   const sbom = parsed.sbom;
   const schema = await validateSchema(sbom).catch(
     (err): SchemaResult => ({ status: "unsupported", reason: `Schema validation failed to run: ${err instanceof Error ? err.message : String(err)}` }),

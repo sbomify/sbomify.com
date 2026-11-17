@@ -12,6 +12,6 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
     const result = await analyse(text, name);
     (self as unknown as Worker).postMessage({ id, result });
   } catch (err) {
-    (self as unknown as Worker).postMessage({ id, result: { ok: false, name, error: `The check crashed: ${err instanceof Error ? err.message : String(err)}` } });
+    (self as unknown as Worker).postMessage({ id, result: { ok: false, name, error: `The check crashed: ${err instanceof Error ? err.message : String(err)}`, errorKind: "crashed" } });
   }
 };

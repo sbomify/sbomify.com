@@ -8,16 +8,11 @@
  * attribute setters, never innerHTML.
  */
 import type { Analysis } from "./analyse";
+import { refsProps, resultProps, sizeBucket, track } from "./analytics";
 import { fixSummary, linksFor } from "./links";
 import { checkRefs, type ExternalRef, type RefCheck } from "./refs";
 import type { Finding, FrameworkResult } from "./types";
 import { MAX_ISSUES, type SchemaResult } from "./validate";
-
-declare global {
-  interface Window {
-    posthog?: { capture?: (event: string, props?: Record<string, unknown>) => void };
-  }
-}
 
 /** Largest file accepted. Validation of very large SPDX 3 graphs is slow. */
 const MAX_FILE_BYTES = 50 * 1024 * 1024;
@@ -70,7 +65,7 @@ function getWorker(url: string): Worker {
     pending.delete(e.data.id);
   };
   worker.onerror = () => {
-    for (const [id, resolve] of pending) resolve({ ok: false, name: "", error: "The checker failed to start in this browser." }), pending.delete(id);
+    for (const [id, resolve] of pending) resolve({ ok: false, name: "", error: "The checker failed to start in this browser.", errorKind: "worker_failed" }), pending.delete(id);
     worker = null;
   };
   return worker;
@@ -100,9 +95,14 @@ export function init(root: HTMLElement): void {
   root.classList.add("is-ready");
 
   let running = false;
-  const run = async (text: string, name: string, source: string) => {
+  let runs = 0;
+  type Source = { source: "file" | "drop" | "paste" | "example"; example?: string; bytes: number; gzipped?: boolean };
+  const run = async (text: string, name: string, src: Source) => {
     if (running) return;
     running = true;
+    runs += 1;
+    const base = { source: src.source, example: src.example, run_index: runs };
+    track("input", { ...base, size_bucket: sizeBucket(src.bytes), gzipped: src.gzipped ?? false });
     root.classList.add("is-busy");
     status.textContent = `Checking ${name}…`;
     out.replaceChildren();
@@ -116,28 +116,31 @@ export function init(root: HTMLElement): void {
     out.hidden = false;
     out.querySelector<HTMLElement>("h2")?.focus({ preventScroll: true });
     out.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
-    track(analysis, source, Math.round(performance.now() - started));
+    track("result", { ...base, depth: 0, ...resultProps(analysis, Math.round(performance.now() - started)) });
   };
 
-  const readFile = async (file: File) => {
+  const readFile = async (file: File, source: "file" | "drop") => {
+    const gzipped = /\.gz$/i.test(file.name);
     if (file.size > MAX_FILE_BYTES) {
+      track("input", { source, size_bucket: sizeBucket(file.size), gzipped });
+      track("result", { source, depth: 0, ok: false, error_kind: "too_large" });
       status.textContent = "";
       out.replaceChildren(errorCard(file.name, `The file is ${(file.size / 1024 / 1024).toFixed(1)} MB. The checker accepts SBOMs up to ${MAX_FILE_BYTES / 1024 / 1024} MB.`, "sbomify handles large SBOMs server-side; upload it there instead."));
       out.hidden = false;
       return;
     }
     let text: string;
-    if (/\.gz$/i.test(file.name) && "DecompressionStream" in window) {
+    if (gzipped && "DecompressionStream" in window) {
       text = await new Response(file.stream().pipeThrough(new DecompressionStream("gzip"))).text();
     } else {
       text = await file.text();
     }
-    await run(text, file.name.replace(/\.gz$/i, ""), "file");
+    await run(text, file.name.replace(/\.gz$/i, ""), { source, bytes: file.size, gzipped });
   };
 
   input.addEventListener("change", () => {
     const file = input.files?.[0];
-    if (file) void readFile(file);
+    if (file) void readFile(file, "file");
     input.value = "";
   });
   form.addEventListener("submit", (e) => e.preventDefault());
@@ -151,43 +154,45 @@ export function init(root: HTMLElement): void {
   drop.addEventListener("drop", (e) => {
     e.preventDefault();
     const file = (e as DragEvent).dataTransfer?.files?.[0];
-    if (file) void readFile(file);
+    if (file) void readFile(file, "drop");
   });
   pasteBtn?.addEventListener("click", () => {
     const text = paste?.value ?? "";
-    if (text.trim()) void run(text, "pasted SBOM", "paste");
+    if (text.trim()) void run(text, "pasted SBOM", { source: "paste", bytes: new Blob([text]).size });
   });
   exampleBtns.forEach((btn) =>
     btn.addEventListener("click", async () => {
       const url = btn.dataset.checkerExample!;
       status.textContent = "Loading the example…";
       const res = await fetch(url);
-      await run(await res.text(), btn.dataset.checkerExampleName ?? url.split("/").pop()!, "example");
+      const text = await res.text();
+      const example = /spdx/i.test(url) ? "spdx" : "cyclonedx";
+      await run(text, btn.dataset.checkerExampleName ?? url.split("/").pop()!, { source: "example", example, bytes: text.length });
     }),
   );
-}
 
-function track(a: Analysis, source: string, ms: number): void {
-  // Aggregate shape only: never names, versions or anything from inside the
-  // document. A no-op until the visitor accepts analytics.
-  window.posthog?.capture?.("sbom_checker_run", {
-    source,
-    ok: a.ok,
-    format: a.ok ? a.format : undefined,
-    spec_version: a.ok ? a.specVersion : undefined,
-    schema: a.ok ? a.schema.status : undefined,
-    components_bucket: a.ok ? bucket(a.inventory.components) : undefined,
-    frameworks: a.ok ? Object.fromEntries(a.frameworks.map((f) => [f.id, f.summary.fail === 0 ? (f.summary.warning ? "warning" : "pass") : "fail"])) : undefined,
-    duration_ms: ms,
-  });
-}
-
-function bucket(n: number): string {
-  if (n === 0) return "0";
-  if (n < 10) return "1-9";
-  if (n < 100) return "10-99";
-  if (n < 1000) return "100-999";
-  return "1000+";
+  // Report interactions, delegated so nested reports are covered too. Links
+  // carry data-track (what kind of link) plus framework/element/step.
+  out.addEventListener(
+    "click",
+    (e) => {
+      const el = (e.target as Element | null)?.closest?.("[data-track]") as HTMLElement | null;
+      if (!el) return;
+      const d = el.dataset;
+      if (d.track === "tile") track("tile_click", { target: d.target });
+      else track("link_click", { kind: d.track, framework: d.framework, element: d.element, step: d.step, destination: el.getAttribute("href") ?? undefined }, true);
+    },
+    true,
+  );
+  out.addEventListener(
+    "toggle",
+    (e) => {
+      const el = e.target as HTMLDetailsElement;
+      if (!(el instanceof HTMLDetailsElement) || !el.open || !el.dataset.expand) return;
+      track("expand", { what: el.dataset.expand, framework: el.dataset.framework, element: el.dataset.element });
+    },
+    true,
+  );
 }
 
 // ---------------------------------------------------------------- results
@@ -217,9 +222,9 @@ export function renderAnalysis(a: Analysis, ctx: RenderCtx): HTMLElement {
 
   // Overview
   const tiles = h("ul", { class: "checker-tiles", role: "list" });
-  tiles.append(tile(`${id}-schema`, "Schema", schemaVerdict(a.schema)));
-  for (const f of a.frameworks) tiles.append(tile(`${id}-${f.id}`, shortName(f), frameworkVerdict(f)));
-  tiles.append(tile(`${id}-refs`, "External references", { status: "info", text: a.refs.length ? `${a.refs.length} found` : "None" }));
+  tiles.append(tile(`${id}-schema`, "schema", "Schema", schemaVerdict(a.schema)));
+  for (const f of a.frameworks) tiles.append(tile(`${id}-${f.id}`, f.id, shortName(f), frameworkVerdict(f)));
+  tiles.append(tile(`${id}-refs`, "references", "External references", { status: "info", text: a.refs.length ? `${a.refs.length} found` : "None" }));
 
   wrap.append(
     h(
@@ -284,8 +289,8 @@ function frameworkVerdict(f: FrameworkResult): Verdict {
   return { status: "pass", text: `All ${total} met` };
 }
 
-function tile(target: string, label: string, v: Verdict): HTMLElement {
-  return h("li", {}, h("a", { class: `checker-tile is-${v.status}`, href: `#${target}` }, h("span", { class: "checker-tile-label" }, label), h("span", { class: "checker-tile-value" }, icon(v.status === "info" ? "info" : STATUS_ICON[v.status]), v.text)));
+function tile(target: string, name: string, label: string, v: Verdict): HTMLElement {
+  return h("li", {}, h("a", { class: `checker-tile is-${v.status}`, href: `#${target}`, "data-track": "tile", "data-target": name }, h("span", { class: "checker-tile-label" }, label), h("span", { class: "checker-tile-value" }, icon(v.status === "info" ? "info" : STATUS_ICON[v.status]), v.text)));
 }
 
 function fact(label: string, value: string): HTMLElement {
@@ -336,13 +341,13 @@ function renderFramework(id: string, f: FrameworkResult): HTMLElement {
     "p",
     { class: "checker-meta" },
     `${f.name}, version ${f.version}. `,
-    h("a", { class: "link", href: f.guideUrl }, "Read our guide"),
+    h("a", { class: "link", href: f.guideUrl, "data-track": "framework_guide", "data-framework": f.id }, "Read our guide"),
     f.id.startsWith("bsi") ? " · " : null,
-    f.id.startsWith("bsi") ? h("a", { class: "link", href: "/compliance/eu-cra/" }, "EU CRA guide") : null,
+    f.id.startsWith("bsi") ? h("a", { class: "link", href: "/compliance/eu-cra/", "data-track": "eu_cra_guide", "data-framework": f.id }, "EU CRA guide") : null,
     " · ",
-    h("a", { class: "link", href: "/compliance/schema-crosswalk/" }, "Field mappings"),
+    h("a", { class: "link", href: "/compliance/schema-crosswalk/", "data-track": "field_mappings", "data-framework": f.id }, "Field mappings"),
     " · ",
-    h("a", { class: "link", href: f.url, rel: "nofollow noopener noreferrer", target: "_blank" }, "Official source"),
+    h("a", { class: "link", href: f.url, rel: "nofollow noopener noreferrer", target: "_blank", "data-track": "official_source", "data-framework": f.id }, "Official source"),
   );
   const list = h("ul", { class: "checker-findings", role: "list" });
   for (const fd of open) list.append(renderFinding(fd, f.id));
@@ -352,7 +357,7 @@ function renderFramework(id: string, f: FrameworkResult): HTMLElement {
   if (passed.length) {
     const pl = h("ul", { class: "checker-findings", role: "list" });
     for (const fd of passed) pl.append(renderFinding(fd, f.id));
-    body.push(h("details", { class: "checker-passed", open: open.length === 0 }, h("summary", {}, `${passed.length} element${passed.length === 1 ? "" : "s"} met`), pl));
+    body.push(h("details", { class: "checker-passed", open: open.length === 0, "data-expand": "passed", "data-framework": f.id }, h("summary", {}, `${passed.length} element${passed.length === 1 ? "" : "s"} met`), pl));
   }
   return section(id, cardTitle(f), v, ...body);
 }
@@ -363,15 +368,16 @@ function renderFinding(f: Finding, frameworkId: string): HTMLElement {
     const total = f.affectedCount ?? f.affected.length;
     const ul = h("ul", { class: "checker-affected" });
     for (const name of f.affected) ul.append(h("li", {}, name));
-    li.append(h("details", { class: "checker-affected-wrap" }, h("summary", {}, `${total} affected component${total === 1 ? "" : "s"}`), ul, total > f.affected.length ? h("p", { class: "checker-hint" }, `…and ${total - f.affected.length} more.`) : null));
+    li.append(h("details", { class: "checker-affected-wrap", "data-expand": "affected", "data-framework": frameworkId, "data-element": f.id }, h("summary", {}, `${total} affected component${total === 1 ? "" : "s"}`), ul, total > f.affected.length ? h("p", { class: "checker-hint" }, `…and ${total - f.affected.length} more.`) : null));
   }
   if (f.remediation && f.status !== "pass") li.append(h("p", { class: "checker-fix" }, h("strong", {}, "How to fix: "), f.remediation));
   if (f.status !== "pass") {
     const links = linksFor(frameworkId, f);
+    const t = (kind: string, step?: string) => ({ "data-track": kind, "data-framework": frameworkId, "data-element": f.id, "data-step": step });
     const items: Child[] = [];
-    if (links.fix) items.push(h("li", { class: "is-fix" }, h("span", { class: "checker-link-kind" }, "sbomify action"), h("a", { class: "link", href: links.fix.href }, links.fix.label)));
-    if (links.guide) items.push(h("li", {}, h("span", { class: "checker-link-kind" }, "Requirement"), h("a", { class: "link", href: links.guide.href }, links.guide.label)));
-    if (links.crosswalk) items.push(h("li", {}, h("span", { class: "checker-link-kind" }, "Field mapping"), h("a", { class: "link", href: links.crosswalk.href }, links.crosswalk.label)));
+    if (links.fix) items.push(h("li", { class: "is-fix" }, h("span", { class: "checker-link-kind" }, "sbomify action"), h("a", { class: "link", href: links.fix.href, ...t("fix", links.fix.step) }, links.fix.label)));
+    if (links.guide) items.push(h("li", {}, h("span", { class: "checker-link-kind" }, "Requirement"), h("a", { class: "link", href: links.guide.href, ...t("guide") }, links.guide.label)));
+    if (links.crosswalk) items.push(h("li", {}, h("span", { class: "checker-link-kind" }, "Field mapping"), h("a", { class: "link", href: links.crosswalk.href, ...t("crosswalk") }, links.crosswalk.label)));
     if (items.length) li.append(h("ul", { class: "checker-links", role: "list" }, ...items));
   }
   return li;
@@ -414,6 +420,7 @@ function renderRefs(id: string, refs: ExternalRef[], ctx: RenderCtx): HTMLElemen
   btn.addEventListener("click", async () => {
     btn.disabled = true;
     progress.textContent = "Checking…";
+    const started = performance.now();
     const checks = await checkRefs(toCheck, {
       pageProtocol: location.protocol,
       onProgress: (done, total) => (progress.textContent = `Checked ${done} of ${total}…`),
@@ -426,7 +433,9 @@ function renderRefs(id: string, refs: ExternalRef[], ctx: RenderCtx): HTMLElemen
     head?.replaceWith(pill(verdict.status, verdict.text));
     card.className = `checker-card is-${verdict.status}`;
     btn.remove();
+    const nestedBefore = ctx.budget.nested;
     results.replaceChildren(await renderRefResults(checks, ctx));
+    track("refs_checked", { depth: ctx.depth, total_refs: refs.length, ...refsProps(checks, Math.round(performance.now() - started), ctx.budget.nested - nestedBefore) });
   });
   return card;
 }
@@ -462,8 +471,10 @@ async function renderNested(c: RefCheck, ctx: RenderCtx): Promise<Node> {
   if (ctx.depth + 1 > MAX_DEPTH || ctx.budget.nested >= MAX_NESTED) return h("p", { class: "checker-hint" }, "Not expanded: the checker follows referenced SBOMs two levels deep and at most ten in total.");
   ctx.budget.nested += 1;
   const name = c.ref.url.split("/").filter(Boolean).pop() ?? c.ref.url;
+  const started = performance.now();
   const analysis = await analyseInWorker(ctx.workerUrl, c.body, name);
-  const details = h("details", { class: "checker-nested" }, h("summary", {}, analysis.ok ? `Checked the referenced SBOM (${analysis.formatLabel})` : "The referenced document is not a readable SBOM"));
+  track("result", { source: "reference", depth: ctx.depth + 1, ...resultProps(analysis, Math.round(performance.now() - started)) });
+  const details = h("details", { class: "checker-nested", "data-expand": "nested" }, h("summary", {}, analysis.ok ? `Checked the referenced SBOM (${analysis.formatLabel})` : "The referenced document is not a readable SBOM"));
   details.append(renderAnalysis(analysis, { ...ctx, depth: ctx.depth + 1 }));
   return details;
 }
@@ -473,6 +484,7 @@ async function renderNested(c: RefCheck, ctx: RenderCtx): Promise<Node> {
 function downloadButton(a: Extract<Analysis, { ok: true }>): HTMLElement {
   const btn = h("button", { type: "button", class: "btn btn-secondary btn-md" }, icon("download"), "Download report");
   btn.addEventListener("click", () => {
+    track("report_download", { format: a.format, failed_total: a.frameworks.reduce((n, f) => n + f.summary.fail, 0) });
     const report = {
       generator: "sbomify SBOM checker (https://sbomify.com/tools/sbom-checker/)",
       generatedAt: new Date().toISOString(),

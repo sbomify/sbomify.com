@@ -5,18 +5,22 @@ import type { DetectedSbom, JsonObject } from "./types";
 
 export type ParseResult =
   | { ok: true; sbom: DetectedSbom }
-  | { ok: false; error: string; hint?: string };
+  | { ok: false; error: string; hint?: string; kind: ParseErrorKind };
+
+/** Why a document could not be read; reported to analytics instead of the message. */
+export type ParseErrorKind = "empty" | "xml" | "tag_value" | "invalid_json" | "not_object" | "attestation";
 
 const isObject = (v: unknown): v is JsonObject => typeof v === "object" && v !== null && !Array.isArray(v);
 
 /** Parse text into a detected SBOM, or explain why that is not possible. */
 export function parseSbom(text: string): ParseResult {
   const trimmed = text.replace(/^﻿/, "").trimStart();
-  if (!trimmed) return { ok: false, error: "The file is empty." };
+  if (!trimmed) return { ok: false, error: "The file is empty.", kind: "empty" };
 
   if (trimmed.startsWith("<")) {
     return {
       ok: false,
+      kind: "xml",
       error: "This looks like an XML document. The checker reads JSON SBOMs.",
       hint: "Export the SBOM as CycloneDX JSON, or convert it with the CycloneDX CLI (cyclonedx convert --output-format json).",
     };
@@ -24,6 +28,7 @@ export function parseSbom(text: string): ParseResult {
   if (/^(SPDXVersion|##)\s*:?/m.test(trimmed.slice(0, 2000)) && !trimmed.startsWith("{")) {
     return {
       ok: false,
+      kind: "tag_value",
       error: "This looks like an SPDX tag-value document. The checker reads SPDX JSON.",
       hint: "Convert it to JSON with the SPDX tools (pyspdxtools -i sbom.spdx -o sbom.spdx.json).",
     };
@@ -35,18 +40,19 @@ export function parseSbom(text: string): ParseResult {
   } catch (err) {
     return {
       ok: false,
+      kind: "invalid_json",
       error: `The file is not valid JSON: ${err instanceof Error ? err.message : String(err)}`,
       hint: "Check that the file was not truncated and that it is the SBOM itself, not an attestation or archive.",
     };
   }
   if (!isObject(data)) {
-    return { ok: false, error: "The document is valid JSON but not a JSON object, so it cannot be an SBOM." };
+    return { ok: false, error: "The document is valid JSON but not a JSON object, so it cannot be an SBOM.", kind: "not_object" };
   }
 
   // An in-toto attestation wrapping an SBOM: unwrap the predicate.
   if (isObject(data.predicate) && typeof data._type === "string" && data._type.includes("in-toto")) {
     data = data.predicate;
-    if (!isObject(data)) return { ok: false, error: "The attestation's predicate is not a JSON object." };
+    if (!isObject(data)) return { ok: false, error: "The attestation's predicate is not a JSON object.", kind: "attestation" };
   }
 
   return { ok: true, sbom: detect(data as JsonObject) };
