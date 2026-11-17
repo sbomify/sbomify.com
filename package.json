@@ -10,6 +10,8 @@
     "build:css": "bun run build:fonts && postcss _assets/css/tailwind.css -o assets/css/styles.css",
     "build:d2": "bun scripts/watch-d2.ts",
     "build:hugo": "hugo --minify --environment production",
+    "build:tools": "cd _tools/sbom-checker && bun install --frozen-lockfile && bun run build",
+    "test:tools": "cd _tools/sbom-checker && bun install --frozen-lockfile && bun run typecheck && bun test",
     "watch:css": "bun run build:fonts && postcss _assets/css/tailwind.css -o assets/css/styles.css --watch",
     "watch:d2": "bun scripts/watch-d2.ts --watch",
     "lint": "bun run lint:markdown && bun run lint:d2",
