@@ -40,6 +40,12 @@ Lifecycle data is only useful if something acts on it, so sbomify now acts on it
 
 A release counts as live until it is replaced on its line, withdrawn, archived, or past its support or end-of-life date. The latest build of each component always counts. Scheduled scans, the VEX re-apply and Dependency-Track all read that one definition, so they cannot drift apart.
 
+Here is what that looks like for a product with two maintained lines:
+
+<div class="my-10 bg-navy-5 rounded-[1.25rem] p-6">
+    {{< d2 "release-lifecycle" >}}
+</div>
+
 - **Scans** cover the newest SBOM of each component and the SBOMs of live releases, and nothing older.
 - **Support dates take effect on their own.** A release whose support ended yesterday retires today, even with nobody touching it. Self-hosted installs without the task scheduler get a management command they can run from cron.
 - **Retired releases are honest about it.** A release that is no longer scanned shows when it was last scanned and why it stopped, for example "Its support ended on…". Previously, a release with no findings at its last scan simply read as clean, on the Trust Center too. Now the date and the reason are right next to the counts.
@@ -56,6 +62,12 @@ If you use the Dependency-Track integration, it changes shape in this release. s
 - a **Latest builds** collection with each component's newest SBOM, released or not.
 
 When a release replaces another on the same line, it **takes over the older release's projects**. sbomify renames them and swaps a component's BOM only where it actually changed. Dependency-Track keeps the project, its history and **your audit decisions**. Triage you did on 1.2.3 is still there on 1.2.4.
+
+Shipping 1.3 on the 1.2 line, for example:
+
+<div class="my-10 bg-navy-5 rounded-[1.25rem] p-6">
+    {{< d2 "dt-release-series" >}}
+</div>
 
 Around that:
 
