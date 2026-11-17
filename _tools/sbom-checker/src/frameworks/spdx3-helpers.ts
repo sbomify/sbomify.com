@@ -28,6 +28,7 @@
  * Python dicts keyed by spdxId become `Map`s. Hostile input never throws.
  */
 
+import { spdx3Nodes, cryptoHash } from "./standards";
 import type { JsonObject } from "../types";
 import { isObject, lastSegment, pyGet, pyStr, pyStrip, truthy } from "./util";
 
@@ -168,12 +169,10 @@ export type Spdx3Elements = [
  * subtype (Person, Organization, SoftwareAgent, Agent), keyed by spdxId.
  * Falls back to a root-level creationInfo object for legacy documents.
  *
- * Unlike iterSpdx3Elements, a present-but-not-array `@graph` yields no
- * elements here (no fallback to `elements`), as in the Python.
+ * Includes legal embedded element/CreationInfo/Agent serializations.
  */
 export function extractSpdx3Elements(data: unknown): Spdx3Elements {
-  let elements = pyGet(data, "@graph", pyGet(data, "elements", []));
-  if (!Array.isArray(elements)) elements = [];
+  const elements = spdx3Nodes(data);
 
   let creationInfo: JsonObject | null = null;
   const packages: JsonObject[] = [];
@@ -310,7 +309,7 @@ export function getSpdx3PackageFields(pkg: unknown): Spdx3PackageFields {
     version,
     supplierRefs,
     hasUniqueId,
-    hasHash: truthy(pyGet(pkg, "verifiedUsing")),
+    hasHash: cryptoHash(pyGet(pkg, "verifiedUsing"), "algorithm", "hashValue"),
     downloadLocation,
     externalRefs: pyGet(pkg, "externalRef", []),
     externalIdentifiers,
@@ -364,7 +363,7 @@ export const NO_LICENSE_TAILS: ReadonlySet<string> = withVocabularyPrefixes(
 
 /** Licensing elements from @graph (or `elements`), keyed by spdxId. */
 export function extractSpdx3Licenses(data: unknown): Spdx3LicenseMap {
-  const elements = pyGet(data, "@graph", pyGet(data, "elements", []));
+  const elements = spdx3Nodes(data);
   const licenses: Spdx3LicenseMap = new Map();
   if (!Array.isArray(elements)) return licenses;
   for (const element of elements) {

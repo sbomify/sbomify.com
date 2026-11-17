@@ -7,6 +7,7 @@
  * them the same way. Hostile input never throws.
  */
 
+import { spdx3Nodes } from "./standards";
 import type { JsonObject } from "../types";
 import { isObject, pyGet, pyStr, pyStrip, truthy } from "./util";
 
@@ -18,16 +19,7 @@ import { isObject, pyGet, pyStr, pyStrip, truthy } from "./util";
  * malformed `@graph` (null, string, number) cannot hide a valid `elements`.
  */
 export function* iterSpdx3Elements(data: unknown): Generator<JsonObject> {
-  const normalise = (container: unknown): unknown[] | null => {
-    if (Array.isArray(container)) return container;
-    if (isObject(container)) return [container];
-    return null;
-  };
-  const raw = normalise(pyGet(data, "@graph")) ?? normalise(pyGet(data, "elements"));
-  if (raw === null) return;
-  for (const element of raw) {
-    if (isObject(element)) yield element;
-  }
+  yield* spdx3Nodes(data);
 }
 
 /**

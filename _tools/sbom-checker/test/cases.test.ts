@@ -3,11 +3,7 @@
  * document, with the outcome each framework's text calls for. Every case was
  * checked against the standard, not just against our own implementation.
  *
- * Cases marked `ours_wrong` are places where the current checks (here and in
- * the sbomify platform, which these mirror) read the standard differently
- * from the case. They are listed as todo so they stay visible until the
- * platform's checks change; this tool follows the platform so the two never
- * disagree about the same SBOM.
+ * These expectations take precedence over historical platform parity.
  */
 import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
@@ -30,10 +26,6 @@ const expectations: Expectation[] = JSON.parse(readFileSync(join(dir, "expectati
 describe("standard-derived cases", () => {
   for (const e of expectations) {
     const name = `${e.fixture} → ${e.finding} is ${e.status}`;
-    if (e.ours_wrong) {
-      test.todo(`${name} (known divergence: ${e.note})`);
-      continue;
-    }
     test(name, () => {
       const framework = FRAMEWORKS.find((f) => f.id === e.framework);
       expect(framework, `framework ${e.framework}`).toBeDefined();

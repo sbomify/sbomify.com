@@ -83,6 +83,7 @@ function cyclonedx(overrides: Doc = {}): Doc {
     },
     components: [
       {
+        "bom-ref": "openssl",
         name: "openssl",
         version: "3.0.11",
         type: "library",
@@ -92,6 +93,7 @@ function cyclonedx(overrides: Doc = {}): Doc {
         licenses: [{ license: { id: "Apache-2.0" } }],
       },
       {
+        "bom-ref": "zlib",
         name: "zlib",
         version: "1.3",
         type: "library",
@@ -101,7 +103,7 @@ function cyclonedx(overrides: Doc = {}): Doc {
         licenses: [{ license: { id: "Zlib" } }],
       },
     ],
-    dependencies: [{ ref: "openssl", dependsOn: ["zlib"] }],
+    dependencies: [{ ref: "openssl", dependsOn: ["zlib"] }, { ref: "zlib", dependsOn: [] }],
     signature: { algorithm: "RS512", value: "signed" },
     ...overrides,
   };
@@ -225,15 +227,13 @@ describe("the element set", () => {
 });
 
 describe("a compliant document passes", () => {
-  // Python passes context=SIGNED; here SPDX cannot carry a signature and no
-  // detached one is visible, so that element fails exactly as it does in the
-  // app for an SBOM uploaded without a signature. Nothing else fails.
+  // Signature authenticity is unverified in every format. Other data checks pass.
   for (const [id, builder] of BUILDERS) {
     test(`nothing fails (${id})`, () => {
       const statuses = assess(builder());
       const notPassing = Object.entries(statuses).filter(([, s]) => s !== "pass").map(([e]) => e);
-      expect(notPassing).toEqual(id === "cyclonedx" ? [] : ["sbom_author_signature"]);
-      expect(Object.values(statuses).filter((s) => s !== "pass")).toEqual(id === "cyclonedx" ? [] : ["fail"]);
+      expect(notPassing).toEqual(["sbom_author_signature"]);
+      expect(Object.values(statuses).filter((s) => s !== "pass")).toEqual(["warning"]);
     });
   }
 });
@@ -570,7 +570,7 @@ describe("what a reader is told", () => {
 
   test("a passing finding carries no remediation", () => {
     for (const f of findings(cyclonedx())) {
-      expect(f.status).toBe("pass");
+      if (f.status !== "pass") continue;
       expect(f.remediation).toBeUndefined();
       expect(f.affected).toBeUndefined();
     }
@@ -593,23 +593,23 @@ describe("every format agrees on an unknown", () => {
 });
 
 describe("the signature", () => {
-  test("cyclonedx carries its own", () => {
-    expect(assess(cyclonedx()).sbom_author_signature).toBe("pass");
+  test("cyclonedx inline signature remains unverified", () => {
+    expect(assess(cyclonedx()).sbom_author_signature).toBe("warning");
   });
 
-  test("an unsigned cyclonedx document fails and points at a detached signature", () => {
+  test("an unsigned cyclonedx document remains unverified and points at a detached signature", () => {
     const document = cyclonedx();
     delete document.signature;
     const f = finding(document, "sbom_author_signature");
-    expect(f.status).toBe("fail");
+    expect(f.status).toBe("warning");
     expect(f.description).toContain("no signature block");
     expect(f.remediation).toContain("detached signature");
   });
 
-  test("unsigned spdx fails (a stored signature would pass it in the app) and says why", () => {
+  test("unsigned spdx remains unverified (a stored signature would pass it in the app) and says why", () => {
     for (const document of [spdx2(), spdx3()]) {
       const f = finding(document, "sbom_author_signature");
-      expect(f.status).toBe("fail");
+      expect(f.status).toBe("warning");
       expect(f.description).toContain("no in-document signature");
       expect(f.remediation).toContain("Sign the SBOM and attach the signature to the artifact");
     }
@@ -657,11 +657,11 @@ describe("the hash splits in two", () => {
     expect(statuses.component_hash_algorithm).toBe("pass");
   });
 
-  test("a value without a recognised algorithm splits the two", () => {
+  test("a value from an unrecognised algorithm does not establish a cryptographic hash", () => {
     const document = cyclonedx();
     for (const c of document.components) c.hashes = [{ alg: "homegrown", content: "a".repeat(64) }];
     const statuses = assess(document);
-    expect(statuses.component_hash_value).toBe("pass");
+    expect(statuses.component_hash_value).toBe("fail");
     expect(statuses.component_hash_algorithm).toBe("fail");
   });
 
@@ -669,7 +669,7 @@ describe("the hash splits in two", () => {
     test(`the spellings the formats disagree about are all read: ${algorithm}`, () => {
       const document = cyclonedx();
       for (const c of document.components) c.hashes = [{ alg: algorithm, content: "a".repeat(64) }];
-      expect(assess(document).component_hash_algorithm).toBe("pass");
+      expect(assess(document).component_hash_algorithm).toBe(algorithm === "BLAKE2b-512" ? "warning" : "pass");
     });
   }
 });
@@ -689,11 +689,11 @@ describe("what counts as a component", () => {
     expect(f.affected).toEqual(["nested"]);
   });
 
-  test("a file entry is not a component", () => {
+  test("a file entry is assessed as a component", () => {
     const document = cyclonedx();
     document.components.push({ name: "uv.lock", type: "file" });
     const statuses = assess(document);
-    expect(statuses.component_version).toBe("pass");
+    expect(statuses.component_version).toBe("fail");
     expect(statuses.component_name).toBe("pass");
   });
 
@@ -724,10 +724,10 @@ describe("dependency relationships", () => {
     expect(assess(document).component_dependency_relationship).toBe("fail");
   });
 
-  test("a single component has nothing to relate", () => {
+  test("a single component can explicitly declare an empty dependency set", () => {
     const document = cyclonedx();
     document.components = document.components.slice(0, 1);
-    document.dependencies = [];
+    document.dependencies = [{ref: "openssl", dependsOn: []}];
     expect(assess(document).component_dependency_relationship).toBe("pass");
   });
 
@@ -739,20 +739,20 @@ describe("dependency relationships", () => {
     expect(assess(document).component_dependency_relationship).toBe("pass");
   });
 
-  test("file entries do not make an edge necessary", () => {
+  test("file entries require dependency knowledge", () => {
     const document = cyclonedx();
     document.components = document.components.slice(0, 1);
     document.components.push({ name: "uv.lock", type: "file" });
     document.dependencies = [];
-    expect(assess(document).component_dependency_relationship).toBe("pass");
+    expect(assess(document).component_dependency_relationship).toBe("fail");
   });
 
-  test("spdx2 file packages do not make an edge necessary", () => {
+  test("spdx2 file packages require dependency knowledge", () => {
     const document = spdx2();
     document.packages = document.packages.slice(0, 1);
     document.packages.push({ name: "uv.lock", SPDXID: "SPDXRef-File-uv-lock" });
     document.relationships = [];
-    expect(assess(document).component_dependency_relationship).toBe("pass");
+    expect(assess(document).component_dependency_relationship).toBe("fail");
   });
 });
 
@@ -1076,7 +1076,7 @@ describe("an SPDX 2 reference type written as an IRI", () => {
 // ---------------------------------------------------------------------------
 
 describe("integration fixtures", () => {
-  test("a compliant CycloneDX 1.5 document passes all seventeen", () => {
+  test("a complete CycloneDX 1.5 document passes data checks with signature unverified", () => {
     const fs = findings({
       bomFormat: "CycloneDX",
       specVersion: "1.5",
@@ -1084,6 +1084,7 @@ describe("integration fixtures", () => {
       signature: { algorithm: "RS512", value: "signed" },
       components: [
         {
+          "bom-ref": "pkg:pypi/example-component@1.0.0",
           name: "example-component",
           version: "1.0.0",
           publisher: "Example Corp",
@@ -1101,7 +1102,8 @@ describe("integration fixtures", () => {
       },
     });
     expect(counts(fs).fail).toBe(0);
-    expect(counts(fs).pass).toBe(17);
+    expect(counts(fs).pass).toBe(16);
+    expect(counts(fs).warning).toBe(1);
   });
 
   test("a non-compliant document fails", () => {

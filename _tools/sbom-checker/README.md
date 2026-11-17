@@ -9,7 +9,7 @@ The browser-side SBOM checker behind [/tools/sbom-checker/](https://sbomify.com/
 - `src/detect.ts`: parsing and format/version detection.
 - `src/validate.ts`, `src/schema/`: schema validation. `schemas/` holds the upstream schemas; `scripts/compile-schemas.ts` compiles them with Ajv in standalone mode into `src/schema/generated/` (not committed). The browser never runs a schema compiler, and each schema is its own chunk, loaded only for the version being checked.
 - `src/refs.ts`: external references (collect, resolve, verify hashes, fetch referenced SBOMs).
-- `src/frameworks/`: the compliance checks. These are ports of the assessment plugins in the sbomify platform (`sbomify/apps/plugins/builtins/` in sbomify/sbomify) and keep their finding IDs and semantics, so a document scores the same here as in the app. A change to a plugin there should be mirrored here.
+- `src/frameworks/`: the compliance checks. These are ports of the assessment plugins in the sbomify platform (`sbomify/apps/plugins/builtins/` in sbomify/sbomify) and retain their finding IDs. Standard-derived corrections take precedence over historical scoring parity; see [STANDARDS.md](STANDARDS.md) for the sources, review resolutions and assessment limits.
 
 ## Commands
 
@@ -37,5 +37,6 @@ To add a version, drop its schema in `schemas/` and add a row to `src/schema/cat
 ## Tests
 
 - `test/*.test.ts` next to each framework port carry over the platform plugin's own tests.
-- `test/cases.test.ts` runs `test/fixtures/cases/`: small documents that each change one thing from a complete SBOM, with the outcome the standard's text calls for. Cases where the platform's current reading differs are kept as `todo` with the reasoning, so they stay visible until the platform changes.
+- `test/cases.test.ts` runs `test/fixtures/cases/`: small documents that each change one thing from a complete SBOM, with the outcome the standard's text calls for. All cases run, including the 16 formerly skipped discrepancies.
+- `test/standards-regressions.test.ts` covers all 17 review findings, using official-schema-valid inputs where applicable.
 - `test/fixtures/samples/` holds real generator output for every supported format version.

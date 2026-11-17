@@ -1,15 +1,10 @@
-/**
- * NTIA Minimum Elements for a Software Bill of Materials (July 2021).
- *
- * Mirrors sbomify `sbomify/apps/plugins/builtins/ntia.py`: same finding ids,
- * titles, descriptions, pass/fail rules and remediation text. Per-component
- * failures are reported in `affected` / `affectedCount` instead of a
- * "Missing for: a, b, c" suffix on the description.
- *
- * The seven elements: supplier name, component name, version, unique
- * identifiers, dependency relationship, SBOM author, timestamp.
+/** NTIA 2021 Minimum Elements.
+ * Finding IDs originated in the platform plugins. Standard-derived behavior
+ * takes precedence over historical platform parity; see ../STANDARDS.md.
+ * File-only checks do not prove artifact completeness or signature authenticity.
  */
 
+import { minimumElementsTimestamp, cdxComponents, dependencyCoverage } from "./standards";
 import type { DetectedSbom, Finding, Framework, JsonObject } from "../types";
 import { SPDX2_IDENTIFIER_TYPES, spdx2ReferenceType, spdx2YoctoSourceDownloads } from "./spdx-shared";
 import {
@@ -23,7 +18,6 @@ import {
   asList,
   displayName,
   isObject,
-  isValidIsoTimestamp,
   missingForSentence,
   pyGet,
   pyStr,
@@ -91,7 +85,7 @@ function perComponent(element: Element, failures: string[], remediation: string)
 }
 
 function timestampFinding(timestamp: unknown, remediation: string): Finding {
-  const valid = isValidIsoTimestamp(timestamp);
+  const valid = minimumElementsTimestamp(timestamp);
   return finding(
     "timestamp",
     valid ? "pass" : "fail",
@@ -103,8 +97,6 @@ function timestampFinding(timestamp: unknown, remediation: string): Finding {
 function validateSpdx(data: JsonObject): Finding[] {
   const rawPackages = pyGet(data, "packages");
   const packages = asList(truthy(rawPackages) ? rawPackages : []).filter(isObject);
-  const rawRelationships = pyGet(data, "relationships");
-  const relationships = asList(truthy(rawRelationships) ? rawRelationships : []);
   const rawCi = pyGet(data, "creationInfo");
   const creationInfo = isObject(rawCi) ? rawCi : {};
 
@@ -116,15 +108,13 @@ function validateSpdx(data: JsonObject): Finding[] {
 
   packages.forEach((pkg, i) => {
     const packageName = displayName(pyGet(pkg, "name", `Package ${i + 1}`), `Package ${i + 1}`);
-    // File-type entries (e.g. lockfiles) are input metadata, not packages.
     const spdxIdRaw = pyGet(pkg, "SPDXID");
     const spdxId = pyStr(truthy(spdxIdRaw) ? spdxIdRaw : "");
-    const isFileEntry = spdxId.includes("-File-");
 
-    if (!isFileEntry && !truthy(pyGet(pkg, "supplier"))) supplierFailures.push(packageName);
+    if (!truthy(pyGet(pkg, "originator")) && !truthy(pyGet(pkg, "supplier"))) supplierFailures.push(packageName);
     if (!truthy(pyGet(pkg, "name"))) nameFailures.push(`Package at index ${i}`);
-    if (!isFileEntry && !truthy(pyGet(pkg, "versionInfo"))) versionFailures.push(packageName);
-    if (!isFileEntry && !sourceDownloads.has(spdxId)) {
+    if (!truthy(pyGet(pkg, "versionInfo"))) versionFailures.push(packageName);
+    if (!sourceDownloads.has(spdxId)) {
       const purl = pyGet(pkg, "purl");
       const hasUniqueId =
         (typeof purl === "string" && purl !== "") ||
@@ -133,10 +123,7 @@ function validateSpdx(data: JsonObject): Finding[] {
     }
   });
 
-  const hasDependencies = relationships.some((rel) => {
-    const t = pyGet(rel, "relationshipType");
-    return isObject(rel) && typeof t === "string" && ["DEPENDS_ON", "CONTAINS"].includes(t.toUpperCase());
-  });
+  const hasDependencies = dependencyCoverage(data, "spdx");
   const creators = pyGet(creationInfo, "creators", []);
 
   return [
@@ -161,7 +148,7 @@ function validateSpdx(data: JsonObject): Finding[] {
 }
 
 function validateSpdx3(data: JsonObject): Finding[] {
-  const [creationInfo, packages, relationships, personsOrgs, tools] = extractSpdx3Elements(data);
+  const [creationInfo, packages, , personsOrgs, tools] = extractSpdx3Elements(data);
   const ciFields = getSpdx3CreationInfoFields(creationInfo, personsOrgs, tools);
 
   const supplierFailures: string[] = [];
@@ -178,11 +165,8 @@ function validateSpdx3(data: JsonObject): Finding[] {
     if (!fields.hasUniqueId) uniqueIdFailures.push(pkgName);
   });
 
-  const hasDependencies = relationships.some((rel) => {
-    const t = pyGet(rel, "relationshipType");
-    return typeof t === "string" && (t === "dependsOn" || t === "contains");
-  });
-  const hasCreators = ciFields.creators.length > 0;
+  const hasDependencies = dependencyCoverage(data, "spdx3");
+  const hasCreators = ciFields.creators.length > 0 || ciFields.toolEntries.length > 0;
 
   return [
     perComponent("supplier_name", supplierFailures, "Add originatedBy reference to Person/Organization element."),
@@ -210,8 +194,7 @@ function validateSpdx3(data: JsonObject): Finding[] {
 }
 
 function validateCycloneDx(data: JsonObject): Finding[] {
-  const components = asList(pyGet(data, "components")).filter(isObject);
-  const dependencies = asList(pyGet(data, "dependencies"));
+  const components = cdxComponents(data);
   const rawMetadata = pyGet(data, "metadata");
   const metadata = isObject(rawMetadata) ? rawMetadata : {};
 
@@ -222,27 +205,28 @@ function validateCycloneDx(data: JsonObject): Finding[] {
 
   components.forEach((component, i) => {
     const componentName = displayName(pyGet(component, "name", `Component ${i + 1}`), `Component ${i + 1}`);
-    // type=file components (lockfiles) are input metadata; only the name applies.
-    const isFileType = pyStr(pyGet(component, "type", "")).toLowerCase() === "file";
 
-    if (!isFileType) {
+    {
       const supplierField = pyGet(component, "supplier");
       const publisher = pyGet(component, "publisher");
-      const supplier = truthy(publisher) ? publisher : isObject(supplierField) ? pyGet(supplierField, "name") : null;
+      const supplier = pyGet(pyGet(component, "manufacturer"), "name") || (truthy(publisher) ? publisher : isObject(supplierField) ? pyGet(supplierField, "name") : null);
       if (!truthy(supplier)) supplierFailures.push(componentName);
     }
     if (!truthy(pyGet(component, "name"))) nameFailures.push(`Component at index ${i}`);
-    if (!isFileType && !truthy(pyGet(component, "version"))) versionFailures.push(componentName);
-    if (!isFileType) {
+    if (!truthy(pyGet(component, "version"))) versionFailures.push(componentName);
+    {
       const hasUniqueId =
         truthy(pyGet(component, "purl")) || truthy(pyGet(component, "cpe")) || truthy(pyGet(component, "swid"));
       if (!hasUniqueId) uniqueIdFailures.push(componentName);
     }
   });
 
-  const hasDependencies = dependencies.length > 0;
-  // NTIA "Author of SBOM Data" is an entity, so tools do not count.
-  const hasAuthor = truthy(pyGet(metadata, "authors", []));
+  const hasDependencies = dependencyCoverage(data, "cyclonedx");
+  // NTIA explicitly permits analysis tools as the metadata source.
+  const tools = pyGet(metadata, "tools");
+  const hasAuthor = asList(pyGet(metadata, "authors")).some(a => truthy(pyGet(a, "name"))) ||
+    truthy(pyGet(pyGet(metadata, "manufacturer"), "name")) ||
+    (Array.isArray(tools) ? tools : asList(pyGet(tools, "components"))).some(t => truthy(pyGet(t, "name")));
 
   return [
     perComponent("supplier_name", supplierFailures, "Add publisher field or supplier.name to components."),

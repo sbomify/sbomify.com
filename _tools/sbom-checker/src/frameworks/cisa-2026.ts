@@ -1,32 +1,16 @@
-/**
- * CISA 2026 Minimum Elements for a Software Bill of Materials.
- *
- * Port of sbomify's `sbomify/apps/plugins/builtins/cisa_2026.py`. Same
- * finding IDs, titles, three-outcome semantics (pass / warning / fail) and
- * remediation text, so a document scores here as it does in the app.
- *
- * The standard defines seventeen data fields: nine about the document, eight
- * about each component. A value the document says it does not know
- * (NOASSERTION, "unknown") is a warning, an omission is a failure. SPDX
- * `NONE` is an answer, not an unknown.
- *
- * Differences from the app, all forced by running in a browser:
- *  - SBOM Author Signature: the app also accepts a signature stored alongside
- *    the artifact. This checker only sees the file, so it scores the document
- *    as the app does when no signature is attached (fail), and the finding
- *    explains that a detached signature satisfies the element.
- *  - Component lists go into `affected` / `affectedCount` rather than into the
- *    description text.
+/** 2026 Minimum Elements.
+ * Finding IDs originated in the platform plugins. Standard-derived behavior
+ * takes precedence over historical platform parity; see ../STANDARDS.md.
+ * File-only checks do not prove artifact completeness or signature authenticity.
  */
 
+import { cdxComponents, dependencyCoverage, cryptoHash, rfc9557, spdx3Nodes } from "./standards";
 import type { DetectedSbom, Finding, FindingStatus, Framework, JsonObject } from "../types";
 import {
   affectedFields,
-  asList,
   hasKey,
   isObject,
   lastSegment,
-  pyFromIsoFormat,
   pyGet,
   pySplit,
   pyStr,
@@ -101,51 +85,15 @@ export const SPDX3_SBOM_TYPES: ReadonlySet<string> = new Set([
   "analyzed",
 ]);
 
-export const HASH_ALGORITHMS: ReadonlySet<string> = new Set([
-  "md2",
-  "md4",
-  "md5",
-  "md6",
-  "adler32",
-  "sha1",
-  "sha224",
-  "sha256",
-  "sha384",
-  "sha512",
-  "sha3224",
-  "sha3256",
-  "sha3384",
-  "sha3512",
-  "blake2b256",
-  "blake2b384",
-  "blake2b512",
-  "blake2s256",
-  "blake3",
-]);
+export { RECOMMENDED_HASHES as HASH_ALGORITHMS } from "./standards";
+import { RECOMMENDED_HASHES as HASH_ALGORITHMS, CRYPTO_HASHES } from "./standards";
 
 /** Wider than the shared SPDX 2 set: the 2026 elements also name gitoid (OmniBOR) and swhid. */
 const SPDX2_IDENTIFIER_TYPES: ReadonlySet<string> = new Set(["purl", "cpe22Type", "cpe23Type", "swid", "gitoid", "swhid"]);
-const SPDX3_IDENTIFIER_TYPES: ReadonlySet<string> = new Set([
-  "packageUrl",
-  "packageURL",
-  "purl",
-  "cpe22",
-  "cpe23",
-  "swid",
-  "gitoid",
-  "swhid",
-]);
 
 /** A document saying it does not know. `NONE` is deliberately absent: it is an answer. */
 const UNKNOWN_MARKERS: ReadonlySet<string> = new Set(["noassertion", "unknown", "notprovided"]);
 
-/**
- * RFC 9557 date-time: RFC 3339 plus optional bracketed time zone and tags.
- * Python's `\d` also matches non-ASCII digits, but `datetime.fromisoformat`
- * then rejects them, so ASCII digits give the same verdict.
- */
-const RFC_9557_RE =
-  /^([0-9]{4}-[0-9]{2}-[0-9]{2}[Tt][0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]+)?)([Zz]|[+-][0-9]{2}:[0-9]{2})(?:\[!?[A-Za-z0-9._+/-]+\])?(?:\[!?[A-Za-z0-9-]+=[A-Za-z0-9._+/-]+\])*$/;
 
 /** Longest RFC 9557 string worth attempting. */
 export const MAX_TIMESTAMP_LEN = 512;
@@ -297,7 +245,7 @@ function lookup(map: unknown, key: string): unknown {
 
 /** `data.get("@graph", data.get("elements", []))`. */
 function graphElements(data: JsonObject): unknown {
-  return hasKey(data, "@graph") ? data["@graph"] : pyGet(data, "elements", []);
+  return spdx3Nodes(data);
 }
 
 const SPDX_HOST_CONTEXT_C0_OR_SPACE = /^[\x00-\x20]+/;
@@ -345,14 +293,7 @@ function isSpdxContext(value: string): boolean {
 
 /** RFC 9557 date-time check, then the impossible-date check `fromisoformat` does. */
 export function validTimestamp(value: unknown): boolean {
-  const t = text(value);
-  if (!t || t.length > MAX_TIMESTAMP_LEN) return false;
-  const match = RFC_9557_RE.exec(t);
-  if (!match) return false;
-  const stamp = match[1]!;
-  const offset = match[2]!;
-  const normalised = offset === "Z" || offset === "z" ? `${stamp}+00:00` : `${stamp}${offset}`;
-  return pyFromIsoFormat(normalised);
+  return rfc9557(value);
 }
 
 // ---------------------------------------------------------------------------
@@ -362,6 +303,7 @@ export function validTimestamp(value: unknown): boolean {
 class Tally {
   missing: string[] = [];
   unknown: string[] = [];
+  unapproved: string[] = [];
 
   record(name: string, value: unknown): void {
     if (isUnknown(value)) this.unknown.push(name);
@@ -372,6 +314,12 @@ class Tally {
     if (isStated) return;
     (isUnknownValue ? this.unknown : this.missing).push(name);
   }
+}
+
+function recordAlgorithm(tally: Tally, name: string, hashes: JsonObject[], key: string): void {
+  if (hashes.some(h => HASH_ALGORITHMS.has(normaliseAlgorithm(h[key])))) return;
+  if (hashes.some(h => CRYPTO_HASHES.has(normaliseAlgorithm(h[key])))) tally.unapproved.push(name);
+  else tally.missing.push(name);
 }
 
 function newTallies(): Record<ComponentElement, Tally> {
@@ -445,6 +393,9 @@ function componentFinding(element: Element, tally: Tally, total: number, remedia
       affectedFields(tally.unknown),
     );
   }
+  if (tally.unapproved.length) {
+    return finding(element, "warning", "Algorithm approval by a relevant authority has not been established; use an approved SHA-2/SHA-3 algorithm or confirm approval under the applicable policy.", remediation, affectedFields(tally.unapproved));
+  }
   return finding(element, "pass");
 }
 
@@ -454,16 +405,14 @@ const SIGNATURE_REMEDIATION =
   "but this checker only reads the SBOM file and cannot see one.";
 
 /**
- * SBOM Author Signature. The app passes this on a signature stored alongside
- * the artifact; the browser cannot see one, so it scores the document as the
- * app does when none is attached, and says a detached signature would do.
+ * Signature presence is not cryptographic verification or author attribution.
  */
 function signatureFinding(inDocument: boolean, note: string): Finding {
-  if (inDocument) return finding("sbom_author_signature", "pass");
   return finding(
-    "sbom_author_signature",
-    "fail",
-    `${note} A detached signature published alongside the SBOM would satisfy this element, but this checker cannot see one.`,
+    "sbom_author_signature", "warning",
+    inDocument
+      ? "A signature block is present, but its cryptographic validity, approved algorithm and attribution to the author have not been verified."
+      : `${note} Detached signatures cannot be inspected from the SBOM file alone. Signature authenticity is unverified.`,
     SIGNATURE_REMEDIATION,
   );
 }
@@ -498,42 +447,12 @@ export function detectFormat(data: JsonObject): "spdx3" | "spdx" | "cyclonedx" |
 // CycloneDX
 // ---------------------------------------------------------------------------
 
-function cyclonedxComponents(data: JsonObject, metadata: JsonObject): JsonObject[] {
-  const found: JsonObject[] = [];
-  const seen = new Set<object>();
-  // Iterative pre-order walk: hostile nesting depth must not overflow the stack.
-  const walk = (entries: unknown): void => {
-    const stack: Iterator<unknown>[] = [];
-    if (Array.isArray(entries)) stack.push(entries[Symbol.iterator]());
-    while (stack.length) {
-      const next = stack[stack.length - 1]!.next();
-      if (next.done) {
-        stack.pop();
-        continue;
-      }
-      const entry = next.value;
-      if (!isObject(entry) || seen.has(entry)) continue;
-      seen.add(entry);
-      found.push(entry);
-      const children = pyGet(entry, "components");
-      if (Array.isArray(children)) stack.push(children[Symbol.iterator]());
-    }
-  };
-  const target = pyGet(metadata, "component");
-  if (isObject(target)) {
-    seen.add(target);
-    found.push(target);
-    walk(pyGet(target, "components"));
-  }
-  walk(pyGet(data, "components"));
-  return found;
-}
 
 function cyclonedxHasAuthor(metadata: JsonObject): boolean {
   const authors = pyGet(metadata, "authors");
   if (Array.isArray(authors)) {
     for (const author of authors) {
-      if (isObject(author) && (stated(pyGet(author, "name")) || stated(pyGet(author, "email")))) return true;
+      if (isObject(author) && stated(pyGet(author, "name"))) return true;
     }
   }
   for (const key of ["manufacturer", "manufacture"]) {
@@ -636,17 +555,6 @@ function cyclonedxLicenseMatches(component: JsonObject, test: (value: unknown) =
   return false;
 }
 
-function cyclonedxHasDependencies(data: JsonObject, componentCount: number): boolean {
-  if (componentCount < 2) return true;
-  const dependencies = pyGet(data, "dependencies");
-  if (!Array.isArray(dependencies)) return false;
-  for (const entry of dependencies) {
-    if (!isObject(entry)) continue;
-    const dependsOn = pyGet(entry, "dependsOn");
-    if (Array.isArray(dependsOn) && dependsOn.some((ref) => text(ref) !== "")) return true;
-  }
-  return false;
-}
 
 /** Python `isinstance(v, int) and v >= 1`; bool is an int in Python. */
 function isPositiveInt(value: unknown): boolean {
@@ -654,14 +562,11 @@ function isPositiveInt(value: unknown): boolean {
   return typeof value === "number" && Number.isInteger(value) && value >= 1;
 }
 
-function isFileComponent(component: JsonObject): boolean {
-  return text(pyGet(component, "type")).toLowerCase() === "file";
-}
 
 function validateCyclonedx(data: JsonObject): Finding[] {
   const rawMetadata = pyGet(data, "metadata");
   const metadata: JsonObject = isObject(rawMetadata) ? rawMetadata : {};
-  const components = cyclonedxComponents(data, metadata);
+  const components = cdxComponents(data);
 
   const findings: Finding[] = [
     documentFinding("sbom_author", {
@@ -720,8 +625,6 @@ function validateCyclonedx(data: JsonObject): Finding[] {
   components.forEach((component, index) => {
     const name = text(pyGet(component, "name")) || `component at index ${index}`;
     tallies.component_name.note(name, text(pyGet(component, "name")) !== "");
-    // A file entry is input metadata rather than a shipped component.
-    if (isFileComponent(component)) return;
 
     const producers = cyclonedxProducerFields(component);
     tallies.component_producer.note(name, producers.some(stated), producers.some(isUnknown));
@@ -732,12 +635,9 @@ function validateCyclonedx(data: JsonObject): Finding[] {
     const hashes = Array.isArray(rawHashes) ? rawHashes.filter(isObject) : [];
     tallies.component_hash_value.note(
       name,
-      hashes.some((h) => stated(pyGet(h, "content"))),
+      cryptoHash(hashes, "alg", "content"),
     );
-    tallies.component_hash_algorithm.note(
-      name,
-      hashes.some((h) => HASH_ALGORITHMS.has(normaliseAlgorithm(pyGet(h, "alg")))),
-    );
+    recordAlgorithm(tallies.component_hash_algorithm, name, hashes, "alg");
     tallies.component_license.note(
       name,
       cyclonedxLicenseMatches(component, stated),
@@ -745,7 +645,7 @@ function validateCyclonedx(data: JsonObject): Finding[] {
     );
   });
 
-  const assessed = components.filter((c) => !isFileComponent(c)).length;
+  const assessed = components.length;
   const remediations: Record<ComponentElement, string> = {
     component_producer:
       "Add manufacturer.name for the organization that created the component, " +
@@ -766,7 +666,7 @@ function validateCyclonedx(data: JsonObject): Finding[] {
   }
   findings.push(
     documentFinding("component_dependency_relationship", {
-      stated: cyclonedxHasDependencies(data, assessed),
+      stated: dependencyCoverage(data, "cyclonedx"),
       details: "No dependencies[] entry states what a component depends on.",
       remediation: remediations.component_dependency_relationship,
     }),
@@ -794,23 +694,7 @@ function spdx2HasIdentifier(pkg: JsonObject): boolean {
   return false;
 }
 
-const SPDX2_DEPENDENCY_TYPES: ReadonlySet<string> = new Set([
-  "DEPENDS_ON",
-  "DEPENDENCY_OF",
-  "CONTAINS",
-  "CONTAINED_BY",
-  "DESCENDANT_OF",
-  "STATIC_LINK",
-]);
 
-function spdx2HasDependencies(data: JsonObject, packageCount: number): boolean {
-  if (packageCount < 2) return true;
-  const relationships = pyGet(data, "relationships");
-  if (!Array.isArray(relationships)) return false;
-  return relationships.some(
-    (rel) => isObject(rel) && SPDX2_DEPENDENCY_TYPES.has(text(pyGet(rel, "relationshipType")).toUpperCase()),
-  );
-}
 
 function spdx2HasGenerationContext(data: JsonObject): boolean {
   const creationInfo = pyGet(data, "creationInfo");
@@ -908,7 +792,6 @@ function validateSpdx2(data: JsonObject): Finding[] {
   packages.forEach((pkg, index) => {
     const name = text(pyGet(pkg, "name")) || `package at index ${index}`;
     tallies.component_name.note(name, text(pyGet(pkg, "name")) !== "");
-    if (text(pyGet(pkg, "SPDXID")).includes("-File-")) return;
     assessed += 1;
 
     const producers = [pyGet(pkg, "originator"), pyGet(pkg, "supplier")];
@@ -922,12 +805,9 @@ function validateSpdx2(data: JsonObject): Finding[] {
     const checksums = Array.isArray(rawChecksums) ? rawChecksums.filter(isObject) : [];
     tallies.component_hash_value.note(
       name,
-      checksums.some((c) => stated(pyGet(c, "checksumValue"))),
+      cryptoHash(checksums, "algorithm", "checksumValue"),
     );
-    tallies.component_hash_algorithm.note(
-      name,
-      checksums.some((c) => HASH_ALGORITHMS.has(normaliseAlgorithm(pyGet(c, "algorithm")))),
-    );
+    recordAlgorithm(tallies.component_hash_algorithm, name, checksums, "algorithm");
     const licences = [pyGet(pkg, "licenseConcluded"), pyGet(pkg, "licenseDeclared")];
     tallies.component_license.note(name, licences.some(stated), licences.some(isUnknown));
   });
@@ -951,7 +831,7 @@ function validateSpdx2(data: JsonObject): Finding[] {
   }
   findings.push(
     documentFinding("component_dependency_relationship", {
-      stated: spdx2HasDependencies(data, assessed),
+      stated: dependencyCoverage(data, "spdx"),
       details: "No relationship states that one component is necessary to another.",
       remediation: remediations.component_dependency_relationship,
     }),
@@ -998,7 +878,7 @@ function spdx3ToolVersion(tool: JsonObject): boolean {
   if (stated(pyGet(tool, "software_packageVersion")) || stated(pyGet(tool, "version"))) return true;
   if (looksVersioned(text(pyGet(tool, "name")))) return true;
   for (const ext of iterSpdx3ExternalIdentifiers(tool)) {
-    if (stated(pyGet(ext, "identifier"))) return true;
+    if (looksVersioned(text(pyGet(ext, "identifier")))) return true;
   }
   return false;
 }
@@ -1035,6 +915,12 @@ export function spdx3HasGenerationContext(data: JsonObject): boolean {
   for (const element of elements) {
     if (!isObject(element)) continue;
     const type = elementType(element);
+    if (["SpdxDocument", "CreationInfo"].includes(type) && statesGenerationContext(text(element.comment))) return true;
+    if (type === "Annotation") {
+      const subjects = spdx3Refs(element.subject);
+      const documentIds = new Set(spdx3Nodes(data).filter(n => ["SpdxDocument", "software_Sbom", "Sbom"].includes(elementType(n))).map(n => n.spdxId));
+      if (subjects.some(ref => documentIds.has(ref as string)) && statesGenerationContext(text(element.statement) || text(element.comment))) return true;
+    }
     if (type !== "software_Sbom" && type !== "Sbom") continue;
     const raw = getOr(element, "software_sbomType", "sbomType");
     const values = Array.isArray(raw) ? raw : [raw];
@@ -1064,8 +950,7 @@ export function spdx3ProducerNames(pkg: JsonObject, agents: unknown): unknown[] 
 function spdx3HasIdentifier(pkg: JsonObject): boolean {
   if (stated(pyGet(pkg, "software_packageUrl"))) return true;
   for (const ext of iterSpdx3ExternalIdentifiers(pkg)) {
-    const kind = lastSegment(text(pyGet(ext, "externalIdentifierType")), "/");
-    if (SPDX3_IDENTIFIER_TYPES.has(kind) && stated(pyGet(ext, "identifier"))) return true;
+    if (stated(pyGet(ext, "identifier"))) return true;
   }
   return false;
 }
@@ -1080,20 +965,7 @@ function spdx3PackageId(pkg: JsonObject): string {
   return text(pyGet(pkg, "spdxId")) || text(pyGet(pkg, "@id"));
 }
 
-const SPDX3_DEPENDENCY_TYPES: ReadonlySet<string> = new Set([
-  "dependsOn",
-  "contains",
-  "hasPrerequisite",
-  "hasStaticLink",
-  "hasDynamicLink",
-]);
 
-function spdx3HasDependencies(relationships: unknown[], packageCount: number): boolean {
-  if (packageCount < 2) return true;
-  return relationships.some(
-    (rel) => isObject(rel) && SPDX3_DEPENDENCY_TYPES.has(lastSegment(text(pyGet(rel, "relationshipType")), "/")),
-  );
-}
 
 function validateSpdx3(data: JsonObject): Finding[] {
   const [rawCreationInfo, packages, relationships, agents, tools] = extractSpdx3Elements(data);
@@ -1161,7 +1033,7 @@ function validateSpdx3(data: JsonObject): Finding[] {
     if (!id) continue;
     for (const kind of ["hasDeclaredLicense", "hasConcludedLicense"]) {
       const resolved = getSpdx3PackageLicense(pkg, relationships, licences, kind);
-      if (resolved !== null && resolved !== undefined) {
+      if (resolved !== null && resolved !== undefined && !isUnknown(resolved)) {
         licenceSubjects.add(id);
         break;
       }
@@ -1182,13 +1054,12 @@ function validateSpdx3(data: JsonObject): Finding[] {
     const hashes = spdx3Hashes(pkg);
     tallies.component_hash_value.note(
       name,
-      hashes.some((h) => stated(pyGet(h, "hashValue"))),
+      cryptoHash(hashes, "algorithm", "hashValue"),
     );
-    tallies.component_hash_algorithm.note(
-      name,
-      hashes.some((h) => HASH_ALGORITHMS.has(normaliseAlgorithm(pyGet(h, "algorithm")))),
-    );
-    tallies.component_license.note(name, licenceSubjects.has(packageId));
+    recordAlgorithm(tallies.component_hash_algorithm, name, hashes, "algorithm");
+    const unknownLicense = ["hasDeclaredLicense", "hasConcludedLicense"].some(kind =>
+      isUnknown(getSpdx3PackageLicense(pkg, relationships, licences, kind)));
+    tallies.component_license.note(name, licenceSubjects.has(packageId), unknownLicense);
   });
 
   const remediations: Record<ComponentElement, string> = {
@@ -1209,7 +1080,7 @@ function validateSpdx3(data: JsonObject): Finding[] {
   }
   findings.push(
     documentFinding("component_dependency_relationship", {
-      stated: spdx3HasDependencies(relationships, packages.length),
+      stated: dependencyCoverage(data, "spdx3"),
       details: "No Relationship states that one component is necessary to another.",
       remediation: remediations.component_dependency_relationship,
     }),
