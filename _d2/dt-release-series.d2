@@ -1,38 +1,48 @@
 # Dependency-Track laid out by release series (v26.11.1).
-# Shipping 1.3 on the 1.2 line takes over 1.2's collection and projects,
-# renaming them, so their history and audit decisions carry over.
+# Each live release gets its own collection, so two maintained lines are two
+# trees side by side. Shipping 1.3 on the 1.x line takes over 1.2's
+# collection and projects and renames them; the 2.x tree is untouched.
 direction: down
 
-before: "Before: 1.2 is live" {
+ws: "Workspace" {class: primary}
+
+old: "Gateway @ 1.2\nretired" {class: secondary}
+
+t1: "1.x tree" {
   class: group
-  direction: right
 
-  ws: "Workspace" {class: primary}
-  c12: "Gateway @ 1.2" {class: primary}
-  api12: "Gateway / api @ 1.2" {class: secondary}
-  auth12: "Gateway / auth @ 1.2" {class: secondary}
-  lb: "Latest builds" {class: accent}
-
-  ws -> c12: {class: flow}
-  ws -> lb: {class: flow}
-  c12 -> api12: {class: flow}
-  c12 -> auth12: {class: flow}
-}
-
-after: "After: 1.3 ships on the same line" {
-  class: group
-  direction: right
-
-  ws: "Workspace" {class: primary}
-  c13: "Gateway @ 1.3\nsame project, renamed" {class: highlight}
+  c13: "Gateway @ 1.3\n1.2's project, renamed" {class: highlight}
   api13: "Gateway / api @ 1.3\nBOM unchanged" {class: secondary}
   auth13: "Gateway / auth @ 1.3\nnew BOM, audit history kept" {class: accent}
-  lb: "Latest builds" {class: accent}
 
-  ws -> c13: {class: flow}
-  ws -> lb: {class: flow}
   c13 -> api13: {class: flow}
   c13 -> auth13: {class: flow}
 }
 
-before -> after: "1.3 replaces 1.2" {class: flow-pink}
+t2: "2.x tree" {
+  class: group
+
+  c21: "Gateway @ 2.1" {class: primary}
+  api21: "Gateway / api @ 2.1" {class: secondary}
+  auth21: "Gateway / auth @ 2.1" {class: secondary}
+
+  c21 -> api21: {class: flow}
+  c21 -> auth21: {class: flow}
+}
+
+lb: "Latest builds" {
+  class: group
+
+  lbc: "Latest builds" {class: accent}
+  auth: "auth @ latest" {class: secondary}
+  worker: "worker @ latest\nin no product" {class: secondary}
+
+  lbc -> auth: {class: flow}
+  lbc -> worker: {class: flow}
+}
+
+ws -> t1.c13: {class: flow}
+ws -> t2.c21: {class: flow}
+ws -> lb.lbc: {class: flow}
+
+old -> t1.c13: "1.3 replaces 1.2" {class: flow-pink}

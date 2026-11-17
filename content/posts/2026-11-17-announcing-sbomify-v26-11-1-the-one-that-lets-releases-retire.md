@@ -40,7 +40,7 @@ Lifecycle data is only useful if something acts on it, so sbomify now acts on it
 
 A release counts as live until it is replaced on its line, withdrawn, archived, or past its support or end-of-life date. The latest build of each component always counts. Scheduled scans, the VEX re-apply and Dependency-Track all read that one definition, so they cannot drift apart.
 
-Here is what that looks like for a product with two maintained lines:
+Here is what that looks like for a product that maintains 1.x and 2.x in parallel:
 
 <div class="my-10 bg-navy-5 rounded-[1.25rem] p-6">
     {{< d2 "release-lifecycle" >}}
@@ -63,7 +63,7 @@ If you use the Dependency-Track integration, it changes shape in this release. s
 
 When a release replaces another on the same line, it **takes over the older release's projects**. sbomify renames them and swaps a component's BOM only where it actually changed. Dependency-Track keeps the project, its history and **your audit decisions**. Triage you did on 1.2.3 is still there on 1.2.4.
 
-Shipping 1.3 on the 1.2 line, for example:
+With 1.x and 2.x both maintained, Dependency-Track holds two trees side by side. Shipping 1.3 on the 1.x line takes over 1.2's projects and leaves the 2.x tree alone:
 
 <div class="my-10 bg-navy-5 rounded-[1.25rem] p-6">
     {{< d2 "dt-release-series" >}}
