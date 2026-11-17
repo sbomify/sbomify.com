@@ -16,7 +16,7 @@ description: "Guide to FDA cybersecurity guidance for medical devices, including
 
 ---
 
-**Check your SBOM:** the free [SBOM checker](/tools/sbom-checker/) scores a CycloneDX or SPDX file against the NTIA and CISA 2026 elements the FDA guidance references, in your browser.
+**Check your SBOM:** the free [SBOM minimum elements checker](/tools/sbom-checker/) scores a CycloneDX or SPDX file against the NTIA and CISA 2026 elements the FDA guidance references, in your browser.
 
 ## Overview
 

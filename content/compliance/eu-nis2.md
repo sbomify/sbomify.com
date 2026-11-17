@@ -16,7 +16,7 @@ description: "Understanding NIS2 Directive cybersecurity requirements and how SB
 
 ---
 
-**Check your SBOM:** NIS2 does not define SBOM fields; the free [SBOM checker](/tools/sbom-checker/) scores a CycloneDX or SPDX file against the NTIA and CISA 2026 elements recommended as the baseline, in your browser.
+**Check your SBOM:** NIS2 does not define SBOM fields; the free [SBOM minimum elements checker](/tools/sbom-checker/) scores a CycloneDX or SPDX file against the NTIA and CISA 2026 elements recommended as the baseline, in your browser.
 
 ## Overview
 

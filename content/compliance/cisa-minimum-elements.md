@@ -16,7 +16,7 @@ description: "The 2026 Minimum Elements for a Software Bill of Materials, publis
 
 ---
 
-**Check your SBOM:** the free [SBOM checker](/tools/sbom-checker/) scores a CycloneDX or SPDX file against the CISA 2026 elements (and the August 2025 draft) in your browser, and links every gap to the fix.
+**Free tool:** [Check your SBOM against the CISA minimum elements](/tools/sbom-checker/) in your browser. It scores a CycloneDX or SPDX file against the CISA 2026 elements (and the August 2025 draft) and links every gap to the fix.
 
 ## Overview
 

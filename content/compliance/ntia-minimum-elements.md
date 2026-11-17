@@ -20,7 +20,7 @@ description: "The NTIA 2021 Minimum Elements for a Software Bill of Materials, t
 
 ---
 
-**Check your SBOM:** the free [SBOM checker](/tools/sbom-checker/) scores a CycloneDX or SPDX file against the NTIA 2021 elements (and the CISA 2026 elements that replaced them) in your browser, and links every gap to the fix.
+**Check your SBOM:** the free [NTIA SBOM validator](/tools/sbom-checker/) scores a CycloneDX or SPDX file against the NTIA 2021 elements (and the CISA 2026 elements that replaced them) in your browser, and links every gap to the fix.
 
 ## Overview
 

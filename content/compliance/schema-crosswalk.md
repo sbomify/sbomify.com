@@ -20,7 +20,7 @@ This page maps the [CISA 2026 Minimum Elements](/compliance/cisa-minimum-element
 
 ---
 
-**Check your SBOM:** the free [SBOM checker](/tools/sbom-checker/) reports which of these fields an SBOM is missing, for CISA 2026, NTIA 2021 and BSI TR-03183-2, and links each one back to this page.
+**Check your SBOM:** the free [SBOM validator](/tools/sbom-checker/) reports which of these fields an SBOM is missing, for CISA 2026, NTIA 2021 and BSI TR-03183-2, and links each one back to this page.
 
 ## CISA 2026 Minimum Elements: Format Mappings
 

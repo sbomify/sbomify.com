@@ -3,9 +3,9 @@
 title: "SBOM Checker and Validator"
 seo_title: "Free SBOM Checker and Validator (CycloneDX, SPDX)"
 layout: sbom-checker
-lede: "Validate a CycloneDX or SPDX SBOM against its official schema, then check it against the CISA 2026 and NTIA minimum elements and BSI TR-03183-2 for the EU Cyber Resilience Act. See what is missing and how to fix it."
-description: "Free SBOM validator for CycloneDX and SPDX. Checks the schema, CISA 2026 and NTIA minimum elements and the EU CRA (BSI TR-03183-2), all in your browser."
-keywords: [SBOM checker, SBOM validator, validate SBOM, CycloneDX validator, SPDX validator, SBOM quality, NTIA minimum elements checker, CISA minimum elements, CRA SBOM check, BSI TR-03183-2, SBOM compliance]
+lede: "A free online SBOM checker: validate a CycloneDX or SPDX SBOM against its official schema, then check it against the CISA 2026 and NTIA minimum elements and BSI TR-03183-2 for the EU Cyber Resilience Act. See what is missing and how to fix it."
+description: "Free online SBOM checker and validator for CycloneDX and SPDX. View and check an SBOM against its schema, CISA 2026, NTIA and the EU CRA in your browser."
+keywords: [SBOM checker, SBOM checker online, free SBOM checker, SBOM validator, NTIA SBOM validator, SBOM viewer, CycloneDX validator online, SPDX validator online, validate SBOM, CycloneDX validator, SPDX validator, SBOM quality, NTIA minimum elements checker, CISA minimum elements, CRA SBOM check, BSI TR-03183-2, SBOM compliance]
 cta: false
 # Structured data: WebApplication (layouts/partials/head.html).
 app:
@@ -23,6 +23,10 @@ app:
 faq:
   - question: "How do I validate an SBOM?"
     answer: "Drop a CycloneDX or SPDX JSON file onto the SBOM checker. It validates the document against the official schema for the version it declares, then checks it against the CISA 2026 and NTIA minimum elements and BSI TR-03183-2, and lists every gap with how to fix it."
+  - question: "Is this an NTIA SBOM validator?"
+    answer: "Yes. The checker validates an SBOM against the NTIA minimum elements (2021): supplier, component name, version, unique identifiers, dependency relationships, SBOM author and timestamp. It also checks the CISA 2026 elements that replaced them and BSI TR-03183-2 for the EU CRA."
+  - question: "Can I use it as an SBOM viewer?"
+    answer: "Partly. After a check it shows the SBOM's format and version, how many components and dependency links it has, every external reference it points to, and which components are missing which fields. It does not yet list every component for browsing."
   - question: "Is my SBOM uploaded anywhere?"
     answer: "No. The checker is a script that runs in your browser. The SBOM is read from your disk into the page and never sent to sbomify or anyone else. The only network requests are the reference checks you start yourself, which go to the URLs the SBOM lists."
   - question: "Which formats are supported?"
@@ -35,7 +39,7 @@ faq:
 
 ## What the checker does
 
-The checker is an SBOM validator and compliance checker in one: it reads a CycloneDX or SPDX SBOM in your browser and runs three kinds of checks. Nothing is uploaded: the file is read, validated and scored on your machine.
+The checker is a free online SBOM validator and compliance checker in one, and works as a CycloneDX validator and an SPDX validator: it reads the SBOM in your browser and runs three kinds of checks. Nothing is uploaded: the file is read, validated and scored on your machine.
 
 ### Is it a valid SBOM?
 
@@ -83,6 +87,14 @@ Augmentation covers what only you know about your own software; enrichment cover
 ### How do I validate an SBOM?
 
 Drop a CycloneDX or SPDX JSON file onto the checker above. It validates the document against the official schema for the version it declares, then checks it against the CISA 2026 and NTIA minimum elements and BSI TR-03183-2, and lists every gap with how to fix it. For validation in CI, the [sbomify GitHub Action](/sbomify-action/how-it-works/#4-finalization) validates every SBOM it writes against the same schemas.
+
+### Is this an NTIA SBOM validator?
+
+Yes. The checker validates an SBOM against the [NTIA minimum elements](/compliance/ntia-minimum-elements/) (2021): supplier, component name, version, unique identifiers, dependency relationships, SBOM author and timestamp. It also checks the [CISA 2026 elements](/compliance/cisa-minimum-elements/) that replaced them and [BSI TR-03183-2](/compliance/bsi-tr-03183/) for the EU CRA.
+
+### Can I use it as an SBOM viewer?
+
+Partly. After a check it shows the SBOM's format and version, how many components and dependency links it has, every external reference it points to, and which components are missing which fields. It does not yet list every component for browsing.
 
 ### Is my SBOM uploaded anywhere?
 
