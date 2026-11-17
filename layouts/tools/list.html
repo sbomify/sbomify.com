@@ -1,0 +1,92 @@
+{{- /*
+  The /tools/ landing page. Unlike the long-form section pages
+  (_default/list.html) this is a launcher: the hero carries the page's one
+  orange call to action (the first tool), and every tool gets a card built
+  from its `card` front matter (icon, summary, button, checks). The section's
+  own Markdown body still feeds the index.md copy for agents.
+*/ -}}
+{{ define "main" }}
+{{- $tools := .RegularPages.ByWeight -}}
+{{- $first := index $tools 0 -}}
+<div>
+  <header class="hero">
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap pt-10 lg:pt-16 pb-10 lg:pb-14">
+      <div class="max-w-4xl">
+        <p class="eyebrow-chip mb-4">Free, no sign-up</p>
+        <h1 class="text-ink !text-[clamp(2.375rem,5.2vw,4rem)] mb-5">{{ .Title }}</h1>
+        {{ with .Params.lede }}<p class="lede max-w-3xl">{{ . }}</p>{{ end }}
+        {{ with $first }}
+        <div class="mt-8 flex flex-col sm:flex-row sm:items-center gap-4">
+          <a href="{{ .RelPermalink }}" class="btn-primary btn-lg">
+            {{ .Params.card.button | default .LinkTitle }}
+            {{ partial "ph.html" "arrow-right" }}
+          </a>
+          <span class="text-sm text-ink-muted">Drop in a file and get a report in seconds.</span>
+        </div>
+        {{ end }}
+        <ul class="checker-promises" role="list">
+          <li>{{ partial "ph.html" "lock-simple" }}Runs in your browser. Nothing is uploaded.</li>
+          <li>{{ partial "ph.html" "user-minus" }}No account needed</li>
+          <li>{{ partial "ph.html" "file-code" }}CycloneDX and SPDX</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <section class="wrap" aria-labelledby="tools-heading">
+    <div class="section-rule pt-10 lg:pt-14 pb-12 lg:pb-16">
+      <h2 id="tools-heading" class="eyebrow mb-6">The tools</h2>
+      <ul class="grid gap-6" role="list">
+        {{ range $tools }}
+        {{ $card := .Params.card | default dict }}
+        <li class="card p-6 lg:p-10 grid lg:grid-cols-[1fr_minmax(0,26rem)] gap-8 lg:gap-14">
+          <div class="flex flex-col">
+            <span class="w-12 h-12 mb-5 rounded-xl bg-surface border border-line flex items-center justify-center text-ink [&_svg]:w-6 [&_svg]:h-6">
+              {{ partial "ph.html" (dict "name" ($card.icon | default "wrench") "weight" "duotone") }}
+            </span>
+            <h3 class="text-2xl lg:text-3xl font-extrabold tracking-display text-ink mb-3">
+              <a href="{{ .RelPermalink }}" class="hover:text-ink-muted transition-colors">{{ .LinkTitle }}</a>
+            </h3>
+            <p class="text-ink-muted text-base lg:text-lg leading-relaxed mb-8 max-w-xl">{{ $card.summary | default .Description }}</p>
+            <div class="mt-auto">
+              <a href="{{ .RelPermalink }}" class="btn-navy btn-lg">
+                {{ $card.button | default (printf "Open %s" .LinkTitle) }}
+                {{ partial "ph.html" "arrow-right" }}
+              </a>
+            </div>
+          </div>
+          {{ with $card.checks }}
+          <div class="lg:border-l lg:border-line lg:pl-10">
+            <p class="eyebrow mb-4">What it checks</p>
+            <ul class="space-y-3" role="list">
+              {{ range . }}
+              <li class="flex items-start gap-3 text-ink">
+                <span class="text-ink flex-none mt-0.5 [&_svg]:w-5 [&_svg]:h-5">{{ partial "ph.html" (dict "name" "check-circle" "weight" "fill") }}</span>
+                {{- if .url }}<a href="{{ .url }}" class="link">{{ .label }}</a>{{ else }}<span>{{ .label }}</span>{{ end }}
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+          {{ end }}
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+  </section>
+
+  {{/* Closing band. The hero already holds the page's orange button, so
+       this one stays navy/white (brand rule: one orange moment per layout). */}}
+  <section class="wrap pb-16 lg:pb-24">
+    <aside class="cta-band on-dark" aria-label="Get started with sbomify">
+      <p class="eyebrow-chip !text-xs mb-4">Beyond a one-off check</p>
+      <p class="text-2xl lg:text-[2rem] leading-[1.1] font-extrabold tracking-display text-white mb-4">Keep every release's SBOM compliant</p>
+      <p class="text-on-inverse-muted text-base md:text-lg leading-relaxed mb-8 max-w-2xl">sbomify stores the SBOM for every release you ship, rescans it for new vulnerabilities and shares it with your customers through a Trust Center. Free for one product.</p>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a href="{{ site.Params.signupURL }}" class="btn-navy btn-lg" data-cta-location="tools_index" data-cta-label="Start free">Start free</a>
+        <a href="{{ site.Params.demoURL }}" class="btn-secondary btn-lg" data-cta-location="tools_index" data-cta-label="Book a demo">Book a demo</a>
+      </div>
+    </aside>
+  </section>
+</div>
+{{ end }}
