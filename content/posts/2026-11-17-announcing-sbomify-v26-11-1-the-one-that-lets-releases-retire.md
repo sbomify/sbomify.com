@@ -100,6 +100,16 @@ Your [Trust Center](/features/trust-center/) is what your customers see, so it s
 
 This release needs a little more care than usual on upgrade.
 
+- **Dependency-Track needs a one-off backfill.** First give your Dependency-Track API key the `PORTFOLIO_MANAGEMENT` permission, so sbomify can create, rename and retire projects. Then, right after the deploy, lay out the release-series tree and retire the old per-SBOM projects:
+
+  ```bash
+  python manage.py dt_tracked_scope --dry-run
+  python manage.py dt_tracked_scope
+  ```
+
+  Do it straight away: a component deleted before the backfill runs leaves nothing to find its old projects by.
+- **No scheduler? Add two cron jobs.** Support dates retire releases on their own, and scans only run when something triggers them. Run the bundled `sbomify-scheduler`, or call `python manage.py dt_tracked_scope --changed-only` daily and `python manage.py rescan_tracked_sboms` hourly from cron. The [release notes](https://github.com/sbomify/sbomify/releases/tag/v26.11.1) have the exact lines.
+- **Check old support dates.** End-of-support and end-of-life dates set through the API before this release had no effect. From now on they retire the release on deploy.
 - **Redis becomes Valkey.** The bundled backing service is now Valkey 9. Valkey cannot read the data files Redis 8 writes, so its data lives in a new `sbomify_valkey_data` volume and starts empty. That is safe because it only holds the cache and the task queue. **Let the workers drain the queue before upgrading**, or any task still waiting in it is dropped. Once the new version is running, remove the old `sbomify_redis_data` volume. To stay on Redis, set `REDIS_IMAGE`. The [upgrade notes](https://github.com/sbomify/sbomify/blob/master/docs/deployment.md#upgrading-from-redis) have the details.
 - **Anonymous usage telemetry.** Installations now report the number of users, workspaces, products and components, and the sbomify version, under a random installation id. The report contains nothing else: no names, no documents and no SBOMs. It helps us understand how sbomify is deployed outside the hosted platform. To turn it off, set `TELEMETRY_ENABLED=False`. It is already off when `CI` is set.
 - **The image moved to Python 3.15** on a Chainguard base that now tracks daily security rebuilds instead of a frozen digest. `osv-scanner` now comes from a [sbom-tools](https://github.com/sbomify/sbom-tools) bundle whose SLSA provenance is checked with cosign during the build.
@@ -111,7 +121,7 @@ This release needs a little more care than usual on upgrade.
 
 If you are on the **hosted platform**, this is already live. The ten minutes worth spending: open a product with a few years of releases, mark the ones you no longer support as replaced or give them an end-of-support date, and watch your vulnerability totals come down to what you actually maintain. If you create releases from CI, add `supersedes` with the previous tag to the call you already make, and the lifecycle keeps itself up to date from then on.
 
-If you **self-host**, read the Valkey note above, let the queue drain, then pull `ghcr.io/sbomify/sbomify:v26.11.1`. There are database migrations in this release, so take a snapshot first as usual.
+If you **self-host**, read the notes above, let the queue drain, then pull `ghcr.io/sbomify/sbomify:v26.11.1`. There are database migrations in this release, so take a snapshot first as usual, and run the Dependency-Track backfill once the new version is up.
 
 For the full technical detail, see the [v26.11.1 release notes on GitHub](https://github.com/sbomify/sbomify/releases/tag/v26.11.1).
 
