@@ -38,6 +38,7 @@ function baseCyclonedx(): Doc {
     specVersion: "1.5",
     components: [
       {
+        "bom-ref": "pkg:pypi/example-component@1.0.0",
         name: "example-component",
         version: "1.0.0",
         publisher: "Example Corp",
@@ -231,11 +232,11 @@ describe("CycloneDX validation", () => {
     expect(findingById(assess(d), "cisa-2025:license").status).toBe("fail");
   });
 
-  test("file-type component skipped from per-component checks", () => {
+  test("file-type component is assessed for per-component checks", () => {
     const d = baseCyclonedx();
     d.components.push({ type: "file", name: "uv.lock" });
     const findings = assess(d);
-    for (const id of PER_COMPONENT_IDS) expect(findingById(findings, id).status).toBe("pass");
+    for (const id of PER_COMPONENT_IDS) expect(findingById(findings, id).status).toBe("fail");
   });
 
   test("missing dependencies", () => {
@@ -353,11 +354,11 @@ describe("SPDX validation", () => {
     expect(statusOf(d, "software-producer")).toBe("fail");
   });
 
-  test("file package skipped from per-component checks", () => {
+  test("file package is assessed for per-component checks", () => {
     const d = baseSpdx();
     d.packages.push({ SPDXID: "SPDXRef-File-LockFile", name: "uv.lock" });
     const findings = assess(d);
-    for (const id of PER_COMPONENT_IDS) expect(findingById(findings, id).status).toBe("pass");
+    for (const id of PER_COMPONENT_IDS) expect(findingById(findings, id).status).toBe("fail");
   });
 
   test("missing component hash", () => {

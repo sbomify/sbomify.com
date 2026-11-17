@@ -6,6 +6,7 @@
  * Everything here takes `unknown`: SBOM input is hostile and nothing may throw.
  */
 
+import { rfc3339 } from "./standards";
 import type { JsonObject } from "../types";
 
 /** A plain JSON object (Python `isinstance(x, dict)`). */
@@ -440,12 +441,8 @@ export function pyFromIsoFormat(s: string): boolean {
   return true;
 }
 
-/**
- * The plugins' `_validate_timestamp`: falsy → invalid, otherwise
- * `datetime.fromisoformat(timestamp.replace("Z", "+00:00"))` must succeed.
- * A truthy non-string is invalid here; the Python raised AttributeError.
- */
+/** A full RFC3339 date-time; dates alone and local times cannot satisfy the timestamp field. */
 export function isValidIsoTimestamp(timestamp: unknown): boolean {
   if (!truthy(timestamp) || typeof timestamp !== "string") return false;
-  return pyFromIsoFormat(timestamp.replaceAll("Z", "+00:00"));
+  return rfc3339(timestamp);
 }

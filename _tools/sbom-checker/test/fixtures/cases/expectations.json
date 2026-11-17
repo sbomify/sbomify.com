@@ -241,8 +241,8 @@
     "fixture": "cdx16-complete.json",
     "framework": "cisa-2026",
     "finding": "cisa-2026:sbom-author-signature",
-    "status": "fail",
-    "note": "2026 Minimum Elements, SBOM Author Signature: the document carries no signature and none is supplied alongside it."
+    "status": "warning",
+    "note": "2026 Author Signature requires cryptographic verification and attribution; file-only inspection cannot verify inline or detached authenticity."
   },
   {
     "fixture": "cdx16-complete.json",
@@ -634,8 +634,7 @@
     "framework": "ntia-2021",
     "finding": "ntia-2021:supplier-name",
     "status": "pass",
-    "note": "NTIA 2021 (Data Fields discussion): 'Supplier refers to the originator or manufacturer of the software component', so a component naming its manufacturer satisfies Supplier Name.",
-    "ours_wrong": true
+    "note": "NTIA 2021 (Data Fields discussion): 'Supplier refers to the originator or manufacturer of the software component', so a component naming its manufacturer satisfies Supplier Name."
   },
   {
     "fixture": "cdx16-component-manufacturer-only.json",
@@ -656,8 +655,7 @@
     "framework": "ntia-2021",
     "finding": "ntia-2021:supplier-name",
     "status": "pass",
-    "note": "NTIA 2021 (Data Fields discussion): 'Supplier refers to the originator or manufacturer of the software component'; PackageOriginator names the originator.",
-    "ours_wrong": true
+    "note": "NTIA 2021 (Data Fields discussion): 'Supplier refers to the originator or manufacturer of the software component'; PackageOriginator names the originator."
   },
   {
     "fixture": "spdx23-package-originator-only.json",
@@ -741,8 +739,7 @@
     "framework": "ntia-2021",
     "finding": "ntia-2021:version",
     "status": "fail",
-    "note": "NTIA 2021: the minimum elements apply to every component including the primary (top level) one described in metadata.component (Depth: 'An SBOM should contain all primary (top level) components').",
-    "ours_wrong": true
+    "note": "NTIA 2021: the minimum elements apply to every component including the primary (top level) one described in metadata.component (Depth: 'An SBOM should contain all primary (top level) components')."
   },
   {
     "fixture": "cdx16-primary-component-missing-version.json",
@@ -756,16 +753,14 @@
     "framework": "bsi-tr03183-2",
     "finding": "bsi-tr03183:component-version",
     "status": "fail",
-    "note": "TR-03183-2 v2.1.0 section 5.2.2 applies to each component, and mapping Table 9 maps the primary component to metadata.component.version.",
-    "ours_wrong": true
+    "note": "TR-03183-2 v2.1.0 section 5.2.2 applies to each component, and mapping Table 9 maps the primary component to metadata.component.version."
   },
   {
     "fixture": "cdx16-nested-component-missing-version.json",
     "framework": "ntia-2021",
     "finding": "ntia-2021:version",
     "status": "fail",
-    "note": "NTIA 2021: Version is required for every component in the SBOM; a component nested under components[].components is still a component.",
-    "ours_wrong": true
+    "note": "NTIA 2021: Version is required for every component in the SBOM; a component nested under components[].components is still a component."
   },
   {
     "fixture": "cdx16-nested-component-missing-version.json",
@@ -779,8 +774,7 @@
     "framework": "bsi-tr03183-2",
     "finding": "bsi-tr03183:component-version",
     "status": "fail",
-    "note": "TR-03183-2 v2.1.0 section 3.2.1 / 5.2.2: every component, including contained ones (mapping Table 9 lists components[].components), needs a version.",
-    "ours_wrong": true
+    "note": "TR-03183-2 v2.1.0 section 3.2.1 / 5.2.2: every component, including contained ones (mapping Table 9 lists components[].components), needs a version."
   },
   {
     "fixture": "cdx16-component-no-identifiers.json",
@@ -843,16 +837,14 @@
     "framework": "ntia-2021",
     "finding": "ntia-2021:dependency-relationship",
     "status": "fail",
-    "note": "NTIA 2021 Dependency Relationship characterises 'that an upstream component X is included in software Y'; dependencies[] entries with no dependsOn state no inclusion at all, so the library is not related to the primary component (Depth: top-level dependencies must be listed).",
-    "ours_wrong": true
+    "note": "NTIA 2021 Dependency Relationship characterises 'that an upstream component X is included in software Y'; dependencies[] entries with no dependsOn state no inclusion at all, so the library is not related to the primary component (Depth: top-level dependencies must be listed)."
   },
   {
     "fixture": "cdx16-dependencies-without-edges.json",
     "framework": "cisa-2025",
     "finding": "cisa-2025:dependency-relationship",
     "status": "fail",
-    "note": "2025 draft Dependency Relationship: entries without dependsOn state no relationship between components.",
-    "ours_wrong": true
+    "note": "2025 draft Dependency Relationship: entries without dependsOn state no relationship between components."
   },
   {
     "fixture": "cdx16-dependencies-without-edges.json",
@@ -908,8 +900,7 @@
     "framework": "ntia-2021",
     "finding": "ntia-2021:sbom-author",
     "status": "pass",
-    "note": "NTIA 2021 Author of SBOM Data: 'Author reflects the source of the metadata, which could come from ... some third party analysis tool', so a named and versioned generating tool satisfies the element.",
-    "ours_wrong": true
+    "note": "NTIA 2021 Author of SBOM Data: 'Author reflects the source of the metadata, which could come from ... some third party analysis tool', so a named and versioned generating tool satisfies the element."
   },
   {
     "fixture": "cdx16-tool-only-author.json",
@@ -1049,16 +1040,14 @@
     "framework": "ntia-2021",
     "finding": "ntia-2021:timestamp",
     "status": "fail",
-    "note": "NTIA 2021 Timestamp: 'Record of the date and time of the SBOM data assembly'; a bare date has no time.",
-    "ours_wrong": true
+    "note": "NTIA 2021 Timestamp: 'Record of the date and time of the SBOM data assembly'; a bare date has no time."
   },
   {
     "fixture": "cdx16-timestamp-date-only.json",
     "framework": "cisa-2025",
     "finding": "cisa-2025:timestamp",
     "status": "fail",
-    "note": "2025 draft Timestamp records the date and time of SBOM data assembly; a bare date has no time.",
-    "ours_wrong": true
+    "note": "2025 draft Timestamp records the date and time of SBOM data assembly; a bare date has no time."
   },
   {
     "fixture": "cdx16-timestamp-date-only.json",
@@ -1072,8 +1061,7 @@
     "framework": "bsi-tr03183-2",
     "finding": "bsi-tr03183:timestamp",
     "status": "fail",
-    "note": "TR-03183-2 v2.1.0 Table 2: 'Date and time ... according to the specification of the formats'; CycloneDX metadata.timestamp is an RFC 3339 date-time, which a bare date is not.",
-    "ours_wrong": true
+    "note": "TR-03183-2 v2.1.0 Table 2: 'Date and time ... according to the specification of the formats'; CycloneDX metadata.timestamp is an RFC 3339 date-time, which a bare date is not."
   },
   {
     "fixture": "cdx16-timestamp-without-offset.json",
@@ -1087,8 +1075,7 @@
     "framework": "bsi-tr03183-2",
     "finding": "bsi-tr03183:timestamp",
     "status": "fail",
-    "note": "TR-03183-2 v2.1.0 Table 2: timestamp 'according to the specification of the formats'; CycloneDX uses the RFC 3339 date-time format, whose time-offset is mandatory (RFC 3339 section 5.6).",
-    "ours_wrong": true
+    "note": "TR-03183-2 v2.1.0 Table 2: timestamp 'according to the specification of the formats'; CycloneDX uses the RFC 3339 date-time format, whose time-offset is mandatory (RFC 3339 section 5.6)."
   },
   {
     "fixture": "cdx16-no-tools.json",
@@ -1143,8 +1130,8 @@
     "fixture": "cdx16-signed.json",
     "framework": "cisa-2026",
     "finding": "cisa-2026:sbom-author-signature",
-    "status": "pass",
-    "note": "2026 Minimum Elements, SBOM Author Signature: the document carries a JSF signature with algorithm and value."
+    "status": "warning",
+    "note": "2026 Author Signature requires cryptographic verification and attribution; file-only inspection cannot verify inline or detached authenticity."
   },
   {
     "fixture": "cdx16-component-no-hashes.json",
@@ -1193,8 +1180,7 @@
     "framework": "bsi-tr03183-2",
     "finding": "bsi-tr03183:hash-value",
     "status": "fail",
-    "note": "TR-03183-2 v2.1.0 Table 3: the hash of the deployable component is required 'as SHA-512'; a SHA-256 hash alone does not meet the requirement.",
-    "ours_wrong": true
+    "note": "TR-03183-2 v2.1.0 Table 3: the hash of the deployable component is required 'as SHA-512'; a SHA-256 hash alone does not meet the requirement."
   },
   {
     "fixture": "cdx16-component-no-license.json",
@@ -1222,8 +1208,7 @@
     "framework": "bsi-tr03183-2",
     "finding": "bsi-tr03183:distribution-licences",
     "status": "fail",
-    "note": "TR-03183-2 v2.1.0 section 8.1.13 says licence information 'must be mapped' as in Table 9, which maps distribution licences to licenses[] with acknowledgement 'concluded'; a 'declared' licence is the original licence (Table 11), not the distribution licence.",
-    "ours_wrong": true
+    "note": "TR-03183-2 v2.1.0 section 8.1.13 says licence information 'must be mapped' as in Table 9, which maps distribution licences to licenses[] with acknowledgement 'concluded'; a 'declared' licence is the original licence (Table 11), not the distribution licence."
   },
   {
     "fixture": "cdx16-component-declared-license-only.json",
@@ -1251,8 +1236,7 @@
     "framework": "bsi-tr03183-2",
     "finding": "bsi-tr03183:original-licences",
     "status": "warning",
-    "note": "TR-03183-2 v2.1.0 section 3.2.8 defines the effective licence (licence under which the SBOM creator uses the component) as distinct from the original licence (assigned by the component creator); bsi:component:effectiveLicence is the optional Table 6 field and does not supply the Table 5 original licence.",
-    "ours_wrong": true
+    "note": "TR-03183-2 v2.1.0 section 3.2.8 defines the effective licence (licence under which the SBOM creator uses the component) as distinct from the original licence (assigned by the component creator); bsi:component:effectiveLicence is the optional Table 6 field and does not supply the Table 5 original licence."
   },
   {
     "fixture": "cdx16-component-no-bsi-properties.json",

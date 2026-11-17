@@ -66,12 +66,16 @@
       ],
       "licenses": [
         {
-          "expression": "Apache-2.0",
-          "acknowledgement": "concluded"
+          "license": {
+            "id": "Apache-2.0",
+            "acknowledgement": "concluded"
+          }
         },
         {
-          "expression": "Apache-2.0",
-          "acknowledgement": "declared"
+          "license": {
+            "id": "Apache-2.0",
+            "acknowledgement": "declared"
+          }
         }
       ],
       "purl": "pkg:generic/example-app@2.0.0",
@@ -143,12 +147,16 @@
       ],
       "licenses": [
         {
-          "expression": "Apache-2.0",
-          "acknowledgement": "concluded"
+          "license": {
+            "id": "Apache-2.0",
+            "acknowledgement": "concluded"
+          }
         },
         {
-          "expression": "Apache-2.0",
-          "acknowledgement": "declared"
+          "license": {
+            "id": "Apache-2.0",
+            "acknowledgement": "declared"
+          }
         }
       ],
       "purl": "pkg:generic/example-lib@1.4.0",

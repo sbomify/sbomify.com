@@ -1,23 +1,11 @@
-/**
- * BSI TR-03183-2 v2.1.0 (the technical guideline for EU Cyber Resilience Act
- * SBOMs).
- *
- * Port of sbomify `sbomify/apps/plugins/builtins/bsi.py`. Finding IDs,
- * titles, statuses and remediation text match the plugin. Two things differ
- * by design:
- *
- *   - Component lists are not embedded in descriptions ("Missing for: a, b");
- *     they go to `affected` / `affectedCount` and the description keeps a
- *     short count.
- *   - The attestation cross-check reads the result of sbomify's attestation
- *     plugins, which a browser does not have. It reports a warning that
- *     explains what satisfies it (see `checkAttestationRequirement`).
- *
- * Where the Python would raise on a malformed document (a `null` hashes
- * list, a non-string `alg`, a non-dict `@graph` entry) the port skips the
- * value instead. Input is hostile; nothing here throws.
+/** BSI TR-03183-2 v2.1.0.
+ * Finding IDs originated in the platform plugins. Standard-derived behavior
+ * takes precedence over historical platform parity; see ../STANDARDS.md.
+ * File-only checks do not prove artifact completeness or signature authenticity.
  */
 
+import { cdxComponents, dependencyCoverage, spdx3Nodes, validLicense } from "./standards";
+import { iriReference } from "../schema/formats";
 import type { DetectedSbom, Finding, FindingStatus, Framework, JsonObject } from "../types";
 import { spdx2ReferenceType, spdx2YoctoSourceDownloads, spdx3DocumentSubjects } from "./spdx-shared";
 import {
@@ -188,8 +176,7 @@ const FINDING_DESCRIPTIONS: Record<Element, string> = {
     "SBOM MUST NOT contain vulnerability information. Use CSAF or VEX documents instead " +
     "(BSI TR-03183-2 §3.1, §8.1.14)",
   attestation_check:
-    "SBOM integrity MUST be verified via digital signature. Run one of the attestation plugins " +
-    "to verify SBOM provenance and integrity (BSI TR-03183-2 §3.2, CRA Article 10)",
+    "Digital signing is recommended so recipients can verify authenticity (BSI TR-03183-2 §8.1.15); it is not a mandatory conformance field",
 };
 
 // ---------------------------------------------------------------------------
@@ -522,10 +509,10 @@ function hashFinding(failures: readonly string[], warnings: readonly string[], r
   }
   if (warnings.length > 0) {
     return createFinding("hash_value", {
-      status: "warning",
+      status: "fail",
       details:
-        `Non-SHA-512 hash found (acceptable but not ideal) for ${countPhrase(warnings.length)}. ` +
-        "BSI TR-03183-2 recommends SHA-512.",
+        `Required SHA-512 hash missing for ${countPhrase(warnings.length)}. ` +
+        "BSI TR-03183-2 Table 3 requires SHA-512.",
       remediation,
       names: warnings,
     });
@@ -546,16 +533,13 @@ export function checkFormatVersion(format: FormatKind, version: string): Finding
   const minVersion = isSpdx ? MIN_SPDX_VERSION : MIN_CYCLONEDX_VERSION;
   const formatName = isSpdx ? "SPDX" : "CycloneDX";
 
-  // BSI §4 accepts officially released versions only: 3.1 must not clear
-  // the floor just by sorting above 3.0.1.
-  if (isSpdx && compareTuples(parseVersionTuple(version).slice(0, 2), [3, 0]) > 0) {
+  const published = isSpdx ? ["2.2", "2.3", "3.0", "3.0.0", "3.0.1"] : ["1.2", "1.3", "1.4", "1.5", "1.6", "1.7"];
+  if (!version) return createFinding("sbom_format", { status: "fail", details: "No format version is declared." });
+  if (!published.includes(version)) {
     return createFinding("sbom_format", {
-      status: "fail",
-      details: `SPDX ${version} is not an officially released version`,
-      remediation:
-        `BSI TR-03183-2 v2.1.0 §4 accepts officially released specification ` +
-        `versions only. SPDX ${version} has not been released; send SPDX 3.0.1 ` +
-        `or CycloneDX ${MIN_CYCLONEDX_VERSION}+.`,
+      status: "warning",
+      details: `${formatName} ${version} is not in this checker's published-release catalogue; it has not been validated.`,
+      remediation: "Use a supported officially released format or update the checker catalogue (BSI §4).",
     });
   }
 
@@ -603,7 +587,7 @@ export function checkAttestationRequirement(dependencyStatus?: unknown): Finding
         "Sign the SBOM, or publish a Sigstore attestation for it (for example with GitHub " +
         "artifact attestations or cosign), and distribute the signature with it. Uploaded to " +
         `sbomify, the SBOM passes this check when the ${pluginsList} attestation plugin ` +
-        "verifies that signature. BSI TR-03183-2 requires digital signature verification.",
+        "verifies that signature. BSI TR-03183-2 §8.1.15 recommends digital signing.",
     });
   }
 
@@ -623,7 +607,7 @@ export function checkAttestationRequirement(dependencyStatus?: unknown): Finding
       details: `Attestation plugin(s) ran but did not pass: ${names(failed)}`,
       remediation:
         "Review the attestation plugin results and resolve any issues. " +
-        "The SBOM must have a valid digital signature for BSI compliance.",
+        "BSI TR-03183-2 §8.1.15 recommends a valid digital signature.",
     });
   }
   return createFinding("attestation_check", {
@@ -631,13 +615,41 @@ export function checkAttestationRequirement(dependencyStatus?: unknown): Finding
     details: "No attestation plugin has been run for this SBOM",
     remediation:
       `Run one of the following attestation plugins to verify SBOM integrity: ` +
-      `${pluginsList}. BSI TR-03183-2 requires digital signature verification.`,
+      `${pluginsList}. BSI TR-03183-2 §8.1.15 recommends digital signing.`,
   });
 }
 
 // ---------------------------------------------------------------------------
 // CycloneDX
 // ---------------------------------------------------------------------------
+
+function validUri(value: unknown): boolean {
+  return typeof value === "string" && /^[a-z][a-z0-9+.-]*:/i.test(value) && /^[\x21-\x7e]+$/.test(value) && iriReference(value);
+}
+const SCOPE_FIELDS = new Set(["filename", "hash-value", "executable-property", "archive-property", "structured-property", "distribution-licences", "original-licences", "source-code-uri", "uri-deployable-form", "unique-identifiers"]);
+function reducedScope(component: JsonObject): "referenced" | "uncertain" | "full" {
+  if (asObjectList(component.externalReferences).some(r => r.type === "bom" && validUri(r.url))) return "referenced";
+  if (!component.hashes && !asObjectList(component.properties).some(p => String(p.name).startsWith(BSI_PROPERTY_PREFIX))) return "uncertain";
+  return "full";
+}
+
+function scopeNotes(findings: Finding[], uncertain: string[], referenced: string[], invalidDistribution: ReadonlySet<string> = new Set()): void {
+  for (const f of findings) {
+    const field = f.id.split(":")[1]!;
+    if (!SCOPE_FIELDS.has(field)) continue;
+    const unknownScope = uncertain.length && (
+      (f.status === "pass" && ["filename", "hash-value", "executable-property", "archive-property", "structured-property"].includes(field)) ||
+      (f.status === "fail" && f.affected?.length && f.affected.every(name => uncertain.includes(name)))
+    );
+    if (unknownScope && !(field === "distribution-licences" && f.affected?.some(name => invalidDistribution.has(name)))) {
+      f.status = "warning";
+      f.description += " Reduced description scope cannot be inferred from this file. Confirm logical/identified/full scope under BSI §§3.2.2–3.2.5 and 5.1.";
+      Object.assign(f, affectedFields(uncertain));
+    }
+    if (referenced.length) f.description += ` BSI §3.2.5: ${referenced.length} referenced component(s) require only creator, name, version and the BOM reference here; referenced BOM contents were not assessed.`;
+  }
+}
+
 
 /** The value of a `bsi:component:<name>` property, if it is a string. The first match wins. */
 function getBsiProperty(component: JsonObject, propName: string): string | null {
@@ -688,30 +700,26 @@ function cyclonedxComponentCreator(component: JsonObject): string | null {
   return null;
 }
 
+function cdxLicence(component: JsonObject, acknowledgement: "concluded" | "declared"): boolean {
+  return asObjectList(component.licenses).some(entry => {
+    const nested = asObject(entry.license);
+    const ack = entry.expression !== undefined ? entry.acknowledgement : nested.acknowledgement;
+    return ack === acknowledgement && validLicense(entry.expression ?? nested.id);
+  });
+}
 function hasValidCyclonedxLicence(component: JsonObject): boolean {
-  for (const licence of asObjectList(pyGet(component, "licenses"))) {
-    if (truthy(pyGet(licence, "expression"))) return true;
-    const nested = pyGet(licence, "license");
-    if (isObject(nested) && truthy(pyGet(nested, "id"))) return true;
-  }
-  return false;
+  return cdxLicence(component, "concluded");
 }
 
 function cyclonedxHasExternalRef(component: JsonObject, refTypes: readonly string[]): boolean {
   for (const ref of asObjectList(pyGet(component, "externalReferences"))) {
-    if (refTypes.includes(normalisedLower(pyGet(ref, "type"))) && isNonBlankString(pyGet(ref, "url"))) return true;
+    if (refTypes.includes(normalisedLower(pyGet(ref, "type"))) && validUri(pyGet(ref, "url"))) return true;
   }
   return false;
 }
 
 function cyclonedxHasOriginalLicence(component: JsonObject): boolean {
-  for (const licence of asObjectList(pyGet(component, "licenses"))) {
-    if (normalisedLower(pyGet(licence, "acknowledgement")) === "declared") return true;
-  }
-  for (const propName of ["associatedLicences", "effectiveLicence"]) {
-    if (isNonBlankString(getBsiProperty(component, propName))) return true;
-  }
-  return false;
+  return cdxLicence(component, "declared") || validLicense(getBsiProperty(component, "associatedLicences"));
 }
 
 /** "sha512", "other" or "none". The Python raised on non-dict entries and non-string `alg`. */
@@ -721,7 +729,7 @@ function cyclonedxComponentHash(component: JsonObject): "sha512" | "other" | "no
     for (const hash of asObjectList(hashes)) {
       const rawAlg = pyGet(hash, "alg", "");
       const alg = typeof rawAlg === "string" ? rawAlg.toUpperCase() : "";
-      if (alg === "SHA-512") return true;
+      if (alg === "SHA-512" && typeof hash.content === "string" && /^[a-f0-9]{128}$/i.test(hash.content)) return true;
       if (alg) hasOther = true;
     }
     return false;
@@ -735,9 +743,7 @@ function cyclonedxComponentHash(component: JsonObject): "sha512" | "other" | "no
 
 function validateCyclonedx(data: JsonObject): Finding[] {
   const findings: Finding[] = [];
-  const components = asObjectList(pyGet(data, "components"));
-  const dependencies = asList(pyGet(data, "dependencies"));
-  const compositions = asList(pyGet(data, "compositions"));
+  const components = cdxComponents(data);
   const metadata = asObject(pyGet(data, "metadata"));
 
   const sbomCreator = cyclonedxSbomCreator(metadata);
@@ -775,18 +781,18 @@ function validateCyclonedx(data: JsonObject): Finding[] {
   const sourceCode: string[] = [];
   const deployable: string[] = [];
   const original: string[] = [];
+  const uncertain: string[] = [], referenced: string[] = [];
 
   components.forEach((component, i) => {
     const componentName = displayName(pyGet(component, "name", null), `Component ${i + 1}`);
-    // type=file entries (lockfiles, scan inputs) are skipped for the
-    // per-component checks; only the name is still required of them.
-    const isFileType = pyStr(pyGet(component, "type", "")).toLowerCase() === "file";
 
     if (!truthy(pyGet(component, "name"))) name.push(`Component at index ${i}`);
-    if (isFileType) return;
 
     if (!truthy(pyGet(component, "version"))) version.push(componentName);
     if (!cyclonedxComponentCreator(component)) creator.push(componentName);
+    const scope = reducedScope(component);
+    if (scope === "referenced") { referenced.push(componentName); return; }
+    if (scope === "uncertain") uncertain.push(componentName);
     if (!getBsiProperty(component, "filename")) filename.push(componentName);
     if (!hasValidCyclonedxLicence(component)) licence.push(componentName);
 
@@ -841,7 +847,7 @@ function validateCyclonedx(data: JsonObject): Finding[] {
       hashFail,
       hashWarn,
       "Add hashes with alg='SHA-512' for each component. " +
-        "Other algorithms (SHA-256, etc.) are acceptable but SHA-512 is recommended.",
+        "SHA-512 is required by BSI Table 3.",
     ),
   );
   findings.push(
@@ -868,15 +874,8 @@ function validateCyclonedx(data: JsonObject): Finding[] {
     ),
   );
 
-  const hasDeps = dependencies.some((dep) => isObject(dep) && truthy(pyGet(dep, "ref")));
-  const hasCompleteness = compositions.some((comp) => {
-    const aggregate = pyGet(comp, "aggregate");
-    return (
-      isObject(comp) &&
-      typeof aggregate === "string" &&
-      ["complete", "incomplete", "unknown", "not_specified"].includes(aggregate)
-    );
-  });
+  const hasDeps = dependencyCoverage(data, "cyclonedx");
+  const hasCompleteness = dependencyCoverage(data, "cyclonedx", true);
   findings.push(
     dependencyFinding(
       hasDeps,
@@ -947,6 +946,7 @@ function validateCyclonedx(data: JsonObject): Finding[] {
   );
 
   findings.push(checkCyclonedxVulnerabilities(data));
+  scopeNotes(findings, uncertain, referenced);
   return findings;
 }
 
@@ -1048,7 +1048,7 @@ function spdx3FileHash(file: JsonObject): "sha512" | "other" | "none" {
   let hasOther = false;
   for (const verified of asObjectList(pyGet(file, "verifiedUsing", []))) {
     const alg = pyGet(verified, "algorithm", "");
-    if (alg === "sha512") return "sha512";
+    if (alg === "sha512" && typeof verified.hashValue === "string" && /^[a-f0-9]{128}$/i.test(verified.hashValue)) return "sha512";
     if (truthy(alg)) hasOther = true;
   }
   return hasOther ? "other" : "none";
@@ -1056,7 +1056,7 @@ function spdx3FileHash(file: JsonObject): "sha512" | "other" | "none" {
 
 /** The plugin's `_spdx3_has_source_code_uri`. */
 export function spdx3HasSourceCodeUri(pkg: unknown): boolean {
-  if (isNonBlankString(pyGet(pkg, "software_sourceInfo"))) return true;
+  if (validUri(pyGet(pkg, "software_sourceInfo"))) return true;
 
   const externalRefs = pyGet(pkg, "externalRef");
   if (Array.isArray(externalRefs)) {
@@ -1067,7 +1067,7 @@ export function spdx3HasSourceCodeUri(pkg: unknown): boolean {
       let locators: unknown = pyGet(ref, "locator");
       if (!truthy(locators)) locators = [];
       if (typeof locators === "string") locators = [locators];
-      if (pyIter(locators).some(isNonBlankString)) return true;
+      if (pyIter(locators).some(validUri)) return true;
     }
   }
 
@@ -1076,7 +1076,7 @@ export function spdx3HasSourceCodeUri(pkg: unknown): boolean {
   for (const extId of iterSpdx3ExternalIdentifiers(pkg)) {
     const idType = normalisedLower(pyGet(extId, "externalIdentifierType"));
     const ident = pyGet(extId, "identifier");
-    if ((idType === "vcs" || idType === "url") && isNonBlankString(ident)) return true;
+    if ((idType === "vcs" || idType === "url") && validUri(ident)) return true;
   }
   return false;
 }
@@ -1085,20 +1085,10 @@ export function spdx3HasSourceCodeUri(pkg: unknown): boolean {
 export function validateSpdx3(data: JsonObject): Finding[] {
   const findings: Finding[] = [];
 
-  let elements: unknown;
-  if (hasKey(data, "@graph")) elements = data["@graph"];
-  else {
-    const doc = pyGet(data, "spdxDocument", {});
-    elements = isObject(doc) ? pyGet(doc, "elements", []) : [];
-  }
-  if (!truthy(elements)) elements = pyGet(data, "elements", []);
-
-  const [creationInfo, packages, relationships, agents] = extractSpdx3Elements({ "@graph": elements as JsonObject[] });
-  const licenses: Spdx3LicenseMap = extractSpdx3Licenses({ "@graph": elements as JsonObject[] });
-  const files = pyIter(elements).filter(
-    (e): e is JsonObject =>
-      isObject(e) && ["software_File", "File"].includes(lastSegment(pyStr(pyGet(e, "type", pyGet(e, "@type", ""))), "/")),
-  );
+  const elements = spdx3Nodes(data);
+  const [creationInfo, packages, relationships, agents] = extractSpdx3Elements(data);
+  const licenses: Spdx3LicenseMap = extractSpdx3Licenses(data);
+  const files = elements.filter(e => ["software_File", "File"].includes(lastSegment(String(e.type), "/")));
   const relatedFilesOf = spdx3FileIndex(relationships, files);
 
   const sbomCreator = spdx3SbomCreator(creationInfo, agents);
@@ -1136,6 +1126,8 @@ export function validateSpdx3(data: JsonObject): Finding[] {
   const sourceCode: string[] = [];
   const deployable: string[] = [];
   const original: string[] = [];
+  const invalidDistribution = new Set<string>();
+  const uncertain: string[] = [], referenced: string[] = [];
 
   packages.forEach((pkg, i) => {
     const pkgName = displayName(pyGet(pkg, "name", null), `Package ${i + 1}`);
@@ -1146,8 +1138,10 @@ export function validateSpdx3(data: JsonObject): Finding[] {
 
     const pkgId = pyGet(pkg, "spdxId", pyGet(pkg, "@id", ""));
     const relatedFiles = relatedFilesOf(pkgId);
+    const external = elements.some(e => e.type === "ExternalMap" && e.externalSpdxId === pkgId && validUri(e.locationHint));
+    if (external) { referenced.push(pkgName); return; }
     if (relatedFiles.length === 0) {
-      for (const list of [filename, hashFail, executable, archive, structured]) list.push(pkgName);
+      uncertain.push(pkgName);
     } else {
       // The Python appends the package once per related file that misses a
       // property; a package is listed once here, so the count is of packages.
@@ -1159,11 +1153,11 @@ export function validateSpdx3(data: JsonObject): Finding[] {
         else if (hash === "other") miss.hashWarn = true;
 
         const purposes = pyGet(file, "software_additionalPurpose", []);
-        const isExec = pyIn("executable", purposes);
-        const isNonExec = ["source", "documentation", "data"].some((p) => pyIn(p, purposes));
-        if (!isExec && !isNonExec) miss.executable = true;
-        if (!pyIn("archive", purposes) && !pyIn("container", purposes)) miss.archive = true;
-        if (!pyIn("container", purposes) && !pyIn("firmware", purposes)) miss.structured = true;
+        const bsiMeaning = typeof file.comment === "string" && file.comment.includes("software_additionalPurpose") && file.comment.includes("BSI TR-03183-2");
+        if (!bsiMeaning) { miss.executable = true; miss.archive = true; miss.structured = true; }
+        // Table 9: absence of executable/archive encodes their negative value.
+        const structured = pyIn("container", purposes), unstructured = pyIn("firmware", purposes);
+        if (structured === unstructured) miss.structured = true;
       }
       if (miss.filename) filename.push(pkgName);
       if (miss.hashFail) hashFail.push(pkgName);
@@ -1173,10 +1167,13 @@ export function validateSpdx3(data: JsonObject): Finding[] {
       if (miss.structured) structured.push(pkgName);
     }
 
-    if (getSpdx3PackageLicense(pkg, relationships, licenses, "hasConcludedLicense") === null) licence.push(pkgName);
+    if (!validLicense(getSpdx3PackageLicense(pkg, relationships, licenses, "hasConcludedLicense"))) {
+      licence.push(pkgName);
+      if (relationships.some(r => r.from === pkgId && r.relationshipType === "hasConcludedLicense")) invalidDistribution.add(pkgName);
+    }
     if (!getSpdx3PackageFields(pkg).hasUniqueId) identifier.push(pkgName);
     if (!spdx3HasSourceCodeUri(pkg)) sourceCode.push(pkgName);
-    if (!isNonBlankString(pyGet(pkg, "software_downloadLocation"))) deployable.push(pkgName);
+    if (!validUri(pyGet(pkg, "software_downloadLocation"))) deployable.push(pkgName);
     if (getSpdx3PackageLicense(pkg, relationships, licenses, "hasDeclaredLicense") === null) original.push(pkgName);
   });
 
@@ -1204,7 +1201,7 @@ export function validateSpdx3(data: JsonObject): Finding[] {
       hashFail,
       hashWarn,
       "Add verifiedUsing with algorithm sha512 to software_File elements. " +
-        "Other algorithms (sha256, etc.) are acceptable but SHA-512 is recommended.",
+        "SHA-512 is required by BSI Table 3.",
     ),
   );
   findings.push(
@@ -1229,18 +1226,8 @@ export function validateSpdx3(data: JsonObject): Finding[] {
     ),
   );
 
-  let hasDeps = false;
-  let hasCompleteness = false;
-  for (const rel of relationships) {
-    const relType = pyGet(rel, "relationshipType", "");
-    if (relType === "dependsOn" || relType === "contains") {
-      hasDeps = true;
-      const completeness = pyGet(rel, "completeness");
-      if (completeness === "complete" || completeness === "incomplete" || completeness === "noAssertion") {
-        hasCompleteness = true;
-      }
-    }
-  }
+  const hasDeps = dependencyCoverage(data, "spdx3");
+  const hasCompleteness = dependencyCoverage(data, "spdx3", true);
   findings.push(
     dependencyFinding(
       hasDeps,
@@ -1296,6 +1283,7 @@ export function validateSpdx3(data: JsonObject): Finding[] {
   );
 
   findings.push(checkSpdxVulnerabilities(data));
+  scopeNotes(findings, uncertain, referenced, invalidDistribution);
   return findings;
 }
 
@@ -1303,10 +1291,6 @@ export function validateSpdx3(data: JsonObject): Finding[] {
 // SPDX 2.x (fails the format floor; validated for information)
 // ---------------------------------------------------------------------------
 
-function isFilePackage(pkg: JsonObject): boolean {
-  const id = pyGet(pkg, "SPDXID");
-  return pyStr(truthy(id) ? id : "").includes("-File-");
-}
 
 function spdx2HasSourceCodeUri(pkg: JsonObject): boolean {
   if (isNonBlankString(pyGet(pkg, "sourceInfo"))) return true;
@@ -1361,16 +1345,15 @@ function validateSpdx2Legacy(data: JsonObject): Finding[] {
   const supplierFailures: string[] = [];
   packages.forEach((pkg, i) => {
     if (!truthy(pyGet(pkg, "name"))) nameFailures.push(label(pkg, i));
-    if (isFilePackage(pkg)) return;
     if (!truthy(pyGet(pkg, "versionInfo"))) versionFailures.push(label(pkg, i));
-    if (!truthy(pyGet(pkg, "supplier"))) supplierFailures.push(label(pkg, i));
+    if (!truthy(pyGet(pkg, "originator")) && !truthy(pyGet(pkg, "supplier"))) supplierFailures.push(label(pkg, i));
   });
 
   findings.push(listFinding("component_name", nameFailures, "Add name field to all packages."));
   findings.push(listFinding("component_version", versionFailures, "Add versionInfo field to packages."));
   findings.push(listFinding("component_creator", supplierFailures, "Add supplier field with email or URL to packages."));
 
-  const limitation = "SPDX 2.x does not directly support this BSI requirement. Upgrade to SPDX 3.0.1+.";
+  const limitation = "BSI §4 excludes SPDX 2.x. This checker does not assess this BSI mapping for SPDX 2.x; the format does support filenames, hashes and licences.";
   const unsupported: Element[] = [
     "filename",
     "distribution_licences",
@@ -1406,7 +1389,7 @@ function validateSpdx2Legacy(data: JsonObject): Finding[] {
   const identifierWarnings: string[] = [];
   packages.forEach((pkg, i) => {
     const spdxId = pyGet(pkg, "SPDXID");
-    if (isFilePackage(pkg) || sourceDownloads.has(pyStr(truthy(spdxId) ? spdxId : ""))) return;
+    if (sourceDownloads.has(pyStr(truthy(spdxId) ? spdxId : ""))) return;
     const purl = pyGet(pkg, "purl");
     const hasId =
       (typeof purl === "string" && purl !== "") ||
@@ -1433,7 +1416,6 @@ function validateSpdx2Legacy(data: JsonObject): Finding[] {
   const deployable: string[] = [];
   const original: string[] = [];
   packages.forEach((pkg, i) => {
-    if (isFilePackage(pkg)) return;
     if (!spdx2HasSourceCodeUri(pkg)) sourceCode.push(label(pkg, i));
     if (!isAssertedValue(pyGet(pkg, "downloadLocation"))) deployable.push(label(pkg, i));
     if (!isAssertedValue(pyGet(pkg, "licenseDeclared"))) original.push(label(pkg, i));
@@ -1472,7 +1454,7 @@ function validateSpdx2Legacy(data: JsonObject): Finding[] {
 
 /** Vulnerability elements (SPDX 3) or vulnerability annotations on packages (SPDX 2). */
 function checkSpdxVulnerabilities(data: JsonObject): Finding {
-  const elements = pyGet(data, "elements", pyGet(data, "@graph", []));
+  const elements = spdx3Nodes(data);
   const vulnElements = pyIter(elements).filter((e) => {
     if (!isObject(e)) return false;
     const type = pyStr(pyGet(e, "type", pyGet(e, "@type", "")));

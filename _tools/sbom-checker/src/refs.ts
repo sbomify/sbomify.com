@@ -12,6 +12,7 @@
  *  - Mixed content. An https page may not fetch plain http URLs, so those
  *    are reported as not checked rather than as broken.
  */
+import { cdxComponents, spdx3Nodes } from "./frameworks/standards";
 import type { DetectedSbom, Json, JsonObject } from "./types";
 
 export type RefKind = "bom" | "other";
@@ -24,7 +25,9 @@ export interface ExternalRef {
   /** Where in the document it was found, e.g. `component "lodash"`. */
   source: string;
   /** Declared digests, algorithm (lowercase, e.g. "sha-256") to hex. */
-  hashes: Record<string, string>;
+  hashes: Record<string, string | string[]>;
+  /** SPDX namespaces identify documents without necessarily locating their bytes. */
+  identifierOnly?: boolean;
 }
 
 export type RefStatus =
@@ -63,13 +66,16 @@ const ALGORITHMS: Record<string, string> = {
   sha512: "SHA-512",
 };
 
-function hashMap(list: Json | undefined, algKey: string, valueKey: string): Record<string, string> {
-  const out: Record<string, string> = {};
+function hashMap(list: Json | undefined, algKey: string, valueKey: string): Record<string, string | string[]> {
+  const out: Record<string, string | string[]> = {};
   for (const h of asList(list)) {
     if (!isObject(h)) continue;
     const alg = str(h[algKey]);
     const value = str(h[valueKey]);
-    if (alg && value) out[alg.toLowerCase()] = value.toLowerCase();
+    if (alg && value) {
+      const key = alg.toLowerCase(), next = value.toLowerCase(), previous = out[key];
+      out[key] = previous === undefined ? next : [...new Set([...(Array.isArray(previous) ? previous : [previous]), next])];
+    }
   }
   return out;
 }
@@ -79,10 +85,14 @@ export function extractRefs(sbom: DetectedSbom): ExternalRef[] {
   const refs: ExternalRef[] = [];
   const add = (r: ExternalRef) => {
     if (!r.url) return;
-    const existing = refs.find((x) => x.url === r.url);
+    const existing = refs.find((x) => x.url === r.url && x.identifierOnly === r.identifierOnly);
     if (existing) {
       if (r.kind === "bom") existing.kind = "bom";
-      Object.assign(existing.hashes, r.hashes);
+      for (const [alg, value] of Object.entries(r.hashes)) {
+        const prior = existing.hashes[alg];
+        if (prior === undefined) existing.hashes[alg] = value;
+        else existing.hashes[alg] = [...new Set([...(Array.isArray(prior) ? prior : [prior]), ...(Array.isArray(value) ? value : [value])])];
+      }
       return;
     }
     refs.push(r);
@@ -99,17 +109,14 @@ export function extractRefs(sbom: DetectedSbom): ExternalRef[] {
       }
     };
     fromList(d.externalReferences, "document");
-    const meta = isObject(d.metadata) ? d.metadata : {};
-    if (isObject(meta.component)) fromList(meta.component.externalReferences, componentLabel(meta.component, "metadata component"));
-    const walk = (list: Json | undefined) => {
-      for (const c of asList(list)) {
-        if (!isObject(c)) continue;
-        fromList(c.externalReferences, componentLabel(c, "component"));
-        walk(c.components);
-      }
-    };
-    walk(d.components);
-    for (const s of asList(d.services)) if (isObject(s)) fromList(s.externalReferences, componentLabel(s, "service"));
+    for (const c of cdxComponents(d)) fromList(c.externalReferences, componentLabel(c, "component"));
+    const pending = [...asList(d.services)];
+    while (pending.length) {
+      const service = pending.pop();
+      if (!isObject(service)) continue;
+      fromList(service.externalReferences, componentLabel(service, "service"));
+      for (const child of asList(service.services)) pending.push(child);
+    }
   } else if (sbom.format === "spdx") {
     for (const ed of asList(d.externalDocumentRefs)) {
       if (!isObject(ed)) continue;
@@ -117,7 +124,7 @@ export function extractRefs(sbom: DetectedSbom): ExternalRef[] {
       const checksum = isObject(ed.checksum) ? ed.checksum : {};
       const alg = str(checksum.algorithm);
       const value = str(checksum.checksumValue);
-      if (url) add({ url, kind: "bom", type: "externalDocumentRef", source: `externalDocumentRefs ${str(ed.externalDocumentId) ?? ""}`.trim(), hashes: alg && value ? { [alg.toLowerCase()]: value.toLowerCase() } : {} });
+      if (url) add({ url, kind: "bom", identifierOnly: true, type: "externalDocumentRef", source: `externalDocumentRefs ${str(ed.externalDocumentId) ?? ""}`.trim(), hashes: alg && value ? { [alg.toLowerCase()]: value.toLowerCase() } : {} });
     }
     for (const p of asList(d.packages)) {
       if (!isObject(p)) continue;
@@ -133,7 +140,7 @@ export function extractRefs(sbom: DetectedSbom): ExternalRef[] {
       }
     }
   } else if (sbom.format === "spdx3") {
-    const graph = Array.isArray(d["@graph"]) ? d["@graph"] : Array.isArray(d.elements) ? d.elements : [];
+    const graph = spdx3Nodes(d);
     for (const el of graph) {
       if (!isObject(el)) continue;
       const source = componentLabel(el, String(el.type ?? "element"));
@@ -155,11 +162,8 @@ export function extractRefs(sbom: DetectedSbom): ExternalRef[] {
         if (!isObject(im)) continue;
         const url = str(im.locationHint);
         if (url) {
-          const hashes: Record<string, string> = {};
           const ver = isObject(im.verifiedUsing) ? [im.verifiedUsing] : asList(im.verifiedUsing);
-          for (const h of ver) {
-            if (isObject(h) && str(h.algorithm) && str(h.hashValue)) hashes[str(h.algorithm)!.toLowerCase()] = str(h.hashValue)!.toLowerCase();
-          }
+          const hashes = hashMap(ver, "algorithm", "hashValue");
           add({ url, kind: "bom", type: "import", source: `import ${str(im.externalSpdxId) ?? ""}`.trim(), hashes });
         }
       }
@@ -209,36 +213,47 @@ export interface CheckOptions {
 const MAX_BODY = 25 * 1024 * 1024;
 
 export async function checkRef(ref: ExternalRef, opts: CheckOptions = {}): Promise<RefCheck> {
+  if (ref.identifierOnly) return { ref, status: "skipped", detail: "SPDX externalDocumentRefs.spdxDocument is a namespace identifier, not a download location (SPDX §6.5.2). Resolve the physical SBOM separately to verify its checksum." };
+  const ctrl = new AbortController();
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const deadline = new Promise<RefCheck>(resolve => {
+    timer = setTimeout(() => {
+      ctrl.abort();
+      resolve(withHashNote({ ref, status: "unreachable", detail: "The reference check exceeded its time limit, including response body reading." }));
+    }, opts.timeoutMs ?? 10_000);
+  });
+  try {
+    return await Promise.race([checkRefWithinDeadline(ref, opts, ctrl.signal), deadline]);
+  } catch {
+    return withHashNote({ ref, status: "unreachable", detail: "The response body could not be read." });
+  } finally { clearTimeout(timer); ctrl.abort(); }
+}
+
+async function checkRefWithinDeadline(ref: ExternalRef, opts: CheckOptions, signal: AbortSignal): Promise<RefCheck> {
   const target = toFetchable(ref.url, opts.pageProtocol);
   if ("skip" in target) return { ref, status: "skipped", detail: target.skip };
   const doFetch = opts.fetchImpl ?? fetch;
   const timeoutMs = opts.timeoutMs ?? 10_000;
   const wantBody = ref.kind === "bom" || Object.keys(ref.hashes).length > 0;
 
-  const attempt = async (mode: RequestMode) => {
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), timeoutMs);
-    try {
-      const res = await doFetch(target.url, { mode, method: wantBody || mode === "no-cors" ? "GET" : "HEAD", redirect: "follow", signal: ctrl.signal, credentials: "omit", referrerPolicy: "no-referrer" });
-      return res;
-    } finally {
-      clearTimeout(timer);
-    }
-  };
+  const request = (mode: RequestMode, method: string) => doFetch(target.url, { mode, method, redirect: "follow", signal, credentials: "omit", referrerPolicy: "no-referrer" });
+  const attempt = (mode: RequestMode) => request(mode, wantBody || mode === "no-cors" ? "GET" : "HEAD");
 
   let res: Response;
   try {
     res = await attempt("cors");
     // Some servers reject HEAD; retry with GET before calling it an error.
     if (!wantBody && (res.status === 405 || res.status === 501)) {
-      res = await doFetch(target.url, { mode: "cors", method: "GET", credentials: "omit", referrerPolicy: "no-referrer" });
+      void res.body?.cancel();
+      res = await request("cors", "GET");
     }
   } catch (err) {
     if (err instanceof Error && err.name === "AbortError") return { ref, status: "unreachable", detail: `No response within ${Math.round(timeoutMs / 1000)} seconds.` };
     // A TypeError here is either a network failure or a CORS refusal; the
     // browser does not say which. no-cors tells them apart.
     try {
-      await attempt("no-cors");
+      const opaque = await attempt("no-cors");
+      void opaque.body?.cancel();
       return withHashNote({ ref, status: "reachable", detail: "The server answered, but does not allow cross-origin reads, so the HTTP status and content cannot be inspected from the browser." });
     } catch (err2) {
       if (err2 instanceof Error && err2.name === "AbortError") return { ref, status: "unreachable", detail: `No response within ${Math.round(timeoutMs / 1000)} seconds.` };
@@ -247,11 +262,12 @@ export async function checkRef(ref: ExternalRef, opts: CheckOptions = {}): Promi
   }
 
   if (!res.ok) {
+    void res.body?.cancel();
     return withHashNote({ ref, status: "http-error", httpStatus: res.status, detail: `The server returned HTTP ${res.status}${res.statusText ? " " + res.statusText : ""}.` });
   }
   const check: RefCheck = { ref, status: "ok", httpStatus: res.status, detail: `HTTP ${res.status}.` };
   if (wantBody) {
-    const buf = await readCapped(res, opts.maxBodyBytes ?? MAX_BODY);
+    const buf = await readCapped(res, opts.maxBodyBytes ?? MAX_BODY, signal);
     if (!buf) {
       check.hash = Object.keys(ref.hashes).length ? { status: "unverifiable", detail: "The file is too large to hash in the browser." } : undefined;
       return check;
@@ -259,6 +275,7 @@ export async function checkRef(ref: ExternalRef, opts: CheckOptions = {}): Promi
     if (Object.keys(ref.hashes).length) check.hash = await verifyHashes(buf, ref.hashes);
     if (ref.kind === "bom") check.body = new TextDecoder().decode(buf);
   }
+  if (!wantBody) void res.body?.cancel();
   return check;
 }
 
@@ -267,15 +284,34 @@ function withHashNote(c: RefCheck): RefCheck {
   return c;
 }
 
-async function readCapped(res: Response, max: number): Promise<ArrayBuffer | null> {
+async function readCapped(res: Response, max: number, signal: AbortSignal): Promise<ArrayBuffer | null> {
   const len = Number(res.headers.get("content-length") ?? "0");
-  if (len > max) return null;
-  const buf = await res.arrayBuffer();
-  return buf.byteLength > max ? null : buf;
+  if (len > max) { void res.body?.cancel(); return null; }
+  if (!res.body) return new ArrayBuffer(0);
+  const reader = res.body.getReader();
+  const cancel = () => { void reader.cancel().catch(() => {}); };
+  signal.addEventListener("abort", cancel, { once: true });
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  try {
+    while (!signal.aborted) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > max) { cancel(); return null; }
+      chunks.push(value);
+    }
+    if (signal.aborted) throw new DOMException("Aborted", "AbortError");
+    const bytes = new Uint8Array(size);
+    let offset = 0;
+    for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
+    return bytes.buffer;
+  } finally { signal.removeEventListener("abort", cancel); reader.releaseLock(); }
 }
 
-export async function verifyHashes(buf: ArrayBuffer, hashes: Record<string, string>): Promise<NonNullable<RefCheck["hash"]>> {
+export async function verifyHashes(buf: ArrayBuffer, hashes: Record<string, string | string[]>): Promise<NonNullable<RefCheck["hash"]>> {
   const unsupported: string[] = [];
+  const matched: string[] = [];
   for (const [alg, expected] of Object.entries(hashes)) {
     const webAlg = ALGORITHMS[alg];
     if (!webAlg) {
@@ -284,10 +320,11 @@ export async function verifyHashes(buf: ArrayBuffer, hashes: Record<string, stri
     }
     const digest = await crypto.subtle.digest(webAlg, buf);
     const hex = [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
-    if (hex !== expected) return { status: "mismatch", detail: `${webAlg} is ${hex}, but the SBOM declares ${expected}. The referenced file has changed since the SBOM was written, or the hash is wrong.` };
-    return { status: "match", detail: `${webAlg} matches the declared value.` };
+    if ((Array.isArray(expected) ? expected : [expected]).some(value => hex !== value.toLowerCase())) return { status: "mismatch", detail: `${webAlg} is ${hex}, but the SBOM declares ${expected}. The referenced file has changed since the SBOM was written, or the hash is wrong.` };
+    matched.push(webAlg);
   }
-  return { status: "unverifiable", detail: `The browser cannot compute ${unsupported.join(", ")}.` };
+  if (unsupported.length) return { status: "unverifiable", detail: `${matched.length ? matched.join(", ") + " matched. " : ""}The browser cannot compute ${unsupported.join(", ")}; not all assertions were verified.` };
+  return matched.length ? { status: "match", detail: `${matched.join(", ")} match all declared values.` } : { status: "unverifiable", detail: "No hashes were declared." };
 }
 
 /** Run checks with bounded concurrency, reporting progress. */

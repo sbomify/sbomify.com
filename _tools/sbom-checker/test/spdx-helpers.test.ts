@@ -293,7 +293,7 @@ describe("iterSpdx3Elements", () => {
     expect(types({ elements: [{ type: "A" }] })).toEqual(["A"]);
   });
 
-  test("prefers @graph over elements", () => {
+  test("prefers @graph over legacy elements", () => {
     expect(types({ "@graph": [{ type: "from-graph" }], elements: [{ type: "from-elements" }] })).toEqual(["from-graph"]);
   });
 
@@ -539,24 +539,24 @@ describe("conformant never scores worse", () => {
 // util.ts: Python semantics
 // ============================================================================
 
-describe("isValidIsoTimestamp (datetime.fromisoformat after Z → +00:00)", () => {
+describe("isValidIsoTimestamp (RFC3339)", () => {
   // Expectations checked against CPython 3.14 datetime.fromisoformat.
   test.each([
-    ["2023-01-01", true],
-    ["20230101", true],
-    ["2023-W01-1", true],
+    ["2023-01-01", false],
+    ["20230101", false],
+    ["2023-W01-1", false],
     ["2023-01-01T10:10:10Z", true],
     ["2023-01-01T10:10:10.123456+05:30", true],
-    ["2024-02-29T24:00", true],
-    ["2023-01-01 10:10", true],
-    ["2023-01-01T10:10:10.Z", true],
+    ["2024-02-29T24:00", false],
+    ["2023-01-01 10:10", false],
+    ["2023-01-01T10:10:10.Z", false],
     ["", false],
     ["2023-02-29", false],
     ["2023-01-01T25:00", false],
     ["not a date", false],
     ["2023-01-01T10:10:10+24:00", false],
     ["2023-01-01T", false],
-    ["2023-01-01T10:10:10z", false],
+    ["2023-01-01T10:10:10z", true],
   ] as const)("%p → %p", (value, expected) => {
     expect(isValidIsoTimestamp(value)).toBe(expected);
   });

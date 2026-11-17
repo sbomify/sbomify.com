@@ -45,9 +45,9 @@ describe("format detection", () => {
     expect(r.ok && r.sbom.format).toBe("cyclonedx");
   });
 
-  test("a later SPDX 3.0.x patch validates against the 3.0.1 schema", () => {
+  test("a later SPDX 3.0.x patch is unsupported until its schema is supplied", () => {
     const d = detect({ "@context": "https://spdx.org/rdf/3.0.2/spdx-context.jsonld", "@graph": [{ type: "CreationInfo", specVersion: "3.0.2" }] });
-    expect(d.schemaVersion).toBe("3.0.1");
+    expect(d.schemaVersion).toBeNull();
   });
 
   test("an SPDX 3 pre-release layout is reported, not validated", async () => {

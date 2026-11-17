@@ -74,12 +74,12 @@ function cdx(overrides: Record<string, unknown> = {}, component: Record<string, 
     bomFormat: "CycloneDX",
     specVersion: "1.5",
     components: [
-      component ?? {
+      { "bom-ref": "pkg:pypi/example-component@1.0.0", ...(component ?? {
         name: "example-component",
         version: "1.0.0",
         publisher: "Example Corp",
         purl: "pkg:pypi/example-component@1.0.0",
-      },
+      }) },
     ],
     dependencies: [{ ref: "pkg:pypi/example-component@1.0.0", dependsOn: [] }],
     metadata: { authors: [{ name: "Example Developer" }], timestamp: "2023-01-01T00:00:00Z" },
@@ -143,7 +143,7 @@ describe("CycloneDX validation", () => {
 
   test("cyclonedx with tools instead of authors", () => {
     const findings = assess(cdx({ metadata: { tools: [{ name: "sbom-generator" }], timestamp: "2023-01-01T00:00:00Z" } }));
-    expect(status(findings, ID.author)).toBe("fail");
+    expect(status(findings, ID.author)).toBe("pass");
   });
 
   test("cyclonedx with supplier object", () => {
@@ -611,39 +611,39 @@ function spdxDoc(packages: Record<string, unknown>[]): Record<string, unknown> {
   };
 }
 
-describe("File-type component skipped", () => {
-  test("cyclonedx file type skipped in purl check", () => {
+describe("File-type components assessed", () => {
+  test("cyclonedx file type assessed in purl check", () => {
     const findings = assess(
       cdx16([django, { name: "uv.lock", type: "file", hashes: [{ alg: "SHA-256", content: "abc123" }] }]),
     );
-    expect(status(findings, ID.uid)).toBe("pass");
+    expect(status(findings, ID.uid)).toBe("fail");
   });
 
-  test("spdx file entry skipped in purl check", () => {
+  test("spdx file entry assessed in purl check", () => {
     const findings = assess(
       spdxDoc([
         { SPDXID: "SPDXRef-DocumentRoot-File-uv.lock", name: "uv.lock", downloadLocation: "NOASSERTION", filesAnalyzed: false },
       ]),
     );
-    expect(status(findings, ID.uid)).toBe("pass");
+    expect(status(findings, ID.uid)).toBe("fail");
   });
 
-  test("cyclonedx file type skipped in supplier and version checks", () => {
+  test("cyclonedx file type assessed in supplier and version checks", () => {
     const findings = assess(
       cdx16([django, { name: "uv.lock", type: "file", hashes: [{ alg: "SHA-256", content: "abc123" }] }]),
     );
-    expect(status(findings, ID.supplier)).toBe("pass");
-    expect(status(findings, ID.version)).toBe("pass");
+    expect(status(findings, ID.supplier)).toBe("fail");
+    expect(status(findings, ID.version)).toBe("fail");
   });
 
-  test("spdx file entry skipped in supplier and version checks", () => {
+  test("spdx file entry assessed in supplier and version checks", () => {
     const findings = assess(
       spdxDoc([
         { SPDXID: "SPDXRef-DocumentRoot-File-uv.lock", name: "uv.lock", downloadLocation: "NOASSERTION", filesAnalyzed: false },
       ]),
     );
-    expect(status(findings, ID.supplier)).toBe("pass");
-    expect(status(findings, ID.version)).toBe("pass");
+    expect(status(findings, ID.supplier)).toBe("fail");
+    expect(status(findings, ID.version)).toBe("fail");
   });
 
   test("cyclonedx library component still fails when missing fields", () => {
@@ -658,7 +658,7 @@ describe("File-type component skipped", () => {
     const version = findingById(findings, ID.version);
     expect(supplier.status).toBe("fail");
     expect(supplier.affected).toContain("unmaintained-lib");
-    expect(supplier.affected).not.toContain("uv.lock");
+    expect(supplier.affected).toContain("uv.lock");
     expect(version.status).toBe("fail");
     expect(version.affected).toContain("unmaintained-lib");
   });
@@ -672,23 +672,21 @@ describe("File-type component skipped", () => {
         { name: "lock3.lock", type: "file" },
       ]),
     );
-    for (const id of [ID.supplier, ID.version, ID.uid]) expect(status(findings, id)).toBe("pass");
+    for (const id of [ID.supplier, ID.version, ID.uid]) expect(status(findings, id)).toBe("fail");
   });
 });
 
-describe("File-type skip across generators", () => {
-  const allPass = (findings: Finding[]): void => {
-    for (const id of [ID.supplier, ID.version, ID.uid]) expect(status(findings, id)).toBe("pass");
-  };
+describe("File-type names cannot bypass checks across generators", () => {
+
 
   test("spdx syft document root file naming", () => {
-    allPass(
+    missingCore(
       assess(spdxDoc([{ SPDXID: "SPDXRef-DocumentRoot-File-uv.lock-e473982c", name: "uv.lock", downloadLocation: "NOASSERTION" }])),
     );
   });
 
   test("spdx microsoft sbom tool double dash naming", () => {
-    allPass(
+    missingCore(
       assess(
         spdxDoc([
           {
@@ -702,7 +700,7 @@ describe("File-type skip across generators", () => {
   });
 
   test("spdx clean file naming", () => {
-    allPass(assess(spdxDoc([{ SPDXID: "SPDXRef-File-manifest.txt", name: "manifest.txt", downloadLocation: "NOASSERTION" }])));
+    missingCore(assess(spdxDoc([{ SPDXID: "SPDXRef-File-manifest.txt", name: "manifest.txt", downloadLocation: "NOASSERTION" }])));
   });
 
   test("spdx real packages containing file in name not skipped", () => {
@@ -725,7 +723,7 @@ describe("File-type skip across generators", () => {
 
   test("cyclonedx works on multiple spec versions", () => {
     for (const v of ["1.4", "1.5", "1.6"]) {
-      allPass(assess(cdx16([django, { name: "uv.lock", type: "file" }], v)));
+      missingCore(assess(cdx16([django, { name: "uv.lock", type: "file" }], v)));
     }
   });
 });
@@ -797,3 +795,7 @@ describe("Hostile input", () => {
     expect(baseSpdx3()["@graph"]).toHaveLength(5);
   });
 });
+
+function missingCore(fs: Finding[]): void {
+  for (const id of [ID.version, ID.supplier, ID.uid]) expect(status(fs, id)).toBe("fail");
+}

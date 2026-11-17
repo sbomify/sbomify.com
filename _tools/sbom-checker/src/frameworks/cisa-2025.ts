@@ -1,26 +1,10 @@
-/**
- * CISA 2025 Minimum Elements for a Software Bill of Materials (August 2025
- * public comment draft).
- *
- * Mirrors sbomify `sbomify/apps/plugins/builtins/cisa_2025.py`: same finding
- * ids, titles, descriptions, pass/fail rules and remediation text. Per-component
- * failures are reported in `affected` / `affectedCount` instead of a
- * "Missing for: a, b, c" suffix on the description.
- *
- * The eleven elements: SBOM author, software producer, component name,
- * component version, software identifiers, component hash, license,
- * dependency relationship, tool name, timestamp, generation context.
- *
- * Generation context:
- *   - CycloneDX: metadata.lifecycles[].phase, or a metadata property named
- *     `internal:sbom:generationContext` (legacy `cdx:sbom:generationContext`).
- *   - SPDX 2.3: creationInfo.comment, the document comment, or an OTHER
- *     annotation on the document / DESCRIBES root carrying
- *     `cisa:generationContext=<phase>`.
- *   - SPDX 3: software_Sbom.software_sbomType, SpdxDocument or CreationInfo
- *     comments, or a document-scoped Annotation.
+/** CISA August 2025 public-comment draft.
+ * Finding IDs originated in the platform plugins. Standard-derived behavior
+ * takes precedence over historical platform parity; see ../STANDARDS.md.
+ * File-only checks do not prove artifact completeness or signature authenticity.
  */
 
+import { minimumElementsTimestamp, cdxComponents, dependencyCoverage, cryptoHash } from "./standards";
 import type { DetectedSbom, Finding, Framework, JsonObject } from "../types";
 import {
   SPDX2_IDENTIFIER_TYPES,
@@ -47,7 +31,6 @@ import {
   displayName,
   escapeRegExp,
   isObject,
-  isValidIsoTimestamp,
   lastSegment,
   missingForSentence,
   pyGet,
@@ -187,7 +170,7 @@ function check(element: Element, ok: boolean, failDetails: string, remediation: 
 }
 
 function timestampFinding(timestamp: unknown, remediation: string): Finding {
-  const valid = isValidIsoTimestamp(timestamp);
+  const valid = minimumElementsTimestamp(timestamp);
   return check("timestamp", valid, !truthy(timestamp) ? "Missing timestamp" : "Invalid ISO-8601 format", remediation);
 }
 
@@ -235,8 +218,6 @@ function spdxHasGenerationContext(data: JsonObject): boolean {
 function validateSpdx(data: JsonObject): Finding[] {
   const rawPackages = pyGet(data, "packages");
   const packages = asList(truthy(rawPackages) ? rawPackages : []).filter(isObject);
-  const rawRelationships = pyGet(data, "relationships");
-  const relationships = asList(truthy(rawRelationships) ? rawRelationships : []);
   const rawCi = pyGet(data, "creationInfo");
   const creationInfo = isObject(rawCi) ? rawCi : {};
 
@@ -258,9 +239,8 @@ function validateSpdx(data: JsonObject): Finding[] {
 
     // Component name applies to every entry, file entries included.
     if (!truthy(pyGet(pkg, "name"))) nameFailures.push(`Package at index ${i}`);
-    if (spdxIdOf(pkg).includes("-File-")) return;
 
-    if (!truthy(pyGet(pkg, "supplier"))) producerFailures.push(packageName);
+    if (!truthy(pyGet(pkg, "originator")) && !truthy(pyGet(pkg, "supplier"))) producerFailures.push(packageName);
     if (!truthy(pyGet(pkg, "versionInfo"))) versionFailures.push(packageName);
 
     // The reference type is read bare, so the full IRI form counts too.
@@ -270,17 +250,14 @@ function validateSpdx(data: JsonObject): Finding[] {
       asList(pyGet(pkg, "externalRefs")).some((ref) => SPDX2_IDENTIFIER_TYPES.has(spdx2ReferenceType(ref)));
     if (!hasIdentifier && !sourceDownloads.has(spdxIdOf(pkg))) identifierFailures.push(packageName);
 
-    if (!truthy(pyGet(pkg, "checksums"))) hashFailures.push(packageName);
+    if (!cryptoHash(pyGet(pkg, "checksums"), "algorithm", "checksumValue")) hashFailures.push(packageName);
 
     // NOASSERTION is acceptable: it states the licence is unknown.
     const hasLicense = truthy(pyGet(pkg, "licenseConcluded", "")) || truthy(pyGet(pkg, "licenseDeclared", ""));
     if (!hasLicense) licenseFailures.push(packageName);
   });
 
-  const hasDependencies = relationships.some((rel) => {
-    const t = pyGet(rel, "relationshipType");
-    return isObject(rel) && typeof t === "string" && ["DEPENDS_ON", "CONTAINS", "DESCENDANT_OF"].includes(t.toUpperCase());
-  });
+  const hasDependencies = dependencyCoverage(data, "spdx");
 
   // A bare string would iterate as characters, and non-strings have no startswith.
   const rawCreators = pyGet(creationInfo, "creators", []);
@@ -406,10 +383,7 @@ function validateSpdx3(data: JsonObject): Finding[] {
     }
   });
 
-  const hasDependencies = relationships.some((rel) => {
-    const t = pyGet(rel, "relationshipType");
-    return typeof t === "string" && ["dependsOn", "contains", "descendantOf"].includes(t);
-  });
+  const hasDependencies = dependencyCoverage(data, "spdx3");
   const hasGenerationContext = spdx3HasGenerationContext(data);
 
   return [
@@ -502,10 +476,7 @@ function cyclonedxHasGenerationContext(metadata: JsonObject): boolean {
 }
 
 function validateCycloneDx(data: JsonObject): Finding[] {
-  const rawComponents = pyGet(data, "components");
-  const components = asList(truthy(rawComponents) ? rawComponents : []).filter(isObject);
-  const rawDependencies = pyGet(data, "dependencies");
-  const dependencies = asList(truthy(rawDependencies) ? rawDependencies : []).filter(isObject);
+  const components = cdxComponents(data);
   const rawMetadata = pyGet(data, "metadata");
   const metadata = isObject(rawMetadata) ? rawMetadata : {};
 
@@ -518,15 +489,12 @@ function validateCycloneDx(data: JsonObject): Finding[] {
 
   components.forEach((component, i) => {
     const componentName = displayName(pyGet(component, "name", `Component ${i + 1}`), `Component ${i + 1}`);
-    // type=file components are input metadata; only the name applies.
-    const isFileType = pyStr(pyGet(component, "type", "")).toLowerCase() === "file";
 
     if (!truthy(pyGet(component, "name"))) nameFailures.push(`Component at index ${i}`);
-    if (isFileType) return;
 
     const supplierField = pyGet(component, "supplier");
     const publisher = pyGet(component, "publisher");
-    const supplier = truthy(publisher) ? publisher : isObject(supplierField) ? pyGet(supplierField, "name") : null;
+    const supplier = pyGet(pyGet(component, "manufacturer"), "name") || (truthy(publisher) ? publisher : isObject(supplierField) ? pyGet(supplierField, "name") : null);
     if (!truthy(supplier)) producerFailures.push(componentName);
 
     if (!truthy(pyGet(component, "version"))) versionFailures.push(componentName);
@@ -535,13 +503,13 @@ function validateCycloneDx(data: JsonObject): Finding[] {
       truthy(pyGet(component, "purl")) || truthy(pyGet(component, "cpe")) || truthy(pyGet(component, "swid"));
     if (!hasIdentifier) identifierFailures.push(componentName);
 
-    if (!truthy(pyGet(component, "hashes"))) hashFailures.push(componentName);
+    if (!cryptoHash(pyGet(component, "hashes"), "alg", "content")) hashFailures.push(componentName);
     if (!truthy(pyGet(component, "licenses", []))) licenseFailures.push(componentName);
   });
 
-  const hasValidDependencies = dependencies.some((dep) => truthy(pyGet(dep, "ref")));
+  const hasValidDependencies = dependencyCoverage(data, "cyclonedx");
   // "Author of SBOM Data" is an entity, so tools do not count.
-  const hasAuthor = truthy(pyGet(metadata, "authors", []));
+  const hasAuthor = asList(pyGet(metadata, "authors")).some(a => truthy(pyGet(a, "name"))) || truthy(pyGet(pyGet(metadata, "manufacturer"), "name"));
 
   return [
     perComponent("software_producer", producerFailures, "Add publisher field or supplier.name to components."),

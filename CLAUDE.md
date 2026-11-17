@@ -135,7 +135,7 @@ Free browser-side tools. The SBOM checker (`/tools/sbom-checker/`, `content/tool
 
 - `bun run build:tools` compiles the schemas and bundles into `static/js/sbom-checker/` (content-hashed) and writes `data/sbom_checker.json`, which the layout reads for the script URLs. All three outputs are gitignored and built in CI before Hugo; without them the page renders a "not built" note.
 - The script loads only on that page, as a module, and the upload form is plain HTML, so the page paints without it. Schema validators are separate chunks fetched for the uploaded version only.
-- Its framework checks are ports of the sbomify platform's assessment plugins and must stay in step with them. `bun run test:tools` runs the type check and tests (the Lint workflow runs it on PRs).
+- Its framework checks originated as ports of the sbomify platform's assessment plugins. Preserve finding IDs, but published standards take precedence over scoring parity; see `_tools/sbom-checker/STANDARDS.md`. `bun run test:tools` runs the type check and tests (the Lint workflow runs it on PRs).
 - The report's classes (`checker-*`) live at the end of `_assets/css/tailwind.css`; `tailwind.config.js` scans `_tools/sbom-checker/src/**/*.ts` for utilities.
 
 ## Outbound Links (rel="nofollow")

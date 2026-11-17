@@ -36,6 +36,7 @@ function createBaseCyclonedxSbom(): Doc {
     specVersion: "1.6",
     components: [
       {
+        "bom-ref": "pkg:pypi/example-component@1.0.0",
         name: "example-component",
         version: "1.0.0",
         manufacturer: {
@@ -45,7 +46,7 @@ function createBaseCyclonedxSbom(): Doc {
         },
         purl: "pkg:pypi/example-component@1.0.0",
         licenses: [{ expression: "MIT", acknowledgement: "concluded" }],
-        hashes: [{ alg: "SHA-512", content: "abc123".repeat(20) }],
+        hashes: [{ alg: "SHA-512", content: "a".repeat(128) }],
         properties: [
           { name: "bsi:component:filename", value: "example-component.whl" },
           { name: "bsi:component:executable", value: "non-executable" },
@@ -106,8 +107,9 @@ function createBaseSpdx3Sbom(): Doc {
         spdxId: "SPDXRef-File-1",
         creationInfo: "_:creationInfo",
         name: "example-package.whl",
-        verifiedUsing: [{ type: "Hash", algorithm: "sha512", hashValue: "abc123".repeat(20) }],
+        verifiedUsing: [{ type: "Hash", algorithm: "sha512", hashValue: "a".repeat(128) }],
         software_additionalPurpose: ["archive", "container"],
+        comment: "software_additionalPurpose field is used to indicate the properties of BSI TR-03183-2",
       },
       {
         type: "Relationship",
@@ -431,7 +433,7 @@ describe("distribution licences", () => {
 
   test("SPDX id passes", () => {
     const doc = createBaseCyclonedxSbom();
-    doc.components[0].licenses = [{ license: { id: "MIT" } }];
+    doc.components[0].licenses = [{ license: { id: "MIT", acknowledgement: "concluded" } }];
     expect(status(doc, "bsi-tr03183:distribution-licences")).toBe("pass");
   });
 
@@ -454,17 +456,17 @@ describe("hash value", () => {
       {
         type: "distribution",
         url: "https://example.com/package.whl",
-        hashes: [{ alg: "SHA-512", content: "abc123".repeat(20) }],
+        hashes: [{ alg: "SHA-512", content: "a".repeat(128) }],
       },
     ];
     expect(status(doc, "bsi-tr03183:hash-value")).toBe("pass");
   });
 
-  test("SHA-256 only warns", () => {
+  test("SHA-256 alone fails (Table 3)", () => {
     const doc = createBaseCyclonedxSbom();
     doc.components[0].hashes = [{ alg: "SHA-256", content: "abc123".repeat(10) }];
     const f = get(assess(doc), "bsi-tr03183:hash-value");
-    expect(f.status).toBe("warning");
+    expect(f.status).toBe("fail");
     expect(f.description).toContain("SHA-512");
     expect(f.affected).toEqual(["example-component"]);
   });
@@ -484,7 +486,7 @@ describe("dependencies", () => {
   for (const aggregate of ["incomplete", "unknown"]) {
     test(`aggregate ${aggregate} passes`, () => {
       const doc = createBaseCyclonedxSbom();
-      doc.compositions = [{ aggregate }];
+      doc.compositions = [{ aggregate, assemblies: [doc.components[0]["bom-ref"]] }];
       expect(status(doc, "bsi-tr03183:dependencies")).toBe("pass");
     });
   }
@@ -571,10 +573,10 @@ describe("additional data fields (§5.2.3 / §5.2.4)", () => {
     expect(status(doc, "bsi-tr03183:original-licences")).toBe("pass");
   });
 
-  test("CycloneDX original licences pass via effectiveLicence property", () => {
+  test("CycloneDX original licences are not supplied by effectiveLicence property", () => {
     const doc = createBaseCyclonedxSbom();
     doc.components[0].properties.push({ name: "bsi:component:effectiveLicence", value: "MIT" });
-    expect(status(doc, "bsi-tr03183:original-licences")).toBe("pass");
+    expect(status(doc, "bsi-tr03183:original-licences")).toBe("warning");
   });
 
   test("CycloneDX original licences warn when only concluded", () => {
@@ -839,8 +841,8 @@ describe("SPDX 3", () => {
     ]) {
       expect(get(findings, id).status).toBe("pass");
     }
-    // additionalPurpose ["archive", "container"] says nothing about executability.
-    expect(get(findings, "bsi-tr03183:executable-property").status).toBe("fail");
+    // With the BSI comment, absence of executable explicitly means non-executable.
+    expect(get(findings, "bsi-tr03183:executable-property").status).toBe("pass");
   });
 });
 
@@ -1055,23 +1057,14 @@ describe("affected lists (replaces _format_failure_details)", () => {
   });
 });
 
-describe("file-type components are skipped", () => {
-  const perComponentIds = [
-    "bsi-tr03183:component-version",
-    "bsi-tr03183:component-creator",
-    "bsi-tr03183:filename",
-    "bsi-tr03183:distribution-licences",
-    "bsi-tr03183:hash-value",
-    "bsi-tr03183:executable-property",
-    "bsi-tr03183:archive-property",
-    "bsi-tr03183:structured-property",
-  ];
+describe("file-type components are assessed", () => {
 
-  test("a CycloneDX type=file component causes no failures", () => {
+
+  test("a CycloneDX type=file component requires core data", () => {
     const doc = createBaseCyclonedxSbom();
     doc.components.push({ name: "uv.lock", type: "file", hashes: [{ alg: "SHA-256", content: "def456".repeat(20) }] });
     const findings = assess(doc);
-    for (const id of perComponentIds) expect(get(findings, id).status).toBe("pass");
+    for (const id of ["bsi-tr03183:component-version", "bsi-tr03183:component-creator"]) expect(get(findings, id).status).toBe("fail");
   });
 
   test("a nameless file-type component still fails the name check", () => {
@@ -1080,7 +1073,7 @@ describe("file-type components are skipped", () => {
     expect(status(doc, "bsi-tr03183:component-name")).toBe("fail");
   });
 
-  test("SPDX 2 -File- entries are skipped for version and creator", () => {
+  test("SPDX 2 -File- entries are assessed for version and creator", () => {
     const doc = {
       spdxVersion: "SPDX-2.3",
       SPDXID: "SPDXRef-DOCUMENT",
@@ -1116,11 +1109,11 @@ describe("file-type components are skipped", () => {
       ],
     };
     const findings = assess(doc);
-    expect(get(findings, "bsi-tr03183:component-version").status).toBe("pass");
-    expect(get(findings, "bsi-tr03183:component-creator").status).toBe("pass");
+    expect(get(findings, "bsi-tr03183:component-version").status).toBe("fail");
+    expect(get(findings, "bsi-tr03183:component-creator").status).toBe("fail");
   });
 
-  test("the skip only applies to type=file", () => {
+  test("library and file components both require core fields", () => {
     const doc = createBaseCyclonedxSbom();
     doc.components.push({ name: "broken-lib", type: "library", purl: "pkg:pypi/broken-lib@unknown" });
     doc.components.push({ name: "uv.lock", type: "file" });
@@ -1129,11 +1122,11 @@ describe("file-type components are skipped", () => {
       const f = get(findings, id);
       expect(f.status).toBe("fail");
       expect(f.affected).toContain("broken-lib");
-      expect(f.affected).not.toContain("uv.lock");
+      expect(f.affected).toContain("uv.lock");
     }
   });
 
-  test("every file-type component is skipped, case-insensitively", () => {
+  test("every file-type component requires core data, case-insensitively", () => {
     const doc = createBaseCyclonedxSbom();
     doc.components.push(
       { name: "uv.lock", type: "file" },
@@ -1141,7 +1134,7 @@ describe("file-type components are skipped", () => {
       { name: "package-lock.json", type: "File" },
     );
     const findings = assess(doc);
-    for (const id of perComponentIds) expect(get(findings, id).status).toBe("pass");
+    for (const id of ["bsi-tr03183:component-version", "bsi-tr03183:component-creator"]) expect(get(findings, id).status).toBe("fail");
   });
 });
 
@@ -1167,7 +1160,7 @@ describe("source-code URI on SPDX 3 (test_spdx3_field_fixes)", () => {
   });
 
   test("software_sourceInfo fallback", () => {
-    expect(hasUri({ software_sourceInfo: "built from https://github.com/acme/p" })).toBe(true);
+    expect(hasUri({ software_sourceInfo: "built from https://github.com/acme/p" })).toBe(false);
   });
 
   test("the legacy identifier shape is still accepted", () => {
@@ -1330,14 +1323,14 @@ describe("format floor messages and detection (test_spdx3_honest_edges)", () => 
     expect(verdict(doc)).toBe("fail");
   });
 
-  test("the 3.1 line is detected and still fails the floor", () => {
+  test("the 3.1 line is detected and is reported as unsupported", () => {
     const doc = {
       "@context": "https://spdx.org/rdf/3.1/spdx-context.jsonld",
       "@graph": [{ type: "CreationInfo", specVersion: "3.1.0" }],
     };
     expect(detectFormatAndVersion(doc)).toEqual(["spdx", "3.1.0"]);
-    expect(verdict(doc)).toBe("fail");
-    expect(checkFormatVersion("spdx", "3.1.0").description).toContain("not an officially released version");
+    expect(verdict(doc)).toBe("warning");
+    expect(checkFormatVersion("spdx", "3.1.0").description).toContain("published-release catalogue");
   });
 
   test("3.0.1 passes and 3.0 fails", () => {

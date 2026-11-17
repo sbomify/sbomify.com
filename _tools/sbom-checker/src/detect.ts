@@ -1,6 +1,7 @@
 /**
  * Parse an uploaded file and work out which SBOM format and version it is.
  */
+import { spdx3Nodes } from "./frameworks/standards";
 import type { DetectedSbom, JsonObject } from "./types";
 
 export type ParseResult =
@@ -77,14 +78,14 @@ export function detect(data: JsonObject): DetectedSbom {
     if (/^SPDX-3/i.test(specVersion)) {
       return { format: "spdx3", specVersion, schemaVersion: null, data };
     }
-    const m = specVersion.match(/^SPDX-(2\.\d)/i);
+    const m = specVersion.match(/^SPDX-(2\.[23])$/i);
     return { format: "spdx", specVersion, schemaVersion: m ? m[1]! : null, data };
   }
 
   const bomFormat = data.bomFormat;
   if ((typeof bomFormat === "string" && bomFormat.toLowerCase() === "cyclonedx") || ("specVersion" in data && "components" in data)) {
     const specVersion = typeof data.specVersion === "string" ? data.specVersion : null;
-    const m = specVersion?.match(/^(1\.\d+)/);
+    const m = specVersion?.match(/^(1\.[2-7])$/);
     return { format: "cyclonedx", specVersion, schemaVersion: m ? m[1]! : null, data };
   }
 
@@ -92,18 +93,18 @@ export function detect(data: JsonObject): DetectedSbom {
 }
 
 function findSpdx3SpecVersion(data: JsonObject): string | null {
-  const graph = Array.isArray(data["@graph"]) ? data["@graph"] : isObject(data["@graph"]) ? [data["@graph"]] : [];
+  const graph = spdx3Nodes(data);
   for (const el of graph) {
     if (isObject(el) && el.type === "CreationInfo" && typeof el.specVersion === "string") return el.specVersion;
   }
   return null;
 }
 
-/** 3.0.0 has its own schema; any later 3.0.x patch validates against 3.0.1. */
+/** Validate only exact releases for which this checker ships an official schema. */
 function spdx3Schema(version: string | null): string | null {
   if (!version) return null;
   if (version === "3.0.0" || version === "3.0") return "3.0.0";
-  if (/^3\.0\.\d+$/.test(version)) return "3.0.1";
+  if (version === "3.0.1") return "3.0.1";
   return null;
 }
 
