@@ -2,6 +2,7 @@
 
 title: "Free SBOM Tools"
 description: "Free tools from sbomify for working with Software Bills of Materials. They run in your browser, so nothing you check leaves your machine."
+lede: "Check any CycloneDX or SPDX SBOM against its schema, CISA, NTIA and the EU Cyber Resilience Act in seconds. Everything runs in your browser, so your files never leave your machine."
 keywords: [SBOM tools, SBOM checker, SBOM validator, CycloneDX validator, SPDX validator]
 ---
 

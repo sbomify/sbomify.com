@@ -7,6 +7,20 @@ lede: "A free online SBOM checker: validate a CycloneDX or SPDX SBOM against its
 description: "Free online SBOM checker and validator for CycloneDX and SPDX. View and check an SBOM against its schema, CISA 2026, NTIA and the EU CRA in your browser."
 keywords: [SBOM checker, SBOM checker online, free SBOM checker, SBOM validator, NTIA SBOM validator, SBOM viewer, CycloneDX validator online, SPDX validator online, validate SBOM, CycloneDX validator, SPDX validator, SBOM quality, NTIA minimum elements checker, CISA minimum elements, CRA SBOM check, BSI TR-03183-2, SBOM compliance]
 cta: false
+# Card on the /tools/ landing page (layouts/tools/list.html).
+card:
+  icon: "seal-check"
+  summary: "Drop in a CycloneDX or SPDX file and get a pass/fail report in seconds. Every gap comes with what is missing and how to fix it."
+  button: "Check an SBOM"
+  checks:
+    - label: "CycloneDX and SPDX schema validation"
+    - label: "CISA 2026 Minimum Elements"
+      url: "/compliance/cisa-minimum-elements/"
+    - label: "NTIA Minimum Elements"
+      url: "/compliance/ntia-minimum-elements/"
+    - label: "BSI TR-03183-2 for the EU Cyber Resilience Act"
+      url: "/compliance/bsi-tr-03183/"
+    - label: "External references and linked SBOMs, with hash checks"
 # Structured data: WebApplication (layouts/partials/head.html).
 app:
   name: "sbomify SBOM Checker"
