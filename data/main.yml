@@ -67,6 +67,10 @@ nav:
             desc: Format, fields and dependency depth
             link: /compliance/eu-cra/
             icon: list-checks
+          - name: Check an SBOM for the CRA
+            desc: BSI TR-03183-2, in your browser
+            link: /tools/sbom-checker/
+            icon: list-magnifying-glass
           - name: The CRA Compliance Wizard
             desc: Assess a product and export the bundle
             link: /faq/how-do-i-use-cra-compliance/
@@ -110,6 +114,10 @@ nav:
             desc: Step by step for every language and build
             link: /guides/
             icon: graduation-cap
+          - name: SBOM checker
+            desc: Check an SBOM against CISA, NTIA and the CRA
+            link: /tools/sbom-checker/
+            icon: list-magnifying-glass
           - name: Compliance
             desc: CISA, NIST, BSI, FDA, NIS2 and more
             link: /compliance/
