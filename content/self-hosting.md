@@ -39,7 +39,7 @@ They depend on:
 
 - **PostgreSQL 17 or 18**: all metadata, results and settings.
 - **Redis 8 or Valkey 8**: cache, job queue and WebSocket fan-out. Both work; we tested on Valkey 8.
-- **S3-compatible object storage**: two buckets, one public-read for media such as logos, one private for SBOMs and documents. AWS S3, Google Cloud Storage (S3 interoperability), MinIO, SeaweedFS, Cloudflare R2 and Tigris all work.
+- **Object storage**: two buckets, one public-read for media such as logos, one private for SBOMs and documents. Any S3-compatible service works: AWS S3, MinIO, SeaweedFS, Cloudflare R2 and Tigris. On Google Cloud, sbomify talks to Cloud Storage natively and signs in with the workload's own identity, so there are no storage keys at all.
 - **Keycloak**: sign-in over OpenID Connect. sbomify has no local password login for regular users. Keycloak is user-facing: browsers are redirected to it to sign in, so it needs its own public HTTPS hostname, and the app also calls it to exchange tokens.
 - **An SMTP relay**: invitations, access requests and onboarding mail.
 - **Outbound HTTPS** from the workers to `api.osv.dev` for vulnerability scanning, to `www.cisa.gov` and `euvdservices.enisa.europa.eu` for the known-exploited and EU vulnerability feeds, and optionally to the GitHub API for attestation checks.
@@ -61,7 +61,7 @@ Have these ready:
 1. **A domain** for sbomify, for example `sbomify.example.com`, with DNS pointing at the app instance or load balancer.
 2. **PostgreSQL 17 or 18** with an empty database and a user that owns it.
 3. **Redis 8 or Valkey 8**. Do not put a database number in the URL: sbomify uses databases 0, 1 and 2 itself.
-4. **Two S3 buckets**: `sbomify-media` with public read, and `sbomify-sboms` private. Create an access key for each, or one key with access to both.
+4. **Two buckets**: `sbomify-media` with public read, and `sbomify-sboms` private. On S3-compatible storage, create an access key for each, or one key with access to both. On Google Cloud, skip the keys: see [Google Cloud (GKE)](#google-cloud-gke).
 5. **A Keycloak realm** named `sbomify` with a confidential OpenID Connect client. Users sign in on Keycloak's own pages, so give it a public HTTPS hostname such as `sso.example.com`:
    - Client ID: `sbomify`, client authentication on.
    - Valid redirect URI and valid post logout redirect URI: `https://sbomify.example.com/*`. Web origin: `https://sbomify.example.com`.
@@ -249,10 +249,12 @@ helm install sbomify ./sbomify/charts/sbomify \
   --set auth.keycloak.clientSecret=... \
   --set secrets.secretKey="$(openssl rand -base64 48)" \
   --set secrets.signedUrlSalt="$(openssl rand -base64 32)" \
-  --set caddy.acme.email=ops@example.com
+  --set caddy.acme.email=ops@your-company.com
 
 helm test sbomify -n sbomify
 ```
+
+`caddy.acme.email` must be a real address. Let's Encrypt refuses `example.com` addresses, and Caddy would then serve no certificate at all, so the chart rejects them.
 
 Without `image.tag`, the chart installs the release in its `appVersion`, which can lag the latest release. Then point DNS for your domain at the `sbomify-caddy` LoadBalancer service. For production, keep the values in a file under version control and put credentials in a Kubernetes Secret (`secrets.existingSecret`) rather than on the command line.
 
@@ -266,6 +268,92 @@ What the chart sets by default:
 | caddy     | 1        | 100m        | 128Mi / 512Mi          | Needs shared storage for more than one     |
 
 Pods run as non-root with a read-only root filesystem. Optional extras: a HorizontalPodAutoscaler for web (2 to 10) and workers (2 to 20), PodDisruptionBudgets (on by default), and a NetworkPolicy that only lets Caddy and the release's own pods reach the web pods. Email, Sentry and other settings the chart does not model go in `app.extraEnv` or `app.extraEnvFrom`.
+
+### Google Cloud (GKE)
+
+This is the setup we test end to end: GKE with Workload Identity, Cloud SQL for PostgreSQL and Memorystore for Redis on private IPs, and Cloud Storage for both buckets. sbomify reaches Cloud Storage with the pod's own Google identity, so no storage keys exist anywhere. Native Cloud Storage support needs a sbomify release newer than v26.11.1.
+
+1. Create the cluster with Workload Identity (`--workload-pool=PROJECT.svc.id.goog`), and give Cloud SQL and Memorystore private IPs on the cluster's VPC.
+2. Create the buckets and a Google service account for sbomify, and grant it access:
+
+```bash
+PROJECT=my-project
+GSA=sbomify@$PROJECT.iam.gserviceaccount.com
+gcloud iam service-accounts create sbomify
+gcloud storage buckets create gs://$PROJECT-sbomify-sboms --uniform-bucket-level-access --public-access-prevention
+gcloud storage buckets create gs://$PROJECT-sbomify-media --uniform-bucket-level-access
+gcloud storage buckets add-iam-policy-binding gs://$PROJECT-sbomify-media \
+  --member=allUsers --role=roles/storage.objectViewer
+for b in sboms media; do
+  gcloud storage buckets add-iam-policy-binding gs://$PROJECT-sbomify-$b \
+    --member=serviceAccount:$GSA --role=roles/storage.objectUser
+done
+# Download links are signed through IAM, since the pod holds no private key
+gcloud iam service-accounts add-iam-policy-binding $GSA \
+  --member=serviceAccount:$GSA --role=roles/iam.serviceAccountTokenCreator
+# Let the chart's Kubernetes service account (namespace sbomify, name sbomify) act as it
+gcloud iam service-accounts add-iam-policy-binding $GSA \
+  --member="serviceAccount:$PROJECT.svc.id.goog[sbomify/sbomify]" \
+  --role=roles/iam.workloadIdentityUser
+```
+
+3. Memorystore with in-transit encryption uses its own certificate authority. Save it in a ConfigMap so the pods can verify the server:
+
+```bash
+kubectl create namespace sbomify
+gcloud redis instances describe sbomify --region europe-west1 \
+  --format='value(serverCaCerts[0].cert)' > redis-ca.pem
+kubectl -n sbomify create configmap redis-ca --from-file=ca.pem=redis-ca.pem
+```
+
+4. Install with a values file like this one, plus the passwords and secrets from Option 2:
+
+```yaml
+app:
+  baseUrl: https://sbomify.example.com
+  extraEnv:
+    - {name: REDIS_CA_CERTS, value: /etc/redis-ca/ca.pem}
+objectStorage:
+  backend: gcs
+  media: {bucket: my-project-sbomify-media}
+  sboms: {bucket: my-project-sbomify-sboms}
+serviceAccount:
+  annotations:
+    iam.gke.io/gcp-service-account: sbomify@my-project.iam.gserviceaccount.com
+database:
+  host: 10.10.0.3        # Cloud SQL private IP
+redis:
+  host: 10.10.0.4        # Memorystore private IP
+  port: 6378             # 6378 when in-transit encryption is on
+  tls: true
+auth:
+  keycloak:
+    serverUrl: https://sso.example.com/
+caddy:
+  acme: {email: ops@your-company.com}
+  service: {loadBalancerIP: 203.0.113.10}   # a reserved regional static IP
+web: &redisCa
+  extraVolumes:
+    - {name: redis-ca, configMap: {name: redis-ca}}
+  extraVolumeMounts:
+    - {name: redis-ca, mountPath: /etc/redis-ca, readOnly: true}
+worker: *redisCa
+scheduler: *redisCa
+migrations: *redisCa
+```
+
+With `backend: gcs` the chart needs no endpoint, region or access keys, and media URLs point at `https://storage.googleapis.com/<bucket>`.
+
+If Keycloak runs in the same cluster, route its hostname through the sbomify edge rather than giving it a second load balancer. Run Keycloak with `KC_HTTP_ENABLED=true` and `KC_PROXY_HEADERS=xforwarded`, then add:
+
+```yaml
+caddy:
+  extraRoutes:
+    - host: sso.example.com
+      upstream: keycloak.identity.svc.cluster.local:8080
+```
+
+Leave `scheme` at its default `https`. It sets how the public side is served, not how Caddy reaches Keycloak.
 
 ## First sign-in
 
@@ -310,14 +398,18 @@ Everything is configured through environment variables. These are the ones most 
 
 ### Object storage
 
-| Variable                                                        | Notes                                                                |
-| --------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `AWS_ENDPOINT_URL_S3`, `AWS_REGION`                             | Endpoint and region of your S3-compatible service.                   |
-| `AWS_MEDIA_ACCESS_KEY_ID`, `AWS_MEDIA_SECRET_ACCESS_KEY`        | Credentials for the public media bucket.                             |
-| `AWS_MEDIA_STORAGE_BUCKET_NAME`, `AWS_MEDIA_STORAGE_BUCKET_URL` | Bucket name, and the public URL browsers load media from.            |
-| `AWS_SBOMS_ACCESS_KEY_ID`, `AWS_SBOMS_SECRET_ACCESS_KEY`        | Credentials for the private SBOM bucket.                             |
-| `AWS_SBOMS_STORAGE_BUCKET_NAME`, `AWS_SBOMS_STORAGE_BUCKET_URL` | Bucket name and URL.                                                 |
-| `AWS_DOCUMENTS_*` (same four)                                   | Optional separate bucket for documents. Defaults to the SBOM bucket. |
+| Variable                                                        | Notes                                                                                                                                                                 |
+| --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `STORAGE_BACKEND`                                               | `s3` (default) for any S3-compatible service, `gcs` for Cloud Storage.                                                                                                |
+| `GCS_PROJECT_ID`, `GCS_SIGNING_SERVICE_ACCOUNT`                 | `gcs` only, both optional. The project defaults to the credentials' project. Download links are signed as the workload's own service account unless you name another. |
+| `AWS_ENDPOINT_URL_S3`, `AWS_REGION`                             | Endpoint and region of your S3-compatible service.                                                                                                                    |
+| `AWS_MEDIA_ACCESS_KEY_ID`, `AWS_MEDIA_SECRET_ACCESS_KEY`        | Credentials for the public media bucket.                                                                                                                              |
+| `AWS_MEDIA_STORAGE_BUCKET_NAME`, `AWS_MEDIA_STORAGE_BUCKET_URL` | Bucket name, and the public URL browsers load media from.                                                                                                             |
+| `AWS_SBOMS_ACCESS_KEY_ID`, `AWS_SBOMS_SECRET_ACCESS_KEY`        | Credentials for the private SBOM bucket.                                                                                                                              |
+| `AWS_SBOMS_STORAGE_BUCKET_NAME`, `AWS_SBOMS_STORAGE_BUCKET_URL` | Bucket name and URL.                                                                                                                                                  |
+| `AWS_DOCUMENTS_*` (same four)                                   | Optional separate bucket for documents. Defaults to the SBOM bucket.                                                                                                  |
+
+With `STORAGE_BACKEND=gcs` the bucket names and URLs still come from the `AWS_*_STORAGE_BUCKET_*` variables. The endpoint, region and access keys are ignored: sbomify uses Google's Application Default Credentials, which is Workload Identity on GKE or the attached service account on a VM.
 
 ### Sign-in
 
@@ -505,6 +597,7 @@ On a single instance, measured throughput was more than 20 times the figures in 
 | `400 Bad Request` on every page               | The host name is not the one in `APP_BASE_URL`, or you are browsing by IP address.                         |
 | Invitations fail, or workers log email errors | `EMAIL_*` settings on every service. Send a test message as shown under [email](#email).                   |
 | Cannot invite a second member                 | The workspace is on the Community plan. Set it to Enterprise in Django admin.                              |
+| Uploads show no vulnerability results         | The OSV plugin is on for the workspace: **Plugins** in the sidebar.                                        |
 | Scans stay pending                            | Workers running (`docker compose logs sbomify-worker`), Redis reachable, outbound HTTPS to `api.osv.dev`.  |
 | Large uploads fail                            | Raise `DATA_UPLOAD_MAX_MEMORY_SIZE_MB`, and check any proxy body-size limit in front of Caddy.             |
 
