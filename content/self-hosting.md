@@ -2,14 +2,14 @@
 url: /self-hosting/
 title: "Self-Hosting sbomify"
 seo_title: "Self-Hosting sbomify: Install, Configure and Size Your Deployment"
-description: "Run sbomify on your own infrastructure with Docker Compose or Helm. A reference architecture, every setting that matters (email, billing, storage, sign-in), and conservative sizing on AWS and Google Cloud."
-keywords: ["self-hosted SBOM management", "sbomify self-hosting", "sbomify docker compose", "sbomify helm chart", "on-premises SBOM platform", "SBOM server sizing"]
-tldr: "sbomify is open source and runs anywhere Docker or Kubernetes runs. Put PostgreSQL and Redis or Valkey on their own instances, keep artifacts in S3-compatible storage, sign users in through Keycloak or the OIDC provider you already run, and start from the conservative sizes below: one 4 vCPU / 8 GB app instance handles 100 users, 1,000 SBOM uploads an hour and a nightly rescan of 20,000 released SBOMs."
+description: "Run sbomify on your own infrastructure with Docker Compose or Helm, on any Kubernetes including AWS and Google Cloud. A reference architecture, every setting that matters (email, billing, storage, sign-in), and conservative sizing."
+keywords: ["self-hosted SBOM management", "sbomify self-hosting", "sbomify docker compose", "sbomify helm chart", "sbomify kubernetes", "sbomify AWS EKS", "sbomify Google Cloud GKE", "on-premises SBOM platform", "SBOM server sizing"]
+tldr: "sbomify is open source and runs anywhere Docker or Kubernetes runs. Put PostgreSQL and Redis or Valkey on their own instances, keep artifacts in S3-compatible storage or Google Cloud Storage, sign users in through Keycloak or the OIDC provider you already run, and start from the conservative sizes below: one 4 vCPU / 8 GB app instance handles 100 users, 1,000 SBOM uploads an hour and a nightly rescan of 20,000 released SBOMs."
 faq:
   - question: "Can I self-host sbomify?"
-    answer: "Yes. sbomify is open source under the Apache 2.0 licence with the Commons Clause, so you can run it for your own organisation but not sell it as a hosted service. Run it with Docker Compose on a single VM or with the Helm chart on Kubernetes. Support packages for self-hosted installations are available on the Enterprise plan."
+    answer: "Yes. sbomify is open source under the Apache 2.0 licence with the Commons Clause, so you can run it for your own organisation but not sell it as a hosted service. Run it with Docker Compose on a single VM, or with the Helm chart on any Kubernetes cluster, including Amazon EKS and Google GKE. Support packages for self-hosted installations are available on the Enterprise plan."
   - question: "What does sbomify need to run?"
-    answer: "The sbomify container image, PostgreSQL 17 or 18, Redis 8 or Valkey 8, S3-compatible object storage with two buckets, an OpenID Connect provider for sign-in (Keycloak, or one you already run such as Okta, Auth0 or Entra ID), and an SMTP relay for email. Vulnerability scanning with OSV needs outbound internet access."
+    answer: "The sbomify container image, PostgreSQL 17 or 18, Redis 8 or Valkey 8, two object storage buckets (any S3-compatible service, or Google Cloud Storage), an OpenID Connect provider for sign-in (Keycloak, or one you already run such as Okta, Auth0 or Entra ID), and an SMTP relay for email. Vulnerability scanning with OSV needs outbound internet access."
   - question: "How do I turn off billing in a self-hosted sbomify?"
     answer: "Set BILLING=False. The Docker Compose file and the Helm chart already default to it. Billing pages, plan selection and product and component limits are switched off. Workspaces still start on the Community plan, which allows only the owner as a member, so set them to Enterprise in Django admin."
   - question: "How big a server does sbomify need?"
