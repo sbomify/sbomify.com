@@ -4,12 +4,12 @@ title: "Self-Hosting sbomify"
 seo_title: "Self-Hosting sbomify: Install, Configure and Size Your Deployment"
 description: "Run sbomify on your own infrastructure with Docker Compose or Helm. A reference architecture, every setting that matters (email, billing, storage, sign-in), and conservative sizing on AWS and Google Cloud."
 keywords: ["self-hosted SBOM management", "sbomify self-hosting", "sbomify docker compose", "sbomify helm chart", "on-premises SBOM platform", "SBOM server sizing"]
-tldr: "sbomify is open source and runs anywhere Docker or Kubernetes runs. Put PostgreSQL and Redis or Valkey on their own instances, keep artifacts in S3-compatible storage, sign users in through Keycloak, and start from the conservative sizes below: one 4 vCPU / 8 GB app instance handles 100 users, 1,000 SBOM uploads an hour and a nightly rescan of 20,000 released SBOMs."
+tldr: "sbomify is open source and runs anywhere Docker or Kubernetes runs. Put PostgreSQL and Redis or Valkey on their own instances, keep artifacts in S3-compatible storage, sign users in through Keycloak or the OIDC provider you already run, and start from the conservative sizes below: one 4 vCPU / 8 GB app instance handles 100 users, 1,000 SBOM uploads an hour and a nightly rescan of 20,000 released SBOMs."
 faq:
   - question: "Can I self-host sbomify?"
     answer: "Yes. sbomify is open source under the Apache 2.0 licence with the Commons Clause, so you can run it for your own organisation but not sell it as a hosted service. Run it with Docker Compose on a single VM or with the Helm chart on Kubernetes. Support packages for self-hosted installations are available on the Enterprise plan."
   - question: "What does sbomify need to run?"
-    answer: "The sbomify container image, PostgreSQL 17 or 18, Redis 8 or Valkey 8, S3-compatible object storage with two buckets, a Keycloak realm for sign-in, and an SMTP relay for email. Vulnerability scanning with OSV needs outbound internet access."
+    answer: "The sbomify container image, PostgreSQL 17 or 18, Redis 8 or Valkey 8, S3-compatible object storage with two buckets, an OpenID Connect provider for sign-in (Keycloak, or one you already run such as Okta, Auth0 or Entra ID), and an SMTP relay for email. Vulnerability scanning with OSV needs outbound internet access."
   - question: "How do I turn off billing in a self-hosted sbomify?"
     answer: "Set BILLING=False. The Docker Compose file and the Helm chart already default to it. Billing pages, plan selection and product and component limits are switched off. Workspaces still start on the Community plan, which allows only the owner as a member, so set them to Enterprise in Django admin."
   - question: "How big a server does sbomify need?"
@@ -40,7 +40,7 @@ They depend on:
 - **PostgreSQL 17 or 18**: all metadata, results and settings.
 - **Redis 8 or Valkey 8**: cache, job queue and WebSocket fan-out. Both work; we tested on Valkey 8.
 - **S3-compatible object storage**: two buckets, one public-read for media such as logos, one private for SBOMs and documents. AWS S3, Google Cloud Storage (S3 interoperability), MinIO, SeaweedFS, Cloudflare R2 and Tigris all work.
-- **Keycloak**: sign-in over OpenID Connect. sbomify has no local password login for regular users. Keycloak is user-facing: browsers are redirected to it to sign in, so it needs its own public HTTPS hostname, and the app also calls it to exchange tokens.
+- **An OpenID Connect provider**: sign-in. sbomify has no local password login for regular users. Keycloak is the reference provider and the only one with account sync and deletion. Okta, Auth0, Entra ID, Authentik, Zitadel and other OIDC providers work too. The provider is user-facing: browsers are redirected to it to sign in, so it needs a public HTTPS hostname, and the app also calls it to exchange tokens.
 - **An SMTP relay**: invitations, access requests and onboarding mail.
 - **Outbound HTTPS** from the workers to `api.osv.dev` for vulnerability scanning, to `www.cisa.gov` and `euvdservices.enisa.europa.eu` for the known-exploited and EU vulnerability feeds, and optionally to the GitHub API for attestation checks.
 
@@ -67,6 +67,8 @@ Have these ready:
    - Valid redirect URI and valid post logout redirect URI: `https://sbomify.example.com/*`. Web origin: `https://sbomify.example.com`.
    - Copy the client secret from **Clients → sbomify → Credentials**.
    - Configure SMTP on the realm too. Keycloak, not sbomify, sends the sign-up verification mail.
+
+   Already run another identity provider? Use it instead: see [Another OIDC provider](#another-oidc-provider).
 6. **Two secrets**, generated once and stored safely:
 
 ```bash
@@ -187,7 +189,7 @@ services:
 
 `!reset` and `!override` need Docker Compose 2.24.4 or later. Compose only passes a variable from `override.env` into a container when the compose file names it, so any setting not in `docker-compose.yml` goes in the `x-extra-env` block. That includes `DATABASE_URL`, Sentry, upload limits, rate limits, `OIDC_GITHUB_AUDIENCE`, `HTTPS_PROXY`, `USE_KEYCLOAK` and a separate documents bucket.
 
-To evaluate with the bundled database and Redis instead, skip this step and leave the database and Redis settings out of `override.env`. The bundled containers publish ports 5432 and 6379 on every interface, PostgreSQL with the password `sbomify` and Redis with none, so set `DATABASE_PASSWORD` and keep those ports firewalled. Compose does not bundle object storage or Keycloak: even an evaluation needs an S3 bucket pair and a Keycloak realm.
+To evaluate with the bundled database and Redis instead, skip this step and leave the database and Redis settings out of `override.env`. The bundled containers publish ports 5432 and 6379 on every interface, PostgreSQL with the password `sbomify` and Redis with none, so set `DATABASE_PASSWORD` and keep those ports firewalled. Compose does not bundle object storage or an identity provider: even an evaluation needs an S3 bucket pair and a Keycloak realm or another OIDC provider.
 
 ### 4. Verify the image and start
 
@@ -225,7 +227,7 @@ Migrations run before the new web and worker containers start. Take a database s
 
 ## Option 2: Kubernetes with Helm
 
-The chart in [`charts/sbomify`](https://github.com/sbomify/sbomify/tree/master/charts/sbomify) needs Kubernetes 1.30 or later. It deploys web, workers, the scheduler, Caddy and the migration job. It does not deploy PostgreSQL, Redis, object storage or Keycloak: bring your own, which fits the reference architecture above.
+The chart in [`charts/sbomify`](https://github.com/sbomify/sbomify/tree/master/charts/sbomify) needs Kubernetes 1.30 or later. It deploys web, workers, the scheduler, Caddy and the migration job. It does not deploy PostgreSQL, Redis, object storage or an identity provider: bring your own, which fits the reference architecture above. For a provider other than Keycloak, set `auth.oidc.discoveryUrl` instead of `auth.keycloak.serverUrl`, and put its client ID and secret in `auth.keycloak.clientId` and `auth.keycloak.clientSecret`.
 
 ```bash
 git clone --depth 1 --branch v26.11.0 https://github.com/sbomify/sbomify.git
@@ -269,7 +271,7 @@ Pods run as non-root with a read-only root filesystem. Optional extras: a Horizo
 
 ## First sign-in
 
-1. Open `https://sbomify.example.com` and sign up through Keycloak. sbomify creates your first workspace and makes you its owner.
+1. Open `https://sbomify.example.com` and sign up through your identity provider. sbomify creates your first workspace and makes you its owner.
 2. Create a Django admin account for operator tasks:
 
    ```bash
@@ -280,7 +282,7 @@ Pods run as non-root with a read-only root filesystem. Optional extras: a Horizo
 3. Sign in to `/admin/`, open **Workspaces**, and set each workspace's plan to **Enterprise**. See [billing](#billing) for why.
 4. Check that email works by inviting a teammate.
 
-To stop strangers from signing up, turn off **User registration** in the Keycloak realm and add users there yourself, or connect Keycloak to your existing identity provider.
+To stop strangers from signing up, turn off **User registration** in the Keycloak realm and add users there yourself, or [use your existing identity provider](#another-oidc-provider) directly.
 
 ## Configuration
 
@@ -329,7 +331,34 @@ Everything is configured through environment variables. These are the ones most 
 | `KEYCLOAK_CLIENT_ID`     | `sbomify`               |                                                                                                                                                                                  |
 | `KEYCLOAK_CLIENT_SECRET` | none                    | From the client's Credentials tab.                                                                                                                                               |
 | `USE_KEYCLOAK`           | `False`                 | Set `True` so deleting an account in sbomify also removes the user from Keycloak. Needs `KEYCLOAK_ADMIN_USERNAME` and `KEYCLOAK_ADMIN_PASSWORD`.                                 |
+| `OIDC_DISCOVERY_URL`     | Keycloak realm          | Discovery document of another OIDC provider. See [Another OIDC provider](#another-oidc-provider).                                                                                |
+| `OIDC_LOGOUT_URL`        | discovered              | Sign-out endpoint, for a provider whose discovery document has none.                                                                                                             |
 | `OIDC_GITHUB_AUDIENCE`   | `sbomify.com`           | Audience for [OIDC trusted publishing](/faq/how-do-i-set-up-oidc-trusted-publishing/) from GitHub Actions. Set it to your own domain.                                            |
+
+### Another OIDC provider
+
+sbomify signs in through a generic OpenID Connect client, so you can point it at the identity provider you already run. Create a confidential web application at the provider, then set:
+
+```bash
+KEYCLOAK_CLIENT_ID=<client ID at the provider>
+KEYCLOAK_CLIENT_SECRET=<client secret at the provider>
+OIDC_DISCOVERY_URL=https://idp.example.com/.well-known/openid-configuration
+```
+
+At the provider, allow `https://sbomify.example.com/accounts/oidc/keycloak/login/callback/` as the sign-in redirect URI and `https://sbomify.example.com/accounts/oidc/keycloak/login/` as the sign-out redirect URI. The `keycloak` in those paths is an internal name and stays the same for every provider. sbomify asks for the `openid email profile` scopes.
+
+| Provider | `OIDC_DISCOVERY_URL`                                                                  | Sign-out                                                                                                    |
+| -------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Okta     | `https://<org>.okta.com/oauth2/default/.well-known/openid-configuration`              | Works as is.                                                                                                |
+| Auth0    | `https://<tenant>.auth0.com/.well-known/openid-configuration`                         | Turn on RP-Initiated Logout in the tenant, or set `OIDC_LOGOUT_URL=https://<tenant>.auth0.com/oidc/logout`. |
+| Entra ID | `https://login.microsoftonline.com/<tenant-id>/v2.0/.well-known/openid-configuration` | Works as is. Use the tenant ID: `common` and `organizations` fail.                                          |
+| Google   | `https://accounts.google.com/.well-known/openid-configuration`                        | Signs out of sbomify only. Google has no sign-out endpoint for apps.                                        |
+
+What changes compared with Keycloak:
+
+- **Confirmed email.** sbomify trusts an address only when the provider sends `email_verified`. Entra ID does not, so its users cannot accept workspace invitations or be matched to an existing account with the same address. After their first sign-in, an operator can tick **Email verified** on the user in Django admin.
+- **No sync.** Name and email are read when the account is created. Changes at the provider are not pulled in later.
+- **No deletion.** Deleting an account in sbomify leaves the user at the provider.
 
 ### Email
 
@@ -493,7 +522,7 @@ On a single instance, measured throughput was more than 20 times the figures in 
 - **Turn on error reporting.** Set `SENTRY_DSN`. With it unset, errors only appear in container logs.
 - **Watch the queue, not just CPU.** If uploads are fast but results arrive late, add workers before you add web capacity.
 - **Allow outbound access to the vulnerability feeds.** Scans call `api.osv.dev`, and the workers fetch the CISA KEV and ENISA EUVD feeds. In a restricted network, allow them through your proxy (`HTTPS_PROXY` is passed to the scanner).
-- **Restrict sign-up.** Turn off self-registration in Keycloak unless you want anyone who can reach the URL to create a workspace.
+- **Restrict sign-up.** Turn off self-registration in Keycloak unless you want anyone who can reach the URL to create a workspace. With another provider, assign the sbomify application only to the people who should use it.
 - **Cap container logs.** The Compose file limits each container to 30 MB of logs (`LOG_MAX_SIZE`, `LOG_MAX_FILE`). Ship them to your log platform if you need history.
 
 ## Troubleshooting
@@ -502,6 +531,7 @@ On a single instance, measured throughput was more than 20 times the figures in 
 | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | Caddy cannot get a certificate                | Ports 80 and 443 open, DNS points at the host, `BIND_IP=0.0.0.0`. Use the staging `ACME_CA` while testing. |
 | Sign-in loops or fails                        | Redirect URI and web origin in Keycloak match `APP_BASE_URL` exactly. `KEYCLOAK_SERVER_URL` ends in `/`.   |
+| Entra ID sign-in fails with an invalid issuer | `OIDC_DISCOVERY_URL` names your tenant ID, not `common` or `organizations`.                                |
 | `400 Bad Request` on every page               | The host name is not the one in `APP_BASE_URL`, or you are browsing by IP address.                         |
 | Invitations fail, or workers log email errors | `EMAIL_*` settings on every service. Send a test message as shown under [email](#email).                   |
 | Cannot invite a second member                 | The workspace is on the Community plan. Set it to Enterprise in Django admin.                              |
