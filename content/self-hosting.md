@@ -227,7 +227,7 @@ Migrations run before the new web and worker containers start. Take a database s
 
 ## Option 2: Kubernetes with Helm
 
-The chart in [`charts/sbomify`](https://github.com/sbomify/sbomify/tree/master/charts/sbomify) needs Kubernetes 1.30 or later. It deploys web, workers, the scheduler, Caddy and the migration job. It does not deploy PostgreSQL, Redis, object storage or an identity provider: bring your own, which fits the reference architecture above. For a provider other than Keycloak, set `auth.oidc.discoveryUrl` instead of `auth.keycloak.serverUrl`, and put its client ID and secret in `auth.keycloak.clientId` and `auth.keycloak.clientSecret`.
+The chart in [`charts/sbomify`](https://github.com/sbomify/sbomify/tree/master/charts/sbomify) needs Kubernetes 1.30 or later. It deploys web, workers, the scheduler, Caddy and the migration job. It does not deploy PostgreSQL, Redis, object storage or an identity provider: bring your own, which fits the reference architecture above. For a provider other than Keycloak, set `auth.oidc.discoveryUrl` instead of `auth.keycloak.serverUrl`, and put its client ID and secret in `auth.oidc.clientId` and `auth.oidc.clientSecret`. `auth.oidc.trustEmail` sets `OIDC_TRUST_EMAIL`.
 
 ```bash
 git clone --depth 1 --branch v26.11.0 https://github.com/sbomify/sbomify.git
@@ -323,27 +323,31 @@ Everything is configured through environment variables. These are the ones most 
 
 ### Sign-in
 
-| Variable                 | Default                 | Notes                                                                                                                                                                            |
-| ------------------------ | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `KEYCLOAK_SERVER_URL`    | `http://keycloak:8080/` | Base URL of Keycloak, with a trailing slash.                                                                                                                                     |
-| `KEYCLOAK_PUBLIC_URL`    | server URL              | Where the browser is sent on sign-out, if browsers cannot reach `KEYCLOAK_SERVER_URL`. Sign-in uses OIDC discovery on the server URL, so that one normally has to be public too. |
-| `KEYCLOAK_REALM`         | `sbomify`               |                                                                                                                                                                                  |
-| `KEYCLOAK_CLIENT_ID`     | `sbomify`               |                                                                                                                                                                                  |
-| `KEYCLOAK_CLIENT_SECRET` | none                    | From the client's Credentials tab.                                                                                                                                               |
-| `USE_KEYCLOAK`           | `False`                 | Set `True` so deleting an account in sbomify also removes the user from Keycloak. Needs `KEYCLOAK_ADMIN_USERNAME` and `KEYCLOAK_ADMIN_PASSWORD`.                                 |
-| `OIDC_DISCOVERY_URL`     | Keycloak realm          | Discovery document of another OIDC provider. See [Another OIDC provider](#another-oidc-provider).                                                                                |
-| `OIDC_LOGOUT_URL`        | discovered              | Sign-out endpoint, for a provider whose discovery document has none.                                                                                                             |
-| `OIDC_GITHUB_AUDIENCE`   | `sbomify.com`           | Audience for [OIDC trusted publishing](/faq/how-do-i-set-up-oidc-trusted-publishing/) from GitHub Actions. Set it to your own domain.                                            |
+| Variable                               | Default                 | Notes                                                                                                                                                                            |
+| -------------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `KEYCLOAK_SERVER_URL`                  | `http://keycloak:8080/` | Base URL of Keycloak, with a trailing slash.                                                                                                                                     |
+| `KEYCLOAK_PUBLIC_URL`                  | server URL              | Where the browser is sent on sign-out, if browsers cannot reach `KEYCLOAK_SERVER_URL`. Sign-in uses OIDC discovery on the server URL, so that one normally has to be public too. |
+| `KEYCLOAK_REALM`                       | `sbomify`               |                                                                                                                                                                                  |
+| `KEYCLOAK_CLIENT_ID`                   | `sbomify`               |                                                                                                                                                                                  |
+| `KEYCLOAK_CLIENT_SECRET`               | none                    | From the client's Credentials tab.                                                                                                                                               |
+| `USE_KEYCLOAK`                         | `False`                 | Set `True` so deleting an account in sbomify also removes the user from Keycloak. Needs `KEYCLOAK_ADMIN_USERNAME` and `KEYCLOAK_ADMIN_PASSWORD`.                                 |
+| `OIDC_DISCOVERY_URL`                   | Keycloak realm          | Discovery document of another OIDC provider. See [Another OIDC provider](#another-oidc-provider).                                                                                |
+| `OIDC_LOGOUT_URL`                      | discovered              | Sign-out endpoint, for a provider whose discovery document has none.                                                                                                             |
+| `OIDC_CLIENT_ID`, `OIDC_CLIENT_SECRET` | the `KEYCLOAK_*` values | Provider-neutral names for the client ID and secret. They win when set.                                                                                                          |
+| `OIDC_TRUST_EMAIL`                     | off                     | `true`, or a comma-separated list of domains, to treat the provider's addresses as confirmed. See [Another OIDC provider](#another-oidc-provider).                               |
+| `OIDC_GITHUB_AUDIENCE`                 | `sbomify.com`           | Audience for [OIDC trusted publishing](/faq/how-do-i-set-up-oidc-trusted-publishing/) from GitHub Actions. Set it to your own domain.                                            |
 
 ### Another OIDC provider
 
 sbomify signs in through a generic OpenID Connect client, so you can point it at the identity provider you already run. Create a confidential web application at the provider, then set:
 
 ```bash
-KEYCLOAK_CLIENT_ID=<client ID at the provider>
-KEYCLOAK_CLIENT_SECRET=<client secret at the provider>
+OIDC_CLIENT_ID=<client ID at the provider>
+OIDC_CLIENT_SECRET=<client secret at the provider>
 OIDC_DISCOVERY_URL=https://idp.example.com/.well-known/openid-configuration
 ```
+
+`OIDC_CLIENT_ID` and `OIDC_CLIENT_SECRET` are the provider-neutral names for `KEYCLOAK_CLIENT_ID` and `KEYCLOAK_CLIENT_SECRET`. Either pair works; when both are set, the `OIDC_*` value wins.
 
 At the provider, allow `https://sbomify.example.com/accounts/oidc/keycloak/login/callback/` as the sign-in redirect URI and `https://sbomify.example.com/accounts/oidc/keycloak/login/` as the sign-out redirect URI. The `keycloak` in those paths is an internal name and stays the same for every provider. sbomify asks for the `openid email profile` scopes.
 
@@ -356,7 +360,7 @@ At the provider, allow `https://sbomify.example.com/accounts/oidc/keycloak/login
 
 What changes compared with Keycloak:
 
-- **Confirmed email.** sbomify trusts an address only when the provider sends `email_verified`. Entra ID does not, so its users cannot accept workspace invitations or be matched to an existing account with the same address. After their first sign-in, an operator can tick **Email verified** on the user in Django admin.
+- **Confirmed email.** sbomify trusts an address only when the provider sends `email_verified`. Entra ID does not, so its users cannot accept workspace invitations or be matched to an existing account with the same address. Set `OIDC_TRUST_EMAIL` to the domains verified in your tenant, for example `OIDC_TRUST_EMAIL=example.com`, and sbomify treats addresses in them as confirmed, like **Trust Email** on a Keycloak identity provider. `true` trusts every address, which is only safe when the provider controls all of them: an Entra user's `email` attribute is otherwise free text. To confirm a single user instead, tick **Email verified** on them in Django admin.
 - **No sync.** Name and email are read when the account is created. Changes at the provider are not pulled in later.
 - **No deletion.** Deleting an account in sbomify leaves the user at the provider.
 
