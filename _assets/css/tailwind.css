@@ -1281,6 +1281,12 @@
 }
 
 /* Tables */
+/* Long field paths (cryptoProperties.algorithmProperties.primitive) wrap
+   inside their cell on a phone instead of pushing columns off-screen. */
+.blog-post td code, .page td code, .faq-content td code {
+  overflow-wrap: anywhere;
+}
+
 .blog-post table, .page table, .faq-content table {
   display: block;
   width: 100%;
@@ -9449,6 +9455,20 @@ a:hover > .ph-up {
   font-size: 0.85rem;
   color: rgb(var(--color-ink));
   word-break: break-all;
+}
+
+/* Field names in finding text (the CBOM, HBOM and AIBOM checks). Long
+   dotted paths such as cryptoProperties.algorithmProperties.primitive must
+   wrap on a phone rather than push the card wider. */
+.checker-p code,
+.checker-fix code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: rgb(var(--color-ink));
+  background: rgb(var(--color-surface-strong));
+  border-radius: 4px;
+  padding: 0.05em 0.3em;
+  overflow-wrap: anywhere;
 }
 
 /* Reference sources are long ("component "name@version""): on a phone the

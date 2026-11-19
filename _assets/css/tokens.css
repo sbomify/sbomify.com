@@ -19,6 +19,9 @@
  */
 
 :root {
+  /* One light theme only: opts out of forced dark modes (see head.html). */
+  color-scheme: only light;
+
   /* ===== Primitives: primary palette ===== */
   --color-navy-100: 37 41 63;     /* #25293F  Navy, primary · text · brand */
   --color-navy-80: 81 84 107;     /* #51546B */

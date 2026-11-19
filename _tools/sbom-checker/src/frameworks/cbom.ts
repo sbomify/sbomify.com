@@ -72,8 +72,8 @@ function assess(sbom: DetectedSbom): Finding[] {
         about: "Cryptographic assets are part of CycloneDX from version 1.6.",
         missing: "fail",
         remediation: legacy
-          ? "This looks like a pre-standard CBOM (component type crypto-asset). Regenerate it with a tool that writes CycloneDX 1.6 or 1.7, where the type is cryptographic-asset."
-          : "Generate the CBOM as CycloneDX 1.6 or 1.7. Earlier versions have no cryptographic-asset type or cryptoProperties.",
+          ? "This looks like a pre-standard CBOM (component type `crypto-asset`). Regenerate it with a tool that writes CycloneDX 1.6 or 1.7, where the type is `cryptographic-asset`."
+          : "Generate the CBOM as CycloneDX 1.6 or 1.7. Earlier versions have no `cryptographic-asset` type or `cryptoProperties`.",
       },
       atLeast(sbom.specVersion, 1, 6),
       `This document declares ${sbom.specVersion ? `specVersion ${sbom.specVersion}` : "no specVersion"}.`,
@@ -85,9 +85,9 @@ function assess(sbom: DetectedSbom): Finding[] {
       {
         id: `${P}:crypto-assets`,
         title: "Cryptographic assets",
-        about: "A CBOM lists the algorithms, certificates, protocols and keys a product uses as components of type cryptographic-asset.",
+        about: "A CBOM lists the algorithms, certificates, protocols and keys a product uses as components of type `cryptographic-asset`.",
         missing: "fail",
-        remediation: "Add a component of type cryptographic-asset, with cryptoProperties, for each algorithm, certificate, protocol and key or other related crypto material in use.",
+        remediation: "Add a component of type `cryptographic-asset`, with `cryptoProperties`, for each algorithm, certificate, protocol and key or other related crypto material in use.",
       },
       assets.length > 0,
       assets.length ? `Found ${assets.length}.` : "None found.",
@@ -103,9 +103,9 @@ function assess(sbom: DetectedSbom): Finding[] {
         {
           id: `${P}:asset-type`,
           title: "Asset type",
-          about: `cryptoProperties.assetType says what kind of asset each one is: ${ASSET_TYPES.join(", ")}.`,
+          about: `\`cryptoProperties.assetType\` says what kind of asset each one is: ${ASSET_TYPES.map((t) => `\`${t}\``).join(", ")}.`,
           missing: "fail",
-          remediation: `Give every cryptographic asset a cryptoProperties object with assetType set to one of ${ASSET_TYPES.join(", ")}.`,
+          remediation: `Give every cryptographic asset a \`cryptoProperties\` object with \`assetType\` set to one of ${ASSET_TYPES.map((t) => `\`${t}\``).join(", ")}.`,
         },
         names(assets, (c) => !(ASSET_TYPES as readonly string[]).includes(assetType(c) ?? "")),
         assets.length,
@@ -123,9 +123,9 @@ function assess(sbom: DetectedSbom): Finding[] {
           {
             id: `${P}:algorithm-primitive`,
             title: "Algorithm primitive",
-            about: "algorithmProperties.primitive says what an algorithm does (for example ae, signature, hash, kem or block-cipher), which is what quantum-readiness and policy checks key on.",
+            about: "`algorithmProperties.primitive` says what an algorithm does (for example `ae`, `signature`, `hash`, `kem` or `block-cipher`), which is what quantum-readiness and policy checks key on.",
             missing: "fail",
-            remediation: "Set cryptoProperties.algorithmProperties.primitive on every algorithm.",
+            remediation: "Set `cryptoProperties.algorithmProperties.primitive` on every algorithm.",
           },
           names(algorithms, (c) => !present(props(c, "algorithmProperties")?.primitive)),
           algorithms.length,
@@ -135,9 +135,9 @@ function assess(sbom: DetectedSbom): Finding[] {
           {
             id: `${P}:algorithm-oid`,
             title: "Algorithm OID",
-            about: "cryptoProperties.oid identifies an algorithm unambiguously, whatever it is called.",
+            about: "`cryptoProperties.oid` identifies an algorithm unambiguously, whatever it is called.",
             missing: "warning",
-            remediation: "Add the algorithm's object identifier as cryptoProperties.oid where one is registered, for example 2.16.840.1.101.3.4.1.46 for AES-256-GCM.",
+            remediation: "Add the algorithm's object identifier as `cryptoProperties.oid` where one is registered, for example `2.16.840.1.101.3.4.1.46` for AES-256-GCM.",
           },
           names(algorithms, (c) => !present(sub(c, "cryptoProperties")?.oid)),
           algorithms.length,
@@ -153,9 +153,9 @@ function assess(sbom: DetectedSbom): Finding[] {
           {
             id: `${P}:certificate-identity`,
             title: "Certificate subject and issuer",
-            about: "certificateProperties.subjectName and issuerName identify a certificate.",
+            about: "`certificateProperties.subjectName` and `issuerName` identify a certificate.",
             missing: "fail",
-            remediation: "Set cryptoProperties.certificateProperties.subjectName and issuerName on every certificate.",
+            remediation: "Set `cryptoProperties.certificateProperties.subjectName` and `issuerName` on every certificate.",
           },
           names(certificates, (c) => {
             const cert = props(c, "certificateProperties");
@@ -168,9 +168,9 @@ function assess(sbom: DetectedSbom): Finding[] {
           {
             id: `${P}:certificate-validity`,
             title: "Certificate validity",
-            about: "certificateProperties.notValidBefore and notValidAfter say when a certificate is valid, so expiry can be tracked.",
+            about: "`certificateProperties.notValidBefore` and `notValidAfter` say when a certificate is valid, so expiry can be tracked.",
             missing: "warning",
-            remediation: "Set cryptoProperties.certificateProperties.notValidBefore and notValidAfter on every certificate.",
+            remediation: "Set `cryptoProperties.certificateProperties.notValidBefore` and `notValidAfter` on every certificate.",
           },
           names(certificates, (c) => {
             const cert = props(c, "certificateProperties");
@@ -189,9 +189,9 @@ function assess(sbom: DetectedSbom): Finding[] {
           {
             id: `${P}:protocol-type`,
             title: "Protocol type",
-            about: "protocolProperties.type says which protocol it is (for example tls, ssh, ipsec or ike).",
+            about: "`protocolProperties.type` says which protocol it is (for example `tls`, `ssh`, `ipsec` or `ike`).",
             missing: "fail",
-            remediation: "Set cryptoProperties.protocolProperties.type on every protocol.",
+            remediation: "Set `cryptoProperties.protocolProperties.type` on every protocol.",
           },
           names(protocols, (c) => !present(props(c, "protocolProperties")?.type)),
           protocols.length,
@@ -207,9 +207,9 @@ function assess(sbom: DetectedSbom): Finding[] {
           {
             id: `${P}:material-type`,
             title: "Crypto material type",
-            about: "relatedCryptoMaterialProperties.type says what the material is (for example private-key, public-key, secret-key or password).",
+            about: "`relatedCryptoMaterialProperties.type` says what the material is (for example `private-key`, `public-key`, `secret-key` or `password`).",
             missing: "fail",
-            remediation: "Set cryptoProperties.relatedCryptoMaterialProperties.type on every related-crypto-material asset.",
+            remediation: "Set `cryptoProperties.relatedCryptoMaterialProperties.type` on every `related-crypto-material` asset.",
           },
           names(material, (c) => !present(props(c, "relatedCryptoMaterialProperties")?.type)),
           material.length,
@@ -223,9 +223,9 @@ function assess(sbom: DetectedSbom): Finding[] {
         {
           id: `${P}:bom-ref`,
           title: "Asset reference (bom-ref)",
-          about: "A bom-ref lets other assets and the dependency graph point at an asset, for example a certificate at its signature algorithm.",
+          about: "A `bom-ref` lets other assets and the dependency graph point at an asset, for example a certificate at its signature algorithm.",
           missing: "warning",
-          remediation: "Give every cryptographic asset a unique bom-ref.",
+          remediation: "Give every cryptographic asset a unique `bom-ref`.",
         },
         names(assets, (c) => !present(c["bom-ref"])),
         assets.length,
@@ -241,9 +241,9 @@ function assess(sbom: DetectedSbom): Finding[] {
           {
             id: `${P}:asset-references`,
             title: "References between assets",
-            about: "References such as signatureAlgorithmRef, algorithmRef, cryptoRefArray and cipher suite algorithms must name the bom-ref of a component in the document.",
+            about: "References such as `signatureAlgorithmRef`, `algorithmRef`, `cryptoRefArray` and cipher suite algorithms must name the `bom-ref` of a component in the document.",
             missing: "fail",
-            remediation: "Point every reference at the bom-ref of a component in this CBOM, or add the missing asset.",
+            remediation: "Point every reference at the `bom-ref` of a component in this CBOM, or add the missing asset.",
             phrase: {
               ok: (total) => `Every reference resolves (${total === 1 ? "one asset" : `${total} assets`} with references).`,
               bad: (n, total) => `${n} of ${total} assets with references point at a bom-ref that is not in the document.`,

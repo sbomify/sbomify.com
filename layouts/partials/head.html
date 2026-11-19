@@ -62,6 +62,15 @@
   {{- end -}}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {{- /* The site has one, light, theme (brand guidelines: white with navy
+       type). "only light" stops browsers from force-darkening it (Chrome's
+       Auto Dark Mode for web contents, Samsung Internet, Opera), which
+       inverts text but not images and leaves the hero gradients, the logo
+       and the status colours unreadable. darkreader-lock does the same for
+       the Dark Reader extension. tokens.css sets color-scheme too, so form
+       controls and scrollbars stay light. */}}
+  <meta name="color-scheme" content="only light">
+  <meta name="darkreader-lock">
   {{- /* The " | sbomify" brand suffix is only added when the whole title
        still fits in ~60 characters. Search results truncate past that, and
        a cut-off headline costs more clicks than a missing brand name. */ -}}
