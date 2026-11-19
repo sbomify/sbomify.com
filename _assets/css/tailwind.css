@@ -9261,11 +9261,21 @@ a:hover > .ph-up {
   color: rgb(var(--color-ink-subtle));
 }
 
+/* A grid, so facts that wrap onto a second row line up in columns, and
+   each value sits on the bottom line of its cell even when a label
+   ("Cryptographic assets") wraps. */
 .checker-facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: 12px 20px;
   margin-top: 14px;
+}
+
+.checker-facts > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2px;
 }
 
 .checker-facts dt {
@@ -9281,9 +9291,11 @@ a:hover > .ph-up {
   color: rgb(var(--color-ink));
 }
 
+/* The minimum fits the longest verdict ("12 recommended", "Could not run")
+   on one line beside its icon; values never wrap (see .checker-tile-value). */
 .checker-tiles {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(9.25rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(10.75rem, 1fr));
   gap: 10px;
   margin-top: 20px;
 }
@@ -9317,6 +9329,7 @@ a:hover > .ph-up {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
   font-weight: var(--font-weight-bold);
   color: rgb(var(--color-ink));
 }
