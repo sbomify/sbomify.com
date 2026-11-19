@@ -1,6 +1,6 @@
 # SBOM checker
 
-The browser-side SBOM checker behind [/tools/sbom-checker/](https://sbomify.com/tools/sbom-checker/). It validates a CycloneDX or SPDX JSON document against its official schema, scores it against compliance frameworks, and checks its external references. All of it runs in the visitor's browser; nothing is uploaded.
+The browser-side SBOM checker behind [/tools/sbom-checker/](https://sbomify.com/tools/sbom-checker/), and the CBOM, HBOM and AIBOM validators that share it. It validates a CycloneDX or SPDX JSON document against its official schema, scores it against compliance frameworks, and checks its external references. All of it runs in the visitor's browser; nothing is uploaded.
 
 ## Layout
 
@@ -9,6 +9,7 @@ The browser-side SBOM checker behind [/tools/sbom-checker/](https://sbomify.com/
 - `src/detect.ts`: parsing and format/version detection.
 - `src/validate.ts`, `src/schema/`: schema validation. `schemas/` holds the upstream schemas; `scripts/compile-schemas.ts` compiles them with Ajv in standalone mode into `src/schema/generated/` (not committed). The browser never runs a schema compiler, and each schema is its own chunk, loaded only for the version being checked.
 - `src/refs.ts`: external references (collect, resolve, verify hashes, fetch referenced SBOMs).
+- `src/frameworks/cbom.ts`, `hbom.ts`, `aibom.ts`: the required-field checks behind the CBOM, HBOM and AIBOM validators ([/tools/cbom-checker/](https://sbomify.com/tools/cbom-checker/), [/tools/hbom-checker/](https://sbomify.com/tools/hbom-checker/), [/tools/aibom-checker/](https://sbomify.com/tools/aibom-checker/)). The page's `data-kind` (`sbom`, `cbom`, `hbom`, `aibom`) is passed to `analyse()`, which runs these instead of the SBOM frameworks and skips reference checks.
 - `src/frameworks/`: the compliance checks. These are ports of the assessment plugins in the sbomify platform (`sbomify/apps/plugins/builtins/` in sbomify/sbomify) and retain their finding IDs. Standard-derived corrections take precedence over historical scoring parity; see [STANDARDS.md](STANDARDS.md) for the sources, review resolutions and assessment limits.
 
 ## Commands

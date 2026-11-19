@@ -5,20 +5,34 @@
  */
 import { formatLabel, parseSbom } from "./detect";
 import { FRAMEWORKS } from "./frameworks";
+import { cbomRequired, cryptoAssets } from "./frameworks/cbom";
+import { devices, hbomRequired } from "./frameworks/hbom";
+import { aibomRequired, aiInventory } from "./frameworks/aibom";
 import { extractRefs, type ExternalRef } from "./refs";
-import { runFramework, type FrameworkResult, type JsonObject, type SbomFormat } from "./types";
+import { runFramework, type BomKind, type Framework, type FrameworkResult, type JsonObject, type SbomFormat } from "./types";
 import { validateSchema, type SchemaResult } from "./validate";
 
 export interface Inventory {
   components: number;
   dependencies: number;
+  /** Components of type cryptographic-asset (CBOM checker only). */
+  cryptoAssets?: number;
+  /** Components of type device (HBOM checker only). */
+  devices?: number;
+  /** AI models and datasets (AIBOM checker only). */
+  models?: number;
+  datasets?: number;
 }
+
+/** What each checker runs. The CBOM, HBOM and AIBOM checkers skip the SBOM frameworks and reference checks. */
+const CHECKS: Record<BomKind, Framework[]> = { sbom: FRAMEWORKS, cbom: [cbomRequired], hbom: [hbomRequired], aibom: [aibomRequired] };
 
 export type Analysis =
   | { ok: false; name: string; error: string; hint?: string; errorKind?: string }
   | {
       ok: true;
       name: string;
+      kind: BomKind;
       format: SbomFormat;
       formatLabel: string;
       specVersion: string | null;
@@ -28,7 +42,7 @@ export type Analysis =
       refs: ExternalRef[];
     };
 
-export async function analyse(text: string, name: string): Promise<Analysis> {
+export async function analyse(text: string, name: string, kind: BomKind = "sbom"): Promise<Analysis> {
   const parsed = parseSbom(text);
   if (!parsed.ok) return { ok: false, name, error: parsed.error, hint: parsed.hint, errorKind: parsed.kind };
   const sbom = parsed.sbom;
@@ -38,19 +52,21 @@ export async function analyse(text: string, name: string): Promise<Analysis> {
   return {
     ok: true,
     name,
+    kind,
     format: sbom.format,
     formatLabel: formatLabel(sbom),
     specVersion: sbom.specVersion,
-    inventory: inventory(sbom.format, sbom.data),
+    inventory: { ...inventory(sbom.format, sbom.data, kind), ...(kind === "aibom" ? aiInventory(sbom) : {}) },
     schema,
-    frameworks: FRAMEWORKS.map((f) => runFramework(f, sbom)),
-    refs: extractRefs(sbom),
+    frameworks: CHECKS[kind].map((f) => runFramework(f, sbom)),
+    refs: kind === "sbom" ? extractRefs(sbom) : [],
   };
 }
 
-function inventory(format: SbomFormat, d: JsonObject): Inventory {
+function inventory(format: SbomFormat, d: JsonObject, kind: BomKind): Inventory {
   const list = (v: unknown) => (Array.isArray(v) ? v : []);
   if (format === "cyclonedx") {
+    const extra = kind === "cbom" ? { cryptoAssets: cryptoAssets(d).length } : kind === "hbom" ? { devices: devices(d).length } : {};
     let components = 0;
     const walk = (cs: unknown) => {
       for (const c of list(cs)) {
@@ -59,7 +75,7 @@ function inventory(format: SbomFormat, d: JsonObject): Inventory {
       }
     };
     walk(d.components);
-    return { components, dependencies: list(d.dependencies).reduce<number>((n, dep) => n + list((dep as JsonObject)?.dependsOn).length, 0) };
+    return { components, dependencies: list(d.dependencies).reduce<number>((n, dep) => n + list((dep as JsonObject)?.dependsOn).length, 0), ...extra };
   }
   if (format === "spdx") {
     return {

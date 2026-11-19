@@ -114,10 +114,6 @@ nav:
             desc: Step by step for every language and build
             link: /guides/
             icon: graduation-cap
-          - name: SBOM checker
-            desc: Check an SBOM against CISA, NTIA and the CRA
-            link: /tools/sbom-checker/
-            icon: list-magnifying-glass
           - name: Compliance
             desc: CISA, NIST, BSI, FDA, NIS2 and more
             link: /compliance/
@@ -134,6 +130,23 @@ nav:
             desc: Tools, benchmarks and further reading
             link: /resources/
             icon: book-bookmark
+      - heading: Tools
+        items:
+          - name: SBOM checker
+            link: /tools/sbom-checker/
+            icon: list-magnifying-glass
+          - name: CBOM validator
+            link: /tools/cbom-checker/
+            icon: key
+          - name: HBOM validator
+            link: /tools/hbom-checker/
+            icon: cpu
+          - name: AIBOM validator
+            link: /tools/aibom-checker/
+            icon: brain
+          - name: All tools
+            link: /tools/
+            icon: wrench
       - heading: Company
         items:
           - name: About

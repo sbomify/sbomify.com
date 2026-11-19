@@ -1,0 +1,92 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:7c1b9f0a-4d2e-4a8f-9b61-2f6d8e0c5a13",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-11-19T09:00:00Z",
+    "component": {
+      "type": "device",
+      "bom-ref": "example-sensor-hub",
+      "name": "Example Sensor Hub",
+      "version": "rev-C",
+      "manufacturer": {
+        "name": "Example Devices Ltd",
+        "url": [
+          "https://example.com"
+        ]
+      },
+      "cpe": "cpe:2.3:h:example:sensor_hub:rev-c:*:*:*:*:*:*:*"
+    }
+  },
+  "components": [
+    {
+      "type": "device",
+      "bom-ref": "mainboard",
+      "name": "SH-MB mainboard",
+      "version": "1.3",
+      "manufacturer": {
+        "name": "Example Devices Ltd"
+      },
+      "cpe": "cpe:2.3:h:example:sh-mb:1.3:*:*:*:*:*:*:*",
+      "components": [
+        {
+          "type": "device",
+          "bom-ref": "soc",
+          "name": "EX-SOC-400 system on chip",
+          "version": "B1",
+          "manufacturer": {
+            "name": "Example Silicon Inc."
+          },
+          "cpe": "cpe:2.3:h:example_silicon:ex-soc-400:b1:*:*:*:*:*:*:*"
+        },
+        {
+          "type": "device",
+          "bom-ref": "flash",
+          "name": "EXF-25Q128 SPI flash",
+          "version": "128Mbit",
+          "manufacturer": {
+            "name": "Example Memory Co."
+          },
+          "cpe": "cpe:2.3:h:example_memory:exf-25q128:-:*:*:*:*:*:*:*"
+        },
+        {
+          "type": "device",
+          "bom-ref": "wifi",
+          "name": "EXW-6 Wi-Fi module",
+          "version": "2.0",
+          "supplier": {
+            "name": "Example Radio GmbH"
+          }
+        }
+      ]
+    },
+    {
+      "type": "firmware",
+      "bom-ref": "bootloader",
+      "name": "sensor-hub-bootloader",
+      "version": "4.1.2",
+      "supplier": {
+        "name": "Example Devices Ltd"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "example-sensor-hub",
+      "dependsOn": [
+        "mainboard",
+        "bootloader"
+      ]
+    },
+    {
+      "ref": "mainboard",
+      "dependsOn": [
+        "soc",
+        "flash",
+        "wifi"
+      ]
+    }
+  ]
+}

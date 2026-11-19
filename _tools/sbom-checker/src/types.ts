@@ -11,6 +11,9 @@
 export type Json = null | boolean | number | string | Json[] | { [key: string]: Json };
 export type JsonObject = { [key: string]: Json };
 
+/** Which checker is running: the SBOM checker, or the CBOM, HBOM or AIBOM validator. */
+export type BomKind = "sbom" | "cbom" | "hbom" | "aibom";
+
 export type SbomFormat = "cyclonedx" | "spdx" | "spdx3" | "unknown";
 
 export interface DetectedSbom {

@@ -152,7 +152,11 @@ export function elementOf(finding: Pick<Finding, "id">): string {
   return i >= 0 ? finding.id.slice(i + 1) : finding.id;
 }
 
+/** The CBOM, HBOM and AIBOM checks are not SBOM frameworks: the action and the SBOM guides do not apply. */
+const NON_SBOM = new Set(["cbom", "hbom", "aibom"]);
+
 export function linksFor(frameworkId: string, finding: Pick<Finding, "id">): FindingLinks {
+  if (NON_SBOM.has(frameworkId)) return {};
   const element = elementOf(finding);
   const fixKey = ELEMENT_FIX[element];
   return {
