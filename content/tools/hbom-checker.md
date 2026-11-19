@@ -58,15 +58,18 @@ The document is validated against the official [CycloneDX](https://cyclonedx.org
 
 The schema requires only a type and a name for each component. To identify a part, and to match it against vulnerability, end-of-life and counterfeit data, each device needs more.
 
-| Check               | Applies to   | Field                                                   | Result if missing |
-| ------------------- | ------------ | ------------------------------------------------------- | ----------------- |
-| Hardware components | The document | At least one component of type `device`                 | Fail              |
-| Device name         | Every device | `name`, not blank                                       | Fail              |
-| Manufacturer        | Every device | `manufacturer.name` (CycloneDX 1.6+) or `supplier.name` | Fail              |
-| Version or revision | Every device | `version`: the model, hardware revision or part number  | Fail              |
-| Unique identifier   | Every device | `cpe` (part `h`), `purl` or `swid`                      | Warning           |
-| Subject of the BOM  | The document | `metadata.component`                                    | Warning           |
-| Timestamp           | The document | `metadata.timestamp`                                    | Warning           |
+| Required (fails if missing)        | Field                                                   |
+| ---------------------------------- | ------------------------------------------------------- |
+| Hardware components (the document) | At least one component of type `device`                 |
+| Device name (every device)         | `name`, not blank                                       |
+| Manufacturer (every device)        | `manufacturer.name` (CycloneDX 1.6+) or `supplier.name` |
+| Version or revision (every device) | `version`: the model, hardware revision or part number  |
+
+| Recommended (warning if missing)  | Field                              |
+| --------------------------------- | ---------------------------------- |
+| Unique identifier (every device)  | `cpe` (part `h`), `purl` or `swid` |
+| Subject of the BOM (the document) | `metadata.component`               |
+| Timestamp (the document)          | `metadata.timestamp`               |
 
 Devices are found wherever they are in the document: in `components`, nested inside other components, or as `metadata.component`. Firmware and software components are counted but not checked here; check the SBOM for those with the [SBOM checker](/tools/sbom-checker/).
 

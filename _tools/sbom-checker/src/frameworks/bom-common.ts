@@ -98,9 +98,9 @@ export function documentChecks(prefix: string, kind: string, data: JsonObject): 
       {
         id: `${prefix}:subject`,
         title: "Subject of the BOM",
-        about: `metadata.component says which product or system the ${kind} describes.`,
+        about: `\`metadata.component\` says which product or system the ${kind} describes.`,
         missing: "warning",
-        remediation: `Add metadata.component with the name and version of the product the ${kind} is for, so a reader can tell which product and release it belongs to.`,
+        remediation: `Add \`metadata.component\` with the name and version of the product the ${kind} is for, so a reader can tell which product and release it belongs to.`,
       },
       !!subject && present(subject.name),
     ),
@@ -108,9 +108,9 @@ export function documentChecks(prefix: string, kind: string, data: JsonObject): 
       {
         id: `${prefix}:timestamp`,
         title: "Timestamp",
-        about: `metadata.timestamp records when the ${kind} was produced.`,
+        about: `\`metadata.timestamp\` records when the ${kind} was produced.`,
         missing: "warning",
-        remediation: "Add metadata.timestamp as an ISO 8601 date and time, for example 2026-11-19T09:00:00Z.",
+        remediation: "Add `metadata.timestamp` as an ISO 8601 date and time, for example `2026-11-19T09:00:00Z`.",
       },
       timestamp !== undefined && isValidIsoTimestamp(timestamp),
     ),

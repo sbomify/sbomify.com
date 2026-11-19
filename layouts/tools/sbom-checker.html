@@ -42,7 +42,7 @@
       <form class="checker-drop" data-checker-form data-checker-drop>
         <label for="checker-file" class="checker-drop-label">
           <span class="checker-drop-icon">{{ partial "ph.html" (dict "name" "file-arrow-up" "weight" "duotone") }}</span>
-          <span class="checker-drop-title">Drop {{ if in (slice "sbom" "aibom") $kind }}an{{ else }}a{{ end }} {{ $noun }} here</span>
+          <span class="checker-drop-title">Drop {{ if eq $kind "cbom" }}a{{ else }}an{{ end }} {{ $noun }} here</span>
           <span class="checker-drop-sub">or <span class="link">choose a file</span> (.json or .json.gz)</span>
         </label>
         <input id="checker-file" class="sr-only" type="file" accept=".json,.gz,.cdx,.spdx,application/json" data-checker-file>

@@ -60,21 +60,24 @@ The document is validated against the official [CycloneDX](https://cyclonedx.org
 
 The schema requires only that each cryptographic asset says which kind it is. Without the properties below, a reader, or a post-quantum readiness check, cannot tell one asset from another.
 
-| Check                          | Applies to                   | Field                                                                                                                    | Result if missing |
-| ------------------------------ | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------- |
-| CycloneDX 1.6 or later         | The document                 | `specVersion`                                                                                                            | Fail              |
-| Cryptographic assets           | The document                 | At least one component of type `cryptographic-asset`                                                                     | Fail              |
-| Asset type                     | Every cryptographic asset    | `cryptoProperties.assetType`                                                                                             | Fail              |
-| Algorithm primitive            | Algorithms                   | `algorithmProperties.primitive`                                                                                          | Fail              |
-| Certificate subject and issuer | Certificates                 | `certificateProperties.subjectName` and `issuerName`                                                                     | Fail              |
-| Protocol type                  | Protocols                    | `protocolProperties.type`                                                                                                | Fail              |
-| Crypto material type           | Keys and other material      | `relatedCryptoMaterialProperties.type`                                                                                   | Fail              |
-| References between assets      | Assets that reference others | Every `signatureAlgorithmRef`, `algorithmRef`, `cryptoRefArray` and cipher suite entry names a `bom-ref` in the document | Fail              |
-| Algorithm OID                  | Algorithms                   | `cryptoProperties.oid`                                                                                                   | Warning           |
-| Certificate validity           | Certificates                 | `notValidBefore` and `notValidAfter`                                                                                     | Warning           |
-| Asset reference                | Every cryptographic asset    | `bom-ref`                                                                                                                | Warning           |
-| Subject of the BOM             | The document                 | `metadata.component`                                                                                                     | Warning           |
-| Timestamp                      | The document                 | `metadata.timestamp`                                                                                                     | Warning           |
+| Required (fails if missing)                              | Field                                                                                                                    |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| CycloneDX 1.6 or later (the document)                    | `specVersion`                                                                                                            |
+| Cryptographic assets (the document)                      | At least one component of type `cryptographic-asset`                                                                     |
+| Asset type (every cryptographic asset)                   | `cryptoProperties.assetType`                                                                                             |
+| Algorithm primitive (algorithms)                         | `algorithmProperties.primitive`                                                                                          |
+| Certificate subject and issuer (certificates)            | `certificateProperties.subjectName` and `issuerName`                                                                     |
+| Protocol type (protocols)                                | `protocolProperties.type`                                                                                                |
+| Crypto material type (keys and other material)           | `relatedCryptoMaterialProperties.type`                                                                                   |
+| References between assets (assets that reference others) | Every `signatureAlgorithmRef`, `algorithmRef`, `cryptoRefArray` and cipher suite entry names a `bom-ref` in the document |
+
+| Recommended (warning if missing)            | Field                                |
+| ------------------------------------------- | ------------------------------------ |
+| Algorithm OID (algorithms)                  | `cryptoProperties.oid`               |
+| Certificate validity (certificates)         | `notValidBefore` and `notValidAfter` |
+| Asset reference (every cryptographic asset) | `bom-ref`                            |
+| Subject of the BOM (the document)           | `metadata.component`                 |
+| Timestamp (the document)                    | `metadata.timestamp`                 |
 
 A component counts as a cryptographic asset when its type is `cryptographic-asset` or it carries `cryptoProperties`, which is how sbomify recognises CBOM content on upload. A software SBOM with a few cryptographic assets in it can be checked here too.
 

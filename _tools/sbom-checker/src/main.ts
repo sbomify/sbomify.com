@@ -295,10 +295,19 @@ function schemaVerdict(s: SchemaResult): Verdict {
   return { status: "warning", text: "Not checked" };
 }
 
+/** The CBOM, HBOM and AIBOM required-field checks, as opposed to SBOM frameworks. */
+const isFieldCheck = (id: string) => id === "cbom" || id === "hbom" || id === "aibom";
+
 function frameworkVerdict(f: FrameworkResult): Verdict {
   const total = f.findings.length;
   const { pass, fail, warning, error } = f.summary;
   if (error) return { status: "error", text: "Could not run" };
+  // Required-field checks: a warning is a recommendation, so "8 of 10 met" would read as a failure.
+  if (isFieldCheck(f.id)) {
+    if (fail) return { status: "fail", text: `${fail} missing` };
+    if (warning) return { status: "warning", text: `${warning} recommended` };
+    return { status: "pass", text: "All present" };
+  }
   if (fail) return { status: "fail", text: `${pass} of ${total} met` };
   if (warning) return { status: "warning", text: `${pass} of ${total} met` };
   return { status: "pass", text: `All ${total} met` };
@@ -352,13 +361,13 @@ function renderFramework(id: string, f: FrameworkResult): HTMLElement {
   const sorted = [...f.findings].sort((a, b) => order[a.status] - order[b.status]);
   const open = sorted.filter((x) => x.status !== "pass");
   const passed = sorted.filter((x) => x.status === "pass");
-  const sbomFramework = f.id !== "cbom" && f.id !== "hbom" && f.id !== "aibom";
+  const sbomFramework = !isFieldCheck(f.id);
   const parts: Child[] = [];
   if (f.guideUrl) parts.push(h("a", { class: "link", href: f.guideUrl, "data-track": "framework_guide", "data-framework": f.id }, "Read our guide"));
   if (f.id.startsWith("bsi")) parts.push(h("a", { class: "link", href: "/compliance/eu-cra/", "data-track": "eu_cra_guide", "data-framework": f.id }, "EU CRA guide"));
   if (sbomFramework) parts.push(h("a", { class: "link", href: "/compliance/schema-crosswalk/", "data-track": "field_mappings", "data-framework": f.id }, "Field mappings"));
   parts.push(h("a", { class: "link", href: f.url, rel: "nofollow noopener noreferrer", target: "_blank", "data-track": "official_source", "data-framework": f.id }, sbomFramework ? "Official source" : "CycloneDX specification"));
-  const links = h("p", { class: "checker-meta" }, sbomFramework ? `${f.name}, version ${f.version}. ` : `${f.name}, ${f.version}. `, ...parts.flatMap((p, i) => (i ? [" · ", p] : [p])));
+  const links = h("p", { class: "checker-meta" }, sbomFramework ? `${f.name}, version ${f.version}. ` : `${f.version}. `, ...parts.flatMap((p, i) => (i ? [" · ", p] : [p])));
   const list = h("ul", { class: "checker-findings", role: "list" });
   for (const fd of open) list.append(renderFinding(fd, f.id));
   const body: Child[] = [links];
@@ -372,15 +381,26 @@ function renderFramework(id: string, f: FrameworkResult): HTMLElement {
   return section(id, cardTitle(f), v, ...body);
 }
 
+/**
+ * Finding text. The required-field checks mark field names with backticks,
+ * shown as code; SBOM framework text is plain. Only our own strings come
+ * through here (names from the document go into the affected list), and
+ * every piece is set as text, never HTML.
+ */
+function prose(text: string, frameworkId: string): Child[] {
+  if (!isFieldCheck(frameworkId)) return [text];
+  return text.split("`").map((part, i) => (i % 2 ? h("code", {}, part) : part));
+}
+
 function renderFinding(f: Finding, frameworkId: string): HTMLElement {
-  const li = h("li", { class: `checker-finding is-${f.status}` }, h("div", { class: "checker-finding-head" }, pill(f.status), h("h4", {}, f.title)), h("p", { class: "checker-p" }, f.description));
+  const li = h("li", { class: `checker-finding is-${f.status}` }, h("div", { class: "checker-finding-head" }, pill(f.status), h("h4", {}, f.title)), h("p", { class: "checker-p" }, ...prose(f.description, frameworkId)));
   if (f.affected?.length) {
     const total = f.affectedCount ?? f.affected.length;
     const ul = h("ul", { class: "checker-affected" });
     for (const name of f.affected) ul.append(h("li", {}, name));
     li.append(h("details", { class: "checker-affected-wrap", "data-expand": "affected", "data-framework": frameworkId, "data-element": f.id }, h("summary", {}, `${total} affected component${total === 1 ? "" : "s"}`), ul, total > f.affected.length ? h("p", { class: "checker-hint" }, `…and ${total - f.affected.length} more.`) : null));
   }
-  if (f.remediation && f.status !== "pass") li.append(h("p", { class: "checker-fix" }, h("strong", {}, "How to fix: "), f.remediation));
+  if (f.remediation && f.status !== "pass") li.append(h("p", { class: "checker-fix" }, h("strong", {}, "How to fix: "), ...prose(f.remediation, frameworkId)));
   if (f.status !== "pass") {
     const links = linksFor(frameworkId, f);
     const t = (kind: string, step?: string) => ({ "data-track": kind, "data-framework": frameworkId, "data-element": f.id, "data-step": step });

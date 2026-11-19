@@ -62,28 +62,34 @@ The document is validated against the official JSON schema for the version it de
 
 **CycloneDX** describes a model as a component of type `machine-learning-model` with a `modelCard`, and training data as components of type `data`. The schema requires only a type and a name.
 
-| Check                  | Applies to   | Field                                                   | Result if missing |
-| ---------------------- | ------------ | ------------------------------------------------------- | ----------------- |
-| CycloneDX 1.5 or later | The document | `specVersion`                                           | Fail              |
-| AI models              | The document | At least one component of type `machine-learning-model` | Fail              |
-| Model supplier         | Every model  | `supplier.name`, `manufacturer.name` or `authors`       | Fail              |
-| Model version          | Every model  | `version`                                               | Fail              |
-| Model card             | Every model  | `modelCard`                                             | Fail              |
-| Model task             | Every model  | `modelCard.modelParameters.task`                        | Warning           |
-| Training data          | Every model  | `modelCard.modelParameters.datasets`                    | Warning           |
-| Model licence          | Every model  | `licenses`                                              | Warning           |
-| Subject of the BOM     | The document | `metadata.component`                                    | Warning           |
-| Timestamp              | The document | `metadata.timestamp`                                    | Warning           |
+| Required (fails if missing)           | Field                                                   |
+| ------------------------------------- | ------------------------------------------------------- |
+| CycloneDX 1.5 or later (the document) | `specVersion`                                           |
+| AI models (the document)              | At least one component of type `machine-learning-model` |
+| Model supplier (every model)          | `supplier.name`, `manufacturer.name` or `authors`       |
+| Model version (every model)           | `version`                                               |
+| Model card (every model)              | `modelCard`                                             |
+
+| Recommended (warning if missing)  | Field                                |
+| --------------------------------- | ------------------------------------ |
+| Model task (every model)          | `modelCard.modelParameters.task`     |
+| Training data (every model)       | `modelCard.modelParameters.datasets` |
+| Model licence (every model)       | `licenses`                           |
+| Subject of the BOM (the document) | `metadata.component`                 |
+| Timestamp (the document)          | `metadata.timestamp`                 |
 
 **SPDX 3** describes a model as an `ai_AIPackage` and a dataset as a `dataset_DatasetPackage`. The AI and Dataset profiles make several properties mandatory that the JSON schema leaves optional; the validator checks them.
 
-| Check                      | Applies to                     | Field                                                                                                                     | Result if missing |
-| -------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| AI models                  | The document                   | At least one `ai_AIPackage`                                                                                               | Fail              |
-| AI profile properties      | Every `ai_AIPackage`           | `suppliedBy`, `releaseTime`, `software_packageVersion`, `software_downloadLocation`, `software_primaryPurpose`            | Fail              |
-| Dataset profile properties | Every `dataset_DatasetPackage` | `originatedBy`, `releaseTime`, `builtTime`, `software_downloadLocation`, `software_primaryPurpose`, `dataset_datasetType` | Fail              |
-| Training data              | Every `ai_AIPackage`           | A `trainedOn` or `testedOn` relationship                                                                                  | Warning           |
-| Model licence              | Every `ai_AIPackage`           | A `hasDeclaredLicense` or `hasConcludedLicense` relationship                                                              | Warning           |
+| Required (fails if missing)                                 | Field                                                                                                                     |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| AI models (the document)                                    | At least one `ai_AIPackage`                                                                                               |
+| AI profile properties (every `ai_AIPackage`)                | `suppliedBy`, `releaseTime`, `software_packageVersion`, `software_downloadLocation`, `software_primaryPurpose`            |
+| Dataset profile properties (every `dataset_DatasetPackage`) | `originatedBy`, `releaseTime`, `builtTime`, `software_downloadLocation`, `software_primaryPurpose`, `dataset_datasetType` |
+
+| Recommended (warning if missing)     | Field                                                        |
+| ------------------------------------ | ------------------------------------------------------------ |
+| Training data (every `ai_AIPackage`) | A `trainedOn` or `testedOn` relationship                     |
+| Model licence (every `ai_AIPackage`) | A `hasDeclaredLicense` or `hasConcludedLicense` relationship |
 
 ## Frequently asked questions
 
