@@ -74,7 +74,7 @@ Key features:
 
 - **Automatic updates**: when you upload a new SBOM from CI, your Trust Center reflects it immediately
 - **Custom domain**: map your Trust Center to your own domain (e.g., trust.yourcompany.com)
-- **Granular access**: choose which components and advisories are public, gated behind an NDA, or private
+- **Granular access**: choose which components and advisories are public, gated (access on approval, optionally behind an NDA), or private
 - **Security advisories with CSAF 2.0**: publish advisories for people and machines
 - **security.txt**: an RFC 9116 contact file served from your Trust Center domain
 - **Compliance badges**: show which standards your products meet

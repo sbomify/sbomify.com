@@ -41,7 +41,7 @@ The two ISO standards most PSIRTs reference are **ISO/IEC 29147** (vulnerability
 There are two reasons it is no longer optional:
 
 - **CVE volume.** The number of published CVEs keeps setting records every year. Every one of them that touches a dependency you ship turns into a customer asking "are you affected?". Without a PSIRT process, those questions go to whichever engineer the account manager knows.
-- **Regulation.** The [EU Cyber Resilience Act](/compliance/eu-cra/) makes vulnerability handling a legal obligation for products sold in the EU: a coordinated vulnerability disclosure policy, a reporting contact, public disclosure of fixed vulnerabilities, and from 11 September 2026, reporting actively exploited vulnerabilities to authorities within 24 hours.
+- **Regulation.** The [EU Cyber Resilience Act](/compliance/eu-cra/) makes vulnerability handling a legal obligation for products sold in the EU: a coordinated vulnerability disclosure policy, a reporting contact, public disclosure of fixed vulnerabilities, and, since 11 September 2026, reporting actively exploited vulnerabilities to authorities within 24 hours.
 
 ## The minimum viable PSIRT
 
@@ -53,4 +53,4 @@ A small vendor does not need a large team. It needs:
 - A **patch SLA** per severity, and a way to measure it
 - A predictable, public place to **publish advisories**, ideally also as machine-readable CSAF
 
-sbomify covers the last four in one place: SBOM-based vulnerability scanning, VEX triage, patch SLA targets with the CRA KPIs, and [security advisories](/features/security-advisories/) published to your [Trust Center](/features/trust-center/) with a CSAF 2.0 feed and security.txt.
+sbomify covers the last four in one place: SBOM-based vulnerability scanning, VEX triage, patch SLA targets with the CRA KPIs, and [security advisories](/features/security-advisories/) published to your [Trust Center](/features/trust-center/) with a CSAF 2.0 feed and security.txt. For the regulator step, it also prepares CRA Article 14 incident reports in the fields ENISA's Single Reporting Platform asks for and tracks their deadlines (you still file them on the ENISA portal).
