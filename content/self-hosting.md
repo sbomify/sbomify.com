@@ -227,7 +227,7 @@ Migrations run before the new web and worker containers start. Take a database s
 
 ## Option 2: Kubernetes with Helm
 
-The chart in [`charts/sbomify`](https://github.com/sbomify/sbomify/tree/master/charts/sbomify) needs Kubernetes 1.30 or later. It deploys web, workers, the scheduler, Caddy and the migration job. It does not deploy PostgreSQL, Redis, object storage or an identity provider: bring your own, which fits the reference architecture above. For a provider other than Keycloak, set `auth.oidc.discoveryUrl` instead of `auth.keycloak.serverUrl`, and put its client ID and secret in `auth.oidc.clientId` and `auth.oidc.clientSecret`. `auth.oidc.trustEmail` sets `OIDC_TRUST_EMAIL`.
+The chart in [`charts/sbomify`](https://github.com/sbomify/sbomify/tree/master/charts/sbomify) needs Kubernetes 1.30 or later. It deploys web, workers, the scheduler, Caddy and the migration job. It does not deploy PostgreSQL, Redis, object storage or an identity provider: bring your own, which fits the reference architecture above. For a provider other than Keycloak (a chart newer than v26.11.1), set `auth.oidc.discoveryUrl` instead of `auth.keycloak.serverUrl`, and put its client ID and secret in `auth.oidc.clientId` and `auth.oidc.clientSecret`. `auth.oidc.trustEmail` sets `OIDC_TRUST_EMAIL`.
 
 ```bash
 git clone --depth 1 --branch v26.11.0 https://github.com/sbomify/sbomify.git
@@ -332,14 +332,14 @@ Everything is configured through environment variables. These are the ones most 
 | `KEYCLOAK_CLIENT_SECRET`               | none                    | From the client's Credentials tab.                                                                                                                                               |
 | `USE_KEYCLOAK`                         | `False`                 | Set `True` so deleting an account in sbomify also removes the user from Keycloak. Needs `KEYCLOAK_ADMIN_USERNAME` and `KEYCLOAK_ADMIN_PASSWORD`.                                 |
 | `OIDC_DISCOVERY_URL`                   | Keycloak realm          | Discovery document of another OIDC provider. See [Another OIDC provider](#another-oidc-provider).                                                                                |
-| `OIDC_LOGOUT_URL`                      | discovered              | Sign-out endpoint, for a provider whose discovery document has none.                                                                                                             |
+| `OIDC_LOGOUT_URL`                      | discovered              | Sign-out endpoint, for a provider whose discovery document has none. With Keycloak, the realm's endpoint under `KEYCLOAK_PUBLIC_URL`.                                            |
 | `OIDC_CLIENT_ID`, `OIDC_CLIENT_SECRET` | the `KEYCLOAK_*` values | Provider-neutral names for the client ID and secret. They win when set.                                                                                                          |
 | `OIDC_TRUST_EMAIL`                     | off                     | `true`, or a comma-separated list of domains, to treat the provider's addresses as confirmed. See [Another OIDC provider](#another-oidc-provider).                               |
 | `OIDC_GITHUB_AUDIENCE`                 | `sbomify.com`           | Audience for [OIDC trusted publishing](/faq/how-do-i-set-up-oidc-trusted-publishing/) from GitHub Actions. Set it to your own domain.                                            |
 
 ### Another OIDC provider
 
-sbomify signs in through a generic OpenID Connect client, so you can point it at the identity provider you already run. Create a confidential web application at the provider, then set:
+sbomify signs in through a generic OpenID Connect client, so you can point it at the identity provider you already run. The settings below need a sbomify release newer than v26.11.1; earlier releases sign in through Keycloak only. Create a confidential web application at the provider, then set:
 
 ```bash
 OIDC_CLIENT_ID=<client ID at the provider>
@@ -351,12 +351,12 @@ OIDC_DISCOVERY_URL=https://idp.example.com/.well-known/openid-configuration
 
 At the provider, allow `https://sbomify.example.com/accounts/oidc/keycloak/login/callback/` as the sign-in redirect URI and `https://sbomify.example.com/accounts/oidc/keycloak/login/` as the sign-out redirect URI. The `keycloak` in those paths is an internal name and stays the same for every provider. sbomify asks for the `openid email profile` scopes.
 
-| Provider | `OIDC_DISCOVERY_URL`                                                                  | Sign-out                                                                                                    |
-| -------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Okta     | `https://<org>.okta.com/oauth2/default/.well-known/openid-configuration`              | Works as is.                                                                                                |
-| Auth0    | `https://<tenant>.auth0.com/.well-known/openid-configuration`                         | Turn on RP-Initiated Logout in the tenant, or set `OIDC_LOGOUT_URL=https://<tenant>.auth0.com/oidc/logout`. |
-| Entra ID | `https://login.microsoftonline.com/<tenant-id>/v2.0/.well-known/openid-configuration` | Works as is. Use the tenant ID: `common` and `organizations` fail.                                          |
-| Google   | `https://accounts.google.com/.well-known/openid-configuration`                        | Signs out of sbomify only. Google has no sign-out endpoint for apps.                                        |
+| Provider | `OIDC_DISCOVERY_URL`                                                                  | Sign-out                                                                                                             |
+| -------- | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Okta     | `https://<org>.okta.com/.well-known/openid-configuration` (org authorization server)  | Works as is. For a custom authorization server, use `https://<org>.okta.com/oauth2/<server-id>/...`.                 |
+| Auth0    | `https://<tenant>.auth0.com/.well-known/openid-configuration`                         | Turn on RP-Initiated Logout in the tenant, or set `OIDC_LOGOUT_URL=https://<tenant>.auth0.com/oidc/logout`.          |
+| Entra ID | `https://login.microsoftonline.com/<tenant-id>/v2.0/.well-known/openid-configuration` | Works once the sign-out URI is also a redirect URI of the app. Use the tenant ID: `common` and `organizations` fail. |
+| Google   | `https://accounts.google.com/.well-known/openid-configuration`                        | Signs out of sbomify only and shows a **Sign in** page. Google has no sign-out endpoint for apps.                    |
 
 What changes compared with Keycloak:
 
