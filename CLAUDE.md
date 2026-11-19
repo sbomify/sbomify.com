@@ -57,7 +57,7 @@ bun run lint:d2            # Format D2 diagram files
 
 **Static site generator:** Hugo with Go templating and goldmark Markdown.
 
-**Styling:** Tailwind CSS 3.4 compiled via PostCSS. All styles (including former SCSS) are in `_assets/css/tailwind.css`. Output goes to `assets/css/styles.css`.
+**Styling:** Tailwind CSS 3.4 compiled via PostCSS. All styles (including former SCSS) are in `_assets/css/tailwind.css`. Output goes to `assets/css/styles.css`. That output is committed and is what a plain `hugo` / `hugo server` run uses, so any change to `_assets/css/` must be followed by `bun run build:css` and the regenerated `styles.css` committed with it (the deploy rebuilds it, local runs without the CSS watcher do not).
 
 **Design tokens:** The brand (sbomify Brand Guidelines v2.0: Navy, White, Mist, Signal Orange, the semantic palette, Figtree and the system mono stack) lives in `_assets/css/tokens.css`, imported at the top of `tailwind.css` via `postcss-import`. It has two tiers: primitives (`--color-navy-80`, `--color-orange-700`, ...) and roles (`--color-ink`, `--color-canvas`, `--color-accent-strong`, ...). `tailwind.config.js` replaces Tailwind's default palette with these tokens, so `indigo-500`-style classes no longer exist; use the role names (`text-ink`, `text-ink-muted`, `bg-surface`, `border-line`, `bg-inverse`, `bg-accent-strong`) or a primitive scale (`navy-*`, `orange-*`). Never hard-code a hex in templates or CSS; component styles use `rgb(var(--color-*))`. `_d2/theme.d2` and `assets/css/native.css` (code highlighting) mirror the tokens, since D2 cannot read CSS variables.
 
