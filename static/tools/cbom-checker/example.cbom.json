@@ -1,0 +1,140 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-11-19T09:00:00Z",
+    "component": {
+      "type": "application",
+      "bom-ref": "example-gateway",
+      "name": "example-gateway",
+      "version": "2.4.0"
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/aes-256-gcm",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "ae",
+          "parameterSetIdentifier": "256",
+          "mode": "gcm",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "x86_64",
+          "cryptoFunctions": ["encrypt", "decrypt"],
+          "classicalSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 1
+        },
+        "oid": "2.16.840.1.101.3.4.1.46"
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/sha-256-rsa",
+      "name": "SHA256withRSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "2048",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "x86_64",
+          "cryptoFunctions": ["sign", "verify"],
+          "classicalSecurityLevel": 112,
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.1.11"
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdhe-x25519",
+      "name": "ECDHE-X25519",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "curve": "curve25519",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "x86_64",
+          "cryptoFunctions": ["keygen"],
+          "classicalSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.3.101.110"
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/key/rsa-2048",
+      "name": "RSA-2048 server key",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "public-key",
+          "algorithmRef": "crypto/algorithm/sha-256-rsa",
+          "size": 2048,
+          "format": "PEM"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/certificate/gateway",
+      "name": "gateway.example.com",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "certificateProperties": {
+          "subjectName": "CN = gateway.example.com",
+          "issuerName": "CN = Example Issuing CA",
+          "notValidBefore": "2026-06-01T00:00:00Z",
+          "notValidAfter": "2027-06-01T00:00:00Z",
+          "signatureAlgorithmRef": "crypto/algorithm/sha-256-rsa",
+          "subjectPublicKeyRef": "crypto/key/rsa-2048",
+          "certificateFormat": "X.509",
+          "certificateExtension": "crt"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/protocol/tls-1.3",
+      "name": "TLS 1.3",
+      "cryptoProperties": {
+        "assetType": "protocol",
+        "protocolProperties": {
+          "type": "tls",
+          "version": "1.3",
+          "cipherSuites": [
+            {
+              "name": "TLS_AES_256_GCM_SHA384",
+              "algorithms": ["crypto/algorithm/aes-256-gcm", "crypto/algorithm/ecdhe-x25519"],
+              "identifiers": ["0x13", "0x02"]
+            }
+          ],
+          "cryptoRefArray": ["crypto/certificate/gateway"]
+        },
+        "oid": "1.3.18.0.2.32.104"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "example-gateway",
+      "dependsOn": ["crypto/protocol/tls-1.3"]
+    },
+    {
+      "ref": "crypto/protocol/tls-1.3",
+      "dependsOn": ["crypto/certificate/gateway", "crypto/algorithm/aes-256-gcm", "crypto/algorithm/ecdhe-x25519"]
+    },
+    {
+      "ref": "crypto/certificate/gateway",
+      "dependsOn": ["crypto/algorithm/sha-256-rsa", "crypto/key/rsa-2048"]
+    }
+  ]
+}

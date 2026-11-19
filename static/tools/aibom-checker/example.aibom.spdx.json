@@ -1,0 +1,77 @@
+{
+  "@context": "https://spdx.org/rdf/3.0.1/spdx-context.jsonld",
+  "@graph": [
+    {
+      "type": "CreationInfo",
+      "@id": "_:creationinfo",
+      "createdBy": ["https://example.com/spdx/agent/example-corp"],
+      "specVersion": "3.0.1",
+      "created": "2026-11-19T09:00:00Z"
+    },
+    {
+      "type": "Organization",
+      "spdxId": "https://example.com/spdx/agent/example-corp",
+      "name": "Example Corp",
+      "creationInfo": "_:creationinfo"
+    },
+    {
+      "type": "SpdxDocument",
+      "spdxId": "https://example.com/spdx/aibom/document",
+      "name": "example-support-assistant AIBOM",
+      "creationInfo": "_:creationinfo",
+      "profileConformance": ["core", "software", "ai", "dataset", "simpleLicensing"],
+      "rootElement": ["https://example.com/spdx/aibom/model/ticket-classifier"]
+    },
+    {
+      "type": "ai_AIPackage",
+      "spdxId": "https://example.com/spdx/aibom/model/ticket-classifier",
+      "name": "example-ticket-classifier",
+      "creationInfo": "_:creationinfo",
+      "suppliedBy": "https://example.com/spdx/agent/example-corp",
+      "releaseTime": "2026-10-01T00:00:00Z",
+      "software_packageVersion": "2026.10.1",
+      "software_downloadLocation": "https://example.com/models/ticket-classifier-2026.10.1.safetensors",
+      "software_primaryPurpose": "model",
+      "ai_typeOfModel": ["transformer"],
+      "ai_domain": ["customer support"],
+      "ai_informationAboutApplication": "Routes incoming support tickets to the right queue.",
+      "ai_limitation": "English only.",
+      "ai_autonomyType": "no"
+    },
+    {
+      "type": "dataset_DatasetPackage",
+      "spdxId": "https://example.com/spdx/aibom/dataset/support-tickets",
+      "name": "support-tickets-2026",
+      "creationInfo": "_:creationinfo",
+      "originatedBy": ["https://example.com/spdx/agent/example-corp"],
+      "releaseTime": "2026-09-30T00:00:00Z",
+      "builtTime": "2026-09-30T00:00:00Z",
+      "software_downloadLocation": "https://example.com/datasets/support-tickets-2026",
+      "software_primaryPurpose": "data",
+      "dataset_datasetType": ["text"],
+      "dataset_hasSensitivePersonalInformation": "no"
+    },
+    {
+      "type": "simplelicensing_LicenseExpression",
+      "spdxId": "https://example.com/spdx/aibom/license/apache-2.0",
+      "creationInfo": "_:creationinfo",
+      "simplelicensing_licenseExpression": "Apache-2.0"
+    },
+    {
+      "type": "Relationship",
+      "spdxId": "https://example.com/spdx/aibom/relationship/trained-on",
+      "creationInfo": "_:creationinfo",
+      "from": "https://example.com/spdx/aibom/model/ticket-classifier",
+      "relationshipType": "trainedOn",
+      "to": ["https://example.com/spdx/aibom/dataset/support-tickets"]
+    },
+    {
+      "type": "Relationship",
+      "spdxId": "https://example.com/spdx/aibom/relationship/license",
+      "creationInfo": "_:creationinfo",
+      "from": "https://example.com/spdx/aibom/model/ticket-classifier",
+      "relationshipType": "hasDeclaredLicense",
+      "to": ["https://example.com/spdx/aibom/license/apache-2.0"]
+    }
+  ]
+}

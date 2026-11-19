@@ -5,9 +5,21 @@
   build:tools), and data/sbom_checker.json names the hashed entry files.
   Nothing is loaded until the page is interactive, and the schema
   validators are fetched only for the version of the uploaded SBOM.
+
+  The CBOM, HBOM and AIBOM validators (content/tools/cbom-checker.md,
+  hbom-checker.md, aibom-checker.md) use this layout and the same script. Their front matter
+  `checker` block sets the kind (data-kind on the root, which picks the
+  checks), the noun, the formats line and the example files; without it the
+  page is the SBOM checker.
 */ -}}
 {{ define "main" }}
 {{- $build := site.Data.sbom_checker -}}
+{{- $c := .Params.checker | default dict -}}
+{{- $kind := $c.kind | default "sbom" -}}
+{{- $noun := upper $kind -}}
+{{- $examples := $c.examples | default (slice
+  (dict "url" "/tools/sbom-checker/example.cdx.json" "name" "example.cdx.json" "label" "Try a CycloneDX example")
+  (dict "url" "/tools/sbom-checker/example.spdx.json" "name" "example.spdx.json" "label" "Try an SPDX example")) -}}
 <div>
   <header class="hero">
     <div class="hero-fade" aria-hidden="true"></div>
@@ -17,20 +29,20 @@
         <h1 class="text-ink !text-[clamp(2.375rem,5.2vw,4rem)] mb-5">{{ .Title }}</h1>
         {{ with .Params.lede }}<p class="lede max-w-3xl">{{ . }}</p>{{ end }}
         <ul class="checker-promises" role="list">
-          <li>{{ partial "ph.html" "lock-simple" }}Runs in your browser. Your SBOM is never uploaded.</li>
-          <li>{{ partial "ph.html" "file-code" }}CycloneDX 1.2–1.7, SPDX 2.2, 2.3 and 3.0 (JSON)</li>
-          <li>{{ partial "ph.html" "seal-check" }}Checks against published SBOM standards</li>
+          <li>{{ partial "ph.html" "lock-simple" }}Runs in your browser. Your {{ $noun }} is never uploaded.</li>
+          <li>{{ partial "ph.html" "file-code" }}{{ $c.formats | default "CycloneDX 1.2–1.7, SPDX 2.2, 2.3 and 3.0 (JSON)" }}</li>
+          <li>{{ partial "ph.html" "seal-check" }}{{ $c.promise | default "Checks against published SBOM standards" }}</li>
         </ul>
       </div>
     </div>
   </header>
 
   <section class="wrap pb-12 lg:pb-16">
-    <div id="sbom-checker" class="checker"{{ with $build }} data-worker="{{ .worker }}"{{ end }}>
+    <div id="sbom-checker" class="checker" data-kind="{{ $kind }}"{{ with $build }} data-worker="{{ .worker }}"{{ end }}>
       <form class="checker-drop" data-checker-form data-checker-drop>
         <label for="checker-file" class="checker-drop-label">
           <span class="checker-drop-icon">{{ partial "ph.html" (dict "name" "file-arrow-up" "weight" "duotone") }}</span>
-          <span class="checker-drop-title">Drop an SBOM here</span>
+          <span class="checker-drop-title">Drop {{ if in (slice "sbom" "aibom") $kind }}an{{ else }}a{{ end }} {{ $noun }} here</span>
           <span class="checker-drop-sub">or <span class="link">choose a file</span> (.json or .json.gz)</span>
         </label>
         <input id="checker-file" class="sr-only" type="file" accept=".json,.gz,.cdx,.spdx,application/json" data-checker-file>
@@ -38,16 +50,17 @@
       </form>
 
       <div class="checker-alt">
-        <span class="checker-alt-label">No SBOM to hand?</span>
-        <button type="button" class="btn btn-secondary btn-md" data-checker-example="/tools/sbom-checker/example.cdx.json" data-checker-example-name="example.cdx.json">Try a CycloneDX example</button>
-        <button type="button" class="btn btn-secondary btn-md" data-checker-example="/tools/sbom-checker/example.spdx.json" data-checker-example-name="example.spdx.json">Try an SPDX example</button>
+        <span class="checker-alt-label">No {{ $noun }} to hand?</span>
+        {{ range $examples }}
+        <button type="button" class="btn btn-secondary btn-md" data-checker-example="{{ .url }}" data-checker-example-name="{{ .name }}">{{ .label }}</button>
+        {{ end }}
       </div>
 
       <details class="checker-paste">
         <summary>Paste JSON instead</summary>
-        <label for="checker-paste" class="sr-only">SBOM JSON</label>
+        <label for="checker-paste" class="sr-only">{{ $noun }} JSON</label>
         <textarea id="checker-paste" rows="8" spellcheck="false" autocomplete="off" placeholder='{"bomFormat": "CycloneDX", "specVersion": "1.6", ...}' data-checker-paste></textarea>
-        <button type="button" class="btn btn-navy btn-md" data-checker-paste-run>Check pasted SBOM</button>
+        <button type="button" class="btn btn-navy btn-md" data-checker-paste-run>Check pasted {{ $noun }}</button>
       </details>
 
       <p class="checker-status" role="status" aria-live="polite" data-checker-status></p>
@@ -65,8 +78,9 @@
       </article>
     </div>
     {{/* Every compliance framework we document, so a reader checking one
-         can get to the others (the same list as the compliance pages). */}}
-    {{ with site.GetPage "/compliance" }}
+         can get to the others (the same list as the compliance pages).
+         SBOM checker only: the frameworks are SBOM frameworks. */}}
+    {{ if eq $kind "sbom" }}{{ with site.GetPage "/compliance" }}
     <nav class="section-rule pt-10 pb-16 lg:pb-24" aria-labelledby="checker-frameworks-heading">
       <h2 id="checker-frameworks-heading" class="eyebrow mb-5">All compliance frameworks</h2>
       <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10">
@@ -75,7 +89,7 @@
         {{ end }}
       </ul>
     </nav>
-    {{ end }}
+    {{ end }}{{ end }}
   </section>
 </div>
 
@@ -87,6 +101,7 @@
 <template id="checker-icon-info">{{ partial "ph.html" (dict "name" "info" "weight" "fill") }}</template>
 <template id="checker-icon-download">{{ partial "ph.html" "download-simple" }}</template>
 <template id="checker-cta">
+  {{ if eq $kind "sbom" }}
   <aside class="cta-band checker-cta" aria-labelledby="checker-cta-title">
     <p class="eyebrow-chip !mb-4">Next step</p>
     <h2 id="checker-cta-title" class="checker-cta-title">Fix the gaps once, for every release</h2>
@@ -110,6 +125,28 @@
       </div>
     </div>
   </aside>
+  {{ else }}
+  {{- $loc := printf "%s_checker_results" $kind -}}
+  <aside class="cta-band checker-cta" aria-labelledby="checker-cta-title">
+    <p class="eyebrow-chip !mb-4">Next step</p>
+    <h2 id="checker-cta-title" class="checker-cta-title">Keep every {{ $noun }} next to the release it describes</h2>
+    <p class="checker-cta-lead" data-cta-lead>{{ $c.ctaLead }}</p>
+    <div class="checker-cta-grid">
+      <div class="checker-cta-item">
+        <span class="checker-cta-icon">{{ partial "ph.html" (dict "name" "stack" "weight" "duotone") }}</span>
+        <h3>Manage the lifecycle: sbomify</h3>
+        <p>{{ $c.ctaBody }}</p>
+        <a href="{{ site.Params.signupURL }}" class="btn btn-primary btn-md" data-cta-location="{{ $loc }}" data-cta-label="Start free">Start free {{ partial "ph.html" "arrow-right" }}</a>
+      </div>
+      <div class="checker-cta-item">
+        <span class="checker-cta-icon">{{ partial "ph.html" (dict "name" "seal-check" "weight" "duotone") }}</span>
+        <h3>Check your SBOMs too</h3>
+        <p>The SBOM checker validates CycloneDX and SPDX SBOMs against their schema and against the CISA, NTIA and EU CRA minimum elements, in your browser.</p>
+        <a href="/tools/sbom-checker/" class="btn btn-secondary btn-md" data-cta-location="{{ $loc }}" data-cta-label="SBOM checker">Open the SBOM checker</a>
+      </div>
+    </div>
+  </aside>
+  {{ end }}
 </template>
 
 {{ with $build }}

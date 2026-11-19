@@ -1,0 +1,78 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:5f0d2c1e-8a4b-4c7e-9d3f-1b2a6e8c4d70",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-11-19T09:00:00Z",
+    "component": {
+      "type": "application",
+      "bom-ref": "support-assistant",
+      "name": "example-support-assistant",
+      "version": "3.2.0",
+      "supplier": { "name": "Example Corp" }
+    }
+  },
+  "components": [
+    {
+      "type": "machine-learning-model",
+      "bom-ref": "model/ticket-classifier",
+      "name": "example-ticket-classifier",
+      "version": "2026.10.1",
+      "supplier": { "name": "Example Corp" },
+      "licenses": [{ "license": { "id": "Apache-2.0" } }],
+      "purl": "pkg:huggingface/example/ticket-classifier@2026.10.1",
+      "modelCard": {
+        "modelParameters": {
+          "task": "text-classification",
+          "architectureFamily": "transformer",
+          "modelArchitecture": "DistilBERT",
+          "datasets": [{ "ref": "dataset/support-tickets" }],
+          "inputs": [{ "format": "string" }],
+          "outputs": [{ "format": "string" }]
+        },
+        "quantitativeAnalysis": {
+          "performanceMetrics": [{ "type": "f1", "value": "0.91" }]
+        },
+        "considerations": {
+          "useCases": ["Routing incoming support tickets to the right queue"],
+          "technicalLimitations": ["English only"]
+        }
+      }
+    },
+    {
+      "type": "machine-learning-model",
+      "bom-ref": "model/reply-drafter",
+      "name": "example-reply-drafter",
+      "version": "1.4.0",
+      "supplier": { "name": "Example Model Lab" },
+      "purl": "pkg:huggingface/example-lab/reply-drafter@1.4.0",
+      "modelCard": {
+        "modelParameters": {
+          "task": "text-generation",
+          "architectureFamily": "transformer"
+        }
+      }
+    },
+    {
+      "type": "data",
+      "bom-ref": "dataset/support-tickets",
+      "name": "support-tickets-2026",
+      "version": "2026-09",
+      "supplier": { "name": "Example Corp" },
+      "data": [
+        {
+          "type": "dataset",
+          "name": "support-tickets-2026",
+          "classification": "confidential",
+          "description": "Anonymised support tickets with their resolved queue"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    { "ref": "support-assistant", "dependsOn": ["model/ticket-classifier", "model/reply-drafter"] },
+    { "ref": "model/ticket-classifier", "dependsOn": ["dataset/support-tickets"] }
+  ]
+}

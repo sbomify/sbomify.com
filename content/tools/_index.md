@@ -2,12 +2,24 @@
 
 title: "Free SBOM Tools"
 description: "Free tools from sbomify for working with Software Bills of Materials. They run in your browser, so nothing you check leaves your machine."
-lede: "Check any CycloneDX or SPDX SBOM against its schema, CISA, NTIA and the EU Cyber Resilience Act in seconds. Everything runs in your browser, so your files never leave your machine."
-keywords: [SBOM tools, SBOM checker, SBOM validator, CycloneDX validator, SPDX validator]
+lede: "Check any CycloneDX or SPDX SBOM against its schema, CISA, NTIA and the EU Cyber Resilience Act in seconds, and validate CBOMs, HBOMs and AIBOMs. Everything runs in your browser, so your files never leave your machine."
+keywords: [SBOM tools, SBOM checker, SBOM validator, CycloneDX validator, SPDX validator, CBOM validator, HBOM validator, AIBOM validator]
 ---
 
-Free tools for working with SBOMs. Each one runs entirely in your browser: the files you check are never uploaded.
+Free tools for working with SBOMs, CBOMs, HBOMs and AIBOMs. Each one runs entirely in your browser: the files you check are never uploaded.
 
 ## SBOM checker
 
 [Check an SBOM](/tools/sbom-checker/) against the official CycloneDX or SPDX schema and against the [CISA 2026 Minimum Elements](/compliance/cisa-minimum-elements/), the [NTIA Minimum Elements](/compliance/ntia-minimum-elements/) and [BSI TR-03183-2](/compliance/bsi-tr-03183/), the technical guideline for SBOMs under the [EU Cyber Resilience Act](/compliance/eu-cra/). Every failed element comes with what is missing and how to fix it, and the checker follows external references, including links to other SBOMs.
+
+## CBOM validator
+
+[Validate a CBOM](/tools/cbom-checker/) (Cryptography Bill of Materials) against the CycloneDX 1.6 or 1.7 schema, and check that every algorithm, certificate, protocol and key carries the fields that say what it is and that references between them resolve.
+
+## HBOM validator
+
+[Validate an HBOM](/tools/hbom-checker/) (Hardware Bill of Materials) against the CycloneDX schema, and check that every device has a name, a manufacturer and a version or revision, plus a hardware identifier.
+
+## AIBOM validator
+
+[Validate an AIBOM](/tools/aibom-checker/) (AI Bill of Materials) in CycloneDX or SPDX 3 against its schema, and check that every model has a supplier, a version and a model card, and that SPDX 3 models and datasets carry the properties their profiles make mandatory.

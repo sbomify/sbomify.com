@@ -12,6 +12,10 @@
  * suppliers, URLs or identifiers from the document. test/analytics.test.ts
  * checks the result payload against a document full of tell-tale strings.
  *
+ * The CBOM, HBOM and AIBOM validators share this script and these event
+ * names; `tool` tells them apart (sbom_checker, cbom_checker, hbom_checker,
+ * aibom_checker).
+ *
  * Events (all prefixed sbom_checker_, all with tool and site_section):
  *   _input            a document was handed to the checker
  *   _result           the checks finished (or the document could not be read)
@@ -26,10 +30,16 @@
 import type { Analysis } from "./analyse";
 import { elementOf, fixSummary } from "./links";
 import type { RefCheck } from "./refs";
+import type { BomKind } from "./types";
 
 type Props = Record<string, string | number | boolean | string[] | null | undefined>;
 
-const BASE = { tool: "sbom_checker", site_section: "tools" } as const;
+const BASE = { tool: "sbom_checker", site_section: "tools" };
+
+/** Which checker the page runs; sets the `tool` property on every event. */
+export function setTool(kind: BomKind): void {
+  BASE.tool = `${kind}_checker`;
+}
 
 export function track(event: string, props: Props = {}, instant = false): void {
   const ph = (globalThis as { posthog?: { capture?: (e: string, p?: object, o?: object) => void } }).posthog;

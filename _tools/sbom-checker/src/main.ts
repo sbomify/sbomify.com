@@ -8,10 +8,10 @@
  * attribute setters, never innerHTML.
  */
 import type { Analysis } from "./analyse";
-import { refsProps, resultProps, sizeBucket, track } from "./analytics";
+import { refsProps, resultProps, setTool, sizeBucket, track } from "./analytics";
 import { fixSummary, linksFor } from "./links";
 import { checkRefs, type ExternalRef, type RefCheck } from "./refs";
-import type { Finding, FrameworkResult } from "./types";
+import type { BomKind, Finding, FrameworkResult } from "./types";
 import { MAX_ISSUES, type SchemaResult } from "./validate";
 
 /** Largest file accepted. Validation of very large SPDX 3 graphs is slow. */
@@ -23,6 +23,10 @@ const MAX_NESTED = 10;
 const MAX_REFS = 150;
 
 type Child = Node | string | null | undefined | false;
+
+/** Which checker this page is (data-kind on the root): the SBOM checker or the CBOM, HBOM or AIBOM validator. */
+let kind: BomKind = "sbom";
+const noun = () => kind.toUpperCase();
 
 function h<K extends keyof HTMLElementTagNameMap>(tag: K, attrs: Record<string, string | boolean | undefined> = {}, ...children: Child[]): HTMLElementTagNameMap[K] {
   const el = document.createElement(tag);
@@ -75,7 +79,7 @@ function analyseInWorker(workerUrl: string, text: string, name: string): Promise
   return new Promise((resolve) => {
     const id = nextId++;
     pending.set(id, resolve);
-    getWorker(workerUrl).postMessage({ id, text, name });
+    getWorker(workerUrl).postMessage({ id, text, name, kind });
   });
 }
 
@@ -84,6 +88,9 @@ function analyseInWorker(workerUrl: string, text: string, name: string): Promise
 export function init(root: HTMLElement): void {
   const workerUrl = root.dataset.worker;
   if (!workerUrl) return;
+  const k = root.dataset.kind;
+  kind = k === "cbom" || k === "hbom" || k === "aibom" ? k : "sbom";
+  setTool(kind);
   const form = root.querySelector<HTMLFormElement>("[data-checker-form]")!;
   const input = root.querySelector<HTMLInputElement>("[data-checker-file]")!;
   const drop = root.querySelector<HTMLElement>("[data-checker-drop]")!;
@@ -125,7 +132,7 @@ export function init(root: HTMLElement): void {
       track("input", { source, size_bucket: sizeBucket(file.size), gzipped });
       track("result", { source, depth: 0, ok: false, error_kind: "too_large" });
       status.textContent = "";
-      out.replaceChildren(errorCard(file.name, `The file is ${(file.size / 1024 / 1024).toFixed(1)} MB. The checker accepts SBOMs up to ${MAX_FILE_BYTES / 1024 / 1024} MB.`, "sbomify handles large SBOMs server-side; upload it there instead."));
+      out.replaceChildren(errorCard(file.name, `The file is ${(file.size / 1024 / 1024).toFixed(1)} MB. The checker accepts files up to ${MAX_FILE_BYTES / 1024 / 1024} MB.`, `sbomify handles large ${noun()}s server-side; upload it there instead.`));
       out.hidden = false;
       return;
     }
@@ -158,7 +165,7 @@ export function init(root: HTMLElement): void {
   });
   pasteBtn?.addEventListener("click", () => {
     const text = paste?.value ?? "";
-    if (text.trim()) void run(text, "pasted SBOM", { source: "paste", bytes: new Blob([text]).size });
+    if (text.trim()) void run(text, `pasted ${noun()}`, { source: "paste", bytes: new Blob([text]).size });
   });
   exampleBtns.forEach((btn) =>
     btn.addEventListener("click", async () => {
@@ -166,7 +173,7 @@ export function init(root: HTMLElement): void {
       status.textContent = "Loading the example…";
       const res = await fetch(url);
       const text = await res.text();
-      const example = /spdx/i.test(url) ? "spdx" : "cyclonedx";
+      const example = /spdx/i.test(url) ? "spdx" : kind === "sbom" ? "cyclonedx" : kind;
       await run(text, btn.dataset.checkerExampleName ?? url.split("/").pop()!, { source: "example", example, bytes: text.length });
     }),
   );
@@ -224,7 +231,7 @@ export function renderAnalysis(a: Analysis, ctx: RenderCtx): HTMLElement {
   const tiles = h("ul", { class: "checker-tiles", role: "list" });
   tiles.append(tile(`${id}-schema`, "schema", "Schema", schemaVerdict(a.schema)));
   for (const f of a.frameworks) tiles.append(tile(`${id}-${f.id}`, f.id, shortName(f), frameworkVerdict(f)));
-  tiles.append(tile(`${id}-refs`, "references", "External references", { status: "info", text: a.refs.length ? `${a.refs.length} found` : "None" }));
+  if (a.kind === "sbom") tiles.append(tile(`${id}-refs`, "references", "External references", { status: "info", text: a.refs.length ? `${a.refs.length} found` : "None" }));
 
   wrap.append(
     h(
@@ -240,15 +247,20 @@ export function renderAnalysis(a: Analysis, ctx: RenderCtx): HTMLElement {
         "dl",
         { class: "checker-facts" },
         fact("Format", a.formatLabel),
-        fact("Components", a.inventory.components.toLocaleString()),
-        fact("Dependency links", a.inventory.dependencies.toLocaleString()),
+        a.inventory.cryptoAssets !== undefined ? fact("Cryptographic assets", a.inventory.cryptoAssets.toLocaleString()) : null,
+        a.inventory.devices !== undefined ? fact("Hardware devices", a.inventory.devices.toLocaleString()) : null,
+        a.inventory.models !== undefined ? fact("AI models", a.inventory.models.toLocaleString()) : null,
+        a.inventory.datasets !== undefined ? fact("Datasets", a.inventory.datasets.toLocaleString()) : null,
+        // The CBOM, HBOM and AIBOM facts above say what matters; skip empty generic counts (an SPDX 3 AIBOM has no software packages).
+        a.kind === "sbom" || a.inventory.components ? fact("Components", a.inventory.components.toLocaleString()) : null,
+        a.kind === "sbom" || a.inventory.dependencies ? fact("Dependency links", a.inventory.dependencies.toLocaleString()) : null,
       ),
       tiles,
     ),
   );
 
   wrap.append(renderSchema(`${id}-schema`, a.schema));
-  wrap.append(renderRefs(`${id}-refs`, a.refs, ctx));
+  if (a.kind === "sbom") wrap.append(renderRefs(`${id}-refs`, a.refs, ctx));
   for (const f of a.frameworks) wrap.append(renderFramework(`${id}-${f.id}`, f));
   return wrap;
 }
@@ -258,6 +270,9 @@ function shortName(f: FrameworkResult): string {
     "ntia-2021": "NTIA 2021",
     "cisa-2025": "CISA 2025 draft",
     "cisa-2026": "CISA 2026",
+    cbom: "Required fields",
+    hbom: "Required fields",
+    aibom: "Required fields",
   };
   return known[f.id] ?? (f.id.startsWith("bsi") ? "EU CRA" : f.name);
 }
@@ -337,23 +352,18 @@ function renderFramework(id: string, f: FrameworkResult): HTMLElement {
   const sorted = [...f.findings].sort((a, b) => order[a.status] - order[b.status]);
   const open = sorted.filter((x) => x.status !== "pass");
   const passed = sorted.filter((x) => x.status === "pass");
-  const links = h(
-    "p",
-    { class: "checker-meta" },
-    `${f.name}, version ${f.version}. `,
-    h("a", { class: "link", href: f.guideUrl, "data-track": "framework_guide", "data-framework": f.id }, "Read our guide"),
-    f.id.startsWith("bsi") ? " · " : null,
-    f.id.startsWith("bsi") ? h("a", { class: "link", href: "/compliance/eu-cra/", "data-track": "eu_cra_guide", "data-framework": f.id }, "EU CRA guide") : null,
-    " · ",
-    h("a", { class: "link", href: "/compliance/schema-crosswalk/", "data-track": "field_mappings", "data-framework": f.id }, "Field mappings"),
-    " · ",
-    h("a", { class: "link", href: f.url, rel: "nofollow noopener noreferrer", target: "_blank", "data-track": "official_source", "data-framework": f.id }, "Official source"),
-  );
+  const sbomFramework = f.id !== "cbom" && f.id !== "hbom" && f.id !== "aibom";
+  const parts: Child[] = [];
+  if (f.guideUrl) parts.push(h("a", { class: "link", href: f.guideUrl, "data-track": "framework_guide", "data-framework": f.id }, "Read our guide"));
+  if (f.id.startsWith("bsi")) parts.push(h("a", { class: "link", href: "/compliance/eu-cra/", "data-track": "eu_cra_guide", "data-framework": f.id }, "EU CRA guide"));
+  if (sbomFramework) parts.push(h("a", { class: "link", href: "/compliance/schema-crosswalk/", "data-track": "field_mappings", "data-framework": f.id }, "Field mappings"));
+  parts.push(h("a", { class: "link", href: f.url, rel: "nofollow noopener noreferrer", target: "_blank", "data-track": "official_source", "data-framework": f.id }, sbomFramework ? "Official source" : "CycloneDX specification"));
+  const links = h("p", { class: "checker-meta" }, sbomFramework ? `${f.name}, version ${f.version}. ` : `${f.name}, ${f.version}. `, ...parts.flatMap((p, i) => (i ? [" · ", p] : [p])));
   const list = h("ul", { class: "checker-findings", role: "list" });
   for (const fd of open) list.append(renderFinding(fd, f.id));
   const body: Child[] = [links];
   if (open.length) body.push(list);
-  else body.push(h("p", { class: "checker-p" }, "Every element this framework asks for is present."));
+  else body.push(h("p", { class: "checker-p" }, sbomFramework ? "Every element this framework asks for is present." : "Every required and recommended field is present."));
   if (passed.length) {
     const pl = h("ul", { class: "checker-findings", role: "list" });
     for (const fd of passed) pl.append(renderFinding(fd, f.id));
@@ -486,7 +496,7 @@ function downloadButton(a: Extract<Analysis, { ok: true }>): HTMLElement {
   btn.addEventListener("click", () => {
     track("report_download", { format: a.format, failed_total: a.frameworks.reduce((n, f) => n + f.summary.fail, 0) });
     const report = {
-      generator: "sbomify SBOM checker (https://sbomify.com/tools/sbom-checker/)",
+      generator: `sbomify ${noun()} checker (https://sbomify.com/tools/${kind}-checker/)`,
       generatedAt: new Date().toISOString(),
       file: a.name,
       format: a.formatLabel,
@@ -496,7 +506,7 @@ function downloadButton(a: Extract<Analysis, { ok: true }>): HTMLElement {
     };
     const blob = new Blob([JSON.stringify(report, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
-    const link = h("a", { href: url, download: `${a.name.replace(/\.json$/i, "")}.sbom-check.json` });
+    const link = h("a", { href: url, download: `${a.name.replace(/\.json$/i, "")}.${kind}-check.json` });
     document.body.append(link);
     link.click();
     link.remove();
@@ -510,7 +520,13 @@ function renderCta(a: Extract<Analysis, { ok: true }> | null): HTMLElement {
   const tpl = document.getElementById("checker-cta") as HTMLTemplateElement | null;
   const node = tpl ? (tpl.content.firstElementChild!.cloneNode(true) as HTMLElement) : h("div");
   const lead = node.querySelector<HTMLElement>("[data-cta-lead]");
-  if (lead && a) {
+  if (lead && a && a.kind !== "sbom") {
+    const failing = a.frameworks.reduce((n, f) => n + f.summary.fail, 0);
+    const problems = [failing ? `${failing} missing required field${failing === 1 ? "" : "s"}` : "", a.schema.status === "invalid" ? "schema errors" : ""].filter(Boolean);
+    lead.textContent = problems.length
+      ? `This ${noun()} has ${problems.join(" and ")}. Fix them where the ${noun()} is generated, then keep every release's ${noun()} in one place.`
+      : `This ${noun()} is valid and has every required field. Keep it that way for every release: store each version alongside your SBOMs and share them from one place.`;
+  } else if (lead && a) {
     const failing = a.frameworks.reduce((n, f) => n + f.summary.fail, 0);
     const schemaBad = a.schema.status === "invalid";
     if (failing || schemaBad) {

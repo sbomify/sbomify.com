@@ -3,6 +3,7 @@
 title: "SBOM Checker and Validator"
 seo_title: "Free SBOM Checker and Validator (CycloneDX, SPDX)"
 layout: sbom-checker
+weight: 1
 lede: "A free online SBOM checker: validate a CycloneDX or SPDX SBOM against its official schema, then check it against the CISA 2026 and NTIA minimum elements and BSI TR-03183-2 for the EU Cyber Resilience Act. See what is missing and how to fix it."
 description: "Free online SBOM checker and validator for CycloneDX and SPDX. View and check an SBOM against its schema, CISA 2026, NTIA and the EU CRA in your browser."
 keywords: [SBOM checker, SBOM checker online, free SBOM checker, SBOM validator, NTIA SBOM validator, SBOM viewer, CycloneDX validator online, SPDX validator online, validate SBOM, CycloneDX validator, SPDX validator, SBOM quality, NTIA minimum elements checker, CISA minimum elements, CRA SBOM check, BSI TR-03183-2, SBOM compliance]
