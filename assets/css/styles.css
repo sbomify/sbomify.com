@@ -18,6 +18,9 @@
  * and must be kept in step with this file.
  */
 :root {
+  /* One light theme only: opts out of forced dark modes (see head.html). */
+  color-scheme: only light;
+
   /* ===== Primitives: primary palette ===== */
   --color-navy-100: 37 41 63;     /* #25293F  Navy, primary · text · brand */
   --color-navy-80: 81 84 107;     /* #51546B */
@@ -1762,6 +1765,9 @@ button {
 .mt-0 {
   margin-top: 0px;
 }
+.mt-0\.5 {
+  margin-top: 0.125rem;
+}
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -1794,6 +1800,9 @@ button {
 }
 .mt-8 {
   margin-top: 2rem;
+}
+.mt-auto {
+  margin-top: auto;
 }
 .line-clamp-3 {
   overflow: hidden;
@@ -1833,6 +1842,9 @@ button {
 }
 .h-11 {
   height: 2.75rem;
+}
+.h-12 {
+  height: 3rem;
 }
 .h-14 {
   height: 3.5rem;
@@ -1887,6 +1899,9 @@ button {
 }
 .w-11 {
   width: 2.75rem;
+}
+.w-12 {
+  width: 3rem;
 }
 .w-2 {
   width: 0.5rem;
@@ -1963,8 +1978,14 @@ button {
 .flex-\[1_0_auto\] {
   flex: 1 0 auto;
 }
+.flex-none {
+  flex: none;
+}
 .flex-shrink-0 {
   flex-shrink: 0;
+}
+.shrink {
+  flex-shrink: 1;
 }
 .shrink-0 {
   flex-shrink: 0;
@@ -2094,6 +2115,11 @@ button {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+.space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
 }
 .space-y-6 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
@@ -2241,6 +2267,10 @@ button {
 .bg-success {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--color-success-full) / var(--tw-bg-opacity, 1));
+}
+.bg-surface {
+  --tw-bg-opacity: 1;
+  background-color: rgb(var(--color-surface) / var(--tw-bg-opacity, 1));
 }
 .bg-surface-strong {
   --tw-bg-opacity: 1;
@@ -2508,6 +2538,9 @@ button {
 }
 .\!leading-tight {
   line-height: 1.25 !important;
+}
+.leading-\[1\.1\] {
+  line-height: 1.1;
 }
 .leading-relaxed {
   line-height: 1.625;
@@ -3060,7 +3093,11 @@ button {
   .blog-post pre code, .page pre code, .faq-content pre code {
     font-size: 0.9375rem; /* 15px, mono at ~90% of the 17-18px body */
   }
-}/* Tables */
+}/* Tables *//* Long field paths (cryptoProperties.algorithmProperties.primitive) wrap
+   inside their cell on a phone instead of pushing columns off-screen. */
+.blog-post td code, .page td code, .faq-content td code {
+  overflow-wrap: anywhere;
+}
 .blog-post table, .page table, .faq-content table {
   display: block;
   width: 100%;
@@ -9696,12 +9733,20 @@ a:hover > .ph-up {
   margin-top: 6px;
   font-size: 0.9rem;
   color: rgb(var(--color-ink-subtle));
-}
+}/* A grid, so facts that wrap onto a second row line up in columns, and
+   each value sits on the bottom line of its cell even when a label
+   ("Cryptographic assets") wraps. */
 .checker-facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: 12px 20px;
   margin-top: 14px;
+}
+.checker-facts > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2px;
 }
 .checker-facts dt {
   font-size: 0.75rem;
@@ -9713,10 +9758,11 @@ a:hover > .ph-up {
 .checker-facts dd {
   font-weight: var(--font-weight-semibold);
   color: rgb(var(--color-ink));
-}
+}/* The minimum fits the longest verdict ("12 recommended", "Could not run")
+   on one line beside its icon; values never wrap (see .checker-tile-value). */
 .checker-tiles {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(9.25rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(10.75rem, 1fr));
   gap: 10px;
   margin-top: 20px;
 }/* Values sit on a common line at the bottom, even when one tile's label
@@ -9745,6 +9791,7 @@ a:hover > .ph-up {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
   font-weight: var(--font-weight-bold);
   color: rgb(var(--color-ink));
 }
@@ -9863,6 +9910,18 @@ a:hover > .ph-up {
   font-size: 0.85rem;
   color: rgb(var(--color-ink));
   word-break: break-all;
+}/* Field names in finding text (the CBOM, HBOM and AIBOM checks). Long
+   dotted paths such as cryptoProperties.algorithmProperties.primitive must
+   wrap on a phone rather than push the card wider. */
+.checker-p code,
+.checker-fix code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: rgb(var(--color-ink));
+  background: rgb(var(--color-surface-strong));
+  border-radius: 4px;
+  padding: 0.05em 0.3em;
+  overflow-wrap: anywhere;
 }/* Reference sources are long ("component "name@version""): on a phone the
    source goes under the pill at full width rather than into a narrow column
    beside it. */
@@ -10029,6 +10088,14 @@ a:hover > .ph-up {
   font-size: 0.9em;
   color: rgb(var(--color-white));
 }
+@media (min-width: 1024px) {
+  .lg\:border-line.bg-canvas.rounded-xl {
+    background-image: var(--nebula-grey);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 120% auto;
+  }
+}
 .hover\:border-line-strong:hover {
   --tw-border-opacity: 1;
   border-color: rgb(var(--color-line-strong) / var(--tw-border-opacity, 1));
@@ -10169,6 +10236,10 @@ a:hover > .ph-up {
     font-size: 1.125rem !important;
     line-height: 1.75rem !important;
   }
+  .md\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
 }
 @media (min-width: 1024px) {
   .lg\:col-span-2 {
@@ -10195,6 +10266,9 @@ a:hover > .ph-up {
   .lg\:grid-cols-\[1fr_auto\] {
     grid-template-columns: 1fr auto;
   }
+  .lg\:grid-cols-\[1fr_minmax\(0\2c 26rem\)\] {
+    grid-template-columns: 1fr minmax(0,26rem);
+  }
   .lg\:gap-12 {
     gap: 3rem;
   }
@@ -10203,6 +10277,16 @@ a:hover > .ph-up {
   }
   .lg\:border-b-0 {
     border-bottom-width: 0px;
+  }
+  .lg\:border-l {
+    border-left-width: 1px;
+  }
+  .lg\:border-line {
+    --tw-border-opacity: 1;
+    border-color: rgb(var(--color-line) / var(--tw-border-opacity, 1));
+  }
+  .lg\:p-10 {
+    padding: 2.5rem;
   }
   .lg\:p-14 {
     padding: 3.5rem;
@@ -10218,6 +10302,9 @@ a:hover > .ph-up {
   }
   .lg\:pb-24 {
     padding-bottom: 6rem;
+  }
+  .lg\:pl-10 {
+    padding-left: 2.5rem;
   }
   .lg\:pt-14 {
     padding-top: 3.5rem;
@@ -10235,9 +10322,20 @@ a:hover > .ph-up {
   .lg\:\!text-\[2rem\] {
     font-size: 2rem !important;
   }
+  .lg\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
   .lg\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
+  }
+  .lg\:text-\[2rem\] {
+    font-size: 2rem;
+  }
+  .lg\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 }
 @media (min-width: 1280px) {
@@ -10265,4 +10363,16 @@ a:hover > .ph-up {
   .xl\:gap-16 {
     gap: 4rem;
   }
+}
+.\[\&_svg\]\:h-5 svg {
+  height: 1.25rem;
+}
+.\[\&_svg\]\:h-6 svg {
+  height: 1.5rem;
+}
+.\[\&_svg\]\:w-5 svg {
+  width: 1.25rem;
+}
+.\[\&_svg\]\:w-6 svg {
+  width: 1.5rem;
 }
