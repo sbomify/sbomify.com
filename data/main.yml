@@ -130,6 +130,10 @@ nav:
             desc: Tools, benchmarks and further reading
             link: /resources/
             icon: book-bookmark
+          - name: Vulnerability database
+            desc: Every CVE in plain English, with fixes and exploit status
+            link: https://insights.sbomify.com/
+            icon: shield-warning
       - heading: Tools
         items:
           - name: SBOM checker
