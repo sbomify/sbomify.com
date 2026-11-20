@@ -52,7 +52,7 @@ steps:
       OUTPUT_FILE: sbom.cdx.json
 
   - name: Attest SBOM
-    uses: actions/attest-build-provenance@v1
+    uses: actions/attest-build-provenance@v4
     with:
       subject-path: '${{ github.workspace }}/sbom.cdx.json'
 ```
@@ -77,7 +77,7 @@ A successful verification confirms:
 
 This is exactly the point: the consumer does not need to trust sbomify, your CDN, or any other intermediary. They can independently verify the SBOM's provenance by checking the attestation against the Sigstore transparency log.
 
-We use this exact workflow for our own [sbomify-action SBOM](https://github.com/sbomify/sbomify-action/blob/master/.github/workflows/sbomify.yaml). You can download the SBOM from our [public Trust Center page](https://trust.sbomify.com/product/sbomify-action/) and verify it yourself. For a detailed walkthrough, see our [attestation blog post](/2024/10/31/github-action-update-and-attestation/).
+We use this exact workflow for our own [sbomify-action SBOM](https://github.com/sbomify/sbomify-action/blob/master/.github/workflows/sboms.yml). You can download the SBOM from our [public Trust Center page](https://trust.sbomify.com/product/sbomify-action/) and verify it yourself. For a detailed walkthrough, see our [attestation blog post](/2024/10/31/github-action-update-and-attestation/).
 
 ## What is happening under the hood
 
@@ -95,7 +95,7 @@ sbomify can verify attestations automatically when you upload signed SBOMs. The 
 
 A single check now covers both sbomify-stored signatures and GitHub-published Sigstore attestations. These were [originally handled by two separate plugins](/2026/01/23/announcing-sbomify-v0-25-the-one-with-attestations/); the GitHub Attestation plugin has since been folded into SBOM Verification, so there is only one plugin to enable.
 
-Enable it from the **Plugins** page in your workspace sidebar:
+Workspace owners and admins can enable it from the **Plugins** page in the workspace sidebar:
 
 {{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/plugin_enablement_sbom-verification.webm" title="Enabling the SBOM Verification plugin in sbomify" description="Step-by-step screencast showing how to enable the SBOM Verification plugin in sbomify for digest, signature, and provenance checks." upload_date="2026-04-24T10:16:53Z" >}}
 

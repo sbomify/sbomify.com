@@ -1,8 +1,8 @@
 ---
 title: "What SBOM formats does sbomify support?"
-description: "sbomify supports CycloneDX 1.3-1.7 and SPDX 2.2, 2.3, and 3.0.1 SBOM formats in JSON, with automatic validation and schema compliance checking."
-answer: "sbomify supports both CycloneDX and SPDX - the two industry-standard SBOM formats. CycloneDX 1.3 through 1.7 and SPDX 2.2, 2.3, and 3.0.1 are accepted in JSON representation, with automatic validation against official schemas. Beyond SBOMs, sbomify also accepts VEX documents (CycloneDX VEX, OpenVEX, CSAF 2.0) and CBOMs."
-tldr: "sbomify supports both CycloneDX (1.3 through 1.7) and SPDX (2.2, 2.3, 3.0.1) - the two industry-standard SBOM formats - in JSON representation, with automatic validation against official schemas."
+description: "sbomify supports CycloneDX 1.3-1.7 and SPDX 2.2, 2.3, and 3.0 (3.0.0 and 3.0.1) SBOM formats in JSON, with automatic validation and schema compliance checking."
+answer: "sbomify supports both CycloneDX and SPDX - the two industry-standard SBOM formats. CycloneDX 1.3 through 1.7 and SPDX 2.2, 2.3, and 3.0 (3.0.0 and 3.0.1) are accepted in JSON representation, with automatic validation against official schemas. Beyond SBOMs, sbomify also accepts VEX documents (CycloneDX VEX, OpenVEX, CSAF 2.0) and CBOMs."
+tldr: "sbomify supports both CycloneDX (1.3 through 1.7) and SPDX (2.2, 2.3, 3.0.0, 3.0.1) - the two industry-standard SBOM formats - in JSON representation, with automatic validation against official schemas."
 weight: 30
 keywords: [SBOM formats, CycloneDX, SPDX, sbomify formats, SBOM standard]
 url: /faq/what-sbom-formats-does-sbomify-support/
@@ -24,8 +24,8 @@ sbomify supports the two major SBOM standards:
 
 [SPDX](https://spdx.dev/) (Software Package Data Exchange) is an ISO/IEC international standard (5962:2021) with deep roots in license compliance.
 
-- **Versions supported:** SPDX 2.2, 2.3, 3.0.1
-- **Representations:** JSON (JSON-LD for 3.0.1)
+- **Versions supported:** SPDX 2.2, 2.3, 3.0.0, 3.0.1 (SPDX 3.1 is not yet accepted)
+- **Representations:** JSON (JSON-LD for 3.0)
 - **Strengths:** ISO standard, strong license compliance support, widely used in automotive and enterprise
 
 ## Automatic validation

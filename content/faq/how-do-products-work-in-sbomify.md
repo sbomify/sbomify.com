@@ -22,7 +22,7 @@ Unlike tools that flatten everything into a single SBOM file (losing critical co
 
 ### Components
 
-Components are the foundation. Each component usually maps to a single repository (e.g., a GitHub repository) and holds the actual SBOMs as well as compliance documents and other artifacts. SBOMs are uploaded to components and versioned here.
+Components are the foundation. Each component usually maps to a single repository (e.g., a GitHub repository) and holds the actual SBOMs (along with related BOMs such as VEX and CBOM). Compliance documents and other evidence live in document components. SBOMs are uploaded to components and versioned here.
 
 Note that the component SBOM version is different from the product version - a component may have many SBOM versions uploaded over time as its dependencies change, independent of product releases.
 
@@ -48,7 +48,7 @@ Because sbomify uses linkage rather than copying, multiple products (or versions
 
 You can export and share SBOMs at any level of the hierarchy - a single component or the entire product. This is useful when different stakeholders need different levels of detail. For example, an internal team might need just one component's SBOM, while a customer or auditor needs the full product SBOM.
 
-Products and their SBOMs can be shared publicly through your [Trust Center](/faq/what-is-a-trust-center/) (available on Business and Enterprise plans).
+Products and their SBOMs can be shared publicly through your [Trust Center](/faq/what-is-a-trust-center/), available on every plan; Business and Enterprise add private products and components and a Trust Center on your own domain.
 
 ## Further reading
 

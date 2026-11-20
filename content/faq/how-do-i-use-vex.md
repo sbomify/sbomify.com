@@ -58,17 +58,18 @@ A minimal CycloneDX VEX statement looks like this:
 }
 ```
 
-The `analysis.state` field is the heart of VEX. CycloneDX defines five states:
+The `analysis.state` field is the heart of VEX. CycloneDX defines six states:
 
-| State                 | When to use                                                                                       |
-| --------------------- | ------------------------------------------------------------------------------------------------- |
-| `not_affected`        | Vulnerability is present in the dependency tree but not exploitable in your product               |
-| `affected`            | Vulnerability is present and your product is exposed - patch is in flight                         |
-| `exploitable`         | Active exploitation is possible right now - alert your customers                                  |
-| `under_investigation` | You are still triaging - publish to acknowledge but do not commit yet                             |
-| `fixed`               | Vulnerability was present in an earlier release; the version your customer is using has the patch |
+| State                    | When to use                                                                                 |
+| ------------------------ | ------------------------------------------------------------------------------------------- |
+| `not_affected`           | Vulnerability is present in the dependency tree but not exploitable in your product         |
+| `false_positive`         | The scanner matched the wrong component or version; the vulnerability does not apply at all |
+| `exploitable`            | Your product is exposed - patch is in flight or a response is documented                    |
+| `in_triage`              | You are still triaging - publish to acknowledge but do not commit yet                       |
+| `resolved`               | The vulnerability was remediated in the version your customer is using                      |
+| `resolved_with_pedigree` | Remediated, with the patch evidence recorded in the component's pedigree                    |
 
-When you mark a finding `not_affected`, you must also provide a `justification` from the standard set: `code_not_present`, `code_not_reachable`, `requires_configuration`, `requires_dependency`, `requires_environment`, `protected_by_compiler`, `protected_at_runtime`, `protected_at_perimeter`, `protected_by_mitigating_control`. Free-form prose goes in `detail`.
+When you mark a finding `not_affected`, you should also provide a `justification` from the standard set (sbomify's in-app triage requires one): `code_not_present`, `code_not_reachable`, `requires_configuration`, `requires_dependency`, `requires_environment`, `protected_by_compiler`, `protected_at_runtime`, `protected_at_perimeter`, `protected_by_mitigating_control`. Free-form prose goes in `detail`.
 
 This structure means a VEX statement is auditable: a regulator or a security team can ask "why did you mark this not_affected" and the JSON has the answer.
 
@@ -82,11 +83,11 @@ In practice this means a CRA-compliant manufacturer publishes:
 2. A **VEX** document (or CSAF) describing the current exploitability status of the CVEs that affect those components.
 3. A **VDR** (Vulnerability Disclosure Report) summarizing the manufacturer's stance over time.
 
-sbomify's CRA Compliance plugin checks for the SBOM/VEX split and flags SBOMs that smuggle vulnerability data inline as non-compliant.
+sbomify's BSI TR-03183-2 (EU CRA SBOM) plugin checks for the SBOM/VEX split and flags SBOMs that smuggle vulnerability data inline as non-compliant.
 
 ## Uploading VEX to sbomify
 
-sbomify treats a VEX document as a separate artifact attached to the same component as its SBOM. There is no separate "VEX component" - the relationship is artifact-to-component, the same as SBOMs. You can upload VEX in any supported format through the upload panel on the component page, via the API, or from CI.
+sbomify treats a VEX document as a separate artifact attached to the same component as its SBOM. There is no separate "VEX component" - the relationship is artifact-to-component, the same as SBOMs. You can upload VEX in any supported format through the upload panel on the component page, via the API, or from CI. In the app you can also tick **Send for approval first** so the VEX waits in the **Review** tab of the **Vulnerabilities** page and changes nothing until someone approves it.
 
 ### Via the API
 
@@ -137,7 +138,7 @@ If your CI platform does not support OIDC, set `TOKEN: ${{ secrets.SBOMIFY_TOKEN
 
 You do not have to author VEX by hand or in an external tool. sbomify has an in-app triage workflow:
 
-- **In-app triage.** Review scanner findings on the vulnerability dashboard, record `not_affected` decisions with justifications, apply bulk decisions across CVEs, and preview the effect with a dry run before committing.
+- **In-app triage.** Review scanner findings on the vulnerability dashboard, record decisions (`not_affected` with a justification, `false_positive`, `exploitable`, `in_triage`, `resolved`, or a formal risk acceptance with an owner and an expiry date), apply bulk decisions across CVEs, and preview the effect with a dry run before committing.
 - **CISA KEV flags.** Findings that appear in the CISA Known Exploited Vulnerabilities catalog are flagged so you triage the vulnerabilities that attackers actually use first.
 - **Self-VEX generation.** sbomify generates a CycloneDX VEX from your triage decisions, complete with CISA tracking fields (serial number and statement timestamps), so your published VEX always matches your ledger.
 - **Dependency Track sync.** If Dependency Track is your triage system of record, opt in and sbomify syncs your DT analysis decisions in as VEX, pinning them to the matching releases so you do not triage the same finding twice.
@@ -161,11 +162,11 @@ A VEX is a security-relevant claim about your product. Sign it with the same mac
 
 ## What sbomify does with VEX
 
-- **Scanner suppression.** Findings covered by a `not_affected` VEX statement are suppressed in your OSV and Dependency Track results, so the dashboard shows your triaged exposure instead of raw scanner noise. Uploading a new VEX re-applies it to existing scans automatically.
+- **Scanner suppression.** Findings covered by a `not_affected` or `false_positive` VEX statement are suppressed in your OSV and Dependency Track results, so the dashboard shows your triaged exposure instead of raw scanner noise. Uploading a new VEX re-applies it to existing scans automatically. An uploaded VEX applies to the component's SBOMs of the version it was written for (or to a release you pin it to), while in-app triage decisions apply across the whole component.
 - **Per-component listing.** The component detail page shows VEX artifacts alongside SBOMs, with distinct badges.
 - **Release-level VEX.** Each release exposes a merged VEX download, on both the internal release page and the public Trust Center release page, next to the release SBOM.
 - **Trust Center exposure.** Customers downloading from your Trust Center see and can fetch the VEX with the same access controls as the SBOM, and the release vulnerability posture card reflects your VEX-applied status.
-- **Audit trail.** Every VEX upload is logged the same way as an SBOM upload, with content hash, timestamp, and uploader identity.
+- **Audit trail.** Every VEX upload is stored byte for byte as received and recorded the same way as an SBOM upload, with content hash, timestamp, and upload source.
 
 ## Further reading
 

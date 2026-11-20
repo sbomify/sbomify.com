@@ -24,7 +24,7 @@ The wizard scans your repo for lockfiles, signs you in to sbomify, creates your 
 
 ## Recommended: sbomify-action
 
-The [sbomify Action](/sbomify-action/) is a CI/CD tool that generates, augments, enriches, and uploads SBOMs from your lockfiles or Docker images. It works as a GitHub Action, Docker image, or pip package, and includes SBOM generators (Syft, cdxgen, and native ecosystem tools) pre-installed.
+The [sbomify Action](/sbomify-action/) is a CI/CD tool that generates, augments, enriches, and uploads SBOMs from your lockfiles or Docker images. It works as a GitHub Action, Docker image, or pip package. It picks a native generator per ecosystem (such as `cyclonedx-py` or `cargo-cyclonedx`) with cdxgen and Syft as fallbacks; apart from `cyclonedx-py`, these tools are downloaded on first use and verified against pinned digests.
 
 ```yaml
 - uses: sbomify/sbomify-action@master
@@ -38,13 +38,13 @@ sbomify-action supports 18 ecosystems (Python, JavaScript, Java, Go, Rust, Ruby,
 
 Beyond basic generation, sbomify-action can:
 
-- **Enrich** SBOMs with metadata from package registries (PyPI, npm, crates.io, etc.)
+- **Enrich** SBOMs with metadata from package registries and databases (PyPI, crates.io, pub.dev, deps.dev, ecosyste.ms, etc.)
 - **Augment** with business metadata (supplier, authors, licenses, lifecycle phase)
 - **Inject** additional packages not in lockfiles (vendored code, system libraries)
 - **Upload** to sbomify for collaboration and vulnerability management
 - **Attest** with GitHub's build provenance
 
-It also works with [GitLab CI and Bitbucket Pipelines](https://github.com/sbomify/sbomify-action#other-cicd-platforms). See our [CI/CD integration guide](/guides/ci-cd/) for details.
+It also works on [GitLab CI, Bitbucket Pipelines, Jenkins and other CI platforms](/sbomify-action/runtimes/). See our [CI/CD integration guide](/guides/ci-cd/) for details.
 
 ### Using Docker directly
 

@@ -1,7 +1,7 @@
 ---
 title: "How do I set up OIDC trusted publishing?"
 description: "OIDC trusted publishing lets GitHub Actions upload SBOMs to sbomify without any long-lived token secret, using short-lived OpenID Connect tokens instead."
-answer: "Add a trusted publisher binding to your component in the sbomify app (Component Settings, Trusted Publishers), then grant your GitHub Actions workflow 'permissions: id-token: write' and drop the TOKEN secret. sbomify-action detects the OIDC environment automatically, exchanges GitHub's OIDC token for a short-lived sbomify token, and uploads. No secrets to create, rotate, or leak."
+answer: "Add a trusted publisher binding to your component in the sbomify app (the component's actions menu, Trusted publishers), then grant your GitHub Actions workflow 'permissions: id-token: write' and drop the TOKEN secret. sbomify-action detects the OIDC environment automatically, exchanges GitHub's OIDC token for a short-lived sbomify token, and uploads. No secrets to create, rotate, or leak."
 tldr: "Trusted publishing replaces long-lived API tokens with short-lived OpenID Connect tokens minted by GitHub for each workflow run. Bind your repository to a component once in the sbomify UI, add 'id-token: write' to your workflow, and uploads just work - no token secret anywhere."
 weight: 62
 keywords: [OIDC trusted publishing, tokenless SBOM upload, GitHub Actions OIDC, sbomify trusted publisher, keyless publishing, id-token write]
@@ -22,7 +22,7 @@ The screencast below walks the whole flow end to end: adding the repository bind
 
 ### 1. Create the trusted publisher binding
 
-In the [sbomify app](https://app.sbomify.com), open your component's settings and add a **Trusted Publisher** with your GitHub organization and repository. Private repositories are supported. To defeat repository resurrection attacks, sbomify pins the immutable GitHub repository and owner IDs, not just the names.
+In the [sbomify app](https://app.sbomify.com), open your component, choose **Trusted publishers…** from its actions menu (⋮), enter your GitHub repository in `org/repo` form and click **Add publisher**. Only workspace owners and admins see this option. Private repositories are supported. To defeat repository resurrection attacks, sbomify pins the immutable GitHub repository and owner IDs, not just the names (for a private repository the IDs are pinned on its first OIDC upload).
 
 If you onboard with the [setup wizard](/faq/how-do-i-use-the-sbomify-setup-wizard/), this step happens automatically.
 
@@ -45,7 +45,7 @@ steps:
       UPLOAD: true
 ```
 
-That is the whole setup. sbomify-action auto-detects the OIDC environment when no `TOKEN` is set. If both are present, `TOKEN` takes precedence. Self-hosted sbomify instances can override the token audience with the `oidc-audience` input (default `sbomify.com`).
+That is the whole setup. sbomify-action auto-detects the OIDC environment when no `TOKEN` is set. If both are present, `TOKEN` takes precedence. The token audience defaults to `sbomify.com` on app.sbomify.com and to the API hostname on other deployments; self-hosted instances can override it with the `oidc-audience` input.
 
 ## Scope and limits
 

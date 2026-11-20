@@ -25,16 +25,18 @@ Before creating a release, you need:
 
 ### The "Latest" release
 
-The first time an SBOM is uploaded against a product, sbomify automatically creates a `Latest` release that always points to the most recent SBOM version of each component. You don't need to manage it - it's there as a stable URL for "whatever is current".
+Every product automatically gets a `latest` release that always points to the most recent SBOM and documents of each component in the product. sbomify manages it for you (you cannot add or remove its artifacts by hand) - it's there as a stable URL for "whatever is current".
 
-Named releases (e.g. `v2.1.0`) are immutable snapshots and are what you should share with customers and auditors.
+Named releases (e.g. `v2.1.0`) hold exactly the artifacts you add to them and do not move when new SBOMs are uploaded, which makes them what you should share with customers and auditors.
 
 ### Steps
 
-1. Navigate to your **Product** and scroll to the **Releases** section
-2. Click **Create Release** and fill in the modal: **Name** (e.g. `Middle-Out Rewrite`), **Version** (e.g. `v2.1.0`), and an optional **Description**, then click **Create**
-3. Click into the new release
+1. Open your **Product** and choose **Create release** from its actions menu (or use **New** → **Add release** in the header)
+2. On the **New release** page, check the **Product**, fill in **Release name** (e.g. `Middle-Out Rewrite`), **Version** (e.g. `v2.1.0`) and, optionally, a **Description** and dates, then click **Create release**
+3. sbomify opens the new release
 4. Click **Add Artifact**, use **Select All Visible** (or pick individual SBOMs and documents) in the artifact picker, then click **Add to Release**
+
+If you upload from CI with [sbomify-action](/sbomify-action/publishing/), setting `PRODUCT_RELEASE` tags each uploaded SBOM into a release and creates the release if it does not exist yet.
 
 ### How versioning works
 
