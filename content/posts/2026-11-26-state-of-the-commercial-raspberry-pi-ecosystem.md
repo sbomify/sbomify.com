@@ -22,6 +22,8 @@ So we did what we'd do with any product: took the image the vendor ships, genera
 
 ## Methodology
 
+We deliberately scoped this to the **Freemium and paid-for OS** category alone, and left every other section of Raspberry Pi Imager out. That choice is the whole point: it would be unfair to hold hobbyists and makers — the general-purpose Raspberry Pi OS images, the retro-gaming distros, the tinkerer projects — to the same security standard as a company selling a product. A maker flashing an image for a weekend build has made no promises to anyone. A vendor charging for a signage player, a thin client or a smart-home hub has, implicitly or in a contract, and will soon have to under law. So we judged only the products that are sold as products.
+
 1. We fetched the Raspberry Pi Imager OS list (`os_list_imagingutility_v4.json`) on 20 November 2026 and took every entry under **Freemium and paid-for OS**.
 2. For each vendor we picked the newest image that supports a Raspberry Pi 4 or Pi 5. A vendor with several images got one scan, the most current.
 3. We decompressed the image, attached it as a read-only loop device and mounted every partition. Where the root filesystem was nested (Ubuntu Core snaps, balenaOS container layers, an LVM volume, a squashfs payload) we mounted that too.
