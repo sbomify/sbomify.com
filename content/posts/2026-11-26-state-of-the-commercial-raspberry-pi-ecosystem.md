@@ -3,7 +3,7 @@ title: "The State of the Commercial Raspberry Pi Ecosystem: We Scanned Every Pai
 date: 2026-11-26
 seo_title: "Commercial Raspberry Pi OS Security: SBOM and CVE Scan"
 description: "We downloaded every image in the 'Freemium and paid-for OS' section of Raspberry Pi Imager, generated SBOMs and ran them through OSV. End-of-life Debian, Python 2.7, stale Chromium builds and thousands of fixable CVEs, on devices that sit inside business networks. Here is what we found, and what the CRA will expect."
-keywords: "Raspberry Pi security, Raspberry Pi OS end of life, Raspbian buster EOL, digital signage security, Raspberry Pi Imager, SBOM Raspberry Pi, OSV scanner, CRA Raspberry Pi, Cyber Resilience Act IoT, commercial Raspberry Pi products, OTA updates Raspberry Pi"
+keywords: "Raspberry Pi security, Raspberry Pi OS end of life, Raspbian 10 EOL, digital signage security, Raspberry Pi Imager, SBOM Raspberry Pi, OSV scanner, CRA Raspberry Pi, Cyber Resilience Act IoT, commercial Raspberry Pi products, OTA updates Raspberry Pi"
 categories:
   - education
 tags: [sbom, cra, raspberry-pi, vulnerability-management, osv, iot, digital-signage]
@@ -41,14 +41,14 @@ Several details are important for interpreting the figures:
 
 | Product (image tested)                         | Base OS                                      | Base OS support status                                                       | Non-kernel vulns | Critical / High | Fix available | Update path we found                            |
 | ---------------------------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------- | ---------------: | --------------: | ------------: | ----------------------------------------------- |
-| **Linutop OS** (Jan 2025)                      | Raspbian 10 "buster"                         | **End of life** (Debian LTS ended June 2024)                                 |      318 (756\*) |        28 / 151 |           316 | Plain apt against the archived buster repo      |
+| **Linutop OS** (Jan 2025)                      | Raspbian 10                                  | **End of life** (Debian LTS ended June 2024)                                 |      318 (756\*) |        28 / 151 |           316 | Plain apt against the archived Debian 10 repo   |
 | **XOGO** 2.105.21 (Oct 2022)                   | balenaOS host, player container on Debian 10 | **End of life** (Debian 10; Alpine 3.15/3.16 supervisor containers also EoL) |      413 (547\*) |          3 / 37 |           413 | balena fleet updates, if the fleet is managed   |
 | **3DPrinterOS** (Mar 2024)                     | Arch Linux ARM snapshot, kernel 6.6.21       | Rolling release, 20 months stale                                             |             299† |         10 / 47 |           299 | Vendor service; no evidence of OS-level updates |
 | **info-beamer OS** (Feb 2026)                  | Custom minimal Linux                         | Runtime on **Python 2.7.18** (EoL Jan 2020)                                  |              117 |         19 / 60 |           116 | Signed A/B image updates                        |
-| **1Play** V17 (Jul 2025)                       | Raspbian 12 "bookworm" (12.11)               | Debian 12 is in LTS since July 2026                                          |            3,877 |     257 / 1,371 |         2,617 | apt against Raspbian and Raspberry Pi repos     |
+| **1Play** V17 (Jul 2025)                       | Raspbian 12.11                               | Debian 12 is in LTS since July 2026                                          |            3,877 |     257 / 1,371 |         2,617 | apt against Raspbian and Raspberry Pi repos     |
 | **Yodeck** (Aug 2026, Pi 5)                    | Debian 12.5                                  | Debian 12 LTS; packages from the March 2024 point release                    |            3,266 |     208 / 1,201 |         2,643 | Vendor apt mirror                               |
 | **TLXOS** 5.2.4                                | Debian 12.13                                 | Debian 12 LTS                                                                |            6,273 |     598 / 2,581 |         5,252 | Vendor updater service + Debian security repo   |
-| **Homey Self-Hosted Server** (Dec 2025)        | Debian 13.2 "trixie"                         | Supported                                                                    |            1,397 |        59 / 429 |         1,103 | Debian security repo, app in Docker             |
+| **Homey Self-Hosted Server** (Dec 2025)        | Debian 13.2                                  | Supported                                                                    |            1,397 |        59 / 429 |         1,103 | Debian security repo, app in Docker             |
 | **ScreenlyOS** 26.10.1 (Nov 2026)              | Ubuntu Core 24/26                            | Supported                                                                    |              673 |        37 / 148 |           349 | Transactional snap updates (automatic)          |
 | **Android by emteria** 17.2.0 (Nov 2026, Pi 5) | Android 17                                   | Security patch level **2026-06-05**, five months behind its own build date   |             n/a‡ |             n/a |           n/a | Vendor OTA                                      |
 | **Fugo One**                                   | n/a                                          | n/a                                                                          |              n/a |             n/a |           n/a | Image URL in Imager returns 404                 |
@@ -64,7 +64,7 @@ Disclosure: ScreenlyOS is developed by Screenly, the firm I co-founded. It is on
 
 ### End-of-life bases are still shipping
 
-Two of the nine images we were able to analyze completely rely on Debian 10 "buster". Regular security maintenance for buster ceased in September 2022, with long-term support ending in June 2024. The image from Linutop, dated January 2025, is Raspbian 10.13 featuring a 5.10.103 kernel from early 2022; its package database was last updated in November 2024. XOGO's player operates within a Debian 10 container on a balenaOS host running a 5.10.95 kernel. The supervisor containers are constructed using Alpine 3.15 and 3.16, which also reached end-of-life status in 2023 and 2024 respectively.
+Two of the nine images we were able to analyze completely rely on Debian 10. Regular security maintenance for Debian 10 ceased in September 2022, with long-term support ending in June 2024. The image from Linutop, dated January 2025, is Raspbian 10.13 featuring a 5.10.103 kernel from early 2022; its package database was last updated in November 2024. XOGO's player operates within a Debian 10 container on a balenaOS host running a 5.10.95 kernel. The supervisor containers are constructed using Alpine 3.15 and 3.16, which also reached end-of-life status in 2023 and 2024 respectively.
 
 info-beamer presents a different scenario. Its foundational system is a compact custom build utilizing signed A/B updates, which constitutes a sound architecture. However, the device management layer relies on Python 2.7.18 alongside Flask 0.12, Werkzeug 0.11, Jinja2 2.8, and Pillow 4.0. Python 2 reached end of life in January 2020, and these libraries originate from 2016-2017. The Pillow library alone is responsible for 70 of the 117 advisories.
 
@@ -72,7 +72,7 @@ info-beamer presents a different scenario. Its foundational system is a compact 
 
 ### "Supported" doesn't mean patched
 
-The Debian 12 images appear superior on paper because bookworm remains under long-term support. In reality, they harbor the highest number of vulnerabilities since they distribute a large volume of software and the image is merely a snapshot:
+The Debian 12 images appear superior on paper because Debian 12 remains under long-term support. In reality, they harbor the highest number of vulnerabilities since they distribute a large volume of software and the image is merely a snapshot:
 
 - **Yodeck's** Pi 5 image carries a date from August 2026 yet relies on Debian 12.5, which came out in February 2024. Chromium is at version 125, from June 2024. Out of its 3,266 non-kernel advisories, fixes are already available for 2,643 within Debian.
 - **1Play** provides two full kernel trees (6.12.25 and 6.12.34) for each Pi model, includes Chromium 138, and offers 2,617 advisories that can be patched.
