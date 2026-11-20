@@ -7,7 +7,7 @@ keywords: "Raspberry Pi security, Raspberry Pi OS end of life, Raspbian buster E
 categories:
   - education
 tags: [sbom, cra, raspberry-pi, vulnerability-management, osv, iot, digital-signage]
-tldr: "We scanned the 11 commercial operating systems listed under 'Freemium and paid-for OS' in Raspberry Pi Imager. Two still ship an end-of-life Debian 10 base, one runs its management stack on Python 2.7, and one is a 20-month-old Arch Linux snapshot. The Debian 12 based images carry between 2,600 and 5,300 vulnerabilities that already have a fix upstream, before the kernel is even counted. Scanners also under-report end-of-life systems: OSV matched 14 Debian advisories against a Raspbian 10 image, but 452 when the same packages were checked against Debian 11 data. Most of these devices are digital signage players sitting on corporate networks, and from December 2027 they fall squarely under the Cyber Resilience Act."
+tldr: "We scanned the 11 commercial operating systems listed under 'Freemium and paid-for OS' in Raspberry Pi Imager. Two still ship an end-of-life Debian 10 base, one runs its management stack on Python 2.7, and one is a 20-month-old Arch Linux snapshot. The Debian 12 based images carry between 2,600 and 5,300 vulnerabilities that already have a fix upstream, before the kernel is even counted. Scanners also under-report end-of-life systems: OSV matched 14 Debian advisories against a Raspbian 10 image, but 452 when the same packages were checked against Debian 11 data. One image still ships the default `pi` / `raspberry` password, and three bake a shared private SSH host key into every device. Most of these are digital signage players sitting on corporate networks, and from December 2027 they fall squarely under the Cyber Resilience Act."
 author:
   display_name: Viktor Petersson
   login: vpetersson
@@ -84,6 +84,29 @@ This finding should worry anyone who relies on a scanner dashboard. When we scan
 
 The reason is mundane. Once a release is archived, the upstream security tracker stops recording new issues against it, so the vulnerability databases stop matching it. The older and less maintained a system gets, the cleaner its scan looks. A naive "0 critical" report on an end-of-life device is a false negative, not a clean bill of health. Checking the support status of the base OS, not just running a scanner, has to be part of the process.
 
+### Default credentials and shared SSH host keys
+
+A CVE count tells you about the software a vendor pulled in. It says nothing about how the vendor configured the system. So we also looked at two things that an SBOM won't catch: the accounts baked into the image, and the SSH host keys.
+
+The worst case is **Linutop**. Its image ships with the `pi` account still set to the well-known default Raspberry Pi password (`raspberry`) — the password Raspberry Pi OS itself stopped shipping with in 2022, precisely because it was the single most exploited default on the platform. Anyone who can reach the device and knows the default, which is to say anyone, is already authenticated. This is a hardcoded credential in the plainest sense.
+
+The SSH story is separate and affects more images. Several vendors bake the **private SSH host keys** straight into the image, so every device flashed from that image presents the _same_ host key:
+
+| Product         | SSH on by default   | Host keys               | First-boot regeneration    | Password login                                    |
+| --------------- | ------------------- | ----------------------- | -------------------------- | ------------------------------------------------- |
+| **Linutop**     | No (needs enabling) | **Baked in, shared**    | None                       | Default `pi` / `raspberry`                        |
+| **1Play**       | Yes                 | **Baked in, shared**    | None                       | `pi` set (not default)                            |
+| **TLXOS**       | Yes                 | **Baked in, shared**    | None                       | Disabled (key-only, root `prohibit-password`)     |
+| **Yodeck**      | Yes                 | Generated on first boot | `regenerate_ssh_host_keys` | `root` / `pi` / `user` set; `PermitRootLogin yes` |
+| **Homey**       | Yes                 | Generated on first boot | `regenerate_ssh_host_keys` | `homey` set                                       |
+| **3DPrinterOS** | Yes                 | None in image           | n/a                        | `root` / `printeros` set                          |
+
+A shared private host key is a real weakness, not a cosmetic one. Because every device in the field holds the identical key, the key is only as secret as the image download — which is public — so an attacker who pulls the image owns the private key for every deployed unit. That removes SSH's protection against man-in-the-middle interception: a device on the same network can impersonate the real player, and the connecting admin gets no host-key warning because the key matches. The fix is routine (delete the keys at build time and let `ssh-keygen` run once per device on first boot, which Yodeck and Homey already do), which makes its absence in the others notable.
+
+To be clear about what we did and didn't extract: the `pi` / `raspberry` pair is the platform's own documented default, so naming it exposes nothing that isn't already public. We did not crack, and are not publishing, the unique password hashes on the other images, nor the private key material itself — the finding is that the keys are _present and shared_, which is observable without reading them. TLXOS deserves credit for disabling password authentication entirely, though its shared host key still stands.
+
+Under the CRA this lands on Annex I, Part I(2)(b) — "ensure protection from unauthorised access by appropriate control mechanisms" — and the guidance that products not use default or unchangeable passwords. A shipped default credential is close to the canonical example of what that clause exists to stop.
+
 ### Update mechanisms vary widely
 
 | Approach                                                 | Products                                        |
@@ -111,6 +134,7 @@ These are commercial products sold in the EU, so the [Cyber Resilience Act](/com
 - **A defined support period, normally at least five years** (Article 13(8)). It has to cover the base OS too, and you can't promise five years of support on a distribution that has already reached end of life.
 - **An SBOM covering at least the top-level dependencies** (Annex I, Part II(1)). Every vendor here would need one. Generating it is the easy part. Acting on it is where most of them fall short today.
 - **Handling vulnerabilities without delay** (Annex I, Part II(2)). 2,000-5,000 already-fixed advisories in a shipping image suggests nobody is tracking them.
+- **No default or unchangeable passwords, and protection from unauthorised access** (Annex I, Part I(2)(b)). A shipped `pi` / `raspberry` default and shared SSH host keys are the textbook failures here.
 
 None of this requires heroics. Most of the problems above disappear if you rebuild the image on a supported base on a schedule, ship it through an update mechanism the device actually uses, and continuously monitor the SBOM for new vulnerabilities. That last part is what [sbomify](https://sbomify.com) is for.
 
@@ -118,6 +142,6 @@ None of this requires heroics. Most of the problems above disappear if you rebui
 
 **If you buy these products**, ask the vendor for an SBOM and a stated support period, and ask how OS-level updates reach the device. Put signage players on an isolated network segment, and add them to your asset inventory.
 
-**If you build them**, treat the base image as a dependency with an end-of-life date. Track it the same way you track your application dependencies. Rebuild regularly, ship through an update channel the device uses, and don't trust a clean scan of an end-of-life system.
+**If you build them**, treat the base image as a dependency with an end-of-life date. Track it the same way you track your application dependencies. Rebuild regularly, ship through an update channel the device uses, and don't trust a clean scan of an end-of-life system. And handle the basics an SBOM won't catch: no default passwords, and regenerate SSH host keys on first boot rather than baking one shared key into every device.
 
 **For everyone**: a hobby image that's two years old is a hobby image. A commercial product that's two years behind is a liability, and from December 2027 it's a compliance problem too.
