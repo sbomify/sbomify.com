@@ -136,27 +136,28 @@ Note that step 1 is not "where you are headquartered" and not "where engineering
 
 ## What You Will Be Typing
 
-ENISA's [SRP Glossary](https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/cra-srp-glossary2) documents 43 fields with their meaning, format, and the stage at which each applies. Fields are marked required, optional, mandatory if the information is available, or carried forward from a previous stage.
+> **Update, November 2026:** This section follows version 1.6 of ENISA's glossary (21 October 2026). Since 1.6, the 72-hour notification and the final report no longer repeat the early warning's fields, and component name, CVE ID and EUVD ID can only be given at the early warning.
+
+ENISA's [SRP Glossary](https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/cra-srp-glossary2) documents 42 fields with their meaning, format, and what each stage does with them: required, optional, copied from the previous step, or not asked at all.
 
 The early warning is deliberately thin. Here is what is **required at the 24-hour mark**:
 
 | Field                                        | Notes                                      |
 | -------------------------------------------- | ------------------------------------------ |
 | Notification type (vulnerability/incident)   | Determines which subsequent fields you see |
-| Notification level (24h/72h/final)           | -                                          |
 | Title and summary                            | -                                          |
-| Manufacturer name                            | -                                          |
+| Manufacturer name                            | Filled in by the platform                  |
 | **Product name**                             | -                                          |
 | **Product version**                          | -                                          |
-| Member States where the product is available | Required if the information is available   |
+| Member States where the product is available | -                                          |
 | Date/time you became aware                   | AEV and SI both                            |
 | Unlawful or malicious acts suspected         | Severe incidents only                      |
 
 Read that list again with an engineering eye. At the 24-hour mark, the regulator is not asking for your root cause analysis. It is asking **which product, which version, and which Member States**. Those are inventory questions, and they are the ones that go badly when the answer lives in three spreadsheets and a release engineer's memory.
 
-The 72-hour notification adds general information about the vulnerability or the nature of the incident, an initial assessment, considered sensitivity of the information, and - now required - **corrective or mitigating measures taken, and measures users can take**. The final report is where the detailed severity and impact descriptions, the malicious actor where known, and the date the corrective measure became available all land.
+The 72-hour notification does not repeat any of that. It requires general information about the vulnerability, or for an incident its nature and an initial assessment. The considered sensitivity of the information, the attack vector, and the corrective or mitigating measures so far are optional at that stage. The final report is where the measures taken and the measures users can take become **required**, along with the detailed severity and impact descriptions, the malicious actor where known, and the date the corrective measure became available.
 
-Fields that stay optional throughout are worth noting too, because they are where SBOM data would go if you have it: **component name**, CVE ID, EUVD ID, and attack vector. Optional to ENISA. Extremely useful to the CSIRT reading it at 3am, and to you when the same component turns up in the next notification.
+The fields where SBOM data would go are optional, but they have a deadline of their own: **component name**, CVE ID and EUVD ID are only on the early warning form. The later stages do not ask for them, so if you cannot name the component within 24 hours, you do not get to name it at all. They are optional to ENISA, and extremely useful to the CSIRT reading the notification at 3am, and to you when the same component turns up in the next one.
 
 ## Two Things That Are Not There
 
