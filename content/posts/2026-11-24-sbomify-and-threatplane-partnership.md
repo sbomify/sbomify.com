@@ -1,13 +1,13 @@
 ---
 title: "sbomify and Threatplane: Putting Vulnerabilities in Context"
 description: "sbomify and Threatplane are partnering to combine SBOM-driven vulnerability findings with risk-based threat models. Mapping sbomify components and products to the assets in a Threatplane threat model tells you which CVEs actually matter, based on where the vulnerable code runs and what it is exposed to."
-keywords: "sbomify, Threatplane, CycloneDX, CycloneDX 2.0, threat modelling, threat modeling, threat model, STRIDE, spoofing, tampering, repudiation, information disclosure, denial of service, elevation of privilege, PASTA, DREAD, LINDDUN, attack trees, MITRE ATT&CK, data flow diagram, DFD, trust boundaries, attack surface, threat actors, risk assessment, likelihood and impact, security controls, risk register, SBOM, VEX, CVE, CVSS, EPSS, KEV, reachability, exploitability, vulnerability triage, vulnerability prioritisation, risk-based prioritisation, secure by design, AI agents, MCP, product security, partnership"
+keywords: "sbomify, Threatplane, CycloneDX, CycloneDX 2.0, threat modelling, threat modeling, threat model, STRIDE, spoofing, tampering, repudiation, information disclosure, denial of service, elevation of privilege, PASTA, DREAD, LINDDUN, attack trees, MITRE ATT&CK, data flow diagram, DFD, trust boundaries, attack surface, threat actors, risk assessment, likelihood and impact, security controls, risk register, SBOM, VEX, CycloneDX VEX, CSAF, OpenVEX, risk acceptance, accepted risk, will_not_fix, not_affected, CVE, CVSS, EPSS, KEV, reachability, exploitability, vulnerability triage, vulnerability prioritisation, risk-based prioritisation, secure by design, AI agents, MCP, product security, partnership"
 author:
   display_name: Viktor Petersson
 categories:
   - announcement
 tags: [sbom, security, threat-modelling, stride, cyclonedx, vulnerability-management, partnership]
-tldr: "sbomify knows what is inside your software and which components carry known vulnerabilities. Threatplane knows how that software is deployed, where it is exposed, and what a compromise would cost the business. On its own, each answers half the question. Together they answer the one that matters: which of these findings should we fix first? By mapping sbomify components and products to the assets in a Threatplane threat model, a CVSS 10 on an internal-only service can be ranked below a CVSS 7 on an internet-facing one. An AI agent can build that mapping today through the two platforms' APIs, with no custom integration needed."
+tldr: "sbomify knows what is inside your software and which components carry known vulnerabilities. Threatplane knows how that software is deployed, where it is exposed, and what a compromise would cost the business. On its own, each answers half the question. Together they answer the one that matters: which of these findings should we fix first? By mapping sbomify components and products to the assets in a Threatplane threat model, a CVSS 10 on an internal-only service can be ranked below a CVSS 7 on an internet-facing one. An AI agent can build that mapping today through the two platforms' APIs, with no custom integration needed. The agent can then draft a VEX statement with that context for a human to sign off, which makes accepting the risk a documented, defensible outcome, depending on where the vulnerable component lives."
 image: /assets/images/blog/sbomify-threatplane-partnership-social.jpg
 date: 2026-11-24
 slug: sbomify-and-threatplane-partnership
@@ -91,6 +91,22 @@ So an AI agent can do the joining for you:
 - Use that mapping to re-rank findings by exposure and business impact, and explain why each one landed where it did.
 
 The mapping is the only manual step, and you only do it once per system. After that, as new releases land in sbomify and the threat model changes in Threatplane, the agent can keep the prioritised view current.
+
+## From Context to a Signed VEX Statement
+
+Re-ranking findings is only half of it. The other half is writing down what you decided, in a form your customers and auditors can read. That is what [VEX](/faq/how-do-i-use-vex/) (Vulnerability Exploitability eXchange) is for.
+
+Until now, most VEX statements said one of two things: the product is not affected, because the vulnerable code is missing or unreachable, or it is affected and a fix is coming. Anything in between was hard to justify, so teams either patched everything or quietly sat on findings without explaining why.
+
+A threat model changes that, because it supplies the missing argument: _where_ the vulnerable component lives. With sbomify and Threatplane joined up, an agent can draft the VEX statement and attach the reasoning from both sides. That covers the component and version from sbomify, plus the asset, trust boundaries, exposure, and business impact from Threatplane. A human then reviews it and signs it off. The agent does the legwork, and a person stays accountable for the decision.
+
+That makes **accepting the risk** a realistic, documented outcome rather than an awkward silence. It depends on where the risk lives. The VEX standards do not have an "accepted risk" status, but each one has fields for exactly this decision:
+
+- **CycloneDX VEX:** if the threat model shows the conditions for exploitation are not present, the analysis state is `not_affected`, with a justification such as `protected_at_perimeter` ("Attacks are blocked at physical, logical, or network perimeter"), `requires_environment`, or `protected_by_mitigating_control`. If the vulnerability is exploitable but the risk is acceptable for that asset, the state is `exploitable` with the response `will_not_fix`. The analysis `detail` records why.
+- **CSAF 2.0:** the product is listed as `known_affected` with a remediation of category `no_fix_planned`, or as `known_not_affected` with a justification flag such as `vulnerable_code_cannot_be_controlled_by_adversary`.
+- **OpenVEX:** the status is `affected` with an `action_statement` explaining the decision, or `not_affected` with a justification such as `vulnerable_code_cannot_be_controlled_by_adversary`.
+
+The same CVE can therefore get different answers on different assets. On the internet-facing payments API it is `exploitable` and gets fixed this sprint. In the isolated batch job, the threat model shows no realistic attack path, and a signed statement accepts the risk until the next scheduled upgrade. sbomify ingests all three formats and applies the statements to your findings, so the decision shows up in your vulnerability counts and on your Trust Center.
 
 Want help setting this up for your own products? [Contact sbomify sales](https://app.sbomify.com/enterprise-contact/) about your SBOM and vulnerability data, or [get in touch with Threatplane](https://threatplane.com/get-in-touch) about threat modelling your systems.
 
