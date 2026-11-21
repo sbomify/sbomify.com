@@ -10,7 +10,6 @@ tags: [sbom, security, threat-modelling, stride, vulnerability-management, partn
 tldr: "sbomify knows what is inside your software and which components carry known vulnerabilities. Threatplane knows how that software is deployed, where it is exposed, and what a compromise would cost the business. On its own, each answers half the question. Together they answer the one that matters: which of these findings should we fix first? By mapping sbomify components and products to the assets in a Threatplane threat model, a CVSS 10 on an internal-only service can be ranked below a CVSS 7 on an internet-facing one. An AI agent can build that mapping today through the two platforms' APIs, with no custom integration needed."
 image: /assets/images/blog/sbomify-threatplane-partnership-social.jpg
 date: 2026-11-24
-draft: true
 slug: sbomify-and-threatplane-partnership
 ---
 
