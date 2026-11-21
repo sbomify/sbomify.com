@@ -1,12 +1,12 @@
 ---
 title: "sbomify and Threatplane: Putting Vulnerabilities in Context"
 description: "sbomify and Threatplane are partnering to combine SBOM-driven vulnerability findings with risk-based threat models. Mapping sbomify components and products to the assets in a Threatplane threat model tells you which CVEs actually matter, based on where the vulnerable code runs and what it is exposed to."
-keywords: "sbomify, Threatplane, threat modelling, threat modeling, threat model, STRIDE, spoofing, tampering, repudiation, information disclosure, denial of service, elevation of privilege, PASTA, DREAD, LINDDUN, attack trees, MITRE ATT&CK, data flow diagram, DFD, trust boundaries, attack surface, threat actors, risk assessment, likelihood and impact, security controls, risk register, SBOM, VEX, CVE, CVSS, EPSS, KEV, reachability, exploitability, vulnerability triage, vulnerability prioritisation, risk-based prioritisation, secure by design, AI agents, MCP, product security, partnership"
+keywords: "sbomify, Threatplane, CycloneDX, CycloneDX 2.0, threat modelling, threat modeling, threat model, STRIDE, spoofing, tampering, repudiation, information disclosure, denial of service, elevation of privilege, PASTA, DREAD, LINDDUN, attack trees, MITRE ATT&CK, data flow diagram, DFD, trust boundaries, attack surface, threat actors, risk assessment, likelihood and impact, security controls, risk register, SBOM, VEX, CVE, CVSS, EPSS, KEV, reachability, exploitability, vulnerability triage, vulnerability prioritisation, risk-based prioritisation, secure by design, AI agents, MCP, product security, partnership"
 author:
   display_name: Viktor Petersson
 categories:
   - announcement
-tags: [sbom, security, threat-modelling, stride, vulnerability-management, partnership]
+tags: [sbom, security, threat-modelling, stride, cyclonedx, vulnerability-management, partnership]
 tldr: "sbomify knows what is inside your software and which components carry known vulnerabilities. Threatplane knows how that software is deployed, where it is exposed, and what a compromise would cost the business. On its own, each answers half the question. Together they answer the one that matters: which of these findings should we fix first? By mapping sbomify components and products to the assets in a Threatplane threat model, a CVSS 10 on an internal-only service can be ranked below a CVSS 7 on an internet-facing one. An AI agent can build that mapping today through the two platforms' APIs, with no custom integration needed."
 image: /assets/images/blog/sbomify-threatplane-partnership-social.jpg
 date: 2026-11-24
@@ -107,6 +107,8 @@ This partnership is aimed at the people who actually triage findings:
 ## What's Next
 
 We will be working with Threatplane to make the mapping easier to set up and keep in sync, and we will share worked examples as we go.
+
+The standards are moving in the same direction. [CycloneDX](https://cyclonedx.org/) 2.0 will add support for expressing threat models, so the components in an SBOM and the threats, trust boundaries and data flows around them can be described in one machine-readable format. Today the mapping between the two sides is built by an agent or by hand. With threat modelling in CycloneDX 2.0, it can travel with the BOM itself, and that paves the way for even closer collaboration between sbomify and Threatplane.
 
 If you already use both platforms, we would love to hear how you are combining them. If you are new to either, talk to the team on that side: sbomify for SBOM management, vulnerability data and VEX, Threatplane for threat modelling and risk assessment.
 
