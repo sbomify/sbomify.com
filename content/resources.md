@@ -32,6 +32,7 @@ sbomify's [free SBOM tools](/tools/) run entirely in your browser: no sign-up, a
 - [SBOM Formats: CycloneDX vs SPDX](/2026/01/15/sbom-formats-cyclonedx-vs-spdx/) – Choosing the right format for your use case
 - [SBOM Scanning: Vulnerability Detection](/2026/02/01/sbom-scanning-vulnerability-detection/) – How to scan SBOMs for known vulnerabilities
 - [SBOM Management Best Practices](/2026/01/18/sbom-management-best-practices/) – Organizing, monitoring, and acting on SBOMs at scale
+- [What Is CTEM? Continuous Threat Exposure Management Explained](/2026/11/23/what-is-ctem-continuous-threat-exposure-management/) – Gartner's five-stage exposure management cycle and where SBOMs fit in
 
 ---
 
