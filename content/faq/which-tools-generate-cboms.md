@@ -1,8 +1,8 @@
 ---
 title: "Which tools generate CBOMs?"
 description: "Tools that generate a Cryptography Bill of Materials (CBOM): the sbomify GitHub Action with cdxgen, PQCA cbomkit, cbomkit-theia for containers, and commercial scanners."
-answer: "The sbomify-action generates a CBOM in CI with cbom-generate: true (cdxgen crypto detection for Java and Python projects, JS/TS source, keystores, and certificates). PQCA's cbomkit scans Java and Python source, and cbomkit-theia scans container images for certificates and keys. Any tool that emits CycloneDX cryptographic assets works; sbomify ingests them all."
-tldr: "Easiest: sbomify-action with cbom-generate: true. Deepest source analysis: PQCA cbomkit (Java/Python). Container images: cbomkit-theia. All emit CycloneDX, and sbomify ingests every CBOM lineage including legacy IBM CBOM 1.0 output."
+answer: "The sbomify-action generates a CBOM in CI with cbom-generate: true, which inventories the certificate, key and keystore files in your project. For the algorithms your source code uses, PQCA's cbomkit scans Java and Python source, and cbomkit-theia scans container images for certificates and keys. Any tool that emits CycloneDX cryptographic assets works; sbomify ingests them all."
+tldr: "Certificates, keys and keystores: sbomify-action with cbom-generate: true. Algorithms in source: PQCA cbomkit (Java/Python). Container images: cbomkit-theia. All emit CycloneDX, and sbomify ingests every CBOM lineage including legacy IBM CBOM 1.0 output."
 weight: 89
 keywords: [CBOM generation, cdxgen crypto, cbomkit, cbomkit-theia, sonar-cryptography, CBOM tools, generate CBOM, CycloneDX cryptographic asset]
 url: /faq/which-tools-generate-cboms/
@@ -22,7 +22,7 @@ The [sbomify-action](https://github.com/sbomify/sbomify-action) generates and up
     LOCK_FILE: 'pom.xml'
 ```
 
-Under the hood this runs [cdxgen](https://github.com/cdxgen/cdxgen) with crypto detection: Java and Python projects, JavaScript/TypeScript source analysis, keystores, and certificates.
+Under the hood this runs [cdxgen](https://github.com/cdxgen/cdxgen) over the `LOCK_FILE` directory and inventories the certificate, key and keystore files it finds (`.pem`, `.key`, `.p12`, `.jks`, …). It does not detect algorithms in source code; for that, use cbomkit.
 
 ## Dedicated crypto scanners
 

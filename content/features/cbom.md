@@ -5,7 +5,7 @@ description: "Upload, analyze, and share Cryptography Bills of Materials (CBOMs)
 
 ---
 
-Your [SBOMs](/what-is-sbom/) tell you what software you ship. A **CBOM (Cryptography Bill of Materials)** tells you what cryptography that software uses: algorithms, key sizes, certificates, and protocols. With NIST's post-quantum standards finalized and [EO 14412](/blog/) directing CISA and NIST to define CBOM minimum elements, cryptographic visibility is moving from nice-to-have to mandated. sbomify treats CBOMs as first-class artifacts, end to end.
+Your [SBOMs](/what-is-sbom/) tell you what software you ship. A **CBOM (Cryptography Bill of Materials)** tells you what cryptography that software uses: algorithms, key sizes, certificates, and protocols. With NIST's post-quantum standards finalized and [EO 14412](/2026/07/22/eo-14412-cbom-minimum-elements/) directing CISA and NIST to define CBOM minimum elements, cryptographic visibility is moving from nice-to-have to mandated. sbomify treats CBOMs as first-class artifacts, end to end.
 
 ## Upload once, sbomify does the rest
 
@@ -51,7 +51,7 @@ CBOMs plug into the sharing machinery you already have:
 
 No scanner yet? Three well-trodden paths, all ending in a one-line upload:
 
-1. **[sbomify-action](https://github.com/sbomify/sbomify-action)** with `cbom-generate: true` runs [cdxgen](https://github.com/cdxgen/cdxgen) crypto detection over your project (Java and Python projects, JS/TS source analysis, keystores, certificates) and uploads the result.
+1. **[sbomify-action](https://github.com/sbomify/sbomify-action)** with `cbom-generate: true` runs [cdxgen](https://github.com/cdxgen/cdxgen) over your project, inventories its certificate, key and keystore files (`.pem`, `.key`, `.p12`, `.jks`, …) and uploads the result. For the algorithms your source code uses, add cbomkit.
 2. **[cbomkit](https://github.com/cbomkit)** (PQCA / Linux Foundation) scans Java and Python source with sonar-cryptography; its GitHub action drops a CycloneDX CBOM you pass through with `bom-type: cbom`.
 3. **Any CycloneDX CBOM** from commercial scanners or hand-authored inventories uploads verbatim; sbomify never modifies the document.
 
