@@ -1,0 +1,82 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "example-app-2.0.0",
+  "documentNamespace": "https://example.com/spdx/example-app-2.0.0-3e671687-395b-41f5-a30f-a58921a69b79",
+  "creationInfo": {
+    "created": "2025-01-15T10:30:00Z",
+    "creators": [
+      "Organization: Example Corp (sbom@example.com)",
+      "Tool: example-sbom-tool-1.2.3"
+    ],
+    "comment": "SBOM generated after build from the release artifacts."
+  },
+  "documentDescribes": [
+    "SPDXRef-Package-example-app"
+  ],
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package-example-app",
+      "name": "example-app",
+      "versionInfo": "2.0.0",
+      "supplier": "Organization: Example Corp (security@example.com)",
+      "originator": "Organization: Example Corp (security@example.com)",
+      "downloadLocation": "https://downloads.example.com/example-app-2.0.0.tar.gz",
+      "filesAnalyzed": false,
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "copyrightText": "Copyright 2025 Example Corp",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:generic/example-app@2.0.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-example-lib",
+      "name": "example-lib",
+      "versionInfo": "1.4.0",
+      "supplier": "Organization: Example Corp (security@example.com)",
+      "originator": "Organization: Example Corp (security@example.com)",
+      "downloadLocation": "https://downloads.example.com/example-lib-1.4.0.tar.gz",
+      "filesAnalyzed": false,
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "copyrightText": "Copyright 2025 Example Corp",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:generic/example-lib@1.4.0"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-Package-example-app"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-example-app",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-example-lib"
+    }
+  ]
+}

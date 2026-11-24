@@ -3,7 +3,6 @@
 url: /guides/cpp/
 title: "SBOM Generation Guide for C/C++ - Conan"
 description: "Learn how to generate Software Bill of Materials for C/C++ projects. Complete guide with conan.lock examples, vcpkg, and handling vendored dependencies."
-section: guides
 ---
 
 ## The C/C++ Dependency Challenge
@@ -107,9 +106,9 @@ SBOM generation is the first step in the [SBOM lifecycle](/features/generate-col
 
 ### Using sbomify GitHub Action (Recommended)
 
-The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step.
+The [sbomify action](/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step. It runs on [any CI platform](/sbomify-action/runtimes/), not just GitHub, and the source is [on GitHub](https://github.com/sbomify/sbomify-action/).
 
-For C/C++ with Conan, sbomify uses **cdxgen** under the hood with fallback to Trivy and Syft.
+For C/C++ with Conan, sbomify uses **cdxgen** under the hood with fallback to Syft.
 
 **Standalone (no account needed):**
 
@@ -168,7 +167,7 @@ When using these tools directly, you'll need to handle enrichment and augmentati
 
 ```yaml
 generate-sbom:
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   before_script:
     - pip install conan
     - conan lock create .
@@ -178,7 +177,7 @@ generate-sbom:
     UPLOAD: "false"
     ENRICH: "true"
   script:
-    - /sbomify.sh
+    - sbomify-action
   artifacts:
     paths:
       - sbom.cdx.json

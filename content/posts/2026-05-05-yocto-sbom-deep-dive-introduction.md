@@ -1,13 +1,13 @@
 ---
 title: "How Yocto Generates SBOMs Behind the Scenes: A Deep Dive into SPDX 2.2 and SPDX 3.0"
-description: "Yocto generates SBOMs during the build itself, not after. Part 1 of a 5-part series on how the Yocto Project builds SPDX 2.2 and SPDX 3.0 SBOMs from BitBake metadata, with first-class VEX support."
+description: "Yocto generates SBOMs during the build itself, not after. Part 1 of a 6-part series on how the Yocto Project builds SPDX 2.2 and SPDX 3.0 SBOMs from BitBake metadata, with first-class VEX support."
 author:
   display_name: Joshua Watt
 categories:
   - guide
 tags: [sbom, yocto, openembedded, spdx, bitbake, embedded-linux]
 keywords: [yocto sbom, yocto spdx, openembedded sbom, bitbake spdx, build-time sbom generation, embedded linux sbom]
-tldr: "Most SBOM tools scan finished artifacts. Yocto's create-spdx class takes a different approach: it generates SBOMs during the build itself, with full access to BitBake's recipe metadata, source URIs, patches, and packaging information. This 5-part series walks through how the SPDX 2.2 and SPDX 3.0 pipelines work in OpenEmbedded-Core."
+tldr: "Most SBOM tools scan finished artifacts. Yocto's create-spdx class takes a different approach: it generates SBOMs during the build itself, with full access to BitBake's recipe metadata, source URIs, patches, and packaging information. This 6-part series walks through how the SPDX 2.2 and SPDX 3.0 pipelines work in OpenEmbedded-Core."
 date: 2026-05-05
 slug: yocto-sbom-deep-dive-introduction
 ---
@@ -76,3 +76,4 @@ Yocto's approach was designed for exactly this level of fidelity. The next posts
 - Part 3: [SPDX 3.0 in Yocto: What Changed and Why It Matters](/2026/05/19/yocto-spdx-3-0-overview/)
 - Part 4: VEX in the SBOM: How Yocto Embeds Vulnerability Assessments _(coming soon)_
 - Part 5: Yocto SBOM in Production: Configuration, Tooling, and What's Still Missing _(coming soon)_
+- Part 6: You Have an SBOM. Now What? Making Yocto SBOMs Operational for the CRA _(coming soon)_

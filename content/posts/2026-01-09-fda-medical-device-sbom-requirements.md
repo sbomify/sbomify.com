@@ -92,7 +92,7 @@ The FDA guidance ties SBOMs into broader cybersecurity documentation expectation
 
 - SBOMs should be **updated to reflect changes** throughout software updates and the device lifecycle
 - This is not a one-time snapshot – it's a living document
-- Proper [SBOM versioning practices](/guides/how-to-version-sboms) are essential for maintaining traceability
+- Proper [SBOM versioning practices](/guides/how-to-version-sboms/) are essential for maintaining traceability
 
 ### Integration with Other Documentation
 
@@ -213,12 +213,12 @@ Getting ahead of these requirements isn't just about regulatory compliance – i
 
 - [What is an SBOM?](/what-is-sbom/)
 - [The SBOM Lifecycle: Generation, Distribution, and Analysis](/features/generate-collaborate-analyze/)
-- [How to Version SBOMs](/guides/how-to-version-sboms)
+- [How to Version SBOMs](/guides/how-to-version-sboms/)
 - [The Growing Importance of SBOMs in Cybersecurity Compliance](/features/why-now/)
 
 ### Related Compliance Frameworks
 
-- [Understanding the EU Cyber Resilience Act](/2024/07/10/understanding-the-eu-cyber-resilience-act-the-role-of-sboms-in-enhancing-cybersecurity/)
+- [EU Cyber Resilience Act (CRA) SBOM Requirements](/compliance/eu-cra/)
 - [How SBOMs Help with PCI DSS 4.0 Compliance](/2025/01/07/how-sboms-can-help-you-achieve-pci-dss-4-compliance/)
 - [CRA Explained: What the Cyber Resilience Act Means for Device Manufacturers](/2026/01/06/cra-explained-cyber-resilience-act-for-device-manufacturers/)
 

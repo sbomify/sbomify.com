@@ -3,7 +3,6 @@
 url: /guides/go/
 title: "SBOM Generation Guide for Go - Go Modules"
 description: "Learn how to generate Software Bill of Materials for Go projects. Complete guide with go.mod and go.sum examples, CycloneDX and SPDX output."
-section: guides
 ---
 
 ## Source vs Build SBOMs
@@ -144,9 +143,9 @@ SBOM generation is the first step in the [SBOM lifecycle](/features/generate-col
 
 ### Using sbomify GitHub Action (Recommended)
 
-The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step.
+The [sbomify action](/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step. It runs on [any CI platform](/sbomify-action/runtimes/), not just GitHub, and the source is [on GitHub](https://github.com/sbomify/sbomify-action/).
 
-For Go, sbomify uses **cdxgen** under the hood with fallback to Trivy and Syft.
+For Go, sbomify uses **cyclonedx-gomod** under the hood, which reads the module graph the Go toolchain itself resolved.
 
 **Standalone (no account needed):**
 
@@ -196,12 +195,6 @@ go install github.com/CycloneDX/cyclonedx-gomod/cmd/cyclonedx-gomod@latest
 cyclonedx-gomod mod -output sbom.cdx.json
 ```
 
-**Trivy:**
-
-```bash
-trivy fs --format cyclonedx --output sbom.cdx.json .
-```
-
 **Syft:**
 
 ```bash
@@ -214,14 +207,14 @@ When using these tools directly, you'll need to handle enrichment and augmentati
 
 ```yaml
 generate-sbom:
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   variables:
     LOCK_FILE: go.mod
     OUTPUT_FILE: sbom.cdx.json
     UPLOAD: "false"
     ENRICH: "true"
   script:
-    - /sbomify.sh
+    - sbomify-action
   artifacts:
     paths:
       - sbom.cdx.json

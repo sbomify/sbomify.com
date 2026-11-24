@@ -9,7 +9,7 @@ product: Product SBOM {
   }
 }
 
-component: Component SBOM(s) {
+component: Component Artifacts {
   class: group
 
   Python SBOM: {
@@ -37,7 +37,7 @@ component: Component SBOM(s) {
   }
 }
 
-# Connections — components attach directly to the product
+# Connections, components attach directly to the product
 component.Node SBOM -> product.Smart Thermostat: {
   class: flow-pink
 }

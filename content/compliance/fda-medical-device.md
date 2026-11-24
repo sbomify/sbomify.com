@@ -3,7 +3,6 @@
 url: /compliance/fda-medical-device/
 title: "FDA Medical Device SBOM Requirements (2025)"
 description: "Guide to FDA cybersecurity guidance for medical devices, including SBOM requirements, support level, and end-of-support date expectations."
-section: compliance
 ---
 
 [← Back to Compliance Overview](/compliance/)
@@ -11,11 +10,13 @@ section: compliance
 **Who it affects:** Medical device manufacturers preparing FDA premarket submissions (and their software suppliers) who must document cybersecurity, including SBOM expectations, for devices marketed in the US.
 
 <div class="cta-box">
-  <p><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get in Touch</a>
+  <p><strong>Turn these requirements into a working process.</strong> See how sbomify handles SBOMs, vulnerability monitoring, VEX and advisories for every release you support.</p>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" data-cta-location="compliance_top" data-cta-label="Book a demo">Book a demo</a>
 </div>
 
 ---
+
+**Check your SBOM:** the free [SBOM minimum elements checker](/tools/sbom-checker/) scores a CycloneDX or SPDX file against the NTIA and CISA 2026 elements the FDA guidance references, in your browser.
 
 ## Overview
 
@@ -55,11 +56,11 @@ For technical guidance on representing support level and end-of-support date in 
 
 sbomify ships an **FDA Medical Device (2025)** plugin that grades each uploaded SBOM against the FDA baseline attributes plus the support-level and end-of-support lifecycle properties. Enable it from the **Plugins** page in your workspace sidebar:
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/plugin_enablement_fda-medical-device-2025.webm" title="Enabling the FDA Medical Device plugin in sbomify" description="Step-by-step screencast showing how to enable the FDA Medical Device (2025) compliance plugin in sbomify." >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/plugin_enablement_fda-medical-device-2025.webm" title="Enabling the FDA Medical Device plugin in sbomify" description="Step-by-step screencast showing how to enable the FDA Medical Device (2025) compliance plugin in sbomify." upload_date="2026-04-24T10:16:53Z" >}}
 
 ## Additional Resources
 
-For more details, see our [FDA Medical Device SBOM Requirements guide](/blog/fda-medical-device-sbom-requirements/).
+For more details, see our [FDA Medical Device SBOM Requirements guide](/2026/01/09/fda-medical-device-sbom-requirements/).
 
 ## Official Source
 

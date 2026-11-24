@@ -45,6 +45,8 @@ Generate natively in the format you need. [sbomify-action](https://github.com/sb
 
 If a customer or regulation requires a specific format, generate in that format from the start rather than converting after the fact.
 
+sbomify follows the same rule: it stores the SBOMs you upload unmodified. When you download a product or release SBOM as CycloneDX or SPDX, sbomify links each component SBOM rather than converting it, preferring one already in the requested format, so uploading both formats for a component gives consumers a native document either way.
+
 ## Further reading
 
 - [What SBOM formats does sbomify support?](/faq/what-sbom-formats-does-sbomify-support/)

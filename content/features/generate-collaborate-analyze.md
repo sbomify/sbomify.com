@@ -6,23 +6,23 @@ description: "Streamline your Software Bill of Materials (SBOM) workflow with ou
 
 The Software Bill of Materials (SBOM) lifecycle comprises three key stages: **Authoring**, **Distribution**, and **Analysis**.
 
-<div class="mb-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="mb-12 bg-canvas rounded-xl p-6 border border-line">
     {{< d2 "lifecycle" >}}
 </div>
 
-> **TL;DR:** If this workflow sounds overly complex, rest assured that sbomify automates the entire process for you. All you need is a few lines of YAML in your CI/CD pipeline using our [GitHub Action](/features/integrations/).
+> **TL;DR:** If this workflow sounds overly complex, rest assured that sbomify automates the entire process for you. All you need is a few lines of YAML in your CI/CD pipeline using the [sbomify Action](/sbomify-action/).
 
 ---
 
 ## Generation (a.k.a Authoring)
 
-Newcomers to SBOMs often underestimate the complexities involved in creating a complete SBOM (also known as 'authoring'). There are many [SBOM generation tools](/resources/#generation) available, so it might seem like it's just a matter of running one of these tools and you're done.
+Newcomers to SBOMs often underestimate the complexities involved in creating a complete SBOM (also known as 'authoring'). There are many [SBOM generation tools](/resources/#generation--authoring) available, so it might seem like it's just a matter of running one of these tools and you're done.
 
 While this _might_ suffice for internal SBOM needs when starting out, the reality is far more complicated if you need to meet industry requirements, such as the NTIA Minimum Elements. But don’t worry – we’re here to help.
 
 To produce an SBOM that complies with standards like the NTIA Minimum Elements, it's helpful to view the process in four phases.
 
-<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
     {{< d2 "generation" >}}
 </div>
 
@@ -51,7 +51,7 @@ _If you want to avoid this step, our agent automates the entire process for you.
 
 Next is the _enrichment_ phase. Depending on the tool used to generate the SBOM, this step might be optional. Some tools automatically enrich the SBOM, typically by calling out to a third-party service (like PyPI) during generation to gather component details, such as licensing data.
 
-For example, [sbomify's GitHub Action](https://github.com/sbomify/sbomify-action) (which can be used either with sbomify or in standalone mode) automatically augments your SBOM with identity data and enriches it with metadata from [ecosyste.ms](https://ecosyste.ms) to create the most complete SBOM possible – all within your CI pipeline before upload.
+For example, the [sbomify Action](/sbomify-action/) (which can be used either with sbomify or in standalone mode) automatically augments your SBOM with identity data and enriches it with metadata from [ecosyste.ms](https://ecosyste.ms) to create the most complete SBOM possible – all within your CI pipeline before upload.
 
 ### 4. Signing / Attestation
 
@@ -71,7 +71,7 @@ This is where sbomify transforms the landscape. sbomify automates the distributi
 
 A frequently overlooked but essential step in the SBOM lifecycle is the creation of a consolidated [SBOM hierarchy](/features/sbom-hierarchy/), which is especially valuable in complex software architectures. Take a basic SaaS product, for instance: with an API service running in a Docker container and a JavaScript-based frontend, you’ll quickly accumulate multiple SBOMs – for the backend, the Docker environment, and the JavaScript libraries.
 
-<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
     {{< d2 "sbom-hierarchy" >}}
 </div>
 
@@ -92,8 +92,8 @@ The final phase in the SBOM lifecycle is the analysis phase. Generally, teams ha
 
 There are many tools available that focus on different problem spaces (many are listed [here](/resources/#analysis)). Two popular open-source tools for SBOM analysis are [Dependency Track](https://dependencytrack.org/) and [guac](https://github.com/guacsec/guac).
 
-<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="my-12 bg-canvas rounded-xl p-6 border border-line">
     {{< d2 "store-analyze-enrich" >}}
 </div>
 
-sbomify aims to be the [SBOM Hub](/features/trust-center/) that not only simplifies sharing SBOMs with stakeholders but also integrates with your existing toolset. For instance, sbomify integrates with [Dependency Track](/features/integrations/#dependency-track) and [OSV](/features/integrations/#osv) for analysis, enabling you to export SBOMs directly to your analysis tools.
+sbomify connects your SBOMs to vulnerability monitoring, triage and disclosure in your [Trust Center](/features/trust-center/), and integrates with your existing toolset. For instance, sbomify integrates with [Dependency Track](/features/integrations/#dependency-track) and [OSV](/features/integrations/#osv) for analysis, enabling you to export SBOMs directly to your analysis tools.

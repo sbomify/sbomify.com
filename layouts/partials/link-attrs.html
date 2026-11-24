@@ -1,0 +1,51 @@
+{{- /*
+  link-attrs — returns the rel/target attributes an <a> should carry.
+
+  Outbound links get `nofollow`; internal links keep whatever baseline you pass
+  in. Use this for links written directly in templates or shortcodes — links in
+  markdown and page content are handled automatically by
+  layouts/_markup/render-link.html and layouts/partials/nofollow-links.html.
+
+  @param {string|map} . Either the URL, or a map with:
+    url    {string} the link destination
+    rel    {string} baseline rel for every link (nofollow is prepended when the
+                    link is outbound); defaults to params.links.externalRel for
+                    outbound links and to nothing for internal ones
+    target {string} baseline target; defaults to params.links.externalTarget for
+                    outbound links
+
+  @returns {template.HTMLAttr} e.g. ` rel="nofollow noopener noreferrer"`
+
+  @example <a href="{{ $url }}"{{ partial "link-attrs.html" $url }}>...</a>
+  @example <a href="{{ $url }}"{{ partial "link-attrs.html" (dict "url" $url "rel" "noopener noreferrer" "target" "_blank") }}>...</a>
+*/ -}}
+
+{{- $url := . -}}
+{{- $rel := "" -}}
+{{- $target := "" -}}
+{{- if reflect.IsMap . -}}
+  {{- $url = .url -}}
+  {{- $rel = .rel | default "" -}}
+  {{- $target = .target | default "" -}}
+{{- end -}}
+
+{{- if partial "is-external-link.html" $url -}}
+  {{- if $rel -}}
+    {{- if not (in (split $rel " ") "nofollow") -}}
+      {{- $rel = printf "nofollow %s" $rel -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $rel = site.Params.links.externalRel | default "nofollow noopener noreferrer" -}}
+  {{- end -}}
+  {{- $target = $target | default site.Params.links.externalTarget -}}
+{{- end -}}
+
+{{- $attrs := "" -}}
+{{- with $rel -}}
+  {{- $attrs = printf `%s rel="%s"` $attrs . -}}
+{{- end -}}
+{{- with $target -}}
+  {{- $attrs = printf `%s target="%s"` $attrs . -}}
+{{- end -}}
+
+{{- return (safeHTMLAttr $attrs) -}}

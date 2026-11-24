@@ -1,12 +1,13 @@
 ---
 
 title: "CRA Explained: What the Cyber Resilience Act Means for Device Manufacturers"
+seo_title: "CRA Explained for Device Manufacturers"
 description: "Podcast episode with EU CRA expert Sarah Fluchs explaining SBOM requirements, the 5-year support mandate, and vulnerability management for device manufacturers."
 author:
   display_name: Viktor Petersson
 categories:
   - podcast
-tags: [CRA, compliance, security, sbom]
+tags: [cra, compliance, security, sbom]
 date: 2026-01-06
 slug: cra-explained-cyber-resilience-act-for-device-manufacturers
 ---
@@ -15,7 +16,7 @@ The EU Cyber Resilience Act (CRA) is transforming how device manufacturers appro
 
 Sarah isn't just any commentator on the CRA - she serves on the **EU Commission's CRA expert group**, giving her first-hand involvement in shaping this landmark regulation. With a PhD in security-by-design and years of experience in OT (Operational Technology) cybersecurity, she brings a rare blend of technical depth and policy insight.
 
-{{< video-embed video_id="e9_bpsJKOL0" title="CRA Explained: Cyber Resilience Act for Device Manufacturers" description="Podcast episode with EU CRA expert Sarah Fluchs explaining SBOM requirements, the 5-year support mandate, and vulnerability management for device manufacturers." >}}
+{{< video-embed video_id="e9_bpsJKOL0" title="CRA Explained: Cyber Resilience Act for Device Manufacturers" description="Podcast episode with EU CRA expert Sarah Fluchs explaining SBOM requirements, the 5-year support mandate, and vulnerability management for device manufacturers." upload_date="2025-12-17T06:01:09-08:00" >}}
 
 ## SBOMs Are Non-Negotiable for CRA Compliance
 
@@ -72,4 +73,4 @@ The CRA deadline is approaching fast. [sbomify]() gives you the infrastructure t
 
 - [EU Cyber Resilience Act - Official EU page](https://digital-strategy.ec.europa.eu/en/policies/cyber-resilience-act)
 - [Why Now? CRA is Coming](/features/why-now/)
-- [Understanding the EU Cyber Resilience Act: The Role of SBOMs](/2024/07/10/understanding-the-eu-cyber-resilience-act-the-role-of-sboms-in-enhancing-cybersecurity/)
+- [EU Cyber Resilience Act (CRA) SBOM Requirements](/compliance/eu-cra/)

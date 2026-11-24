@@ -7,6 +7,22 @@ url: /case-studies/screenly/
 aliases:
   - /case-studies/screenly
 logo: /assets/images/site/screenly_dark.svg
+company: Screenly
+headline: "Simplifying SBOM management"
+summary: "Dozens of SBOMs across a digital signage product line, generated, grouped and shared."
+logo_width: 135
+logo_height: 32
+uses:
+  - name: The sbomify GitHub Action
+    url: /sbomify-action/
+  - name: SBOM hierarchy
+    url: /features/sbom-hierarchy/
+  - name: Augmentation
+    url: /features/integrations/#augmentation
+  - name: SBOM attestation
+    url: /faq/how-do-i-sign-an-sbom/
+  - name: Sharing with stakeholders
+    url: /share-and-collaborate/
 ---
 
 ## About Screenly

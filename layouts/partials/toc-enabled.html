@@ -1,0 +1,4 @@
+{{/* Whether a page gets an "On this page" table of contents: at least five
+     h2/h3 entries and 1000 words, unless front matter sets `toc: false`. */}}
+{{- $entries := len (findRE `<a href="#` .TableOfContents) -}}
+{{- return (and (ne .Params.toc false) (ge $entries 5) (ge .WordCount 1000)) -}}

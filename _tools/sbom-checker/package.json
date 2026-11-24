@@ -1,0 +1,20 @@
+{
+  "name": "sbomify-sbom-checker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bun scripts/build.ts",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.4",
+    "@types/spdx-expression-parse": "^4.0.0",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "spdx-expression-parse": "^5.0.0"
+  }
+}

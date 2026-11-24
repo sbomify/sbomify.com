@@ -36,22 +36,28 @@ The simplest way to sign an SBOM today is with GitHub's built-in attestation sup
 In your GitHub Actions workflow, generate the SBOM and then pass it to the attestation action:
 
 ```yaml
-- name: Generate SBOM
-  uses: sbomify/sbomify-action@master
-  env:
-    TOKEN: ${{ secrets.SBOMIFY_TOKEN }}
-    COMPONENT_ID: 'your-component-id'
-    LOCK_FILE: 'requirements.txt'
-    AUGMENT: true
-    ENRICH: true
-    UPLOAD: true
-    OUTPUT_FILE: sbom.cdx.json
+permissions:
+  id-token: write
+  attestations: write
 
-- name: Attest SBOM
-  uses: actions/attest-build-provenance@v1
-  with:
-    subject-path: '${{ github.workspace }}/sbom.cdx.json'
+steps:
+  - name: Generate SBOM
+    uses: sbomify/sbomify-action@master
+    env:
+      COMPONENT_ID: 'your-component-id'
+      LOCK_FILE: 'requirements.txt'
+      AUGMENT: true
+      ENRICH: true
+      UPLOAD: true
+      OUTPUT_FILE: sbom.cdx.json
+
+  - name: Attest SBOM
+    uses: actions/attest-build-provenance@v4
+    with:
+      subject-path: '${{ github.workspace }}/sbom.cdx.json'
 ```
+
+The `id-token: write` permission also enables [OIDC trusted publishing](/faq/how-do-i-set-up-oidc-trusted-publishing/), so the upload itself needs no token secret either.
 
 That is it. GitHub signs the SBOM using your workflow's identity, records the signature in a [Sigstore transparency log](/2024/08/12/what-is-sigstore/), and links it to the exact repository and workflow run that produced it.
 
@@ -71,7 +77,7 @@ A successful verification confirms:
 
 This is exactly the point: the consumer does not need to trust sbomify, your CDN, or any other intermediary. They can independently verify the SBOM's provenance by checking the attestation against the Sigstore transparency log.
 
-We use this exact workflow for our own [sbomify-action SBOM](https://github.com/sbomify/sbomify-action/blob/master/.github/workflows/sbomify.yaml). You can download the SBOM from our [public Trust Center page](https://trust.sbomify.com/product/sbomify-action/) and verify it yourself. For a detailed walkthrough, see our [attestation blog post](/2024/10/31/github-action-update-and-attestation/).
+We use this exact workflow for our own [sbomify-action SBOM](https://github.com/sbomify/sbomify-action/blob/master/.github/workflows/sboms.yml). You can download the SBOM from our [public Trust Center page](https://trust.sbomify.com/product/sbomify-action/) and verify it yourself. For a detailed walkthrough, see our [attestation blog post](/2024/10/31/github-action-update-and-attestation/).
 
 ## What is happening under the hood
 
@@ -85,15 +91,13 @@ The combination means the signature is tied to a verified identity (your GitHub 
 
 ## sbomify attestation verification
 
-sbomify can verify attestations automatically when you upload signed SBOMs. The [GitHub Attestation Plugin](/2026/01/23/announcing-sbomify-v0-25-the-one-with-attestations/) uses Sigstore and cosign to check signatures on upload, giving you a verified provenance status for every SBOM in your portfolio.
+sbomify can verify attestations automatically when you upload signed SBOMs. The **SBOM Verification** plugin uses Sigstore and cosign to check signatures on upload, giving you a verified provenance status for every SBOM in your portfolio. It re-computes the SBOM digest, validates any attached cosign signature, and confirms the provenance subject digest matches the SBOM hash.
 
-Enable it from the **Plugins** page in your workspace sidebar:
+A single check now covers both sbomify-stored signatures and GitHub-published Sigstore attestations. These were [originally handled by two separate plugins](/2026/01/23/announcing-sbomify-v0-25-the-one-with-attestations/); the GitHub Attestation plugin has since been folded into SBOM Verification, so there is only one plugin to enable.
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/plugin_enablement_github-attestation.webm" title="Enabling the GitHub Attestation plugin in sbomify" description="Step-by-step screencast showing how to enable the GitHub Attestation verification plugin in sbomify." >}}
+Workspace owners and admins can enable it from the **Plugins** page in the workspace sidebar:
 
-For a broader integrity check that re-computes the SBOM digest, validates any attached cosign signature, and confirms the provenance subject digest matches the SBOM hash, enable the **SBOM Verification** plugin alongside it:
-
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/plugin_enablement_sbom-verification.webm" title="Enabling the SBOM Verification plugin in sbomify" description="Step-by-step screencast showing how to enable the SBOM Verification plugin in sbomify for digest, signature, and provenance checks." >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/plugin_enablement_sbom-verification.webm" title="Enabling the SBOM Verification plugin in sbomify" description="Step-by-step screencast showing how to enable the SBOM Verification plugin in sbomify for digest, signature, and provenance checks." upload_date="2026-04-24T10:16:53Z" >}}
 
 This closes the loop: your CI pipeline signs the SBOM, sbomify verifies the signature on ingestion, and your customers can independently verify the same signature when they download the SBOM from your Trust Center.
 

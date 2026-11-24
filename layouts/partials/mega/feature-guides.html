@@ -1,0 +1,20 @@
+{{- /* Resources menu card: a way straight into the SBOM generation guide
+       for your stack. A fixed list, so the menu never shows dated content. */ -}}
+{{ $guides := slice
+  (dict "name" "Python" "link" "/guides/python/")
+  (dict "name" "JavaScript" "link" "/guides/javascript/")
+  (dict "name" "Java" "link" "/guides/java/")
+  (dict "name" "Go" "link" "/guides/go/")
+  (dict "name" "Rust" "link" "/guides/rust/")
+  (dict "name" ".NET" "link" "/guides/dotnet/")
+  (dict "name" "C/C++" "link" "/guides/cpp/")
+  (dict "name" "Docker" "link" "/guides/docker/")
+  (dict "name" "Yocto" "link" "/guides/yocto/") }}
+<div class="mega-card is-guides">
+  <p class="kicker">SBOM generation guides</p>
+  <p class="mega-card-title">Generate an SBOM for your stack</p>
+  <ul class="mega-chips">
+    {{ range $i, $g := $guides }}<li><a href="{{ $g.link }}" style="--i: {{ $i }}">{{ $g.name }}</a></li>{{ end }}
+  </ul>
+  <a class="mega-card-go" href="/guides/">All guides{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}</a>
+</div>

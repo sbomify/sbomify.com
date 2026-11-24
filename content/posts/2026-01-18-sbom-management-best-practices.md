@@ -1,6 +1,7 @@
 ---
 
 title: "SBOM Management: How to Organize, Track, and Act on Your SBOMs"
+seo_title: "SBOM Management: Organize, Track and Act on SBOMs"
 description: "Learn how to manage SBOMs across the full lifecycle – from generation and storage to vulnerability monitoring, versioning, and distribution to consumers."
 categories:
   - education

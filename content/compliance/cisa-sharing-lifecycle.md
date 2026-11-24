@@ -3,7 +3,6 @@
 url: /compliance/cisa-sharing-lifecycle/
 title: "CISA SBOM Sharing Lifecycle Report (2023)"
 description: "Guide to the CISA SBOM Sharing Lifecycle Report, covering discovery, access, and transport patterns for SBOM distribution across supply chains."
-section: compliance
 ---
 
 [← Back to Compliance Overview](/compliance/)
@@ -11,8 +10,8 @@ section: compliance
 **Who it affects:** Organizations that distribute or retrieve SBOMs across supply chains (vendors, buyers, operators) that need practical patterns for discovery, access, and transport.
 
 <div class="cta-box">
-  <p><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get in Touch</a>
+  <p><strong>Turn these requirements into a working process.</strong> See how sbomify handles SBOMs, vulnerability monitoring, VEX and advisories for every release you support.</p>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" data-cta-location="compliance_top" data-cta-label="Book a demo">Book a demo</a>
 </div>
 
 ---

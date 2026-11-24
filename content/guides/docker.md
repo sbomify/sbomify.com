@@ -1,9 +1,10 @@
 ---
 
 url: /guides/docker/
+aliases:
+  - /2024/09/20/how-to-generate-an-sbom-from-a-container/
 title: "SBOM Generation Guide for Docker and Containers"
-description: "Learn how to generate Software Bill of Materials for Docker images and containers. Complete guide with multi-stage builds, distroless images, and attestation examples."
-section: guides
+description: "Generate a Software Bill of Materials for Docker images and containers: what image scanning does and does not capture, multi-stage builds, distroless images, signing, and combining container and application SBOMs."
 ---
 
 ## Source vs Build SBOMs
@@ -90,15 +91,27 @@ CMD ["node", "dist/index.js"]
 
 **Important:** SBOMs should be generated from the **final stage only**, not intermediate build stages.
 
+## What Image Scanning Does and Does Not Capture
+
+Before generating an SBOM from a container image, it is worth being clear about what that process can and cannot see. Scanning the image is convenient, but it is not equivalent to knowing what is in your software.
+
+A container image typically arrives at its final state in two phases: system packages and runtime dependencies get installed, and then your application code is copied in. Capturing the first phase is reliable. Tools read the system package database and, for mainstream base images, produce an accurate list.
+
+The second phase is where it breaks down. **If you copy a compiled binary into the image, essentially no SBOM generation tool will capture it**, because the tools work from the package database rather than from the filesystem contents. A package database that is incomplete, or has been tampered with, produces an SBOM that looks complete and is not. Multi-stage builds make this harder still, since the artifacts that land in the final stage were produced somewhere the scanner never sees.
+
+Tools such as Syft are good at picking up installed packages across programming language ecosystems, but quality varies by language.
+
+**The practical consequence: separate the container SBOM from the application SBOM.** Generate the application SBOM from your lockfile, where the dependency graph is authoritative, and the container SBOM from the image, where the system packages are. See [Combining Application and Container SBOMs](#combining-application-and-container-sboms) below for how to run both.
+
 ## Generating an SBOM
 
 SBOM generation is the first step in the [SBOM lifecycle](/features/generate-collaborate-analyze/). After generation, you typically need to enrich your SBOM with package metadata and augment it with your organization's details.
 
 ### Using sbomify GitHub Action (Recommended)
 
-The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step.
+The [sbomify action](/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step. It runs on [any CI platform](/sbomify-action/runtimes/), not just GitHub, and the source is [on GitHub](https://github.com/sbomify/sbomify-action/).
 
-For Docker images, sbomify uses **cdxgen** under the hood with fallback to Trivy and Syft. Use `DOCKER_IMAGE` instead of `LOCK_FILE`.
+For container images, sbomify uses **Syft** under the hood with fallback to cdxgen. Use `DOCKER_IMAGE` instead of `LOCK_FILE`.
 
 **Standalone (no account needed):**
 
@@ -138,12 +151,6 @@ DOCKER_IMAGE: ghcr.io/myorg/myapp:latest
 
 If you prefer to run SBOM generation tools manually:
 
-**Trivy:**
-
-```bash
-trivy image --format cyclonedx --output sbom.cdx.json myapp:latest
-```
-
 **Syft:**
 
 ```bash
@@ -162,13 +169,21 @@ cdxgen -t docker myapp:latest -o sbom.cdx.json
 docker scout sbom myapp:latest --format cyclonedx > sbom.cdx.json
 ```
 
+**Docker Desktop:**
+
+```bash
+docker sbom --format spdx-json nginx:stable > docker.spdx.json
+```
+
+Docker uses Syft behind the scenes, with some additions of its own, but is more restrictive about output formats. See [How to create an SBOM](/2024/04/07/how-to-create-an-sbom/) for more on that.
+
 When using these tools directly, you'll need to handle enrichment and augmentation separately.
 
 ### GitLab CI
 
 ```yaml
 generate-sbom:
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   services:
     - docker:dind
   before_script:
@@ -179,7 +194,7 @@ generate-sbom:
     UPLOAD: "false"
     ENRICH: "true"
   script:
-    - /sbomify.sh
+    - sbomify-action
   artifacts:
     paths:
       - sbom.cdx.json
@@ -285,7 +300,6 @@ FROM python:3.12-slim
 
 Related blog posts:
 
-- [How to generate an SBOM from a Docker container](/2024/09/20/how-to-generate-an-sbom-from-a-container/) - Guide to using Syft, Trivy, and Docker Desktop, including best practices for separating container from application SBOMs
 - [GitHub Action module with Attestation](/2024/10/31/github-action-update-and-attestation/) - SLSA build provenance attestation for Docker images
 
 ## Further Resources

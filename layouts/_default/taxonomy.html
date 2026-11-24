@@ -1,28 +1,48 @@
+{{- /* Renders both the taxonomy indexes (/tags/, /categories/) and the term
+     pages (/tags/sbom/). Current Hugo resolves term pages to
+     _default/taxonomy.html ahead of _default/term.html, so a separate
+     term.html was silently ignored and term pages rendered as a bare grid of
+     titles without the post cards. */ -}}
 {{ define "main" }}
+{{ if eq .Kind "term" }}
 <div>
-  <div class="bg-primaryBG relative overflow-hidden">
-    {{ partial "aurora.html" . }}
-    <div class="relative px-5 py-16 lg:py-24 lg:px-24 max-w-7xl mx-auto">
-      <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
-        <span class="text-gradient">{{ .Title }}</span>
+  <div class="hero">
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap pt-10 lg:pt-16 pb-10 lg:pb-14">
+      <h1 class="text-ink mb-5">
+        <span class="capitalize">{{ .Title }}</span>
+      </h1>
+      <p class="lede max-w-3xl">
+        {{ .Data.Singular | title }} &middot; <a href="{{ .Parent.RelPermalink }}" class="link">All {{ .Data.Plural }}</a> &middot; <a href="/blog/" class="link">Blog</a>
+      </p>
+    </div>
+  </div>
+  <section class="wrap pb-16 lg:pb-24">
+    {{ partial "posts.html" (dict "paginate" true "context" . "pages" .Pages) }}
+  </section>
+</div>
+{{ else }}
+<div>
+  <div class="hero">
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap pt-10 lg:pt-16 pb-10 lg:pb-14">
+      <h1 class="text-ink">
+        {{ .Title }}
       </h1>
     </div>
   </div>
-  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <section class="wrap pb-16 lg:pb-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10">
       {{ range .Pages }}
-      <a href="{{ .RelPermalink }}" class="group flex flex-col justify-between rounded-2xl p-8 hover:shadow-xl transition-[box-shadow,border-color] duration-300 h-full bg-white border border-gray-200 hover:border-purple">
-        <div>
-          <h2 class="text-2xl font-semibold leading-tight mb-4 group-hover:text-purple transition-colors duration-200 text-primaryText capitalize">
-            {{ .LinkTitle }}
-          </h2>
-        </div>
-        <div class="flex items-center justify-end pt-6 mt-6 border-t border-gray-100">
-          <span class="text-purple text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200">View &rarr;</span>
-        </div>
+      <a href="{{ .RelPermalink }}" class="group flex items-center justify-between gap-4 py-4 border-t border-line">
+        <h2 class="!text-lg font-semibold !leading-snug tracking-heading text-ink capitalize underline decoration-transparent underline-offset-4 decoration-1 group-hover:decoration-navy-40">
+          {{ .LinkTitle }}
+        </h2>
+        <span class="text-ink text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0">View{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}</span>
       </a>
       {{ end }}
     </div>
-  </div>
+  </section>
 </div>
+{{ end }}
 {{ end }}

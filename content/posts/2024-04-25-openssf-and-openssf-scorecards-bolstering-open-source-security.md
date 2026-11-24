@@ -141,7 +141,7 @@ A project can have a perfect Scorecard but ship a compromised artifact if the bu
 
 Together, they provide layered defense: Scorecards for development practices, SLSA for build integrity, and [SBOMs](/what-is-sbom/) for component visibility.
 
-{{< video-embed video_id="KdgkiWdhpZ8" title="OpenSSF Scorecards Deep Dive" description="A detailed look at OpenSSF Scorecards and their implications for open-source security." >}}
+{{< video-embed video_id="KdgkiWdhpZ8" title="OpenSSF Scorecards Deep Dive" description="A detailed look at OpenSSF Scorecards and their implications for open-source security." upload_date="2024-04-21T16:00:08-07:00" >}}
 
 ## Frequently Asked Questions
 

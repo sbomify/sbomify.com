@@ -1,18 +1,25 @@
 baseURL = "https://sbomify.com"
-title = "Sbomify"
+title = "sbomify"
 languageCode = "en-us"
+
+# Enable .GitInfo (replaces _plugins/git_dates.rb)
+#
+# Keep this and ignoreFiles ABOVE the first table header. TOML assigns every
+# bare key to the table that precedes it, so while these sat under
+# [pagination] they were parsed as pagination.enableGitInfo /
+# pagination.ignoreFiles -- silently dropped by Hugo, with no root-level
+# enableGitInfo in `hugo config` at all. The visible symptom was .GitInfo nil
+# and .Lastmod zero on every page, which put "0001-01-01T00:00:00Z" into the
+# dateModified of 28 FAQ pages.
+enableGitInfo = true
+
+# Ignore leftover Jekyll files
+ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfile\\.lock", "convert_to_webp\\.rb$"]
 
 # Pagination (matches jekyll-paginate-v2: 12 per page)
 [pagination]
   pagerSize = 12
   path = "page"
-
-# Enable .GitInfo (replaces _plugins/git_dates.rb)
-enableGitInfo = true
-
-
-# Ignore leftover Jekyll files
-ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfile\\.lock", "convert_to_webp\\.rb$"]
 
 # Match Jekyll permalink exactly: /:year/:month/:day/:slug/
 [permalinks]
@@ -30,6 +37,10 @@ ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfi
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+    ordered = false
   [markup.highlight]
     style = "monokai"
     noClasses = false
@@ -52,8 +63,11 @@ ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfi
   isPlainText = true
 
 [outputs]
-  home = ["HTML", "RSS", "llms", "llmsfull"]
-  section = ["HTML"]
+  home = ["HTML", "RSS", "llms", "llmsfull", "markdown"]
+  section = ["HTML", "markdown"]
+  page = ["HTML", "markdown"]
+  taxonomy = ["HTML", "RSS", "markdown"]
+  term = ["HTML", "RSS", "markdown"]
 
 # Sitemap (replaces jekyll-sitemap)
 [sitemap]
@@ -63,12 +77,35 @@ ignoreFiles = ["_config\\.yml$", "_config_development\\.yml$", "Gemfile", "Gemfi
 # Minification (replaces jekyll-minifier)
 [minify]
   minifyOutput = true
+  [minify.tdewolff.html]
+    # Cloudflare's email obfuscation is switched off per-region with
+    # <!--email_off--> markers (see layouts/_default/_markup/render-codeblock.html),
+    # and the minifier drops every comment unless told otherwise. Template
+    # comments use {{/* */}} so this only preserves the markers themselves.
+    keepComments = true
 
 # Custom params
 [params]
-  description = "Your Security Artifact Hub. From zero to SBOM hero. Generate, manage, and share SBOMs and compliance documents. Built for CRA compliance and seamless integration with your existing tools."
-  keywords = ["SBOM", "Supply Chain Security", "CRA Compliance", "NTIA Compliant", "Software Bill of Materials", "SBOM Management", "Security Artifact Hub"]
+  description = "From SBOM to security disclosure. Manage product security for every release you support: generate SBOMs, monitor vulnerabilities, triage with VEX and publish advisories through your Trust Center. Built for the EU Cyber Resilience Act."
+  keywords = ["SBOM", "Product Security", "CRA Vulnerability Handling", "Supply Chain Security", "CRA Compliance", "NTIA Compliant", "Software Bill of Materials", "SBOM Management", "Security Artifact Hub"]
+  # Conversion endpoints. Every sign-up, sign-in and demo button reads these, so
+  # pointing "Book a demo" at a scheduling page is a one-line change here.
+  signupURL = "https://app.sbomify.com"
+  signinURL = "https://app.sbomify.com"
+  demoURL = "https://app.sbomify.com/enterprise-contact/"
+  # Public status page (sbomify/status). The footer links to it, and
+  # assets/js/main.js reads statusURL + "api/summary.json" for the live badge.
+  statusURL = "https://status.sbomify.com/"
   posthog_api_key = "phc_kWvZ17AgVDC3CAEHYG2oQBYEg5lUnyK3brPqJ6P4nPH"
+
+  # Outbound link policy, applied by layouts/_markup/render-link.html and the
+  # layouts/partials/link-attrs.html helper. Any link whose host is not the site
+  # host or one of these (subdomains included) is treated as outbound and gets
+  # `externalRel`. Set `externalTarget = "_blank"` to also open them in a new tab.
+  [params.links]
+    internalHosts = ["sbomify.com"]
+    externalRel = "nofollow noopener noreferrer"
+    externalTarget = ""
 
   [params.social]
     image = "/assets/images/site/sbomify.png"

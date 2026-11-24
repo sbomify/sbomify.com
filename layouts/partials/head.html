@@ -1,22 +1,100 @@
 <head>
+  {{- /* Paginated pages (/blog/page/2/ etc.) need their own canonical URL,
+       title, and description so they don't count as duplicates of page 1. */ -}}
+  {{- $paginator := partial "paginator.html" . -}}
+  {{- $pageSuffix := "" -}}
+  {{- $canonical := .Permalink -}}
+  {{- with $paginator -}}
+    {{- if gt .PageNumber 1 -}}
+      {{- $pageSuffix = printf " - Page %d of %d" .PageNumber .TotalPages -}}
+      {{- $canonical = .URL | absURL -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $desc := or .Params.description "" -}}
+  {{- if not $desc -}}
+    {{- if eq .Kind "term" -}}
+      {{- /* Derive the description from what the term actually contains. The
+           previous wording differed only by the term itself, which left ~12
+           taxonomy pages sharing a near-identical description; the post count
+           and newest headline make each one genuinely distinct and more
+           informative than boilerplate. */ -}}
+      {{- $n := len .Pages -}}
+      {{- $noun := cond (eq $n 1) "article" "articles" -}}
+      {{- $rel := cond (eq .Data.Plural "categories") "in the" "tagged" -}}
+      {{- $suffix := cond (eq .Data.Plural "categories") " category" "" -}}
+      {{- $latest := "" -}}
+      {{- with .Pages.ByDate.Reverse -}}
+        {{- /* Post titles may contain straight quotes (eg. v26.7.1 "Not
+             Affected"), which would end the attribute early. Fold them to
+             single quotes rather than relying on the minifier to swap the
+             surrounding quote style -- and so they stay legible next to the
+             typographic quotes wrapping the title itself. */ -}}
+        {{- $latest = replace (index . 0).Title "\"" "'" -}}
+      {{- end -}}
+      {{- $term := .Title | lower -}}
+      {{- if $latest -}}
+        {{- $desc = printf "%d sbomify %s %s %s%s, most recently “%s”." $n $noun $rel $term $suffix $latest -}}
+      {{- else -}}
+        {{- $desc = printf "sbomify %s %s %s%s." $noun $rel $term $suffix -}}
+      {{- end -}}
+    {{- else if eq .Kind "taxonomy" -}}
+      {{- $desc = printf "Browse the sbomify blog by %s to find articles on SBOMs, software supply chain security, and compliance." (.Title | lower) -}}
+    {{- else -}}
+      {{- $desc = site.Params.description -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $desc = printf "%s%s" $desc $pageSuffix -}}
+  {{- /* Distinguish term page titles from same-named content pages
+       (e.g. /tags/integrations/ vs /features/integrations/). */ -}}
+  {{- $title := .Title -}}
+  {{- if eq .Kind "term" -}}
+    {{- if eq .Data.Plural "categories" -}}
+      {{- $title = printf "%s Category" .Title -}}
+    {{- else -}}
+      {{- $title = printf "%s Articles" .Title -}}
+    {{- end -}}
+  {{- end -}}
+  {{- /* seo_title lets a page keep a long editorial headline as its <h1>
+       while the <title> tag stays inside Google's ~60 character display
+       limit. Falls back to .Title when unset. */ -}}
+  {{- with .Params.seo_title -}}
+    {{- $title = . -}}
+  {{- end -}}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ if eq .RelPermalink "/" }}{{ .Title | default site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
-  <meta name="description" content="{{ .Params.description | default site.Params.description }}">
-  <meta name="keywords" content="{{ with .Params.keywords }}{{ delimit . ", " }}{{ else }}{{ delimit site.Params.keywords ", " }}{{ end }}">
+  {{- /* The site has one, light, theme (brand guidelines: white with navy
+       type). "only light" stops browsers from force-darkening it (Chrome's
+       Auto Dark Mode for web contents, Samsung Internet, Opera), which
+       inverts text but not images and leaves the hero gradients, the logo
+       and the status colours unreadable. darkreader-lock does the same for
+       the Dark Reader extension. tokens.css sets color-scheme too, so form
+       controls and scrollbars stay light. */}}
+  <meta name="color-scheme" content="only light">
+  <meta name="darkreader-lock">
+  {{- /* The " | sbomify" brand suffix is only added when the whole title
+       still fits in ~60 characters. Search results truncate past that, and
+       a cut-off headline costs more clicks than a missing brand name. */ -}}
+  {{- $fullTitle := printf "%s%s" $title $pageSuffix -}}
+  {{- $branded := printf "%s | %s" $fullTitle site.Title -}}
+  {{- if le (strings.RuneCount $branded) 60 }}{{ $fullTitle = $branded }}{{ end }}
+  <title>{{ if eq .RelPermalink "/" }}{{ $title | default site.Title }}{{ else }}{{ $fullTitle }}{{ end }}</title>
+  <meta name="description" content="{{ $desc }}">
 
-  <!-- Canonical URL -->
-  <link rel="canonical" href="{{ .Permalink }}">
+  {{/* Canonical URL */}}
+  <link rel="canonical" href="{{ $canonical }}">
+  {{- /* The page's Markdown copy (index.md next to index.html), for AI agents. */}}
+  {{ with .OutputFormats.Get "markdown" }}<link rel="alternate" type="text/markdown" href="{{ .Permalink }}" title="Markdown">{{ end }}
 
-  <!-- Robots meta -->
-  <meta name="robots" content="index, follow">
-  <meta name="googlebot" content="index, follow">
+  {{/* Robots meta */}}
+  {{- $robots := cond (eq (.Params.noindex | default false) true) "noindex, follow" "index, follow" }}
+  <meta name="robots" content="{{ $robots }}">
+  <meta name="googlebot" content="{{ $robots }}">
 
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="{{ .Title | default site.Title }}">
-  <meta property="og:description" content="{{ .Params.description | default site.Params.description }}">
+  {{/* Open Graph Meta Tags */}}
+  <meta property="og:title" content="{{ $title | default site.Title }}{{ $pageSuffix }}">
+  <meta property="og:description" content="{{ $desc }}">
   <meta property="og:type" content="{{ if eq .Type "posts" }}article{{ else }}website{{ end }}">
-  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:url" content="{{ $canonical }}">
   {{- $ogImage := .Params.image | default site.Params.social.image -}}
   <meta property="og:image" content="{{ $ogImage | absURL }}">
   <meta property="og:image:width" content="1200">
@@ -27,7 +105,11 @@
   {{- range site.Params.social.profiles -}}
     {{- if eq .platform "LinkedIn" -}}{{ $linkedinUrl = .url }}{{- end -}}
   {{- end -}}
-  {{ if eq .Type "posts" }}
+  {{/* .Kind "page" excludes the /blog/ listing and its paginated pages, which
+       share Type "posts" but have no date of their own, they were emitting
+       article:published_time "0001-01-01T00:00:00Z". They get their own
+       CollectionPage schema further down. */}}
+  {{ if and (eq .Type "posts") (eq .Kind "page") }}
   <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
   <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
   <meta property="article:author" content="{{ $linkedinUrl }}">
@@ -36,10 +118,10 @@
   {{ end }}
   {{ end }}
 
-  <!-- Twitter Card Meta Tags -->
+  {{/* Twitter Card Meta Tags */}}
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ .Title | default site.Title }}">
-  <meta name="twitter:description" content="{{ .Params.description | default site.Params.description }}">
+  <meta name="twitter:title" content="{{ $title | default site.Title }}{{ $pageSuffix }}">
+  <meta name="twitter:description" content="{{ $desc }}">
   <meta name="twitter:image" content="{{ $ogImage | absURL }}">
   <meta name="twitter:image:alt" content="{{ .Title | default site.Title }}">
   {{- $twitterHandle := "" -}}
@@ -49,18 +131,24 @@
   <meta name="twitter:site" content="@{{ $twitterHandle }}">
   <meta name="twitter:creator" content="@{{ $twitterHandle }}">
 
-  <!-- LinkedIn Card Meta Tags -->
-  <meta property="linkedin:card" content="summary_large_image">
-  <meta property="linkedin:title" content="{{ .Title | default site.Title }}">
-  <meta property="linkedin:description" content="{{ .Params.description | default site.Params.description }}">
-  <meta property="linkedin:image" content="{{ $ogImage | absURL }}">
-  <meta property="linkedin:author" content="{{ $linkedinUrl }}">
+  {{/* No linkedin:* meta tags. There is no such vocabulary -- LinkedIn reads
+       the standard Open Graph tags above. Emitting them with property=""
+       declares RDFa properties in an undefined "linkedin" prefix, which
+       validators report as a structured-data error on every page. */}}
 
   <link rel="dns-prefetch" href="//us.i.posthog.com">
-  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  {{ $css := resources.Get "css/styles.css" | fingerprint }}
+  <link rel="preload" href="/assets/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  {{ $css := resources.Get "css/styles.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}">
-  {{ $nativeCss := resources.Get "css/native.css" | fingerprint }}
+  {{- /* The nebula stills as CSS variables, so stylesheet rules can use the
+         fingerprinted images (the legacy .hero / .cta-band / .panel-dark
+         clouds and the diagram frames). Cards never fake a nebula with
+         gradients. */ -}}
+  {{- $nl := resources.Get "images/nebula/nebula-light.webp" | fingerprint -}}
+  {{- $ng := resources.Get "images/nebula/nebula-grey.webp" | fingerprint -}}
+  {{- $nn := resources.Get "images/nebula/nebula-navy.webp" | fingerprint -}}
+  <style>:root{--nebula-light:url("{{ $nl.RelPermalink }}");--nebula-grey:url("{{ $ng.RelPermalink }}");--nebula-navy:url("{{ $nn.RelPermalink }}")}</style>
+  {{ $nativeCss := resources.Get "css/native.css" | minify | fingerprint }}
   <link rel="preload" href="{{ $nativeCss.RelPermalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="{{ $nativeCss.RelPermalink }}"></noscript>
 
@@ -72,7 +160,7 @@
 
   {{ partial "posthog.html" . }}
 
-  <!-- Schema.org structured data: Organization -->
+  {{/* Schema.org structured data: Organization */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -88,19 +176,31 @@
     "sameAs": [
       {{ range $i, $p := site.Params.social.profiles }}{{ if $i }},{{ end }}"{{ $p.url }}"{{ end }}
     ],
-    "description": {{ site.Params.description | jsonify }}
+    "description": {{ site.Params.description | jsonify | safeJS }}
   }
   </script>
 
-  <!-- Schema.org structured data: SoftwareApplication -->
+  {{ if .IsHome }}
+  {{/* Schema.org structured data: Product, which validates on offers alone.
+       No review/aggregateRating: Google requires reviewRating on every Review,
+       and we have collected no ratings -- inventing one would breach Google's
+       review policy, while a rating-less Review is a markup error that
+       invalidates the whole Product snippet. The Atsign testimonial in the
+       "Trusted By" section stays as on-page content only. */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "Product",
+    "additionalType": "https://schema.org/SoftwareApplication",
     "name": "sbomify",
-    "applicationCategory": "BusinessApplication",
-    "applicationSubCategory": "Supply Chain Security",
-    "operatingSystem": "Cloud",
+    "description": {{ site.Params.description | jsonify | safeJS }},
+    "url": "{{ site.BaseURL }}",
+    "image": "{{ site.BaseURL }}android-chrome-512x512.png",
+    "brand": {
+      "@type": "Brand",
+      "name": "sbomify"
+    },
+    "category": "Supply Chain Security Software",
     "offers": [
       {
         "@type": "Offer",
@@ -108,7 +208,10 @@
         "price": "0",
         "priceCurrency": "USD",
         "description": "For OSS maintainers and hobby projects",
-        "availability": "https://schema.org/InStock"
+        "availability": "https://schema.org/InStock",
+        "validFrom": "{{ now.Format "2006-01-02" }}",
+        "priceValidUntil": "{{ now.AddDate 0 1 0 | time.Format "2006-01-02" }}",
+        "url": "{{ site.BaseURL }}pricing/"
       },
       {
         "@type": "Offer",
@@ -117,30 +220,19 @@
         "priceCurrency": "USD",
         "description": "For mid-size teams needing private SBOMs",
         "availability": "https://schema.org/InStock",
-        "priceValidUntil": "{{ now.AddDate 0 1 0 | time.Format "2006-01-02" }}"
-      },
-      {
-        "@type": "Offer",
-        "name": "Enterprise",
-        "description": "For large orgs with advanced security & compliance needs. Contact for pricing.",
-        "availability": "https://schema.org/InStock"
+        "validFrom": "{{ now.Format "2006-01-02" }}",
+        "priceValidUntil": "{{ now.AddDate 0 1 0 | time.Format "2006-01-02" }}",
+        "url": "{{ site.BaseURL }}pricing/"
       }
-    ],
-    "description": {{ site.Params.description | jsonify }},
-    "url": "{{ site.BaseURL }}",
-    "featureList": [
-      "SBOM Generation",
-      "SBOM Management",
-      "Supply Chain Security",
-      "Compliance Management",
-      "Vulnerability Tracking"
-    ],
-    "softwareVersion": "1.0"
+    ]
   }
   </script>
+  {{ end }}
 
-  {{ if eq .Type "posts" }}
-  <!-- Schema.org structured data: BlogPosting / TechArticle -->
+  {{/* .Kind "page" only, the /blog/ listing is not a BlogPosting, and was
+       emitting one with datePublished "0001-01-01T00:00:00Z". */}}
+  {{ if and (eq .Type "posts") (eq .Kind "page") }}
+  {{/* Schema.org structured data: BlogPosting / TechArticle */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -156,8 +248,8 @@
       "@type": "WebPage",
       "@id": "{{ .Permalink }}"
     },
-    "headline": {{ .Title | jsonify }},
-    "description": {{ (.Params.description | default site.Params.description) | jsonify }},
+    "headline": {{ .Title | jsonify | safeJS }},
+    "description": {{ (.Params.description | default site.Params.description) | jsonify | safeJS }},
     "image": "{{ $ogImage | absURL }}",
     "author": {
       "@type": "Person",
@@ -189,7 +281,7 @@
   }
   </script>
 
-  <!-- Schema.org structured data: BreadcrumbList (Blog Post) -->
+  {{/* Schema.org structured data: BreadcrumbList (Blog Post) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -210,7 +302,7 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": {{ .Title | jsonify }},
+        "name": {{ .Title | jsonify | safeJS }},
         "item": "{{ .Permalink }}"
       }
     ]
@@ -219,13 +311,13 @@
   {{ end }}
 
   {{ if and (in .RelPermalink "/case-studies/") (ne .RelPermalink "/case-studies/") }}
-  <!-- Schema.org structured data: Article (Case Study) -->
+  {{/* Schema.org structured data: Article (Case Study) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": {{ .Title | jsonify }},
-    "description": {{ (.Params.description | default site.Params.description) | jsonify }},
+    "headline": {{ .Title | jsonify | safeJS }},
+    "description": {{ (.Params.description | default site.Params.description) | jsonify | safeJS }},
     "image": "{{ (.Params.logo | default site.Params.social.image) | absURL }}",
     "publisher": {
       "@type": "Organization",
@@ -244,7 +336,7 @@
   }
   </script>
 
-  <!-- Schema.org structured data: BreadcrumbList (Case Study) -->
+  {{/* Schema.org structured data: BreadcrumbList (Case Study) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -265,7 +357,7 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": {{ .Title | jsonify }},
+        "name": {{ .Title | jsonify | safeJS }},
         "item": "{{ .Permalink }}"
       }
     ]
@@ -274,7 +366,7 @@
   {{ end }}
 
   {{ if .Params.faq }}
-  <!-- Schema.org structured data: FAQPage -->
+  {{/* Schema.org structured data: FAQPage */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -283,10 +375,10 @@
       {{ range $i, $qa := .Params.faq }}
       {{ if $i }},{{ end }}{
         "@type": "Question",
-        "name": {{ $qa.question | jsonify }},
+        "name": {{ $qa.question | jsonify | safeJS }},
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": {{ $qa.answer | jsonify }}
+          "text": {{ $qa.answer | jsonify | safeJS }}
         }
       }
       {{ end }}
@@ -295,7 +387,37 @@
   </script>
   {{ end }}
 
-  <!-- Schema.org structured data: WebSite -->
+  {{ with .Params.app }}
+  {{/* Schema.org structured data: WebApplication, for free tools that run in
+       the browser (content/tools/). Set `app` in front matter. */}}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": {{ .name | jsonify | safeJS }},
+    "url": "{{ $.Permalink }}",
+    "description": {{ ($.Params.description | default site.Params.description) | jsonify | safeJS }},
+    "applicationCategory": {{ (.category | default "DeveloperApplication") | jsonify | safeJS }},
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript and a modern web browser.",
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    {{ with .features }}"featureList": {{ . | jsonify | safeJS }},
+    {{ end }}"image": "{{ $ogImage | absURL }}",
+    "publisher": {
+      "@type": "Organization",
+      "name": "sbomify",
+      "url": "{{ site.BaseURL }}"
+    }
+  }
+  </script>
+  {{ end }}
+
+  {{/* Schema.org structured data: WebSite */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -306,13 +428,22 @@
   </script>
 
   {{ if and (in .RelPermalink "/guides/") (ne .RelPermalink "/guides/") }}
-  <!-- Schema.org structured data: TechArticle (Guide) -->
+  {{/* Schema.org structured data: TechArticle (Guide) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    "name": {{ .Title | jsonify }},
-    "description": {{ (.Params.description | default site.Params.description) | jsonify }},
+    "name": {{ .Title | jsonify | safeJS }},
+    {{/* headline is what Google reads for Article-family types; name alone is
+         not a substitute. */}}
+    "headline": {{ .Title | jsonify | safeJS }},
+    {{/* .Lastmod is the file's latest git commit, so it is dateModified and
+         nothing else. Using it for datePublished would restamp a guide as
+         newly published on every edit. Guides carry no date in frontmatter,
+         so datePublished is emitted only when one is authored explicitly. */}}
+    {{ with .Params.date }}"datePublished": "{{ (time .).Format "2006-01-02T15:04:05Z07:00" }}",
+    {{ end }}{{ if not .Lastmod.IsZero }}"dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+    {{ end }}"description": {{ (.Params.description | default site.Params.description) | jsonify | safeJS }},
     "image": "{{ $ogImage | absURL }}",
     "proficiencyLevel": "Beginner",
     "inLanguage": "en-US"
@@ -321,7 +452,7 @@
   {{ end }}
 
   {{ if or (eq .RelPermalink "/blog/") (in .RelPermalink "/blog/page/") }}
-  <!-- Schema.org structured data: CollectionPage (Blog Listing) -->
+  {{/* Schema.org structured data: CollectionPage (Blog Listing) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -345,10 +476,35 @@
     }
   }
   </script>
+
+  {{/* The listing's breadcrumb used to come from the blog-post block, which is
+       now restricted to .Kind "page". Emitted here so /blog/ and its paginated
+       pages keep their trail without also claiming to be a BlogPosting. */}}
+  {{/* Schema.org structured data: BreadcrumbList (Blog Listing) */}}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ site.BaseURL }}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "{{ site.BaseURL }}blog/"
+      }
+    ]
+  }
+  </script>
   {{ end }}
 
   {{ if eq .RelPermalink "/case-studies/" }}
-  <!-- Schema.org structured data: CollectionPage (Case Studies) -->
+  {{/* Schema.org structured data: CollectionPage (Case Studies) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -375,7 +531,7 @@
   {{ end }}
 
   {{ if eq .RelPermalink "/guides/" }}
-  <!-- Schema.org structured data: CollectionPage (Guides) -->
+  {{/* Schema.org structured data: CollectionPage (Guides) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -402,7 +558,7 @@
   {{ end }}
 
   {{ if eq .RelPermalink "/faq/" }}
-  <!-- Schema.org structured data: FAQPage (FAQ Index) -->
+  {{/* Schema.org structured data: FAQPage (FAQ Index) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -411,10 +567,10 @@
       {{ range $i, $faq := .Pages.ByWeight }}
       {{ if $i }},{{ end }}{
         "@type": "Question",
-        "name": {{ $faq.Title | jsonify }},
+        "name": {{ $faq.Title | jsonify | safeJS }},
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": {{ $faq.Params.answer | jsonify }}
+          "text": {{ $faq.Params.answer | jsonify | safeJS }}
         }
       }
       {{ end }}
@@ -422,7 +578,7 @@
   }
   </script>
 
-  <!-- Schema.org structured data: CollectionPage (FAQ) -->
+  {{/* Schema.org structured data: CollectionPage (FAQ) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -438,7 +594,7 @@
           "@type": "ListItem",
           "position": {{ add $i 1 }},
           "url": "{{ $faq.Permalink }}",
-          "name": {{ $faq.Title | jsonify }}
+          "name": {{ $faq.Title | jsonify | safeJS }}
         }
         {{ end }}
       ]
@@ -446,7 +602,7 @@
   }
   </script>
 
-  <!-- Schema.org structured data: BreadcrumbList (FAQ Index) -->
+  {{/* Schema.org structured data: BreadcrumbList (FAQ Index) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -470,7 +626,7 @@
   {{ end }}
 
   {{ if and (eq .Section "faq") (ne .RelPermalink "/faq/") }}
-  <!-- Schema.org structured data: FAQPage (Individual FAQ) -->
+  {{/* Schema.org structured data: FAQPage (Individual FAQ) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -478,26 +634,28 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": {{ .Title | jsonify }},
+        "name": {{ .Title | jsonify | safeJS }},
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": {{ .Params.answer | jsonify }}
+          "text": {{ .Params.answer | jsonify | safeJS }}
         }
       }
     ]
   }
   </script>
 
-  <!-- Schema.org structured data: WebPage (Individual FAQ) -->
+  {{/* Schema.org structured data: WebPage (Individual FAQ) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": {{ .Title | jsonify }},
-    "description": {{ (.Params.description | default site.Params.description) | jsonify }},
+    "name": {{ .Title | jsonify | safeJS }},
+    "description": {{ (.Params.description | default site.Params.description) | jsonify | safeJS }},
     "url": "{{ .Permalink }}",
-    "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
-    "isPartOf": {
+    {{/* Guarded: this is the field that shipped "0001-01-01T00:00:00Z" on 28
+         FAQ pages while enableGitInfo was silently inert. */}}
+    {{ if not .Lastmod.IsZero }}"dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+    {{ end }}"isPartOf": {
       "@type": "WebSite",
       "name": "{{ site.Title }}",
       "url": "{{ site.BaseURL }}"
@@ -513,7 +671,7 @@
   }
   </script>
 
-  <!-- Schema.org structured data: BreadcrumbList (Individual FAQ) -->
+  {{/* Schema.org structured data: BreadcrumbList (Individual FAQ) */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -534,9 +692,46 @@
       {
         "@type": "ListItem",
         "position": 3,
-        "name": {{ .Title | jsonify }},
+        "name": {{ .Title | jsonify | safeJS }},
         "item": "{{ .Permalink }}"
       }
+    ]
+  }
+  </script>
+  {{ end }}
+
+  {{/* Blog posts, case studies and FAQ pages get their own BreadcrumbList above.
+       The compliance / features / guides / sbomify-action trees had none, leaving
+       every page in them without breadcrumbs. One generic block covers them all
+       rather than four near-identical copies. Any new top-level section must be
+       added here or its pages ship without breadcrumb schema. */}}
+  {{ $crumbSections := dict "compliance" "Compliance" "features" "Features" "guides" "Guides" "sbomify-action" "sbomify Action" "tools" "Tools" }}
+  {{ $crumbLabel := index $crumbSections .Section }}
+  {{ if $crumbLabel }}
+  {{/* Schema.org structured data: BreadcrumbList (Section) */}}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ site.BaseURL }}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ $crumbLabel }}",
+        "item": "{{ site.BaseURL }}{{ .Section }}/"
+      }{{ if not .IsSection }},
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": {{ .Title | jsonify | safeJS }},
+        "item": "{{ .Permalink }}"
+      }{{ end }}
     ]
   }
   </script>

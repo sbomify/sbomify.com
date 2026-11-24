@@ -20,14 +20,19 @@ The Community tier is **completely free** and designed for:
 - Hobby projects and personal use
 - Developers evaluating sbomify before upgrading
 
-It includes core SBOM management features and the ability to share SBOMs publicly.
+It includes core SBOM management features, API access, weekly vulnerability scans, and the ability to share SBOMs publicly through a public Trust Center.
 
 ### Business ($199/month)
 
-The Business tier is built for mid-size teams that need:
+The Business tier comes with a 14-day free trial and is built for mid-size teams that need:
 
 - Private SBOM repositories
 - Team collaboration features
+- Custom trust center on your own domain
+- [Transparency Exchange API (TEA)](/faq/how-do-i-enable-tea-in-sbomify/)
+- [CRA Compliance Wizard](/faq/how-do-i-use-cra-compliance/)
+- [Dependency Track integration](/faq/how-do-i-enable-vulnerability-scanning/) and daily vulnerability re-scans
+- NTIA Minimum Elements checks
 - Compliance reporting
 - Priority support
 
@@ -37,6 +42,7 @@ For large organizations with advanced security and compliance needs:
 
 - SSO/SAML integration
 - Custom roles and permissions
+- Your choice of Dependency Track server
 - Dedicated support
 - SLA guarantees
 
@@ -44,7 +50,7 @@ Visit our [Pricing page](/pricing/) for the full feature comparison, or [sign up
 
 ## Self-hosting
 
-sbomify is also available as a self-hosted solution. If you prefer to run sbomify on your own infrastructure, you can deploy it using Docker. Visit our [GitHub repository](https://github.com/sbomify/sbomify) for setup instructions.
+sbomify is also available as a self-hosted solution. If you prefer to run sbomify on your own infrastructure, you can deploy it with Docker Compose, or with Helm on any Kubernetes cluster, including AWS (EKS) and Google Cloud (GKE). The [self-hosting guide](/self-hosting/) covers installation, configuration and server sizing.
 
 ## No credit card required
 

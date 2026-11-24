@@ -1,5 +1,5 @@
 <div class="video-embed-wrapper my-8 w-full max-w-3xl mx-auto">
-    <div class="relative w-full overflow-hidden rounded-xl sm:rounded-2xl shadow-lg" style="padding-bottom: 56.25%;">
+    <div class="relative w-full overflow-hidden rounded-xl sm:rounded-2xl bg-inverse" style="padding-bottom: 56.25%;">
         <video
             class="absolute top-0 left-0 w-full h-full border-0 bg-black"
             controls
@@ -18,7 +18,11 @@
   "@type": "VideoObject",
   "name": "{{ (.Get "title") | default .Page.Title | htmlEscape }}",
   "description": "{{ (.Get "description") | default (.Page.Params.description | default site.Params.description) | plainify | htmlEscape }}",
-  {{ with .Get "poster" }}"thumbnailUrl": "{{ . }}",{{ end }}
+  {{/* thumbnailUrl is REQUIRED by Google for VideoObject, without it the whole
+       entity is dropped. No call site passes a poster today, so fall back to the
+       page's social image (same source head.html uses for og:image) rather than
+       emitting an invalid entity. */}}
+  "thumbnailUrl": "{{ with .Get "poster" }}{{ . | absURL }}{{ else }}{{ (.Page.Params.image | default site.Params.social.image) | absURL }}{{ end }}",
   "uploadDate": "{{ with .Get "upload_date" }}{{ . }}{{ else }}{{ .Page.Date.Format "2006-01-02T15:04:05Z07:00" }}{{ end }}",
   "contentUrl": "{{ .Get "video_url" }}"
 }

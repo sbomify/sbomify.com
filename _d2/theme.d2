@@ -1,11 +1,14 @@
-# Sbomify D2 Theme - Clean & Modern
+# sbomify D2 theme, from the Brand Guidelines v2.0
 #
-# Brand colors:
-# - Dark Blue: #201B4C
-# - Purple: #8A7DFF  
-# - Pink: #d874a9
-# - Light Pink: #FCDDEC
-# - Background: #F8F9FC
+# D2 cannot read CSS variables, so these are copies of the tokens in
+# _assets/css/tokens.css. Keep the two in step.
+# - Navy 100 (ink):          #25293F
+# - Navy 80 (ink-muted):     #51546B
+# - Navy 20 (line-strong):   #D3D4D9
+# - Navy 10 (line):          #E9EAEC
+# - Mist 50 (surface):       #F0F1F5
+# - Signal Orange (accent):  #FF6A13
+# - Orange 700 (fill behind small white type): #C2410C
 
 # Global Defaults
 style: {
@@ -17,12 +20,12 @@ style: {
 }
 
 classes: {
-  # Primary - Purple border, light fill
+  # Primary - Navy border, white fill
   primary: {
     style: {
       fill: "#FFFFFF"
-      stroke: "#8A7DFF"
-      font-color: "#201B4C"
+      stroke: "#25293F"
+      font-color: "#25293F"
       stroke-width: 2
       shadow: false
       border-radius: 8
@@ -30,12 +33,12 @@ classes: {
     }
   }
 
-  # Accent - Pink border, light fill
+  # Accent - Signal Orange border, white fill
   accent: {
     style: {
       fill: "#FFFFFF"
-      stroke: "#d874a9"
-      font-color: "#201B4C"
+      stroke: "#FF6A13"
+      font-color: "#25293F"
       stroke-width: 2
       shadow: false
       border-radius: 8
@@ -43,12 +46,12 @@ classes: {
     }
   }
 
-  # Secondary - Light pink border, light fill (for less emphasis)
+  # Secondary - Navy 20 dashed border (for less emphasis)
   secondary: {
     style: {
       fill: "#FFFFFF"
-      stroke: "#CCCCCC"
-      font-color: "#666666"
+      stroke: "#D3D4D9"
+      font-color: "#51546B"
       stroke-width: 2
       shadow: false
       border-radius: 8
@@ -57,11 +60,11 @@ classes: {
     }
   }
 
-  # Highlight - Filled purple (for key items)
+  # Highlight - Orange fill, white type (for the one key item)
   highlight: {
     style: {
-      fill: "#8A7DFF"
-      stroke: "#8A7DFF"
+      fill: "#C2410C"
+      stroke: "#C2410C"
       font-color: "#FFFFFF"
       stroke-width: 2
       shadow: false
@@ -74,9 +77,9 @@ classes: {
   # Group Container
   group: {
     style: {
-      fill: "#F8F9FC"
-      stroke: "#E2E4E9"
-      font-color: "#201B4C"
+      fill: "#F0F1F5"
+      stroke: "#E9EAEC"
+      font-color: "#25293F"
       stroke-width: 1
       border-radius: 12
       font-size: 13
@@ -90,23 +93,23 @@ classes: {
     }
   }
 
-  # Flow - Purple animated connection
+  # Flow - Navy animated connection
   flow: {
     style: {
       animated: true
-      stroke: "#8A7DFF"
-      font-color: "#666666"
+      stroke: "#51546B"
+      font-color: "#51546B"
       stroke-width: 2
       font-size: 12
     }
   }
 
-  # Flow Pink - Pink animated connection
+  # Flow Pink - Signal Orange animated connection (name kept for existing diagrams)
   flow-pink: {
     style: {
       animated: true
-      stroke: "#d874a9"
-      font-color: "#666666"
+      stroke: "#FF6A13"
+      font-color: "#51546B"
       stroke-width: 2
       font-size: 12
     }

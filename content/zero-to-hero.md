@@ -5,7 +5,7 @@ title: From Zero to SBOM Hero
 description: "Generate your first compliance-ready SBOM in under 5 minutes. A quick-start guide to SBOM generation, quality, and distribution."
 ---
 
-<div class="mb-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="card mb-12 p-4 sm:p-8 overflow-hidden">
     {{< d2 "zero-to-hero" >}}
 </div>
 
@@ -27,17 +27,17 @@ Most SBOM generation tools produce incomplete SBOMs that:
 - **License compliance**: Missing license data means legal blind spots
 - **Compliance failures**: [NTIA minimum elements](/compliance/ntia-minimum-elements/), [CISA requirements](/compliance/cisa-minimum-elements/), and [EU CRA](/compliance/eu-cra/) all set quality bars that raw generation tools don't meet
 
-<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="card my-12 p-4 sm:p-8 overflow-hidden">
     {{< d2 "quality-gap" >}}
 </div>
 
 ### The sbomify Difference
 
-The [sbomify action](https://github.com/sbomify/sbomify-action) is **fully open source** and the only tool that produces compliance-ready SBOMs out of the box by automatically:
+The [sbomify action](https://github.com/sbomify/sbomify-action) is **fully open source** and produces SBOMs that meet NTIA, CISA and BSI TR-03183 field requirements out of the box by automatically:
 
 - Augmenting with supplier/author/manufacturer metadata
   - Data comes from your [sbomify profile](https://app.sbomify.com/) or a `sbomify.json` file in your repo
-- Enriching from **11 data sources** including:
+- Enriching from **12 data sources** including:
   - Pre-computed databases (LicenseDB, Lifecycle Database for EOL dates)
   - Native registries (PyPI, crates.io, pub.dev, Debian)
   - Aggregators (deps.dev, ecosyste.ms)
@@ -47,16 +47,16 @@ The [sbomify action](https://github.com/sbomify/sbomify-action) is **fully open 
 
 See [Integrations](/features/integrations/) for the full list of enrichment sources.
 
-<div class="my-12 bg-white rounded-xl p-6 border border-gray-100">
+<div class="card my-12 p-4 sm:p-8 overflow-hidden">
     {{< d2 "sbomify-action-flow" >}}
 </div>
 
 ### Runs Anywhere - No Vendor Lock-in
 
 - **GitHub Actions** - Native integration
-- **Any CI/CD** - GitLab CI, Bitbucket Pipelines, Jenkins, CircleCI, etc.
-- **Python package** - `pip install sbomify-action` for standalone use
-- **Docker** - `sbomifyhub/sbomify-action` runs anywhere
+- **Any CI/CD** - GitLab CI, Bitbucket Pipelines, Jenkins, CircleCI, Travis CI, etc.
+- **Python package** - `uvx sbomify-action` for standalone use
+- **Docker** - `ghcr.io/sbomify/sbomify-action` runs anywhere
 
 ### Deployment Flexibility
 
@@ -73,7 +73,7 @@ Your SBOMs, your infrastructure, your choice. Use the action standalone or with 
 
 A Software Bill of Materials (SBOM) is like the ingredients list on a food package - but for software. It documents every component, library, and dependency in your application.
 
-<div class="my-8 bg-white rounded-xl p-6 border border-gray-100">
+<div class="card my-8 p-4 sm:p-8 overflow-hidden">
     {{< d2 "what-is-sbom" >}}
 </div>
 
@@ -90,7 +90,7 @@ sbomify supports all major ecosystems:
 | [Python](/guides/python/)         | pip, Poetry, Pipenv, uv |
 | [JavaScript](/guides/javascript/) | npm, yarn, pnpm, Bun    |
 | [Java](/guides/java/)             | Maven, Gradle           |
-| [Go](/guides/go/)                 | Go Modules              |
+| [Go (Golang)](/guides/go/)        | Go Modules              |
 | [Rust](/guides/rust/)             | Cargo                   |
 | [Ruby](/guides/ruby/)             | Bundler                 |
 | [PHP](/guides/php/)               | Composer                |
@@ -103,7 +103,19 @@ sbomify supports all major ecosystems:
 
 Choose the option that fits your environment:
 
-**GitHub Actions** (quickest)
+**Setup wizard** (quickest)
+
+```bash
+docker run --rm -it \
+  -v "$(pwd):/github/workspace" \
+  -w /github/workspace \
+  ghcr.io/sbomify/sbomify-action \
+  sbomify-action wizard
+```
+
+The interactive [setup wizard](/faq/how-do-i-use-the-sbomify-setup-wizard/) scans your repo for lockfiles, creates your product and components in sbomify, registers [OIDC trusted publishing](/faq/how-do-i-set-up-oidc-trusted-publishing/) (so you never store a token secret), and writes a ready-to-commit `.github/workflows/sboms.yml`.
+
+**GitHub Actions** (manual setup)
 
 ```yaml
 - name: Generate SBOM
@@ -127,7 +139,7 @@ All options handle generation + augmentation + enrichment automatically. The Doc
 
 SBOMs generated outside CI/CD (or without signing) could be altered post-generation. No cryptographic proof means no way to verify authenticity or integrity.
 
-<div class="my-8 bg-white rounded-xl p-6 border border-gray-100">
+<div class="card my-8 p-4 sm:p-8 overflow-hidden">
     {{< d2 "trust-chain" >}}
 </div>
 
@@ -145,7 +157,7 @@ The sbomify action supports attestation via GitHub Actions (Sigstore) and other 
 
 For those who want to understand what's happening under the hood:
 
-<div class="my-8 bg-white rounded-xl p-6 border border-gray-100">
+<div class="card my-8 p-4 sm:p-8 overflow-hidden">
     {{< d2 "generation" >}}
 </div>
 
@@ -164,7 +176,7 @@ When you're generating one SBOM, management is easy. When you have dozens or hun
 
 [Learn about SBOM Hierarchy →](/features/sbom-hierarchy/)
 
-<div class="my-8 bg-white rounded-xl p-6 border border-gray-100">
+<div class="card my-8 p-4 sm:p-8 overflow-hidden">
     {{< d2 "store-analyze-enrich" >}}
 </div>
 
@@ -207,8 +219,8 @@ Regulators and buyers are no longer asking "do you have security?" - they're ask
 ---
 
 <div class="cta-box">
-  <p><strong>Ready to become an SBOM Hero?</strong></p>
-  <p>Start generating compliance-ready SBOMs in minutes with sbomify.</p>
-  <a href="https://app.sbomify.com/" class="cta-button">Get Started Free</a>
-  <p class="mt-4 text-sm text-gray-600">Or <a href="/guides/">explore our guides</a> to learn more.</p>
+  <p><strong>Generate your first SBOM, then keep it monitored</strong></p>
+  <p>A free sbomify workspace stores the SBOM for every release, rescans it for new vulnerabilities and shares it with your customers.</p>
+  <a href="https://app.sbomify.com/" class="cta-button" data-cta-location="zero_to_hero_end" data-cta-label="Start free">Start free</a>
+  <p class="mt-4 text-sm text-navy-80">Rolling it out across a product line? <a href="https://app.sbomify.com/enterprise-contact/" data-cta-location="zero_to_hero_end" data-cta-label="Book a demo">Book a demo</a>, or <a href="/guides/">explore our guides</a>.</p>
 </div>

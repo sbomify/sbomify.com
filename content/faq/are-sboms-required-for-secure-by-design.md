@@ -31,12 +31,12 @@ SBOMs are not a nice-to-have under Secure by Design - they are foundational to m
 
 Several major frameworks now connect Secure by Design directly to SBOM requirements:
 
-- **CISA Secure by Design Pledge** - commits signatories to transparency practices that include providing SBOMs and participating in vulnerability disclosure programs
-- **[EU Cyber Resilience Act (CRA)](/compliance/eu-cra/)** - makes Secure by Design a legal duty for products sold in the EU, with SBOM requirements fully enforceable by September 2027
+- **CISA Secure by Design Pledge** - commits signatories to transparency goals such as publishing a vulnerability disclosure policy and complete CVE records. SBOMs are not one of its seven goals, but CISA's wider Secure by Design guidance recommends them
+- **[EU Cyber Resilience Act (CRA)](/compliance/eu-cra/)** - makes Secure by Design a legal duty for products sold in the EU, with SBOM requirements fully enforceable from 11 December 2027
 - **US Executive Order 14028** - directs federal agencies to require SBOMs from software suppliers, with NIST's Secure Software Development Framework (SSDF) reinforcing this
-- **DoD/Pentagon** - requires SBOMs in all new software contracts as of February 2025
+- **US Army** - requires SBOMs in new software contracts as of February 2025
 
-For detailed compliance guidance, see our pages on [EU CRA compliance](/compliance/eu-cra/), [NTIA minimum elements](/compliance/ntia/), and [CISA framing](/compliance/cisa-framing/).
+For detailed compliance guidance, see our pages on [EU CRA compliance](/compliance/eu-cra/), [NTIA minimum elements](/compliance/ntia-minimum-elements/), and [CISA framing](/compliance/cisa-framing/).
 
 ## How sbomify helps
 
@@ -45,6 +45,6 @@ sbomify provides the tooling to put Secure by Design into practice:
 - **Generate and manage SBOMs** across your entire product portfolio using [sbomify-action](https://github.com/sbomify/sbomify-action)
 - **Automated vulnerability scanning** against known CVEs so you can respond to disclosures immediately
 - **Share compliance artifacts** with customers and auditors via your [Trust Center](https://trust.sbomify.com/)
-- **Track compliance** against [NTIA](/compliance/ntia/), [CISA](/compliance/cisa-framing/), and [CRA](/compliance/eu-cra/) requirements with built-in compliance plugins
+- **Track compliance** against [NTIA](/compliance/ntia-minimum-elements/), [CISA](/compliance/cisa-framing/), and [CRA](/compliance/eu-cra/) (via BSI TR-03183-2) requirements with built-in compliance plugins
 
 Get started for free at [app.sbomify.com](https://app.sbomify.com).

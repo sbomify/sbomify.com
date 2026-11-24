@@ -3,7 +3,6 @@
 url: /guides/java/
 title: "SBOM Generation Guide for Java - Maven, Gradle"
 description: "Learn how to generate Software Bill of Materials for Java projects. Complete guide with pom.xml, build.gradle, and gradle.lockfile examples, CycloneDX and SPDX output."
-section: guides
 ---
 
 ## Source vs Build SBOMs
@@ -139,9 +138,9 @@ SBOM generation is the first step in the [SBOM lifecycle](/features/generate-col
 
 ### Using sbomify GitHub Action (Recommended)
 
-The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step.
+The [sbomify action](/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step. It runs on [any CI platform](/sbomify-action/runtimes/), not just GitHub, and the source is [on GitHub](https://github.com/sbomify/sbomify-action/).
 
-For Java, sbomify uses **cdxgen** under the hood as it has the best support for Maven and Gradle projects.
+For Java, sbomify uses **cyclonedx-maven** for `pom.xml` and **cyclonedx-gradle** for Gradle build scripts, and reads a `gradle.lockfile` directly without running Gradle at all.
 
 **Standalone (no account needed):**
 
@@ -210,26 +209,20 @@ plugins {
 gradle cyclonedxBom
 ```
 
-**Trivy:**
-
-```bash
-trivy fs --format cyclonedx --output sbom.cdx.json .
-```
-
 When using these tools directly, you'll need to handle enrichment and augmentation separately.
 
 ### GitLab CI
 
 ```yaml
 generate-sbom:
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   variables:
     LOCK_FILE: pom.xml
     OUTPUT_FILE: sbom.cdx.json
     UPLOAD: "false"
     ENRICH: "true"
   script:
-    - /sbomify.sh
+    - sbomify-action
   artifacts:
     paths:
       - sbom.cdx.json

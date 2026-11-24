@@ -3,7 +3,6 @@
 url: /compliance/uk-software-security-code-of-practice/
 title: "Software Security Code of Practice (UK, May 2025)"
 description: "Guide to the UK Software Security Code of Practice, a voluntary government code for secure software development, supply chain resilience, and customer communication."
-section: compliance
 ---
 
 [← Back to Compliance Overview](/compliance/)
@@ -11,8 +10,8 @@ section: compliance
 **Who it affects:** Organisations that **develop and/or sell software to businesses or other organisations**, including standalone software, software services, and goods/services that contain software (most relevant for B2B proprietary software vendors and SaaS).
 
 <div class="cta-box">
-  <p><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get in Touch</a>
+  <p><strong>Turn these requirements into a working process.</strong> See how sbomify handles SBOMs, vulnerability monitoring, VEX and advisories for every release you support.</p>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" data-cta-location="compliance_top" data-cta-label="Book a demo">Book a demo</a>
 </div>
 
 ---

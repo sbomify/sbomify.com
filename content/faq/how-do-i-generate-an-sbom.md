@@ -1,16 +1,30 @@
 ---
 title: "How do I generate an SBOM?"
 description: "Step-by-step guide to generating your first SBOM using sbomify-action, open-source tools, and CI/CD integration."
-answer: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. You can also use standalone tools like Syft, ~~Trivy~~ (compromised March 2026), or cdxgen."
-tldr: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. You can also use standalone tools like Syft, ~~Trivy~~ (compromised March 2026), or cdxgen."
+answer: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. Run its interactive setup wizard (sbomify-action wizard) to get a working pipeline in minutes. You can also use standalone tools like Syft or cdxgen."
+tldr: "The easiest way is with sbomify-action, which generates, enriches, and uploads SBOMs from your lockfiles or Docker images in CI/CD. Run its interactive setup wizard (sbomify-action wizard) to get a working pipeline in minutes. You can also use standalone tools like Syft or cdxgen."
 weight: 60
 keywords: [generate SBOM, create SBOM, SBOM tools, SBOM generation, how to SBOM, sbomify-action]
 url: /faq/how-do-i-generate-an-sbom/
 ---
 
+## Fastest path: the setup wizard
+
+If you are starting from scratch, run the interactive [setup wizard](/faq/how-do-i-use-the-sbomify-setup-wizard/) from the root of your repository. The Docker image bundles everything it needs:
+
+```bash
+docker run --rm -it \
+  -v "$(pwd):/github/workspace" \
+  -w /github/workspace \
+  ghcr.io/sbomify/sbomify-action \
+  sbomify-action wizard
+```
+
+The wizard scans your repo for lockfiles, signs you in to sbomify, creates your product and components, registers [OIDC trusted publishing](/faq/how-do-i-set-up-oidc-trusted-publishing/), and writes a ready-to-commit `.github/workflows/sboms.yml`. Commit the file and your next push generates and uploads an SBOM.
+
 ## Recommended: sbomify-action
 
-The [sbomify-action](https://github.com/sbomify/sbomify-action) is a CI/CD tool that generates, augments, enriches, and uploads SBOMs from your lockfiles or Docker images. It works as a GitHub Action, Docker image, or pip package, and includes SBOM generators (Syft, ~~Trivy~~, cdxgen) pre-installed. (Note: Trivy was [removed from sbomify-action](/2026/03/26/trivy-compromise-hardening-sbomify-action/) as of v26.1.0 following its March 2026 compromise.)
+The [sbomify Action](/sbomify-action/) is a CI/CD tool that generates, augments, enriches, and uploads SBOMs from your lockfiles or Docker images. It works as a GitHub Action, Docker image, or pip package. It picks a native generator per ecosystem (such as `cyclonedx-py` or `cargo-cyclonedx`) with cdxgen and Syft as fallbacks; apart from `cyclonedx-py`, these tools are downloaded on first use and verified against pinned digests.
 
 ```yaml
 - uses: sbomify/sbomify-action@master
@@ -20,17 +34,17 @@ The [sbomify-action](https://github.com/sbomify/sbomify-action) is a CI/CD tool 
     ENRICH: true
 ```
 
-sbomify-action supports Python, Node, Rust, Go, Ruby, Dart, C++, Docker images, and Yocto/OpenEmbedded builds. It outputs both CycloneDX and SPDX formats.
+sbomify-action supports 18 ecosystems (Python, JavaScript, Java, Go, Rust, Ruby, PHP, .NET, Swift, Dart, Elixir, Scala, C++, Terraform, Haskell, Erlang, Clojure, and PlatformIO), plus Docker images, directory scans and Yocto/OpenEmbedded builds. It outputs both CycloneDX and SPDX formats.
 
 Beyond basic generation, sbomify-action can:
 
-- **Enrich** SBOMs with metadata from package registries (PyPI, npm, crates.io, etc.)
+- **Enrich** SBOMs with metadata from package registries and databases (PyPI, crates.io, pub.dev, deps.dev, ecosyste.ms, etc.)
 - **Augment** with business metadata (supplier, authors, licenses, lifecycle phase)
 - **Inject** additional packages not in lockfiles (vendored code, system libraries)
 - **Upload** to sbomify for collaboration and vulnerability management
 - **Attest** with GitHub's build provenance
 
-It also works with [GitLab CI and Bitbucket Pipelines](https://github.com/sbomify/sbomify-action#other-cicd-platforms). See our [CI/CD integration guide](/guides/ci-cd/) for details.
+It also works on [GitLab CI, Bitbucket Pipelines, Jenkins and other CI platforms](/sbomify-action/runtimes/). See our [CI/CD integration guide](/guides/ci-cd/) for details.
 
 ### Using Docker directly
 
@@ -44,21 +58,18 @@ docker run --rm \
   -e OUTPUT_FILE=/github/workspace/sbom.cdx.json \
   -e UPLOAD=false \
   -e ENRICH=true \
-  sbomifyhub/sbomify-action
+  ghcr.io/sbomify/sbomify-action
 ```
 
 This is useful for local development, scripted workflows, or CI systems that don't have a native sbomify-action integration.
 
 ## Standalone tools
 
-If you prefer standalone tools outside of CI/CD, **Syft** and **~~Trivy~~** are popular options:
+If you prefer standalone tools outside of CI/CD, **Syft** is a popular option:
 
 ```bash
 # Using Syft
 syft . -o cyclonedx-json > sbom.cdx.json
-
-# Using Trivy (see advisory below)
-trivy fs . --format cyclonedx --output sbom.cdx.json
 ```
 
 Note: We [no longer consider Trivy safe](/2026/03/26/trivy-compromise-hardening-sbomify-action/) following two successful supply chain attacks in March 2026 and have removed it from sbomify-action.
@@ -69,7 +80,7 @@ For language-specific generators, see our [language guides](/guides/) covering P
 
 Watch our FOSDEM 2026 talk for a real-world walkthrough of CRA-ready SBOM generation using sbomify-action:
 
-{{< video-embed-native video_url="https://video.fosdem.org/2026/ud2208/UYTGWA-sbom-generation.av1.webm" title="CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation" description="A four-phase SBOM generation model addressing the EU's Cyber Resilience Act requirements, covering authoring, augmenting, enriching, and signing SBOMs to exceed minimal compliance standards." >}}
+{{< video-embed-native video_url="https://video.fosdem.org/2026/ud2208/UYTGWA-sbom-generation.av1.webm" title="CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation" description="A four-phase SBOM generation model addressing the EU's Cyber Resilience Act requirements, covering authoring, augmenting, enriching, and signing SBOMs to exceed minimal compliance standards." upload_date="2026-02-03T18:53:55Z" >}}
 
 ## Next steps
 

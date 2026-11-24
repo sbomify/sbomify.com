@@ -1,6 +1,7 @@
 ---
 
 title: "The GPL License: A Comprehensive Guide to the GNU General Public License"
+seo_title: "GPL License Explained: GNU General Public License Guide"
 description: "Understand the GPL license, including GPL v2 vs v3, copyleft obligations, LGPL, AGPL, commercial use, and how SBOMs track GPL compliance."
 categories:
   - education

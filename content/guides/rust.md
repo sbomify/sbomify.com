@@ -3,7 +3,6 @@
 url: /guides/rust/
 title: "SBOM Generation Guide for Rust - Cargo"
 description: "Learn how to generate Software Bill of Materials for Rust projects. Complete guide with Cargo.lock examples, workspace dependencies, and CycloneDX output."
-section: guides
 ---
 
 ## Source vs Build SBOMs
@@ -136,9 +135,9 @@ SBOM generation is the first step in the [SBOM lifecycle](/features/generate-col
 
 ### Using sbomify GitHub Action (Recommended)
 
-The [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step.
+The [sbomify action](/sbomify-action/) is a swiss army knife for SBOMs that automatically selects the best generation tool for your ecosystem, enriches the output with package metadata, and optionally augments it with your business information – all in one step. It runs on [any CI platform](/sbomify-action/runtimes/), not just GitHub, and the source is [on GitHub](https://github.com/sbomify/sbomify-action/).
 
-For Rust, sbomify uses **cdxgen** under the hood with fallback to Trivy and Syft.
+For Rust, sbomify uses **cargo-cyclonedx** under the hood, because Cargo resolves a Rust project more accurately than a generic scanner can.
 
 **Standalone (no account needed):**
 
@@ -193,26 +192,20 @@ npm install -g @cyclonedx/cdxgen
 cdxgen -t rust -o sbom.cdx.json
 ```
 
-**Trivy:**
-
-```bash
-trivy fs --format cyclonedx --output sbom.cdx.json .
-```
-
 When using these tools directly, you'll need to handle enrichment and augmentation separately.
 
 ### GitLab CI
 
 ```yaml
 generate-sbom:
-  image: sbomifyhub/sbomify-action
+  image: ghcr.io/sbomify/sbomify-action
   variables:
     LOCK_FILE: Cargo.lock
     OUTPUT_FILE: sbom.cdx.json
     UPLOAD: "false"
     ENRICH: "true"
   script:
-    - /sbomify.sh
+    - sbomify-action
   artifacts:
     paths:
       - sbom.cdx.json

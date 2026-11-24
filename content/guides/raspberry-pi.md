@@ -3,7 +3,6 @@
 url: /guides/raspberry-pi/
 title: "SBOM Generation Guide for Raspberry Pi - rpi-image-gen"
 description: "Learn how to generate Software Bill of Materials for Raspberry Pi custom images using rpi-image-gen. Complete guide with SPDX output and quality analysis."
-section: guides
 ---
 
 ## Source vs Build SBOMs
@@ -159,7 +158,7 @@ build-image:
 
 ## Enrichment and Augmentation with sbomify
 
-While rpi-image-gen generates SBOMs natively, you can use the [sbomify GitHub Action](https://github.com/sbomify/sbomify-action/) to enrich and augment them further. The action accepts existing SBOMs via the `SBOM_FILE` input.
+While rpi-image-gen generates SBOMs natively, you can use the [sbomify action](/sbomify-action/) to enrich and augment them further. The action accepts existing SBOMs via the `SBOM_FILE` input.
 
 **Standalone (enrichment only, no account needed):**
 

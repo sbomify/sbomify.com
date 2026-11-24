@@ -3,7 +3,6 @@
 url: /compliance/eu-nis2/
 title: "EU NIS2 Directive SBOM Requirements"
 description: "Understanding NIS2 Directive cybersecurity requirements and how SBOMs support supply chain security, asset management, and incident response."
-section: compliance
 ---
 
 [← Back to Compliance Overview](/compliance/)
@@ -11,11 +10,13 @@ section: compliance
 **Who it affects:** EU "essential" and "important" entities (and their management) responsible for cybersecurity risk management and incident reporting across their operations and supply chains.
 
 <div class="cta-box">
-  <p><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get in Touch</a>
+  <p><strong>Turn these requirements into a working process.</strong> See how sbomify handles SBOMs, vulnerability monitoring, VEX and advisories for every release you support.</p>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" data-cta-location="compliance_top" data-cta-label="Book a demo">Book a demo</a>
 </div>
 
 ---
+
+**Check your SBOM:** NIS2 does not define SBOM fields; the free [SBOM minimum elements checker](/tools/sbom-checker/) scores a CycloneDX or SPDX file against the NTIA and CISA 2026 elements recommended as the baseline, in your browser.
 
 ## Overview
 

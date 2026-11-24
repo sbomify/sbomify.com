@@ -1,8 +1,8 @@
 ---
 title: "What is the EU Cyber Resilience Act (CRA)?"
-description: "Understand the EU Cyber Resilience Act, its SBOM requirements, timeline, and how sbomify helps you achieve CRA compliance."
-answer: "The EU Cyber Resilience Act (CRA) is a binding EU regulation requiring manufacturers of products with digital elements to provide SBOMs, handle vulnerabilities, and meet cybersecurity requirements throughout the product lifecycle."
-tldr: "The EU Cyber Resilience Act (CRA) is a binding EU regulation requiring manufacturers of products with digital elements to provide SBOMs, handle vulnerabilities, and meet cybersecurity requirements throughout the product lifecycle."
+description: "Understand the EU Cyber Resilience Act, its SBOM requirements, timeline, and what sbomify covers and what stays your responsibility."
+answer: "The EU Cyber Resilience Act (CRA) is a binding EU regulation requiring manufacturers of products with digital elements to draw up SBOMs, handle vulnerabilities, and meet cybersecurity requirements throughout the product lifecycle."
+tldr: "The EU Cyber Resilience Act (CRA) is a binding EU regulation requiring manufacturers of products with digital elements to draw up SBOMs, handle vulnerabilities, and meet cybersecurity requirements throughout the product lifecycle."
 weight: 50
 keywords: [EU CRA, Cyber Resilience Act, CRA SBOM, EU SBOM compliance, CRA requirements]
 url: /faq/what-is-the-eu-cyber-resilience-act/
@@ -21,8 +21,10 @@ The CRA explicitly requires manufacturers to:
 - **Produce a machine-readable SBOM** in a commonly used format (e.g., CycloneDX, SPDX) identifying components and dependencies in their products
 - **Cover at least top-level dependencies** of the product
 - **Document vulnerabilities** and provide timely security updates
-- **Report actively exploited vulnerabilities** to ENISA within 24 hours
+- **Report actively exploited vulnerabilities and severe incidents** within 24 hours, through the ENISA [Single Reporting Platform](/compliance/eu-cra/)
 - **Maintain cybersecurity** throughout the product's expected lifetime
+
+Reporting is not sent to ENISA directly: notifications go through the Single Reporting Platform to the CSIRT designated as coordinator in the relevant Member State, and are made available to ENISA at the same time (Article 16(1)).
 
 Germany's BSI has published [TR-03183-2](https://bsi.bund.de/dok/TR-03183-en), which provides concrete technical specifications for CRA-compliant SBOMs, including:
 
@@ -41,8 +43,9 @@ The CRA applies to:
 
 ## Timeline
 
-- **September 2026** - Vulnerability reporting obligations begin
-- **September 2027** - Full compliance required for all products
+- **11 September 2026** - Article 14 reporting obligations began for manufacturers, filed through the ENISA [Single Reporting Platform](/compliance/eu-cra/)
+- **11 December 2027** - Full application: all essential requirements, including the SBOM obligation, become enforceable
+- **11 December 2027** - Reporting obligations for open-source software stewards begin (Article 24(3))
 
 ## How sbomify helps
 
@@ -51,7 +54,9 @@ sbomify provides tooling to help you prepare for CRA compliance:
 - Manage and monitor SBOMs across your product portfolio
 - Track vulnerability status with automated scanning
 - Share compliance artifacts through your [Trust Center](https://trust.sbomify.com/)
-- CRA compliance plugin to assess your SBOM against CRA requirements
+- BSI TR-03183-2 (EU CRA SBOM) plugin to assess your SBOMs against the CRA's technical SBOM specification
+- [CRA compliance wizard](/faq/how-do-i-use-cra-compliance/) per product (Business and Enterprise plans), which generates documents such as the vulnerability disclosure policy and EU Declaration of Conformity and exports an auditor-ready bundle
+- CRA Article 14 incident reports laid out the way ENISA's Single Reporting Platform asks for them, with deadline tracking (you file them on the ENISA portal)
 
 For the complete breakdown of CRA requirements and field mappings, see our detailed [EU CRA Compliance Guide](/compliance/eu-cra/).
 
@@ -59,4 +64,4 @@ For the complete breakdown of CRA requirements and field mappings, see our detai
 
 For a practical walkthrough of CRA-ready SBOM generation, watch our FOSDEM 2026 talk:
 
-{{< video-embed-native video_url="https://video.fosdem.org/2026/ud2208/UYTGWA-sbom-generation.av1.webm" title="CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation" description="A four-phase SBOM generation model addressing the EU's Cyber Resilience Act requirements, covering authoring, augmenting, enriching, and signing SBOMs to exceed minimal compliance standards." >}}
+{{< video-embed-native video_url="https://video.fosdem.org/2026/ud2208/UYTGWA-sbom-generation.av1.webm" title="CRA-Ready SBOMs: A Practical Blueprint for High-Quality Generation" description="A four-phase SBOM generation model addressing the EU's Cyber Resilience Act requirements, covering authoring, augmenting, enriching, and signing SBOMs to exceed minimal compliance standards." upload_date="2026-02-03T18:53:55Z" >}}

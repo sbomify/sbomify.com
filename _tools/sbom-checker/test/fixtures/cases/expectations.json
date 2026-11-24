@@ -1,0 +1,1276 @@
+[
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:supplier-name",
+    "status": "pass",
+    "note": "Every component, including the primary one, carries all seven NTIA 2021 minimum data fields (NTIA Minimum Elements, 2021, Data Fields table)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:component-name",
+    "status": "pass",
+    "note": "Every component, including the primary one, carries all seven NTIA 2021 minimum data fields (NTIA Minimum Elements, 2021, Data Fields table)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:version",
+    "status": "pass",
+    "note": "Every component, including the primary one, carries all seven NTIA 2021 minimum data fields (NTIA Minimum Elements, 2021, Data Fields table)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:unique-identifiers",
+    "status": "pass",
+    "note": "Every component, including the primary one, carries all seven NTIA 2021 minimum data fields (NTIA Minimum Elements, 2021, Data Fields table)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:dependency-relationship",
+    "status": "pass",
+    "note": "Every component, including the primary one, carries all seven NTIA 2021 minimum data fields (NTIA Minimum Elements, 2021, Data Fields table)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:sbom-author",
+    "status": "pass",
+    "note": "Every component, including the primary one, carries all seven NTIA 2021 minimum data fields (NTIA Minimum Elements, 2021, Data Fields table)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:timestamp",
+    "status": "pass",
+    "note": "Every component, including the primary one, carries all seven NTIA 2021 minimum data fields (NTIA Minimum Elements, 2021, Data Fields table)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:sbom-author",
+    "status": "pass",
+    "note": "All eleven elements of the 2025 draft minimum elements are present; generation context is stated as lifecycle phase 'build'."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:software-producer",
+    "status": "pass",
+    "note": "All eleven elements of the 2025 draft minimum elements are present; generation context is stated as lifecycle phase 'build'."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:component-name",
+    "status": "pass",
+    "note": "All eleven elements of the 2025 draft minimum elements are present; generation context is stated as lifecycle phase 'build'."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:component-version",
+    "status": "pass",
+    "note": "All eleven elements of the 2025 draft minimum elements are present; generation context is stated as lifecycle phase 'build'."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:software-identifiers",
+    "status": "pass",
+    "note": "All eleven elements of the 2025 draft minimum elements are present; generation context is stated as lifecycle phase 'build'."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:component-hash",
+    "status": "pass",
+    "note": "All eleven elements of the 2025 draft minimum elements are present; generation context is stated as lifecycle phase 'build'."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:license",
+    "status": "pass",
+    "note": "All eleven elements of the 2025 draft minimum elements are present; generation context is stated as lifecycle phase 'build'."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:dependency-relationship",
+    "status": "pass",
+    "note": "All eleven elements of the 2025 draft minimum elements are present; generation context is stated as lifecycle phase 'build'."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:tool-name",
+    "status": "pass",
+    "note": "All eleven elements of the 2025 draft minimum elements are present; generation context is stated as lifecycle phase 'build'."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:timestamp",
+    "status": "pass",
+    "note": "All eleven elements of the 2025 draft minimum elements are present; generation context is stated as lifecycle phase 'build'."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:generation-context",
+    "status": "pass",
+    "note": "All eleven elements of the 2025 draft minimum elements are present; generation context is stated as lifecycle phase 'build'."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-author",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-data-format-name",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-data-format-version",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-generation-context",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-timestamp",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-tool-name",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-tool-version",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-version",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-producer",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-name",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-version",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-identifiers",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-hash-value",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-hash-algorithm",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-license",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-dependency-relationship",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements data fields (SBOM Metadata and Component Data, Appendix A definitions)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-author-signature",
+    "status": "warning",
+    "note": "2026 Author Signature requires cryptographic verification and attribution; file-only inspection cannot verify inline or detached authenticity."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:sbom-format",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: CycloneDX 1.6 meets the minimum format version (TR-03183-2 v2.1.0 section 4)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:sbom-creator",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: metadata.authors / metadata.manufacturer carry an email address and URL (section 5.2.1, Table 2)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:timestamp",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: metadata.timestamp is an RFC 3339 date-time (section 5.2.1, Table 2)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:component-creator",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: Each component's manufacturer carries an email address and URL (section 5.2.2, Table 3; mapping Table 9)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:component-name",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: Section 5.2.2, Table 3."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:component-version",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: Section 5.2.2, Table 3."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:filename",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: bsi:component:filename present on every component (Table 3; mapping Table 9)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:dependencies",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: dependencies[] enumerates direct dependencies and compositions[] states completeness (Table 3)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:distribution-licences",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: licenses[] with acknowledgement 'concluded' and an SPDX expression (Table 3; mapping Table 9; section 6.1)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:hash-value",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: SHA-512 hash on the distribution external reference (Table 3; mapping Table 9)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:executable-property",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: bsi:component:executable uses an allowed value (Table 3)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:archive-property",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: bsi:component:archive uses an allowed value (Table 3)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:structured-property",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: bsi:component:structured uses an allowed value (Table 3)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:sbom-uri",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: serialNumber is a urn:uuid URN (section 5.2.3, Table 4)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:source-code-uri",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: source-distribution external reference present (section 5.2.4, Table 5)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:uri-deployable-form",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: distribution external reference present (section 5.2.4, Table 5)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:unique-identifiers",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: purl present (section 5.2.4, Table 5)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:original-licences",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: licenses[] with acknowledgement 'declared' (Table 5; mapping Table 11)."
+  },
+  {
+    "fixture": "cdx16-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:no-vulnerabilities",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0: No vulnerabilities array (section 3.1: an SBOM MUST NOT contain vulnerability information)."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:supplier-name",
+    "status": "pass",
+    "note": "All seven NTIA 2021 minimum data fields present: PackageSupplier, name, versionInfo, purl external reference, DEPENDS_ON from the described package, an Organization creator and an ISO 8601 created timestamp."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:component-name",
+    "status": "pass",
+    "note": "All seven NTIA 2021 minimum data fields present: PackageSupplier, name, versionInfo, purl external reference, DEPENDS_ON from the described package, an Organization creator and an ISO 8601 created timestamp."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:version",
+    "status": "pass",
+    "note": "All seven NTIA 2021 minimum data fields present: PackageSupplier, name, versionInfo, purl external reference, DEPENDS_ON from the described package, an Organization creator and an ISO 8601 created timestamp."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:unique-identifiers",
+    "status": "pass",
+    "note": "All seven NTIA 2021 minimum data fields present: PackageSupplier, name, versionInfo, purl external reference, DEPENDS_ON from the described package, an Organization creator and an ISO 8601 created timestamp."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:dependency-relationship",
+    "status": "pass",
+    "note": "All seven NTIA 2021 minimum data fields present: PackageSupplier, name, versionInfo, purl external reference, DEPENDS_ON from the described package, an Organization creator and an ISO 8601 created timestamp."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:sbom-author",
+    "status": "pass",
+    "note": "All seven NTIA 2021 minimum data fields present: PackageSupplier, name, versionInfo, purl external reference, DEPENDS_ON from the described package, an Organization creator and an ISO 8601 created timestamp."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:timestamp",
+    "status": "pass",
+    "note": "All seven NTIA 2021 minimum data fields present: PackageSupplier, name, versionInfo, purl external reference, DEPENDS_ON from the described package, an Organization creator and an ISO 8601 created timestamp."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:component-name",
+    "status": "pass",
+    "note": "Element present in the SPDX 2.3 document per the 2025 draft minimum elements."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:component-version",
+    "status": "pass",
+    "note": "Element present in the SPDX 2.3 document per the 2025 draft minimum elements."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:software-identifiers",
+    "status": "pass",
+    "note": "Element present in the SPDX 2.3 document per the 2025 draft minimum elements."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:component-hash",
+    "status": "pass",
+    "note": "Element present in the SPDX 2.3 document per the 2025 draft minimum elements."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:license",
+    "status": "pass",
+    "note": "Element present in the SPDX 2.3 document per the 2025 draft minimum elements."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:dependency-relationship",
+    "status": "pass",
+    "note": "Element present in the SPDX 2.3 document per the 2025 draft minimum elements."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:tool-name",
+    "status": "pass",
+    "note": "Element present in the SPDX 2.3 document per the 2025 draft minimum elements."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:timestamp",
+    "status": "pass",
+    "note": "Element present in the SPDX 2.3 document per the 2025 draft minimum elements."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-author",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements (the tool version rides the SPDX tool name, as in 'Tool: name-version'); the creator comment states the 'after build' phase and an Organization creator is the SBOM Author."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-data-format-name",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements (the tool version rides the SPDX tool name, as in 'Tool: name-version'); the creator comment states the 'after build' phase and an Organization creator is the SBOM Author."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-data-format-version",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements (the tool version rides the SPDX tool name, as in 'Tool: name-version'); the creator comment states the 'after build' phase and an Organization creator is the SBOM Author."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-generation-context",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements (the tool version rides the SPDX tool name, as in 'Tool: name-version'); the creator comment states the 'after build' phase and an Organization creator is the SBOM Author."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-timestamp",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements (the tool version rides the SPDX tool name, as in 'Tool: name-version'); the creator comment states the 'after build' phase and an Organization creator is the SBOM Author."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-tool-name",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements (the tool version rides the SPDX tool name, as in 'Tool: name-version'); the creator comment states the 'after build' phase and an Organization creator is the SBOM Author."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-tool-version",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements (the tool version rides the SPDX tool name, as in 'Tool: name-version'); the creator comment states the 'after build' phase and an Organization creator is the SBOM Author."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-producer",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements (the tool version rides the SPDX tool name, as in 'Tool: name-version'); the creator comment states the 'after build' phase and an Organization creator is the SBOM Author."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-name",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements (the tool version rides the SPDX tool name, as in 'Tool: name-version'); the creator comment states the 'after build' phase and an Organization creator is the SBOM Author."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-version",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements (the tool version rides the SPDX tool name, as in 'Tool: name-version'); the creator comment states the 'after build' phase and an Organization creator is the SBOM Author."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-identifiers",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements (the tool version rides the SPDX tool name, as in 'Tool: name-version'); the creator comment states the 'after build' phase and an Organization creator is the SBOM Author."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-hash-value",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements (the tool version rides the SPDX tool name, as in 'Tool: name-version'); the creator comment states the 'after build' phase and an Organization creator is the SBOM Author."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-hash-algorithm",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements (the tool version rides the SPDX tool name, as in 'Tool: name-version'); the creator comment states the 'after build' phase and an Organization creator is the SBOM Author."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-license",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements (the tool version rides the SPDX tool name, as in 'Tool: name-version'); the creator comment states the 'after build' phase and an Organization creator is the SBOM Author."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-dependency-relationship",
+    "status": "pass",
+    "note": "Element present per the 2026 Minimum Elements (the tool version rides the SPDX tool name, as in 'Tool: name-version'); the creator comment states the 'after build' phase and an Organization creator is the SBOM Author."
+  },
+  {
+    "fixture": "spdx23-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:sbom-format",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 section 4: SPDX documents must be version 3.0.1 or higher; SPDX 2.3 is not accepted."
+  },
+  {
+    "fixture": "cdx15-complete.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:sbom-format",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 section 4: CycloneDX documents must be version 1.6 or higher."
+  },
+  {
+    "fixture": "cdx15-complete.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-data-format-version",
+    "status": "pass",
+    "note": "2026 Minimum Elements, SBOM Data Format Version: specVersion names the format version."
+  },
+  {
+    "fixture": "cdx16-component-no-supplier-or-manufacturer.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:supplier-name",
+    "status": "fail",
+    "note": "NTIA 2021 Supplier Name: a component names no supplier, originator or manufacturer."
+  },
+  {
+    "fixture": "cdx16-component-no-supplier-or-manufacturer.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-producer",
+    "status": "fail",
+    "note": "2026 Minimum Elements, Component Producer: the component names no entity that created it and does not state unknown provenance."
+  },
+  {
+    "fixture": "cdx16-component-no-supplier-or-manufacturer.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:component-creator",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 section 5.2.2, Table 3: component creator email or URL is required for each component."
+  },
+  {
+    "fixture": "cdx16-component-manufacturer-only.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:supplier-name",
+    "status": "pass",
+    "note": "NTIA 2021 (Data Fields discussion): 'Supplier refers to the originator or manufacturer of the software component', so a component naming its manufacturer satisfies Supplier Name."
+  },
+  {
+    "fixture": "cdx16-component-manufacturer-only.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-producer",
+    "status": "pass",
+    "note": "2026 Minimum Elements, Component Producer: the manufacturer is the entity that created the component."
+  },
+  {
+    "fixture": "cdx16-component-manufacturer-only.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:component-creator",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0 Table 3 and mapping Table 9: components[].manufacturer.url carries the creator URL."
+  },
+  {
+    "fixture": "spdx23-package-originator-only.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:supplier-name",
+    "status": "pass",
+    "note": "NTIA 2021 (Data Fields discussion): 'Supplier refers to the originator or manufacturer of the software component'; PackageOriginator names the originator."
+  },
+  {
+    "fixture": "spdx23-package-originator-only.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-producer",
+    "status": "pass",
+    "note": "2026 Minimum Elements, Component Producer: PackageOriginator names the entity that created the package."
+  },
+  {
+    "fixture": "spdx23-package-no-supplier-or-originator.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:supplier-name",
+    "status": "fail",
+    "note": "NTIA 2021 Supplier Name: the package names neither supplier nor originator."
+  },
+  {
+    "fixture": "spdx23-package-no-supplier-or-originator.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-producer",
+    "status": "fail",
+    "note": "2026 Minimum Elements, Component Producer: no originator or supplier, and no explicit statement of unknown provenance."
+  },
+  {
+    "fixture": "cdx16-component-empty-name.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:component-name",
+    "status": "fail",
+    "note": "NTIA 2021 Component Name is required for every component; an empty string is not a name."
+  },
+  {
+    "fixture": "cdx16-component-empty-name.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:component-name",
+    "status": "fail",
+    "note": "2025 draft Component Name is required for every component."
+  },
+  {
+    "fixture": "cdx16-component-empty-name.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-name",
+    "status": "fail",
+    "note": "2026 Minimum Elements, Component Name is required for every component."
+  },
+  {
+    "fixture": "cdx16-component-empty-name.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:component-name",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 3: component name (or actual filename) is required."
+  },
+  {
+    "fixture": "cdx16-component-missing-version.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:version",
+    "status": "fail",
+    "note": "NTIA 2021 Version of the Component is required for every component."
+  },
+  {
+    "fixture": "cdx16-component-missing-version.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:component-version",
+    "status": "fail",
+    "note": "2025 draft Component Version is required for every component."
+  },
+  {
+    "fixture": "cdx16-component-missing-version.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-version",
+    "status": "fail",
+    "note": "2026 Minimum Elements, Component Version: absent, and not stated as unknown."
+  },
+  {
+    "fixture": "cdx16-component-missing-version.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:component-version",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 3: version, or the file modification date per RFC 3339, is required."
+  },
+  {
+    "fixture": "cdx16-primary-component-missing-version.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:version",
+    "status": "fail",
+    "note": "NTIA 2021: the minimum elements apply to every component including the primary (top level) one described in metadata.component (Depth: 'An SBOM should contain all primary (top level) components')."
+  },
+  {
+    "fixture": "cdx16-primary-component-missing-version.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-version",
+    "status": "fail",
+    "note": "2026 Minimum Elements: Component Data covers 'the target component ... and all enumerated subcomponents'; the target component has no version."
+  },
+  {
+    "fixture": "cdx16-primary-component-missing-version.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:component-version",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 section 5.2.2 applies to each component, and mapping Table 9 maps the primary component to metadata.component.version."
+  },
+  {
+    "fixture": "cdx16-nested-component-missing-version.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:version",
+    "status": "fail",
+    "note": "NTIA 2021: Version is required for every component in the SBOM; a component nested under components[].components is still a component."
+  },
+  {
+    "fixture": "cdx16-nested-component-missing-version.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-version",
+    "status": "fail",
+    "note": "2026 Minimum Elements: Component Data covers all enumerated subcomponents, including nested ones."
+  },
+  {
+    "fixture": "cdx16-nested-component-missing-version.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:component-version",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 section 3.2.1 / 5.2.2: every component, including contained ones (mapping Table 9 lists components[].components), needs a version."
+  },
+  {
+    "fixture": "cdx16-component-no-identifiers.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:software-identifiers",
+    "status": "fail",
+    "note": "2025 draft Software Identifiers: at least one identifier is required per component."
+  },
+  {
+    "fixture": "cdx16-component-no-identifiers.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-identifiers",
+    "status": "fail",
+    "note": "2026 Minimum Elements, Component Identifiers: 'contains at least one software identifier'."
+  },
+  {
+    "fixture": "cdx16-component-swid-only.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-identifiers",
+    "status": "pass",
+    "note": "2026 Minimum Elements, Component Identifiers: a SWID tag identifies the component."
+  },
+  {
+    "fixture": "cdx16-component-swid-only.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:unique-identifiers",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0 Table 5 and mapping Table 11: cpe OR swid OR purl."
+  },
+  {
+    "fixture": "cdx16-no-dependencies.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:dependency-relationship",
+    "status": "fail",
+    "note": "NTIA 2021 Dependency Relationship: no relationship is stated between the primary component and its dependency."
+  },
+  {
+    "fixture": "cdx16-no-dependencies.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:dependency-relationship",
+    "status": "fail",
+    "note": "2025 draft Dependency Relationship: no relationships stated."
+  },
+  {
+    "fixture": "cdx16-no-dependencies.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-dependency-relationship",
+    "status": "fail",
+    "note": "2026 Minimum Elements, Component Dependency Relationship: two components, no relationship."
+  },
+  {
+    "fixture": "cdx16-no-dependencies.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:dependencies",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 3: direct dependencies must be enumerated and their completeness indicated."
+  },
+  {
+    "fixture": "cdx16-dependencies-without-edges.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:dependency-relationship",
+    "status": "fail",
+    "note": "NTIA 2021 Dependency Relationship characterises 'that an upstream component X is included in software Y'; dependencies[] entries with no dependsOn state no inclusion at all, so the library is not related to the primary component (Depth: top-level dependencies must be listed)."
+  },
+  {
+    "fixture": "cdx16-dependencies-without-edges.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:dependency-relationship",
+    "status": "fail",
+    "note": "2025 draft Dependency Relationship: entries without dependsOn state no relationship between components."
+  },
+  {
+    "fixture": "cdx16-dependencies-without-edges.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-dependency-relationship",
+    "status": "fail",
+    "note": "2026 Minimum Elements, Component Dependency Relationship: no entry states that one component includes another."
+  },
+  {
+    "fixture": "cdx16-dependencies-without-edges.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:dependencies",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 3: completeness of the dependency enumeration MUST be clearly indicated; there is no compositions[] entry."
+  },
+  {
+    "fixture": "spdx23-describes-only.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:dependency-relationship",
+    "status": "fail",
+    "note": "NTIA 2021 Dependency Relationship: DESCRIBES links the document to a package, it is not an inclusion relationship between components."
+  },
+  {
+    "fixture": "spdx23-describes-only.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:dependency-relationship",
+    "status": "fail",
+    "note": "2025 draft Dependency Relationship: only a DESCRIBES relationship is present."
+  },
+  {
+    "fixture": "spdx23-describes-only.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-dependency-relationship",
+    "status": "fail",
+    "note": "2026 Minimum Elements, Component Dependency Relationship: DESCRIBES is not a component-to-component dependency."
+  },
+  {
+    "fixture": "spdx23-contains-relationship.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:dependency-relationship",
+    "status": "pass",
+    "note": "2025 draft Dependency Relationship covers inclusion; CONTAINS states that the library is included."
+  },
+  {
+    "fixture": "spdx23-contains-relationship.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-dependency-relationship",
+    "status": "pass",
+    "note": "2026 Minimum Elements: the element 'reflects that a component includes another component'; CONTAINS is such a relationship."
+  },
+  {
+    "fixture": "cdx16-tool-only-author.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:sbom-author",
+    "status": "pass",
+    "note": "NTIA 2021 Author of SBOM Data: 'Author reflects the source of the metadata, which could come from ... some third party analysis tool', so a named and versioned generating tool satisfies the element."
+  },
+  {
+    "fixture": "cdx16-tool-only-author.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-author",
+    "status": "fail",
+    "note": "2026 Minimum Elements, SBOM Author: 'captures the entity operating the tool to generate the SBOM, not the tool itself'."
+  },
+  {
+    "fixture": "cdx16-tool-only-author.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-tool-name",
+    "status": "pass",
+    "note": "2026 Minimum Elements, SBOM Tool Name: metadata.tools names the tool."
+  },
+  {
+    "fixture": "cdx16-tool-only-author.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:sbom-creator",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 2: creator of the SBOM must be an email address or URL; only a tool is named."
+  },
+  {
+    "fixture": "spdx23-tool-only-creator.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:sbom-author",
+    "status": "pass",
+    "note": "NTIA 2021 Author of SBOM Data may be 'some third party analysis tool'."
+  },
+  {
+    "fixture": "spdx23-tool-only-creator.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-author",
+    "status": "fail",
+    "note": "2026 Minimum Elements, SBOM Author is the entity operating the tool, not the tool; there is no Person or Organization creator."
+  },
+  {
+    "fixture": "spdx23-tool-only-creator.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-tool-name",
+    "status": "pass",
+    "note": "2026 Minimum Elements, SBOM Tool Name: a Tool creator is present."
+  },
+  {
+    "fixture": "cdx16-author-name-without-contact.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:sbom-author",
+    "status": "pass",
+    "note": "NTIA 2021 Author of SBOM Data is a name; metadata.authors[].name provides it."
+  },
+  {
+    "fixture": "cdx16-author-name-without-contact.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-author",
+    "status": "pass",
+    "note": "2026 Minimum Elements, SBOM Author: an entity is named."
+  },
+  {
+    "fixture": "cdx16-author-name-without-contact.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:sbom-creator",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 2: the creator of the SBOM must be given as an email address, or a URL if no email exists; a bare name does not satisfy it."
+  },
+  {
+    "fixture": "cdx16-sbom-creator-manufacturer-url.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:sbom-creator",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0 Table 2 and mapping Table 8: metadata.manufacturer.url is an accepted creator URL."
+  },
+  {
+    "fixture": "cdx16-sbom-creator-invalid-email.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:sbom-creator",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 2: 'not-an-email' is neither an email address nor a URL."
+  },
+  {
+    "fixture": "cdx16-missing-timestamp.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:timestamp",
+    "status": "fail",
+    "note": "NTIA 2021 Timestamp is a required data field."
+  },
+  {
+    "fixture": "cdx16-missing-timestamp.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:timestamp",
+    "status": "fail",
+    "note": "2025 draft Timestamp is a required element."
+  },
+  {
+    "fixture": "cdx16-missing-timestamp.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-timestamp",
+    "status": "fail",
+    "note": "2026 Minimum Elements, SBOM Timestamp is a required element."
+  },
+  {
+    "fixture": "cdx16-missing-timestamp.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:timestamp",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 2: timestamp is required."
+  },
+  {
+    "fixture": "cdx16-timestamp-not-a-date.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:timestamp",
+    "status": "fail",
+    "note": "NTIA 2021 Timestamp must record a date and time; free text does not."
+  },
+  {
+    "fixture": "cdx16-timestamp-not-a-date.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:timestamp",
+    "status": "fail",
+    "note": "2025 draft Timestamp: not an ISO 8601 date and time."
+  },
+  {
+    "fixture": "cdx16-timestamp-not-a-date.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-timestamp",
+    "status": "fail",
+    "note": "2026 Minimum Elements, SBOM Timestamp should adhere to RFC 9557."
+  },
+  {
+    "fixture": "cdx16-timestamp-not-a-date.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:timestamp",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 2: date and time according to the format specification (CycloneDX date-time)."
+  },
+  {
+    "fixture": "cdx16-timestamp-date-only.json",
+    "framework": "ntia-2021",
+    "finding": "ntia-2021:timestamp",
+    "status": "fail",
+    "note": "NTIA 2021 Timestamp: 'Record of the date and time of the SBOM data assembly'; a bare date has no time."
+  },
+  {
+    "fixture": "cdx16-timestamp-date-only.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:timestamp",
+    "status": "fail",
+    "note": "2025 draft Timestamp records the date and time of SBOM data assembly; a bare date has no time."
+  },
+  {
+    "fixture": "cdx16-timestamp-date-only.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-timestamp",
+    "status": "fail",
+    "note": "2026 Minimum Elements, SBOM Timestamp should adhere to RFC 9557, which requires a full date-time with offset."
+  },
+  {
+    "fixture": "cdx16-timestamp-date-only.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:timestamp",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 2: 'Date and time ... according to the specification of the formats'; CycloneDX metadata.timestamp is an RFC 3339 date-time, which a bare date is not."
+  },
+  {
+    "fixture": "cdx16-timestamp-without-offset.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-timestamp",
+    "status": "fail",
+    "note": "2026 Minimum Elements, SBOM Timestamp should adhere to RFC 9557, whose date-time requires a UTC offset or Z."
+  },
+  {
+    "fixture": "cdx16-timestamp-without-offset.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:timestamp",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 2: timestamp 'according to the specification of the formats'; CycloneDX uses the RFC 3339 date-time format, whose time-offset is mandatory (RFC 3339 section 5.6)."
+  },
+  {
+    "fixture": "cdx16-no-tools.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:tool-name",
+    "status": "fail",
+    "note": "2025 draft Tool Name: no generating tool is named."
+  },
+  {
+    "fixture": "cdx16-no-tools.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-tool-name",
+    "status": "fail",
+    "note": "2026 Minimum Elements, SBOM Tool Name: no tool is named."
+  },
+  {
+    "fixture": "cdx16-no-tools.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-tool-version",
+    "status": "fail",
+    "note": "2026 Minimum Elements, SBOM Tool Version: no tool, so no version."
+  },
+  {
+    "fixture": "cdx16-tool-without-version.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-tool-name",
+    "status": "pass",
+    "note": "2026 Minimum Elements, SBOM Tool Name: the tool is named."
+  },
+  {
+    "fixture": "cdx16-tool-without-version.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-tool-version",
+    "status": "fail",
+    "note": "2026 Minimum Elements, SBOM Tool Version: absent and not stated as unknown."
+  },
+  {
+    "fixture": "cdx16-no-lifecycle.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-generation-context",
+    "status": "fail",
+    "note": "2026 Minimum Elements, SBOM Generation Context: no lifecycle phase is stated (a timestamp is not a generation context)."
+  },
+  {
+    "fixture": "cdx16-no-serial-number-or-version.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-version",
+    "status": "fail",
+    "note": "2026 Minimum Elements, SBOM Version: the document states no version identifier."
+  },
+  {
+    "fixture": "cdx16-signed.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:sbom-author-signature",
+    "status": "warning",
+    "note": "2026 Author Signature requires cryptographic verification and attribution; file-only inspection cannot verify inline or detached authenticity."
+  },
+  {
+    "fixture": "cdx16-component-no-hashes.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:component-hash",
+    "status": "fail",
+    "note": "2025 draft Component Hash: no hash for the component."
+  },
+  {
+    "fixture": "cdx16-component-no-hashes.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-hash-value",
+    "status": "fail",
+    "note": "2026 Minimum Elements, Component Hash Value: absent and not stated as unknown."
+  },
+  {
+    "fixture": "cdx16-component-no-hashes.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-hash-algorithm",
+    "status": "fail",
+    "note": "2026 Minimum Elements, Component Hash Algorithm: no hash, so no algorithm."
+  },
+  {
+    "fixture": "cdx16-component-no-hashes.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:hash-value",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 3: SHA-512 hash of the deployable component is required."
+  },
+  {
+    "fixture": "cdx16-component-sha256-only.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-hash-value",
+    "status": "pass",
+    "note": "2026 Minimum Elements, Component Hash Value: present."
+  },
+  {
+    "fixture": "cdx16-component-sha256-only.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-hash-algorithm",
+    "status": "pass",
+    "note": "2026 Minimum Elements, Component Hash Algorithm: SHA-256 is an IANA-named, NIST-approved algorithm."
+  },
+  {
+    "fixture": "cdx16-component-sha256-only.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:hash-value",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 3: the hash of the deployable component is required 'as SHA-512'; a SHA-256 hash alone does not meet the requirement."
+  },
+  {
+    "fixture": "cdx16-component-no-license.json",
+    "framework": "cisa-2025",
+    "finding": "cisa-2025:license",
+    "status": "fail",
+    "note": "2025 draft License: no licence information, and unknown is not stated."
+  },
+  {
+    "fixture": "cdx16-component-no-license.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-license",
+    "status": "fail",
+    "note": "2026 Minimum Elements, Component License: absent and not stated as unknown."
+  },
+  {
+    "fixture": "cdx16-component-no-license.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:distribution-licences",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 3: distribution licences are required."
+  },
+  {
+    "fixture": "cdx16-component-declared-license-only.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:distribution-licences",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 section 8.1.13 says licence information 'must be mapped' as in Table 9, which maps distribution licences to licenses[] with acknowledgement 'concluded'; a 'declared' licence is the original licence (Table 11), not the distribution licence."
+  },
+  {
+    "fixture": "cdx16-component-declared-license-only.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:original-licences",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0 Table 5 and mapping Table 11: acknowledgement 'declared' is the original licence."
+  },
+  {
+    "fixture": "cdx16-component-declared-license-only.json",
+    "framework": "cisa-2026",
+    "finding": "cisa-2026:component-license",
+    "status": "pass",
+    "note": "2026 Minimum Elements, Component License: an SPDX expression is given."
+  },
+  {
+    "fixture": "cdx16-component-effective-license-property-only.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:distribution-licences",
+    "status": "pass",
+    "note": "TR-03183-2 v2.1.0 mapping Table 9: acknowledgement 'concluded' is the distribution licence."
+  },
+  {
+    "fixture": "cdx16-component-effective-license-property-only.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:original-licences",
+    "status": "warning",
+    "note": "TR-03183-2 v2.1.0 section 3.2.8 defines the effective licence (licence under which the SBOM creator uses the component) as distinct from the original licence (assigned by the component creator); bsi:component:effectiveLicence is the optional Table 6 field and does not supply the Table 5 original licence."
+  },
+  {
+    "fixture": "cdx16-component-no-bsi-properties.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:filename",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 3: filename is required for each component (CycloneDX: bsi:component:* properties, mapping Table 9)."
+  },
+  {
+    "fixture": "cdx16-component-no-bsi-properties.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:executable-property",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 3: executable property is required for each component (CycloneDX: bsi:component:* properties, mapping Table 9)."
+  },
+  {
+    "fixture": "cdx16-component-no-bsi-properties.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:archive-property",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 3: archive property is required for each component (CycloneDX: bsi:component:* properties, mapping Table 9)."
+  },
+  {
+    "fixture": "cdx16-component-no-bsi-properties.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:structured-property",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 Table 3: structured property is required for each component (CycloneDX: bsi:component:* properties, mapping Table 9)."
+  },
+  {
+    "fixture": "cdx16-with-vulnerabilities.json",
+    "framework": "bsi-tr03183-2",
+    "finding": "bsi-tr03183:no-vulnerabilities",
+    "status": "fail",
+    "note": "TR-03183-2 v2.1.0 section 3.1: 'An SBOM MUST NOT contain vulnerability information' (see also 8.1.14)."
+  }
+]

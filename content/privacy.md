@@ -4,9 +4,7 @@ title: Privacy Policy
 description: Our commitment to protecting your privacy and personal data
 ---
 
-# Privacy Policy
-
-Last updated: May 2, 2025
+Last updated: September 10, 2026
 
 This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You. We are committed to protecting your privacy in accordance with the UK General Data Protection Regulation (UK GDPR), the Data Protection Act 2018, and other applicable UK data protection laws.
 
@@ -14,7 +12,7 @@ We use Your Personal data to provide and improve the Service. By using the Servi
 
 ## Data Controller Information
 
-sbomify ltd (Company Registration Number: 16181507) is the Data Controller for personal data collected through our Services. Our registered office is at 17-18 Berkeley Square, Clifton, Bristol, BS8 1HB, England. For data protection matters, you can contact our Data Protection Officer at <privacy@sbomify.com>.
+sbomify ltd (Company Registration Number: 16181507) is the Data Controller for personal data collected through our Services. Our registered office is at 17-18 Berkeley Square, Clifton, Bristol, BS8 1HB, England. For data protection matters, you can contact our Data Protection Officer at <hello@sbomify.com>.
 
 ## Your Data Protection Rights
 
@@ -114,6 +112,23 @@ We use both Session and Persistent Cookies for the purposes set out below:
   Administered by: Us
   Purpose: These Cookies allow us to remember choices You make when You use the Website, such as remembering your login details or language preference. The purpose of these Cookies is to provide You with a more personal experience and to avoid You having to re-enter your preferences every time You use the Website.
 
+- **Analytics Cookies**
+  Type: Persistent Cookies
+  Administered by: PostHog Inc., acting as Our processor
+  Purpose: These Cookies tell Us how the Website is used in aggregate — which pages are read, which links are followed — so that We can improve it. They are never used for advertising and are set only if You accept them. Data is processed on PostHog's United States infrastructure under appropriate safeguards for international transfers.
+
+#### Your Cookie Choices
+
+Analytics Cookies are not strictly necessary for the Website to work, so We ask for Your consent before setting any of them. Until You accept, the PostHog script is not loaded at all: nothing is requested from PostHog, and nothing is written to Your device apart from Your own choice.
+
+What is stored once You accept:
+
+- `sbomify_cookie_consent` (browser local storage) — records whether You accepted or declined, so that We do not ask again. Stored on Your device only and never sent to Us or to any third party. This entry is also written when You decline.
+- `ph_<project key>_posthog` (Cookie, expires after 365 days) — PostHog's pseudonymous visitor and session identifier.
+- Further `ph_*` entries in browser local storage — session state and feature flag values used by PostHog.
+
+You can change Your decision at any time through the **Cookie settings** link in the footer of every page. Declining, or withdrawing an acceptance You gave earlier, stops analytics collection and deletes the PostHog Cookies and local storage entries this Website has already set. You can also refuse or delete Cookies through Your browser settings.
+
 ### Use of Your Personal Data
 
 The Company may use Personal Data for the following purposes:
@@ -129,7 +144,7 @@ The Company may use Personal Data for the following purposes:
 
 We may share Your personal information in the following situations:
 
-- **With Service Providers:** We may share Your personal information with Service Providers to monitor and analyze the use of our Service, to contact You.
+- **With Service Providers:** We may share Your personal information with Service Providers to monitor and analyze the use of our Service, to contact You. The Service Providers that process personal data on Our behalf are listed on our [Sub-processors](/legal/sub-processors/) page.
 - **For business transfers:** We may share or transfer Your personal information in connection with, or during negotiations of, any merger, sale of Company assets, financing, or acquisition of all or a portion of Our business to another company.
 - **With Affiliates:** We may share Your information with Our affiliates, in which case we will require those affiliates to honor this Privacy Policy. Affiliates include Our parent company and any other subsidiaries, joint venture partners or other companies that We control or that are under common control with Us.
 - **With business partners:** We may share Your information with Our business partners to offer You certain products, services or promotions.
@@ -240,5 +255,5 @@ Wilmslow
 Cheshire
 SK9 5AF
 
-Website: [https://ico.org.uk](https://ico.org.uk)
+Website: [Information Commissioner's Office](https://ico.org.uk)
 Telephone: 0303 123 1113

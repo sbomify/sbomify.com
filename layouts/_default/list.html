@@ -1,27 +1,37 @@
 {{ define "main" }}
 <div>
-  <div class="bg-primaryBG relative overflow-hidden">
-    {{ partial "aurora.html" . }}
-
-    <div class="relative px-5 py-16 lg:py-24 lg:px-24 max-w-7xl mx-auto">
-      <h1 class="text-white text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
-        <span class="text-gradient">{{ .Title }}</span>
-      </h1>
-      {{ with .Params.description }}
-      <p class="text-gray-300 text-lg lg:text-xl max-w-4xl leading-relaxed">
-        {{ . }}
-      </p>
-      {{ end }}
+  {{/* Same head and reading measure as _default/single.html: these section
+       pages (guides, compliance, sbomify-action, ...) are long-form prose. */}}
+  <header class="hero">
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap pt-10 lg:pt-16 pb-10 lg:pb-14">
+      <div class="max-w-4xl">
+        <h1 class="text-ink !text-[clamp(2.375rem,5.2vw,4rem)] mb-5">
+          {{ .Title }}
+        </h1>
+        {{ with .Params.description }}
+        <p class="lede max-w-3xl">
+          {{ . }}
+        </p>
+        {{ end }}
+      </div>
     </div>
-  </div>
+  </header>
 
-  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-    {{ if .Content }}
-    <article class="page bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100">
-      {{ partial "tldr.html" . }}
-      {{ .Content }}
-    </article>
-    {{ end }}
-  </div>
+  {{ if .Content }}
+  <section class="wrap">
+    {{ $toc := partial "toc-enabled.html" . }}
+    <div class="section-rule pt-10 lg:pt-14 pb-16 lg:pb-24 {{ if $toc }}xl:flex xl:items-start xl:justify-between xl:gap-16{{ end }}">
+      <article class="page read xl:flex-1 xl:min-w-0">
+        {{ partial "agent-tools.html" . }}
+        {{ partial "tldr.html" . }}
+        {{ partial "toc.html" (dict "page" . "mode" "inline") }}
+        {{ partial "content.html" . }}
+        {{ partial "article-cta.html" . }}
+      </article>
+      {{ partial "toc.html" (dict "page" . "mode" "aside") }}
+    </div>
+  </section>
+  {{ end }}
 </div>
 {{ end }}

@@ -1,5 +1,5 @@
 ---
-title: "What is an SBOM?"
+title: "What is an SBOM (Software Bill of Materials)?"
 description: "Learn what a Software Bill of Materials (SBOM) is, why it matters for supply chain security, and how it lists every component in your software."
 answer: "An SBOM (Software Bill of Materials) is a machine-readable inventory of all components, libraries, and dependencies that make up a piece of software - like an ingredients list for your code."
 tldr: "An SBOM (Software Bill of Materials) is a machine-readable inventory of all components, libraries, and dependencies that make up a piece of software - like an ingredients list for your code."
@@ -21,7 +21,7 @@ Modern software is built from hundreds or thousands of open-source and third-par
 SBOMs help you:
 
 - **Identify vulnerabilities** - Know immediately if a vulnerable component is in your software
-- **Meet compliance requirements** - Regulations like the [EU Cyber Resilience Act](/compliance/eu-cra/) and [NTIA minimum elements](/compliance/ntia/) now require SBOMs
+- **Meet compliance requirements** - Regulations like the [EU Cyber Resilience Act](/compliance/eu-cra/) now require SBOMs, and baselines like the [NTIA minimum elements](/compliance/ntia-minimum-elements/) define what they must contain
 - **Build customer trust** - Share your software composition transparently via a [Trust Center](https://trust.sbomify.com/)
 - **Manage license risk** - Understand which open-source licenses apply to your codebase
 

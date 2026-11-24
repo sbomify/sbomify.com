@@ -1,0 +1,40 @@
+{{- /* Renders page content through the site's content filters.
+
+     1. nofollow-links.html adds rel="nofollow" to outbound anchors that were
+        written as raw <a> tags in content (Markdown links are handled earlier
+        by layouts/_markup/render-link.html). See CLAUDE.md, "Outbound Links".
+
+     2. Cloudflare's Email Address Obfuscation is switched off for all page
+        content. Cloudflare rewrites anything shaped like an email address
+        into a link to /cdn-cgi/l/email-protection, which 404s for anything
+        that does not run its decoder script. That mangled package
+        identifiers (express@4.18.2 was served as "[email protected]", both in
+        code blocks and in inline code such as PURLs), and turned every
+        mailto: link into a link to that 404 -- which site audits report as
+        broken internal links and a 4xx page. The addresses on the site are
+        public role addresses (hello@, privacy@, security@) that are also
+        published in security.txt, so there is nothing to hide from scrapers.
+
+        The markers live here rather than in a render hook because Hugo
+        strips HTML comments emitted by render hooks. They also need
+        minify.tdewolff.html keepComments in hugo.toml, or the minifier removes
+        them, so templates use Go template comments and content HTML files use
+        the comment shortcode -- an HTML comment anywhere else now reaches the
+        built page. Cloudflare's markers do not nest, so do not add inner
+        <!--email_off--> / <!--email_on--> pairs inside content.
+
+     3. fingerprint-assets.html points src="/assets/images/..." at the
+        fingerprinted copy of the file, so an updated image is not served
+        stale from caches (the pages are cached for hours).
+
+     4. A link whose text ends in " →" (a Markdown call to action such as
+        [View all guides →](/guides/)) gets the Phosphor arrow instead of the
+        glyph. The source and its index.md copy keep the →.
+
+     Every layout renders page content through this partial, so anything that
+     has to apply site-wide to rendered content belongs here rather than in
+     each layout. */ -}}
+{{- $html := partial "nofollow-links.html" .Content | partial "fingerprint-assets.html" -}}
+{{- $arrow := partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") -}}
+{{- $html = replaceRE `(?:\s|&nbsp;|&#160;)*(?:→|&rarr;)</a>` (printf "%s</a>" $arrow) (string $html) -}}
+{{- printf "<!--email_off-->%s<!--email_on-->" $html | safeHTML -}}

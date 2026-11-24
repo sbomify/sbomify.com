@@ -1,0 +1,22 @@
+{{- /*
+  Markdown link render hook: every [text](url) written in content passes through
+  here, so links pointing outside our own domains automatically get
+  rel="nofollow ...". See layouts/partials/link-attrs.html for the rules and the
+  configuration knobs.
+
+  The destination is only marked safe when its scheme is one we actually use.
+  Anything else (javascript:, data:, vbscript: ...) is printed as a plain string,
+  so html/template's URL filter rewrites it to #ZgotmplZ rather than emitting a
+  live href. Marking every destination safe would pass those through; not marking
+  any safe would break tel: and ftp:, which that filter also rejects.
+*/ -}}
+{{- $allowedSchemes := slice "http" "https" "mailto" "tel" "ftp" "ftps" -}}
+{{- $scheme := "" -}}
+{{- with findRE `^[a-zA-Z][a-zA-Z0-9+.\-]*:` .Destination 1 -}}
+  {{- $scheme = lower (strings.TrimSuffix ":" (index . 0)) -}}
+{{- end -}}
+{{- $href := .Destination -}}
+{{- if or (eq $scheme "") (in $allowedSchemes $scheme) -}}
+  {{- $href = .Destination | safeURL -}}
+{{- end -}}
+<a href="{{ $href }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ partial "link-attrs.html" .Destination }}>{{ .Text }}</a>

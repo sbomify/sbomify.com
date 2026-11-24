@@ -3,7 +3,6 @@
 url: /compliance/cisa-framing/
 title: "CISA Framing Software Component Transparency (3rd Edition)"
 description: "Guide to the CISA Framing document, the authoritative source for SBOM baseline attributes and CycloneDX/SPDX schema crosswalk."
-section: compliance
 ---
 
 [← Back to Compliance Overview](/compliance/)
@@ -11,8 +10,8 @@ section: compliance
 **Who it affects:** SBOM producers and consumers who need shared terminology and a consistent crosswalk between SBOM formats (CycloneDX/SPDX) for policy, tooling, and interoperability.
 
 <div class="cta-box">
-  <p><strong>Need help with compliance?</strong> We can help you navigate your SBOM compliance journey.</p>
-  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button">Get in Touch</a>
+  <p><strong>Turn these requirements into a working process.</strong> See how sbomify handles SBOMs, vulnerability monitoring, VEX and advisories for every release you support.</p>
+  <a href="https://app.sbomify.com/enterprise-contact/" class="cta-button" data-cta-location="compliance_top" data-cta-label="Book a demo">Book a demo</a>
 </div>
 
 ---
@@ -43,7 +42,7 @@ The Framing document is particularly useful as:
 ## Related Frameworks
 
 - [NTIA Minimum Elements](/compliance/ntia-minimum-elements/) - The original baseline guidance
-- [CISA 2025 Minimum Elements](/compliance/cisa-minimum-elements/) - Updated guidance
+- [CISA 2026 Minimum Elements](/compliance/cisa-minimum-elements/) - The current US baseline
 - [Schema Crosswalk](/compliance/schema-crosswalk/) - CycloneDX and SPDX field mappings
 
 ## Official Source
