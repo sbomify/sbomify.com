@@ -1,0 +1,61 @@
+{{- /*
+  The narration of one of our screencasts, read from its WebVTT subtitles.
+
+  The recorder publishes the subtitles next to each video (same name, .vtt).
+  They are fetched at build time and republished on this site, so the player
+  can load them as a captions track without CORS on the asset bucket, and the
+  words reach search engines and AI agents as text rather than audio.
+
+  Takes the video URL (or a dict with "video" and "transcript"). Returns a dict:
+    text      the narration as one paragraph, "" when there are no subtitles
+    vtt       absolute URL of the republished subtitles, "" when there are none
+    seconds   the time the last cue ends, 0 when unknown
+    duration  the same as an ISO 8601 duration (PT1M48S), "" when unknown
+  A missing file (the video predates narration) returns the empty values.
+*/ -}}
+{{- $video := . -}}
+{{- $url := "" -}}
+{{- if reflect.IsMap . -}}
+  {{- $video = .video -}}
+  {{- $url = .transcript | default "" -}}
+{{- end -}}
+{{- if and (not $url) (hasPrefix $video "https://marketing-assets.sbomify.com/screencasts/") -}}
+  {{- $url = replaceRE `\.webm$` ".vtt" $video -}}
+{{- end -}}
+{{- $cues := slice -}}
+{{- $vtt := "" -}}
+{{- $seconds := 0 -}}
+{{- with $url -}}
+  {{- with try (resources.GetRemote .) -}}
+    {{- with .Err -}}
+      {{- warnf "video-transcript: %s: %s" $url . -}}
+    {{- else with .Value -}}
+      {{- $vtt = (resources.Copy (printf "screencasts/%s" (path.Base $url)) .).Permalink -}}
+      {{- range split (replace .Content "\r\n" "\n") "\n\n" -}}
+        {{- $cue := slice -}}
+        {{- $text := false -}}
+        {{- range split (trim . "\n") "\n" -}}
+          {{- if $text -}}{{- $cue = $cue | append . -}}{{- end -}}
+          {{- if in . "-->" -}}
+            {{- $text = true -}}
+            {{- with findRESubmatch `--> *(\d+):(\d+):(\d+)\.(\d+)` . 1 -}}
+              {{- $m := index . 0 -}}
+              {{- $h := int (strings.TrimLeft "0" (index $m 1) | default "0") -}}
+              {{- $mi := int (strings.TrimLeft "0" (index $m 2) | default "0") -}}
+              {{- $se := int (strings.TrimLeft "0" (index $m 3) | default "0") -}}
+              {{- $seconds = add (add (mul $h 3600) (mul $mi 60)) $se -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+        {{- with $cue -}}{{- $cues = $cues | append (delimit . " ") -}}{{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $duration := "" -}}
+{{- if gt $seconds 0 -}}
+  {{- $m := div $seconds 60 -}}
+  {{- $s := mod $seconds 60 -}}
+  {{- $duration = printf "PT%s%dS" (cond (gt $m 0) (printf "%dM" $m) "") $s -}}
+{{- end -}}
+{{- return dict "text" (delimit $cues " ") "vtt" $vtt "seconds" $seconds "duration" $duration -}}

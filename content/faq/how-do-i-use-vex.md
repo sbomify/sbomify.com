@@ -11,13 +11,13 @@ url: /faq/how-do-i-use-vex/
 
 ## Walkthrough
 
-The full lifecycle: a scanner finding, a VEX that marks it `not_affected`, the finding dropping out of the open list and the Trust Center, and a re-issued VEX superseding the previous one:
+There are three ways a VEX statement gets into sbomify. sbomify writes one for you when you triage a vulnerability, an AI agent can propose one that waits for a person to approve it, and you can upload one made by another tool. This walkthrough shows all three, ending on the public release page where the finding shows as suppressed:
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/vex_lifecycle.webm" title="The VEX lifecycle in sbomify: upload, suppress, publish, supersede" description="Narrated screencast: upload a CycloneDX VEX that marks a critical finding not affected, watch it leave the open list and show as suppressed on the Trust Center, then re-issue a version 2 VEX that replaces the first." upload_date="2026-10-28T00:00:00Z" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/vex_lifecycle.webm" title="The VEX lifecycle in sbomify: built-in triage, AI agent rulings and upload" description="Narrated screencast: a triage decision becomes a VEX statement, an AI agent's ruling is refused when it tries to apply it and approved by a person on the Review tab, a VEX from another tool is uploaded with a preview, and the public release page shows the finding suppressed." upload_date="2026-11-26T00:00:00Z" >}}
 
-And the upload itself, step by step, from the component's actions menu:
+If your VEX comes from another tool, upload it from the component's actions menu:
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/vex_upload.webm" title="How to upload a VEX document in sbomify" description="Narrated screencast: choose Upload VEX in the component actions menu, check the preview of what the VEX would suppress, apply it, and find the closed finding with its reason attached." upload_date="2026-10-28T00:00:00Z" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/vex_upload.webm" title="How to upload a VEX document in sbomify" description="Narrated screencast: the built-in options first (the Triage and Review tabs, where AI agent rulings wait), then Upload VEX from the component actions menu, a preview of what it would suppress, and the closed finding with its reason attached." upload_date="2026-11-26T00:00:00Z" >}}
 
 ## The problem VEX solves
 

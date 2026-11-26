@@ -31,6 +31,15 @@ Workspace owners and admins write and publish advisories. An API token with the 
 
 The advisory's **Timeline** records every change. As the fix moves along, write a note, choose **Note only** or a new status (for example **Fix in progress**), and click **Post update**. The update lands on the timeline, and the advisory's status moves with it. The statuses are Identified, Investigating, Fix in progress, Resolved, and Won't fix.
 
+## Choosing how advisory IDs read
+
+Every published advisory gets a tracking ID made of a prefix, the year and a number, for example `PP-2026-0100`. Set both in **Settings**, on the **General** tab, under **Security advisories**:
+
+- **Advisory id prefix**: leave it empty to use one made from the workspace name
+- **Start numbering at**: each year's numbers start here. Set it past the last number you issued elsewhere to avoid clashes
+
+Advisories you have already published keep their IDs.
+
 ## Publishing it
 
 When you are ready to disclose:
