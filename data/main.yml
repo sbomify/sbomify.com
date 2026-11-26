@@ -21,6 +21,14 @@ nav:
             desc: Write, gate and publish CSAF advisories
             link: /features/security-advisories/
             icon: siren
+          - name: Vulnerabilities and VEX
+            desc: Scan, triage and publish what does not affect you
+            link: /features/vulnerability-management/
+            icon: shield-warning
+          - name: AI agents
+            desc: Agents do the legwork, a person makes the call
+            link: /features/ai-agents/
+            icon: robot
           - name: Integrations
             desc: CI pipelines, registries and vulnerability scanners
             link: /features/integrations/

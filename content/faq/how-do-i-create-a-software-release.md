@@ -10,7 +10,7 @@ url: /faq/how-do-i-create-a-software-release/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/release_creation.webm" title="How to create a software release in sbomify" description="Narrated screencast: create a release from the product actions menu and add the SBOM of every component that shipped in that version." upload_date="2026-10-28T00:00:00Z" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/release_creation.webm" title="How to create a software release in sbomify" description="Narrated screencast: create a release from the product actions menu, add the SBOM of every component that shipped in that version, link the release of another product it ships with, and see it on the public release page." upload_date="2026-11-26T00:00:00Z" >}}
 
 ## Creating a product release
 
@@ -35,6 +35,10 @@ Named releases (e.g. `v2.1.0`) hold exactly the artifacts you add to them and do
 2. Open the **Product actions** menu at the top of the page and choose **Create release** (or use **New** → **Add release** in the header)
 3. The product is already picked. Fill in a **Name** (e.g. `Middle-Out Rewrite`), a **Version** (e.g. `v2.1.0`), and, optionally, a **Description** and dates, then click **Create release**
 4. The release starts empty. Click **Add Artifact**, search or filter the list, or use **Select All Visible** to pick every SBOM at once (or pick individual SBOMs and documents), then click **Add to Release**
+
+### Ships with: releases of other products
+
+A version often includes something you maintain as a separate product, such as a runtime, a firmware image or a toolchain it downloads. On the release page, under **Ships with**, click **Add release** and pick the release of the other product it includes. The linked release's SBOMs become part of this release's combined SBOM, so one download covers everything the version ships. The release's public page lists it under **Ships with**, linked to its own release.
 
 If you upload from CI with [sbomify-action](/sbomify-action/publishing/), setting `PRODUCT_RELEASE` tags each uploaded SBOM into a release and creates the release if it does not exist yet.
 
