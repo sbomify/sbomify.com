@@ -15,7 +15,7 @@ Most SBOM generation tools produce SBOMs that are missing key fields required by
 - **Supplier name** - the organization that supplies the component
 - **Authors** - who created the SBOM data
 - **Licenses** - per-component license information
-- **Lifecycle phase** - the SDLC phase where the SBOM was generated (CISA 2025)
+- **Lifecycle phase** - the SDLC phase where the SBOM was generated (Generation Context in CISA 2026)
 
 It is possible to achieve NTIA/CISA compliance using other tools, but it typically requires chaining together multiple tools and manually injecting data into the generated SBOM. sbomify-action is a toolkit that automates this process and provides best-effort quality improvements to your SBOMs in a single step.
 
@@ -56,7 +56,7 @@ This is ideal for individual projects or teams that want to manage metadata per-
 
 ## Option 2: Central party management in sbomify
 
-For organizations managing many components, sbomify provides centrally managed **Parties**. Instead of maintaining `sbomify.json` files in every repository, you configure the supplier, author, and contact metadata once in sbomify and it gets applied automatically during augmentation.
+For organizations managing many components, sbomify provides centrally managed **Parties** (previously called contact profiles). Instead of maintaining `sbomify.json` files in every repository, you configure the supplier, author, and contact metadata once in sbomify and it gets applied automatically during augmentation.
 
 ### Creating a party
 
@@ -77,8 +77,8 @@ The party is saved, and if you made it the default, new components pick up these
 
 Once you have a party, there are two ways to apply it:
 
-- **Default party** - Mark a party as the workspace default, and it will be used for components in that workspace during augmentation
-- **Per-component party** - Select a specific party in an individual component's metadata for cases where different components need different metadata
+- **Default party** - Mark a party as the workspace default, and it is assigned to each new component you create in that workspace
+- **Per-component party** - Manually select a specific party on individual components, for existing components or where different components need different metadata
 
 Then in your CI pipeline, simply enable augmentation with a sbomify account:
 
@@ -94,9 +94,9 @@ Then in your CI pipeline, simply enable augmentation with a sbomify account:
 
 sbomify-action will fetch the party metadata from sbomify and apply it to the generated SBOM automatically.
 
-## Score uploaded SBOMs against the NTIA checklist
+## Score uploaded SBOMs against the NTIA and CISA checklists
 
-sbomify ships a built-in **NTIA Minimum Elements (2021)** plugin that grades every uploaded SBOM against the seven required fields and surfaces the result on the SBOM detail page. To enable it, open **Plugins** in the sidebar, tick **NTIA Minimum Elements (2021)**, and click **Save changes**:
+sbomify ships a built-in **NTIA Minimum Elements (2021)** plugin that grades every uploaded SBOM against the seven required fields and surfaces the result on the SBOM detail page (Business and Enterprise plans). A **CISA Minimum Elements (2026)** plugin, available on every plan, scores SBOMs against the seventeen CISA 2026 data fields. Workspace owners and admins enable them from **Plugins** in the sidebar: tick the plugin and click **Save changes**:
 
 {{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/plugin_enablement_ntia-minimum-elements-2021.webm" title="Enabling the NTIA Minimum Elements plugin in sbomify" description="Narrated screencast: turn on the NTIA Minimum Elements (2021) check so every new SBOM upload gets a compliance result." upload_date="2026-10-28T00:00:00Z" >}}
 
@@ -104,7 +104,7 @@ sbomify ships a built-in **NTIA Minimum Elements (2021)** plugin that grades eve
 
 Augmentation addresses specific NTIA and CISA minimum element fields:
 
-| Field               | NTIA 2021 | CISA 2025      |
+| Field               | NTIA 2021 | CISA 2026      |
 | ------------------- | --------- | -------------- |
 | Supplier Name       | Required  | Required       |
 | Author of SBOM Data | Required  | Required       |

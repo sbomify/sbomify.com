@@ -1,24 +1,16 @@
-{{ $dark := .Get "dark" }}
+{{/* Closing call to action: the navy band with the nebula's embers and the
+     page's one orange button. `dark` is kept for existing calls; both
+     variants render the same band. */}}
 {{ $title := .Get "title" | default "From SBOM to security disclosure" }}
 {{ $primary_url := .Get "primary_url" | default site.Params.signupURL }}
 {{ $primary_text := .Get "primary_text" | default "Start free" }}
 {{ $secondary_url := .Get "secondary_url" | default site.Params.demoURL }}
 {{ $secondary_text := .Get "secondary_text" | default "Book a demo" }}
 
-{{ if $dark }}
-<div class="text-center bg-inverse p-12 rounded-[40px]">
-    <h2 class="text-4xl font-bold text-white mb-8">{{ $title }}</h2>
-    <div class="flex flex-col sm:flex-row justify-center gap-4">
+<div class="cta-band not-prose my-10 grid lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 items-center">
+    <h2 class="!m-0 text-3xl lg:text-4xl font-extrabold tracking-display !text-white text-balance">{{ $title }}</h2>
+    <div class="flex flex-col sm:flex-row gap-3">
         <a href="{{ $primary_url }}" class="btn-primary btn-lg !text-on-accent !no-underline" data-cta-location="cta_component" data-cta-label="{{ $primary_text }}">{{ $primary_text }}</a>
-        <a href="{{ $secondary_url }}" class="px-8 py-4 bg-transparent border-2 border-white/40 hover:border-white !text-white rounded-full font-bold transition-all hover:-translate-y-0.5 text-lg !no-underline" data-cta-location="cta_component" data-cta-label="{{ $secondary_text }}">{{ $secondary_text }}</a>
+        <a href="{{ $secondary_url }}" class="btn-secondary btn-lg !text-white !no-underline" data-cta-location="cta_component" data-cta-label="{{ $secondary_text }}">{{ $secondary_text }}</a>
     </div>
 </div>
-{{ else }}
-<div class="text-center bg-canvas p-8 sm:p-12 rounded-[40px] border border-line shadow-card">
-    <h2 class="text-4xl font-bold text-ink mb-8">{{ $title }}</h2>
-    <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a href="{{ $primary_url }}" class="btn-primary btn-lg !text-on-accent !no-underline" data-cta-location="cta_component" data-cta-label="{{ $primary_text }}">{{ $primary_text }}</a>
-        <a href="{{ $secondary_url }}" class="px-8 py-4 bg-canvas border-2 border-line-strong hover:border-ink !text-ink rounded-full font-bold transition-all hover:-translate-y-0.5 text-lg !no-underline" data-cta-location="cta_component" data-cta-label="{{ $secondary_text }}">{{ $secondary_text }}</a>
-    </div>
-</div>
-{{ end }}

@@ -17,6 +17,11 @@ on:
       - 'layouts/**'
       - 'content/**'
       - 'bun.lock'
+      - '_tools/**'
+      - 'static/**'
+      - 'data/**'
+      - 'tailwind.config.js'
+      - '_assets/**'
 
 permissions:
   contents: read
@@ -66,6 +71,33 @@ jobs:
 
       - name: Run linters
         run: bun run lint
+
+  sbom-checker:
+    name: SBOM checker tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Cache Bun dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-tools-${{ hashFiles('_tools/sbom-checker/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-tools-
+
+      - name: Compile schemas
+        working-directory: _tools/sbom-checker
+        run: bun install --frozen-lockfile && bun scripts/compile-schemas.ts
+
+      - name: Type check and test
+        run: bun run test:tools
 
   hugo-build:
     name: Hugo Build Check
@@ -125,14 +157,18 @@ jobs:
       - name: Build CSS
         run: bun run build:css
 
+      - name: Build SBOM checker
+        run: bun run build:tools
+
       - name: Build Hugo site
         run: hugo --minify
 
       - name: Check internal links with lychee
         uses: lycheeverse/lychee-action@v2
         with:
-          # llms.txt and llms-full.txt are excluded: they contain raw Markdown
-          # (including placeholder URLs inside code examples) that lychee scans
-          # as plaintext; every real link in them also exists in the HTML pages.
-          args: --no-progress --offline --root-dir ${{ github.workspace }}/public --exclude-path '${{ github.workspace }}/public/llms.txt' --exclude-path '${{ github.workspace }}/public/llms-full.txt' ${{ github.workspace }}/public
+          # llms.txt, llms-full.txt and the per-page index.md copies are
+          # excluded: they contain raw Markdown (including placeholder URLs
+          # inside code examples) that lychee scans as plaintext; every real
+          # link in them also exists in the HTML pages.
+          args: --no-progress --offline --root-dir ${{ github.workspace }}/public --exclude-path '${{ github.workspace }}/public/llms.txt' --exclude-path '${{ github.workspace }}/public/llms-full.txt' --exclude-path 'index\.md$' ${{ github.workspace }}/public
           fail: true

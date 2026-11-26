@@ -29,14 +29,14 @@ Instead of manually exchanging files via email or portals, TEA lets consumers pr
 
 ## Enabling TEA
 
-TEA is available on the **Business** plan and above. It is delivered through your Trust Center, so the Trust Center must be enabled and reachable on a validated custom domain before TEA can be turned on.
+TEA is available on the **Business** plan and above. It is delivered through your Trust Center, so the Trust Center must be enabled, and TEA discovery only answers on a validated custom domain (or, where your sbomify instance offers one, your Trust Center subdomain). The feature is currently in beta.
 
 To enable it:
 
 1. Open **Settings** and go to the **Trust Center** tab
 2. Switch on **Enable Trust Center**
 3. Under **Custom domain**, enter your domain (for example `trust.yourcompany.com`) and click **Save domain**
-4. Add the DNS records shown with your DNS provider. sbomify verifies the domain automatically, and its status changes to **Verified**
+4. Add the CNAME records shown (one for the domain, one for automatic SSL certificates) with your DNS provider. sbomify verifies the domain automatically, and its status changes to **Verified**
 5. In the **Sharing** section, switch on **Transparency Exchange API (TEA)**
 
 After TEA is enabled, the **TEA discovery endpoint** appears under the toggle, ready to copy. It lives at `https://<your-custom-domain>/.well-known/tea`. Consumers can hit that endpoint to programmatically discover and pull your published SBOMs and other transparency artifacts. A TEA client follows it to your public products, and from there to each release and its artifacts. TEA support in sbomify is in beta.

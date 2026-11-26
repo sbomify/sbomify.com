@@ -20,6 +20,8 @@ This page maps the [CISA 2026 Minimum Elements](/compliance/cisa-minimum-element
 
 ---
 
+**Check your SBOM:** the free [SBOM validator](/tools/sbom-checker/) reports which of these fields an SBOM is missing, for CISA 2026, NTIA 2021 and BSI TR-03183-2, and links each one back to this page.
+
 ## CISA 2026 Minimum Elements: Format Mappings
 
 The [CISA 2026 Minimum Elements](/compliance/cisa-minimum-elements/) define 23 elements, of which 17 are data fields. The tables below map each data field to its representation in SPDX and CycloneDX.

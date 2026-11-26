@@ -1,8 +1,8 @@
 ---
 title: "How do I delete my account?"
 description: "Step-by-step guide to deleting your account in sbomify, including what happens to your data."
-answer: "Open Settings > Account, expand the Danger zone, click Delete account, type 'delete' to confirm, then click Delete my account. Your account is deactivated right away and deleted for good after 14 days."
-tldr: "Open Settings > Account, expand the Danger zone, click Delete account, type 'delete' to confirm, then click Delete my account. Your account is deactivated right away and deleted for good after 14 days."
+answer: "Open Settings > Account, expand the Danger zone, click Delete account, type 'delete' to confirm, then click Delete my account. Your account is deactivated right away and deleted for good after 14 days. Contact support within that window if you change your mind."
+tldr: "Open Settings > Account, expand the Danger zone, click Delete account, type 'delete' to confirm, then click Delete my account. Your account is deactivated right away and deleted for good after 14 days. Contact support within that window if you change your mind."
 weight: 81
 keywords: [delete account, remove account, sbomify account, account settings, account deletion, danger zone]
 url: /faq/how-do-i-delete-my-account/
@@ -24,8 +24,8 @@ To delete your account in sbomify:
 
 You are signed out right away. Here is what happens next:
 
-- **Right away:** your account is deactivated, so you can no longer sign in. Your personal access tokens are revoked and your pending invitations are removed.
-- **Workspaces you are the only member of** are deleted too, including all their products, SBOMs, and documents.
+- **Right away:** your account is deactivated, so you can no longer sign in. Your personal access tokens are revoked, so any CI/CD pipelines using them stop working, and your pending invitations are removed.
+- **Workspaces you are the only member of** are deleted too, including all their products, SBOMs, and documents, and their subscriptions are canceled.
 - **After 14 days:** the account is deleted for good. Changed your mind? Contact support within the 14 days and the deletion is stopped.
 
 After the 14 days, this cannot be undone. If you only want to remove a workspace, see [How do I delete a workspace?](/faq/how-do-i-delete-a-workspace/) instead.

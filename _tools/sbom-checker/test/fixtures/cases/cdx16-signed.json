@@ -1,0 +1,226 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2025-01-15T10:30:00Z",
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "example-sbom-tool",
+          "version": "1.2.3"
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "Example SBOM Team",
+        "email": "sbom@example.com"
+      }
+    ],
+    "manufacturer": {
+      "name": "Example Corp",
+      "url": [
+        "https://example.com"
+      ],
+      "contact": [
+        {
+          "name": "Example SBOM Team",
+          "email": "sbom@example.com"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "pkg:generic/example-app@2.0.0",
+      "supplier": {
+        "name": "Example Corp",
+        "url": [
+          "https://example.com"
+        ]
+      },
+      "manufacturer": {
+        "name": "Example Corp",
+        "url": [
+          "https://example.com"
+        ],
+        "contact": [
+          {
+            "name": "Example Security",
+            "email": "security@example.com"
+          }
+        ]
+      },
+      "name": "example-app",
+      "version": "2.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "acknowledgement": "concluded"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:generic/example-app@2.0.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://downloads.example.com/example-app-2.0.0.bin",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          ]
+        },
+        {
+          "type": "source-distribution",
+          "url": "https://source.example.com/example-app-2.0.0.tar.gz"
+        }
+      ],
+      "properties": [
+        {
+          "name": "bsi:component:filename",
+          "value": "example-app-2.0.0.bin"
+        },
+        {
+          "name": "bsi:component:executable",
+          "value": "executable"
+        },
+        {
+          "name": "bsi:component:archive",
+          "value": "no archive"
+        },
+        {
+          "name": "bsi:component:structured",
+          "value": "unstructured"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:generic/example-lib@1.4.0",
+      "supplier": {
+        "name": "Example Corp",
+        "url": [
+          "https://example.com"
+        ]
+      },
+      "manufacturer": {
+        "name": "Example Corp",
+        "url": [
+          "https://example.com"
+        ],
+        "contact": [
+          {
+            "name": "Example Security",
+            "email": "security@example.com"
+          }
+        ]
+      },
+      "name": "example-lib",
+      "version": "1.4.0",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "acknowledgement": "concluded"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:generic/example-lib@1.4.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://downloads.example.com/example-lib-1.4.0.so",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          ]
+        },
+        {
+          "type": "source-distribution",
+          "url": "https://source.example.com/example-lib-1.4.0.tar.gz"
+        }
+      ],
+      "properties": [
+        {
+          "name": "bsi:component:filename",
+          "value": "example-lib-1.4.0.so"
+        },
+        {
+          "name": "bsi:component:executable",
+          "value": "executable"
+        },
+        {
+          "name": "bsi:component:archive",
+          "value": "no archive"
+        },
+        {
+          "name": "bsi:component:structured",
+          "value": "unstructured"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:generic/example-app@2.0.0",
+      "dependsOn": [
+        "pkg:generic/example-lib@1.4.0"
+      ]
+    },
+    {
+      "ref": "pkg:generic/example-lib@1.4.0",
+      "dependsOn": []
+    }
+  ],
+  "compositions": [
+    {
+      "aggregate": "complete",
+      "dependencies": [
+        "pkg:generic/example-app@2.0.0",
+        "pkg:generic/example-lib@1.4.0"
+      ]
+    }
+  ],
+  "signature": {
+    "algorithm": "ES256",
+    "value": "ZXhhbXBsZS1zaWduYXR1cmUtdmFsdWU="
+  }
+}

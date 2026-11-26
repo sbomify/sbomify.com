@@ -10,6 +10,8 @@
     "build:css": "bun run build:fonts && postcss _assets/css/tailwind.css -o assets/css/styles.css",
     "build:d2": "bun scripts/watch-d2.ts",
     "build:hugo": "hugo --minify --environment production",
+    "build:tools": "cd _tools/sbom-checker && bun install --frozen-lockfile && bun run build",
+    "test:tools": "cd _tools/sbom-checker && bun install --frozen-lockfile && bun run typecheck && bun test",
     "watch:css": "bun run build:fonts && postcss _assets/css/tailwind.css -o assets/css/styles.css --watch",
     "watch:d2": "bun scripts/watch-d2.ts --watch",
     "lint": "bun run lint:markdown && bun run lint:d2",
@@ -20,6 +22,7 @@
   "dependencies": {
     "@fontsource-variable/figtree": "^5.3.0",
     "@fortawesome/fontawesome-free": "^7.1.0",
+    "@phosphor-icons/core": "2.1.1",
     "@tabler/icons": "^3.36.1",
     "autoprefixer": "^10.4.24",
     "baseline-browser-mapping": "^2.9.19",

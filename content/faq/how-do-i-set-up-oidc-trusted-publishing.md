@@ -22,7 +22,7 @@ The screencast below walks the whole flow end to end: adding the repository bind
 
 ### 1. Create the trusted publisher binding
 
-In the [sbomify app](https://app.sbomify.com), open your component, open the **Component actions** menu, and choose **Trusted publishers**. Enter the GitHub **Repository** whose workflows may publish to this component and click **Add publisher**. Private repositories are supported. To defeat repository resurrection attacks, sbomify pins the immutable GitHub repository and owner IDs, not just the names, so a renamed or recreated repository cannot take over. For public repositories the IDs are pinned at setup. For private ones they are pinned on the first OIDC publish.
+In the [sbomify app](https://app.sbomify.com), open your component, open the **Component actions** menu, and choose **Trusted publishers**. Only workspace owners and admins see this option. Enter the GitHub **Repository** (in `org/repo` form) whose workflows may publish to this component and click **Add publisher**. Private repositories are supported. To defeat repository resurrection attacks, sbomify pins the immutable GitHub repository and owner IDs, not just the names, so a renamed or recreated repository cannot take over. For public repositories the IDs are pinned at setup. For private ones they are pinned on the first OIDC publish.
 
 Expand **Configure your GitHub Actions workflow** under the binding to get the workflow step for that component.
 
@@ -47,7 +47,7 @@ steps:
       UPLOAD: true
 ```
 
-That is the whole setup. sbomify-action auto-detects the OIDC environment when no `TOKEN` is set. If both are present, `TOKEN` takes precedence. Self-hosted sbomify instances can override the token audience with the `oidc-audience` input (default `sbomify.com`).
+That is the whole setup. sbomify-action auto-detects the OIDC environment when no `TOKEN` is set. If both are present, `TOKEN` takes precedence. The token audience defaults to `sbomify.com` on app.sbomify.com and to the API hostname on other deployments; self-hosted instances can override it with the `oidc-audience` input.
 
 ## Scope and limits
 

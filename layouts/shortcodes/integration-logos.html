@@ -1,0 +1,23 @@
+{{- /* A single line of integration logos, each a bordered chip. The logos are
+       the existing SVGs used as masks, so every one paints in the same token
+       colour whatever colours the file carries. Ratios are the logos' drawn
+       bounds (viewBoxes cropped to fit); h sets each one's optical height so
+       the wordmarks read at one size. */ -}}
+{{- $logos := slice
+  (dict "name" "GitHub" "href" "/features/integrations/#github" "file" "github.svg" "ratio" 4.033 "h" 18)
+  (dict "name" "GitLab" "href" "/features/integrations/#gitlab" "file" "gitlab.svg" "ratio" 4.572 "h" 16)
+  (dict "name" "Bitbucket" "href" "/features/integrations/#bitbucket" "file" "bitbucket.svg" "ratio" 7.227 "h" 15)
+  (dict "name" "Docker" "href" "/features/integrations/#docker" "file" "docker.svg" "ratio" 4.395 "h" 18)
+  (dict "name" "Google OSV" "href" "/features/integrations/" "file" "osv-navy.svg" "ratio" 5.002 "h" 24)
+  (dict "name" "Dependency-Track" "href" "/features/integrations/" "file" "dependency-track-navy.svg" "ratio" 4.651 "h" 28)
+  (dict "name" "Ecosyste.ms" "href" "/features/integrations/" "file" "ecosystems.svg" "ratio" 5.189 "h" 18)
+-}}
+<div class="integrations">
+    <span class="kicker">{{ .Get "label" | default "Integrates with" }}</span>
+    <ul class="integration-logos">
+        {{- range $logos }}
+        {{- $img := resources.Get (printf "images/site/%s" .file) | fingerprint }}
+        <li><a href="{{ .href }}" aria-label="{{ .name }}" title="{{ .name }}"><span class="integration-mark" style="--mark: url('{{ $img.RelPermalink }}'); --ratio: {{ .ratio }}; --h: {{ .h }}px"></span></a></li>
+        {{- end }}
+    </ul>
+</div>

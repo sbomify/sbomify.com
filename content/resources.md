@@ -16,6 +16,15 @@ There's also a GitHub repository called [sbom-benchmarks](https://github.com/sbo
 
 For step-by-step guides on generating SBOMs for specific languages and platforms, see our comprehensive [SBOM Guides](/guides/).
 
+## Free SBOM Tools
+
+sbomify's [free SBOM tools](/tools/) run entirely in your browser: no sign-up, and the files you check are never uploaded.
+
+- [SBOM Checker and Validator](/tools/sbom-checker/) – Validate a CycloneDX or SPDX SBOM against its schema and check it against the [CISA 2026](/compliance/cisa-minimum-elements/) and [NTIA](/compliance/ntia-minimum-elements/) minimum elements and [BSI TR-03183-2](/compliance/bsi-tr-03183/) for the EU Cyber Resilience Act
+- [CBOM Validator](/tools/cbom-checker/) – Validate a CycloneDX Cryptography Bill of Materials and the fields every cryptographic asset needs
+- [HBOM Validator](/tools/hbom-checker/) – Validate a CycloneDX Hardware Bill of Materials and the fields that identify every part
+- [AIBOM Validator](/tools/aibom-checker/) – Validate a CycloneDX or SPDX 3 AI Bill of Materials and the fields every model and dataset needs
+
 **Related educational content:**
 
 - [SBOM Generation Tools Compared](/2026/01/26/sbom-generation-tools-comparison/) – In-depth comparison of Syft, Trivy, cdxgen, and more
@@ -23,6 +32,7 @@ For step-by-step guides on generating SBOMs for specific languages and platforms
 - [SBOM Formats: CycloneDX vs SPDX](/2026/01/15/sbom-formats-cyclonedx-vs-spdx/) – Choosing the right format for your use case
 - [SBOM Scanning: Vulnerability Detection](/2026/02/01/sbom-scanning-vulnerability-detection/) – How to scan SBOMs for known vulnerabilities
 - [SBOM Management Best Practices](/2026/01/18/sbom-management-best-practices/) – Organizing, monitoring, and acting on SBOMs at scale
+- [What Is CTEM? Continuous Threat Exposure Management Explained](/2026/11/23/what-is-ctem-continuous-threat-exposure-management/) – Gartner's five-stage exposure management cycle and where SBOMs fit in
 
 ---
 
@@ -230,7 +240,7 @@ Related blog posts:
 
 The distribution phase, also known as Transportation, focuses on how you share the SBOM with internal and external stakeholders.
 
-- [sbomify]()
+- [sbomify](/)
 - [Project Koala](https://github.com/CycloneDX/transparency-exchange-api) (a.k.a. Transparency Exchange API) from CycloneDX
 
 ---
@@ -241,6 +251,7 @@ The analysis phase involves how you use the SBOM, typically for compliance or se
 
 - [bomber](https://github.com/devops-kung-fu/bomber) from DKFM
 - [bomshell](https://github.com/puerco/bomshell) from Adolfo García Veytia (a.k.a. Puerco)
+- [CBOM Validator](/tools/cbom-checker/), [HBOM Validator](/tools/hbom-checker/) and [AIBOM Validator](/tools/aibom-checker/) from sbomify
 - [Cybellum](https://cybellum.com/) from Cybellum
 - [Dependency Track](https://dependencytrack.org/) from OWASP
 - [Eclipse SW360](https://github.com/eclipse-sw360/sw360)
@@ -249,6 +260,7 @@ The analysis phase involves how you use the SBOM, typically for compliance or se
 - [Helm](https://www.medcrypt.com/solutions/helm) from Medcrypt
 - [NTIA Conformance Checker](https://github.com/spdx/ntia-conformance-checker) from SPDX
 - [Open Source Vulnerabilities](https://osv.dev/) (OSV) from Google
+- [SBOM Checker](/tools/sbom-checker/) from sbomify
 - [SBOM Observer](https://sbom.observer/) from Bitfront
 - [sbomaudit](https://github.com/anthonyharrison/sbomaudit) from Anthony Harrison
 - [sbommerge](https://github.com/anthonyharrison/sbommerge) from Anthony Harrison
@@ -267,9 +279,9 @@ For detailed information on SBOM compliance requirements across NTIA, CISA, EU C
 - [OpenChain CRA Compliance](https://openchainproject.org/cracompliance) – The OpenChain Project's CRA requirement and self-certification checklist, developed in the open on [GitHub](https://github.com/OpenChain-Project/CRA-Compliance) and building on ISO/IEC 18974 (open source security assurance). Where [BSI TR-03183-2](/compliance/bsi-tr-03183/) specifies what a CRA-ready SBOM must contain, OpenChain's checklist covers the process and policy side of getting an organisation ready. The two complement each other.
 - [Open Regulatory Compliance Working Group (ORC WG)](https://orcwg.org/) – Hosted by the Eclipse Foundation, ORC WG is where open source foundations, maintainers, and industry work out what the CRA means for open source in practice. Its [CRA Hub](https://github.com/orcwg/cra-hub) collects an FAQ, a resource inventory, a summary of the requested harmonised standards, and input on the important and critical product categories. Start here if you are working out whether you are an **open-source steward** under [CRA Article 24](/compliance/eu-cra/) rather than a manufacturer.
 
-<div class="mt-16 flex justify-center">
-  <a href="https://github.com/sbomify/sbomify.com/blob/master/resources.md" class="inline-flex items-center gap-2 !text-ink-muted hover:!text-ink transition-colors !no-underline text-sm font-medium">
-    <svg viewBox="0 0 24 24" aria-hidden="true" class="w-5 h-5 fill-current"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+<div class="mt-16 pt-6 border-t border-line">
+  <a href="https://github.com/sbomify/sbomify.com/blob/master/content/resources.md" class="inline-flex items-center gap-2 !text-ink-subtle hover:!text-ink transition-colors !no-underline text-sm font-medium">
+    <svg viewBox="0 0 24 24" aria-hidden="true" class="w-4 h-4 fill-current"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
     <span>Edit this page on GitHub</span>
   </a>
 </div>

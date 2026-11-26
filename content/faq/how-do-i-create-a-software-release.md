@@ -25,16 +25,18 @@ Before creating a release, you need:
 
 ### The "latest" release
 
-Every product has a `latest` release. sbomify keeps it current with the newest artifact of each component. You don't need to manage it - it's there as a stable URL for "whatever is current".
+Every product automatically gets a `latest` release that always points to the most recent SBOM and documents of each component in the product. sbomify manages it for you (you cannot add or remove its artifacts by hand) - it's there as a stable URL for "whatever is current".
 
-Named releases (e.g. `v2.1.0`) are immutable snapshots and are what you should share with customers and auditors.
+Named releases (e.g. `v2.1.0`) hold exactly the artifacts you add to them and do not move when new SBOMs are uploaded, which makes them what you should share with customers and auditors.
 
 ### Steps
 
 1. Open **Products** and click your product
-2. Open the **Product actions** menu at the top of the page and choose **Create release**
-3. The product is already picked. Fill in a **Name** (e.g. `Middle-Out Rewrite`), a **Version** (e.g. `v2.1.0`), and an optional **Description**, then click **Create release**
-4. The release starts empty. Click **Add Artifact**, search or filter the list, or use **Select All Visible** to pick every SBOM at once, then click **Add to Release**
+2. Open the **Product actions** menu at the top of the page and choose **Create release** (or use **New** → **Add release** in the header)
+3. The product is already picked. Fill in a **Name** (e.g. `Middle-Out Rewrite`), a **Version** (e.g. `v2.1.0`), and, optionally, a **Description** and dates, then click **Create release**
+4. The release starts empty. Click **Add Artifact**, search or filter the list, or use **Select All Visible** to pick every SBOM at once (or pick individual SBOMs and documents), then click **Add to Release**
+
+If you upload from CI with [sbomify-action](/sbomify-action/publishing/), setting `PRODUCT_RELEASE` tags each uploaded SBOM into a release and creates the release if it does not exist yet.
 
 ### How versioning works
 

@@ -62,6 +62,15 @@
   {{- end -}}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {{- /* The site has one, light, theme (brand guidelines: white with navy
+       type). "only light" stops browsers from force-darkening it (Chrome's
+       Auto Dark Mode for web contents, Samsung Internet, Opera), which
+       inverts text but not images and leaves the hero gradients, the logo
+       and the status colours unreadable. darkreader-lock does the same for
+       the Dark Reader extension. tokens.css sets color-scheme too, so form
+       controls and scrollbars stay light. */}}
+  <meta name="color-scheme" content="only light">
+  <meta name="darkreader-lock">
   {{- /* The " | sbomify" brand suffix is only added when the whole title
        still fits in ~60 characters. Search results truncate past that, and
        a cut-off headline costs more clicks than a missing brand name. */ -}}
@@ -73,6 +82,8 @@
 
   {{/* Canonical URL */}}
   <link rel="canonical" href="{{ $canonical }}">
+  {{- /* The page's Markdown copy (index.md next to index.html), for AI agents. */}}
+  {{ with .OutputFormats.Get "markdown" }}<link rel="alternate" type="text/markdown" href="{{ .Permalink }}" title="Markdown">{{ end }}
 
   {{/* Robots meta */}}
   {{- $robots := cond (eq (.Params.noindex | default false) true) "noindex, follow" "index, follow" }}
@@ -129,6 +140,14 @@
   <link rel="preload" href="/assets/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   {{ $css := resources.Get "css/styles.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+  {{- /* The nebula stills as CSS variables, so stylesheet rules can use the
+         fingerprinted images (the legacy .hero / .cta-band / .panel-dark
+         clouds and the diagram frames). Cards never fake a nebula with
+         gradients. */ -}}
+  {{- $nl := resources.Get "images/nebula/nebula-light.webp" | fingerprint -}}
+  {{- $ng := resources.Get "images/nebula/nebula-grey.webp" | fingerprint -}}
+  {{- $nn := resources.Get "images/nebula/nebula-navy.webp" | fingerprint -}}
+  <style>:root{--nebula-light:url("{{ $nl.RelPermalink }}");--nebula-grey:url("{{ $ng.RelPermalink }}");--nebula-navy:url("{{ $nn.RelPermalink }}")}</style>
   {{ $nativeCss := resources.Get "css/native.css" | minify | fingerprint }}
   <link rel="preload" href="{{ $nativeCss.RelPermalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="{{ $nativeCss.RelPermalink }}"></noscript>
@@ -364,6 +383,36 @@
       }
       {{ end }}
     ]
+  }
+  </script>
+  {{ end }}
+
+  {{ with .Params.app }}
+  {{/* Schema.org structured data: WebApplication, for free tools that run in
+       the browser (content/tools/). Set `app` in front matter. */}}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": {{ .name | jsonify | safeJS }},
+    "url": "{{ $.Permalink }}",
+    "description": {{ ($.Params.description | default site.Params.description) | jsonify | safeJS }},
+    "applicationCategory": {{ (.category | default "DeveloperApplication") | jsonify | safeJS }},
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript and a modern web browser.",
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    {{ with .features }}"featureList": {{ . | jsonify | safeJS }},
+    {{ end }}"image": "{{ $ogImage | absURL }}",
+    "publisher": {
+      "@type": "Organization",
+      "name": "sbomify",
+      "url": "{{ site.BaseURL }}"
+    }
   }
   </script>
   {{ end }}
@@ -656,7 +705,7 @@
        every page in them without breadcrumbs. One generic block covers them all
        rather than four near-identical copies. Any new top-level section must be
        added here or its pages ship without breadcrumb schema. */}}
-  {{ $crumbSections := dict "compliance" "Compliance" "features" "Features" "guides" "Guides" "sbomify-action" "sbomify Action" }}
+  {{ $crumbSections := dict "compliance" "Compliance" "features" "Features" "guides" "Guides" "sbomify-action" "sbomify Action" "tools" "Tools" }}
   {{ $crumbLabel := index $crumbSections .Section }}
   {{ if $crumbLabel }}
   {{/* Schema.org structured data: BreadcrumbList (Section) */}}

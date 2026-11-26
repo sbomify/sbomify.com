@@ -16,6 +16,8 @@ description: "The 2026 Minimum Elements for a Software Bill of Materials, publis
 
 ---
 
+**Free tool:** [Check your SBOM against the CISA minimum elements](/tools/sbom-checker/) in your browser. It scores a CycloneDX or SPDX file against the CISA 2026 elements (and the August 2025 draft) and links every gap to the fix.
+
 ## Overview
 
 The [2026 Minimum Elements for a Software Bill of Materials (SBOM)](https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom) was published on **29 July 2026** by the US Cybersecurity and Infrastructure Security Agency (CISA), together with the NSA, the FBI, and fifteen international partner agencies.

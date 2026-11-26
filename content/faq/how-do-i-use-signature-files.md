@@ -1,7 +1,7 @@
 ---
 title: "How do I attach signatures and provenance to SBOMs?"
 description: "Walk through uploading detached cryptographic signatures (cosign-bundle, PGP, PKCS#7) and SLSA in-toto provenance attestations to your SBOMs in sbomify, where the Signed and Provenance badges appear, and how the SBOM Verification plugin validates both."
-answer: "sbomify accepts a detached signature on every SBOM via `POST /api/v1/sboms/sbom/<id>/signature` (with an `X-Signature-Type` header naming `cosign-bundle`, `pgp-detached`, or `pkcs7`) and a separate in-toto / DSSE provenance attestation via `POST /api/v1/sboms/sbom/<id>/provenance`. Once attached, Signed and Provenance badges appear on the SBOM detail page and the SBOM Verification plugin runs five checks (digest integrity, signature presence + validity, provenance presence + digest match) on every assessment cycle."
+answer: "sbomify accepts a detached signature on every SBOM via `POST /api/v1/sboms/sbom/<id>/signature` (with an `X-Signature-Type` header naming `cosign-bundle`, `pgp-detached`, or `pkcs7`) and a separate in-toto / DSSE provenance attestation via `POST /api/v1/sboms/sbom/<id>/provenance`. Once attached, Signed and Provenance badges appear on the SBOM detail page and the SBOM Verification plugin turns them into findings (digest integrity, signature presence + validity, provenance presence + digest match, plus a GitHub attestation lookup) on every assessment cycle."
 tldr: "Each SBOM in sbomify can carry a detached signature and a SLSA provenance attestation as separate, opaque blobs. Signatures arrive as raw bytes plus a format header; provenance arrives as JSON (DSSE envelope or direct in-toto Statement) and is rejected on upload if its subject digest does not match the SBOM. The SBOM Verification plugin then turns both into pass/fail findings on every assessment run."
 weight: 86
 keywords: [SBOM signature, SBOM provenance, in-toto attestation, DSSE envelope, cosign-bundle, PGP detached signature, PKCS7 signature, SLSA provenance, sbomify sign API, SBOM verification plugin, signed SBOM, attestation]
@@ -51,7 +51,9 @@ POST   /api/v1/sboms/sbom/<sbom_id>/provenance     # JSON body (DSSE or Statemen
 GET    /api/v1/sboms/sbom/<sbom_id>/provenance     # download stored JSON
 ```
 
-All four require authentication, uploads need write access to the SBOM's component, downloads honour the SBOM's public/private visibility just like the SBOM body itself. Upload sizes are capped (5 MB for signatures, 10 MB for provenance) and the SBOM row is row-locked during the write so two concurrent uploads cannot both win.
+API v2 serves the same endpoints as `/api/v2/artifacts/<artifact_id>/signature` and `/api/v2/artifacts/<artifact_id>/provenance`.
+
+Uploads require authentication with an owner, admin or member role in the SBOM's workspace (an OIDC trusted-publishing token is not enough). Downloads honour the SBOM's visibility just like the SBOM body itself, so the signature and provenance of a public SBOM can be fetched without signing in. Upload sizes are capped (5 MB for signatures, 10 MB for provenance) and the SBOM row is row-locked during the write so two concurrent uploads cannot both win.
 
 ### Uploading a signature
 
@@ -74,7 +76,7 @@ curl -X POST "https://app.sbomify.com/api/v1/sboms/sbom/$SBOM_ID/provenance" \
     --data-binary @sbom.cdx.json.intoto.jsonl
 ```
 
-The endpoint accepts the in-toto JSON or the DSSE envelope and returns `201 Created` once the subject digest passes. A `400 Bad Request` with `error_code: bad_request` and a message about the digest mismatch means the attestation does not name your SBOM, most often a sign that the SBOM was rebuilt after the attestation was issued.
+The endpoint accepts the in-toto JSON or the DSSE envelope and returns `201 Created` once the subject digest passes. A `400 Bad Request` with `error_code: BAD_REQUEST` and a message about the digest mismatch means the attestation does not name your SBOM, most often a sign that the SBOM was rebuilt after the attestation was issued.
 
 ## Where the badges show up
 
@@ -91,19 +93,20 @@ The badges are visible to authenticated users in the workspace. The same fields 
 
 ## How the SBOM Verification plugin uses them
 
-The unified `sbom-verification` plugin runs as part of every SBOM assessment cycle and produces five granular findings:
+Once enabled for your workspace on the **Plugins** page, the unified `sbom-verification` plugin runs as part of every SBOM assessment cycle and produces six granular findings:
 
-| Finding              | What it checks                                                                                                                                                                                       | When it passes                             |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| `digest:integrity`   | Re-computes the SBOM SHA-256 and compares it to the stored hash                                                                                                                                      | The recomputed hash matches                |
-| `signature:present`  | Looks for a stored `signature_blob_key`                                                                                                                                                              | A signature has been uploaded              |
-| `signature:valid`    | Validates the stored signature using `sigstore.Verifier.production().verify_artifact` (cosign-bundle), the other formats currently report `unknown` while keeping the upload + presence check active | The signature verifies cleanly             |
-| `provenance:present` | Looks for a stored `provenance_blob_key`                                                                                                                                                             | A provenance attestation has been uploaded |
-| `provenance:digest`  | Re-checks the stored attestation's `subject[].digest.sha256` against the SBOM hash                                                                                                                   | At least one subject digest matches        |
+| Finding                           | What it checks                                                                                                                                                                                                                            | When it passes                                       |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| `verification:digest-integrity`   | Re-computes the SBOM SHA-256 and compares it to the stored hash                                                                                                                                                                           | The recomputed hash matches                          |
+| `verification:signature-present`  | Looks for a stored `signature_blob_key`                                                                                                                                                                                                   | A signature has been uploaded                        |
+| `verification:signature-valid`    | Validates the stored signature using `sigstore.Verifier.production().verify_artifact` (cosign-bundle), the other formats currently report a warning ("not yet supported for validation") while keeping the upload + presence check active | The signature verifies cleanly                       |
+| `verification:provenance-present` | Looks for a stored `provenance_blob_key`                                                                                                                                                                                                  | A provenance attestation has been uploaded           |
+| `verification:provenance-digest`  | Re-checks the stored attestation's `subject[].digest.sha256` against the SBOM hash                                                                                                                                                        | At least one subject digest matches                  |
+| `verification:github-attestation` | Looks up a GitHub-published Sigstore attestation for the SBOM (see below)                                                                                                                                                                 | `cosign verify-blob-attestation` verifies the bundle |
 
-The plugin also rolls all five up into an aggregated `verification:attestation` summary finding whose status is `pass` when _any_ cryptographic source verified and `fail` when none did, the BSI / FDA / NTIA plugins consume that summary via a `requires_one_of: [{"type": "category", "value": "attestation"}]` clause, so a digest-only "pass" cannot satisfy an attestation requirement on its own.
+The plugin also rolls these up into an aggregated `verification:attestation` summary finding whose status is `pass` when _any_ cryptographic source (signature, provenance or GitHub attestation) verified and `fail` when none did, the BSI TR-03183-2 plugin consumes that summary via a `requires_one_of: [{"type": "category", "value": "attestation"}]` clause, so a digest-only "pass" cannot satisfy an attestation requirement on its own.
 
-The plugin runs even if neither artefact has been uploaded, the digest check still passes on its own, and the signature/provenance findings come back as `not present` rather than `fail`. Uploading either artefact while the SBOM is sitting in the assessment queue triggers a re-run.
+The plugin runs even if neither artefact has been uploaded, the digest check still passes on its own, and the signature/provenance findings come back as warnings rather than failures (the `verification:attestation` summary still fails unless some cryptographic source verified). Uploading either artefact queues a fresh verification run.
 
 ## Auto-discovering GitHub Attestations
 
@@ -115,7 +118,7 @@ Use the explicit `POST /signature` / `POST /provenance` endpoints when:
 - You sign with PGP or PKCS#7 instead of Sigstore.
 - You want sbomify to retain the bundle even if the upstream GitHub repository is deleted.
 
-The two paths are not mutually exclusive, an explicitly uploaded artefact takes precedence over the GitHub-discovered one, so the API can be the primary channel and auto-discovery serves as a backup.
+The two paths are not mutually exclusive, the plugin checks every source on each run and the summary passes when any one of them verifies, so the API can be the primary channel and auto-discovery serves as a backup.
 
 ## Rotating a signature or provenance
 

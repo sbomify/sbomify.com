@@ -1,0 +1,10 @@
+{{- /* Product menu card: our own public Trust Center, on the navy nebula. */ -}}
+{{ $bg := resources.Get "images/nebula/nebula-band.webp" | fingerprint }}
+{{ $url := "https://trust.sbomify.com/" }}
+<a class="mega-card is-dark" href="{{ $url }}" style="background-image: url('{{ $bg.RelPermalink }}')"{{ partial "link-attrs.html" (dict "url" $url "rel" "noopener noreferrer" "target" "_blank") }}>
+  <span class="mega-card-ico">{{ partial "ph.html" (dict "name" "shield-check" "weight" "duotone") }}</span>
+  <span class="kicker">See it live</span>
+  <b class="mega-card-title">sbomify's own Trust Center</b>
+  <span class="mega-card-text">The public Trust Center we run for sbomify, built with the same tools you get.</span>
+  <span class="mega-card-go">Visit trust.sbomify.com{{ partial "ph.html" (dict "name" "arrow-up-right" "class" "ph-go") }}</span>
+</a>

@@ -1,35 +1,35 @@
 {{ define "main" }}
 <div>
-  <div class="hero px-5 py-16 lg:py-24 lg:px-24">
-
-    <div class="relative max-w-4xl mx-auto text-center">
-      <h1 class="text-ink text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
-        Oops, 404!
-      </h1>
-      <p class="text-ink-muted text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
-        This page has gone missing from our supply chain
-      </p>
+  <div class="hero">
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap pt-10 lg:pt-16 pb-10 lg:pb-14">
+      <div class="read">
+        <h1 class="text-ink mb-5">
+          Oops, 404!
+        </h1>
+        <p class="lede">
+          This page has gone missing from our supply chain
+        </p>
+      </div>
     </div>
   </div>
 
-  <div class="bg-surface">
-    <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-      <div class="bg-canvas p-8 md:p-12 rounded-2xl shadow-card border border-line text-center">
-        <p class="text-navy-80 text-lg mb-8">
-          We couldn't find what you were looking for, but don't worry &mdash; unlike a missing SBOM, this is easy to fix.
-        </p>
-        <a href="/" class="btn-primary mb-8">
-          Take Me Home
-        </a>
-        <div class="border-t border-line pt-8">
-          <p class="text-ink-muted text-sm mb-4">Or explore these instead:</p>
-          <div class="flex flex-wrap justify-center gap-4 text-sm">
-            <a href="/blog/" class="text-accent-strong hover:underline">Blog</a>
-            <a href="/guides/" class="text-accent-strong hover:underline">Guides</a>
-            <a href="/faq/" class="text-accent-strong hover:underline">FAQ</a>
-            <a href="/pricing/" class="text-accent-strong hover:underline">Pricing</a>
-          </div>
-        </div>
+  <div class="wrap pb-16 lg:pb-24">
+    <div class="read section-rule pt-10">
+      <p class="text-ink-muted text-lg mb-8">
+        We couldn't find what you were looking for, but don't worry &mdash; unlike a missing SBOM, this is easy to fix.
+      </p>
+      <a href="/" class="btn-primary btn-lg mb-12">
+        Take Me Home
+      </a>
+      <div>
+        <p class="eyebrow mb-3">Or explore these instead:</p>
+        <ul class="grid sm:grid-cols-2 gap-x-10">
+          <li class="border-t border-line"><a href="/blog/" class="flex justify-between py-3.5 font-medium text-ink hover:text-ink-muted transition-colors">Blog</a></li>
+          <li class="border-t border-line"><a href="/guides/" class="flex justify-between py-3.5 font-medium text-ink hover:text-ink-muted transition-colors">Guides</a></li>
+          <li class="border-t border-line"><a href="/faq/" class="flex justify-between py-3.5 font-medium text-ink hover:text-ink-muted transition-colors">FAQ</a></li>
+          <li class="border-t border-line"><a href="/pricing/" class="flex justify-between py-3.5 font-medium text-ink hover:text-ink-muted transition-colors">Pricing</a></li>
+        </ul>
       </div>
     </div>
   </div>

@@ -49,12 +49,12 @@
 {{/* CRA readers are the closest to buying, wherever the page lives. */}}
 {{- if or (findRE `\bCRA\b|Cyber Resilience` $page.Title) (eq $page.Params.cta_lead "demo") }}{{ $lead = "demo" }}{{ end -}}
 {{- $loc := printf "article_end_%s" $key -}}
-<aside class="mt-16 rounded-3xl bg-inverse p-8 sm:p-10 not-prose" aria-label="Get started with sbomify">
-  <p class="!text-on-inverse-subtle !text-sm font-semibold uppercase tracking-eyebrow !mt-0 !mb-3">{{ .eyebrow }}</p>
-  <p class="!text-2xl lg:!text-3xl !leading-tight font-bold !text-white !mt-0 !mb-4">{{ .title }}</p>
-  <p class="!text-on-inverse-muted !text-lg leading-relaxed !mt-0 !mb-8 max-w-2xl">{{ .body }}</p>
-  {{- $solid := "btn-primary btn-md justify-center !no-underline !text-on-accent" -}}
-  {{- $ghost := "inline-flex items-center justify-center px-5 py-2.5 min-h-10 max-sm:min-h-11 text-sm rounded-full border-2 border-white/40 hover:border-white !text-white font-semibold !no-underline transition-colors" -}}
+<aside class="mt-16 cta-band not-prose" aria-label="Get started with sbomify">
+  <p class="eyebrow-chip !text-xs !mt-0 !mb-4">{{ .eyebrow }}</p>
+  <p class="!text-2xl lg:!text-[2rem] !leading-[1.1] font-extrabold tracking-display !text-white !mt-0 !mb-4">{{ .title }}</p>
+  <p class="!text-on-inverse-muted !text-base md:!text-lg !leading-relaxed !mt-0 !mb-8 max-w-2xl">{{ .body }}</p>
+  {{- $solid := "btn-primary" -}}
+  {{- $ghost := "btn-secondary" -}}
   {{- $demoFirst := eq $lead "demo" -}}
   <div class="flex gap-3 {{ if $demoFirst }}flex-col-reverse sm:flex-row-reverse sm:justify-end{{ else }}flex-col sm:flex-row{{ end }}">
     <a href="{{ site.Params.signupURL }}" class="{{ cond $demoFirst $ghost $solid }}" data-cta-location="{{ $loc }}" data-cta-label="Start free">Start free</a>

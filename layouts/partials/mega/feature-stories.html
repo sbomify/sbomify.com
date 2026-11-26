@@ -1,0 +1,23 @@
+{{- /* Customers menu: one card per case study, from its front matter, and
+       the quote from a study that has one. */ -}}
+{{ $studies := (where site.RegularPages "Section" "case-studies").ByDate.Reverse }}
+{{ range $i, $p := $studies }}
+<a class="mega-story" href="{{ .RelPermalink }}" style="--i: {{ $i }}">
+  {{ with .Params.logo }}<img src="{{ . }}" alt="{{ $p.Params.company }}" width="{{ $p.Params.logo_width | default 150 }}" height="{{ $p.Params.logo_height | default 40 }}" loading="lazy" decoding="async">{{ end }}
+  <b>{{ .Params.headline | default .Title }}</b>
+  <span>{{ .Params.summary | default .Description }}</span>
+  <span class="mega-card-go">Read the case study{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}</span>
+</a>
+{{ end }}
+{{ range first 1 (where $studies "Params.quote" "!=" nil) }}
+{{ $q := .Params.quote }}
+{{ $neb := resources.Get "images/nebula/nebula-navy.webp" | fingerprint }}
+<figure class="mega-quote" style="background-image: url('{{ $neb.RelPermalink }}')">
+  {{ partial "ph.html" (dict "name" "quotes" "weight" "fill" "class" "mega-quote-mark") }}
+  <blockquote><p>{{ $q.text }}</p></blockquote>
+  <figcaption>
+    {{ with $q.avatar }}{{ with resources.Get . }}{{ $img := .Process "fill 80x80 Center webp q80" }}<img src="{{ $img.RelPermalink }}" alt="" width="40" height="40" loading="lazy" decoding="async">{{ end }}{{ end }}
+    <span><b>{{ $q.name }}</b><span>{{ $q.role }}</span></span>
+  </figcaption>
+</figure>
+{{ end }}

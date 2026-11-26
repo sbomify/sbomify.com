@@ -8,6 +8,8 @@ module.exports = {
   content: [
     './layouts/**/*.html',
     './content/**/*.{html,md}',
+    // The SBOM checker builds its report in script.
+    './_tools/sbom-checker/src/**/*.ts',
   ],
   theme: {
     // Replace, not extend, the default palette: the brand palette is the
@@ -31,6 +33,7 @@ module.exports = {
         10: token('navy-10'),
         5: token('navy-5'),
       },
+      panel: token('panel'),
       mist: {
         DEFAULT: token('mist'),
         soft: token('mist-soft'),

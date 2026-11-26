@@ -1,0 +1,675 @@
+{
+ "minimal_conformant": {
+  "@context": "https://spdx.org/rdf/3.0.1/spdx-context.jsonld",
+  "@graph": [
+   {
+    "type": "CreationInfo",
+    "@id": "_:creationinfo",
+    "specVersion": "3.0.1",
+    "created": "2026-08-01T00:00:00Z",
+    "createdBy": [
+     "urn:acme:agent"
+    ],
+    "createdUsing": [
+     "urn:acme:tool"
+    ]
+   },
+   {
+    "type": "Person",
+    "spdxId": "urn:acme:agent",
+    "creationInfo": "_:creationinfo",
+    "name": "Jane Doe",
+    "externalIdentifier": [
+     {
+      "type": "ExternalIdentifier",
+      "externalIdentifierType": "email",
+      "identifier": "jane@acme.test"
+     }
+    ]
+   },
+   {
+    "type": "Tool",
+    "spdxId": "urn:acme:tool",
+    "creationInfo": "_:creationinfo",
+    "name": "sbomify-action-1.2.3"
+   },
+   {
+    "type": "SpdxDocument",
+    "spdxId": "urn:acme:doc",
+    "creationInfo": "_:creationinfo",
+    "rootElement": [
+     "urn:acme:pkg1"
+    ],
+    "profileConformance": [
+     "core",
+     "software"
+    ]
+   },
+   {
+    "type": "software_Package",
+    "spdxId": "urn:acme:pkg1",
+    "creationInfo": "_:creationinfo",
+    "name": "my-app",
+    "software_packageVersion": "1.2.3",
+    "software_downloadLocation": "https://downloads.acme.test/my-app-1.2.3.tar.gz",
+    "verifiedUsing": [
+     {
+      "type": "Hash",
+      "algorithm": "sha256",
+      "hashValue": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+     }
+    ],
+    "externalRef": [
+     {
+      "type": "ExternalRef",
+      "externalRefType": "vcs",
+      "locator": [
+       "https://github.com/acme/my-app"
+      ]
+     }
+    ],
+    "validUntilTime": "2030-01-01T00:00:00Z",
+    "originatedBy": [
+     "urn:acme:agent"
+    ],
+    "software_packageUrl": "pkg:pypi/my-app@1.2.3"
+   },
+   {
+    "type": "simplelicensing_LicenseExpression",
+    "spdxId": "urn:acme:lic1",
+    "creationInfo": "_:creationinfo",
+    "simplelicensing_licenseExpression": "MIT"
+   },
+   {
+    "type": "Relationship",
+    "spdxId": "urn:acme:rel1",
+    "creationInfo": "_:creationinfo",
+    "relationshipType": "hasConcludedLicense",
+    "from": "urn:acme:pkg1",
+    "to": [
+     "urn:acme:lic1"
+    ]
+   },
+   {
+    "type": "Relationship",
+    "spdxId": "urn:acme:rel2",
+    "creationInfo": "_:creationinfo",
+    "relationshipType": "hasDeclaredLicense",
+    "from": "urn:acme:pkg1",
+    "to": [
+     "urn:acme:lic1"
+    ]
+   }
+  ]
+ },
+ "inline_agents": {
+  "@context": "https://spdx.org/rdf/3.0.1/spdx-context.jsonld",
+  "@graph": [
+   {
+    "type": "CreationInfo",
+    "@id": "_:creationinfo",
+    "specVersion": "3.0.1",
+    "created": "2026-08-01T00:00:00Z",
+    "createdBy": [
+     {
+      "type": "Organization",
+      "spdxId": "urn:acme:inlineorg",
+      "creationInfo": "_:creationinfo",
+      "name": "Inline Corp",
+      "externalIdentifier": [
+       {
+        "type": "ExternalIdentifier",
+        "externalIdentifierType": "email",
+        "identifier": "sec@inline.test"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "SpdxDocument",
+    "spdxId": "urn:acme:doc",
+    "creationInfo": "_:creationinfo",
+    "rootElement": [
+     "urn:acme:pkg1"
+    ],
+    "profileConformance": [
+     "core",
+     "software"
+    ]
+   },
+   {
+    "type": "software_Package",
+    "spdxId": "urn:acme:pkg1",
+    "creationInfo": "_:creationinfo",
+    "name": "my-app",
+    "software_packageVersion": "1.2.3",
+    "software_downloadLocation": "https://downloads.acme.test/my-app-1.2.3.tar.gz",
+    "verifiedUsing": [
+     {
+      "type": "Hash",
+      "algorithm": "sha256",
+      "hashValue": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+     }
+    ],
+    "externalRef": [
+     {
+      "type": "ExternalRef",
+      "externalRefType": "vcs",
+      "locator": [
+       "https://github.com/acme/my-app"
+      ]
+     }
+    ],
+    "validUntilTime": "2030-01-01T00:00:00Z",
+    "originatedBy": [
+     {
+      "type": "Organization",
+      "spdxId": "urn:acme:inlineorg",
+      "creationInfo": "_:creationinfo",
+      "name": "Inline Corp",
+      "externalIdentifier": [
+       {
+        "type": "ExternalIdentifier",
+        "externalIdentifierType": "email",
+        "identifier": "sec@inline.test"
+       }
+      ]
+     }
+    ],
+    "software_packageUrl": "pkg:pypi/my-app@1.2.3"
+   }
+  ]
+ },
+ "software_agent_supplier": {
+  "@context": "https://spdx.org/rdf/3.0.1/spdx-context.jsonld",
+  "@graph": [
+   {
+    "type": "CreationInfo",
+    "@id": "_:creationinfo",
+    "specVersion": "3.0.1",
+    "created": "2026-08-01T00:00:00Z",
+    "createdBy": [
+     "urn:acme:agent"
+    ]
+   },
+   {
+    "type": "Person",
+    "spdxId": "urn:acme:agent",
+    "creationInfo": "_:creationinfo",
+    "name": "Jane Doe",
+    "externalIdentifier": [
+     {
+      "type": "ExternalIdentifier",
+      "externalIdentifierType": "email",
+      "identifier": "jane@acme.test"
+     }
+    ]
+   },
+   {
+    "type": "SoftwareAgent",
+    "spdxId": "urn:acme:bot",
+    "creationInfo": "_:creationinfo",
+    "name": "build-bot",
+    "externalIdentifier": [
+     {
+      "type": "ExternalIdentifier",
+      "externalIdentifierType": "email",
+      "identifier": "bot@acme.test"
+     }
+    ]
+   },
+   {
+    "type": "SpdxDocument",
+    "spdxId": "urn:acme:doc",
+    "creationInfo": "_:creationinfo",
+    "rootElement": [
+     "urn:acme:pkg1"
+    ],
+    "profileConformance": [
+     "core",
+     "software"
+    ]
+   },
+   {
+    "type": "software_Package",
+    "spdxId": "urn:acme:pkg1",
+    "creationInfo": "_:creationinfo",
+    "name": "my-app",
+    "software_packageVersion": "1.2.3",
+    "software_downloadLocation": "https://downloads.acme.test/my-app-1.2.3.tar.gz",
+    "verifiedUsing": [
+     {
+      "type": "Hash",
+      "algorithm": "sha256",
+      "hashValue": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+     }
+    ],
+    "externalRef": [
+     {
+      "type": "ExternalRef",
+      "externalRefType": "vcs",
+      "locator": [
+       "https://github.com/acme/my-app"
+      ]
+     }
+    ],
+    "validUntilTime": "2030-01-01T00:00:00Z",
+    "originatedBy": [
+     "urn:acme:bot"
+    ],
+    "software_packageUrl": "pkg:pypi/my-app@1.2.3"
+   }
+  ]
+ },
+ "yocto_shaped": {
+  "@context": "https://spdx.org/rdf/3.0.1/spdx-context.jsonld",
+  "@graph": [
+   {
+    "type": "CreationInfo",
+    "@id": "_:creationinfo",
+    "specVersion": "3.0.1",
+    "created": "2026-08-01T00:00:00Z",
+    "createdBy": [
+     "urn:oe:org"
+    ]
+   },
+   {
+    "type": "Organization",
+    "spdxId": "urn:oe:org",
+    "creationInfo": "_:creationinfo",
+    "name": "OpenEmbedded"
+   },
+   {
+    "type": "SpdxDocument",
+    "spdxId": "urn:acme:doc",
+    "creationInfo": "_:creationinfo",
+    "rootElement": [
+     "urn:oe:sbom"
+    ],
+    "profileConformance": [
+     "core",
+     "software"
+    ]
+   },
+   {
+    "type": "software_Sbom",
+    "spdxId": "urn:oe:sbom",
+    "creationInfo": "_:creationinfo",
+    "software_sbomType": [
+     "build"
+    ],
+    "rootElement": [
+     "urn:oe:image"
+    ],
+    "element": [
+     "urn:oe:image",
+     "urn:oe:netbase"
+    ]
+   },
+   {
+    "type": "software_Package",
+    "spdxId": "urn:oe:image",
+    "creationInfo": "_:creationinfo",
+    "name": "core-image-minimal",
+    "software_packageVersion": "6.0",
+    "software_downloadLocation": "https://downloads.acme.test/core-image-minimal-6.0.tar.gz",
+    "verifiedUsing": [
+     {
+      "type": "Hash",
+      "algorithm": "sha256",
+      "hashValue": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+     }
+    ],
+    "externalRef": [
+     {
+      "type": "ExternalRef",
+      "externalRefType": "vcs",
+      "locator": [
+       "https://github.com/acme/core-image-minimal"
+      ]
+     }
+    ],
+    "validUntilTime": "2030-01-01T00:00:00Z",
+    "originatedBy": [
+     "urn:oe:org"
+    ],
+    "software_packageUrl": "pkg:generic/core-image-minimal@6.0"
+   },
+   {
+    "type": "software_Package",
+    "spdxId": "urn:oe:netbase",
+    "creationInfo": "_:creationinfo",
+    "name": "netbase",
+    "software_packageVersion": "6.4",
+    "software_downloadLocation": "https://downloads.acme.test/netbase-6.4.tar.gz",
+    "verifiedUsing": [
+     {
+      "type": "Hash",
+      "algorithm": "sha256",
+      "hashValue": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+     }
+    ],
+    "externalRef": [
+     {
+      "type": "ExternalRef",
+      "externalRefType": "vcs",
+      "locator": [
+       "https://github.com/acme/netbase"
+      ]
+     }
+    ],
+    "validUntilTime": "2030-01-01T00:00:00Z",
+    "originatedBy": [
+     "urn:oe:org"
+    ],
+    "software_packageUrl": "pkg:generic/netbase@6.4?distro=yocto"
+   }
+  ]
+ },
+ "syft_shaped": {
+  "@context": "https://spdx.org/rdf/3.0.0/spdx-context.jsonld",
+  "@graph": [
+   {
+    "type": "CreationInfo",
+    "@id": "_:creationinfo",
+    "specVersion": "3.0.0",
+    "created": "2026-08-01T00:00:00Z",
+    "createdBy": [
+     "urn:acme:agent"
+    ],
+    "createdUsing": [
+     "urn:syft:tool"
+    ]
+   },
+   {
+    "type": "Person",
+    "spdxId": "urn:syft:agent",
+    "creationInfo": "_:creationinfo",
+    "name": "Anchore",
+    "externalIdentifier": [
+     {
+      "type": "ExternalIdentifier",
+      "externalIdentifierType": "email",
+      "identifier": "oss@anchore.test"
+     }
+    ]
+   },
+   {
+    "type": "Tool",
+    "spdxId": "urn:syft:tool",
+    "creationInfo": "_:creationinfo",
+    "name": "syft-1.46.0"
+   },
+   {
+    "type": "SpdxDocument",
+    "spdxId": "urn:syft:doc",
+    "creationInfo": "_:creationinfo",
+    "profileConformance": [
+     "core",
+     "software"
+    ]
+   },
+   {
+    "type": "software_Package",
+    "spdxId": "urn:syft:pkg1",
+    "creationInfo": "_:creationinfo",
+    "name": "left-pad",
+    "software_packageVersion": "1.3.0",
+    "software_downloadLocation": "https://downloads.acme.test/left-pad-1.3.0.tar.gz",
+    "verifiedUsing": [
+     {
+      "type": "Hash",
+      "algorithm": "sha256",
+      "hashValue": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+     }
+    ],
+    "externalRef": [
+     {
+      "type": "ExternalRef",
+      "externalRefType": "vcs",
+      "locator": [
+       "https://github.com/acme/left-pad"
+      ]
+     }
+    ],
+    "validUntilTime": "2030-01-01T00:00:00Z",
+    "originatedBy": [
+     "urn:syft:agent"
+    ],
+    "externalIdentifier": [
+     {
+      "type": "ExternalIdentifier",
+      "externalIdentifierType": "packageUrl",
+      "identifier": "pkg:npm/left-pad@1.3.0"
+     }
+    ]
+   },
+   {
+    "type": "Relationship",
+    "spdxId": "urn:syft:rel1",
+    "creationInfo": "_:creationinfo",
+    "relationshipType": "describes",
+    "from": "urn:syft:doc",
+    "to": [
+     "urn:syft:pkg1"
+    ]
+   }
+  ]
+ },
+ "purl_via_software_package_url_only": {
+  "@context": "https://spdx.org/rdf/3.0.1/spdx-context.jsonld",
+  "@graph": [
+   {
+    "type": "CreationInfo",
+    "@id": "_:creationinfo",
+    "specVersion": "3.0.1",
+    "created": "2026-08-01T00:00:00Z",
+    "createdBy": [
+     "urn:acme:agent"
+    ]
+   },
+   {
+    "type": "Person",
+    "spdxId": "urn:acme:agent",
+    "creationInfo": "_:creationinfo",
+    "name": "Jane Doe",
+    "externalIdentifier": [
+     {
+      "type": "ExternalIdentifier",
+      "externalIdentifierType": "email",
+      "identifier": "jane@acme.test"
+     }
+    ]
+   },
+   {
+    "type": "SpdxDocument",
+    "spdxId": "urn:acme:doc",
+    "creationInfo": "_:creationinfo",
+    "rootElement": [
+     "urn:acme:pkg1"
+    ],
+    "profileConformance": [
+     "core",
+     "software"
+    ]
+   },
+   {
+    "type": "software_Package",
+    "spdxId": "urn:acme:pkg1",
+    "creationInfo": "_:creationinfo",
+    "name": "my-app",
+    "software_packageVersion": "1.2.3",
+    "software_downloadLocation": "https://downloads.acme.test/my-app-1.2.3.tar.gz",
+    "verifiedUsing": [
+     {
+      "type": "Hash",
+      "algorithm": "sha256",
+      "hashValue": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+     }
+    ],
+    "externalRef": [
+     {
+      "type": "ExternalRef",
+      "externalRefType": "vcs",
+      "locator": [
+       "https://github.com/acme/my-app"
+      ]
+     }
+    ],
+    "validUntilTime": "2030-01-01T00:00:00Z",
+    "originatedBy": [
+     "urn:acme:agent"
+    ],
+    "software_packageUrl": "pkg:pypi/my-app@1.2.3"
+   }
+  ]
+ },
+ "purl_via_external_identifier_only": {
+  "@context": "https://spdx.org/rdf/3.0.1/spdx-context.jsonld",
+  "@graph": [
+   {
+    "type": "CreationInfo",
+    "@id": "_:creationinfo",
+    "specVersion": "3.0.1",
+    "created": "2026-08-01T00:00:00Z",
+    "createdBy": [
+     "urn:acme:agent"
+    ]
+   },
+   {
+    "type": "Person",
+    "spdxId": "urn:acme:agent",
+    "creationInfo": "_:creationinfo",
+    "name": "Jane Doe",
+    "externalIdentifier": [
+     {
+      "type": "ExternalIdentifier",
+      "externalIdentifierType": "email",
+      "identifier": "jane@acme.test"
+     }
+    ]
+   },
+   {
+    "type": "SpdxDocument",
+    "spdxId": "urn:acme:doc",
+    "creationInfo": "_:creationinfo",
+    "rootElement": [
+     "urn:acme:pkg1"
+    ],
+    "profileConformance": [
+     "core",
+     "software"
+    ]
+   },
+   {
+    "type": "software_Package",
+    "spdxId": "urn:acme:pkg1",
+    "creationInfo": "_:creationinfo",
+    "name": "my-app",
+    "software_packageVersion": "1.2.3",
+    "software_downloadLocation": "https://downloads.acme.test/my-app-1.2.3.tar.gz",
+    "verifiedUsing": [
+     {
+      "type": "Hash",
+      "algorithm": "sha256",
+      "hashValue": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+     }
+    ],
+    "externalRef": [
+     {
+      "type": "ExternalRef",
+      "externalRefType": "vcs",
+      "locator": [
+       "https://github.com/acme/my-app"
+      ]
+     }
+    ],
+    "validUntilTime": "2030-01-01T00:00:00Z",
+    "originatedBy": [
+     "urn:acme:agent"
+    ],
+    "externalIdentifier": [
+     {
+      "type": "ExternalIdentifier",
+      "externalIdentifierType": "packageUrl",
+      "identifier": "pkg:pypi/my-app@1.2.3"
+     }
+    ]
+   }
+  ]
+ },
+ "legacy_spelling_counterpart": {
+  "@context": "https://spdx.org/rdf/3.0.1/spdx-context.jsonld",
+  "@graph": [
+   {
+    "type": "CreationInfo",
+    "@id": "_:creationinfo",
+    "specVersion": "3.0.1",
+    "created": "2026-08-01T00:00:00Z",
+    "createdBy": [
+     "urn:acme:agent"
+    ]
+   },
+   {
+    "type": "Person",
+    "spdxId": "urn:acme:agent",
+    "creationInfo": "_:creationinfo",
+    "name": "Jane Doe",
+    "externalIdentifiers": [
+     {
+      "type": "ExternalIdentifier",
+      "externalIdentifierType": "email",
+      "identifier": "jane@acme.test"
+     }
+    ]
+   },
+   {
+    "type": "SpdxDocument",
+    "spdxId": "urn:acme:doc",
+    "creationInfo": "_:creationinfo",
+    "rootElement": [
+     "urn:acme:pkg1"
+    ],
+    "profileConformance": [
+     "core",
+     "software"
+    ]
+   },
+   {
+    "type": "software_Package",
+    "spdxId": "urn:acme:pkg1",
+    "creationInfo": "_:creationinfo",
+    "name": "my-app",
+    "software_packageVersion": "1.2.3",
+    "software_downloadLocation": "https://downloads.acme.test/my-app-1.2.3.tar.gz",
+    "verifiedUsing": [
+     {
+      "type": "Hash",
+      "algorithm": "sha256",
+      "hashValue": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+     }
+    ],
+    "externalRef": [
+     {
+      "type": "ExternalRef",
+      "externalRefType": "vcs",
+      "locator": [
+       "https://github.com/acme/my-app"
+      ]
+     }
+    ],
+    "validUntilTime": "2030-01-01T00:00:00Z",
+    "originatedBy": [
+     "urn:acme:agent"
+    ],
+    "externalIdentifiers": [
+     {
+      "externalIdentifierType": "packageURL",
+      "identifier": "pkg:pypi/my-app@1.2.3"
+     }
+    ]
+   }
+  ]
+ }
+}

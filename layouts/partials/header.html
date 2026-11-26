@@ -1,28 +1,138 @@
-<header class="sticky top-0 z-50 bg-canvas">
-  <div class="max-w-7xl mx-auto px-6 py-4">
-    <div class="flex justify-between items-center bg-canvas rounded-full px-6 py-3 border border-line shadow-card">
-      <div class="flex gap-10 items-center">
-        <a href="/" class="hover:opacity-80 transition-opacity">
-          {{/* Navy on white: the default colourway */}}
-          {{ $logo := resources.Get "images/site/logo-navy.svg" }}
-          {{ if $logo }}
-          {{ $logo = $logo | fingerprint }}
-          <img src="{{ $logo.RelPermalink }}" alt="sbomify logo" class="h-7" width="128" height="24" />
+{{/* Header, as on sbomify Insights: sticky, clear over the hero so the
+     nebula runs under it, frosted once the page scrolls (assets/js/main.js
+     sets .is-scrolled). The navy "Start free" leaves the page's one orange
+     moment to the page itself.
+
+     Navigation comes from data/main.yml. An entry with an "id" opens a
+     megamenu: link columns plus a feature card (layouts/partials/mega/).
+     Without JavaScript the menus open on hover and keyboard focus; main.js
+     adds .mega-ready and takes over (click, hover intent, Escape). */}}
+{{ $page := . }}
+{{ $here := $page.RelPermalink }}
+{{ $logo := resources.Get "images/site/logo-navy.svg" | fingerprint }}
+
+{{/* Which top-level entry holds this page: an exact link match first (so
+     /features/security-advisories/ lights Product, its first home), then
+     the longest path prefix; blog posts belong to Resources. */}}
+{{ $current := "" }}
+{{ range site.Data.main.nav }}
+  {{ $n := . }}
+  {{ if and (not $current) (eq .link $here) }}{{ $current = $n.name }}{{ end }}
+  {{ range .columns }}{{ range .items }}
+    {{ if and (not $current) (eq .link $here) }}{{ $current = $n.name }}{{ end }}
+  {{ end }}{{ end }}
+{{ end }}
+{{ if not $current }}
+  {{ $best := 0 }}
+  {{ range site.Data.main.nav }}
+    {{ $n := . }}
+    {{ $links := slice }}
+    {{ with .link }}{{ $links = $links | append . }}{{ end }}
+    {{ range .columns }}{{ range .items }}{{ $links = $links | append .link }}{{ end }}{{ end }}
+    {{ range $links }}
+      {{ if and (hasPrefix . "/") (gt (len .) $best) (hasPrefix $here .) }}{{ $best = len . }}{{ $current = $n.name }}{{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if and (not $current) (eq $page.Section "posts") }}{{ $current = "Resources" }}{{ end }}
+{{ end }}
+
+<header class="ins ins-header" data-header>
+  <div class="wrap">
+    <a class="brand" href="/">
+      <img src="{{ $logo.RelPermalink }}" alt="sbomify logo" width="117" height="22">
+    </a>
+
+    <nav class="nav" aria-label="Main navigation">
+      <ul class="nav-list">
+        {{ range site.Data.main.nav }}
+        {{ $n := . }}
+        {{ $active := eq .name $current }}
+        {{ if .id }}
+        <li class="nav-item" data-mega>
+          <button class="nav-trigger{{ if $active }} is-current{{ end }}" type="button" aria-expanded="false" aria-controls="mega-{{ .id }}">
+            {{ .name }}{{ partial "ph.html" (dict "name" "caret-down" "class" "nav-caret") }}
+          </button>
+          <div class="mega" id="mega-{{ .id }}" data-mega-id="{{ .id }}">
+            <div class="mega-body">
+              {{ if and .feature .feature_first }}<div class="mega-feature">{{ partial (printf "mega/feature-%s.html" .feature) $page }}</div>{{ end }}
+              {{ $i := 0 }}
+              {{ range .columns }}
+              <div class="mega-col{{ if .wide }} is-wide{{ end }}">
+                <p class="mega-heading">{{ .heading }}</p>
+                <div class="mega-links">
+                  {{ range .items }}{{ partial "mega/link.html" (dict "item" . "i" $i) }}{{ $i = add $i 1 }}{{ end }}
+                </div>
+              </div>
+              {{ end }}
+              {{ if and .feature (not .feature_first) }}<div class="mega-feature">{{ partial (printf "mega/feature-%s.html" .feature) $page }}</div>{{ end }}
+            </div>
+            {{ with .foot }}
+            {{ $href := partial "mega/href.html" .link }}
+            <div class="mega-foot">
+              <p>{{ .text }}</p>
+              <a href="{{ $href }}"{{ partial "link-attrs.html" $href }}{{ if eq .link "demo" }} data-cta-location="mega_menu" data-cta-label="{{ .label }}"{{ end }}>{{ .label }}{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}</a>
+            </div>
+            {{ end }}
+          </div>
+        </li>
+        {{ else }}
+        <li class="nav-item"><a class="nav-trigger" href="{{ .link }}"{{ if $active }} aria-current="page"{{ end }}>{{ .name }}</a></li>
+        {{ end }}
+        {{ end }}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="signin-link" href="{{ site.Params.signinURL }}" data-cta-location="header" data-cta-label="Sign in" data-cta-intent="signin">Sign in</a>
+      <a class="btn-secondary btn-md" href="{{ site.Params.demoURL }}" data-cta-location="header" data-cta-label="Book a demo">Book a demo</a>
+      <a class="btn-navy btn-md" href="{{ site.Params.signupURL }}" data-cta-location="header" data-cta-label="Start free">Start free</a>
+      {{/* Three staggered bars, the emblem's shape; they fold into a cross when open. */}}
+      <button class="menu-toggle open-menu" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="menu-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+  </div>
+
+  {{/* Dims and softens the page under an open megamenu; a click closes it. */}}
+  <div class="mega-scrim" aria-hidden="true"></div>
+
+  {{/* The phone menu: each megamenu becomes a native disclosure; the one that
+       holds this page starts open. */}}
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <div class="wrap">
+      <nav aria-label="Mobile navigation">
+        <ul class="mobile-primary">
+          {{ range site.Data.main.nav }}
+          {{ $active := eq .name $current }}
+          {{ if .id }}
+          <li>
+            <details class="m-group"{{ if $active }} open{{ end }}>
+              <summary>{{ .name }}{{ partial "ph.html" (dict "name" "caret-down" "class" "nav-caret") }}</summary>
+              <ul class="m-links">
+                {{ if eq .id "cra" }}<li><a href="/cra/"{{ if eq $here "/cra/" }} aria-current="page"{{ end }}>{{ partial "ph.html" (dict "name" "shield-star" "weight" "duotone") }}sbomify for the CRA</a></li>{{ end }}
+                {{ if eq .id "customers" }}
+                  {{ range (where site.RegularPages "Section" "case-studies").ByDate.Reverse }}
+                  <li><a href="{{ .RelPermalink }}"{{ if eq $here .RelPermalink }} aria-current="page"{{ end }}>{{ partial "ph.html" (dict "name" "identification-card" "weight" "duotone") }}{{ .Params.company | default .Title }}</a></li>
+                  {{ end }}
+                  <li><a href="/case-studies/"{{ if eq $here "/case-studies/" }} aria-current="page"{{ end }}>{{ partial "ph.html" (dict "name" "arrow-right" "weight" "duotone") }}All case studies</a></li>
+                {{ end }}
+                {{ range .columns }}{{ range .items }}
+                {{ $href := partial "mega/href.html" .link }}
+                <li><a href="{{ $href }}"{{ partial "link-attrs.html" $href }}{{ if eq $here .link }} aria-current="page"{{ end }}>{{ partial "ph.html" (dict "name" .icon "weight" "duotone") }}{{ .name }}</a></li>
+                {{ end }}{{ end }}
+              </ul>
+            </details>
+          </li>
           {{ else }}
-          <img src="/assets/images/site/logo-navy.svg" alt="sbomify logo" class="h-7" width="128" height="24" />
+          <li><a class="m-plain" href="{{ .link }}"{{ if $active }} aria-current="page"{{ end }}>{{ .name }}</a></li>
           {{ end }}
-        </a>
-      </div>
-      <div class="flex gap-2 items-center">
-        <div class="flex items-center gap-1">
-          {{ partial "nav.html" . }}
-        </div>
-        <div class="hidden lg:flex items-center gap-2 ml-2">
-          <a href="{{ site.Params.signinURL }}" class="px-3 py-2 text-sm font-medium text-ink-muted hover:text-ink transition-colors" data-cta-location="header" data-cta-label="Sign in" data-cta-intent="signin">Sign in</a>
-          <a href="{{ site.Params.demoURL }}" class="btn-secondary btn-md" data-cta-location="header" data-cta-label="Book a demo">Book a demo</a>
-          <a href="{{ site.Params.signupURL }}" class="btn-primary btn-md" data-cta-location="header" data-cta-label="Start free">Start free</a>
-        </div>
-        {{ partial "nav-mobile.html" . }}
+          {{ end }}
+        </ul>
+      </nav>
+      <div class="mobile-actions">
+        <a class="btn-navy btn-lg" href="{{ site.Params.signupURL }}" data-cta-location="mobile_menu" data-cta-label="Start free">Start free</a>
+        <a class="btn-secondary btn-lg" href="{{ site.Params.demoURL }}" data-cta-location="mobile_menu" data-cta-label="Book a demo">Book a demo</a>
+        <a class="mobile-signin" href="{{ site.Params.signinURL }}" data-cta-location="mobile_menu" data-cta-label="Sign in" data-cta-intent="signin">Sign in</a>
       </div>
     </div>
   </div>

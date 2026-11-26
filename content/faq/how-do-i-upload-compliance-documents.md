@@ -14,7 +14,7 @@ url: /faq/how-do-i-upload-compliance-documents/
 
 ## Uploading compliance documents
 
-sbomify treats compliance documents - such as SOC 2 Type II reports, ISO 27001 certificates, CE certificates, and other attestations - as **Document components**. Like SBOM components they hold versioned artifacts, but their content is a document instead of an SBOM. PDF, Word, text, and markdown files all work. Marking the component as **workspace-wide** means it is not tied to one product, so a single SOC 2 report can serve every product that needs it, without re-uploading. A workspace-wide document can also earn a badge on your Trust Center.
+sbomify treats compliance documents - such as SOC 2 Type II reports, ISO 27001 certificates, CE certificates, and other attestations - as **Document components**. Like SBOM components they hold versioned artifacts, but their content is a document instead of an SBOM. PDF, Word, text, and markdown files all work. Marking the component as **workspace-wide** means it is not tied to one product, so a single SOC 2 report can serve every product that needs it, without re-uploading. Only workspace-wide documents earn a certification badge on your Trust Center.
 
 To upload a compliance document:
 
@@ -24,7 +24,7 @@ To upload a compliance document:
 4. Fill in the **Version** (e.g. `2024`), pick a **Document type** (e.g. `Compliance`) and a subcategory (e.g. `SOC 2 Type II`), and add a short **Description**
 5. Drop in the file, or click to browse, then click **Save document**
 
-The uploaded document appears in the component's documents table, with its type and version. To show it on your [Trust Center](/faq/what-is-a-trust-center/), set the component's visibility to **Public** or **Gated** (see [How do I set up a Trust Center?](/faq/how-do-i-set-up-a-trust-center/)).
+The uploaded document appears in the component's documents table, with its type and version. To show it on your [Trust Center](/faq/what-is-a-trust-center/), set the component's visibility to **Public** or **Gated** (see [How do I set up a Trust Center?](/faq/how-do-i-set-up-a-trust-center/)). If you would rather attach a document to specific products, leave **Workspace-wide component** unticked and assign the component to those products instead.
 
 ## Further reading
 

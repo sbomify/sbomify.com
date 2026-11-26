@@ -16,11 +16,11 @@ That question is becoming urgent. Migrating to post-quantum cryptography starts 
 
 ## What sbomify does with CBOMs
 
-- **Auto-detection, whatever produced it.** Upload a CycloneDX document containing cryptographic assets and sbomify automatically classifies it as a CBOM, no special flag needed. Every CBOM lineage is ingested, and assets are normalized against the CycloneDX 1.7 cryptographic registry, so output from different generators lands in the same shape instead of depending on which tool you happened to use. You can also be explicit with `BOM_TYPE: cbom` in [sbomify-action](https://github.com/sbomify/sbomify-action), which uploads the document verbatim.
+- **Auto-detection, whatever produced it.** Upload a CycloneDX document made up of cryptographic assets and sbomify automatically classifies it as a CBOM, no special flag needed. An ordinary SBOM that also embeds some crypto assets stays an SBOM, so it keeps its SBOM checks, but it still gets the crypto inventory and post-quantum assessment. Every CBOM lineage is ingested, and assets are normalized against the CycloneDX 1.7 cryptographic registry, so output from different generators lands in the same shape instead of depending on which tool you happened to use. You can also be explicit with `BOM_TYPE: cbom` in [sbomify-action](https://github.com/sbomify/sbomify-action), which uploads the document verbatim.
 - **Crypto-asset inventory.** The document detail page renders an inventory of the cryptographic assets found: algorithms, key sizes, certificates, and protocols.
 - **Post-quantum readiness.** The PQC readiness assessment plugin classifies each asset against NIST guidance and gives your component a post-quantum posture view, so you can see at a glance which algorithms are quantum-vulnerable and where.
 - **Workspace-level crypto posture.** The **Cryptography** page in the sidebar grades every component for quantum readiness, so post-quantum readiness is visible across the estate rather than one component at a time.
-- **Trust Center distribution.** CBOMs appear on your public release pages next to SBOMs and VEX, with the same access controls, and are exposed through the [Transparency Exchange API](/faq/how-do-i-enable-tea-in-sbomify/) as a supported artifact type.
+- **Trust Center distribution.** CBOMs appear on your public release pages next to SBOMs and VEX, with the same access controls, and are exposed through the [Transparency Exchange API](/faq/how-do-i-enable-tea-in-sbomify/) as BOM artifacts.
 
 ## The Cryptography page
 

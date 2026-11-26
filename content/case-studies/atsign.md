@@ -7,6 +7,22 @@ url: /case-studies/atsign/
 aliases:
   - /case-studies/atsign
 logo: /assets/images/site/atsign-logo-horizontal-color2022.svg
+company: Atsign
+headline: "Working towards NTIA compliance"
+summary: "From lock-file SBOMs to NTIA-compliant ones for its secure communications platform."
+logo_width: 150
+logo_height: 48
+uses:
+  - name: The sbomify GitHub Action
+    url: /sbomify-action/
+  - name: Augmentation and enrichment
+    url: /features/integrations/#augmentation
+  - name: The sbomify badge
+quote:
+  text: "Using sbomify has hugely accelerated our work on NTIA compliance. Viktor has also been leading a group that's creating standards for making SBOMs. This gives us confidence that sbomify will become a platform that follows industry practices as they emerge."
+  name: Chris Swan
+  role: Engineer, Atsign
+  avatar: images/chris.png
 ---
 
 ## About Atsign
@@ -54,8 +70,8 @@ Whilst working together on SBOM quality and visibility, opportunities have
 arisen to take on broader issues in the SBOM arena, such as the difficulty
 in generating SBOMs for C based projects.
 
-<div class="quote-container bg-surface p-6 my-8 rounded-lg border-l-4 border-ink">
-    <p class="italic text-navy-80">
+<div class="quote-container my-8">
+    <p class="text-lg font-medium tracking-heading text-ink">
         "Working with Viktor and the team at sbomify has been a pleasure.
         Using sbomify has hugely accelerated our work on NTIA compliance. Viktor
         has also been leading a group that's creating standards for making SBOMs.

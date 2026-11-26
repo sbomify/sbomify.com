@@ -8,12 +8,12 @@
 {{- $page := .page -}}
 {{- if partial "toc-enabled.html" $page -}}
 {{- if eq .mode "inline" -}}
-<details class="toc toc-inline xl:hidden mb-10 rounded-xl border border-line bg-surface">
-  <summary class="eyebrow cursor-pointer select-none px-5 py-4">On this page</summary>
-  <div class="px-5 pb-5">{{ $page.TableOfContents }}</div>
+<details class="toc toc-inline xl:hidden mb-10 border-y border-line">
+  <summary class="eyebrow cursor-pointer select-none py-4">On this page</summary>
+  <div class="pb-5">{{ $page.TableOfContents }}</div>
 </details>
 {{- else if eq .mode "aside" -}}
-<aside class="toc toc-aside hidden xl:block w-64 shrink-0 sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto" aria-label="On this page">
+<aside class="toc toc-aside hidden xl:block w-60 shrink-0 sticky top-[calc(var(--header-h)+2rem)] max-h-[calc(100vh-var(--header-h)-4rem)] overflow-y-auto border-l border-line pl-6" aria-label="On this page">
   <p class="eyebrow mb-4">On this page</p>
   {{ $page.TableOfContents }}
 </aside>

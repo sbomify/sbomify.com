@@ -2,14 +2,18 @@
 <html lang="en">
   {{ partial "head.html" . }}
 
-  <body>
+  <body id="top" class="flex flex-col min-h-screen">
+    <a class="skip-link" href="#main">Skip to content</a>
     {{ partial "header.html" . }}
-    <main class="body">
+    <main id="main" class="body flex-[1_0_auto]">
       {{ block "main" . }}{{ end }}
     </main>
     {{ partial "footer.html" . }}
     {{ partial "cookie-consent.html" . }}
     {{ $js := resources.Get "js/main.js" | minify | fingerprint }}
     <script src="{{ $js.RelPermalink }}" defer></script>
+    {{/* The nebula shader starts after the load event; see the file. */}}
+    {{ $neb := resources.Get "js/nebula.js" | minify | fingerprint }}
+    <script src="{{ $neb.RelPermalink }}" defer></script>
   </body>
 </html>

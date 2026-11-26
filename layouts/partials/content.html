@@ -27,8 +27,14 @@
         fingerprinted copy of the file, so an updated image is not served
         stale from caches (the pages are cached for hours).
 
+     4. A link whose text ends in " →" (a Markdown call to action such as
+        [View all guides →](/guides/)) gets the Phosphor arrow instead of the
+        glyph. The source and its index.md copy keep the →.
+
      Every layout renders page content through this partial, so anything that
      has to apply site-wide to rendered content belongs here rather than in
      each layout. */ -}}
 {{- $html := partial "nofollow-links.html" .Content | partial "fingerprint-assets.html" -}}
+{{- $arrow := partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") -}}
+{{- $html = replaceRE `(?:\s|&nbsp;|&#160;)*(?:→|&rarr;)</a>` (printf "%s</a>" $arrow) (string $html) -}}
 {{- printf "<!--email_off-->%s<!--email_on-->" $html | safeHTML -}}

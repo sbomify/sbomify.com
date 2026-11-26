@@ -24,34 +24,33 @@
 }
 </script>
 <div>
-  <div class="hero px-5 py-16 lg:py-24 lg:px-24">
-
-    <div class="relative max-w-4xl mx-auto text-center">
-      <h1 class="text-ink text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+  <div class="hero">
+      <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap pt-10 lg:pt-16 pb-12 lg:pb-16">
+      <h1 class="text-ink mb-6 max-w-[16ch]">
         {{ .Title }}
       </h1>
       {{ with .Params.description }}
-      <p class="text-ink-muted text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
+      <p class="lede max-w-3xl">
         {{ . }}
       </p>
       {{ end }}
     </div>
   </div>
 
-  <div class="bg-surface">
-    <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-      <article class="page bg-canvas p-8 md:p-12 rounded-2xl shadow-card border border-line mb-16">
+  <div class="wrap">
+    <div class="section-rule pt-12 lg:pt-16">
+      <article class="page read">
         {{ partial "content.html" . }}
       </article>
 
       {{/* Advisors Section */}}
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl lg:text-4xl font-bold text-ink mb-12 text-center">Advisors</h2>
+      <div class="section">
+        <h2 class="section-title mb-10">Advisors</h2>
 
-        <div class="flex flex-col gap-8">
+        <div class="grid md:grid-cols-2 gap-x-12">
           {{ range $i, $advisor := site.Data.advisors }}
-            {{ $mod := mod (add $i 1) 2 }}
-            <div class="bg-canvas p-8 md:p-10 rounded-2xl shadow-card border border-line flex flex-col {{ if eq $mod 0 }}md:flex-row-reverse{{ else }}md:flex-row{{ end }} items-center gap-8 md:gap-12 transition-colors">
+            <div class="border-t border-line py-8 flex flex-col sm:flex-row items-start gap-6">
 
               <div class="flex-shrink-0">
                 {{ $imgPath := strings.TrimPrefix "/assets/" $advisor.image }}
@@ -60,25 +59,25 @@
                   {{ $webp := $img.Process "fit 256x256 webp q80" }}
                   <picture>
                     <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
-                    <img src="{{ $img.RelPermalink }}" alt="{{ $advisor.name }}" class="w-32 h-32 object-cover !m-0 grayscale hover:grayscale-0 transition-all duration-500" width="128" height="128" loading="lazy">
+                    <img src="{{ $img.RelPermalink }}" alt="{{ $advisor.name }}" class="w-24 h-24 rounded-2xl object-cover !m-0 grayscale hover:grayscale-0 transition-all duration-500" width="128" height="128" loading="lazy">
                   </picture>
                 {{ else }}
-                  <img src="{{ $advisor.image }}" alt="{{ $advisor.name }}" class="w-32 h-32 object-cover !m-0 grayscale hover:grayscale-0 transition-all duration-500" width="128" height="128" loading="lazy">
+                  <img src="{{ $advisor.image }}" alt="{{ $advisor.name }}" class="w-24 h-24 rounded-2xl object-cover !m-0 grayscale hover:grayscale-0 transition-all duration-500" width="128" height="128" loading="lazy">
                 {{ end }}
               </div>
 
               <div class="text-left flex-grow">
-                <div class="flex items-center gap-3 mb-2">
-                  <h3 class="text-2xl font-bold text-ink !mt-0 !mb-0">{{ $advisor.name }}</h3>
+                <div class="flex items-center gap-3 mb-1">
+                  <h3 class="text-xl font-bold tracking-heading text-ink !mt-0 !mb-0">{{ $advisor.name }}</h3>
                   {{ with $advisor.linkedin }}
-                    <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center text-[#0077b5] hover:text-[#006097] transition-colors" title="{{ $advisor.name }} on LinkedIn">
-                      {{ partial "icon.html" (dict "name" "linkedin" "class" "w-5 h-5") }}
+                    <a href="{{ . }}"{{ partial "link-attrs.html" (dict "url" . "rel" "noopener noreferrer" "target" "_blank") }} class="inline-flex items-center text-ink-subtle hover:text-ink transition-colors" title="{{ $advisor.name }} on LinkedIn">
+                      {{ partial "icon.html" (dict "name" "linkedin" "class" "w-[18px] h-[18px]") }}
                       <span class="sr-only">{{ $advisor.name }} on LinkedIn</span>
                     </a>
                   {{ end }}
                 </div>
-                <p class="text-ink-muted font-semibold text-sm uppercase tracking-eyebrow mb-4">{{ $advisor.role }}</p>
-                <p class="text-ink-muted leading-relaxed mb-0 text-lg">
+                <p class="eyebrow mb-3">{{ $advisor.role }}</p>
+                <p class="text-ink-muted leading-relaxed mb-0 text-base">
                   {{ $advisor.bio }}
                 </p>
               </div>

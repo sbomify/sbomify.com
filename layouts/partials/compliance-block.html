@@ -1,26 +1,30 @@
-<div class="bg-inverse rounded-[40px] p-8 md:p-16 relative overflow-hidden mb-24 shadow-raised">
+{{/* Navy panel with the nebula's embers: heading left, the two points as
+     hairline rows on the right. The !-utilities hold against the prose rules
+     (.page h2/h4/p/a) of the content pages that embed it. */}}
+<div class="panel-dark p-6 sm:p-10 lg:p-14 mb-24">
+    <div class="grid lg:grid-cols-5 gap-10 lg:gap-14">
+        <div class="lg:col-span-2">
+            <h2 class="!text-3xl lg:!text-4xl !font-extrabold !tracking-display !leading-[1.08] !mt-0 !mb-6 !text-white text-balance">Disclosure the CRA expects</h2>
+            <p class="!text-on-inverse-muted !text-lg !leading-relaxed !m-0">
+                Regulations like the <strong class="!text-white">EU Cyber Resilience Act (CRA)</strong> and <strong class="!text-white">US Executive Order 14028</strong> expect manufacturers to tell customers what is in their software and which vulnerabilities affect it. A Trust Center is where you do that, release after release.
+            </p>
+        </div>
 
-    <div class="relative z-10 max-w-4xl mx-auto text-center">
-        <h2 class="text-4xl font-bold mb-8 !text-white">Disclosure the CRA expects</h2>
-        <p class="!text-on-inverse-muted text-lg mb-12 leading-relaxed max-w-2xl mx-auto">
-            Regulations like the <strong class="!text-white">EU Cyber Resilience Act (CRA)</strong> and <strong class="!text-white">US Executive Order 14028</strong> expect manufacturers to tell customers what is in their software and which vulnerabilities affect it. A Trust Center is where you do that, release after release.
-        </p>
-
-        <div class="grid md:grid-cols-2 gap-6 text-left">
-            <div class="bg-inverse-raised p-8 rounded-3xl border border-white/10 flex flex-col h-full">
-                <div class="flex items-start gap-3 mb-4">
+        <div class="lg:col-span-3 border-t border-white/15 text-left">
+            <div class="py-7 border-b border-white/15">
+                <div class="flex items-start gap-3 mb-3">
                     <span class="w-2 h-2 rounded-full bg-accent mt-2.5 flex-shrink-0"></span>
-                    <h4 class="font-bold !text-white text-lg m-0 !mt-0 !mb-0 leading-tight">Built for the EU CRA</h4>
+                    <h4 class="font-bold !text-white !text-lg !m-0 !leading-tight">Built for the EU CRA</h4>
                 </div>
-                <p class="leading-relaxed m-0 !text-on-inverse-muted !mb-0 flex-grow">Publish SBOMs, security advisories and your vulnerability disclosure policy, the parts of the CRA that face your customers. See <a href="/cra/" class="!text-white underline">what sbomify covers</a>.</p>
+                <p class="!leading-relaxed !m-0 !text-on-inverse-muted !text-base pl-5">Publish SBOMs, security advisories and your vulnerability disclosure policy, the parts of the CRA that face your customers. See <a href="/guides/cra-obligations/" class="!text-white underline underline-offset-[3px] decoration-white/40 hover:decoration-white">what sbomify covers</a>.</p>
             </div>
 
-            <div class="bg-inverse-raised p-8 rounded-3xl border border-white/10 flex flex-col h-full">
-                <div class="flex items-start gap-3 mb-4">
+            <div class="py-7 border-b border-white/15">
+                <div class="flex items-start gap-3 mb-3">
                     <span class="w-2 h-2 rounded-full bg-accent mt-2.5 flex-shrink-0"></span>
-                    <h4 class="font-bold !text-white text-lg m-0 !mt-0 !mb-0 leading-tight">NIST & NTIA Aligned</h4>
+                    <h4 class="font-bold !text-white !text-lg !m-0 !leading-tight">NIST & NTIA Aligned</h4>
                 </div>
-                <p class="leading-relaxed m-0 !text-on-inverse-muted !mb-0 flex-grow">Supports minimum elements, VEX, and standard formats required for federal procurement.</p>
+                <p class="!leading-relaxed !m-0 !text-on-inverse-muted !text-base pl-5">Supports minimum elements, VEX, and standard formats required for federal procurement.</p>
             </div>
         </div>
     </div>

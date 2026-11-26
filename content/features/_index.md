@@ -15,6 +15,10 @@ Streamline your SBOM workflow from creation to analysis. Our comprehensive tools
 
 Turn transparency into a competitive advantage. Share SBOMs, VEX statements, and security certifications (like SOC 2 and ISO 27001) with stakeholders through a branded, automated portal. Support for both public transparency and private, invited access ensures you stay in control. [Explore Trust Center →](/features/trust-center/)
 
+### Security Advisories
+
+Answer "are we affected?" once. Write security advisories with CVSS, per-product affected and fixed versions, and a dated timeline, then publish them on your Trust Center with per-product gating, a CSAF 2.0 feed, and security.txt. [Explore Security Advisories →](/features/security-advisories/)
+
 ### SBOM Hierarchy
 
 Understand complex relationships between your software components with our hierarchical view. Map dependencies across your entire software portfolio and identify potential vulnerabilities at any level. [Discover SBOM Hierarchy →](/features/sbom-hierarchy/)

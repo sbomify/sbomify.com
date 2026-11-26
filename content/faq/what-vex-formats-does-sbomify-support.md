@@ -20,9 +20,11 @@ sbomify ingests VEX documents in the three formats that matter in practice, and 
 
 One nuance worth knowing: `not_affected` statements suppress findings from all three formats, while the `false_positive` analysis state is specific to CycloneDX.
 
+SPDX 3.0 SBOMs can also carry VEX inside the document itself (Yocto writes its `CVE_STATUS` this way). sbomify reads those embedded not-affected and fixed statements and applies them to that SBOM's own findings, with no separate upload needed.
+
 ## How to upload
 
-- **In the app.** Use the upload panel on the component page. VEX artifacts are listed next to SBOMs with their own badge.
+- **In the app.** Use the upload panel on the component page. VEX artifacts are listed next to SBOMs with their own badge. Tick **Send for approval first** to hold the VEX in the review queue until someone approves it.
 - **Via the API.** CycloneDX VEX goes to the CycloneDX artifact endpoint with `bom_type=vex`; OpenVEX and CSAF documents go to the format-agnostic `/api/v1/sboms/artifact/vex/` endpoint, which detects the format for you.
 - **From CI.** Set `BOM_TYPE: vex` in your [sbomify-action](https://github.com/sbomify/sbomify-action) step. The document is uploaded verbatim, byte for byte, with no modification.
 

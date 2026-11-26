@@ -82,7 +82,7 @@ These map onto [Common Lifecycle Enumeration](/compliance/cle/), and let downstr
 
 The [NTIA Minimum Elements](/compliance/ntia-minimum-elements/) require a supplier name and an author of the SBOM data. The [EU Cyber Resilience Act](/compliance/eu-cra/) expects a documented vulnerability reporting channel and a defined support period. None of that can be inferred from a lockfile - a scanner has no way to know it.
 
-Augmentation is how those fields get populated, and it is the difference between an SBOM that passes a procurement review and one that gets sent back.
+Augmentation is how those fields get populated, and it is the difference between an SBOM that passes a procurement review and one that gets sent back. To see which of them an SBOM is missing, run it through the free [SBOM checker](/tools/sbom-checker/): each failed element links back to the field here that fixes it.
 
 ## Where values come from
 

@@ -1,0 +1,5 @@
+{{- /* A nav link from data/main.yml: a path, or "demo"/"slack" for the
+       site's demo booking and Slack invite. Returns the URL. */ -}}
+{{- $l := . -}}
+{{- if eq $l "demo" }}{{ $l = site.Params.demoURL }}{{ else if eq $l "slack" }}{{ $l = site.Data.main.social.slack }}{{ end -}}
+{{- return $l -}}

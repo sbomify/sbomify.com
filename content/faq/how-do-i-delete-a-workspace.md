@@ -1,8 +1,8 @@
 ---
 title: "How do I delete a workspace?"
 description: "Step-by-step guide to deleting a workspace in sbomify, including what happens to your data."
-answer: "Open Settings, stay on the General tab, expand the Danger zone at the bottom and click Delete workspace. Type 'delete' to confirm. Only the workspace owner can do this, and it permanently removes every product, component and artifact in the workspace."
-tldr: "Open Settings, stay on the General tab, expand the Danger zone at the bottom and click Delete workspace. Type 'delete' to confirm. Only the workspace owner can do this, and it permanently removes every product, component and artifact in the workspace."
+answer: "Open Settings, stay on the General tab, expand the Danger zone at the bottom and click Delete workspace. Type 'delete' to confirm. Only the workspace owner can do this, and it permanently removes every product, component and artifact in the workspace. You cannot delete your default workspace."
+tldr: "Open Settings, stay on the General tab, expand the Danger zone at the bottom and click Delete workspace. Type 'delete' to confirm. Only the workspace owner can do this, and it permanently removes every product, component and artifact in the workspace. You cannot delete your default workspace."
 weight: 80
 keywords: [delete workspace, remove workspace, sbomify workspace, workspace settings]
 url: /faq/how-do-i-delete-a-workspace/
@@ -20,6 +20,8 @@ Only the workspace owner can delete a workspace. To delete one:
 2. Stay on the **General** tab and scroll to the bottom
 3. Expand the **Danger zone** and click **Delete workspace**
 4. In the confirmation dialog, type `delete` and click **Delete workspace**
+
+You cannot delete your default workspace. Set another workspace as your default first.
 
 You land back on the dashboard of your default workspace.
 

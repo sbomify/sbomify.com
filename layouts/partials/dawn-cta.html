@@ -1,0 +1,33 @@
+{{- /* The final call to action: a sunrise over a curved horizon, full width,
+       the page's one big orange moment. CSS: "final call to action: dawn" in
+       _assets/css/tailwind.css; the sky and ground nebulas are the "dawn" and
+       "ground" variants in assets/js/nebula.js.
+
+       From content: {{< dawn-cta title="…" text="…" location="home_final" >}}
+       From a template: partial "dawn-cta.html" (dict "title" … "text" … "location" …)
+       kicker defaults to "Ready when you are"; location is the analytics
+       data-cta-location of both buttons. */ -}}
+{{- $loc := .location | default "page_final" -}}
+{{- $sky := resources.Get "images/nebula/nebula-dawn.webp" | fingerprint -}}
+{{- $ground := resources.Get "images/nebula/nebula-ground.webp" | fingerprint -}}
+<section class="dawn" id="start" data-nebula="dawn" style="background-image: url('{{ $sky.RelPermalink }}')">
+    <div class="dawn-sun" aria-hidden="true"></div>
+    <div class="dawn-horizon" aria-hidden="true"></div>
+    <div class="dawn-ground" aria-hidden="true" data-nebula="ground" style="background-image: url('{{ $ground.RelPermalink }}')"></div>
+    <div class="wrap dawn-copy">
+        <span class="kicker">{{ .kicker | default "Ready when you are" }}</span>
+        <h2>{{ .title }}</h2>
+        {{- with .text }}
+        <p>{{ . }}</p>
+        {{- end }}
+        <div class="dawn-actions">
+            <a class="btn-navy btn-lg" href="https://app.sbomify.com/enterprise-contact/" data-cta-location="{{ $loc }}" data-cta-label="Book a demo">Book a demo</a>
+            <a class="btn-secondary btn-lg" href="https://app.sbomify.com" data-cta-location="{{ $loc }}" data-cta-label="Start free">Start free</a>
+        </div>
+        <ul class="dawn-notes">
+            <li>{{ partial "ph.html" (dict "name" "check" "weight" "bold") }}Free to start</li>
+            <li>{{ partial "ph.html" (dict "name" "check" "weight" "bold") }}Open source</li>
+            <li>{{ partial "ph.html" (dict "name" "check" "weight" "bold") }}Cloud or self-hosted</li>
+        </ul>
+    </div>
+</section>

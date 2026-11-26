@@ -1,0 +1,44 @@
+{{- /* {{< home-posts >}}: the home page's blog block. The latest weekly
+       roundup (category "news") as a large card, beside the latest post
+       that isn't a roundup and the latest from another category after it,
+       so the three never repeat a type. */ -}}
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+{{- $news := where $posts ".Params.categories" "intersect" (slice "news") -}}
+{{- $rest := complement $news $posts -}}
+{{- $first := index $rest 0 -}}
+{{- $later := after 1 $rest -}}
+{{- $same := where $later ".Params.categories" "intersect" ($first.Params.categories | default slice) -}}
+{{- $other := complement $same $later -}}
+{{- $side := slice $first (index $other 0) -}}
+{{- $authors := site.Data.authors -}}
+{{- define "partials/home-post-author.html" -}}
+  {{- $name := .name -}}
+  {{- $img := "" -}}
+  {{- range .authors }}{{ if eq .display_name $name }}{{ $img = .image }}{{ end }}{{ end -}}
+  <span class="post-by">
+    {{- with and $img (resources.Get (strings.TrimPrefix "/assets/" $img)) -}}
+      {{- $s := .Process "fill 64x64 Center webp q80" -}}
+      <img src="{{ $s.RelPermalink }}" alt="" width="24" height="24" loading="lazy" decoding="async">
+    {{- else -}}
+      <span class="post-initial" aria-hidden="true"><span>{{ substr $name 0 1 }}</span></span>
+    {{- end -}}
+    {{ $name }}
+  </span>
+{{- end -}}
+<div class="posts" data-reveal>
+  {{- with index $news 0 }}
+  <a class="post post-feature" href="{{ .RelPermalink }}">
+    <span class="post-top"><span class="post-tag post-series">{{ partial "ph.html" (dict "name" "newspaper" "weight" "bold") }}This Week in SBOMs</span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></span>
+    <h3>{{ replaceRE `^This Week in SBOMs:\s*` "" .Title }}</h3>
+    <p>{{ (.Params.tldr | default .Summary) | plainify | truncate 220 "…" }}</p>
+    <span class="post-foot">{{ with .Params.author }}{{ with .display_name }}{{ partial "home-post-author.html" (dict "name" . "authors" $authors) }}{{ end }}{{ end }}<b>Read the roundup{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}</b></span>
+  </a>
+  {{- end }}
+  {{- range $side }}
+  <a class="post" href="{{ .RelPermalink }}">
+    <span class="post-top">{{ with .GetTerms "categories" }}<span class="post-tag">{{ (index . 0).LinkTitle }}</span>{{ end }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></span>
+    <h3>{{ .Title }}</h3>
+    <span class="post-foot">{{ with .Params.author }}{{ with .display_name }}{{ partial "home-post-author.html" (dict "name" . "authors" $authors) }}{{ end }}{{ end }}<b>Read{{ partial "ph.html" (dict "name" "arrow-right" "class" "ph-go") }}</b></span>
+  </a>
+  {{- end }}
+</div>

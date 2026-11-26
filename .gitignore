@@ -6,3 +6,8 @@ public
 resources
 node_modules
 .claude/worktrees
+
+# SBOM checker build output (bun run build:tools)
+static/js/sbom-checker/
+data/sbom_checker.json
+_tools/sbom-checker/src/schema/generated/

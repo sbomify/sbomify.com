@@ -1,20 +1,21 @@
 {{ define "main" }}
 {{ if not .Params.author_key }}
   {{/* Section index page – not an individual author */}}
-  <div class="hero px-5 py-16 lg:py-24 lg:px-24">
-    <div class="relative max-w-4xl mx-auto text-center">
-      <h1 class="text-ink text-[40px] lg:text-[68px] leading-[48px] lg:leading-[78px] mb-6">
+  <div class="hero">
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap pt-10 lg:pt-16 pb-10 lg:pb-14">
+      <h1 class="text-ink">
         Authors
       </h1>
     </div>
   </div>
-  <div class="bg-surface">
-    <div class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-      <div class="flex flex-col gap-8">
+  <div class="wrap">
+    <div class="pb-16 lg:pb-24">
+      <div class="rows">
         {{ range .Pages }}
           {{ $author := index site.Data.authors .Params.author_key }}
           {{ if $author }}
-          <a href="{{ .RelPermalink }}" class="bg-canvas p-8 md:p-10 rounded-2xl shadow-card border border-line flex flex-col md:flex-row items-center gap-8 md:gap-12 transition-all duration-300 hover:border-line-strong hover:shadow-raised no-underline">
+          <a href="{{ .RelPermalink }}" class="group py-8 flex flex-col md:flex-row md:items-center gap-6 md:gap-10 no-underline">
             <div class="flex-shrink-0">
               {{ $imgPath := strings.TrimPrefix "/assets/" $author.image }}
               {{ $img := resources.Get $imgPath }}
@@ -22,13 +23,13 @@
                 {{ $webp := $img.Process "fit 256x256 webp q80" }}
                 <picture>
                   <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
-                  <img src="{{ $img.RelPermalink }}" alt="{{ $author.display_name }}" class="w-32 h-32 object-cover !m-0 grayscale hover:grayscale-0 transition-all duration-500" width="128" height="128" loading="lazy">
+                  <img src="{{ $img.RelPermalink }}" alt="{{ $author.display_name }}" class="w-28 h-28 object-cover rounded-2xl !m-0 grayscale group-hover:grayscale-0 transition-[filter] duration-500" width="128" height="128" loading="lazy">
                 </picture>
               {{ end }}
             </div>
-            <div class="text-center md:text-left flex-grow">
-              <h2 class="text-2xl font-bold text-ink !mt-0 !mb-2">{{ $author.display_name }}</h2>
-              <p class="text-ink-muted leading-relaxed mb-0 text-lg">{{ $author.bio | truncate 200 }}</p>
+            <div class="flex-grow">
+              <h2 class="!text-2xl font-bold tracking-heading text-ink !mt-0 !mb-2 underline decoration-transparent underline-offset-4 decoration-1 group-hover:decoration-navy-40">{{ $author.display_name }}</h2>
+              <p class="text-ink-muted leading-relaxed mb-0 max-w-3xl">{{ $author.bio | truncate 200 }}</p>
             </div>
           </a>
           {{ end }}
@@ -71,8 +72,8 @@
 
   {{ $authorPosts := where (where site.RegularPages "Section" "posts") ".Params.author.display_name" $author.display_name }}
   {{ if gt (len $authorPosts) 0 }}
-  <div class="bg-surface">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+  <div class="wrap">
+    <div class="section-rule pt-12 lg:pt-16 pb-6">
       {{ partial "posts.html" (dict
         "context" .
         "pages" $authorPosts

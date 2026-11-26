@@ -1,0 +1,48 @@
+{{- /* The whole Markdown copy of a page: title, summary, dates, content and,
+     on list pages, links to what the list holds. One source for index.md and
+     llms-full.txt, so the two never disagree. Returns a string. */ -}}
+{{- $p := . -}}
+{{- $body := partial "markdown/body.html" $p -}}
+{{- $out := slice -}}
+{{- /* Raw-HTML pages carry their own h1 in the hero. */ -}}
+{{- if not (findRE `(?m)^# ` $body 1) -}}
+  {{- $title := $p.Title -}}
+  {{- if eq $p.Kind "term" }}{{ $title = printf "%s articles" $p.Title }}{{ end -}}
+  {{- $out = $out | append (printf "# %s" ($title | default site.Title)) -}}
+{{- end -}}
+{{- with $p.Description }}{{ $out = $out | append (printf "> %s" .) }}{{ end -}}
+
+{{- $meta := slice -}}
+{{- if eq $p.Section "posts" | and (eq $p.Kind "page") -}}
+  {{- with $p.Params.author }}{{ with .display_name }}{{ $meta = $meta | append (printf "- **Author:** %s" .) }}{{ end }}{{ end -}}
+  {{- $meta = $meta | append (printf "- **Published:** %s" ($p.Date.Format "2006-01-02")) -}}
+  {{- with $p.GetTerms "categories" }}{{ $names := slice }}{{ range . }}{{ $names = $names | append .LinkTitle }}{{ end }}{{ $meta = $meta | append (printf "- **Categories:** %s" (delimit $names ", ")) }}{{ end -}}
+  {{- with $p.GetTerms "tags" }}{{ $names := slice }}{{ range . }}{{ $names = $names | append .LinkTitle }}{{ end }}{{ $meta = $meta | append (printf "- **Tags:** %s" (delimit $names ", ")) }}{{ end -}}
+{{- end -}}
+{{- with $p.Params.plan }}{{ $meta = $meta | append (printf "- **Plan:** %s" .) }}{{ end -}}
+{{- if and (eq $p.Kind "page") (not $p.Lastmod.IsZero) (ne ($p.Lastmod.Format "2006-01-02") ($p.Date.Format "2006-01-02")) -}}
+  {{- $meta = $meta | append (printf "- **Updated:** %s" ($p.Lastmod.Format "2006-01-02")) -}}
+{{- end -}}
+{{- with $meta }}{{ $out = $out | append (delimit . "\n") }}{{ end -}}
+
+{{- with $p.Params.tldr }}{{ $out = $out | append (printf "**TL;DR:** %s" .) }}{{ end -}}
+{{- with $body }}{{ $out = $out | append . }}{{ end -}}
+
+{{- /* List pages: everything they list, newest first for the blog. */ -}}
+{{- if and $p.IsNode (not $p.IsHome) -}}
+  {{- $pages := $p.Pages -}}
+  {{- if or (eq $p.Section "posts") (eq $p.Kind "term") }}{{ $pages = $pages.ByDate.Reverse }}{{ end -}}
+  {{- with $pages -}}
+    {{- $rows := slice -}}
+    {{- range . -}}
+      {{- $row := printf "- [%s](%s)" .LinkTitle .Permalink -}}
+      {{- if eq .Section "posts" | and (eq .Kind "page") }}{{ $row = printf "%s (%s)" $row (.Date.Format "2006-01-02") }}{{ end -}}
+      {{- with .Description }}{{ $row = printf "%s: %s" $row . }}{{ end -}}
+      {{- $rows = $rows | append $row -}}
+    {{- end -}}
+    {{- $out = $out | append (printf "## %s\n\n%s" (cond (eq $p.Kind "taxonomy") (printf "All %s" ($p.Title | lower)) "Pages") (delimit $rows "\n")) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $out = $out | append (printf "---\n\nFrom sbomify: %s" $p.Permalink) -}}
+{{- return delimit $out "\n\n" -}}

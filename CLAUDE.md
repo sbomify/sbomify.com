@@ -57,7 +57,7 @@ bun run lint:d2            # Format D2 diagram files
 
 **Static site generator:** Hugo with Go templating and goldmark Markdown.
 
-**Styling:** Tailwind CSS 3.4 compiled via PostCSS. All styles (including former SCSS) are in `_assets/css/tailwind.css`. Output goes to `assets/css/styles.css`.
+**Styling:** Tailwind CSS 3.4 compiled via PostCSS. All styles (including former SCSS) are in `_assets/css/tailwind.css`. Output goes to `assets/css/styles.css`. That output is committed and is what a plain `hugo` / `hugo server` run uses, so any change to `_assets/css/` must be followed by `bun run build:css` and the regenerated `styles.css` committed with it (the deploy rebuilds it, local runs without the CSS watcher do not).
 
 **Design tokens:** The brand (sbomify Brand Guidelines v2.0: Navy, White, Mist, Signal Orange, the semantic palette, Figtree and the system mono stack) lives in `_assets/css/tokens.css`, imported at the top of `tailwind.css` via `postcss-import`. It has two tiers: primitives (`--color-navy-80`, `--color-orange-700`, ...) and roles (`--color-ink`, `--color-canvas`, `--color-accent-strong`, ...). `tailwind.config.js` replaces Tailwind's default palette with these tokens, so `indigo-500`-style classes no longer exist; use the role names (`text-ink`, `text-ink-muted`, `bg-surface`, `border-line`, `bg-inverse`, `bg-accent-strong`) or a primitive scale (`navy-*`, `orange-*`). Never hard-code a hex in templates or CSS; component styles use `rgb(var(--color-*))`. `_d2/theme.d2` and `assets/css/native.css` (code highlighting) mirror the tokens, since D2 cannot read CSS variables.
 
@@ -82,9 +82,9 @@ Brand rules the tokens encode:
 
 **Layouts** in `layouts/`: `_default/baseof.html` (base), `_default/single.html` (pages), `posts/single.html` (blog posts), `_default/about.html`, `_default/pricing.html`, `_default/integrations.html`, `authors/single.html`, `case-studies/single.html`.
 
-**Shortcodes** in `layouts/shortcodes/`: `picture`, `video-embed`, `video-embed-native`, `d2`, `cta-ready`, `feature-card`, `artifact-card`, `check-list-item`, `impact-card`, `sbomified-badge`, `trust-center-pillars`, `trust-center-pillars-grid`, `trust-center-artifacts`, `compliance-block`.
+**Shortcodes** in `layouts/shortcodes/` (Markdown variants: see "Markdown Copies for AI Agents"): `picture`, `video-embed`, `video-embed-native`, `d2`, `cta-ready`, `feature-card`, `artifact-card`, `check-list-item`, `impact-card`, `sbomified-badge`, `trust-center-pillars`, `trust-center-pillars-grid`, `trust-center-artifacts`, `compliance-block`.
 
-**Data files** in `data/`: `authors.yml`, `advisors.yml`, `main.yml` (navigation/social links).
+**Data files** in `data/`: `authors.yml`, `advisors.yml`, `main.yml` (navigation/social links). Header megamenus are built from `main.yml` `nav` (an entry with an `id` opens a megamenu; its `feature` card is `layouts/partials/mega/feature-<name>.html`).
 
 **Deployment:** GitHub Actions builds with Hugo + Bun, deploys to GitHub Pages. A nightly cron job rebuilds the site to publish future-dated posts. The deploy pipeline also generates an SBOM for JavaScript dependencies via the sbomify GitHub Action.
 
@@ -117,6 +117,28 @@ Brand rules the tokens encode:
 - Hugo live-reloads automatically when content or templates change
 - Output directory is `public/` (not `_site/`)
 
+## Markdown Copies for AI Agents
+
+Every page is also built as clean Markdown at `index.md` next to its `index.html` (`/cra/` → `/cra/index.md`, home → `/index.md`), for AI agents and the page tools. `/llms.txt` lists every page with a link to its Markdown, and `/llms-full.txt` is all of them in one file.
+
+- `hugo.toml` adds the `markdown` output format to every page kind. A page that sets its own `outputs` in front matter (like `content/faq/_index.md`) must list `markdown` too.
+- `layouts/partials/markdown/page.html` builds the whole copy (title, description, author and dates, TL;DR, content, and on list pages links to everything listed). `layouts/_default/single.markdown.md`, `list.markdown.md` and `layouts/home.markdown.md` only call it.
+- `layouts/partials/markdown/body.html` is the content alone, also used by `llms-full.txt`. Markdown files keep their source with shortcodes rendered; raw HTML inside them goes through `markdown/inline-html.html` (fenced code is left alone). Pages written as `.html` go through `markdown/from-html.html`, which keeps headings, links, lists and tables and drops SVG icons, buttons and scripts. Root-relative links are made absolute.
+- Shortcodes render their Markdown from `layouts/partials/markdown/shortcode.html`, through one-line `<name>.md` (index.md) and `<name>.txt` (llms-full.txt) templates. A D2 diagram becomes the SVG link plus its nodes and edges from `_d2/`. **A new shortcode used in Markdown content needs both files and a branch in that partial**; without them its HTML ends up in the Markdown.
+- `<head>` links the copy with `<link rel="alternate" type="text/markdown">`. Articles (blog, guides, FAQ, compliance and the section pages) show `layouts/partials/agent-tools.html` above the TL;DR: Copy as Markdown, View as Markdown, Ask Claude, Ask ChatGPT. The copy button ships hidden and `assets/js/main.js` reveals it; clicks send `agent_tool_click` with `tool`.
+- The copies repeat their page, so they must not compete with it in search. GitHub Pages cannot set headers, so Cloudflare does: a Transform Rule (modify response header) on `ends_with(http.request.uri.path, ".md")` sets `X-Robots-Tag: noindex`. They are not in the sitemap.
+- Lychee skips `index.md` like `llms.txt`: code examples in them carry placeholder URLs.
+
+## Tools (`/tools/`)
+
+Free browser-side tools. The SBOM checker (`/tools/sbom-checker/`, `content/tools/sbom-checker.md`, layout `layouts/tools/sbom-checker.html`) is a TypeScript package in `_tools/sbom-checker/` with its own `package.json` and `bun.lock`; see its README.
+
+- `bun run build:tools` compiles the schemas and bundles into `static/js/sbom-checker/` (content-hashed) and writes `data/sbom_checker.json`, which the layout reads for the script URLs. All three outputs are gitignored and built in CI before Hugo; without them the page renders a "not built" note.
+- The script loads only on that page, as a module, and the upload form is plain HTML, so the page paints without it. Schema validators are separate chunks fetched for the uploaded version only.
+- Its framework checks originated as ports of the sbomify platform's assessment plugins. Preserve finding IDs, but published standards take precedence over scoring parity; see `_tools/sbom-checker/STANDARDS.md`. `bun run test:tools` runs the type check and tests (the Lint workflow runs it on PRs).
+- The report's classes (`checker-*`) live at the end of `_assets/css/tailwind.css`; `tailwind.config.js` scans `_tools/sbom-checker/src/**/*.ts` for utilities.
+- The CBOM, HBOM and AIBOM validators (`/tools/cbom-checker/`, `/tools/hbom-checker/`, `/tools/aibom-checker/`) are the same layout and script, and are listed under Tools in the Resources megamenu. Their front matter `checker` block sets `kind` (rendered as `data-kind` on the root), the formats line, the example files and the closing call to action. For `cbom`/`hbom`/`aibom` the script runs schema validation plus one required-fields check (`src/frameworks/cbom.ts`, `hbom.ts`, `aibom.ts`; the AIBOM one covers CycloneDX and the SPDX 3 AI and Dataset profiles) instead of the SBOM frameworks, and skips the reference checks. Their events keep the `sbom_checker_` names with `tool: cbom_checker` / `hbom_checker` / `aibom_checker`, and their call to action uses `data-cta-location="<kind>_checker_results"`.
+
 ## Outbound Links (rel="nofollow")
 
 Links to anything outside our own domains automatically get `rel="nofollow noopener noreferrer"`. Do not add it by hand. The policy lives in `[params.links]` in `hugo.toml` (`internalHosts`, `externalRel`, `externalTarget`); `sbomify.com` and its subdomains are internal.
@@ -137,3 +159,4 @@ PostHog is consent-gated. It is analytics, not a strictly necessary cookie, so i
 - The **Cookie settings** button in `layouts/partials/footer.html` re-opens the banner. It ships `hidden` and is revealed by the consent script, so it is not a dead control without JavaScript.
 - `forget()` runs only on an explicit "Reject" click, never on plain page loads: PostHog's cookie is set on `.sbomify.com`, so sweeping it on every page view would keep resetting analytics state for `app.sbomify.com` too.
 - Cookies and choices are documented in `content/privacy.md` under "Your Cookie Choices". Keep the two in step.
+- The SBOM checker sends its own events through `_tools/sbom-checker/src/analytics.ts` (`track()`, a no-op until consent): `sbom_checker_input`, `_result` (format, version, schema status, per-framework `<id>_status`/`_pass`/`_fail`, `failed_elements`, `fixable_by_<step>`), `_refs_checked`, `_report_download`, `_link_click` (`kind` fix/guide/crosswalk/framework links, with `framework`, `element`, `step`), `_expand` and `_tile_click`, all with `tool: sbom_checker` and `site_section: tools`. They carry shape only, never file names, component names or URLs from the uploaded SBOM; `test/analytics.test.ts` enforces that. Its closing call to action uses `data-cta-location="sbom_checker_results"`, so those clicks are ordinary `cta_click` events.

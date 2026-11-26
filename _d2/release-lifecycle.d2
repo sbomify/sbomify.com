@@ -1,0 +1,57 @@
+# Which releases sbomify monitors (v26.11.1 release lifecycle).
+# Two maintained lines run in parallel: 2.0.0 started a new line from 1.2.3,
+# and 1.x kept shipping. A same-line successor retires the release it
+# replaces; dates, withdrawal and archiving retire a release too.
+direction: down
+
+product: "A product with two maintained lines" {
+  class: group
+
+  line1: "1.x line" {
+    class: group
+    style.fill: "#FFFFFF"
+
+    r123: "1.2.3\nreplaced" {class: secondary}
+    r124: "1.2.4\nlive" {class: primary}
+    r123 -> r124: Same line {class: flow}
+  }
+
+  line2: "2.x line" {
+    class: group
+    style.fill: "#FFFFFF"
+
+    r20: "2.0.0\nreplaced" {class: secondary}
+    r21: "2.1.0\nlive" {class: primary}
+    r20 -> r21: Same line {class: flow}
+  }
+
+  r11: "1.1.0\nsupport ended" {class: secondary}
+
+  line1.r123 -> line2.r20: New line {
+    class: flow
+    style.stroke-dash: 3
+  }
+}
+
+latest: "Latest builds\neach component's newest SBOM" {class: accent}
+
+monitored: "Monitored\nscheduled scans · VEX re-apply\nDependency-Track" {class: highlight}
+
+history: "Not scanned\ncounts show the last scan date" {class: secondary}
+
+product.line1.r124 -> monitored: {class: flow-pink}
+product.line2.r21 -> monitored: {class: flow-pink}
+latest -> monitored: {class: flow-pink}
+
+product.line1.r123 -> history: {
+  class: flow
+  style.stroke-dash: 3
+}
+product.line2.r20 -> history: {
+  class: flow
+  style.stroke-dash: 3
+}
+product.r11 -> history: {
+  class: flow
+  style.stroke-dash: 3
+}
