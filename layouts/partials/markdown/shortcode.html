@@ -18,6 +18,9 @@
 {{- else if eq .Name "video-embed-native" -}}
   {{- $s = printf "Video: [%s](%s)" (.Get "title" | default "Video") (.Get "video_url") -}}
   {{- with .Get "description" }}{{ $s = printf "%s. %s" $s . }}{{ end -}}
+  {{- $t := partial "video-transcript.html" (dict "video" (.Get "video_url") "transcript" (.Get "transcript_url")) -}}
+  {{- with $t.text }}{{ $s = printf "%s\n\nTranscript of the narration:\n\n> %s" $s . }}{{ end -}}
+  {{- with $t.vtt }}{{ $s = printf "%s\n\nSubtitles (WebVTT): %s" $s . }}{{ end -}}
 {{- else if eq .Name "cta-ready" -}}
   {{- $s = printf "**%s** [%s](%s) or [%s](%s)."
     (.Get "title" | default "From SBOM to security disclosure")
