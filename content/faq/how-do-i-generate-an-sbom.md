@@ -84,4 +84,4 @@ Watch our FOSDEM 2026 talk for a real-world walkthrough of CRA-ready SBOM genera
 
 ## Next steps
 
-Once you have your SBOM, [upload it to sbomify](https://app.sbomify.com) to monitor for vulnerabilities, track compliance, and share it with customers through your [Trust Center](https://trust.sbomify.com/).
+Once you have your SBOM, [upload it to sbomify](https://app.sbomify.com) to monitor for vulnerabilities, track compliance, and share it with customers through your [Trust Center](https://trust.sbomify.com/). You can [upload it by hand](/faq/how-do-i-upload-an-sbom/) for a first try, then automate the upload in CI with [OIDC trusted publishing](/faq/how-do-i-set-up-oidc-trusted-publishing/) or an [API token](/faq/how-do-i-create-an-api-token/).

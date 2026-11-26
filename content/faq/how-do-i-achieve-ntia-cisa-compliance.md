@@ -1,8 +1,8 @@
 ---
 title: "How do I achieve NTIA/CISA minimum elements compliance?"
-description: "Guide to meeting NTIA and CISA SBOM minimum elements requirements using sbomify-action's augmentation feature and sbomify's central profile management."
-answer: "Use sbomify-action's augmentation feature to automatically add required metadata like supplier info, authors, licenses, and lifecycle phase to your SBOMs - either via a local config file or centrally managed profiles in sbomify."
-tldr: "Use sbomify-action's augmentation feature to automatically add required metadata like supplier info, authors, licenses, and lifecycle phase to your SBOMs - either via a local config file or centrally managed profiles in sbomify."
+description: "Guide to meeting NTIA and CISA SBOM minimum elements requirements using sbomify-action's augmentation feature and sbomify's centrally managed parties."
+answer: "Use sbomify-action's augmentation feature to automatically add required metadata like supplier info, authors, licenses, and lifecycle phase to your SBOMs - either via a local config file or centrally managed parties in sbomify."
+tldr: "Use sbomify-action's augmentation feature to automatically add required metadata like supplier info, authors, licenses, and lifecycle phase to your SBOMs - either via a local config file or centrally managed parties in sbomify."
 weight: 85
 keywords: [NTIA compliance, CISA minimum elements, SBOM compliance, SBOM augmentation, supplier metadata, sbomify-action]
 url: /faq/how-do-i-achieve-ntia-cisa-compliance/
@@ -54,15 +54,24 @@ Then enable augmentation in your CI pipeline:
 
 This is ideal for individual projects or teams that want to manage metadata per-repository.
 
-## Option 2: Central profile management in sbomify
+## Option 2: Central party management in sbomify
 
 For organizations managing many components, sbomify provides centrally managed **Parties** (previously called contact profiles). Instead of maintaining `sbomify.json` files in every repository, you configure the supplier, author, and contact metadata once in sbomify and it gets applied automatically during augmentation.
 
 ### Creating a party
 
-In **Settings**, open the **Parties** tab and click **Add party**. A party contains one or more **Entities** (with manufacturer / supplier / author roles, name, email, phone, address, and website) and one or more **Contacts** on each entity (with author / security / technical roles). Check **Set as default** if this party should be assigned to new components automatically.
+A party holds your supplier, manufacturer, and security contacts. You add one once and reuse it across your components.
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/profile_editing.webm" title="Creating a contact profile in sbomify" description="Walkthrough of creating a centrally managed contact profile in sbomify for NTIA/CISA compliance." upload_date="2026-02-26T13:02:46Z" >}}
+1. Open **Settings** and go to the **Parties** tab, then click **Add party**
+2. Give the party a name. Tick **Set as default** if it should apply to new components
+3. Click **Add entity**. An entity is an organization, with manufacturer, supplier, or author roles, plus its address and website. The address and website fill in the supplier details on your components
+4. Every entity needs at least one contact person. Click **Add contact** and tick the roles each person covers (author, security, technical). The security contact is who receives vulnerability reports
+5. Click **Done** to close the entity. The summary shows its roles and contacts
+6. Click **Create party**
+
+The party is saved, and if you made it the default, new components pick up these contacts automatically.
+
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/profile_editing.webm" title="Setting up a party in sbomify" description="Narrated screencast: create a party in the Parties tab of Settings, with a manufacturer and supplier entity, contact people and their roles, and make it the workspace default." upload_date="2026-10-28T00:00:00Z" >}}
 
 ### Using parties
 
@@ -87,9 +96,9 @@ sbomify-action will fetch the party metadata from sbomify and apply it to the ge
 
 ## Score uploaded SBOMs against the NTIA and CISA checklists
 
-sbomify ships a built-in **NTIA Minimum Elements (2021)** plugin that grades every uploaded SBOM against the seven required fields and surfaces the result on the SBOM detail page (Business and Enterprise plans). A **CISA Minimum Elements (2026)** plugin, available on every plan, scores SBOMs against the seventeen CISA 2026 data fields. Workspace owners and admins enable them from the **Plugins** page in the workspace sidebar:
+sbomify ships a built-in **NTIA Minimum Elements (2021)** plugin that grades every uploaded SBOM against the seven required fields and surfaces the result on the SBOM detail page (Business and Enterprise plans). A **CISA Minimum Elements (2026)** plugin, available on every plan, scores SBOMs against the seventeen CISA 2026 data fields. Workspace owners and admins enable them from **Plugins** in the sidebar: tick the plugin and click **Save changes**:
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/plugin_enablement_ntia-minimum-elements-2021.webm" title="Enabling the NTIA Minimum Elements plugin in sbomify" description="Step-by-step screencast showing how to enable the NTIA Minimum Elements (2021) compliance plugin in sbomify." upload_date="2026-04-24T10:16:53Z" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/plugin_enablement_ntia-minimum-elements-2021.webm" title="Enabling the NTIA Minimum Elements plugin in sbomify" description="Narrated screencast: turn on the NTIA Minimum Elements (2021) check so every new SBOM upload gets a compliance result." upload_date="2026-10-28T00:00:00Z" >}}
 
 ## What gets added
 
