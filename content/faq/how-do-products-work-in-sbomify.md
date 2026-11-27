@@ -42,7 +42,18 @@ Because sbomify uses linkage rather than copying, multiple products (or versions
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/product_creation.webm" title="Creating components and products in sbomify" description="Walkthrough of setting up the sbomify hierarchy: creating components and attaching them to a product." upload_date="2026-02-26T19:24:17Z" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/product_creation.webm" title="Setting up a product in sbomify" description="Narrated screencast: create components, create a product, assign the components, and fill in its lifecycle dates, links and identifiers." upload_date="2026-10-28T00:00:00Z" >}}
+
+To set up a product:
+
+1. Open **Components** and click **Create component**. A name is all a component needs
+2. Open **Products**, click **Create product**, and give it a name and a short description
+3. On the product page, assign the components that make up the product
+4. Under **Product details**, the **Lifecycle** tab holds the dates that say when the product shipped and how long you support it. Click **Set dates**, fill them in, and click **Save**
+5. On the **Links** tab, click **Add link** to point people to your website, source code, or documentation. Each link has a type, a title, and an address
+6. On the **Identifiers** tab, add identifiers such as CPE and PURL so scanners and buyers can match your product to its records
+
+To version the product, see [How do I create a software release?](/faq/how-do-i-create-a-software-release/).
 
 ## Sharing and exporting
 
@@ -53,5 +64,7 @@ Products and their SBOMs can be shared publicly through your [Trust Center](/faq
 ## Further reading
 
 - [SBOM Hierarchy feature page](/features/sbom-hierarchy/)
+- [How do I upload an SBOM?](/faq/how-do-i-upload-an-sbom/) - add SBOMs to your components by hand
+- [How do I track compliance controls?](/faq/how-do-i-track-compliance-controls/) - the Compliance tab on each product
 - [Share and Collaborate](/share-and-collaborate/)
 - [Screenly case study](/case-studies/screenly/) - a real-world example of the hierarchy in production

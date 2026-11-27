@@ -554,6 +554,65 @@ New workspaces still start on the **Community** plan, and a few checks read the 
 
 Customers can also use their own domain for a [Trust Center](/features/trust-center/). Caddy issues the certificate on the first request, after asking sbomify whether the domain belongs to a workspace.
 
+### Slack
+
+sbomify can post the VEX approval queue, a daily vulnerability digest and new vulnerabilities to Slack channels. Each workspace connects its own Slack workspace from **Settings → Integrations** and picks a channel for each message. You register one Slack app for the whole installation, and every workspace installs that app. Slack needs a sbomify release newer than v26.11.1.
+
+**1. Create the Slack app.** At [api.slack.com/apps](https://api.slack.com/apps), choose **Create New App → From a manifest**, pick a Slack workspace to own the app, and paste the manifest below with your host name in it:
+
+```yaml
+display_information:
+  name: sbomify
+  description: VEX approvals and vulnerability news from sbomify
+features:
+  bot_user:
+    display_name: sbomify
+    always_online: false
+oauth_config:
+  redirect_urls:
+    - https://sbomify.example.com/integrations/oauth/slack/callback
+  scopes:
+    bot:
+      - chat:write
+      - chat:write.public
+      - channels:read
+      - groups:read
+settings:
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
+```
+
+The redirect URL is `APP_BASE_URL` followed by `/integrations/oauth/slack/callback`, and must match exactly. Leave token rotation off. sbomify keeps the bot token Slack issues and never refreshes it, so a rotating token stops working after 12 hours. Slack never calls back into sbomify, so the app needs no event subscriptions, interactivity or public inbound access.
+
+**2. Allow other Slack workspaces, if you need to.** An app installs only into the Slack workspace that owns it. If your teams use more than one, turn on public distribution under **Manage Distribution**. That does not list the app in the Slack Marketplace.
+
+**3. Set the credentials.** Copy the client ID and client secret from **Basic Information**:
+
+| Variable              | Default | Notes                                                                    |
+| --------------------- | ------- | ------------------------------------------------------------------------ |
+| `SLACK_CLIENT_ID`     | none    | The app's client ID. With it unset, Slack shows as "Not available here". |
+| `SLACK_CLIENT_SECRET` | none    | The app's client secret. Keep it with your other secrets, not in Git.    |
+
+Set them on every process: the web containers run the OAuth flow and the workers post the messages. In Compose, add them to `override.env`. A `docker-compose.yml` from v26.11.1 or earlier does not pass them through, so download a current one. In Helm, put them in a Kubernetes Secret and reference it with `app.extraEnvFrom`:
+
+```bash
+kubectl -n sbomify create secret generic sbomify-slack \
+  --from-literal=SLACK_CLIENT_ID=... \
+  --from-literal=SLACK_CLIENT_SECRET=...
+```
+
+```yaml
+app:
+  extraEnvFrom:
+    - secretRef:
+        name: sbomify-slack
+```
+
+Outbound HTTPS to `slack.com` must be allowed from the web and worker containers. The digest is posted at 08:00 UTC by the scheduler.
+
+**4. Connect a workspace.** A workspace owner or admin opens **Settings → Integrations**, clicks **Connect Slack** and approves the app in Slack. They then pick a channel for each message and use **Send test** to check it. The bot posts to any public channel without being invited. A private channel shows up in the list only after someone invites the app to it (`/invite @sbomify`).
+
 ### Limits and integrations
 
 | Variable                              | Default    | Notes                                                                                                                              |
@@ -686,6 +745,8 @@ On a single instance, measured throughput was more than 20 times the figures in 
 | Uploads show no vulnerability results         | The OSV plugin is on for the workspace: **Plugins** in the sidebar.                                        |
 | Scans stay pending                            | Workers running (`docker compose logs sbomify-worker`), Redis reachable, outbound HTTPS to `api.osv.dev`.  |
 | Large uploads fail                            | Raise `DATA_UPLOAD_MAX_MEMORY_SIZE_MB`, and check any proxy body-size limit in front of Caddy.             |
+| Slack shows "Not available here"              | `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET` set on web and workers, and a current `docker-compose.yml`.    |
+| Slack shows "Needs reconnecting"              | Token rotation is off on the Slack app, then reconnect. A removed app or a revoked token shows the same.   |
 
 Still stuck? Ask in the [sbomify Slack](https://join.slack.com/t/sbomify/shared_invite/zt-3na54pa1f-MXrFWhotmZr0YxXc8sABTw) or [open an issue](https://github.com/sbomify/sbomify/issues).
 

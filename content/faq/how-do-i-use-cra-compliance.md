@@ -1,7 +1,7 @@
 ---
 title: "How do I use CRA compliance in sbomify?"
 description: "Practical walkthrough of the sbomify CRA Compliance Wizard: scope screening, the five wizard steps, what ends up in the export bundle, and how to sign it."
-answer: "Open a Product, run the CRA scope screening to confirm the product is in CRA scope, then walk through the five-step wizard (Product Profile, SBOM Compliance, Security & Vulnerability, User Information, Review & Export). Export produces a single self-contained ZIP with your SBOMs, OSCAL assessment results, generated documents, and a SHA-256 manifest. Sign that ZIP with cosign on your side, upload the signature back to sbomify to have it verified and stored with the bundle, and you have a CRA compliance package ready for an auditor."
+answer: "Open Compliance in the sidebar, click Start assessment and choose a product. Run the CRA scope screening to confirm the product is in CRA scope, then walk through the five-step wizard (Product Profile, SBOM Compliance, Security & Vulnerability, User Information, Review & Export). Export produces a single self-contained ZIP with your SBOMs, OSCAL assessment results, generated documents, and a SHA-256 manifest. Sign that ZIP with cosign on your side, upload the signature back to sbomify to have it verified and stored with the bundle, and you have a CRA compliance package ready for an auditor."
 tldr: "The CRA Compliance Wizard is a five-step flow per Product. Step 1 captures classification, Step 2 reviews SBOM coverage against BSI TR-03183-2, Step 3 covers security controls and vulnerability handling, Step 4 covers user-facing information, Step 5 exports a hash-manifested ZIP with everything an auditor needs. Available on Business and Enterprise plans."
 weight: 55
 keywords: [CRA compliance, EU CRA wizard, CRA assessment, CRA bundle, BSI TR-03183-2, CRA export, CRA conformity, sbomify CRA]
@@ -10,7 +10,7 @@ url: /faq/how-do-i-use-cra-compliance/
 
 ## Walkthrough
 
-{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/cra_compliance.webm" title="How to use the CRA Compliance Wizard in sbomify" description="Screencast walking through the sbomify CRA Compliance Wizard from scope screening through the five-step assessment to bundle export." upload_date="2026-04-29T15:39:44+05:00" >}}
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/cra_compliance.webm" title="How to use the CRA Compliance Wizard in sbomify" description="Narrated screencast: take a product through the EU Cyber Resilience Act in sbomify, from scope screening and the five-step wizard to a signed, published Declaration of Conformity and the compliance bundle." upload_date="2026-10-28T00:00:00Z" >}}
 
 ## Plan availability
 
@@ -18,7 +18,9 @@ The CRA Compliance Wizard is available on the **Business** and **Enterprise** pl
 
 ## Where to start: scope screening
 
-Not every product needs to file CRA conformity. Start from the **CRA Compliance** card on a Product page (**Start Scope Screening**), or from **Compliance** in the sidebar (**Start assessment**). Before the wizard opens, sbomify runs a short **scope screening** that asks the questions Article 2 and Article 3 of the [CRA](/compliance/eu-cra/) require you to answer:
+Open **Compliance** in the sidebar. It lists every CRA assessment in the workspace. Click **Start assessment**, choose a product, and click **Start scope screening**. You can also start from the **CRA Compliance** card on a product's page (**Start Scope Screening**).
+
+Not every product needs to file CRA conformity. Before the wizard opens, sbomify runs a short **scope screening**: five questions from Article 2 and Article 3 of the [CRA](/compliance/eu-cra/) that decide whether it applies:
 
 - Does the product have a remote data connection?
 - Is it strictly for own-use within the manufacturer?
@@ -26,7 +28,7 @@ Not every product needs to file CRA conformity. Start from the **CRA Compliance*
 - Is it covered by exempted EU legislation (medical devices, motor vehicles, civil aviation, marine equipment)?
 - Is it a dual-use product with both civilian and defence applications? (These stay in scope when commercially available.)
 
-If the screening finds the product is out of scope, sbomify records the determination (with a timestamp and the user who made it) and you do not need to fill in the wizard. Changes to the screening are written to the audit log. If anything changes later, a new feature adds a network connection, the product enters the EU market, you can re-run the screening from the same Product page.
+If the CRA applies, click **Save & Continue to Wizard**. If the screening finds the product is out of scope, sbomify records the determination (with a timestamp and the user who made it) and you do not need to fill in the wizard. The screening result is part of the audit trail and is included in the export bundle, and changes to it are written to the audit log. If anything changes later, a new feature adds a network connection, the product enters the EU market, you can re-run the screening from the assessment or the product's page.
 
 ## The five wizard steps
 
@@ -34,7 +36,7 @@ Once a product is in scope, the wizard walks through the assessment in five step
 
 ### Step 1: Product Profile
 
-Captures the classification and lifecycle data the CRA references throughout:
+Captures the classification and lifecycle data the CRA references throughout. The **Manufacturer** details come from your workspace [Parties](/faq/how-do-i-achieve-ntia-cisa-compliance/), so set your legal manufacturer name there first. The support period is filled in from the product's lifecycle dates. You also record whether the manufacturer is established in the EU.
 
 - **Product category**: Default, Class I, Class II, or Critical (CRA Annex III/IV)
 - **Manufacturer**: legal name, email and address, read from your workspace **Parties** settings
@@ -73,10 +75,16 @@ The end-user-facing information CRA Article 13 and Annex II require: support con
 
 ### Step 5: Review & Export
 
-The final step shows a single-page summary of every answer, the BSI findings, the waivers you recorded, and the documents that will be included. It also captures the Declaration of Conformity signatory (place, name, function and a drawn signature), which you can preview or download as a PDF. Two outcomes:
+The final step shows a single-page summary of every step and control, the BSI findings, the waivers you recorded, and the documents that will be included. From here:
 
-- **Mark Assessment Complete**: flips the assessment to `complete`.
-- **Export compliance bundle**: produces the export ZIP described below. Export is enabled once every step is done and every control is answered.
+1. **Sign the Declaration of Conformity**: enter the place, your full legal name and your role, draw your signature, and click **Save signature**. The signature is embedded in the generated declaration (CRA Annex V Section 8), which you can preview or download as a PDF.
+2. **Generate the documents**: each document has its own card with a generate button, from the vulnerability disclosure policy, `security.txt` and incident report templates to the user instructions and the declaration. If the evidence behind a document changes later, sbomify marks it **Stale**, and **Refresh stale documents** brings them all up to date.
+3. **Export compliance bundle**: produces the export ZIP described below. Export is enabled once every step is done and every control is answered. **Last Export Bundle** then lists each file with the CRA article it answers, plus a checksum to verify it.
+4. **Mark Assessment Complete**: flips the assessment to `complete` and locks in the results. Back on **Compliance**, the assessment reads complete, five of five steps.
+
+## Publishing to your Trust Center
+
+Once the documents are generated, the product's public [Trust Center](/faq/what-is-a-trust-center/) page links to the **Vulnerability disclosure policy** and the signed EU Declaration of Conformity (**View declaration**). The published declaration always matches your latest assessment, so customers and researchers see current information without a manual upload.
 
 ## What is in the export bundle
 
@@ -101,7 +109,7 @@ Every generated Markdown document also ships with a PDF copy beside it. The mani
 
 ## Signing the bundle
 
-sbomify produces the bundle but keeps no signing key, so it does not sign it for you. Signing is a single operator step you run after export with cosign 3 or later, the same machinery you would use to [sign an SBOM](/faq/how-do-i-sign-an-sbom/), pointed at the ZIP. It signs keyless, as you through your browser or as a CI workflow:
+sbomify signs the Declaration of Conformity inside the bundle, but keeps no signing key, so it does not sign the bundle ZIP for you. Signing is a single operator step you run after export with cosign 3 or later, the same machinery you would use to [sign an SBOM](/faq/how-do-i-sign-an-sbom/), pointed at the ZIP. It signs keyless, as you through your browser or as a CI workflow:
 
 ```bash
 cosign sign-blob cra-bundle.zip --bundle cra-bundle.zip.sigstore.json
@@ -111,7 +119,9 @@ Back in Step 5, upload the `.sigstore.json` file with the identity you signed as
 
 ## Stale documents and assessments
 
-The CRA is a continuous obligation. When something a generated document depends on changes (product details, a new SBOM upload, manufacturer or security contacts, or your wizard answers), sbomify flags the affected documents as **stale**, and **Refresh stale documents** in Step 5 regenerates them before your next export. If you re-run the scope screening and the product falls out of CRA scope, the assessment itself is marked **stale** and locked against edits until you re-scope it or delete it. Exported bundles still contain a timestamp and the assessment id, so a stale flag in the UI does not invalidate previously distributed bundles; it just tells you the next export will produce different content.
+The CRA is a continuous obligation. When something a generated document depends on changes (product details, a new SBOM upload, manufacturer or security contacts, or your wizard answers), sbomify marks the affected documents **Stale**, and **Refresh stale documents** in Step 5 regenerates them before your next export. Exported bundles still carry a timestamp and the assessment id, so a stale flag in the UI does not invalidate bundles you already distributed. It just tells you the next export will produce different content.
+
+If the product's scope screening later says the CRA no longer applies, the assessment shows **Assessment is out of scope**. It is kept, but it cannot be edited or exported until you click **Re-run scope screening**. Flipping the CRA back on restores the assessment to where you left off.
 
 ## Article 14 reports
 
@@ -122,6 +132,8 @@ Separately from the wizard, the **Reports** tab under **Compliance** tracks Arti
 - [What is the EU Cyber Resilience Act?](/faq/what-is-the-eu-cyber-resilience-act/) - the regulatory background
 - [EU Cyber Resilience Act compliance guide](/compliance/eu-cra/) - field-level CRA reference
 - [How do I sign an SBOM?](/faq/how-do-i-sign-an-sbom/) - same mechanics apply to signing the CRA bundle
+- [How do I publish a security advisory?](/faq/how-do-i-publish-a-security-advisory/) - disclose vulnerabilities under your published policy
+- [How do I track compliance controls?](/faq/how-do-i-track-compliance-controls/) - SOC 2, ISO 27001, and NIST controls alongside the CRA
 - [How do I use VEX with sbomify?](/faq/how-do-i-use-vex/) - how the BSI SBOM/VEX split is enforced in Step 2
 - [Schema Crosswalk](/compliance/schema-crosswalk/) - field mappings for CycloneDX 1.7, SPDX 2.3, and SPDX 3.0
 - [BSI TR-03183-2](https://bsi.bund.de/dok/TR-03183-en) - the technical specification the wizard assesses against

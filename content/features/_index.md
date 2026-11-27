@@ -19,6 +19,14 @@ Turn transparency into a competitive advantage. Share SBOMs, VEX statements, and
 
 Answer "are we affected?" once. Write security advisories with CVSS, per-product affected and fixed versions, and a dated timeline, then publish them on your Trust Center with per-product gating, a CSAF 2.0 feed, and security.txt. [Explore Security Advisories →](/features/security-advisories/)
 
+### Vulnerabilities and VEX
+
+Every SBOM is scanned with OSV, or Dependency-Track on Business and above, and the Vulnerabilities page ranks what to fix first, with CISA KEV flags and a patch SLA. Triage with your AI agents and a person in the loop, and every decision is written into VEX that your customers' tools can read. [Explore vulnerability management →](/features/vulnerability-management/)
+
+### AI Agents
+
+sbomify is built for the agents you already use, such as Claude Code and Cursor, through its API and MCP server. An AI agent token can triage vulnerabilities and draft advisories, but a person approves everything that reaches a customer. [See how AI agents work →](/features/ai-agents/)
+
 ### CBOM: Cryptography Bill of Materials
 
 Know your cryptographic posture before the post-quantum deadlines arrive. Upload CBOMs (or SBOMs with embedded crypto assets), get every algorithm graded for quantum readiness, track certificate expiry, export cipher-suite inventories for PCI DSS 12.3.3, and share your posture on your Trust Center. [Explore CBOM support →](/features/cbom/)

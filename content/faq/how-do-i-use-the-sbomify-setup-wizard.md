@@ -8,6 +8,23 @@ keywords: [sbomify setup wizard, sbomify-action init, SBOM onboarding, SBOM CI s
 url: /faq/how-do-i-use-the-sbomify-setup-wizard/
 ---
 
+## Starting in the app
+
+In a new workspace, start with **Get started** in the sidebar. This in-app wizard asks three things once: who you are, where to report a vulnerability, and how you support your software.
+
+{{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/onboarding_wizard.webm" title="Setting up a new sbomify workspace with the Get started wizard" description="Narrated screencast: fill in the Get started wizard, then connect a first repository with a coding agent prompt or the terminal wizard." upload_date="2026-10-28T00:00:00Z" >}}
+
+1. **Your organization.** These details become your default contact profile
+2. **Security promises.** Enter the address security researchers report vulnerabilities to, and optionally tick **Publish this email in my Trust Center's security.txt**. Set a default support period, and the maximum time to fix each severity. The recommended targets are 7 days for critical, 30 for high, and 90 for medium
+3. Click **Save and continue**. The workspace is ready, and the checklist shows what was saved
+
+Until your first artifact arrives, the dashboard shows **Set up your first repository**, with two ways in:
+
+- **Coding agent.** Click **Create setup token**, and the token becomes part of a prompt for Claude Code, Cursor, or another coding agent. Click **Copy prompt** and paste it into your agent in the repository. It finds your lockfiles, creates the components, and adds an SBOM workflow, after you review the changes. The setup token expires after seven days, and you can revoke it in Settings.
+- **Terminal.** Run the same setup wizard described below, with Docker or uv.
+
+To come back to this page later, search for `connect a repository` (see [How do I search in sbomify?](/faq/how-do-i-search-in-sbomify/)). Commit and push the workflow, and your first SBOM lands in the workspace.
+
 ## What the wizard does
 
 The setup wizard is an interactive terminal UI built into [sbomify-action](https://github.com/sbomify/sbomify-action). It is the recommended way to onboard a repository, because it automates every step that used to be manual:
@@ -50,3 +67,5 @@ The wizard targets GitHub Actions. If you use GitLab CI, Bitbucket Pipelines, or
 - [How do I generate an SBOM?](/faq/how-do-i-generate-an-sbom/) - the broader generation options
 - [How do I set up OIDC trusted publishing?](/faq/how-do-i-set-up-oidc-trusted-publishing/) - tokenless uploads explained
 - [Zero to Hero](/zero-to-hero/) - the full onboarding walkthrough
+- [How do I upload an SBOM?](/faq/how-do-i-upload-an-sbom/) - upload by hand while you set up CI
+- [How do I create an API token?](/faq/how-do-i-create-an-api-token/) - for CI systems other than GitHub Actions

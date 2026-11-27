@@ -1,0 +1,169 @@
+---
+
+title: AI Agents
+seo_title: "AI Agents for Product Security, With a Person in the Loop"
+layout: ins
+description: "sbomify is built for your own AI agents. Connect Claude Code, Cursor or any MCP client, let agents triage CVEs and draft security advisories, and keep a person on every decision that reaches a customer."
+keywords: [AI agent, AI agents product security, MCP server, Model Context Protocol, Claude Code, Cursor, AI vulnerability triage, AI security advisory, human in the loop, agent token, agent permissions, VEX review]
+---
+
+<div class="ins">
+
+    {{< comment >}}Hero{{< /comment >}}
+    <section class="home-hero centered" data-nebula="light-center" style="background-image: url('{{< nebula-still "light-center" >}}')">
+        <div class="wrap">
+            <p class="hero-stat">
+                <span class="live" aria-hidden="true"></span>
+                <span><strong>Agent first</strong></span>
+                <span class="muted">With a person in the loop</span>
+            </p>
+            <h1>Agents do the legwork. You make the call.</h1>
+            <p class="lede">sbomify does not bundle a model. It gives the agents you already use, such as Claude Code or Cursor, your security data and an API built for them. They triage vulnerabilities and draft advisories. Nothing they send reaches a customer until a person approves it.</p>
+            <div class="hero-actions">
+                <a href="https://app.sbomify.com" class="btn-navy btn-lg" data-cta-location="agents_hero" data-cta-label="Start free">
+                    Start free
+                    {{< ph "arrow-right" "bold" "ph-go" >}}
+                </a>
+                <a href="https://app.sbomify.com/enterprise-contact/" class="btn-secondary btn-lg" data-cta-location="agents_hero" data-cta-label="Book a demo">Book a demo</a>
+            </div>
+        </div>
+    </section>
+
+    {{< comment >}}The token: can and cannot{{< /comment >}}
+    <section class="section" id="token">
+        <div class="wrap cra-split">
+            <div class="cra-split-copy">
+                <span class="kicker">The AI agent token</span>
+                <h2 class="sec-title">Built to propose. <span class="soft">Not to decide.</span></h2>
+                <p class="sec-lede">Create a token in Settings with the <b>AI agent</b> scope. It belongs to the person who made it and can never do more than that person's role allows. Every request it makes is marked as coming from an agent, so reviewers always know what they are approving.</p>
+                <ul class="cra-points">
+                    <li>{{< ph "check-circle" >}}<span><b>It can</b> read your workspace and its vulnerabilities, pick up the fix and triage prompts, send VEX rulings for review, and draft and edit security advisories.</span></li>
+                    <li>{{< ph "prohibit" >}}<span><b>It cannot</b> apply a ruling, approve or reject anything (its own work included), or publish, withdraw or delete an advisory. Those calls are refused.</span></li>
+                    <li>{{< ph "git-pull-request" >}}<span><b>After publishing,</b> every change an agent sends to an advisory becomes a proposal, shown as a diff against the current text.</span></li>
+                </ul>
+                <p class="cra-small"><a href="/faq/how-do-ai-agents-work-in-sbomify/">The full list of what an agent token can and cannot do</a></p>
+            </div>
+
+            <figure class="bundle tc-endpoints" data-reveal data-md-skip>
+                <div class="bundle-head">
+                    <span class="bundle-ico">{{< ph "robot" >}}</span>
+                    <span><b>AI agent token</b><span>What the API answers</span></span>
+                </div>
+                <ul class="bundle-files">
+                    <li><span class="mono">Send a VEX ruling for review</span><span>202 waiting</span></li>
+                    <li><span class="mono">Apply a ruling directly</span><span>403 refused</span></li>
+                    <li><span class="mono">Draft an advisory</span><span>201 draft</span></li>
+                    <li><span class="mono">Publish an advisory</span><span>403 refused</span></li>
+                </ul>
+                <p class="bundle-foot">{{< ph "user-check" >}}A person approves on the Review tab</p>
+            </figure>
+        </div>
+    </section>
+
+    {{< comment >}}Two workflows on the dark band{{< /comment >}}
+    <section class="band-dark" id="workflows" data-nebula="band" style="background-image: url('{{< nebula-still "band" >}}')">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Human in the loop</span>
+                    <h2 class="sec-title">Two jobs agents are good at. <span class="soft">Both end with a person.</span></h2>
+                </div>
+                <p class="sec-lede">A ruling on a vulnerability feeds your VEX and your Trust Center. An advisory goes straight to customers. For both, sbomify holds what an agent sends until someone on your team signs off.</p>
+            </div>
+
+            <div class="cra-feats" data-reveal>
+                <article>
+                    <span class="cra-feat-ico">{{< ph "terminal-window" >}}</span>
+                    <h3>CVE triage</h3>
+                    <p>The agent reads the vulnerability in the context of your code and sends a ruling with its reasoning, such as not affected because the code is not reachable.</p>
+                </article>
+                <article>
+                    <span class="cra-feat-ico">{{< ph "user-check" >}}</span>
+                    <h3>Approved into VEX</h3>
+                    <p>The ruling waits on the <b>Review</b> tab. Once a person approves it, sbomify writes it into the component's VEX. Rejected rulings change nothing.</p>
+                </article>
+                <article>
+                    <span class="cra-feat-ico">{{< ph "siren" >}}</span>
+                    <h3>Security advisories</h3>
+                    <p>When a vulnerability does affect you, the agent drafts the advisory. A draft is visible only to your workspace, and only owners and admins can publish it.</p>
+                </article>
+                <article>
+                    <span class="cra-feat-ico">{{< ph "git-pull-request" >}}</span>
+                    <h3>Changes as proposals</h3>
+                    <p>After publishing, a new update or an edited field from the agent arrives as a proposal with a diff. Approve it, reword it, or reject it with a reason the agent reads back.</p>
+                </article>
+            </div>
+
+            <p class="sec-close">How triage, VEX and scanning fit together. <a href="/features/vulnerability-management/">Vulnerability management and VEX{{< ph "arrow-right" "bold" "ph-go" >}}</a></p>
+        </div>
+    </section>
+
+    {{< comment >}}MCP{{< /comment >}}
+    <section class="section" id="mcp">
+        <div class="wrap cra-split is-flip">
+            <div class="cra-split-copy">
+                <span class="kicker">MCP server</span>
+                <h2 class="sec-title">Plug in any MCP client. <span class="soft">No glue code.</span></h2>
+                <p class="sec-lede">sbomify serves a Model Context Protocol endpoint at <span class="mono">/mcp</span>. Point Claude Code, Cursor or any other MCP client at it, and the agent sees tools for your products, components, releases, artifacts, vulnerabilities, assessments, advisories and CRA assessments.</p>
+                <ul class="cra-points">
+                    <li>{{< ph "key" >}}<span><b>Scoped by the token.</b> An agent is only shown the tools its token allows, and anything outside that scope is refused.</span></li>
+                    <li>{{< ph "trash" >}}<span><b>Nothing to delete with.</b> No tool deletes anything, so &ldquo;delete our SBOMs&rdquo; has nothing to call.</span></li>
+                    <li>{{< ph "stamp" >}}<span><b>Publishing stays with people.</b> Publishing advisories, changing visibility, approving submissions and signing declarations are never exposed to agents.</span></li>
+                </ul>
+                <p class="cra-small"><a href="/faq/how-do-i-create-an-api-token/">How to create a token and connect a client</a></p>
+            </div>
+
+            <figure class="bundle tc-endpoints" data-reveal data-md-skip>
+                <div class="bundle-head">
+                    <span class="bundle-ico">{{< ph "plugs-connected" >}}</span>
+                    <span><b>.mcp.json</b><span>One entry in your agent's config</span></span>
+                </div>
+                <ul class="bundle-files">
+                    <li><span class="mono">"url": "https://app.sbomify.com/mcp"</span></li>
+                    <li><span class="mono">"Authorization": "Bearer &lt;AI agent token&gt;"</span></li>
+                </ul>
+                <p class="bundle-foot">{{< ph "robot" >}}Works with Claude Code, Cursor and other MCP clients</p>
+            </figure>
+        </div>
+    </section>
+
+    {{< comment >}}Walkthrough video{{< /comment >}}
+    <section class="section" id="walkthrough">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Walkthrough</span>
+                    <h2 class="sec-title">Watch an agent hit its limits. <span class="soft">On purpose.</span></h2>
+                </div>
+                <p class="sec-lede">Create an AI agent token, let the agent propose a ruling and draft an advisory through the API, see it refused where it should be, and approve its work as a person.</p>
+            </div>
+
+            {{< video-embed-native video_url="https://marketing-assets.sbomify.com/screencasts/ai_agents.webm" title="Working with AI agents in sbomify, with a person in the loop" description="Narrated screencast: create an AI agent token, let an agent propose a VEX ruling and draft a security advisory through the API, see what it is not allowed to do, and approve its work as a person." upload_date="2026-11-26T00:00:00Z" >}}
+        </div>
+    </section>
+
+    {{< comment >}}Guides{{< /comment >}}
+    <section class="section" id="learn">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <span class="kicker">Learn more</span>
+                    <h2 class="sec-title">Put your agents to work. <span class="soft">Safely.</span></h2>
+                </div>
+                <p class="sec-lede">Step-by-step answers for each part.</p>
+            </div>
+
+            <ul class="adv-guides">
+                <li><a href="/faq/how-do-ai-agents-work-in-sbomify/"><b>How do AI agents work in sbomify?</b><span>The token, triage and advisories</span></a></li>
+                <li><a href="/faq/how-do-i-create-an-api-token/"><b>How do I create an API token?</b><span>Scopes, presets and MCP</span></a></li>
+                <li><a href="/faq/how-do-i-triage-vulnerabilities/"><b>How do I triage vulnerabilities?</b><span>Fix prompts and the Review tab</span></a></li>
+                <li><a href="/faq/how-do-i-publish-a-security-advisory/"><b>How do I publish an advisory?</b><span>Drafts, proposals and publishing</span></a></li>
+                <li><a href="/faq/how-do-i-use-vex/"><b>How do I use VEX?</b><span>Where approved rulings end up</span></a></li>
+                <li><a href="/features/security-advisories/"><b>Security advisories</b><span>Gated, CSAF and CRA ready</span></a></li>
+            </ul>
+        </div>
+    </section>
+
+    {{< dawn-cta title="Let your agents do the legwork" text="Connect the agents you already use. They triage and draft; a person on your team approves everything that reaches a customer." location="agents_final" >}}
+
+</div>
