@@ -11,7 +11,8 @@
             controls
             preload="metadata"
             {{ with .Get "poster" }}poster="{{ . }}"{{ end }}
-            title="{{ .Get "title" | default "Video player" }}">
+            title="{{ .Get "title" | default "Video player" }}"
+            data-video-title="{{ .Get "title" | default .Page.Title }}">
             <source src="{{ $video }}" type="video/webm">
             {{- with $t.vtt }}
             <track kind="captions" srclang="en" label="English" src="{{ . }}">

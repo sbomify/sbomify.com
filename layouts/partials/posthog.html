@@ -112,6 +112,56 @@
         site_section: section
       }, { send_instantly: true, transport: 'sendBeacon' });
     }, true);
+
+    /* Video engagement for the self-hosted <video> embeds
+       (shortcodes/video-embed-native.html, used by every FAQ screencast).
+       Media events do not bubble, so one capture-phase listener on the
+       document sees every player without per-embed script. Each video sends
+       `video_play` once per page view, then `video_progress` at 25/50/75% and
+       on reaching the end. The first play also registers `watched_video` for
+       the rest of the session, so a later `cta_click` (and every other event)
+       carries it and a video -> sign-up funnel can be filtered on it. */
+    var seen = new WeakMap();
+
+    function videoProps(v, extra) {
+      var props = {
+        video_title: v.dataset.videoTitle || v.title || '',
+        video_url: v.currentSrc || '',
+        site_section: section
+      };
+      for (var k in extra) { props[k] = extra[k]; }
+      return props;
+    }
+
+    document.addEventListener('play', function (e) {
+      var v = e.target;
+      if (!(v instanceof HTMLVideoElement) || !window.posthog.__loaded) { return; }
+      if (seen.has(v)) { return; }
+      seen.set(v, {});
+      window.posthog.register_for_session({ watched_video: true });
+      window.posthog.capture('video_play', videoProps(v, {}));
+    }, true);
+
+    document.addEventListener('timeupdate', function (e) {
+      var v = e.target;
+      var marks = seen.get(v);
+      if (!marks || !v.duration || !window.posthog.__loaded) { return; }
+      var pct = v.currentTime / v.duration * 100;
+      [25, 50, 75].forEach(function (m) {
+        if (pct >= m && !marks[m]) {
+          marks[m] = true;
+          window.posthog.capture('video_progress', videoProps(v, { percent: m }));
+        }
+      });
+    }, true);
+
+    document.addEventListener('ended', function (e) {
+      var v = e.target;
+      var marks = seen.get(v);
+      if (!marks || marks[100] || !window.posthog.__loaded) { return; }
+      marks[100] = true;
+      window.posthog.capture('video_progress', videoProps(v, { percent: 100 }));
+    }, true);
   }());
 </script>
 {{- end -}}
