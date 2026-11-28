@@ -132,15 +132,17 @@ Step 1 is not "where we are headquartered" and not "where engineering sits." Mak
 
 ### What you actually submit
 
-ENISA's [SRP Glossary](https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/cra-srp-glossary2) documents 43 fields with their meaning, expected format, and the reporting stage at which each applies. Fields are marked required, optional, mandatory if the information is available, or carried forward from the previous stage.
+ENISA's [SRP Glossary](https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/cra-srp-glossary2) (version 1.6, 21 October 2026) documents 42 fields with their meaning, expected format, and what each reporting stage does with them: required, optional, copied from the previous step, or not asked. Since version 1.6, the later stages do not repeat the early warning. Each one only asks for what is new.
 
-**Required at the 24-hour early warning:** notification type and level, title, summary, manufacturer name, **product name**, **product version**, the date and time you became aware, the Member States where the product is available (if known), and - for incidents - whether unlawful or malicious acts are suspected.
+**Required at the 24-hour early warning:** notification type, title, summary, manufacturer name, **product name**, **product version**, the Member States where the product is available, the date and time you became aware, and - for incidents - whether unlawful or malicious acts are suspected.
 
-**Added at 72 hours:** general information about the vulnerability or the nature of the incident, an initial assessment, considered sensitivity of the information, and corrective or mitigating measures taken plus measures users can take.
+**Optional, and only at the early warning:** **component name**, CVE ID, EUVD ID, product type, class and category, end of support, whether a mitigating measure is expected shortly, what users can do to reduce the impact, and a short "additional information" note of up to 255 characters. The later forms do not have these fields, so anything you leave out here cannot be added at 72 hours or in the final report.
 
-**Added in the final report:** detailed severity and impact descriptions, the date a corrective measure became available, the type of threat or root cause, and the malicious actor where that information is available.
+**Required at 72 hours:** general information about the vulnerability, or for an incident its nature and an initial assessment. Optional at this stage: the considered sensitivity of the information, the attack vector, the corrective or mitigating measures so far, and particularly exceptional circumstances (PEC).
 
-Fields that remain optional throughout are the ones an SBOM programme is best placed to fill: **component name**, CVE ID, EUVD ID, and attack vector.
+**Required in the final report:** corrective or mitigating measures taken and measures users can take, detailed severity and impact descriptions, and for a vulnerability the date a corrective measure became available and its details, or for an incident the applied mitigation and the type of threat or root cause. The malicious actor is required where that information is available.
+
+The fields an SBOM programme is best placed to fill - component name, CVE ID and EUVD ID - are optional to ENISA, and the early warning is the only stage that takes them.
 
 ### Operational details that catch teams out
 
